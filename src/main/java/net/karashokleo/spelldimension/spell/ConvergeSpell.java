@@ -50,12 +50,10 @@ public class ConvergeSpell
         Entity owner = projectile.getOwner();
         if (owner == null ||
                 owner.isRemoved() ||
-                (!(owner instanceof PlayerEntity player)) ||
-                (!MageComponent.get(player).greaterThan(new Mage(1, MagicSchool.ARCANE, MageMajor.CONVERGE))))
+                (!(owner instanceof PlayerEntity player)))
             return;
-        int grade = MageComponent.get(player).grade();
-        MagicSchool school = MageComponent.get(player).school();
-        assert school != null;
+        Mage mage = MageComponent.get(player);
+        int grade = mage.greaterThan(1, MagicSchool.ARCANE, MageMajor.CONVERGE) ? mage.grade() : 0;
         ParticleHelper.sendBatches(projectile, PARTICLE);
         SoundHelper.playSoundEvent(projectile.getWorld(), projectile, SoundEvents.ENTITY_GENERIC_EXPLODE);
         float addition = (float) DamageUtil.calculateDamage(player, MagicSchool.FROST, 0.4, 1.2, grade);
@@ -67,7 +65,7 @@ public class ConvergeSpell
                 {
                     Vec3d movement = projectile.getPos().subtract(target.getPos()).multiply(0.12 + grade * 0.03);
                     target.setVelocity(movement);
-                    DamageUtil.spellDamage(target, school, player, 4F + addition, false);
+                    DamageUtil.spellDamage(target, MagicSchool.ARCANE, player, 4F + addition, false);
                 }
         );
     }

@@ -18,11 +18,16 @@ public record Mage(int grade, @Nullable MagicSchool school, @Nullable MageMajor 
     public static final int MAX_GRADE = 3;
     public static final Mage EMPTY = new Mage(MIN_GRADE, null, null);
 
+    public boolean greaterThan(int grade, @Nullable MagicSchool school, @Nullable MageMajor major)
+    {
+        return this.grade >= grade &&
+                (this.school == school || school == null) &&
+                (this.major == major || major == null);
+    }
+
     public boolean greaterThan(Mage mage)
     {
-        return this.grade >= mage.grade() &&
-                (this.school == mage.school() || mage.school() == null) &&
-                (this.major == mage.major() || mage.major() == null);
+        return this.greaterThan(mage.grade, mage.school, mage.major);
     }
 
     public boolean isInvalid()

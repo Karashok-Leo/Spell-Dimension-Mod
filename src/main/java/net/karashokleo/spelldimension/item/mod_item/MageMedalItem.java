@@ -41,12 +41,15 @@ public class MageMedalItem extends Item
         MageComponent.set(user, mage);
         PacketByteBuf buf = PacketByteBufs.create();
         mage.writeToPacket(buf);
-        if (mage.grade() == 0)
-            SpellDimensionNetworking.sendToTrackers(user, SpellDimensionNetworking.CLEAR_PACKET, buf);
-        else if (mage.school() == null || mage.major() == null)
-            SpellDimensionNetworking.sendToTrackers(user, SpellDimensionNetworking.RESET_PACKET, buf);
-        else if (MageComponent.get(user).greaterThan(mage))
-            SpellDimensionNetworking.sendToTrackers(user, SpellDimensionNetworking.UPGRADE_PACKET, buf);
+        if(!world.isClient)
+        {
+            if (mage.grade() == 0)
+                SpellDimensionNetworking.sendToTrackers(user, SpellDimensionNetworking.CLEAR_PACKET, buf);
+            else if (mage.school() == null || mage.major() == null)
+                SpellDimensionNetworking.sendToTrackers(user, SpellDimensionNetworking.RESET_PACKET, buf);
+            else if (MageComponent.get(user).greaterThan(mage))
+                SpellDimensionNetworking.sendToTrackers(user, SpellDimensionNetworking.UPGRADE_PACKET, buf);
+        }
         user.getItemCooldownManager().set(this, COOL_DOWN);
         ParticleUtil.ringParticleEmit(user, (mage.grade() + 1) * 30, 5, mage.school());
         return TypedActionResult.success(stack);

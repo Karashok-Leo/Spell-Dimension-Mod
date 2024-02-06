@@ -27,6 +27,6 @@ public abstract class InGameHudMixin
     private void injectedRender(DrawContext context, float tickDelta, CallbackInfo ci)
     {
         if (INoClip.noClip(client.player))
-            this.renderOverlay(context, SpellDimensionClient.PHASE_LAYER, 0.5F);
+            this.renderOverlay(context, SpellDimensionClient.PHASE_LAYER, 0.1F);
     }
 }

@@ -3,7 +3,6 @@
   "package": "net.karashokleo.spelldimension.mixin",
   "compatibilityLevel": "JAVA_17",
   "client": [
-    "DrawContextAccessor",
     "DrawContextMixin",
     "phase.ClientPlayerEntityMixin",
     "phase.ClientPlayerInteractionManagerMixin",
