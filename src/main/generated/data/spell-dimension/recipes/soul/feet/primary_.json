@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:enchanted_essence",
+  "attributeId": "spell_power:soul",
+  "grade": 0,
+  "school": "SOUL",
+  "slot": "FEET",
+  "threshold": 10
+}

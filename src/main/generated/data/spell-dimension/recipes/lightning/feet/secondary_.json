@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:enchanted_essence",
+  "attributeId": "spell_power:lightning",
+  "grade": 1,
+  "school": "LIGHTNING",
+  "slot": "FEET",
+  "threshold": 20
+}

@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:enchanted_essence",
+  "attributeId": "spell_power:fire",
+  "grade": 1,
+  "school": "FIRE",
+  "slot": "FEET",
+  "threshold": 20
+}

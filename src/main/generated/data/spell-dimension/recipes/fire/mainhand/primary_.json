@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:enchanted_essence",
+  "attributeId": "spell_power:fire",
+  "grade": 0,
+  "school": "FIRE",
+  "slot": "MAINHAND",
+  "threshold": 10
+}

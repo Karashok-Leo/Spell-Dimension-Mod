@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:enchanted_essence",
+  "attributeId": "spell_power:frost",
+  "grade": 1,
+  "school": "FROST",
+  "slot": "HEAD",
+  "threshold": 20
+}

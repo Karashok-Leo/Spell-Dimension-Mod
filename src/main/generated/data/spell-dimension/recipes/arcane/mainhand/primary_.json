@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:enchanted_essence",
+  "attributeId": "spell_power:arcane",
+  "grade": 0,
+  "school": "ARCANE",
+  "slot": "MAINHAND",
+  "threshold": 10
+}

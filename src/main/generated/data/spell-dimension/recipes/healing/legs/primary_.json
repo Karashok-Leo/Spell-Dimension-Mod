@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:enchanted_essence",
+  "attributeId": "spell_power:healing",
+  "grade": 0,
+  "school": "HEALING",
+  "slot": "LEGS",
+  "threshold": 10
+}
