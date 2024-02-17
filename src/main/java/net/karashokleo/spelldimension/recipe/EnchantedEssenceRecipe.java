@@ -24,6 +24,11 @@ import java.util.Map;
 public class EnchantedEssenceRecipe extends ShapedRecipe
 {
     public static final String NAME = "enchanted_essence";
+    public static final String GRADE_KEY = "grade";
+    public static final String SCHOOL_KEY = "school";
+    public static final String SLOT_KEY = "slot";
+    public static final String THRESHOLD_KEY = "threshold";
+    public static final String ATTRIBUTE_ID_KEY = "attributeId";
     public static final Map<EquipmentSlot, String[]> PATTERNS = Map.of(
             EquipmentSlot.MAINHAND, new String[]{" ##",
                     "###",
@@ -106,11 +111,11 @@ public class EnchantedEssenceRecipe extends ShapedRecipe
         @Override
         public EnchantedEssenceRecipe read(Identifier id, JsonObject json)
         {
-            int grade = JsonHelper.getInt(json, "grade");
-            MagicSchool school = MagicSchool.valueOf(JsonHelper.getString(json, "school"));
-            EquipmentSlot slot = EquipmentSlot.valueOf(JsonHelper.getString(json, "slot"));
-            int threshold = JsonHelper.getInt(json, "threshold");
-            Identifier attributeId = new Identifier(JsonHelper.getString(json, "attributeId"));
+            int grade = JsonHelper.getInt(json, GRADE_KEY);
+            MagicSchool school = MagicSchool.valueOf(JsonHelper.getString(json, SCHOOL_KEY));
+            EquipmentSlot slot = EquipmentSlot.valueOf(JsonHelper.getString(json, SLOT_KEY));
+            int threshold = JsonHelper.getInt(json, THRESHOLD_KEY);
+            Identifier attributeId = new Identifier(JsonHelper.getString(json, ATTRIBUTE_ID_KEY));
             return new EnchantedEssenceRecipe(id, grade, school, slot, threshold, attributeId);
         }
 

@@ -1,9 +1,13 @@
 package net.karashokleo.spelldimension.misc;
 
 import com.google.gson.JsonObject;
+import net.karashokleo.spelldimension.data.LangData;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.text.MutableText;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.JsonHelper;
 import net.spell_power.api.MagicSchool;
 import org.jetbrains.annotations.Nullable;
@@ -28,6 +32,11 @@ public record Mage(int grade, @Nullable MagicSchool school, @Nullable MageMajor 
     public boolean greaterThan(Mage mage)
     {
         return this.greaterThan(mage.grade, mage.school, mage.major);
+    }
+
+    public boolean isEmpty()
+    {
+        return this.grade == 0 && this.school == null && this.major == null;
     }
 
     public boolean isInvalid()
@@ -147,5 +156,43 @@ public record Mage(int grade, @Nullable MagicSchool school, @Nullable MageMajor 
     public void writeToJson(JsonObject json)
     {
         writeToJson(json, this.grade, this.school, this.major);
+    }
+
+    public MutableText getGradeText()
+    {
+        return Text.translatable(LangData.ENUM_GRADE + this.grade);
+    }
+
+    public MutableText getSchoolText()
+    {
+        if (school == null) return Text.empty();
+        return Text.translatable(LangData.ENUM_SCHOOL + this.school.name());
+    }
+
+    public MutableText getMajorText()
+    {
+        if (major == null) return Text.empty();
+        return Text.translatable(LangData.ENUM_MAJOR + this.major.name());
+    }
+
+    public Text getMageTitle(MutableText append)
+    {
+        MutableText name = Text.empty();
+        name.append(this.getGradeText())
+                .append(Text.of(" "));
+        if (this.school() != null)
+            name.append(this.getSchoolText())
+                    .append(Text.of(" "));
+        name.append(append);
+        if (this.major() != null)
+            name.append(Text.of(" • "))
+                    .append(this.getMajorText())
+                    .append(Text.of(" "))
+                    .append(Text.translatable(LangData.MASTERY));
+        if (school == null)
+            name.formatted(Formatting.GRAY);
+        else
+            name.setStyle(name.getStyle().withColor(school.color()));
+        return name;
     }
 }

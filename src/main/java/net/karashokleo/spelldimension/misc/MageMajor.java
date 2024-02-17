@@ -3,7 +3,6 @@ package net.karashokleo.spelldimension.misc;
 import net.karashokleo.spelldimension.SpellDimension;
 import net.minecraft.util.Identifier;
 import net.spell_power.api.MagicSchool;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,18 +21,18 @@ public enum MageMajor
     AURA(MagicSchool.FROST),//光环，对周围生物施加冰冻效果
     POWER(MagicSchool.HEALING),//力量效果
     REGEN(MagicSchool.HEALING),//再生效果
-    RESIST(MagicSchool.HEALING),//抗性效果
-    STRIKE(MagicSchool.LIGHTNING),
+    RESIST(MagicSchool.HEALING);//抗性效果
 
-    REALM(null),
-    BLACKHOLE(null),//召唤黑洞
-    ETERNAL(null),//透支生命，不死效果
-    KINGDOM(null);
+//    STRIKE(MagicSchool.LIGHTNING),
 
-    @Nullable
+//    REALM(null),
+//    BLACKHOLE(null),//召唤黑洞
+//    ETERNAL(null),//透支生命，不死效果
+//    KINGDOM(null);
+
     public final MagicSchool school;
 
-    MageMajor(@Nullable MagicSchool school)
+    MageMajor(MagicSchool school)
     {
         this.school = school;
     }
@@ -46,11 +45,6 @@ public enum MageMajor
     public Identifier spellId()
     {
         return SpellDimension.modLoc(this.majorName());
-    }
-
-    public boolean isFinal()
-    {
-        return this.school == null;
     }
 
     public static List<MageMajor> getMajors(MagicSchool school)

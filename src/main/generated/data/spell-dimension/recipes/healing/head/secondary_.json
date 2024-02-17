@@ -1,8 +1,0 @@
-{
-  "type": "spell-dimension:enchanted_essence",
-  "attributeId": "spell_power:healing",
-  "grade": 1,
-  "school": "HEALING",
-  "slot": "HEAD",
-  "threshold": 20
-}

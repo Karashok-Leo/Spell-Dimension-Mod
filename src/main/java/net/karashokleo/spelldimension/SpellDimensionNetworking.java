@@ -12,7 +12,6 @@ import java.util.Collection;
 public class SpellDimensionNetworking
 {
     public static final Identifier UPGRADE_PACKET = SpellDimension.modLoc("mage_upgrade");
-    public static final Identifier RESET_PACKET = SpellDimension.modLoc("mage_reset");
     public static final Identifier CLEAR_PACKET = SpellDimension.modLoc("mage_clear");
     public static final Identifier DUST_PACKET = SpellDimension.modLoc("dust");
 

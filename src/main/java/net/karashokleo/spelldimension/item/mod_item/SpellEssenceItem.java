@@ -60,10 +60,10 @@ public abstract class SpellEssenceItem extends Item
             {
                 Mage mage = Mage.readFromStack(stack);
                 ParticleUtil.ringParticleEmit(player, (mage.grade() + 1) * 30, 5, mage.school());
-                player.sendMessage(Text.translatable(LangData.TEXT_SUCCESS), true);
+                player.sendMessage(Text.translatable(LangData.TITLE_SUCCESS), true);
                 if (!player.isCreative())
                     stack.decrement(1);
-            } else player.sendMessage(Text.translatable(LangData.TEXT_FAILURE), true);
+            } else player.sendMessage(Text.translatable(LangData.TITLE_FAILURE), true);
             player.getItemCooldownManager().set(this, COOL_DOWN);
         }
         return stack;
@@ -82,9 +82,10 @@ public abstract class SpellEssenceItem extends Item
     {
         super.appendTooltip(stack, world, tooltip, context);
         tooltip.add(Text.translatable(LangData.TOOLTIP_REQUIRE).formatted(Formatting.GRAY));
-        tooltip.add(LangData.getMageTitle(Mage.readFromStack(stack)));
+        tooltip.add(Mage.readFromStack(stack).getMageTitle(Text.translatable(LangData.MAGE)));
         tooltip.add(ScreenTexts.EMPTY);
         tooltip.add(Text.translatable(LangData.TOOLTIP_ESSENCE_USE));
+        tooltip.add(ScreenTexts.EMPTY);
         tooltip.add(Text.translatable(LangData.TOOLTIP_EFFECT));
     }
 

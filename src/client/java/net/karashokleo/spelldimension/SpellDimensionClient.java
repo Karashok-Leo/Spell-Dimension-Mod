@@ -70,26 +70,15 @@ public class SpellDimensionClient implements ClientModInitializer
             Mage mage = Mage.readFromPacket(buf);
             client.execute(() ->
             {
-                client.inGameHud.setTitle(Text.translatable(LangData.MAGE_UPGRADE));
-                client.inGameHud.setSubtitle(LangData.getMageTitle(mage));
-            });
-        });
-        ClientPlayNetworking.registerGlobalReceiver(SpellDimensionNetworking.RESET_PACKET, (client, handler, buf, responseSender) ->
-        {
-            Mage mage = Mage.readFromPacket(buf);
-            client.execute(() ->
-            {
-                client.inGameHud.setTitle(Text.translatable(LangData.MAGE_RESET));
-                client.inGameHud.setSubtitle(LangData.getMageTitle(mage));
+                client.inGameHud.setTitle(Text.translatable(LangData.TITLE_UPGRADE));
+                client.inGameHud.setSubtitle(mage.getMageTitle(Text.translatable(LangData.MAGE)));
             });
         });
         ClientPlayNetworking.registerGlobalReceiver(SpellDimensionNetworking.CLEAR_PACKET, (client, handler, buf, responseSender) ->
         {
-            Mage mage = Mage.readFromPacket(buf);
             client.execute(() ->
             {
-                client.inGameHud.setTitle(Text.translatable(LangData.MAGE_CLEAR));
-                client.inGameHud.setSubtitle(LangData.getMageTitle(mage));
+                client.inGameHud.setTitle(Text.translatable(LangData.TITLE_CLEAR));
             });
         });
     }

@@ -20,8 +20,6 @@ public class AllItems
 {
     public static final String[] GRADES = {"primary_", "secondary_", "advanced_", "perfect_"};
 
-    public static final List<Item> ALL = new ArrayList<>();
-
     public static final Map<MagicSchool, SpellBooksEntry> SPELL_BOOKS = new HashMap<>();
     public static final Map<MagicSchool, List<Item>> BASE_ESSENCES = new HashMap<>();
 
@@ -51,7 +49,6 @@ public class AllItems
 
     public static <T extends Item> T registerItem(String id, T item)
     {
-        ALL.add(item);
         Registry.register(Registries.ITEM, SpellDimension.modLoc(id), item);
         return item;
     }

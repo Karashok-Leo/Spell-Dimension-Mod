@@ -27,28 +27,28 @@ public class AllGroups
                 FabricItemGroup
                         .builder()
                         .icon(() -> new ItemStack(AllItems.SPELL_BOOKS.get(MagicSchool.ARCANE).primary))
-                        .displayName(Text.translatable("itemGroup.spellplus.group_books"))
+                        .displayName(Text.translatable("itemGroup.spell-dimension.group_books"))
                         .build()
         );
         Registry.register(Registries.ITEM_GROUP, SpellDimension.modLoc("group_ees"),
                 FabricItemGroup
                         .builder()
-                        .icon(() -> AllItems.BASE_ESSENCES.get(MagicSchool.FIRE).get(1).getDefaultStack())
-                        .displayName(Text.translatable("itemGroup.spellplus.group_ees"))
+                        .icon(() -> AllItems.ENCHANTED_ESSENCE.getStack(new Mage(3, MagicSchool.FIRE, null), new ExtraModifier(30, EquipmentSlot.MAINHAND, MagicSchool.FIRE.attributeId())))
+                        .displayName(Text.translatable("itemGroup.spell-dimension.group_ees"))
                         .build()
         );
         Registry.register(Registries.ITEM_GROUP, SpellDimension.modLoc("group_medals"),
                 FabricItemGroup
                         .builder()
-                        .icon(() -> new ItemStack(AllItems.MAGE_MEDAL))
-                        .displayName(Text.translatable("itemGroup.spellplus.group_medals"))
+                        .icon(() -> AllItems.MAGE_MEDAL.getStack(new Mage(3, MagicSchool.FROST, null)))
+                        .displayName(Text.translatable("itemGroup.spell-dimension.group_medals"))
                         .build()
         );
         Registry.register(Registries.ITEM_GROUP, SpellDimension.modLoc("group_misc"),
                 FabricItemGroup
                         .builder()
-                        .icon(() -> AllItems.BASE_ESSENCES.get(MagicSchool.FROST).get(1).getDefaultStack())
-                        .displayName(Text.translatable("itemGroup.spellplus.group_misc"))
+                        .icon(() -> AllItems.BASE_ESSENCES.get(MagicSchool.HEALING).get(1).getDefaultStack())
+                        .displayName(Text.translatable("itemGroup.spell-dimension.group_misc"))
                         .build()
         );
 
@@ -76,7 +76,6 @@ public class AllGroups
             for (MagicSchool school : MagicSchool.values())
             {
                 if (!school.isMagical) continue;
-                entries.add(AllItems.MAGE_MEDAL.getStack(0, school, null));
                 for (MageMajor major : MageMajor.getMajors(school))
                     for (int i = 1; i <= Mage.MAX_GRADE; i++)
                         entries.add(AllItems.MAGE_MEDAL.getStack(i, school, major));

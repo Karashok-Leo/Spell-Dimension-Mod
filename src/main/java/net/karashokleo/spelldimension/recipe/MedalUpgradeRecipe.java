@@ -17,27 +17,45 @@ import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.world.World;
 
 public class MedalUpgradeRecipe extends ShapedRecipe
 {
     public static final String NAME = "medal_upgrade";
-    private static final String ORIGINAL_KEY = "original";
-    private static final String UPGRADED_KEY = "upgraded";
+    public static final String INGREDIENTS_KEY = "ingredients";
+    public static final String ORIGINAL_KEY = "original";
+    public static final String UPGRADED_KEY = "upgraded";
     final Mage original;
     final Mage upgraded;
 
     public MedalUpgradeRecipe(Identifier id, DefaultedList<Ingredient> input, Mage original, Mage upgraded)
     {
         super(id, "", CraftingRecipeCategory.MISC, 3, 3, input, AllItems.MAGE_MEDAL.getStack(upgraded));
-        this.getIngredients().set(4, Ingredient.ofStacks(AllItems.MAGE_MEDAL.getStack(original)));
         this.original = original;
         this.upgraded = upgraded;
     }
 
     @Override
-    public ItemStack craft(RecipeInputInventory recipeInputInventory, DynamicRegistryManager dynamicRegistryManager)
+    public ItemStack craft(RecipeInputInventory inventory, DynamicRegistryManager dynamicRegistryManager)
     {
         return AllItems.MAGE_MEDAL.getStack(this.upgraded);
+    }
+
+    @Override
+    public boolean matches(RecipeInputInventory inventory, World world)
+    {
+        return testMedal(inventory) && super.matches(inventory, world);
+    }
+
+    private boolean testMedal(RecipeInputInventory inventory)
+    {
+        for (ItemStack stack : this.getIngredients().get(4).getMatchingStacks())
+        {
+            ItemStack invStack = inventory.getStack(4);
+            if (invStack.isOf(stack.getItem()) && invStack.getOrCreateNbt().equals(stack.getOrCreateNbt()))
+                return true;
+        }
+        return false;
     }
 
     @Override
@@ -48,7 +66,7 @@ public class MedalUpgradeRecipe extends ShapedRecipe
 
     public static class Serializer implements RecipeSerializer<MedalUpgradeRecipe>
     {
-        public static final EnchantedEssenceRecipe.Serializer INSTANCE = new EnchantedEssenceRecipe.Serializer();
+        public static final Serializer INSTANCE = new Serializer();
         public static final Identifier ID = SpellDimension.modLoc(NAME);
         public static final JsonObject DEFAULT_MAGE = new JsonObject();
 
@@ -60,13 +78,10 @@ public class MedalUpgradeRecipe extends ShapedRecipe
         @Override
         public MedalUpgradeRecipe read(Identifier id, JsonObject json)
         {
-            DefaultedList<Ingredient> defaultedList = getIngredients(JsonHelper.getArray(json, "ingredients"));
-            if (defaultedList.isEmpty())
-                throw new JsonParseException("No ingredients for medal_upgrade recipe");
-            if (defaultedList.size() > 9)
-                throw new JsonParseException("Too many ingredients for medal_upgrade recipe");
             Mage original = Mage.readFromJson(JsonHelper.getObject(json, ORIGINAL_KEY, DEFAULT_MAGE));
             Mage upgraded = Mage.readFromJson(JsonHelper.getObject(json, UPGRADED_KEY, DEFAULT_MAGE));
+            DefaultedList<Ingredient> defaultedList = getIngredients(JsonHelper.getArray(json, INGREDIENTS_KEY));
+            defaultedList.set(4, Ingredient.ofStacks(AllItems.MAGE_MEDAL.getStack(original)));
             return new MedalUpgradeRecipe(id, defaultedList, original, upgraded);
         }
 
@@ -93,13 +108,13 @@ public class MedalUpgradeRecipe extends ShapedRecipe
 
         private static DefaultedList<Ingredient> getIngredients(JsonArray json)
         {
-            DefaultedList<Ingredient> defaultedList = DefaultedList.of();
+            if (json.isEmpty())
+                throw new JsonParseException("No ingredients for medal_upgrade recipe");
+            if (json.size() > 8)
+                throw new JsonParseException("Too many ingredients for medal_upgrade recipe");
+            DefaultedList<Ingredient> defaultedList = DefaultedList.ofSize(9, Ingredient.EMPTY);
             for (int i = 0; i < json.size(); ++i)
-            {
-                Ingredient ingredient = Ingredient.fromJson(json.get(i), false);
-                if (ingredient.isEmpty()) continue;
-                defaultedList.add(ingredient);
-            }
+                defaultedList.set((i < 4 ? i : (i + 1)), Ingredient.fromJson(json.get(i)));
             return defaultedList;
         }
     }

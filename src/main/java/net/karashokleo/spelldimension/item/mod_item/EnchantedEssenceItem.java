@@ -8,7 +8,6 @@ import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
@@ -23,7 +22,7 @@ public class EnchantedEssenceItem extends SpellEssenceItem
         super();
     }
 
-    public ItemStack getStack(Mage mage,ExtraModifier extraModifier)
+    public ItemStack getStack(Mage mage, ExtraModifier extraModifier)
     {
         ItemStack stack = this.getDefaultStack();
         mage.writeToStack(stack);
@@ -43,14 +42,13 @@ public class EnchantedEssenceItem extends SpellEssenceItem
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
         super.appendTooltip(stack, world, tooltip, context);
-        tooltip.add(ScreenTexts.EMPTY);
         ExtraModifier extraModifier = ExtraModifier.fromNbt(stack.getOrCreateNbt());
         if (extraModifier == null)
         {
             tooltip.add(Text.translatable(LangData.TOOLTIP_INVALID));
             return;
         }
-        tooltip.add(Text.translatable(LangData.getSlotKey(extraModifier.slot)).formatted(Formatting.GRAY));
+        tooltip.add(Text.translatable(LangData.ENUM_SLOT + extraModifier.slot.name()).formatted(Formatting.GRAY));
         tooltip.add(Text.translatable(LangData.TOOLTIP_THRESHOLD, extraModifier.threshold).formatted(Formatting.GRAY));
         tooltip.add(Text.translatable(LangData.TOOLTIP_MODIFIER).formatted(Formatting.GRAY));
 
@@ -61,5 +59,17 @@ public class EnchantedEssenceItem extends SpellEssenceItem
             tooltip.add(Text.translatable("attribute.modifier.plus." + extraModifier.operation.getId(), ItemStack.MODIFIER_FORMAT.format(e), Text.translatable(extraModifier.attribute.getTranslationKey())).formatted(Formatting.BLUE));
         } else if (d < 0.0)
             tooltip.add(Text.translatable("attribute.modifier.take." + extraModifier.operation.getId(), ItemStack.MODIFIER_FORMAT.format(e * -1.0), Text.translatable(extraModifier.attribute.getTranslationKey())).formatted(Formatting.RED));
+    }
+
+    @Override
+    public Text getName()
+    {
+        return Text.translatable(LangData.ENCHANTED_ESSENCE);
+    }
+
+    @Override
+    public Text getName(ItemStack stack)
+    {
+        return Mage.readFromStack(stack).getMageTitle(Text.translatable(LangData.ENCHANTED_ESSENCE));
     }
 }

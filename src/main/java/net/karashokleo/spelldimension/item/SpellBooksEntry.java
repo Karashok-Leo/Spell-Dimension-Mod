@@ -52,12 +52,7 @@ public class SpellBooksEntry
 
     public void register()
     {
-        AllItems.ALL.add(primary);
         Registry.register(Registries.ITEM, SpellBooks.itemIdFor(primary.poolId), primary);
-        majors.values().forEach(books -> books.forEach(book ->
-        {
-            AllItems.ALL.add(book);
-            Registry.register(Registries.ITEM, SpellBooks.itemIdFor(book.poolId), book);
-        }));
+        majors.values().forEach(books -> books.forEach(book -> Registry.register(Registries.ITEM, SpellBooks.itemIdFor(book.poolId), book)));
     }
 }

@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.loot.condition.LootCondition;
 import net.minecraft.loot.context.LootContext;
 import net.minecraft.loot.function.ConditionalLootFunction;
+import net.minecraft.loot.function.LootFunction;
 import net.minecraft.loot.function.LootFunctionType;
 import net.minecraft.loot.provider.number.LootNumberProvider;
 import net.minecraft.util.JsonHelper;
@@ -18,12 +19,12 @@ import net.spell_power.api.MagicSchool;
 
 public class RandomEnchantedEssenceFunction extends ConditionalLootFunction
 {
-    final LootNumberProvider countRange;
+    final LootNumberProvider threshold;
 
-    protected RandomEnchantedEssenceFunction(LootCondition[] conditions, LootNumberProvider countRange)
+    protected RandomEnchantedEssenceFunction(LootCondition[] conditions, LootNumberProvider threshold)
     {
         super(conditions);
-        this.countRange = countRange;
+        this.threshold = threshold;
     }
 
     @Override
@@ -34,8 +35,8 @@ public class RandomEnchantedEssenceFunction extends ConditionalLootFunction
             Random random = context.getRandom();
             MagicSchool school = AllLoot.randomSchool(random);
             return AllItems.ENCHANTED_ESSENCE.getStack(
-                    new Mage(AllLoot.randomGrade(random), school, null),
-                    new ExtraModifier(30 + random.nextInt((int) context.getLuck()), AllLoot.randomSlot(random), school.attributeId())
+                    new Mage(AllLoot.randomGrade(random, 3), school, null),
+                    new ExtraModifier(threshold.nextInt(context), AllLoot.randomSlot(random), school.attributeId())
             );
         } else return stack;
     }
@@ -46,12 +47,37 @@ public class RandomEnchantedEssenceFunction extends ConditionalLootFunction
         return AllLoot.RANDOM_ENCHANTED_ESSENCE;
     }
 
+    public static RandomEnchantedEssenceFunction.Builder builder(LootNumberProvider threshold)
+    {
+        return new RandomEnchantedEssenceFunction.Builder(threshold);
+    }
+
+    public static class Builder extends ConditionalLootFunction.Builder<RandomEnchantedEssenceFunction.Builder>
+    {
+        private final LootNumberProvider threshold;
+
+        public Builder(LootNumberProvider threshold)
+        {
+            this.threshold = threshold;
+        }
+
+        protected RandomEnchantedEssenceFunction.Builder getThisBuilder()
+        {
+            return this;
+        }
+
+        public LootFunction build()
+        {
+            return new RandomEnchantedEssenceFunction(this.getConditions(), this.threshold);
+        }
+    }
+
     public static class Serializer extends ConditionalLootFunction.Serializer<RandomEnchantedEssenceFunction>
     {
         @Override
         public RandomEnchantedEssenceFunction fromJson(JsonObject json, JsonDeserializationContext context, LootCondition[] conditions)
         {
-            LootNumberProvider provider = JsonHelper.deserialize(json, "count", context, LootNumberProvider.class);
+            LootNumberProvider provider = JsonHelper.deserialize(json, "threshold", context, LootNumberProvider.class);
             return new RandomEnchantedEssenceFunction(conditions, provider);
         }
     }

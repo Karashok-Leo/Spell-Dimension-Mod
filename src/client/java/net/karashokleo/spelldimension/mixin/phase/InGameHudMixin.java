@@ -23,10 +23,16 @@ public abstract class InGameHudMixin
     @Shadow
     protected abstract void renderOverlay(DrawContext context, Identifier texture, float opacity);
 
-    @Inject(method = "render", at = @At("TAIL"))
+    @Inject(
+            method = "render",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/client/network/ClientPlayerEntity;getFrozenTicks()I"
+            )
+    )
     private void injectedRender(DrawContext context, float tickDelta, CallbackInfo ci)
     {
         if (INoClip.noClip(client.player))
-            this.renderOverlay(context, SpellDimensionClient.PHASE_LAYER, 0.1F);
+            this.renderOverlay(context, SpellDimensionClient.PHASE_LAYER, 0.5F);
     }
 }

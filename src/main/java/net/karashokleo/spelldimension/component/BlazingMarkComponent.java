@@ -27,7 +27,7 @@ public class BlazingMarkComponent extends WithCasterComponent implements ServerT
     {
         if (duration == 0) return;
         --duration;
-        if (duration == BlazingMark.TRIGGER_TIME)
+        if (duration == BlazingMark.getTriggerDuration())
             BlazingMark.trigger(source, caster, damage, amplifier);
         if (duration % 20 == 0)
         {
@@ -60,14 +60,9 @@ public class BlazingMarkComponent extends WithCasterComponent implements ServerT
         return this.duration;
     }
 
-    public int getMaxDamage()
-    {
-        return this.amplifier * BlazingMark.MAX_DAMAGE;
-    }
-
     public void accumulateDamage(float amount)
     {
-        this.damage = Math.min(this.damage + amount, this.getMaxDamage());
+        this.damage = Math.min(this.damage + amount, this.amplifier * BlazingMark.getMaxDamage());
     }
 
     public void clear()
@@ -83,7 +78,7 @@ public class BlazingMarkComponent extends WithCasterComponent implements ServerT
     {
         float f = Math.min(source.getWidth(), source.getHeight()) * 0.5F;
         Vec3d pos = source.getPos().add(0, source.getHeight() + f, 0).addRandom(source.getRandom(), 0.5F);
-        int color = duration >= BlazingMark.TRIGGER_TIME ? 0xffff00 - 0x100 * (int) (0xff * damage / getMaxDamage()) : 0x888888;
+        int color = duration >= BlazingMark.getTriggerDuration() ? 0xffff00 - 0x100 * (int) (0xff * damage / (amplifier * BlazingMark.getMaxDamage())) : 0x888888;
         BlazingMark.sendDustPacket(source, pos, (int) (f * 100), color, f);
     }
 
@@ -96,7 +91,7 @@ public class BlazingMarkComponent extends WithCasterComponent implements ServerT
     {
         BlazingMarkComponent component = get(source);
         source.setGlowing(true);
-        component.duration = BlazingMark.TOTAL_DURATION;
+        component.duration = BlazingMark.getTotalDuration();
         component.amplifier = amplifier;
         component.damage = 0;
         component.setCaster(caster);

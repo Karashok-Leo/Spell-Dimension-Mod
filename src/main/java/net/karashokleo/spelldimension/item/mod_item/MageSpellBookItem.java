@@ -44,6 +44,18 @@ public class MageSpellBookItem extends SpellBookItem
     {
         super.appendTooltip(stack, world, tooltip, context);
         tooltip.add(Text.translatable(LangData.TOOLTIP_REQUIRE).formatted(Formatting.GRAY));
-        tooltip.add(LangData.getMageTitle(mage));
+        tooltip.add(mage.getMageTitle(Text.translatable(LangData.MAGE)));
+    }
+
+    @Override
+    public Text getName()
+    {
+        return mage.getMageTitle(Text.translatable(LangData.SPELL_BOOK));
+    }
+
+    @Override
+    public Text getName(ItemStack stack)
+    {
+        return getName();
     }
 }

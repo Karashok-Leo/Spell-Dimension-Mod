@@ -38,21 +38,34 @@ public class MageMedalItem extends Item
         ItemStack stack = user.getStackInHand(hand);
         Mage mage = Mage.readFromStack(stack);
         if (mage.isInvalid()) return TypedActionResult.fail(stack);
-        MageComponent.set(user, mage);
-        PacketByteBuf buf = PacketByteBufs.create();
-        mage.writeToPacket(buf);
-        if(!world.isClient)
+        if (!world.isClient)
         {
-            if (mage.grade() == 0)
+            PacketByteBuf buf = PacketByteBufs.create();
+            mage.writeToPacket(buf);
+            if (mage.isEmpty())
                 SpellDimensionNetworking.sendToTrackers(user, SpellDimensionNetworking.CLEAR_PACKET, buf);
-            else if (mage.school() == null || mage.major() == null)
-                SpellDimensionNetworking.sendToTrackers(user, SpellDimensionNetworking.RESET_PACKET, buf);
-            else if (MageComponent.get(user).greaterThan(mage))
+            else if (mage.greaterThan(MageComponent.get(user)) &&
+                    mage.grade() != MageComponent.get(user).grade())
                 SpellDimensionNetworking.sendToTrackers(user, SpellDimensionNetworking.UPGRADE_PACKET, buf);
         }
+        MageComponent.set(user, mage);
         user.getItemCooldownManager().set(this, COOL_DOWN);
         ParticleUtil.ringParticleEmit(user, (mage.grade() + 1) * 30, 5, mage.school());
         return TypedActionResult.success(stack);
+    }
+
+    @Override
+    public Text getName()
+    {
+        return Text.translatable(LangData.MAGE_MEDAL);
+    }
+
+    @Override
+    public Text getName(ItemStack stack)
+    {
+        Mage mage = Mage.readFromStack(stack);
+        if (mage.isEmpty()) return Text.translatable(LangData.BLANK_MAGE_MEDAL);
+        return mage.getMageTitle(Text.translatable(LangData.MAGE_MEDAL));
     }
 
     @Override
@@ -72,7 +85,7 @@ public class MageMedalItem extends Item
             return;
         }
         tooltip.add(Text.translatable(LangData.TOOLTIP_MEDAL_USE).formatted(Formatting.GRAY));
-        tooltip.add(LangData.getMageTitle(mage));
+        tooltip.add(mage.getMageTitle(Text.translatable(LangData.MAGE)));
     }
 
     public ItemStack getStack(Mage mage)

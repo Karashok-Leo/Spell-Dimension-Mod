@@ -30,12 +30,11 @@ public class EnchantedEssenceRecipeJsonProvider implements RecipeJsonProvider
     @Override
     public void serialize(JsonObject json)
     {
-        json.addProperty("grade", grade);
-        json.addProperty("school",school.name());
-        json.addProperty("slot",slot.name());
-        json.addProperty("threshold",threshold);
-        json.addProperty("attributeId",attributeId.toString());
-
+        json.addProperty(EnchantedEssenceRecipe.GRADE_KEY, grade);
+        json.addProperty(EnchantedEssenceRecipe.SCHOOL_KEY, school.name());
+        json.addProperty(EnchantedEssenceRecipe.SLOT_KEY, slot.name());
+        json.addProperty(EnchantedEssenceRecipe.THRESHOLD_KEY, threshold);
+        json.addProperty(EnchantedEssenceRecipe.ATTRIBUTE_ID_KEY, attributeId.toString());
     }
 
     @Override

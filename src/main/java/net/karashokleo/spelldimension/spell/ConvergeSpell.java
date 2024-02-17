@@ -2,6 +2,7 @@ package net.karashokleo.spelldimension.spell;
 
 import net.karashokleo.spelldimension.SpellDimension;
 import net.karashokleo.spelldimension.component.MageComponent;
+import net.karashokleo.spelldimension.config.AllConfig;
 import net.karashokleo.spelldimension.misc.Mage;
 import net.karashokleo.spelldimension.misc.MageMajor;
 import net.karashokleo.spelldimension.util.DamageUtil;
@@ -31,6 +32,11 @@ public class ConvergeSpell
             0
     )};
 
+    public static AllConfig.Damage getDamage()
+    {
+        return AllConfig.INSTANCE.converge.damage;
+    }
+
     public static boolean test(Identifier spellId)
     {
         for (Identifier id : CONVERGE_SPELL)
@@ -56,7 +62,7 @@ public class ConvergeSpell
         int grade = mage.greaterThan(1, MagicSchool.ARCANE, MageMajor.CONVERGE) ? mage.grade() : 0;
         ParticleHelper.sendBatches(projectile, PARTICLE);
         SoundHelper.playSoundEvent(projectile.getWorld(), projectile, SoundEvents.ENTITY_GENERIC_EXPLODE);
-        float addition = (float) DamageUtil.calculateDamage(player, MagicSchool.FROST, 0.4, 1.2, grade);
+        float damage = (float) DamageUtil.calculateDamage(player, MagicSchool.FROST, getDamage(), grade);
         ImpactUtil.applyAreaImpact(
                 projectile,
                 3 + grade * 0.8F,
@@ -65,7 +71,7 @@ public class ConvergeSpell
                 {
                     Vec3d movement = projectile.getPos().subtract(target.getPos()).multiply(0.12 + grade * 0.03);
                     target.setVelocity(movement);
-                    DamageUtil.spellDamage(target, MagicSchool.ARCANE, player, 4F + addition, false);
+                    DamageUtil.spellDamage(target, MagicSchool.ARCANE, player, damage, false);
                 }
         );
     }

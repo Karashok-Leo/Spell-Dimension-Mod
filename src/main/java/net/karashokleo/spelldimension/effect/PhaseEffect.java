@@ -25,7 +25,7 @@ public class PhaseEffect extends StatusEffect
     @Override
     public boolean canApplyUpdateEffect(int duration, int amplifier)
     {
-        return duration % 20 == 0;
+        return duration % 10 == 0;
     }
 
     @Override
