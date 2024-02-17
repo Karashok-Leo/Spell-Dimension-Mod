@@ -20,6 +20,7 @@ import net.spell_power.api.MagicSchool;
 
 public class ConvergeSpell
 {
+    private static final Mage mage = new Mage(1, MagicSchool.ARCANE, MageMajor.CONVERGE);
     private static final Identifier[] CONVERGE_SPELL = {SpellDimension.modLoc("converge1"), SpellDimension.modLoc("converge2"), SpellDimension.modLoc("converge3")};
     private static final ParticleBatch[] PARTICLE = {new ParticleBatch(
             "minecraft:explosion_emitter",
@@ -58,8 +59,7 @@ public class ConvergeSpell
                 owner.isRemoved() ||
                 (!(owner instanceof PlayerEntity player)))
             return;
-        Mage mage = MageComponent.get(player);
-        int grade = mage.greaterThan(1, MagicSchool.ARCANE, MageMajor.CONVERGE) ? mage.grade() : 0;
+        int grade = mage.testPlayer(player) ? MageComponent.get(player).grade() : 0;
         ParticleHelper.sendBatches(projectile, PARTICLE);
         SoundHelper.playSoundEvent(projectile.getWorld(), projectile, SoundEvents.ENTITY_GENERIC_EXPLODE);
         float damage = (float) DamageUtil.calculateDamage(player, MagicSchool.FROST, getDamage(), grade);

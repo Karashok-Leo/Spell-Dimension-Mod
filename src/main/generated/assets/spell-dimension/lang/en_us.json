@@ -169,7 +169,7 @@
   "text.spell-dimension.success": "Successful use of essence!",
   "tooltip.spell-dimension.disenchant": "Remove attribute modifiers from your offhand item.",
   "tooltip.spell-dimension.effect": "Effect:",
-  "tooltip.spell-dimension.essence.use": "When in Main Hand, press the right button to apply effect on the item in Off Hand.",
+  "tooltip.spell-dimension.essence.use": "Main hand holding, use for off hand item, or right click on other item in the inventory with it.",
   "tooltip.spell-dimension.invalid": "Invalid Nbt Data!",
   "tooltip.spell-dimension.level": "Level: %s",
   "tooltip.spell-dimension.medal.use": "Use to become:",

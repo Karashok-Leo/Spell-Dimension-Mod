@@ -147,7 +147,7 @@
   "text.spell-dimension.success": "使用成功!",
   "tooltip.spell-dimension.disenchant": "从副手物品上移除所有通过附魔精华获得的属性修饰符.",
   "tooltip.spell-dimension.effect": "效果:",
-  "tooltip.spell-dimension.essence.use": "主手持有时, 按住右键为副手物品应用相应效果.",
+  "tooltip.spell-dimension.essence.use": "主手持有, 为副手物品使用, 或在物品栏中用该物品右键其他物品.",
   "tooltip.spell-dimension.invalid": "无效的Nbt数据!",
   "tooltip.spell-dimension.level": "等级: %s",
   "tooltip.spell-dimension.medal.use": "使用后成为:",

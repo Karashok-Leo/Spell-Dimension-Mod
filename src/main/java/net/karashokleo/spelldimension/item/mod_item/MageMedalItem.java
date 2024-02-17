@@ -25,7 +25,7 @@ import java.util.List;
 
 public class MageMedalItem extends Item
 {
-    private static final int COOL_DOWN = 100;
+    private static final int COOL_DOWN = 200;
 
     public MageMedalItem()
     {
@@ -42,10 +42,12 @@ public class MageMedalItem extends Item
         {
             PacketByteBuf buf = PacketByteBufs.create();
             mage.writeToPacket(buf);
-            if (mage.isEmpty())
+            Mage playerMage = MageComponent.get(user);
+            if (mage.grade() == 0)
                 SpellDimensionNetworking.sendToTrackers(user, SpellDimensionNetworking.CLEAR_PACKET, buf);
-            else if (mage.greaterThan(MageComponent.get(user)) &&
-                    mage.grade() != MageComponent.get(user).grade())
+            else if (playerMage.grade() == 0 ||
+                    (playerMage.grade() < mage.grade() &&
+                            playerMage.checkSchoolAndMajor(mage.school(), mage.major())))
                 SpellDimensionNetworking.sendToTrackers(user, SpellDimensionNetworking.UPGRADE_PACKET, buf);
         }
         MageComponent.set(user, mage);
@@ -64,7 +66,7 @@ public class MageMedalItem extends Item
     public Text getName(ItemStack stack)
     {
         Mage mage = Mage.readFromStack(stack);
-        if (mage.isEmpty()) return Text.translatable(LangData.BLANK_MAGE_MEDAL);
+        if (mage.grade() == 0) return Text.translatable(LangData.BLANK_MAGE_MEDAL);
         return mage.getMageTitle(Text.translatable(LangData.MAGE_MEDAL));
     }
 

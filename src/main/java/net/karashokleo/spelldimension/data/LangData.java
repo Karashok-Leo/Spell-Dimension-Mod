@@ -171,7 +171,7 @@ public class LangData extends FabricLanguageProvider
     private static void addTooltipTranslation(TranslationBuilder builder)
     {
         builder.add(TOOLTIP_INVALID, "Invalid Nbt Data!");
-        builder.add(TOOLTIP_ESSENCE_USE, "When in Main Hand, press the right button to apply effect on the item in Off Hand.");
+        builder.add(TOOLTIP_ESSENCE_USE, "Main hand holding, use for off hand item, or right click on other item in the inventory with it.");
         builder.add(TOOLTIP_MEDAL_USE, "Use to become:");
         builder.add(TOOLTIP_EFFECT, "Effect:");
         builder.add(TOOLTIP_LEVEL, "Level: %s");

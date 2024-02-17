@@ -34,7 +34,7 @@ public class MageSpellBookItem extends SpellBookItem
     public boolean canEquip(ItemStack stack, SlotReference slot, LivingEntity entity)
     {
         if (entity instanceof PlayerEntity player)
-            return mage.test(player);
+            return mage.testPlayer(player);
         else return false;
     }
 

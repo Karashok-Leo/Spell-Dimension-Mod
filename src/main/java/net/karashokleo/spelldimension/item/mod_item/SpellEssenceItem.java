@@ -33,12 +33,13 @@ public abstract class SpellEssenceItem extends Item
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand)
     {
         ItemStack stack = user.getStackInHand(hand);
-        if (hand == Hand.OFF_HAND ||
-                user.getOffHandStack().isEmpty() ||
-                !Mage.readFromStack(stack).test(user))
-            return TypedActionResult.fail(stack);
-        user.setCurrentHand(hand);
-        return TypedActionResult.consume(stack);
+        if (hand == Hand.MAIN_HAND &&
+                !user.getOffHandStack().isEmpty() &&
+                Mage.readFromStack(stack).testPlayer(user))
+        {
+            user.setCurrentHand(hand);
+            return TypedActionResult.consume(stack);
+        } else return TypedActionResult.fail(stack);
     }
 
     @Override
@@ -68,7 +69,7 @@ public abstract class SpellEssenceItem extends Item
         System.out.println(player.getWorld().isClient);
         if (clickType == ClickType.RIGHT &&
                 !slot.getStack().isEmpty() &&
-                Mage.readFromStack(stack).test(player) &&
+                Mage.readFromStack(stack).testPlayer(player) &&
                 applyEffect(stack, slot.getStack()))
         {
             success(stack, player);

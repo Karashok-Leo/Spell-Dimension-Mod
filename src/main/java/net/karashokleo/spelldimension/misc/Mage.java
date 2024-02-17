@@ -24,26 +24,22 @@ public record Mage(int grade, @Nullable MagicSchool school, @Nullable MageMajor 
     public static final int MAX_GRADE = 3;
     public static final Mage EMPTY = new Mage(MIN_GRADE, null, null);
 
-    public boolean test(PlayerEntity player)
+    public boolean checkSchoolAndMajor(@Nullable MagicSchool school, @Nullable MageMajor major)
     {
-        return MageComponent.get(player).greaterThan(this);
-    }
-
-    public boolean greaterThan(int grade, @Nullable MagicSchool school, @Nullable MageMajor major)
-    {
-        return this.grade >= grade &&
-                (this.school == school || school == null) &&
+        return (this.school == school || school == null) &&
                 (this.major == major || major == null);
     }
 
-    public boolean greaterThan(Mage mage)
+    public boolean test(Mage mage)
     {
-        return this.greaterThan(mage.grade, mage.school, mage.major);
+        return this.grade == 0 ||
+                (this.grade <= mage.grade &&
+                        this.checkSchoolAndMajor(mage.school, mage.major));
     }
 
-    public boolean isEmpty()
+    public boolean testPlayer(PlayerEntity player)
     {
-        return this.grade == 0 && this.school == null && this.major == null;
+        return this.test(MageComponent.get(player));
     }
 
     public boolean isInvalid()
