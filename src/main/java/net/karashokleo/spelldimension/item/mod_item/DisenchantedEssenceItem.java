@@ -3,7 +3,6 @@ package net.karashokleo.spelldimension.item.mod_item;
 import net.karashokleo.spelldimension.data.LangData;
 import net.karashokleo.spelldimension.item.ExtraModifier;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.world.World;
@@ -19,9 +18,9 @@ public class DisenchantedEssenceItem extends SpellEssenceItem
     }
 
     @Override
-    protected boolean applyEffect(ItemStack stack, PlayerEntity player)
+    protected boolean applyEffect(ItemStack essence, ItemStack target)
     {
-        return ExtraModifier.remove(player.getOffHandStack());
+        return ExtraModifier.remove(target);
     }
 
     @Override

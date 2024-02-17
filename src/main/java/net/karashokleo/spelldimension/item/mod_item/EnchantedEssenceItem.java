@@ -6,7 +6,6 @@ import net.karashokleo.spelldimension.misc.Mage;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -31,11 +30,11 @@ public class EnchantedEssenceItem extends SpellEssenceItem
     }
 
     @Override
-    protected boolean applyEffect(ItemStack stack, PlayerEntity player)
+    protected boolean applyEffect(ItemStack essence, ItemStack target)
     {
-        ExtraModifier extraModifier = ExtraModifier.fromNbt(stack.getOrCreateNbt());
+        ExtraModifier extraModifier = ExtraModifier.fromNbt(essence.getOrCreateNbt());
         if (extraModifier == null) return false;
-        else return extraModifier.apply(player.getOffHandStack());
+        else return extraModifier.apply(target);
     }
 
     @Override

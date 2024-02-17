@@ -1,10 +1,10 @@
 package net.karashokleo.spelldimension.item.mod_item;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.karashokleo.spelldimension.component.MageComponent;
 import net.karashokleo.spelldimension.data.LangData;
 import net.karashokleo.spelldimension.misc.Mage;
 import net.karashokleo.spelldimension.util.ParticleUtil;
+import net.karashokleo.spelldimension.util.SoundUtil;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -12,11 +12,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.screen.ScreenTexts;
+import net.minecraft.screen.slot.Slot;
 import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
-import net.minecraft.util.UseAction;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -37,7 +35,7 @@ public abstract class SpellEssenceItem extends Item
         ItemStack stack = user.getStackInHand(hand);
         if (hand == Hand.OFF_HAND ||
                 user.getOffHandStack().isEmpty() ||
-                MageComponent.get(user).greaterThan(Mage.readFromStack(stack)))
+                !Mage.readFromStack(stack).test(user))
             return TypedActionResult.fail(stack);
         user.setCurrentHand(hand);
         return TypedActionResult.consume(stack);
@@ -55,21 +53,38 @@ public abstract class SpellEssenceItem extends Item
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user)
     {
         if (user instanceof PlayerEntity player)
-        {
-            if (applyEffect(stack, player))
-            {
-                Mage mage = Mage.readFromStack(stack);
-                ParticleUtil.ringParticleEmit(player, (mage.grade() + 1) * 30, 5, mage.school());
-                player.sendMessage(Text.translatable(LangData.TITLE_SUCCESS), true);
-                if (!player.isCreative())
-                    stack.decrement(1);
-            } else player.sendMessage(Text.translatable(LangData.TITLE_FAILURE), true);
-            player.getItemCooldownManager().set(this, COOL_DOWN);
-        }
+            if (!player.getOffHandStack().isEmpty() &&
+                    applyEffect(stack, player.getOffHandStack()))
+                success(stack, player);
+            else player.sendMessage(Text.translatable(LangData.TITLE_FAILURE), true);
         return stack;
     }
 
-    protected abstract boolean applyEffect(ItemStack stack, PlayerEntity player);
+    protected abstract boolean applyEffect(ItemStack essence, ItemStack target);
+
+    @Override
+    public boolean onStackClicked(ItemStack stack, Slot slot, ClickType clickType, PlayerEntity player)
+    {
+        System.out.println(player.getWorld().isClient);
+        if (clickType == ClickType.RIGHT &&
+                !slot.getStack().isEmpty() &&
+                Mage.readFromStack(stack).test(player) &&
+                applyEffect(stack, slot.getStack()))
+        {
+            success(stack, player);
+            return true;
+        } else return false;
+    }
+
+    public void success(ItemStack essence, PlayerEntity player)
+    {
+        player.getItemCooldownManager().set(this, COOL_DOWN);
+        Mage mage = Mage.readFromStack(essence);
+        ParticleUtil.ringParticleEmit(player, (mage.grade() + 1) * 30, 5, mage.school());
+        SoundUtil.playSound(player, mage.school());
+        player.sendMessage(Text.translatable(LangData.TITLE_SUCCESS), true);
+        if (!player.isCreative()) essence.decrement(1);
+    }
 
     @Override
     public boolean hasGlint(ItemStack stack)

@@ -13,6 +13,7 @@ import java.util.Map;
 
 public class ParticleUtil
 {
+    private static final ParticleEffect defaultParticleType = ParticleTypes.END_ROD;
     private static final Map<MagicSchool, ParticleEffect> map = Map.of(
             MagicSchool.ARCANE, Particles.arcane_spell.particleType,
             MagicSchool.FIRE, ParticleTypes.FLAME,
@@ -41,7 +42,7 @@ public class ParticleUtil
 
     public static ParticleEffect getParticle(@Nullable MagicSchool school)
     {
-        return school == null ? ParticleTypes.END_ROD : map.get(school);
+        return school == null ? defaultParticleType : map.get(school);
     }
 
     public static void ringParticleEmit(Entity entity, int amount, double divisor, @Nullable MagicSchool school)

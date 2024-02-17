@@ -1,7 +1,9 @@
 package net.karashokleo.spelldimension.misc;
 
 import com.google.gson.JsonObject;
+import net.karashokleo.spelldimension.component.MageComponent;
 import net.karashokleo.spelldimension.data.LangData;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
@@ -21,6 +23,11 @@ public record Mage(int grade, @Nullable MagicSchool school, @Nullable MageMajor 
     public static final int MIN_GRADE = 0;
     public static final int MAX_GRADE = 3;
     public static final Mage EMPTY = new Mage(MIN_GRADE, null, null);
+
+    public boolean test(PlayerEntity player)
+    {
+        return MageComponent.get(player).greaterThan(this);
+    }
 
     public boolean greaterThan(int grade, @Nullable MagicSchool school, @Nullable MageMajor major)
     {

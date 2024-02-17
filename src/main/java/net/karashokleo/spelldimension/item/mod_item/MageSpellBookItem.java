@@ -3,7 +3,6 @@ package net.karashokleo.spelldimension.item.mod_item;
 import dev.emi.trinkets.api.SlotReference;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.karashokleo.spelldimension.SpellDimension;
-import net.karashokleo.spelldimension.component.MageComponent;
 import net.karashokleo.spelldimension.data.LangData;
 import net.karashokleo.spelldimension.item.AllItems;
 import net.karashokleo.spelldimension.misc.Mage;
@@ -35,7 +34,7 @@ public class MageSpellBookItem extends SpellBookItem
     public boolean canEquip(ItemStack stack, SlotReference slot, LivingEntity entity)
     {
         if (entity instanceof PlayerEntity player)
-            return MageComponent.get(player).greaterThan(mage);
+            return mage.test(player);
         else return false;
     }
 
