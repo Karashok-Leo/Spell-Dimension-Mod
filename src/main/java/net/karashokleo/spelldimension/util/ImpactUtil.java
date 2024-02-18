@@ -29,7 +29,8 @@ public class ImpactUtil
 
     public static boolean isAlly(LivingEntity origin, LivingEntity target)
     {
-        return origin.isTeammate(target)
+        return origin == target
+                || origin.isTeammate(target)
                 || (target instanceof Tameable tameable && tameable.getOwner() == origin)
                 || (target instanceof Ownable ownable && ownable.getOwner() == origin);
     }
@@ -49,7 +50,7 @@ public class ImpactUtil
 
     public static void shootProjectile(World world, LivingEntity caster, Vec3d position, Vec3d direction, SpellInfo spellInfo, SpellHelper.ImpactContext context, boolean initial)
     {
-        if (world.isClient) return;
+        if (world.isClient()) return;
 
         var spell = spellInfo.spell();
         var data = spell.release.target.projectile;

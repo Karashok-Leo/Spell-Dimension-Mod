@@ -36,7 +36,7 @@ public class AllConfig implements ConfigData
     public static class ConvergeConfig
     {
         @ConfigEntry.Gui.CollapsibleObject
-        public Damage damage = new Damage(4, 0.4, 1.2);
+        public Damage damage = new Damage(4, 0.6, 1.2);
     }
 
     public static class BlazingMarkConfig
@@ -50,7 +50,7 @@ public class AllConfig implements ConfigData
     public static class NucleusConfig
     {
         @ConfigEntry.Gui.CollapsibleObject
-        public Damage damage = new Damage(8, 0.2, 1.1);
+        public Damage damage = new Damage(8, 0.8, 1.1);
     }
 
     public static class FrostedConfig
@@ -62,14 +62,14 @@ public class AllConfig implements ConfigData
     public static class Damage
     {
         public double addition;
-        public double base;
         public double multiplier;
+        public double base;
 
-        public Damage(double addition, double base, double multiplier)
+        public Damage(double addition, double multiplier, double base)
         {
             this.addition = addition;
-            this.base = base;
             this.multiplier = multiplier;
+            this.base = base;
         }
     }
 }

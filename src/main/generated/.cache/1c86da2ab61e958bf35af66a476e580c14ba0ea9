@@ -1,9 +1,9 @@
-// 1.20.1	2024-02-17T21:57:26.6710605	Spell Dimension/Recipes
+// 1.20.1	2024-02-18T14:49:02.7724192	Spell Dimension/Recipes
 0d7d428ef3b7ab5fd0d8c9b186cfcdaf20cd4a22 data\spell-dimension\recipes\arcane\phase\medal\3.json
 98ad804f9afcda10811d1ef1965eb41d63d52f59 data\spell-dimension\advancements\recipes\misc\fire\decompose_0.json
 2aa24dc2c3e8eb0726f8ddfe7ce949070225dcab data\spell-dimension\recipes\healing\feet\0.json
-499a2b00088910dcb74c8aa37025b7741df2e825 data\spell-dimension\advancements\recipes\misc\healing\power\spell_book\1.json
 65c3390fc470e54ab8101d6ad19c84fc6a274ffe data\spell-dimension\advancements\recipes\misc\frost\icicle\spell_book\2.json
+499a2b00088910dcb74c8aa37025b7741df2e825 data\spell-dimension\advancements\recipes\misc\healing\power\spell_book\1.json
 94444d99654daffbbfd6d094873cce190327d94a data\spell-dimension\recipes\frost\feet\2.json
 292ea31389e0360217550d55ae8d92bd99d63428 data\spell-dimension\advancements\recipes\misc\soul\compose_1.json
 b2de7521edc02020f9642f216aba1fd05b08ed98 data\spell-dimension\recipes\frost\decompose_0.json
@@ -216,8 +216,8 @@ c773623c4faa1c588d45da2fbad36d54cc998751 data\spell-dimension\advancements\recip
 ff0560a509a7b7c60d0f365b96b5da4f66300c29 data\spell-dimension\recipes\healing\regen\medal\1.json
 470864233d634eba8c0bb84b09dd01017e039507 data\spell-dimension\recipes\fire\ignite\medal\3.json
 3d2a0a01388060db3bf9a12f1af2cc7dd86972ff data\spell-dimension\advancements\recipes\misc\frost\decompose_0.json
-a6a960d4f25d93717423e3208a567c485f0d7ecc data\spell-dimension\advancements\recipes\misc\fire\blast\spell_book\3.json
 ee9b3183aff70a5e59e44e623cfcc68538b77b8b data\spell-dimension\recipes\arcane\phase\spell_book\2.json
+a6a960d4f25d93717423e3208a567c485f0d7ecc data\spell-dimension\advancements\recipes\misc\fire\blast\spell_book\3.json
 ef4d3d35aab9aa054e7f7cad8ddf7f2bb46891bf data\spell-dimension\recipes\healing\resist\spell_book\1.json
 7616687386233c4e32da71c660df74d4fd5ac5d9 data\spell-dimension\advancements\recipes\misc\arcane\flourish\spell_book\2.json
 cdd388f8cda0a1e1a6bfe0a426a89a7c2df58730 data\spell-dimension\recipes\healing\mainhand\2.json

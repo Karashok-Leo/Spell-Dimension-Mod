@@ -62,7 +62,7 @@ public class ConvergeSpell
         int grade = mage.testPlayer(player) ? MageComponent.get(player).grade() : 0;
         ParticleHelper.sendBatches(projectile, PARTICLE);
         SoundHelper.playSoundEvent(projectile.getWorld(), projectile, SoundEvents.ENTITY_GENERIC_EXPLODE);
-        float damage = (float) DamageUtil.calculateDamage(player, MagicSchool.FROST, getDamage(), grade);
+        float damage = (float) DamageUtil.calculateDamage(player, MagicSchool.ARCANE, getDamage(), grade);
         ImpactUtil.applyAreaImpact(
                 projectile,
                 3 + grade * 0.8F,

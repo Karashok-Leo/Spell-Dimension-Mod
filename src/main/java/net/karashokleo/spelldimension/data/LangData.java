@@ -31,6 +31,7 @@ public class LangData extends FabricLanguageProvider
     public static final String MAGE_MEDAL = "misc.spell-dimension.medal";
     public static final String BLANK_MAGE_MEDAL = "misc.spell-dimension.medal.blank";
     public static final String ENCHANTED_ESSENCE = "misc.spell-dimension.enchanted_essence";
+    public static final String FASTER = "misc.spell-dimension.medal.faster";
 
     //Enum
     public static final String ENUM_GRADE = "enum.spell-dimension.grade.";
@@ -47,7 +48,8 @@ public class LangData extends FabricLanguageProvider
     //Tooltip
     public static final String TOOLTIP_INVALID = "tooltip.spell-dimension.invalid";
     public static final String TOOLTIP_ESSENCE_USE = "tooltip.spell-dimension.essence.use";
-    public static final String TOOLTIP_MEDAL_USE = "tooltip.spell-dimension.medal.use";
+    public static final String TOOLTIP_MEDAL_USE_1 = "tooltip.spell-dimension.medal.use.1";
+    public static final String TOOLTIP_MEDAL_USE_2 = "tooltip.spell-dimension.medal.use.2";
     public static final String TOOLTIP_EFFECT = "tooltip.spell-dimension.effect";
     public static final String TOOLTIP_LEVEL = "tooltip.spell-dimension.level";
     public static final String TOOLTIP_THRESHOLD = "tooltip.spell-dimension.threshold";
@@ -103,7 +105,6 @@ public class LangData extends FabricLanguageProvider
         builder.add(AllItems.DISENCHANTED_ESSENCE, getName(AllItems.DISENCHANTED_ESSENCE));
         AllItems.BASE_ESSENCES.values().forEach(items -> items.forEach(item -> builder.add(item, getName(item))));
         AllItems.SPELL_BOOKS.values().forEach(entry -> builder.add(entry.primary, getName(entry.primary)));
-
     }
 
     private static void addGroupTranslation(TranslationBuilder builder)
@@ -128,6 +129,7 @@ public class LangData extends FabricLanguageProvider
         builder.add(MAGE_MEDAL, "Mage Medal");
         builder.add(BLANK_MAGE_MEDAL, "Blank Mage Medal");
         builder.add(ENCHANTED_ESSENCE, "Enchanted Essence");
+        builder.add(FASTER, " - %.1f%% Faster");
     }
 
     private static void addGradeTranslation(TranslationBuilder builder)
@@ -172,7 +174,8 @@ public class LangData extends FabricLanguageProvider
     {
         builder.add(TOOLTIP_INVALID, "Invalid Nbt Data!");
         builder.add(TOOLTIP_ESSENCE_USE, "Main hand holding, use for off hand item, or right click on other item in the inventory with it.");
-        builder.add(TOOLTIP_MEDAL_USE, "Use to become:");
+        builder.add(TOOLTIP_MEDAL_USE_1, "Use to become:");
+        builder.add(TOOLTIP_MEDAL_USE_2, "Use when sneaking to learn about your attributes.");
         builder.add(TOOLTIP_EFFECT, "Effect:");
         builder.add(TOOLTIP_LEVEL, "Level: %s");
         builder.add(TOOLTIP_THRESHOLD, "Threshold: %s");

@@ -71,6 +71,7 @@
   "misc.spell-dimension.mastery": "专精",
   "misc.spell-dimension.medal": "法师勋章",
   "misc.spell-dimension.medal.blank": "空白法师勋章",
+  "misc.spell-dimension.medal.faster": " - 快 %.1f%%",
   "spell.spell-dimension.aura1.description": "施法者获得霜环{effect_amplifier}效果, 持续{effect_duration}秒. 霜环: 在霜环内, 所有生物被霜冻.",
   "spell.spell-dimension.aura1.name": "霜环 I",
   "spell.spell-dimension.aura2.description": "施法者获得霜环{effect_amplifier}效果, 持续{effect_duration}秒. 霜环: 在霜环内, 所有生物被霜冻.",
@@ -150,7 +151,8 @@
   "tooltip.spell-dimension.essence.use": "主手持有, 为副手物品使用, 或在物品栏中用该物品右键其他物品.",
   "tooltip.spell-dimension.invalid": "无效的Nbt数据!",
   "tooltip.spell-dimension.level": "等级: %s",
-  "tooltip.spell-dimension.medal.use": "使用后成为:",
+  "tooltip.spell-dimension.medal.use.1": "使用后成为:",
+  "tooltip.spell-dimension.medal.use.2": "潜行时使用以获知自身魔法相关属性.",
   "tooltip.spell-dimension.modifier": "属性修饰语:",
   "tooltip.spell-dimension.require": "使用要求:",
   "tooltip.spell-dimension.threshold": "阈值: %s"

@@ -26,8 +26,8 @@ public record Mage(int grade, @Nullable MagicSchool school, @Nullable MageMajor 
 
     public boolean checkSchoolAndMajor(@Nullable MagicSchool school, @Nullable MageMajor major)
     {
-        return (this.school == school || school == null) &&
-                (this.major == major || major == null);
+        return (this.school == school || this.school == null) &&
+                (this.major == major || this.major == null);
     }
 
     public boolean test(Mage mage)

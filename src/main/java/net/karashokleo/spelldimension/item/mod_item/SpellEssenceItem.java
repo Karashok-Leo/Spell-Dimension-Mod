@@ -66,8 +66,8 @@ public abstract class SpellEssenceItem extends Item
     @Override
     public boolean onStackClicked(ItemStack stack, Slot slot, ClickType clickType, PlayerEntity player)
     {
-        System.out.println(player.getWorld().isClient);
         if (clickType == ClickType.RIGHT &&
+                !player.getItemCooldownManager().isCoolingDown(stack.getItem()) &&
                 !slot.getStack().isEmpty() &&
                 Mage.readFromStack(stack).testPlayer(player) &&
                 applyEffect(stack, slot.getStack()))

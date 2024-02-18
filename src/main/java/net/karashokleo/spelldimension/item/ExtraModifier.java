@@ -109,8 +109,8 @@ public class ExtraModifier
     public static boolean remove(ItemStack stack)
     {
         if (stack.isEmpty()) return false;
-        NbtCompound nbt = stack.getOrCreateNbt();
-        if (nbt.contains(EXTRA_MODIFIER_KEY))
+        NbtCompound nbt = stack.getNbt();
+        if (nbt != null && nbt.contains(EXTRA_MODIFIER_KEY))
         {
             nbt.remove(EXTRA_MODIFIER_KEY);
             return true;
@@ -120,7 +120,8 @@ public class ExtraModifier
 
     public static void addModifiers(ItemStack stack, EquipmentSlot slot, Multimap<EntityAttribute, EntityAttributeModifier> modifiers)
     {
-        NbtCompound nbt = stack.getOrCreateNbt();
+        NbtCompound nbt = stack.getNbt();
+        if (nbt == null) return;
         if (!nbt.contains(EXTRA_MODIFIER_KEY))
             return;
         NbtCompound extraModifiers = nbt.getCompound(EXTRA_MODIFIER_KEY);
@@ -146,8 +147,8 @@ public class ExtraModifier
 
     public static void levelTooltip(ItemStack stack, TooltipContext context, List<Text> lines)
     {
-        NbtCompound nbt = stack.getOrCreateNbt();
-        if (!nbt.contains(EXTRA_MODIFIER_KEY))
+        NbtCompound nbt = stack.getNbt();
+        if (nbt == null || !nbt.contains(EXTRA_MODIFIER_KEY))
             return;
         NbtCompound extraModifiers = nbt.getCompound(EXTRA_MODIFIER_KEY);
         if (!extraModifiers.contains(LEVEL_KEY))

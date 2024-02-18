@@ -71,6 +71,7 @@
   "misc.spell-dimension.mastery": "Mastery",
   "misc.spell-dimension.medal": "Mage Medal",
   "misc.spell-dimension.medal.blank": "Blank Mage Medal",
+  "misc.spell-dimension.medal.faster": " - %.1f%% Faster",
   "spell.spell-dimension.aura1.description": "Apply aura {effect_amplifier} effect to oneself for {effect_duration} seconds. Aura: Within the frozen aura, livings get Frosted.",
   "spell.spell-dimension.aura1.name": "Aura I",
   "spell.spell-dimension.aura2.description": "Apply aura {effect_amplifier} effect to oneself for {effect_duration} seconds. Aura: Within the frozen aura, livings get Frosted.",
@@ -172,7 +173,8 @@
   "tooltip.spell-dimension.essence.use": "Main hand holding, use for off hand item, or right click on other item in the inventory with it.",
   "tooltip.spell-dimension.invalid": "Invalid Nbt Data!",
   "tooltip.spell-dimension.level": "Level: %s",
-  "tooltip.spell-dimension.medal.use": "Use to become:",
+  "tooltip.spell-dimension.medal.use.1": "Use to become:",
+  "tooltip.spell-dimension.medal.use.2": "Use when sneaking to learn about your attributes.",
   "tooltip.spell-dimension.modifier": "Modifier:",
   "tooltip.spell-dimension.require": "Requirement:",
   "tooltip.spell-dimension.threshold": "Threshold: %s"

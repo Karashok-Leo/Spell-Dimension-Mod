@@ -13,12 +13,14 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import net.spell_power.api.MagicSchool;
+import net.spell_power.api.SpellPower;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -38,7 +40,28 @@ public class MageMedalItem extends Item
         ItemStack stack = user.getStackInHand(hand);
         Mage mage = Mage.readFromStack(stack);
         if (mage.isInvalid()) return TypedActionResult.fail(stack);
-        if (!world.isClient)
+        if (world.isClient() && user.isSneaking() && mage.school() != null)
+        {
+            SpellPower.Result result = SpellPower.getSpellPower(mage.school(), user);
+            user.sendMessage(Text
+                    .translatable("attribute.name.spell_power." + result.school().spellName())
+                    .append(String.format(" - %s", result.baseValue()))
+                    .setStyle(Style.EMPTY.withColor(mage.school().color())));
+            user.sendMessage(Text
+                    .translatable("attribute.name.spell_power.critical_chance")
+                    .append(String.format(" - %.1f%%", result.criticalChance() * 100))
+                    .setStyle(Style.EMPTY.withColor(mage.school().color())));
+            user.sendMessage(Text
+                    .translatable("attribute.name.spell_power.critical_damage")
+                    .append(String.format(" - × %.1f%%", result.criticalDamage() * 100))
+                    .setStyle(Style.EMPTY.withColor(mage.school().color())));
+            user.sendMessage(Text
+                    .translatable("attribute.name.spell_power.haste")
+                    .append(Text.translatable(LangData.FASTER, (SpellPower.getHaste(user) - 1.0) * 100))
+                    .setStyle(Style.EMPTY.withColor(mage.school().color())));
+            return TypedActionResult.success(stack);
+        }
+        if (!world.isClient())
         {
             PacketByteBuf buf = PacketByteBufs.create();
             mage.writeToPacket(buf);
@@ -86,8 +109,9 @@ public class MageMedalItem extends Item
             tooltip.add(Text.translatable(LangData.TOOLTIP_INVALID));
             return;
         }
-        tooltip.add(Text.translatable(LangData.TOOLTIP_MEDAL_USE).formatted(Formatting.GRAY));
+        tooltip.add(Text.translatable(LangData.TOOLTIP_MEDAL_USE_1).formatted(Formatting.GRAY));
         tooltip.add(mage.getMageTitle(Text.translatable(LangData.MAGE)));
+        tooltip.add(Text.translatable(LangData.TOOLTIP_MEDAL_USE_2).formatted(Formatting.GRAY));
     }
 
     public ItemStack getStack(Mage mage)

@@ -52,7 +52,8 @@ public class MedalUpgradeRecipe extends ShapedRecipe
         for (ItemStack stack : this.getIngredients().get(4).getMatchingStacks())
         {
             ItemStack invStack = inventory.getStack(4);
-            if (invStack.isOf(stack.getItem()) && invStack.getOrCreateNbt().equals(stack.getOrCreateNbt()))
+            if (invStack.isOf(stack.getItem()) &&
+                    (stack.getNbt() == null || stack.getNbt().equals(invStack.getNbt())))
                 return true;
         }
         return false;
