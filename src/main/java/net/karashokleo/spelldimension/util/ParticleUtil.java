@@ -1,5 +1,6 @@
 package net.karashokleo.spelldimension.util;
 
+import net.karashokleo.spelldimension.item.mod_item.EnchantedEssenceItem;
 import net.karashokleo.spelldimension.item.mod_item.IMageItem;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
@@ -31,6 +32,8 @@ public class ParticleUtil
     {
         if (stack.getItem() instanceof IMageItem item)
             return getSchoolColor(item.getMage(stack).school());
+        else if (stack.getItem() instanceof EnchantedEssenceItem item)
+            return getSchoolColor(item.getSchool(stack));
         else return 0xFFFFFF;
     }
 

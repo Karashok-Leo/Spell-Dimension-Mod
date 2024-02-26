@@ -5,12 +5,12 @@
   "name": "Spell Dimension",
   "description": "Spell Dimension",
   "authors": [
-    "Leo!"
+    "Karashok-Leo"
   ],
   "contact": {
     "sources": "https://github.com/Karashok-Leo/spell-dimension"
   },
-  "license": "CC0-1.0",
+  "license": "GPLv3",
   "icon": "assets/spell-dimension/icon.png",
   "environment": "*",
   "entrypoints": {
@@ -47,7 +47,6 @@
     "spell_power": "*"
   },
   "suggests": {
-    "another-mod": "*"
   },
   "custom": {
     "cardinal-components": [

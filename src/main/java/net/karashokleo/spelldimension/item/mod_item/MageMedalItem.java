@@ -27,7 +27,7 @@ import java.util.List;
 
 public class MageMedalItem extends Item implements IMageItem
 {
-    private static final int COOL_DOWN = 20;
+    private static final int COOL_DOWN = 200;
 
     public MageMedalItem()
     {
