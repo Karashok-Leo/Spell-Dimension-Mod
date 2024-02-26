@@ -1,4 +1,4 @@
-package net.karashokleo.spelldimension.item;
+package net.karashokleo.spelldimension.misc;
 
 import com.google.common.collect.Multimap;
 import net.fabricmc.fabric.api.item.v1.ModifyItemAttributeModifiersCallback;
@@ -57,16 +57,17 @@ public class ExtraModifier
 
     public ExtraModifier(int threshold, EquipmentSlot slot, EntityAttribute attribute, double value, EntityAttributeModifier.Operation operation)
     {
-        this.threshold = threshold;
+        this.threshold = Math.max(0, threshold);
         this.slot = slot;
         this.attribute = attribute;
         this.value = value;
         this.operation = operation;
     }
 
-    private String getAttributeId()
+    public String getAttributeId()
     {
-        return Registries.ATTRIBUTE.getId(attribute).toString();
+        Identifier id = Registries.ATTRIBUTE.getId(attribute);
+        return id == null ? "" : id.toString();
     }
 
     public Identifier getSlotTexture()

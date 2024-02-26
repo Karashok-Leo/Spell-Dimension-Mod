@@ -1,14 +1,13 @@
 package net.karashokleo.spelldimension.loot;
 
-import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.karashokleo.spelldimension.SpellDimension;
 import net.karashokleo.spelldimension.component.MageComponent;
 import net.karashokleo.spelldimension.config.AllConfig;
 import net.karashokleo.spelldimension.item.AllItems;
-import net.karashokleo.spelldimension.util.DamageUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.entry.EmptyEntry;
@@ -20,7 +19,6 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.math.random.Random;
 import net.spell_power.api.MagicSchool;
-import net.spell_power.api.SpellPowerTags;
 
 public class AllLoot
 {
@@ -29,21 +27,6 @@ public class AllLoot
     public static void register()
     {
         RANDOM_ENCHANTED_ESSENCE = Registry.register(Registries.LOOT_FUNCTION_TYPE, SpellDimension.modLoc("random_enchanted_essence"), new LootFunctionType(new RandomEnchantedEssenceFunction.Serializer()));
-
-        ServerLivingEntityEvents.ALLOW_DAMAGE.register((entity, source, amount) ->
-        {
-            if (!source.isIn(SpellPowerTags.DamageType.IS_SPELL)) return true;
-            for (String id : AllConfig.INSTANCE.loot_blacklist)
-                if (Registries.ENTITY_TYPE.getId(entity.getType()).toString().equals(id))
-                    return true;
-            if (entity.getRandom().nextFloat() < 0.9F) return true;
-            MagicSchool school = DamageUtil.getDamageSchool(source);
-            if (school == null) return true;
-            Entity attacker = source.getAttacker();
-            int grade = (attacker instanceof PlayerEntity player) ? MageComponent.get(player).grade() : 3;
-            entity.dropItem(AllItems.BASE_ESSENCES.get(school).get(randomGrade(entity.getRandom(), grade)));
-            return true;
-        });
 
         LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) ->
         {
@@ -71,6 +54,17 @@ public class AllLoot
             builder.with(entry50);
             tableBuilder.pool(builder.build());
         });
+    }
+
+    public static void essenceLoot(LivingEntity caster, Entity target, MagicSchool impactSchool, MagicSchool spellSchool)
+    {
+        for (String id : AllConfig.INSTANCE.loot_blacklist)
+            if (Registries.ENTITY_TYPE.getId(target.getType()).toString().equals(id))
+                return;
+        if (caster.getRandom().nextFloat() < 0.9F) return;
+        MagicSchool school = impactSchool != null ? impactSchool : spellSchool;
+        int grade = (caster instanceof PlayerEntity player) ? MageComponent.get(player).grade() : 3;
+        target.dropItem(AllItems.BASE_ESSENCES.get(school).get(randomGrade(caster.getRandom(), grade)));
     }
 
     public static int randomGrade(Random random, int maxGrade)

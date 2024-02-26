@@ -44,7 +44,7 @@ public record Mage(int grade, @Nullable MagicSchool school, @Nullable MageMajor 
 
     public boolean isInvalid()
     {
-        return this.grade < 0 || this.grade > MAX_GRADE;
+        return this.grade < MIN_GRADE || this.grade > MAX_GRADE;
     }
 
     public static Mage readFromStack(ItemStack stack)
@@ -67,24 +67,16 @@ public record Mage(int grade, @Nullable MagicSchool school, @Nullable MageMajor 
 
     public static Mage readFromNbt(NbtCompound tag)
     {
-        int grade = tag.getInt(GRADE_KEY);
-        MagicSchool school;
         try
         {
-            school = MagicSchool.valueOf(tag.getString(SCHOOL_KEY));
+            int grade = tag.getInt(GRADE_KEY);
+            MagicSchool school = MagicSchool.valueOf(tag.getString(SCHOOL_KEY));
+            MageMajor major = MageMajor.valueOf(tag.getString(MAJOR_KEY));
+            return new Mage(grade, school, major);
         } catch (Exception e)
         {
-            school = null;
+            return EMPTY;
         }
-        MageMajor major;
-        try
-        {
-            major = MageMajor.valueOf(tag.getString(MAJOR_KEY));
-        } catch (Exception e)
-        {
-            major = null;
-        }
-        return new Mage(grade, school, major);
     }
 
     public static void writeToNbt(NbtCompound tag, int grade, @Nullable MagicSchool school, @Nullable MageMajor major)
@@ -127,24 +119,16 @@ public record Mage(int grade, @Nullable MagicSchool school, @Nullable MageMajor 
 
     public static Mage readFromJson(JsonObject json)
     {
-        int grade = JsonHelper.getInt(json, GRADE_KEY, 0);
-        MagicSchool school;
         try
         {
-            school = MagicSchool.valueOf(JsonHelper.getString(json, SCHOOL_KEY));
+            int grade = JsonHelper.getInt(json, GRADE_KEY, 0);
+            MagicSchool school = MagicSchool.valueOf(JsonHelper.getString(json, SCHOOL_KEY));
+            MageMajor major = MageMajor.valueOf(JsonHelper.getString(json, MAJOR_KEY));
+            return new Mage(grade, school, major);
         } catch (Exception e)
         {
-            school = null;
+            return EMPTY;
         }
-        MageMajor major;
-        try
-        {
-            major = MageMajor.valueOf(JsonHelper.getString(json, MAJOR_KEY));
-        } catch (Exception e)
-        {
-            major = null;
-        }
-        return new Mage(grade, school, major);
     }
 
     public static void writeToJson(JsonObject json, int grade, @Nullable MagicSchool school, @Nullable MageMajor major)

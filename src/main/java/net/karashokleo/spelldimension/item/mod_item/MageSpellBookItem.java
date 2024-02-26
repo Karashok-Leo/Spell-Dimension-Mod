@@ -20,7 +20,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class MageSpellBookItem extends SpellBookItem
+public class MageSpellBookItem extends SpellBookItem implements IMageItem
 {
     public final Mage mage;
 
@@ -28,6 +28,12 @@ public class MageSpellBookItem extends SpellBookItem
     {
         super(SpellDimension.modLoc(major.majorName() + "_" + AllItems.GRADES[grade] + school.spellName()), new FabricItemSettings().maxCount(3 - 2));
         this.mage = new Mage(grade, school, major);
+    }
+
+    @Override
+    public Mage getMage(ItemStack stack)
+    {
+        return this.mage;
     }
 
     @Override

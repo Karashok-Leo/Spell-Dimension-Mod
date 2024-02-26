@@ -1,6 +1,8 @@
 package net.karashokleo.spelldimension.util;
 
+import net.karashokleo.spelldimension.item.mod_item.IMageItem;
 import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.particle.DustParticleEffect;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
@@ -24,6 +26,13 @@ public class ParticleUtil
             MagicSchool.PHYSICAL_MELEE, ParticleTypes.CRIT,
             MagicSchool.PHYSICAL_RANGED, ParticleTypes.CRIT
     );
+
+    public static int getSchoolColor(ItemStack stack)
+    {
+        if (stack.getItem() instanceof IMageItem item)
+            return getSchoolColor(item.getMage(stack).school());
+        else return 0xFFFFFF;
+    }
 
     public static int getSchoolColor(@Nullable MagicSchool school)
     {

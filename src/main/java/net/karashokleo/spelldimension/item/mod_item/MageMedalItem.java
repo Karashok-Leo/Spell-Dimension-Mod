@@ -25,9 +25,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class MageMedalItem extends Item
+public class MageMedalItem extends Item implements IMageItem
 {
-    private static final int COOL_DOWN = 200;
+    private static final int COOL_DOWN = 20;
 
     public MageMedalItem()
     {
@@ -38,45 +38,76 @@ public class MageMedalItem extends Item
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand)
     {
         ItemStack stack = user.getStackInHand(hand);
-        Mage mage = Mage.readFromStack(stack);
+        Mage mage = getMage(stack);
         if (mage.isInvalid()) return TypedActionResult.fail(stack);
-        if (world.isClient() && user.isSneaking() && mage.school() != null)
+        if (user.isSneaking() && world.isClient())
+            attributesNotify(user, mage.school());
+        else if (!user.isSneaking())
         {
-            SpellPower.Result result = SpellPower.getSpellPower(mage.school(), user);
-            user.sendMessage(Text
+            if (!world.isClient())
+                upgradeNotify(user, mage);
+            MageComponent.set(user, mage);
+            user.getItemCooldownManager().set(this, COOL_DOWN);
+            ParticleUtil.ringParticleEmit(user, (mage.grade() + 1) * 30, 5, mage.school());
+        }
+        return TypedActionResult.success(stack);
+    }
+
+    private void attributesNotify(PlayerEntity player, @Nullable MagicSchool school)
+    {
+        if (school == null)
+        {
+            for (MagicSchool school_ : MagicSchool.values())
+                if (school_.isMagical)
+                {
+                    SpellPower.Result result = SpellPower.getSpellPower(school_, player);
+                    player.sendMessage(Text
+                            .translatable("attribute.name.spell_power." + result.school().spellName())
+                            .append(String.format(" - %s", result.baseValue()))
+                            .setStyle(Style.EMPTY.withColor(school_.color())));
+                }
+            player.sendMessage(Text
+                    .translatable("attribute.name.spell_power.critical_chance")
+                    .append(String.format(" - %.1f%%", SpellPower.getCriticalChance(player) * 100)));
+            player.sendMessage(Text
+                    .translatable("attribute.name.spell_power.critical_damage")
+                    .append(String.format(" - × %.1f%%", SpellPower.getCriticalMultiplier(player) * 100)));
+            player.sendMessage(Text
+                    .translatable("attribute.name.spell_power.haste")
+                    .append(Text.translatable(LangData.FASTER, (SpellPower.getHaste(player) - 1.0) * 100)));
+        } else
+        {
+            SpellPower.Result result = SpellPower.getSpellPower(school, player);
+            player.sendMessage(Text
                     .translatable("attribute.name.spell_power." + result.school().spellName())
                     .append(String.format(" - %s", result.baseValue()))
-                    .setStyle(Style.EMPTY.withColor(mage.school().color())));
-            user.sendMessage(Text
+                    .setStyle(Style.EMPTY.withColor(school.color())));
+            player.sendMessage(Text
                     .translatable("attribute.name.spell_power.critical_chance")
                     .append(String.format(" - %.1f%%", result.criticalChance() * 100))
-                    .setStyle(Style.EMPTY.withColor(mage.school().color())));
-            user.sendMessage(Text
+                    .setStyle(Style.EMPTY.withColor(school.color())));
+            player.sendMessage(Text
                     .translatable("attribute.name.spell_power.critical_damage")
                     .append(String.format(" - × %.1f%%", result.criticalDamage() * 100))
-                    .setStyle(Style.EMPTY.withColor(mage.school().color())));
-            user.sendMessage(Text
+                    .setStyle(Style.EMPTY.withColor(school.color())));
+            player.sendMessage(Text
                     .translatable("attribute.name.spell_power.haste")
-                    .append(Text.translatable(LangData.FASTER, (SpellPower.getHaste(user) - 1.0) * 100))
-                    .setStyle(Style.EMPTY.withColor(mage.school().color())));
-            return TypedActionResult.success(stack);
+                    .append(Text.translatable(LangData.FASTER, (SpellPower.getHaste(player) - 1.0) * 100))
+                    .setStyle(Style.EMPTY.withColor(school.color())));
         }
-        if (!world.isClient())
-        {
-            PacketByteBuf buf = PacketByteBufs.create();
-            mage.writeToPacket(buf);
-            Mage playerMage = MageComponent.get(user);
-            if (mage.grade() == 0)
-                SpellDimensionNetworking.sendToTrackers(user, SpellDimensionNetworking.CLEAR_PACKET, buf);
-            else if (playerMage.grade() == 0 ||
-                    (playerMage.grade() < mage.grade() &&
-                            playerMage.checkSchoolAndMajor(mage.school(), mage.major())))
-                SpellDimensionNetworking.sendToTrackers(user, SpellDimensionNetworking.UPGRADE_PACKET, buf);
-        }
-        MageComponent.set(user, mage);
-        user.getItemCooldownManager().set(this, COOL_DOWN);
-        ParticleUtil.ringParticleEmit(user, (mage.grade() + 1) * 30, 5, mage.school());
-        return TypedActionResult.success(stack);
+    }
+
+    private void upgradeNotify(PlayerEntity player, Mage mage)
+    {
+        PacketByteBuf buf = PacketByteBufs.create();
+        mage.writeToPacket(buf);
+        Mage playerMage = MageComponent.get(player);
+        if (mage.grade() == 0)
+            SpellDimensionNetworking.sendToTrackers(player, SpellDimensionNetworking.CLEAR_PACKET, buf);
+        else if (playerMage.grade() == 0 ||
+                (playerMage.grade() < mage.grade() &&
+                        playerMage.checkSchoolAndMajor(mage.school(), mage.major())))
+            SpellDimensionNetworking.sendToTrackers(player, SpellDimensionNetworking.UPGRADE_PACKET, buf);
     }
 
     @Override
@@ -88,22 +119,20 @@ public class MageMedalItem extends Item
     @Override
     public Text getName(ItemStack stack)
     {
-        Mage mage = Mage.readFromStack(stack);
-        if (mage.grade() == 0) return Text.translatable(LangData.BLANK_MAGE_MEDAL);
-        return mage.getMageTitle(Text.translatable(LangData.MAGE_MEDAL));
+        return getMage(stack).grade() == 0 ? Text.translatable(LangData.BLANK_MAGE_MEDAL) : getMage(stack).getMageTitle(Text.translatable(LangData.MAGE_MEDAL));
     }
 
     @Override
     public boolean hasGlint(ItemStack stack)
     {
-        return Mage.readFromStack(stack).grade() > 0;
+        return getMage(stack).grade() > 0;
     }
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
         super.appendTooltip(stack, world, tooltip, context);
-        Mage mage = Mage.readFromStack(stack);
+        Mage mage = getMage(stack);
         if (mage.isInvalid())
         {
             tooltip.add(Text.translatable(LangData.TOOLTIP_INVALID));

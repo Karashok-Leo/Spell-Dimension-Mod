@@ -3,9 +3,8 @@ package net.karashokleo.spelldimension.loot;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import net.karashokleo.spelldimension.item.AllItems;
-import net.karashokleo.spelldimension.item.ExtraModifier;
+import net.karashokleo.spelldimension.misc.ExtraModifier;
 import net.karashokleo.spelldimension.item.mod_item.EnchantedEssenceItem;
-import net.karashokleo.spelldimension.misc.Mage;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.condition.LootCondition;
 import net.minecraft.loot.context.LootContext;
@@ -34,9 +33,7 @@ public class RandomEnchantedEssenceFunction extends ConditionalLootFunction
         {
             Random random = context.getRandom();
             MagicSchool school = AllLoot.randomSchool(random);
-            return AllItems.ENCHANTED_ESSENCE.getStack(
-                    new Mage(AllLoot.randomGrade(random, 3), school, null),
-                    new ExtraModifier(threshold.nextInt(context), AllLoot.randomSlot(random), school.attributeId())
+            return AllItems.ENCHANTED_ESSENCE.getStack(new ExtraModifier(threshold.nextInt(context), AllLoot.randomSlot(random), school.attributeId())
             );
         } else return stack;
     }

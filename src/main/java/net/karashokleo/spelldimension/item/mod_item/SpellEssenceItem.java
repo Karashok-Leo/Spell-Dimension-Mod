@@ -2,7 +2,6 @@ package net.karashokleo.spelldimension.item.mod_item;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.karashokleo.spelldimension.data.LangData;
-import net.karashokleo.spelldimension.misc.Mage;
 import net.karashokleo.spelldimension.util.ParticleUtil;
 import net.karashokleo.spelldimension.util.SoundUtil;
 import net.minecraft.client.item.TooltipContext;
@@ -16,6 +15,7 @@ import net.minecraft.screen.slot.Slot;
 import net.minecraft.text.Text;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
+import net.spell_power.api.MagicSchool;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -35,7 +35,7 @@ public abstract class SpellEssenceItem extends Item
         ItemStack stack = user.getStackInHand(hand);
         if (hand == Hand.MAIN_HAND &&
                 !user.getOffHandStack().isEmpty() &&
-                Mage.readFromStack(stack).testPlayer(user))
+                canUse(user, stack))
         {
             user.setCurrentHand(hand);
             return TypedActionResult.consume(stack);
@@ -63,13 +63,23 @@ public abstract class SpellEssenceItem extends Item
 
     protected abstract boolean applyEffect(ItemStack essence, ItemStack target);
 
+    protected boolean canUse(PlayerEntity player, ItemStack essence)
+    {
+        return true;
+    }
+
+    protected MagicSchool getSchool(ItemStack stack)
+    {
+        return MagicSchool.PHYSICAL_MELEE;
+    }
+
     @Override
     public boolean onStackClicked(ItemStack stack, Slot slot, ClickType clickType, PlayerEntity player)
     {
         if (clickType == ClickType.RIGHT &&
                 !player.getItemCooldownManager().isCoolingDown(stack.getItem()) &&
                 !slot.getStack().isEmpty() &&
-                Mage.readFromStack(stack).testPlayer(player) &&
+                canUse(player, stack) &&
                 applyEffect(stack, slot.getStack()))
         {
             success(stack, player);
@@ -80,26 +90,16 @@ public abstract class SpellEssenceItem extends Item
     public void success(ItemStack essence, PlayerEntity player)
     {
         player.getItemCooldownManager().set(this, COOL_DOWN);
-        Mage mage = Mage.readFromStack(essence);
-        ParticleUtil.ringParticleEmit(player, (mage.grade() + 1) * 30, 5, mage.school());
-        SoundUtil.playSound(player, mage.school());
+        ParticleUtil.ringParticleEmit(player, 4 * 30, 5, getSchool(essence));
+        SoundUtil.playSound(player, getSchool(essence));
         player.sendMessage(Text.translatable(LangData.TITLE_SUCCESS), true);
         if (!player.isCreative()) essence.decrement(1);
-    }
-
-    @Override
-    public boolean hasGlint(ItemStack stack)
-    {
-        return Mage.readFromStack(stack).grade() > 0;
     }
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
         super.appendTooltip(stack, world, tooltip, context);
-        tooltip.add(Text.translatable(LangData.TOOLTIP_REQUIRE).formatted(Formatting.GRAY));
-        tooltip.add(Mage.readFromStack(stack).getMageTitle(Text.translatable(LangData.MAGE)));
-        tooltip.add(ScreenTexts.EMPTY);
         tooltip.add(Text.translatable(LangData.TOOLTIP_ESSENCE_USE));
         tooltip.add(ScreenTexts.EMPTY);
         tooltip.add(Text.translatable(LangData.TOOLTIP_EFFECT));

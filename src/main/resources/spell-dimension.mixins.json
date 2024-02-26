@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "SpellBooksAccessor",
+    "SpellHelperMixin",
     "SpellProjectileMixin",
     "phase.EntityPredicatesMixin",
     "phase.LivingEntityMixin",

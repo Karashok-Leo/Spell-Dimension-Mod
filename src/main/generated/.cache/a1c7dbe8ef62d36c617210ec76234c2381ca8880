@@ -1,4 +1,4 @@
-// 1.20.1	2024-02-18T14:49:02.7754202	Spell Dimension/Model Definitions
+// 1.20.1	2024-02-25T17:48:33.7831321	Spell Dimension/Model Definitions
 fc8440d7f744ed76d4f5d77993bdf509402ce388 assets\spell-dimension\models\item\primary_frost_spell_book.json
 ccaf88fc8faa6df38e90019ae5c1d030c78c426e assets\spell-dimension\models\item\advanced_lightning_essence.json
 f9b1ad6774102eb0f1978c22f513253b87ae6a76 assets\spell-dimension\models\item\advanced_fire_essence.json
@@ -25,8 +25,8 @@ dd6bf775b4ce6420bc288048fd22bc19b61ef7ea assets\spell-dimension\models\item\nucl
 2fde5d2043740a67152b30ba89889764b3a40625 assets\spell-dimension\models\item\regen_secondary_healing_spell_book.json
 93ca7c5bfcc65c4fd6103f411cb7123f2703e348 assets\spell-dimension\models\item\power_perfect_healing_spell_book.json
 22de0d98f9a23f574d8c2481f03a456486a9c46e assets\spell-dimension\models\item\ignite_advanced_fire_spell_book.json
-67078b8eec679db011fab85cf8102102875c652f assets\spell-dimension\models\item\aura_perfect_frost_spell_book.json
 2a753ae6dc3dc526ba2cab4a9d7cf2accbe6d4b7 assets\spell-dimension\models\item\flourish_secondary_arcane_spell_book.json
+67078b8eec679db011fab85cf8102102875c652f assets\spell-dimension\models\item\aura_perfect_frost_spell_book.json
 5a22045947aa5e089f6a54c8b53167e1554b2f12 assets\spell-dimension\models\item\primary_arcane_essence.json
 65166d23e39f89470e5ed5ed5a44063853121cc6 assets\spell-dimension\models\item\advanced_healing_essence.json
 3b29fc5cde378db091ceca6e80a676b32c6caaa1 assets\spell-dimension\models\item\primary_healing_spell_book.json

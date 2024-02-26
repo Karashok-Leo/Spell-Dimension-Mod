@@ -3,6 +3,7 @@ package net.karashokleo.spelldimension.item;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.karashokleo.spelldimension.SpellDimension;
+import net.karashokleo.spelldimension.misc.ExtraModifier;
 import net.karashokleo.spelldimension.misc.Mage;
 import net.karashokleo.spelldimension.misc.MageMajor;
 import net.minecraft.entity.EquipmentSlot;
@@ -33,7 +34,7 @@ public class AllGroups
         Registry.register(Registries.ITEM_GROUP, SpellDimension.modLoc("group_ees"),
                 FabricItemGroup
                         .builder()
-                        .icon(() -> AllItems.ENCHANTED_ESSENCE.getStack(new Mage(3, MagicSchool.FIRE, null), new ExtraModifier(30, EquipmentSlot.MAINHAND, MagicSchool.FIRE.attributeId())))
+                        .icon(() -> AllItems.ENCHANTED_ESSENCE.getStack(new ExtraModifier(30, EquipmentSlot.MAINHAND, MagicSchool.FIRE.attributeId())))
                         .displayName(Text.translatable("itemGroup.spell-dimension.group_ees"))
                         .build()
         );
@@ -61,14 +62,11 @@ public class AllGroups
         ItemGroupEvents.modifyEntriesEvent(EES_GROUP_KEY).register(entries ->
         {
             for (MagicSchool school : MagicSchool.values())
-            {
-                if (!school.isMagical) continue;
                 for (int i = 0; i < 3; i++)
                 {
                     for (EquipmentSlot slot : EquipmentSlot.values())
-                        entries.add(AllItems.ENCHANTED_ESSENCE.getStack(new Mage(i, school, null), new ExtraModifier((i + 1) * 10, slot, school.attributeId())));
+                        entries.add(AllItems.ENCHANTED_ESSENCE.getStack(new ExtraModifier((i + 1) * 10, slot, school.attributeId())));
                 }
-            }
         });
         ItemGroupEvents.modifyEntriesEvent(MEDALS_GROUP_KEY).register(entries ->
         {

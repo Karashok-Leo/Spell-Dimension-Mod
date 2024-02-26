@@ -7,7 +7,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback;
 import net.karashokleo.spelldimension.data.LangData;
 import net.karashokleo.spelldimension.item.AllItems;
-import net.karashokleo.spelldimension.item.ExtraModifier;
+import net.karashokleo.spelldimension.misc.ExtraModifier;
 import net.karashokleo.spelldimension.effect.AllStatusEffects;
 import net.karashokleo.spelldimension.misc.Mage;
 import net.karashokleo.spelldimension.render.*;
@@ -33,7 +33,7 @@ public class SpellDimensionClient implements ClientModInitializer
     public void onInitializeClient()
     {
         ColorProviderRegistry.ITEM.register((stack, tintIndex) ->
-                ParticleUtil.getSchoolColor(Mage.readFromStack(stack).school()), AllItems.MAGE_MEDAL, AllItems.ENCHANTED_ESSENCE, AllItems.DISENCHANTED_ESSENCE);
+                ParticleUtil.getSchoolColor(stack), AllItems.MAGE_MEDAL, AllItems.ENCHANTED_ESSENCE, AllItems.DISENCHANTED_ESSENCE);
 
         ItemTooltipCallback.EVENT.register(ExtraModifier::levelTooltip);
 

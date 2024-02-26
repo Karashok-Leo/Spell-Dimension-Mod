@@ -1,7 +1,7 @@
 package net.karashokleo.spelldimension.item.mod_item;
 
 import net.karashokleo.spelldimension.data.LangData;
-import net.karashokleo.spelldimension.item.ExtraModifier;
+import net.karashokleo.spelldimension.misc.ExtraModifier;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;

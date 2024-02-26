@@ -3,8 +3,7 @@ package net.karashokleo.spelldimension.recipe;
 import com.google.gson.JsonObject;
 import net.karashokleo.spelldimension.SpellDimension;
 import net.karashokleo.spelldimension.item.AllItems;
-import net.karashokleo.spelldimension.item.ExtraModifier;
-import net.karashokleo.spelldimension.misc.Mage;
+import net.karashokleo.spelldimension.misc.ExtraModifier;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.inventory.RecipeInputInventory;
 import net.minecraft.item.ItemStack;
@@ -56,7 +55,7 @@ public class EnchantedEssenceRecipe extends ShapedRecipe
 
     public EnchantedEssenceRecipe(Identifier id, int grade, MagicSchool school, EquipmentSlot slot, int threshold, Identifier attributeId)
     {
-        super(id, "", CraftingRecipeCategory.MISC, getWidth(slot), getHeight(slot), getIngredients(slot, school, grade), AllItems.ENCHANTED_ESSENCE.getStack(new Mage(grade, school, null), new ExtraModifier(threshold, slot, attributeId)));
+        super(id, "", CraftingRecipeCategory.MISC, getWidth(slot), getHeight(slot), getIngredients(slot, school, grade), AllItems.ENCHANTED_ESSENCE.getStack(new ExtraModifier(threshold, slot, attributeId)));
         this.grade = grade;
         this.school = school;
         this.slot = slot;
@@ -94,7 +93,7 @@ public class EnchantedEssenceRecipe extends ShapedRecipe
     @Override
     public ItemStack craft(RecipeInputInventory recipeInputInventory, DynamicRegistryManager dynamicRegistryManager)
     {
-        return AllItems.ENCHANTED_ESSENCE.getStack(new Mage(grade, school, null), new ExtraModifier(threshold, slot, attributeId));
+        return AllItems.ENCHANTED_ESSENCE.getStack(new ExtraModifier(threshold, slot, attributeId));
     }
 
     @Override

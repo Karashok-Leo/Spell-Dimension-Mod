@@ -1,15 +1,18 @@
 package net.karashokleo.spelldimension.item.mod_item;
 
 import net.karashokleo.spelldimension.data.LangData;
-import net.karashokleo.spelldimension.item.ExtraModifier;
+import net.karashokleo.spelldimension.misc.ExtraModifier;
 import net.karashokleo.spelldimension.misc.Mage;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.item.ItemStack;
+import net.minecraft.text.MutableText;
+import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
+import net.spell_power.api.MagicSchool;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -21,10 +24,9 @@ public class EnchantedEssenceItem extends SpellEssenceItem
         super();
     }
 
-    public ItemStack getStack(Mage mage, ExtraModifier extraModifier)
+    public ItemStack getStack(ExtraModifier extraModifier)
     {
         ItemStack stack = this.getDefaultStack();
-        mage.writeToStack(stack);
         extraModifier.toNbt(stack.getOrCreateNbt());
         return stack;
     }
@@ -69,6 +71,22 @@ public class EnchantedEssenceItem extends SpellEssenceItem
     @Override
     public Text getName(ItemStack stack)
     {
-        return Mage.readFromStack(stack).getMageTitle(Text.translatable(LangData.ENCHANTED_ESSENCE));
+        MagicSchool school = getSchool(stack);
+        MutableText name = new Mage(0, school, null).getSchoolText().append(Text.translatable(LangData.ENCHANTED_ESSENCE));
+        if (school != null)
+            name.setStyle(Style.EMPTY.withColor(school.color()));
+        return name;
+    }
+
+    @Override
+    public MagicSchool getSchool(ItemStack stack)
+    {
+        MagicSchool school = super.getSchool(stack);
+        ExtraModifier extraModifier = ExtraModifier.fromNbt(stack.getNbt());
+        if (extraModifier != null)
+            for (MagicSchool school_ : MagicSchool.values())
+                if (school_.attributeId().toString().equals(extraModifier.getAttributeId()))
+                    school = school_;
+        return school;
     }
 }
