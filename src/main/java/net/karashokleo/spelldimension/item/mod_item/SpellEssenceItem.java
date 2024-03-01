@@ -1,6 +1,7 @@
 package net.karashokleo.spelldimension.item.mod_item;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.karashokleo.spelldimension.config.AllConfig;
 import net.karashokleo.spelldimension.data.LangData;
 import net.karashokleo.spelldimension.util.ParticleUtil;
 import net.karashokleo.spelldimension.util.SoundUtil;
@@ -22,8 +23,6 @@ import java.util.List;
 
 public abstract class SpellEssenceItem extends Item
 {
-    private static final int COOL_DOWN = 40;
-
     public SpellEssenceItem()
     {
         super(new FabricItemSettings().maxCount(1));
@@ -89,7 +88,7 @@ public abstract class SpellEssenceItem extends Item
 
     public void success(ItemStack essence, PlayerEntity player)
     {
-        player.getItemCooldownManager().set(this, COOL_DOWN);
+        player.getItemCooldownManager().set(this, AllConfig.INSTANCE.spell_essence_cool_down);
         ParticleUtil.ringParticleEmit(player, 4 * 30, 5, getSchool(essence));
         SoundUtil.playSound(player, getSchool(essence));
         player.sendMessage(Text.translatable(LangData.TITLE_SUCCESS), true);

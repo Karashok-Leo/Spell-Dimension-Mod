@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.karashokleo.spelldimension.SpellDimensionNetworking;
 import net.karashokleo.spelldimension.component.MageComponent;
+import net.karashokleo.spelldimension.config.AllConfig;
 import net.karashokleo.spelldimension.data.LangData;
 import net.karashokleo.spelldimension.misc.Mage;
 import net.karashokleo.spelldimension.misc.MageMajor;
@@ -27,8 +28,6 @@ import java.util.List;
 
 public class MageMedalItem extends Item implements IMageItem
 {
-    private static final int COOL_DOWN = 200;
-
     public MageMedalItem()
     {
         super(new FabricItemSettings().maxCount(1));
@@ -47,7 +46,7 @@ public class MageMedalItem extends Item implements IMageItem
             if (!world.isClient())
                 upgradeNotify(user, mage);
             MageComponent.set(user, mage);
-            user.getItemCooldownManager().set(this, COOL_DOWN);
+            user.getItemCooldownManager().set(this, AllConfig.INSTANCE.mage_medal_cool_down);
             ParticleUtil.ringParticleEmit(user, (mage.grade() + 1) * 30, 5, mage.school());
         }
         return TypedActionResult.success(stack);

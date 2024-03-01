@@ -30,28 +30,28 @@ public class AllLoot
 
         LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) ->
         {
-            if (!id.getPath().contains("chest")) return;
+            if (!id.getPath().contains("chest") && !id.getPath().contains("entities")) return;
             LootPool.Builder builder = LootPool.builder();
-            builder.rolls(UniformLootNumberProvider.create(0, 3));
-            LeafEntry.Builder<?> entry1 = ItemEntry
-                    .builder(AllItems.ENCHANTED_ESSENCE)
-                    .weight(1)
-                    .apply(RandomEnchantedEssenceFunction.builder(UniformLootNumberProvider.create(40, 60)));
-            LeafEntry.Builder<?> entry3 = ItemEntry
-                    .builder(AllItems.ENCHANTED_ESSENCE)
-                    .weight(3)
-                    .apply(RandomEnchantedEssenceFunction.builder(UniformLootNumberProvider.create(20, 40)));
-            LeafEntry.Builder<?> entry9 = ItemEntry
-                    .builder(AllItems.ENCHANTED_ESSENCE)
-                    .weight(9)
-                    .apply(RandomEnchantedEssenceFunction.builder(UniformLootNumberProvider.create(1, 20)));
-            LeafEntry.Builder<?> entry50 = EmptyEntry
+            builder.rolls(UniformLootNumberProvider.create(AllConfig.INSTANCE.loot.chest_loot.min_rolls, AllConfig.INSTANCE.loot.chest_loot.max_rolls));
+            LeafEntry.Builder<?> emptyEntry = EmptyEntry
                     .builder()
-                    .weight(140);
-            builder.with(entry1);
-            builder.with(entry3);
-            builder.with(entry9);
-            builder.with(entry50);
+                    .weight(AllConfig.INSTANCE.loot.chest_loot.empty_weight);
+            LeafEntry.Builder<?> commonEntry = ItemEntry
+                    .builder(AllItems.ENCHANTED_ESSENCE)
+                    .weight(AllConfig.INSTANCE.loot.chest_loot.common_loot.weight)
+                    .apply(RandomEnchantedEssenceFunction.builder(UniformLootNumberProvider.create(AllConfig.INSTANCE.loot.chest_loot.common_loot.min_threshold, AllConfig.INSTANCE.loot.chest_loot.common_loot.max_threshold)));
+            LeafEntry.Builder<?> uncommonEntry = ItemEntry
+                    .builder(AllItems.ENCHANTED_ESSENCE)
+                    .weight(AllConfig.INSTANCE.loot.chest_loot.uncommon_loot.weight)
+                    .apply(RandomEnchantedEssenceFunction.builder(UniformLootNumberProvider.create(AllConfig.INSTANCE.loot.chest_loot.uncommon_loot.min_threshold, AllConfig.INSTANCE.loot.chest_loot.uncommon_loot.max_threshold)));
+            LeafEntry.Builder<?> rareEntry = ItemEntry
+                    .builder(AllItems.ENCHANTED_ESSENCE)
+                    .weight(AllConfig.INSTANCE.loot.chest_loot.rare_loot.weight)
+                    .apply(RandomEnchantedEssenceFunction.builder(UniformLootNumberProvider.create(AllConfig.INSTANCE.loot.chest_loot.rare_loot.min_threshold, AllConfig.INSTANCE.loot.chest_loot.rare_loot.max_threshold)));
+            builder.with(emptyEntry);
+            builder.with(commonEntry);
+            builder.with(uncommonEntry);
+            builder.with(rareEntry);
             tableBuilder.pool(builder.build());
         });
     }
@@ -61,7 +61,7 @@ public class AllLoot
         for (String id : AllConfig.INSTANCE.loot_blacklist)
             if (Registries.ENTITY_TYPE.getId(target.getType()).toString().equals(id))
                 return;
-        if (caster.getRandom().nextFloat() < 0.9F) return;
+        if (caster.getRandom().nextFloat() < AllConfig.INSTANCE.loot.mob_loot.drop_chance) return;
         MagicSchool school = impactSchool != null ? impactSchool : spellSchool;
         int grade = (caster instanceof PlayerEntity player) ? MageComponent.get(player).grade() : 3;
         target.dropItem(AllItems.BASE_ESSENCES.get(school).get(randomGrade(caster.getRandom(), grade)));
@@ -71,8 +71,8 @@ public class AllLoot
     {
         float f = random.nextFloat();
         int grade;
-        if (f < 0.9F) grade = 0;
-        else if (f < 0.99F) grade = 1;
+        if (f < AllConfig.INSTANCE.loot.mob_loot.grade_0_1) grade = 0;
+        else if (f < AllConfig.INSTANCE.loot.mob_loot.grade_1_2) grade = 1;
         else grade = 2;
         return Math.min(grade, maxGrade);
     }
@@ -84,6 +84,6 @@ public class AllLoot
 
     public static EquipmentSlot randomSlot(Random random)
     {
-        return EquipmentSlot.values()[random.nextInt(MagicSchool.values().length)];
+        return EquipmentSlot.values()[random.nextInt(EquipmentSlot.values().length)];
     }
 }

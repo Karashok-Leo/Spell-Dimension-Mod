@@ -1,4 +1,4 @@
-// 1.20.1	2024-02-25T17:48:33.780133	Spell Dimension/Recipes
+// 1.20.1	2024-02-29T11:35:12.956454	Spell Dimension/Recipes
 0d7d428ef3b7ab5fd0d8c9b186cfcdaf20cd4a22 data\spell-dimension\recipes\arcane\phase\medal\3.json
 98ad804f9afcda10811d1ef1965eb41d63d52f59 data\spell-dimension\advancements\recipes\misc\fire\decompose_0.json
 2aa24dc2c3e8eb0726f8ddfe7ce949070225dcab data\spell-dimension\recipes\healing\feet\0.json
@@ -110,8 +110,8 @@ e7cf9802ce6f50da7aa2b3597886b3122150d94d data\spell-dimension\recipes\soul\mainh
 197ed3ccf6805ea2500d64809981fdb2a4aa9b00 data\spell-dimension\recipes\fire\mainhand\0.json
 1cb27090229d9cb25a530352c477cbe3a63d119d data\spell-dimension\recipes\soul\chest\2.json
 135be6662ac5a1b04c7f17239d099b92bc74eb56 data\spell-dimension\advancements\recipes\misc\fire\compose_1.json
-8e3ad3f2bc36942ccd42ab1b41e0e44a64a6b171 data\spell-dimension\advancements\recipes\misc\fire\breath\spell_book\1.json
 b96d4cca3910b959dfe821f37dd841e1b16e8492 data\spell-dimension\advancements\recipes\misc\frost\nucleus\spell_book\2.json
+8e3ad3f2bc36942ccd42ab1b41e0e44a64a6b171 data\spell-dimension\advancements\recipes\misc\fire\breath\spell_book\1.json
 0e1934c681532b72a0c59456e2dad7e9403e46d5 data\spell-dimension\recipes\arcane\chest\2.json
 0fb5ac624744256275f4345f68156afa12647014 data\spell-dimension\recipes\soul\offhand\0.json
 49c82e0dbfe904d06c0935267da608138706f8eb data\spell-dimension\recipes\healing\power\medal\2.json
@@ -202,9 +202,9 @@ b16d4ea996959687f00b3deb46595988e580ab02 data\spell-dimension\advancements\recip
 9218388bb6b7fcf47680d00a89669232fb9255c0 data\spell-dimension\recipes\lightning\compose_0.json
 bc828057403a8c2a7fbe6a712c220ec0fdaa1971 data\spell-dimension\recipes\healing\power\spell_book\2.json
 9c992c1fdec696a00184dd57371c997346473d02 data\spell-dimension\recipes\frost\compose_1.json
-4789e017dd527b16d715366dcdf993192770c62b data\spell-dimension\recipes\healing\resist\medal\2.json
 b9dc89df16bd266d5abab207133b6c8ba43c4ce6 data\spell-dimension\recipes\arcane\converge\spell_book\1.json
 cc717361675de480b33db5496b6377b03b6692da data\spell-dimension\advancements\recipes\misc\fire\ignite\spell_book\2.json
+4789e017dd527b16d715366dcdf993192770c62b data\spell-dimension\recipes\healing\resist\medal\2.json
 5f16d53d282125d3023fccd89ee294638668d932 data\spell-dimension\advancements\recipes\misc\frost\aura\spell_book\3.json
 ae86f50f4421fe71df0662b445e8c3b1c3ac98a6 data\spell-dimension\recipes\fire\feet\2.json
 4368d39ed23ec52e1cac8a6b93fab35765e47012 data\spell-dimension\recipes\arcane\feet\2.json
@@ -227,8 +227,8 @@ cdd388f8cda0a1e1a6bfe0a426a89a7c2df58730 data\spell-dimension\recipes\healing\ma
 6fb0ebb6368ef5583b1b6706efc0bf320d391da2 data\spell-dimension\recipes\frost\nucleus\spell_book\3.json
 45eeea92a3e352b56884f7bbfe02688b72a5b401 data\spell-dimension\recipes\healing\chest\2.json
 ffdf1fe28b72674b4c149d3d2bde4d4b4937d250 data\spell-dimension\recipes\soul\legs\2.json
-5af425e4746e6cf096f369c42922fee2c4429ed9 data\spell-dimension\recipes\lightning\head\2.json
 c4a4071a3783bc89c1d528046bd65075ae496d77 data\spell-dimension\recipes\lightning\offhand\2.json
+5af425e4746e6cf096f369c42922fee2c4429ed9 data\spell-dimension\recipes\lightning\head\2.json
 819e08ce2df2b3eb8650689122bf8c520085bf31 data\spell-dimension\recipes\frost\compose_0.json
 71688f3c72fa3e3f531eea4e790095612219dc82 data\spell-dimension\recipes\healing\offhand\2.json
 e36b92d180d15901f74457131bbbfcfa54f3d4f2 data\spell-dimension\recipes\fire\blast\spell_book\2.json
