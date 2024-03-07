@@ -1,6 +1,6 @@
 package net.karashokleo.spelldimension.effect;
 
-import net.karashokleo.spelldimension.config.AllConfig;
+import net.karashokleo.spelldimension.config.AllConfigs;
 import net.karashokleo.spelldimension.util.DamageUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
@@ -20,16 +20,11 @@ public class FrostedEffect extends StatusEffect
         this.addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, UUID, MULTIPLIER, EntityAttributeModifier.Operation.MULTIPLY_TOTAL);
     }
 
-    public static AllConfig.Damage getDamage()
-    {
-        return AllConfig.INSTANCE.frosted.damage;
-    }
-
     @Override
     public void applyUpdateEffect(LivingEntity entity, int amplifier)
     {
         LivingEntity attacker = entity.getLastAttacker();
-        float damage = attacker == null ? 2F : (float) DamageUtil.calculateDamage(attacker, MagicSchool.FROST, getDamage(), amplifier);
+        float damage = attacker == null ? 2F : (float) DamageUtil.calculateDamage(attacker, MagicSchool.FROST, AllConfigs.frosted.value.damage, amplifier);
         DamageUtil.spellDamage(entity, MagicSchool.FROST, attacker, damage, false);
         if (entity.canFreeze())
         {

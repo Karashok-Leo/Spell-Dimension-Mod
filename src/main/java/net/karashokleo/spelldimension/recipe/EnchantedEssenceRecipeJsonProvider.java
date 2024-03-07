@@ -12,29 +12,26 @@ public class EnchantedEssenceRecipeJsonProvider implements RecipeJsonProvider
 {
     final Identifier recipeId;
     final int grade;
-    final MagicSchool school;
-    final EquipmentSlot slot;
     final int threshold;
-    final Identifier attributeId;
+    final EquipmentSlot slot;
+    final MagicSchool school;
 
-    public EnchantedEssenceRecipeJsonProvider(Identifier recipeId, int grade, MagicSchool school, EquipmentSlot slot, int threshold, Identifier attributeId)
+    public EnchantedEssenceRecipeJsonProvider(Identifier recipeId, int grade, int threshold, EquipmentSlot slot, MagicSchool school)
     {
         this.recipeId = recipeId;
         this.grade = grade;
-        this.school = school;
-        this.slot = slot;
         this.threshold = threshold;
-        this.attributeId = attributeId;
+        this.slot = slot;
+        this.school = school;
     }
 
     @Override
     public void serialize(JsonObject json)
     {
         json.addProperty(EnchantedEssenceRecipe.GRADE_KEY, grade);
-        json.addProperty(EnchantedEssenceRecipe.SCHOOL_KEY, school.name());
-        json.addProperty(EnchantedEssenceRecipe.SLOT_KEY, slot.name());
         json.addProperty(EnchantedEssenceRecipe.THRESHOLD_KEY, threshold);
-        json.addProperty(EnchantedEssenceRecipe.ATTRIBUTE_ID_KEY, attributeId.toString());
+        json.addProperty(EnchantedEssenceRecipe.SLOT_KEY, slot.name());
+        json.addProperty(EnchantedEssenceRecipe.SCHOOL_KEY, school.name());
     }
 
     @Override

@@ -3,7 +3,7 @@ package net.karashokleo.spelldimension.spell;
 import net.karashokleo.spelldimension.SpellDimension;
 import net.karashokleo.spelldimension.component.MageComponent;
 import net.karashokleo.spelldimension.component.NucleusComponent;
-import net.karashokleo.spelldimension.config.AllConfig;
+import net.karashokleo.spelldimension.config.AllConfigs;
 import net.karashokleo.spelldimension.util.DamageUtil;
 import net.karashokleo.spelldimension.util.ImpactUtil;
 import net.minecraft.entity.Entity;
@@ -27,11 +27,6 @@ public class NucleusSpell implements ISpellHandler
     public static final double MULTIPLIER = -0.75D;
     public static final int TOTAL_DURATION = 80;
 
-    public static AllConfig.Damage getDamage()
-    {
-        return AllConfig.INSTANCE.nucleus.damage;
-    }
-
     @Override
     public Boolean handle(CustomSpellHandler.Data data)
     {
@@ -54,7 +49,7 @@ public class NucleusSpell implements ISpellHandler
         if (spell == null) return;
 
         //Damage
-        float damage = (float) DamageUtil.calculateDamage(caster, MagicSchool.FROST, getDamage(), amplifier);
+        float damage = (float) DamageUtil.calculateDamage(caster, MagicSchool.FROST, AllConfigs.nucleus.value.damage, amplifier);
         DamageUtil.spellDamage(source, MagicSchool.FROST, caster, damage, false);
 
         //Adjust amplifier

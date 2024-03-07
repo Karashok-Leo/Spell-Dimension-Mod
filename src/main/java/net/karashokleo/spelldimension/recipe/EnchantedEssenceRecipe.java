@@ -3,7 +3,7 @@ package net.karashokleo.spelldimension.recipe;
 import com.google.gson.JsonObject;
 import net.karashokleo.spelldimension.SpellDimension;
 import net.karashokleo.spelldimension.item.AllItems;
-import net.karashokleo.spelldimension.misc.ExtraModifier;
+import net.karashokleo.spelldimension.misc.EnchantedModifier;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.inventory.RecipeInputInventory;
 import net.minecraft.item.ItemStack;
@@ -24,10 +24,9 @@ public class EnchantedEssenceRecipe extends ShapedRecipe
 {
     public static final String NAME = "enchanted_essence";
     public static final String GRADE_KEY = "grade";
-    public static final String SCHOOL_KEY = "school";
-    public static final String SLOT_KEY = "slot";
     public static final String THRESHOLD_KEY = "threshold";
-    public static final String ATTRIBUTE_ID_KEY = "attributeId";
+    public static final String SLOT_KEY = "slot";
+    public static final String SCHOOL_KEY = "school";
     public static final Map<EquipmentSlot, String[]> PATTERNS = Map.of(
             EquipmentSlot.MAINHAND, new String[]{" ##",
                     "###",
@@ -48,19 +47,17 @@ public class EnchantedEssenceRecipe extends ShapedRecipe
     );
 
     final int grade;
-    final MagicSchool school;
-    final EquipmentSlot slot;
     final int threshold;
-    final Identifier attributeId;
+    final EquipmentSlot slot;
+    final MagicSchool school;
 
-    public EnchantedEssenceRecipe(Identifier id, int grade, MagicSchool school, EquipmentSlot slot, int threshold, Identifier attributeId)
+    public EnchantedEssenceRecipe(Identifier id, int grade, int threshold, EquipmentSlot slot, MagicSchool school)
     {
-        super(id, "", CraftingRecipeCategory.MISC, getWidth(slot), getHeight(slot), getIngredients(slot, school, grade), AllItems.ENCHANTED_ESSENCE.getStack(new ExtraModifier(threshold, slot, attributeId)));
+        super(id, "", CraftingRecipeCategory.MISC, getWidth(slot), getHeight(slot), getIngredients(slot, school, grade), AllItems.ENCHANTED_ESSENCE.getStack(new EnchantedModifier(threshold, slot, school)));
         this.grade = grade;
-        this.school = school;
-        this.slot = slot;
         this.threshold = threshold;
-        this.attributeId = attributeId;
+        this.slot = slot;
+        this.school = school;
     }
 
     public static int getHeight(EquipmentSlot slot)
@@ -93,7 +90,7 @@ public class EnchantedEssenceRecipe extends ShapedRecipe
     @Override
     public ItemStack craft(RecipeInputInventory recipeInputInventory, DynamicRegistryManager dynamicRegistryManager)
     {
-        return AllItems.ENCHANTED_ESSENCE.getStack(new ExtraModifier(threshold, slot, attributeId));
+        return AllItems.ENCHANTED_ESSENCE.getStack(new EnchantedModifier(threshold, slot, school));
     }
 
     @Override
@@ -111,32 +108,29 @@ public class EnchantedEssenceRecipe extends ShapedRecipe
         public EnchantedEssenceRecipe read(Identifier id, JsonObject json)
         {
             int grade = JsonHelper.getInt(json, GRADE_KEY);
-            MagicSchool school = MagicSchool.valueOf(JsonHelper.getString(json, SCHOOL_KEY));
-            EquipmentSlot slot = EquipmentSlot.valueOf(JsonHelper.getString(json, SLOT_KEY));
             int threshold = JsonHelper.getInt(json, THRESHOLD_KEY);
-            Identifier attributeId = new Identifier(JsonHelper.getString(json, ATTRIBUTE_ID_KEY));
-            return new EnchantedEssenceRecipe(id, grade, school, slot, threshold, attributeId);
+            EquipmentSlot slot = EquipmentSlot.valueOf(JsonHelper.getString(json, SLOT_KEY));
+            MagicSchool school = MagicSchool.valueOf(JsonHelper.getString(json, SCHOOL_KEY));
+            return new EnchantedEssenceRecipe(id, grade, threshold, slot, school);
         }
 
         @Override
         public EnchantedEssenceRecipe read(Identifier id, PacketByteBuf buf)
         {
             int grade = buf.readVarInt();
-            MagicSchool school = buf.readEnumConstant(MagicSchool.class);
-            EquipmentSlot slot = buf.readEnumConstant(EquipmentSlot.class);
             int threshold = buf.readVarInt();
-            Identifier attributeId = buf.readIdentifier();
-            return new EnchantedEssenceRecipe(id, grade, school, slot, threshold, attributeId);
+            EquipmentSlot slot = buf.readEnumConstant(EquipmentSlot.class);
+            MagicSchool school = buf.readEnumConstant(MagicSchool.class);
+            return new EnchantedEssenceRecipe(id, grade, threshold, slot, school);
         }
 
         @Override
         public void write(PacketByteBuf buf, EnchantedEssenceRecipe recipe)
         {
             buf.writeVarInt(recipe.grade);
-            buf.writeEnumConstant(recipe.school);
-            buf.writeEnumConstant(recipe.slot);
             buf.writeVarInt(recipe.threshold);
-            buf.writeIdentifier(recipe.attributeId);
+            buf.writeEnumConstant(recipe.slot);
+            buf.writeEnumConstant(recipe.school);
         }
     }
 }

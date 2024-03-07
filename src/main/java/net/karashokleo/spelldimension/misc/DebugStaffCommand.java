@@ -13,7 +13,7 @@ import net.spell_engine.internals.SpellRegistry;
 
 public class DebugStaffCommand
 {
-    public static void register()
+    public static void init()
     {
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) ->
         {

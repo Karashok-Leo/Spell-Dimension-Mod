@@ -25,9 +25,6 @@
     ],
     "cardinal-components": [
       "net.karashokleo.spelldimension.SpellDimensionComponents"
-    ],
-    "modmenu": [
-      "net.karashokleo.spelldimension.ModMenuIntegration"
     ]
   },
   "mixins": [
@@ -42,7 +39,6 @@
     "minecraft": "~1.20.1",
     "java": ">=17",
     "fabric-api": "*",
-    "cloth-config": "*",
     "spell_engine": "*",
     "spell_power": "*"
   },

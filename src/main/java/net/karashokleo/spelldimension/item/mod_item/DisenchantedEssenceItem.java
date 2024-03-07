@@ -1,7 +1,7 @@
 package net.karashokleo.spelldimension.item.mod_item;
 
 import net.karashokleo.spelldimension.data.LangData;
-import net.karashokleo.spelldimension.misc.ExtraModifier;
+import net.karashokleo.spelldimension.misc.EnchantedModifier;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
@@ -10,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class DisenchantedEssenceItem extends SpellEssenceItem
+public class DisenchantedEssenceItem extends StackClickEssenceItem
 {
     public DisenchantedEssenceItem()
     {
@@ -20,7 +20,7 @@ public class DisenchantedEssenceItem extends SpellEssenceItem
     @Override
     protected boolean applyEffect(ItemStack essence, ItemStack target)
     {
-        return ExtraModifier.remove(target);
+        return EnchantedModifier.remove(target);
     }
 
     @Override

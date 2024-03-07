@@ -1,6 +1,6 @@
 package net.karashokleo.spelldimension.util;
 
-import net.karashokleo.spelldimension.config.AllConfig;
+import net.karashokleo.spelldimension.config.mod_config.DamageConfig;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.registry.RegistryKey;
@@ -13,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class DamageUtil
 {
-    public static double calculateDamage(LivingEntity player, MagicSchool school, AllConfig.Damage damage, double exponent)
+    public static double calculateDamage(LivingEntity player, MagicSchool school, DamageConfig.Damage damage, double exponent)
     {
         return damage.addition + damage.multiplier * SpellPower.getSpellPower(school, player).randomValue() * Math.pow(damage.base, exponent);
     }

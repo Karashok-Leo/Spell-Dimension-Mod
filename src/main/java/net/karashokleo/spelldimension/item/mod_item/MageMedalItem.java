@@ -4,7 +4,7 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.karashokleo.spelldimension.SpellDimensionNetworking;
 import net.karashokleo.spelldimension.component.MageComponent;
-import net.karashokleo.spelldimension.config.AllConfig;
+import net.karashokleo.spelldimension.config.AllConfigs;
 import net.karashokleo.spelldimension.data.LangData;
 import net.karashokleo.spelldimension.misc.Mage;
 import net.karashokleo.spelldimension.misc.MageMajor;
@@ -46,7 +46,7 @@ public class MageMedalItem extends Item implements IMageItem
             if (!world.isClient())
                 upgradeNotify(user, mage);
             MageComponent.set(user, mage);
-            user.getItemCooldownManager().set(this, AllConfig.INSTANCE.mage_medal_cool_down);
+            user.getItemCooldownManager().set(this, AllConfigs.misc.value.mage_medal_cool_down);
             ParticleUtil.ringParticleEmit(user, (mage.grade() + 1) * 30, 5, mage.school());
         }
         return TypedActionResult.success(stack);
@@ -73,7 +73,7 @@ public class MageMedalItem extends Item implements IMageItem
                     .append(String.format(" - × %.1f%%", SpellPower.getCriticalMultiplier(player) * 100)));
             player.sendMessage(Text
                     .translatable("attribute.name.spell_power.haste")
-                    .append(Text.translatable(LangData.FASTER, (SpellPower.getHaste(player) - 1.0) * 100)));
+                    .append(String.format(" - × %.1f%%", SpellPower.getHaste(player) * 100)));
         } else
         {
             SpellPower.Result result = SpellPower.getSpellPower(school, player);
@@ -91,7 +91,7 @@ public class MageMedalItem extends Item implements IMageItem
                     .setStyle(Style.EMPTY.withColor(school.color())));
             player.sendMessage(Text
                     .translatable("attribute.name.spell_power.haste")
-                    .append(Text.translatable(LangData.FASTER, (SpellPower.getHaste(player) - 1.0) * 100))
+                    .append(String.format(" - × %.1f%%", SpellPower.getHaste(player) * 100))
                     .setStyle(Style.EMPTY.withColor(school.color())));
         }
     }

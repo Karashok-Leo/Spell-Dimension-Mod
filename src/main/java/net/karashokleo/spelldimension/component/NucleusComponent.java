@@ -7,13 +7,16 @@ import net.karashokleo.spelldimension.spell.NucleusSpell;
 import net.karashokleo.spelldimension.util.AttributeUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 
+import java.util.UUID;
+
 public class NucleusComponent extends WithCasterComponent implements ServerTickingComponent, AutoSyncedComponent
 {
-    public static final String UUID = "977AE476-9F10-5499-4B5D-09B296214773";
+    public static final UUID uuid = UUID.fromString("977AE476-9F10-5499-4B5D-09B296214773");
 
     private static final String MODIFIER_KEY = "IceNucleus";
     private static final String DURATION_KEY = "duration";
@@ -81,7 +84,7 @@ public class NucleusComponent extends WithCasterComponent implements ServerTicki
 
     public void clear()
     {
-        AttributeUtil.removeModifier(source, UUID);
+        AttributeUtil.removeModifier(source, EntityAttributes.GENERIC_MOVEMENT_SPEED, uuid);
         this.duration = 0;
         this.setCaster(null);
     }
@@ -96,6 +99,6 @@ public class NucleusComponent extends WithCasterComponent implements ServerTicki
         NucleusComponent component = get(source);
         component.duration = NucleusSpell.TOTAL_DURATION;
         component.setCaster(caster);
-        AttributeUtil.addModifier(source, UUID, MODIFIER_KEY, NucleusSpell.MULTIPLIER, EntityAttributeModifier.Operation.MULTIPLY_TOTAL);
+        AttributeUtil.addModifier(source,EntityAttributes.GENERIC_MOVEMENT_SPEED, uuid, MODIFIER_KEY, NucleusSpell.MULTIPLIER, EntityAttributeModifier.Operation.MULTIPLY_TOTAL);
     }
 }

@@ -150,7 +150,7 @@ public class RecipeData extends FabricRecipeProvider
 
             for (int i = 0; i < 3; i++)
                 for (EquipmentSlot slot : EquipmentSlot.values())
-                    exporter.accept(new EnchantedEssenceRecipeJsonProvider(SpellDimension.modLoc(school.spellName() + "/" + slot.getName() + "/" + i), i, school, slot, (i + 1) * 10, school.attributeId()));
+                    exporter.accept(new EnchantedEssenceRecipeJsonProvider(SpellDimension.modLoc(school.spellName() + "/" + slot.getName() + "/" + i), i, (i + 1) * 10, slot, school));
         }
     }
 }

@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.karashokleo.spelldimension.SpellDimension;
 import net.karashokleo.spelldimension.item.mod_item.DisenchantedEssenceItem;
 import net.karashokleo.spelldimension.item.mod_item.EnchantedEssenceItem;
+import net.karashokleo.spelldimension.item.mod_item.EnlighteningEssenceItem;
 import net.karashokleo.spelldimension.item.mod_item.MageMedalItem;
 import net.karashokleo.spelldimension.misc.MageMajor;
 import net.minecraft.item.Item;
@@ -25,6 +26,7 @@ public class AllItems
 
     public static Item DEBUG_STAFF;
     public static MageMedalItem MAGE_MEDAL;
+    public static EnlighteningEssenceItem ENLIGHTENING_ESSENCE;
     public static EnchantedEssenceItem ENCHANTED_ESSENCE;
     public static DisenchantedEssenceItem DISENCHANTED_ESSENCE;
 
@@ -43,6 +45,7 @@ public class AllItems
         SPELL_BOOKS.values().forEach(SpellBooksEntry::register);
         DEBUG_STAFF = registerItem("debug_staff", new Item(new FabricItemSettings().maxCount(1)));
         MAGE_MEDAL = registerItem("mage_medal", new MageMedalItem());
+        ENLIGHTENING_ESSENCE = registerItem("enlightening_essence", new EnlighteningEssenceItem());
         ENCHANTED_ESSENCE = registerItem("enchanted_essence", new EnchantedEssenceItem());
         DISENCHANTED_ESSENCE = registerItem("disenchanted_essence", new DisenchantedEssenceItem());
     }

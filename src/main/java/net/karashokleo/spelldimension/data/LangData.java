@@ -1,9 +1,7 @@
 package net.karashokleo.spelldimension.data;
 
-import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
-import net.karashokleo.spelldimension.config.AllConfig;
 import net.karashokleo.spelldimension.item.AllGroups;
 import net.karashokleo.spelldimension.item.AllItems;
 import net.karashokleo.spelldimension.effect.AllStatusEffects;
@@ -17,21 +15,16 @@ import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.spell_power.api.MagicSchool;
 
-import java.lang.reflect.Field;
-
 public class LangData extends FabricLanguageProvider
 {
-    //Config
-    public static final String CONFIG_TITLE = "text.autoconfig.spell-dimension.title";
-    public static final String CONFIG_OPTION = "text.autoconfig.spell-dimension.option";
     //Misc
     public static final String MAGE = "misc.spell-dimension.mage";
     public static final String MASTERY = "misc.spell-dimension.mastery";
     public static final String SPELL_BOOK = "misc.spell-dimension.book";
     public static final String MAGE_MEDAL = "misc.spell-dimension.medal";
     public static final String BLANK_MAGE_MEDAL = "misc.spell-dimension.medal.blank";
+    public static final String ENLIGHTENING_ESSENCE = "misc.spell-dimension.enlightening_essence";
     public static final String ENCHANTED_ESSENCE = "misc.spell-dimension.enchanted_essence";
-    public static final String FASTER = "misc.spell-dimension.medal.faster";
 
     //Enum
     public static final String ENUM_GRADE = "enum.spell-dimension.grade.";
@@ -47,7 +40,8 @@ public class LangData extends FabricLanguageProvider
 
     //Tooltip
     public static final String TOOLTIP_INVALID = "tooltip.spell-dimension.invalid";
-    public static final String TOOLTIP_ESSENCE_USE = "tooltip.spell-dimension.essence.use";
+    public static final String TOOLTIP_ESSENCE_USE_1 = "tooltip.spell-dimension.essence.use.1";
+    public static final String TOOLTIP_ESSENCE_USE_2 = "tooltip.spell-dimension.essence.use.2";
     public static final String TOOLTIP_MEDAL_USE_1 = "tooltip.spell-dimension.medal.use.1";
     public static final String TOOLTIP_MEDAL_USE_2 = "tooltip.spell-dimension.medal.use.2";
     public static final String TOOLTIP_EFFECT = "tooltip.spell-dimension.effect";
@@ -65,7 +59,6 @@ public class LangData extends FabricLanguageProvider
     @Override
     public void generateTranslations(TranslationBuilder builder)
     {
-        addConfigTranslation(builder);
         addItemTranslation(builder);
         addGroupTranslation(builder);
         addStatusEffectTranslation(builder);
@@ -79,26 +72,6 @@ public class LangData extends FabricLanguageProvider
         addSpellTranslation(builder);
     }
 
-    private static void addConfigTranslation(TranslationBuilder builder)
-    {
-        builder.add(CONFIG_TITLE, "Spell Dimension");
-        addConfigTranslation(builder, AllConfig.class, CONFIG_OPTION);
-    }
-
-    private static void addConfigTranslation(TranslationBuilder builder, Class<?> c, String pre)
-    {
-        if (c.isPrimitive() || c.isArray()) return;
-        Field[] fields = c.getFields();
-        for (Field field : fields)
-        {
-            if (field.isAnnotationPresent(ConfigEntry.Gui.Excluded.class)) continue;
-            String name = field.getName();
-            String key = pre + "." + name;
-            builder.add(key, getDefaultName(name));
-            addConfigTranslation(builder, field.getType(), key);
-        }
-    }
-
     private static void addItemTranslation(TranslationBuilder builder)
     {
         builder.add(AllItems.DEBUG_STAFF, getName(AllItems.DEBUG_STAFF));
@@ -110,7 +83,8 @@ public class LangData extends FabricLanguageProvider
     private static void addGroupTranslation(TranslationBuilder builder)
     {
         builder.add(AllGroups.BOOKS_GROUP_KEY, "Spell Dimension: Spell Books");
-        builder.add(AllGroups.EES_GROUP_KEY, "Spell Dimension: Enchanted Essences");
+        builder.add(AllGroups.ELES_GROUP_KEY, "Spell Dimension: Enlightening Essences");
+        builder.add(AllGroups.ECES_GROUP_KEY, "Spell Dimension: Enchanted Essences");
         builder.add(AllGroups.MEDALS_GROUP_KEY, "Spell Dimension: Mage Medals");
         builder.add(AllGroups.MISC_GROUP_KEY, "Spell Dimension: Misc");
     }
@@ -128,8 +102,8 @@ public class LangData extends FabricLanguageProvider
         builder.add(SPELL_BOOK, "Spell Book");
         builder.add(MAGE_MEDAL, "Mage Medal");
         builder.add(BLANK_MAGE_MEDAL, "Blank Mage Medal");
+        builder.add(ENLIGHTENING_ESSENCE, "Enlightening Essence");
         builder.add(ENCHANTED_ESSENCE, "Enchanted Essence");
-        builder.add(FASTER, " - %.1f%% Faster");
     }
 
     private static void addGradeTranslation(TranslationBuilder builder)
@@ -173,7 +147,8 @@ public class LangData extends FabricLanguageProvider
     private static void addTooltipTranslation(TranslationBuilder builder)
     {
         builder.add(TOOLTIP_INVALID, "Invalid Nbt Data!");
-        builder.add(TOOLTIP_ESSENCE_USE, "Main hand holding, use for off hand item, or right click on other item in the inventory with it.");
+        builder.add(TOOLTIP_ESSENCE_USE_1, "Usage: Right click on other item in the inventory.");
+        builder.add(TOOLTIP_ESSENCE_USE_2, "Usage: Main hand holding, press the right button.");
         builder.add(TOOLTIP_MEDAL_USE_1, "Use to become:");
         builder.add(TOOLTIP_MEDAL_USE_2, "Use when sneaking to learn about your attributes.");
         builder.add(TOOLTIP_EFFECT, "Effect:");

@@ -4,7 +4,7 @@ import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.karashokleo.spelldimension.SpellDimensionNetworking;
 import net.karashokleo.spelldimension.component.BlazingMarkComponent;
-import net.karashokleo.spelldimension.config.AllConfig;
+import net.karashokleo.spelldimension.config.AllConfigs;
 import net.karashokleo.spelldimension.effect.AllStatusEffects;
 import net.karashokleo.spelldimension.util.DamageUtil;
 import net.minecraft.entity.Entity;
@@ -44,22 +44,22 @@ public class BlazingMark
 
     public static int getTotalDuration()
     {
-        return AllConfig.INSTANCE.blazing_mark.total_duration;
+        return AllConfigs.blazing_mark.value.total_duration;
     }
 
     public static int getTriggerDuration()
     {
-        return AllConfig.INSTANCE.blazing_mark.trigger_duration;
+        return AllConfigs.blazing_mark.value.trigger_duration;
     }
 
     public static int getMaxDamage()
     {
-        return AllConfig.INSTANCE.blazing_mark.max_damage;
+        return AllConfigs.blazing_mark.value.max_damage;
     }
 
     public static float getProportion()
     {
-        return AllConfig.INSTANCE.blazing_mark.proportion;
+        return AllConfigs.blazing_mark.value.proportion;
     }
 
     public static float getTriggerTime()

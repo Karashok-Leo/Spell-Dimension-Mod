@@ -30,6 +30,7 @@ public class ModelData extends FabricModelProvider
     {
         generator.register(AllItems.DEBUG_STAFF, Models.GENERATED);
         generator.register(AllItems.MAGE_MEDAL, Models.GENERATED);
+        generator.register(AllItems.ENLIGHTENING_ESSENCE, Models.GENERATED);
         generator.register(AllItems.ENCHANTED_ESSENCE, Models.GENERATED);
         generator.register(AllItems.DISENCHANTED_ESSENCE, Models.GENERATED);
 

@@ -1,9 +1,9 @@
 package net.karashokleo.spelldimension.mixin;
 
 import net.karashokleo.spelldimension.item.mod_item.EnchantedEssenceItem;
-import net.karashokleo.spelldimension.misc.ExtraModifier;
+import net.karashokleo.spelldimension.misc.EnchantedModifier;
 import net.karashokleo.spelldimension.item.mod_item.IMageItem;
-import net.karashokleo.spelldimension.util.ParticleUtil;
+import net.karashokleo.spelldimension.util.ColorUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
@@ -51,21 +51,21 @@ public abstract class DrawContextMixin
                     TextRenderer textRenderer = this.client.textRenderer;
                     this.matrices.push();
                     this.matrices.translate(0, 0, 200);
-                    drawText(textRenderer, String.valueOf(grade), x, y - 1, ParticleUtil.getSchoolColor(item.getMage(stack).school()), true);
+                    drawText(textRenderer, String.valueOf(grade), x, y - 1, ColorUtil.getItemColor(stack), true);
                     this.matrices.pop();
                 }
             }
-            if (stack.getItem() instanceof EnchantedEssenceItem && stack.hasNbt())
+            if (stack.getItem() instanceof EnchantedEssenceItem item && stack.hasNbt())
             {
-                ExtraModifier extraModifier = ExtraModifier.fromNbt(stack.getNbt());
-                if (extraModifier != null)
+                EnchantedModifier enchantedModifier = item.getModifier(stack);
+                if (enchantedModifier != null)
                 {
-                    drawTexture(extraModifier.getSlotTexture(), x, y, 200, 0, 0, 16, 16, 16, 16);
+                    drawTexture(enchantedModifier.getSlotTexture(), x, y, 200, 0, 0, 16, 16, 16, 16);
                     TextRenderer textRenderer = this.client.textRenderer;
-                    String threshold = String.valueOf(extraModifier.threshold);
+                    String threshold = String.valueOf(enchantedModifier.threshold);
                     this.matrices.push();
                     this.matrices.translate(0, 0, 200);
-                    drawText(textRenderer, threshold, x + 19 - 2 - textRenderer.getWidth(threshold), y - 1, 16777215, true);
+                    drawText(textRenderer, threshold, x + 19 - 2 - textRenderer.getWidth(threshold), y - 1, 0xffffff, true);
                     this.matrices.pop();
                 }
             }

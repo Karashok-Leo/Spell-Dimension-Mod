@@ -7,10 +7,11 @@ import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback;
 import net.karashokleo.spelldimension.data.LangData;
 import net.karashokleo.spelldimension.item.AllItems;
-import net.karashokleo.spelldimension.misc.ExtraModifier;
+import net.karashokleo.spelldimension.misc.EnchantedModifier;
 import net.karashokleo.spelldimension.effect.AllStatusEffects;
 import net.karashokleo.spelldimension.misc.Mage;
 import net.karashokleo.spelldimension.render.*;
+import net.karashokleo.spelldimension.util.ColorUtil;
 import net.karashokleo.spelldimension.util.ParticleUtil;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -33,9 +34,9 @@ public class SpellDimensionClient implements ClientModInitializer
     public void onInitializeClient()
     {
         ColorProviderRegistry.ITEM.register((stack, tintIndex) ->
-                ParticleUtil.getSchoolColor(stack), AllItems.MAGE_MEDAL, AllItems.ENCHANTED_ESSENCE, AllItems.DISENCHANTED_ESSENCE);
+                ColorUtil.getItemColor(stack), AllItems.MAGE_MEDAL, AllItems.ENLIGHTENING_ESSENCE, AllItems.ENCHANTED_ESSENCE);
 
-        ItemTooltipCallback.EVENT.register(ExtraModifier::levelTooltip);
+        ItemTooltipCallback.EVENT.register(EnchantedModifier::levelTooltip);
 
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, entityRenderer, registrationHelper, context) ->
         {
