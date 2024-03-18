@@ -50,6 +50,7 @@ public class LangData extends FabricLanguageProvider
     public static final String TOOLTIP_MODIFIER = "tooltip.spell-dimension.modifier";
     public static final String TOOLTIP_REQUIRE = "tooltip.spell-dimension.require";
     public static final String TOOLTIP_DISENCHANT = "tooltip.spell-dimension.disenchant";
+    public static final String TOOLTIP_MENDING = "tooltip.spell-dimension.mending";
 
     public LangData(FabricDataOutput output)
     {
@@ -76,6 +77,7 @@ public class LangData extends FabricLanguageProvider
     {
         builder.add(AllItems.DEBUG_STAFF, getName(AllItems.DEBUG_STAFF));
         builder.add(AllItems.DISENCHANTED_ESSENCE, getName(AllItems.DISENCHANTED_ESSENCE));
+        builder.add(AllItems.MENDING_ESSENCE, getName(AllItems.MENDING_ESSENCE));
         AllItems.BASE_ESSENCES.values().forEach(items -> items.forEach(item -> builder.add(item, getName(item))));
         AllItems.SPELL_BOOKS.values().forEach(entry -> builder.add(entry.primary, getName(entry.primary)));
     }
@@ -156,7 +158,8 @@ public class LangData extends FabricLanguageProvider
         builder.add(TOOLTIP_THRESHOLD, "Threshold: %s");
         builder.add(TOOLTIP_MODIFIER, "Modifier:");
         builder.add(TOOLTIP_REQUIRE, "Requirement:");
-        builder.add(TOOLTIP_DISENCHANT, "Remove attribute modifiers from your offhand item.");
+        builder.add(TOOLTIP_DISENCHANT, "Remove attribute modifiers from the item.");
+        builder.add(TOOLTIP_MENDING, "Completely repair the item and eliminate the repair cost of the item.");
     }
 
     private static void addSpellTranslation(TranslationBuilder builder)

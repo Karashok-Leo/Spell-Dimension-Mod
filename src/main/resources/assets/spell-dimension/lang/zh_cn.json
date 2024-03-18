@@ -41,6 +41,7 @@
   "item.spell-dimension.advanced_soul_essence": "高级灵魂精华",
   "item.spell-dimension.debug_staff": "调试法杖",
   "item.spell-dimension.disenchanted_essence": "祛魔精华",
+  "item.spell-dimension.mending_essence": "修复精华",
   "item.spell-dimension.primary_arcane_essence": "初级奥秘精华",
   "item.spell-dimension.primary_arcane_spell_book": "初级奥秘法术书",
   "item.spell-dimension.primary_fire_essence": "初级烈焰精华",
@@ -145,7 +146,9 @@
   "spell.spell-dimension.resist2.name": "抗性 II",
   "spell.spell-dimension.resist3.description": "施法者获得抗性{effect_amplifier}效果, 持续{effect_duration}秒.",
   "spell.spell-dimension.resist3.name": "抗性 III",
-  "tooltip.spell-dimension.disenchant": "从副手物品上移除所有通过束魔精华获得的属性修饰符.",
+  "text.spell-dimension.failure": "精华使用失败!",
+  "text.spell-dimension.success": "精华使用成功!",
+  "tooltip.spell-dimension.disenchant": "从物品上移除所有通过束魔精华获得的属性修饰符.",
   "tooltip.spell-dimension.effect": "效果:",
   "tooltip.spell-dimension.essence.use.1": "用法: 物品栏中用该物品右键其他物品.",
   "tooltip.spell-dimension.essence.use.2": "用法: 主手持有时，长按右键.",
@@ -153,9 +156,8 @@
   "tooltip.spell-dimension.level": "等级: %s",
   "tooltip.spell-dimension.medal.use.1": "使用后成为:",
   "tooltip.spell-dimension.medal.use.2": "潜行时使用以获知自身魔法相关属性.",
+  "tooltip.spell-dimension.mending": "完全修复物品, 并且清除物品的修复惩罚.",
   "tooltip.spell-dimension.modifier": "属性修饰语:",
   "tooltip.spell-dimension.require": "使用要求:",
-  "tooltip.spell-dimension.threshold": "阈值: %s",
-  "text.spell-dimension.failure": "精华使用失败!",
-  "text.spell-dimension.success": "精华使用成功!"
+  "tooltip.spell-dimension.threshold": "阈值: %s"
 }

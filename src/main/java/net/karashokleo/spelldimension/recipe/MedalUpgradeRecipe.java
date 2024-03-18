@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import net.karashokleo.spelldimension.SpellDimension;
 import net.karashokleo.spelldimension.item.AllItems;
+import net.karashokleo.spelldimension.item.mod_item.MageMedalItem;
 import net.karashokleo.spelldimension.misc.Mage;
 import net.minecraft.inventory.RecipeInputInventory;
 import net.minecraft.item.ItemStack;
@@ -52,9 +53,15 @@ public class MedalUpgradeRecipe extends ShapedRecipe
         for (ItemStack stack : this.getIngredients().get(4).getMatchingStacks())
         {
             ItemStack invStack = inventory.getStack(4);
-            if (invStack.isOf(stack.getItem()) &&
-                    (stack.getNbt() == null || stack.getNbt().equals(invStack.getNbt())))
-                return true;
+            if (invStack.getItem() instanceof MageMedalItem invMedal &&
+                    stack.getItem() instanceof MageMedalItem medal)
+            {
+                Mage invMage = invMedal.getMage(invStack);
+                Mage mage = medal.getMage(stack);
+                if (mage.checkSchoolAndMajor(invMage.school(), invMage.major())
+                        && mage.grade() == invMage.grade())
+                    return true;
+            }
         }
         return false;
     }

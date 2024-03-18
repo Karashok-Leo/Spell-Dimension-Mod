@@ -33,6 +33,7 @@ public class ModelData extends FabricModelProvider
         generator.register(AllItems.ENLIGHTENING_ESSENCE, Models.GENERATED);
         generator.register(AllItems.ENCHANTED_ESSENCE, Models.GENERATED);
         generator.register(AllItems.DISENCHANTED_ESSENCE, Models.GENERATED);
+        generator.register(AllItems.MENDING_ESSENCE, Models.GENERATED);
 
         for (MagicSchool school : MagicSchool.values())
         {

@@ -24,53 +24,60 @@ import net.spell_power.api.MagicSchool;
 public class AllLoots
 {
     public static LootFunctionType RANDOM_ENCHANTED_ESSENCE;
+    public static LootFunctionType RANDOM_ENLIGHTENING_ESSENCE;
 
     public static void register()
     {
-        RANDOM_ENCHANTED_ESSENCE = Registry.register(Registries.LOOT_FUNCTION_TYPE, SpellDimension.modLoc("random_enchanted_essence"), new LootFunctionType(new RandomEssenceFunction.Serializer()));
+        RANDOM_ENCHANTED_ESSENCE = Registry.register(Registries.LOOT_FUNCTION_TYPE, SpellDimension.modLoc("random_enchanted_essence"), new LootFunctionType(new RandomEnchantedEssenceFunction.Serializer()));
+        RANDOM_ENLIGHTENING_ESSENCE = Registry.register(Registries.LOOT_FUNCTION_TYPE, SpellDimension.modLoc("random_enlightening_essence"), new LootFunctionType(new RandomEnlighteningEssenceFunction.Serializer()));
 
         LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) ->
         {
             if (id.getPath().contains("chest"))
             {
                 LootPool.Builder builder = LootPool.builder();
-                builder.rolls(UniformLootNumberProvider.create(AllConfigs.loot.value.function.chest_pool.min_rolls, AllConfigs.loot.value.function.chest_pool.max_rolls));
-                LeafEntry.Builder<?> emptyEntry = EmptyEntry
-                        .builder()
-                        .weight(AllConfigs.loot.value.function.chest_pool.empty_weight);
-                builder.with(emptyEntry);
-                for (LootConfig.FunctionConfig.LootEntry entry : AllConfigs.loot.value.function.chest_pool.entries)
-                    addEntry(builder, entry);
+                addPool(builder, AllConfigs.loot.value.random_essence.chest_pool);
                 tableBuilder.pool(builder.build());
             }
             if (id.getPath().contains("entities"))
             {
                 LootPool.Builder builder = LootPool.builder();
-                builder.rolls(UniformLootNumberProvider.create(AllConfigs.loot.value.function.entity_pool.min_rolls, AllConfigs.loot.value.function.entity_pool.max_rolls));
-                LeafEntry.Builder<?> emptyEntry = EmptyEntry
-                        .builder()
-                        .weight(AllConfigs.loot.value.function.entity_pool.empty_weight);
-                builder.with(emptyEntry);
-                for (LootConfig.FunctionConfig.LootEntry entry : AllConfigs.loot.value.function.entity_pool.entries)
-                    addEntry(builder, entry);
+                addPool(builder, AllConfigs.loot.value.random_essence.entity_pool);
                 builder.conditionally(KilledByPlayerLootCondition.builder());
                 tableBuilder.pool(builder.build());
             }
         });
     }
 
-    private static void addEntry(LootPool.Builder builder, LootConfig.FunctionConfig.LootEntry entry)
+    private static void addPool(LootPool.Builder builder, LootConfig.RandomEssenceConfig.LootPool pool)
     {
+        builder.rolls(UniformLootNumberProvider.create(pool.min_rolls, pool.max_rolls));
+        LeafEntry.Builder<?> emptyEntry = EmptyEntry
+                .builder()
+                .weight(pool.empty_weight);
+        builder.with(emptyEntry);
+
+        // EnchantedEssence
+        for (LootConfig.RandomEssenceConfig.EcEntry entry : pool.entries)
+        {
+            LeafEntry.Builder<?> ecEntry = ItemEntry
+                    .builder(AllItems.ENCHANTED_ESSENCE)
+                    .weight(entry.weight)
+                    .apply(RandomEnchantedEssenceFunction.builder(UniformLootNumberProvider.create(entry.min_threshold, entry.max_threshold)));
+            builder.with(ecEntry);
+        }
+        // EnlighteningEssence
         LeafEntry.Builder<?> elEntry = ItemEntry
                 .builder(AllItems.ENLIGHTENING_ESSENCE)
-                .weight(entry.weight)
-                .apply(RandomEssenceFunction.builder(UniformLootNumberProvider.create(entry.min_threshold, entry.max_threshold)));
+                .weight(pool.el_weight)
+                .apply(RandomEnlighteningEssenceFunction.builder());
         builder.with(elEntry);
-        LeafEntry.Builder<?> ecEntry = ItemEntry
-                .builder(AllItems.ENCHANTED_ESSENCE)
-                .weight(entry.weight)
-                .apply(RandomEssenceFunction.builder(UniformLootNumberProvider.create(entry.min_threshold, entry.max_threshold)));
-        builder.with(ecEntry);
+
+        // MendingEssence
+        LeafEntry.Builder<?> mdEntry = ItemEntry
+                .builder(AllItems.MENDING_ESSENCE)
+                .weight(pool.md_weight);
+        builder.with(mdEntry);
     }
 
     public static void essenceLoot(LivingEntity caster, Entity target, MagicSchool impactSchool, MagicSchool spellSchool)

@@ -2,10 +2,7 @@ package net.karashokleo.spelldimension.item;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.karashokleo.spelldimension.SpellDimension;
-import net.karashokleo.spelldimension.item.mod_item.DisenchantedEssenceItem;
-import net.karashokleo.spelldimension.item.mod_item.EnchantedEssenceItem;
-import net.karashokleo.spelldimension.item.mod_item.EnlighteningEssenceItem;
-import net.karashokleo.spelldimension.item.mod_item.MageMedalItem;
+import net.karashokleo.spelldimension.item.mod_item.*;
 import net.karashokleo.spelldimension.misc.MageMajor;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -29,6 +26,7 @@ public class AllItems
     public static EnlighteningEssenceItem ENLIGHTENING_ESSENCE;
     public static EnchantedEssenceItem ENCHANTED_ESSENCE;
     public static DisenchantedEssenceItem DISENCHANTED_ESSENCE;
+    public static MendingEssenceItem MENDING_ESSENCE;
 
     public static void register()
     {
@@ -48,6 +46,7 @@ public class AllItems
         ENLIGHTENING_ESSENCE = registerItem("enlightening_essence", new EnlighteningEssenceItem());
         ENCHANTED_ESSENCE = registerItem("enchanted_essence", new EnchantedEssenceItem());
         DISENCHANTED_ESSENCE = registerItem("disenchanted_essence", new DisenchantedEssenceItem());
+        MENDING_ESSENCE = registerItem("mending_essence", new MendingEssenceItem());
     }
 
     public static <T extends Item> T registerItem(String id, T item)

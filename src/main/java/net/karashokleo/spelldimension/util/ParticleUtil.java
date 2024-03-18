@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class ParticleUtil
 {
-    private static final ParticleEffect defaultParticleType = ParticleTypes.END_ROD;
+    private static final ParticleEffect defaultParticleType = ParticleTypes.CRIT;
     private static final Map<MagicSchool, ParticleEffect> map = Map.of(
             MagicSchool.ARCANE, Particles.arcane_spell.particleType,
             MagicSchool.FIRE, ParticleTypes.FLAME,

@@ -105,6 +105,7 @@ public class AllGroups
         {
             AllItems.BASE_ESSENCES.values().forEach(items -> items.forEach(entries::add));
             entries.add(AllItems.DISENCHANTED_ESSENCE);
+            entries.add(AllItems.MENDING_ESSENCE);
             entries.add(AllItems.DEBUG_STAFF);
         });
     }
