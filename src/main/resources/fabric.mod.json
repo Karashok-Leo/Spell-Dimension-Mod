@@ -15,16 +15,16 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.karashokleo.spelldimension.SpellDimension"
+      "karashokleo.spell_dimension.SpellDimension"
     ],
     "client": [
-      "net.karashokleo.spelldimension.SpellDimensionClient"
+      "karashokleo.spell_dimension.SpellDimensionClient"
     ],
     "fabric-datagen": [
-      "net.karashokleo.spelldimension.SpellDimensionDataGenerator"
+      "karashokleo.spell_dimension.init.AllData"
     ],
     "cardinal-components": [
-      "net.karashokleo.spelldimension.SpellDimensionComponents"
+      "karashokleo.spell_dimension.init.AllComponents"
     ]
   },
   "mixins": [
