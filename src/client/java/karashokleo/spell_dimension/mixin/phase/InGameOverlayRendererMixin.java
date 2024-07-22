@@ -9,15 +9,13 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+/**
+ * 取消所有叠加渲染
+ * Learned from <a href="https://github.com/andantet/noclip/blob/1.20/src/main/java/me/andante/noclip/mixin/client/InGameOverlayRendererMixin.java">...</a>
+ */
 @Mixin(InGameOverlayRenderer.class)
 public abstract class InGameOverlayRendererMixin
 {
-    /*
-     * 取消所有叠加渲染
-     * Learned from
-     * https://github.com/andantet/noclip/blob/1.20/src/main/java/me/andante/noclip/mixin/client/InGameOverlayRendererMixin.java
-     * */
-
     /**
      * Add Phase overlay.
      * Cancels other overlays when clipping.

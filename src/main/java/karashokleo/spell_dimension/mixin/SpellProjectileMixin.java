@@ -1,6 +1,7 @@
 package karashokleo.spell_dimension.mixin;
 
-import karashokleo.spell_dimension.content.spell.ConvergeSpell;
+import karashokleo.spell_dimension.api.SpellProjectileHitBlockCallback;
+import karashokleo.spell_dimension.api.SpellProjectileHitEntityCallback;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
@@ -20,12 +21,12 @@ public abstract class SpellProjectileMixin
     @Inject(method = "onEntityHit", at = @At(value = "INVOKE", target = "Lnet/spell_engine/entity/SpellProjectile;setFollowedTarget(Lnet/minecraft/entity/Entity;)V"))
     private void injectedOnEntityHit(EntityHitResult entityHitResult, CallbackInfo ci)
     {
-        ConvergeSpell.convergeImpact((SpellProjectile) (Object) this, spellId);
+        SpellProjectileHitEntityCallback.EVENT.invoker().onHitEntity((SpellProjectile) (Object) this, spellId, entityHitResult);
     }
 
     @Inject(method = "onBlockHit", at = @At("HEAD"))
     private void injectedOnBlockHit(BlockHitResult blockHitResult, CallbackInfo ci)
     {
-        ConvergeSpell.convergeImpact((SpellProjectile) (Object) this, spellId);
+        SpellProjectileHitBlockCallback.EVENT.invoker().onHitBlock((SpellProjectile) (Object) this, spellId, blockHitResult);
     }
 }

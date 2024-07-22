@@ -14,17 +14,15 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+/**
+ * 取消浸水效果
+ * 入水后不取消疾跑
+ * 提升水下视野
+ * Learned from <a href="https://github.com/andantet/noclip/blob/1.20/src/main/java/me/andante/noclip/mixin/client/ClientPlayerEntityMixin.java">...</a>
+ */
 @Mixin(ClientPlayerEntity.class)
 public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
 {
-    /*
-    * 取消浸水效果
-    * 入水后不取消疾跑
-    * 提升水下视野
-    * Learned from
-    * https://github.com/andantet/noclip/blob/1.20/src/main/java/me/andante/noclip/mixin/client/ClientPlayerEntityMixin.java
-    * */
-
     @Shadow
     public Input input;
 

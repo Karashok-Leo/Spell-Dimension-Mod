@@ -1,11 +1,10 @@
 package karashokleo.spell_dimension.init;
 
-import karashokleo.spell_dimension.content.item.*;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import karashokleo.spell_dimension.SpellDimension;
-import karashokleo.spell_dimension.item.*;
-import karashokleo.spell_dimension.content.misc.MageMajor;
+import karashokleo.spell_dimension.content.item.essence.*;
+import karashokleo.spell_dimension.content.item.essence.base.ColorProvider;
 import karashokleo.spell_dimension.util.SchoolUtil;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -18,11 +17,10 @@ import java.util.Map;
 
 public class AllItems
 {
-    public static final Map<SpellSchool, SpellBooksEntry> SPELL_BOOKS = new HashMap<>();
-    public static final Map<SpellSchool, List<Item>> BASE_ESSENCES = new HashMap<>();
+    public static final List<Item> COLORABLE = new ArrayList<>();
+    public static final Map<SpellSchool, List<BaseEssenceItem>> BASE_ESSENCES = new HashMap<>();
 
     public static Item DEBUG_STAFF;
-    public static MageMedalItem MAGE_MEDAL;
     public static EnlighteningEssenceItem ENLIGHTENING_ESSENCE;
     public static EnchantedEssenceItem ENCHANTED_ESSENCE;
     public static DisenchantedEssenceItem DISENCHANTED_ESSENCE;
@@ -32,15 +30,12 @@ public class AllItems
     {
         for (SpellSchool school : SchoolUtil.SCHOOLS)
         {
-            SPELL_BOOKS.put(school, new SpellBooksEntry(school, MageMajor.getMajors(school)));
             BASE_ESSENCES.put(school, new ArrayList<>());
 
-            for (int i = 0; i < 3; i++)
-                BASE_ESSENCES.get(school).add(registerBaseEssence(i, school));
+            for (int grade = 0; grade < 3; grade++)
+                BASE_ESSENCES.get(school).add(registerItem(school.id.getPath() + "_essence_" + grade, new BaseEssenceItem(school, grade)));
         }
-        SPELL_BOOKS.values().forEach(SpellBooksEntry::register);
         DEBUG_STAFF = registerItem("debug_staff", new Item(new FabricItemSettings().maxCount(1)));
-        MAGE_MEDAL = registerItem("mage_medal", new MageMedalItem());
         ENLIGHTENING_ESSENCE = registerItem("enlightening_essence", new EnlighteningEssenceItem());
         ENCHANTED_ESSENCE = registerItem("enchanted_essence", new EnchantedEssenceItem());
         DISENCHANTED_ESSENCE = registerItem("disenchanted_essence", new DisenchantedEssenceItem());
@@ -50,11 +45,7 @@ public class AllItems
     public static <T extends Item> T registerItem(String id, T item)
     {
         Registry.register(Registries.ITEM, SpellDimension.modLoc(id), item);
+        if (item instanceof ColorProvider) COLORABLE.add(item);
         return item;
-    }
-
-    public static Item registerBaseEssence(int grade, SpellSchool school)
-    {
-        return registerItem(school.id.getPath() + "_essence_"+grade, new Item(new FabricItemSettings()));
     }
 }

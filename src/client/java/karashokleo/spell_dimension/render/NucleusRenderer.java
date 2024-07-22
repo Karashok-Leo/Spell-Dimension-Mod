@@ -13,13 +13,14 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.random.Random;
 
+/**
+ * 冰核渲染
+ * Learned from <a href="https://github.com/TeamTwilight/twilightforest-fabric/blob/1.20.x/src/main/java/twilightforest/client/renderer/entity/IceLayer.java">...</a>
+ * @param <T>
+ * @param <M>
+ */
 public class NucleusRenderer<T extends LivingEntity, M extends EntityModel<T>> extends FeatureRenderer<T, M>
 {
-    /*
-    * 冰核渲染
-    * Learned from
-    * https://github.com/TeamTwilight/twilightforest-fabric/blob/1.20.x/src/main/java/twilightforest/client/renderer/entity/IceLayer.java
-    * */
     private final Random random = Random.create();
 
     public NucleusRenderer(FeatureRendererContext<T, M> context)

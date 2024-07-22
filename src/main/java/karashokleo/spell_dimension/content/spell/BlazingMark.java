@@ -1,14 +1,14 @@
 package karashokleo.spell_dimension.content.spell;
 
+import karashokleo.spell_dimension.config.SpellConfig;
 import karashokleo.spell_dimension.content.component.BlazingMarkComponent;
-import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import karashokleo.spell_dimension.util.NetworkUtil;
-import karashokleo.spell_dimension.init.AllConfigs;
 import karashokleo.spell_dimension.init.AllStatusEffects;
 import karashokleo.spell_dimension.util.DamageUtil;
+import karashokleo.spell_dimension.util.NetworkUtil;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.network.PacketByteBuf;
@@ -54,22 +54,22 @@ public class BlazingMark
 
     public static int getTotalDuration()
     {
-        return AllConfigs.blazing_mark.value.total_duration;
+        return SpellConfig.BLAZING_MARK.totalDuration();
     }
 
     public static int getTriggerDuration()
     {
-        return AllConfigs.blazing_mark.value.trigger_duration;
+        return SpellConfig.BLAZING_MARK.triggerDuration();
     }
 
     public static int getMaxDamage()
     {
-        return AllConfigs.blazing_mark.value.max_damage;
+        return SpellConfig.BLAZING_MARK.maxDamage();
     }
 
     public static float getProportion()
     {
-        return AllConfigs.blazing_mark.value.proportion;
+        return SpellConfig.BLAZING_MARK.proportion();
     }
 
     public static float getTriggerTime()
@@ -77,7 +77,7 @@ public class BlazingMark
         return (getTotalDuration() - getTriggerDuration()) / 20.0F;
     }
 
-    public static final ServerLivingEntityEvents.AllowDamage LISTENER = (entity, source, amount) ->
+    public static boolean mark(LivingEntity entity, DamageSource source, float amount)
     {
         if (source.getAttacker() != null &&
                 source.getAttacker() instanceof LivingEntity attacker)
@@ -91,7 +91,7 @@ public class BlazingMark
                 BlazingMarkComponent.applyToLiving(entity, attacker, instance.getAmplifier() + 1);
         }
         return true;
-    };
+    }
 
     public static void trigger(LivingEntity source, LivingEntity caster, float damage, int amplifier)
     {

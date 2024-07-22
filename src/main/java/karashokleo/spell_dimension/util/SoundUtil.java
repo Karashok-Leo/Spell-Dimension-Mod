@@ -7,7 +7,6 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
-import net.spell_engine.api.spell.ExternalSpellSchools;
 import net.spell_engine.api.spell.Sound;
 import net.spell_engine.utils.SoundHelper;
 import net.spell_power.api.SpellSchool;
@@ -18,21 +17,21 @@ import java.util.Map;
 
 public class SoundUtil
 {
-    private static final Sound defaultSound = new Sound("block.anvil.use");
+    public static final Sound ANVIL = new Sound("block.anvil.use");
+    public static final Sound SPELL = new Sound("spell_engine:bind_spell");
+
     private static final Map<SpellSchool, Sound> map = Map.of(
             SpellSchools.ARCANE, new Sound("spell_engine:generic_arcane_release"),
             SpellSchools.FIRE, new Sound("spell_engine:generic_fire_release"),
             SpellSchools.FROST, new Sound("spell_engine:generic_frost_release"),
             SpellSchools.HEALING, new Sound("spell_engine:generic_healing_release"),
             SpellSchools.LIGHTNING, new Sound("spell_engine:generic_lightning_release"),
-            SpellSchools.SOUL, new Sound("spell_engine:generic_soul_release"),
-            ExternalSpellSchools.PHYSICAL_MELEE, new Sound("block.anvil.use"),
-            ExternalSpellSchools.PHYSICAL_RANGED, new Sound("block.anvil.use")
+            SpellSchools.SOUL, new Sound("spell_engine:generic_soul_release")
     );
 
     public static Sound getSound(@Nullable SpellSchool school)
     {
-        return school == null ? defaultSound : map.get(school);
+        return school == null ? ANVIL : map.getOrDefault(school, ANVIL);
     }
 
     public static void playSound(Entity entity, Sound sound)
@@ -50,10 +49,5 @@ public class SoundUtil
                 e.printStackTrace();
             }
         } else SoundHelper.playSound(entity.getWorld(), entity, sound);
-    }
-
-    public static void playSound(Entity entity, @Nullable SpellSchool school)
-    {
-        playSound(entity, getSound(school));
     }
 }

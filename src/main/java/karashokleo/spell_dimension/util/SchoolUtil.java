@@ -1,5 +1,7 @@
 package karashokleo.spell_dimension.util;
 
+import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.damage.DamageSource;
 import net.spell_power.api.SpellSchool;
 import net.spell_power.api.SpellSchools;
 import org.jetbrains.annotations.Nullable;
@@ -17,23 +19,21 @@ public class SchoolUtil
             SpellSchools.SOUL
     );
 
-    public static String getName(SpellSchool school)
+    @Nullable
+    public static SpellSchool getDamageSchool(DamageSource source)
     {
-        return school.id.getPath();
+        for (SpellSchool school : SCHOOLS)
+            if (source.isOf(school.damageType))
+                return school;
+        return null;
     }
 
-    public static boolean isMagic(SpellSchool school)
+    @Nullable
+    public static SpellSchool getAttributeSchool(EntityAttribute attribute)
     {
-        return school.archetype == SpellSchool.Archetype.MAGIC;
-    }
-
-    public static int getSchoolColorOrDefault(@Nullable SpellSchool school, int defaultColor)
-    {
-        return school == null ? defaultColor : school.color;
-    }
-
-    public static int getSchoolColorOrWhite(@Nullable SpellSchool school)
-    {
-        return getSchoolColorOrDefault(school, 0xFFFFFF);
+        for (SpellSchool school : SCHOOLS)
+            if (attribute == school.attribute)
+                return school;
+        return null;
     }
 }

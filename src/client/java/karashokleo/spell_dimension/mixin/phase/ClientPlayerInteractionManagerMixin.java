@@ -10,15 +10,13 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+/**
+ * 强制飞行
+ * Learned from <a href="https://github.com/andantet/noclip/blob/1.20/src/main/java/me/andante/noclip/mixin/client/ClientPlayerInteractionManagerMixin.java">...</a>
+ */
 @Mixin(ClientPlayerInteractionManager.class)
 public abstract class ClientPlayerInteractionManagerMixin
 {
-    /*
-    * 强制飞行
-    * Learned from
-    * https://github.com/andantet/noclip/blob/1.20/src/main/java/me/andante/noclip/mixin/client/ClientPlayerInteractionManagerMixin.java
-    * */
-
     @Final
     @Shadow
     private MinecraftClient client;

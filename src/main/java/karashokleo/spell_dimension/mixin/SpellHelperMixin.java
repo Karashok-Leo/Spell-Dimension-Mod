@@ -1,6 +1,6 @@
 package karashokleo.spell_dimension.mixin;
 
-import karashokleo.spell_dimension.init.AllLoots;
+import karashokleo.spell_dimension.api.SpellImpactCallback;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -25,7 +25,6 @@ public abstract class SpellHelperMixin
     private static void dropEssenceLoot(World world, LivingEntity caster, Entity target, SpellInfo spellInfo, Spell.Impact impact, SpellHelper.ImpactContext context, Collection<ServerPlayerEntity> trackers, CallbackInfoReturnable<Boolean> cir)
     {
         if (cir.getReturnValue())
-            AllLoots.essenceLoot(caster, target, impact.school, spellInfo.spell().school);
+            SpellImpactCallback.EVENT.invoker().onImpact(world, caster, target, spellInfo, impact, context);
     }
-
 }

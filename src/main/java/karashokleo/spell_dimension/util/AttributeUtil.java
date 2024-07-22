@@ -1,7 +1,5 @@
 package karashokleo.spell_dimension.util;
 
-import karashokleo.spell_dimension.init.AllConfigs;
-import karashokleo.spell_dimension.config.ModifiersConfig;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
@@ -12,56 +10,29 @@ import net.minecraft.registry.Registries;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
-import net.spell_power.api.SpellSchool;
-import net.spell_power.api.SpellSchools;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 public class AttributeUtil
 {
-    public static Map<String, Integer> colorMap = new HashMap<>();
-
-    public static void initColorMap()
-    {
-        for (ModifiersConfig.AttributeModifier modifier : AllConfigs.modifiers.value.modifiers)
-            AttributeUtil.colorMap.put(modifier.attributeId, modifier.color);
-    }
-
-    public static int getColorCode(EntityAttribute attribute)
-    {
-        SpellSchool school = getSchool(attribute, null);
-        if (school != null) return school.color;
-        Integer color = colorMap.get(getAttributeId(attribute));
-        return color == null ? 0xffffff : color;
-    }
-
-    @Nullable
-    public static SpellSchool getSchool(EntityAttribute attribute)
-    {
-        return getSchool(attribute, null);
-    }
-
-    @Nullable
-    public static SpellSchool getSchool(EntityAttribute attribute, @Nullable SpellSchool defaultSchool)
-    {
-        SpellSchool result = defaultSchool;
-        if (attribute != null)
-            for (SpellSchool school : SpellSchools.all())
-                if (school.attribute == attribute)
-                    result = school;
-        return result;
-    }
-
+    /**
+     * @param attribute entity attribute
+     * @return Identifier of the attribute in registry
+     */
     public static String getAttributeId(EntityAttribute attribute)
     {
         Identifier id = Registries.ATTRIBUTE.getId(attribute);
         return id == null ? "" : id.toString();
     }
 
+    /**
+     * Add tooltips from an attribute modifier
+     * @param tooltip tooltip
+     * @param attribute attribute
+     * @param amount amount
+     * @param operation operation
+     */
     public static void addTooltip(List<Text> tooltip, EntityAttribute attribute, double amount, EntityAttributeModifier.Operation operation)
     {
         double e = operation == EntityAttributeModifier.Operation.MULTIPLY_BASE || operation == EntityAttributeModifier.Operation.MULTIPLY_TOTAL ? amount * 100.0 : (attribute.equals(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE) ? amount * 10.0 : amount);
@@ -72,6 +43,15 @@ public class AttributeUtil
             tooltip.add(Text.translatable("attribute.modifier.take." + operation.getId(), ItemStack.MODIFIER_FORMAT.format(e * -1.0), Text.translatable(attribute.getTranslationKey())).formatted(Formatting.RED));
     }
 
+    /**
+     * Add a persistent attribute modifier to a living
+     * @param entity entity
+     * @param attribute attribute
+     * @param uuid uuid
+     * @param name name
+     * @param value value
+     * @param operation operation
+     */
     public static void addModifier(LivingEntity entity, EntityAttribute attribute, UUID uuid, String name, double value, EntityAttributeModifier.Operation operation)
     {
         EntityAttributeInstance instance = entity.getAttributeInstance(attribute);
@@ -80,6 +60,12 @@ public class AttributeUtil
         instance.addPersistentModifier(modifier);
     }
 
+    /**
+     * Remove the attribute modifier with the given uuid
+     * @param entity entity
+     * @param attribute attribute
+     * @param uuid uuid
+     */
     public static void removeModifier(LivingEntity entity, EntityAttribute attribute, UUID uuid)
     {
         EntityAttributeInstance instance = entity.getAttributeInstance(attribute);

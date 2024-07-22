@@ -1,0 +1,16 @@
+- Essence
+  - Enlightening Essence
+  - Enchanted Essence
+  - Disenchanted Essence
+  - Mending Essence
+  - Essence Loot
+  - Essence Recipe
+
+- Phase
+- Nucleus
+- Converge
+- Blaze Mark
+- Frost Aura
+- Frosted
+- Spell Book
+- Spell Scroll

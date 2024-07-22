@@ -11,15 +11,13 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+/**
+ * 取消阴影渲染
+ * Learned from <a href="https://github.com/andantet/noclip/blob/1.20/src/main/java/me/andante/noclip/mixin/client/EntityRenderDispatcherMixin.java">...</a>
+ */
 @Mixin(EntityRenderDispatcher.class)
 public abstract class EntityRenderDispatcherMixin
 {
-    /*
-    * 取消阴影渲染
-    * Learned from
-    * https://github.com/andantet/noclip/blob/1.20/src/main/java/me/andante/noclip/mixin/client/EntityRenderDispatcherMixin.java
-    * */
-
     /**
      * Cancels shadow rendering if clipping.
      */

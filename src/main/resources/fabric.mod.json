@@ -21,10 +21,10 @@
       "karashokleo.spell_dimension.SpellDimensionClient"
     ],
     "fabric-datagen": [
-      "karashokleo.spell_dimension.init.AllData"
+      "karashokleo.spell_dimension.SpellDimension"
     ],
     "cardinal-components": [
-      "karashokleo.spell_dimension.init.AllComponents"
+      "karashokleo.spell_dimension.SpellDimension"
     ]
   },
   "mixins": [

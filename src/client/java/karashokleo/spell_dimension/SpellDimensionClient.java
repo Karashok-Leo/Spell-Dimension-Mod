@@ -1,20 +1,21 @@
 package karashokleo.spell_dimension;
 
+import karashokleo.spell_dimension.content.item.essence.base.ColorProvider;
+import karashokleo.spell_dimension.content.item.essence.logic.EnchantedModifier;
+import karashokleo.spell_dimension.init.AllItems;
+import karashokleo.spell_dimension.init.AllStatusEffects;
+import karashokleo.spell_dimension.render.FrostedEffectRenderer;
+import karashokleo.spell_dimension.render.FrostedParticleSpawner;
+import karashokleo.spell_dimension.render.NucleusRenderer;
+import karashokleo.spell_dimension.render.PhaseParticleSpawner;
+import karashokleo.spell_dimension.util.NetworkUtil;
+import karashokleo.spell_dimension.util.ParticleUtil;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback;
-import karashokleo.spell_dimension.data.LangData;
-import karashokleo.spell_dimension.init.AllItems;
-import karashokleo.spell_dimension.content.misc.EnchantedModifier;
-import karashokleo.spell_dimension.init.AllStatusEffects;
-import karashokleo.spell_dimension.content.misc.Mage;
-import karashokleo.spell_dimension.render.*;
-import karashokleo.spell_dimension.util.ColorUtil;
-import karashokleo.spell_dimension.util.ParticleUtil;
-import karashokleo.spell_dimension.util.NetworkUtil;
-import net.minecraft.text.Text;
+import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
@@ -34,8 +35,8 @@ public class SpellDimensionClient implements ClientModInitializer
     @Override
     public void onInitializeClient()
     {
-        ColorProviderRegistry.ITEM.register((stack, tintIndex) ->
-                ColorUtil.getItemColor(stack), AllItems.MAGE_MEDAL, AllItems.ENLIGHTENING_ESSENCE, AllItems.ENCHANTED_ESSENCE);
+        for (Item item : AllItems.COLORABLE)
+            ColorProviderRegistry.ITEM.register((stack, tintIndex) -> (stack.getItem() instanceof ColorProvider c) ? c.getColor(stack) : 0xffffff, item);
 
         ItemTooltipCallback.EVENT.register(EnchantedModifier::levelTooltip);
 
@@ -50,8 +51,8 @@ public class SpellDimensionClient implements ClientModInitializer
                 CONVERGE_MODEL
         ));
 
-        CustomParticleStatusEffect.register(AllStatusEffects.PHASE_EFFECT, new PhaseParticles());
-        CustomParticleStatusEffect.register(AllStatusEffects.FROSTED_EFFECT, new FrostedParticles());
+        CustomParticleStatusEffect.register(AllStatusEffects.PHASE_EFFECT, new PhaseParticleSpawner());
+        CustomParticleStatusEffect.register(AllStatusEffects.FROSTED_EFFECT, new FrostedParticleSpawner());
         CustomModelStatusEffect.register(AllStatusEffects.FROSTED_EFFECT, new FrostedEffectRenderer());
 
         ClientPlayNetworking.registerGlobalReceiver(NetworkUtil.DUST_PACKET, (client, handler, buf, responseSender) ->
@@ -65,22 +66,6 @@ public class SpellDimensionClient implements ClientModInitializer
             {
                 for (int i = 0; i < count; i++)
                     client.particleManager.addParticle(ParticleUtil.getDustParticle(color), pos.addRandom(random, range).x, pos.addRandom(random, range).y, pos.addRandom(random, range).z, 0D, 0D, 0D);
-            });
-        });
-        ClientPlayNetworking.registerGlobalReceiver(NetworkUtil.UPGRADE_PACKET, (client, handler, buf, responseSender) ->
-        {
-            Mage mage = Mage.readFromPacket(buf);
-            client.execute(() ->
-            {
-                client.inGameHud.setTitle(Text.translatable(LangData.TITLE_UPGRADE));
-                client.inGameHud.setSubtitle(mage.getMageTitle(Text.translatable(LangData.MAGE)));
-            });
-        });
-        ClientPlayNetworking.registerGlobalReceiver(NetworkUtil.CLEAR_PACKET, (client, handler, buf, responseSender) ->
-        {
-            client.execute(() ->
-            {
-                client.inGameHud.setTitle(Text.translatable(LangData.TITLE_CLEAR));
             });
         });
     }

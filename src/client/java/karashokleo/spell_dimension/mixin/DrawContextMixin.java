@@ -1,9 +1,8 @@
 package karashokleo.spell_dimension.mixin;
 
-import karashokleo.spell_dimension.content.item.EnchantedEssenceItem;
-import karashokleo.spell_dimension.content.misc.EnchantedModifier;
-import karashokleo.spell_dimension.content.item.IMageRequirement;
-import karashokleo.spell_dimension.util.ColorUtil;
+import karashokleo.spell_dimension.SpellDimension;
+import karashokleo.spell_dimension.content.item.essence.EnchantedEssenceItem;
+import karashokleo.spell_dimension.content.item.essence.logic.EnchantedModifier;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
@@ -43,26 +42,15 @@ public abstract class DrawContextMixin
     {
         if (this.client.player != null && Screen.hasShiftDown() && this.client.currentScreen != null)
         {
-            if (stack.getItem() instanceof IMageRequirement item)
-            {
-                int grade = item.getMage(stack).grade();
-                if (grade > 0)
-                {
-                    TextRenderer textRenderer = this.client.textRenderer;
-                    this.matrices.push();
-                    this.matrices.translate(0, 0, 200);
-                    drawText(textRenderer, String.valueOf(grade), x, y - 1, ColorUtil.getItemColor(stack), true);
-                    this.matrices.pop();
-                }
-            }
             if (stack.getItem() instanceof EnchantedEssenceItem item && stack.hasNbt())
             {
                 EnchantedModifier enchantedModifier = item.getModifier(stack);
                 if (enchantedModifier != null)
                 {
-                    drawTexture(enchantedModifier.getSlotTexture(), x, y, 200, 0, 0, 16, 16, 16, 16);
+                    Identifier texture = SpellDimension.modLoc("textures/slot/" + enchantedModifier.slot().getName() + ".png");
+                    drawTexture(texture, x, y, 200, 0, 0, 16, 16, 16, 16);
                     TextRenderer textRenderer = this.client.textRenderer;
-                    String threshold = String.valueOf(enchantedModifier.threshold);
+                    String threshold = String.valueOf(enchantedModifier.threshold());
                     this.matrices.push();
                     this.matrices.translate(0, 0, 200);
                     drawText(textRenderer, threshold, x + 19 - 2 - textRenderer.getWidth(threshold), y - 1, 0xffffff, true);

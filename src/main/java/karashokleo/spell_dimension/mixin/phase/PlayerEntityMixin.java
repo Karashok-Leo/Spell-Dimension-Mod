@@ -1,6 +1,5 @@
 package karashokleo.spell_dimension.mixin.phase;
 
-import karashokleo.spell_dimension.content.component.MageComponent;
 import karashokleo.spell_dimension.content.misc.INoClip;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
@@ -17,25 +16,18 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
+/**
+ * 更新noClip等字段
+ * 取消姿势更新
+ * 取消挖掘惩罚
+ * 取消实体碰撞
+ * 取消液体交互
+ * Learned from <a href="https://github.com/andantet/noclip/blob/1.20/src/main/java/me/andante/noclip/mixin/PlayerEntityMixin.java">...</a>
+ */
 @SuppressWarnings("InvalidInjectorMethodSignature")
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity
 {
-    @Override
-    public boolean isFireImmune()
-    {
-        return super.isFireImmune() || MageComponent.get((PlayerEntity) (Object) this).school() == SpellSchools.FIRE;
-    }
-
-    /*
-     * 更新noClip等字段
-     * 取消姿势更新
-     * 取消挖掘惩罚
-     * 取消实体碰撞
-     * 取消液体交互
-     * Learned from
-     * https://github.com/andantet/noclip/blob/1.20/src/main/java/me/andante/noclip/mixin/PlayerEntityMixin.java
-     * */
     private PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world)
     {
         super(entityType, world);

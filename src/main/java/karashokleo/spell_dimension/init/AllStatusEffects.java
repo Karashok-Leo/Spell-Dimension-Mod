@@ -15,7 +15,6 @@ import java.util.List;
 
 public class AllStatusEffects
 {
-    public static final List<StatusEffect> ALL = new ArrayList<>();
     public static final IgniteEffect IGNITE_EFFECT = new IgniteEffect();
     public static final FrostAuraEffect FROST_AURA_EFFECT = new FrostAuraEffect();
     public static final FrostedEffect FROSTED_EFFECT = new FrostedEffect();
@@ -24,11 +23,6 @@ public class AllStatusEffects
 
     public static void register()
     {
-        ALL.add(IGNITE_EFFECT);
-        ALL.add(FROST_AURA_EFFECT);
-        ALL.add(FROSTED_EFFECT);
-        ALL.add(PHASE_EFFECT);
-
         Registry.register(Registries.STATUS_EFFECT, SpellDimension.modLoc("phase"), PHASE_EFFECT);
         Registry.register(Registries.STATUS_EFFECT, SpellDimension.modLoc("ignite"), IGNITE_EFFECT);
         Registry.register(Registries.STATUS_EFFECT, SpellDimension.modLoc("aura"), FROST_AURA_EFFECT);

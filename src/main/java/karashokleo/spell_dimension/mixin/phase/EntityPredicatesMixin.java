@@ -10,15 +10,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.function.Predicate;
 
+/**
+ * 实体谓词修改
+ * Learned from <a href="https://github.com/andantet/noclip/blob/1.20/src/main/java/me/andante/noclip/mixin/EntityPredicatesMixin.java">...</a>
+ */
 @Mixin(EntityPredicates.class)
 public abstract class EntityPredicatesMixin
 {
-    /*
-    * 实体谓词修改
-    * Learned from
-    * https://github.com/andantet/noclip/blob/1.20/src/main/java/me/andante/noclip/mixin/EntityPredicatesMixin.java
-    * */
-
     /**
      * Adds an extra check to {@link EntityPredicates#VALID_LIVING_ENTITY} for clipping.
      * <p>This predicate is used when checking for players near spawners and dripstone landing.</p>

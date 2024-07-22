@@ -19,7 +19,6 @@ import java.util.function.Predicate;
 
 public class ImpactUtil
 {
-
     public static void applyAreaImpact(Entity origin, double range, Predicate<LivingEntity> predicate, Consumer<LivingEntity> consumer)
     {
         List<LivingEntity> targets = getLivingsInRange(origin, range, predicate);

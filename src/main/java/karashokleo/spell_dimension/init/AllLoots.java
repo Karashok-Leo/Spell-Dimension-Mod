@@ -1,117 +1,76 @@
 package karashokleo.spell_dimension.init;
 
-import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import karashokleo.spell_dimension.SpellDimension;
-import karashokleo.spell_dimension.content.component.MageComponent;
+import karashokleo.spell_dimension.api.SpellImpactCallback;
 import karashokleo.spell_dimension.config.LootConfig;
-import karashokleo.spell_dimension.content.loot.RandomEnchantedEssenceFunction;
-import karashokleo.spell_dimension.content.loot.RandomEnlighteningEssenceFunction;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
+import karashokleo.spell_dimension.content.loot.entry.RandomEnchantedEssenceEntry;
+import karashokleo.spell_dimension.content.loot.entry.RandomEnlighteningEssenceEntry;
+import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.condition.KilledByPlayerLootCondition;
-import net.minecraft.loot.context.LootContext;
-import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.loot.entry.EmptyEntry;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.entry.LeafEntry;
-import net.minecraft.loot.function.LootFunctionType;
+import net.minecraft.loot.entry.LootPoolEntryType;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.util.math.random.Random;
 import net.spell_power.api.SpellSchool;
-import org.jetbrains.annotations.Nullable;
 
 public class AllLoots
 {
-    public static LootFunctionType RANDOM_ENCHANTED_ESSENCE;
-    public static LootFunctionType RANDOM_ENLIGHTENING_ESSENCE;
+    public static LootPoolEntryType RANDOM_ENCHANTED_ESSENCE_ENTRY;
+    public static LootPoolEntryType RANDOM_ENLIGHTENING_ESSENCE_ENTRY;
 
     public static void register()
     {
-        RANDOM_ENCHANTED_ESSENCE = Registry.register(Registries.LOOT_FUNCTION_TYPE, SpellDimension.modLoc("random_enchanted_essence"), new LootFunctionType(new RandomEnchantedEssenceFunction.Serializer()));
-        RANDOM_ENLIGHTENING_ESSENCE = Registry.register(Registries.LOOT_FUNCTION_TYPE, SpellDimension.modLoc("random_enlightening_essence"), new LootFunctionType(new RandomEnlighteningEssenceFunction.Serializer()));
+        RANDOM_ENCHANTED_ESSENCE_ENTRY = Registry.register(Registries.LOOT_POOL_ENTRY_TYPE, SpellDimension.modLoc("random_enchanted_essence"), new LootPoolEntryType(new RandomEnchantedEssenceEntry.Serializer()));
+        RANDOM_ENLIGHTENING_ESSENCE_ENTRY = Registry.register(Registries.LOOT_POOL_ENTRY_TYPE, SpellDimension.modLoc("random_enlightening_essence"), new LootPoolEntryType(new RandomEnlighteningEssenceEntry.Serializer()));
 
         LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) ->
         {
             if (id.getPath().contains("chests/"))
             {
                 LootPool.Builder builder = LootPool.builder();
-                addPool(builder, AllConfigs.loot.value.random_essence.chest_pool);
+                addEssenceLootPool(builder, LootConfig.CHEST_POOL);
                 tableBuilder.pool(builder.build());
             }
             if (id.getPath().contains("entities/"))
             {
                 LootPool.Builder builder = LootPool.builder();
-                addPool(builder, AllConfigs.loot.value.random_essence.entity_pool);
+                addEssenceLootPool(builder, LootConfig.ENTITY_POOL);
                 builder.conditionally(KilledByPlayerLootCondition.builder());
                 tableBuilder.pool(builder.build());
             }
         });
+
+        SpellImpactCallback.EVENT.register((world, caster, target, spellInfo, impact, context) ->
+        {
+            if (LootConfig.BASE_CONFIG.blacklist().contains(Registries.ENTITY_TYPE.getId(target.getType()).toString()))
+                return;
+            if (caster.getRandom().nextFloat() < LootConfig.BASE_CONFIG.dropChance()) return;
+            SpellSchool school = impact.school != null ? impact.school : spellInfo.spell().school;
+            int grade = LootConfig.BASE_CONFIG.getRandomGrade(caster.getRandom());
+            target.dropItem(AllItems.BASE_ESSENCES.get(school).get(grade));
+        });
     }
 
-    private static void addPool(LootPool.Builder builder, LootConfig.RandomEssenceConfig.LootPool pool)
+    private static void addEssenceLootPool(LootPool.Builder builder, LootConfig.LootPool pool)
     {
-        builder.rolls(UniformLootNumberProvider.create(pool.min_rolls, pool.max_rolls));
+        builder.rolls(UniformLootNumberProvider.create(pool.minRolls(), pool.maxRolls()));
         LeafEntry.Builder<?> emptyEntry = EmptyEntry
                 .builder()
-                .weight(pool.empty_weight);
+                .weight(pool.emptyWeight());
         builder.with(emptyEntry);
 
         // EnchantedEssence
-        for (LootConfig.RandomEssenceConfig.EcEntry entry : pool.entries)
-        {
-            LeafEntry.Builder<?> ecEntry = ItemEntry
-                    .builder(AllItems.ENCHANTED_ESSENCE)
-                    .weight(entry.weight)
-                    .apply(RandomEnchantedEssenceFunction.builder(UniformLootNumberProvider.create(entry.min_threshold, entry.max_threshold)));
-            builder.with(ecEntry);
-        }
+        for (LootConfig.EcEntry entry : LootConfig.EC_ENTRIES)
+            builder.with(RandomEnchantedEssenceEntry.builder(UniformLootNumberProvider.create(entry.minThreshold(), entry.maxThreshold())).weight(entry.weight()));
+
         // EnlighteningEssence
-        LeafEntry.Builder<?> elEntry = ItemEntry
-                .builder(AllItems.ENLIGHTENING_ESSENCE)
-                .weight(pool.el_weight)
-                .apply(RandomEnlighteningEssenceFunction.builder());
-        builder.with(elEntry);
+        builder.with(RandomEnlighteningEssenceEntry.builder().weight(LootConfig.EL_WEIGHT));
 
         // MendingEssence
-        LeafEntry.Builder<?> mdEntry = ItemEntry
-                .builder(AllItems.MENDING_ESSENCE)
-                .weight(pool.md_weight);
-        builder.with(mdEntry);
-    }
-
-    @Nullable
-    public static PlayerEntity getContextPlayer(LootContext context)
-    {
-        PlayerEntity player = null;
-        if (context.get(LootContextParameters.THIS_ENTITY) instanceof PlayerEntity thisEntity)
-            player = thisEntity;
-        if (context.get(LootContextParameters.KILLER_ENTITY) instanceof PlayerEntity killerEntity)
-            player = killerEntity;
-        return player;
-    }
-
-    public static void essenceLoot(LivingEntity caster, Entity target, SpellSchool impactSchool, SpellSchool spellSchool)
-    {
-        for (String id : AllConfigs.misc.value.essence_loot_blacklist)
-            if (Registries.ENTITY_TYPE.getId(target.getType()).toString().equals(id))
-                return;
-        if (caster.getRandom().nextFloat() < AllConfigs.loot.value.essence_loot.drop_chance) return;
-        SpellSchool school = impactSchool != null ? impactSchool : spellSchool;
-        int grade = (caster instanceof PlayerEntity player) ? MageComponent.get(player).grade() : 3;
-        target.dropItem(AllItems.BASE_ESSENCES.get(school).get(randomGrade(caster.getRandom(), grade)));
-    }
-
-    public static int randomGrade(Random random, int maxGrade)
-    {
-        float f = random.nextFloat();
-        int grade;
-        if (f < AllConfigs.loot.value.essence_loot.grade_0_1) grade = 0;
-        else if (f < AllConfigs.loot.value.essence_loot.grade_1_2) grade = 1;
-        else grade = 2;
-        return Math.min(grade, maxGrade);
+        builder.with(ItemEntry.builder(AllItems.MENDING_ESSENCE).weight(LootConfig.MD_WEIGHT));
     }
 }

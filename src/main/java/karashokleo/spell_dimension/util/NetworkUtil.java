@@ -12,8 +12,6 @@ import java.util.Collection;
 
 public class NetworkUtil
 {
-    public static final Identifier UPGRADE_PACKET = SpellDimension.modLoc("mage_upgrade");
-    public static final Identifier CLEAR_PACKET = SpellDimension.modLoc("mage_clear");
     public static final Identifier DUST_PACKET = SpellDimension.modLoc("dust");
 
     public static void sendToTrackers(Entity trackedEntity, Identifier id, PacketByteBuf buf)
