@@ -1,5 +1,6 @@
 package karashokleo.spell_dimension;
 
+import karashokleo.spell_dimension.content.item.DynamicSpellBookItem;
 import karashokleo.spell_dimension.content.item.essence.base.ColorProvider;
 import karashokleo.spell_dimension.content.item.essence.logic.EnchantedModifier;
 import karashokleo.spell_dimension.init.AllItems;
@@ -15,7 +16,9 @@ import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback;
+import net.fabricmc.fabric.api.event.Event;
 import net.minecraft.item.Item;
+import net.minecraft.text.TranslatableTextContent;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
@@ -35,10 +38,10 @@ public class SpellDimensionClient implements ClientModInitializer
     @Override
     public void onInitializeClient()
     {
-        for (Item item : AllItems.COLORABLE)
-            ColorProviderRegistry.ITEM.register((stack, tintIndex) -> (stack.getItem() instanceof ColorProvider c) ? c.getColor(stack) : 0xffffff, item);
+        itemTooltip();
 
-        ItemTooltipCallback.EVENT.register(EnchantedModifier::levelTooltip);
+        for (Item item : AllItems.COLOR_PROVIDERS)
+            ColorProviderRegistry.ITEM.register((stack, tintIndex) -> (stack.getItem() instanceof ColorProvider c) ? c.getColor(stack) : 0xffffff, item);
 
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, entityRenderer, registrationHelper, context) ->
         {
@@ -67,6 +70,21 @@ public class SpellDimensionClient implements ClientModInitializer
                 for (int i = 0; i < count; i++)
                     client.particleManager.addParticle(ParticleUtil.getDustParticle(color), pos.addRandom(random, range).x, pos.addRandom(random, range).y, pos.addRandom(random, range).z, 0D, 0D, 0D);
             });
+        });
+
+    }
+
+    public static void itemTooltip()
+    {
+        Identifier tooltipFinal = SpellDimension.modLoc("tooltip_final");
+        ItemTooltipCallback.EVENT.addPhaseOrdering(Event.DEFAULT_PHASE, tooltipFinal);
+        ItemTooltipCallback.EVENT.register(EnchantedModifier::levelTooltip);
+        ItemTooltipCallback.EVENT.register(tooltipFinal, (stack, context, lines) ->
+        {
+            if (stack.getItem() instanceof DynamicSpellBookItem)
+                lines.removeIf(line ->
+                        line.getContent() instanceof TranslatableTextContent content &&
+                                content.getKey().equals("spell.tooltip.spell_binding_tip"));
         });
     }
 }

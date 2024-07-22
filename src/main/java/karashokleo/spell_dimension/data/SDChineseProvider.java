@@ -26,6 +26,7 @@ public class SDChineseProvider extends FabricLanguageProvider
     private static void addGroupTranslation(TranslationBuilder builder)
     {
         builder.add(AllGroups.BOOKS_GROUP_KEY, "咒次元: 法术书");
+        builder.add(AllGroups.SCROLLS_GROUP_KEY, "咒次元: 法术卷轴");
         builder.add(AllGroups.ELES_GROUP_KEY, "咒次元: 束魔精华");
         builder.add(AllGroups.ECES_GROUP_KEY, "咒次元: 附魔精华");
         builder.add(AllGroups.MISC_GROUP_KEY, "咒次元: 杂项");

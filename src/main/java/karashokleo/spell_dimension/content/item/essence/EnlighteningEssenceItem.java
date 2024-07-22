@@ -49,13 +49,13 @@ public class EnlighteningEssenceItem extends RightPressEssenceItem
     @Override
     public Text getName()
     {
-        return SDTexts.ESSENCE_ENLIGHTENING.get();
+        return SDTexts.TEXT_ESSENCE_ENLIGHTENING.get();
     }
 
     @Override
     public Text getName(ItemStack stack)
     {
-        return SDTexts.ESSENCE_ENLIGHTENING.get().setStyle(Style.EMPTY.withColor(this.getColor(stack)));
+        return SDTexts.TEXT_ESSENCE_ENLIGHTENING.get().setStyle(Style.EMPTY.withColor(this.getColor(stack)));
     }
 
     public ItemStack getStack(EnlighteningModifier modifier)

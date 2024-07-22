@@ -42,7 +42,7 @@ public abstract class StackClickEssenceItem extends SpellEssenceItem
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
         super.appendTooltip(stack, world, tooltip, context);
-        tooltip.add(SDTexts.TOOLTIP_ESSENCE_USE_1.get());
+        tooltip.add(SDTexts.TOOLTIP_USE_CLICK.get());
         tooltip.add(ScreenTexts.EMPTY);
         tooltip.add(SDTexts.TOOLTIP_EFFECT.get());
     }

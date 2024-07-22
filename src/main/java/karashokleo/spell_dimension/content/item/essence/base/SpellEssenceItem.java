@@ -19,14 +19,14 @@ public abstract class SpellEssenceItem extends Item implements ColorProvider, Pa
     protected void success(ItemStack essence, PlayerEntity player)
     {
         ParticleUtil.ringParticleEmit(player, 4 * 30, 5, getParticle(essence));
-        player.sendMessage(SDTexts.ESSENCE_SUCCESS.get(), true);
+        player.sendMessage(SDTexts.TEXT_ESSENCE_SUCCESS.get(), true);
         player.getItemCooldownManager().set(this, COOLDOWN);
         if (!player.isCreative()) essence.decrement(1);
     }
 
     protected void fail(ItemStack essence, PlayerEntity player)
     {
-        player.sendMessage(SDTexts.ESSENCE_FAIL.get(), true);
+        player.sendMessage(SDTexts.TEXT_ESSENCE_FAIL.get(), true);
     }
 
     @Override

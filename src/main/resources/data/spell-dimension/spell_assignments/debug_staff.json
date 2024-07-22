@@ -1,15 +1,15 @@
 {
   "is_proxy": true,
   "spell_ids": [
-    "spell-dimension:converge3",
-    "spell-dimension:phase3",
-    "spell-dimension:blast3",
-    "spell-dimension:ignite3",
-    "spell-dimension:aura3",
-    "spell-dimension:icicle3",
-    "spell-dimension:nucleus3",
-    "spell-dimension:power3",
-    "spell-dimension:regen3",
-    "spell-dimension:resist3"
+    "spell-dimension:converge",
+    "spell-dimension:phase",
+    "spell-dimension:blast",
+    "spell-dimension:ignite",
+    "spell-dimension:aura",
+    "spell-dimension:icicle",
+    "spell-dimension:nucleus",
+    "spell-dimension:power",
+    "spell-dimension:regen",
+    "spell-dimension:resist"
   ]
 }

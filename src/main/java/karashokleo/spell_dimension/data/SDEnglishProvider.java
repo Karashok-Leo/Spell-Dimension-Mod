@@ -30,6 +30,7 @@ public class SDEnglishProvider extends FabricLanguageProvider
     private static void addGroupTranslation(TranslationBuilder builder)
     {
         builder.add(AllGroups.BOOKS_GROUP_KEY, "Spell Dimension: Spell Books");
+        builder.add(AllGroups.SCROLLS_GROUP_KEY, "Spell Dimension: Spell Scrolls");
         builder.add(AllGroups.ELES_GROUP_KEY, "Spell Dimension: Enlightening Essences");
         builder.add(AllGroups.ECES_GROUP_KEY, "Spell Dimension: Enchanted Essences");
         builder.add(AllGroups.MISC_GROUP_KEY, "Spell Dimension: Misc");

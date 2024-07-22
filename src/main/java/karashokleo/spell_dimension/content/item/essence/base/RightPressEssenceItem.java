@@ -71,7 +71,7 @@ public abstract class RightPressEssenceItem extends SpellEssenceItem
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
         super.appendTooltip(stack, world, tooltip, context);
-        tooltip.add(SDTexts.TOOLTIP_ESSENCE_USE_2.get());
+        tooltip.add(SDTexts.TOOLTIP_USE_PRESS.get());
         tooltip.add(ScreenTexts.EMPTY);
         tooltip.add(SDTexts.TOOLTIP_EFFECT.get());
     }

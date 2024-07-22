@@ -6,6 +6,7 @@ import karashokleo.spell_dimension.content.component.BlazingMarkComponent;
 import karashokleo.spell_dimension.content.component.NucleusComponent;
 import karashokleo.spell_dimension.content.item.essence.logic.EnchantedModifier;
 import karashokleo.spell_dimension.content.misc.DebugStaffCommand;
+import karashokleo.spell_dimension.content.misc.SpellRegistryReload;
 import karashokleo.spell_dimension.data.SDChineseProvider;
 import karashokleo.spell_dimension.data.SDEnglishProvider;
 import karashokleo.spell_dimension.data.SDModelProvider;
@@ -39,6 +40,7 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
         AllSpells.register();
         EnchantedModifier.init();
         DebugStaffCommand.init();
+        SpellRegistryReload.init();
     }
 
     @Override

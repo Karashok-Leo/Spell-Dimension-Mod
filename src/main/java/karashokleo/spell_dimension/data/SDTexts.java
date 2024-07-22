@@ -14,10 +14,19 @@ import java.util.Locale;
 public enum SDTexts
 {
     /**
-     * Misc Text
+     * Text
      */
-    MISC_MAGE("Mage", "法师"),
-    MISC_SPELL_BOOK("Spell Book", "法术书"),
+    TEXT_MAGE("Mage", "法师"),
+    TEXT_SPELL_BOOK("Spell Book", "法术书"),
+    TEXT_SPELL_SCROLL("Spell Scroll", "法术卷轴"),
+    TEXT_ESSENCE("Essence", "精华"),
+    TEXT_ESSENCE_BASE("Base Essence", "基础精华"),
+    TEXT_ESSENCE_ENCHANTED("Enchanted Essence", "束魔精华"),
+    TEXT_ESSENCE_ENLIGHTENING("Enlightening Essence", "源启精华"),
+    TEXT_ESSENCE_SUCCESS("Successful use of essence!", "精华使用成功!"),
+    TEXT_ESSENCE_FAIL("Failed to use essence!", "精华使用失败!"),
+    TEXT_INCOMPATIBLE_SCHOOL("Incompatible spell school!", "不兼容的法术学派!"),
+    TEXT_BLANK_BOOK("Blank spell book!", "空白法术书!"),
 
     /**
      * Spell School
@@ -32,9 +41,9 @@ public enum SDTexts
     /**
      * Grade
      */
-    GRADE_0("Small-sized ", "小型"),
-    GRADE_1("Middle-sized ", "中型"),
-    GRADE_2("Good-sized ", "大型"),
+    GRADE_0("Primary ", "初级"),
+    GRADE_1("Intermediate ", "中级"),
+    GRADE_2("Advanced ", "高级"),
 
     /**
      * Equipment Slot
@@ -47,21 +56,11 @@ public enum SDTexts
     SLOT_OFFHAND("Slot: Off Hand", "槽位: 副手"),
 
     /**
-     * Essence Text
-     */
-    ESSENCE_NAME("Essence", "精华"),
-    ESSENCE_BASE("Base Essence", "基础精华"),
-    ESSENCE_ENCHANTED("Enchanted Essence", "束魔精华"),
-    ESSENCE_ENLIGHTENING("Enlightening Essence", "源启精华"),
-    ESSENCE_SUCCESS("Successful use of essence!", "精华使用成功!"),
-    ESSENCE_FAIL("Failed to use essence!", "精华使用失败!"),
-
-    /**
      * Tooltip
      */
     TOOLTIP_INVALID("Invalid Nbt Data!", "无效的Nbt数据!"),
-    TOOLTIP_ESSENCE_USE_1("Usage: Right click on other item in the inventory.", "用法: 物品栏中用该物品右键其他物品."),
-    TOOLTIP_ESSENCE_USE_2("Usage: Main hand holding, press the right button.", "用法: 主手持有时，长按右键."),
+    TOOLTIP_USE_CLICK("Usage: Right click on other item in the inventory.", "用法: 物品栏中用该物品右键其他物品."),
+    TOOLTIP_USE_PRESS("Usage: Main hand holding, press the right button.", "用法: 主手持有时，长按右键."),
     TOOLTIP_EFFECT("Effect:", "效果:"),
     TOOLTIP_LEVEL("Level: %s", "等级: %s"),
     TOOLTIP_THRESHOLD("Threshold: %s", "阈值: %s"),

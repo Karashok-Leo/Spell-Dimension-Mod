@@ -47,13 +47,13 @@ public class EnchantedEssenceItem extends StackClickEssenceItem
     @Override
     public Text getName()
     {
-        return SDTexts.ESSENCE_ENCHANTED.get();
+        return SDTexts.TEXT_ESSENCE_ENCHANTED.get();
     }
 
     @Override
     public Text getName(ItemStack stack)
     {
-        return SDTexts.ESSENCE_ENCHANTED.get().setStyle(Style.EMPTY.withColor(this.getColor(stack)));
+        return SDTexts.TEXT_ESSENCE_ENCHANTED.get().setStyle(Style.EMPTY.withColor(this.getColor(stack)));
     }
 
     public ItemStack getStack(EnchantedModifier enchantedModifier)

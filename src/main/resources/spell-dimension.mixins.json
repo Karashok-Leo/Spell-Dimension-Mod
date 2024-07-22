@@ -5,6 +5,7 @@
   "mixins": [
     "SpellHelperMixin",
     "SpellProjectileMixin",
+    "SpellRegistryAccessor",
     "phase.EntityPredicatesMixin",
     "phase.LivingEntityMixin",
     "phase.PlayerEntityMixin"
