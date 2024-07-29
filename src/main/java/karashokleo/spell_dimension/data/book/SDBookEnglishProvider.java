@@ -15,6 +15,5 @@ public class SDBookEnglishProvider extends AbstractModonomiconLanguageProvider
     @Override
     protected void addTranslations()
     {
-
     }
 }

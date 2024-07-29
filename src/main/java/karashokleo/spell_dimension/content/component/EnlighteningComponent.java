@@ -9,12 +9,13 @@ import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class EnlighteningComponent implements Component
 {
-    private final List<EnlighteningModifier> modifiers = new ArrayList<>();
+    private final Map<UUID, EnlighteningModifier> modifiers = new HashMap<>();
 
     public static EnlighteningComponent get(PlayerEntity player)
     {
@@ -31,7 +32,7 @@ public class EnlighteningComponent implements Component
             for (int i = 0; i < list.size(); i++)
             {
                 EnlighteningModifier modifier = EnlighteningModifier.fromNbt(list.getCompound(i));
-                if (modifier != null) this.addModifier(modifier);
+                if (modifier != null) this.modifiers.put(modifier.uuid(), modifier);
             }
         }
     }
@@ -40,18 +41,13 @@ public class EnlighteningComponent implements Component
     public void writeToNbt(@NotNull NbtCompound tag)
     {
         NbtList list = new NbtList();
-        for (EnlighteningModifier modifier : this.modifiers)
+        for (EnlighteningModifier modifier : this.modifiers.values())
             list.add(modifier.toNbt());
         tag.put(EnlighteningModifier.NBT_KEY, list);
     }
 
-    public List<EnlighteningModifier> getModifiers()
+    public Map<UUID, EnlighteningModifier> getModifiers()
     {
         return modifiers;
-    }
-
-    public void addModifier(@NotNull EnlighteningModifier modifier)
-    {
-        this.modifiers.add(modifier);
     }
 }

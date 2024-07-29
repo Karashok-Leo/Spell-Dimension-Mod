@@ -8,11 +8,13 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.item.AttributeResolver;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Map;
 import java.util.UUID;
 
 public record EnlighteningModifier(
@@ -23,11 +25,10 @@ public record EnlighteningModifier(
 {
     public static void init()
     {
-        ServerPlayerEvents.AFTER_RESPAWN.register((oldPlayer, newPlayer, alive) -> {
-            for (EnlighteningModifier modifier : EnlighteningComponent.get(newPlayer).getModifiers())
-            {
+        ServerPlayerEvents.AFTER_RESPAWN.register((oldPlayer, newPlayer, alive) ->
+        {
+            for (EnlighteningModifier modifier : EnlighteningComponent.get(newPlayer).getModifiers().values())
                 modifier.applyToEntity(newPlayer);
-            }
         });
     }
 
@@ -59,6 +60,15 @@ public record EnlighteningModifier(
         attributeInstance.removeModifier(uuid);
         attributeInstance.addPersistentModifier(toModifier(newAmount));
         return true;
+    }
+
+    public void applyToComponent(PlayerEntity player)
+    {
+        Map<UUID, EnlighteningModifier> modifiers = EnlighteningComponent.get(player).getModifiers();
+        EnlighteningModifier oldModifier = modifiers.get(uuid);
+        double newAmount = oldModifier == null ? amount : getNewAmount(oldModifier.amount);
+        modifiers.remove(uuid);
+        modifiers.put(uuid, new EnlighteningModifier(attribute, uuid, newAmount, operation));
     }
 
     public void applyToStack(Multimap<EntityAttribute, EntityAttributeModifier> modifiers)
