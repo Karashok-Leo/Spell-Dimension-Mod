@@ -9,6 +9,7 @@ import com.klikli_dev.modonomicon.api.datagen.book.BookEntryModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
 import net.minecraft.util.Identifier;
 import net.spell_engine.spellbinding.SpellBindingBlock;
+import net.wizards.item.Weapons;
 
 public class SDCategoryProvider extends CategoryProvider
 {
@@ -21,14 +22,16 @@ public class SDCategoryProvider extends CategoryProvider
     protected String[] generateEntryMap()
     {
         return new String[]{
-                "I"
+                "c          ",
+                "       b   "
         };
     }
 
     @Override
     protected void generateEntries()
     {
-        this.add(this.createBeginner('I'));
+        this.add(this.entryCastSpell());
+        this.add(this.entryBeginner());
     }
 
     @Override
@@ -40,7 +43,17 @@ public class SDCategoryProvider extends CategoryProvider
                 .withIcon(SpellBindingBlock.ITEM);
     }
 
-    private BookEntryModel createBeginner(char location)
+    private BookEntryModel entryCastSpell()
+    {
+        BookContextHelper context = this.context();
+        context.entry("cast_spell");
+        context.page("intro");
+
+        return this.entry('c')
+                .withIcon(Weapons.arcaneWand.item());
+    }
+
+    private BookEntryModel entryBeginner()
     {
         BookContextHelper context = this.context();
         context.entry("beginner");
@@ -51,7 +64,7 @@ public class SDCategoryProvider extends CategoryProvider
                 .withTitle(context.pageTitle())
                 .build();
 
-        return this.entry(location)
+        return this.entry('b')
                 .withIcon(SpellBindingBlock.ITEM)
                 .withPage(pageModel);
     }

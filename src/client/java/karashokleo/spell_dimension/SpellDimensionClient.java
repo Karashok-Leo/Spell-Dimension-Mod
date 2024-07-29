@@ -1,14 +1,19 @@
 package karashokleo.spell_dimension;
 
+import dev.xkmc.l2tabs.tabs.core.TabToken;
+import dev.xkmc.l2tabs.tabs.inventory.InvTabData;
+import dev.xkmc.l2tabs.tabs.inventory.TabRegistry;
 import karashokleo.spell_dimension.content.item.DynamicSpellBookItem;
 import karashokleo.spell_dimension.content.item.essence.base.ColorProvider;
-import karashokleo.spell_dimension.content.item.essence.logic.EnchantedModifier;
+import karashokleo.spell_dimension.content.item.logic.EnchantedModifier;
+import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllStatusEffects;
 import karashokleo.spell_dimension.render.FrostedEffectRenderer;
 import karashokleo.spell_dimension.render.FrostedParticleSpawner;
 import karashokleo.spell_dimension.render.NucleusRenderer;
 import karashokleo.spell_dimension.render.PhaseParticleSpawner;
+import karashokleo.spell_dimension.screen.SpellPowerTab;
 import karashokleo.spell_dimension.util.NetworkUtil;
 import karashokleo.spell_dimension.util.ParticleUtil;
 import net.fabricmc.api.ClientModInitializer;
@@ -25,6 +30,7 @@ import net.minecraft.util.math.random.Random;
 import net.spell_engine.api.effect.CustomModelStatusEffect;
 import net.spell_engine.api.effect.CustomParticleStatusEffect;
 import net.spell_engine.api.render.CustomModels;
+import net.wizards.item.Armors;
 
 import java.util.List;
 
@@ -35,10 +41,15 @@ public class SpellDimensionClient implements ClientModInitializer
     public static final Identifier FROSTED_MODEL = SpellDimension.modLoc("spell_effect/frosted");
     public static final Identifier ICICLE_MODEL = SpellDimension.modLoc("spell_projectile/icicle");
 
+    public static TabToken<InvTabData, SpellPowerTab> TAB_SPELL_POWER;
+
     @Override
     public void onInitializeClient()
     {
         itemTooltip();
+
+        TAB_SPELL_POWER = TabRegistry.GROUP.registerTab(3600, SpellPowerTab::new,
+                () -> Armors.wizardRobeSet.head, SDTexts.TEXT_SPELL_POWER_INFO.get());
 
         for (Item item : AllItems.COLOR_PROVIDERS)
             ColorProviderRegistry.ITEM.register((stack, tintIndex) -> (stack.getItem() instanceof ColorProvider c) ? c.getColor(stack) : 0xffffff, item);

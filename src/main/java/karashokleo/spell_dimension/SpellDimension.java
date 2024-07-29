@@ -7,8 +7,9 @@ import dev.onyxstudios.cca.api.v3.entity.RespawnCopyStrategy;
 import karashokleo.spell_dimension.content.component.BlazingMarkComponent;
 import karashokleo.spell_dimension.content.component.EnlighteningComponent;
 import karashokleo.spell_dimension.content.component.NucleusComponent;
-import karashokleo.spell_dimension.content.item.essence.logic.EnchantedModifier;
-import karashokleo.spell_dimension.content.item.essence.logic.EnlighteningModifier;
+import karashokleo.spell_dimension.content.event.PlayerHealthEvent;
+import karashokleo.spell_dimension.content.item.logic.EnchantedModifier;
+import karashokleo.spell_dimension.content.item.logic.EnlighteningModifier;
 import karashokleo.spell_dimension.content.misc.DebugStaffCommand;
 import karashokleo.spell_dimension.content.misc.SpellRegistryReload;
 import karashokleo.spell_dimension.data.*;
@@ -43,6 +44,7 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
         AllSpells.register();
         EnchantedModifier.init();
         EnlighteningModifier.init();
+        PlayerHealthEvent.init();
         DebugStaffCommand.init();
         SpellRegistryReload.init();
     }

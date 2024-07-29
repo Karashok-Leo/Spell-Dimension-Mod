@@ -11,15 +11,18 @@ base {
 }
 
 repositories {
+	mavenLocal()
 	maven { url 'https://jitpack.io' }
 	maven { url 'https://maven.kosmx.dev/' }
 	maven { url "https://www.cursemaven.com" }
 	maven { url 'https://maven.shedaniel.me/' }
 	maven { url "https://maven.blamejared.com/" }
 	maven { url 'https://api.modrinth.com/maven' }
+	maven { url "https://mvn.devos.one/releases/" }
 	maven { url "https://maven.terraformersmc.com/" }
 	maven { url 'https://libs.azuredoom.com:4443/mods' }
 	maven { url 'https://maven.ladysnake.org/releases' }
+	maven { url "https://maven.jamieswhiteshirt.com/libs-release" }
 	maven { url "https://dl.cloudsmith.io/public/klikli-dev/mods/maven/" }
 }
 
@@ -84,14 +87,14 @@ dependencies {
 	modImplementation "mod.azure.azurelib:azurelib-fabric-1.20.1:${project.azurelib_version}"
 	modImplementation("mod.azure.azurelibarmor:azurelibarmor-fabric-1.20.1:${project.azurelib_armor_version}")
 	modImplementation("dev.kosmx.player-anim:player-animation-lib-fabric:${project.player_animator_version}")
-	implementation("com.github.ZsoltMolnarrr:TinyConfig:${project.tiny_config_version}")
 
-//	implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:0.2.1"))
+	modImplementation("dev.xkmc.l2serial:L2Serial:${project.l2serial_version}")
+	modImplementation("dev.xkmc.l2tabs:L2Tabs:${project.l2tabs_version}")
+	modImplementation("karashokleo.leobrary:data:${project.leobrary_version}")
+	modImplementation("karashokleo.l2hostility:L2Hostility:${project.l2hostility_version}")
+	modImplementation("io.github.fabricators_of_create.Porting-Lib:entity:${project.port_lib_version}")
 
 //	modImplementation "curse.maven:puffish-skills-835091:${project.puffer_fish_skills_version}"
-
-
-//	modImplementation "net.darkhax.maxhealthfix:MaxHealthFix-Fabric-${project.minecraft_version}:${project.max_health_fix_version}"
 
 	modImplementation "com.klikli_dev:modonomicon-${project.minecraft_version}-fabric:${project.modonomicon_version}"
 

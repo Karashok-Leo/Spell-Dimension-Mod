@@ -2,9 +2,9 @@ package karashokleo.spell_dimension.content.recipe.essence;
 
 import com.google.gson.JsonObject;
 import karashokleo.spell_dimension.SpellDimension;
-import karashokleo.spell_dimension.content.item.essence.logic.EnlighteningModifier;
+import karashokleo.spell_dimension.content.item.logic.EnlighteningModifier;
 import karashokleo.spell_dimension.init.AllItems;
-import karashokleo.spell_dimension.content.item.essence.logic.EnchantedModifier;
+import karashokleo.spell_dimension.content.item.logic.EnchantedModifier;
 import karashokleo.spell_dimension.util.UuidUtil;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.EntityAttributeModifier;

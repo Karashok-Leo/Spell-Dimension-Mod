@@ -2,7 +2,7 @@ package karashokleo.spell_dimension.content.item.essence;
 
 import karashokleo.spell_dimension.config.AttributeColorConfig;
 import karashokleo.spell_dimension.content.item.essence.base.RightPressEssenceItem;
-import karashokleo.spell_dimension.content.item.essence.logic.EnlighteningModifier;
+import karashokleo.spell_dimension.content.item.logic.EnlighteningModifier;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.util.AttributeUtil;
 import karashokleo.spell_dimension.util.ParticleUtil;
@@ -84,10 +84,7 @@ public class EnlighteningEssenceItem extends RightPressEssenceItem
     {
         EnlighteningModifier enlighteningModifier = getModifier(essence);
         if (enlighteningModifier == null) return false;
-        boolean apply = enlighteningModifier.applyToEntity(entity);
-        if (apply && entity instanceof PlayerEntity player)
-            enlighteningModifier.applyToComponent(player);
-        return apply;
+        return enlighteningModifier.applyToEntityOrPlayer(entity);
     }
 
     @Override

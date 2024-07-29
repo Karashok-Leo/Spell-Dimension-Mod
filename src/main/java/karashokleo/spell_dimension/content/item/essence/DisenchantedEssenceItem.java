@@ -1,7 +1,7 @@
 package karashokleo.spell_dimension.content.item.essence;
 
 import karashokleo.spell_dimension.content.item.essence.base.StackClickEssenceItem;
-import karashokleo.spell_dimension.content.item.essence.logic.EnchantedModifier;
+import karashokleo.spell_dimension.content.item.logic.EnchantedModifier;
 import karashokleo.spell_dimension.data.SDTexts;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.ItemStack;

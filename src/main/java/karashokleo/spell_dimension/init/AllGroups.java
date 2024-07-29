@@ -2,8 +2,8 @@ package karashokleo.spell_dimension.init;
 
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.config.AttributeModifier;
-import karashokleo.spell_dimension.content.item.essence.logic.EnchantedModifier;
-import karashokleo.spell_dimension.content.item.essence.logic.EnlighteningModifier;
+import karashokleo.spell_dimension.content.item.logic.EnchantedModifier;
+import karashokleo.spell_dimension.content.item.logic.EnlighteningModifier;
 import karashokleo.spell_dimension.util.UuidUtil;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.entity.EquipmentSlot;

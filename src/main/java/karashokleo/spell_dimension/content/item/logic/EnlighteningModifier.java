@@ -1,4 +1,4 @@
-package karashokleo.spell_dimension.content.item.essence.logic;
+package karashokleo.spell_dimension.content.item.logic;
 
 import com.google.common.collect.Multimap;
 import karashokleo.spell_dimension.content.component.EnlighteningComponent;
@@ -14,8 +14,10 @@ import net.minecraft.util.Identifier;
 import net.spell_engine.api.item.AttributeResolver;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Map;
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
+import java.util.function.Predicate;
 
 public record EnlighteningModifier(
         EntityAttribute attribute,
@@ -27,7 +29,7 @@ public record EnlighteningModifier(
     {
         ServerPlayerEvents.AFTER_RESPAWN.register((oldPlayer, newPlayer, alive) ->
         {
-            for (EnlighteningModifier modifier : EnlighteningComponent.get(newPlayer).getModifiers().values())
+            for (EnlighteningModifier modifier : EnlighteningComponent.get(newPlayer).getModifiers())
                 modifier.applyToEntity(newPlayer);
         });
     }
@@ -51,6 +53,14 @@ public record EnlighteningModifier(
         return operation == EntityAttributeModifier.Operation.MULTIPLY_TOTAL ? ((1 + amount) * (1 + oldAmount) - 1) : (amount + oldAmount);
     }
 
+    public boolean applyToEntityOrPlayer(LivingEntity entity)
+    {
+        boolean apply = this.applyToEntity(entity);
+        if (apply && entity instanceof PlayerEntity player)
+            this.applyToComponent(player);
+        return apply;
+    }
+
     public boolean applyToEntity(LivingEntity entity)
     {
         EntityAttributeInstance attributeInstance = entity.getAttributeInstance(attribute);
@@ -64,11 +74,12 @@ public record EnlighteningModifier(
 
     public void applyToComponent(PlayerEntity player)
     {
-        Map<UUID, EnlighteningModifier> modifiers = EnlighteningComponent.get(player).getModifiers();
-        EnlighteningModifier oldModifier = modifiers.get(uuid);
-        double newAmount = oldModifier == null ? amount : getNewAmount(oldModifier.amount);
-        modifiers.remove(uuid);
-        modifiers.put(uuid, new EnlighteningModifier(attribute, uuid, newAmount, operation));
+        List<EnlighteningModifier> modifiers = EnlighteningComponent.get(player).getModifiers();
+        Predicate<EnlighteningModifier> predicate = modifier -> modifier.attribute == this.attribute && modifier.uuid == this.uuid;
+        Optional<EnlighteningModifier> oldModifier = modifiers.stream().filter(predicate).findAny();
+        double newAmount = oldModifier.map(modifier -> getNewAmount(modifier.amount())).orElse(amount);
+        modifiers.removeIf(predicate);
+        modifiers.add(new EnlighteningModifier(attribute, uuid, newAmount, operation));
     }
 
     public void applyToStack(Multimap<EntityAttribute, EntityAttributeModifier> modifiers)

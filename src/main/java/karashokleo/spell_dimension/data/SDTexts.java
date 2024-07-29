@@ -27,6 +27,7 @@ public enum SDTexts
     TEXT_ESSENCE_FAIL("Failed to use essence!", "精华使用失败!"),
     TEXT_INCOMPATIBLE_SCHOOL("Incompatible spell school!", "不兼容的法术学派!"),
     TEXT_BLANK_BOOK("Blank spell book!", "空白法术书!"),
+    TEXT_SPELL_POWER_INFO("Spell Power Information","魔法信息"),
 
     /**
      * Spell School
@@ -121,12 +122,21 @@ public enum SDTexts
             "Apply resist {effect_amplifier} effect to oneself for {effect_duration} seconds.",
             "施法者获得抗性提升{effect_amplifier}效果, 持续{effect_duration}秒."
     ),
+    // Fix
+    HEALING_POWER("attribute.name.spell_power.healing", "Healing Spell Power", "治愈法术强度")
     ;
 
 
     private final String key;
     private final String en;
     private final String zh;
+
+    SDTexts(String key, String en, String zh)
+    {
+        this.key = key;
+        this.en = en;
+        this.zh = zh;
+    }
 
     SDTexts(String en, String zh)
     {

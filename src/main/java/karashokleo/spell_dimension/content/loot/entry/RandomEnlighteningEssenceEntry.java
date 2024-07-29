@@ -3,7 +3,7 @@ package karashokleo.spell_dimension.content.loot.entry;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import karashokleo.spell_dimension.config.AttributeModifier;
-import karashokleo.spell_dimension.content.item.essence.logic.EnlighteningModifier;
+import karashokleo.spell_dimension.content.item.logic.EnlighteningModifier;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllLoots;
 import karashokleo.spell_dimension.util.LootContextUtil;

@@ -1,4 +1,4 @@
-package karashokleo.spell_dimension.content.item.essence.logic;
+package karashokleo.spell_dimension.content.item.logic;
 
 import com.google.common.collect.Multimap;
 import karashokleo.spell_dimension.data.SDTexts;
