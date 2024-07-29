@@ -15,10 +15,12 @@ repositories {
 	maven { url 'https://maven.kosmx.dev/' }
 	maven { url "https://www.cursemaven.com" }
 	maven { url 'https://maven.shedaniel.me/' }
+	maven { url "https://maven.blamejared.com/" }
 	maven { url 'https://api.modrinth.com/maven' }
 	maven { url "https://maven.terraformersmc.com/" }
 	maven { url 'https://libs.azuredoom.com:4443/mods' }
 	maven { url 'https://maven.ladysnake.org/releases' }
+	maven { url "https://dl.cloudsmith.io/public/klikli-dev/mods/maven/" }
 }
 
 loom {
@@ -87,6 +89,11 @@ dependencies {
 //	implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:0.2.1"))
 
 //	modImplementation "curse.maven:puffish-skills-835091:${project.puffer_fish_skills_version}"
+
+
+//	modImplementation "net.darkhax.maxhealthfix:MaxHealthFix-Fabric-${project.minecraft_version}:${project.max_health_fix_version}"
+
+	modImplementation "com.klikli_dev:modonomicon-${project.minecraft_version}-fabric:${project.modonomicon_version}"
 
 }
 

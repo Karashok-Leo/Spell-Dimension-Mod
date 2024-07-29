@@ -1,7 +1,9 @@
 package karashokleo.spell_dimension.content.item.essence.logic;
 
 import com.google.common.collect.Multimap;
+import karashokleo.spell_dimension.content.component.EnlighteningComponent;
 import karashokleo.spell_dimension.util.AttributeUtil;
+import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
@@ -19,7 +21,18 @@ public record EnlighteningModifier(
         EntityAttributeModifier.Operation operation
 )
 {
-    private static final String ATTR_MODIFIER_KEY = "EnlighteningModifier";
+    public static void init()
+    {
+        ServerPlayerEvents.AFTER_RESPAWN.register((oldPlayer, newPlayer, alive) -> {
+            for (EnlighteningModifier modifier : EnlighteningComponent.get(newPlayer).getModifiers())
+            {
+                modifier.applyToEntity(newPlayer);
+            }
+        });
+    }
+
+    public static final String NBT_KEY = "EnlighteningModifiers";
+    private static final String MODIFIER_NAME = "EnlighteningModifier";
     private static final String ATTRIBUTE_KEY = "Attribute";
     private static final String UUID_KEY = "Uuid";
     private static final String AMOUNT_KEY = "Amount";
@@ -55,12 +68,12 @@ public record EnlighteningModifier(
 
     public EntityAttributeModifier toModifier()
     {
-        return new EntityAttributeModifier(uuid, ATTR_MODIFIER_KEY, amount, operation);
+        return new EntityAttributeModifier(uuid, MODIFIER_NAME, amount, operation);
     }
 
     public EntityAttributeModifier toModifier(double newAmount)
     {
-        return new EntityAttributeModifier(uuid, ATTR_MODIFIER_KEY, newAmount, operation);
+        return new EntityAttributeModifier(uuid, MODIFIER_NAME, newAmount, operation);
     }
 
     public NbtCompound toNbt()

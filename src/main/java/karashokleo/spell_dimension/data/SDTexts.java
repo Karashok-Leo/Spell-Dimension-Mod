@@ -71,16 +71,56 @@ public enum SDTexts
     /**
      * Spells
      */
-    SPELL_CONVERGE("Launching a spell to explode at the landing point and make enemies converged.", "发射一道咒语, 在落点处爆炸并汇聚敌人."),
-    SPELL_PHASE("Apply phase {effect_amplifier} effect to oneself for {effect_duration} seconds. Phase: You are free as a bird, even more than a bird.", "施法者获得相位{effect_amplifier}效果, 持续{effect_duration}秒. 相位: 你自由了."),
-    SPELL_BLAST("Causing a powerful flame explosion, repelling surrounding creatures and causing {damage} fire spell damage.", "造成一次威力巨大的烈焰爆炸, 击退周围生物并造成{damage}点伤害."),
-    SPELL_IGNITE("Apply ignite effect to oneself. Ignite: Your attack will leave a mark on the enemy, and some of the damage you inflict during this period will damage the enemy again in " + BlazingMark.getTriggerTime() + " seconds.", "施法者获得引火效果. 引火: 你的攻击会在敌人身上留下一个印记, " + BlazingMark.getTriggerTime() + "秒内你造成的部分伤害将会在" + BlazingMark.getTriggerTime() + "秒后再次打击敌人, 并使其虚弱."),
-    SPELL_AURA("Apply aura {effect_amplifier} effect to oneself for {effect_duration} seconds. Aura: Within the frozen aura, livings get Frosted.", "施法者获得霜环{effect_amplifier}效果, 持续{effect_duration}秒. 霜环: 在霜环内, 所有生物被霜冻."),
-    SPELL_NUCLEUS("Freeze the target's heart into a ice nucleus, explode in " + NucleusSpell.TOTAL_DURATION / 20F + " seconds, and shoot icicles into the surrounding area.", "将敌人的心脏化作一个冰核, " + NucleusSpell.TOTAL_DURATION / 20F + "秒后爆炸, 并向周围射出冰刺."),
-    SPELL_ICICLE("Shooting an icicle, which deals {damage} frost spell damage to the hit enemy and can cause a chain reaction.", "发射一道冰刺, 对命中的敌人造成{damage}点伤害, 冰刺可以引发链式反应."),
-    SPELL_POWER("Apply strength {effect_amplifier} effect to oneself for {effect_duration} seconds.", "施法者获得力量{effect_amplifier}效果, 持续{effect_duration}秒."),
-    SPELL_REGEN("Apply regen {effect_amplifier} effect to oneself for {effect_duration} seconds.", "施法者获得生命再生{effect_amplifier}效果, 持续{effect_duration}秒."),
-    SPELL_RESIST("Apply resist {effect_amplifier} effect to oneself for {effect_duration} seconds.", "施法者获得抗性提升{effect_amplifier}效果, 持续{effect_duration}秒."),
+    SPELL_CONVERGE_NAME("Converge", "汇聚"),
+    SPELL_CONVERGE_DESCRIPTION(
+            "Launching a spell to explode at the landing point and make enemies converged.",
+            "发射一道咒语, 在落点处爆炸并汇聚敌人."
+    ),
+    SPELL_PHASE_NAME("Phase", "相位"),
+    SPELL_PHASE_DESCRIPTION(
+            "Apply phase {effect_amplifier} effect to oneself for {effect_duration} seconds. Phase: You are free as a bird, even more than a bird.",
+            "施法者获得相位{effect_amplifier}效果, 持续{effect_duration}秒. 相位: 你自由了."
+    ),
+    SPELL_BLAST_NAME("Blast", "热爆"),
+    SPELL_BLAST_DESCRIPTION(
+            "Causing a powerful flame explosion, repelling surrounding creatures and causing {damage} fire spell damage.",
+            "造成一次威力巨大的烈焰爆炸, 击退周围生物并造成{damage}点伤害."
+    ),
+    SPELL_IGNITE_NAME("Ignite", "引火"),
+    SPELL_IGNITE_DESCRIPTION(
+            "Apply ignite effect to oneself. Ignite: Your attack will leave a mark on the enemy, and some of the damage you inflict during this period will damage the enemy again in " + BlazingMark.getTriggerTime() + " seconds.",
+            "施法者获得引火效果. 引火: 你的攻击会在敌人身上留下一个印记, " + BlazingMark.getTriggerTime() + "秒内你造成的部分伤害将会在" + BlazingMark.getTriggerTime() + "秒后再次打击敌人, 并使其虚弱."
+    ),
+    SPELL_AURA_NAME("Aura", "霜环"),
+    SPELL_AURA_DESCRIPTION(
+            "Apply aura {effect_amplifier} effect to oneself for {effect_duration} seconds. Aura: Within the frozen aura, livings get Frosted.",
+            "施法者获得霜环{effect_amplifier}效果, 持续{effect_duration}秒. 霜环: 在霜环内, 所有生物被霜冻."
+    ),
+    SPELL_NUCLEUS_NAME("Nucleus", "冰核"),
+    SPELL_NUCLEUS_DESCRIPTION(
+            "Freeze the target's heart into a ice nucleus, explode in " + NucleusSpell.TOTAL_DURATION / 20F + " seconds, and shoot icicles into the surrounding area.",
+            "将敌人的心脏化作一个冰核, " + NucleusSpell.TOTAL_DURATION / 20F + "秒后爆炸, 并向周围射出冰刺."
+    ),
+    SPELL_ICICLE_NAME("Icicle", "冰刺"),
+    SPELL_ICICLE_DESCRIPTION(
+            "Shooting an icicle, which deals {damage} frost spell damage to the hit enemy and can cause a chain reaction.",
+            "发射一道冰刺, 对命中的敌人造成{damage}点伤害, 冰刺可以引发链式反应."
+    ),
+    SPELL_POWER_NAME("Power", "力量"),
+    SPELL_POWER_DESCRIPTION(
+            "Apply strength {effect_amplifier} effect to oneself for {effect_duration} seconds.",
+            "施法者获得力量{effect_amplifier}效果, 持续{effect_duration}秒."
+    ),
+    SPELL_REGEN_NAME("Regen", "再生"),
+    SPELL_REGEN_DESCRIPTION(
+            "Apply regen {effect_amplifier} effect to oneself for {effect_duration} seconds.",
+            "施法者获得生命再生{effect_amplifier}效果, 持续{effect_duration}秒."
+    ),
+    SPELL_RESIST_NAME("Resist", "抗性"),
+    SPELL_RESIST_DESCRIPTION(
+            "Apply resist {effect_amplifier} effect to oneself for {effect_duration} seconds.",
+            "施法者获得抗性提升{effect_amplifier}效果, 持续{effect_duration}秒."
+    ),
     ;
 
 
@@ -94,7 +134,7 @@ public enum SDTexts
         if (split.length != 2) throw new RuntimeException("SDTexts: Incorrect name!");
         this.key = Util.createTranslationKey(
                 split[0].toLowerCase(Locale.ROOT),
-                SpellDimension.modLoc(split[1].toLowerCase(Locale.ROOT))
+                SpellDimension.modLoc(split[1].replace('_', '.').toLowerCase(Locale.ROOT))
         );
         this.en = en;
         this.zh = zh;

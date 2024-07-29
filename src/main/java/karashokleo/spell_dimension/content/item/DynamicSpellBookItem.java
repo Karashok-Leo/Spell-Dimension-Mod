@@ -98,7 +98,7 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem implements ColorP
                 player.sendMessage(SDTexts.TEXT_INCOMPATIBLE_SCHOOL.get());
                 return;
             }
-            SpellBinding.State.ApplyState state = SpellBinding.State.of(spellInfo.id(), stack, 0, 0).state;
+            SpellBinding.State.ApplyState state = SpellBinding.State.of(spellInfo.id(), stack, 0, 0, 0).state;
             switch (state)
             {
                 case INVALID -> player.sendMessage(SDTexts.TOOLTIP_INVALID.get());

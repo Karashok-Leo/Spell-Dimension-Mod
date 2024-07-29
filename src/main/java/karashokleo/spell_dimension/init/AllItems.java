@@ -41,7 +41,7 @@ public class AllItems
             SPELL_BOOKS.put(school, new ArrayList<>());
             for (int grade = 0; grade < 3; grade++)
             {
-                BASE_ESSENCES.get(school).add(registerItem(school.id.getPath() + "_essence_" + grade, new BaseEssenceItem(school, grade)));
+                BASE_ESSENCES.get(school).add(registerItem("essence_" + school.id.getPath() + "_" + grade, new BaseEssenceItem(school, grade)));
                 SPELL_BOOKS.get(school).add(registerSpellBook(school, grade));
             }
         }

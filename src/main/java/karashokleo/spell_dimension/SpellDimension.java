@@ -1,20 +1,23 @@
 package karashokleo.spell_dimension;
 
+import com.klikli_dev.modonomicon.api.datagen.LanguageProviderCache;
 import dev.onyxstudios.cca.api.v3.entity.EntityComponentFactoryRegistry;
 import dev.onyxstudios.cca.api.v3.entity.EntityComponentInitializer;
+import dev.onyxstudios.cca.api.v3.entity.RespawnCopyStrategy;
 import karashokleo.spell_dimension.content.component.BlazingMarkComponent;
+import karashokleo.spell_dimension.content.component.EnlighteningComponent;
 import karashokleo.spell_dimension.content.component.NucleusComponent;
 import karashokleo.spell_dimension.content.item.essence.logic.EnchantedModifier;
+import karashokleo.spell_dimension.content.item.essence.logic.EnlighteningModifier;
 import karashokleo.spell_dimension.content.misc.DebugStaffCommand;
 import karashokleo.spell_dimension.content.misc.SpellRegistryReload;
-import karashokleo.spell_dimension.data.SDChineseProvider;
-import karashokleo.spell_dimension.data.SDEnglishProvider;
-import karashokleo.spell_dimension.data.SDModelProvider;
-import karashokleo.spell_dimension.data.SDRecipeProvider;
+import karashokleo.spell_dimension.data.*;
+import karashokleo.spell_dimension.data.book.SDBookProvider;
 import karashokleo.spell_dimension.init.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.minecraft.data.DataOutput;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Identifier;
 
@@ -39,6 +42,7 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
         AllRecipeSerializers.register();
         AllSpells.register();
         EnchantedModifier.init();
+        EnlighteningModifier.init();
         DebugStaffCommand.init();
         SpellRegistryReload.init();
     }
@@ -51,11 +55,17 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
         pack.addProvider(SDChineseProvider::new);
         pack.addProvider(SDModelProvider::new);
         pack.addProvider(SDRecipeProvider::new);
+        pack.addProvider(SDItemTagProvider::new);
+
+        LanguageProviderCache enUs = new LanguageProviderCache("en_us");
+        LanguageProviderCache zhCn = new LanguageProviderCache("zh_cn");
+        pack.addProvider((DataOutput output) -> new SDBookProvider(output, enUs, zhCn));
     }
 
     @Override
     public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry)
     {
+        registry.registerForPlayers(AllComponents.ENLIGHTENING, player -> new EnlighteningComponent(), RespawnCopyStrategy.ALWAYS_COPY);
         registry.registerFor(LivingEntity.class, AllComponents.BLAZING_MARK, BlazingMarkComponent::new);
         registry.registerFor(LivingEntity.class, AllComponents.NUCLEUS, NucleusComponent::new);
     }

@@ -1,6 +1,7 @@
 package karashokleo.spell_dimension.content.item.essence;
 
 import karashokleo.spell_dimension.config.AttributeColorConfig;
+import karashokleo.spell_dimension.content.component.EnlighteningComponent;
 import karashokleo.spell_dimension.content.item.essence.base.RightPressEssenceItem;
 import karashokleo.spell_dimension.content.item.essence.logic.EnlighteningModifier;
 import karashokleo.spell_dimension.data.SDTexts;
@@ -24,8 +25,6 @@ import java.util.List;
 
 public class EnlighteningEssenceItem extends RightPressEssenceItem
 {
-    private static final String ENLIGHTENING_MODIFIERS = "EnlighteningModifiers";
-
     public EnlighteningEssenceItem()
     {
         super();
@@ -61,14 +60,14 @@ public class EnlighteningEssenceItem extends RightPressEssenceItem
     public ItemStack getStack(EnlighteningModifier modifier)
     {
         ItemStack stack = this.getDefaultStack();
-        modifier.writeNbt(stack.getOrCreateSubNbt(ENLIGHTENING_MODIFIERS));
+        modifier.writeNbt(stack.getOrCreateSubNbt(EnlighteningModifier.NBT_KEY));
         return stack;
     }
 
     @Nullable
     public EnlighteningModifier getModifier(ItemStack stack)
     {
-        NbtCompound compound = stack.getSubNbt(ENLIGHTENING_MODIFIERS);
+        NbtCompound compound = stack.getSubNbt(EnlighteningModifier.NBT_KEY);
         return EnlighteningModifier.fromNbt(compound);
     }
 
@@ -86,7 +85,10 @@ public class EnlighteningEssenceItem extends RightPressEssenceItem
     {
         EnlighteningModifier enlighteningModifier = getModifier(essence);
         if (enlighteningModifier == null) return false;
-        return enlighteningModifier.applyToEntity(entity);
+        boolean apply = enlighteningModifier.applyToEntity(entity);
+        if (apply && entity instanceof PlayerEntity player)
+            EnlighteningComponent.get(player).addModifier(enlighteningModifier);
+        return apply;
     }
 
     @Override
