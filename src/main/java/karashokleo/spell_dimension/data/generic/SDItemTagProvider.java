@@ -1,4 +1,4 @@
-package karashokleo.spell_dimension.data;
+package karashokleo.spell_dimension.data.generic;
 
 import karashokleo.l2hostility.content.item.ComplementItems;
 import karashokleo.spell_dimension.content.event.PlayerHealthEvent;

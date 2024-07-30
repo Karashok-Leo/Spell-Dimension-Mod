@@ -12,8 +12,8 @@ import karashokleo.spell_dimension.content.item.logic.EnchantedModifier;
 import karashokleo.spell_dimension.content.item.logic.EnlighteningModifier;
 import karashokleo.spell_dimension.content.misc.DebugStaffCommand;
 import karashokleo.spell_dimension.content.misc.SpellRegistryReload;
-import karashokleo.spell_dimension.data.*;
-import karashokleo.spell_dimension.data.book.SDBookProvider;
+import karashokleo.spell_dimension.data.book.MagicGuidanceProvider;
+import karashokleo.spell_dimension.data.generic.*;
 import karashokleo.spell_dimension.init.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
@@ -61,7 +61,7 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
 
         LanguageProviderCache enUs = new LanguageProviderCache("en_us");
         LanguageProviderCache zhCn = new LanguageProviderCache("zh_cn");
-        pack.addProvider((DataOutput output) -> new SDBookProvider(output, enUs, zhCn));
+        pack.addProvider((DataOutput output) -> new MagicGuidanceProvider(output, enUs, zhCn));
     }
 
     @Override

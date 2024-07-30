@@ -1,4 +1,4 @@
-package karashokleo.spell_dimension.data;
+package karashokleo.spell_dimension.data.generic;
 
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.init.AllItems;

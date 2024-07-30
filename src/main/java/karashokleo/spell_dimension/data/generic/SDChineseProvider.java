@@ -1,5 +1,6 @@
-package karashokleo.spell_dimension.data;
+package karashokleo.spell_dimension.data.generic;
 
+import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllGroups;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllStatusEffects;

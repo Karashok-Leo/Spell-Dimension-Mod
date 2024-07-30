@@ -3,9 +3,11 @@ package karashokleo.spell_dimension;
 import dev.xkmc.l2tabs.tabs.core.TabToken;
 import dev.xkmc.l2tabs.tabs.inventory.InvTabData;
 import dev.xkmc.l2tabs.tabs.inventory.TabRegistry;
+import karashokleo.leobrary.gui.api.TextureOverlayRegistry;
 import karashokleo.spell_dimension.content.item.DynamicSpellBookItem;
 import karashokleo.spell_dimension.content.item.essence.base.ColorProvider;
 import karashokleo.spell_dimension.content.item.logic.EnchantedModifier;
+import karashokleo.spell_dimension.content.misc.INoClip;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllStatusEffects;
@@ -47,6 +49,8 @@ public class SpellDimensionClient implements ClientModInitializer
     public void onInitializeClient()
     {
         itemTooltip();
+
+        TextureOverlayRegistry.register(PHASE_LAYER, 0.5F, (client, player, context, tickDelta) -> INoClip.noClip(player));
 
         TAB_SPELL_POWER = TabRegistry.GROUP.registerTab(3600, SpellPowerTab::new,
                 () -> Armors.wizardRobeSet.head, SDTexts.TEXT_SPELL_POWER_INFO.get());

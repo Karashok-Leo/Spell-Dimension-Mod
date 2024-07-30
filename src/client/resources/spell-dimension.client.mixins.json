@@ -7,7 +7,6 @@
     "phase.ClientPlayerEntityMixin",
     "phase.ClientPlayerInteractionManagerMixin",
     "phase.EntityRenderDispatcherMixin",
-    "phase.InGameHudMixin",
     "phase.InGameOverlayRendererMixin",
     "phase.WorldRendererMixin"
   ],
