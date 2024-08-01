@@ -13,11 +13,14 @@ import karashokleo.spell_dimension.content.item.logic.EnlighteningModifier;
 import karashokleo.spell_dimension.content.misc.DebugStaffCommand;
 import karashokleo.spell_dimension.content.misc.SpellRegistryReload;
 import karashokleo.spell_dimension.data.book.MagicGuidanceProvider;
+import karashokleo.spell_dimension.data.book.lang.BookChineseProvider;
+import karashokleo.spell_dimension.data.book.lang.BookEnglishProvider;
 import karashokleo.spell_dimension.data.generic.*;
 import karashokleo.spell_dimension.init.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.data.DataOutput;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Identifier;
@@ -62,6 +65,8 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
         LanguageProviderCache enUs = new LanguageProviderCache("en_us");
         LanguageProviderCache zhCn = new LanguageProviderCache("zh_cn");
         pack.addProvider((DataOutput output) -> new MagicGuidanceProvider(output, enUs, zhCn));
+        pack.addProvider((FabricDataOutput output) -> new BookEnglishProvider(output, enUs));
+        pack.addProvider((FabricDataOutput output) -> new BookChineseProvider(output, zhCn));
     }
 
     @Override

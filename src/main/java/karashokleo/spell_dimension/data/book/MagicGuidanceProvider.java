@@ -5,9 +5,10 @@ import com.klikli_dev.modonomicon.api.datagen.BookProvider;
 import com.klikli_dev.modonomicon.api.datagen.ModonomiconLanguageProvider;
 import com.klikli_dev.modonomicon.api.datagen.book.BookModel;
 import com.klikli_dev.modonomicon.registry.ItemRegistry;
-import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.data.book.category.MageProvider;
+import karashokleo.spell_dimension.data.book.category.TipsCategory;
 import karashokleo.spell_dimension.init.AllGroups;
+import karashokleo.spell_dimension.util.BookGenUtil;
 import net.minecraft.data.DataOutput;
 
 public class MagicGuidanceProvider extends BookProvider
@@ -16,7 +17,7 @@ public class MagicGuidanceProvider extends BookProvider
 
     public MagicGuidanceProvider(DataOutput packOutput, ModonomiconLanguageProvider defaultLang, ModonomiconLanguageProvider... translations)
     {
-        super(BOOK_NAME, packOutput, SpellDimension.MOD_ID, defaultLang, translations);
+        super(BOOK_NAME, packOutput, BookGenUtil.NAMESPACE, defaultLang, translations);
     }
 
     @Override
@@ -28,13 +29,14 @@ public class MagicGuidanceProvider extends BookProvider
         this.lang("zh_cn").add(context.bookName(), "魔力接引");
         this.lang("zh_cn").add(context.bookTooltip(), "三岁小孩也能看懂的入门魔法书。");
         return BookModel
-                .create(SpellDimension.modLoc(BOOK_NAME), context.bookName())
-                .withGenerateBookItem(true)
+                .create(BookGenUtil.id(BOOK_NAME), context.bookName())
                 .withTooltip(context.bookTooltip())
                 .withModel(ItemRegistry.MODONOMICON_PURPLE.getId())
                 .withCreativeTab(AllGroups.MISC_GROUP_KEY.getValue())
+                .withGenerateBookItem(true)
                 .withCategories(
-                        new MageProvider(this).generate()
+                        new MageProvider(this).generate(),
+                        new TipsCategory(this).generate()
                 );
     }
 

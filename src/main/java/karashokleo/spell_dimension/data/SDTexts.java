@@ -63,7 +63,7 @@ public enum SDTexts
     TOOLTIP_USE_CLICK("Usage: Right click on other item in the inventory.", "用法: 物品栏中用该物品右键其他物品."),
     TOOLTIP_USE_PRESS("Usage: Main hand holding, press the right button.", "用法: 主手持有时，长按右键."),
     TOOLTIP_EFFECT("Effect:", "效果:"),
-    TOOLTIP_LEVEL("Level: %s", "束魔等级: %s"),
+    TOOLTIP_LEVEL("Enchanted Level: %s", "束魔等级: %s"),
     TOOLTIP_THRESHOLD("Threshold: %s", "阈值: %s"),
     TOOLTIP_MODIFIER("Modifier:", "属性修饰语:"),
     TOOLTIP_DISENCHANT("Remove attribute modifiers from the item.", "从物品上移除所有通过束魔精华获得的属性修饰符."),

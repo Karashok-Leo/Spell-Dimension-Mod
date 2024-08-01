@@ -1,12 +1,14 @@
 package karashokleo.spell_dimension.config;
 
+import net.mehvahdjukaar.dummmmmmy.Dummmmmmy;
+import net.minecraft.entity.EntityType;
 import net.minecraft.util.math.random.Random;
 
 import java.util.List;
 
 public class LootConfig
 {
-    public static final BaseConfig BASE_CONFIG = new BaseConfig(0.8F, 0.9F, 0.99F, List.of("dummmmmmy:target_dummy"));
+    public static final BaseConfig BASE_CONFIG = new BaseConfig(0.8F, 0.9F, 0.99F, List.of(Dummmmmmy.TARGET_DUMMY.get()));
 
     public static final int EL_WEIGHT = 6;
     public static final int MD_WEIGHT = 3;
@@ -19,7 +21,7 @@ public class LootConfig
     public static final LootPool CHEST_POOL = new LootPool(1, 3, 100);
     public static final LootPool ENTITY_POOL = new LootPool(0, 2, 180);
 
-    public record BaseConfig(float dropChance, float advancedChance, float perfectChance, List<String> blacklist)
+    public record BaseConfig(float dropChance, float advancedChance, float perfectChance, List<EntityType<?>> blacklist)
     {
         public int getRandomGrade(Random random)
         {

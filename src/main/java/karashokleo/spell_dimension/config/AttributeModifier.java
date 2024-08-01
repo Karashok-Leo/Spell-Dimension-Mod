@@ -18,7 +18,7 @@ public record AttributeModifier(EntityAttribute attribute, double amount, Entity
     /**
      * Generic Attributes
      */
-    private static final AttributeModifier[] modifiers = {
+    private static final List<AttributeModifier> modifiers = List.of(
             new AttributeModifier(EntityAttributes.GENERIC_ARMOR, 1, EntityAttributeModifier.Operation.ADDITION),
             new AttributeModifier(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, 1, EntityAttributeModifier.Operation.ADDITION),
             new AttributeModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1, EntityAttributeModifier.Operation.ADDITION),
@@ -30,7 +30,7 @@ public record AttributeModifier(EntityAttribute attribute, double amount, Entity
             new AttributeModifier(SpellPowerMechanics.HASTE.attribute, 0.01, EntityAttributeModifier.Operation.MULTIPLY_BASE),
             new AttributeModifier(SpellPowerMechanics.CRITICAL_DAMAGE.attribute, 0.01, EntityAttributeModifier.Operation.MULTIPLY_BASE),
             new AttributeModifier(SpellPowerMechanics.CRITICAL_CHANCE.attribute, 0.01, EntityAttributeModifier.Operation.MULTIPLY_BASE)
-    };
+    );
 
     public static final float GENERIC_CHANCE = 0.16F;
 
@@ -43,7 +43,7 @@ public record AttributeModifier(EntityAttribute attribute, double amount, Entity
     public static AttributeModifier getRandom(Random random, @Nullable SpellSchool school)
     {
         return random.nextFloat() < GENERIC_CHANCE ?
-                modifiers[random.nextInt(modifiers.length)] :
+                modifiers.get(random.nextInt(modifiers.size())) :
                 new AttributeModifier(
                         school == null ? RandomUtil.randomSchool(random).attribute : school.attribute,
                         1,
@@ -53,9 +53,10 @@ public record AttributeModifier(EntityAttribute attribute, double amount, Entity
 
     public static List<AttributeModifier> getAll()
     {
-        List<AttributeModifier> all = new ArrayList<>(List.of(modifiers));
+        List<AttributeModifier> all = new ArrayList<>();
         for (SpellSchool school : SchoolUtil.SCHOOLS)
             all.add(new AttributeModifier(school.attribute, 1, EntityAttributeModifier.Operation.ADDITION));
+        all.addAll(modifiers);
         return all;
     }
 }

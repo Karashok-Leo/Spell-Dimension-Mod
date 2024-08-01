@@ -33,6 +33,7 @@ public class AllItems
     public static DisenchantedEssenceItem DISENCHANTED_ESSENCE;
     public static MendingEssenceItem MENDING_ESSENCE;
 
+
     public static void register()
     {
         for (SpellSchool school : SchoolUtil.SCHOOLS)

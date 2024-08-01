@@ -20,8 +20,8 @@ import net.minecraft.world.World;
 public class PlayerHealthEvent
 {
     public static final TagKey<Item> HEART_FOOD = TagUtil.itemTag("heart_food");
-    private static final int XP_THRESHOLD = 6;
-    private static final int HEALTH_THRESHOLD = 66;
+    public static final int XP_THRESHOLD = 6;
+    public static final int HEALTH_THRESHOLD = 66;
 
     public static void init()
     {

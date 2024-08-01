@@ -46,7 +46,7 @@ public class AllLoots
 
         SpellImpactCallback.EVENT.register((world, caster, target, spellInfo, impact, context) ->
         {
-            if (LootConfig.BASE_CONFIG.blacklist().contains(Registries.ENTITY_TYPE.getId(target.getType()).toString()))
+            if (LootConfig.BASE_CONFIG.blacklist().contains(target.getType()))
                 return;
             if (caster.getRandom().nextFloat() < LootConfig.BASE_CONFIG.dropChance()) return;
             SpellSchool school = impact.school != null ? impact.school : spellInfo.spell().school;
