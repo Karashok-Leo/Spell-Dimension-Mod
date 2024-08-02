@@ -17,7 +17,7 @@ import com.tom.storagemod.Content;
 import karashokleo.enchantment_infusion.init.EIItems;
 import karashokleo.l2hostility.init.LHTags;
 import karashokleo.l2hostility.init.LHTraits;
-import karashokleo.spell_dimension.SpellDimension;
+import karashokleo.spell_dimension.content.event.PlayerHealthEvent;
 import karashokleo.spell_dimension.util.BookGenUtil;
 import net.mehvahdjukaar.dummmmmmy.Dummmmmmy;
 import net.minecraft.item.Item;
@@ -190,15 +190,15 @@ public class TipsCategory extends CategoryProvider
         this.lang().add(context.pageText(),
                 """
                         \\
-                        As you can see, in the beginning you only have a max health of 10. Early in the game, you have a probability of getting a heart when you gain experience values greater than " + PlayerHealthEvent.XP_THRESHOLD + " at once, but as your max health approaches " + PlayerHealthEvent.HEALTH_THRESHOLD + ", you will no longer be able to grow your max health in this way.
-                        """
+                        As you can see, in the beginning you only have a max health of 10. Early in the game, you have a probability of getting a heart when you gain experience values greater than %d at once, but as your max health approaches %d, you will no longer be able to grow your max health in this way.
+                        """.formatted(PlayerHealthEvent.XP_THRESHOLD, PlayerHealthEvent.HEALTH_THRESHOLD)
         );
         this.lang("zh_cn").add(context.pageTitle(), "生命机制");
         this.lang("zh_cn").add(context.pageText(),
                 """
                         \\
-                        如你所见，开局你只有10点生命值。在游戏初期，当你一次性获得大于" + PlayerHealthEvent.XP_THRESHOLD + "的经验值时，你有概率获得一颗心，但随着你的最大生命值逼近" + PlayerHealthEvent.HEALTH_THRESHOLD + "点，你将不再能通过这种方式增长血量。
-                        """
+                        如你所见，开局你只有10点生命值。在游戏初期，当你一次性获得大于%d的经验值时，你有概率获得一颗心，但随着你的最大生命值逼近%d点，你将不再能通过这种方式增长血量。
+                        """.formatted(PlayerHealthEvent.XP_THRESHOLD, PlayerHealthEvent.HEALTH_THRESHOLD)
         );
 
         BookTextPageModel health = BookTextPageModel
@@ -350,9 +350,9 @@ public class TipsCategory extends CategoryProvider
 
         context.entry("storage");
         this.lang().add(context.entryName(), "Storage");
-        this.lang().add(context.entryDescription(), "MmmMmmMmmMmm");
+        this.lang().add(context.entryDescription(), "Well organized.");
         this.lang("zh_cn").add(context.entryName(), "存储");
-        this.lang("zh_cn").add(context.entryDescription(), "MmmMmmMmmMmm");
+        this.lang("zh_cn").add(context.entryDescription(), "井然有序。");
 
         context.page("storage");
         this.lang().add(context.pageTitle(), "Tom's Simple Storage");
@@ -392,7 +392,7 @@ public class TipsCategory extends CategoryProvider
         this.lang("zh_cn").add(context.entryName(), "莱特兰·恶意");
         this.lang("zh_cn").add(context.entryDescription(), "这充斥着恶意的世界。");
 
-        String link = "(patchouli://l2hostility:hostility_guide//mechanics/a1_difficulty_level)";
+        String link = "patchouli://l2hostility:hostility_guide//traits/tank";
 
         context.page("prev");
         this.lang().add(context.pageTitle(), "Lightland Hostility");
@@ -406,7 +406,7 @@ public class TipsCategory extends CategoryProvider
         this.lang("zh_cn").add(context.pageText(),
                 """
                         \\
-                        游戏采用**莱特兰·恶意**控制难度。只有在杀死强大怪物时才增加难度，死亡时降低难度。怪物生成时会带有特殊能力，称为**"词条"**。
+                        游戏采用**莱特兰·恶意**控制难度。只有在杀死强大怪物时才增加难度，死亡时降低难度。怪物生成时会带有特殊能力，称为 **"词条"**。
                         """
         );
 
@@ -424,7 +424,7 @@ public class TipsCategory extends CategoryProvider
                         The higher the level of the monster, the higher their attributes such as damage and health, and the more powerful the traits they possess. Each trait has a unique way of dealing with it.
                         \\
                         \\
-                        [See the *L2Hostility Guide* for more details]""" + link
+                        [See the *L2Hostility Guide* for more details](%s)""".formatted(link)
         );
         this.lang("zh_cn").add(context.pageText(),
                 """
@@ -432,7 +432,7 @@ public class TipsCategory extends CategoryProvider
                         怪物的等级越高，它们的伤害与血量等属性也就越高，拥有的词条越强大。每一种词条都有独特的应对方法。
                         \\
                         \\
-                        [更多详细信息见《莱特兰恶意教程》]""" + link
+                        [更多详细信息见《莱特兰恶意教程》](%s)""".formatted(link)
         );
 
         BookTextPageModel next = BookTextPageModel
@@ -546,7 +546,7 @@ public class TipsCategory extends CategoryProvider
         BookImagePageModel image = BookImagePageModel
                 .builder()
                 .withTitle(context.pageTitle())
-                .withImages(SpellDimension.modLoc("textures/machine.png"))
+                .withImages(BookGenUtil.id("textures/infusion.png"))
                 .build();
 
         context.page("pos");
@@ -642,12 +642,6 @@ public class TipsCategory extends CategoryProvider
                         \\
                         \\
                         Usage: Right click on a block with a target dummy to place it.He can be rotated 16 different directions depending on the way you face when you place it, similar to an armor stand.
-                        \\
-                        \\
-                        You can start dressing the little dude with all kind of armors and equipment.Just right click him with the desired item.To unequip a certain armor piece just click on his corresponding body part.
-                        \\
-                        \\
-                        Got tired of testing your dps?You can remove the dummy just by shift left clicking him with an empty hand !
                         """
         );
         this.lang("zh_cn").add(context.pageText(),
@@ -657,12 +651,6 @@ public class TipsCategory extends CategoryProvider
                         \\
                         \\
                         用法：右键单击方块放置它。它可以根据放置时面对的方向旋转 16个不同的方向，类似于盔甲架。
-                        \\
-                        \\
-                        你可以这家伙穿上各种盔甲和装备。只需用物品右键单击它即可。要取消装备某个盔甲，只需单击其相应的身体部位即可。
-                        \\
-                        \\
-                        开始对测试DPS感到厌倦？只需空手左键即可移除假人！
                         """
         );
 
@@ -671,9 +659,34 @@ public class TipsCategory extends CategoryProvider
                 .withText(context.pageText())
                 .build();
 
+        context.page("last");
+        this.lang().add(context.pageText(),
+                """
+                        \\
+                        You can start dressing the little dude with all kind of armors and equipment.Just right click him with the desired item.To unequip a certain armor piece just click on his corresponding body part.
+                        \\
+                        \\
+                        Got tired of testing your dps? You can remove the dummy just by shift left clicking him with an empty hand!
+                        """
+        );
+        this.lang("zh_cn").add(context.pageText(),
+                """
+                        \\
+                        你可以给这家伙穿上各种盔甲和装备。只需用物品右键单击它即可。要取消装备某个盔甲，只需单击其相应的身体部位即可。
+                        \\
+                        \\
+                        开始对测试DPS感到厌倦？只需空手左键即可移除假人！
+                        """
+        );
+
+        BookTextPageModel last = BookTextPageModel
+                .builder()
+                .withText(context.pageText())
+                .build();
+
         return this.entry('m')
                 .withIcon(Dummmmmmy.DUMMY_ITEM.get())
-                .withPages(prev, entity, next);
+                .withPages(prev, entity, next, last);
     }
 
     private BookEntryModel entryTrader()
@@ -781,9 +794,15 @@ public class TipsCategory extends CategoryProvider
                 .withItem(BookGenUtil.getIngredient(ForgeRegistry.controllerBlocksView().stream().map(block -> block.asItem().getDefaultStack())))
                 .build();
 
+        Identifier id = BookGenUtil.id("textures/alloy_forge/");
+
         BookImagePageModel image = BookImagePageModel
                 .builder()
-                .withImages(SpellDimension.modLoc("textures/forge.png"))
+                .withImages(
+                        id.withSuffixedPath("1.png"),
+                        id.withSuffixedPath("2.png"),
+                        id.withSuffixedPath("3.png")
+                )
                 .build();
 
         return this.entry('l')

@@ -1,5 +1,7 @@
 package karashokleo.spell_dimension.util;
 
+import com.klikli_dev.modonomicon.api.datagen.book.BookEntryModel;
+import com.klikli_dev.modonomicon.api.datagen.book.condition.BookEntryReadConditionModel;
 import karashokleo.spell_dimension.SpellDimension;
 import net.fabricmc.fabric.api.recipe.v1.ingredient.DefaultCustomIngredients;
 import net.minecraft.item.Item;
@@ -49,5 +51,11 @@ public class BookGenUtil
     public static Ingredient getNbtIngredient(List<ItemStack> stacks)
     {
         return DefaultCustomIngredients.any(stacks.stream().map(BookGenUtil::getNbtIngredient).toArray(Ingredient[]::new));
+    }
+
+    public static void setParent(BookEntryModel sub, BookEntryModel parent)
+    {
+        sub.withParent(parent);
+        sub.withCondition(BookEntryReadConditionModel.builder().withEntry(parent.getId()).build());
     }
 }
