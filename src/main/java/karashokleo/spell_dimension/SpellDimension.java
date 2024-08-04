@@ -16,6 +16,8 @@ import karashokleo.spell_dimension.data.book.MagicGuidanceProvider;
 import karashokleo.spell_dimension.data.book.lang.BookChineseProvider;
 import karashokleo.spell_dimension.data.book.lang.BookEnglishProvider;
 import karashokleo.spell_dimension.data.generic.*;
+import karashokleo.spell_dimension.data.loot_bag.BagProvider;
+import karashokleo.spell_dimension.data.loot_bag.ContentProvider;
 import karashokleo.spell_dimension.init.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
@@ -56,17 +58,22 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
     public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator)
     {
         FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
-        pack.addProvider(SDEnglishProvider::new);
-        pack.addProvider(SDChineseProvider::new);
-        pack.addProvider(SDModelProvider::new);
-        pack.addProvider(SDRecipeProvider::new);
-        pack.addProvider(SDItemTagProvider::new);
+
+        pack.addProvider(ContentProvider::new);
+        pack.addProvider(BagProvider::new);
 
         LanguageProviderCache enUs = new LanguageProviderCache("en_us");
         LanguageProviderCache zhCn = new LanguageProviderCache("zh_cn");
         pack.addProvider((DataOutput output) -> new MagicGuidanceProvider(output, enUs, zhCn));
         pack.addProvider((FabricDataOutput output) -> new BookEnglishProvider(output, enUs));
         pack.addProvider((FabricDataOutput output) -> new BookChineseProvider(output, zhCn));
+
+        pack.addProvider(SDEnglishProvider::new);
+        pack.addProvider(SDChineseProvider::new);
+        pack.addProvider(SDModelProvider::new);
+        pack.addProvider(SDRecipeProvider::new);
+        pack.addProvider(SDItemTagProvider::new);
+
     }
 
     @Override

@@ -122,6 +122,56 @@ public enum SDTexts
             "Apply resist {effect_amplifier} effect to oneself for {effect_duration} seconds.",
             "施法者获得抗性提升{effect_amplifier}效果, 持续{effect_duration}秒."
     ),
+    SPELL_LIGHTMOON_NAME("Light Moon", "浅月"),
+    SPELL_LIGHTMOON_DESCRIPTION(
+            "Leaves a cloud of spells on the target, dealing {damage} damage.",
+            "在目标处留下法术云, 造成{damage}点伤害."
+    ),
+    SPELL_GREATMOON_NAME("Great Moon", "漫月"),
+    SPELL_GREATMOON_DESCRIPTION(
+            "Leaves a cloud of spells on the target, dealing {damage} damage.",
+            "在目标处留下法术云, 造成{damage}点伤害."
+    ),
+    SPELL_FORLORN_NAME("Scythe Dance", "镰舞"),
+    SPELL_FORLORN_DESCRIPTION(
+            "Continuously swing the scythe in your hand, dealing {damage} damage.",
+            "持续挥舞手中巨镰, 造成{damage}点伤害."
+    ),
+    SPELL_KAYN_NAME("Scythe Dance", "镰舞"),
+    SPELL_KAYN_DESCRIPTION(
+            "Continuously swing the scythe in your hand, dealing {damage} damage.",
+            "持续挥舞手中巨镰, 造成{damage}点伤害."
+    ),
+    SPELL_RHAAST_NAME("Scythe Dance", "镰舞"),
+    SPELL_RHAAST_DESCRIPTION(
+            "Continuously swing the scythe in your hand, dealing {damage} damage.",
+            "持续挥舞手中巨镰, 造成{damage}点伤害."
+    ),
+    SPELL_BLOODTHIRSTER_NAME("Blood Thirster", "渴血"),
+    SPELL_BLOODTHIRSTER_DESCRIPTION(
+            "Build up your strength and swing your sword forward to deal {damage} melee damage and heal {heal} health.",
+            "蓄力后向前挥剑造成{damage}点近战伤害并回复{heal}点生命值."
+    ),
+    SPELL_FEATHERLIGHT_NAME("Featherlight", "羽轻"),
+    SPELL_FEATHERLIGHT_DESCRIPTION(
+            "Gain a short-lived Speed and Slow-Falling effect",
+            "获得短暂的迅捷和缓降效果."
+    ),
+    SPELL_CRUCIBLE_NAME("Empyrean", "擎天"),
+    SPELL_CRUCIBLE_DESCRIPTION(
+            "Two-Week Turn of the Greatsword, dealing {damage} fire spell damage  and slowing and catching the target on fire.",
+            "横转巨剑两周, 造成{damage}点火焰法术伤害并使目标着火和缓速."
+    ),
+    SPELL_LICHBANE_NAME("Lich Bane", "妖斩"),
+    SPELL_LICHBANE_DESCRIPTION(
+            "Splash multiple times, inflicting {damage} damage, and additional damage when the target's maximum blood level is below 40.",
+            "连续劈出多道剑斩, 造成{damage}点伤害, 当目标最大血量低于40时造成额外伤害."
+    ),
+    SPELL_DAWNBREAKER_NAME("Dawnbreaker", "破晓"),
+    SPELL_DAWNBREAKER_DESCRIPTION(
+            "Meteor Dawn, Strikes the target, dealing {damage} damage and stunning the target.",
+            "流星破晓, 冲击目标, 造成{damage}点伤害并使目标晕眩."
+    ),
     // Fix
     HEALING_POWER("attribute.name.spell_power.healing", "Healing Spell Power", "治愈法术强度")
     ;

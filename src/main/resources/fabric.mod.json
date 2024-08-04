@@ -10,7 +10,7 @@
   "contact": {
     "sources": "https://github.com/Karashok-Leo/spell-dimension"
   },
-  "license": "GPLv3",
+  "license": "LGPLv2.1",
   "icon": "assets/spell-dimension/icon.png",
   "environment": "*",
   "entrypoints": {

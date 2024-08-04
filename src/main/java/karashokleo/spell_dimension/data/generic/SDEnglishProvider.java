@@ -1,6 +1,8 @@
 package karashokleo.spell_dimension.data.generic;
 
 import karashokleo.spell_dimension.data.SDTexts;
+import karashokleo.spell_dimension.data.loot_bag.SDBags;
+import karashokleo.spell_dimension.data.loot_bag.SDContents;
 import karashokleo.spell_dimension.init.AllGroups;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllStatusEffects;
@@ -26,6 +28,7 @@ public class SDEnglishProvider extends FabricLanguageProvider
         addGroupTranslation(builder);
         addItemTranslation(builder);
         addStatusEffectTranslation(builder);
+        addLootBagTranslation(builder);
     }
 
     private static void addGroupTranslation(TranslationBuilder builder)
@@ -50,6 +53,19 @@ public class SDEnglishProvider extends FabricLanguageProvider
         builder.add(AllStatusEffects.IGNITE_EFFECT, getName(AllStatusEffects.PHASE_EFFECT));
         builder.add(AllStatusEffects.FROST_AURA_EFFECT, getName(AllStatusEffects.PHASE_EFFECT));
         builder.add(AllStatusEffects.FROSTED_EFFECT, getName(AllStatusEffects.PHASE_EFFECT));
+    }
+
+    private static void addLootBagTranslation(TranslationBuilder builder)
+    {
+        for (SDContents ins : SDContents.values())
+        {
+            builder.add(ins.entry.nameKey(), ins.nameEn);
+            builder.add(ins.entry.descKey(), ins.descEn);
+        }
+        for (SDBags ins : SDBags.values())
+        {
+            builder.add(ins.entry.nameKey(), ins.nameEn);
+        }
     }
 
     private static String getName(Item item)

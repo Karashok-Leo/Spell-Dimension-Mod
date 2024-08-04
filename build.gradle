@@ -90,6 +90,7 @@ dependencies {
     modImplementation("dev.xkmc.l2tabs:L2Tabs:${project.l2tabs_version}")
     modImplementation("karashokleo.leobrary:data:${project.leobrary_version}")
     modImplementation("karashokleo.leobrary:gui:${project.leobrary_version}")
+    modImplementation("karashokleo.loot_bag:loot-bag:${project.loot_bag_version}")
     modImplementation("karashokleo.l2hostility:L2Hostility:${project.l2hostility_version}")
     modImplementation "karashokleo.enchantment_infusion:enchantment_infusion:${project.enchantment_infusion_version}"
     modImplementation("io.github.fabricators_of_create.Porting-Lib:entity:${project.port_lib_version}")

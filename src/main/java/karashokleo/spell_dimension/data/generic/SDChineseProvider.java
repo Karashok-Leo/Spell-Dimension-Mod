@@ -1,6 +1,8 @@
 package karashokleo.spell_dimension.data.generic;
 
 import karashokleo.spell_dimension.data.SDTexts;
+import karashokleo.spell_dimension.data.loot_bag.SDBags;
+import karashokleo.spell_dimension.data.loot_bag.SDContents;
 import karashokleo.spell_dimension.init.AllGroups;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllStatusEffects;
@@ -22,6 +24,7 @@ public class SDChineseProvider extends FabricLanguageProvider
         addGroupTranslation(builder);
         addItemTranslation(builder);
         addStatusEffectTranslation(builder);
+        addLootBagTranslation(builder);
     }
 
     private static void addGroupTranslation(TranslationBuilder builder)
@@ -46,5 +49,18 @@ public class SDChineseProvider extends FabricLanguageProvider
         builder.add(AllStatusEffects.IGNITE_EFFECT, "引火");
         builder.add(AllStatusEffects.FROST_AURA_EFFECT, "霜环");
         builder.add(AllStatusEffects.FROSTED_EFFECT, "霜冻");
+    }
+
+    private static void addLootBagTranslation(TranslationBuilder builder)
+    {
+        for (SDContents ins : SDContents.values())
+        {
+            builder.add(ins.entry.nameKey(), ins.nameZh);
+            builder.add(ins.entry.descKey(), ins.descZh);
+        }
+        for (SDBags ins : SDBags.values())
+        {
+            builder.add(ins.entry.nameKey(), ins.nameZh);
+        }
     }
 }
