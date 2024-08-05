@@ -1,0 +1,8 @@
+{
+  "spell_ids": [
+    "wizards:frostbolt",
+    "wizards:frost_nova",
+    "wizards:frost_shield"
+  ],
+  "creatable_as_spellbook": false
+}

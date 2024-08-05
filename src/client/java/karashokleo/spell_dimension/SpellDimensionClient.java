@@ -94,12 +94,12 @@ public class SpellDimensionClient implements ClientModInitializer
         Identifier tooltipFinal = SpellDimension.modLoc("tooltip_final");
         ItemTooltipCallback.EVENT.addPhaseOrdering(Event.DEFAULT_PHASE, tooltipFinal);
         ItemTooltipCallback.EVENT.register(EnchantedModifier::levelTooltip);
-        ItemTooltipCallback.EVENT.register(tooltipFinal, (stack, context, lines) ->
-        {
-            if (stack.getItem() instanceof DynamicSpellBookItem)
-                lines.removeIf(line ->
-                        line.getContent() instanceof TranslatableTextContent content &&
-                                content.getKey().equals("spell.tooltip.spell_binding_tip"));
-        });
+//        ItemTooltipCallback.EVENT.register(tooltipFinal, (stack, context, lines) ->
+//        {
+//            if (stack.getItem() instanceof DynamicSpellBookItem)
+//                lines.removeIf(line ->
+//                        line.getContent() instanceof TranslatableTextContent content &&
+//                                content.getKey().equals("spell.tooltip.spell_binding_tip"));
+//        });
     }
 }

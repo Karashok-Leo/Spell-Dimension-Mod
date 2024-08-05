@@ -1,5 +1,7 @@
 package karashokleo.spell_dimension.content.item;
 
+import com.google.common.collect.Multimap;
+import dev.emi.trinkets.api.SlotReference;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.item.essence.base.ColorProvider;
 import karashokleo.spell_dimension.data.SDTexts;
@@ -9,6 +11,9 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.StackReference;
 import net.minecraft.item.ItemStack;
@@ -26,22 +31,33 @@ import net.spell_engine.internals.SpellContainerHelper;
 import net.spell_engine.spellbinding.SpellBinding;
 import net.spell_engine.spellbinding.SpellBindingScreenHandler;
 import net.spell_power.api.SpellSchool;
+import net.spell_power.api.SpellSchools;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Stream;
 
 public class DynamicSpellBookItem extends SpellBookTrinketItem implements ColorProvider
 {
     public static final Identifier DYNAMIC_POOL = SpellDimension.modLoc("dynamic");
+    public static final Map<SpellSchool, Identifier> POOLS = Map.of(
+            SpellSchools.ARCANE, SpellDimension.modLoc("arcane"),
+            SpellSchools.FIRE, SpellDimension.modLoc("fire"),
+            SpellSchools.FROST, SpellDimension.modLoc("frost"),
+            SpellSchools.HEALING, SpellDimension.modLoc("healing"),
+            SpellSchools.LIGHTNING, DYNAMIC_POOL,
+            SpellSchools.SOUL, DYNAMIC_POOL
+    );
 
     private final SpellSchool school;
     private final int grade;
 
     public DynamicSpellBookItem(SpellSchool school, int grade)
     {
-        super(DYNAMIC_POOL, new FabricItemSettings().maxCount(1));
+        super(POOLS.get(school), new FabricItemSettings().maxCount(1));
         this.school = school;
         this.grade = grade;
     }
@@ -53,7 +69,7 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem implements ColorP
 
     public SpellContainer getSpellContainer()
     {
-        return new SpellContainer(SpellContainer.ContentType.MAGIC, false, DYNAMIC_POOL.toString(), this.getMaxSpellCount(), List.of());
+        return new SpellContainer(SpellContainer.ContentType.MAGIC, false, this.getPoolId().toString(), this.getMaxSpellCount(), List.of());
     }
 
     @Override
@@ -178,6 +194,14 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem implements ColorP
     public void onItemEntityDestroyed(ItemEntity entity)
     {
         ItemUsage.spawnItemContents(entity, getAllScrolls(entity.getStack()));
+    }
+
+    @Override
+    public Multimap<EntityAttribute, EntityAttributeModifier> getModifiers(ItemStack stack, SlotReference slot, LivingEntity entity, UUID uuid)
+    {
+        Multimap<EntityAttribute, EntityAttributeModifier> modifiers = super.getModifiers(stack, slot, entity, uuid);
+        modifiers.put(this.school.attribute, new EntityAttributeModifier(uuid, "SpellBookModifier", (this.grade + 1) * 0.2, EntityAttributeModifier.Operation.MULTIPLY_TOTAL));
+        return modifiers;
     }
 
     public Stream<ItemStack> getAllScrolls(ItemStack stack)

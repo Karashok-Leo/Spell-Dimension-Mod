@@ -6,7 +6,7 @@ import net.minecraft.util.math.random.Random;
 
 import java.util.List;
 
-public class LootConfig
+public class EssenceLootConfig
 {
     public static final BaseConfig BASE_CONFIG = new BaseConfig(0.8F, 0.9F, 0.99F, List.of(Dummmmmmy.TARGET_DUMMY.get()));
 

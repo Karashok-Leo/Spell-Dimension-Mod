@@ -16,21 +16,21 @@ public class SpellRegistryReload
 {
     public static void init()
     {
-        ServerLifecycleEvents.END_DATA_PACK_RELOAD.register((server, resourceManager, success) ->
-        {
-            SpellRegistry.loadSpells(server.getResourceManager());
-            SpellRegistry.loadPools(server.getResourceManager());
-            SpellRegistry.loadContainers(server.getResourceManager());
-            WeaponCompatibility.initialize();
-            SpellRegistryAccessor.invokeEncodedContent();
-
-            PacketByteBuf configSerialized = Packets.ConfigSync.write(SpellEngineMod.config);
-            for (ServerPlayerEntity player : PlayerLookup.all(server))
-            {
-                PacketSender sender = ServerPlayNetworking.getSender(player);
-                sender.sendPacket(Packets.SpellRegistrySync.ID, SpellRegistry.encoded);
-                sender.sendPacket(Packets.ConfigSync.ID, configSerialized);
-            }
-        });
+//        ServerLifecycleEvents.END_DATA_PACK_RELOAD.register((server, resourceManager, success) ->
+//        {
+//            SpellRegistry.loadSpells(server.getResourceManager());
+//            SpellRegistry.loadPools(server.getResourceManager());
+//            SpellRegistry.loadContainers(server.getResourceManager());
+//            WeaponCompatibility.initialize();
+//            SpellRegistryAccessor.invokeEncodedContent();
+//
+//            PacketByteBuf configSerialized = Packets.ConfigSync.write(SpellEngineMod.config);
+//            for (ServerPlayerEntity player : PlayerLookup.all(server))
+//            {
+//                PacketSender sender = ServerPlayNetworking.getSender(player);
+//                sender.sendPacket(Packets.SpellRegistrySync.ID, SpellRegistry.encoded);
+//                sender.sendPacket(Packets.ConfigSync.ID, configSerialized);
+//            }
+//        });
     }
 }

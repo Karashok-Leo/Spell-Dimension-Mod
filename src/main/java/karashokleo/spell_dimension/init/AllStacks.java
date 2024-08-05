@@ -1,6 +1,7 @@
 package karashokleo.spell_dimension.init;
 
 import karashokleo.spell_dimension.config.AttributeModifier;
+import karashokleo.spell_dimension.config.ScrollLootConfig;
 import karashokleo.spell_dimension.content.item.logic.EnchantedModifier;
 import karashokleo.spell_dimension.content.item.logic.EnlighteningModifier;
 import karashokleo.spell_dimension.util.UuidUtil;
@@ -9,13 +10,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.spell.SpellInfo;
-import net.spell_engine.internals.SpellRegistry;
 import net.wizards.WizardsMod;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class AllStacks
 {
@@ -66,7 +67,9 @@ public class AllStacks
     public static List<ItemStack> getScrolls()
     {
         SPELL_SCROLL_STACKS.clear();
-        SPELL_SCROLL_STACKS.addAll(SpellRegistry.all().keySet().stream().map(AllItems.SPELL_SCROLL::getStack).sorted(Comparator.comparing(stack ->
+//        Stream<Identifier> stream = SpellRegistry.all().keySet().stream();
+        Stream<Identifier> stream = ScrollLootConfig.getAllSpells().stream();
+        SPELL_SCROLL_STACKS.addAll(stream.map(AllItems.SPELL_SCROLL::getStack).sorted(Comparator.comparing(stack ->
         {
             SpellInfo spellInfo = AllItems.SPELL_SCROLL.getSpellInfo(stack);
             return spellInfo == null ? "" : spellInfo.spell().school.id.toString();

@@ -27,7 +27,7 @@ public enum SDTexts
     TEXT_ESSENCE_FAIL("Failed to use essence!", "精华使用失败!"),
     TEXT_INCOMPATIBLE_SCHOOL("Incompatible spell school!", "不兼容的法术学派!"),
     TEXT_BLANK_BOOK("Blank spell book!", "空白法术书!"),
-    TEXT_SPELL_POWER_INFO("Spell Power Information","魔法信息"),
+    TEXT_SPELL_POWER_INFO("Spell Power Information", "魔法信息"),
 
     /**
      * Spell School
@@ -68,6 +68,9 @@ public enum SDTexts
     TOOLTIP_MODIFIER("Modifier:", "属性修饰语:"),
     TOOLTIP_DISENCHANT("Remove attribute modifiers from the item.", "从物品上移除所有通过束魔精华获得的属性修饰符."),
     TOOLTIP_MENDING("Completely repair the item and eliminate the repair cost of the item.", "完全修复物品, 并且清除物品的修复惩罚."),
+    TOOLTIP_OBTAIN("How to obtain: ", "获取方式: "),
+    TOOLTIP_UNAVAILABLE("Not yet available", "暂无"),
+    TOOLTIP_KILLING("Drop from killing ", "击杀"),
 
     /**
      * Spells
@@ -173,8 +176,7 @@ public enum SDTexts
             "流星破晓, 冲击目标, 造成{damage}点伤害并使目标晕眩."
     ),
     // Fix
-    HEALING_POWER("attribute.name.spell_power.healing", "Healing Spell Power", "治愈法术强度")
-    ;
+    HEALING_POWER("attribute.name.spell_power.healing", "Healing Spell Power", "治愈法术强度");
 
 
     private final String key;

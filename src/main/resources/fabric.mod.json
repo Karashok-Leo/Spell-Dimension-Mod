@@ -40,9 +40,28 @@
     "java": ">=17",
     "fabric-api": "*",
     "spell_engine": "*",
-    "spell_power": "*"
-  },
-  "suggests": {
+    "spell_power": "*",
+    "wizards": "*",
+    "paladins": "*",
+    "spellbladenext": "*",
+    "adventurez": "*",
+    "alloy_forgery": "*",
+    "aquamirae": "*",
+    "attributefix": "*",
+    "bosses_of_mass_destruction": "*",
+    "dummmmmmy": "*",
+    "equipment_standard": "*",
+    "explorerscompass": "*",
+    "goblintraders": "*",
+    "jewelry": "*",
+    "l2hostility": "*",
+    "loot-bag": "*",
+    "modonomicon": "*",
+    "naturescompass": "*",
+    "toms_storage": "*",
+    "trinkets": "*",
+    "victus": "*",
+    "voidz": "*"
   },
   "custom": {
     "cardinal-components": [

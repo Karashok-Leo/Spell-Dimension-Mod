@@ -3,8 +3,6 @@
   "package": "karashokleo.spell_dimension.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "BookProviderPatch",
-    "CategoryProviderPatch",
     "LivingEntityMixin",
     "SpellHelperMixin",
     "SpellProjectileMixin",

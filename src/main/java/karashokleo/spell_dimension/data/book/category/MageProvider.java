@@ -545,6 +545,9 @@ public class MageProvider extends CategoryProvider
                 """
                         \\
                         There are a limited number of spells that you can learn through the Spell Binding Table. To learn to use more spells, you need to have Spell Scrolls.
+                        \\
+                        \\
+                        Search for spell scrolls to see how to get them.
                         """
         );
         this.lang("zh_cn").add(context.pageTitle(), "法术卷轴");
@@ -552,6 +555,9 @@ public class MageProvider extends CategoryProvider
                 """
                         \\
                         通过法术绑定台能够学习到的法术有限。要想学习使用更多魔法，你需要拥有法术卷轴。
+                        \\
+                        \\
+                        搜索法术卷轴以查阅其获取方式。
                         """
         );
 
