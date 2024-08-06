@@ -11,6 +11,7 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
@@ -54,7 +55,7 @@ public class NucleusComponent extends WithCasterComponent implements ServerTicki
     }
 
     @Override
-    public void writeToNbt(NbtCompound tag)
+    public void writeToNbt(@NotNull NbtCompound tag)
     {
         tag.putInt(DURATION_KEY, this.duration);
         super.writeToNbt(tag);

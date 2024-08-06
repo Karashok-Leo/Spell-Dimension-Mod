@@ -6,6 +6,7 @@ import karashokleo.spell_dimension.content.spell.BlazingMark;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.Vec3d;
+import org.jetbrains.annotations.NotNull;
 
 public class BlazingMarkComponent extends WithCasterComponent implements ServerTickingComponent
 {
@@ -47,7 +48,7 @@ public class BlazingMarkComponent extends WithCasterComponent implements ServerT
     }
 
     @Override
-    public void writeToNbt(NbtCompound tag)
+    public void writeToNbt(@NotNull NbtCompound tag)
     {
         tag.putInt(DURATION_KEY, this.duration);
         tag.putInt(AMPLIFIER_KEY, this.amplifier);

@@ -11,7 +11,6 @@ import karashokleo.spell_dimension.content.event.PlayerHealthEvent;
 import karashokleo.spell_dimension.content.item.logic.EnchantedModifier;
 import karashokleo.spell_dimension.content.item.logic.EnlighteningModifier;
 import karashokleo.spell_dimension.content.misc.DebugStaffCommand;
-import karashokleo.spell_dimension.content.misc.SpellRegistryReload;
 import karashokleo.spell_dimension.data.book.MagicGuidanceProvider;
 import karashokleo.spell_dimension.data.book.lang.BookChineseProvider;
 import karashokleo.spell_dimension.data.book.lang.BookEnglishProvider;
@@ -51,7 +50,6 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
         EnlighteningModifier.init();
         PlayerHealthEvent.init();
         DebugStaffCommand.init();
-        SpellRegistryReload.init();
     }
 
     @Override
@@ -73,7 +71,6 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
         pack.addProvider(SDModelProvider::new);
         pack.addProvider(SDRecipeProvider::new);
         pack.addProvider(SDItemTagProvider::new);
-
     }
 
     @Override

@@ -16,54 +16,30 @@ public class ScrollLootConfig
 
     static
     {
-//        put("wizards:arcane_beam", "");
-//        put("spellbladenext:arcaneoverdrive", "");
-//        put("spellbladenext:arcaneflourish", "");
         put("spellbladenext:eldritchblast", "minecraft:warden");
         put("spellbladenext:maelstrom", "minecraft:ender_dragon");
         put("spellbladenext:finalstrike", "deeperdarker:stalker");
-//        put("spellbladenext:bladestorm", "");
-//        put("spellbladenext:amethystslash", "");
         put("spell-dimension:converge", "illagerinvasion:invoker");
         put("spell-dimension:phase", "bosses_of_mass_destruction:lich");
-//
+
         put("wizards:fire_breath", "soulsweapons:draugr_boss");
-        put("spellbladenext:fireflourish", "soulsweapons:day_stalker");
-//        put("spellbladenext:overblaze", "");
-//        put("spellbladenext:combustion", "");
-//        put("spellbladenext:frostvert", "");
-//        put("spellbladenext:flameslash", "");
-//        put("spellbladenext:snuffout", "");
-//        put("spellbladenext:fireoverdrive", "");
-//        put("spellbladenext:phoenixdive", "");
-//        put("spellbladenext:phoenixdive", "");
+        put("spellbladenext:fireflourish", "soulsweapons:night_shade");
         put("spellbladenext:flicker_strike", "bosses_of_mass_destruction:gauntlet");
-//        put("spellbladenext:inferno", "");
         put("spell-dimension:blast", "soulsweapons:accursed_lord_boss");
         put("spell-dimension:ignite", "adventurez:blackstone_golem");
-//
+
         put("wizards:frost_blizzard", "soulsweapons:moonknight");
-//        put("spellbladenext:eviscerate", "");
-//        put("spellbladenext:frostbloom0", "");
-//        put("spellbladenext:frostoverdrive", "");
-//        put("spellbladenext:tempest", "");
-//        put("spellbladenext:deathchill", "");
-//        put("spellbladenext:whirlingblades", "");
         put("spellbladenext:frostflourish", "soulsweapons:night_prowler");
-//        put("spellbladenext:coldbuff", "");
-//        put("spellbladenext:frostslash", "");
         put("spell-dimension:nucleus", "aquamirae:maze_mother");
         put("spell-dimension:aura", "aquamirae:captain_cornelia");
         put("spell-dimension:icicle", "minecraft:elder_guardian");
-//
+
         put("paladins:holy_beam", "soulsweapons:chaos_monarch");
         put("paladins:circle_of_healing", "soulsweapons:returning_knight");
         put("paladins:barrier", "graveyard:lich");
-//        put("paladins:battle_banner", "");
         put("paladins:judgement", "minecraft:wither");
         put("spell-dimension:resist", "soulsweapons:draugr_boss");
         put("spell-dimension:regen", "bosses_of_mass_destruction:void_blossom");
-//        put("spell-dimension:power", "");
     }
 
     public static final String[] BOSSES = {

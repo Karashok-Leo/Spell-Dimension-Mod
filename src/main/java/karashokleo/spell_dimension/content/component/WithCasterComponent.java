@@ -4,6 +4,7 @@ import dev.onyxstudios.cca.api.v3.component.Component;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
@@ -30,7 +31,7 @@ public abstract class WithCasterComponent implements Component
     }
 
     @Override
-    public void writeToNbt(NbtCompound tag)
+    public void writeToNbt(@NotNull NbtCompound tag)
     {
         if (casterUuid != null)
             tag.putUuid(CASTER_KEY, casterUuid);
