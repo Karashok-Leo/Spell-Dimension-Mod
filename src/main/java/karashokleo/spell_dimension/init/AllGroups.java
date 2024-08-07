@@ -11,7 +11,8 @@ import net.minecraft.text.Text;
 public class AllGroups
 {
     public static final RegistryKey<ItemGroup> BOOKS_GROUP_KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), SpellDimension.modLoc("group_books"));
-    public static final RegistryKey<ItemGroup> SCROLLS_GROUP_KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), SpellDimension.modLoc("group_scrolls"));
+    public static final RegistryKey<ItemGroup> SPELL_SCROLLS_GROUP_KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), SpellDimension.modLoc("group_spell_scrolls"));
+    public static final RegistryKey<ItemGroup> QUEST_SCROLLS_GROUP_KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), SpellDimension.modLoc("group_quest_scrolls"));
     public static final RegistryKey<ItemGroup> ELES_GROUP_KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), SpellDimension.modLoc("group_eles"));
     public static final RegistryKey<ItemGroup> ECES_GROUP_KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), SpellDimension.modLoc("group_eces"));
     public static final RegistryKey<ItemGroup> MISC_GROUP_KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), SpellDimension.modLoc("group_misc"));
@@ -27,14 +28,24 @@ public class AllGroups
                         .build()
         );
 
-        Registry.register(Registries.ITEM_GROUP, SCROLLS_GROUP_KEY,
+        Registry.register(Registries.ITEM_GROUP, SPELL_SCROLLS_GROUP_KEY,
                 FabricItemGroup
                         .builder()
-                        .icon(() -> AllStacks.SCROLL)
-                        .displayName(Text.translatable(SCROLLS_GROUP_KEY.getValue().toTranslationKey("itemGroup")))
+                        .icon(() -> AllStacks.getScrolls().get(0))
+                        .displayName(Text.translatable(SPELL_SCROLLS_GROUP_KEY.getValue().toTranslationKey("itemGroup")))
                         .entries((displayContext, entries) -> entries.addAll(AllStacks.getScrolls()))
                         .build()
         );
+
+        Registry.register(Registries.ITEM_GROUP, QUEST_SCROLLS_GROUP_KEY,
+                FabricItemGroup
+                        .builder()
+                        .icon(() -> AllStacks.QUEST_SCROLL_STACKS.get(0))
+                        .displayName(Text.translatable(QUEST_SCROLLS_GROUP_KEY.getValue().toTranslationKey("itemGroup")))
+                        .entries((displayContext, entries) -> entries.addAll(AllStacks.QUEST_SCROLL_STACKS))
+                        .build()
+        );
+
         Registry.register(Registries.ITEM_GROUP, ELES_GROUP_KEY,
                 FabricItemGroup
                         .builder()
@@ -43,6 +54,7 @@ public class AllGroups
                         .entries((displayContext, entries) -> entries.addAll(AllStacks.ELES_STACKS))
                         .build()
         );
+
         Registry.register(Registries.ITEM_GROUP, ECES_GROUP_KEY,
                 FabricItemGroup
                         .builder()
@@ -51,6 +63,7 @@ public class AllGroups
                         .entries((displayContext, entries) -> entries.addAll(AllStacks.ECES_STACKS))
                         .build()
         );
+
         Registry.register(Registries.ITEM_GROUP, MISC_GROUP_KEY,
                 FabricItemGroup
                         .builder()

@@ -22,7 +22,6 @@ import net.minecraft.loot.function.LootFunction;
 import net.minecraft.loot.provider.number.LootNumberProvider;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.math.random.Random;
-import net.spell_power.api.SpellSchool;
 
 import java.util.function.Consumer;
 
@@ -44,11 +43,8 @@ public class RandomEnchantedEssenceEntry extends LeafEntry
         // Determine Slot
         EquipmentSlot slot = RandomUtil.randomSlot(random);
 
-        // Determine School
-        SpellSchool school = LootContextUtil.getContextSchool(context);
-
         // Determine Modifier
-        AttributeModifier modifier = AttributeModifier.getRandom(random, school);
+        AttributeModifier modifier = LootContextUtil.getContextModifier(random, context);
 
         lootConsumer.accept(AllItems.ENCHANTED_ESSENCE.getStack(
                 new EnchantedModifier(

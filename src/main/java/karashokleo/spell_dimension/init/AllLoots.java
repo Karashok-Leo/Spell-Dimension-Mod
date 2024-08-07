@@ -51,7 +51,7 @@ public class AllLoots
 
         LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) ->
         {
-            Identifier spellId = ScrollLootConfig.getSpellId(id);
+            Identifier spellId = ScrollLootConfig.getLootSpellId(id);
             if (spellId == null) return;
             tableBuilder.pool(LootPool.builder().with(SpellScrollEntry.builder(spellId)));
         });

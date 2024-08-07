@@ -26,6 +26,7 @@ public class SDModelProvider extends FabricModelProvider
     public void generateItemModels(ItemModelGenerator generator)
     {
         generator.register(AllItems.SPELL_SCROLL, Models.GENERATED);
+        generator.register(AllItems.QUEST_SCROLL, Models.GENERATED);
         generator.register(AllItems.DEBUG_STAFF, Models.GENERATED);
         generator.register(AllItems.ENLIGHTENING_ESSENCE, Models.GENERATED);
         generator.register(AllItems.ENCHANTED_ESSENCE, Models.GENERATED);

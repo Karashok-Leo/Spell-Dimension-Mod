@@ -13,6 +13,7 @@ import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllStacks;
 import karashokleo.spell_dimension.util.BookGenUtil;
 import karashokleo.spell_dimension.util.SchoolUtil;
+import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.util.Identifier;
 import net.paladins.PaladinsMod;
@@ -21,9 +22,9 @@ import net.spell_engine.spellbinding.SpellBindingBlock;
 import net.wizards.WizardsMod;
 import net.wizards.item.Weapons;
 
-public class MageProvider extends CategoryProvider
+public class MageCategory extends CategoryProvider
 {
-    public MageProvider(BookProvider parent)
+    public MageCategory(BookProvider parent)
     {
         super(parent, "mage");
     }
@@ -561,11 +562,13 @@ public class MageProvider extends CategoryProvider
                         """
         );
 
+        ItemStack stack = AllItems.SPELL_SCROLL.getStack(new Identifier(WizardsMod.ID, "fire_breath"));
+
         BookSpotlightPageModel prev = BookSpotlightPageModel
                 .builder()
                 .withTitle(context.pageTitle())
                 .withText(context.pageText())
-                .withItem(BookGenUtil.getNbtIngredient(AllStacks.SCROLL))
+                .withItem(BookGenUtil.getNbtIngredient(stack))
                 .build();
 
         context.page("next");
@@ -588,7 +591,7 @@ public class MageProvider extends CategoryProvider
                 .build();
 
         return this.entry('r')
-                .withIcon(BookIconModel.create(AllStacks.SCROLL))
+                .withIcon(BookIconModel.create(stack))
                 .withPages(prev, next);
     }
 }

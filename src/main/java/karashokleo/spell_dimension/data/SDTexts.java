@@ -28,6 +28,7 @@ public enum SDTexts
     TEXT_INCOMPATIBLE_SCHOOL("Incompatible spell school!", "不兼容的法术学派!"),
     TEXT_BLANK_BOOK("Blank spell book!", "空白法术书!"),
     TEXT_SPELL_POWER_INFO("Spell Power Information", "魔法信息"),
+    TEXT_QUEST("Quest completed!", "任务完成！"),
 
     /**
      * Spell School
@@ -70,7 +71,12 @@ public enum SDTexts
     TOOLTIP_MENDING("Completely repair the item and eliminate the repair cost of the item.", "完全修复物品, 并且清除物品的修复惩罚."),
     TOOLTIP_OBTAIN("How to obtain: ", "获取方式: "),
     TOOLTIP_UNAVAILABLE("Not yet available", "暂无"),
-    TOOLTIP_KILLING("Drop from killing ", "击杀"),
+    TOOLTIP_KILLING("Drop from killing %s", "击杀%s掉落"),
+    TOOLTIP_QUEST_TASK("Task:", "任务目标:"),
+    TOOLTIP_QUEST_REWARD("Reward:", "任务奖励:"),
+    TOOLTIP_QUEST_COMPLETE("Right click to submit", "右键提交任务"),
+    TOOLTIP_QUEST_MUL("%s × %s", "%s × %s"),
+    TOOLTIP_QUEST_GE("%s >= %s", "%s >= %s"),
 
     /**
      * Spells

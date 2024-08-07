@@ -4,22 +4,19 @@ import io.github.fabricators_of_create.porting_lib.entity.events.PlayerEvents;
 import io.github.fabricators_of_create.porting_lib.entity.events.ServerPlayerCreationCallback;
 import karashokleo.spell_dimension.api.ApplyFoodEffectsCallback;
 import karashokleo.spell_dimension.content.item.logic.EnlighteningModifier;
-import karashokleo.spell_dimension.util.TagUtil;
+import karashokleo.spell_dimension.init.AllTags;
 import karashokleo.spell_dimension.util.UuidUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 
 public class PlayerHealthEvent
 {
-    public static final TagKey<Item> HEART_FOOD = TagUtil.itemTag("heart_food");
     public static final int XP_THRESHOLD = 6;
     public static final int HEALTH_THRESHOLD = 66;
 
@@ -50,7 +47,7 @@ public class PlayerHealthEvent
 
     private static void onEatHeartFood(LivingEntity entity, World world, ItemStack stack)
     {
-        if (stack.isIn(HEART_FOOD))
+        if (stack.isIn(AllTags.HEART_FOOD))
             addHeart(entity);
     }
 

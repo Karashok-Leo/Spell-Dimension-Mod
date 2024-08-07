@@ -2,6 +2,7 @@ package karashokleo.spell_dimension.init;
 
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.item.DynamicSpellBookItem;
+import karashokleo.spell_dimension.content.item.QuestScrollItem;
 import karashokleo.spell_dimension.content.item.SpellScrollItem;
 import karashokleo.spell_dimension.content.item.essence.*;
 import karashokleo.spell_dimension.content.item.essence.base.ColorProvider;
@@ -33,6 +34,7 @@ public class AllItems
     public static DisenchantedEssenceItem DISENCHANTED_ESSENCE;
     public static MendingEssenceItem MENDING_ESSENCE;
 
+    public static QuestScrollItem QUEST_SCROLL;
 
     public static void register()
     {
@@ -53,6 +55,8 @@ public class AllItems
         ENCHANTED_ESSENCE = registerItem("enchanted_essence", new EnchantedEssenceItem());
         DISENCHANTED_ESSENCE = registerItem("disenchanted_essence", new DisenchantedEssenceItem());
         MENDING_ESSENCE = registerItem("mending_essence", new MendingEssenceItem());
+
+        QUEST_SCROLL = registerItem("quest_scroll", new QuestScrollItem());
     }
 
     public static <T extends Item> T registerItem(String id, T item)

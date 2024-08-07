@@ -1,8 +1,13 @@
 package karashokleo.spell_dimension.config;
 
+import karashokleo.spell_dimension.data.SDTexts;
 import net.minecraft.entity.EntityType;
 import net.minecraft.registry.Registries;
+import net.minecraft.text.Style;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
+import net.spell_engine.api.spell.SpellInfo;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
@@ -11,6 +16,28 @@ import java.util.Set;
 
 public class ScrollLootConfig
 {
+    public static Set<Identifier> getAllSpells()
+    {
+        return SPELL2ENTITY.keySet();
+    }
+
+    public static Text getInfo(@Nullable SpellInfo spellInfo)
+    {
+        EntityType<?> type;
+        return spellInfo == null ||
+                (type = SPELL2ENTITY.get(spellInfo.id())) == null ?
+                SDTexts.TOOLTIP_UNAVAILABLE.get().formatted(Formatting.GRAY) :
+                SDTexts.TOOLTIP_KILLING
+                        .get(type.getName())
+                        .setStyle(Style.EMPTY.withColor(spellInfo.spell().school.color));
+    }
+
+    @Nullable
+    public static Identifier getLootSpellId(Identifier lootTableId)
+    {
+        return LOOT2SPELL.get(lootTableId);
+    }
+
     private static final Map<Identifier, EntityType<?>> SPELL2ENTITY = new HashMap<>();
     private static final Map<Identifier, Identifier> LOOT2SPELL = new HashMap<>();
 
@@ -68,23 +95,6 @@ public class ScrollLootConfig
             "soulsweapons:night_prowler", "soulsweapons:forlorn_scythe",
             "使用混沌宝珠召唤。"
     };
-
-    public static Set<Identifier> getAllSpells()
-    {
-        return SPELL2ENTITY.keySet();
-    }
-
-    @Nullable
-    public static EntityType<?> getEntityType(Identifier spellId)
-    {
-        return SPELL2ENTITY.get(spellId);
-    }
-
-    @Nullable
-    public static Identifier getSpellId(Identifier lootTableId)
-    {
-        return LOOT2SPELL.get(lootTableId);
-    }
 
     private static void put(String spellId, String entityTypeId)
     {

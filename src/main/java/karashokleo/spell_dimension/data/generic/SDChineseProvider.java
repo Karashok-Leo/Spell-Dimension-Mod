@@ -30,7 +30,8 @@ public class SDChineseProvider extends FabricLanguageProvider
     private static void addGroupTranslation(TranslationBuilder builder)
     {
         builder.add(AllGroups.BOOKS_GROUP_KEY, "咒次元: 法术书");
-        builder.add(AllGroups.SCROLLS_GROUP_KEY, "咒次元: 法术卷轴");
+        builder.add(AllGroups.SPELL_SCROLLS_GROUP_KEY, "咒次元: 法术卷轴");
+        builder.add(AllGroups.QUEST_SCROLLS_GROUP_KEY, "咒次元: 任务卷轴");
         builder.add(AllGroups.ELES_GROUP_KEY, "咒次元: 束魔精华");
         builder.add(AllGroups.ECES_GROUP_KEY, "咒次元: 附魔精华");
         builder.add(AllGroups.MISC_GROUP_KEY, "咒次元: 杂项");
@@ -41,6 +42,7 @@ public class SDChineseProvider extends FabricLanguageProvider
         builder.add(AllItems.DEBUG_STAFF, "调试法杖");
         builder.add(AllItems.DISENCHANTED_ESSENCE, "祛魔精华");
         builder.add(AllItems.MENDING_ESSENCE, "修复精华");
+        builder.add(AllItems.QUEST_SCROLL, "任务卷轴");
     }
 
     private static void addStatusEffectTranslation(TranslationBuilder builder)

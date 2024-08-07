@@ -5,7 +5,6 @@ import karashokleo.spell_dimension.content.item.essence.base.ColorProvider;
 import karashokleo.spell_dimension.data.SDTexts;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Style;
@@ -75,15 +74,6 @@ public class SpellScrollItem extends Item implements ColorProvider
     {
         super.appendTooltip(stack, world, tooltip, context);
         tooltip.add(SDTexts.TOOLTIP_OBTAIN.get().formatted(Formatting.GRAY));
-        SpellInfo spellInfo = this.getSpellInfo(stack);
-        EntityType<?> type;
-        if (spellInfo == null
-                || (type = ScrollLootConfig.getEntityType(spellInfo.id())) == null)
-            tooltip.add(SDTexts.TOOLTIP_UNAVAILABLE.get().formatted(Formatting.GRAY));
-        else tooltip.add(
-                SDTexts.TOOLTIP_KILLING.get()
-                        .append(type.getName())
-                        .setStyle(Style.EMPTY.withColor(spellInfo.spell().school.color))
-        );
+        tooltip.add(ScrollLootConfig.getInfo(this.getSpellInfo(stack)));
     }
 }

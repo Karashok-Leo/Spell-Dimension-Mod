@@ -15,9 +15,9 @@ import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.util.Identifier;
 
-public class BossProvider extends CategoryProvider
+public class BossCategory extends CategoryProvider
 {
-    public BossProvider(BookProvider parent)
+    public BossCategory(BookProvider parent)
     {
         super(parent, "boss");
     }

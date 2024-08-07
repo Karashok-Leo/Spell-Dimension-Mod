@@ -1,10 +1,9 @@
 package karashokleo.spell_dimension.init;
 
+import karashokleo.spell_dimension.api.quest.QuestRegistry;
 import karashokleo.spell_dimension.config.AttributeModifier;
 import karashokleo.spell_dimension.config.ScrollLootConfig;
 import karashokleo.spell_dimension.content.item.logic.EnchantedModifier;
-import karashokleo.spell_dimension.content.item.logic.EnlighteningModifier;
-import karashokleo.spell_dimension.util.UuidUtil;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -24,7 +23,8 @@ public class AllStacks
     public static final List<ItemStack> SPELL_BOOK_STACKS;
     public static final List<ItemStack> ELES_STACKS;
     public static final List<ItemStack> ECES_STACKS;
-    public static final List<ItemStack> SPELL_SCROLL_STACKS;
+    private static final List<ItemStack> SPELL_SCROLL_STACKS;
+    public static final List<ItemStack> QUEST_SCROLL_STACKS;
     public static final ItemStack SCROLL = AllItems.SPELL_SCROLL.getStack(new Identifier(WizardsMod.ID, "fire_breath"));
 
     static
@@ -35,14 +35,7 @@ public class AllStacks
 
         List<AttributeModifier> allModifiers = AttributeModifier.getAll();
 
-        ELES_STACKS = allModifiers.stream().map(modifier -> AllItems.ENLIGHTENING_ESSENCE.getStack(
-                new EnlighteningModifier(
-                        modifier.attribute(),
-                        UuidUtil.getSelfUuid(modifier.operation()),
-                        modifier.amount(),
-                        modifier.operation()
-                )
-        )).toList();
+        ELES_STACKS = allModifiers.stream().map(modifier -> AllItems.ENLIGHTENING_ESSENCE.getStack(modifier.toELM())).toList();
 
         ECES_STACKS = new ArrayList<>();
         for (AttributeModifier modifier : allModifiers)
@@ -52,16 +45,13 @@ public class AllStacks
                             new EnchantedModifier(
                                     (i + 1) * 10,
                                     slot,
-                                    new EnlighteningModifier(
-                                            modifier.attribute(),
-                                            UuidUtil.getEquipmentUuid(slot, modifier.operation()),
-                                            modifier.amount(),
-                                            modifier.operation()
-                                    )
+                                    modifier.toELM(slot)
                             )
                     ));
 
         SPELL_SCROLL_STACKS = new ArrayList<>();
+
+        QUEST_SCROLL_STACKS = QuestRegistry.QUEST_REGISTRY.streamEntries().map(entry -> AllItems.QUEST_SCROLL.getStack(entry.registryKey().getValue())).toList();
     }
 
     public static List<ItemStack> getScrolls()

@@ -15,7 +15,6 @@ import net.minecraft.loot.entry.LeafEntry;
 import net.minecraft.loot.entry.LootPoolEntryType;
 import net.minecraft.loot.function.LootFunction;
 import net.minecraft.util.math.random.Random;
-import net.spell_power.api.SpellSchool;
 
 import java.util.function.Consumer;
 
@@ -31,11 +30,8 @@ public class RandomEnlighteningEssenceEntry extends LeafEntry
     {
         Random random = context.getRandom();
 
-        // Determine School
-        SpellSchool school = LootContextUtil.getContextSchool(context);
-
         // Determine Modifier
-        AttributeModifier modifier = AttributeModifier.getRandom(random, school);
+        AttributeModifier modifier = LootContextUtil.getContextModifier(random, context);
 
         lootConsumer.accept(AllItems.ENLIGHTENING_ESSENCE.getStack(
                 new EnlighteningModifier(

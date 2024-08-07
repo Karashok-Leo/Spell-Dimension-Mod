@@ -5,8 +5,8 @@ import com.klikli_dev.modonomicon.api.datagen.BookProvider;
 import com.klikli_dev.modonomicon.api.datagen.ModonomiconLanguageProvider;
 import com.klikli_dev.modonomicon.api.datagen.book.BookModel;
 import com.klikli_dev.modonomicon.registry.ItemRegistry;
-import karashokleo.spell_dimension.data.book.category.BossProvider;
-import karashokleo.spell_dimension.data.book.category.MageProvider;
+import karashokleo.spell_dimension.data.book.category.BossCategory;
+import karashokleo.spell_dimension.data.book.category.MageCategory;
 import karashokleo.spell_dimension.data.book.category.TipsCategory;
 import karashokleo.spell_dimension.init.AllGroups;
 import karashokleo.spell_dimension.util.BookGenUtil;
@@ -36,9 +36,9 @@ public class MagicGuidanceProvider extends BookProvider
                 .withCreativeTab(AllGroups.MISC_GROUP_KEY.getValue())
                 .withGenerateBookItem(true)
                 .withCategories(
-                        new MageProvider(this).generate(),
+                        new MageCategory(this).generate(),
                         new TipsCategory(this).generate(),
-                        new BossProvider(this).generate()
+                        new BossCategory(this).generate()
                 );
     }
 

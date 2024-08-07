@@ -1,14 +1,16 @@
 package karashokleo.spell_dimension.config;
 
+import karashokleo.spell_dimension.content.item.logic.EnlighteningModifier;
 import karashokleo.spell_dimension.util.RandomUtil;
 import karashokleo.spell_dimension.util.SchoolUtil;
+import karashokleo.spell_dimension.util.UuidUtil;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.util.math.random.Random;
 import net.spell_power.api.SpellPowerMechanics;
 import net.spell_power.api.SpellSchool;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,12 +42,12 @@ public record AttributeModifier(EntityAttribute attribute, double amount, Entity
      * @param random random
      * @return an attribute modifier with GENERIC_CHANCE to modify generic attributes, otherwise modify spell power attributes
      */
-    public static AttributeModifier getRandom(Random random, @Nullable SpellSchool school)
+    public static AttributeModifier getRandom(Random random, List<SpellSchool> schools)
     {
         return random.nextFloat() < GENERIC_CHANCE ?
-                modifiers.get(random.nextInt(modifiers.size())) :
+                RandomUtil.randomList(random, modifiers) :
                 new AttributeModifier(
-                        school == null ? RandomUtil.randomSchool(random).attribute : school.attribute,
+                        RandomUtil.randomList(random, schools).attribute,
                         1,
                         EntityAttributeModifier.Operation.ADDITION
                 );
@@ -58,5 +60,25 @@ public record AttributeModifier(EntityAttribute attribute, double amount, Entity
             all.add(new AttributeModifier(school.attribute, 1, EntityAttributeModifier.Operation.ADDITION));
         all.addAll(modifiers);
         return all;
+    }
+
+    public EnlighteningModifier toELM()
+    {
+        return new EnlighteningModifier(
+                this.attribute(),
+                UuidUtil.getSelfUuid(this.operation()),
+                this.amount(),
+                this.operation()
+        );
+    }
+
+    public EnlighteningModifier toELM(EquipmentSlot slot)
+    {
+        return new EnlighteningModifier(
+                this.attribute(),
+                UuidUtil.getEquipmentUuid(slot, this.operation()),
+                this.amount(),
+                this.operation()
+        );
     }
 }
