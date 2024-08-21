@@ -2,13 +2,14 @@ package karashokleo.spell_dimension.init;
 
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.spell_dimension.SpellDimension;
-import karashokleo.spell_dimension.api.SpellImpactCallback;
+import karashokleo.spell_dimension.api.SpellImpactEvents;
 import karashokleo.spell_dimension.config.EssenceLootConfig;
 import karashokleo.spell_dimension.config.ScrollLootConfig;
 import karashokleo.spell_dimension.content.loot.entry.RandomEnchantedEssenceEntry;
 import karashokleo.spell_dimension.content.loot.entry.RandomEnlighteningEssenceEntry;
 import karashokleo.spell_dimension.content.loot.entry.SpellScrollEntry;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
+import net.minecraft.entity.Entity;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.condition.KilledByPlayerLootCondition;
 import net.minecraft.loot.entry.EmptyEntry;
@@ -19,6 +20,7 @@ import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
+import net.spell_engine.api.spell.Spell;
 import net.spell_power.api.SpellSchool;
 
 public class AllLoots
@@ -57,18 +59,27 @@ public class AllLoots
             tableBuilder.pool(LootPool.builder().with(SpellScrollEntry.builder(spellId)));
         });
 
-        SpellImpactCallback.EVENT.register((world, caster, target, spellInfo, impact, context) ->
+        SpellImpactEvents.AFTER.register((world, caster, targets, spellInfo) ->
         {
-            if (EssenceLootConfig.BASE_CONFIG.blacklist().contains(target.getType()))
-                return;
+            SpellSchool school = spellInfo.spell().school;
+            Spell.Impact[] impacts = spellInfo.spell().impact;
+            if (impacts.length > 0)
+            {
+                SpellSchool impactSchool = impacts[0].school;
+                if (impactSchool != null) school = impactSchool;
+            }
+            for (Entity target : targets)
+            {
+                if (EssenceLootConfig.BASE_CONFIG.blacklist().contains(target.getType()))
+                    continue;
 
-            var op = MobDifficulty.get(target);
-            if (op.isPresent() && op.get().noDrop) return;
+                var op = MobDifficulty.get(target);
+                if (op.isPresent() && op.get().noDrop) continue;
 
-            if (caster.getRandom().nextFloat() < EssenceLootConfig.BASE_CONFIG.dropChance()) return;
-            SpellSchool school = impact.school != null ? impact.school : spellInfo.spell().school;
-            int grade = EssenceLootConfig.BASE_CONFIG.getRandomGrade(caster.getRandom());
-            target.dropItem(AllItems.BASE_ESSENCES.get(school).get(grade));
+                if (caster.getRandom().nextFloat() < EssenceLootConfig.BASE_CONFIG.dropChance()) continue;
+                int grade = EssenceLootConfig.BASE_CONFIG.getRandomGrade(caster.getRandom());
+                target.dropItem(AllItems.BASE_ESSENCES.get(school).get(grade));
+            }
         });
     }
 

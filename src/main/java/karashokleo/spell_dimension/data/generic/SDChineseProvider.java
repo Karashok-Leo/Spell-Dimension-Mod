@@ -47,10 +47,11 @@ public class SDChineseProvider extends FabricLanguageProvider
 
     private static void addStatusEffectTranslation(TranslationBuilder builder)
     {
-        builder.add(AllStatusEffects.PHASE_EFFECT, "相位");
-        builder.add(AllStatusEffects.IGNITE_EFFECT, "引火");
-        builder.add(AllStatusEffects.FROST_AURA_EFFECT, "霜环");
-        builder.add(AllStatusEffects.FROSTED_EFFECT, "霜冻");
+        builder.add(AllStatusEffects.PHASE, "相位");
+        builder.add(AllStatusEffects.IGNITE, "引火");
+        builder.add(AllStatusEffects.FROST_AURA, "霜环");
+        builder.add(AllStatusEffects.FROSTED, "霜冻");
+        builder.add(AllStatusEffects.SPELL_HASTE, "施法急速");
     }
 
     private static void addLootBagTranslation(TranslationBuilder builder)

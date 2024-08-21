@@ -51,10 +51,11 @@ public class SDEnglishProvider extends FabricLanguageProvider
 
     private static void addStatusEffectTranslation(TranslationBuilder builder)
     {
-        builder.add(AllStatusEffects.PHASE_EFFECT, getName(AllStatusEffects.PHASE_EFFECT));
-        builder.add(AllStatusEffects.IGNITE_EFFECT, getName(AllStatusEffects.PHASE_EFFECT));
-        builder.add(AllStatusEffects.FROST_AURA_EFFECT, getName(AllStatusEffects.PHASE_EFFECT));
-        builder.add(AllStatusEffects.FROSTED_EFFECT, getName(AllStatusEffects.PHASE_EFFECT));
+        builder.add(AllStatusEffects.PHASE, getName(AllStatusEffects.PHASE));
+        builder.add(AllStatusEffects.IGNITE, getName(AllStatusEffects.IGNITE));
+        builder.add(AllStatusEffects.FROST_AURA, getName(AllStatusEffects.FROST_AURA));
+        builder.add(AllStatusEffects.FROSTED, getName(AllStatusEffects.FROSTED));
+        builder.add(AllStatusEffects.SPELL_HASTE, getName(AllStatusEffects.SPELL_HASTE));
     }
 
     private static void addLootBagTranslation(TranslationBuilder builder)

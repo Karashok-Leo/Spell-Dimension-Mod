@@ -32,7 +32,7 @@ public class FrostAuraEffect extends StatusEffect
             world.getOtherEntities(entity, entity.getBoundingBox().expand(3 + amplifier, 2 + amplifier, 3 + amplifier), EntityPredicates.VALID_LIVING_ENTITY).forEach(e ->
             {
                 if (e instanceof LivingEntity target && !ImpactUtil.isAlly(entity, target))
-                    target.addStatusEffect(new StatusEffectInstance(AllStatusEffects.FROSTED_EFFECT, 100, amplifier, false, false));
+                    target.addStatusEffect(new StatusEffectInstance(AllStatusEffects.FROSTED, 100, amplifier, false, false));
             });
     }
 

@@ -23,7 +23,7 @@ public abstract class LivingEntityMixin extends Entity implements INoClip
     @Override
     public boolean isNoClip()
     {
-        return ((LivingEntity) (Object) this).hasStatusEffect(AllStatusEffects.PHASE_EFFECT);
+        return ((LivingEntity) (Object) this).hasStatusEffect(AllStatusEffects.PHASE);
     }
 
     @Override

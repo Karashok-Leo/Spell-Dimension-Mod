@@ -16,11 +16,11 @@ import net.spell_engine.internals.casting.SpellCasterEntity;
 
 import java.util.List;
 
-public class SpeedBoostEnch extends Enchantment
+public class CooldownBoostEnchantment extends Enchantment
 {
-    protected SpeedBoostEnch(Rarity weight, EnchantmentTarget target, EquipmentSlot[] slotTypes)
+    public CooldownBoostEnchantment()
     {
-        super(weight, target, slotTypes);
+        super(Rarity.RARE, EnchantmentTarget.ARMOR_CHEST, new EquipmentSlot[]{EquipmentSlot.CHEST});
     }
 
     @Override

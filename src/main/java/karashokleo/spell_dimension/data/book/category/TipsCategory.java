@@ -149,7 +149,10 @@ public class TipsCategory extends CategoryProvider
         this.lang().add(context.pageText(),
                 """
                         \\
-                        Middle Button: Sort Inventory
+                        J: Turn on/off auto step-up
+                        \\
+                        \\
+                        Middle Button / Double-click: Sort Inventory
                         \\
                         \\
                         Left Shift + W: Wall-Jumping
@@ -158,7 +161,10 @@ public class TipsCategory extends CategoryProvider
         this.lang("zh_cn").add(context.pageText(),
                 """
                         \\
-                        鼠标中键: 整理物品栏
+                        J: 开启/关闭自动上坡
+                        \\
+                        \\
+                        鼠标中键 / 双击: 整理物品栏
                         \\
                         \\
                         左Shift + W: 攀墙跳

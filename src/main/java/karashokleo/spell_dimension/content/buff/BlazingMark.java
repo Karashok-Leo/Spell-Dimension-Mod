@@ -113,7 +113,7 @@ public class BlazingMark implements Buff
         if (source.getAttacker() != null &&
                 source.getAttacker() instanceof LivingEntity attacker)
         {
-            StatusEffectInstance instance = attacker.getStatusEffect(AllStatusEffects.IGNITE_EFFECT);
+            StatusEffectInstance instance = attacker.getStatusEffect(AllStatusEffects.IGNITE);
             if (instance == null) return;
             Buff.get(entity, TYPE).ifPresentOrElse(blazingMark ->
             {

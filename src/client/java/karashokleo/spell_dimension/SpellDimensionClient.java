@@ -73,9 +73,9 @@ public class SpellDimensionClient implements ClientModInitializer
                 CONVERGE_MODEL
         ));
 
-        CustomParticleStatusEffect.register(AllStatusEffects.PHASE_EFFECT, new PhaseParticleSpawner());
-        CustomParticleStatusEffect.register(AllStatusEffects.FROSTED_EFFECT, new FrostedParticleSpawner());
-        CustomModelStatusEffect.register(AllStatusEffects.FROSTED_EFFECT, new FrostedEffectRenderer());
+        CustomParticleStatusEffect.register(AllStatusEffects.PHASE, new PhaseParticleSpawner());
+        CustomParticleStatusEffect.register(AllStatusEffects.FROSTED, new FrostedParticleSpawner());
+        CustomModelStatusEffect.register(AllStatusEffects.FROSTED, new FrostedEffectRenderer());
 
         ClientPlayNetworking.registerGlobalReceiver(NetworkUtil.QUEST_PACKET, ((client, handler, buf, responseSender) -> client.inGameHud.setTitle(SDTexts.TEXT_QUEST.get())));
         ClientPlayNetworking.registerGlobalReceiver(NetworkUtil.DUST_PACKET, (client, handler, buf, responseSender) ->
