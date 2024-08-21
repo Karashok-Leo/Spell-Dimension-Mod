@@ -74,6 +74,6 @@ public class SpellScrollItem extends Item implements ColorProvider
     {
         super.appendTooltip(stack, world, tooltip, context);
         tooltip.add(SDTexts.TOOLTIP_OBTAIN.get().formatted(Formatting.GRAY));
-        tooltip.add(ScrollLootConfig.getInfo(this.getSpellInfo(stack)));
+        tooltip.add(ScrollLootConfig.getSpellScrollText(this.getSpellInfo(stack)));
     }
 }

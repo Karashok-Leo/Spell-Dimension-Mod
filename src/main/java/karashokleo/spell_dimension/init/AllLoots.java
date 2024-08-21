@@ -1,5 +1,6 @@
 package karashokleo.spell_dimension.init;
 
+import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.api.SpellImpactCallback;
 import karashokleo.spell_dimension.config.EssenceLootConfig;
@@ -60,6 +61,10 @@ public class AllLoots
         {
             if (EssenceLootConfig.BASE_CONFIG.blacklist().contains(target.getType()))
                 return;
+
+            var op = MobDifficulty.get(target);
+            if (op.isPresent() && op.get().noDrop) return;
+
             if (caster.getRandom().nextFloat() < EssenceLootConfig.BASE_CONFIG.dropChance()) return;
             SpellSchool school = impact.school != null ? impact.school : spellInfo.spell().school;
             int grade = EssenceLootConfig.BASE_CONFIG.getRandomGrade(caster.getRandom());

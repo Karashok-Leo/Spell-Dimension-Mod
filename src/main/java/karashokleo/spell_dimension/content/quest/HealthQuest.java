@@ -14,7 +14,7 @@ public record HealthQuest(float health, List<ItemStack> rewards) implements Item
     @Override
     public boolean completeTasks(ServerPlayerEntity player)
     {
-        return player.getMaxHealth() > health;
+        return player.getMaxHealth() >= health;
     }
 
     @Override
@@ -26,6 +26,6 @@ public record HealthQuest(float health, List<ItemStack> rewards) implements Item
     @Override
     public void appendTaskDesc(List<Text> desc)
     {
-        desc.add(SDTexts.TOOLTIP_QUEST_GE.get(Text.translatable(EntityAttributes.GENERIC_MAX_HEALTH.getTranslationKey()), this.health));
+        desc.add(SDTexts.TOOLTIP_QUEST_HEALTH.get(Text.translatable(EntityAttributes.GENERIC_MAX_HEALTH.getTranslationKey()), this.health));
     }
 }

@@ -1,8 +1,8 @@
 package karashokleo.spell_dimension.data;
 
 import karashokleo.spell_dimension.SpellDimension;
-import karashokleo.spell_dimension.content.spell.BlazingMark;
-import karashokleo.spell_dimension.content.spell.NucleusSpell;
+import karashokleo.spell_dimension.content.buff.BlazingMark;
+import karashokleo.spell_dimension.content.buff.Nucleus;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
@@ -71,12 +71,16 @@ public enum SDTexts
     TOOLTIP_MENDING("Completely repair the item and eliminate the repair cost of the item.", "完全修复物品, 并且清除物品的修复惩罚."),
     TOOLTIP_OBTAIN("How to obtain: ", "获取方式: "),
     TOOLTIP_UNAVAILABLE("Not yet available", "暂无"),
+    TOOLTIP_PRIMARY("Primary Wand (unable to acquire scrolls)", "初始法杖（无法获取卷轴）"),
+    TOOLTIP_BINDING("Spell Binding Table", "法术绑定台"),
+    TOOLTIP_EXPLORING("Obtained through exploring %s", "探索%s获得"),
     TOOLTIP_KILLING("Drop from killing %s", "击杀%s掉落"),
     TOOLTIP_QUEST_TASK("Task:", "任务目标:"),
     TOOLTIP_QUEST_REWARD("Reward:", "任务奖励:"),
     TOOLTIP_QUEST_COMPLETE("Right click to submit", "右键提交任务"),
     TOOLTIP_QUEST_MUL("%s × %s", "%s × %s"),
-    TOOLTIP_QUEST_GE("%s >= %s", "%s >= %s"),
+    TOOLTIP_QUEST_FIRSTDAY("Survive for one day", "存活一天"),
+    TOOLTIP_QUEST_HEALTH("Gain experience to increase your %s to %s", "获取经验以提升你的%s至%s"),
 
     /**
      * Spells
@@ -108,8 +112,8 @@ public enum SDTexts
     ),
     SPELL_NUCLEUS_NAME("Nucleus", "冰核"),
     SPELL_NUCLEUS_DESCRIPTION(
-            "Freeze the target's heart into a ice nucleus, explode in " + NucleusSpell.TOTAL_DURATION / 20F + " seconds, and shoot icicles into the surrounding area.",
-            "将敌人的心脏化作一个冰核, " + NucleusSpell.TOTAL_DURATION / 20F + "秒后爆炸, 并向周围射出冰刺."
+            "Freeze the target's heart into a ice nucleus, explode in " + Nucleus.TOTAL_DURATION / 20F + " seconds, and shoot icicles into the surrounding area.",
+            "将敌人的心脏化作一个冰核, " + Nucleus.TOTAL_DURATION / 20F + "秒后爆炸, 并向周围射出冰刺."
     ),
     SPELL_ICICLE_NAME("Icicle", "冰刺"),
     SPELL_ICICLE_DESCRIPTION(

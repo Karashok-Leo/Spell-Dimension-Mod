@@ -1,6 +1,7 @@
 package karashokleo.spell_dimension.render;
 
-import karashokleo.spell_dimension.content.component.NucleusComponent;
+import karashokleo.spell_dimension.api.buff.Buff;
+import karashokleo.spell_dimension.content.buff.Nucleus;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.OverlayTexture;
@@ -13,9 +14,12 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.random.Random;
 
+import java.util.Optional;
+
 /**
  * 冰核渲染
  * Learned from <a href="https://github.com/TeamTwilight/twilightforest-fabric/blob/1.20.x/src/main/java/twilightforest/client/renderer/entity/IceLayer.java">...</a>
+ *
  * @param <T>
  * @param <M>
  */
@@ -31,13 +35,13 @@ public class NucleusRenderer<T extends LivingEntity, M extends EntityModel<T>> e
     @Override
     public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, T entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch)
     {
-        NucleusComponent component = NucleusComponent.get(entity);
-        if (!component.isActive()) return;
+        Optional<Nucleus> optional = Buff.get(entity, Nucleus.TYPE);
+        if (optional.isEmpty() || optional.get().getDuration() <= 0) return;
         this.random.setSeed(entity.getId() * entity.getId() * 3121L + entity.getId() * 45238971L);
 
         float width = entity.getWidth();
         float height = entity.getHeight();
-        float scale = component.getScale();
+        float scale = optional.get().getScale();
 
         for (int i = 0; i < scale * 10; i++)
         {

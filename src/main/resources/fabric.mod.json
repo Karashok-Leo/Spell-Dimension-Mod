@@ -66,8 +66,7 @@
   "custom": {
     "cardinal-components": [
       "spell-dimension:enlightening",
-      "spell-dimension:blazing_mark",
-      "spell-dimension:nucleus"
+      "spell-dimension:buff"
     ]
   }
 }

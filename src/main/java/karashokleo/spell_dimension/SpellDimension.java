@@ -4,9 +4,8 @@ import com.klikli_dev.modonomicon.api.datagen.LanguageProviderCache;
 import dev.onyxstudios.cca.api.v3.entity.EntityComponentFactoryRegistry;
 import dev.onyxstudios.cca.api.v3.entity.EntityComponentInitializer;
 import dev.onyxstudios.cca.api.v3.entity.RespawnCopyStrategy;
-import karashokleo.spell_dimension.content.component.BlazingMarkComponent;
+import karashokleo.spell_dimension.content.component.BuffComponentImpl;
 import karashokleo.spell_dimension.content.component.EnlighteningComponent;
-import karashokleo.spell_dimension.content.component.NucleusComponent;
 import karashokleo.spell_dimension.content.event.PlayerHealthEvent;
 import karashokleo.spell_dimension.content.item.logic.EnchantedModifier;
 import karashokleo.spell_dimension.content.item.logic.EnlighteningModifier;
@@ -39,8 +38,10 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
     public void onInitialize()
     {
         AllItems.register();
+        AllTags.register();
         AllGroups.register();
         AllLoots.register();
+        AllBuffs.register();
         AllQuests.register();
         AllEnchantments.register();
         AllStatusEffects.register();
@@ -77,7 +78,6 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
     public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry)
     {
         registry.registerForPlayers(AllComponents.ENLIGHTENING, player -> new EnlighteningComponent(), RespawnCopyStrategy.ALWAYS_COPY);
-        registry.registerFor(LivingEntity.class, AllComponents.BLAZING_MARK, BlazingMarkComponent::new);
-        registry.registerFor(LivingEntity.class, AllComponents.NUCLEUS, NucleusComponent::new);
+        registry.registerFor(LivingEntity.class, AllComponents.BUFF, BuffComponentImpl::new);
     }
 }

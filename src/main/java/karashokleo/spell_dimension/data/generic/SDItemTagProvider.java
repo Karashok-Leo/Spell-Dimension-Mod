@@ -1,5 +1,6 @@
 package karashokleo.spell_dimension.data.generic;
 
+import io.github.apace100.autotag.common.TagIdentifiers;
 import karashokleo.l2hostility.content.item.ComplementItems;
 import karashokleo.spell_dimension.content.item.essence.BaseEssenceItem;
 import karashokleo.spell_dimension.init.AllItems;
@@ -43,6 +44,15 @@ public class SDItemTagProvider extends FabricTagProvider.ItemTagProvider
         heartFood.add(Items.ENCHANTED_GOLDEN_APPLE);
         heartFood.add(ComplementItems.LIFE_ESSENCE);
         heartFood.addOptional(new Identifier("midashunger:enchanted_golden_carrot"));
+
+        this.getOrCreateTagBuilder(AllTags.SPELL_POWER_GENERIC).addTag(AllTags.BREAKABLE);
+        this.getOrCreateTagBuilder(AllTags.SPELL_POWER_SOULFROST).addTag(AllTags.BREAKABLE);
+        this.getOrCreateTagBuilder(AllTags.SPELL_POWER_SUNFIRE).addTag(AllTags.BREAKABLE);
+        this.getOrCreateTagBuilder(AllTags.SPELL_POWER_ENERGIZE).addTag(AllTags.BREAKABLE);
+        this.getOrCreateTagBuilder(AllTags.SPELL_POWER_CRITICAL_CHANCE).addTag(AllTags.BREAKABLE);
+        this.getOrCreateTagBuilder(AllTags.SPELL_POWER_CRITICAL_DAMAGE).addTag(AllTags.BREAKABLE);
+        this.getOrCreateTagBuilder(AllTags.SPELL_POWER_HASTE).addTag(AllTags.BREAKABLE);
+        this.getOrCreateTagBuilder(AllTags.SPELL_INFINITY).addOptionalTag(TagIdentifiers.Items.SWORDS);
     }
 
     private void add(String path, Item item)
