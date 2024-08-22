@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "loot-bag:loot_bag",
+          "bag": "spell-dimension:common/material",
+          "weight": 4
+        },
+        {
+          "type": "loot-bag:loot_bag",
+          "bag": "spell-dimension:uncommon/material",
+          "weight": 1
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

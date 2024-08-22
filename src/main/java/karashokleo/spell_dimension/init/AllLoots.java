@@ -8,7 +8,6 @@ import karashokleo.spell_dimension.config.ScrollLootConfig;
 import karashokleo.spell_dimension.content.loot.entry.RandomEnchantedEssenceEntry;
 import karashokleo.spell_dimension.content.loot.entry.RandomEnlighteningEssenceEntry;
 import karashokleo.spell_dimension.content.loot.entry.SpellScrollEntry;
-import karashokleo.spell_dimension.util.SchoolUtil;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.loot.LootPool;
@@ -61,7 +60,7 @@ public class AllLoots
 
         SpellImpactEvents.BEFORE.register((world, caster, targets, spellInfo) ->
         {
-            SpellSchool school = SchoolUtil.getSpellSchool(spellInfo.spell());
+            SpellSchool school = spellInfo.spell().school;
             for (Entity target : targets)
             {
                 if (EssenceLootConfig.BASE_CONFIG.blacklist().contains(target.getType()))

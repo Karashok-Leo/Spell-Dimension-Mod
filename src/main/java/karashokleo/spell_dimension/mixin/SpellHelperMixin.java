@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 
-@Mixin(value = SpellHelper.class, remap = false)
+@Mixin(SpellHelper.class)
 public abstract class SpellHelperMixin
 {
     @Inject(
@@ -53,14 +53,16 @@ public abstract class SpellHelperMixin
             method = "attemptCasting(Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/item/ItemStack;Lnet/minecraft/util/Identifier;Z)Lnet/spell_engine/internals/casting/SpellCast$Attempt;",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/spell_engine/internals/casting/SpellCast$Attempt;success()Lnet/spell_engine/internals/casting/SpellCast$Attempt;"
+                    target = "Lnet/spell_engine/internals/SpellRegistry;getSpell(Lnet/minecraft/util/Identifier;)Lnet/spell_engine/api/spell/Spell;",
+                    shift = At.Shift.BY,
+                    by = 2
             ),
             cancellable = true
     )
     private static void inject_attemptCasting(PlayerEntity player, ItemStack itemStack, Identifier spellId, boolean checkAmmo, CallbackInfoReturnable<SpellCast.Attempt> cir, @Local Spell spell)
     {
         if (itemStack.isOf(AllItems.SPELL_SCROLL) &&
-                !SchoolUtil.getPlayerSchool(player).contains(SchoolUtil.getSpellSchool(spell)))
+                !SchoolUtil.getPlayerSchool(player).contains(spell.school))
         {
             player.sendMessage(SDTexts.TEXT_SKILLED_SCHOOL.get(), true);
             cir.setReturnValue(SpellCast.Attempt.none());

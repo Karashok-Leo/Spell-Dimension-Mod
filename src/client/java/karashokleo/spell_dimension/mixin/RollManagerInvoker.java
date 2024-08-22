@@ -5,7 +5,7 @@ import net.minecraft.client.network.ClientPlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
-@Mixin(value = RollManager.class, remap = false)
+@Mixin(RollManager.class)
 public interface RollManagerInvoker
 {
     @Invoker
