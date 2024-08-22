@@ -3,9 +3,17 @@ package karashokleo.spell_dimension.data;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.buff.BlazingMark;
 import karashokleo.spell_dimension.content.buff.Nucleus;
+import karashokleo.spell_dimension.content.effect.FrostAuraEffect;
+import karashokleo.spell_dimension.data.loot_bag.SDBags;
+import karashokleo.spell_dimension.data.loot_bag.SDContents;
+import karashokleo.spell_dimension.init.AllGroups;
+import karashokleo.spell_dimension.init.AllItems;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.Item;
+import net.minecraft.registry.Registries;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import net.spell_power.api.SpellSchool;
 
@@ -26,6 +34,7 @@ public enum SDTexts
     TEXT_ESSENCE_SUCCESS("Successful use of essence!", "精华使用成功!"),
     TEXT_ESSENCE_FAIL("Failed to use essence!", "精华使用失败!"),
     TEXT_INCOMPATIBLE_SCHOOL("Incompatible spell school!", "不兼容的法术学派!"),
+    TEXT_SKILLED_SCHOOL("This is not the magic school you are skilled in!", "这不是你擅长的法术学派!"),
     TEXT_BLANK_BOOK("Blank spell book!", "空白法术书!"),
     TEXT_SPELL_POWER_INFO("Spell Power Information", "魔法信息"),
     TEXT_QUEST("Quest completed!", "任务完成！"),
@@ -63,6 +72,7 @@ public enum SDTexts
     TOOLTIP_INVALID("Invalid Nbt Data!", "无效的Nbt数据!"),
     TOOLTIP_USE_CLICK("Usage: Right click on other item in the inventory.", "用法: 物品栏中用该物品右键其他物品."),
     TOOLTIP_USE_PRESS("Usage: Main hand holding, press the right button.", "用法: 主手持有时，长按右键."),
+    TOOLTIP_BOOK_REQUIREMENT("Must have at least %s %s to equip", "需要拥有至少%s的%s才能装备"),
     TOOLTIP_EFFECT("Effect:", "效果:"),
     TOOLTIP_LEVEL("Enchanted Level: %s", "束魔等级: %s"),
     TOOLTIP_THRESHOLD("Threshold: %s", "阈值: %s"),
@@ -102,13 +112,13 @@ public enum SDTexts
     ),
     SPELL_IGNITE_NAME("Ignite", "引火"),
     SPELL_IGNITE_DESCRIPTION(
-            "Apply ignite effect to oneself. Ignite: Your attack will leave a mark on the enemy, and some of the damage you inflict during this period will damage the enemy again in " + BlazingMark.getTriggerTime() + " seconds.",
-            "施法者获得引火效果. 引火: 你的攻击会在敌人身上留下一个印记, " + BlazingMark.getTriggerTime() + "秒内你造成的部分伤害将会在" + BlazingMark.getTriggerTime() + "秒后再次打击敌人, 并使其虚弱."
+            "Apply ignite effect to oneself. Ignite: " + BlazingMark.DESC_EN,
+            "施法者获得引火效果. 引火: " + BlazingMark.DESC_ZH
     ),
     SPELL_AURA_NAME("Aura", "霜环"),
     SPELL_AURA_DESCRIPTION(
-            "Apply aura {effect_amplifier} effect to oneself for {effect_duration} seconds. Aura: Within the frozen aura, livings get Frosted.",
-            "施法者获得霜环{effect_amplifier}效果, 持续{effect_duration}秒. 霜环: 在霜环内, 所有生物被霜冻."
+            "Apply aura {effect_amplifier} effect to oneself for {effect_duration} seconds. Aura: " + FrostAuraEffect.DESC_EN,
+            "施法者获得霜环{effect_amplifier}效果, 持续{effect_duration}秒. 霜环: " + FrostAuraEffect.DESC_ZH
     ),
     SPELL_NUCLEUS_NAME("Nucleus", "冰核"),
     SPELL_NUCLEUS_DESCRIPTION(
@@ -245,5 +255,86 @@ public enum SDTexts
     public static MutableText getSlotText(EquipmentSlot slot)
     {
         return Text.translatable(Util.createTranslationKey("slot", SpellDimension.modLoc(slot.getName())));
+    }
+
+    public static void register()
+    {
+        for (SDTexts value : SDTexts.values())
+        {
+            SpellDimension.EN_TEXTS.addText(value.getKey(), value.getEn());
+            SpellDimension.ZH_TEXTS.addText(value.getKey(), value.getZh());
+        }
+        addGroupTranslation();
+        addItemTranslation();
+        addLootBagTranslation();
+    }
+
+    private static void addGroupTranslation()
+    {
+        SpellDimension.EN_TEXTS.addText(AllGroups.BOOKS_GROUP_KEY.getValue().toTranslationKey("itemGroup"), "Spell Dimension: Spell Books");
+        SpellDimension.EN_TEXTS.addText(AllGroups.SPELL_SCROLLS_GROUP_KEY.getValue().toTranslationKey("itemGroup"), "Spell Dimension: Spell Scrolls");
+        SpellDimension.EN_TEXTS.addText(AllGroups.QUEST_SCROLLS_GROUP_KEY.getValue().toTranslationKey("itemGroup"), "Spell Dimension: Quest Scrolls");
+        SpellDimension.EN_TEXTS.addText(AllGroups.ELES_GROUP_KEY.getValue().toTranslationKey("itemGroup"), "Spell Dimension: Enlightening Essences");
+        SpellDimension.EN_TEXTS.addText(AllGroups.ECES_GROUP_KEY.getValue().toTranslationKey("itemGroup"), "Spell Dimension: Enchanted Essences");
+        SpellDimension.EN_TEXTS.addText(AllGroups.MISC_GROUP_KEY.getValue().toTranslationKey("itemGroup"), "Spell Dimension: Misc");
+
+        SpellDimension.ZH_TEXTS.addText(AllGroups.BOOKS_GROUP_KEY.getValue().toTranslationKey("itemGroup"), "咒次元: 法术书");
+        SpellDimension.ZH_TEXTS.addText(AllGroups.SPELL_SCROLLS_GROUP_KEY.getValue().toTranslationKey("itemGroup"), "咒次元: 法术卷轴");
+        SpellDimension.ZH_TEXTS.addText(AllGroups.QUEST_SCROLLS_GROUP_KEY.getValue().toTranslationKey("itemGroup"), "咒次元: 任务卷轴");
+        SpellDimension.ZH_TEXTS.addText(AllGroups.ELES_GROUP_KEY.getValue().toTranslationKey("itemGroup"), "咒次元: 束魔精华");
+        SpellDimension.ZH_TEXTS.addText(AllGroups.ECES_GROUP_KEY.getValue().toTranslationKey("itemGroup"), "咒次元: 附魔精华");
+        SpellDimension.ZH_TEXTS.addText(AllGroups.MISC_GROUP_KEY.getValue().toTranslationKey("itemGroup"), "咒次元: 杂项");
+    }
+
+    private static void addItemTranslation()
+    {
+        SpellDimension.EN_TEXTS.addItem(AllItems.DEBUG_STAFF, getDefaultName(AllItems.DEBUG_STAFF));
+        SpellDimension.EN_TEXTS.addItem(AllItems.DISENCHANTED_ESSENCE, getDefaultName(AllItems.DISENCHANTED_ESSENCE));
+        SpellDimension.EN_TEXTS.addItem(AllItems.MENDING_ESSENCE, getDefaultName(AllItems.MENDING_ESSENCE));
+        SpellDimension.EN_TEXTS.addItem(AllItems.QUEST_SCROLL, getDefaultName(AllItems.QUEST_SCROLL));
+
+        SpellDimension.ZH_TEXTS.addItem(AllItems.DEBUG_STAFF, "调试法杖");
+        SpellDimension.ZH_TEXTS.addItem(AllItems.DISENCHANTED_ESSENCE, "祛魔精华");
+        SpellDimension.ZH_TEXTS.addItem(AllItems.MENDING_ESSENCE, "修复精华");
+        SpellDimension.ZH_TEXTS.addItem(AllItems.QUEST_SCROLL, "任务卷轴");
+    }
+
+    private static void addLootBagTranslation()
+    {
+        for (SDContents ins : SDContents.values())
+        {
+            SpellDimension.EN_TEXTS.addText(ins.entry.nameKey(), ins.nameEn);
+            SpellDimension.EN_TEXTS.addText(ins.entry.descKey(), ins.descEn);
+            SpellDimension.ZH_TEXTS.addText(ins.entry.nameKey(), ins.nameZh);
+            SpellDimension.ZH_TEXTS.addText(ins.entry.descKey(), ins.descZh);
+        }
+        for (SDBags ins : SDBags.values())
+        {
+            SpellDimension.EN_TEXTS.addText(ins.entry.nameKey(), ins.nameEn);
+            SpellDimension.ZH_TEXTS.addText(ins.entry.nameKey(), ins.nameZh);
+        }
+    }
+
+    private static String getDefaultName(Item item)
+    {
+        Identifier id = Registries.ITEM.getId(item);
+        return getDefaultName(id);
+    }
+
+    private static String getDefaultName(String name)
+    {
+        String[] words = name.split("_");
+        StringBuilder sb = new StringBuilder();
+        for (String word : words)
+            if (!word.isEmpty())
+                sb.append(Character.toUpperCase(word.charAt(0)))
+                        .append(word.substring(1).toLowerCase())
+                        .append(" ");
+        return sb.toString().trim();
+    }
+
+    private static String getDefaultName(Identifier id)
+    {
+        return getDefaultName(id.getPath());
     }
 }

@@ -1,6 +1,7 @@
 package karashokleo.spell_dimension.data.generic;
 
 import karashokleo.l2hostility.content.item.ComplementItems;
+import karashokleo.l2hostility.content.item.MiscItems;
 import karashokleo.spell_dimension.content.item.essence.BaseEssenceItem;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllTags;
@@ -36,25 +37,33 @@ public class SDItemTagProvider extends FabricTagProvider.ItemTagProvider
         RuneItems.entries.stream().map(RuneItems.Entry::item).forEach(this.getOrCreateTagBuilder(AllTags.RUNE)::add);
         AllItems.BASE_ESSENCES.forEach((school, items) ->
         {
-            add(school.id.getPath() + "_small", items.get(0));
-            add(school.id.getPath() + "_medium", items.get(1));
+            addRuneCraft(school.id.getPath() + "_small", items.get(0));
+            addRuneCraft(school.id.getPath() + "_medium", items.get(1));
         });
         FabricTagProvider<Item>.FabricTagBuilder heartFood = this.getOrCreateTagBuilder(AllTags.HEART_FOOD);
         heartFood.add(Items.ENCHANTED_GOLDEN_APPLE);
         heartFood.add(ComplementItems.LIFE_ESSENCE);
         heartFood.addOptional(new Identifier("midashunger:enchanted_golden_carrot"));
 
-        this.getOrCreateTagBuilder(AllTags.SPELL_POWER_GENERIC).addOptionalTag(AllTags.BREAKABLE);
-        this.getOrCreateTagBuilder(AllTags.SPELL_POWER_SOULFROST).addOptionalTag(AllTags.BREAKABLE);
-        this.getOrCreateTagBuilder(AllTags.SPELL_POWER_SUNFIRE).addOptionalTag(AllTags.BREAKABLE);
-        this.getOrCreateTagBuilder(AllTags.SPELL_POWER_ENERGIZE).addOptionalTag(AllTags.BREAKABLE);
-        this.getOrCreateTagBuilder(AllTags.SPELL_POWER_CRITICAL_CHANCE).addOptionalTag(AllTags.BREAKABLE);
-        this.getOrCreateTagBuilder(AllTags.SPELL_POWER_CRITICAL_DAMAGE).addOptionalTag(AllTags.BREAKABLE);
-        this.getOrCreateTagBuilder(AllTags.SPELL_POWER_HASTE).addOptionalTag(AllTags.BREAKABLE);
-        this.getOrCreateTagBuilder(AllTags.SPELL_INFINITY).addOptionalTag(AllTags.MELEE_WEAPONS);
+        getOrCreateTagBuilder(AllTags.REFORGE_CORE_TAGS.get(0))
+                .setReplace(true)
+                .forceAddTag(AllTags.ESSENCE.get(2));
+
+        getOrCreateTagBuilder(AllTags.REFORGE_CORE_TAGS.get(0))
+                .setReplace(true)
+                .forceAddTag(AllTags.ESSENCE.get(2));
+
+        getOrCreateTagBuilder(AllTags.REFORGE_CORE_TAGS.get(1))
+                .setReplace(true)
+                .add(MiscItems.CHAOS.ingot());
+
+        getOrCreateTagBuilder(AllTags.REFORGE_CORE_TAGS.get(2))
+                .setReplace(true)
+                .add(MiscItems.MIRACLE.ingot());
+
     }
 
-    private void add(String path, Item item)
+    private void addRuneCraft(String path, Item item)
     {
         this.getOrCreateTagBuilder(TagUtil.itemTag(new Identifier(RunesMod.ID, "rune_crafting/reagent/" + path))).add(item);
     }

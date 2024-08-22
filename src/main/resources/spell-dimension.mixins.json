@@ -3,9 +3,11 @@
   "package": "karashokleo.spell_dimension.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "AmplifierEnchantmentMixin",
     "LivingEntityMixin",
     "PlayerInventoryAccessor",
     "SpellHelperMixin",
+    "SpellInfinityEnchantmentMixin",
     "SpellProjectileMixin",
     "SpellRegistryAccessor",
     "phase.EntityPredicatesMixin",

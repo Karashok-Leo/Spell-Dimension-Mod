@@ -12,6 +12,7 @@ import karashokleo.spell_dimension.content.misc.INoClip;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllStatusEffects;
+import karashokleo.spell_dimension.mixin.RollManagerInvoker;
 import karashokleo.spell_dimension.render.FrostedEffectRenderer;
 import karashokleo.spell_dimension.render.FrostedParticleSpawner;
 import karashokleo.spell_dimension.render.NucleusRenderer;
@@ -20,6 +21,7 @@ import karashokleo.spell_dimension.screen.QuestOverlay;
 import karashokleo.spell_dimension.screen.SpellPowerTab;
 import karashokleo.spell_dimension.util.NetworkUtil;
 import karashokleo.spell_dimension.util.ParticleUtil;
+import net.combatroll.internals.RollingEntity;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -77,7 +79,17 @@ public class SpellDimensionClient implements ClientModInitializer
         CustomParticleStatusEffect.register(AllStatusEffects.FROSTED, new FrostedParticleSpawner());
         CustomModelStatusEffect.register(AllStatusEffects.FROSTED, new FrostedEffectRenderer());
 
-        ClientPlayNetworking.registerGlobalReceiver(NetworkUtil.QUEST_PACKET, ((client, handler, buf, responseSender) -> client.inGameHud.setTitle(SDTexts.TEXT_QUEST.get())));
+        ClientPlayNetworking.registerGlobalReceiver(NetworkUtil.SPELL_DASH_PACKET, ((client, handler, buf, responseSender) ->
+        {
+            client.execute(() ->
+            {
+                if (client.player instanceof RollingEntity rolling)
+                    ((RollManagerInvoker) rolling.getRollManager()).invokeRechargeRoll(client.player);
+            });
+        }));
+        ClientPlayNetworking.registerGlobalReceiver(NetworkUtil.QUEST_PACKET, ((client, handler, buf, responseSender) ->
+                client.execute(() ->
+                        client.inGameHud.setTitle(SDTexts.TEXT_QUEST.get()))));
         ClientPlayNetworking.registerGlobalReceiver(NetworkUtil.DUST_PACKET, (client, handler, buf, responseSender) ->
         {
             Vec3d pos = new Vec3d(buf.readDouble(), buf.readDouble(), buf.readDouble());

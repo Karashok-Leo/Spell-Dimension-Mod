@@ -7,34 +7,40 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
-import net.spell_engine.api.spell.Spell;
+import net.spell_engine.api.spell.SpellContainer;
 import net.spell_engine.internals.SpellContainerHelper;
 import net.spell_engine.internals.SpellCooldownManager;
-import net.spell_engine.internals.SpellHelper;
-import net.spell_engine.internals.SpellRegistry;
 import net.spell_engine.internals.casting.SpellCasterEntity;
 
 import java.util.List;
 
-public class CooldownBoostEnchantment extends Enchantment
+public class StressResponseEnchantment extends Enchantment
 {
-    public CooldownBoostEnchantment()
+    public static final float MULTIPLIER = 0.16F;
+
+    public StressResponseEnchantment()
     {
         super(Rarity.RARE, EnchantmentTarget.ARMOR_CHEST, new EquipmentSlot[]{EquipmentSlot.CHEST});
+    }
+
+    @Override
+    public int getMaxLevel()
+    {
+        return 3;
     }
 
     @Override
     public void onUserDamaged(LivingEntity user, Entity attacker, int level)
     {
         if (!(user instanceof PlayerEntity player)) return;
-        List<Identifier> spellIds = SpellContainerHelper.getEquipped(player.getMainHandStack(), player).spell_ids.stream().map(Identifier::new).toList();
+        SpellContainer equipped = SpellContainerHelper.getEquipped(player.getMainHandStack(), player);
+        if (equipped == null) return;
+        List<Identifier> spellIds = equipped.spell_ids.stream().map(Identifier::new).toList();
         SpellCooldownManager manager = ((SpellCasterEntity) player).getCooldownManager();
         for (Identifier spellId : spellIds)
         {
-            Spell spell = SpellRegistry.getSpell(spellId);
-            float duration = SpellHelper.getCastDuration(user, spell);
-            float progress = manager.getCooldownProgress(spellId, 0.1F * duration);
-            manager.set(spellId, Math.round(progress * duration * 20));
+            float progress = manager.getCooldownProgress(spellId, 0);
+            if (progress < level * MULTIPLIER) manager.set(spellId, 0);
         }
     }
 }

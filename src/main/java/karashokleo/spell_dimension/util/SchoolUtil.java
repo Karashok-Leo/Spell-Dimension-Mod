@@ -3,6 +3,7 @@ package karashokleo.spell_dimension.util;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
+import net.spell_engine.api.spell.Spell;
 import net.spell_power.api.SpellPower;
 import net.spell_power.api.SpellSchool;
 import net.spell_power.api.SpellSchools;
@@ -23,6 +24,18 @@ public class SchoolUtil
             SpellSchools.LIGHTNING,
             SpellSchools.SOUL
     );
+
+    public static SpellSchool getSpellSchool(Spell spell)
+    {
+        SpellSchool school = spell.school;
+        Spell.Impact[] impacts = spell.impact;
+        if (impacts.length > 0)
+        {
+            SpellSchool impactSchool = impacts[0].school;
+            if (impactSchool != null) school = impactSchool;
+        }
+        return school;
+    }
 
     public static List<SpellSchool> getPlayerSchool(PlayerEntity player)
     {

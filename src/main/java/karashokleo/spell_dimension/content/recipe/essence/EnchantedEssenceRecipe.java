@@ -2,9 +2,9 @@ package karashokleo.spell_dimension.content.recipe.essence;
 
 import com.google.gson.JsonObject;
 import karashokleo.spell_dimension.SpellDimension;
+import karashokleo.spell_dimension.content.item.logic.EnchantedModifier;
 import karashokleo.spell_dimension.content.item.logic.EnlighteningModifier;
 import karashokleo.spell_dimension.init.AllItems;
-import karashokleo.spell_dimension.content.item.logic.EnchantedModifier;
 import karashokleo.spell_dimension.util.UuidUtil;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
@@ -32,22 +32,34 @@ public class EnchantedEssenceRecipe extends ShapedRecipe
     public static final String SLOT_KEY = "slot";
     public static final String SCHOOL_KEY = "school";
     public static final Map<EquipmentSlot, String[]> PATTERNS = Map.of(
-            EquipmentSlot.MAINHAND, new String[]{" ##",
+            EquipmentSlot.MAINHAND, new String[]{
+                    " ##",
                     "###",
-                    "## "},
-            EquipmentSlot.OFFHAND, new String[]{"## ",
+                    "## "
+            },
+            EquipmentSlot.OFFHAND, new String[]{
                     "###",
-                    " ##"},
-            EquipmentSlot.HEAD, new String[]{"###",
-                    "# #"},
-            EquipmentSlot.CHEST, new String[]{"# #",
                     "###",
-                    "###"},
-            EquipmentSlot.LEGS, new String[]{"###",
+                    " # "
+            },
+            EquipmentSlot.HEAD, new String[]{
+                    "###",
+                    "# #"
+            },
+            EquipmentSlot.CHEST, new String[]{
                     "# #",
-                    "# #"},
-            EquipmentSlot.FEET, new String[]{"# #",
-                    "# #"}
+                    "###",
+                    "###"
+            },
+            EquipmentSlot.LEGS, new String[]{
+                    "###",
+                    "# #",
+                    "# #"
+            },
+            EquipmentSlot.FEET, new String[]{
+                    "# #",
+                    "# #"
+            }
     );
 
     final int grade;

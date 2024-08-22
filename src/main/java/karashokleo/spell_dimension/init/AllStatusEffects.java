@@ -1,42 +1,66 @@
 package karashokleo.spell_dimension.init;
 
+import karashokleo.leobrary.datagen.builder.StatusEffectBuilder;
 import karashokleo.spell_dimension.SpellDimension;
-import karashokleo.spell_dimension.content.effect.*;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
+import karashokleo.spell_dimension.content.buff.BlazingMark;
+import karashokleo.spell_dimension.content.effect.FrostAuraEffect;
+import karashokleo.spell_dimension.content.effect.FrostedEffect;
+import karashokleo.spell_dimension.content.effect.IgniteEffect;
+import karashokleo.spell_dimension.content.effect.PhaseEffect;
 import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.entity.effect.StatusEffectCategory;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 import net.spell_engine.api.effect.Synchronized;
-import net.spell_power.api.SpellPowerMechanics;
 
 public class AllStatusEffects
 {
-    public static final IgniteEffect IGNITE = new IgniteEffect();
-    public static final FrostAuraEffect FROST_AURA = new FrostAuraEffect();
-    public static final FrostedEffect FROSTED = new FrostedEffect();
-    public static final PhaseEffect PHASE = new PhaseEffect();
+    public static PhaseEffect PHASE = new PhaseEffect();
+    public static IgniteEffect IGNITE = new IgniteEffect();
+    public static FrostAuraEffect FROST_AURA = new FrostAuraEffect();
+    public static FrostedEffect FROSTED = new FrostedEffect();
     //    public static final PhaseEffect ASTRAL_TRIP = new PhaseEffect();
-    public static final StatusEffect SPELL_HASTE = new AttributeEffect(
-            StatusEffectCategory.BENEFICIAL,
-            0x000000,
-            "spell_haste",
-            SpellPowerMechanics.HASTE.attribute,
-            0.05,
-            EntityAttributeModifier.Operation.MULTIPLY_BASE
-    );
 
     public static void register()
     {
-        Registry.register(Registries.STATUS_EFFECT, SpellDimension.modLoc("phase"), PHASE);
-        Registry.register(Registries.STATUS_EFFECT, SpellDimension.modLoc("ignite"), IGNITE);
-        Registry.register(Registries.STATUS_EFFECT, SpellDimension.modLoc("aura"), FROST_AURA);
-        Registry.register(Registries.STATUS_EFFECT, SpellDimension.modLoc("frosted"), FROSTED);
-//        Registry.register(Registries.STATUS_EFFECT, SpellPlus.modLoc("astral_trip"), ASTRAL_TRIP);
-        Registry.register(Registries.STATUS_EFFECT, SpellDimension.modLoc("spell_haste"), SPELL_HASTE);
+        PHASE = new Entry<>("phase", new PhaseEffect())
+                .addEN()
+                .addENDesc("Can fly freely and pass through blocks")
+                .addZH("相位")
+                .addZHDesc("自由飞行并且可以穿过方块")
+                .register();
+        IGNITE = new Entry<>("ignite", new IgniteEffect())
+                .addEN()
+                .addENDesc(BlazingMark.DESC_EN)
+                .addZH("引火")
+                .addZHDesc(BlazingMark.DESC_ZH)
+                .register();
+        FROST_AURA = new Entry<>("aura", new FrostAuraEffect())
+                .addEN()
+                .addENDesc(FrostAuraEffect.DESC_EN)
+                .addZH("霜环")
+                .addZHDesc(FrostAuraEffect.DESC_ZH)
+                .register();
+        FROSTED = new Entry<>("frosted", new FrostedEffect())
+                .addEN()
+                .addENDesc("Frozen and continuously receiving frost spell damage")
+                .addZH("霜冻")
+                .addZHDesc("冻结并持续收到冰霜法术伤害")
+                .register();
 
         Synchronized.configure(PHASE, true);
         Synchronized.configure(FROSTED, true);
 //        ActionImpairing.configure(ASTRAL_TRIP_EFFECT, EntityActionsAllowed.STUN);
+    }
+
+    public static class Entry<T extends StatusEffect> extends StatusEffectBuilder<T>
+    {
+        public Entry(String name, T content)
+        {
+            super(name, content);
+        }
+
+        @Override
+        public String getNameSpace()
+        {
+            return SpellDimension.MOD_ID;
+        }
     }
 }

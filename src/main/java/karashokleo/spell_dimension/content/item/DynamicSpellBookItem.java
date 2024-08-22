@@ -22,6 +22,7 @@ import net.minecraft.screen.slot.Slot;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.ClickType;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import net.spell_engine.api.item.trinket.SpellBookTrinketItem;
@@ -30,6 +31,7 @@ import net.spell_engine.api.spell.SpellInfo;
 import net.spell_engine.internals.SpellContainerHelper;
 import net.spell_engine.spellbinding.SpellBinding;
 import net.spell_engine.spellbinding.SpellBindingScreenHandler;
+import net.spell_power.api.SpellPower;
 import net.spell_power.api.SpellSchool;
 import net.spell_power.api.SpellSchools;
 import org.jetbrains.annotations.Nullable;
@@ -42,6 +44,7 @@ import java.util.stream.Stream;
 
 public class DynamicSpellBookItem extends SpellBookTrinketItem implements ColorProvider
 {
+    public static final int REQUIREMENT_SPELL_POWER_PER_GRADE = 33;
     public static final Identifier DYNAMIC_POOL = SpellDimension.modLoc("dynamic");
     public static final Map<SpellSchool, Identifier> POOLS = Map.of(
             SpellSchools.ARCANE, SpellDimension.modLoc("arcane"),
@@ -97,6 +100,24 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem implements ColorP
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
         super.appendTooltip(stack, world, tooltip, context);
+        tooltip.add(
+                SDTexts.TOOLTIP_BOOK_REQUIREMENT.get(
+                        this.getRequirementSpellPower(),
+                        Text.translatable("attribute.name.spell_power." + school.id.getPath())
+                ).formatted(Formatting.DARK_GRAY)
+        );
+    }
+
+    @Override
+    public boolean canEquip(ItemStack stack, SlotReference slot, LivingEntity entity)
+    {
+        return SpellPower.getSpellPower(this.school, entity).baseValue() >=
+                this.getRequirementSpellPower();
+    }
+
+    public int getRequirementSpellPower()
+    {
+        return (this.grade + 1) * REQUIREMENT_SPELL_POWER_PER_GRADE;
     }
 
     public void tryAddScroll(ItemStack stack, ItemStack scroll, PlayerEntity player)

@@ -1,16 +1,13 @@
 package karashokleo.spell_dimension.init;
 
-import io.github.apace100.autotag.api.AutoTagRegistry;
-import io.github.apace100.autotag.common.TagIdentifiers;
 import karashokleo.spell_dimension.util.TagUtil;
 import net.minecraft.item.Item;
-import net.minecraft.registry.Registries;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
-import net.spell_engine.SpellEngineMod;
-import net.spell_power.SpellPowerMod;
+import net.spell_engine.internals.SpellInfinityEnchantment;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 public class AllTags
 {
@@ -22,25 +19,25 @@ public class AllTags
     public static final TagKey<Item> ESSENCE_ALL = TagUtil.itemTag("essence/all");
     public static final TagKey<Item> RUNE = TagUtil.itemTag("rune");
     public static final TagKey<Item> HEART_FOOD = TagUtil.itemTag("heart_food");
-    public static final TagKey<Item> BREAKABLE = TagUtil.itemTag(new Identifier("c:breakable"));
-    public static final TagKey<Item> MELEE_WEAPONS = TagUtil.itemTag(TagIdentifiers.Items.MELEE_WEAPONS);
-    public static final TagKey<Item> ARMOR = TagUtil.itemTag(TagIdentifiers.Items.ARMOR);
 
-    public static final TagKey<Item> SPELL_POWER_GENERIC = TagUtil.itemTag(new Identifier(SpellPowerMod.ID, "enchant_spell_power_generic"));
-    public static final TagKey<Item> SPELL_POWER_SOULFROST = TagUtil.itemTag(new Identifier(SpellPowerMod.ID, "enchant_spell_power_soulfrost"));
-    public static final TagKey<Item> SPELL_POWER_SUNFIRE = TagUtil.itemTag(new Identifier(SpellPowerMod.ID, "enchant_spell_power_sunfire"));
-    public static final TagKey<Item> SPELL_POWER_ENERGIZE = TagUtil.itemTag(new Identifier(SpellPowerMod.ID, "enchant_spell_power_energize"));
-    public static final TagKey<Item> SPELL_POWER_CRITICAL_CHANCE = TagUtil.itemTag(new Identifier(SpellPowerMod.ID, "enchant_critical_chance"));
-    public static final TagKey<Item> SPELL_POWER_CRITICAL_DAMAGE = TagUtil.itemTag(new Identifier(SpellPowerMod.ID, "enchant_critical_damage"));
-    public static final TagKey<Item> SPELL_POWER_HASTE = TagUtil.itemTag(new Identifier(SpellPowerMod.ID, "enchant_haste"));
-    public static final TagKey<Item> SPELL_INFINITY = TagUtil.itemTag(new Identifier(SpellEngineMod.ID, "enchant_spell_infinity"));
+    public static final TagKey<Item> MELEE_WEAPONS = TagUtil.itemTag(new Identifier("equipment_standard:melee_weapons"));
+    public static final TagKey<Item> ARMOR = TagUtil.itemTag(new Identifier("equipment_standard:armor"));
+
+    public static final List<TagKey<Item>> SPELL_POWER_ENCHANTMENT_TAGS = Stream.of(
+            "enchant_spell_power_generic",
+            "enchant_spell_power_soulfrost",
+            "enchant_spell_power_sunfire",
+            "enchant_spell_power_energize",
+            "enchant_critical_chance",
+            "enchant_critical_damage",
+            "enchant_haste"
+    ).map(s -> TagUtil.itemTag(new Identifier("spell_power", s))).toList();
+
+    public static final TagKey<Item> SPELL_INFINITY = TagUtil.itemTag(SpellInfinityEnchantment.tagId);
+
+    public static final List<TagKey<Item>> REFORGE_CORE_TAGS = Stream.of(1, 2, 3).map(i -> TagUtil.itemTag(new Identifier("equipment_standard:reforge_core/lv" + i))).toList();
 
     public static void register()
     {
-        AutoTagRegistry.register(
-                Registries.ITEM,
-                BREAKABLE,
-                Item::isDamageable
-        );
     }
 }

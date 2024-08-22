@@ -12,6 +12,7 @@ import java.util.Collection;
 
 public class NetworkUtil
 {
+    public static final Identifier SPELL_DASH_PACKET = SpellDimension.modLoc("spell_dash");
     public static final Identifier QUEST_PACKET = SpellDimension.modLoc("quest");
     public static final Identifier DUST_PACKET = SpellDimension.modLoc("dust");
 

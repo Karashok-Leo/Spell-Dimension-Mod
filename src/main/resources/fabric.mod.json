@@ -25,6 +25,9 @@
     ],
     "cardinal-components": [
       "karashokleo.spell_dimension.SpellDimension"
+    ],
+    "leobrary-generator": [
+      "karashokleo.spell_dimension.SpellDimension"
     ]
   },
   "mixins": [
@@ -49,6 +52,7 @@
     "aquamirae": "*",
     "attributefix": "*",
     "bosses_of_mass_destruction": "*",
+    "combatroll": ">=1.0.0",
     "dummmmmmy": "*",
     "equipment_standard": "*",
     "explorerscompass": "*",
