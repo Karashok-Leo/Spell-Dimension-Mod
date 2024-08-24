@@ -62,6 +62,7 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+    modImplementation "io.github.ladysnake:PlayerAbilityLib:${project.pal_version}"
     modImplementation("dev.emi:trinkets:${project.trinkets_version}")
     include modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cca_version}")
     include modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${project.cca_version}")
@@ -105,6 +106,8 @@ dependencies {
     modImplementation("com.klikli_dev:modonomicon-${project.minecraft_version}-fabric:${project.modonomicon_version}")
 
     // Book Information
+    modImplementation("maven.modrinth:aquamirae:${project.aquamirae_version}")
+    modImplementation("maven.modrinth:obscure-api:${project.obscure_api_version}")
     modImplementation("maven.modrinth:mmmmmmmmmmmm:${project.mmmmmmmmmmmm_version}")
     modRuntimeOnly("maven.modrinth:moonlight:${project.moonlight_version}")
     modImplementation("maven.modrinth:victus:${project.victus_version}")

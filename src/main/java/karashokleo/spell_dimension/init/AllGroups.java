@@ -75,6 +75,8 @@ public class AllGroups
                             entries.add(AllItems.DISENCHANTED_ESSENCE);
                             entries.add(AllItems.MENDING_ESSENCE);
                             entries.add(AllItems.DEBUG_STAFF);
+                            entries.add(AllItems.ABYSS_GUARD);
+                            entries.add(AllItems.ACCURSED_BLACKSTONE);
                         })
                         .build()
         );

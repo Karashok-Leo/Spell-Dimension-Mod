@@ -1,37 +1,39 @@
 package karashokleo.spell_dimension.content.effect;
 
+import io.github.ladysnake.pal.AbilitySource;
+import io.github.ladysnake.pal.Pal;
+import io.github.ladysnake.pal.VanillaAbilities;
+import karashokleo.spell_dimension.SpellDimension;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.AttributeContainer;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
-import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.entity.player.PlayerEntity;
 
 public class PhaseEffect extends StatusEffect
 {
+    public static final AbilitySource PHASE = Pal.getAbilitySource(SpellDimension.modLoc("phase"));
+
     public PhaseEffect()
     {
         super(StatusEffectCategory.BENEFICIAL, 0xA020F0);
     }
 
     @Override
-    public void applyUpdateEffect(LivingEntity entity, int amplifier)
+    public void onApplied(LivingEntity entity, AttributeContainer attributes, int amplifier)
     {
+        super.onApplied(entity, attributes, amplifier);
+        if (entity.getWorld().isClient()) return;
         entity.noClip = true;
         if (entity instanceof PlayerEntity player)
             setFly(player, true);
     }
 
     @Override
-    public boolean canApplyUpdateEffect(int duration, int amplifier)
-    {
-        return duration % 10 == 0;
-    }
-
-    @Override
     public void onRemoved(LivingEntity entity, AttributeContainer attributes, int amplifier)
     {
         super.onRemoved(entity, attributes, amplifier);
+        if (entity.getWorld().isClient()) return;
         entity.noClip = false;
         if (entity instanceof PlayerEntity player)
             setFly(player, false);
@@ -39,15 +41,14 @@ public class PhaseEffect extends StatusEffect
 
     public static void setFly(PlayerEntity player, boolean canFly)
     {
-        PlayerAbilities abilities = player.getAbilities();
         if (canFly)
         {
-            abilities.allowFlying = true;
-            abilities.flying = true;
+            Pal.grantAbility(player, VanillaAbilities.ALLOW_FLYING, PHASE);
+            Pal.grantAbility(player, VanillaAbilities.FLYING, PHASE);
         } else
         {
-            abilities.allowFlying = player.isCreative() || player.isSpectator();
-            abilities.flying = player.isCreative() || player.isSpectator();
+            Pal.revokeAbility(player, VanillaAbilities.ALLOW_FLYING, PHASE);
+            Pal.revokeAbility(player, VanillaAbilities.FLYING, PHASE);
         }
     }
 }

@@ -38,6 +38,7 @@ public enum SDTexts
     TEXT_BLANK_BOOK("Blank spell book!", "空白法术书!"),
     TEXT_SPELL_POWER_INFO("Spell Power Information", "魔法信息"),
     TEXT_QUEST("Quest completed!", "任务完成！"),
+    TEXT_ABYSS_GUARD("You need to have Abyss Guard in your inventory to sound the shell horn!", "你需要在物品栏中持有深渊守护才能吹响号角！"),
 
     /**
      * Spell School
@@ -292,11 +293,15 @@ public enum SDTexts
         SpellDimension.EN_TEXTS.addItem(AllItems.DISENCHANTED_ESSENCE, getDefaultName(AllItems.DISENCHANTED_ESSENCE));
         SpellDimension.EN_TEXTS.addItem(AllItems.MENDING_ESSENCE, getDefaultName(AllItems.MENDING_ESSENCE));
         SpellDimension.EN_TEXTS.addItem(AllItems.QUEST_SCROLL, getDefaultName(AllItems.QUEST_SCROLL));
+        SpellDimension.EN_TEXTS.addItem(AllItems.ABYSS_GUARD, getDefaultName(AllItems.ABYSS_GUARD));
+        SpellDimension.EN_TEXTS.addItem(AllItems.ACCURSED_BLACKSTONE, getDefaultName(AllItems.ACCURSED_BLACKSTONE));
 
         SpellDimension.ZH_TEXTS.addItem(AllItems.DEBUG_STAFF, "调试法杖");
         SpellDimension.ZH_TEXTS.addItem(AllItems.DISENCHANTED_ESSENCE, "祛魔精华");
         SpellDimension.ZH_TEXTS.addItem(AllItems.MENDING_ESSENCE, "修复精华");
         SpellDimension.ZH_TEXTS.addItem(AllItems.QUEST_SCROLL, "任务卷轴");
+        SpellDimension.ZH_TEXTS.addItem(AllItems.ABYSS_GUARD, "深渊守护");
+        SpellDimension.ZH_TEXTS.addItem(AllItems.ACCURSED_BLACKSTONE, "朽咒黑石");
     }
 
     private static void addLootBagTranslation()

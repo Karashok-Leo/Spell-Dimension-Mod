@@ -61,6 +61,7 @@ public class SDItemTagProvider extends FabricTagProvider.ItemTagProvider
                 .setReplace(true)
                 .add(MiscItems.MIRACLE.ingot());
 
+        getOrCreateTagBuilder(AllTags.SHELL_HORN_REQUIREMENT).add(AllItems.ABYSS_GUARD);
     }
 
     private void addRuneCraft(String path, Item item)

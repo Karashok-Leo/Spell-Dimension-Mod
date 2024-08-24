@@ -1,17 +1,27 @@
 package karashokleo.spell_dimension.init;
 
+import com.obscuria.aquamirae.registry.AquamiraeItems;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.item.DynamicSpellBookItem;
 import karashokleo.spell_dimension.content.item.QuestScrollItem;
 import karashokleo.spell_dimension.content.item.SpellScrollItem;
 import karashokleo.spell_dimension.content.item.essence.*;
 import karashokleo.spell_dimension.content.item.essence.base.ColorProvider;
+import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.util.SchoolUtil;
+import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
+import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.NetherStarItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
+import net.minecraft.util.TypedActionResult;
 import net.spell_engine.api.item.trinket.SpellBooks;
 import net.spell_engine.internals.SpellRegistry;
 import net.spell_power.api.SpellSchool;
@@ -33,8 +43,9 @@ public class AllItems
     public static EnchantedEssenceItem ENCHANTED_ESSENCE;
     public static DisenchantedEssenceItem DISENCHANTED_ESSENCE;
     public static MendingEssenceItem MENDING_ESSENCE;
-
     public static QuestScrollItem QUEST_SCROLL;
+    public static Item ABYSS_GUARD;
+    public static Item ACCURSED_BLACKSTONE;
 
     public static void register()
     {
@@ -55,8 +66,32 @@ public class AllItems
         ENCHANTED_ESSENCE = registerItem("enchanted_essence", new EnchantedEssenceItem());
         DISENCHANTED_ESSENCE = registerItem("disenchanted_essence", new DisenchantedEssenceItem());
         MENDING_ESSENCE = registerItem("mending_essence", new MendingEssenceItem());
-
         QUEST_SCROLL = registerItem("quest_scroll", new QuestScrollItem());
+        ABYSS_GUARD = registerItem("abyss_guard", new NetherStarItem(new FabricItemSettings().maxCount(1).rarity(Rarity.EPIC)));
+        ACCURSED_BLACKSTONE = registerItem("accursed_blackstone", new NetherStarItem(new FabricItemSettings().maxCount(1).rarity(Rarity.EPIC)));
+
+        AttackEntityCallback.EVENT.register((player, world, hand, entity, hitResult) ->
+        {
+            if (!world.isClient() &&
+                    player.getStackInHand(hand).isOf(DEBUG_STAFF))
+            {
+                entity.damage(player.getDamageSources().create(DamageTypes.MAGIC, player), 999999);
+            }
+            return ActionResult.PASS;
+        });
+
+        UseItemCallback.EVENT.register((player, world, hand) ->
+        {
+            ItemStack stack = player.getStackInHand(hand);
+            if (!world.isClient() &&
+                    stack.isOf(AquamiraeItems.SHELL_HORN) &&
+                    !player.getInventory().contains(AllTags.SHELL_HORN_REQUIREMENT))
+            {
+                player.sendMessage(SDTexts.TEXT_ABYSS_GUARD.get(), true);
+                return TypedActionResult.fail(stack);
+            }
+            return TypedActionResult.pass(stack);
+        });
     }
 
     public static <T extends Item> T registerItem(String id, T item)

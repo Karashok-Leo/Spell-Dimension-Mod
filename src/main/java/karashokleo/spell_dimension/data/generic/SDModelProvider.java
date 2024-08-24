@@ -32,6 +32,8 @@ public class SDModelProvider extends FabricModelProvider
         generator.register(AllItems.ENCHANTED_ESSENCE, Models.GENERATED);
         generator.register(AllItems.DISENCHANTED_ESSENCE, Models.GENERATED);
         generator.register(AllItems.MENDING_ESSENCE, Models.GENERATED);
+        generator.register(AllItems.ABYSS_GUARD, Models.GENERATED);
+        generator.register(AllItems.ACCURSED_BLACKSTONE, Models.GENERATED);
 
         for (SpellSchool school : SchoolUtil.SCHOOLS)
         {

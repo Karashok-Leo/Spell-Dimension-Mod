@@ -37,6 +37,8 @@ public class AllTags
 
     public static final List<TagKey<Item>> REFORGE_CORE_TAGS = Stream.of(1, 2, 3).map(i -> TagUtil.itemTag(new Identifier("equipment_standard:reforge_core/lv" + i))).toList();
 
+    public static final TagKey<Item> SHELL_HORN_REQUIREMENT = TagUtil.itemTag("shell_horn_requirement");
+
     public static void register()
     {
     }

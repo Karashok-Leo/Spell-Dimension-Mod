@@ -14,6 +14,20 @@
         }
       ],
       "rolls": 1.0
+    },
+    {
+      "conditions": [
+        {
+          "condition": "minecraft:killed_by_player"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "spell-dimension:accursed_blackstone"
+        }
+      ],
+      "rolls": 1.0
     }
   ]
 }
