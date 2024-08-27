@@ -1,9 +1,13 @@
 package karashokleo.spell_dimension.init;
 
+import karashokleo.leobrary.datagen.generator.TagGenerator;
+import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.util.TagUtil;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
+import net.runes.api.RuneItems;
 import net.spell_engine.internals.SpellInfinityEnchantment;
 
 import java.util.List;
@@ -41,5 +45,27 @@ public class AllTags
 
     public static void register()
     {
+        TagGenerator<Item> generator = SpellDimension.ITEM_TAGS;
+
+        RuneItems.entries.stream().map(RuneItems.Entry::id)
+                .forEach(id -> generator.getOrCreateContainer(RUNE).add(id));
+
+        generator.getOrCreateContainer(HEART_FOOD)
+                .add(Items.ENCHANTED_GOLDEN_APPLE)
+                .addOptional(
+                        new Identifier("l2hostility:life_essence"),
+                        new Identifier("midashunger:enchanted_golden_carrot")
+                );
+
+        generator.getOrCreateContainer(REFORGE_CORE_TAGS.get(0), true)
+                .addTag(AllTags.ESSENCE.get(2));
+        generator.getOrCreateContainer(REFORGE_CORE_TAGS.get(1), true)
+                .addOptional(new Identifier("l2hostility:chaos_ingot"));
+        generator.getOrCreateContainer(REFORGE_CORE_TAGS.get(2), true)
+                .addOptional(new Identifier("l2hostility:miracle_ingot"));
+
+        TagGenerator.Container<Item> essenceAllContainer = generator.getOrCreateContainer(ESSENCE_ALL);
+        for (TagKey<Item> key : ESSENCE)
+            essenceAllContainer.addTag(ESSENCE_ALL, key);
     }
 }

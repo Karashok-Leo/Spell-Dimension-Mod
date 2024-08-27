@@ -26,6 +26,6 @@ public record HealthQuest(float health, List<ItemStack> rewards) implements Item
     @Override
     public void appendTaskDesc(List<Text> desc)
     {
-        desc.add(SDTexts.TOOLTIP_QUEST_HEALTH.get(Text.translatable(EntityAttributes.GENERIC_MAX_HEALTH.getTranslationKey()), this.health));
+        desc.add(SDTexts.QUEST$HEALTH.get(Text.translatable(EntityAttributes.GENERIC_MAX_HEALTH.getTranslationKey()), this.health));
     }
 }

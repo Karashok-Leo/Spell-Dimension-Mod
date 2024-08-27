@@ -47,13 +47,13 @@ public class EnlighteningEssenceItem extends RightPressEssenceItem
     @Override
     public Text getName()
     {
-        return SDTexts.TEXT_ESSENCE_ENLIGHTENING.get();
+        return SDTexts.TEXT$ESSENCE$ENLIGHTENING.get();
     }
 
     @Override
     public Text getName(ItemStack stack)
     {
-        return SDTexts.TEXT_ESSENCE_ENLIGHTENING.get().setStyle(Style.EMPTY.withColor(this.getColor(stack)));
+        return SDTexts.TEXT$ESSENCE$ENLIGHTENING.get().setStyle(Style.EMPTY.withColor(this.getColor(stack)));
     }
 
     public ItemStack getStack(EnlighteningModifier modifier)
@@ -95,10 +95,10 @@ public class EnlighteningEssenceItem extends RightPressEssenceItem
         EnlighteningModifier enlighteningModifier = getModifier(stack);
         if (enlighteningModifier == null)
         {
-            tooltip.add(SDTexts.TOOLTIP_INVALID.get());
+            tooltip.add(SDTexts.TOOLTIP$INVALID.get());
             return;
         }
-        tooltip.add(SDTexts.TOOLTIP_MODIFIER.get().formatted(Formatting.GRAY));
+        tooltip.add(SDTexts.TOOLTIP$MODIFIER.get().formatted(Formatting.GRAY));
         AttributeUtil.addTooltip(tooltip, enlighteningModifier.attribute(), enlighteningModifier.amount(), enlighteningModifier.operation());
     }
 }

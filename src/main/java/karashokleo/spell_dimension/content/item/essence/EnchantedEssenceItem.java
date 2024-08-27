@@ -47,13 +47,13 @@ public class EnchantedEssenceItem extends StackClickEssenceItem
     @Override
     public Text getName()
     {
-        return SDTexts.TEXT_ESSENCE_ENCHANTED.get();
+        return SDTexts.TEXT$ESSENCE$ENCHANTED.get();
     }
 
     @Override
     public Text getName(ItemStack stack)
     {
-        return SDTexts.TEXT_ESSENCE_ENCHANTED.get().setStyle(Style.EMPTY.withColor(this.getColor(stack)));
+        return SDTexts.TEXT$ESSENCE$ENCHANTED.get().setStyle(Style.EMPTY.withColor(this.getColor(stack)));
     }
 
     public ItemStack getStack(EnchantedModifier enchantedModifier)
@@ -85,12 +85,12 @@ public class EnchantedEssenceItem extends StackClickEssenceItem
         EnchantedModifier enchantedModifier = getModifier(stack);
         if (enchantedModifier == null)
         {
-            tooltip.add(SDTexts.TOOLTIP_INVALID.get());
+            tooltip.add(SDTexts.TOOLTIP$INVALID.get());
             return;
         }
         tooltip.add(SDTexts.getSlotText(enchantedModifier.slot()).formatted(Formatting.GRAY));
-        tooltip.add(SDTexts.TOOLTIP_THRESHOLD.get(enchantedModifier.threshold()).formatted(Formatting.GRAY));
-        tooltip.add(SDTexts.TOOLTIP_MODIFIER.get().formatted(Formatting.GRAY));
+        tooltip.add(SDTexts.TOOLTIP$THRESHOLD.get(enchantedModifier.threshold()).formatted(Formatting.GRAY));
+        tooltip.add(SDTexts.TOOLTIP$MODIFIER.get().formatted(Formatting.GRAY));
         AttributeUtil.addTooltip(tooltip, enchantedModifier.modifier().attribute(), enchantedModifier.modifier().amount(), enchantedModifier.modifier().operation());
     }
 }

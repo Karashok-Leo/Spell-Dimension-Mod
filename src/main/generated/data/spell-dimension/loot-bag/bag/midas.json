@@ -1,0 +1,8 @@
+{
+  "type": "loot-bag:single",
+  "color": {
+    "bag_body": 16776960,
+    "bag_string": 14408560
+  },
+  "content": "spell-dimension:midas"
+}

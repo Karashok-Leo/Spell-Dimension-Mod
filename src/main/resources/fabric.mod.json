@@ -70,6 +70,7 @@
   "custom": {
     "cardinal-components": [
       "spell-dimension:enlightening",
+      "spell-dimension:end_stage",
       "spell-dimension:buff"
     ]
   }

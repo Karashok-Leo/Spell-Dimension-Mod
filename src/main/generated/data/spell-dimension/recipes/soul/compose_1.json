@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "spell-dimension:essence_soul_2"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "spell-dimension:essence_soul_1"
+  }
+}

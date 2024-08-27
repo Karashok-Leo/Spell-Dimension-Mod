@@ -2,6 +2,8 @@ package karashokleo.spell_dimension.config;
 
 import karashokleo.spell_dimension.data.SDTexts;
 import net.minecraft.entity.EntityType;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
@@ -19,16 +21,16 @@ public class ScrollLootConfig
 {
     public static Set<Identifier> getAllSpells()
     {
-        return SPELL2TEXT.keySet();
+        return SPELL_TEXTS.keySet();
     }
 
     public static Text getSpellScrollText(@Nullable SpellInfo spellInfo)
     {
         return spellInfo == null ?
-                SDTexts.TOOLTIP_UNAVAILABLE
+                SDTexts.SCROLL$UNAVAILABLE
                         .get()
                         .formatted(Formatting.GRAY) :
-                SPELL2TEXT
+                SPELL_TEXTS
                         .get(spellInfo.id())
                         .setStyle(Style.EMPTY.withColor(spellInfo.spell().school.color));
     }
@@ -36,64 +38,81 @@ public class ScrollLootConfig
     @Nullable
     public static Identifier getLootSpellId(Identifier lootTableId)
     {
-        return LOOT2SPELL.get(lootTableId);
+        return LOOT_SPELLS.get(lootTableId);
     }
 
-    private static final Map<Identifier, MutableText> SPELL2TEXT = new HashMap<>();
-    private static final Map<Identifier, Identifier> LOOT2SPELL = new HashMap<>();
+    @Nullable
+    public static Identifier getCraftSpellId(ItemStack stack)
+    {
+        return CRAFT_SPELLS.get(stack.getItem());
+    }
+
+    private static final Map<Identifier, MutableText> SPELL_TEXTS = new HashMap<>();
+    private static final Map<Identifier, Identifier> LOOT_SPELLS = new HashMap<>();
+    private static final Map<Item, Identifier> CRAFT_SPELLS = new HashMap<>();
 
     static
     {
         // Primary
-        fromPrimary("wizards:arcane_bolt");
-        fromPrimary("wizards:fire_scorch");
-        fromPrimary("wizards:frost_shard");
-        fromPrimary("wizards:heal");
+        {
+            fromPrimary("wizards:arcane_bolt");
+            fromPrimary("wizards:fire_scorch");
+            fromPrimary("wizards:frost_shard");
+            fromPrimary("wizards:heal");
+        }
 
         // Pool
-        fromBinding("wizards:arcane_missile");
-        fromBinding("wizards:arcane_blast");
-        fromBinding("wizards:arcane_blink");
+        {
+            fromBinding("wizards:arcane_missile");
+            fromBinding("wizards:arcane_blast");
+            fromBinding("wizards:arcane_blink");
 
-        fromBinding("wizards:fireball");
-        fromBinding("wizards:fire_wall");
-        fromBinding("wizards:fire_meteor");
+            fromBinding("wizards:fireball");
+            fromBinding("wizards:fire_wall");
+            fromBinding("wizards:fire_meteor");
 
-        fromBinding("wizards:frostbolt");
-        fromBinding("wizards:frost_nova");
-        fromBinding("wizards:frost_shield");
+            fromBinding("wizards:frostbolt");
+            fromBinding("wizards:frost_nova");
+            fromBinding("wizards:frost_shield");
 
-        fromBinding("paladins:flash_heal");
-        fromBinding("paladins:holy_shock");
-        fromBinding("paladins:divine_protection");
+            fromBinding("paladins:flash_heal");
+            fromBinding("paladins:holy_shock");
+            fromBinding("paladins:divine_protection");
+        }
+
+        // Essential
+        {
+            fromStructureChest("spell-dimension:phase", "ancient_city");
+            fromEntityLoot("spell-dimension:converge", "illagerinvasion:invoker");
+
+            fromEntityLoot("wizards:fire_breath", "soulsweapons:draugr_boss");
+            fromEntityLoot("spell-dimension:blast", "soulsweapons:accursed_lord_boss");
+            fromEntityLoot("spell-dimension:ignite", "adventurez:blackstone_golem");
+
+            fromEntityLoot("wizards:frost_blizzard", "soulsweapons:moonknight");
+            fromEntityLoot("spell-dimension:nucleus", "aquamirae:maze_mother");
+            fromCrafting("spell-dimension:aura", "aquamirae:maze_rose");
+            fromCrafting("spell-dimension:icicle", "spell-dimension:abyss_guard");
+
+            fromEntityLoot("paladins:holy_beam", "soulsweapons:chaos_monarch");
+            fromEntityLoot("paladins:circle_of_healing", "soulsweapons:returning_knight");
+            fromEntityLoot("paladins:barrier", "graveyard:lich");
+            fromEntityLoot("paladins:judgement", "minecraft:wither");
+            fromEntityLoot("spell-dimension:resist", "soulsweapons:draugr_boss");
+            fromEntityLoot("spell-dimension:regen", "bosses_of_mass_destruction:void_blossom");
+        }
 
         // Dynamic
-        fromStructureChest("spell-dimension:phase", "ancient_city");
+        {
+            fromEntityLoot("spellbladenext:eldritchblast", "minecraft:warden");
+            fromEntityLoot("spellbladenext:maelstrom", "minecraft:ender_dragon");
+            fromEntityLoot("spellbladenext:finalstrike", "deeperdarker:stalker");
 
-        fromEntityLoot("spellbladenext:eldritchblast", "minecraft:warden");
-        fromEntityLoot("spellbladenext:maelstrom", "minecraft:ender_dragon");
-        fromEntityLoot("spellbladenext:finalstrike", "deeperdarker:stalker");
-        fromEntityLoot("spell-dimension:converge", "illagerinvasion:invoker");
-//        fromEntityLoot("spell-dimension:phase", "bosses_of_mass_destruction:lich");
+            fromEntityLoot("spellbladenext:fireflourish", "soulsweapons:night_shade");
+            fromEntityLoot("spellbladenext:flicker_strike", "bosses_of_mass_destruction:gauntlet");
 
-        fromEntityLoot("wizards:fire_breath", "soulsweapons:draugr_boss");
-        fromEntityLoot("spellbladenext:fireflourish", "soulsweapons:night_shade");
-        fromEntityLoot("spellbladenext:flicker_strike", "bosses_of_mass_destruction:gauntlet");
-        fromEntityLoot("spell-dimension:blast", "soulsweapons:accursed_lord_boss");
-        fromEntityLoot("spell-dimension:ignite", "adventurez:blackstone_golem");
-
-        fromEntityLoot("wizards:frost_blizzard", "soulsweapons:moonknight");
-        fromEntityLoot("spellbladenext:frostflourish", "soulsweapons:night_prowler");
-        fromEntityLoot("spell-dimension:nucleus", "aquamirae:maze_mother");
-        fromEntityLoot("spell-dimension:aura", "aquamirae:captain_cornelia");
-        fromEntityLoot("spell-dimension:icicle", "minecraft:elder_guardian");
-
-        fromEntityLoot("paladins:holy_beam", "soulsweapons:chaos_monarch");
-        fromEntityLoot("paladins:circle_of_healing", "soulsweapons:returning_knight");
-        fromEntityLoot("paladins:barrier", "graveyard:lich");
-        fromEntityLoot("paladins:judgement", "minecraft:wither");
-        fromEntityLoot("spell-dimension:resist", "soulsweapons:draugr_boss");
-        fromEntityLoot("spell-dimension:regen", "bosses_of_mass_destruction:void_blossom");
+            fromEntityLoot("spellbladenext:frostflourish", "soulsweapons:night_prowler");
+        }
     }
 
     public static final String[] BOSSES = {
@@ -125,12 +144,24 @@ public class ScrollLootConfig
 
     private static void fromPrimary(String spellId)
     {
-        SPELL2TEXT.put(new Identifier(spellId), SDTexts.TOOLTIP_PRIMARY.get());
+        SPELL_TEXTS.put(new Identifier(spellId), SDTexts.SCROLL$PRIMARY.get());
     }
 
     private static void fromBinding(String spellId)
     {
-        SPELL2TEXT.put(new Identifier(spellId), SDTexts.TOOLTIP_BINDING.get());
+        SPELL_TEXTS.put(new Identifier(spellId), SDTexts.SCROLL$BINDING.get());
+    }
+
+    private static void fromCrafting(String spellId, String itemId)
+    {
+        fromCrafting(new Identifier(spellId), new Identifier(itemId));
+    }
+
+    private static void fromCrafting(Identifier spellId, Identifier itemId)
+    {
+        Item item = Registries.ITEM.get(itemId);
+        SPELL_TEXTS.put(spellId, SDTexts.SCROLL$CRAFT.get(item.getName().copy().formatted(Formatting.BOLD)));
+        CRAFT_SPELLS.put(item, spellId);
     }
 
     private static void fromStructureChest(String spellId, String structureId)
@@ -140,8 +171,8 @@ public class ScrollLootConfig
 
     private static void fromStructureChest(Identifier spellId, Identifier structureId, Identifier chestId)
     {
-        SPELL2TEXT.put(spellId, SDTexts.TOOLTIP_EXPLORING.get(Text.translatable(structureId.toTranslationKey("struture")).formatted(Formatting.BOLD)));
-        LOOT2SPELL.put(chestId, spellId);
+        SPELL_TEXTS.put(spellId, SDTexts.SCROLL$EXPLORING.get(Text.translatable(structureId.toTranslationKey("struture")).formatted(Formatting.BOLD)));
+        LOOT_SPELLS.put(chestId, spellId);
     }
 
     private static void fromEntityLoot(String spellId, String entityTypeId)
@@ -152,7 +183,7 @@ public class ScrollLootConfig
     private static void fromEntityLoot(Identifier spellId, Identifier entityTypeId)
     {
         EntityType<?> type = Registries.ENTITY_TYPE.get(entityTypeId);
-        SPELL2TEXT.put(spellId, SDTexts.TOOLTIP_KILLING.get(type.getName().copy().formatted(Formatting.BOLD)));
-        LOOT2SPELL.put(type.getLootTableId(), spellId);
+        SPELL_TEXTS.put(spellId, SDTexts.SCROLL$KILLING.get(type.getName().copy().formatted(Formatting.BOLD)));
+        LOOT_SPELLS.put(type.getLootTableId(), spellId);
     }
 }

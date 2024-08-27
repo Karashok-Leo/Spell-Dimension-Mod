@@ -8,14 +8,12 @@ import karashokleo.spell_dimension.api.buff.BuffType;
 import karashokleo.spell_dimension.config.SpellConfig;
 import karashokleo.spell_dimension.init.AllStatusEffects;
 import karashokleo.spell_dimension.util.DamageUtil;
-import karashokleo.spell_dimension.util.NetworkUtil;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.minecraft.entity.Entity;
+import karashokleo.spell_dimension.util.ParticleUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.network.PacketByteBuf;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.dynamic.Codecs;
 import net.minecraft.util.math.Vec3d;
 import net.spell_engine.api.spell.ParticleBatch;
@@ -141,23 +139,25 @@ public class BlazingMark implements Buff
     private void particle(LivingEntity owner)
     {
         float f = Math.min(owner.getWidth(), owner.getHeight()) * 0.5F;
-        Vec3d pos = owner.getPos().add(0, owner.getHeight() + f, 0).addRandom(owner.getRandom(), 0.5F);
         int color = duration >= SpellConfig.BLAZING_MARK.triggerDuration() ?
                 0xffff00 - 0x100 * (int) (0xff * damage / (amplifier * SpellConfig.BLAZING_MARK.maxDamage())) :
                 0x888888;
-        sendDustPacket(owner, pos, (int) (f * 100), color, f);
-    }
-
-    public static void sendDustPacket(Entity trackedEntity, Vec3d pos, int count, int color, float range)
-    {
-        PacketByteBuf buf = PacketByteBufs.create();
-        buf.writeDouble(pos.x);
-        buf.writeDouble(pos.y);
-        buf.writeDouble(pos.z);
-        buf.writeInt(count);
-        buf.writeInt(color);
-        buf.writeFloat(range);
-        NetworkUtil.sendToTrackers(trackedEntity, NetworkUtil.DUST_PACKET, buf);
+        Vec3d pos = owner.getPos()
+                .add(0, owner.getHeight() + f, 0).addRandom(owner.getRandom(), 0.5F)
+                .addRandom(owner.getRandom(), 0.5F);
+        int count = (int) (f * 100);
+        if (owner.getWorld() instanceof ServerWorld world)
+            world.spawnParticles(
+                    ParticleUtil.getDustParticle(color),
+                    pos.x,
+                    pos.y,
+                    pos.z,
+                    count,
+                    0D,
+                    0D,
+                    0D,
+                    0D
+            );
     }
 
     public static float getTriggerTime()

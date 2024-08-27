@@ -101,7 +101,7 @@ public record EnchantedModifier(
         NbtCompound extraModifiers = nbt.getCompound(ENCHANTED_MODIFIER_KEY);
         if (!extraModifiers.contains(LEVEL_KEY)) return;
         lines.add(ScreenTexts.EMPTY);
-        lines.add(SDTexts.TOOLTIP_LEVEL.get(extraModifiers.getInt(LEVEL_KEY)).formatted(Formatting.BOLD));
+        lines.add(SDTexts.TOOLTIP$LEVEL.get(extraModifiers.getInt(LEVEL_KEY)).formatted(Formatting.BOLD));
         lines.add(ScreenTexts.EMPTY);
     }
 

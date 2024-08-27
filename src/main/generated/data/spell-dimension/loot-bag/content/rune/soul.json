@@ -1,0 +1,10 @@
+{
+  "type": "loot-bag:item",
+  "icon": {
+    "texture": "runes:textures/item/soul_stone.png"
+  },
+  "item": {
+    "Count": 64,
+    "id": "runes:soul_stone"
+  }
+}

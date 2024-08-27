@@ -39,13 +39,13 @@ public class SpellScrollItem extends Item implements ColorProvider
     @Override
     public Text getName()
     {
-        return SDTexts.TEXT_SPELL_SCROLL.get();
+        return SDTexts.TEXT$SPELL_SCROLL.get();
     }
 
     @Override
     public Text getName(ItemStack stack)
     {
-        return SDTexts.TEXT_SPELL_SCROLL.get().setStyle(Style.EMPTY.withColor(this.getColor(stack)));
+        return SDTexts.TEXT$SPELL_SCROLL.get().setStyle(Style.EMPTY.withColor(this.getColor(stack)));
     }
 
     @Nullable
@@ -73,7 +73,7 @@ public class SpellScrollItem extends Item implements ColorProvider
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
         super.appendTooltip(stack, world, tooltip, context);
-        tooltip.add(SDTexts.TOOLTIP_OBTAIN.get().formatted(Formatting.GRAY));
+        tooltip.add(SDTexts.SCROLL$OBTAIN.get().formatted(Formatting.GRAY));
         tooltip.add(ScrollLootConfig.getSpellScrollText(this.getSpellInfo(stack)));
     }
 }

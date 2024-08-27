@@ -1,0 +1,7 @@
+{
+  "type": "loot-bag:loot_table",
+  "icon": {
+    "texture": "minecraft:textures/item/enchanted_book.png"
+  },
+  "id": "spell-dimension:pool/common/book"
+}

@@ -1,0 +1,7 @@
+{
+  "type": "loot-bag:loot_table",
+  "icon": {
+    "texture": "ringsofascension:textures/item/ring_flight.png"
+  },
+  "id": "spell-dimension:pool/aring"
+}

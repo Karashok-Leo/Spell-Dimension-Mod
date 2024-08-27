@@ -32,7 +32,7 @@ public class BaseEssenceItem extends Item implements ColorProvider
     {
         return SDTexts.getGradeText(this.grade)
                 .append(SDTexts.getSchoolText(this.school))
-                .append(SDTexts.TEXT_ESSENCE.get())
+                .append(SDTexts.TEXT$ESSENCE.get())
                 .setStyle(Style.EMPTY.withColor(this.getColor(stack)));
     }
 

@@ -1,0 +1,7 @@
+{
+  "type": "spell-dimension:enchanted_essence",
+  "grade": 2,
+  "school": "spell_power:lightning",
+  "slot": "MAINHAND",
+  "threshold": 30
+}

@@ -1,0 +1,9 @@
+{
+  "type": "loot-bag:single",
+  "color": {
+    "bag_body": 14972979,
+    "bag_string": 4353858
+  },
+  "content": "spell-dimension:artifact",
+  "rarity": "EPIC"
+}

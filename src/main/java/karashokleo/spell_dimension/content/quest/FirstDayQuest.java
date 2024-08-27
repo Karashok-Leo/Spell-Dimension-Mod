@@ -29,6 +29,6 @@ public record FirstDayQuest(List<ItemStack> rewards) implements ItemRewardQuest
     @Override
     public void appendTaskDesc(List<Text> desc)
     {
-        desc.add(SDTexts.TOOLTIP_QUEST_FIRSTDAY.get());
+        desc.add(SDTexts.QUEST$FIRST_DAY.get());
     }
 }

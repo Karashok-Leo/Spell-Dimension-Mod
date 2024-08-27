@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "#spell-dimension:essence/all",
+    "#spell-dimension:essence/0",
+    "#spell-dimension:essence/all",
+    "#spell-dimension:essence/1",
+    "#spell-dimension:essence/all",
+    "#spell-dimension:essence/2"
+  ]
+}

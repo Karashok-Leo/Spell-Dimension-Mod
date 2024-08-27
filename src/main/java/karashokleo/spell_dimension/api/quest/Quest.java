@@ -27,11 +27,11 @@ public interface Quest
     default List<Text> getDesc()
     {
         List<Text> desc = new ArrayList<>();
-        desc.add(SDTexts.TOOLTIP_QUEST_TASK.get().formatted(Formatting.BOLD));
+        desc.add(SDTexts.TOOLTIP$QUEST$TASK.get().formatted(Formatting.BOLD));
         this.appendTaskDesc(desc);
-        desc.add(SDTexts.TOOLTIP_QUEST_REWARD.get().formatted(Formatting.BOLD));
+        desc.add(SDTexts.TOOLTIP$QUEST$REWARD.get().formatted(Formatting.BOLD));
         this.appendRewardDesc(desc);
-        desc.add(SDTexts.TOOLTIP_QUEST_COMPLETE.get().formatted(Formatting.GOLD));
+        desc.add(SDTexts.TOOLTIP$QUEST$COMPLETE.get().formatted(Formatting.GOLD));
         return desc;
     }
 }

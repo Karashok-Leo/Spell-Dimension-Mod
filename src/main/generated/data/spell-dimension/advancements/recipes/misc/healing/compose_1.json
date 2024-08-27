@@ -1,0 +1,48 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_essence_healing_1": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "spell-dimension:essence_healing_1"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_essence_healing_2": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "spell-dimension:essence_healing_2"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "spell-dimension:healing/compose_1"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_essence_healing_1",
+      "has_essence_healing_2",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "spell-dimension:healing/compose_1"
+    ]
+  },
+  "sends_telemetry_event": false
+}

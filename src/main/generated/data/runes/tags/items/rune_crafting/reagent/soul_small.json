@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "spell-dimension:essence_soul_0",
+    "spell-dimension:essence_soul_1",
+    "spell-dimension:essence_soul_2"
+  ]
+}

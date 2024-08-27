@@ -3,7 +3,6 @@ package karashokleo.spell_dimension.content.item;
 import com.google.common.collect.Multimap;
 import dev.emi.trinkets.api.SlotReference;
 import karashokleo.spell_dimension.SpellDimension;
-import karashokleo.spell_dimension.content.item.essence.base.ColorProvider;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.util.SpellContainerUtil;
@@ -42,7 +41,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Stream;
 
-public class DynamicSpellBookItem extends SpellBookTrinketItem implements ColorProvider
+public class DynamicSpellBookItem extends SpellBookTrinketItem
 {
     public static final int REQUIREMENT_SPELL_POWER_PER_GRADE = 33;
     public static final Identifier DYNAMIC_POOL = SpellDimension.modLoc("dynamic");
@@ -86,14 +85,8 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem implements ColorP
     {
         return SDTexts.getGradeText(this.grade)
                 .append(SDTexts.getSchoolText(this.school))
-                .append(SDTexts.TEXT_SPELL_BOOK.get())
-                .setStyle(Style.EMPTY.withColor(this.getColor(stack)));
-    }
-
-    @Override
-    public int getColor(ItemStack stack)
-    {
-        return this.school.color;
+                .append(SDTexts.TEXT$SPELL_BOOK.get())
+                .setStyle(Style.EMPTY.withColor(this.school.color));
     }
 
     @Override
@@ -101,7 +94,7 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem implements ColorP
     {
         super.appendTooltip(stack, world, tooltip, context);
         tooltip.add(
-                SDTexts.TOOLTIP_BOOK_REQUIREMENT.get(
+                SDTexts.TOOLTIP$BOOK_REQUIREMENT.get(
                         this.getRequirementSpellPower(),
                         Text.translatable("attribute.name.spell_power." + school.id.getPath())
                 ).formatted(Formatting.DARK_GRAY)
@@ -127,18 +120,18 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem implements ColorP
             SpellInfo spellInfo = scrollItem.getSpellInfo(scroll);
             if (spellInfo == null)
             {
-                player.sendMessage(SDTexts.TOOLTIP_INVALID.get());
+                player.sendMessage(SDTexts.TOOLTIP$INVALID.get());
                 return;
             }
             if (this.school != spellInfo.spell().school)
             {
-                player.sendMessage(SDTexts.TEXT_INCOMPATIBLE_SCHOOL.get());
+                player.sendMessage(SDTexts.TEXT$INCOMPATIBLE_SCHOOL.get());
                 return;
             }
             SpellBinding.State.ApplyState state = SpellBinding.State.of(spellInfo.id(), stack, 0, 0, 0).state;
             switch (state)
             {
-                case INVALID -> player.sendMessage(SDTexts.TOOLTIP_INVALID.get());
+                case INVALID -> player.sendMessage(SDTexts.TOOLTIP$INVALID.get());
                 case ALREADY_APPLIED ->
                         player.sendMessage(Text.translatable("gui.spell_engine.spell_binding.already_bound"));
                 case NO_MORE_SLOT ->
@@ -161,13 +154,13 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem implements ColorP
         SpellContainer container = SpellContainerHelper.containerFromItemStack(stack);
         if (container == null || !container.isValid())
         {
-            player.sendMessage(SDTexts.TOOLTIP_INVALID.get());
+            player.sendMessage(SDTexts.TOOLTIP$INVALID.get());
             return Optional.empty();
         }
         int size = container.spell_ids.size();
         if (size < 1)
         {
-            player.sendMessage(SDTexts.TEXT_BLANK_BOOK.get());
+            player.sendMessage(SDTexts.TEXT$BLANK_BOOK.get());
             return Optional.empty();
         }
         String spellId = container.spell_ids.get(size - 1);

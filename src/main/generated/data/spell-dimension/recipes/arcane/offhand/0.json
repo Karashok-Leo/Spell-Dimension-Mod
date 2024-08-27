@@ -1,0 +1,7 @@
+{
+  "type": "spell-dimension:enchanted_essence",
+  "grade": 0,
+  "school": "spell_power:arcane",
+  "slot": "OFFHAND",
+  "threshold": 10
+}

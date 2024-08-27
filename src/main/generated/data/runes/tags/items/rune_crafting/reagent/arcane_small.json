@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "spell-dimension:essence_arcane_0",
+    "spell-dimension:essence_arcane_1",
+    "spell-dimension:essence_arcane_2"
+  ]
+}

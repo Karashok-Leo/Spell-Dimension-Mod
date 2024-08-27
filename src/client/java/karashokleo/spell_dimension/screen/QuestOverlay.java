@@ -32,7 +32,7 @@ public class QuestOverlay extends InfoSideBar<SideBar.IntSignature>
             Optional<Quest> quest = scroll.getQuest(stack);
             if (quest.isPresent()) return quest.get().getDesc();
         }
-        return List.of(SDTexts.TOOLTIP_INVALID.get());
+        return List.of(SDTexts.TOOLTIP$INVALID.get());
     }
 
     @Override

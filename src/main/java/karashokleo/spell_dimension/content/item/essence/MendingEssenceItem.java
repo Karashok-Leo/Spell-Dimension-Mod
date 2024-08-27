@@ -32,6 +32,6 @@ public class MendingEssenceItem extends StackClickEssenceItem
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
         super.appendTooltip(stack, world, tooltip, context);
-        tooltip.add(SDTexts.TOOLTIP_MENDING.get());
+        tooltip.add(SDTexts.TOOLTIP$MENDING.get());
     }
 }

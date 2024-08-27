@@ -1,11 +1,12 @@
 package karashokleo.spell_dimension.content.item;
 
+import karashokleo.l2hostility.content.network.S2CUndying;
+import karashokleo.l2hostility.init.LHNetworking;
 import karashokleo.spell_dimension.api.quest.Quest;
 import karashokleo.spell_dimension.api.quest.QuestRegistry;
+import karashokleo.spell_dimension.content.network.S2CTitle;
 import karashokleo.spell_dimension.data.SDTexts;
-import karashokleo.spell_dimension.util.NetworkUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
@@ -69,7 +70,10 @@ public class QuestScrollItem extends Item
                 quest.get().completeTasks(player))
         {
             quest.get().reward(player);
-            ServerPlayNetworking.send(player, NetworkUtil.QUEST_PACKET, PacketByteBufs.create());
+            ServerPlayNetworking.send(player, new S2CTitle(SDTexts.TEXT$QUEST_COMPLETE.get()));
+            S2CUndying packet = new S2CUndying(player);
+            LHNetworking.toClientPlayer(player, packet);
+            LHNetworking.toTracking(player, packet);
             if (!user.getAbilities().creativeMode)
                 stack.decrement(1);
         }
@@ -82,6 +86,6 @@ public class QuestScrollItem extends Item
         super.appendTooltip(stack, world, tooltip, context);
         Optional<Quest> quest = this.getQuest(stack);
         if (quest.isPresent()) tooltip.addAll(quest.get().getDesc());
-        else tooltip.add(SDTexts.TOOLTIP_INVALID.get());
+        else tooltip.add(SDTexts.TOOLTIP$INVALID.get());
     }
 }

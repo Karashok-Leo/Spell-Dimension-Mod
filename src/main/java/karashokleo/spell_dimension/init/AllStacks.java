@@ -12,7 +12,6 @@ import net.spell_engine.api.spell.SpellInfo;
 import net.wizards.WizardsMod;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Stream;
@@ -29,9 +28,9 @@ public class AllStacks
 
     static
     {
-        BASE_ESSENCE_STACKS = AllItems.BASE_ESSENCES.values().stream().flatMap(Collection::stream).map(Item::getDefaultStack).toList();
+        BASE_ESSENCE_STACKS = AllItems.BASE_ESSENCES.values().stream().map(Item::getDefaultStack).toList();
 
-        SPELL_BOOK_STACKS = AllItems.SPELL_BOOKS.values().stream().flatMap(Collection::stream).map(Item::getDefaultStack).toList();
+        SPELL_BOOK_STACKS = AllItems.SPELL_BOOKS.values().stream().map(Item::getDefaultStack).toList();
 
         List<AttributeModifier> allModifiers = AttributeModifier.getAll();
 

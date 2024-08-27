@@ -117,6 +117,12 @@ public class EnchantedEssenceRecipe extends ShapedRecipe
     @Override
     public ItemStack craft(RecipeInputInventory recipeInputInventory, DynamicRegistryManager dynamicRegistryManager)
     {
+        return getOutput(dynamicRegistryManager);
+    }
+
+    @Override
+    public ItemStack getOutput(DynamicRegistryManager registryManager)
+    {
         return AllItems.ENCHANTED_ESSENCE.getStack(
                 new EnchantedModifier(
                         threshold,

@@ -64,7 +64,7 @@ public abstract class SpellHelperMixin
         if (itemStack.isOf(AllItems.SPELL_SCROLL) &&
                 !SchoolUtil.getPlayerSchool(player).contains(spell.school))
         {
-            player.sendMessage(SDTexts.TEXT_SKILLED_SCHOOL.get(), true);
+            player.sendMessage(SDTexts.TEXT$SKILLED_SCHOOL.get(), true);
             cir.setReturnValue(SpellCast.Attempt.none());
         }
     }

@@ -1,0 +1,7 @@
+{
+  "type": "loot-bag:loot_table",
+  "icon": {
+    "texture": "mythicmetals:textures/item/tools/adamantite_sword.png"
+  },
+  "id": "spell-dimension:pool/epic/gear"
+}

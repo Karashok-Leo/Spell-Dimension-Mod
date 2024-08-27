@@ -1,0 +1,7 @@
+{
+  "type": "spell-dimension:enchanted_essence",
+  "grade": 1,
+  "school": "spell_power:soul",
+  "slot": "LEGS",
+  "threshold": 20
+}

@@ -1,0 +1,7 @@
+{
+  "type": "loot-bag:loot_table",
+  "icon": {
+    "texture": "artifacts:textures/item/crystal_heart.png"
+  },
+  "id": "spell-dimension:pool/artifact"
+}

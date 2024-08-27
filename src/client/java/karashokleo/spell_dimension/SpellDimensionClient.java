@@ -9,6 +9,8 @@ import karashokleo.spell_dimension.content.item.DynamicSpellBookItem;
 import karashokleo.spell_dimension.content.item.essence.base.ColorProvider;
 import karashokleo.spell_dimension.content.item.logic.EnchantedModifier;
 import karashokleo.spell_dimension.content.misc.INoClip;
+import karashokleo.spell_dimension.content.network.S2CSpellDash;
+import karashokleo.spell_dimension.content.network.S2CTitle;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllStatusEffects;
@@ -19,8 +21,6 @@ import karashokleo.spell_dimension.render.NucleusRenderer;
 import karashokleo.spell_dimension.render.PhaseParticleSpawner;
 import karashokleo.spell_dimension.screen.QuestOverlay;
 import karashokleo.spell_dimension.screen.SpellPowerTab;
-import karashokleo.spell_dimension.util.NetworkUtil;
-import karashokleo.spell_dimension.util.ParticleUtil;
 import net.combatroll.internals.RollingEntity;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
@@ -28,11 +28,11 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback;
 import net.fabricmc.fabric.api.event.Event;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.item.Item;
 import net.minecraft.text.TranslatableTextContent;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.random.Random;
 import net.spell_engine.api.effect.CustomModelStatusEffect;
 import net.spell_engine.api.effect.CustomParticleStatusEffect;
 import net.spell_engine.api.render.CustomModels;
@@ -59,7 +59,7 @@ public class SpellDimensionClient implements ClientModInitializer
         TextureOverlayRegistry.register(PHASE_LAYER, 0.5F, (client, player, context, tickDelta) -> INoClip.noClip(player));
 
         TAB_SPELL_POWER = TabRegistry.GROUP.registerTab(3600, SpellPowerTab::new,
-                () -> Armors.wizardRobeSet.head, SDTexts.TEXT_SPELL_POWER_INFO.get());
+                () -> Armors.wizardRobeSet.head, SDTexts.TEXT$SPELL_POWER_INFO.get());
 
         for (Item item : AllItems.COLOR_PROVIDERS)
             ColorProviderRegistry.ITEM.register((stack, tintIndex) -> (stack.getItem() instanceof ColorProvider c) ? c.getColor(stack) : 0xffffff, item);
@@ -79,29 +79,16 @@ public class SpellDimensionClient implements ClientModInitializer
         CustomParticleStatusEffect.register(AllStatusEffects.FROSTED, new FrostedParticleSpawner());
         CustomModelStatusEffect.register(AllStatusEffects.FROSTED, new FrostedEffectRenderer());
 
-        ClientPlayNetworking.registerGlobalReceiver(NetworkUtil.SPELL_DASH_PACKET, ((client, handler, buf, responseSender) ->
+        ClientPlayNetworking.registerGlobalReceiver(S2CTitle.TYPE, (packet, player, responseSender) ->
         {
-            client.execute(() ->
-            {
-                if (client.player instanceof RollingEntity rolling)
-                    ((RollManagerInvoker) rolling.getRollManager()).invokeRechargeRoll(client.player);
-            });
-        }));
-        ClientPlayNetworking.registerGlobalReceiver(NetworkUtil.QUEST_PACKET, ((client, handler, buf, responseSender) ->
-                client.execute(() ->
-                        client.inGameHud.setTitle(SDTexts.TEXT_QUEST.get()))));
-        ClientPlayNetworking.registerGlobalReceiver(NetworkUtil.DUST_PACKET, (client, handler, buf, responseSender) ->
+            InGameHud inGameHud = MinecraftClient.getInstance().inGameHud;
+            inGameHud.setTitle(packet.title());
+            if (packet.subTitle() != null) inGameHud.setSubtitle(packet.subTitle());
+        });
+        ClientPlayNetworking.registerGlobalReceiver(S2CSpellDash.TYPE, (packet, player, responseSender) ->
         {
-            Vec3d pos = new Vec3d(buf.readDouble(), buf.readDouble(), buf.readDouble());
-            int count = buf.readInt();
-            int color = buf.readInt();
-            float range = buf.readFloat();
-            Random random = Random.create();
-            client.execute(() ->
-            {
-                for (int i = 0; i < count; i++)
-                    client.particleManager.addParticle(ParticleUtil.getDustParticle(color), pos.addRandom(random, range).x, pos.addRandom(random, range).y, pos.addRandom(random, range).z, 0D, 0D, 0D);
-            });
+            if (player instanceof RollingEntity rolling)
+                ((RollManagerInvoker) rolling.getRollManager()).invokeRechargeRoll(player);
         });
     }
 

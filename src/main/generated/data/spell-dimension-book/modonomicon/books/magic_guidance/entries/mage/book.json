@@ -1,0 +1,119 @@
+{
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "category": "spell-dimension-book:mage",
+  "condition": {
+    "type": "modonomicon:entry_read",
+    "entry_id": "spell-dimension-book:mage/bind"
+  },
+  "description": "book.spell-dimension-book.magic_guidance.mage.book.description",
+  "hide_while_locked": false,
+  "icon": {
+    "item": "wizards:arcane_spell_book"
+  },
+  "name": "book.spell-dimension-book.magic_guidance.mage.book.name",
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "item": [
+        {
+          "item": "wizards:arcane_spell_book"
+        },
+        {
+          "item": "wizards:fire_spell_book"
+        },
+        {
+          "item": "wizards:frost_spell_book"
+        },
+        {
+          "item": "paladins:paladin_spell_book"
+        },
+        {
+          "item": "paladins:priest_spell_book"
+        }
+      ],
+      "text": "book.spell-dimension-book.magic_guidance.mage.book.prev.text",
+      "title": "book.spell-dimension-book.magic_guidance.mage.book.prev.title"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "item": [
+        {
+          "item": "spell-dimension:spell_book_healing_0"
+        },
+        {
+          "item": "spell-dimension:spell_book_healing_1"
+        },
+        {
+          "item": "spell-dimension:spell_book_healing_2"
+        },
+        {
+          "item": "spell-dimension:spell_book_soul_0"
+        },
+        {
+          "item": "spell-dimension:spell_book_soul_1"
+        },
+        {
+          "item": "spell-dimension:spell_book_soul_2"
+        },
+        {
+          "item": "spell-dimension:spell_book_arcane_0"
+        },
+        {
+          "item": "spell-dimension:spell_book_arcane_1"
+        },
+        {
+          "item": "spell-dimension:spell_book_arcane_2"
+        },
+        {
+          "item": "spell-dimension:spell_book_fire_0"
+        },
+        {
+          "item": "spell-dimension:spell_book_fire_1"
+        },
+        {
+          "item": "spell-dimension:spell_book_fire_2"
+        },
+        {
+          "item": "spell-dimension:spell_book_frost_0"
+        },
+        {
+          "item": "spell-dimension:spell_book_frost_1"
+        },
+        {
+          "item": "spell-dimension:spell_book_frost_2"
+        },
+        {
+          "item": "spell-dimension:spell_book_lightning_0"
+        },
+        {
+          "item": "spell-dimension:spell_book_lightning_1"
+        },
+        {
+          "item": "spell-dimension:spell_book_lightning_2"
+        }
+      ],
+      "text": "book.spell-dimension-book.magic_guidance.mage.book.next.text",
+      "title": "book.spell-dimension-book.magic_guidance.mage.book.next.title"
+    }
+  ],
+  "parents": [
+    {
+      "draw_arrow": true,
+      "entry": "spell-dimension-book:mage/bind",
+      "line_enabled": true,
+      "line_reversed": false
+    }
+  ],
+  "show_when_any_parent_unlocked": false,
+  "x": -4,
+  "y": 3
+}

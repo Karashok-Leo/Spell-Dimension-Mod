@@ -1,7 +1,6 @@
 package karashokleo.spell_dimension.content.enchantment;
 
-import karashokleo.spell_dimension.util.NetworkUtil;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import karashokleo.spell_dimension.content.network.S2CSpellDash;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.Entity;
@@ -24,6 +23,6 @@ public class SpellDashEnchantment extends SpellImpactEnchantment
     public void onSpellImpact(World world, LivingEntity caster, int totalLevel, List<Entity> targets, SpellInfo spellInfo)
     {
         if (caster instanceof ServerPlayerEntity player)
-            ServerPlayNetworking.send(player, NetworkUtil.SPELL_DASH_PACKET, PacketByteBufs.create());
+            ServerPlayNetworking.send(player, new S2CSpellDash());
     }
 }

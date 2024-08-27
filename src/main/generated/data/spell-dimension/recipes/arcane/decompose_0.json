@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "spell-dimension:essence_arcane_0"
+    },
+    {
+      "item": "spell-dimension:essence_arcane_0"
+    },
+    {
+      "item": "spell-dimension:essence_arcane_0"
+    },
+    {
+      "item": "spell-dimension:essence_arcane_0"
+    },
+    {
+      "item": "spell-dimension:essence_arcane_0"
+    },
+    {
+      "item": "spell-dimension:essence_arcane_0"
+    },
+    {
+      "item": "spell-dimension:essence_arcane_0"
+    },
+    {
+      "item": "spell-dimension:essence_arcane_0"
+    },
+    {
+      "item": "spell-dimension:essence_arcane_0"
+    }
+  ],
+  "result": {
+    "item": "spell-dimension:essence_arcane_1"
+  }
+}

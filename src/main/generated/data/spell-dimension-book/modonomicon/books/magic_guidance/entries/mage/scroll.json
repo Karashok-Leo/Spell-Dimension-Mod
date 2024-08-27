@@ -1,0 +1,64 @@
+{
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "category": "spell-dimension-book:mage",
+  "condition": {
+    "type": "modonomicon:entry_read",
+    "entry_id": "spell-dimension-book:mage/bind"
+  },
+  "description": "book.spell-dimension-book.magic_guidance.mage.scroll.description",
+  "hide_while_locked": false,
+  "icon": {
+    "item": "spell-dimension:spell_scroll"
+  },
+  "name": "book.spell-dimension-book.magic_guidance.mage.scroll.name",
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "item": {
+        "fabric:type": "fabric:nbt",
+        "base": {
+          "item": "spell-dimension:spell_scroll"
+        },
+        "nbt": {
+          "spell_container": {
+            "is_proxy": 1,
+            "max_spell_count": 1,
+            "spell_ids": [
+              "wizards:fire_breath"
+            ]
+          }
+        },
+        "strict": true
+      },
+      "text": "book.spell-dimension-book.magic_guidance.mage.scroll.prev.text",
+      "title": "book.spell-dimension-book.magic_guidance.mage.scroll.prev.title"
+    },
+    {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "show_title_separator": true,
+      "text": "book.spell-dimension-book.magic_guidance.mage.scroll.next.text",
+      "title": "",
+      "use_markdown_in_title": false
+    }
+  ],
+  "parents": [
+    {
+      "draw_arrow": true,
+      "entry": "spell-dimension-book:mage/bind",
+      "line_enabled": true,
+      "line_reversed": false
+    }
+  ],
+  "show_when_any_parent_unlocked": false,
+  "x": 4,
+  "y": 3
+}

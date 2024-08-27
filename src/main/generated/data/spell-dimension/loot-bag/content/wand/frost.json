@@ -1,0 +1,13 @@
+{
+  "type": "loot-bag:item",
+  "icon": {
+    "texture": "wizards:textures/item/wand_frost.png"
+  },
+  "item": {
+    "Count": 1,
+    "id": "wizards:wand_frost",
+    "tag": {
+      "Damage": 0
+    }
+  }
+}
