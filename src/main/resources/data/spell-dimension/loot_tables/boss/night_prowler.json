@@ -10,7 +10,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "endrem:cryptic_eye"
+          "name": "spell-dimension:sun_moon_star"
         }
       ],
       "rolls": 1.0

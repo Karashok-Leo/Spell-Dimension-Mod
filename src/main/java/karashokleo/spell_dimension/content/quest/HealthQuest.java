@@ -1,7 +1,6 @@
 package karashokleo.spell_dimension.content.quest;
 
 import karashokleo.spell_dimension.api.quest.ItemRewardQuest;
-import karashokleo.spell_dimension.data.SDTexts;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -9,7 +8,7 @@ import net.minecraft.text.Text;
 
 import java.util.List;
 
-public record HealthQuest(float health, List<ItemStack> rewards) implements ItemRewardQuest
+public record HealthQuest(float health, List<ItemStack> rewards) implements ItemRewardQuest, AutoDescQuest
 {
     @Override
     public boolean completeTasks(ServerPlayerEntity player)
@@ -24,8 +23,8 @@ public record HealthQuest(float health, List<ItemStack> rewards) implements Item
     }
 
     @Override
-    public void appendTaskDesc(List<Text> desc)
+    public Text getDescText()
     {
-        desc.add(SDTexts.QUEST$HEALTH.get(Text.translatable(EntityAttributes.GENERIC_MAX_HEALTH.getTranslationKey()), this.health));
+        return Text.translatable(this.getTranslationKey(), Text.translatable(EntityAttributes.GENERIC_MAX_HEALTH.getTranslationKey()), this.health);
     }
 }

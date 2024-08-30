@@ -141,61 +141,73 @@ public enum SDContents
     ),
     WAND_ARCANE(
             Weapons.arcaneWand.item().getDefaultStack(),
+            Weapons.arcaneWand.id(),
             "Arcane Wand",
             "奥秘魔杖"
     ),
     WAND_FIRE(
             Weapons.fireWand.item().getDefaultStack(),
+            Weapons.fireWand.id(),
             "Fire Wand",
             "火焰魔杖"
     ),
     WAND_FROST(
             Weapons.frostWand.item().getDefaultStack(),
+            Weapons.frostWand.id(),
             "Frost Wand",
             "寒冰魔杖"
     ),
     WAND_HEALING(
             net.paladins.item.Weapons.holy_wand.item().getDefaultStack(),
+            net.paladins.item.Weapons.holy_wand.id(),
             "Holy Wand",
             "神圣魔杖"
     ),
     WAND_LIGHTNING(
             Weapons.arcaneWand.item().getDefaultStack(),
+            Weapons.arcaneWand.id(),
             "Lightning Wand",
             "雷电魔杖"
     ),
     WAND_SOUL(
             Weapons.arcaneWand.item().getDefaultStack(),
+            Weapons.arcaneWand.id(),
             "Soul Wand",
             "灵魂魔杖"
     ),
     RUNE_ARCANE(
-            runeStack(RuneItems.RuneType.ARCANE),
+            new ItemStack(runeEntry(RuneItems.RuneType.ARCANE).item(), 64),
+            runeEntry(RuneItems.RuneType.ARCANE).id(),
             "Arcane Rune",
             "奥秘符文"
     ),
     RUNE_FIRE(
-            runeStack(RuneItems.RuneType.FIRE),
+            new ItemStack(runeEntry(RuneItems.RuneType.FIRE).item(), 64),
+            runeEntry(RuneItems.RuneType.FIRE).id(),
             "Fire Rune",
             "火焰符文"
     ),
     RUNE_FROST(
-            runeStack(RuneItems.RuneType.FROST),
+            new ItemStack(runeEntry(RuneItems.RuneType.FROST).item(), 64),
+            runeEntry(RuneItems.RuneType.FROST).id(),
             "Frost Rune",
             "寒冰符文"
     ),
     RUNE_HEALING(
-            runeStack(RuneItems.RuneType.HEALING),
+            new ItemStack(runeEntry(RuneItems.RuneType.HEALING).item(), 64),
+            runeEntry(RuneItems.RuneType.HEALING).id(),
             "Healing Rune",
             "治愈符文"
     ),
     RUNE_LIGHTNING(
-            runeStack(RuneItems.RuneType.LIGHTNING),
+            new ItemStack(runeEntry(RuneItems.RuneType.LIGHTNING).item(), 64),
+            runeEntry(RuneItems.RuneType.LIGHTNING).id(),
             "Lightning Rune",
             "雷电符文"
     ),
     RUNE_SOUL(
-            runeStack(RuneItems.RuneType.SOUL),
+            new ItemStack(runeEntry(RuneItems.RuneType.SOUL).item(), 64),
+            runeEntry(RuneItems.RuneType.SOUL).id(),
             "Soul Rune",
             "灵魂符文"
     ),
@@ -264,10 +276,10 @@ public enum SDContents
         );
     }
 
-    SDContents(ItemStack stack, String nameEn, String nameZh)
+    SDContents(ItemStack stack, Identifier texture, String nameEn, String nameZh)
     {
         this(
-                new ItemContent(stack),
+                new ItemContent(stack, new Content.Icon(texture)),
                 nameEn,
                 nameZh,
                 "%d × %s".formatted(stack.getCount(), nameEn),
@@ -275,10 +287,9 @@ public enum SDContents
         );
     }
 
-    private static ItemStack runeStack(RuneItems.RuneType type)
+    @SuppressWarnings("all")
+    private static RuneItems.Entry runeEntry(RuneItems.RuneType type)
     {
-        ItemStack stack = RuneItems.get(type).getDefaultStack();
-        stack.setCount(stack.getMaxCount());
-        return stack;
+        return RuneItems.entries.stream().filter(entry -> entry.type() == type).findFirst().get();
     }
 }

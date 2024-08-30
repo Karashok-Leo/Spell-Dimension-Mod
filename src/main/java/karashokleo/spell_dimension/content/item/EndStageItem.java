@@ -29,13 +29,23 @@ public class EndStageItem extends Item
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand)
     {
-        if (user instanceof ServerPlayerEntity player && !EndStageComponent.canEnterEnd(user))
+        if (user instanceof ServerPlayerEntity player)
         {
-            ServerPlayNetworking.send(player, new S2CTitle(SDTexts.TEXT$END_STAGE.get()));
-            S2CUndying packet = new S2CUndying(player);
-            LHNetworking.toClientPlayer(player, packet);
-            LHNetworking.toTracking(player, packet);
-            EndStageComponent.setCanEnterEnd(user, true);
+            if (EndStageComponent.canEnterEnd(user))
+            {
+                if (player.getAbilities().creativeMode && player.isSneaking())
+                {
+                    player.sendMessage(SDTexts.TEXT$PROGRESS_ROLLBACK.get(), true);
+                    EndStageComponent.setCanEnterEnd(user, true);
+                }
+            } else
+            {
+                ServerPlayNetworking.send(player, new S2CTitle(SDTexts.TEXT$END_STAGE.get()));
+                S2CUndying packet = new S2CUndying(player);
+                LHNetworking.toClientPlayer(player, packet);
+                LHNetworking.toTracking(player, packet);
+                EndStageComponent.setCanEnterEnd(user, true);
+            }
         }
         return TypedActionResult.success(user.getStackInHand(hand), world.isClient());
     }

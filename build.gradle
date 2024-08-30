@@ -120,6 +120,14 @@ dependencies {
 
     modImplementation "io.wispforest:owo-lib:${project.owo_version}"
     modImplementation("maven.modrinth:when-dungeons-arise:${project.wda_version}-fabric")
+
+    modImplementation "maven.modrinth:puzzles-lib:${project.puzzles_lib_version}"
+    modImplementation "maven.modrinth:forge-config-api-port:${project.forge_config_api_port}"
+    modImplementation "maven.modrinth:mutant-monsters:${project.mutant_monster_version}"
+
+    modImplementation "maven.modrinth:adventurez:${project.adventurez_version}"
+    modImplementation "maven.modrinth:voidz:${project.voidz_version}"
+
 }
 
 processResources {

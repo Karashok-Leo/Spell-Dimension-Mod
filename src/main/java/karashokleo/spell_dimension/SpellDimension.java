@@ -11,6 +11,7 @@ import karashokleo.leobrary.datagen.generator.init.GeneratorStorage;
 import karashokleo.spell_dimension.content.component.BuffComponentImpl;
 import karashokleo.spell_dimension.content.component.EndStageComponent;
 import karashokleo.spell_dimension.content.component.EnlighteningComponent;
+import karashokleo.spell_dimension.content.component.QuestComponent;
 import karashokleo.spell_dimension.content.item.logic.EnchantedModifier;
 import karashokleo.spell_dimension.content.item.logic.EnlighteningModifier;
 import karashokleo.spell_dimension.content.misc.DebugStaffCommand;
@@ -87,6 +88,7 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
     {
         registry.registerForPlayers(AllComponents.ENLIGHTENING, player -> new EnlighteningComponent(), RespawnCopyStrategy.ALWAYS_COPY);
         registry.registerForPlayers(AllComponents.ENTER_END, player -> new EndStageComponent(), RespawnCopyStrategy.ALWAYS_COPY);
+        registry.registerForPlayers(AllComponents.QUEST, player -> new QuestComponent(), RespawnCopyStrategy.ALWAYS_COPY);
         registry.registerFor(LivingEntity.class, AllComponents.BUFF, BuffComponentImpl::new);
     }
 

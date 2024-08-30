@@ -4,7 +4,10 @@ import karashokleo.loot_bag.api.common.bag.Bag;
 import karashokleo.loot_bag.api.common.bag.BagEntry;
 import karashokleo.loot_bag.api.common.bag.OptionalBag;
 import karashokleo.loot_bag.api.common.bag.SingleBag;
+import karashokleo.loot_bag.internal.item.LootBagItemRegistry;
 import karashokleo.spell_dimension.SpellDimension;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtString;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 
@@ -215,5 +218,12 @@ public enum SDBags
                 nameEn,
                 nameZh
         );
+    }
+
+    public ItemStack getStack()
+    {
+        ItemStack stack = LootBagItemRegistry.LOOT_BAG.getDefaultStack();
+        stack.setSubNbt("BagId", NbtString.of(id.toString()));
+        return stack;
     }
 }

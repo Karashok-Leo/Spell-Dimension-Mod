@@ -50,7 +50,7 @@ public class AllStacks
 
         SPELL_SCROLL_STACKS = new ArrayList<>();
 
-        QUEST_SCROLL_STACKS = QuestRegistry.QUEST_REGISTRY.streamEntries().map(entry -> AllItems.QUEST_SCROLL.getStack(entry.registryKey().getValue())).toList();
+        QUEST_SCROLL_STACKS = QuestRegistry.QUEST_REGISTRY.streamEntries().map(entry -> AllItems.QUEST_SCROLL.getStack(entry)).toList();
     }
 
     public static List<ItemStack> getScrolls()

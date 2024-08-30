@@ -5,7 +5,10 @@ import dev.xkmc.l2tabs.tabs.inventory.InvTabData;
 import dev.xkmc.l2tabs.tabs.inventory.TabRegistry;
 import karashokleo.leobrary.gui.api.GuiOverlayRegistry;
 import karashokleo.leobrary.gui.api.TextureOverlayRegistry;
+import karashokleo.spell_dimension.api.quest.Quest;
+import karashokleo.spell_dimension.api.quest.QuestUsage;
 import karashokleo.spell_dimension.content.item.DynamicSpellBookItem;
+import karashokleo.spell_dimension.content.item.QuestScrollItem;
 import karashokleo.spell_dimension.content.item.essence.base.ColorProvider;
 import karashokleo.spell_dimension.content.item.logic.EnchantedModifier;
 import karashokleo.spell_dimension.content.misc.INoClip;
@@ -30,6 +33,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRe
 import net.fabricmc.fabric.api.event.Event;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.InGameHud;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.text.TranslatableTextContent;
 import net.minecraft.util.Identifier;
@@ -39,6 +43,7 @@ import net.spell_engine.api.render.CustomModels;
 import net.wizards.item.Armors;
 
 import java.util.List;
+import java.util.Optional;
 
 public class SpellDimensionClient implements ClientModInitializer
 {
@@ -97,6 +102,18 @@ public class SpellDimensionClient implements ClientModInitializer
         Identifier tooltipFinal = SpellDimension.modLoc("tooltip_final");
         ItemTooltipCallback.EVENT.addPhaseOrdering(Event.DEFAULT_PHASE, tooltipFinal);
         ItemTooltipCallback.EVENT.register(EnchantedModifier::levelTooltip);
+        ItemTooltipCallback.EVENT.register((stack, context, lines) ->
+        {
+            if (context.isAdvanced() && stack.getItem() instanceof QuestScrollItem item)
+            {
+                ClientPlayerEntity player = MinecraftClient.getInstance().player;
+                Optional<Quest> optional = item.getQuest(stack);
+                if (player != null &&
+                        optional.isPresent() &&
+                        QuestUsage.isQuestCompleted(player, optional.get()))
+                    lines.add(SDTexts.TEXT$QUEST_COMPLETE.get());
+            }
+        });
         ItemTooltipCallback.EVENT.register(tooltipFinal, (stack, context, lines) ->
         {
             if (stack.getItem() instanceof DynamicSpellBookItem)

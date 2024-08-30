@@ -36,6 +36,7 @@ public enum SDTexts
     TEXT$QUEST_COMPLETE("Quest completed!", "任务完成！"),
     TEXT$ABYSS_GUARD("You need to have Abyss Guard in your inventory to sound the shell horn!", "你需要在物品栏中持有深渊守护才能吹响号角！"),
     TEXT$END_STAGE("End Stage Unlocked!", "终末阶段解锁！"),
+    TEXT$PROGRESS_ROLLBACK("Progress has been rolled back!", "进度已回退！"),
 
     /**
      * Spell School
@@ -82,6 +83,8 @@ public enum SDTexts
     TOOLTIP$QUEST$REWARD("Reward:", "任务奖励:"),
     TOOLTIP$QUEST$COMPLETE("Right click to submit", "右键提交任务"),
     TOOLTIP$QUEST$MUL("%s × %s", "%s × %s"),
+    TOOLTIP$QUEST$AND(" and ", "和"),
+    TOOLTIP$QUEST$LOOT_ITEM("Defeat %s to obtain %s", "击杀%s并获取%s"),
 
     /**
      * Scrolls
@@ -93,12 +96,6 @@ public enum SDTexts
     SCROLL$EXPLORING("Obtained through exploring %s", "探索%s获得"),
     SCROLL$KILLING("Dropped by killing %s", "击杀%s掉落"),
     SCROLL$CRAFT("Obtained through crafting using %s", "使用%s合成获得"),
-
-    /**
-     * Quests
-     */
-    QUEST$FIRST_DAY("Survive for one day", "存活一天"),
-    QUEST$HEALTH("Gain experience to increase your %s to %s", "获取经验以提升你的%s至%s"),
 
     /**
      * Spells

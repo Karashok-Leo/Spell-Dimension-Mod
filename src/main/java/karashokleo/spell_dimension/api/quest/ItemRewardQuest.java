@@ -21,6 +21,13 @@ public interface ItemRewardQuest extends Quest
     default void appendRewardDesc(List<Text> desc)
     {
         for (ItemStack reward : this.getRewards())
-            desc.add(SDTexts.TOOLTIP$QUEST$MUL.get(reward.getName(), reward.getCount()));
+            desc.add(
+                    SDTexts.TOOLTIP$QUEST$MUL.get(
+                            Text.empty()
+                                    .append(reward.getName())
+                                    .formatted(reward.getRarity().formatting),
+                            reward.getCount()
+                    )
+            );
     }
 }

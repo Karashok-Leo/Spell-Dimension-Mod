@@ -4,6 +4,8 @@ import karashokleo.l2hostility.content.network.S2CUndying;
 import karashokleo.l2hostility.init.LHNetworking;
 import karashokleo.spell_dimension.api.quest.Quest;
 import karashokleo.spell_dimension.api.quest.QuestRegistry;
+import karashokleo.spell_dimension.api.quest.QuestUsage;
+import karashokleo.spell_dimension.content.component.QuestComponent;
 import karashokleo.spell_dimension.content.network.S2CTitle;
 import karashokleo.spell_dimension.data.SDTexts;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -13,6 +15,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtOps;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
@@ -35,16 +39,18 @@ public class QuestScrollItem extends Item
 
     public ItemStack getStack(Quest quest)
     {
-        Identifier id = QuestRegistry.QUEST_REGISTRY.getId(quest);
-        return id == null ?
-                this.getDefaultStack() :
-                this.getStack(id);
+        return getStack(QuestUsage.entry(quest));
     }
 
     public ItemStack getStack(Identifier id)
     {
+        return getStack(QuestUsage.entry(id));
+    }
+
+    public ItemStack getStack(RegistryEntry<Quest> entry)
+    {
         ItemStack stack = this.getDefaultStack();
-        stack.getOrCreateNbt().putString(KEY, id.toString());
+        QuestRegistry.ENTRY_CODEC.encodeStart(NbtOps.INSTANCE, entry).result().ifPresent(e -> stack.getOrCreateNbt().put(KEY, e));
         return stack;
     }
 
@@ -64,18 +70,34 @@ public class QuestScrollItem extends Item
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand)
     {
         ItemStack stack = user.getStackInHand(hand);
-        Optional<Quest> quest = this.getQuest(stack);
-        if (quest.isPresent() &&
-                user instanceof ServerPlayerEntity player &&
-                quest.get().completeTasks(player))
+        Optional<Quest> optional = this.getQuest(stack);
+        if (optional.isPresent() && user instanceof ServerPlayerEntity player)
         {
-            quest.get().reward(player);
-            ServerPlayNetworking.send(player, new S2CTitle(SDTexts.TEXT$QUEST_COMPLETE.get()));
-            S2CUndying packet = new S2CUndying(player);
-            LHNetworking.toClientPlayer(player, packet);
-            LHNetworking.toTracking(player, packet);
-            if (!user.getAbilities().creativeMode)
-                stack.decrement(1);
+            Quest quest = optional.get();
+            boolean creativeMode = player.getAbilities().creativeMode;
+            if (QuestUsage.isQuestCompleted(player, quest))
+            {
+                if (creativeMode && player.isSneaking())
+                {
+                    player.sendMessage(SDTexts.TEXT$PROGRESS_ROLLBACK.get(), true);
+                    QuestUsage.removeQuestsCompleted(player, quest);
+                }
+            } else if (QuestUsage.allDependenciesCompleted(player, quest) &&
+                    quest.completeTasks(player))
+            {
+                quest.reward(player);
+                QuestUsage.addQuestsCompleted(player, quest);
+                QuestUsage.getDependents(quest)
+                        .stream()
+                        .filter(q1 -> QuestUsage.getDependencies(q1.value()).stream().allMatch(q2 -> QuestComponent.isCompleted(player, q2)))
+                        .map(this::getStack)
+                        .forEach(itemStack -> player.getInventory().offerOrDrop(itemStack));
+                ServerPlayNetworking.send(player, new S2CTitle(SDTexts.TEXT$QUEST_COMPLETE.get()));
+                S2CUndying packet = new S2CUndying(player);
+                LHNetworking.toClientPlayer(player, packet);
+                LHNetworking.toTracking(player, packet);
+                if (!creativeMode) stack.decrement(1);
+            }
         }
         return TypedActionResult.success(stack, world.isClient());
     }

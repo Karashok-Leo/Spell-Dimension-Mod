@@ -1,5 +1,6 @@
 package karashokleo.spell_dimension.api.quest;
 
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.text.Text;
@@ -19,7 +20,14 @@ public interface ItemTaskQuest extends IngredientTaskQuest
     @Override
     default void appendTaskDesc(List<Text> desc)
     {
-        for (ItemConvertible item : this.getTaskItems())
-            desc.add(item.asItem().getName());
+        for (ItemConvertible c : this.getTaskItems())
+        {
+            Item item = c.asItem();
+            desc.add(
+                    Text.empty()
+                            .append(item.getName())
+                            .formatted(item.getRarity(item.getDefaultStack()).formatting)
+            );
+        }
     }
 }

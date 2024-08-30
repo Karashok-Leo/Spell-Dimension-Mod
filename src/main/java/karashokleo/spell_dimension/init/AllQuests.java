@@ -1,33 +1,473 @@
 package karashokleo.spell_dimension.init;
 
+import com.obscuria.aquamirae.registry.AquamiraeEntities;
+import com.obscuria.aquamirae.registry.AquamiraeItems;
+import fuzs.mutantmonsters.init.ModRegistry;
+import karashokleo.l2hostility.L2Hostility;
+import karashokleo.leobrary.datagen.builder.NamedEntryBuilder;
+import karashokleo.leobrary.datagen.builder.provider.DefaultLanguageGeneratorProvider;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.api.quest.Quest;
 import karashokleo.spell_dimension.api.quest.QuestRegistry;
+import karashokleo.spell_dimension.api.quest.QuestUsage;
 import karashokleo.spell_dimension.config.AttributeModifier;
-import karashokleo.spell_dimension.content.quest.FirstDayQuest;
-import karashokleo.spell_dimension.content.quest.HealthQuest;
+import karashokleo.spell_dimension.content.quest.*;
+import karashokleo.spell_dimension.data.loot_bag.SDBags;
+import net.adventurez.init.EntityInit;
+import net.adventurez.init.ItemInit;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.item.Items;
+import net.minecraft.registry.Registries;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.Pair;
 import net.spell_power.api.SpellPowerMechanics;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class AllQuests
 {
-    public static final FirstDayQuest FIRST_DAY = new FirstDayQuest(List.of());
-    public static final HealthQuest HEALTH = new HealthQuest(20, List.of(
-            AllItems.ENLIGHTENING_ESSENCE.getStack(
-                    new AttributeModifier(SpellPowerMechanics.HASTE.attribute, 0.05, EntityAttributeModifier.Operation.MULTIPLY_BASE).toELM()
-            )
-    ));
+    public static FirstDayQuest FIRST_DAY;
+
+    public static HealthQuest HEALTH;
+    public static SimpleAdvancementQuest CHOOSE_PATH;
+    public static SimpleAdvancementQuest KILL_TRAIT;
+
+
+    public static SimpleLootItemQuest KILL_MUTANT_ZOMBIE;
+    public static SimpleLootItemQuest KILL_MUTANT_SKELETON;
+    public static SimpleLootItemQuest KILL_MUTANT_CREEPER;
+    public static SimpleLootItemQuest KILL_MUTANT_ENDERMAN;
+
+    public static SimpleLootItemQuest KILL_OLD_CHAMPION;
+    public static SimpleLootItemQuest KILL_DECAYING_KING;
+    public static SimpleLootItemQuest KILL_ELDER_GUARDIAN;
+    public static SimpleLootItemQuest KILL_WITHER;
+    public static SimpleLootItemQuest KILL_INVOKER;
+    public static SimpleLootItemQuest KILL_WARDEN;
+
+    public static SimpleLootItemQuest KILL_MOON_KNIGHT;
+    public static SimpleLootItemQuest KILL_BLACKSTONE_GOLEM;
+    public static SimpleLootItemQuest KILL_CAPTAIN_CORNELIA;
+    public static SimpleLootItemQuest KILL_CHAOS_MONARCH;
+    public static SimpleLootItemQuest KILL_RETURNING_KNIGHT;
+    public static SimpleLootItemQuest KILL_STALKER;
+
+    public static SimpleLootItemQuest KILL_GRAVEYARD_LICH;
+    public static SimpleLootItemQuest KILL_BOMD_LICH;
+    public static SimpleLootItemQuest KILL_VOID_BLOSSOM;
+    public static SimpleLootItemQuest KILL_GAUNTLET;
+
+    public static SimpleLootItemQuest KILL_DAY_NIGHT;
+
+    public static EnderDragonAdvancementQuest KILL_ENDER_DRAGON;
+    public static SimpleLootItemQuest KILL_OBSIDLITH;
+    public static SimpleLootItemQuest KILL_THE_EYE;
+    public static SimpleLootItemQuest KILL_VOID_SHADOW;
 
     public static void register()
     {
-        register("first_day", FIRST_DAY);
-        register("health", HEALTH);
+        registerQuestsBase();
+        registerQuestsKillMutant();
+        registerQuestsKillLv100();
+        registerQuestsKillLv150();
+        registerQuestsKillLv200();
+        registerQuestsKillLv250();
+        registerQuestsKillLv300();
+        Entry.buildRelations();
     }
 
-    public static void register(String path, Quest quest)
+    public static void registerQuestsBase()
     {
-        QuestRegistry.register(SpellDimension.modLoc(path), quest);
+        FIRST_DAY = Entry.of("first_day", new FirstDayQuest(List.of()))
+                .addEnDesc("Survive for one day")
+                .addZhDesc("存活一天")
+                .register();
+        HEALTH = Entry.of("health", new HealthQuest(20, List.of(
+                        AllItems.ENLIGHTENING_ESSENCE.getStack(
+                                new AttributeModifier(SpellPowerMechanics.HASTE.attribute, 0.05, EntityAttributeModifier.Operation.MULTIPLY_BASE).toELM()
+                        )
+                )))
+                .addDependencies(FIRST_DAY)
+                .addEnDesc("Gain experience to increase your %s to %s")
+                .addZhDesc("获取经验以提升你的%s至%s")
+                .register();
+        CHOOSE_PATH = Entry.of("choose_path", new SimpleAdvancementQuest(new Identifier("rpg_series:classes"), List.of(
+                        AllItems.ENLIGHTENING_ESSENCE.getStack(
+                                new AttributeModifier(SpellPowerMechanics.CRITICAL_CHANCE.attribute, 0.05, EntityAttributeModifier.Operation.MULTIPLY_BASE).toELM()
+                        )
+                )))
+                .addDependencies(FIRST_DAY)
+                .register();
+        KILL_TRAIT = Entry.of("kill_trait", new SimpleAdvancementQuest(L2Hostility.id("hostility/kill_first"), List.of(
+                        AllItems.ENLIGHTENING_ESSENCE.getStack(
+                                new AttributeModifier(SpellPowerMechanics.CRITICAL_DAMAGE.attribute, 0.05, EntityAttributeModifier.Operation.MULTIPLY_BASE).toELM()
+                        )
+                )))
+                .addDependencies(FIRST_DAY)
+                .register();
+    }
+
+    public static void registerQuestsKillMutant()
+    {
+        KILL_MUTANT_ZOMBIE = Entry.of(
+                        "kill_mutant_zombie",
+                        new SimpleLootItemQuest(
+                                ModRegistry.MUTANT_ZOMBIE_ENTITY_TYPE::get,
+                                ModRegistry.HULK_HAMMER_ITEM::get,
+                                SDBags.COMMON_BOOK.getStack()
+                        )
+                )
+                .addDependencies(KILL_TRAIT)
+                .register();
+        KILL_MUTANT_SKELETON = Entry.of(
+                        "kill_mutant_skeleton",
+                        new SimpleLootItemQuest(
+                                ModRegistry.MUTANT_SKELETON_ENTITY_TYPE::get,
+                                ModRegistry.MUTANT_SKELETON_SKULL_ITEM::get,
+                                SDBags.COMMON_GEAR.getStack()
+                        )
+                )
+                .addDependencies(KILL_TRAIT)
+                .register();
+        KILL_MUTANT_CREEPER = Entry.of(
+                        "kill_mutant_creeper",
+                        new SimpleLootItemQuest(
+                                ModRegistry.MUTANT_CREEPER_ENTITY_TYPE::get,
+                                ModRegistry.CREEPER_SHARD_ITEM::get,
+                                SDBags.COMMON_MATERIAL.getStack()
+                        )
+                )
+                .addDependencies(KILL_TRAIT)
+                .register();
+        KILL_MUTANT_ENDERMAN = Entry.of(
+                        "kill_mutant_enderman",
+                        new SimpleLootItemQuest(
+                                ModRegistry.MUTANT_ENDERMAN_ENTITY_TYPE::get,
+                                ModRegistry.ENDERSOUL_HAND_ITEM::get,
+                                SDBags.COMMON_BOOK.getStack()
+                        )
+                )
+                .addDependencies(KILL_TRAIT)
+                .register();
+    }
+
+    public static void registerQuestsKillLv100()
+    {
+        KILL_OLD_CHAMPION = Entry.of(
+                        "kill_old_champion",
+                        new SimpleLootItemQuest(
+                                List.of(
+                                        () -> Registries.ENTITY_TYPE.get(new Identifier("soulsweapons:draugr_boss")),
+                                        () -> Registries.ENTITY_TYPE.get(new Identifier("soulsweapons:night_shade"))
+                                ),
+                                List.of(
+                                        () -> Registries.ITEM.get(new Identifier("soulsweapons:essence_of_eventide"))
+                                ),
+                                List.of(
+                                        SDBags.UNCOMMON_BOOK.getStack()
+                                )
+                        )
+                )
+                .addDependencies(KILL_MUTANT_ZOMBIE)
+                .register();
+        KILL_DECAYING_KING = Entry.of(
+                        "kill_decaying_king",
+                        new SimpleLootItemQuest(
+                                () -> Registries.ENTITY_TYPE.get(new Identifier("soulsweapons:accursed_lord_boss")),
+                                () -> AllItems.ACCURSED_BLACKSTONE,
+                                SDBags.UNCOMMON_BOOK.getStack()
+                        )
+                )
+                .addDependencies(KILL_MUTANT_ZOMBIE)
+                .register();
+        KILL_ELDER_GUARDIAN = Entry.of(
+                        "kill_elder_guardian",
+                        new SimpleLootItemQuest(
+                                () -> EntityType.ELDER_GUARDIAN,
+                                () -> AllItems.ABYSS_GUARD,
+                                SDBags.UNCOMMON_GEAR.getStack()
+                        )
+                )
+                .addDependencies(KILL_MUTANT_SKELETON)
+                .register();
+        KILL_WITHER = Entry.of(
+                        "kill_wither",
+                        new SimpleLootItemQuest(
+                                () -> EntityType.WITHER,
+                                () -> Items.NETHER_STAR,
+                                SDBags.UNCOMMON_GEAR.getStack()
+                        )
+                )
+                .addDependencies(KILL_MUTANT_SKELETON)
+                .register();
+        KILL_INVOKER = Entry.of(
+                        "kill_invoker",
+                        new SimpleLootItemQuest(
+                                "illagerinvasion:invoker",
+                                "illagerinvasion:primal_essence",
+                                SDBags.UNCOMMON_MATERIAL.getStack()
+                        )
+                )
+                .addDependencies(KILL_MUTANT_CREEPER)
+                .register();
+        KILL_WARDEN = Entry.of(
+                        "kill_warden",
+                        new SimpleLootItemQuest(
+                                () -> EntityType.WARDEN,
+                                () -> Registries.ITEM.get(new Identifier("deeperdarker:heart_of_the_deep")),
+                                SDBags.UNCOMMON_MATERIAL.getStack()
+                        )
+                )
+                .addDependencies(KILL_MUTANT_CREEPER)
+                .register();
+    }
+
+    public static void registerQuestsKillLv150()
+    {
+        KILL_MOON_KNIGHT = Entry.of(
+                        "kill_moon_knight",
+                        new SimpleLootItemQuest(
+                                "soulsweapons:moonknight",
+                                "soulsweapons:essence_of_luminescence",
+                                SDBags.RARE_BOOK.getStack()
+                        )
+                )
+                .addDependencies(KILL_OLD_CHAMPION)
+                .register();
+        KILL_BLACKSTONE_GOLEM = Entry.of(
+                        "kill_blackstone_golem",
+                        new SimpleLootItemQuest(
+                                () -> EntityInit.BLACKSTONE_GOLEM,
+                                () -> ItemInit.BLACKSTONE_GOLEM_HEART,
+                                SDBags.RARE_BOOK.getStack()
+                        )
+                )
+                .addDependencies(KILL_DECAYING_KING)
+                .register();
+        KILL_CAPTAIN_CORNELIA = Entry.of(
+                        "kill_captain_cornelia",
+                        new SimpleLootItemQuest(
+                                () -> AquamiraeEntities.CAPTAIN_CORNELIA,
+                                () -> AquamiraeItems.SHIP_GRAVEYARD_ECHO,
+                                SDBags.RARE_GEAR.getStack()
+                        )
+                )
+                .addDependencies(KILL_ELDER_GUARDIAN)
+                .register();
+        KILL_CHAOS_MONARCH = Entry.of(
+                        "kill_chaos_monarch",
+                        new SimpleLootItemQuest(
+                                "soulsweapons:chaos_monarch",
+                                "soulsweapons:chaos_crown",
+                                SDBags.RARE_GEAR.getStack()
+                        )
+                )
+                .addDependencies(KILL_WITHER)
+                .register();
+        KILL_RETURNING_KNIGHT = Entry.of(
+                        "kill_returning_knight",
+                        new SimpleLootItemQuest(
+                                "soulsweapons:returning_knight",
+                                "soulsweapons:arkenstone",
+                                SDBags.RARE_MATERIAL.getStack()
+                        )
+                )
+                .addDependencies(KILL_INVOKER)
+                .register();
+        KILL_STALKER = Entry.of(
+                        "kill_stalker",
+                        new SimpleLootItemQuest(
+                                "deeperdarker:stalker",
+                                "deeperdarker:soul_crystal",
+                                SDBags.RARE_MATERIAL.getStack()
+                        )
+                )
+                .addDependencies(KILL_WARDEN)
+                .register();
+    }
+
+    public static void registerQuestsKillLv200()
+    {
+        KILL_GRAVEYARD_LICH = Entry.of(
+                        "kill_graveyard_lich",
+                        new SimpleLootItemQuest(
+                                "graveyard:lich",
+                                "endrem:undead_soul",
+                                SDBags.CHARM.getStack()
+                        )
+                )
+                .addDependencies(KILL_MUTANT_ENDERMAN)
+                .register();
+        KILL_BOMD_LICH = Entry.of(
+                        "kill_bomd_lich",
+                        new SimpleLootItemQuest(
+                                "bosses_of_mass_destruction:lich",
+                                "bosses_of_mass_destruction:ancient_anima",
+                                SDBags.EPIC_BOOK.getStack()
+                        )
+                )
+                .addDependencies(KILL_MUTANT_ENDERMAN)
+                .register();
+        KILL_VOID_BLOSSOM = Entry.of(
+                        "kill_void_blossom",
+                        new SimpleLootItemQuest(
+                                "bosses_of_mass_destruction:void_blossom",
+                                "bosses_of_mass_destruction:void_thorn",
+                                SDBags.EPIC_GEAR.getStack()
+                        )
+                )
+                .addDependencies(KILL_MUTANT_ENDERMAN)
+                .register();
+        KILL_GAUNTLET = Entry.of(
+                        "kill_gauntlet",
+                        new SimpleLootItemQuest(
+                                "bosses_of_mass_destruction:gauntlet",
+                                "bosses_of_mass_destruction:blazing_eye",
+                                SDBags.EPIC_MATERIAL.getStack()
+                        )
+                )
+                .addDependencies(KILL_MUTANT_ENDERMAN)
+                .register();
+    }
+
+    public static void registerQuestsKillLv250()
+    {
+        KILL_DAY_NIGHT = Entry.of(
+                        "kill_day_night",
+                        new SimpleLootItemQuest(
+                                List.of(
+                                        () -> Registries.ENTITY_TYPE.get(new Identifier("soulsweapons:day_stalker")),
+                                        () -> Registries.ENTITY_TYPE.get(new Identifier("soulsweapons:night_prowler"))
+                                ),
+                                List.of(
+                                        () -> AllItems.SUN_MOON_STAR
+                                ),
+                                List.of(
+                                        SDBags.ARING.getStack()
+                                )
+                        )
+                )
+                .addDependencies(
+                        KILL_BOMD_LICH,
+                        KILL_VOID_BLOSSOM,
+                        KILL_CHAOS_MONARCH,
+                        KILL_MOON_KNIGHT,
+                        KILL_RETURNING_KNIGHT,
+                        KILL_DECAYING_KING,
+                        KILL_CAPTAIN_CORNELIA,
+                        KILL_BLACKSTONE_GOLEM
+                )
+                .register();
+    }
+
+    public static void registerQuestsKillLv300()
+    {
+        KILL_ENDER_DRAGON = Entry.of(
+                        "kill_ender_dragon",
+                        new EnderDragonAdvancementQuest(
+                                List.of(SDBags.ARTIFACT.getStack())
+                        )
+                )
+                .addDependencies(KILL_DAY_NIGHT)
+                .addEnDesc("Defeat Ender Dragon and free the end")
+                .addZhDesc("击杀末影龙，解放末地")
+                .register();
+        KILL_OBSIDLITH = Entry.of(
+                        "kill_obsidilith",
+                        new SimpleLootItemQuest(
+                                "bosses_of_mass_destruction:obsidilith",
+                                "bosses_of_mass_destruction:obsidian_heart",
+                                SDBags.LEGENDARY_BOOK.getStack()
+                        )
+                )
+                .addDependencies(KILL_DAY_NIGHT)
+                .register();
+        KILL_THE_EYE = Entry.of(
+                        "kill_the_eye",
+                        new SimpleLootItemQuest(
+                                () -> EntityInit.THE_EYE,
+                                () -> Items.NETHER_STAR,
+                                SDBags.LEGENDARY_GEAR.getStack()
+                        )
+                )
+                .addDependencies(KILL_DAY_NIGHT)
+                .register();
+        KILL_VOID_SHADOW = Entry.of(
+                        "kill_void_shadow",
+                        new SimpleLootItemQuest(
+                                () -> EntityInit.VOID_SHADOW,
+                                () -> Items.NETHER_STAR,
+                                SDBags.LEGENDARY_MATERIAL.getStack()
+                        )
+                )
+                .addDependencies(KILL_DAY_NIGHT)
+                .register();
+    }
+
+    public static class Entry<Q extends Quest> extends NamedEntryBuilder<Q> implements DefaultLanguageGeneratorProvider
+    {
+        private static final Set<Pair<Quest, Quest>> RELATIONS = new HashSet<>();
+
+        public static <Q extends Quest> Entry<Q> of(String name, Q quest)
+        {
+            return new Entry<>(name, quest);
+        }
+
+        public static void buildRelations()
+        {
+            for (Pair<Quest, Quest> relation : RELATIONS)
+                QuestUsage.configure(relation.getLeft(), relation.getRight());
+        }
+
+        public Entry(String name, Q content)
+        {
+            super(name, content);
+        }
+
+        public Q register()
+        {
+            QuestRegistry.register(getId(), content);
+            return content;
+        }
+
+        public Entry<Q> addDependencies(Quest... dependencies)
+        {
+            for (Quest quest : dependencies)
+                RELATIONS.add(new Pair<>(quest, content));
+            return this;
+        }
+
+        public Entry<Q> addDependents(Quest... dependents)
+        {
+            for (Quest quest : dependents)
+                RELATIONS.add(new Pair<>(content, quest));
+            return this;
+        }
+
+        public Entry<Q> addEnDesc(String desc)
+        {
+            getEnglishGenerator().addText(getTranslationKey(), desc);
+            return this;
+        }
+
+        public Entry<Q> addZhDesc(String desc)
+        {
+            getChineseGenerator().addText(getTranslationKey(), desc);
+            return this;
+        }
+
+        public String getTranslationKey()
+        {
+            return super.getTranslationKey("quest") + ".description";
+        }
+
+        @Override
+        public String getNameSpace()
+        {
+            return SpellDimension.MOD_ID;
+        }
     }
 }
