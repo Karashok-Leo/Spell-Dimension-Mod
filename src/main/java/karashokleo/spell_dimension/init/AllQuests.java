@@ -10,6 +10,7 @@ import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.api.quest.Quest;
 import karashokleo.spell_dimension.api.quest.QuestRegistry;
 import karashokleo.spell_dimension.api.quest.QuestUsage;
+import karashokleo.spell_dimension.api.quest.SimpleItemQuest;
 import karashokleo.spell_dimension.config.AttributeModifier;
 import karashokleo.spell_dimension.content.quest.*;
 import karashokleo.spell_dimension.data.loot_bag.SDBags;
@@ -35,6 +36,14 @@ public class AllQuests
     public static SimpleAdvancementQuest CHOOSE_PATH;
     public static SimpleAdvancementQuest KILL_TRAIT;
 
+    public static SimpleTagIngredientQuest BASE_ESSENCE;
+    public static SimpleItemQuest MORE_ESSENCE;
+    public static SimpleTagIngredientQuest SPELL_BOOK_0;
+    public static SimpleTagIngredientQuest SPELL_BOOK_1;
+    public static SimpleTagIngredientQuest SPELL_BOOK_2;
+    public static SpellPowerQuest SPELL_POWER_0;
+    public static SpellPowerQuest SPELL_POWER_1;
+    public static SpellPowerQuest SPELL_POWER_2;
 
     public static SimpleLootItemQuest KILL_MUTANT_ZOMBIE;
     public static SimpleLootItemQuest KILL_MUTANT_SKELETON;
@@ -70,6 +79,7 @@ public class AllQuests
     public static void register()
     {
         registerQuestsBase();
+        registerQuestsMage();
         registerQuestsKillMutant();
         registerQuestsKillLv100();
         registerQuestsKillLv150();
@@ -81,7 +91,9 @@ public class AllQuests
 
     public static void registerQuestsBase()
     {
-        FIRST_DAY = Entry.of("first_day", new FirstDayQuest(List.of()))
+        FIRST_DAY = Entry.of("first_day", new FirstDayQuest(List.of(
+                        SDBags.MIDAS.getStack()
+                )))
                 .addEnDesc("Survive for one day")
                 .addZhDesc("存活一天")
                 .register();
@@ -91,8 +103,6 @@ public class AllQuests
                         )
                 )))
                 .addDependencies(FIRST_DAY)
-                .addEnDesc("Gain experience to increase your %s to %s")
-                .addZhDesc("获取经验以提升你的%s至%s")
                 .register();
         CHOOSE_PATH = Entry.of("choose_path", new SimpleAdvancementQuest(new Identifier("rpg_series:classes"), List.of(
                         AllItems.ENLIGHTENING_ESSENCE.getStack(
@@ -107,6 +117,94 @@ public class AllQuests
                         )
                 )))
                 .addDependencies(FIRST_DAY)
+                .register();
+    }
+
+    public static void registerQuestsMage()
+    {
+        BASE_ESSENCE = Entry.of(
+                        "base_essence",
+                        new SimpleTagIngredientQuest(
+                                AllTags.ESSENCE_ALL,
+                                SDBags.JEWELRY_RINGS.getStack()
+                        )
+                )
+                .addDependencies(CHOOSE_PATH)
+                .addEnDesc("Obtain any basic magic essence")
+                .addZhDesc("获取任意基础魔法精华")
+                .register();
+        MORE_ESSENCE = Entry.of(
+                        "more_essence",
+                        new SimpleItemQuest(
+                                List.of(
+                                        AllItems.ENLIGHTENING_ESSENCE,
+                                        AllItems.ENCHANTED_ESSENCE,
+                                        AllItems.MENDING_ESSENCE
+                                ),
+                                SDBags.JEWELRY_NECKLACES.getStack()
+                        )
+                )
+                .addDependencies(BASE_ESSENCE)
+                .register();
+        SPELL_BOOK_0 = Entry.of(
+                        "spell_book_0",
+                        new SimpleTagIngredientQuest(
+                                AllTags.BOOK.get(0),
+                                SDBags.UNCOMMON_GEAR.getStack()
+                        )
+                )
+                .addDependencies(CHOOSE_PATH)
+                .addEnDesc("Craft a Primary Spell Book")
+                .addZhDesc("合成一本初级法术书")
+                .register();
+        SPELL_BOOK_1 = Entry.of(
+                        "spell_book_1",
+                        new SimpleTagIngredientQuest(
+                                AllTags.BOOK.get(1),
+                                SDBags.RARE_GEAR.getStack()
+                        )
+                )
+                .addDependencies(SPELL_BOOK_0)
+                .addEnDesc("Craft a Intermediate Spell Book")
+                .addZhDesc("合成一本中级法术书")
+                .register();
+        SPELL_BOOK_2 = Entry.of(
+                        "spell_book_2",
+                        new SimpleTagIngredientQuest(
+                                AllTags.BOOK.get(2),
+                                SDBags.EPIC_GEAR.getStack()
+                        )
+                )
+                .addDependencies(SPELL_BOOK_1)
+                .addEnDesc("Craft a Advanced Spell Book")
+                .addZhDesc("合成一本高级法术书")
+                .register();
+        SPELL_POWER_0 = Entry.of(
+                        "spell_power_0",
+                        new SpellPowerQuest(
+                                33,
+                                SDBags.UNCOMMON_MATERIAL.getStack()
+                        )
+                )
+                .addDependencies(CHOOSE_PATH)
+                .register();
+        SPELL_POWER_1 = Entry.of(
+                        "spell_power_1",
+                        new SpellPowerQuest(
+                                66,
+                                SDBags.RARE_MATERIAL.getStack()
+                        )
+                )
+                .addDependencies(SPELL_POWER_0)
+                .register();
+        SPELL_POWER_2 = Entry.of(
+                        "spell_power_2",
+                        new SpellPowerQuest(
+                                99,
+                                SDBags.EPIC_MATERIAL.getStack()
+                        )
+                )
+                .addDependencies(SPELL_POWER_1)
                 .register();
     }
 

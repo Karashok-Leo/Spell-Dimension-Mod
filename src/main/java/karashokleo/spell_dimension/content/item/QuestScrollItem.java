@@ -81,7 +81,7 @@ public class QuestScrollItem extends Item
                 {
                     player.sendMessage(SDTexts.TEXT$PROGRESS_ROLLBACK.get(), true);
                     QuestUsage.removeQuestsCompleted(player, quest);
-                }
+                } else player.sendMessage(SDTexts.TEXT$QUEST_COMPLETED.get(), true);
             } else if (QuestUsage.allDependenciesCompleted(player, quest) &&
                     quest.completeTasks(player))
             {

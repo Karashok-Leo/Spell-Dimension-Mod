@@ -33,10 +33,13 @@ public enum SDTexts
     TEXT$SKILLED_SCHOOL("This is not the magic school you are skilled in!", "这不是你擅长的法术学派!"),
     TEXT$BLANK_BOOK("Blank spell book!", "空白法术书!"),
     TEXT$SPELL_POWER_INFO("Spell Power Information", "魔法信息"),
-    TEXT$QUEST_COMPLETE("Quest completed!", "任务完成！"),
     TEXT$ABYSS_GUARD("You need to have Abyss Guard in your inventory to sound the shell horn!", "你需要在物品栏中持有深渊守护才能吹响号角！"),
     TEXT$END_STAGE("End Stage Unlocked!", "终末阶段解锁！"),
     TEXT$PROGRESS_ROLLBACK("Progress has been rolled back!", "进度已回退！"),
+    TEXT$QUEST_COMPLETE("Quest completed!", "任务完成！"),
+    TEXT$QUEST_COMPLETED("The quest has been completed", "该任务已完成"),
+    TEXT$QUEST$HEALTH("Gain experience to increase your %s to %s", "获取经验以提升你的%s至%s"),
+    TEXT$QUEST$SPELL_POWER("Increase any Spell Power to %s", "将任意法术强度提升至%s"),
 
     /**
      * Spell School

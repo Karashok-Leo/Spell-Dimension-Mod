@@ -111,7 +111,7 @@ public class SpellDimensionClient implements ClientModInitializer
                 if (player != null &&
                         optional.isPresent() &&
                         QuestUsage.isQuestCompleted(player, optional.get()))
-                    lines.add(SDTexts.TEXT$QUEST_COMPLETE.get());
+                    lines.add(SDTexts.TEXT$QUEST_COMPLETED.get());
             }
         });
         ItemTooltipCallback.EVENT.register(tooltipFinal, (stack, context, lines) ->

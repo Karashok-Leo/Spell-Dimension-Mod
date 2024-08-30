@@ -8,6 +8,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @SuppressWarnings("all")
 public final class QuestUsage
@@ -36,6 +37,18 @@ public final class QuestUsage
     public static boolean allDependenciesCompleted(PlayerEntity player, Quest quest)
     {
         return getDependencies(quest).stream().allMatch(entry -> QuestComponent.isCompleted(player, entry));
+    }
+
+    public static Set<RegistryEntry<Quest>> getCurrentQuests(PlayerEntity player)
+    {
+        return QuestRegistry.QUEST_REGISTRY.streamEntries().filter(entry ->
+        {
+            if (QuestComponent.isCompleted(player, entry))
+                return false;
+            else if (allDependenciesCompleted(player, entry.value()))
+                return true;
+            else return false;
+        }).collect(Collectors.toSet());
     }
 
     public static RegistryEntry<Quest> entry(Quest quest)

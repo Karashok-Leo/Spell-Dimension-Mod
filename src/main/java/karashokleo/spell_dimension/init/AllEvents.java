@@ -5,6 +5,8 @@ import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.trait.common.AdaptingTrait;
 import karashokleo.l2hostility.init.LHTraits;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
+import karashokleo.spell_dimension.api.quest.Quest;
+import karashokleo.spell_dimension.api.quest.QuestUsage;
 import karashokleo.spell_dimension.config.ScrollLootConfig;
 import karashokleo.spell_dimension.content.event.PlayerHealthEvent;
 import karashokleo.spell_dimension.data.SDTexts;
@@ -18,6 +20,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsage;
 import net.minecraft.item.Items;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -25,6 +28,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
 
 import java.util.Optional;
+import java.util.Set;
 
 public class AllEvents
 {
@@ -107,6 +111,21 @@ public class AllEvents
                     player.incrementStat(Stats.USE_CAULDRON);
                     player.incrementStat(Stats.USED.getOrCreateStat(item));
                 }
+            }
+            return ActionResult.success(world.isClient());
+        });
+
+        // Quest Scroll Craft
+        CauldronBehavior.WATER_CAULDRON_BEHAVIOR.put(Items.WRITABLE_BOOK, (state, world, pos, player, hand, stack) ->
+        {
+            if (!world.isClient() && hand == Hand.MAIN_HAND)
+            {
+                Set<RegistryEntry<Quest>> currentQuests = QuestUsage.getCurrentQuests(player);
+                currentQuests.stream()
+                        .map(AllItems.QUEST_SCROLL::getStack)
+                        .forEach(itemStack -> player.getInventory().offerOrDrop(itemStack));
+                if (!player.getAbilities().creativeMode && !currentQuests.isEmpty())
+                    stack.decrement(1);
             }
             return ActionResult.success(world.isClient());
         });

@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "spell-dimension:spell_book_arcane_1",
+    "spell-dimension:spell_book_fire_1",
+    "spell-dimension:spell_book_frost_1",
+    "spell-dimension:spell_book_healing_1",
+    "spell-dimension:spell_book_lightning_1",
+    "spell-dimension:spell_book_soul_1"
+  ]
+}

@@ -122,6 +122,7 @@ public class AllItems
                         new DynamicSpellBookItem(school, grade)
                 )
                 .addModel("spell_book/" + school.id.getPath() + "/" + grade)
+                .addTag(AllTags.BOOK.get(grade))
                 .register();
         SpellBooks.all.add(item);
         SpellRegistry.book_containers.put(SpellDimension.modLoc(name), item.getSpellContainer());

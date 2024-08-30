@@ -21,6 +21,13 @@ public class AllTags
             TagUtil.itemTag("essence/2")
     );
     public static final TagKey<Item> ESSENCE_ALL = TagUtil.itemTag("essence/all");
+    public static final List<TagKey<Item>> BOOK = List.of(
+            TagUtil.itemTag("book/0"),
+            TagUtil.itemTag("book/1"),
+            TagUtil.itemTag("book/2")
+    );
+    public static final TagKey<Item> BOOK_ALL = TagUtil.itemTag("essence/all");
+
     public static final TagKey<Item> RUNE = TagUtil.itemTag("rune");
     public static final TagKey<Item> HEART_FOOD = TagUtil.itemTag("heart_food");
 
@@ -66,6 +73,10 @@ public class AllTags
 
         TagGenerator.Container<Item> essenceAllContainer = generator.getOrCreateContainer(ESSENCE_ALL);
         for (TagKey<Item> key : ESSENCE)
-            essenceAllContainer.addTag(ESSENCE_ALL, key);
+            essenceAllContainer.addTag(key);
+
+        TagGenerator.Container<Item> bookAllContainer = generator.getOrCreateContainer(BOOK_ALL);
+        for (TagKey<Item> key : BOOK)
+            bookAllContainer.addTag(key);
     }
 }
