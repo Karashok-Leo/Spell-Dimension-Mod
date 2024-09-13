@@ -1,5 +1,6 @@
 package karashokleo.spell_dimension.content.enchantment;
 
+import karashokleo.l2hostility.content.enchantment.UnobtainableEnchantment;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.Entity;
@@ -10,7 +11,7 @@ import net.spell_engine.api.spell.SpellInfo;
 
 import java.util.List;
 
-public abstract class SpellImpactEnchantment extends Enchantment
+public abstract class SpellImpactEnchantment extends UnobtainableEnchantment
 {
     public SpellImpactEnchantment(Rarity weight, EnchantmentTarget target, EquipmentSlot[] slotTypes)
     {

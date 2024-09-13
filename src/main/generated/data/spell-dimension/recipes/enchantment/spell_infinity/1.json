@@ -1,0 +1,21 @@
+{
+  "type": "enchantment_infusion:enchantment_infusion",
+  "enchantment": "spell_engine:spell_infinity",
+  "force": false,
+  "ingredients": [
+    {
+      "item": "l2hostility:sun_membrane"
+    },
+    {
+      "item": "l2hostility:storm_core"
+    },
+    {
+      "tag": "spell-dimension:essence/2"
+    }
+  ],
+  "input": {
+    "enchantment": "minecraft:infinity",
+    "min_level": 1
+  },
+  "level": 1
+}

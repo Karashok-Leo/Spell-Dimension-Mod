@@ -25,4 +25,10 @@ public class SpellDashEnchantment extends SpellImpactEnchantment
         if (caster instanceof ServerPlayerEntity player)
             ServerPlayNetworking.send(player, new S2CSpellDash());
     }
+
+    @Override
+    public int getMaxLevel()
+    {
+        return 1;
+    }
 }

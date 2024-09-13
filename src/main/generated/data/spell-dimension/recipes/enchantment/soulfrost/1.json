@@ -1,0 +1,28 @@
+{
+  "type": "enchantment_infusion:enchantment_infusion",
+  "enchantment": "spell_power:soulfrost",
+  "force": false,
+  "ingredients": [
+    [
+      {
+        "item": "l2hostility:hard_ice"
+      },
+      {
+        "item": "l2hostility:cursed_droplet"
+      }
+    ],
+    [
+      {
+        "item": "spell-dimension:essence_frost_0"
+      },
+      {
+        "item": "spell-dimension:essence_soul_0"
+      }
+    ]
+  ],
+  "input": {
+    "enchantment": "spell_power:soulfrost",
+    "min_level": 0
+  },
+  "level": 1
+}

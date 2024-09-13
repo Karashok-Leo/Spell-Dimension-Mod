@@ -1,0 +1,36 @@
+{
+  "type": "enchantment_infusion:enchantment_infusion",
+  "enchantment": "spell-dimension:spell_dash",
+  "force": false,
+  "ingredients": [
+    {
+      "item": "l2hostility:captured_wind"
+    },
+    {
+      "item": "l2hostility:captured_wind"
+    },
+    {
+      "item": "l2hostility:storm_core"
+    },
+    {
+      "item": "l2hostility:storm_core"
+    },
+    {
+      "item": "l2hostility:sun_membrane"
+    },
+    {
+      "item": "l2hostility:sun_membrane"
+    },
+    {
+      "item": "l2hostility:resonant_feather"
+    },
+    {
+      "item": "l2hostility:resonant_feather"
+    }
+  ],
+  "input": {
+    "enchantment": "spell-dimension:spell_dash",
+    "min_level": 0
+  },
+  "level": 1
+}

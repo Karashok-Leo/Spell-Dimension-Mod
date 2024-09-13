@@ -1,0 +1,28 @@
+{
+  "type": "enchantment_infusion:enchantment_infusion",
+  "enchantment": "spell_power:sunfire",
+  "force": false,
+  "ingredients": [
+    [
+      {
+        "item": "l2hostility:resonant_feather"
+      },
+      {
+        "item": "l2hostility:soul_flame"
+      }
+    ],
+    [
+      {
+        "item": "spell-dimension:essence_arcane_0"
+      },
+      {
+        "item": "spell-dimension:essence_fire_0"
+      }
+    ]
+  ],
+  "input": {
+    "enchantment": "spell_power:sunfire",
+    "min_level": 0
+  },
+  "level": 1
+}

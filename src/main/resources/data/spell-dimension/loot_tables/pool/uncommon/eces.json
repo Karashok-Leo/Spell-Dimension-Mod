@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:generic",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "spell-dimension:random_enchanted_essence",
+          "threshold": {
+            "type": "minecraft:uniform",
+            "min": 10,
+            "max": 70
+          }
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "min": 1,
+        "max": 3
+      }
+    }
+  ]
+}

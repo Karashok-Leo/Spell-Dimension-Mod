@@ -1,0 +1,27 @@
+{
+  "type": "enchantment_infusion:enchantment_infusion",
+  "enchantment": "spell-dimension:spell_curse",
+  "force": false,
+  "ingredients": [
+    {
+      "item": "l2hostility:cursed_droplet"
+    },
+    {
+      "item": "l2hostility:cursed_droplet"
+    },
+    {
+      "tag": "spell-dimension:essence/2"
+    },
+    {
+      "tag": "spell-dimension:essence/2"
+    },
+    {
+      "tag": "spell-dimension:essence/2"
+    }
+  ],
+  "input": {
+    "enchantment": "spell-dimension:spell_curse",
+    "min_level": 3
+  },
+  "level": 4
+}

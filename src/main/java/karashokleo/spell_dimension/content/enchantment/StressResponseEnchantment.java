@@ -1,5 +1,6 @@
 package karashokleo.spell_dimension.content.enchantment;
 
+import karashokleo.l2hostility.content.enchantment.UnobtainableEnchantment;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.Entity;
@@ -14,7 +15,7 @@ import net.spell_engine.internals.casting.SpellCasterEntity;
 
 import java.util.List;
 
-public class StressResponseEnchantment extends Enchantment
+public class StressResponseEnchantment extends UnobtainableEnchantment
 {
     public static final float MULTIPLIER = 0.16F;
 

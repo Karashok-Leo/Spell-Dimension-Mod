@@ -1,0 +1,30 @@
+{
+  "type": "enchantment_infusion:enchantment_infusion",
+  "enchantment": "spell-dimension:stress_response",
+  "force": false,
+  "ingredients": [
+    {
+      "item": "l2hostility:miracle_powder"
+    },
+    {
+      "item": "l2hostility:miracle_powder"
+    },
+    {
+      "item": "l2hostility:miracle_powder"
+    },
+    {
+      "tag": "spell-dimension:essence/2"
+    },
+    {
+      "tag": "spell-dimension:essence/2"
+    },
+    {
+      "tag": "spell-dimension:essence/2"
+    }
+  ],
+  "input": {
+    "enchantment": "spell-dimension:stress_response",
+    "min_level": 2
+  },
+  "level": 3
+}

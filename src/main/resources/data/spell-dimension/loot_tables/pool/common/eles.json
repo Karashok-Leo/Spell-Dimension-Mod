@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:generic",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "spell-dimension:random_enlightening_essence"
+        }
+      ],
+      "rolls": 1
+    }
+  ]
+}

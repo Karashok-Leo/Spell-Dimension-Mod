@@ -58,7 +58,7 @@ public class ScrollLootConfig
             fromPrimary("wizards:arcane_bolt");
             fromPrimary("wizards:fire_scorch");
             fromPrimary("wizards:frost_shard");
-            fromPrimary("wizards:heal");
+            fromPrimary("paladins:heal");
         }
 
         // Pool

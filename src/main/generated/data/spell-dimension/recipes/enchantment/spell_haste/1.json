@@ -1,0 +1,18 @@
+{
+  "type": "enchantment_infusion:enchantment_infusion",
+  "enchantment": "spell-dimension:spell_haste",
+  "force": false,
+  "ingredients": [
+    {
+      "item": "l2hostility:resonant_feather"
+    },
+    {
+      "tag": "spell-dimension:essence/0"
+    }
+  ],
+  "input": {
+    "enchantment": "spell_power:haste",
+    "min_level": 1
+  },
+  "level": 1
+}

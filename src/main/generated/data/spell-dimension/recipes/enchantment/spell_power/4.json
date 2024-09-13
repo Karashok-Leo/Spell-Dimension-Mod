@@ -1,0 +1,30 @@
+{
+  "type": "enchantment_infusion:enchantment_infusion",
+  "enchantment": "spell_power:spell_power",
+  "force": false,
+  "ingredients": [
+    {
+      "item": "spell-dimension:essence_arcane_2"
+    },
+    {
+      "item": "spell-dimension:essence_fire_2"
+    },
+    {
+      "item": "spell-dimension:essence_frost_2"
+    },
+    {
+      "item": "spell-dimension:essence_healing_2"
+    },
+    {
+      "item": "spell-dimension:essence_lightning_2"
+    },
+    {
+      "item": "spell-dimension:essence_soul_2"
+    }
+  ],
+  "input": {
+    "enchantment": "spell_power:spell_power",
+    "min_level": 3
+  },
+  "level": 4
+}

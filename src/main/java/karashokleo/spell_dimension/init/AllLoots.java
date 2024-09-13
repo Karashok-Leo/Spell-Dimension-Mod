@@ -58,6 +58,11 @@ public class AllLoots
             tableBuilder.pool(LootPool.builder().with(SpellScrollEntry.builder(spellId)));
         });
 
+        injectBaseEssenceLoot();
+    }
+
+    private static void injectBaseEssenceLoot()
+    {
         SpellImpactEvents.BEFORE.register((world, caster, targets, spellInfo) ->
         {
             SpellSchool school = spellInfo.spell().school;
@@ -67,11 +72,14 @@ public class AllLoots
                     continue;
 
                 var op = MobDifficulty.get(target);
-                if (op.isPresent() && op.get().noDrop) continue;
+                if (op.isPresent())
+                {
+                    if (op.get().noDrop) continue;
 
-                if (caster.getRandom().nextFloat() < EssenceLootConfig.BASE_CONFIG.dropChance()) continue;
-                int grade = EssenceLootConfig.BASE_CONFIG.getRandomGrade(caster.getRandom());
-                target.dropItem(AllItems.BASE_ESSENCES.get(school).get(grade));
+                    if (caster.getRandom().nextFloat() < EssenceLootConfig.BASE_CONFIG.dropChance()) continue;
+                    int grade = EssenceLootConfig.BASE_CONFIG.getRandomGrade(caster.getRandom(), op.get().getLevel());
+                    target.dropItem(AllItems.BASE_ESSENCES.get(school).get(grade));
+                }
             }
         });
     }

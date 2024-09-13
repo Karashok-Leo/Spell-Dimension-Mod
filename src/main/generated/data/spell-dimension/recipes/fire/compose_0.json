@@ -3,11 +3,34 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "spell-dimension:essence_fire_1"
+      "item": "spell-dimension:essence_fire_0"
+    },
+    {
+      "item": "spell-dimension:essence_fire_0"
+    },
+    {
+      "item": "spell-dimension:essence_fire_0"
+    },
+    {
+      "item": "spell-dimension:essence_fire_0"
+    },
+    {
+      "item": "spell-dimension:essence_fire_0"
+    },
+    {
+      "item": "spell-dimension:essence_fire_0"
+    },
+    {
+      "item": "spell-dimension:essence_fire_0"
+    },
+    {
+      "item": "spell-dimension:essence_fire_0"
+    },
+    {
+      "item": "spell-dimension:essence_fire_0"
     }
   ],
   "result": {
-    "count": 9,
-    "item": "spell-dimension:essence_fire_0"
+    "item": "spell-dimension:essence_fire_1"
   }
 }

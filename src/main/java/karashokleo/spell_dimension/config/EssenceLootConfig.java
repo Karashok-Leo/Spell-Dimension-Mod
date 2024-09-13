@@ -8,7 +8,12 @@ import java.util.List;
 
 public class EssenceLootConfig
 {
-    public static final BaseConfig BASE_CONFIG = new BaseConfig(0.8F, 0.9F, 0.99F, List.of(Dummmmmmy.TARGET_DUMMY.get()));
+    public static final BaseConfig BASE_CONFIG = new BaseConfig(
+            List.of(Dummmmmmy.TARGET_DUMMY.get()),
+            0.8F,
+            100, 200,
+            0.90F, 0.99F
+    );
 
     public static final EcEntry[] EC_ENTRIES = {
             new EcEntry(9, 1, 20),
@@ -21,14 +26,39 @@ public class EssenceLootConfig
     public static final LootPool CHEST_POOL = new LootPool(1, 3, 100);
     public static final LootPool ENTITY_POOL = new LootPool(0, 2, 180);
 
-    public record BaseConfig(float dropChance, float advancedChance, float perfectChance, List<EntityType<?>> blacklist)
+    public record BaseConfig(
+            List<EntityType<?>> blacklist,
+            float dropChance,
+            int intermediateLevel,
+            int advancedLevel,
+            float intermediateChance,
+            float advancedChance
+    )
     {
-        public int getRandomGrade(Random random)
+        public int getRandomGrade(Random random, int mobLevel)
         {
+            int maxGrade = 0;
+            if (mobLevel >= intermediateLevel) maxGrade++;
+            if (mobLevel >= advancedLevel) maxGrade++;
+
+            int randomGrade = 0;
             float f = random.nextFloat();
-            if (f < advancedChance) return 0;
-            else if (f < perfectChance) return 1;
-            else return 2;
+            if (f >= intermediateChance) randomGrade++;
+            if (f >= advancedChance) randomGrade++;
+
+            return Math.min(maxGrade, randomGrade);
+//            if (mobLevel < intermediateLevel) return 0;
+//            else if (mobLevel < advancedLevel)
+//            {
+//                if (random.nextFloat() < intermediateChance) return 0;
+//                else return 1;
+//            } else
+//            {
+//                float f = random.nextFloat();
+//                if (f < intermediateChance) return 0;
+//                else if (f < advancedChance) return 1;
+//                else return 2;
+//            }
         }
     }
 

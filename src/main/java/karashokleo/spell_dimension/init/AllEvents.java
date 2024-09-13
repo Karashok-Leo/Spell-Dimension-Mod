@@ -40,7 +40,7 @@ public class AllEvents
         AttackEntityCallback.EVENT.register((player, world, hand, entity, hitResult) ->
         {
             if (!world.isClient() &&
-                    player.getStackInHand(hand).isOf(AllItems.DEBUG_STAFF))
+                player.getStackInHand(hand).isOf(AllItems.DEBUG_STAFF))
             {
                 entity.damage(player.getDamageSources().create(DamageTypes.MAGIC, player), 999999);
             }
@@ -52,8 +52,8 @@ public class AllEvents
         {
             ItemStack stack = player.getStackInHand(hand);
             if (!world.isClient() &&
-                    stack.isOf(AquamiraeItems.SHELL_HORN) &&
-                    !player.getInventory().contains(AllTags.SHELL_HORN_REQUIREMENT))
+                stack.isOf(AquamiraeItems.SHELL_HORN) &&
+                !player.getInventory().contains(AllTags.SHELL_HORN_REQUIREMENT))
             {
                 player.sendMessage(SDTexts.TEXT$ABYSS_GUARD.get(), true);
                 return TypedActionResult.fail(stack);
@@ -124,8 +124,14 @@ public class AllEvents
                 currentQuests.stream()
                         .map(AllItems.QUEST_SCROLL::getStack)
                         .forEach(itemStack -> player.getInventory().offerOrDrop(itemStack));
-                if (!player.getAbilities().creativeMode && !currentQuests.isEmpty())
-                    stack.decrement(1);
+                if (!currentQuests.isEmpty())
+                {
+                    LeveledCauldronBlock.decrementFluidLevel(state, world, pos);
+                    player.incrementStat(Stats.USE_CAULDRON);
+                    player.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));
+                    if (!player.getAbilities().creativeMode)
+                        stack.decrement(1);
+                }
             }
             return ActionResult.success(world.isClient());
         });
