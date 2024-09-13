@@ -1,0 +1,30 @@
+{
+  "type": "enchantment_infusion:enchantment_infusion",
+  "enchantment": "spell-dimension:spell_haste",
+  "force": false,
+  "ingredients": [
+    {
+      "item": "l2hostility:resonant_feather"
+    },
+    {
+      "item": "l2hostility:resonant_feather"
+    },
+    {
+      "item": "l2hostility:resonant_feather"
+    },
+    {
+      "tag": "spell-dimension:essence/2"
+    },
+    {
+      "tag": "spell-dimension:essence/2"
+    },
+    {
+      "tag": "spell-dimension:essence/2"
+    }
+  ],
+  "input": {
+    "enchantment": "spell-dimension:spell_haste",
+    "min_level": 4
+  },
+  "level": 5
+}

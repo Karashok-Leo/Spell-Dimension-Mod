@@ -1,0 +1,56 @@
+{
+  "type": "enchantment_infusion:enchantment_infusion",
+  "enchantment": "spell_power:energize",
+  "force": false,
+  "ingredients": [
+    [
+      {
+        "item": "l2hostility:life_essence"
+      },
+      {
+        "item": "l2hostility:captured_wind"
+      }
+    ],
+    [
+      {
+        "item": "l2hostility:life_essence"
+      },
+      {
+        "item": "l2hostility:captured_wind"
+      }
+    ],
+    [
+      {
+        "item": "l2hostility:life_essence"
+      },
+      {
+        "item": "l2hostility:captured_wind"
+      }
+    ],
+    [
+      {
+        "item": "spell-dimension:essence_healing_2"
+      },
+      {
+        "item": "spell-dimension:essence_lightning_2"
+      }
+    ],
+    [
+      {
+        "item": "spell-dimension:essence_healing_2"
+      },
+      {
+        "item": "spell-dimension:essence_lightning_2"
+      }
+    ],
+    [
+      {
+        "item": "spell-dimension:essence_healing_2"
+      },
+      {
+        "item": "spell-dimension:essence_lightning_2"
+      }
+    ]
+  ],
+  "level": 5
+}

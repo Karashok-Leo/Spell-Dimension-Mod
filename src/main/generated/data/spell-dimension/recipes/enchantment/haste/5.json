@@ -1,0 +1,30 @@
+{
+  "type": "enchantment_infusion:enchantment_infusion",
+  "enchantment": "spell_power:haste",
+  "force": false,
+  "ingredients": [
+    {
+      "item": "l2hostility:chaos_ingot"
+    },
+    {
+      "item": "l2hostility:chaos_ingot"
+    },
+    {
+      "item": "l2hostility:chaos_ingot"
+    },
+    {
+      "tag": "spell-dimension:essence/2"
+    },
+    {
+      "tag": "spell-dimension:essence/2"
+    },
+    {
+      "tag": "spell-dimension:essence/2"
+    }
+  ],
+  "input": {
+    "enchantment": "spell_power:haste",
+    "min_level": 4
+  },
+  "level": 5
+}

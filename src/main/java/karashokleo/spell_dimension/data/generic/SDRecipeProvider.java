@@ -85,7 +85,7 @@ public class SDRecipeProvider extends FabricRecipeProvider
 
         // SpellPower Enchantments
         {
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 5; i++)
             {
                 int level = i + 1;
                 int baseIngredient = baseIngredientArray[i];
@@ -166,7 +166,7 @@ public class SDRecipeProvider extends FabricRecipeProvider
 
         // SpellPowerMechanics Enchantments
         {
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 5; i++)
             {
                 int level = i + 1;
                 int baseIngredient = baseIngredientArray[i];
@@ -262,7 +262,7 @@ public class SDRecipeProvider extends FabricRecipeProvider
         // SpellDimension Enchantments
         {
             // Spell Curse, Spell Haste
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 5; i++)
             {
                 int level = i + 1;
                 int baseIngredient = baseIngredientArray[i];
