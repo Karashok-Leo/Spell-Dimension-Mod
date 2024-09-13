@@ -30,7 +30,6 @@ public class LootContextUtil
         return context.get(LootContextParameters.DAMAGE_SOURCE);
     }
 
-    @Deprecated
     @Nullable
     public static SpellSchool getContextSchool(LootContext context)
     {
@@ -40,17 +39,17 @@ public class LootContextUtil
 
     public static AttributeModifier getContextModifier(Random random, LootContext context)
     {
-//        SpellSchool school = getContextSchool(context);
-//        PlayerEntity player = getContextPlayer(context);
-//        List<SpellSchool> schools = school == null ?
-//                (player == null ?
-//                        SchoolUtil.SCHOOLS :
-//                        SchoolUtil.getPlayerSchool(player)):
-//                List.of(school);
+        SpellSchool school = getContextSchool(context);
         PlayerEntity player = getContextPlayer(context);
-        List<SpellSchool> schools = player == null ?
-                SchoolUtil.SCHOOLS :
-                SchoolUtil.getPlayerSchool(player);
+        List<SpellSchool> schools = school == null ?
+                (player == null ?
+                        SchoolUtil.SCHOOLS :
+                        SchoolUtil.getPlayerSchool(player)):
+                List.of(school);
+//        PlayerEntity player = getContextPlayer(context);
+//        List<SpellSchool> schools = player == null ?
+//                SchoolUtil.SCHOOLS :
+//                SchoolUtil.getPlayerSchool(player);
         return AttributeModifier.getRandom(random, schools);
     }
 }
