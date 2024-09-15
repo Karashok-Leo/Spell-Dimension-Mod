@@ -5,11 +5,10 @@ import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.trait.common.AdaptingTrait;
 import karashokleo.l2hostility.init.LHTraits;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
-import karashokleo.spell_dimension.api.quest.Quest;
-import karashokleo.spell_dimension.api.quest.QuestUsage;
 import karashokleo.spell_dimension.config.ScrollLootConfig;
 import karashokleo.spell_dimension.content.event.PlayerHealthEvent;
 import karashokleo.spell_dimension.data.SDTexts;
+import karashokleo.spell_dimension.util.SchoolUtil;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.minecraft.block.LeveledCauldronBlock;
@@ -20,15 +19,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsage;
 import net.minecraft.item.Items;
-import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
+import net.spell_power.api.SpellDamageSource;
 
 import java.util.Optional;
-import java.util.Set;
 
 public class AllEvents
 {
@@ -42,7 +40,8 @@ public class AllEvents
             if (!world.isClient() &&
                 player.getStackInHand(hand).isOf(AllItems.DEBUG_STAFF))
             {
-                entity.damage(player.getDamageSources().create(DamageTypes.MAGIC, player), 999999);
+                SchoolUtil.getPlayerSchool(player).stream().findFirst().ifPresent(school ->
+                        entity.damage(SpellDamageSource.player(school, player), 999999));
             }
             return ActionResult.PASS;
         });
@@ -110,27 +109,6 @@ public class AllEvents
                     LeveledCauldronBlock.decrementFluidLevel(state, world, pos);
                     player.incrementStat(Stats.USE_CAULDRON);
                     player.incrementStat(Stats.USED.getOrCreateStat(item));
-                }
-            }
-            return ActionResult.success(world.isClient());
-        });
-
-        // Quest Scroll Craft
-        CauldronBehavior.WATER_CAULDRON_BEHAVIOR.put(Items.WRITABLE_BOOK, (state, world, pos, player, hand, stack) ->
-        {
-            if (!world.isClient() && hand == Hand.MAIN_HAND)
-            {
-                Set<RegistryEntry<Quest>> currentQuests = QuestUsage.getCurrentQuests(player);
-                currentQuests.stream()
-                        .map(AllItems.QUEST_SCROLL::getStack)
-                        .forEach(itemStack -> player.getInventory().offerOrDrop(itemStack));
-                if (!currentQuests.isEmpty())
-                {
-                    LeveledCauldronBlock.decrementFluidLevel(state, world, pos);
-                    player.incrementStat(Stats.USE_CAULDRON);
-                    player.incrementStat(Stats.USED.getOrCreateStat(stack.getItem()));
-                    if (!player.getAbilities().creativeMode)
-                        stack.decrement(1);
                 }
             }
             return ActionResult.success(world.isClient());

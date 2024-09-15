@@ -38,6 +38,8 @@ public enum SDTexts
     TEXT$PROGRESS_ROLLBACK("Progress has been rolled back!", "进度已回退！"),
     TEXT$QUEST_COMPLETE("Quest completed!", "任务完成！"),
     TEXT$QUEST_COMPLETED("The quest has been completed", "该任务已完成"),
+    TEXT$QUEST_ALL_COMPLETED("All quests have been completed", "所有任务已完成"),
+    TEXT$QUEST_REQUIREMENT("Quest requirements not met!", "任务要求未达成！"),
     TEXT$QUEST$HEALTH("Gain experience to increase your %s to %s", "获取经验以提升你的%s至%s"),
     TEXT$QUEST$SPELL_POWER("Increase any Spell Power to %s", "将任意法术强度提升至%s"),
 
@@ -85,6 +87,7 @@ public enum SDTexts
     TOOLTIP$QUEST$TASK("Task:", "任务目标:"),
     TOOLTIP$QUEST$REWARD("Reward:", "任务奖励:"),
     TOOLTIP$QUEST$COMPLETE("Right click to submit", "右键提交任务"),
+    TOOLTIP$QUEST$OBTAIN_CURRENT("Right click to obtain all current quests", "右键获取当前所有任务"),
     TOOLTIP$QUEST$MUL("%s × %s", "%s × %s"),
     TOOLTIP$QUEST$AND(" and ", "和"),
     TOOLTIP$QUEST$LOOT_ITEM("Defeat %s to obtain %s", "击杀%s并获取%s"),

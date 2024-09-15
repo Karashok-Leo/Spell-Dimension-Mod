@@ -76,7 +76,7 @@ public class AllLoots
                 {
                     if (op.get().noDrop) continue;
 
-                    if (caster.getRandom().nextFloat() < EssenceLootConfig.BASE_CONFIG.dropChance()) continue;
+                    if (caster.getRandom().nextFloat() > EssenceLootConfig.BASE_CONFIG.dropChance()) continue;
                     int grade = EssenceLootConfig.BASE_CONFIG.getRandomGrade(caster.getRandom(), op.get().getLevel());
                     target.dropItem(AllItems.BASE_ESSENCES.get(school).get(grade));
                 }

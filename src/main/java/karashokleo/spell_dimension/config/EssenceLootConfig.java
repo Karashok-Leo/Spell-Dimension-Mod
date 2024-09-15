@@ -10,7 +10,7 @@ public class EssenceLootConfig
 {
     public static final BaseConfig BASE_CONFIG = new BaseConfig(
             List.of(Dummmmmmy.TARGET_DUMMY.get()),
-            0.8F,
+            0.1F,
             100, 200,
             0.90F, 0.99F
     );
@@ -20,11 +20,11 @@ public class EssenceLootConfig
             new EcEntry(3, 20, 40),
             new EcEntry(1, 40, 60)
     };
-    public static final int EL_WEIGHT = 5;
-    public static final int MD_WEIGHT = 3;
+    public static final int EL_WEIGHT = 3;
+    public static final int MD_WEIGHT = 2;
 
-    public static final LootPool CHEST_POOL = new LootPool(1, 3, 100);
-    public static final LootPool ENTITY_POOL = new LootPool(0, 2, 180);
+    public static final LootPool CHEST_POOL = new LootPool(1, 3, 160);
+    public static final LootPool ENTITY_POOL = new LootPool(0, 2, 250);
 
     public record BaseConfig(
             List<EntityType<?>> blacklist,

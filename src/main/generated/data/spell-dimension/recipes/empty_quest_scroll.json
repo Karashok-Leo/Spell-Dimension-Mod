@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:writable_book"
+    },
+    {
+      "tag": "spell-dimension:essence/all"
+    }
+  ],
+  "result": {
+    "item": "spell-dimension:quest_scroll"
+  }
+}

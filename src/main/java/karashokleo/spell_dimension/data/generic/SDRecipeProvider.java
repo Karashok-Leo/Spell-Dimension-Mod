@@ -18,6 +18,7 @@ import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.spell_engine.api.enchantment.Enchantments_SpellEngine;
@@ -38,9 +39,21 @@ public class SDRecipeProvider extends FabricRecipeProvider
     @Override
     public void generate(Consumer<RecipeJsonProvider> exporter)
     {
+        addMiscItemRecipe(exporter);
         addBaseEssenceRecipe(exporter);
         addEnchantedEssenceRecipe(exporter);
         addEnchantmentRecipe(exporter);
+    }
+
+    private static void addMiscItemRecipe(Consumer<RecipeJsonProvider> exporter)
+    {
+        // Empty Quest Scroll
+        ShapelessRecipeJsonBuilder
+                .create(RecipeCategory.MISC, AllItems.QUEST_SCROLL)
+                .input(Items.WRITABLE_BOOK)
+                .input(Ingredient.fromTag(AllTags.ESSENCE_ALL))
+                .criterion(FabricRecipeProvider.hasItem(Items.WRITABLE_BOOK), FabricRecipeProvider.conditionsFromItem(Items.WRITABLE_BOOK))
+                .offerTo(exporter, SpellDimension.modLoc("empty_quest_scroll"));
     }
 
     private static void addBaseEssenceRecipe(Consumer<RecipeJsonProvider> exporter)
