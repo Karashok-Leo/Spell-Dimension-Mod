@@ -1,16 +1,9 @@
 package karashokleo.spell_dimension.init;
 
-import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.leobrary.datagen.builder.EnchantmentBuilder;
 import karashokleo.spell_dimension.SpellDimension;
-import karashokleo.spell_dimension.api.SpellImpactEvents;
 import karashokleo.spell_dimension.content.enchantment.*;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.item.ItemStack;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class AllEnchantments
 {
@@ -18,6 +11,8 @@ public class AllEnchantments
     public static SpellHasteEnchantment SPELL_HASTE;
     public static SpellDashEnchantment SPELL_DASH;
     public static StressResponseEnchantment STRESS_RESPONSE;
+    public static SpellLeechEnchantment SPELL_LEECH;
+    public static SpellResistanceEnchantment SPELL_RESISTANCE;
 
     public static void register()
     {
@@ -45,18 +40,18 @@ public class AllEnchantments
                 .addZH("应激急速")
                 .addZHDesc("受伤时如果有法术冷却进度（百分比）小于 魔咒等级 × " + StressResponseEnchantment.MULTIPLIER + ", 则该法术立即冷却完毕。")
                 .register();
-
-        SpellImpactEvents.BEFORE.register((world, caster, targets, spellInfo) ->
-        {
-            Map<SpellImpactEnchantment, Integer> map = new HashMap<>();
-            for (ItemStack e : TrinketCompat.getItems(caster, e -> true))
-                EnchantmentHelper.get(e).forEach((enchantment, level) ->
-                {
-                    if (enchantment instanceof SpellImpactEnchantment impactEnchantment)
-                        map.compute(impactEnchantment, (en, lv) -> (lv == null ? 0 : lv) + level);
-                });
-            map.forEach((enchantment, level) -> enchantment.onSpellImpact(world, caster, level, targets, spellInfo));
-        });
+        SPELL_LEECH = new Entry<>("spell_leech", new SpellLeechEnchantment())
+                .addEN()
+                .addENDesc("The spell damage you deal will be reduced by a certain percentage and converted into health you recover.")
+                .addZH("法术吸血")
+                .addZHDesc("你造成的法术伤害将按一定比例减少，转化为你回复的生命值。")
+                .register();
+        SPELL_RESISTANCE = new Entry<>("spell_resistance", new SpellResistanceEnchantment())
+                .addEN()
+                .addENDesc("Your spell power will help you resist some damage.")
+                .addZH("魔力御体")
+                .addZHDesc("你的法术强度将会为你抵御部分伤害。")
+                .register();
     }
 
     public static class Entry<T extends Enchantment> extends EnchantmentBuilder<T>

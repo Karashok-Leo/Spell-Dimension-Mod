@@ -1,36 +1,26 @@
 package karashokleo.spell_dimension.content.spell;
 
 import karashokleo.spell_dimension.SpellDimension;
+import karashokleo.spell_dimension.config.SummonSpellConfig;
+import karashokleo.spell_dimension.content.misc.ISpawnerExtension;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.MobSpawnerBlockEntity;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.event.GameEvent;
 import net.spell_engine.entity.SpellProjectile;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class SummonSpell
 {
-    private static final Map<Item, EntityType<?>> CONFIG = new HashMap<>();
-
     public static final Identifier SPELL_ID = SpellDimension.modLoc("summon");
-
-    static
-    {
-        register(Items.GUNPOWDER, EntityType.CREEPER);
-    }
 
     public static void handle(SpellProjectile projectile, Identifier spellId, BlockHitResult hitResult)
     {
@@ -43,12 +33,10 @@ public class SummonSpell
             world.getBlockEntity(blockPos) instanceof MobSpawnerBlockEntity mobSpawnerBlockEntity)
         {
             ItemStack itemStack = living.getOffHandStack();
-            EntityType<?> entityType = getEntityType(itemStack);
-            if (entityType == null) return;
+            SummonSpellConfig.Entry entry = SummonSpellConfig.getEntry(itemStack);
+            if (entry == null) return;
 
-            mobSpawnerBlockEntity.setEntityType(entityType, world.getRandom());
-            BlockPos pos = mobSpawnerBlockEntity.getPos();
-//            mobSpawnerBlockEntity.getLogic().setEntityId(id, world.getRandom(), pos);
+            setSummonData(mobSpawnerBlockEntity, entry, world.getRandom());
 
             mobSpawnerBlockEntity.markDirty();
             world.updateListeners(blockPos, blockState, blockState, 3);
@@ -58,6 +46,7 @@ public class SummonSpell
                   player.getAbilities().creativeMode))
                 itemStack.decrement(1);
 
+            BlockPos pos = mobSpawnerBlockEntity.getPos();
             world.spawnParticles(
                     ParticleTypes.END_ROD,
                     pos.getX() + 0.5,
@@ -72,13 +61,9 @@ public class SummonSpell
         }
     }
 
-    public static void register(Item item, EntityType<?> entityType)
+    private static void setSummonData(MobSpawnerBlockEntity spawnerBlockEntity, SummonSpellConfig.Entry entry, Random random)
     {
-        CONFIG.put(item, entityType);
-    }
-
-    private static EntityType<?> getEntityType(ItemStack itemStack)
-    {
-        return CONFIG.get(itemStack.getItem());
+        spawnerBlockEntity.setEntityType(entry.entityType(), random);
+        ((ISpawnerExtension) spawnerBlockEntity.getLogic()).setRemain(entry.count());
     }
 }

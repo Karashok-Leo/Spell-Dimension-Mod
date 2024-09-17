@@ -6,6 +6,7 @@ import karashokleo.l2hostility.content.trait.common.AdaptingTrait;
 import karashokleo.l2hostility.init.LHTraits;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
 import karashokleo.spell_dimension.config.ScrollLootConfig;
+import karashokleo.spell_dimension.content.event.EnchantmentEvent;
 import karashokleo.spell_dimension.content.event.PlayerHealthEvent;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.util.SchoolUtil;
@@ -33,6 +34,7 @@ public class AllEvents
     public static void init()
     {
         PlayerHealthEvent.init();
+        EnchantmentEvent.init();
 
         // 调试棒伤害
         AttackEntityCallback.EVENT.register((player, world, hand, entity, hitResult) ->

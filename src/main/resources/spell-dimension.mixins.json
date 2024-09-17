@@ -6,6 +6,7 @@
     "AmplifierEnchantmentMixin",
     "EndPortalBlockMixin",
     "LivingEntityMixin",
+    "MobSpawnerLogicMixin",
     "PlayerInventoryAccessor",
     "SpellHelperMixin",
     "SpellInfinityEnchantmentMixin",

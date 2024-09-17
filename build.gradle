@@ -112,8 +112,6 @@ dependencies {
     modRuntimeOnly("maven.modrinth:moonlight:${project.moonlight_version}")
     modImplementation("maven.modrinth:victus:${project.victus_version}")
     modRuntimeOnly("io.wispforest:lavender:${project.lavender_version}")
-    modImplementation("maven.modrinth:natures-compass:${project.natures_compass_version}")
-    modImplementation("maven.modrinth:explorers-compass:${project.explorers_compass_version}")
     modImplementation("maven.modrinth:alloy-forgery:${project.alloy_forgery_version}")
     modImplementation("maven.modrinth:architectury-api:${project.architectury_api_version}")
     modImplementation("maven.modrinth:toms-storage:${project.toms_storage_version}")
@@ -128,7 +126,12 @@ dependencies {
     modImplementation "maven.modrinth:adventurez:${project.adventurez_version}"
     modImplementation "maven.modrinth:voidz:${project.voidz_version}"
 
-    modLocalRuntime "me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}"
+    // Compat
+    modCompileOnly "dev.emi:emi-fabric:${project.emi_version}:api"
+    modLocalRuntime "dev.emi:emi-fabric:${project.emi_version}"
+
+    modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:${project.rei_version}"
+//    modLocalRuntime "me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}"
 }
 
 processResources {

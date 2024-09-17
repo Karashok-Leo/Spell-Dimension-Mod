@@ -1,7 +1,5 @@
 package karashokleo.spell_dimension.data.book.category;
 
-import com.chaosthedude.explorerscompass.ExplorersCompass;
-import com.chaosthedude.naturescompass.NaturesCompass;
 import com.glisco.victus.item.VictusItems;
 import com.klikli_dev.modonomicon.api.ModonomiconAPI;
 import com.klikli_dev.modonomicon.api.datagen.BookContextHelper;
@@ -39,7 +37,7 @@ public class TipsCategory extends CategoryProvider
         return new String[]{
                 "k_h_s_g_",
                 "_______",
-                "f_c_e_m_",
+                "f___e_m_",
                 "_______",
                 "t_l____",
                 "_______",
@@ -54,7 +52,6 @@ public class TipsCategory extends CategoryProvider
         BookEntryModel smith = this.entrySmith();
         BookEntryModel storage = this.entryStorage();
         BookEntryModel difficulty = this.entryHostility();
-        BookEntryModel compass = this.entryCompass();
         BookEntryModel enchant = this.entryEnchant();
         BookEntryModel dummy = this.entryDummy();
         BookEntryModel trader = this.entryTrader();
@@ -64,7 +61,6 @@ public class TipsCategory extends CategoryProvider
         this.add(smith);
         this.add(storage);
         this.add(difficulty);
-        this.add(compass);
         this.add(enchant);
         this.add(dummy);
         this.add(trader);
@@ -449,67 +445,6 @@ public class TipsCategory extends CategoryProvider
         return this.entry('f')
                 .withIcon(LHTraits.ENDER.asItem())
                 .withPages(prev, next);
-    }
-
-    private BookEntryModel entryCompass()
-    {
-        BookContextHelper context = this.context();
-
-        context.entry("compass");
-        this.lang().add(context.entryName(), "Compass");
-        this.lang().add(context.entryDescription(), "More useful compasses.");
-        this.lang("zh_cn").add(context.entryName(), "指南针");
-        this.lang("zh_cn").add(context.entryDescription(), "更有用处的指南针。");
-
-        context.page("nature");
-        this.lang().add(context.pageTitle(), "Nature's Compass");
-        this.lang().add(context.pageText(),
-                """
-                        \\
-                        Nature's Compass can be used to locate biomes.
-                        """
-        );
-        this.lang("zh_cn").add(context.pageTitle(), "自然指南针");
-        this.lang("zh_cn").add(context.pageText(),
-                """
-                        \\
-                        自然指南针可以用于定位生物群系。
-                        """
-        );
-
-        BookSpotlightPageModel nature = BookSpotlightPageModel
-                .builder()
-                .withTitle(context.pageTitle())
-                .withText(context.pageText())
-                .withItem(Ingredient.ofItems(NaturesCompass.NATURES_COMPASS_ITEM))
-                .build();
-
-        context.page("explorer");
-        this.lang().add(context.pageTitle(), "Explorer's Compass");
-        this.lang().add(context.pageText(),
-                """
-                        \\
-                        Explorer's Compass can be used to locate structures such as dungeons.
-                        """
-        );
-        this.lang("zh_cn").add(context.pageTitle(), "探险家指南针");
-        this.lang("zh_cn").add(context.pageText(),
-                """
-                        \\
-                        探险家指南针可以用于定位地牢等结构。
-                        """
-        );
-
-        BookSpotlightPageModel explorer = BookSpotlightPageModel
-                .builder()
-                .withTitle(context.pageTitle())
-                .withText(context.pageText())
-                .withItem(Ingredient.ofItems(ExplorersCompass.EXPLORERS_COMPASS_ITEM))
-                .build();
-
-        return this.entry('c')
-                .withIcon(Items.COMPASS)
-                .withPages(nature, explorer);
     }
 
     private BookEntryModel entryEnchant()

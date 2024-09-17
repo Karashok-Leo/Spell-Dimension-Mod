@@ -2,14 +2,13 @@ package karashokleo.spell_dimension.content.spell;
 
 import com.mojang.datafixers.util.Pair;
 import karashokleo.spell_dimension.SpellDimension;
+import karashokleo.spell_dimension.config.LocateSpellConfig;
 import karashokleo.spell_dimension.content.entity.LocatePortalEntity;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllTags;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
@@ -22,25 +21,13 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.gen.structure.Structure;
-import net.minecraft.world.gen.structure.StructureKeys;
 import net.spell_engine.entity.SpellProjectile;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
 public class LocateSpell
 {
-    private static final Map<Item, RegistryKey<Structure>> STRUCTURE_CONFIG = new HashMap<>();
-    private static final Map<Item, RegistryKey<Biome>> BIOME_CONFIG = new HashMap<>();
-
-    static
-    {
-        STRUCTURE_CONFIG.put(Items.SCULK, StructureKeys.ANCIENT_CITY);
-        BIOME_CONFIG.put(Items.SAND, BiomeKeys.DESERT);
-    }
 
     public static final Identifier SPELL_ID = SpellDimension.modLoc("locate");
 
@@ -53,8 +40,8 @@ public class LocateSpell
         if (!isLocateTargetBlock(world, blockPos)) return;
 
         ItemStack offHandStack = living.getOffHandStack();
-        RegistryKey<Structure> structureRegistryKey = STRUCTURE_CONFIG.get(offHandStack.getItem());
-        RegistryKey<Biome> biomeRegistryKey = BIOME_CONFIG.get(offHandStack.getItem());
+        RegistryKey<Structure> structureRegistryKey = LocateSpellConfig.getStructure(offHandStack.getItem());
+        RegistryKey<Biome> biomeRegistryKey = LocateSpellConfig.getBiome(offHandStack.getItem());
 
         boolean consume = false;
 

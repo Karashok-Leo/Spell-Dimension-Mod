@@ -107,6 +107,21 @@ public enum SDTexts
     /**
      * Spells
      */
+    SPELL$LOCATE$NAME("Locate", "定位"),
+    SPELL$LOCATE$DESCRIPTION(
+            "Launch a spell, if it touches a lodestone, it will use the item in your off-hand as a key item to find the corresponding structure or biome. If found, it will shatter the lodestone and the key item to summon a portal to the corresponding structure or biome.",
+            "发射一道咒语, 若其触碰到磁石, 则会以你副手的物品为索引物, 寻找相应的结构或群系. 若找到，则击碎磁石和索引物, 召唤出一个通往对应结构或群系的传送门."
+    ),
+    SPELL$SUMMON$NAME("Summon", "引唤"),
+    SPELL$SUMMON$DESCRIPTION(
+            "Launch a spell, if it touches a spawner, it will use the item in your off-hand as a key item to replace the mob in the spawner.",
+            "发射一道咒语, 若其触碰到刷怪笼, 则会以你副手的物品为索引物, 替换刷怪笼中的生物."
+    ),
+    SPELL$PLACE$NAME("Remote Manipulation", "远端操控"),
+    SPELL$PLACE$DESCRIPTION(
+            "Launch a spell, if it touches a block, it will use the item in your off-hand on the block.",
+            "发射一道咒语, 若其触碰到方块, 则会对其使用你副手的物品."
+    ),
     SPELL$CONVERGE$NAME("Converge", "汇聚"),
     SPELL$CONVERGE$DESCRIPTION(
             "Launching a spell to explode at the landing point and make enemies converged.",
