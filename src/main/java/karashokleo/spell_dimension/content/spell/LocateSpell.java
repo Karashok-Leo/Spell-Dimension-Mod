@@ -10,6 +10,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
@@ -117,6 +118,8 @@ public class LocateSpell
         LocatePortalEntity locatePortalEntity = new LocatePortalEntity(world, destination);
         locatePortalEntity.setPosition(pos.getX() + 0.5, pos.getY() + 3, pos.getZ() + 0.5);
         world.spawnEntity(locatePortalEntity);
+
+        world.spawnParticles(ParticleTypes.PORTAL, pos.getX() + 0.5, pos.getY() + 3, pos.getZ() + 0.5, 1000, 0, 0, 0, 2);
     }
 
     private static boolean isLocateTargetBlock(World world, BlockPos pos)

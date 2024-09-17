@@ -2,7 +2,7 @@
   "school": "spell-dimension:generic",
   "range": 16,
   "cast": {
-    "duration": 2.08,
+    "duration": 2.0,
     "animation": "spell_engine:one_handed_projectile_charge",
     "sound": {
       "id": "spell_engine:generic_arcane_casting",
@@ -28,22 +28,13 @@
           "client_data": {
             "travel_particles": [
               {
-                "particle_id": "spell_engine:arcane_spell",
+                "particle_id": "minecraft:portal",
                 "shape": "CIRCLE",
                 "rotation": "LOOK",
                 "origin": "CENTER",
                 "count": 3,
                 "min_speed": 0.02,
                 "max_speed": 0.1
-              },
-              {
-                "particle_id": "spell_engine:weakness_smoke",
-                "shape": "CIRCLE",
-                "rotation": "LOOK",
-                "origin": "CENTER",
-                "count": 1,
-                "min_speed": 0.1,
-                "max_speed": 0.2
               }
             ],
             "model": {

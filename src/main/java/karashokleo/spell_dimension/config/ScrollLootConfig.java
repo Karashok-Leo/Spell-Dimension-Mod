@@ -1,6 +1,7 @@
 package karashokleo.spell_dimension.config;
 
 import karashokleo.spell_dimension.content.spell.LocateSpell;
+import karashokleo.spell_dimension.content.spell.PlaceSpell;
 import karashokleo.spell_dimension.content.spell.SummonSpell;
 import karashokleo.spell_dimension.data.SDTexts;
 import net.minecraft.entity.EntityType;
@@ -57,6 +58,7 @@ public class ScrollLootConfig
     {
         SPELL_TEXTS.put(LocateSpell.SPELL_ID, Text.empty());
         SPELL_TEXTS.put(SummonSpell.SPELL_ID, Text.empty());
+        SPELL_TEXTS.put(PlaceSpell.SPELL_ID, Text.empty());
 
         // Primary
         {
