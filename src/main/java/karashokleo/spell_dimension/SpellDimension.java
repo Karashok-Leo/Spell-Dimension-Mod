@@ -27,6 +27,7 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.minecraft.block.Block;
 import net.minecraft.data.DataOutput;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
@@ -48,6 +49,7 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
         AllItems.register();
         AllTags.register();
         AllGroups.register();
+        AllEntities.register();
         AllLoots.register();
         AllBuffs.register();
         AllQuests.register();
@@ -96,6 +98,7 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
     public static final LanguageGenerator ZH_TEXTS = new LanguageGenerator("zh_cn");
     public static final ModelGenerator MODELS = new ModelGenerator();
     public static final TagGenerator<Item> ITEM_TAGS = new TagGenerator<>(RegistryKeys.ITEM);
+    public static final TagGenerator<Block> BLOCK_TAGS = new TagGenerator<>(RegistryKeys.BLOCK);
 
     @Override
     public String getModId()

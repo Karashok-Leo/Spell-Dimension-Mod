@@ -38,7 +38,7 @@ public class Nucleus implements Buff
 
     public static final UUID uuid = UUID.fromString("977AE476-9F10-5499-4B5D-09B296214773");
     private static final String MODIFIER_KEY = "IceNucleus";
-    public static final Identifier NUCLEUS = SpellDimension.modLoc("nucleus");
+    public static final Identifier SPELL_ID = SpellDimension.modLoc("nucleus");
     public static final Identifier ICICLE = SpellDimension.modLoc("nuclear_icicle");
     public static final double MULTIPLIER = -0.75D;
     public static final int TOTAL_DURATION = 80;

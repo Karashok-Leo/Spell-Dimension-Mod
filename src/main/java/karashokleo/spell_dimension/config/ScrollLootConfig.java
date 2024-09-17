@@ -1,5 +1,7 @@
 package karashokleo.spell_dimension.config;
 
+import karashokleo.spell_dimension.content.spell.LocateSpell;
+import karashokleo.spell_dimension.content.spell.SummonSpell;
 import karashokleo.spell_dimension.data.SDTexts;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
@@ -53,6 +55,9 @@ public class ScrollLootConfig
 
     static
     {
+        SPELL_TEXTS.put(LocateSpell.SPELL_ID, Text.empty());
+        SPELL_TEXTS.put(SummonSpell.SPELL_ID, Text.empty());
+
         // Primary
         {
             fromPrimary("wizards:arcane_bolt");

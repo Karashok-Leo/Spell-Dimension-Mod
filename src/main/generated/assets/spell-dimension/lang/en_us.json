@@ -198,6 +198,7 @@
   "text.spell-dimension.essence.fail": "Failed to use essence!",
   "text.spell-dimension.essence.success": "Successful use of essence!",
   "text.spell-dimension.incompatible_school": "Incompatible spell school!",
+  "text.spell-dimension.invalid_key_item": "Invalid Key Item!",
   "text.spell-dimension.mage": "Mage",
   "text.spell-dimension.progress_rollback": "Progress has been rolled back!",
   "text.spell-dimension.quest.health": "Gain experience to increase your %s to %s",

@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#spell-dimension:book/0",
+    "#spell-dimension:book/1",
+    "#spell-dimension:book/2"
+  ]
+}

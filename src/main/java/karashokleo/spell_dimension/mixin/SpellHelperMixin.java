@@ -4,6 +4,7 @@ import com.llamalad7.mixinextras.sugar.Local;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllItems;
+import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.util.SchoolUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -62,7 +63,8 @@ public abstract class SpellHelperMixin
     private static void inject_attemptCasting(PlayerEntity player, ItemStack itemStack, Identifier spellId, boolean checkAmmo, CallbackInfoReturnable<SpellCast.Attempt> cir, @Local Spell spell)
     {
         if (itemStack.isOf(AllItems.SPELL_SCROLL) &&
-                !SchoolUtil.getPlayerSchool(player).contains(spell.school))
+            spell.school != AllSpells.GENERIC &&
+            !SchoolUtil.getPlayerSchool(player).contains(spell.school))
         {
             player.sendMessage(SDTexts.TEXT$SKILLED_SCHOOL.get(), true);
             cir.setReturnValue(SpellCast.Attempt.none());

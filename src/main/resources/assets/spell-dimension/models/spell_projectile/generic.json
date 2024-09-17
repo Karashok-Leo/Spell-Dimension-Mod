@@ -1,0 +1,43 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "spell-dimension:spell_projectile/generic",
+		"particle": "spell-dimension:spell_projectile/generic"
+	},
+	"elements": [
+		{
+			"from": [6, 6, 6],
+			"to": [10, 10, 10],
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"north": {"uv": [4, 0, 8, 4], "texture": "#0"},
+				"east": {"uv": [0, 0, 4, 4], "texture": "#0"},
+				"south": {"uv": [0, 4, 4, 8], "texture": "#0"},
+				"west": {"uv": [4, 4, 8, 8], "texture": "#0"},
+				"up": {"uv": [12, 4, 16, 0], "texture": "#0"},
+				"down": {"uv": [8, 0, 12, 4], "texture": "#0"}
+			}
+		},
+		{
+			"from": [6, 6, 6],
+			"to": [10, 10, 10],
+			"rotation": {"angle": 45, "axis": "z", "origin": [8, 8, 8]},
+			"faces": {
+				"north": {"uv": [4, 8.4, 7.2, 12], "texture": "#0"},
+				"east": {"uv": [0, 8.4, 3.2, 12], "texture": "#0"},
+				"south": {"uv": [0, 12.4, 3.2, 16], "texture": "#0"},
+				"west": {"uv": [4, 12.4, 7.2, 16], "texture": "#0"},
+				"up": {"uv": [12, 8.4, 16, 11.6], "texture": "#0"},
+				"down": {"uv": [8, 8.4, 11.2, 11.6], "texture": "#0"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "head",
+			"origin": [8, 8, 6.8],
+			"color": 0,
+			"children": [0, 1]
+		}
+	]
+}

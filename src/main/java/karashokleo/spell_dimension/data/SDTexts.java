@@ -42,6 +42,7 @@ public enum SDTexts
     TEXT$QUEST_REQUIREMENT("Quest requirements not met!", "任务要求未达成！"),
     TEXT$QUEST$HEALTH("Gain experience to increase your %s to %s", "获取经验以提升你的%s至%s"),
     TEXT$QUEST$SPELL_POWER("Increase any Spell Power to %s", "将任意法术强度提升至%s"),
+    TEXT$INVALID_KEY_ITEM("Invalid Key Item!", "无效的索引物品！"),
 
     /**
      * Spell School

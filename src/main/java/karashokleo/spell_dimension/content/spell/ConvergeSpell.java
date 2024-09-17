@@ -8,6 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Vec3d;
 import net.spell_engine.api.spell.ParticleBatch;
 import net.spell_engine.entity.SpellProjectile;
@@ -18,7 +19,7 @@ import net.spell_power.api.SpellSchools;
 
 public class ConvergeSpell
 {
-    private static final Identifier CONVERGE_SPELL = SpellDimension.modLoc("converge");
+    public static final Identifier SPELL_ID = SpellDimension.modLoc("converge");
     private static final ParticleBatch[] PARTICLE = {new ParticleBatch(
             "minecraft:explosion_emitter",
             ParticleBatch.Shape.SPHERE,
@@ -35,9 +36,9 @@ public class ConvergeSpell
             false
     )};
 
-    public static void convergeImpact(SpellProjectile projectile, Identifier spellId)
+    public static void handle(SpellProjectile projectile, Identifier spellId, HitResult hitResult)
     {
-        if (spellId.equals(CONVERGE_SPELL))
+        if (spellId.equals(SPELL_ID))
             convergeImpact(projectile);
     }
 

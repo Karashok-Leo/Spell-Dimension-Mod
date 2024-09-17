@@ -3,9 +3,6 @@
   "values": [
     "#spell-dimension:essence/0",
     "#spell-dimension:essence/1",
-    "#spell-dimension:essence/2",
-    "#spell-dimension:book/0",
-    "#spell-dimension:book/1",
-    "#spell-dimension:book/2"
+    "#spell-dimension:essence/2"
   ]
 }

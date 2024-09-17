@@ -15,13 +15,11 @@ import karashokleo.spell_dimension.content.misc.INoClip;
 import karashokleo.spell_dimension.content.network.S2CSpellDash;
 import karashokleo.spell_dimension.content.network.S2CTitle;
 import karashokleo.spell_dimension.data.SDTexts;
+import karashokleo.spell_dimension.init.AllEntities;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllStatusEffects;
 import karashokleo.spell_dimension.mixin.RollManagerInvoker;
-import karashokleo.spell_dimension.render.FrostedEffectRenderer;
-import karashokleo.spell_dimension.render.FrostedParticleSpawner;
-import karashokleo.spell_dimension.render.NucleusRenderer;
-import karashokleo.spell_dimension.render.PhaseParticleSpawner;
+import karashokleo.spell_dimension.render.*;
 import karashokleo.spell_dimension.screen.QuestOverlay;
 import karashokleo.spell_dimension.screen.SpellPowerTab;
 import net.combatroll.internals.RollingEntity;
@@ -29,6 +27,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback;
 import net.fabricmc.fabric.api.event.Event;
 import net.minecraft.client.MinecraftClient;
@@ -51,6 +50,7 @@ public class SpellDimensionClient implements ClientModInitializer
     public static final Identifier CONVERGE_MODEL = SpellDimension.modLoc("spell_projectile/converge");
     public static final Identifier FROSTED_MODEL = SpellDimension.modLoc("spell_effect/frosted");
     public static final Identifier ICICLE_MODEL = SpellDimension.modLoc("spell_projectile/icicle");
+    public static final Identifier GENERIC_MODEL = SpellDimension.modLoc("spell_projectile/generic");
 
     public static TabToken<InvTabData, SpellPowerTab> TAB_SPELL_POWER;
 
@@ -58,6 +58,8 @@ public class SpellDimensionClient implements ClientModInitializer
     public void onInitializeClient()
     {
         itemTooltip();
+
+        EntityRendererRegistry.register(AllEntities.LOCATE_PORTAL, LocatePortalRenderer::new);
 
         GuiOverlayRegistry.registerLayer(6, new QuestOverlay());
 
@@ -77,7 +79,8 @@ public class SpellDimensionClient implements ClientModInitializer
         CustomModels.registerModelIds(List.of(
                 FROSTED_MODEL,
                 ICICLE_MODEL,
-                CONVERGE_MODEL
+                CONVERGE_MODEL,
+                GENERIC_MODEL
         ));
 
         CustomParticleStatusEffect.register(AllStatusEffects.PHASE, new PhaseParticleSpawner());

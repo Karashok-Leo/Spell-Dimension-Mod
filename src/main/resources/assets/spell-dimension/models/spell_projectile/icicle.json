@@ -1,9 +1,9 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "spell-dimension:spell_projectile/icicle_0",
-		"1": "spell-dimension:spell_projectile/icicle_1",
-		"particle": "spell-dimension:spell_projectile/icicle_0"
+		"0": "spell-dimension:spell_projectile/icicle",
+		"1": "spell-dimension:spell_projectile/icicle",
+		"particle": "spell-dimension:spell_projectile/icicle"
 	},
 	"elements": [
 		{

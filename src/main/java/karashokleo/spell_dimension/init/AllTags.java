@@ -3,6 +3,8 @@ package karashokleo.spell_dimension.init;
 import karashokleo.leobrary.datagen.generator.TagGenerator;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.util.TagUtil;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.registry.tag.TagKey;
@@ -26,7 +28,7 @@ public class AllTags
             TagUtil.itemTag("book/1"),
             TagUtil.itemTag("book/2")
     );
-    public static final TagKey<Item> BOOK_ALL = TagUtil.itemTag("essence/all");
+    public static final TagKey<Item> BOOK_ALL = TagUtil.itemTag("book/all");
 
     public static final TagKey<Item> RUNE = TagUtil.itemTag("rune");
     public static final TagKey<Item> HEART_FOOD = TagUtil.itemTag("heart_food");
@@ -49,6 +51,8 @@ public class AllTags
     public static final List<TagKey<Item>> REFORGE_CORE_TAGS = Stream.of(1, 2, 3).map(i -> TagUtil.itemTag(new Identifier("equipment_standard:reforge_core/lv" + i))).toList();
 
     public static final TagKey<Item> SHELL_HORN_REQUIREMENT = TagUtil.itemTag("shell_horn_requirement");
+
+    public static final TagKey<Block> LOCATE_TARGET = TagUtil.blockTag("locate_target");
 
     public static void register()
     {
@@ -78,5 +82,9 @@ public class AllTags
         TagGenerator.Container<Item> bookAllContainer = generator.getOrCreateContainer(BOOK_ALL);
         for (TagKey<Item> key : BOOK)
             bookAllContainer.addTag(key);
+
+        SpellDimension.BLOCK_TAGS.getOrCreateContainer(LOCATE_TARGET).add(
+                Blocks.LODESTONE
+        );
     }
 }

@@ -198,6 +198,7 @@
   "text.spell-dimension.essence.fail": "精华使用失败!",
   "text.spell-dimension.essence.success": "精华使用成功!",
   "text.spell-dimension.incompatible_school": "不兼容的法术学派!",
+  "text.spell-dimension.invalid_key_item": "无效的索引物品！",
   "text.spell-dimension.mage": "法师",
   "text.spell-dimension.progress_rollback": "进度已回退！",
   "text.spell-dimension.quest.health": "获取经验以提升你的%s至%s",
