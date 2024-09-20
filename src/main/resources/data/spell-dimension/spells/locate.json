@@ -53,7 +53,7 @@
   "impact": [
   ],
   "cost": {
-    "cooldown_duration": 2.0,
+    "cooldown_duration": 60.0,
     "exhaust": 0.2
   }
 }

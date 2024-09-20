@@ -2,7 +2,7 @@ package karashokleo.spell_dimension.content.spell;
 
 import com.mojang.datafixers.util.Pair;
 import karashokleo.spell_dimension.SpellDimension;
-import karashokleo.spell_dimension.config.LocateSpellConfig;
+import karashokleo.spell_dimension.config.recipe.LocateSpellConfig;
 import karashokleo.spell_dimension.content.entity.LocatePortalEntity;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllTags;
@@ -102,11 +102,10 @@ public class LocateSpell
 
     private static void spawnLocatePortal(ServerWorld world, BlockPos destination, BlockPos pos)
     {
+        world.spawnParticles(ParticleTypes.PORTAL, pos.getX() + 0.5, pos.getY() - 0.5 + 3, pos.getZ() + 0.5, 1000, 0, 0, 0, 2);
         LocatePortalEntity locatePortalEntity = new LocatePortalEntity(world, destination);
         locatePortalEntity.setPosition(pos.getX() + 0.5, pos.getY() + 3, pos.getZ() + 0.5);
         world.spawnEntity(locatePortalEntity);
-
-        world.spawnParticles(ParticleTypes.PORTAL, pos.getX() + 0.5, pos.getY() + 3, pos.getZ() + 0.5, 1000, 0, 0, 0, 2);
     }
 
     private static boolean isLocateTargetBlock(World world, BlockPos pos)

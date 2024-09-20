@@ -36,6 +36,9 @@ public class LocatePortalRenderer extends EntityRenderer<LocatePortalEntity>
     @Override
     public void render(LocatePortalEntity entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light)
     {
+        int activeTime = entity.getActiveTime();
+        if (activeTime < 0) return;
+
         ClientPlayerEntity player = L2HostilityClient.getClientPlayer();
         if (player == null) return;
 
@@ -49,10 +52,10 @@ public class LocatePortalRenderer extends EntityRenderer<LocatePortalEntity>
         matrices.multiply(new Quaternionf().rotationAxis(MathHelper.RADIANS_PER_DEGREE * (180F - (float) angleOf(portal, playerV)), 0, 1, 0));
 
         double emergeHeight = 3.6 * entity.getHeight();
-        double yOffset = entity.age > EMERGE_DURATION ? 0 : emergeHeight * (1.0 * entity.age / EMERGE_DURATION - 1.0);
+        double yOffset = activeTime > EMERGE_DURATION ? 0 : emergeHeight * (1.0 * activeTime / EMERGE_DURATION - 1.0);
         matrices.translate(0, -yOffset, 0);
 
-        float scale = entity.age > EMERGE_DURATION ? 2 : 2F * entity.age / EMERGE_DURATION;
+        float scale = activeTime > EMERGE_DURATION ? 2 : 2F * activeTime / EMERGE_DURATION;
         matrices.scale(scale, scale, 1);
 
         RenderSystem.setShader(GameRenderer::getPositionTexProgram);
@@ -63,7 +66,7 @@ public class LocatePortalRenderer extends EntityRenderer<LocatePortalEntity>
 //        int color = 0x00FF00;
 //        int r = color >> 16 & 255, g = color >> 8 & 255, b = color & 255;
         float frameHeight = 1F / FRAME_COUNT;
-        int frame = entity.age % FRAME_COUNT;
+        int frame = activeTime % FRAME_COUNT;
 
         float v1 = 1 - frame * frameHeight;
         float v2 = v1 - frameHeight;

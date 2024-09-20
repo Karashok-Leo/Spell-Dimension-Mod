@@ -1,4 +1,4 @@
-package karashokleo.spell_dimension.config;
+package karashokleo.spell_dimension.config.recipe;
 
 import karashokleo.spell_dimension.content.spell.LocateSpell;
 import karashokleo.spell_dimension.content.spell.PlaceSpell;
@@ -19,6 +19,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.BiConsumer;
 
 public class ScrollLootConfig
 {
@@ -53,6 +54,11 @@ public class ScrollLootConfig
     private static final Map<Identifier, MutableText> SPELL_TEXTS = new HashMap<>();
     private static final Map<Identifier, Identifier> LOOT_SPELLS = new HashMap<>();
     private static final Map<Item, Identifier> CRAFT_SPELLS = new HashMap<>();
+
+    public static void forEach(BiConsumer<Item, Identifier> action)
+    {
+        CRAFT_SPELLS.forEach(action);
+    }
 
     static
     {

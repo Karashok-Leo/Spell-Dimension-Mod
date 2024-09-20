@@ -1,15 +1,15 @@
 package karashokleo.spell_dimension.content.spell;
 
 import karashokleo.spell_dimension.SpellDimension;
-import karashokleo.spell_dimension.config.SummonSpellConfig;
+import karashokleo.spell_dimension.config.recipe.SummonSpellConfig;
 import karashokleo.spell_dimension.content.misc.ISpawnerExtension;
+import karashokleo.spell_dimension.util.ParticleUtil;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.MobSpawnerBlockEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
@@ -46,18 +46,7 @@ public class SummonSpell
                   player.getAbilities().creativeMode))
                 itemStack.decrement(1);
 
-            BlockPos pos = mobSpawnerBlockEntity.getPos();
-            world.spawnParticles(
-                    ParticleTypes.END_ROD,
-                    pos.getX() + 0.5,
-                    pos.getY() + 0.5,
-                    pos.getZ() + 0.5,
-                    16,
-                    0.01,
-                    0.01,
-                    0.01,
-                    0.06
-            );
+            ParticleUtil.sparkParticleEmit(world, mobSpawnerBlockEntity.getPos().toCenterPos(), 24);
         }
     }
 

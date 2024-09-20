@@ -4,7 +4,7 @@ import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
 import karashokleo.spell_dimension.config.EssenceLootConfig;
-import karashokleo.spell_dimension.config.ScrollLootConfig;
+import karashokleo.spell_dimension.config.recipe.ScrollLootConfig;
 import karashokleo.spell_dimension.content.loot.entry.RandomEnchantedEssenceEntry;
 import karashokleo.spell_dimension.content.loot.entry.RandomEnlighteningEssenceEntry;
 import karashokleo.spell_dimension.content.loot.entry.SpellScrollEntry;

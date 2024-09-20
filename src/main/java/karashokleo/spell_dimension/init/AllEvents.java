@@ -5,25 +5,16 @@ import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.trait.common.AdaptingTrait;
 import karashokleo.l2hostility.init.LHTraits;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
-import karashokleo.spell_dimension.config.ScrollLootConfig;
 import karashokleo.spell_dimension.content.event.EnchantmentEvent;
 import karashokleo.spell_dimension.content.event.PlayerHealthEvent;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.util.SchoolUtil;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
-import net.minecraft.block.LeveledCauldronBlock;
-import net.minecraft.block.cauldron.CauldronBehavior;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.damage.DamageTypes;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsage;
-import net.minecraft.item.Items;
-import net.minecraft.stat.Stats;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
 import net.spell_power.api.SpellDamageSource;
 
@@ -63,8 +54,6 @@ public class AllEvents
         });
 
         adaptiveCompat();
-
-        registerCauldronBehavior();
     }
 
     private static void adaptiveCompat()
@@ -93,27 +82,6 @@ public class AllEvents
                 if (first.isPresent()) return first.get();
             }
             return null;
-        });
-    }
-
-    private static void registerCauldronBehavior()
-    {
-        // Spell Scroll Craft
-        CauldronBehavior.WATER_CAULDRON_BEHAVIOR.put(Items.PAPER, (state, world, pos, player, hand, stack) ->
-        {
-            if (!world.isClient() && hand == Hand.MAIN_HAND)
-            {
-                Item item = stack.getItem();
-                Identifier craftSpellId = ScrollLootConfig.getCraftSpellId(player.getOffHandStack());
-                if (craftSpellId != null)
-                {
-                    player.setStackInHand(hand, ItemUsage.exchangeStack(stack, player, AllItems.SPELL_SCROLL.getStack(craftSpellId)));
-                    LeveledCauldronBlock.decrementFluidLevel(state, world, pos);
-                    player.incrementStat(Stats.USE_CAULDRON);
-                    player.incrementStat(Stats.USED.getOrCreateStat(item));
-                }
-            }
-            return ActionResult.success(world.isClient());
         });
     }
 }

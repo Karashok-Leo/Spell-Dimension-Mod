@@ -3,6 +3,7 @@ package karashokleo.spell_dimension;
 import dev.xkmc.l2tabs.tabs.core.TabToken;
 import dev.xkmc.l2tabs.tabs.inventory.InvTabData;
 import dev.xkmc.l2tabs.tabs.inventory.TabRegistry;
+import karashokleo.enchantment_infusion.api.render.InfusionTableTileRenderer;
 import karashokleo.leobrary.gui.api.GuiOverlayRegistry;
 import karashokleo.leobrary.gui.api.TextureOverlayRegistry;
 import karashokleo.spell_dimension.api.quest.Quest;
@@ -15,6 +16,7 @@ import karashokleo.spell_dimension.content.misc.INoClip;
 import karashokleo.spell_dimension.content.network.S2CSpellDash;
 import karashokleo.spell_dimension.content.network.S2CTitle;
 import karashokleo.spell_dimension.data.SDTexts;
+import karashokleo.spell_dimension.init.AllBlocks;
 import karashokleo.spell_dimension.init.AllEntities;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllStatusEffects;
@@ -33,6 +35,7 @@ import net.fabricmc.fabric.api.event.Event;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.item.Item;
 import net.minecraft.text.TranslatableTextContent;
 import net.minecraft.util.Identifier;
@@ -58,6 +61,8 @@ public class SpellDimensionClient implements ClientModInitializer
     public void onInitializeClient()
     {
         itemTooltip();
+
+        BlockEntityRendererFactories.register(AllBlocks.SPELL_INFUSION_PEDESTAL_TILE, ctx -> new InfusionTableTileRenderer<>(1.05F, ctx));
 
         EntityRendererRegistry.register(AllEntities.LOCATE_PORTAL, LocatePortalRenderer::new);
 
@@ -112,8 +117,8 @@ public class SpellDimensionClient implements ClientModInitializer
                 ClientPlayerEntity player = MinecraftClient.getInstance().player;
                 Optional<Quest> optional = item.getQuest(stack);
                 if (player != null &&
-                        optional.isPresent() &&
-                        QuestUsage.isQuestCompleted(player, optional.get()))
+                    optional.isPresent() &&
+                    QuestUsage.isQuestCompleted(player, optional.get()))
                     lines.add(SDTexts.TEXT$QUEST_COMPLETED.get());
             }
         });
@@ -122,7 +127,7 @@ public class SpellDimensionClient implements ClientModInitializer
             if (stack.getItem() instanceof DynamicSpellBookItem)
                 lines.removeIf(line ->
                         line.getContent() instanceof TranslatableTextContent content &&
-                                content.getKey().equals("spell.tooltip.spell_binding_tip"));
+                        content.getKey().equals("spell.tooltip.spell_binding_tip"));
         });
     }
 }

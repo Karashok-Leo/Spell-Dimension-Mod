@@ -4,6 +4,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.particle.DustParticleEffect;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.spell_engine.particle.Particles;
 import net.spell_power.api.SpellSchool;
@@ -55,5 +57,20 @@ public class ParticleUtil
             double z = entity.getZ() + Math.sin(radian) * amount / divisor;
             entity.getWorld().addParticle(effect, x, entity.getY() + entity.getHeight() * 0.5F, z, 0.0, 0.0, 0.0);
         }
+    }
+
+    public static void sparkParticleEmit(ServerWorld world, Vec3d pos, int count)
+    {
+        world.spawnParticles(
+                ParticleTypes.END_ROD,
+                pos.getX(),
+                pos.getY(),
+                pos.getZ(),
+                count,
+                0.01,
+                0.01,
+                0.01,
+                0.06
+        );
     }
 }

@@ -1,20 +1,22 @@
-package karashokleo.spell_dimension.config;
+package karashokleo.spell_dimension.config.recipe;
 
 import fuzs.mutantmonsters.init.ModRegistry;
 import karashokleo.spell_dimension.content.misc.ISpawnerExtension;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.BiConsumer;
 
 public class SummonSpellConfig
 {
     private static final Map<Item, Entry> CONFIG = new HashMap<>();
 
-    public record Entry(EntityType<?> entityType, int count)
+    public record Entry(EntityType<? extends LivingEntity> entityType, int count)
     {
     }
 
@@ -30,12 +32,12 @@ public class SummonSpellConfig
         register(Items.END_CRYSTAL, ModRegistry.MUTANT_ENDERMAN_ENTITY_TYPE.get(), 1);
     }
 
-    public static void register(Item item, EntityType<?> entityType, int count)
+    public static void register(Item item, EntityType<? extends LivingEntity> entityType, int count)
     {
         CONFIG.put(item, new Entry(entityType, count));
     }
 
-    public static void register(Item item, EntityType<?> entityType)
+    public static void register(Item item, EntityType<? extends LivingEntity> entityType)
     {
         register(item, entityType, ISpawnerExtension.DEFAULT_REMAIN);
     }
@@ -43,5 +45,10 @@ public class SummonSpellConfig
     public static Entry getEntry(ItemStack itemStack)
     {
         return CONFIG.get(itemStack.getItem());
+    }
+
+    public static void forEach(BiConsumer<Item, Entry> action)
+    {
+        CONFIG.forEach(action);
     }
 }

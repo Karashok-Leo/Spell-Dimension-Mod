@@ -2,7 +2,7 @@ package karashokleo.spell_dimension.init;
 
 import karashokleo.spell_dimension.api.quest.QuestRegistry;
 import karashokleo.spell_dimension.config.AttributeModifier;
-import karashokleo.spell_dimension.config.ScrollLootConfig;
+import karashokleo.spell_dimension.config.recipe.ScrollLootConfig;
 import karashokleo.spell_dimension.content.item.logic.EnchantedModifier;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.Item;

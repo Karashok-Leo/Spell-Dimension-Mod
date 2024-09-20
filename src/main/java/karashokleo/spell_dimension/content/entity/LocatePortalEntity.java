@@ -11,8 +11,10 @@ import java.util.List;
 
 public class LocatePortalEntity extends Entity
 {
-    protected final int lifespan;
-    protected final BlockPos destination;
+    public static final int SPAWN_DELAY = 50;
+    public static final int PORTAL_COOLDOWN = 100;
+    protected int lifespan;
+    protected BlockPos destination;
 
     public static LocatePortalEntity create(EntityType<?> type, World world)
     {
@@ -47,16 +49,24 @@ public class LocatePortalEntity extends Entity
     public void tick()
     {
         super.tick();
-        if (this.age > this.lifespan)
+        int activeTime = this.getActiveTime();
+        if (activeTime > this.lifespan)
             this.remove(RemovalReason.DISCARDED);
-        if (!this.getWorld().isClient())
+        if (!this.getWorld().isClient() && activeTime > 0)
         {
             List<Entity> entities = this.getWorld().getOtherEntities(this, this.getBoundingBox().expand(1, 2, 1));
             entities.forEach(entity ->
             {
+                if (entity.hasPortalCooldown()) return;
                 entity.teleport(this.getDestination().getX(), this.getDestination().getY(), this.getDestination().getZ());
+                entity.setPortalCooldown(PORTAL_COOLDOWN);
             });
         }
+    }
+
+    public int getActiveTime()
+    {
+        return this.age - SPAWN_DELAY;
     }
 
     public BlockPos getDestination()
@@ -67,12 +77,14 @@ public class LocatePortalEntity extends Entity
     @Override
     protected void readCustomDataFromNbt(NbtCompound nbt)
     {
-
+        this.lifespan = nbt.getInt("lifespan");
+        this.destination = BlockPos.fromLong(nbt.getLong("destination"));
     }
 
     @Override
     protected void writeCustomDataToNbt(NbtCompound nbt)
     {
-
+        nbt.putInt("lifespan", this.lifespan);
+        nbt.putLong("destination", this.destination.asLong());
     }
 }

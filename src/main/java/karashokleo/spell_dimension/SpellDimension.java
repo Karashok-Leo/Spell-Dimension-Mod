@@ -4,6 +4,7 @@ import com.klikli_dev.modonomicon.api.datagen.LanguageProviderCache;
 import dev.onyxstudios.cca.api.v3.entity.EntityComponentFactoryRegistry;
 import dev.onyxstudios.cca.api.v3.entity.EntityComponentInitializer;
 import dev.onyxstudios.cca.api.v3.entity.RespawnCopyStrategy;
+import karashokleo.leobrary.datagen.generator.BlockLootGenerator;
 import karashokleo.leobrary.datagen.generator.LanguageGenerator;
 import karashokleo.leobrary.datagen.generator.ModelGenerator;
 import karashokleo.leobrary.datagen.generator.TagGenerator;
@@ -47,9 +48,10 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
     public void onInitialize()
     {
         AllItems.register();
+        AllBlocks.register();
+        AllEntities.register();
         AllTags.register();
         AllGroups.register();
-        AllEntities.register();
         AllLoots.register();
         AllBuffs.register();
         AllQuests.register();
@@ -97,6 +99,7 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
     public static final LanguageGenerator EN_TEXTS = new LanguageGenerator("en_us");
     public static final LanguageGenerator ZH_TEXTS = new LanguageGenerator("zh_cn");
     public static final ModelGenerator MODELS = new ModelGenerator();
+    public static final BlockLootGenerator BLOCK_LOOTS = new BlockLootGenerator();
     public static final TagGenerator<Item> ITEM_TAGS = new TagGenerator<>(RegistryKeys.ITEM);
     public static final TagGenerator<Block> BLOCK_TAGS = new TagGenerator<>(RegistryKeys.BLOCK);
 

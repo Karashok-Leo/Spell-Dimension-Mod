@@ -1,6 +1,7 @@
 package karashokleo.spell_dimension.data;
 
 import karashokleo.spell_dimension.SpellDimension;
+import karashokleo.spell_dimension.config.recipe.LocateSpellConfig;
 import karashokleo.spell_dimension.content.buff.BlazingMark;
 import karashokleo.spell_dimension.content.buff.Nucleus;
 import karashokleo.spell_dimension.content.effect.FrostAuraEffect;
@@ -43,6 +44,7 @@ public enum SDTexts
     TEXT$QUEST$HEALTH("Gain experience to increase your %s to %s", "获取经验以提升你的%s至%s"),
     TEXT$QUEST$SPELL_POWER("Increase any Spell Power to %s", "将任意法术强度提升至%s"),
     TEXT$INVALID_KEY_ITEM("Invalid Key Item!", "无效的索引物品！"),
+    TEXT$SPELL_INFUSION("Spell Infusion", "魔力灌注"),
 
     /**
      * Spell School
@@ -107,12 +109,12 @@ public enum SDTexts
     /**
      * Spells
      */
-    SPELL$LOCATE$NAME("Locate", "定位"),
+    SPELL$LOCATE$NAME("Spell Locate", "魔力定位"),
     SPELL$LOCATE$DESCRIPTION(
             "Launch a spell, if it touches a lodestone, it will use the item in your off-hand as a key item to find the corresponding structure or biome. If found, it will shatter the lodestone and the key item to summon a portal to the corresponding structure or biome.",
             "发射一道咒语, 若其触碰到磁石, 则会以你副手的物品为索引物, 寻找相应的结构或群系. 若找到，则击碎磁石和索引物, 召唤出一个通往对应结构或群系的传送门."
     ),
-    SPELL$SUMMON$NAME("Summon", "引唤"),
+    SPELL$SUMMON$NAME("Spell Summon", "魔力召唤"),
     SPELL$SUMMON$DESCRIPTION(
             "Launch a spell, if it touches a spawner, it will use the item in your off-hand as a key item to replace the mob in the spawner.",
             "发射一道咒语, 若其触碰到刷怪笼, 则会以你副手的物品为索引物, 替换刷怪笼中的生物."
@@ -292,6 +294,7 @@ public enum SDTexts
         }
         addGroupTranslation();
         addLootBagTranslation();
+        LocateSpellConfig.addTranslation();
     }
 
     private static void addGroupTranslation()

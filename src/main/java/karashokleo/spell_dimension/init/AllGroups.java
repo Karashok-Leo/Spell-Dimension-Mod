@@ -78,6 +78,7 @@ public class AllGroups
                             entries.add(AllItems.ABYSS_GUARD);
                             entries.add(AllItems.ACCURSED_BLACKSTONE);
                             entries.add(AllItems.SUN_MOON_STAR);
+                            entries.add(AllBlocks.SPELL_INFUSION_PEDESTAL.item());
                         })
                         .build()
         );

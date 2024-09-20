@@ -28,6 +28,12 @@
     ],
     "leobrary-generator": [
       "karashokleo.spell_dimension.SpellDimension"
+    ],
+    "emi": [
+      "karashokleo.spell_dimension.compat.emi.EMICompat"
+    ],
+    "rei_client": [
+      "karashokleo.spell_dimension.compat.rei.REICompat"
     ]
   },
   "mixins": [
@@ -56,13 +62,11 @@
     "combatroll": ">=1.0.0",
     "dummmmmmy": "*",
     "equipment_standard": "*",
-    "explorerscompass": "*",
     "goblintraders": "*",
     "jewelry": "*",
     "l2hostility": "*",
     "loot-bag": "*",
     "modonomicon": "*",
-    "naturescompass": "*",
     "toms_storage": "*",
     "trinkets": "*",
     "victus": "*",
