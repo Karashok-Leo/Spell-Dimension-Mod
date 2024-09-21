@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "enchantment_infusion:enchantment_infusion_pedestal"
+    },
+    {
+      "tag": "spell-dimension:essence/all"
+    }
+  ],
+  "result": {
+    "item": "spell-dimension:spell_infusion_pedestal"
+  }
+}
