@@ -112,6 +112,7 @@
   "enchantment.spell-dimension.spell_resistance.desc": "Your spell power will help you resist some damage.",
   "enchantment.spell-dimension.stress_response": "Stress Response",
   "enchantment.spell-dimension.stress_response.desc": "If the cooldown progress (percentage) of a spell when injured is less than the enchantment level × 0.16, the spell will immediately cool down.",
+  "entity.spell-dimension.locate_portal": "Locate Portal",
   "grade.spell-dimension.0": "Primary ",
   "grade.spell-dimension.1": "Intermediate ",
   "grade.spell-dimension.2": "Advanced ",
@@ -199,6 +200,7 @@
   "spell.spell-dimension.rhaast.name": "Scythe Dance",
   "spell.spell-dimension.summon.description": "Launch a spell, if it touches a spawner, it will use the item in your off-hand as a key item to replace the mob in the spawner.",
   "spell.spell-dimension.summon.name": "Spell Summon",
+  "structure.dungeonz.dark_dungeon_structure": "Structure.dungeonz.dark Dungeon Structure",
   "structure.minecraft.ancient_city": "Structure.minecraft.ancient City",
   "structure.minecraft.bastion_remnant": "Structure.minecraft.bastion Remnant",
   "structure.minecraft.end_city": "Structure.minecraft.end City",
@@ -236,6 +238,7 @@
   "tooltip.spell-dimension.level": "Enchanted Level: %s",
   "tooltip.spell-dimension.mending": "Completely repair the item and eliminate the repair cost of the item.",
   "tooltip.spell-dimension.modifier": "Modifier:",
+  "tooltip.spell-dimension.not_consumed": "Will not be consumed",
   "tooltip.spell-dimension.quest.and": " and ",
   "tooltip.spell-dimension.quest.complete": "Right click to submit",
   "tooltip.spell-dimension.quest.loot_item": "Defeat %s to obtain %s",
@@ -244,6 +247,7 @@
   "tooltip.spell-dimension.quest.reward": "Reward:",
   "tooltip.spell-dimension.quest.task": "Task:",
   "tooltip.spell-dimension.threshold": "Threshold: %s",
+  "tooltip.spell-dimension.took_seconds": "Took %s second(s)",
   "tooltip.spell-dimension.use.click": "Usage: Right click on other item in the inventory.",
   "tooltip.spell-dimension.use.press": "Usage: Main hand holding, press the right button."
 }

@@ -1,6 +1,8 @@
 package karashokleo.spell_dimension.config.recipe;
 
+import artifacts.registry.ModEntityTypes;
 import fuzs.mutantmonsters.init.ModRegistry;
+import karashokleo.l2hostility.content.item.MiscItems;
 import karashokleo.spell_dimension.content.misc.ISpawnerExtension;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -30,6 +32,8 @@ public class SummonSpellConfig
         register(Items.SKELETON_SKULL, ModRegistry.MUTANT_SKELETON_ENTITY_TYPE.get(), 1);
         register(Items.CREEPER_HEAD, ModRegistry.MUTANT_CREEPER_ENTITY_TYPE.get(), 1);
         register(Items.END_CRYSTAL, ModRegistry.MUTANT_ENDERMAN_ENTITY_TYPE.get(), 1);
+        register(MiscItems.CHAOS.ingot(), ModEntityTypes.MIMIC.get(), 1);
+        register(MiscItems.MIRACLE.ingot(), ModEntityTypes.MIMIC.get());
     }
 
     public static void register(Item item, EntityType<? extends LivingEntity> entityType, int count)

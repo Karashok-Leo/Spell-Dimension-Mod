@@ -5,26 +5,33 @@ import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.render.EmiTexture;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
+import dev.emi.emi.api.widget.SlotWidget;
 import dev.emi.emi.api.widget.WidgetHolder;
+import karashokleo.spell_dimension.config.recipe.InfusionRecipes;
+import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllBlocks;
-import karashokleo.spell_dimension.init.AllItems;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public record EMIInfusionRecipe(EmiStack base, EmiStack addition, EmiStack output) implements EmiRecipe
+public record EMIInfusionRecipe(
+        EmiStack base,
+        EmiStack addition,
+        EmiStack output,
+        boolean consume,
+        int time
+) implements EmiRecipe
 {
-    public EMIInfusionRecipe(Item base, Item addition, ItemStack output)
+    public EMIInfusionRecipe(InfusionRecipes.RecipeEntry entry)
     {
-        this(EmiStack.of(base), EmiStack.of(addition), EmiStack.of(output));
-    }
-
-    public EMIInfusionRecipe(Item base, Item addition, Identifier output)
-    {
-        this(base, addition, AllItems.SPELL_SCROLL.getStack(output));
+        this(
+                EmiStack.of(entry.base()),
+                EmiStack.of(entry.addition()),
+                EmiStack.of(entry.output()),
+                entry.consume(),
+                entry.time()
+        );
     }
 
     @Override
@@ -73,8 +80,10 @@ public record EMIInfusionRecipe(EmiStack base, EmiStack addition, EmiStack outpu
     public void addWidgets(WidgetHolder widgets)
     {
         widgets.addSlot(base, 0, 0);
-        widgets.addSlot(addition, 20, 0).catalyst(true).drawBack(false);
+        SlotWidget additionSlot = widgets.addSlot(addition, 20, 0).catalyst(true);
+        if (!consume) additionSlot.appendTooltip(SDTexts.TOOLTIP$NOT_CONSUMED.get());
         widgets.addTexture(EmiTexture.EMPTY_ARROW, 42, 0);
         widgets.addSlot(output, 70, 0);
+        widgets.addTooltipText(List.of(SDTexts.TOOLTIP$TOOK_SECONDS.get(time / 20)), 0, 0, getDisplayWidth(), getDisplayHeight());
     }
 }

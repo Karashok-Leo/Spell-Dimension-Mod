@@ -1,6 +1,6 @@
 package karashokleo.spell_dimension.content.item;
 
-import karashokleo.spell_dimension.config.recipe.ScrollLootConfig;
+import karashokleo.spell_dimension.config.recipe.SpellScrollConfig;
 import karashokleo.spell_dimension.content.item.essence.base.ColorProvider;
 import karashokleo.spell_dimension.data.SDTexts;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -74,6 +74,6 @@ public class SpellScrollItem extends Item implements ColorProvider
     {
         super.appendTooltip(stack, world, tooltip, context);
         tooltip.add(SDTexts.SCROLL$OBTAIN.get().formatted(Formatting.GRAY));
-        tooltip.add(ScrollLootConfig.getSpellScrollText(this.getSpellInfo(stack)));
+        tooltip.add(SpellScrollConfig.getSpellScrollText(this.getSpellInfo(stack)));
     }
 }

@@ -29,8 +29,8 @@
     }
   ],
   "input": {
-    "enchantment": "spell-dimension:spell_dash",
-    "min_level": 0
+    "enchantment": "combatroll:acrobat",
+    "min_level": 10
   },
   "level": 1
 }

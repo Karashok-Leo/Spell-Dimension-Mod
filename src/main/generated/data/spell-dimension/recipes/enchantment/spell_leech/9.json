@@ -1,0 +1,36 @@
+{
+  "type": "enchantment_infusion:enchantment_infusion",
+  "enchantment": "spell-dimension:spell_leech",
+  "force": false,
+  "ingredients": [
+    {
+      "item": "l2hostility:miracle_powder"
+    },
+    {
+      "item": "l2hostility:miracle_powder"
+    },
+    {
+      "item": "l2hostility:hostility_essence"
+    },
+    {
+      "item": "l2hostility:hostility_essence"
+    },
+    {
+      "item": "l2hostility:void_eye"
+    },
+    {
+      "item": "l2hostility:void_eye"
+    },
+    {
+      "item": "l2hostility:force_field"
+    },
+    {
+      "item": "l2hostility:force_field"
+    }
+  ],
+  "input": {
+    "enchantment": "spell-dimension:spell_leech",
+    "min_level": 8
+  },
+  "level": 9
+}

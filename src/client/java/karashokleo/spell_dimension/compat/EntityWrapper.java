@@ -10,6 +10,7 @@ import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.SlimeEntity;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.math.Box;
 import org.jetbrains.annotations.Nullable;
 
@@ -33,7 +34,7 @@ public record EntityWrapper(
                 ((SlimeEntity) entity).setSize(5, false);
             int scale = (int) (1.05 / len * 8.0);
 
-            return new EntityWrapper(entity, scale * 3, SDTexts.TOOLTIP$QUEST$MUL.get(entity.getName(), entry.count()));
+            return new EntityWrapper(entity, scale * 3, SDTexts.TOOLTIP$QUEST$MUL.get(entity.getName(), entry.count()).formatted(Formatting.BOLD));
         } else
             return new EntityWrapper(null, 0, SDTexts.TEXT$INVALID_KEY_ITEM.get());
     }

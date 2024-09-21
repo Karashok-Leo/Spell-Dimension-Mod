@@ -5,6 +5,7 @@ import dev.emi.trinkets.api.SlotReference;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllItems;
+import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.util.SpellContainerUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
@@ -105,7 +106,7 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
     public boolean canEquip(ItemStack stack, SlotReference slot, LivingEntity entity)
     {
         return SpellPower.getSpellPower(this.school, entity).baseValue() >=
-                this.getRequirementSpellPower();
+               this.getRequirementSpellPower();
     }
 
     public int getRequirementSpellPower()
@@ -123,7 +124,8 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
                 player.sendMessage(SDTexts.TOOLTIP$INVALID.get());
                 return;
             }
-            if (this.school != spellInfo.spell().school)
+            SpellSchool school = spellInfo.spell().school;
+            if (school != AllSpells.GENERIC && school != this.school)
             {
                 player.sendMessage(SDTexts.TEXT$INCOMPATIBLE_SCHOOL.get());
                 return;

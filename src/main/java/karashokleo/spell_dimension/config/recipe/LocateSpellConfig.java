@@ -1,12 +1,15 @@
 package karashokleo.spell_dimension.config.recipe;
 
+import karashokleo.l2hostility.content.item.ComplementItems;
 import karashokleo.leobrary.datagen.util.StringUtil;
 import karashokleo.spell_dimension.SpellDimension;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.gen.structure.Structure;
@@ -23,6 +26,8 @@ public class LocateSpellConfig
     private static final Map<Item, RegistryKey<Structure>> STRUCTURE_CONFIG = new HashMap<>();
     private static final Map<Item, RegistryKey<Biome>> BIOME_CONFIG = new HashMap<>();
 
+    public static final RegistryKey<Structure> DARK_DUNGEON = RegistryKey.of(RegistryKeys.STRUCTURE, new Identifier("dungeonz:dark_dungeon_structure"));
+
     static
     {
         STRUCTURE_CONFIG.put(Items.SCULK, StructureKeys.ANCIENT_CITY);
@@ -30,10 +35,11 @@ public class LocateSpellConfig
         STRUCTURE_CONFIG.put(RuneItems.get(RuneItems.RuneType.HEALING), StructureKeys.BASTION_REMNANT);
         STRUCTURE_CONFIG.put(Items.DRAGON_BREATH, StructureKeys.END_CITY);
         STRUCTURE_CONFIG.put(Items.EMERALD_BLOCK, StructureKeys.MANSION);
+        STRUCTURE_CONFIG.put(ComplementItems.CURSED_DROPLET, DARK_DUNGEON);
 
         BIOME_CONFIG.put(RuneItems.get(RuneItems.RuneType.FROST), BiomeKeys.SNOWY_PLAINS);
         BIOME_CONFIG.put(Items.SAND, BiomeKeys.DESERT);
-        BIOME_CONFIG.put(Items.GRASS, BiomeKeys.PLAINS);
+        BIOME_CONFIG.put(Items.GRASS_BLOCK, BiomeKeys.PLAINS);
         BIOME_CONFIG.put(Items.CANDLE, BiomeKeys.DEEP_DARK);
     }
 
@@ -44,6 +50,7 @@ public class LocateSpellConfig
         addTranslation(StructureKeys.BASTION_REMNANT, "堡垒遗迹");
         addTranslation(StructureKeys.END_CITY, "末地城");
         addTranslation(StructureKeys.MANSION, "林地府邸");
+        addTranslation(DARK_DUNGEON, "暗黑地牢");
     }
 
     @Nullable

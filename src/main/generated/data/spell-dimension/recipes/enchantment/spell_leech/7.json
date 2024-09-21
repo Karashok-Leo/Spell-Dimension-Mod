@@ -1,0 +1,36 @@
+{
+  "type": "enchantment_infusion:enchantment_infusion",
+  "enchantment": "spell-dimension:spell_leech",
+  "force": false,
+  "ingredients": [
+    {
+      "item": "l2hostility:witch_droplet"
+    },
+    {
+      "item": "l2hostility:witch_droplet"
+    },
+    {
+      "item": "l2hostility:cursed_droplet"
+    },
+    {
+      "item": "l2hostility:cursed_droplet"
+    },
+    {
+      "item": "l2hostility:soul_flame"
+    },
+    {
+      "item": "l2hostility:soul_flame"
+    },
+    {
+      "item": "l2hostility:life_essence"
+    },
+    {
+      "item": "l2hostility:life_essence"
+    }
+  ],
+  "input": {
+    "enchantment": "spell-dimension:spell_leech",
+    "min_level": 6
+  },
+  "level": 7
+}

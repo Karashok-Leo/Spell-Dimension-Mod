@@ -6,8 +6,8 @@ import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.stack.EmiStack;
 import karashokleo.l2hostility.compat.emi.EMICategory;
 import karashokleo.spell_dimension.SpellDimension;
+import karashokleo.spell_dimension.config.recipe.InfusionRecipes;
 import karashokleo.spell_dimension.config.recipe.LocateSpellConfig;
-import karashokleo.spell_dimension.config.recipe.ScrollLootConfig;
 import karashokleo.spell_dimension.config.recipe.SummonSpellConfig;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllBlocks;
@@ -35,6 +35,6 @@ public class EMICompat implements EmiPlugin
 
         LocateSpellConfig.forEach((item, key) -> registry.addRecipe(new EMILocateRecipe(item, key)));
         SummonSpellConfig.forEach((item, entry) -> registry.addRecipe(new EMISummonRecipe(item, entry)));
-        ScrollLootConfig.forEach((item, id) -> registry.addRecipe(new EMIInfusionRecipe(Items.PAPER, item, id)));
+        InfusionRecipes.getAll().forEach(entry -> registry.addRecipe(new EMIInfusionRecipe(entry)));
     }
 }

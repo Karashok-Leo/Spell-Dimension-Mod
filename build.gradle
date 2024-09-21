@@ -22,6 +22,7 @@ repositories {
     maven { url "https://mvn.devos.one/releases/" }
     maven { url 'https://maven.willbl.dev/releases' }
     maven { url "https://maven.terraformersmc.com/" }
+    maven { url 'https://maven.florens.be/releases' }
     maven { url 'https://maven.isxander.dev/releases' }
     maven { url 'https://libs.azuredoom.com:4443/mods' }
     maven { url 'https://maven.ladysnake.org/releases' }
@@ -118,6 +119,7 @@ dependencies {
 
     modImplementation "io.wispforest:owo-lib:${project.owo_version}"
     modImplementation("maven.modrinth:when-dungeons-arise:${project.wda_version}-fabric")
+    modImplementation("maven.modrinth:plenty-of-armors:${project.plenty_of_armors_version}")
 
     modImplementation "maven.modrinth:puzzles-lib:${project.puzzles_lib_version}"
     modImplementation "maven.modrinth:forge-config-api-port:${project.forge_config_api_port}"
@@ -125,6 +127,8 @@ dependencies {
 
     modImplementation "maven.modrinth:adventurez:${project.adventurez_version}"
     modImplementation "maven.modrinth:voidz:${project.voidz_version}"
+    modImplementation "maven.modrinth:artifacts:${project.artifacts_version}-fabric"
+    modImplementation "be.florens:expandability-fabric:${project.expandability_version}"
 
     // Compat
     modCompileOnly "dev.emi:emi-fabric:${project.emi_version}:api"

@@ -47,7 +47,23 @@ public class SpellInfusionPedestalBlock extends AbstractInfusionBlock
     @Override
     public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type)
     {
-        return world.isClient() ? null : checkType(type, AllBlocks.SPELL_INFUSION_PEDESTAL_TILE, SpellInfusionPedestalTile::serverTick);
+        return world.isClient() ?
+                checkType(
+                        type,
+                        AllBlocks.SPELL_INFUSION_PEDESTAL_TILE,
+                        SpellInfusionPedestalTile::clientTick
+                ) :
+                checkType(
+                        type,
+                        AllBlocks.SPELL_INFUSION_PEDESTAL_TILE,
+                        SpellInfusionPedestalTile::serverTick
+                );
+//        return checkType(
+//                type,
+//                AllBlocks.SPELL_INFUSION_PEDESTAL_TILE,
+//                world.isClient() ?
+//                        SpellInfusionPedestalTile::clientTick : SpellInfusionPedestalTile::serverTick
+//        );
     }
 
     @Nullable

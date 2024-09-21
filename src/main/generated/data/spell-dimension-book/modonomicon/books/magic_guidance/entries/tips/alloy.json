@@ -17,6 +17,15 @@
       },
       "item": [
         {
+          "item": "alloy_forgery:stone_bricks_forge_controller"
+        },
+        {
+          "item": "alloy_forgery:polished_blackstone_forge_controller"
+        },
+        {
+          "item": "alloy_forgery:bricks_forge_controller"
+        },
+        {
           "item": "alloy_forgery:deepslate_bricks_forge_controller"
         },
         {
@@ -24,15 +33,6 @@
         },
         {
           "item": "alloy_forgery:prismarine_bricks_forge_controller"
-        },
-        {
-          "item": "alloy_forgery:bricks_forge_controller"
-        },
-        {
-          "item": "alloy_forgery:stone_bricks_forge_controller"
-        },
-        {
-          "item": "alloy_forgery:polished_blackstone_forge_controller"
         }
       ],
       "text": "book.spell-dimension-book.magic_guidance.tips.alloy.alloy.text",

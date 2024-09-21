@@ -4,7 +4,7 @@ import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
 import karashokleo.spell_dimension.config.EssenceLootConfig;
-import karashokleo.spell_dimension.config.recipe.ScrollLootConfig;
+import karashokleo.spell_dimension.config.recipe.SpellScrollConfig;
 import karashokleo.spell_dimension.content.loot.entry.RandomEnchantedEssenceEntry;
 import karashokleo.spell_dimension.content.loot.entry.RandomEnlighteningEssenceEntry;
 import karashokleo.spell_dimension.content.loot.entry.SpellScrollEntry;
@@ -53,7 +53,7 @@ public class AllLoots
 
         LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) ->
         {
-            Identifier spellId = ScrollLootConfig.getLootSpellId(id);
+            Identifier spellId = SpellScrollConfig.getLootSpellId(id);
             if (spellId == null) return;
             tableBuilder.pool(LootPool.builder().with(SpellScrollEntry.builder(spellId)));
         });

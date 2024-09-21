@@ -2,6 +2,7 @@ package karashokleo.spell_dimension.data.generic;
 
 import karashokleo.enchantment_infusion.api.util.EIRecipeUtil;
 import karashokleo.l2hostility.content.item.ComplementItems;
+import karashokleo.l2hostility.content.item.ConsumableItems;
 import karashokleo.l2hostility.content.item.MiscItems;
 import karashokleo.l2hostility.init.LHEnchantments;
 import karashokleo.spell_dimension.SpellDimension;
@@ -10,6 +11,7 @@ import karashokleo.spell_dimension.init.AllEnchantments;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllTags;
 import karashokleo.spell_dimension.util.SchoolUtil;
+import net.aleganza.plentyofarmors.item.ModItems;
 import net.combatroll.api.Enchantments_CombatRoll;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
@@ -350,7 +352,7 @@ public class SDRecipeProvider extends FabricRecipeProvider
 
             // Spell Dash
             {
-                EIRecipeUtil.add(
+                EIRecipeUtil.set(
                         builder -> builder
                                 .withTableIngredient(Enchantments_CombatRoll.RECHARGE, 10)
                                 .withPedestalItem(2, ComplementItems.CAPTURED_WIND)
@@ -361,6 +363,82 @@ public class SDRecipeProvider extends FabricRecipeProvider
                         1,
                         exporter,
                         SpellDimension.modLoc("enchantment/spell_dash/" + 1)
+                );
+            }
+
+            // Spell Leech
+            {
+                EIRecipeUtil.set(
+                        builder -> builder
+                                .withTableIngredient(Enchantments.SMITE, 4)
+                                .withPedestalItem(2, ConsumableItems.BOTTLE_CURSE)
+                                .withPedestalItem(2, ConsumableItems.BOTTLE_SANITY)
+                                .withPedestalItem(2, Ingredient.fromTag(AllTags.ESSENCE_ALL)),
+                        AllEnchantments.SPELL_LEECH,
+                        1,
+                        exporter,
+                        SpellDimension.modLoc("enchantment/spell_leech/" + 1)
+                );
+                EIRecipeUtil.add(
+                        builder -> builder
+                                .withPedestalItem(2, Items.GOLD_INGOT)
+                                .withPedestalItem(2, Items.EMERALD)
+                                .withPedestalItem(2, Items.DIAMOND)
+                                .withPedestalItem(2, Items.NETHERITE_INGOT),
+                        AllEnchantments.SPELL_LEECH,
+                        3,
+                        exporter,
+                        SpellDimension.modLoc("enchantment/spell_leech/" + 3)
+                );
+                EIRecipeUtil.add(
+                        builder -> builder
+                                .withPedestalItem(2, Items.BLAZE_POWDER)
+                                .withPedestalItem(2, Items.GHAST_TEAR)
+                                .withPedestalItem(2, Items.DRAGON_BREATH)
+                                .withPedestalItem(2, Items.ENCHANTED_GOLDEN_APPLE),
+                        AllEnchantments.SPELL_LEECH,
+                        5,
+                        exporter,
+                        SpellDimension.modLoc("enchantment/spell_leech/" + 5)
+                );
+                EIRecipeUtil.add(
+                        builder -> builder
+                                .withPedestalItem(2, MiscItems.WITCH_DROPLET)
+                                .withPedestalItem(2, ComplementItems.CURSED_DROPLET)
+                                .withPedestalItem(2, ComplementItems.SOUL_FLAME)
+                                .withPedestalItem(2, ComplementItems.LIFE_ESSENCE),
+                        AllEnchantments.SPELL_LEECH,
+                        7,
+                        exporter,
+                        SpellDimension.modLoc("enchantment/spell_leech/" + 7)
+                );
+                EIRecipeUtil.add(
+                        builder -> builder
+                                .withPedestalItem(2, MiscItems.MIRACLE_POWDER)
+                                .withPedestalItem(2, MiscItems.HOSTILITY_ESSENCE)
+                                .withPedestalItem(2, ComplementItems.VOID_EYE)
+                                .withPedestalItem(2, ComplementItems.FORCE_FIELD),
+                        AllEnchantments.SPELL_LEECH,
+                        9,
+                        exporter,
+                        SpellDimension.modLoc("enchantment/spell_leech/" + 9)
+                );
+            }
+
+            // Spell Resistance
+            for (int i = 0; i < 3; i++)
+            {
+                int finalI = i;
+                int level = i + 1;
+                EIRecipeUtil.add(
+                        builder -> builder
+                                .withPedestalItem(finalI + 1, ModItems.STARDUSITE_INGOT)
+                                .withPedestalItem(finalI + 1,
+                                        Ingredient.fromTag(AllTags.ESSENCE.get(finalI))),
+                        AllEnchantments.SPELL_RESISTANCE,
+                        level,
+                        exporter,
+                        SpellDimension.modLoc("enchantment/spell_resistance/" + level)
                 );
             }
         }

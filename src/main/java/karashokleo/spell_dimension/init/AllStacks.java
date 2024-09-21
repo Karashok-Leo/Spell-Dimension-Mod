@@ -2,7 +2,7 @@ package karashokleo.spell_dimension.init;
 
 import karashokleo.spell_dimension.api.quest.QuestRegistry;
 import karashokleo.spell_dimension.config.AttributeModifier;
-import karashokleo.spell_dimension.config.recipe.ScrollLootConfig;
+import karashokleo.spell_dimension.config.recipe.SpellScrollConfig;
 import karashokleo.spell_dimension.content.item.logic.EnchantedModifier;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.Item;
@@ -59,7 +59,7 @@ public class AllStacks
     {
         SPELL_SCROLL_STACKS.clear();
 //        Stream<Identifier> stream = SpellRegistry.all().keySet().stream();
-        Stream<Identifier> stream = ScrollLootConfig.getAllSpells().stream();
+        Stream<Identifier> stream = SpellScrollConfig.getAllSpells().stream();
         SPELL_SCROLL_STACKS.addAll(stream.map(AllItems.SPELL_SCROLL::getStack).sorted(Comparator.comparing(stack ->
         {
             SpellInfo spellInfo = AllItems.SPELL_SCROLL.getSpellInfo(stack);

@@ -1,0 +1,30 @@
+{
+  "type": "enchantment_infusion:enchantment_infusion",
+  "enchantment": "spell-dimension:spell_leech",
+  "force": false,
+  "ingredients": [
+    {
+      "item": "l2hostility:bottle_of_curse"
+    },
+    {
+      "item": "l2hostility:bottle_of_curse"
+    },
+    {
+      "item": "l2hostility:bottle_of_sanity"
+    },
+    {
+      "item": "l2hostility:bottle_of_sanity"
+    },
+    {
+      "tag": "spell-dimension:essence/all"
+    },
+    {
+      "tag": "spell-dimension:essence/all"
+    }
+  ],
+  "input": {
+    "enchantment": "minecraft:smite",
+    "min_level": 4
+  },
+  "level": 1
+}

@@ -1,12 +1,17 @@
 package karashokleo.spell_dimension.config.recipe;
 
+import com.obscuria.aquamirae.registry.AquamiraeItems;
+import fuzs.mutantmonsters.init.ModRegistry;
+import karashokleo.l2hostility.content.item.ComplementItems;
 import karashokleo.spell_dimension.content.spell.LocateSpell;
 import karashokleo.spell_dimension.content.spell.PlaceSpell;
 import karashokleo.spell_dimension.content.spell.SummonSpell;
 import karashokleo.spell_dimension.data.SDTexts;
+import karashokleo.spell_dimension.init.AllItems;
+import net.adventurez.init.ItemInit;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
@@ -19,9 +24,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.BiConsumer;
 
-public class ScrollLootConfig
+public class SpellScrollConfig
 {
     public static Set<Identifier> getAllSpells()
     {
@@ -45,20 +49,8 @@ public class ScrollLootConfig
         return LOOT_SPELLS.get(lootTableId);
     }
 
-    @Nullable
-    public static Identifier getCraftSpellId(ItemStack stack)
-    {
-        return CRAFT_SPELLS.get(stack.getItem());
-    }
-
     private static final Map<Identifier, MutableText> SPELL_TEXTS = new HashMap<>();
     private static final Map<Identifier, Identifier> LOOT_SPELLS = new HashMap<>();
-    private static final Map<Item, Identifier> CRAFT_SPELLS = new HashMap<>();
-
-    public static void forEach(BiConsumer<Item, Identifier> action)
-    {
-        CRAFT_SPELLS.forEach(action);
-    }
 
     static
     {
@@ -74,7 +66,7 @@ public class ScrollLootConfig
             fromPrimary("paladins:heal");
         }
 
-        // Pool
+        // Binding
         {
             fromBinding("wizards:arcane_missile");
             fromBinding("wizards:arcane_blast");
@@ -93,31 +85,37 @@ public class ScrollLootConfig
             fromBinding("paladins:divine_protection");
         }
 
-        // Essential
+        // Infusion
         {
-            fromStructureChest("spell-dimension:phase", "ancient_city");
-            fromEntityLoot("spell-dimension:converge", "illagerinvasion:invoker");
+            fromCrafting("spell-dimension:locate", Items.RECOVERY_COMPASS);
+            fromCrafting("spell-dimension:summon", AquamiraeItems.SHIP_GRAVEYARD_ECHO);
+            fromCrafting("spell-dimension:place", ModRegistry.ENDERSOUL_HAND_ITEM.get());
 
-            fromEntityLoot("wizards:fire_breath", "soulsweapons:draugr_boss");
-            fromEntityLoot("spell-dimension:blast", "soulsweapons:accursed_lord_boss");
-            fromEntityLoot("spell-dimension:ignite", "adventurez:blackstone_golem");
+            fromCrafting("spell-dimension:phase", Items.ECHO_SHARD);
+            fromCrafting("spell-dimension:converge", "illagerinvasion:primal_essence");
+            fromCrafting("spellbladenext:eldritchblast", ComplementItems.WARDEN_BONE_SHARD);
 
-            fromEntityLoot("wizards:frost_blizzard", "soulsweapons:moonknight");
-            fromEntityLoot("spell-dimension:nucleus", "aquamirae:maze_mother");
+            fromCrafting("wizards:fire_breath", "soulsweapons:lord_soul_rose");
+            fromCrafting("spell-dimension:blast", AllItems.ACCURSED_BLACKSTONE);
+            fromCrafting("spell-dimension:ignite", ItemInit.BLACKSTONE_GOLEM_HEART);
+
+            fromCrafting("wizards:frost_blizzard", "soulsweapons:lord_soul_white");
+            fromCrafting("spell-dimension:nucleus", "endrem:cold_eye");
             fromCrafting("spell-dimension:aura", "aquamirae:maze_rose");
             fromCrafting("spell-dimension:icicle", "spell-dimension:abyss_guard");
 
-            fromEntityLoot("paladins:holy_beam", "soulsweapons:chaos_monarch");
-            fromEntityLoot("paladins:circle_of_healing", "soulsweapons:returning_knight");
-            fromEntityLoot("paladins:barrier", "graveyard:lich");
-            fromEntityLoot("paladins:judgement", "minecraft:wither");
-            fromEntityLoot("spell-dimension:resist", "soulsweapons:draugr_boss");
-            fromEntityLoot("spell-dimension:regen", "bosses_of_mass_destruction:void_blossom");
+            fromCrafting("paladins:holy_beam", "bosses_of_mass_destruction:ancient_anima");
+            fromCrafting("paladins:circle_of_healing", "soulsweapons:arkenstone");
+            fromCrafting("paladins:barrier", "graveyard:dark_iron_block");
+            fromCrafting("paladins:judgement", "soulsweapons:lord_soul_dark");
+
+            fromCrafting("spell-dimension:power", "soulsweapons:essence_of_luminescence");
+            fromCrafting("spell-dimension:resist", "soulsweapons:essence_of_eventide");
+            fromCrafting("spell-dimension:regen", "bosses_of_mass_destruction:void_thorn");
         }
 
         // Dynamic
         {
-            fromEntityLoot("spellbladenext:eldritchblast", "minecraft:warden");
             fromEntityLoot("spellbladenext:maelstrom", "minecraft:ender_dragon");
             fromEntityLoot("spellbladenext:finalstrike", "deeperdarker:stalker");
 
@@ -172,20 +170,18 @@ public class ScrollLootConfig
 
     private static void fromCrafting(Identifier spellId, Identifier itemId)
     {
-        Item item = Registries.ITEM.get(itemId);
+        fromCrafting(spellId, Registries.ITEM.get(itemId));
+    }
+
+    private static void fromCrafting(String spellId, Item item)
+    {
+        fromCrafting(new Identifier(spellId), item);
+    }
+
+    private static void fromCrafting(Identifier spellId, Item item)
+    {
         SPELL_TEXTS.put(spellId, SDTexts.SCROLL$CRAFT.get(item.getName().copy().formatted(Formatting.BOLD)));
-        CRAFT_SPELLS.put(item, spellId);
-    }
-
-    private static void fromStructureChest(String spellId, String structureId)
-    {
-        fromStructureChest(new Identifier(spellId), new Identifier(structureId), new Identifier(structureId).withPrefixedPath("chests/"));
-    }
-
-    private static void fromStructureChest(Identifier spellId, Identifier structureId, Identifier chestId)
-    {
-        SPELL_TEXTS.put(spellId, SDTexts.SCROLL$EXPLORING.get(Text.translatable(structureId.toTranslationKey("struture")).formatted(Formatting.BOLD)));
-        LOOT_SPELLS.put(chestId, spellId);
+        InfusionRecipes.register(Items.PAPER, item, AllItems.SPELL_SCROLL.getStack(spellId), false, 20 * 60);
     }
 
     private static void fromEntityLoot(String spellId, String entityTypeId)

@@ -112,6 +112,7 @@
   "enchantment.spell-dimension.spell_resistance.desc": "你的法术强度将会为你抵御部分伤害。",
   "enchantment.spell-dimension.stress_response": "应激急速",
   "enchantment.spell-dimension.stress_response.desc": "受伤时如果有法术冷却进度（百分比）小于 魔咒等级 × 0.16, 则该法术立即冷却完毕。",
+  "entity.spell-dimension.locate_portal": "定位传送门",
   "grade.spell-dimension.0": "初级",
   "grade.spell-dimension.1": "中级",
   "grade.spell-dimension.2": "高级",
@@ -199,6 +200,7 @@
   "spell.spell-dimension.rhaast.name": "镰舞",
   "spell.spell-dimension.summon.description": "发射一道咒语, 若其触碰到刷怪笼, 则会以你副手的物品为索引物, 替换刷怪笼中的生物.",
   "spell.spell-dimension.summon.name": "魔力召唤",
+  "structure.dungeonz.dark_dungeon_structure": "暗黑地牢",
   "structure.minecraft.ancient_city": "远古城市",
   "structure.minecraft.bastion_remnant": "堡垒遗迹",
   "structure.minecraft.end_city": "末地城",
@@ -236,6 +238,7 @@
   "tooltip.spell-dimension.level": "束魔等级: %s",
   "tooltip.spell-dimension.mending": "完全修复物品, 并且清除物品的修复惩罚.",
   "tooltip.spell-dimension.modifier": "属性修饰语:",
+  "tooltip.spell-dimension.not_consumed": "不消耗",
   "tooltip.spell-dimension.quest.and": "和",
   "tooltip.spell-dimension.quest.complete": "右键提交任务",
   "tooltip.spell-dimension.quest.loot_item": "击杀%s并获取%s",
@@ -244,6 +247,7 @@
   "tooltip.spell-dimension.quest.reward": "任务奖励:",
   "tooltip.spell-dimension.quest.task": "任务目标:",
   "tooltip.spell-dimension.threshold": "阈值: %s",
+  "tooltip.spell-dimension.took_seconds": "耗时%s秒",
   "tooltip.spell-dimension.use.click": "用法: 物品栏中用该物品右键其他物品.",
   "tooltip.spell-dimension.use.press": "用法: 主手持有时，长按右键."
 }

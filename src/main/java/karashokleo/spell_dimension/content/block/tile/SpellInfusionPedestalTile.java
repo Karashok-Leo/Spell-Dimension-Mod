@@ -1,45 +1,77 @@
 package karashokleo.spell_dimension.content.block.tile;
 
 import karashokleo.enchantment_infusion.api.block.entity.AbstractInfusionTile;
-import karashokleo.spell_dimension.config.recipe.ScrollLootConfig;
+import karashokleo.spell_dimension.config.recipe.InfusionRecipes;
 import karashokleo.spell_dimension.init.AllBlocks;
-import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.util.ParticleUtil;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 public class SpellInfusionPedestalTile extends AbstractInfusionTile
 {
-    private int craftTime = 0;
     @Nullable
-    private Identifier craftSpellId = null;
+    private ItemStack crafting = null;
+    private int craftTime = 0;
+    private int craftTimeMax = 0;
 
     public SpellInfusionPedestalTile(BlockPos pos, BlockState state)
     {
         super(AllBlocks.SPELL_INFUSION_PEDESTAL_TILE, pos, state);
     }
 
+    private void startCrafting(ItemStack stack, int time)
+    {
+        this.crafting = stack;
+        this.craftTime = time;
+        this.craftTimeMax = time;
+        this.update();
+    }
+
     @Override
     public void onUse(ServerWorld world, BlockPos pos, PlayerEntity player)
     {
         if (this.craftTime != 0) return;
-        if (this.getStack().isOf(Items.PAPER))
+        ItemStack mainHandStack = player.getMainHandStack();
+        InfusionRecipes.RecipeEntry recipe = InfusionRecipes.getRecipe(this.getStack().getItem(), mainHandStack.getItem());
+        if (recipe != null)
         {
-            this.craftSpellId = ScrollLootConfig.getCraftSpellId(player.getMainHandStack());
-            if (this.craftSpellId != null)
-            {
-                this.craftTime = 20 * 10;
-                return;
-            }
+            this.startCrafting(recipe.output().copy(), recipe.time());
+            if (recipe.consume())
+                mainHandStack.decrement(1);
+            return;
         }
         super.onUse(world, pos, player);
+    }
+
+    @SuppressWarnings("unused")
+    public static void clientTick(World world, BlockPos pos, BlockState state, SpellInfusionPedestalTile entity)
+    {
+        if (entity.craftTime > 0 && entity.craftTime % 5 == 0)
+        {
+            float progress = (float) entity.craftTime / entity.craftTimeMax;
+            float radian = progress * MathHelper.PI * 4;
+            float y = 2.5F * (1 - progress);
+            Vec3d vec = pos.toCenterPos()
+                    .add(
+                            MathHelper.cos(radian) * progress * 1.5,
+                            y > 1.8 ? 1.8 - (y - 1.8) / 0.7 * 1.2 : y,
+                            MathHelper.sin(radian) * progress * 1.5
+                    );
+            world.addParticle(
+                    ParticleTypes.END_ROD,
+                    vec.getX(), vec.getY(), vec.getZ(),
+                    0, 0, 0
+            );
+        }
     }
 
     @SuppressWarnings("unused")
@@ -47,13 +79,15 @@ public class SpellInfusionPedestalTile extends AbstractInfusionTile
     {
         if (entity.craftTime > 0)
         {
+            entity.update();
             entity.craftTime--;
-            if (entity.craftTime == 0 && entity.craftSpellId != null)
+            if (entity.craftTime == 0 && entity.crafting != null)
             {
-                entity.setStack(AllItems.SPELL_SCROLL.getStack(entity.craftSpellId));
+                entity.setStack(entity.crafting);
                 if (world instanceof ServerWorld serverWorld)
-                    ParticleUtil.sparkParticleEmit(serverWorld, pos.toCenterPos().add(0, 0.8, 0), 24);
-                entity.craftSpellId = null;
+                    ParticleUtil.sparkParticleEmit(serverWorld, pos.toCenterPos().add(0, 0.6, 0), 24);
+                entity.crafting = null;
+                entity.craftTimeMax = 0;
             }
         }
     }
@@ -62,16 +96,18 @@ public class SpellInfusionPedestalTile extends AbstractInfusionTile
     public void readNbt(NbtCompound nbt)
     {
         super.readNbt(nbt);
+        this.crafting = nbt.contains("Crafting") ? ItemStack.fromNbt(nbt.getCompound("Crafting")) : null;
         this.craftTime = nbt.getInt("CraftTime");
-        this.craftSpellId = nbt.contains("CraftSpellId") ? new Identifier(nbt.getString("CraftSpellId")) : null;
+        this.craftTimeMax = nbt.getInt("CraftTimeMax");
     }
 
     @Override
     protected void writeNbt(NbtCompound nbt)
     {
         super.writeNbt(nbt);
+        if (this.crafting != null)
+            nbt.put("Crafting", this.crafting.writeNbt(new NbtCompound()));
         nbt.putInt("CraftTime", this.craftTime);
-        if (this.craftSpellId != null)
-            nbt.putString("CraftSpellId", this.craftSpellId.toString());
+        nbt.putInt("CraftTimeMax", this.craftTimeMax);
     }
 }

@@ -1,0 +1,30 @@
+{
+  "type": "enchantment_infusion:enchantment_infusion",
+  "enchantment": "spell-dimension:spell_resistance",
+  "force": false,
+  "ingredients": [
+    {
+      "item": "plentyofarmors:stardusite_ingot"
+    },
+    {
+      "item": "plentyofarmors:stardusite_ingot"
+    },
+    {
+      "item": "plentyofarmors:stardusite_ingot"
+    },
+    {
+      "tag": "spell-dimension:essence/2"
+    },
+    {
+      "tag": "spell-dimension:essence/2"
+    },
+    {
+      "tag": "spell-dimension:essence/2"
+    }
+  ],
+  "input": {
+    "enchantment": "spell-dimension:spell_resistance",
+    "min_level": 2
+  },
+  "level": 3
+}

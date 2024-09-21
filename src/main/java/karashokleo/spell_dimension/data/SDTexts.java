@@ -7,6 +7,7 @@ import karashokleo.spell_dimension.content.buff.Nucleus;
 import karashokleo.spell_dimension.content.effect.FrostAuraEffect;
 import karashokleo.spell_dimension.data.loot_bag.SDBags;
 import karashokleo.spell_dimension.data.loot_bag.SDContents;
+import karashokleo.spell_dimension.init.AllEntities;
 import karashokleo.spell_dimension.init.AllGroups;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.text.MutableText;
@@ -94,6 +95,8 @@ public enum SDTexts
     TOOLTIP$QUEST$MUL("%s × %s", "%s × %s"),
     TOOLTIP$QUEST$AND(" and ", "和"),
     TOOLTIP$QUEST$LOOT_ITEM("Defeat %s to obtain %s", "击杀%s并获取%s"),
+    TOOLTIP$NOT_CONSUMED("Will not be consumed", "不消耗"),
+    TOOLTIP$TOOK_SECONDS("Took %s second(s)", "耗时%s秒"),
 
     /**
      * Scrolls
@@ -295,6 +298,8 @@ public enum SDTexts
         addGroupTranslation();
         addLootBagTranslation();
         LocateSpellConfig.addTranslation();
+        SpellDimension.EN_TEXTS.addEntityType(AllEntities.LOCATE_PORTAL, "Locate Portal");
+        SpellDimension.ZH_TEXTS.addEntityType(AllEntities.LOCATE_PORTAL, "定位传送门");
     }
 
     private static void addGroupTranslation()
