@@ -103,6 +103,8 @@ public class SpellDimensionClient implements ClientModInitializer
             if (player instanceof RollingEntity rolling)
                 ((RollManagerInvoker) rolling.getRollManager()).invokeRechargeRoll(player);
         });
+
+        ClientAirHopHandler.register();
     }
 
     public static void itemTooltip()
