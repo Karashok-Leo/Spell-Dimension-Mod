@@ -1,6 +1,5 @@
 package karashokleo.spell_dimension.config.recipe;
 
-import com.obscuria.aquamirae.registry.AquamiraeItems;
 import fuzs.mutantmonsters.init.ModRegistry;
 import karashokleo.l2hostility.content.item.ComplementItems;
 import karashokleo.spell_dimension.content.spell.LocateSpell;
@@ -88,8 +87,9 @@ public class SpellScrollConfig
         // Infusion
         {
             fromCrafting("spell-dimension:locate", Items.RECOVERY_COMPASS);
-            fromCrafting("spell-dimension:summon", AquamiraeItems.SHIP_GRAVEYARD_ECHO);
+            fromCrafting("spell-dimension:summon", AllItems.SPAWNER_SOUL);
             fromCrafting("spell-dimension:place", ModRegistry.ENDERSOUL_HAND_ITEM.get());
+            fromCrafting("spell-dimension:light", Items.GLOWSTONE);
 
             fromCrafting("spell-dimension:phase", Items.ECHO_SHARD);
             fromCrafting("spell-dimension:converge", "illagerinvasion:primal_essence");

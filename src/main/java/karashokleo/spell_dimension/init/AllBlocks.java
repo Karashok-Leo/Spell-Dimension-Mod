@@ -4,6 +4,7 @@ import karashokleo.leobrary.datagen.builder.BlockBuilder;
 import karashokleo.leobrary.datagen.builder.BlockSet;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.block.SpellInfusionPedestalBlock;
+import karashokleo.spell_dimension.content.block.SpellLightBlock;
 import karashokleo.spell_dimension.content.block.tile.SpellInfusionPedestalTile;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.Block;
@@ -15,6 +16,8 @@ public class AllBlocks
 {
     public static BlockSet SPELL_INFUSION_PEDESTAL;
     public static BlockEntityType<SpellInfusionPedestalTile> SPELL_INFUSION_PEDESTAL_TILE;
+
+    public static SpellLightBlock SPELL_LIGHT;
 
     public static void register()
     {
@@ -29,6 +32,10 @@ public class AllBlocks
                 SpellDimension.modLoc("spell_infusion_pedestal"),
                 FabricBlockEntityTypeBuilder.create(SpellInfusionPedestalTile::new, SPELL_INFUSION_PEDESTAL.block()).build()
         );
+        SPELL_LIGHT = Entry.of("spell_light", new SpellLightBlock())
+                .addEN()
+                .addZH("魔力之光")
+                .register();
 
         SpellDimension.MODELS.addBlock(generator -> generator.registerSimpleState(SPELL_INFUSION_PEDESTAL.block()));
     }

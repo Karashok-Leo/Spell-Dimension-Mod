@@ -97,6 +97,8 @@ public enum SDTexts
     TOOLTIP$QUEST$LOOT_ITEM("Defeat %s to obtain %s", "击杀%s并获取%s"),
     TOOLTIP$NOT_CONSUMED("Will not be consumed", "不消耗"),
     TOOLTIP$TOOK_SECONDS("Took %s second(s)", "耗时%s秒"),
+    TOOLTIP$SUMMON_ENTITY("Entity Type: %s", "实体类型: %s"),
+    TOOLTIP$SUMMON_REMAIN("Remain: %s", "剩余: %s"),
 
     /**
      * Scrolls
@@ -112,6 +114,11 @@ public enum SDTexts
     /**
      * Spells
      */
+    SPELL$LIGHT$NAME("Spell Light", "魔力之光"),
+    SPELL$LIGHT$DESCRIPTION(
+            "Launch a spell, if it touches a block, it will light up the surrounding area.",
+            "发射一道咒语, 若其触碰到方块，则会点亮周围一片区域."
+    ),
     SPELL$LOCATE$NAME("Spell Locate", "魔力定位"),
     SPELL$LOCATE$DESCRIPTION(
             "Launch a spell, if it touches a lodestone, it will use the item in your off-hand as a key item to find the corresponding structure or biome. If found, it will shatter the lodestone and the key item to summon a portal to the corresponding structure or biome.",

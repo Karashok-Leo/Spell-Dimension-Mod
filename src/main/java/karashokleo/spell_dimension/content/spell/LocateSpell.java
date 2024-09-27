@@ -28,7 +28,6 @@ import java.util.Optional;
 
 public class LocateSpell
 {
-
     public static final Identifier SPELL_ID = SpellDimension.modLoc("locate");
 
     public static void handle(SpellProjectile projectile, Identifier spellId, BlockHitResult hitResult)

@@ -7,10 +7,15 @@ import karashokleo.l2hostility.init.LHTraits;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
 import karashokleo.spell_dimension.content.event.EnchantmentEvent;
 import karashokleo.spell_dimension.content.event.PlayerHealthEvent;
+import karashokleo.spell_dimension.content.misc.ISpawnerExtension;
+import karashokleo.spell_dimension.content.spell.LightSpell;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.util.SchoolUtil;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
+import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
+import net.minecraft.block.Block;
+import net.minecraft.block.entity.MobSpawnerBlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.item.ItemStack;
@@ -26,6 +31,18 @@ public class AllEvents
     {
         PlayerHealthEvent.init();
         EnchantmentEvent.init();
+        LightSpell.init();
+
+        // 刷怪笼掉落
+        PlayerBlockBreakEvents.AFTER.register((world, player, pos, state, blockEntity) ->
+        {
+            if (blockEntity instanceof MobSpawnerBlockEntity spawner)
+            {
+                ItemStack stack = AllItems.SPAWNER_SOUL.getStack((ISpawnerExtension) spawner.getLogic());
+                if (stack.isEmpty()) return;
+                Block.dropStack(world, pos, stack);
+            }
+        });
 
         // 调试棒伤害
         AttackEntityCallback.EVENT.register((player, world, hand, entity, hitResult) ->
