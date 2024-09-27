@@ -5,9 +5,12 @@ import karashokleo.spell_dimension.content.misc.ISpawnerExtension;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.MobSpawnerEntry;
 import net.minecraft.world.MobSpawnerLogic;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -17,6 +20,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(MobSpawnerLogic.class)
 public abstract class MobSpawnerLogicMixin implements ISpawnerExtension
 {
+    @Shadow
+    @Nullable
+    private MobSpawnerEntry spawnEntry;
+
     @Unique
     private int remain = DEFAULT_REMAIN;
 
@@ -70,6 +77,13 @@ public abstract class MobSpawnerLogicMixin implements ISpawnerExtension
     private void inject_writeNbt(NbtCompound nbt, CallbackInfoReturnable<NbtCompound> cir)
     {
         nbt.putShort(KEY_REMAIN, (short) this.remain);
+    }
+
+    @Override
+    public NbtCompound getEntityNbt()
+    {
+        if (this.spawnEntry == null) return new NbtCompound();
+        return this.spawnEntry.getNbt();
     }
 
     @Override

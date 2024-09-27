@@ -18,6 +18,7 @@ import net.combatroll.api.Enchantments_CombatRoll;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
+import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EquipmentSlot;
@@ -56,7 +57,10 @@ public class SDRecipeProvider extends FabricRecipeProvider
                 .create(RecipeCategory.MISC, AllItems.QUEST_SCROLL)
                 .input(Items.WRITABLE_BOOK)
                 .input(Ingredient.fromTag(AllTags.ESSENCE_ALL))
-                .criterion(FabricRecipeProvider.hasItem(Items.WRITABLE_BOOK), FabricRecipeProvider.conditionsFromItem(Items.WRITABLE_BOOK))
+                .criterion(
+                        FabricRecipeProvider.hasItem(Items.WRITABLE_BOOK),
+                        FabricRecipeProvider.conditionsFromItem(Items.WRITABLE_BOOK)
+                )
                 .offerTo(exporter, SpellDimension.modLoc("empty_quest_scroll"));
 
         // Spell Infusion Pedestal
@@ -64,8 +68,28 @@ public class SDRecipeProvider extends FabricRecipeProvider
                 .create(RecipeCategory.MISC, AllBlocks.SPELL_INFUSION_PEDESTAL.item())
                 .input(EIItems.INFUSION_PEDESTAL_ITEM)
                 .input(Ingredient.fromTag(AllTags.ESSENCE_ALL))
-                .criterion(FabricRecipeProvider.hasItem(EIItems.INFUSION_PEDESTAL_ITEM), FabricRecipeProvider.conditionsFromItem(EIItems.INFUSION_PEDESTAL_ITEM))
+                .criterion(
+                        FabricRecipeProvider.hasItem(EIItems.INFUSION_PEDESTAL_ITEM),
+                        FabricRecipeProvider.conditionsFromItem(EIItems.INFUSION_PEDESTAL_ITEM)
+                )
                 .offerTo(exporter, SpellDimension.modLoc("spell_infusion_pedestal"));
+
+        ShapedRecipeJsonBuilder
+                .create(RecipeCategory.MISC, Items.ENCHANTED_GOLDEN_APPLE)
+                .pattern("SSS")
+                .pattern("SAS")
+                .pattern("SSS")
+                .input('S', AllItems.SPAWNER_SOUL)
+                .input('A', Items.GOLDEN_APPLE)
+                .criterion(
+                        FabricRecipeProvider.hasItem(AllItems.SPAWNER_SOUL),
+                        FabricRecipeProvider.conditionsFromItem(AllItems.SPAWNER_SOUL)
+                )
+                .criterion(
+                        FabricRecipeProvider.hasItem(Items.GOLDEN_APPLE),
+                        FabricRecipeProvider.conditionsFromItem(Items.GOLDEN_APPLE)
+                )
+                .offerTo(exporter, SpellDimension.modLoc("enchanted_golden_apple"));
     }
 
     private static void addBaseEssenceRecipe(Consumer<RecipeJsonProvider> exporter)

@@ -82,7 +82,8 @@ public class LocateSpellConfig
     public static void addTranslation(RegistryKey<?> registryKey, String zh)
     {
         String spotKey = getSpotKey(registryKey);
-        SpellDimension.EN_TEXTS.addText(spotKey, StringUtil.defaultName(spotKey));
+        String[] split = spotKey.split("\\.");
+        SpellDimension.EN_TEXTS.addText(spotKey, StringUtil.defaultName(split[split.length - 1]));
         SpellDimension.ZH_TEXTS.addText(spotKey, zh);
     }
 

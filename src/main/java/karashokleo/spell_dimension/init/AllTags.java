@@ -69,7 +69,7 @@ public class AllTags
                 );
 
         generator.getOrCreateContainer(REFORGE_CORE_TAGS.get(0), true)
-                .addTag(AllTags.ESSENCE.get(2));
+                .add(AllItems.SPAWNER_SOUL);
         generator.getOrCreateContainer(REFORGE_CORE_TAGS.get(1), true)
                 .addOptional(new Identifier("l2hostility:chaos_ingot"));
         generator.getOrCreateContainer(REFORGE_CORE_TAGS.get(2), true)

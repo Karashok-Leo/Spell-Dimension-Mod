@@ -4,6 +4,7 @@ import artifacts.registry.ModEntityTypes;
 import fuzs.mutantmonsters.init.ModRegistry;
 import karashokleo.l2hostility.content.item.MiscItems;
 import karashokleo.spell_dimension.content.misc.ISpawnerExtension;
+import karashokleo.spell_dimension.init.AllItems;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
@@ -12,6 +13,7 @@ import net.minecraft.item.Items;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.BiConsumer;
 
 public class SummonSpellConfig
@@ -48,6 +50,11 @@ public class SummonSpellConfig
 
     public static Entry getEntry(ItemStack itemStack)
     {
+        if (itemStack.isOf(AllItems.SPAWNER_SOUL))
+        {
+            Optional<Entry> summonEntry = AllItems.SPAWNER_SOUL.getSummonEntry(itemStack);
+            if (summonEntry.isPresent()) return summonEntry.get();
+        }
         return CONFIG.get(itemStack.getItem());
     }
 

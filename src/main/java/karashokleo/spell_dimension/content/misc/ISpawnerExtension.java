@@ -1,5 +1,6 @@
 package karashokleo.spell_dimension.content.misc;
 
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 
@@ -10,6 +11,8 @@ public interface ISpawnerExtension
     String KEY_REMAIN = "Remain";
 
     int DEFAULT_REMAIN = 20;
+
+    NbtCompound getEntityNbt();
 
     int getRemain();
 

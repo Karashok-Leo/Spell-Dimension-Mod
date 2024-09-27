@@ -3,10 +3,7 @@ package karashokleo.spell_dimension.init;
 import com.google.common.collect.ArrayListMultimap;
 import karashokleo.leobrary.datagen.builder.ItemBuilder;
 import karashokleo.spell_dimension.SpellDimension;
-import karashokleo.spell_dimension.content.item.DynamicSpellBookItem;
-import karashokleo.spell_dimension.content.item.EndStageItem;
-import karashokleo.spell_dimension.content.item.QuestScrollItem;
-import karashokleo.spell_dimension.content.item.SpellScrollItem;
+import karashokleo.spell_dimension.content.item.*;
 import karashokleo.spell_dimension.content.item.essence.*;
 import karashokleo.spell_dimension.content.item.essence.base.ColorProvider;
 import karashokleo.spell_dimension.util.SchoolUtil;
@@ -41,6 +38,7 @@ public class AllItems
     public static Item ABYSS_GUARD;
     public static Item ACCURSED_BLACKSTONE;
     public static EndStageItem SUN_MOON_STAR;
+    public static SpawnerSoulItem SPAWNER_SOUL;
 
     public static void register()
     {
@@ -96,6 +94,11 @@ public class AllItems
         SUN_MOON_STAR = Entry.of("sun_moon_star", new EndStageItem(new FabricItemSettings().maxCount(1).rarity(Rarity.EPIC)))
                 .addEN()
                 .addZH("日月星")
+                .addModel()
+                .register();
+        SPAWNER_SOUL = Entry.of("spawner_soul", new SpawnerSoulItem())
+                .addEN()
+                .addZH("笼中魄")
                 .addModel()
                 .register();
     }
