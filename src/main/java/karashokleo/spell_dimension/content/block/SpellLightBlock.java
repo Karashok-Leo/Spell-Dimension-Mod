@@ -25,11 +25,13 @@ import org.jetbrains.annotations.Nullable;
 @SuppressWarnings("deprecation")
 public class SpellLightBlock extends Block
 {
+    public static final int LUMINANCE = 15;
+
     protected static final VoxelShape SHAPE = Block.createCuboidShape(6, 6, 6, 10, 10, 10);
 
     public SpellLightBlock()
     {
-        super(FabricBlockSettings.create().luminance(15).noCollision().nonOpaque().dynamicBounds().strength(0, 0));
+        super(FabricBlockSettings.create().luminance(LUMINANCE).noCollision().nonOpaque().dynamicBounds().strength(0, 0));
         this.setDefaultState(this.getDefaultState().with(Properties.WATERLOGGED, false));
     }
 

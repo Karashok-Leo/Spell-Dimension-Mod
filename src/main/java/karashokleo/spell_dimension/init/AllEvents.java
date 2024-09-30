@@ -7,6 +7,7 @@ import karashokleo.l2hostility.init.LHTraits;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
 import karashokleo.spell_dimension.content.event.EnchantmentEvent;
 import karashokleo.spell_dimension.content.event.PlayerHealthEvent;
+import karashokleo.spell_dimension.content.event.TrinketEvent;
 import karashokleo.spell_dimension.content.misc.ISpawnerExtension;
 import karashokleo.spell_dimension.content.spell.LightSpell;
 import karashokleo.spell_dimension.data.SDTexts;
@@ -31,6 +32,7 @@ public class AllEvents
     {
         PlayerHealthEvent.init();
         EnchantmentEvent.init();
+        TrinketEvent.init();
         LightSpell.init();
 
         // 刷怪笼掉落

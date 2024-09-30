@@ -10,7 +10,7 @@
     },
     "particles": [
       {
-        "particle_id": "spell_engine:healing_ascend",
+        "particle_id": "spell_engine:white_spark_mini",
         "shape": "PIPE",
         "origin": "FEET",
         "count": 2,

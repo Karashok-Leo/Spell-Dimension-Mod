@@ -3,18 +3,21 @@ package karashokleo.spell_dimension.content.spell;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import karashokleo.spell_dimension.SpellDimension;
+import karashokleo.spell_dimension.content.block.SpellLightBlock;
 import karashokleo.spell_dimension.init.AllBlocks;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.LightType;
 import net.spell_engine.entity.SpellProjectile;
 
-import java.util.Collection;
-import java.util.HashSet;
+import java.util.*;
 
 public class LightSpell
 {
@@ -33,52 +36,112 @@ public class LightSpell
         ServerLifecycleEvents.SERVER_STOPPED.register(server -> SPAWNERS.clear());
     }
 
-    public static class LightSpawner
+    public record LightSpawner(
+            BlockPos center,
+            int lightThreshold,
+            int lightSpacing,
+            int total,
+            int step,
+            Queue<BlockPos> border,
+            Set<BlockPos> visited,
+            Set<BlockPos> spawned
+    )
     {
-        private final HashSet<BlockPos> affectedPoses = new HashSet<>();
-        private final int lightThreshold;
-        private final int tickInterval;
-        private int ticks = 0;
-
-        public LightSpawner(BlockPos pos, int radius, int lightThreshold, int tickInterval)
+        public LightSpawner(BlockPos center, int lightThreshold, int total, int step)
         {
-            this.lightThreshold = lightThreshold;
-            this.tickInterval = tickInterval;
-            for (int i = 0; i < radius; i++)
+            this(center, lightThreshold, SpellLightBlock.LUMINANCE - lightThreshold, total, step, new LinkedList<>(), new HashSet<>(), new HashSet<>());
+            border.add(center);
+            visited.add(center);
+        }
+
+        private static final Vec3i[] EXPANDS = {
+                new Vec3i(1, 0, 0),
+                new Vec3i(-1, 0, 0),
+                new Vec3i(0, 1, 0),
+                new Vec3i(0, -1, 0),
+                new Vec3i(0, 0, 1),
+                new Vec3i(0, 0, -1),
+
+                new Vec3i(1, 1, 0),
+                new Vec3i(-1, 1, 0),
+                new Vec3i(0, 1, 1),
+                new Vec3i(0, 1, -1),
+                new Vec3i(1, 1, 1),
+                new Vec3i(1, 1, -1),
+                new Vec3i(-1, 1, 1),
+                new Vec3i(-1, 1, -1),
+
+                new Vec3i(1, -1, 0),
+                new Vec3i(-1, -1, 0),
+                new Vec3i(0, -1, 1),
+                new Vec3i(0, -1, -1),
+                new Vec3i(1, -1, 1),
+                new Vec3i(1, -1, -1),
+                new Vec3i(-1, -1, 1),
+                new Vec3i(-1, -1, -1),
+        };
+
+        public void spawn(ServerWorld world)
+        {
+            int expand = 0;
+            while (expand <= step && !border.isEmpty())
             {
-                for (int j = 0; j < radius; j++)
+                BlockPos pos = border.poll();
+                for (Vec3i direction : EXPANDS)
                 {
-                    for (int k = 0; k < radius; k++)
-                    {
-                        affectedPoses.add(pos.add(i, j, k));
-                        affectedPoses.add(pos.add(-i, j, k));
-                        affectedPoses.add(pos.add(i, -j, k));
-                        affectedPoses.add(pos.add(i, j, -k));
-                        affectedPoses.add(pos.add(-i, -j, k));
-                        affectedPoses.add(pos.add(i, -j, -k));
-                        affectedPoses.add(pos.add(-i, j, -k));
-                        affectedPoses.add(pos.add(-i, -j, -k));
-                    }
+                    BlockPos neighbor = pos.add(direction);
+                    if (tryVisit(world, neighbor))
+                        expand++;
+                    if (expand > step) break;
                 }
             }
         }
 
-        public void spawn(ServerWorld world)
+        private boolean tryVisit(ServerWorld world, BlockPos pos)
         {
-            ticks++;
-            if (ticks % tickInterval != 0) return;
-            affectedPoses.stream().findAny().ifPresent(pos ->
+            if (visited.add(pos))
             {
-                affectedPoses.remove(pos);
+                border.add(pos);
+
                 if (world.getBlockState(pos).isAir() &&
                     world.getLightLevel(LightType.BLOCK, pos) <= lightThreshold)
-                    world.setBlockState(pos, AllBlocks.SPELL_LIGHT.getDefaultState());
-            });
+                {
+                    boolean canSpawn = true;
+                    for (BlockPos existed : spawned)
+                        if (existed.getManhattanDistance(pos) < 7)
+                        {
+                            canSpawn = false;
+                            break;
+                        }
+                    if (canSpawn)
+                    {
+                        spawned.add(pos);
+                        world.setBlockState(pos, AllBlocks.SPELL_LIGHT.getDefaultState());
+
+                        Vec3d centerPos = center.toCenterPos();
+                        Vec3d direction = pos.toCenterPos().subtract(centerPos).normalize();
+                        double distance = pos.toCenterPos().distanceTo(centerPos);
+                        for (double i = 0; i < distance; i += 0.5)
+                        {
+                            Vec3d particlePos = centerPos.add(direction.multiply(i));
+                            world.spawnParticles(
+                                    ParticleTypes.END_ROD,
+                                    particlePos.getX(),
+                                    particlePos.getY(),
+                                    particlePos.getZ(),
+                                    1, 0, 0, 0, 0
+                            );
+                        }
+                    }
+                }
+                return true;
+            }
+            return false;
         }
 
         public boolean isDone()
         {
-            return affectedPoses.isEmpty();
+            return visited.size() > total;
         }
     }
 
@@ -86,6 +149,6 @@ public class LightSpell
     {
         if (!spellId.equals(SPELL_ID)) return;
         if (!(projectile.getWorld() instanceof ServerWorld world)) return;
-        SPAWNERS.put(world, new LightSpawner(hitResult.getBlockPos(), 9, 9, 3));
+        SPAWNERS.put(world, new LightSpawner(hitResult.getBlockPos(), 7, 8000, 20));
     }
 }

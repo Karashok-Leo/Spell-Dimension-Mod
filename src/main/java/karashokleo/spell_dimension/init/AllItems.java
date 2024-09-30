@@ -1,11 +1,13 @@
 package karashokleo.spell_dimension.init;
 
 import com.google.common.collect.ArrayListMultimap;
+import karashokleo.l2hostility.init.LHTags;
 import karashokleo.leobrary.datagen.builder.ItemBuilder;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.item.*;
 import karashokleo.spell_dimension.content.item.essence.*;
 import karashokleo.spell_dimension.content.item.essence.base.ColorProvider;
+import karashokleo.spell_dimension.content.item.trinket.HeartSpellSteelItem;
 import karashokleo.spell_dimension.util.SchoolUtil;
 import karashokleo.spell_dimension.util.TagUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -39,6 +41,7 @@ public class AllItems
     public static Item ACCURSED_BLACKSTONE;
     public static EndStageItem SUN_MOON_STAR;
     public static SpawnerSoulItem SPAWNER_SOUL;
+    public static HeartSpellSteelItem HEART_STEEL;
 
     public static void register()
     {
@@ -99,6 +102,13 @@ public class AllItems
         SPAWNER_SOUL = Entry.of("spawner_soul", new SpawnerSoulItem())
                 .addEN()
                 .addZH("笼中魄")
+                .addModel()
+                .register();
+
+        HEART_STEEL = Entry.of("heart_spell_steel", new HeartSpellSteelItem())
+                .addEN()
+                .addZH("心之魔钢")
+                .addTag(LHTags.CHARM_SLOT)
                 .addModel()
                 .register();
     }
