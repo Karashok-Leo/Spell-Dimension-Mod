@@ -5,7 +5,7 @@
   "description": "book.spell-dimension-book.magic_guidance.tips.enchant.description",
   "hide_while_locked": false,
   "icon": {
-    "item": "minecraft:enchanting_table"
+    "item": "enchantment_infusion:enchantment_infusion_table"
   },
   "name": "book.spell-dimension-book.magic_guidance.tips.enchant.name",
   "pages": [
