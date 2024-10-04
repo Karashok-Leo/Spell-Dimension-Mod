@@ -39,7 +39,7 @@ public class Nucleus implements Buff
     public static final UUID uuid = UUID.fromString("977AE476-9F10-5499-4B5D-09B296214773");
     private static final String MODIFIER_KEY = "IceNucleus";
     public static final Identifier SPELL_ID = SpellDimension.modLoc("nucleus");
-    public static final Identifier ICICLE = SpellDimension.modLoc("nuclear_icicle");
+    public static final Identifier MINI_ICICLE = SpellDimension.modLoc("mini_icicle");
     public static final double MULTIPLIER = -0.75D;
     public static final int TOTAL_DURATION = 80;
 
@@ -103,7 +103,7 @@ public class Nucleus implements Buff
         if (caster == null) return;
         SpellPower.Result power = SpellPower.getSpellPower(SpellSchools.FROST, caster);
         int amplifier = Math.min((int) (power.baseValue()) / 24 + 1, 3);
-        Spell spell = SpellRegistry.getSpell(ICICLE);
+        Spell spell = SpellRegistry.getSpell(MINI_ICICLE);
         if (spell == null) return;
 
         //Damage
@@ -112,17 +112,14 @@ public class Nucleus implements Buff
 
         //Adjust amplifier
         float height = source.getHeight();
-        spell.range = Math.max(3 + amplifier, height * (1.6F + amplifier * 0.4F));
-        for (Spell.Impact impact : spell.impact)
-            if (impact.action.status_effect != null)
-                impact.action.status_effect.amplifier = amplifier;
+        float range = Math.max(3 + amplifier, height * (1.6F + amplifier * 0.4F));
 
-        SpellInfo spellInfo = new SpellInfo(spell, ICICLE);
+        SpellInfo spellInfo = new SpellInfo(spell, MINI_ICICLE);
         SpellHelper.ImpactContext context = new SpellHelper.ImpactContext(1.0F, 1.0F, null, SpellPower.getSpellPower(spell.school, caster), SpellHelper.impactTargetingMode(spell));
         int step = 72 / (amplifier + 1);
         for (int i = 0; i < 360; i += step)
             for (int j = 0; j < 360; j += step)
-                ImpactUtil.shootProjectile(source.getWorld(), caster, source.getPos().add(0, height / 2, 0), ImpactUtil.fromEulerAngle(i, j, 0), spellInfo, context);
+                ImpactUtil.shootProjectile(source.getWorld(), caster, source.getPos().add(0, height / 2, 0), ImpactUtil.fromEulerAngle(i, j, 0), range, spellInfo, context);
     }
 
     public int getDuration()

@@ -17,6 +17,7 @@ import karashokleo.spell_dimension.content.item.logic.EnchantedModifier;
 import karashokleo.spell_dimension.content.item.logic.EnlighteningModifier;
 import karashokleo.spell_dimension.content.misc.DebugStaffCommand;
 import karashokleo.spell_dimension.data.SDTexts;
+import karashokleo.spell_dimension.data.SpellTexts;
 import karashokleo.spell_dimension.data.book.MagicGuidanceProvider;
 import karashokleo.spell_dimension.data.book.lang.BookChineseProvider;
 import karashokleo.spell_dimension.data.book.lang.BookEnglishProvider;
@@ -72,6 +73,7 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
         FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
 
         SDTexts.register();
+        SpellTexts.register();
 
         pack.addProvider(ContentProvider::new);
         pack.addProvider(BagProvider::new);

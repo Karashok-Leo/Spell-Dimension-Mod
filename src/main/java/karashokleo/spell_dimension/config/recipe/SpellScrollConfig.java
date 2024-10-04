@@ -2,9 +2,8 @@ package karashokleo.spell_dimension.config.recipe;
 
 import fuzs.mutantmonsters.init.ModRegistry;
 import karashokleo.l2hostility.content.item.ComplementItems;
-import karashokleo.spell_dimension.content.spell.LocateSpell;
-import karashokleo.spell_dimension.content.spell.PlaceSpell;
-import karashokleo.spell_dimension.content.spell.SummonSpell;
+import karashokleo.spell_dimension.SpellDimension;
+import karashokleo.spell_dimension.content.spell.*;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllItems;
 import net.adventurez.init.ItemInit;
@@ -53,9 +52,9 @@ public class SpellScrollConfig
 
     static
     {
-        SPELL_TEXTS.put(LocateSpell.SPELL_ID, Text.empty());
-        SPELL_TEXTS.put(SummonSpell.SPELL_ID, Text.empty());
-        SPELL_TEXTS.put(PlaceSpell.SPELL_ID, Text.empty());
+        SPELL_TEXTS.put(ShiftSpell.SPELL_ID, Text.empty());
+        SPELL_TEXTS.put(FrostBlinkSpell.SPELL_ID, Text.empty());
+        SPELL_TEXTS.put(SpellDimension.modLoc("frozen"), Text.empty());
 
         // Primary
         {

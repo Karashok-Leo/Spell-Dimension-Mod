@@ -1,5 +1,6 @@
 {
     "school": "FROST",
+    "range": 6,
     "release": {
       "target": {
         "type": "PROJECTILE",
@@ -68,6 +69,17 @@
         ],
         "sound": {
           "id": "spell_engine:generic_frost_impact"
+        }
+      },
+      {
+        "action": {
+          "type": "STATUS_EFFECT",
+          "status_effect": {
+            "effect_id": "spell-dimension:frosted",
+            "duration": 6,
+            "amplifier": 2,
+            "show_particles": false
+          }
         }
       }
     ]

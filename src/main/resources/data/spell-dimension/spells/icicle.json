@@ -5,7 +5,7 @@
       "tier": 2
     },
     "cast": {
-      "duration": 0.48,
+      "duration": 0.32,
       "animation": "spell_engine:one_handed_projectile_charge",
       "sound": {
         "id": "spell_engine:generic_frost_casting",

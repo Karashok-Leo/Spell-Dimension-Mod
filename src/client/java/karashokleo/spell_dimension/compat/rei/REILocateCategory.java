@@ -1,7 +1,7 @@
 package karashokleo.spell_dimension.compat.rei;
 
 import com.google.common.collect.Lists;
-import karashokleo.spell_dimension.data.SDTexts;
+import karashokleo.spell_dimension.data.SpellTexts;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.gui.Renderer;
@@ -68,7 +68,7 @@ public class REILocateCategory implements DisplayCategory<REILocateDisplay>
     @Override
     public Text getTitle()
     {
-        return SDTexts.SPELL$LOCATE$NAME.get();
+        return SpellTexts.LOCATE.getNameText();
     }
 
     @Override

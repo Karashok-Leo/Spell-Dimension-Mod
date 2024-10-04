@@ -29,9 +29,9 @@ public class ImpactUtil
     public static boolean isAlly(LivingEntity origin, LivingEntity target)
     {
         return origin == target
-                || origin.isTeammate(target)
-                || (target instanceof Tameable tameable && tameable.getOwner() == origin)
-                || (target instanceof Ownable ownable && ownable.getOwner() == origin);
+               || origin.isTeammate(target)
+               || (target instanceof Tameable tameable && tameable.getOwner() == origin)
+               || (target instanceof Ownable ownable && ownable.getOwner() == origin);
     }
 
     public static Vec3d fromEulerAngle(float pitch, float yaw, float roll)
@@ -42,12 +42,12 @@ public class ImpactUtil
         return new Vec3d(x, y, z);
     }
 
-    public static void shootProjectile(World world, LivingEntity caster, Vec3d position, Vec3d direction, SpellInfo spellInfo, SpellHelper.ImpactContext context)
+    public static void shootProjectile(World world, LivingEntity caster, Vec3d position, Vec3d direction, float range, SpellInfo spellInfo, SpellHelper.ImpactContext context)
     {
-        shootProjectile(world, caster, position, direction, spellInfo, context, 0);
+        shootProjectile(world, caster, position, direction, range, spellInfo, context, 0);
     }
 
-    public static void shootProjectile(World world, LivingEntity caster, Vec3d position, Vec3d direction, SpellInfo spellInfo, SpellHelper.ImpactContext context, int sequenceIndex)
+    public static void shootProjectile(World world, LivingEntity caster, Vec3d position, Vec3d direction, float range, SpellInfo spellInfo, SpellHelper.ImpactContext context, int sequenceIndex)
     {
         if (world.isClient()) return;
 
@@ -65,7 +65,7 @@ public class ImpactUtil
                     new SpellEvents.ProjectileLaunchEvent(projectile, mutableLaunchProperties, caster, null, spellInfo, context, sequenceIndex)));
 
         projectile.setVelocity(direction.x, direction.y, direction.z, mutableLaunchProperties.velocity, projectileData.divergence);
-        projectile.range = spell.range;
+        projectile.range = range > 0 ? range : spell.range;
 
         world.spawnEntity(projectile);
 
@@ -78,7 +78,7 @@ public class ImpactUtil
                 {
                     if (caster == null || !caster.isAlive())
                         return;
-                    shootProjectile(world, caster, position, direction, spellInfo, context, nextSequenceIndex);
+                    shootProjectile(world, caster, position, direction, range, spellInfo, context, nextSequenceIndex);
                 });
             }
     }

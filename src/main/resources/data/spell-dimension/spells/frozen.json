@@ -1,0 +1,56 @@
+{
+  "school": "FROST",
+  "range": 8,
+  "cast": {
+    "duration": 0
+  },
+  "release": {
+    "target": {
+      "type": "AREA",
+      "area": {
+        "horizontal_range_multiplier":1.2,
+        "vertical_range_multiplier":1.2,
+        "angle_degrees":360
+      }
+    },
+    "particles": [
+      {
+        "particle_id": "spell_engine:snowflake",
+        "shape": "PILLAR",
+        "origin": "FEET",
+        "count": 90.0,
+        "min_speed": 0.1,
+        "max_speed": 0.35
+      },
+      {
+        "particle_id": "spell_engine:frost_shard",
+        "shape": "PIPE",
+        "origin": "FEET",
+        "count": 50.0,
+        "min_speed": 0.1,
+        "max_speed": 0.3
+      }
+    ],
+    "animation": "spell_engine:one_handed_area_release",
+    "sound": {
+      "id": "wizards:frost_shield_release"
+    }
+  },
+  "impact": [
+    {
+      "action": {
+        "type": "STATUS_EFFECT",
+        "status_effect": {
+          "effect_id": "spell-dimension:frosted",
+          "amplifier": 9,
+          "duration": 8,
+          "show_particles": false
+        }
+      }
+    }
+  ],
+  "cost": {
+    "cooldown_duration": 30,
+    "exhaust" : 0.5
+  }
+}

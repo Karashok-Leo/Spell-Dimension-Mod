@@ -10,6 +10,7 @@ import karashokleo.spell_dimension.config.recipe.InfusionRecipes;
 import karashokleo.spell_dimension.config.recipe.LocateSpellConfig;
 import karashokleo.spell_dimension.config.recipe.SummonSpellConfig;
 import karashokleo.spell_dimension.data.SDTexts;
+import karashokleo.spell_dimension.data.SpellTexts;
 import karashokleo.spell_dimension.init.AllBlocks;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
@@ -20,9 +21,9 @@ public class EMICompat implements EmiPlugin
     public static final Identifier SUMMON = SpellDimension.modLoc("summon");
     public static final Identifier SPELL_INFUSION = SpellDimension.modLoc("spell_infusion");
 
-    public static final EmiRecipeCategory LOCATE_CATEGORY = new EMICategory(LOCATE, EmiStack.of(Items.LODESTONE), SDTexts.SPELL$LOCATE$NAME::get);
+    public static final EmiRecipeCategory LOCATE_CATEGORY = new EMICategory(LOCATE, EmiStack.of(Items.LODESTONE), SpellTexts.LOCATE::getNameText);
 
-    public static final EmiRecipeCategory SUMMON_CATEGORY = new EMICategory(SUMMON, EmiStack.of(Items.SPAWNER), SDTexts.SPELL$SUMMON$NAME::get);
+    public static final EmiRecipeCategory SUMMON_CATEGORY = new EMICategory(SUMMON, EmiStack.of(Items.SPAWNER), SpellTexts.SUMMON::getNameText);
 
     public static final EmiRecipeCategory SPELL_INFUSION_CATEGORY = new EMICategory(SPELL_INFUSION, EmiStack.of(AllBlocks.SPELL_INFUSION_PEDESTAL.item()), SDTexts.TEXT$SPELL_INFUSION::get);
 
