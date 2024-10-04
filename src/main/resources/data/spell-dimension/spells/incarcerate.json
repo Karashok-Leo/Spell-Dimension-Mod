@@ -1,0 +1,43 @@
+{
+  "school": "ARCANE",
+  "range": 16,
+  "cast": {
+    "duration": 0
+  },
+  "release": {
+    "target": {
+      "type": "CURSOR"
+    },
+    "animation": "spell_engine:one_handed_area_release",
+    "sound": {
+      "id": "wizards:frost_shield_release"
+    }
+  },
+  "impact": [
+    {
+      "action": {
+        "type": "STATUS_EFFECT",
+        "status_effect": {
+          "effect_id": "l2hostility:stone_cage",
+          "amplifier": 0,
+          "duration": 4,
+          "show_particles": false
+        }
+      },
+      "particles": [
+        {
+          "particle_id": "spell_engine:arcane_hit",
+          "shape": "SPHERE",
+          "origin": "CENTER",
+          "count": 100.0,
+          "min_speed": 0.2,
+          "max_speed": 0.4
+        }
+      ]
+    }
+  ],
+  "cost": {
+    "cooldown_duration": 16,
+    "exhaust" : 0.5
+  }
+}

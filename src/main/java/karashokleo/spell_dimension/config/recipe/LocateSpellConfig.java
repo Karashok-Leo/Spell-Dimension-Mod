@@ -41,6 +41,8 @@ public class LocateSpellConfig
         BIOME_CONFIG.put(Items.SAND, BiomeKeys.DESERT);
         BIOME_CONFIG.put(Items.GRASS_BLOCK, BiomeKeys.PLAINS);
         BIOME_CONFIG.put(Items.CANDLE, BiomeKeys.DEEP_DARK);
+        BIOME_CONFIG.put(Items.RED_MUSHROOM, BiomeKeys.CRIMSON_FOREST);
+        BIOME_CONFIG.put(Items.BROWN_MUSHROOM, BiomeKeys.WARPED_FOREST);
     }
 
     public static void addTranslation()

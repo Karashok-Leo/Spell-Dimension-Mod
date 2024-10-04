@@ -1,12 +1,16 @@
 package karashokleo.spell_dimension.config.recipe;
 
+import com.obscuria.aquamirae.registry.AquamiraeItems;
 import fuzs.mutantmonsters.init.ModRegistry;
 import karashokleo.l2hostility.content.item.ComplementItems;
-import karashokleo.spell_dimension.SpellDimension;
+import karashokleo.l2hostility.init.LHTraits;
+import karashokleo.spell_dimension.content.buff.Nucleus;
 import karashokleo.spell_dimension.content.spell.*;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllItems;
+import karashokleo.spell_dimension.init.AllSpells;
 import net.adventurez.init.ItemInit;
+import net.aleganza.plentyofarmors.item.ModItems;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
@@ -52,9 +56,7 @@ public class SpellScrollConfig
 
     static
     {
-        SPELL_TEXTS.put(ShiftSpell.SPELL_ID, Text.empty());
-        SPELL_TEXTS.put(FrostBlinkSpell.SPELL_ID, Text.empty());
-        SPELL_TEXTS.put(SpellDimension.modLoc("frozen"), Text.empty());
+//        SPELL_TEXTS.put(AllSpells.INCARCERATE, Text.empty());
 
         // Primary
         {
@@ -85,29 +87,37 @@ public class SpellScrollConfig
 
         // Infusion
         {
-            fromCrafting("spell-dimension:locate", Items.RECOVERY_COMPASS);
-            fromCrafting("spell-dimension:summon", AllItems.SPAWNER_SOUL);
-            fromCrafting("spell-dimension:place", ModRegistry.ENDERSOUL_HAND_ITEM.get());
-            fromCrafting("spell-dimension:light", Items.GLOWSTONE);
+            fromCrafting(LocateSpell.SPELL_ID, Items.RECOVERY_COMPASS);
+            fromCrafting(SummonSpell.SPELL_ID, AllItems.SPAWNER_SOUL);
+            fromCrafting(PlaceSpell.SPELL_ID, ModRegistry.ENDERSOUL_HAND_ITEM.get());
+            fromCrafting(LightSpell.SPELL_ID, Items.GLOWSTONE);
 
             fromCrafting("spell-dimension:phase", Items.ECHO_SHARD);
-            fromCrafting("spell-dimension:converge", "illagerinvasion:primal_essence");
+            fromCrafting(ConvergeSpell.SPELL_ID, "illagerinvasion:primal_essence");
             fromCrafting("spellbladenext:eldritchblast", ComplementItems.WARDEN_BONE_SHARD);
+            fromCrafting(ShiftSpell.SPELL_ID, ModItems.HEART_OF_THE_END);
+            fromCrafting(AllSpells.FORCE_LANDING, LHTraits.GRAVITY.asItem());
+            fromCrafting(AllSpells.INCARCERATE, LHTraits.GRAVITY.asItem());
+            fromCrafting(AllSpells.FORCE_LANDING, ComplementItems.BLACKSTONE_CORE);
 
             fromCrafting("wizards:fire_breath", "soulsweapons:lord_soul_rose");
             fromCrafting("spell-dimension:blast", AllItems.ACCURSED_BLACKSTONE);
             fromCrafting("spell-dimension:ignite", ItemInit.BLACKSTONE_GOLEM_HEART);
 
             fromCrafting("wizards:frost_blizzard", "soulsweapons:lord_soul_white");
-            fromCrafting("spell-dimension:nucleus", "endrem:cold_eye");
+            fromCrafting(Nucleus.SPELL_ID, "endrem:cold_eye");
             fromCrafting("spell-dimension:aura", "aquamirae:maze_rose");
             fromCrafting("spell-dimension:icicle", "spell-dimension:abyss_guard");
+            fromCrafting(FrostBlinkSpell.SPELL_ID, AquamiraeItems.DEAD_SEA_SCROLL);
+            fromCrafting(AllSpells.FROZEN, AquamiraeItems.SHIP_GRAVEYARD_ECHO);
 
             fromCrafting("paladins:holy_beam", "bosses_of_mass_destruction:ancient_anima");
             fromCrafting("paladins:circle_of_healing", "soulsweapons:arkenstone");
             fromCrafting("paladins:barrier", "graveyard:dark_iron_block");
             fromCrafting("paladins:judgement", "soulsweapons:lord_soul_dark");
 
+            fromCrafting("spell-dimension:cleanse", ComplementItems.LIFE_ESSENCE);
+            fromCrafting(ExorcismSpell.SPELL_ID, LHTraits.DISPELL.asItem());
             fromCrafting("spell-dimension:power", "soulsweapons:essence_of_luminescence");
             fromCrafting("spell-dimension:resist", "soulsweapons:essence_of_eventide");
             fromCrafting("spell-dimension:regen", "bosses_of_mass_destruction:void_thorn");
@@ -165,6 +175,11 @@ public class SpellScrollConfig
     private static void fromCrafting(String spellId, String itemId)
     {
         fromCrafting(new Identifier(spellId), new Identifier(itemId));
+    }
+
+    private static void fromCrafting(Identifier spellId, String itemId)
+    {
+        fromCrafting(spellId, new Identifier(itemId));
     }
 
     private static void fromCrafting(Identifier spellId, Identifier itemId)

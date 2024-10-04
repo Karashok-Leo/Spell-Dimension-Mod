@@ -35,6 +35,18 @@ public enum SpellTexts
             "Launch a spell, if it touches a block, it will use the item in your off-hand on the block.",
             "发射一道咒语, 若其触碰到方块, 则会对其使用你副手的物品."
     ),
+    INCARCERATE(
+            "Incarcerate",
+            "禁锢",
+            "Incarcerate the target for {effect_duration} seconds.",
+            "禁锢目标, 持续{effect_duration}秒."
+    ),
+    FORCE_LANDING(
+            "Force Landing",
+            "迫降",
+            "Make all targets within a certain range get the gravity {effect_amplifier} effect for {effect_duration} seconds.",
+            "使一定范围内所有目标获得重力{effect_amplifier}效果, 持续{effect_duration}秒."
+    ),
     CONVERGE(
             "Converge",
             "汇聚",
@@ -80,8 +92,8 @@ public enum SpellTexts
     FROZEN(
             "Frozen",
             "冰封",
-            "Freeze all targets within a certain range.",
-            "冻结一定范围内所有目标."
+            "Freeze all targets within a certain range for {effect_duration} seconds.",
+            "冻结一定范围内所有目标, 持续{effect_duration}秒."
     ),
     NUCLEUS(
             "Nucleus",
@@ -112,6 +124,18 @@ public enum SpellTexts
             "抗性",
             "Apply resist {effect_amplifier} effect to oneself for {effect_duration} seconds.",
             "施法者获得抗性提升{effect_amplifier}效果, 持续{effect_duration}秒."
+    ),
+    CLEANSE(
+            "Cleanse",
+            "净化",
+            "Apply cleanse effect to oneself or an ally.",
+            "施法者或者目标友军获得净化效果."
+    ),
+    EXORCISM(
+            "Exorcism",
+            "驱邪",
+            "Reduce the target's level to half of the original, and reacquire the traits, while the caster takes damage equal to the target's original level.",
+            "使目标等级降至原来的一半，并且重新获取词条，同时施法者受到相当于目标原有等级的伤害."
     ),
     LIGHTMOON(
             "Light Moon",

@@ -3,6 +3,7 @@ package karashokleo.spell_dimension.content.buff;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDamageEvent;
+import karashokleo.leobrary.effect.api.util.EffectUtil;
 import karashokleo.spell_dimension.api.buff.Buff;
 import karashokleo.spell_dimension.api.buff.BuffType;
 import karashokleo.spell_dimension.config.SpellConfig;
@@ -133,7 +134,8 @@ public class BlazingMark implements Buff
     {
         ParticleHelper.sendBatches(source, PARTICLES);
         DamageUtil.spellDamage(source, SpellSchools.FIRE, caster, damage * amplifier * SpellConfig.BLAZING_MARK.proportion(), false);
-        source.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 100, amplifier, false, false));
+        EffectUtil.forceAddEffect(source, new StatusEffectInstance(StatusEffects.WEAKNESS, 100, amplifier, false, false), caster);
+//        source.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 100, amplifier, false, false));
     }
 
     private void particle(LivingEntity owner)

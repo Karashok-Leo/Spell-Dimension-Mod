@@ -1,6 +1,7 @@
 package karashokleo.spell_dimension.content.enchantment;
 
 import karashokleo.l2hostility.init.LHEffects;
+import karashokleo.leobrary.effect.api.util.EffectUtil;
 import karashokleo.spell_dimension.util.ImpactUtil;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.Entity;
@@ -28,12 +29,12 @@ public class SpellCurseEnchantment extends SpellImpactEnchantment
     @Override
     public void onSpellImpact(World world, LivingEntity caster, int totalLevel, List<Entity> targets, SpellInfo spellInfo)
     {
-
         for (Entity entity : targets)
             if (entity instanceof LivingEntity living)
             {
                 if (ImpactUtil.isAlly(caster, living)) continue;
-                living.addStatusEffect(new StatusEffectInstance(LHEffects.CURSE, 20 * (totalLevel + 1), 0));
+                EffectUtil.forceAddEffect(living, new StatusEffectInstance(LHEffects.CURSE, 20 * (totalLevel + 1), 0), caster);
+//                living.addStatusEffect(new StatusEffectInstance(LHEffects.CURSE, 20 * (totalLevel + 1), 0));
             }
     }
 }

@@ -94,6 +94,7 @@ dependencies {
     modImplementation("karashokleo.leobrary:data:${project.leobrary_version}")
     modImplementation("karashokleo.leobrary:datagen:${project.leobrary_version}")
     modImplementation("karashokleo.leobrary:damage:${project.leobrary_version}")
+    modImplementation("karashokleo.leobrary:effect:${project.leobrary_version}")
     modImplementation("karashokleo.leobrary:gui:${project.leobrary_version}")
     modImplementation("karashokleo.effect_overlay:effect-overlay:${project.effect_overlay_version}")
     modImplementation("karashokleo.loot_bag:loot-bag:${project.loot_bag_version}")
