@@ -1,6 +1,7 @@
 package karashokleo.spell_dimension.config.recipe;
 
 import com.obscuria.aquamirae.registry.AquamiraeItems;
+import dev.architectury.platform.Mod;
 import fuzs.mutantmonsters.init.ModRegistry;
 import karashokleo.l2hostility.content.item.ComplementItems;
 import karashokleo.l2hostility.init.LHTraits;
@@ -91,6 +92,7 @@ public class SpellScrollConfig
             fromCrafting(SummonSpell.SPELL_ID, AllItems.SPAWNER_SOUL);
             fromCrafting(PlaceSpell.SPELL_ID, ModRegistry.ENDERSOUL_HAND_ITEM.get());
             fromCrafting(LightSpell.SPELL_ID, Items.GLOWSTONE);
+            fromCrafting(AllSpells.MOON_SWIM, ModItems.HARDENED_PHANTOM_MEMBRANE);
 
             fromCrafting("spell-dimension:phase", Items.ECHO_SHARD);
             fromCrafting(ConvergeSpell.SPELL_ID, "illagerinvasion:primal_essence");
@@ -103,6 +105,7 @@ public class SpellScrollConfig
             fromCrafting("wizards:fire_breath", "soulsweapons:lord_soul_rose");
             fromCrafting("spell-dimension:blast", AllItems.ACCURSED_BLACKSTONE);
             fromCrafting("spell-dimension:ignite", ItemInit.BLACKSTONE_GOLEM_HEART);
+            fromCrafting(FireOfRetributionSpell.SPELL_ID, LHTraits.SOUL_BURNER.asItem());
 
             fromCrafting("wizards:frost_blizzard", "soulsweapons:lord_soul_white");
             fromCrafting(Nucleus.SPELL_ID, "endrem:cold_eye");

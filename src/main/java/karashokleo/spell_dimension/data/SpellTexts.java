@@ -35,6 +35,12 @@ public enum SpellTexts
             "Launch a spell, if it touches a block, it will use the item in your off-hand on the block.",
             "发射一道咒语, 若其触碰到方块, 则会对其使用你副手的物品."
     ),
+    MOON_SWIM(
+            "Moon Swim",
+            "月泳",
+            "Apply Air Hop and Slow Falling effects to oneself for {effect_duration} seconds.",
+            "施法者获得空中跳跃效果和缓降效果, 持续{effect_duration}秒."
+    ),
     INCARCERATE(
             "Incarcerate",
             "禁锢",
@@ -76,6 +82,12 @@ public enum SpellTexts
             "引火",
             "Apply ignite effect to oneself. Ignite: " + BlazingMark.DESC_EN,
             "施法者获得引火效果. 引火: " + BlazingMark.DESC_ZH
+    ),
+    FIRE_OF_RETRIBUTION(
+            "Fire of Retribution",
+            "业火",
+            "Burn a random trait of the target every second. The higher the level of the trait consumed, the higher the damage caused.",
+            "每秒灼烧目标的随机一个词条，该词条的等级消耗越高，造成的伤害越高."
     ),
     AURA(
             "Aura",

@@ -21,6 +21,7 @@ public class AllSpells
     public static final Identifier FROZEN = SpellDimension.modLoc("frozen");
     public static final Identifier INCARCERATE = SpellDimension.modLoc("incarcerate");
     public static final Identifier FORCE_LANDING = SpellDimension.modLoc("force_landing");
+    public static final Identifier MOON_SWIM = SpellDimension.modLoc("moon_swim");
 
     public static void register()
     {
@@ -40,5 +41,6 @@ public class AllSpells
         SpellProjectileHitBlockCallback.EVENT.register(PlaceSpell::handle);
 
         SpellImpactEvents.BEFORE.register(FrostBlinkSpell::handle);
+        SpellImpactEvents.BEFORE.register(FireOfRetributionSpell::handle);
     }
 }

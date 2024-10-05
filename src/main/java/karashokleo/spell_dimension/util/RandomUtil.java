@@ -4,13 +4,15 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.util.math.random.Random;
 import net.spell_power.api.SpellSchool;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class RandomUtil
 {
     public static SpellSchool randomSchool(Random random)
     {
-        return randomList(random, SchoolUtil.SCHOOLS);
+        return randomFromList(random, SchoolUtil.SCHOOLS);
     }
 
     public static EquipmentSlot randomSlot(Random random)
@@ -18,10 +20,15 @@ public class RandomUtil
         return randomEnum(random, EquipmentSlot.class);
     }
 
-    public static <T> T randomList(Random random, List<T> list)
+    public static <T> T randomFromList(Random random, List<T> list)
     {
         int randomIndex = random.nextInt(list.size());
         return list.get(randomIndex);
+    }
+
+    public static <T> T randomFromSet(Random random, Set<T> set)
+    {
+        return randomFromList(random, new ArrayList<>(set));
     }
 
     public static <T extends Enum<T>> T randomEnum(Random random, Class<T> enumClass)

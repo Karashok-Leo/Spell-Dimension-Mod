@@ -45,9 +45,9 @@ public record AttributeModifier(EntityAttribute attribute, double amount, Entity
     public static AttributeModifier getRandom(Random random, List<SpellSchool> schools)
     {
         return random.nextFloat() < GENERIC_CHANCE ?
-                RandomUtil.randomList(random, modifiers) :
+                RandomUtil.randomFromList(random, modifiers) :
                 new AttributeModifier(
-                        RandomUtil.randomList(random, schools).attribute,
+                        RandomUtil.randomFromList(random, schools).attribute,
                         1,
                         EntityAttributeModifier.Operation.ADDITION
                 );
