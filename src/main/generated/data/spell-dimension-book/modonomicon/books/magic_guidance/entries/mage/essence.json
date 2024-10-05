@@ -57,15 +57,6 @@
           "item": "spell-dimension:essence_arcane_2"
         },
         {
-          "item": "spell-dimension:essence_soul_0"
-        },
-        {
-          "item": "spell-dimension:essence_soul_1"
-        },
-        {
-          "item": "spell-dimension:essence_soul_2"
-        },
-        {
           "item": "spell-dimension:essence_frost_0"
         },
         {
@@ -73,6 +64,15 @@
         },
         {
           "item": "spell-dimension:essence_frost_2"
+        },
+        {
+          "item": "spell-dimension:essence_soul_0"
+        },
+        {
+          "item": "spell-dimension:essence_soul_1"
+        },
+        {
+          "item": "spell-dimension:essence_soul_2"
         }
       ],
       "text": "book.spell-dimension-book.magic_guidance.mage.essence.base.text",
