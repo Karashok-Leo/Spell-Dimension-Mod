@@ -6,16 +6,11 @@
         {
           "type": "loot-bag:loot_bag",
           "bag": "spell-dimension:epic/book",
-          "weight": 6
+          "weight": 4
         },
         {
           "type": "loot-bag:loot_bag",
           "bag": "spell-dimension:epic/gear",
-          "weight": 5
-        },
-        {
-          "type": "loot-bag:loot_bag",
-          "bag": "spell-dimension:charm",
           "weight": 4
         },
         {
@@ -25,17 +20,7 @@
         },
         {
           "type": "loot-bag:loot_bag",
-          "bag": "spell-dimension:artifact",
-          "weight": 3
-        },
-        {
-          "type": "loot-bag:loot_bag",
           "bag": "spell-dimension:legendary/book",
-          "weight": 3
-        },
-        {
-          "type": "loot-bag:loot_bag",
-          "bag": "spell-dimension:aring",
           "weight": 2
         },
         {
@@ -45,17 +30,32 @@
         },
         {
           "type": "loot-bag:loot_bag",
-          "bag": "spell-dimension:jewelry/rings",
+          "bag": "spell-dimension:legendary/material",
           "weight": 2
+        },
+        {
+          "type": "loot-bag:loot_bag",
+          "bag": "spell-dimension:charm",
+          "weight": 1
+        },
+        {
+          "type": "loot-bag:loot_bag",
+          "bag": "spell-dimension:artifact",
+          "weight": 1
+        },
+        {
+          "type": "loot-bag:loot_bag",
+          "bag": "spell-dimension:aring",
+          "weight": 1
+        },
+        {
+          "type": "loot-bag:loot_bag",
+          "bag": "spell-dimension:jewelry/rings",
+          "weight": 1
         },
         {
           "type": "loot-bag:loot_bag",
           "bag": "spell-dimension:jewelry/necklaces",
-          "weight": 2
-        },
-        {
-          "type": "loot-bag:loot_bag",
-          "bag": "spell-dimension:legendary/material",
           "weight": 1
         }
       ],

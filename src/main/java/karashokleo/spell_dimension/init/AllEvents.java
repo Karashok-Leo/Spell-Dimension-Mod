@@ -5,6 +5,7 @@ import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.trait.common.AdaptingTrait;
 import karashokleo.l2hostility.init.LHTraits;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
+import karashokleo.spell_dimension.content.event.DifficultyEvent;
 import karashokleo.spell_dimension.content.event.EnchantmentEvent;
 import karashokleo.spell_dimension.content.event.PlayerHealthEvent;
 import karashokleo.spell_dimension.content.event.TrinketEvent;
@@ -32,6 +33,7 @@ public class AllEvents
     {
         PlayerHealthEvent.init();
         EnchantmentEvent.init();
+        DifficultyEvent.init();
         TrinketEvent.init();
         LightSpell.init();
 
