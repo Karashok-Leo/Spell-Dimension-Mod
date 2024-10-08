@@ -38,6 +38,7 @@ public class AllBlocks
                 .register();
 
         SpellDimension.MODELS.addBlock(generator -> generator.registerSimpleState(SPELL_INFUSION_PEDESTAL.block()));
+        SpellDimension.MODELS.addBlock(generator -> generator.registerSimpleState(SPELL_LIGHT));
     }
 
     static class Entry<T extends Block> extends BlockBuilder<T>

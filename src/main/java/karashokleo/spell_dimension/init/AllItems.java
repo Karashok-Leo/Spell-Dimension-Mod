@@ -8,6 +8,7 @@ import karashokleo.spell_dimension.content.item.*;
 import karashokleo.spell_dimension.content.item.essence.*;
 import karashokleo.spell_dimension.content.item.essence.base.ColorProvider;
 import karashokleo.spell_dimension.content.item.trinket.HeartSpellSteelItem;
+import karashokleo.spell_dimension.content.item.trinket.RejuvenatingBlossomItem;
 import karashokleo.spell_dimension.util.SchoolUtil;
 import karashokleo.spell_dimension.util.TagUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -42,6 +43,7 @@ public class AllItems
     public static EndStageItem SUN_MOON_STAR;
     public static SpawnerSoulItem SPAWNER_SOUL;
     public static HeartSpellSteelItem HEART_STEEL;
+    public static RejuvenatingBlossomItem REJUVENATING_BLOSSOM;
 
     public static void register()
     {
@@ -108,6 +110,13 @@ public class AllItems
         HEART_STEEL = Entry.of("heart_spell_steel", new HeartSpellSteelItem())
                 .addEN()
                 .addZH("心之魔钢")
+                .addTag(LHTags.CHARM_SLOT)
+                .addModel()
+                .register();
+
+        REJUVENATING_BLOSSOM = Entry.of("rejuvenating_blossom", new RejuvenatingBlossomItem())
+                .addEN()
+                .addZH("复苏绽放")
                 .addTag(LHTags.CHARM_SLOT)
                 .addModel()
                 .register();

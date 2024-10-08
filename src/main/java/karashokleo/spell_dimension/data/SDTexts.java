@@ -2,9 +2,6 @@ package karashokleo.spell_dimension.data;
 
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.config.recipe.LocateSpellConfig;
-import karashokleo.spell_dimension.content.buff.BlazingMark;
-import karashokleo.spell_dimension.content.buff.Nucleus;
-import karashokleo.spell_dimension.content.effect.FrostAuraEffect;
 import karashokleo.spell_dimension.data.loot_bag.SDBags;
 import karashokleo.spell_dimension.data.loot_bag.SDContents;
 import karashokleo.spell_dimension.init.AllEntities;
@@ -99,6 +96,10 @@ public enum SDTexts
     TOOLTIP$TOOK_SECONDS("Took %s second(s)", "耗时%s秒"),
     TOOLTIP$SUMMON_ENTITY("Entity Type: %s", "实体类型: %s"),
     TOOLTIP$SUMMON_REMAIN("Remain: %s", "剩余: %s"),
+    TOOLTIP$HEART_SPELL_STEEL$USAGE("Dealing magic damage from beyond %s blocks away to instantly kill a full-health mob that is higher than %s level, will grant a max health increase equivalent to %s of the damage dealt.","在%s格以外使用魔法伤害秒杀满血且等级高于%s的生物, 可获得相当于此次伤害%s的生命上限提升"),
+    TOOLTIP$HEART_SPELL_STEEL$ACCUMULATED("Max health obtained: %s", "已获得的最大生命值: %s"),
+    TOOLTIP$REJUVENATING_BLOSSOM$USAGE_1("- When injured, if the amount of health that your existing regeneration effect will recover is less than the damage dealt * the count of this item equipped, then remove all negative effects from you.", "- 受伤时, 如果你还未恢复的生命值低于受到伤害 * 装备的该物品数量, 则移除你身上所有负面效果"),
+    TOOLTIP$REJUVENATING_BLOSSOM$USAGE_2("- When injured, gain a regeneration effect that restores health equivalent to the amount of damage received * the count of this item equipped.", "- 受伤时获得生命恢复效果, 该效果将恢复的生命值等同于受到的伤害值 * 装备的该物品数量"),
 
     /**
      * Scrolls
