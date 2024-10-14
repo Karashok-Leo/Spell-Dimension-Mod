@@ -1,0 +1,21 @@
+{
+  "feature": "spell-dimension:tree_of_consciousness",
+  "placement": [
+    {
+      "type": "minecraft:biome"
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 32
+    },
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "above_bottom": 64
+      }
+    }
+  ]
+}

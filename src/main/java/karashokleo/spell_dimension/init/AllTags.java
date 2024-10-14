@@ -7,6 +7,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
+import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.runes.api.RuneItems;
@@ -54,6 +56,9 @@ public class AllTags
 
     public static final TagKey<Block> LOCATE_TARGET = TagUtil.blockTag("locate_target");
 
+    public static final TagKey<Item> BACK = TagUtil.itemTag(new Identifier("trinkets", "chest/back"));
+    public static final TagKey<Item> CAPE = TagUtil.itemTag(new Identifier("trinkets", "chest/cape"));
+
     public static void register()
     {
         TagGenerator<Item> generator = SpellDimension.ITEM_TAGS;
@@ -85,6 +90,15 @@ public class AllTags
 
         SpellDimension.BLOCK_TAGS.getOrCreateContainer(LOCATE_TARGET).add(
                 Blocks.LODESTONE
+        );
+
+        SpellDimension.BLOCK_TAGS.getOrCreateContainer(BlockTags.REPLACEABLE_BY_TREES).add(
+                AllBlocks.CONSCIOUSNESS
+        );
+
+        SpellDimension.FLUID_TAGS.getOrCreateContainer(FluidTags.WATER).add(
+                AllBlocks.STILL_CONSCIOUSNESS,
+                AllBlocks.FLOWING_CONSCIOUSNESS
         );
     }
 }

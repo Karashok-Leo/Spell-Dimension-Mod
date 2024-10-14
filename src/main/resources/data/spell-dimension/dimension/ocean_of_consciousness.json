@@ -1,0 +1,19 @@
+{
+  "type": "spell-dimension:ocean_of_consciousness",
+  "generator": {
+    "type": "minecraft:flat",
+    "settings": {
+      "layers": [
+        {
+          "block": "spell-dimension:consciousness",
+          "height": 128
+        }
+      ],
+      "biome": "spell-dimension:ocean_of_consciousness",
+      "lakes": false,
+      "features": true,
+      "structure_overrides": [
+      ]
+    }
+  }
+}

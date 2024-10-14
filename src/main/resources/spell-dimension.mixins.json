@@ -8,6 +8,8 @@
     "LivingEntityMixin",
     "MobSpawnerLogicMixin",
     "PlayerInventoryAccessor",
+    "PlayerManagerMixin",
+    "ServerPlayerEntityMixin",
     "SpellHelperMixin",
     "SpellInfinityEnchantmentMixin",
     "SpellProjectileMixin",

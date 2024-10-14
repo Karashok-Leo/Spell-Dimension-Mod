@@ -5,9 +5,12 @@ import karashokleo.leobrary.datagen.builder.BlockSet;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.block.SpellInfusionPedestalBlock;
 import karashokleo.spell_dimension.content.block.SpellLightBlock;
+import karashokleo.spell_dimension.content.block.fluid.ConsciousnessFluid;
 import karashokleo.spell_dimension.content.block.tile.SpellInfusionPedestalTile;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.FluidBlock;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -18,6 +21,10 @@ public class AllBlocks
     public static BlockEntityType<SpellInfusionPedestalTile> SPELL_INFUSION_PEDESTAL_TILE;
 
     public static SpellLightBlock SPELL_LIGHT;
+
+    public static FluidBlock CONSCIOUSNESS;
+    public static ConsciousnessFluid STILL_CONSCIOUSNESS;
+    public static ConsciousnessFluid FLOWING_CONSCIOUSNESS;
 
     public static void register()
     {
@@ -37,8 +44,17 @@ public class AllBlocks
                 .addZH("魔力之光")
                 .register();
 
+        STILL_CONSCIOUSNESS = Registry.register(Registries.FLUID, SpellDimension.modLoc("still_consciousness"), new ConsciousnessFluid.Still());
+        FLOWING_CONSCIOUSNESS = Registry.register(Registries.FLUID, SpellDimension.modLoc("flowing_consciousness"), new ConsciousnessFluid.Flowing());
+
+        CONSCIOUSNESS = Entry.of("consciousness", new FluidBlock(STILL_CONSCIOUSNESS, Block.Settings.copy(Blocks.WATER)))
+                .addEN()
+                .addZH("识")
+                .register();
+
         SpellDimension.MODELS.addBlock(generator -> generator.registerSimpleState(SPELL_INFUSION_PEDESTAL.block()));
         SpellDimension.MODELS.addBlock(generator -> generator.registerSimpleState(SPELL_LIGHT));
+        SpellDimension.MODELS.addBlock(generator -> generator.registerSimpleState(CONSCIOUSNESS));
     }
 
     static class Entry<T extends Block> extends BlockBuilder<T>

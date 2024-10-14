@@ -26,8 +26,10 @@ import karashokleo.spell_dimension.screen.QuestOverlay;
 import karashokleo.spell_dimension.screen.SpellPowerTab;
 import net.combatroll.internals.RollingEntity;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback;
@@ -35,6 +37,7 @@ import net.fabricmc.fabric.api.event.Event;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.item.Item;
 import net.minecraft.text.TranslatableTextContent;
@@ -63,6 +66,18 @@ public class SpellDimensionClient implements ClientModInitializer
         itemTooltip();
 
         BlockEntityRendererFactories.register(AllBlocks.SPELL_INFUSION_PEDESTAL_TILE, ctx -> new InfusionTableTileRenderer<>(1.05F, ctx));
+
+        FluidRenderHandlerRegistry.INSTANCE.register(
+                AllBlocks.STILL_CONSCIOUSNESS,
+                AllBlocks.FLOWING_CONSCIOUSNESS,
+                new ConsciousnessFluidRenderHandler()
+        );
+
+        BlockRenderLayerMap.INSTANCE.putFluids(
+                RenderLayer.getTranslucent(),
+                AllBlocks.STILL_CONSCIOUSNESS,
+                AllBlocks.FLOWING_CONSCIOUSNESS
+        );
 
         EntityRendererRegistry.register(AllEntities.LOCATE_PORTAL, LocatePortalRenderer::new);
 
