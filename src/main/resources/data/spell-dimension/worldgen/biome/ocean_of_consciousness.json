@@ -5,12 +5,10 @@
   "effects": {
     "fog_color": 12638463,
     "sky_color": 7907327,
-    "water_color": 7907327,
-    "water_fog_color": 4885247,
-    "foliage_color": 1731856,
-    "grass_color": 2518303,
+    "water_color": 4159204,
+    "water_fog_color": 329011,
     "particle": {
-      "probability": 0.01,
+      "probability": 0.05,
       "options": {
         "type": "minecraft:end_rod"
       }

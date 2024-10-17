@@ -66,6 +66,7 @@ public class SpellDimensionClient implements ClientModInitializer
         itemTooltip();
 
         BlockEntityRendererFactories.register(AllBlocks.SPELL_INFUSION_PEDESTAL_TILE, ctx -> new InfusionTableTileRenderer<>(1.05F, ctx));
+        BlockEntityRendererFactories.register(AllBlocks.CONSCIOUSNESS_CORE_TILE, ConsciousnessCoreRenderer::new);
 
         FluidRenderHandlerRegistry.INSTANCE.register(
                 AllBlocks.STILL_CONSCIOUSNESS,

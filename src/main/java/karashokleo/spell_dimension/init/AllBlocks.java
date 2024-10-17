@@ -1,19 +1,25 @@
 package karashokleo.spell_dimension.init;
 
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import karashokleo.leobrary.datagen.builder.BlockBuilder;
 import karashokleo.leobrary.datagen.builder.BlockSet;
 import karashokleo.spell_dimension.SpellDimension;
-import karashokleo.spell_dimension.content.block.SpellInfusionPedestalBlock;
-import karashokleo.spell_dimension.content.block.SpellLightBlock;
+import karashokleo.spell_dimension.content.block.*;
 import karashokleo.spell_dimension.content.block.fluid.ConsciousnessFluid;
+import karashokleo.spell_dimension.content.block.tile.ConsciousnessCoreTile;
+import karashokleo.spell_dimension.content.block.tile.ProtectiveCoverBlockTile;
 import karashokleo.spell_dimension.content.block.tile.SpellInfusionPedestalTile;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.data.client.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.state.property.IntProperty;
+import net.minecraft.util.Identifier;
 
 public class AllBlocks
 {
@@ -21,6 +27,13 @@ public class AllBlocks
     public static BlockEntityType<SpellInfusionPedestalTile> SPELL_INFUSION_PEDESTAL_TILE;
 
     public static SpellLightBlock SPELL_LIGHT;
+
+    public static BlockSet CONSCIOUSNESS_LOG;
+    public static BlockSet CONSCIOUSNESS_CORE;
+    public static BlockEntityType<ConsciousnessCoreTile> CONSCIOUSNESS_CORE_TILE;
+
+    public static BlockSet PROTECTIVE_COVER;
+    public static BlockEntityType<ProtectiveCoverBlockTile> PROTECTIVE_COVER_TILE;
 
     public static FluidBlock CONSCIOUSNESS;
     public static ConsciousnessFluid STILL_CONSCIOUSNESS;
@@ -43,6 +56,34 @@ public class AllBlocks
                 .addEN()
                 .addZH("魔力之光")
                 .register();
+        CONSCIOUSNESS_LOG = Entry.of("consciousness_log", new ConsciousnessLogBlock())
+                .addEN()
+                .addZH("识之木")
+                .addSimpleItem()
+                .registerWithItem();
+        CONSCIOUSNESS_CORE = Entry.of("consciousness_core", new ConsciousnessCoreBlock())
+                .addEN()
+                .addZH("识之核心")
+                .addSimpleItem()
+                .addModel()
+                .registerWithItem();
+        CONSCIOUSNESS_CORE_TILE = Registry.register(
+                Registries.BLOCK_ENTITY_TYPE,
+                SpellDimension.modLoc("consciousness_core"),
+                FabricBlockEntityTypeBuilder.create(ConsciousnessCoreTile::new, CONSCIOUSNESS_CORE.block()).build()
+        );
+
+        PROTECTIVE_COVER = Entry.of("protective_cover", new ProtectiveCoverBlock())
+                .addEN()
+                .addZH("屏障")
+                .addSimpleItem()
+                .addModel()
+                .registerWithItem();
+        PROTECTIVE_COVER_TILE = Registry.register(
+                Registries.BLOCK_ENTITY_TYPE,
+                SpellDimension.modLoc("protective_cover"),
+                FabricBlockEntityTypeBuilder.create(ProtectiveCoverBlockTile::new, PROTECTIVE_COVER.block()).build()
+        );
 
         STILL_CONSCIOUSNESS = Registry.register(Registries.FLUID, SpellDimension.modLoc("still_consciousness"), new ConsciousnessFluid.Still());
         FLOWING_CONSCIOUSNESS = Registry.register(Registries.FLUID, SpellDimension.modLoc("flowing_consciousness"), new ConsciousnessFluid.Flowing());
@@ -55,6 +96,19 @@ public class AllBlocks
         SpellDimension.MODELS.addBlock(generator -> generator.registerSimpleState(SPELL_INFUSION_PEDESTAL.block()));
         SpellDimension.MODELS.addBlock(generator -> generator.registerSimpleState(SPELL_LIGHT));
         SpellDimension.MODELS.addBlock(generator -> generator.registerSimpleState(CONSCIOUSNESS));
+        SpellDimension.MODELS.addBlock(generator ->
+        {
+            IntProperty levelProperty = ConsciousnessLogBlock.LEVEL;
+            Int2ObjectMap<Identifier> map = new Int2ObjectOpenHashMap<>();
+            BlockStateVariantMap blockStateVariantMap = BlockStateVariantMap
+                    .create(levelProperty)
+                    .register(level -> BlockStateVariant.create()
+                            .put(VariantSettings.MODEL, map.computeIfAbsent(
+                                    level,
+                                    i -> generator.createSubModel(CONSCIOUSNESS_LOG.block(), "_" + i, Models.CUBE_ALL, TextureMap::all))));
+            generator.registerItemModel(CONSCIOUSNESS_LOG.item());
+            generator.blockStateCollector.accept(VariantsBlockStateSupplier.create(CONSCIOUSNESS_LOG.block()).coordinate(blockStateVariantMap));
+        });
     }
 
     static class Entry<T extends Block> extends BlockBuilder<T>

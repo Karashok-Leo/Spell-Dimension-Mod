@@ -13,6 +13,7 @@ import karashokleo.spell_dimension.content.misc.ISpawnerExtension;
 import karashokleo.spell_dimension.content.spell.LightSpell;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.util.SchoolUtil;
+import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
@@ -20,6 +21,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.entity.MobSpawnerBlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.damage.DamageTypes;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.TypedActionResult;
@@ -37,15 +40,25 @@ public class AllEvents
         TrinketEvent.init();
         LightSpell.init();
 
-        // 刷怪笼掉落
+        ServerEntityCombatEvents.AFTER_KILLED_OTHER_ENTITY.register((world, entity, killedEntity) ->
+        {
+            if (entity instanceof PlayerEntity player)
+            {
+                PlayerInventory inventory = player.getInventory();
+                AllItems.SPELL_CONTAINER.addKillCredit(inventory, killedEntity);
+            }
+        });
+
         PlayerBlockBreakEvents.AFTER.register((world, player, pos, state, blockEntity) ->
         {
-            if (blockEntity instanceof MobSpawnerBlockEntity spawner)
-            {
-                ItemStack stack = AllItems.SPAWNER_SOUL.getStack((ISpawnerExtension) spawner.getLogic());
-                if (stack.isEmpty()) return;
-                Block.dropStack(world, pos, stack);
-            }
+            // 刷怪笼掉落
+            if (!(blockEntity instanceof MobSpawnerBlockEntity spawner)) return;
+            ItemStack spawnerSoulStack = AllItems.SPAWNER_SOUL.getStack((ISpawnerExtension) spawner.getLogic());
+            if (spawnerSoulStack.isEmpty()) return;
+            Block.dropStack(world, pos, spawnerSoulStack);
+
+            // 刷怪笼破坏计数
+            AllItems.SPELL_CONTAINER.addBreakSpawnerCredit(player.getInventory());
         });
 
         // 调试棒伤害

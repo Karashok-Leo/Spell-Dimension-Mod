@@ -4,25 +4,27 @@
     "trunk_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "minecraft:oak_log",
+        "Name": "spell-dimension:consciousness_log",
         "Properties": {
-          "axis": "y"
+          "turning": false,
+          "level": 1
         }
       }
     },
     "branch_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "minecraft:oak_log",
+        "Name": "spell-dimension:consciousness_log",
         "Properties": {
-          "axis": "y"
+          "turning": false,
+          "level": 1
         }
       }
     },
     "leaves_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "minecraft:oak_leaves",
+        "Name": "minecraft:stone",
         "Properties": {
           "distance": "7",
           "persistent": "false",

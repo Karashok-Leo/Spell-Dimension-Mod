@@ -11,6 +11,8 @@ import java.util.List;
 
 public class LocatePortalEntity extends Entity
 {
+    public static final String LIFESPAN_KEY = "Lifespan";
+    public static final String DESTINATION_KEY = "Destination";
     public static final int SPAWN_DELAY = 50;
     public static final int PORTAL_COOLDOWN = 100;
     protected int lifespan;
@@ -77,14 +79,14 @@ public class LocatePortalEntity extends Entity
     @Override
     protected void readCustomDataFromNbt(NbtCompound nbt)
     {
-        this.lifespan = nbt.getInt("lifespan");
-        this.destination = BlockPos.fromLong(nbt.getLong("destination"));
+        this.lifespan = nbt.getInt(LIFESPAN_KEY);
+        this.destination = BlockPos.fromLong(nbt.getLong(DESTINATION_KEY));
     }
 
     @Override
     protected void writeCustomDataToNbt(NbtCompound nbt)
     {
-        nbt.putInt("lifespan", this.lifespan);
-        nbt.putLong("destination", this.destination.asLong());
+        nbt.putInt(LIFESPAN_KEY, this.lifespan);
+        nbt.putLong(DESTINATION_KEY, this.destination.asLong());
     }
 }

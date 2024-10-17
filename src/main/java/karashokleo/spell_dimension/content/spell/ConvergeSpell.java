@@ -27,10 +27,10 @@ public class ConvergeSpell
             null,
             0,
             0,
-            0,
             1,
             0.25F,
             0.5F,
+            0,
             0,
             0,
             false
@@ -49,18 +49,23 @@ public class ConvergeSpell
                 owner.isRemoved() ||
                 (!(owner instanceof PlayerEntity player)))
             return;
+        convergeImpact(player, projectile, projectile.getPos());
+    }
+
+    public static void convergeImpact(PlayerEntity player, Entity tracked, Vec3d pos)
+    {
         SpellPower.Result power = SpellPower.getSpellPower(SpellSchools.ARCANE, player);
         int amplifier = Math.min((int) (power.baseValue()) / 24 + 1, 3);
-        ParticleHelper.sendBatches(projectile, PARTICLE);
-        SoundHelper.playSoundEvent(projectile.getWorld(), projectile, SoundEvents.ENTITY_GENERIC_EXPLODE);
+        ParticleHelper.sendBatches(tracked, PARTICLE);
+        SoundHelper.playSoundEvent(tracked.getWorld(), tracked, SoundEvents.ENTITY_GENERIC_EXPLODE);
         float damage = (float) DamageUtil.calculateDamage(player, SpellSchools.ARCANE, SpellConfig.CONVERGE, amplifier);
         ImpactUtil.applyAreaImpact(
-                projectile,
+                tracked,
                 3 + amplifier * 0.8F,
                 target -> !ImpactUtil.isAlly(player, target),
                 target ->
                 {
-                    Vec3d movement = projectile.getPos().subtract(target.getPos()).multiply(0.12 + amplifier * 0.03);
+                    Vec3d movement = pos.subtract(target.getPos()).multiply(0.12 + amplifier * 0.03);
                     target.setVelocity(movement);
                     DamageUtil.spellDamage(target, SpellSchools.ARCANE, player, damage, false);
                 }

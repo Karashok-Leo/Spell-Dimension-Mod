@@ -79,6 +79,8 @@ public class AllGroups
                             entries.add(AllItems.ACCURSED_BLACKSTONE);
                             entries.add(AllItems.SUN_MOON_STAR);
                             entries.add(AllBlocks.SPELL_INFUSION_PEDESTAL.item());
+                            entries.add(AllBlocks.CONSCIOUSNESS_LOG.item());
+                            entries.add(AllBlocks.CONSCIOUSNESS_CORE.item());
                             entries.add(AllItems.HEART_STEEL);
                             entries.add(AllItems.REJUVENATING_BLOSSOM);
                         })

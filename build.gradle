@@ -101,8 +101,10 @@ dependencies {
     modImplementation("karashokleo.l2hostility:L2Hostility:${project.l2hostility_version}")
     modImplementation("karashokleo.enchantment_infusion:enchantment_infusion:${project.enchantment_infusion_version}")
     modImplementation("io.github.fabricators_of_create.Porting-Lib:entity:${project.port_lib_version}")
+//    modImplementation("maven.modrinth:lootr:${project.lootr_version}-fabric")
 
 //	modImplementation "curse.maven:puffish-skills-835091:${project.puffer_fish_skills_version}"
+//	modImplementation "curse.maven:lootr-fabric-615106:${project.lootr_version}"
 
     // Book Datagen
     modImplementation("com.klikli_dev:modonomicon-${project.minecraft_version}-fabric:${project.modonomicon_version}")

@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "level=1": {
+      "model": "spell-dimension:block/consciousness_log_1"
+    },
+    "level=2": {
+      "model": "spell-dimension:block/consciousness_log_2"
+    },
+    "level=3": {
+      "model": "spell-dimension:block/consciousness_log_3"
+    },
+    "level=4": {
+      "model": "spell-dimension:block/consciousness_log_4"
+    },
+    "level=5": {
+      "model": "spell-dimension:block/consciousness_log_5"
+    },
+    "level=6": {
+      "model": "spell-dimension:block/consciousness_log_6"
+    }
+  }
+}

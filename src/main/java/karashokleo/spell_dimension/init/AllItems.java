@@ -1,6 +1,7 @@
 package karashokleo.spell_dimension.init;
 
 import com.google.common.collect.ArrayListMultimap;
+import dev.emi.trinkets.api.TrinketItem;
 import karashokleo.l2hostility.init.LHTags;
 import karashokleo.leobrary.datagen.builder.ItemBuilder;
 import karashokleo.spell_dimension.SpellDimension;
@@ -44,6 +45,8 @@ public class AllItems
     public static SpawnerSoulItem SPAWNER_SOUL;
     public static HeartSpellSteelItem HEART_STEEL;
     public static RejuvenatingBlossomItem REJUVENATING_BLOSSOM;
+    public static TrinketItem ARMOR_OF_CONVERGENCE;
+    public static SpellContainerItem SPELL_CONTAINER;
 
     public static void register()
     {
@@ -118,6 +121,27 @@ public class AllItems
                 .addEN()
                 .addZH("复苏绽放")
                 .addTag(LHTags.CHARM_SLOT)
+                .addModel()
+                .register();
+
+        ARMOR_OF_CONVERGENCE = Entry.of(
+                        "armor_of_convergence",
+                        new TrinketItem(
+                                new FabricItemSettings()
+                                        .fireproof()
+                                        .maxCount(1)
+                                        .rarity(Rarity.EPIC)
+                        )
+                )
+                .addEN()
+                .addZH("汇聚甲胄")
+                .addTag(AllTags.BACK, AllTags.CAPE)
+                .addModel()
+                .register();
+
+        SPELL_CONTAINER = Entry.of("spell_container", new SpellContainerItem())
+                .addEN()
+                .addZH("法术容器")
                 .addModel()
                 .register();
     }
