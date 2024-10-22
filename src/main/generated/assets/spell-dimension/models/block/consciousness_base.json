@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "spell-dimension:block/consciousness_log_2"
+    "all": "spell-dimension:block/consciousness_base"
   }
 }

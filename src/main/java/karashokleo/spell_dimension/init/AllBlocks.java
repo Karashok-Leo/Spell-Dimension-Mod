@@ -1,7 +1,5 @@
 package karashokleo.spell_dimension.init;
 
-import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
-import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import karashokleo.leobrary.datagen.builder.BlockBuilder;
 import karashokleo.leobrary.datagen.builder.BlockSet;
 import karashokleo.spell_dimension.SpellDimension;
@@ -18,7 +16,6 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.data.client.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.Identifier;
 
 public class AllBlocks
@@ -28,7 +25,7 @@ public class AllBlocks
 
     public static SpellLightBlock SPELL_LIGHT;
 
-    public static BlockSet CONSCIOUSNESS_LOG;
+    public static BlockSet CONSCIOUSNESS_BASE;
     public static BlockSet CONSCIOUSNESS_CORE;
     public static BlockEntityType<ConsciousnessCoreTile> CONSCIOUSNESS_CORE_TILE;
 
@@ -56,9 +53,9 @@ public class AllBlocks
                 .addEN()
                 .addZH("魔力之光")
                 .register();
-        CONSCIOUSNESS_LOG = Entry.of("consciousness_log", new ConsciousnessLogBlock())
+        CONSCIOUSNESS_BASE = Entry.of("consciousness_base", new ConsciousnessBaseBlock())
                 .addEN()
-                .addZH("识之木")
+                .addZH("识之基座")
                 .addSimpleItem()
                 .registerWithItem();
         CONSCIOUSNESS_CORE = Entry.of("consciousness_core", new ConsciousnessCoreBlock())
@@ -98,16 +95,9 @@ public class AllBlocks
         SpellDimension.MODELS.addBlock(generator -> generator.registerSimpleState(CONSCIOUSNESS));
         SpellDimension.MODELS.addBlock(generator ->
         {
-            IntProperty levelProperty = ConsciousnessLogBlock.LEVEL;
-            Int2ObjectMap<Identifier> map = new Int2ObjectOpenHashMap<>();
-            BlockStateVariantMap blockStateVariantMap = BlockStateVariantMap
-                    .create(levelProperty)
-                    .register(level -> BlockStateVariant.create()
-                            .put(VariantSettings.MODEL, map.computeIfAbsent(
-                                    level,
-                                    i -> generator.createSubModel(CONSCIOUSNESS_LOG.block(), "_" + i, Models.CUBE_ALL, TextureMap::all))));
-            generator.registerItemModel(CONSCIOUSNESS_LOG.item());
-            generator.blockStateCollector.accept(VariantsBlockStateSupplier.create(CONSCIOUSNESS_LOG.block()).coordinate(blockStateVariantMap));
+            Identifier base = TexturedModel.CUBE_ALL.upload(CONSCIOUSNESS_BASE.block(), generator.modelCollector);
+            Identifier base_turned = generator.createSubModel(CONSCIOUSNESS_BASE.block(), "_turned", Models.CUBE_ALL, TextureMap::all);
+            generator.blockStateCollector.accept(VariantsBlockStateSupplier.create(CONSCIOUSNESS_BASE.block()).coordinate(BlockStateModelGenerator.createBooleanModelMap(ConsciousnessBaseBlock.TURNED, base_turned, base)));
         });
     }
 

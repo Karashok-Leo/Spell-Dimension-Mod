@@ -22,7 +22,7 @@ public class REICompat implements REIClientPlugin
         registry.add(new REISummonCategory());
         registry.add(new REIInfusionCategory());
 
-        registry.addWorkstations(LOCATE, REILocateCategory.LODESTONE);
+        registry.addWorkstations(LOCATE, REILocateCategory.LOCATE_TARGET);
         registry.addWorkstations(SUMMON, REISummonCategory.SPAWNER);
         registry.addWorkstations(SPELL_INFUSION, REIInfusionCategory.PEDESTAL);
     }

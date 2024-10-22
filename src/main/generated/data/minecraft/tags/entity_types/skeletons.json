@@ -1,0 +1,29 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "skeletalremains:overgrownskeleton",
+      "required": false
+    },
+    {
+      "id": "skeletalremains:sharpshooterskeleton",
+      "required": false
+    },
+    {
+      "id": "skeletalremains:sunkenskeleton",
+      "required": false
+    },
+    {
+      "id": "skeletalremains:charredskeleton",
+      "required": false
+    },
+    {
+      "id": "skeletalremains:fallenskeleton",
+      "required": false
+    },
+    {
+      "id": "skeletalremains:swampedskeleton",
+      "required": false
+    }
+  ]
+}

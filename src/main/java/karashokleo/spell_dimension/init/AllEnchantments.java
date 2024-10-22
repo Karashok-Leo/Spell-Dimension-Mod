@@ -36,7 +36,7 @@ public class AllEnchantments
                 .register();
         STRESS_RESPONSE = new Entry<>("stress_response", new StressResponseEnchantment())
                 .addEN()
-                .addENDesc("If the cooldown progress (percentage) of a spell when injured is less than the enchantment level × " + StressResponseEnchantment.MULTIPLIER + ", the spell will immediately cool down.")
+                .addENDesc("If the cooldown progress (percentage) of a spell when injured is less than the enchantment levelFactor × " + StressResponseEnchantment.MULTIPLIER + ", the spell will immediately cool down.")
                 .addZH("应激急速")
                 .addZHDesc("受伤时如果有法术冷却进度（百分比）小于 魔咒等级 × " + StressResponseEnchantment.MULTIPLIER + ", 则该法术立即冷却完毕。")
                 .register();

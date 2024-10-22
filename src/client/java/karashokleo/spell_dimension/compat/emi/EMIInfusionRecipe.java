@@ -23,6 +23,8 @@ public record EMIInfusionRecipe(
         int time
 ) implements EmiRecipe
 {
+    public static final EmiStack CATALYSTS = EmiStack.of(AllBlocks.SPELL_INFUSION_PEDESTAL.item());
+
     public EMIInfusionRecipe(InfusionRecipes.RecipeEntry entry)
     {
         this(
@@ -43,7 +45,7 @@ public record EMIInfusionRecipe(
     @Override
     public List<EmiIngredient> getCatalysts()
     {
-        return List.of(EmiStack.of(AllBlocks.SPELL_INFUSION_PEDESTAL.item()));
+        return List.of(CATALYSTS);
     }
 
     @Override

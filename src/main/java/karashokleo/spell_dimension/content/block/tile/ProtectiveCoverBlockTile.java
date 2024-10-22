@@ -1,11 +1,16 @@
 package karashokleo.spell_dimension.content.block.tile;
 
 import karashokleo.spell_dimension.init.AllBlocks;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.listener.ClientPlayPacketListener;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 public class ProtectiveCoverBlockTile extends BlockEntity
 {
@@ -15,6 +20,27 @@ public class ProtectiveCoverBlockTile extends BlockEntity
     public ProtectiveCoverBlockTile(BlockPos pos, BlockState state)
     {
         super(AllBlocks.PROTECTIVE_COVER_TILE, pos, state);
+    }
+
+    public void setLife(int life)
+    {
+        this.life = life;
+        this.markDirty();
+        if (world == null) return;
+        this.world.updateListeners(pos, getCachedState(), getCachedState(), Block.NOTIFY_ALL);
+    }
+
+    @Nullable
+    @Override
+    public Packet<ClientPlayPacketListener> toUpdatePacket()
+    {
+        return BlockEntityUpdateS2CPacket.create(this);
+    }
+
+    @Override
+    public NbtCompound toInitialChunkDataNbt()
+    {
+        return this.createNbt();
     }
 
     @Override

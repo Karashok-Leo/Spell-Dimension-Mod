@@ -7,9 +7,9 @@ import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
 import karashokleo.spell_dimension.config.recipe.LocateSpellConfig;
+import karashokleo.spell_dimension.init.AllTags;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.item.Item;
-import net.minecraft.item.Items;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -19,7 +19,7 @@ import java.util.List;
 
 public record EMILocateRecipe(EmiStack input, Text text, Text id) implements EmiRecipe
 {
-    public static final EmiStack CATALYSTS = EmiStack.of(Items.LODESTONE);
+    public static final EmiIngredient CATALYSTS = EmiIngredient.of(AllTags.LOCATE_TARGET);
 
     public EMILocateRecipe(Item item, RegistryKey<?> registryKey)
     {

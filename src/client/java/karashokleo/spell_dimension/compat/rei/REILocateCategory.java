@@ -2,23 +2,23 @@ package karashokleo.spell_dimension.compat.rei;
 
 import com.google.common.collect.Lists;
 import karashokleo.spell_dimension.data.SpellTexts;
+import karashokleo.spell_dimension.init.AllTags;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.gui.Renderer;
 import me.shedaniel.rei.api.client.gui.widgets.*;
 import me.shedaniel.rei.api.client.registry.display.DisplayCategory;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
+import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.entry.EntryStack;
-import me.shedaniel.rei.api.common.util.EntryStacks;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import me.shedaniel.rei.api.common.util.EntryIngredients;
 import net.minecraft.text.Text;
 
 import java.util.List;
 
 public class REILocateCategory implements DisplayCategory<REILocateDisplay>
 {
-    public static final EntryStack<ItemStack> LODESTONE = EntryStacks.of(Items.LODESTONE);
+    public static final EntryIngredient LOCATE_TARGET = EntryIngredients.ofItemTag(AllTags.LOCATE_TARGET);
 
     private static final int DISPLAY_OFFSET_X = 12;
     private static final int DISPLAY_OFFSET_Y = -18;
@@ -33,7 +33,7 @@ public class REILocateCategory implements DisplayCategory<REILocateDisplay>
         widgets.add(Widgets.createRecipeBase(bounds));
         widgets.add(Widgets.createArrow(new Point(startPoint.x + DISPLAY_OFFSET_X + ARROW_OFFSET, startPoint.y + DISPLAY_OFFSET_Y)));
         Slot input = Widgets.createSlot(new Point(startPoint.x + DISPLAY_OFFSET_X - SLOT_OFFSET - 8, startPoint.y + DISPLAY_OFFSET_Y)).entries(display.input()).markInput();
-        Slot lodestone = Widgets.createSlot(new Point(startPoint.x + DISPLAY_OFFSET_X - SLOT_OFFSET + 8 + 6, startPoint.y + DISPLAY_OFFSET_Y)).entries(List.of(LODESTONE)).noInteractable().disableBackground();
+        Slot lodestone = Widgets.createSlot(new Point(startPoint.x + DISPLAY_OFFSET_X - SLOT_OFFSET + 8 + 6, startPoint.y + DISPLAY_OFFSET_Y)).entries(LOCATE_TARGET).noInteractable().disableBackground();
         Label destination = Widgets.createLabel(new Point(startPoint.x, startPoint.y + 6), display.text()).shadow();
         widgets.add(input);
         widgets.add(lodestone);
@@ -74,6 +74,7 @@ public class REILocateCategory implements DisplayCategory<REILocateDisplay>
     @Override
     public Renderer getIcon()
     {
-        return LODESTONE;
+        if (LOCATE_TARGET.isEmpty()) return EntryStack.empty();
+        return LOCATE_TARGET.get(0);
     }
 }

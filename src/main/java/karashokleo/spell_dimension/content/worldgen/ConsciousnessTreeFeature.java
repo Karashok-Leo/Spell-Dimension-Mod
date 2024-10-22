@@ -436,7 +436,6 @@ public class ConsciousnessTreeFeature extends TFTreeFeature<TFTreeFeatureConfig>
 
         for (int i = 0; i <= numMedBranches; i++)
         {
-
             double outVar = (random.nextDouble() * 0.3) + 0.3;
             double angleVar = random.nextDouble() * 0.225 * ((i & 1) == 0 ? 1.0 : -1.0);
             BlockPos bsrc = FeatureLogic.translate(src, length * outVar, angle, tilt);

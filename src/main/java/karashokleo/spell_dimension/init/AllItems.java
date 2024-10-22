@@ -47,6 +47,8 @@ public class AllItems
     public static RejuvenatingBlossomItem REJUVENATING_BLOSSOM;
     public static TrinketItem ARMOR_OF_CONVERGENCE;
     public static SpellContainerItem SPELL_CONTAINER;
+    public static MagicMirrorItem MAGIC_MIRROR;
+    public static MagicMirrorItem BROKEN_MAGIC_MIRROR;
 
     public static void register()
     {
@@ -142,6 +144,17 @@ public class AllItems
         SPELL_CONTAINER = Entry.of("spell_container", new SpellContainerItem())
                 .addEN()
                 .addZH("法术容器")
+                .addModel()
+                .register();
+
+        MAGIC_MIRROR = Entry.of("magic_mirror", new MagicMirrorItem(false))
+                .addEN()
+                .addZH("魔镜")
+                .addModel()
+                .register();
+        BROKEN_MAGIC_MIRROR = Entry.of("broken_magic_mirror", new MagicMirrorItem(true))
+                .addEN()
+                .addZH("破碎魔镜")
                 .addModel()
                 .register();
     }

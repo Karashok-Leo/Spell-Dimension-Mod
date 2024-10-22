@@ -22,12 +22,16 @@ public class RandomUtil
 
     public static <T> T randomFromList(Random random, List<T> list)
     {
+        if (list.isEmpty())
+            throw new IllegalArgumentException("The list must not be empty.");
         int randomIndex = random.nextInt(list.size());
         return list.get(randomIndex);
     }
 
     public static <T> T randomFromSet(Random random, Set<T> set)
     {
+        if (set.isEmpty())
+            throw new IllegalArgumentException("The set must not be empty.");
         return randomFromList(random, new ArrayList<>(set));
     }
 

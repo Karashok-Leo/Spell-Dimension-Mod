@@ -47,6 +47,8 @@ public record BuffComponentImpl(
     @Override
     public <B extends Buff> void apply(BuffType<B> type, B buff, @Nullable LivingEntity source)
     {
+        BuffEntry<?> remove = this.buffMap.remove(type);
+        if (remove != null) remove.buff.onRemoved(this.owner, remove.source);
         this.buffMap.put(type, new BuffEntry<>(type, buff, source));
         buff.onApplied(this.owner, source);
     }

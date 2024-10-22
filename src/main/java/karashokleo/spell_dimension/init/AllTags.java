@@ -1,13 +1,16 @@
 package karashokleo.spell_dimension.init;
 
+import fuzs.mutantmonsters.init.ModRegistry;
 import karashokleo.leobrary.datagen.generator.TagGenerator;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.util.TagUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.registry.tag.EntityTypeTags;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
@@ -59,6 +62,12 @@ public class AllTags
     public static final TagKey<Item> BACK = TagUtil.itemTag(new Identifier("trinkets", "chest/back"));
     public static final TagKey<Item> CAPE = TagUtil.itemTag(new Identifier("trinkets", "chest/cape"));
 
+    public static final TagKey<EntityType<?>> ZOMBIES = TagUtil.entityTypeTag(new Identifier("zombies"));
+    public static final TagKey<EntityType<?>> SKELETONS = EntityTypeTags.SKELETONS;
+    public static final TagKey<EntityType<?>> MINI_BOSS = TagUtil.entityTypeTag("mini_boss");
+    public static final TagKey<EntityType<?>> RAIDERS_VANILLA = TagUtil.entityTypeTag("raiders_vanilla");
+    public static final TagKey<EntityType<?>> RAIDERS_INVADE = TagUtil.entityTypeTag("raiders_invade");
+
     public static void register()
     {
         TagGenerator<Item> generator = SpellDimension.ITEM_TAGS;
@@ -99,6 +108,49 @@ public class AllTags
         SpellDimension.FLUID_TAGS.getOrCreateContainer(FluidTags.WATER).add(
                 AllBlocks.STILL_CONSCIOUSNESS,
                 AllBlocks.FLOWING_CONSCIOUSNESS
+        );
+
+        SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(ZOMBIES).add(
+                EntityType.ZOMBIE,
+                EntityType.ZOMBIE_VILLAGER,
+                EntityType.DROWNED,
+                EntityType.HUSK
+        );
+        SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(SKELETONS).addOptional(
+                new Identifier("skeletalremains:overgrownskeleton"),
+                new Identifier("skeletalremains:sharpshooterskeleton"),
+                new Identifier("skeletalremains:sunkenskeleton"),
+                new Identifier("skeletalremains:charredskeleton"),
+                new Identifier("skeletalremains:fallenskeleton"),
+                new Identifier("skeletalremains:swampedskeleton")
+        );
+        SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(MINI_BOSS).add(
+                EntityType.EVOKER,
+                EntityType.RAVAGER,
+                ModRegistry.MUTANT_ZOMBIE_ENTITY_TYPE.get(),
+                ModRegistry.MUTANT_SKELETON_ENTITY_TYPE.get(),
+                ModRegistry.MUTANT_CREEPER_ENTITY_TYPE.get(),
+                ModRegistry.MUTANT_ENDERMAN_ENTITY_TYPE.get()
+        );
+        SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(RAIDERS_VANILLA).add(
+                EntityType.PILLAGER,
+                EntityType.VINDICATOR,
+                EntityType.RAVAGER,
+                EntityType.WITCH,
+                EntityType.EVOKER,
+                EntityType.ILLUSIONER
+        );
+        SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(RAIDERS_INVADE).add(
+                fuzs.illagerinvasion.init.ModRegistry.BASHER_ENTITY_TYPE.get(),
+                fuzs.illagerinvasion.init.ModRegistry.PROVOKER_ENTITY_TYPE.get(),
+                fuzs.illagerinvasion.init.ModRegistry.NECROMANCER_ENTITY_TYPE.get(),
+                fuzs.illagerinvasion.init.ModRegistry.SORCERER_ENTITY_TYPE.get(),
+                fuzs.illagerinvasion.init.ModRegistry.ARCHIVIST_ENTITY_TYPE.get(),
+                fuzs.illagerinvasion.init.ModRegistry.MARAUDER_ENTITY_TYPE.get(),
+                fuzs.illagerinvasion.init.ModRegistry.INQUISITOR_ENTITY_TYPE.get(),
+                fuzs.illagerinvasion.init.ModRegistry.ALCHEMIST_ENTITY_TYPE.get(),
+                fuzs.illagerinvasion.init.ModRegistry.FIRECALLER_ENTITY_TYPE.get(),
+                fuzs.illagerinvasion.init.ModRegistry.SURRENDERED_ENTITY_TYPE.get()
         );
     }
 }

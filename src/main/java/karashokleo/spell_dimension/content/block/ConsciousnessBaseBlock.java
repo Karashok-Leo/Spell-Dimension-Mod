@@ -7,29 +7,25 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.MapColor;
 import net.minecraft.block.enums.Instrument;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.IntProperty;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-@SuppressWarnings("deprecation")
-public class ConsciousnessLogBlock extends Block
-{
-    public static final int MAX_LEVEL = 6;
-    public static final BooleanProperty TURNING = BooleanProperty.of("turning");
-    public static final IntProperty LEVEL = IntProperty.of("level", 1, MAX_LEVEL);
+import java.util.HashSet;
+import java.util.Set;
 
-    public ConsciousnessLogBlock()
+@SuppressWarnings("deprecation")
+public class ConsciousnessBaseBlock extends Block
+{
+    public static final BooleanProperty TURNING = BooleanProperty.of("turning");
+    public static final BooleanProperty TURNED = BooleanProperty.of("turned");
+
+    public ConsciousnessBaseBlock()
     {
         super(
                 FabricBlockSettings.create()
@@ -43,7 +39,7 @@ public class ConsciousnessLogBlock extends Block
         this.setDefaultState(
                 this.stateManager.getDefaultState()
                         .with(TURNING, false)
-                        .with(LEVEL, 1)
+                        .with(TURNED, false)
         );
     }
 
@@ -52,7 +48,7 @@ public class ConsciousnessLogBlock extends Block
     {
         super.appendProperties(builder);
         builder.add(TURNING);
-        builder.add(LEVEL);
+        builder.add(TURNED);
     }
 
     @Override
@@ -61,21 +57,13 @@ public class ConsciousnessLogBlock extends Block
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit)
-    {
-        this.tryTurnSelf(state, world, pos);
-        return super.onUse(state, world, pos, player, hand, hit);
-    }
-
-    @Override
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random)
     {
         if (state.get(TURNING))
         {
             world.setBlockState(pos, state.with(TURNING, false));
-            int level = state.get(LEVEL);
-            if (level < MAX_LEVEL)
-                world.setBlockState(pos, world.getBlockState(pos).with(LEVEL, level + 1));
+            if (!state.get(TURNED))
+                world.setBlockState(pos, world.getBlockState(pos).with(TURNED, true));
 
             // TODO: play sound
             // TODO: spawn particles
@@ -84,9 +72,9 @@ public class ConsciousnessLogBlock extends Block
         }
     }
 
-    private void tryTurnSelf(BlockState state, World world, BlockPos pos)
+    public void tryTurnSelf(BlockState state, World world, BlockPos pos)
     {
-        if (!state.get(TURNING) && state.get(LEVEL) < MAX_LEVEL)
+        if (!state.get(TURNING) && !state.get(TURNED))
             world.setBlockState(pos, state.with(TURNING, true));
         world.scheduleBlockTick(pos, state.getBlock(), 5);
     }
@@ -98,8 +86,30 @@ public class ConsciousnessLogBlock extends Block
             BlockPos otherPos = pos.offset(direction);
             BlockState otherState = world.getBlockState(otherPos);
             if (otherState.isOf(this) &&
-                state.get(LEVEL) > otherState.get(LEVEL))
+                state.get(TURNED))
                 this.tryTurnSelf(otherState, world, otherPos);
         }
+//        for (BlockPos otherPos : getSurroundingPoses(pos))
+//        {
+//            BlockState otherState = world.getBlockState(otherPos);
+//            if (otherState.isOf(this) &&
+//                state.get(TURNED))
+//                this.tryTurnSelf(otherState, world, otherPos);
+//        }
+    }
+
+    private static Set<BlockPos> getSurroundingPoses(BlockPos pos)
+    {
+        Set<BlockPos> poses = new HashSet<>();
+        int radius = 1;
+        for (int x = -radius; x <= radius; x++)
+            for (int y = -radius; y <= radius; y++)
+                for (int z = -radius; z <= radius; z++)
+                {
+                    if (x == 0 && y == 0 && z == 0)
+                        continue;
+                    poses.add(pos.add(x, y, z));
+                }
+        return poses;
     }
 }

@@ -79,10 +79,15 @@ public class AllGroups
                             entries.add(AllItems.ACCURSED_BLACKSTONE);
                             entries.add(AllItems.SUN_MOON_STAR);
                             entries.add(AllBlocks.SPELL_INFUSION_PEDESTAL.item());
-                            entries.add(AllBlocks.CONSCIOUSNESS_LOG.item());
+                            entries.add(AllBlocks.CONSCIOUSNESS_BASE.item());
                             entries.add(AllBlocks.CONSCIOUSNESS_CORE.item());
+                            entries.add(AllBlocks.PROTECTIVE_COVER.item());
                             entries.add(AllItems.HEART_STEEL);
                             entries.add(AllItems.REJUVENATING_BLOSSOM);
+                            entries.add(AllItems.ARMOR_OF_CONVERGENCE);
+                            entries.add(AllItems.SPELL_CONTAINER);
+                            entries.add(AllItems.MAGIC_MIRROR);
+                            entries.add(AllItems.BROKEN_MAGIC_MIRROR);
                         })
                         .build()
         );

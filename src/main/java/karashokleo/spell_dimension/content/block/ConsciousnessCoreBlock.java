@@ -1,5 +1,6 @@
 package karashokleo.spell_dimension.content.block;
 
+import karashokleo.l2hostility.content.component.player.PlayerDifficulty;
 import karashokleo.spell_dimension.content.block.tile.ConsciousnessCoreTile;
 import karashokleo.spell_dimension.init.AllBlocks;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -43,15 +44,15 @@ public class ConsciousnessCoreBlock extends BlockWithEntity
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit)
     {
         if (world.isClient()) return ActionResult.SUCCESS;
-        if (world.getBlockEntity(pos) instanceof ConsciousnessCoreTile tile)
-        {
-            tile.activate(pos);
-        }
+        if (world.getBlockEntity(pos) instanceof ConsciousnessCoreTile tile &&
+            tile.testStack(player.getStackInHand(hand)))
+            tile.activate(pos, PlayerDifficulty.get(player).getLevel().getLevel());
         return ActionResult.CONSUME;
     }
 
+    @Nullable
     @Override
-    public @Nullable BlockEntity createBlockEntity(BlockPos pos, BlockState state)
+    public BlockEntity createBlockEntity(BlockPos pos, BlockState state)
     {
         return new ConsciousnessCoreTile(pos, state);
     }

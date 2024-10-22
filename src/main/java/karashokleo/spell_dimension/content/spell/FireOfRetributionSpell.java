@@ -15,6 +15,7 @@ import net.spell_power.api.SpellPower;
 import net.spell_power.api.SpellSchool;
 
 import java.util.List;
+import java.util.Set;
 
 public class FireOfRetributionSpell
 {
@@ -30,7 +31,9 @@ public class FireOfRetributionSpell
             var opt = MobDifficulty.get(target);
             if (opt.isEmpty()) return;
             var cap = opt.get();
-            MobTrait trait = RandomUtil.randomFromSet(target.getRandom(), cap.traits.keySet());
+            Set<MobTrait> traitSet = cap.traits.keySet();
+            if (traitSet.isEmpty()) return;
+            MobTrait trait = RandomUtil.randomFromSet(target.getRandom(), traitSet);
             Integer ans = cap.traits.compute(trait, TraitAdderWand::decrease);
             int val = ans == null ? 0 : ans;
             trait.initialize(target, val);

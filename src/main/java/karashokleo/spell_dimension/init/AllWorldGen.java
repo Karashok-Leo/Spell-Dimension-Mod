@@ -1,6 +1,7 @@
 package karashokleo.spell_dimension.init;
 
 import karashokleo.spell_dimension.SpellDimension;
+import karashokleo.spell_dimension.content.worldgen.ConsciousnessPivotFeature;
 import karashokleo.spell_dimension.content.worldgen.ConsciousnessTreeFeature;
 import karashokleo.spell_dimension.content.worldgen.TFTreeFeatureConfig;
 import net.minecraft.registry.Registries;
@@ -20,10 +21,12 @@ public class AllWorldGen
     public static final RegistryKey<Biome> OC_BIOME = RegistryKey.of(RegistryKeys.BIOME, OC_ID);
 
     public static final ConsciousnessTreeFeature CONSCIOUSNESS_TREE = new ConsciousnessTreeFeature(TFTreeFeatureConfig.CODEC);
+    public static final ConsciousnessPivotFeature CONSCIOUSNESS_PIVOT = new ConsciousnessPivotFeature();
 
     public static void register()
     {
         Registry.register(Registries.FEATURE, SpellDimension.modLoc("tree_of_consciousness"), CONSCIOUSNESS_TREE);
+        Registry.register(Registries.FEATURE, SpellDimension.modLoc("consciousness_pivot"), CONSCIOUSNESS_PIVOT);
 
         String biome_key = OC_BIOME.getValue().toTranslationKey("biome");
         SpellDimension.EN_TEXTS.addText(biome_key, "Ocean of Consciousness");

@@ -29,6 +29,7 @@ import java.util.Optional;
 public class LocateSpell
 {
     public static final Identifier SPELL_ID = SpellDimension.modLoc("locate");
+    public static final double BREAK_CHANCE = 0.3;
 
     public static void handle(SpellProjectile projectile, Identifier spellId, BlockHitResult hitResult)
     {
@@ -74,7 +75,8 @@ public class LocateSpell
             if (!(living instanceof PlayerEntity player &&
                   player.getAbilities().creativeMode))
                 offHandStack.decrement(1);
-            world.breakBlock(blockPos, false);
+            if (living.getRandom().nextFloat() < BREAK_CHANCE)
+                world.breakBlock(blockPos, false);
         }
     }
 

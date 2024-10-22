@@ -4,7 +4,7 @@
     "trunk_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "spell-dimension:consciousness_log",
+        "Name": "spell-dimension:consciousness_base",
         "Properties": {
           "turning": false,
           "level": 1
@@ -14,7 +14,7 @@
     "branch_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "spell-dimension:consciousness_log",
+        "Name": "spell-dimension:consciousness_base",
         "Properties": {
           "turning": false,
           "level": 1

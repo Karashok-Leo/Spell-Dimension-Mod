@@ -86,7 +86,7 @@ public enum SpellTexts
     FIRE_OF_RETRIBUTION(
             "Fire of Retribution",
             "业火",
-            "Burn a random trait of the target every second. The higher the level of the trait consumed, the higher the damage caused.",
+            "Burn a random trait of the target every second. The higher the levelFactor of the trait consumed, the higher the damage caused.",
             "每秒灼烧目标的随机一个词条，该词条的等级消耗越高，造成的伤害越高."
     ),
     AURA(
@@ -146,7 +146,7 @@ public enum SpellTexts
     EXORCISM(
             "Exorcism",
             "驱邪",
-            "Reduce the target's level to half of the original, and reacquire the traits, while the caster takes damage equal to the target's original level.",
+            "Reduce the target's levelFactor to half of the original, and reacquire the traits, while the caster takes damage equal to the target's original levelFactor.",
             "使目标等级降至原来的一半，并且重新获取词条，同时施法者受到相当于目标原有等级的伤害."
     ),
     LIGHTMOON(
@@ -200,7 +200,7 @@ public enum SpellTexts
     LICHBANE(
             "Lich Bane",
             "妖斩",
-            "Splash multiple times, inflicting {damage} damage, and additional damage when the target's maximum blood level is below 40.",
+            "Splash multiple times, inflicting {damage} damage, and additional damage when the target's maximum blood levelFactor is below 40.",
             "连续劈出多道剑斩, 造成{damage}点伤害, 当目标最大血量低于40时造成额外伤害."
     ),
     DAWNBREAKER(

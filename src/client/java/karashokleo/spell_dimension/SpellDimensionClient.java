@@ -13,6 +13,7 @@ import karashokleo.spell_dimension.content.item.QuestScrollItem;
 import karashokleo.spell_dimension.content.item.essence.base.ColorProvider;
 import karashokleo.spell_dimension.content.item.logic.EnchantedModifier;
 import karashokleo.spell_dimension.content.misc.INoClip;
+import karashokleo.spell_dimension.content.network.S2CFloatingItem;
 import karashokleo.spell_dimension.content.network.S2CSpellDash;
 import karashokleo.spell_dimension.content.network.S2CTitle;
 import karashokleo.spell_dimension.data.SDTexts;
@@ -22,6 +23,7 @@ import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllStatusEffects;
 import karashokleo.spell_dimension.mixin.RollManagerInvoker;
 import karashokleo.spell_dimension.render.*;
+import karashokleo.spell_dimension.screen.ConsciousCoreOverlay;
 import karashokleo.spell_dimension.screen.QuestOverlay;
 import karashokleo.spell_dimension.screen.SpellPowerTab;
 import net.combatroll.internals.RollingEntity;
@@ -39,6 +41,7 @@ import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
+import net.minecraft.client.render.entity.EmptyEntityRenderer;
 import net.minecraft.item.Item;
 import net.minecraft.text.TranslatableTextContent;
 import net.minecraft.util.Identifier;
@@ -79,10 +82,16 @@ public class SpellDimensionClient implements ClientModInitializer
                 AllBlocks.STILL_CONSCIOUSNESS,
                 AllBlocks.FLOWING_CONSCIOUSNESS
         );
+        BlockRenderLayerMap.INSTANCE.putBlocks(
+                RenderLayer.getTranslucent(),
+                AllBlocks.PROTECTIVE_COVER.block()
+        );
 
         EntityRendererRegistry.register(AllEntities.LOCATE_PORTAL, LocatePortalRenderer::new);
+        EntityRendererRegistry.register(AllEntities.CONSCIOUSNESS_EVENT, EmptyEntityRenderer::new);
 
         GuiOverlayRegistry.registerLayer(6, new QuestOverlay());
+        GuiOverlayRegistry.registerLayer(7, new ConsciousCoreOverlay());
 
         TextureOverlayRegistry.register(PHASE_LAYER, 0.5F, (client, player, context, tickDelta) -> INoClip.noClip(player));
 
@@ -108,6 +117,13 @@ public class SpellDimensionClient implements ClientModInitializer
         CustomParticleStatusEffect.register(AllStatusEffects.FROSTED, new FrostedParticleSpawner());
         CustomModelStatusEffect.register(AllStatusEffects.FROSTED, new FrostedEffectRenderer());
 
+        network();
+
+        ClientAirHopHandler.register();
+    }
+
+    private static void network()
+    {
         ClientPlayNetworking.registerGlobalReceiver(S2CTitle.TYPE, (packet, player, responseSender) ->
         {
             InGameHud inGameHud = MinecraftClient.getInstance().inGameHud;
@@ -119,11 +135,11 @@ public class SpellDimensionClient implements ClientModInitializer
             if (player instanceof RollingEntity rolling)
                 ((RollManagerInvoker) rolling.getRollManager()).invokeRechargeRoll(player);
         });
-
-        ClientAirHopHandler.register();
+        ClientPlayNetworking.registerGlobalReceiver(S2CFloatingItem.TYPE, (packet, player, responseSender) ->
+                MinecraftClient.getInstance().gameRenderer.showFloatingItem(packet.stack()));
     }
 
-    public static void itemTooltip()
+    private static void itemTooltip()
     {
         Identifier tooltipFinal = SpellDimension.modLoc("tooltip_final");
         ItemTooltipCallback.EVENT.addPhaseOrdering(Event.DEFAULT_PHASE, tooltipFinal);

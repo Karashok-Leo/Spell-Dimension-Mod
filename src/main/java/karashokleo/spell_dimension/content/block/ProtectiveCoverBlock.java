@@ -38,6 +38,18 @@ public class ProtectiveCoverBlock extends AbstractGlassBlock implements BlockEnt
         );
     }
 
+    public static void place(World world, BlockPos pos, int life)
+    {
+        world.setBlockState(pos, AllBlocks.PROTECTIVE_COVER.block().getDefaultState());
+        if (world.getBlockEntity(pos) instanceof ProtectiveCoverBlockTile tile)
+            tile.setLife(life);
+    }
+
+    public static void placePersistent(World world, BlockPos pos)
+    {
+        world.setBlockState(pos, AllBlocks.PROTECTIVE_COVER.block().getDefaultState().with(Properties.PERSISTENT, true));
+    }
+
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder)
     {

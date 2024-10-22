@@ -2,12 +2,15 @@ package karashokleo.spell_dimension.content.block.tile;
 
 import com.google.common.collect.Lists;
 import io.wispforest.owo.ops.WorldOps;
-import karashokleo.spell_dimension.content.item.logic.ConsciousnessEventManager;
+import karashokleo.spell_dimension.content.block.ConsciousnessBaseBlock;
+import karashokleo.spell_dimension.content.entity.ConsciousnessEventEntity;
+import karashokleo.spell_dimension.content.event.conscious.ConsciousnessEventManager;
 import karashokleo.spell_dimension.init.AllBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Stainable;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
@@ -34,12 +37,21 @@ import java.util.UUID;
 public class ConsciousnessCoreTile extends BlockEntity
 {
     public static final String ACTIVATED_KEY = "Activated";
+    public static final String TRIGGERED_KEY = "Triggered";
+    public static final String LEVEL_FACTOR_KEY = "LevelFactor";
+    public static final String LEVEL_KEY = "Level";
     public static final String DESTINATION_WORLD_KEY = "DestinationWorld";
-    public static final String DESTINATION_POS_KEY = "DestinationPos";
-    private int age = 0;
+    public static final String EVENT_KEY = "EventUUID";
+
     private boolean activated = false;
-    private RegistryKey<World> destinationWorld = World.OVERWORLD;
-    private BlockPos destinationPos = BlockPos.ORIGIN;
+    private boolean triggered = false;
+    private double levelFactor;
+    @Nullable
+    private Integer level = null;
+    @Nullable
+    private RegistryKey<World> destinationWorld;
+    @Nullable
+    private ConsciousnessEventEntity event;
 
     private final HashMap<UUID, Integer> playerTicks = new HashMap<>();
 
@@ -52,15 +64,39 @@ public class ConsciousnessCoreTile extends BlockEntity
         super(AllBlocks.CONSCIOUSNESS_CORE_TILE, pos, state);
     }
 
-    @Override
-    public void setWorld(World world)
+    public double getLevelFactor()
     {
-        super.setWorld(world);
+        return levelFactor;
+    }
+
+    @Nullable
+    public Integer getLevel()
+    {
+        return level;
+    }
+
+    public void setLevelFactor(double levelFactor)
+    {
+        this.levelFactor = levelFactor;
+    }
+
+    public void initLevelFactor(World world)
+    {
+        this.initLevelFactor(world, world.getRandom().nextDouble());
+    }
+
+    public void initLevelFactor(World world, double levelFactor)
+    {
+        this.levelFactor = levelFactor;
+        this.markDirty();
+        world.updateListeners(pos, getCachedState(), getCachedState(), Block.NOTIFY_ALL);
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, ConsciousnessCoreTile tile)
     {
-        tile.age++;
+        if (tile.levelFactor == 0 && !world.isClient())
+            tile.initLevelFactor(world);
+
         if (!tile.isActivated()) return;
 
         if (world.getTime() % 80L == 0L)
@@ -136,27 +172,27 @@ public class ConsciousnessCoreTile extends BlockEntity
             UUID playerUuid = player.getUuid();
             if (box.contains(player.getX(), player.getY(), player.getZ()))
             {
-//                if (!player.hasStatusEffect(StatusEffects.LEVITATION) ||
-//                    (player.hasStatusEffect(StatusEffects.LEVITATION) &&
-//                     player.getStatusEffect(StatusEffects.LEVITATION).getDuration() <= 2))
-//                {
-//                    player.addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 2, 5, false, false));
-//                }
-
                 player.addVelocity(0, 0.09, 0);
                 player.networkHandler.sendPacket(new EntityVelocityUpdateS2CPacket(player));
 
-                int currentTick = playerTicks.compute(playerUuid, (uuid, ticks) -> ticks == null ? 1 : ticks + 1);
+                int currentTick = this.playerTicks.compute(playerUuid, (uuid, ticks) -> ticks == null ? 1 : ticks + 1);
                 if (currentTick >= 100)
                 {
-                    ServerWorld destinationWorld = world.getServer().getWorld(this.destinationWorld);
+                    ServerWorld destinationWorld = world.getServer().getOverworld();
+                    this.destinationWorld = destinationWorld.getRegistryKey();
+                    BlockPos destinationPos = ConsciousnessEventManager.findTeleportPos(world, destinationWorld, pos);
                     WorldOps.teleportToWorld(player, destinationWorld, destinationPos.toCenterPos());
-                    playerTicks.remove(playerUuid);
+                    this.playerTicks.remove(playerUuid);
+                    if (!this.triggered && this.level != null)
+                    {
+                        this.triggered = true;
+                        this.event = ConsciousnessEventManager.startEvent(destinationWorld, destinationPos, this.level);
+
+                        this.markDirty();
+                        world.updateListeners(pos, getCachedState(), getCachedState(), Block.NOTIFY_ALL);
+                    }
                 }
-            } else
-            {
-                playerTicks.remove(playerUuid);
-            }
+            } else this.playerTicks.remove(playerUuid);
         }
     }
 
@@ -170,19 +206,26 @@ public class ConsciousnessCoreTile extends BlockEntity
         return this.activated;
     }
 
-    public void activate(BlockPos pos)
+    public boolean testStack(ItemStack stack)
     {
+        return true;
+    }
+
+    public void activate(BlockPos pos, double playerLevel)
+    {
+        if (this.activated) return;
         if (world instanceof ServerWorld serverWorld)
         {
-            ServerWorld overworld = serverWorld.getServer().getOverworld();
-
-            this.destinationWorld = RegistryKey.of(RegistryKeys.WORLD, overworld.getRegistryKey().getValue());
-            this.destinationPos = ConsciousnessEventManager.findTeleportTarget(serverWorld, overworld, pos);
-
             this.activated = true;
+            this.level = ConsciousnessEventManager.randomEventLevel(serverWorld.getRandom(), playerLevel, this.levelFactor);
             this.markDirty();
-            world.playSound(null, pos, activated ? SoundEvents.BLOCK_BEACON_ACTIVATE : SoundEvents.BLOCK_BEACON_DEACTIVATE, SoundCategory.BLOCKS, 1.0F, 1.0F);
-            world.updateListeners(pos, getCachedState(), getCachedState(), Block.NOTIFY_ALL);
+            serverWorld.updateListeners(pos, getCachedState(), getCachedState(), Block.NOTIFY_ALL);
+            serverWorld.playSound(null, pos, activated ? SoundEvents.BLOCK_BEACON_ACTIVATE : SoundEvents.BLOCK_BEACON_DEACTIVATE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+
+            BlockPos logPos = pos.down();
+            BlockState logState = serverWorld.getBlockState(logPos);
+            if (logState.getBlock() instanceof ConsciousnessBaseBlock logBlock)
+                logBlock.tryTurnSelf(logState, serverWorld, logPos);
         }
     }
 
@@ -204,8 +247,14 @@ public class ConsciousnessCoreTile extends BlockEntity
     {
         super.writeNbt(nbt);
         nbt.putBoolean(ACTIVATED_KEY, this.activated);
-        nbt.putString(DESTINATION_WORLD_KEY, destinationWorld.getValue().toString());
-        nbt.putLong(DESTINATION_POS_KEY, destinationPos.asLong());
+        nbt.putBoolean(TRIGGERED_KEY, this.triggered);
+        nbt.putDouble(LEVEL_FACTOR_KEY, this.levelFactor);
+        if (this.level != null)
+            nbt.putInt(LEVEL_KEY, this.level);
+        if (this.destinationWorld != null)
+            nbt.putString(DESTINATION_WORLD_KEY, this.destinationWorld.getValue().toString());
+        if (this.event != null)
+            nbt.putUuid(EVENT_KEY, this.event.getUuid());
     }
 
     @Override
@@ -213,8 +262,16 @@ public class ConsciousnessCoreTile extends BlockEntity
     {
         super.readNbt(nbt);
         this.activated = nbt.getBoolean(ACTIVATED_KEY);
-        this.destinationWorld = RegistryKey.of(RegistryKeys.WORLD, new Identifier(nbt.getString(DESTINATION_WORLD_KEY)));
-        this.destinationPos = BlockPos.fromLong(nbt.getLong(DESTINATION_POS_KEY));
+        this.triggered = nbt.getBoolean(TRIGGERED_KEY);
+        this.levelFactor = nbt.getDouble(LEVEL_FACTOR_KEY);
+        if (nbt.contains(LEVEL_KEY))
+            this.level = nbt.getInt(LEVEL_KEY);
+        if (nbt.contains(DESTINATION_WORLD_KEY))
+            this.destinationWorld = RegistryKey.of(RegistryKeys.WORLD, new Identifier(nbt.getString(DESTINATION_WORLD_KEY)));
+        if (nbt.containsUuid(EVENT_KEY) &&
+            world instanceof ServerWorld serverWorld &&
+            serverWorld.getEntity(nbt.getUuid(EVENT_KEY)) instanceof ConsciousnessEventEntity eventEntity)
+            this.event = eventEntity;
     }
 
     /**

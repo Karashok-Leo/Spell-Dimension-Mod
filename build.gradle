@@ -28,6 +28,7 @@ repositories {
     maven { url 'https://maven.ladysnake.org/releases' }
     maven { url "https://maven.jamieswhiteshirt.com/libs-release" }
     maven { url "https://dl.cloudsmith.io/public/klikli-dev/mods/maven/" }
+    maven { url "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" }
 }
 
 loom {
@@ -130,6 +131,8 @@ dependencies {
     modImplementation "maven.modrinth:puzzles-lib:${project.puzzles_lib_version}"
     modImplementation "maven.modrinth:forge-config-api-port:${project.forge_config_api_port}"
     modImplementation "maven.modrinth:mutant-monsters:${project.mutant_monster_version}"
+    modImplementation "maven.modrinth:illager-invasion:${project.illager_invasion_version}"
+    modImplementation "fuzs.extensibleenums:extensibleenums-fabric:${project.extensible_enums_version}"
 
     modImplementation "maven.modrinth:adventurez:${project.adventurez_version}"
     modImplementation "maven.modrinth:voidz:${project.voidz_version}"

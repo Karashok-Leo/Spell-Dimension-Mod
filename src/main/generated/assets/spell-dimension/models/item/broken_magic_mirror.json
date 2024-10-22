@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "spell-dimension:item/consciousness_log"
+    "layer0": "spell-dimension:item/broken_magic_mirror"
   }
 }

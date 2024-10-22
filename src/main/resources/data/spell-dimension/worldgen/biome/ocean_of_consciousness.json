@@ -8,7 +8,7 @@
     "water_color": 4159204,
     "water_fog_color": 329011,
     "particle": {
-      "probability": 0.05,
+      "probability": 0.001,
       "options": {
         "type": "minecraft:end_rod"
       }
@@ -26,7 +26,7 @@
     [],
     [],
     [
-      "spell-dimension:tree_of_consciousness"
+      "spell-dimension:consciousness_pivot"
     ],
     []
   ],

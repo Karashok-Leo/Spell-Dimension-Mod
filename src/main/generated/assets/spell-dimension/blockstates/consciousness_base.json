@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "turned=false": {
+      "model": "spell-dimension:block/consciousness_base"
+    },
+    "turned=true": {
+      "model": "spell-dimension:block/consciousness_base_turned"
+    }
+  }
+}
