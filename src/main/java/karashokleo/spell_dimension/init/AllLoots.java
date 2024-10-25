@@ -5,6 +5,7 @@ import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
 import karashokleo.spell_dimension.config.EssenceLootConfig;
 import karashokleo.spell_dimension.config.recipe.SpellScrollConfig;
+import karashokleo.spell_dimension.content.event.conscious.EventAward;
 import karashokleo.spell_dimension.content.loot.entry.RandomEnchantedEssenceEntry;
 import karashokleo.spell_dimension.content.loot.entry.RandomEnlighteningEssenceEntry;
 import karashokleo.spell_dimension.content.loot.entry.SpellScrollEntry;
@@ -21,6 +22,8 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.spell_power.api.SpellSchool;
+
+import java.util.Set;
 
 public class AllLoots
 {
@@ -49,13 +52,12 @@ public class AllLoots
                 builder.conditionally(KilledByPlayerLootCondition.builder());
                 tableBuilder.pool(builder.build());
             }
-        });
-
-        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) ->
-        {
-            Identifier spellId = SpellScrollConfig.getLootSpellId(id);
-            if (spellId == null) return;
-            tableBuilder.pool(LootPool.builder().with(SpellScrollEntry.builder(spellId)));
+            if (id.equals(EventAward.SPELL_SCROLL.lootTable))
+            {
+                LootPool.Builder builder = LootPool.builder();
+                addCraftSpellLootPool(builder, SpellScrollConfig.getCraftSpells());
+                tableBuilder.pool(builder.build());
+            }
         });
 
         injectBaseEssenceLoot();
@@ -101,5 +103,12 @@ public class AllLoots
 
         // MendingEssence
         builder.with(ItemEntry.builder(AllItems.MENDING_ESSENCE).weight(EssenceLootConfig.MD_WEIGHT));
+    }
+
+    private static void addCraftSpellLootPool(LootPool.Builder builder, Set<Identifier> pool)
+    {
+        builder.rolls(UniformLootNumberProvider.create(1, 3));
+        for (Identifier spellId : pool)
+            builder.with(SpellScrollEntry.builder(spellId));
     }
 }

@@ -77,14 +77,18 @@ public class SpellDimensionClient implements ClientModInitializer
                 new ConsciousnessFluidRenderHandler()
         );
 
+//        BlockRenderLayerMap.INSTANCE.putBlocks(
+//                RenderLayer.getCutout(),
+//        );
+        BlockRenderLayerMap.INSTANCE.putBlocks(
+                RenderLayer.getTranslucent(),
+                AllBlocks.PROTECTIVE_COVER.block(),
+                AllBlocks.CONSCIOUSNESS_CORE.block()
+        );
         BlockRenderLayerMap.INSTANCE.putFluids(
                 RenderLayer.getTranslucent(),
                 AllBlocks.STILL_CONSCIOUSNESS,
                 AllBlocks.FLOWING_CONSCIOUSNESS
-        );
-        BlockRenderLayerMap.INSTANCE.putBlocks(
-                RenderLayer.getTranslucent(),
-                AllBlocks.PROTECTIVE_COVER.block()
         );
 
         EntityRendererRegistry.register(AllEntities.LOCATE_PORTAL, LocatePortalRenderer::new);

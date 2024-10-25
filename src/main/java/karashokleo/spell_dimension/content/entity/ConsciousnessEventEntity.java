@@ -4,10 +4,10 @@ import com.google.common.collect.Sets;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.component.player.PlayerDifficulty;
 import karashokleo.spell_dimension.content.event.conscious.ConsciousnessEventManager;
+import karashokleo.spell_dimension.content.event.conscious.EventAward;
 import karashokleo.spell_dimension.content.event.conscious.Wave;
 import karashokleo.spell_dimension.content.event.conscious.WaveFactory;
 import karashokleo.spell_dimension.data.SDTexts;
-import karashokleo.spell_dimension.init.AllItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -21,15 +21,16 @@ import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.function.Predicate;
 
 public class ConsciousnessEventEntity extends Entity
 {
-    public static final int PREPARE_TIME = 200;
-    public static final int WAIT_TIME = 200;
-    public static final int FINISH_TIME = 200;
+    public static final int PREPARE_TIME = 20 * 10;
+    public static final int WAIT_TIME = 20 * 5;
+    public static final int FINISH_TIME = 20 * 5;
 
     public static final double FACTOR_PER_WAVE = 0.4;
     public static final String STATE_KEY = "State";
@@ -37,6 +38,7 @@ public class ConsciousnessEventEntity extends Entity
     public static final String FINISH_TIMER_KEY = "FinishTimer";
     public static final String WAVE_INDEX_KEY = "WaveIndex";
     public static final String LEVEL_KEY = "Level";
+    public static final String AWARD_KEY = "Award";
     public static final String WAVES_KEY = "Waves";
     public static final String SUMMONED_KEY = "Summoned";
     public static final String TOTAL_MAX_HEALTH_KEY = "TotalMaxHealth";
@@ -47,7 +49,10 @@ public class ConsciousnessEventEntity extends Entity
     private int waveIndex = 0;
     private int level;
     private float totalMaxHealth = 0;
+    @Nullable
+    private EventAward award;
     private final ArrayList<Wave> waves = new ArrayList<>();
+    private final LinkedList<UUID> summonedUuids = new LinkedList<>();
     private final Set<LivingEntity> summoned = new HashSet<>();
     private final ServerBossBar bossBar = new ServerBossBar(Text.empty(), ServerBossBar.Color.RED, ServerBossBar.Style.NOTCHED_10);
 
@@ -64,10 +69,17 @@ public class ConsciousnessEventEntity extends Entity
         super(type, world);
     }
 
-    public void initLevel(int level)
+    public void init(int level, EventAward award)
     {
         this.level = level;
-        WaveFactory.getRandom(this.random, this.level).fillWaves(this.waves);
+        this.award = award;
+        WaveFactory.getRandom(this.random, this.level).fillWaves(random, this.waves);
+    }
+
+    @Nullable
+    public EventAward getAward()
+    {
+        return award;
     }
 
     public void setBoundingBox(int radius)
@@ -84,7 +96,18 @@ public class ConsciousnessEventEntity extends Entity
     public void tick()
     {
         super.tick();
+
         if (!(this.getWorld() instanceof ServerWorld world)) return;
+
+        while (!this.summonedUuids.isEmpty())
+        {
+            UUID uuid = this.summonedUuids.poll();
+            if (uuid == null) continue;
+            Entity entity = world.getEntity(uuid);
+            if (entity instanceof LivingEntity living)
+                this.summoned.add(living);
+        }
+
         switch (this.state)
         {
             case PREPARE -> this.tickPrepare(world);
@@ -111,6 +134,11 @@ public class ConsciousnessEventEntity extends Entity
         this.bossBar.removePlayer(player);
     }
 
+    public List<ServerPlayerEntity> getPlayers(ServerWorld world)
+    {
+        return world.getPlayers(this.isInEventRange());
+    }
+
     protected Predicate<ServerPlayerEntity> isInEventRange()
     {
         return player -> this.getBoundingBox().contains(player.getPos());
@@ -119,7 +147,7 @@ public class ConsciousnessEventEntity extends Entity
     protected void updateBarToPlayers(ServerWorld world)
     {
         Set<ServerPlayerEntity> set = Sets.newHashSet(this.bossBar.getPlayers());
-        List<ServerPlayerEntity> list = world.getPlayers(this.isInEventRange());
+        List<ServerPlayerEntity> list = this.getPlayers(world);
         for (ServerPlayerEntity player : list)
             if (!set.contains(player))
                 this.bossBar.addPlayer(player);
@@ -142,6 +170,7 @@ public class ConsciousnessEventEntity extends Entity
     {
         if (checkSummonedClear(world))
         {
+            this.waveIndex++;
             if (this.waveIndex >= this.waves.size())
                 this.turnToFinish(world, true);
             else this.turnToWaiting(world);
@@ -155,7 +184,7 @@ public class ConsciousnessEventEntity extends Entity
         if (this.age % 10 == 0)
             this.bossBar.setName(
                     SDTexts.TEXT$EVENT$RUNNING.get(
-                            this.waveIndex,
+                            this.waveIndex + 1,
                             this.waves.size(),
                             this.summoned.size()
                     )
@@ -175,7 +204,7 @@ public class ConsciousnessEventEntity extends Entity
         if (this.age % 10 == 0)
             this.bossBar.setName(
                     SDTexts.TEXT$EVENT$WAITING.get(
-                            this.waveIndex,
+                            this.waveIndex + 1,
                             this.waves.size(),
                             (WAIT_TIME - this.waitTimer) / 20
                     )
@@ -190,6 +219,7 @@ public class ConsciousnessEventEntity extends Entity
             if (this.finishTimer == FINISH_TIME)
             {
                 this.bossBar.clearPlayers();
+                ConsciousnessEventManager.breakBarrier(world, this.getBlockPos(), ConsciousnessEventManager.RADIUS);
                 this.remove(RemovalReason.DISCARDED);
             }
         }
@@ -217,15 +247,13 @@ public class ConsciousnessEventEntity extends Entity
                         SDTexts.TEXT$EVENT$FINISH$FAIL.get()
         );
 
-        world.getPlayers(this.isInEventRange())
-                .forEach(player -> player.getInventory().offerOrDrop(AllItems.BROKEN_MAGIC_MIRROR.getDefaultStack()));
+        ConsciousnessEventManager.giveReward(world, this.getBlockPos(), this);
     }
 
     protected void summon(ServerWorld world)
     {
         if (waveIndex >= waves.size()) return;
         Wave wave = waves.get(waveIndex);
-        this.waveIndex++;
         this.summoned.clear();
         double playerLevel = this.calcPlayerLevel(world);
 
@@ -263,7 +291,7 @@ public class ConsciousnessEventEntity extends Entity
 
     protected double calcPlayerLevel(ServerWorld world)
     {
-        return world.getPlayers(this.isInEventRange())
+        return this.getPlayers(world)
                 .stream()
                 .mapToDouble(player -> PlayerDifficulty.get(player).getLevel().getLevel())
                 .average()
@@ -291,6 +319,8 @@ public class ConsciousnessEventEntity extends Entity
         this.waveIndex = nbt.getInt(WAVE_INDEX_KEY);
         this.level = nbt.getInt(LEVEL_KEY);
         this.totalMaxHealth = nbt.getFloat(TOTAL_MAX_HEALTH_KEY);
+        if (nbt.contains(AWARD_KEY))
+            this.award = EventAward.valueOf(nbt.getString(AWARD_KEY));
         this.waves.clear();
         NbtList wavesNbt = nbt.getList(WAVES_KEY, NbtElement.COMPOUND_TYPE);
         for (NbtElement element : wavesNbt)
@@ -300,18 +330,11 @@ public class ConsciousnessEventEntity extends Entity
                 if (wave != null)
                     this.waves.add(wave);
             }
-        this.summoned.clear();
-        if (this.getWorld() instanceof ServerWorld world)
-        {
-            NbtList summonedNbt = nbt.getList(SUMMONED_KEY, NbtElement.INT_ARRAY_TYPE);
-            for (NbtElement i : summonedNbt)
-                if (i instanceof NbtIntArray uuidNbt)
-                {
-                    Entity entity = world.getEntity(NbtHelper.toUuid(uuidNbt));
-                    if (entity instanceof LivingEntity living)
-                        this.summoned.add(living);
-                }
-        }
+        this.summonedUuids.clear();
+        NbtList summonedNbt = nbt.getList(SUMMONED_KEY, NbtElement.INT_ARRAY_TYPE);
+        for (NbtElement i : summonedNbt)
+            if (i instanceof NbtIntArray uuidNbt)
+                this.summonedUuids.add(NbtHelper.toUuid(uuidNbt));
     }
 
     @Override
@@ -323,6 +346,8 @@ public class ConsciousnessEventEntity extends Entity
         nbt.putInt(WAVE_INDEX_KEY, this.waveIndex);
         nbt.putInt(LEVEL_KEY, this.level);
         nbt.putFloat(TOTAL_MAX_HEALTH_KEY, this.totalMaxHealth);
+        if (this.award != null)
+            nbt.putString(AWARD_KEY, this.award.name());
         NbtList wavesNbt = new NbtList();
         for (Wave wave : this.waves)
         {

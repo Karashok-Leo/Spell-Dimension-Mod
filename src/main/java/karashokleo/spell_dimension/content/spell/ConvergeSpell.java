@@ -1,7 +1,7 @@
 package karashokleo.spell_dimension.content.spell;
 
-import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.config.SpellConfig;
+import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.util.DamageUtil;
 import karashokleo.spell_dimension.util.ImpactUtil;
 import net.minecraft.entity.Entity;
@@ -19,7 +19,6 @@ import net.spell_power.api.SpellSchools;
 
 public class ConvergeSpell
 {
-    public static final Identifier SPELL_ID = SpellDimension.modLoc("converge");
     private static final ParticleBatch[] PARTICLE = {new ParticleBatch(
             "minecraft:explosion_emitter",
             ParticleBatch.Shape.SPHERE,
@@ -38,7 +37,7 @@ public class ConvergeSpell
 
     public static void handle(SpellProjectile projectile, Identifier spellId, HitResult hitResult)
     {
-        if (spellId.equals(SPELL_ID))
+        if (spellId.equals(AllSpells.CONVERGE))
             convergeImpact(projectile);
     }
 

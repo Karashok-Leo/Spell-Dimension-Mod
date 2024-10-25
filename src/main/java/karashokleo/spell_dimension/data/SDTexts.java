@@ -2,6 +2,7 @@ package karashokleo.spell_dimension.data;
 
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.config.recipe.LocateSpellConfig;
+import karashokleo.spell_dimension.content.event.conscious.EventAward;
 import karashokleo.spell_dimension.data.loot_bag.SDBags;
 import karashokleo.spell_dimension.data.loot_bag.SDContents;
 import karashokleo.spell_dimension.init.AllEntities;
@@ -46,6 +47,9 @@ public enum SDTexts
     TEXT$SPAWN_POINT_RESTRICTION("You can only set your spawn point in the sea of consciousness!", "你只能将重生点设置在识海！"),
     TEXT$CONSCIOUSNESS_CORE$LEVEL("Active Level: %s", "激活等级: %s"),
     TEXT$CONSCIOUSNESS_CORE$LEVEL_FACTOR("Difficulty Factor: %s", "难度系数: %s"),
+    TEXT$CONSCIOUSNESS_CORE$AWARD("Award: %s", "奖励: %s"),
+    TEXT$CONSCIOUSNESS_CORE$TRIGGERED("Event has been triggered", "事件已触发"),
+    TEXT$CONSCIOUSNESS_CORE$NOT_TRIGGERED("Event not triggered", "事件未触发"),
     TEXT$CONSCIOUS_TIMER("Conscious - Countdown: %s seconds", "识 - 倒计时: %s秒"),
     TEXT$EVENT$PREPARE("The event is about to begin - Countdown: %s seconds", "事件即将开始 - 倒计时: %s秒"),
     TEXT$EVENT$RUNNING("Wave %s/%s - Enemies Remaining: %s", "第%s/%s波 - 剩余敌人: %s"),
@@ -183,6 +187,7 @@ public enum SDTexts
         }
         addGroupTranslation();
         addLootBagTranslation();
+        addEventAwardTranslation();
         LocateSpellConfig.addTranslation();
         SpellDimension.EN_TEXTS.addEntityType(AllEntities.LOCATE_PORTAL, "Locate Portal");
         SpellDimension.ZH_TEXTS.addEntityType(AllEntities.LOCATE_PORTAL, "定位传送门");
@@ -219,5 +224,15 @@ public enum SDTexts
             SpellDimension.EN_TEXTS.addText(ins.entry.nameKey(), ins.nameEn);
             SpellDimension.ZH_TEXTS.addText(ins.entry.nameKey(), ins.nameZh);
         }
+    }
+
+    private static void addEventAwardTranslation()
+    {
+        SpellDimension.EN_TEXTS.addText(EventAward.BAG.getTranslationKey(), "Random Loot Bags");
+        SpellDimension.EN_TEXTS.addText(EventAward.ESSENCE.getTranslationKey(), "Random Spell Essences");
+        SpellDimension.EN_TEXTS.addText(EventAward.SPELL_SCROLL.getTranslationKey(), "Random Spell Scrolls");
+        SpellDimension.ZH_TEXTS.addText(EventAward.BAG.getTranslationKey(), "随机战利品袋");
+        SpellDimension.ZH_TEXTS.addText(EventAward.ESSENCE.getTranslationKey(), "随机魔法精华");
+        SpellDimension.ZH_TEXTS.addText(EventAward.SPELL_SCROLL.getTranslationKey(), "随机法术卷轴");
     }
 }

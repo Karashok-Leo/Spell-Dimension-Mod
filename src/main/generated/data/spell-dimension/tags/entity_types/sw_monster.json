@@ -1,0 +1,41 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "soulsweapons:warmth_entity",
+      "required": false
+    },
+    {
+      "id": "soulsweapons:big_chungus",
+      "required": false
+    },
+    {
+      "id": "soulsweapons:dark_sorcerer",
+      "required": false
+    },
+    {
+      "id": "soulsweapons:soul_reaper_ghost",
+      "required": false
+    },
+    {
+      "id": "soulsweapons:forlorn",
+      "required": false
+    },
+    {
+      "id": "soulsweapons:evil_forlorn",
+      "required": false
+    },
+    {
+      "id": "soulsweapons:soulmass",
+      "required": false
+    },
+    {
+      "id": "soulsweapons:frost_giant",
+      "required": false
+    },
+    {
+      "id": "soulsweapons:rime_spectre",
+      "required": false
+    }
+  ]
+}

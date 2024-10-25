@@ -1,0 +1,1 @@
+The textures in this folder are from [LopyLuna](https://github.com/LopyLuna). Thanks for her artistic creation!

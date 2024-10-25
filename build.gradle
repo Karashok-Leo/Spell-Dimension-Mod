@@ -124,6 +124,8 @@ dependencies {
     modImplementation "io.wispforest:owo-lib:${project.owo_version}"
     modImplementation("maven.modrinth:mythicmetals:${project.mythic_metals_version}")
     modImplementation("maven.modrinth:mythic-upgrades:${project.mythic_upgrades_version}")
+    modImplementation("net.kyrptonaught:customportalapi:${project.customportalapi_version}")
+    modImplementation("maven.modrinth:deeperdarker:${project.deeperdarker_version}")
     modImplementation("maven.modrinth:AdditionalEntityAttributes:${project.aea_version}")
     modImplementation("maven.modrinth:when-dungeons-arise:${project.wda_version}-fabric")
     modImplementation("maven.modrinth:plenty-of-armors:${project.plenty_of_armors_version}")

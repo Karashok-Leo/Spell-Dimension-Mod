@@ -2,9 +2,9 @@ package karashokleo.spell_dimension.content.spell;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.block.SpellLightBlock;
 import karashokleo.spell_dimension.init.AllBlocks;
+import karashokleo.spell_dimension.init.AllSpells;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.particle.ParticleTypes;
@@ -21,8 +21,6 @@ import java.util.*;
 
 public class LightSpell
 {
-    public static final Identifier SPELL_ID = SpellDimension.modLoc("light");
-
     private static final Multimap<ServerWorld, LightSpawner> SPAWNERS = HashMultimap.create();
 
     public static void init()
@@ -147,7 +145,7 @@ public class LightSpell
 
     public static void handle(SpellProjectile projectile, Identifier spellId, BlockHitResult hitResult)
     {
-        if (!spellId.equals(SPELL_ID)) return;
+        if (!spellId.equals(AllSpells.LIGHT)) return;
         if (!(projectile.getWorld() instanceof ServerWorld world)) return;
         SPAWNERS.put(world, new LightSpawner(hitResult.getBlockPos(), 7, 8000, 20));
     }

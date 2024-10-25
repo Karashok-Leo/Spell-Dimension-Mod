@@ -5,7 +5,9 @@ import io.wispforest.owo.ops.WorldOps;
 import karashokleo.spell_dimension.content.block.ConsciousnessBaseBlock;
 import karashokleo.spell_dimension.content.entity.ConsciousnessEventEntity;
 import karashokleo.spell_dimension.content.event.conscious.ConsciousnessEventManager;
+import karashokleo.spell_dimension.content.event.conscious.EventAward;
 import karashokleo.spell_dimension.init.AllBlocks;
+import karashokleo.spell_dimension.util.RandomUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Stainable;
@@ -25,6 +27,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -39,13 +42,17 @@ public class ConsciousnessCoreTile extends BlockEntity
     public static final String ACTIVATED_KEY = "Activated";
     public static final String TRIGGERED_KEY = "Triggered";
     public static final String LEVEL_FACTOR_KEY = "LevelFactor";
+    public static final String AWARD_KEY = "Award";
     public static final String LEVEL_KEY = "Level";
     public static final String DESTINATION_WORLD_KEY = "DestinationWorld";
     public static final String EVENT_KEY = "EventUUID";
 
+    public int tick = 0;
     private boolean activated = false;
     private boolean triggered = false;
     private double levelFactor;
+    @Nullable
+    private EventAward award;
     @Nullable
     private Integer level = null;
     @Nullable
@@ -64,9 +71,20 @@ public class ConsciousnessCoreTile extends BlockEntity
         super(AllBlocks.CONSCIOUSNESS_CORE_TILE, pos, state);
     }
 
+    public boolean isTriggered()
+    {
+        return triggered;
+    }
+
     public double getLevelFactor()
     {
         return levelFactor;
+    }
+
+    @Nullable
+    public EventAward getAward()
+    {
+        return award;
     }
 
     @Nullable
@@ -75,27 +93,26 @@ public class ConsciousnessCoreTile extends BlockEntity
         return level;
     }
 
-    public void setLevelFactor(double levelFactor)
+    public void init(double levelFactor, EventAward award)
     {
         this.levelFactor = levelFactor;
-    }
-
-    public void initLevelFactor(World world)
-    {
-        this.initLevelFactor(world, world.getRandom().nextDouble());
-    }
-
-    public void initLevelFactor(World world, double levelFactor)
-    {
-        this.levelFactor = levelFactor;
-        this.markDirty();
-        world.updateListeners(pos, getCachedState(), getCachedState(), Block.NOTIFY_ALL);
+        this.award = award;
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, ConsciousnessCoreTile tile)
     {
-        if (tile.levelFactor == 0 && !world.isClient())
-            tile.initLevelFactor(world);
+        tile.tick++;
+        if ((tile.levelFactor == 0 || tile.award == null) &&
+            !world.isClient())
+        {
+            Random random = world.getRandom();
+            tile.init(
+                    random.nextDouble(),
+                    RandomUtil.randomEnum(random, EventAward.class)
+            );
+            tile.markDirty();
+            world.updateListeners(pos, state, state, Block.NOTIFY_ALL);
+        }
 
         if (!tile.isActivated()) return;
 
@@ -183,10 +200,10 @@ public class ConsciousnessCoreTile extends BlockEntity
                     BlockPos destinationPos = ConsciousnessEventManager.findTeleportPos(world, destinationWorld, pos);
                     WorldOps.teleportToWorld(player, destinationWorld, destinationPos.toCenterPos());
                     this.playerTicks.remove(playerUuid);
-                    if (!this.triggered && this.level != null)
+                    if (!this.triggered && this.level != null && this.award != null)
                     {
                         this.triggered = true;
-                        this.event = ConsciousnessEventManager.startEvent(destinationWorld, destinationPos, this.level);
+                        this.event = ConsciousnessEventManager.startEvent(destinationWorld, destinationPos, this.level, this.award);
 
                         this.markDirty();
                         world.updateListeners(pos, getCachedState(), getCachedState(), Block.NOTIFY_ALL);
@@ -209,6 +226,11 @@ public class ConsciousnessCoreTile extends BlockEntity
     public boolean testStack(ItemStack stack)
     {
         return true;
+//        int tier = MathHelper.clamp((int) (this.levelFactor / 0.1), 0, 4);
+//        for (int i = tier; i < 5; i++)
+//            if (stack.isIn(AllTags.MATERIAL.get(i)))
+//                return true;
+//        return false;
     }
 
     public void activate(BlockPos pos, double playerLevel)
@@ -249,6 +271,8 @@ public class ConsciousnessCoreTile extends BlockEntity
         nbt.putBoolean(ACTIVATED_KEY, this.activated);
         nbt.putBoolean(TRIGGERED_KEY, this.triggered);
         nbt.putDouble(LEVEL_FACTOR_KEY, this.levelFactor);
+        if (this.award != null)
+            nbt.putString(AWARD_KEY, this.award.name());
         if (this.level != null)
             nbt.putInt(LEVEL_KEY, this.level);
         if (this.destinationWorld != null)
@@ -264,6 +288,8 @@ public class ConsciousnessCoreTile extends BlockEntity
         this.activated = nbt.getBoolean(ACTIVATED_KEY);
         this.triggered = nbt.getBoolean(TRIGGERED_KEY);
         this.levelFactor = nbt.getDouble(LEVEL_FACTOR_KEY);
+        if (nbt.contains(AWARD_KEY))
+            this.award = EventAward.valueOf(nbt.getString(AWARD_KEY));
         if (nbt.contains(LEVEL_KEY))
             this.level = nbt.getInt(LEVEL_KEY);
         if (nbt.contains(DESTINATION_WORLD_KEY))

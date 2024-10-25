@@ -2,7 +2,9 @@ package karashokleo.spell_dimension.content.worldgen;
 
 import com.google.common.collect.Sets;
 import karashokleo.spell_dimension.content.block.tile.ConsciousnessCoreTile;
+import karashokleo.spell_dimension.content.event.conscious.EventAward;
 import karashokleo.spell_dimension.init.AllBlocks;
+import karashokleo.spell_dimension.util.RandomUtil;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
@@ -47,7 +49,7 @@ public class ConsciousnessPivotFeature extends Feature<DefaultFeatureConfig>
         );
         if (worldAccess.getBlockEntity(corePos) instanceof ConsciousnessCoreTile tile)
         {
-            tile.setLevelFactor(levelFactor);
+            tile.init(levelFactor, RandomUtil.randomEnum(context.getRandom(), EventAward.class));
         }
         for (BlockPos pos : set)
             worldAccess.setBlockState(

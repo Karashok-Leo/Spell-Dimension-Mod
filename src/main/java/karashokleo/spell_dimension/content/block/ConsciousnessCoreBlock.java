@@ -26,11 +26,14 @@ public class ConsciousnessCoreBlock extends BlockWithEntity
     {
         super(
                 FabricBlockSettings.create()
-                        .mapColor(MapColor.BLUE)
-                        .instrument(Instrument.BASS)
+                        .mapColor(MapColor.DIAMOND_BLUE)
+                        .instrument(Instrument.HAT)
                         .sounds(BlockSoundGroup.GLASS)
                         .strength(-1.0F, 3600000.0F)
+                        .luminance(state -> 15)
+                        .nonOpaque()
                         .dropsNothing()
+                        .solidBlock(Blocks::never)
                         .allowsSpawning(Blocks::never)
         );
     }
@@ -60,7 +63,7 @@ public class ConsciousnessCoreBlock extends BlockWithEntity
     @Override
     public BlockRenderType getRenderType(BlockState state)
     {
-        return BlockRenderType.MODEL;
+        return BlockRenderType.INVISIBLE;
     }
 
     @Nullable

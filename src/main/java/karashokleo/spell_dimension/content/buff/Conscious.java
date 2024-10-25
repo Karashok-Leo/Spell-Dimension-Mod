@@ -25,7 +25,7 @@ public class Conscious implements Buff
             ).apply(ins, Conscious::new)
     );
     public static final BuffType<Conscious> TYPE = new BuffType<>(CODEC, false);
-    private static final int COUNT_DOWN = 60 * 20;
+    private static final int COUNT_DOWN = 20 * 60 * 10;
 
     private final ServerBossBar bossBar = new ServerBossBar(Text.of(""), ServerBossBar.Color.PURPLE, ServerBossBar.Style.PROGRESS);
     private ServerPlayerEntity player;

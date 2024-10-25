@@ -62,7 +62,7 @@ public class ProtectiveCoverBlockTile extends BlockEntity
         tile.life--;
         if (tile.life <= 0)
         {
-            world.breakBlock(pos, false);
+            world.setBlockState(pos, world.getFluidState(pos).getBlockState(), 3);
             world.removeBlockEntity(pos);
         }
     }

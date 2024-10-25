@@ -4,6 +4,10 @@ import karashokleo.spell_dimension.content.block.tile.ProtectiveCoverBlockTile;
 import karashokleo.spell_dimension.content.entity.ConsciousnessEventEntity;
 import karashokleo.spell_dimension.init.AllBlocks;
 import karashokleo.spell_dimension.init.AllEntities;
+import karashokleo.spell_dimension.init.AllItems;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.entity.LootableContainerBlockEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.server.world.ServerWorld;
@@ -21,7 +25,7 @@ import java.util.Optional;
 
 public class ConsciousnessEventManager
 {
-    public static final int TIME_LIMIT = 12000;
+    public static final int TIME_LIMIT = 20 * 60 * 10;
     public static final int RADIUS = 32;
     public static final int SPAWN_LIMIT = 100;
 
@@ -31,15 +35,27 @@ public class ConsciousnessEventManager
     }
 
     @Nullable
-    public static ConsciousnessEventEntity startEvent(ServerWorld world, BlockPos pos, int level)
+    public static ConsciousnessEventEntity startEvent(ServerWorld world, BlockPos pos, int level, EventAward award)
     {
         placeAsBarrier(world, pos, RADIUS, TIME_LIMIT);
         ConsciousnessEventEntity event = AllEntities.CONSCIOUSNESS_EVENT.spawn(world, pos, SpawnReason.EVENT);
         if (event == null) return null;
         event.setPos(pos.getX(), pos.getY(), pos.getZ());
         event.setBoundingBox(RADIUS);
-        event.initLevel(level);
+        event.init(level, award);
         return event;
+    }
+
+    public static void giveReward(ServerWorld world, BlockPos pos, ConsciousnessEventEntity event)
+    {
+        world.setBlockState(pos, Blocks.CHEST.getDefaultState(), 2);
+        if (world.getBlockEntity(pos) instanceof
+                    LootableContainerBlockEntity lootChest &&
+            event.getAward() != null)
+            lootChest.setLootTable(event.getAward().lootTable, world.getSeed() * pos.getX() * pos.getY() * pos.getZ());
+
+        event.getPlayers(world)
+                .forEach(player -> player.getInventory().offerOrDrop(AllItems.BROKEN_MAGIC_MIRROR.getDefaultStack()));
     }
 
     public static void placeAsBarrier(World world, BlockPos pos, int radius, int life)
@@ -57,6 +73,25 @@ public class ConsciousnessEventManager
                             world.setBlockState(placePos, AllBlocks.PROTECTIVE_COVER.block().getDefaultState());
                             if (world.getBlockEntity(placePos) instanceof ProtectiveCoverBlockTile tile)
                                 tile.setLife(life);
+                        }
+                    }
+    }
+
+    public static void breakBarrier(World world, BlockPos pos, int radius)
+    {
+        for (int x = -radius; x <= radius; x++)
+            for (int y = -radius; y <= radius; y++)
+                for (int z = -radius; z <= radius; z++)
+                    if (x == -radius || x == radius ||
+                        y == -radius || y == radius ||
+                        z == -radius || z == radius)
+                    {
+                        BlockPos breakPos = pos.add(x, y, z);
+                        BlockState blockState = world.getBlockState(breakPos);
+                        if (blockState.isOf(AllBlocks.PROTECTIVE_COVER.block()))
+                        {
+                            world.breakBlock(breakPos, false);
+                            world.removeBlockEntity(breakPos);
                         }
                     }
     }

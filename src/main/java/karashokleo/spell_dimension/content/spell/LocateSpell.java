@@ -1,10 +1,10 @@
 package karashokleo.spell_dimension.content.spell;
 
 import com.mojang.datafixers.util.Pair;
-import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.config.recipe.LocateSpellConfig;
 import karashokleo.spell_dimension.content.entity.LocatePortalEntity;
 import karashokleo.spell_dimension.data.SDTexts;
+import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.init.AllTags;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -28,12 +28,11 @@ import java.util.Optional;
 
 public class LocateSpell
 {
-    public static final Identifier SPELL_ID = SpellDimension.modLoc("locate");
     public static final double BREAK_CHANCE = 0.3;
 
     public static void handle(SpellProjectile projectile, Identifier spellId, BlockHitResult hitResult)
     {
-        if (!spellId.equals(SPELL_ID)) return;
+        if (!spellId.equals(AllSpells.LOCATE)) return;
         if (!(projectile.getWorld() instanceof ServerWorld world)) return;
         if (!(projectile.getOwner() instanceof LivingEntity living)) return;
         BlockPos blockPos = hitResult.getBlockPos();

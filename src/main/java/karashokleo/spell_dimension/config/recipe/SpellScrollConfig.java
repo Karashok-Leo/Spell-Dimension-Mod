@@ -1,18 +1,14 @@
 package karashokleo.spell_dimension.config.recipe;
 
 import com.obscuria.aquamirae.registry.AquamiraeItems;
-import dev.architectury.platform.Mod;
 import fuzs.mutantmonsters.init.ModRegistry;
 import karashokleo.l2hostility.content.item.ComplementItems;
 import karashokleo.l2hostility.init.LHTraits;
-import karashokleo.spell_dimension.content.buff.Nucleus;
-import karashokleo.spell_dimension.content.spell.*;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllSpells;
 import net.adventurez.init.ItemInit;
 import net.aleganza.plentyofarmors.item.ModItems;
-import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
@@ -25,6 +21,7 @@ import net.spell_engine.api.spell.SpellInfo;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -33,6 +30,11 @@ public class SpellScrollConfig
     public static Set<Identifier> getAllSpells()
     {
         return SPELL_TEXTS.keySet();
+    }
+
+    public static Set<Identifier> getCraftSpells()
+    {
+        return CRAFT_SPELLS;
     }
 
     public static Text getSpellScrollText(@Nullable SpellInfo spellInfo)
@@ -46,99 +48,87 @@ public class SpellScrollConfig
                         .setStyle(Style.EMPTY.withColor(spellInfo.spell().school.color));
     }
 
-    @Nullable
-    public static Identifier getLootSpellId(Identifier lootTableId)
-    {
-        return LOOT_SPELLS.get(lootTableId);
-    }
-
     private static final Map<Identifier, MutableText> SPELL_TEXTS = new HashMap<>();
-    private static final Map<Identifier, Identifier> LOOT_SPELLS = new HashMap<>();
+    private static final Set<Identifier> CRAFT_SPELLS = new HashSet<>();
 
     static
     {
-//        SPELL_TEXTS.put(AllSpells.INCARCERATE, Text.empty());
-
         // Primary
         {
-            fromPrimary("wizards:arcane_bolt");
-            fromPrimary("wizards:fire_scorch");
-            fromPrimary("wizards:frost_shard");
-            fromPrimary("paladins:heal");
+            fromPrimary(AllSpells.ARCANE_BOLT);
+            fromPrimary(AllSpells.FIRE_SCORCH);
+            fromPrimary(AllSpells.FROST_SHARD);
+            fromPrimary(AllSpells.HEAL);
         }
 
         // Binding
         {
-            fromBinding("wizards:arcane_missile");
-            fromBinding("wizards:arcane_blast");
-            fromBinding("wizards:arcane_blink");
+            fromBinding(AllSpells.ARCANE_MISSILE);
+            fromBinding(AllSpells.ARCANE_BLAST);
+            fromBinding(AllSpells.ARCANE_BLINK);
 
-            fromBinding("wizards:fireball");
-            fromBinding("wizards:fire_wall");
-            fromBinding("wizards:fire_meteor");
+            fromBinding(AllSpells.FIREBALL);
+            fromBinding(AllSpells.FIRE_WALL);
+            fromBinding(AllSpells.FIRE_METEOR);
 
-            fromBinding("wizards:frostbolt");
-            fromBinding("wizards:frost_nova");
-            fromBinding("wizards:frost_shield");
+            fromBinding(AllSpells.FROSTBOLT);
+            fromBinding(AllSpells.FROST_NOVA);
+            fromBinding(AllSpells.FROST_SHIELD);
 
-            fromBinding("paladins:flash_heal");
-            fromBinding("paladins:holy_shock");
-            fromBinding("paladins:divine_protection");
+            fromBinding(AllSpells.FLASH_HEAL);
+            fromBinding(AllSpells.HOLY_SHOCK);
+            fromBinding(AllSpells.DIVINE_PROTECTION);
         }
 
         // Infusion
         {
-            fromCrafting(LocateSpell.SPELL_ID, Items.RECOVERY_COMPASS);
-            fromCrafting(SummonSpell.SPELL_ID, AllItems.SPAWNER_SOUL);
-            fromCrafting(PlaceSpell.SPELL_ID, ModRegistry.ENDERSOUL_HAND_ITEM.get());
-            fromCrafting(LightSpell.SPELL_ID, Items.GLOWSTONE);
+            fromCrafting(AllSpells.LOCATE, Items.RECOVERY_COMPASS);
+            fromCrafting(AllSpells.SUMMON, AllItems.SPAWNER_SOUL);
+            fromCrafting(AllSpells.PLACE, ModRegistry.ENDERSOUL_HAND_ITEM.get());
+            fromCrafting(AllSpells.LIGHT, Items.GLOWSTONE);
             fromCrafting(AllSpells.MOON_SWIM, ModItems.HARDENED_PHANTOM_MEMBRANE);
 
-            fromCrafting("spell-dimension:phase", Items.ECHO_SHARD);
-            fromCrafting(ConvergeSpell.SPELL_ID, "illagerinvasion:primal_essence");
-            fromCrafting("spellbladenext:eldritchblast", ComplementItems.WARDEN_BONE_SHARD);
-            fromCrafting(ShiftSpell.SPELL_ID, ModItems.HEART_OF_THE_END);
+            fromCrafting(AllSpells.PHASE, Items.ECHO_SHARD);
+            fromCrafting(AllSpells.CONVERGE, "illagerinvasion:primal_essence");
+            fromCrafting(AllSpells.ELDRITCH_BLAST, ComplementItems.WARDEN_BONE_SHARD);
+            fromCrafting(AllSpells.SHIFT, ModItems.HEART_OF_THE_END);
             fromCrafting(AllSpells.FORCE_LANDING, LHTraits.GRAVITY.asItem());
-            fromCrafting(AllSpells.INCARCERATE, LHTraits.GRAVITY.asItem());
-            fromCrafting(AllSpells.FORCE_LANDING, ComplementItems.BLACKSTONE_CORE);
+            fromCrafting(AllSpells.INCARCERATE, ComplementItems.BLACKSTONE_CORE);
+            fromCrafting(AllSpells.MAELSTROM, "soulsweapons:lord_soul_purple");
+            fromCrafting(AllSpells.FINALSTRIKE, "deeperdarker:soul_crystal");
 
-            fromCrafting("wizards:fire_breath", "soulsweapons:lord_soul_rose");
-            fromCrafting("spell-dimension:blast", AllItems.ACCURSED_BLACKSTONE);
-            fromCrafting("spell-dimension:ignite", ItemInit.BLACKSTONE_GOLEM_HEART);
-            fromCrafting(FireOfRetributionSpell.SPELL_ID, LHTraits.SOUL_BURNER.asItem());
 
-            fromCrafting("wizards:frost_blizzard", "soulsweapons:lord_soul_white");
-            fromCrafting(Nucleus.SPELL_ID, "endrem:cold_eye");
-            fromCrafting("spell-dimension:aura", "aquamirae:maze_rose");
-            fromCrafting("spell-dimension:icicle", "spell-dimension:abyss_guard");
-            fromCrafting(FrostBlinkSpell.SPELL_ID, AquamiraeItems.DEAD_SEA_SCROLL);
+            fromCrafting(AllSpells.FIRE_BREATH, "soulsweapons:lord_soul_rose");
+            fromCrafting(AllSpells.BLAST, AllItems.ACCURSED_BLACKSTONE);
+            fromCrafting(AllSpells.IGNITE, ItemInit.BLACKSTONE_GOLEM_HEART);
+            fromCrafting(AllSpells.FIRE_OF_RETRIBUTION, LHTraits.SOUL_BURNER.asItem());
+            fromCrafting(AllSpells.FIREFLOURISH, "bosses_of_mass_destruction:blazing_eye");
+            fromCrafting(AllSpells.FLICKER_STRIKE, "soulsweapons:lord_soul_red");
+
+            fromCrafting(AllSpells.FROST_BLIZZARD, "soulsweapons:lord_soul_white");
+            fromCrafting(AllSpells.NUCLEUS, "endrem:cold_eye");
+            fromCrafting(AllSpells.AURA, "aquamirae:maze_rose");
+            fromCrafting(AllSpells.ICICLE, "spell-dimension:abyss_guard");
+            fromCrafting(AllSpells.FROST_BLINK, AquamiraeItems.DEAD_SEA_SCROLL);
             fromCrafting(AllSpells.FROZEN, AquamiraeItems.SHIP_GRAVEYARD_ECHO);
+            fromCrafting(AllSpells.FROSTFLOURISH, "aquamirae:poisoned_chakra");
 
-            fromCrafting("paladins:holy_beam", "bosses_of_mass_destruction:ancient_anima");
-            fromCrafting("paladins:circle_of_healing", "soulsweapons:arkenstone");
-            fromCrafting("paladins:barrier", "graveyard:dark_iron_block");
-            fromCrafting("paladins:judgement", "soulsweapons:lord_soul_dark");
-
-            fromCrafting("spell-dimension:cleanse", ComplementItems.LIFE_ESSENCE);
-            fromCrafting(ExorcismSpell.SPELL_ID, LHTraits.DISPELL.asItem());
-            fromCrafting("spell-dimension:power", "soulsweapons:essence_of_luminescence");
-            fromCrafting("spell-dimension:resist", "soulsweapons:essence_of_eventide");
-            fromCrafting("spell-dimension:regen", "bosses_of_mass_destruction:void_thorn");
-        }
-
-        // Dynamic
-        {
-            fromEntityLoot("spellbladenext:maelstrom", "minecraft:ender_dragon");
-            fromEntityLoot("spellbladenext:finalstrike", "deeperdarker:stalker");
-
-            fromEntityLoot("spellbladenext:fireflourish", "soulsweapons:night_shade");
-            fromEntityLoot("spellbladenext:flicker_strike", "bosses_of_mass_destruction:gauntlet");
-
-            fromEntityLoot("spellbladenext:frostflourish", "soulsweapons:night_prowler");
+            fromCrafting(AllSpells.HOLY_BEAM, "bosses_of_mass_destruction:ancient_anima");
+            fromCrafting(AllSpells.CIRCLE_OF_HEALING, "soulsweapons:arkenstone");
+            fromCrafting(AllSpells.BARRIER, "graveyard:dark_iron_block");
+            fromCrafting(AllSpells.JUDGEMENT, "soulsweapons:lord_soul_dark");
+            fromCrafting(AllSpells.CLEANSE, ComplementItems.LIFE_ESSENCE);
+            fromCrafting(AllSpells.EXORCISM, LHTraits.DISPELL.asItem());
+            fromCrafting(AllSpells.POWER, "soulsweapons:essence_of_luminescence");
+            fromCrafting(AllSpells.RESIST, "soulsweapons:essence_of_eventide");
+            fromCrafting(AllSpells.REGEN, "bosses_of_mass_destruction:void_thorn");
         }
     }
 
     public static final String[] BOSSES = {
+            "soulsweapons:lord_soul_void",
+            "soulsweapons:lord_soul_day_stalker",
+            "soulsweapons:lord_soul_night_prowler",
             "illagerinvasion:invoker", "minecraft:totem_of_undying",
             "soulsweapons:draugr_boss", "soulsweapons:essence_of_eventide",
             """
@@ -165,19 +155,14 @@ public class SpellScrollConfig
             "使用混沌宝珠召唤。"
     };
 
-    private static void fromPrimary(String spellId)
+    private static void fromPrimary(Identifier spellId)
     {
-        SPELL_TEXTS.put(new Identifier(spellId), SDTexts.SCROLL$PRIMARY.get());
+        SPELL_TEXTS.put(spellId, SDTexts.SCROLL$PRIMARY.get());
     }
 
-    private static void fromBinding(String spellId)
+    private static void fromBinding(Identifier spellId)
     {
-        SPELL_TEXTS.put(new Identifier(spellId), SDTexts.SCROLL$BINDING.get());
-    }
-
-    private static void fromCrafting(String spellId, String itemId)
-    {
-        fromCrafting(new Identifier(spellId), new Identifier(itemId));
+        SPELL_TEXTS.put(spellId, SDTexts.SCROLL$BINDING.get());
     }
 
     private static void fromCrafting(Identifier spellId, String itemId)
@@ -190,26 +175,10 @@ public class SpellScrollConfig
         fromCrafting(spellId, Registries.ITEM.get(itemId));
     }
 
-    private static void fromCrafting(String spellId, Item item)
-    {
-        fromCrafting(new Identifier(spellId), item);
-    }
-
     private static void fromCrafting(Identifier spellId, Item item)
     {
         SPELL_TEXTS.put(spellId, SDTexts.SCROLL$CRAFT.get(item.getName().copy().formatted(Formatting.BOLD)));
+        CRAFT_SPELLS.add(spellId);
         InfusionRecipes.register(Items.PAPER, item, AllItems.SPELL_SCROLL.getStack(spellId), false, 20 * 60);
-    }
-
-    private static void fromEntityLoot(String spellId, String entityTypeId)
-    {
-        fromEntityLoot(new Identifier(spellId), new Identifier(entityTypeId));
-    }
-
-    private static void fromEntityLoot(Identifier spellId, Identifier entityTypeId)
-    {
-        EntityType<?> type = Registries.ENTITY_TYPE.get(entityTypeId);
-        SPELL_TEXTS.put(spellId, SDTexts.SCROLL$KILLING.get(type.getName().copy().formatted(Formatting.BOLD)));
-        LOOT_SPELLS.put(type.getLootTableId(), spellId);
     }
 }

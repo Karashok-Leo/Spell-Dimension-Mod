@@ -1,6 +1,7 @@
 package karashokleo.spell_dimension.content.spell;
 
 import karashokleo.spell_dimension.SpellDimension;
+import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.util.ImpactUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -16,12 +17,11 @@ import java.util.List;
 
 public class FrostBlinkSpell
 {
-    public static final Identifier SPELL_ID = SpellDimension.modLoc("frost_blink");
     public static final Identifier MINI_ICICLE = SpellDimension.modLoc("mini_icicle");
 
     public static void handle(World world, LivingEntity caster, List<Entity> targets, SpellInfo spellInfo)
     {
-        if (!spellInfo.id().equals(SPELL_ID) || world.isClient()) return;
+        if (!spellInfo.id().equals(AllSpells.FROST_BLINK) || world.isClient()) return;
 
         Spell spell = SpellRegistry.getSpell(MINI_ICICLE);
 

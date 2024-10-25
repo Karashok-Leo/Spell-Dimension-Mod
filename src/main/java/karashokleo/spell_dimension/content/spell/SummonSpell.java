@@ -1,8 +1,8 @@
 package karashokleo.spell_dimension.content.spell;
 
-import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.config.recipe.SummonSpellConfig;
 import karashokleo.spell_dimension.content.misc.ISpawnerExtension;
+import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.util.ParticleUtil;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -20,11 +20,9 @@ import net.spell_engine.entity.SpellProjectile;
 
 public class SummonSpell
 {
-    public static final Identifier SPELL_ID = SpellDimension.modLoc("summon");
-
     public static void handle(SpellProjectile projectile, Identifier spellId, BlockHitResult hitResult)
     {
-        if (!spellId.equals(SPELL_ID)) return;
+        if (!spellId.equals(AllSpells.SUMMON)) return;
         if (!(projectile.getWorld() instanceof ServerWorld world)) return;
         if (!(projectile.getOwner() instanceof LivingEntity living)) return;
         BlockPos blockPos = hitResult.getBlockPos();

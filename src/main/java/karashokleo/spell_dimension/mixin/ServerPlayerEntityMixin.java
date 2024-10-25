@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class ServerPlayerEntityMixin
 {
     @Shadow
-    public abstract boolean isSpawnForced();
+    private RegistryKey<World> spawnPointDimension;
 
     @Shadow
     public abstract void sendMessage(Text message, boolean overlay);
@@ -29,8 +29,11 @@ public abstract class ServerPlayerEntityMixin
     )
     private void inject_setSpawnPoint(RegistryKey<World> dimension, BlockPos pos, float angle, boolean forced, boolean sendMessage, CallbackInfo ci)
     {
-        if (dimension.equals(AllWorldGen.OC_WORLD)) return;
-        this.sendMessage(SDTexts.TEXT$SPAWN_POINT_RESTRICTION.get(), false);
-        ci.cancel();
+        if (this.spawnPointDimension.equals(AllWorldGen.OC_WORLD) &&
+            !dimension.equals(AllWorldGen.OC_WORLD))
+        {
+            this.sendMessage(SDTexts.TEXT$SPAWN_POINT_RESTRICTION.get(), false);
+            ci.cancel();
+        }
     }
 }

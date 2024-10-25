@@ -1,0 +1,35 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:piglin",
+    "minecraft:piglin_brute",
+    "minecraft:zoglin",
+    "minecraft:hoglin",
+    "minecraft:wither_skeleton",
+    "adventurez:blaze_guardian",
+    "adventurez:piglin_beast",
+    "adventurez:soul_reaper",
+    "adventurez:wither_puppet",
+    "adventurez:necromancer",
+    {
+      "id": "soulsweapons:forlorn",
+      "required": false
+    },
+    {
+      "id": "soulsweapons:evil_forlorn",
+      "required": false
+    },
+    {
+      "id": "soulsweapons:warmth_entity",
+      "required": false
+    },
+    {
+      "id": "soulsweapons:dark_sorcerer",
+      "required": false
+    },
+    {
+      "id": "soulsweapons:withered_demon",
+      "required": false
+    }
+  ]
+}

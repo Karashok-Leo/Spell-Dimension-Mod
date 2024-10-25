@@ -4,6 +4,14 @@
     "minecraft:zombie",
     "minecraft:zombie_villager",
     "minecraft:drowned",
-    "minecraft:husk"
+    "minecraft:husk",
+    {
+      "id": "soulsweapons:soul_reaper_ghost",
+      "required": false
+    },
+    {
+      "id": "soulsweapons:frost_giant",
+      "required": false
+    }
   ]
 }

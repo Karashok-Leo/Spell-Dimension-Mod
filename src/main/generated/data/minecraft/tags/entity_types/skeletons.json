@@ -1,6 +1,10 @@
 {
   "replace": false,
   "values": [
+    "adventurez:skeleton_vanguard",
+    "adventurez:soul_reaper",
+    "adventurez:wither_puppet",
+    "adventurez:necromancer",
     {
       "id": "skeletalremains:overgrownskeleton",
       "required": false

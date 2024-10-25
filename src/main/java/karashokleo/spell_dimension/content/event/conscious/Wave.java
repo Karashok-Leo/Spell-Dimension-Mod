@@ -9,32 +9,6 @@ public record Wave(Summoner summoner, int count)
     public static final String SUMMONER_KEY = "Summoner";
     public static final String COUNT_KEY = "Count";
 
-    //    MELEE(
-//            Summoner.fromTag(LHTags.MELEE_WEAPON_TARGET), 8
-//    ),
-//    RANGED(
-//            Summoner.fromTag(LHTags.RANGED_WEAPON_TARGET), 8
-//    ),
-//    BOSS(
-//            Summoner.fromTag(LHTags.SEMIBOSS), 1
-//    ),
-//    ZOMBIE(
-//            Summoner.fromTag(AllTags.ZOMBIE), 8
-//    ),
-//    SKELETON(
-//            Summoner.fromTag(AllTags.SKELETON), 8
-//    ),
-//    CREEPER(
-//            Summoner.fromTag(AllTags.CREEPER), 8
-//    ),
-//    MINI_BOSS(
-//            Summoner.fromTag(AllTags.MINI_BOSS), 1
-//    ),
-//    RAID(
-//            Summoner.fromTag(AllTags.RAID), 8
-//    ),
-    ;
-
     @Nullable
     public static Wave fromNbt(NbtCompound nbt)
     {

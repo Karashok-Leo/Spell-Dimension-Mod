@@ -3,12 +3,11 @@ package karashokleo.spell_dimension.content.spell;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.item.misc.wand.TraitAdderWand;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
-import karashokleo.spell_dimension.SpellDimension;
+import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.util.DamageUtil;
 import karashokleo.spell_dimension.util.RandomUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import net.spell_engine.api.spell.SpellInfo;
 import net.spell_power.api.SpellPower;
@@ -19,11 +18,9 @@ import java.util.Set;
 
 public class FireOfRetributionSpell
 {
-    public static final Identifier SPELL_ID = SpellDimension.modLoc("fire_of_retribution");
-
     public static void handle(World world, LivingEntity caster, List<Entity> targets, SpellInfo spellInfo)
     {
-        if (!spellInfo.id().equals(SPELL_ID) || world.isClient()) return;
+        if (!spellInfo.id().equals(AllSpells.FIRE_OF_RETRIBUTION) || world.isClient()) return;
         for (Entity entity : targets)
         {
             if (!(entity instanceof LivingEntity target)) continue;

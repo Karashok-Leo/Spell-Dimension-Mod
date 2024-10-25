@@ -62,7 +62,6 @@ public class AllBlocks
                 .addEN()
                 .addZH("识之核心")
                 .addSimpleItem()
-                .addModel()
                 .registerWithItem();
         CONSCIOUSNESS_CORE_TILE = Registry.register(
                 Registries.BLOCK_ENTITY_TYPE,
@@ -93,10 +92,12 @@ public class AllBlocks
         SpellDimension.MODELS.addBlock(generator -> generator.registerSimpleState(SPELL_INFUSION_PEDESTAL.block()));
         SpellDimension.MODELS.addBlock(generator -> generator.registerSimpleState(SPELL_LIGHT));
         SpellDimension.MODELS.addBlock(generator -> generator.registerSimpleState(CONSCIOUSNESS));
+        SpellDimension.MODELS.addBlock(generator -> generator.registerSimpleState(CONSCIOUSNESS_CORE.block()));
         SpellDimension.MODELS.addBlock(generator ->
         {
-            Identifier base = TexturedModel.CUBE_ALL.upload(CONSCIOUSNESS_BASE.block(), generator.modelCollector);
-            Identifier base_turned = generator.createSubModel(CONSCIOUSNESS_BASE.block(), "_turned", Models.CUBE_ALL, TextureMap::all);
+
+            Identifier base = Models.CUBE_ALL.upload(CONSCIOUSNESS_BASE.block(), TextureMap.all(SpellDimension.modLoc("block/lopy/consciousness_base")), generator.modelCollector);
+            Identifier base_turned = Models.CUBE_ALL.upload(CONSCIOUSNESS_BASE.block(), "_turned", TextureMap.all(SpellDimension.modLoc("block/lopy/consciousness_base_turned")), generator.modelCollector);
             generator.blockStateCollector.accept(VariantsBlockStateSupplier.create(CONSCIOUSNESS_BASE.block()).coordinate(BlockStateModelGenerator.createBooleanModelMap(ConsciousnessBaseBlock.TURNED, base_turned, base)));
         });
     }

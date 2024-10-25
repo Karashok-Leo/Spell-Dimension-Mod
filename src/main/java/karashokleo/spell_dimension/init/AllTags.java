@@ -1,9 +1,11 @@
 package karashokleo.spell_dimension.init;
 
-import fuzs.mutantmonsters.init.ModRegistry;
+import com.kyanite.deeperdarker.content.DDEntities;
+import karashokleo.l2hostility.init.LHTags;
 import karashokleo.leobrary.datagen.generator.TagGenerator;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.util.TagUtil;
+import net.adventurez.init.EntityInit;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
@@ -22,6 +24,14 @@ import java.util.stream.Stream;
 
 public class AllTags
 {
+    public static final List<TagKey<Item>> MATERIAL = List.of(
+            TagUtil.itemTag("common/material"),
+            TagUtil.itemTag("uncommon/material"),
+            TagUtil.itemTag("rare/material"),
+            TagUtil.itemTag("epic/material"),
+            TagUtil.itemTag("legendary/material")
+    );
+
     public static final List<TagKey<Item>> ESSENCE = List.of(
             TagUtil.itemTag("essence/0"),
             TagUtil.itemTag("essence/1"),
@@ -64,9 +74,12 @@ public class AllTags
 
     public static final TagKey<EntityType<?>> ZOMBIES = TagUtil.entityTypeTag(new Identifier("zombies"));
     public static final TagKey<EntityType<?>> SKELETONS = EntityTypeTags.SKELETONS;
-    public static final TagKey<EntityType<?>> MINI_BOSS = TagUtil.entityTypeTag("mini_boss");
     public static final TagKey<EntityType<?>> RAIDERS_VANILLA = TagUtil.entityTypeTag("raiders_vanilla");
     public static final TagKey<EntityType<?>> RAIDERS_INVADE = TagUtil.entityTypeTag("raiders_invade");
+    public static final TagKey<EntityType<?>> NETHER = TagUtil.entityTypeTag("nether");
+    public static final TagKey<EntityType<?>> SCULK = TagUtil.entityTypeTag("sculk");
+    public static final TagKey<EntityType<?>> ADVZ_MONSTER = TagUtil.entityTypeTag("advz_monster");
+    public static final TagKey<EntityType<?>> SW_MONSTER = TagUtil.entityTypeTag("sw_monster");
 
     public static void register()
     {
@@ -97,60 +110,129 @@ public class AllTags
         for (TagKey<Item> key : BOOK)
             bookAllContainer.addTag(key);
 
-        SpellDimension.BLOCK_TAGS.getOrCreateContainer(LOCATE_TARGET).add(
-                Blocks.LODESTONE
-        );
+        SpellDimension.BLOCK_TAGS.getOrCreateContainer(LOCATE_TARGET)
+                .add(
+                        Blocks.LODESTONE
+                );
 
-        SpellDimension.BLOCK_TAGS.getOrCreateContainer(BlockTags.REPLACEABLE_BY_TREES).add(
-                AllBlocks.CONSCIOUSNESS
-        );
+        SpellDimension.BLOCK_TAGS.getOrCreateContainer(BlockTags.REPLACEABLE_BY_TREES)
+                .add(
+                        AllBlocks.CONSCIOUSNESS
+                );
 
-        SpellDimension.FLUID_TAGS.getOrCreateContainer(FluidTags.WATER).add(
-                AllBlocks.STILL_CONSCIOUSNESS,
-                AllBlocks.FLOWING_CONSCIOUSNESS
-        );
+        SpellDimension.FLUID_TAGS.getOrCreateContainer(FluidTags.WATER)
+                .add(
+                        AllBlocks.STILL_CONSCIOUSNESS,
+                        AllBlocks.FLOWING_CONSCIOUSNESS
+                );
 
-        SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(ZOMBIES).add(
-                EntityType.ZOMBIE,
-                EntityType.ZOMBIE_VILLAGER,
-                EntityType.DROWNED,
-                EntityType.HUSK
-        );
-        SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(SKELETONS).addOptional(
-                new Identifier("skeletalremains:overgrownskeleton"),
-                new Identifier("skeletalremains:sharpshooterskeleton"),
-                new Identifier("skeletalremains:sunkenskeleton"),
-                new Identifier("skeletalremains:charredskeleton"),
-                new Identifier("skeletalremains:fallenskeleton"),
-                new Identifier("skeletalremains:swampedskeleton")
-        );
-        SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(MINI_BOSS).add(
-                EntityType.EVOKER,
-                EntityType.RAVAGER,
-                ModRegistry.MUTANT_ZOMBIE_ENTITY_TYPE.get(),
-                ModRegistry.MUTANT_SKELETON_ENTITY_TYPE.get(),
-                ModRegistry.MUTANT_CREEPER_ENTITY_TYPE.get(),
-                ModRegistry.MUTANT_ENDERMAN_ENTITY_TYPE.get()
-        );
-        SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(RAIDERS_VANILLA).add(
-                EntityType.PILLAGER,
-                EntityType.VINDICATOR,
-                EntityType.RAVAGER,
-                EntityType.WITCH,
-                EntityType.EVOKER,
-                EntityType.ILLUSIONER
-        );
-        SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(RAIDERS_INVADE).add(
-                fuzs.illagerinvasion.init.ModRegistry.BASHER_ENTITY_TYPE.get(),
-                fuzs.illagerinvasion.init.ModRegistry.PROVOKER_ENTITY_TYPE.get(),
-                fuzs.illagerinvasion.init.ModRegistry.NECROMANCER_ENTITY_TYPE.get(),
-                fuzs.illagerinvasion.init.ModRegistry.SORCERER_ENTITY_TYPE.get(),
-                fuzs.illagerinvasion.init.ModRegistry.ARCHIVIST_ENTITY_TYPE.get(),
-                fuzs.illagerinvasion.init.ModRegistry.MARAUDER_ENTITY_TYPE.get(),
-                fuzs.illagerinvasion.init.ModRegistry.INQUISITOR_ENTITY_TYPE.get(),
-                fuzs.illagerinvasion.init.ModRegistry.ALCHEMIST_ENTITY_TYPE.get(),
-                fuzs.illagerinvasion.init.ModRegistry.FIRECALLER_ENTITY_TYPE.get(),
-                fuzs.illagerinvasion.init.ModRegistry.SURRENDERED_ENTITY_TYPE.get()
-        );
+        SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(ZOMBIES)
+                .add(
+                        EntityType.ZOMBIE,
+                        EntityType.ZOMBIE_VILLAGER,
+                        EntityType.DROWNED,
+                        EntityType.HUSK
+                ).addOptional(
+                        new Identifier("soulsweapons:soul_reaper_ghost"),
+                        new Identifier("soulsweapons:frost_giant")
+                );
+        SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(SKELETONS)
+                .add(
+                        EntityInit.SKELETON_VANGUARD,
+                        EntityInit.SOUL_REAPER,
+                        EntityInit.WITHER_PUPPET,
+                        EntityInit.NECROMANCER
+                ).addOptional(
+                        new Identifier("skeletalremains:overgrownskeleton"),
+                        new Identifier("skeletalremains:sharpshooterskeleton"),
+                        new Identifier("skeletalremains:sunkenskeleton"),
+                        new Identifier("skeletalremains:charredskeleton"),
+                        new Identifier("skeletalremains:fallenskeleton"),
+                        new Identifier("skeletalremains:swampedskeleton")
+                );
+        SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(RAIDERS_VANILLA)
+                .add(
+                        EntityType.PILLAGER,
+                        EntityType.VINDICATOR,
+                        EntityType.RAVAGER,
+                        EntityType.WITCH,
+                        EntityType.EVOKER,
+                        EntityType.ILLUSIONER
+                );
+        SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(RAIDERS_INVADE)
+                .add(
+                        fuzs.illagerinvasion.init.ModRegistry.BASHER_ENTITY_TYPE.get(),
+                        fuzs.illagerinvasion.init.ModRegistry.PROVOKER_ENTITY_TYPE.get(),
+                        fuzs.illagerinvasion.init.ModRegistry.NECROMANCER_ENTITY_TYPE.get(),
+                        fuzs.illagerinvasion.init.ModRegistry.SORCERER_ENTITY_TYPE.get(),
+                        fuzs.illagerinvasion.init.ModRegistry.ARCHIVIST_ENTITY_TYPE.get(),
+                        fuzs.illagerinvasion.init.ModRegistry.MARAUDER_ENTITY_TYPE.get(),
+                        fuzs.illagerinvasion.init.ModRegistry.INQUISITOR_ENTITY_TYPE.get(),
+                        fuzs.illagerinvasion.init.ModRegistry.ALCHEMIST_ENTITY_TYPE.get(),
+                        fuzs.illagerinvasion.init.ModRegistry.FIRECALLER_ENTITY_TYPE.get(),
+                        fuzs.illagerinvasion.init.ModRegistry.SURRENDERED_ENTITY_TYPE.get()
+                );
+        SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(NETHER)
+                .add(
+                        EntityType.PIGLIN,
+                        EntityType.PIGLIN_BRUTE,
+                        EntityType.ZOGLIN,
+                        EntityType.HOGLIN,
+                        EntityType.WITHER_SKELETON,
+                        EntityInit.BLAZE_GUARDIAN,
+                        EntityInit.PIGLIN_BEAST,
+                        EntityInit.SOUL_REAPER,
+                        EntityInit.WITHER_PUPPET,
+                        EntityInit.NECROMANCER
+
+                ).addOptional(
+                        new Identifier("soulsweapons:forlorn"),
+                        new Identifier("soulsweapons:evil_forlorn"),
+                        new Identifier("soulsweapons:warmth_entity"),
+                        new Identifier("soulsweapons:dark_sorcerer"),
+                        new Identifier("soulsweapons:withered_demon")
+                );
+        SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(SCULK)
+                .add(
+                        DDEntities.SCULK_CENTIPEDE,
+                        DDEntities.SHATTERED,
+                        DDEntities.SCULK_SNAPPER,
+                        DDEntities.SLUDGE,
+                        DDEntities.SHRIEK_WORM
+                );
+        SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(ADVZ_MONSTER)
+                .add(
+                        EntityInit.AMETHYST_GOLEM,
+                        EntityInit.SKELETON_VANGUARD,
+                        EntityInit.SUMMONER,
+                        EntityInit.BLAZE_GUARDIAN,
+                        EntityInit.ORC,
+                        EntityInit.PIGLIN_BEAST,
+                        EntityInit.SOUL_REAPER,
+                        EntityInit.WITHER_PUPPET,
+                        EntityInit.NECROMANCER,
+                        EntityInit.DESERT_RHINO,
+                        EntityInit.SHAMAN,
+                        EntityInit.ENDERWARTHOG,
+                        EntityInit.VOID_FRAGMENT
+                );
+        SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(SW_MONSTER)
+                .addOptional(
+                        new Identifier("soulsweapons:warmth_entity"),
+                        new Identifier("soulsweapons:big_chungus"),
+                        new Identifier("soulsweapons:dark_sorcerer"),
+                        new Identifier("soulsweapons:soul_reaper_ghost"),
+                        new Identifier("soulsweapons:forlorn"),
+                        new Identifier("soulsweapons:evil_forlorn"),
+                        new Identifier("soulsweapons:soulmass"),
+                        new Identifier("soulsweapons:frost_giant"),
+                        new Identifier("soulsweapons:rime_spectre")
+                );
+
+        SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(LHTags.WHITELIST)
+                .addTag(
+                        ADVZ_MONSTER,
+                        SW_MONSTER
+                );
     }
 }
