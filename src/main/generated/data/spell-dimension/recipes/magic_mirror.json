@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "spell-dimension:broken_magic_mirror"
+    },
+    "S": {
+      "tag": "spell-dimension:legendary/material"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "SAS",
+    "SSS"
+  ],
+  "result": {
+    "item": "spell-dimension:magic_mirror"
+  },
+  "show_notification": true
+}

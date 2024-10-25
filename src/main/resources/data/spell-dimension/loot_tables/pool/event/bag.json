@@ -95,6 +95,11 @@
         },
         {
           "type": "loot-bag:loot_bag",
+          "bag": "spell-dimension:victus",
+          "weight": 1
+        },
+        {
+          "type": "loot-bag:loot_bag",
           "bag": "spell-dimension:jewelry/rings",
           "weight": 1
         },

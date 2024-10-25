@@ -1,0 +1,81 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "victus:grilled_heart_aspect",
+      "required": false
+    },
+    {
+      "id": "victus:bundle_heart_aspect",
+      "required": false
+    },
+    {
+      "id": "victus:creeper_heart_aspect",
+      "required": false
+    },
+    {
+      "id": "victus:diamond_heart_aspect",
+      "required": false
+    },
+    {
+      "id": "victus:light_heart_aspect",
+      "required": false
+    },
+    {
+      "id": "victus:ocean_heart_aspect",
+      "required": false
+    },
+    {
+      "id": "victus:totem_heart_aspect",
+      "required": false
+    },
+    {
+      "id": "victus:potion_heart_aspect",
+      "required": false
+    },
+    {
+      "id": "victus:archery_heart_aspect",
+      "required": false
+    },
+    {
+      "id": "victus:blazing_heart_aspect",
+      "required": false
+    },
+    {
+      "id": "victus:draconic_heart_aspect",
+      "required": false
+    },
+    {
+      "id": "victus:emerald_heart_aspect",
+      "required": false
+    },
+    {
+      "id": "victus:evoking_heart_aspect",
+      "required": false
+    },
+    {
+      "id": "victus:golden_heart_aspect",
+      "required": false
+    },
+    {
+      "id": "victus:icy_heart_aspect",
+      "required": false
+    },
+    {
+      "id": "victus:iron_heart_aspect",
+      "required": false
+    },
+    {
+      "id": "victus:lapis_heart_aspect",
+      "required": false
+    },
+    {
+      "id": "victus:sweet_heart_aspect",
+      "required": false
+    },
+    {
+      "id": "victus:cheese_heart_aspect",
+      "required": false
+    }
+  ]
+}

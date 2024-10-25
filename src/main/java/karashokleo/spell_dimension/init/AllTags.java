@@ -67,6 +67,8 @@ public class AllTags
 
     public static final TagKey<Item> SHELL_HORN_REQUIREMENT = TagUtil.itemTag("shell_horn_requirement");
 
+    public static final TagKey<Item> VICTUS_ITEM = TagUtil.itemTag("victus_item");
+
     public static final TagKey<Block> LOCATE_TARGET = TagUtil.blockTag("locate_target");
 
     public static final TagKey<Item> BACK = TagUtil.itemTag(new Identifier("trinkets", "chest/back"));
@@ -109,6 +111,29 @@ public class AllTags
         TagGenerator.Container<Item> bookAllContainer = generator.getOrCreateContainer(BOOK_ALL);
         for (TagKey<Item> key : BOOK)
             bookAllContainer.addTag(key);
+
+        generator.getOrCreateContainer(VICTUS_ITEM)
+                .addOptional(
+                        new Identifier("victus:grilled_heart_aspect"),
+                        new Identifier("victus:bundle_heart_aspect"),
+                        new Identifier("victus:creeper_heart_aspect"),
+                        new Identifier("victus:diamond_heart_aspect"),
+                        new Identifier("victus:light_heart_aspect"),
+                        new Identifier("victus:ocean_heart_aspect"),
+                        new Identifier("victus:totem_heart_aspect"),
+                        new Identifier("victus:potion_heart_aspect"),
+                        new Identifier("victus:archery_heart_aspect"),
+                        new Identifier("victus:blazing_heart_aspect"),
+                        new Identifier("victus:draconic_heart_aspect"),
+                        new Identifier("victus:emerald_heart_aspect"),
+                        new Identifier("victus:evoking_heart_aspect"),
+                        new Identifier("victus:golden_heart_aspect"),
+                        new Identifier("victus:icy_heart_aspect"),
+                        new Identifier("victus:iron_heart_aspect"),
+                        new Identifier("victus:lapis_heart_aspect"),
+                        new Identifier("victus:sweet_heart_aspect"),
+                        new Identifier("victus:cheese_heart_aspect")
+                );
 
         SpellDimension.BLOCK_TAGS.getOrCreateContainer(LOCATE_TARGET)
                 .add(

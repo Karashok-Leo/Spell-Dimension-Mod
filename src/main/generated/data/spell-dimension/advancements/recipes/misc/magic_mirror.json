@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_broken_magic_mirror": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "spell-dimension:broken_magic_mirror"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "spell-dimension:magic_mirror"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_broken_magic_mirror",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "spell-dimension:magic_mirror"
+    ]
+  },
+  "sends_telemetry_event": false
+}

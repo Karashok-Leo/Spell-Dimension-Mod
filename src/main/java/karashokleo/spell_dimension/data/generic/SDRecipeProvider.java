@@ -90,6 +90,19 @@ public class SDRecipeProvider extends FabricRecipeProvider
                         FabricRecipeProvider.conditionsFromItem(Items.GOLDEN_APPLE)
                 )
                 .offerTo(exporter, SpellDimension.modLoc("enchanted_golden_apple"));
+
+        ShapedRecipeJsonBuilder
+                .create(RecipeCategory.MISC, AllItems.MAGIC_MIRROR)
+                .pattern("SSS")
+                .pattern("SAS")
+                .pattern("SSS")
+                .input('S', Ingredient.fromTag(AllTags.MATERIAL.get(4)))
+                .input('A', AllItems.BROKEN_MAGIC_MIRROR)
+                .criterion(
+                        FabricRecipeProvider.hasItem(AllItems.BROKEN_MAGIC_MIRROR),
+                        FabricRecipeProvider.conditionsFromItem(AllItems.BROKEN_MAGIC_MIRROR)
+                )
+                .offerTo(exporter);
     }
 
     private static void addBaseEssenceRecipe(Consumer<RecipeJsonProvider> exporter)
