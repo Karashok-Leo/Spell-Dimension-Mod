@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class SpellInfusionPedestalTile extends AbstractInfusionTile
 {
-    public static final int CRAFT_TIME = 100;
+    public static final int CRAFT_TIME = 20 * 10;
 
     @Nullable
     private ItemStack crafting = null;

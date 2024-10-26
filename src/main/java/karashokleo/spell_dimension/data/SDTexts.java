@@ -2,6 +2,7 @@ package karashokleo.spell_dimension.data;
 
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.config.recipe.LocateSpellConfig;
+import karashokleo.spell_dimension.content.buff.Conscious;
 import karashokleo.spell_dimension.content.event.conscious.EventAward;
 import karashokleo.spell_dimension.data.loot_bag.SDBags;
 import karashokleo.spell_dimension.data.loot_bag.SDContents;
@@ -50,12 +51,12 @@ public enum SDTexts
     TEXT$CONSCIOUSNESS_CORE$AWARD("Award: %s", "奖励: %s"),
     TEXT$CONSCIOUSNESS_CORE$TRIGGERED("Event has been triggered", "事件已触发"),
     TEXT$CONSCIOUSNESS_CORE$NOT_TRIGGERED("Event not triggered", "事件未触发"),
-    TEXT$CONSCIOUS_TIMER("Conscious - Countdown: %s seconds", "识 - 倒计时: %s秒"),
     TEXT$EVENT$PREPARE("The event is about to begin - Countdown: %s seconds", "事件即将开始 - 倒计时: %s秒"),
     TEXT$EVENT$RUNNING("Wave %s/%s - Enemies Remaining: %s", "第%s/%s波 - 剩余敌人: %s"),
     TEXT$EVENT$WAITING("Wave %s/%s is about to start - Countdown: %s seconds", "第%s/%s波即将开始 - 倒计时: %s秒"),
     TEXT$EVENT$FINISH$SUCCESS("Event End - Successful", "事件结束 - 成功"),
     TEXT$EVENT$FINISH$FAIL("Event End - Failed", "事件结束 - 失败"),
+    TEXT$CONSCIOUS$COUNTDOWN("Conscious - Countdown: %s seconds", "意识留存 - 倒计时: %s秒"),
 
     /**
      * Spell School
@@ -113,6 +114,10 @@ public enum SDTexts
     TOOLTIP$HEART_SPELL_STEEL$ACCUMULATED("Max health obtained: %s", "已获得的最大生命值: %s"),
     TOOLTIP$REJUVENATING_BLOSSOM$USAGE_1("- When injured, if the amount of health that your existing regeneration effect will recover is less than the damage dealt * the count of this item equipped, then remove all negative effects from you.", "- 受伤时, 如果你还未恢复的生命值低于受到伤害 * 装备的该物品数量, 则移除你身上所有负面效果"),
     TOOLTIP$REJUVENATING_BLOSSOM$USAGE_2("- When injured, gain a regeneration effect that restores health equivalent to the amount of damage received * the count of this item equipped.", "- 受伤时获得生命恢复效果, 该效果将恢复的生命值等同于受到的伤害值 * 装备的该物品数量"),
+    TOOLTIP$MAGIC_MIRROR$USAGE("Use to teleport to the Ocean of Consciousness", "使用后传送至识之海"),
+    TOOLTIP$MAGIC_MIRROR$WARNING("Warning: After entering the Ocean of Consciousness, you can only be reborn in the dimension of the Ocean of Consciousness", "警告: 进入识之海后, 你只能在识之海维度中重生"),
+    TOOLTIP$MAGIC_MIRROR$BROKEN_1("This item is a consumable", "该物品为消耗品"),
+    TOOLTIP$MAGIC_MIRROR$BROKEN_2("After entering the Ocean of Consciousness, obtain 'Conscious' with a " + Conscious.COUNT_DOWN / 20 + " timer, and force return to the overworld after the countdown ends", "进入识之海后, 获得计时" + Conscious.COUNT_DOWN / 20 + "秒的意识留存, 倒计时结束后强制返回主世界"),
 
     /**
      * Scrolls
@@ -188,7 +193,7 @@ public enum SDTexts
         addGroupTranslation();
         addLootBagTranslation();
         addEventAwardTranslation();
-        LocateSpellConfig.register( );
+        LocateSpellConfig.register();
         SpellDimension.EN_TEXTS.addEntityType(AllEntities.LOCATE_PORTAL, "Locate Portal");
         SpellDimension.ZH_TEXTS.addEntityType(AllEntities.LOCATE_PORTAL, "定位传送门");
     }

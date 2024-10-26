@@ -50,6 +50,25 @@ public class ProtectiveCoverBlock extends AbstractGlassBlock implements BlockEnt
         world.setBlockState(pos, AllBlocks.PROTECTIVE_COVER.block().getDefaultState().with(Properties.PERSISTENT, true));
     }
 
+    public static void placeAsBarrier(World world, BlockPos pos, int radius, int life)
+    {
+        for (int x = -radius; x <= radius; x++)
+            for (int y = -radius; y <= radius; y++)
+                for (int z = -radius; z <= radius; z++)
+                    if (x == -radius || x == radius ||
+                        y == -radius || y == radius ||
+                        z == -radius || z == radius)
+                    {
+                        BlockPos placePos = pos.add(x, y, z);
+                        if (world.getBlockState(placePos).isReplaceable())
+                        {
+                            world.setBlockState(placePos, AllBlocks.PROTECTIVE_COVER.block().getDefaultState());
+                            if (world.getBlockEntity(placePos) instanceof ProtectiveCoverBlockTile tile)
+                                tile.setLife(life);
+                        }
+                    }
+    }
+
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder)
     {

@@ -1,5 +1,6 @@
 package karashokleo.spell_dimension.config.recipe;
 
+import com.spellbladenext.Spellblades;
 import karashokleo.l2hostility.content.item.ComplementItems;
 import karashokleo.leobrary.datagen.util.StringUtil;
 import karashokleo.spell_dimension.SpellDimension;
@@ -29,6 +30,8 @@ public class LocateSpellConfig
 
     public static final RegistryKey<Structure> DARK_DUNGEON = RegistryKey.of(RegistryKeys.STRUCTURE, new Identifier("dungeonz:dark_dungeon_structure"));
     public static final RegistryKey<Structure> DESERT_DUNGEON = RegistryKey.of(RegistryKeys.STRUCTURE, new Identifier("dungeonz:desert_dungeon_structure"));
+    public static final RegistryKey<Structure> SHIP = RegistryKey.of(RegistryKeys.STRUCTURE, new Identifier("aquamirae:ship"));
+    public static final RegistryKey<Structure> SHELTER = RegistryKey.of(RegistryKeys.STRUCTURE, new Identifier("aquamirae:shelter"));
 
     static
     {
@@ -39,6 +42,8 @@ public class LocateSpellConfig
         register(StructureKeys.MANSION, Items.EMERALD_BLOCK, "林地府邸");
         register(DARK_DUNGEON, ComplementItems.CURSED_DROPLET, "暗黑地牢");
         register(DESERT_DUNGEON, ComplementItems.SUN_MEMBRANE, "沙漠地牢");
+        register(SHIP, RuneItems.get(RuneItems.RuneType.FROST), "搁浅舰船");
+        register(SHELTER, Spellblades.RUNEFROST, "避难所");
 
         register(ConventionalBiomeTags.TAIGA, Items.SWEET_BERRIES, "针叶林");
         register(ConventionalBiomeTags.JUNGLE, Items.COCOA_BEANS, "热带雨林");
@@ -47,7 +52,7 @@ public class LocateSpellConfig
         register(ConventionalBiomeTags.MUSHROOM, Items.BROWN_MUSHROOM, "蘑菇岛");
         register(ConventionalBiomeTags.BADLANDS, Items.CLAY_BALL, "恶地");
         register(ConventionalBiomeTags.SNOWY, Items.SNOWBALL, "覆雪地带");
-        register(ConventionalBiomeTags.ICY, RuneItems.get(RuneItems.RuneType.FROST), "冰冻地带");
+        register(ConventionalBiomeTags.ICY, Items.ICE, "冰冻地带");
         register(ConventionalBiomeTags.OCEAN, Items.KELP, "海洋");
         register(ConventionalBiomeTags.DEEP_OCEAN, Items.PRISMARINE_SHARD, "深海");
         register(ConventionalBiomeTags.DESERT, Items.SAND, "沙漠");

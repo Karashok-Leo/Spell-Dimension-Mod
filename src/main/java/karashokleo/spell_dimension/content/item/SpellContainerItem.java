@@ -1,7 +1,7 @@
 package karashokleo.spell_dimension.content.item;
 
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
-import karashokleo.spell_dimension.content.event.conscious.ConsciousnessEventManager;
+import karashokleo.spell_dimension.content.block.ProtectiveCoverBlock;
 import karashokleo.spell_dimension.content.item.logic.KillSpellGoal;
 import karashokleo.spell_dimension.content.item.logic.SpellGoal;
 import karashokleo.spell_dimension.init.AllItems;
@@ -60,7 +60,7 @@ public class SpellContainerItem extends Item
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand)
     {
-        ConsciousnessEventManager.placeAsBarrier(world, user.getBlockPos(), 16, 200);
+        ProtectiveCoverBlock.placeAsBarrier(world, user.getBlockPos(), 16, 200);
         return super.use(world, user, hand);
     }
 

@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "conditions": [
+        {
+          "condition": "minecraft:killed_by_player"
+        },
+        {
+          "chance": 0.2,
+          "condition": "minecraft:random_chance_with_looting",
+          "looting_multiplier": 0.15
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "soulsweapons:moonstone"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "soulsweapons:verglas"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

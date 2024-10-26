@@ -25,9 +25,9 @@ public class Conscious implements Buff
             ).apply(ins, Conscious::new)
     );
     public static final BuffType<Conscious> TYPE = new BuffType<>(CODEC, false);
-    private static final int COUNT_DOWN = 20 * 60 * 10;
+    public static final int COUNT_DOWN = 20 * 60 * 10;
 
-    private final ServerBossBar bossBar = new ServerBossBar(Text.of(""), ServerBossBar.Color.PURPLE, ServerBossBar.Style.PROGRESS);
+    private final ServerBossBar bossBar = new ServerBossBar(Text.empty(), ServerBossBar.Color.PURPLE, ServerBossBar.Style.PROGRESS);
     private ServerPlayerEntity player;
     private int countDown;
 
@@ -91,7 +91,7 @@ public class Conscious implements Buff
     private void tickBossBar()
     {
         bossBar.setPercent(1.0F * countDown / COUNT_DOWN);
-        bossBar.setName(SDTexts.TEXT$CONSCIOUS_TIMER.get(countDown / 20));
+        bossBar.setName(SDTexts.TEXT$CONSCIOUS$COUNTDOWN.get(countDown / 20));
         if (!bossBar.getPlayers().contains(player))
             bossBar.addPlayer(player);
     }

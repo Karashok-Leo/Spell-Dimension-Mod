@@ -92,12 +92,26 @@ public class SDRecipeProvider extends FabricRecipeProvider
                 .offerTo(exporter, SpellDimension.modLoc("enchanted_golden_apple"));
 
         ShapedRecipeJsonBuilder
+                .create(RecipeCategory.MISC, AllItems.BROKEN_MAGIC_MIRROR)
+                .pattern("MMM")
+                .pattern("LPL")
+                .pattern("MMM")
+                .input('M', Ingredient.fromTag(AllTags.ESSENCE.get(1)))
+                .input('L', Ingredient.fromTag(AllTags.ESSENCE.get(2)))
+                .input('P', Items.ENDER_PEARL)
+                .criterion(
+                        FabricRecipeProvider.hasItem(Items.ENDER_PEARL),
+                        FabricRecipeProvider.conditionsFromItem(Items.ENDER_PEARL)
+                )
+                .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder
                 .create(RecipeCategory.MISC, AllItems.MAGIC_MIRROR)
-                .pattern("SSS")
-                .pattern("SAS")
-                .pattern("SSS")
-                .input('S', Ingredient.fromTag(AllTags.MATERIAL.get(4)))
-                .input('A', AllItems.BROKEN_MAGIC_MIRROR)
+                .pattern("MMM")
+                .pattern("MBM")
+                .pattern("MMM")
+                .input('M', Ingredient.fromTag(AllTags.MATERIAL.get(4)))
+                .input('B', AllItems.BROKEN_MAGIC_MIRROR)
                 .criterion(
                         FabricRecipeProvider.hasItem(AllItems.BROKEN_MAGIC_MIRROR),
                         FabricRecipeProvider.conditionsFromItem(AllItems.BROKEN_MAGIC_MIRROR)

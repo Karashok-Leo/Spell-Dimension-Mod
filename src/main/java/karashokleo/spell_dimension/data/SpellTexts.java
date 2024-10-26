@@ -71,6 +71,12 @@ public enum SpellTexts
             "Launch a spell, if it touches a mob, exchange your position with that mob.",
             "发射一道咒语, 若其触碰到生物，则交换你与该生物的位置."
     ),
+    ARCANE_BARRIER(
+            "Arcane Barrier",
+            "奥术屏障",
+            "Generate an arcane barrier around oneself.",
+            "在自身周围生成一个奥术屏障."
+    ),
     BLAST(
             "Blast",
             "热爆",

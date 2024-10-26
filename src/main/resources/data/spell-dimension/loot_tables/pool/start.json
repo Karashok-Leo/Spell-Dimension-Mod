@@ -27,7 +27,27 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "name": "l2hostility:bottle_of_curse"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
           "name": "things:ender_pouch"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "spell-dimension:broken_magic_mirror"
         }
       ],
       "rolls": 1.0

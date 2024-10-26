@@ -65,6 +65,7 @@ public class AllSpells
     public static final Identifier ELDRITCH_BLAST = new Identifier("spellbladenext:eldritchblast");
     public static final Identifier SHIFT = SpellDimension.modLoc("shift");
     public static final Identifier FORCE_LANDING = SpellDimension.modLoc("force_landing");
+    public static final Identifier ARCANE_BARRIER= SpellDimension.modLoc("arcane_barrier");
     public static final Identifier INCARCERATE = SpellDimension.modLoc("incarcerate");
     public static final Identifier MAELSTROM = new Identifier("spellbladenext:maelstrom");
     public static final Identifier FINALSTRIKE = new Identifier("spellbladenext:finalstrike");
@@ -103,6 +104,7 @@ public class AllSpells
 
         LivingDamageEvent.DAMAGE.register(BlazingMark::mark);
 
+        CustomSpellHandler.register(ARCANE_BARRIER, data -> ArcaneBarrierSpell.handle((CustomSpellHandler.Data) data));
         CustomSpellHandler.register(NUCLEUS, data -> Nucleus.handle((CustomSpellHandler.Data) data));
         CustomSpellHandler.register(EXORCISM, data -> ExorcismSpell.handle((CustomSpellHandler.Data) data));
 

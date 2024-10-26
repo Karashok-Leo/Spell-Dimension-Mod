@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "L": {
+      "tag": "spell-dimension:essence/2"
+    },
+    "M": {
+      "tag": "spell-dimension:essence/1"
+    },
+    "P": {
+      "item": "minecraft:ender_pearl"
+    }
+  },
+  "pattern": [
+    "MMM",
+    "LPL",
+    "MMM"
+  ],
+  "result": {
+    "item": "spell-dimension:broken_magic_mirror"
+  },
+  "show_notification": true
+}

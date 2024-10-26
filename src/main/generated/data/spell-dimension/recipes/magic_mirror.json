@@ -2,17 +2,17 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "A": {
+    "B": {
       "item": "spell-dimension:broken_magic_mirror"
     },
-    "S": {
+    "M": {
       "tag": "spell-dimension:legendary/material"
     }
   },
   "pattern": [
-    "SSS",
-    "SAS",
-    "SSS"
+    "MMM",
+    "MBM",
+    "MMM"
   ],
   "result": {
     "item": "spell-dimension:magic_mirror"

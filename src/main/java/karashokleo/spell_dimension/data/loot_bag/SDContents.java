@@ -19,8 +19,8 @@ public enum SDContents
             "wizards:textures/item/wand_arcane.png",
             "Starter Kit",
             "初始装备",
-            "Includes random digging tool, 16 bottles of recall potion, ender pouch",
-            "包含随机挖掘工具、16瓶回忆药水、末影袋"
+            "Includes random digging tool, 16 bottles of recall potion, bottle of curse, ender pouch, broken magic mirror",
+            "包含随机挖掘工具、16瓶回忆药水、瓶装恶意、末影袋、破碎的魔镜"
     ),
     CHARM(
             "mythic_charms:textures/item/fragile_charm_of_gaze_serenity.png",

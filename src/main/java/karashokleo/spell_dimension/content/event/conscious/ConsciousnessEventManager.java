@@ -1,6 +1,6 @@
 package karashokleo.spell_dimension.content.event.conscious;
 
-import karashokleo.spell_dimension.content.block.tile.ProtectiveCoverBlockTile;
+import karashokleo.spell_dimension.content.block.ProtectiveCoverBlock;
 import karashokleo.spell_dimension.content.entity.ConsciousnessEventEntity;
 import karashokleo.spell_dimension.init.AllBlocks;
 import karashokleo.spell_dimension.init.AllEntities;
@@ -37,7 +37,7 @@ public class ConsciousnessEventManager
     @Nullable
     public static ConsciousnessEventEntity startEvent(ServerWorld world, BlockPos pos, int level, EventAward award)
     {
-        placeAsBarrier(world, pos, RADIUS, TIME_LIMIT);
+        ProtectiveCoverBlock.placeAsBarrier(world, pos, RADIUS, TIME_LIMIT);
         ConsciousnessEventEntity event = AllEntities.CONSCIOUSNESS_EVENT.spawn(world, pos, SpawnReason.EVENT);
         if (event == null) return null;
         event.setPos(pos.getX(), pos.getY(), pos.getZ());
@@ -56,25 +56,6 @@ public class ConsciousnessEventManager
 
         event.getPlayers(world)
                 .forEach(player -> player.getInventory().offerOrDrop(AllItems.BROKEN_MAGIC_MIRROR.getDefaultStack()));
-    }
-
-    public static void placeAsBarrier(World world, BlockPos pos, int radius, int life)
-    {
-        for (int x = -radius; x <= radius; x++)
-            for (int y = -radius; y <= radius; y++)
-                for (int z = -radius; z <= radius; z++)
-                    if (x == -radius || x == radius ||
-                        y == -radius || y == radius ||
-                        z == -radius || z == radius)
-                    {
-                        BlockPos placePos = pos.add(x, y, z);
-                        if (world.getBlockState(placePos).isReplaceable())
-                        {
-                            world.setBlockState(placePos, AllBlocks.PROTECTIVE_COVER.block().getDefaultState());
-                            if (world.getBlockEntity(placePos) instanceof ProtectiveCoverBlockTile tile)
-                                tile.setLife(life);
-                        }
-                    }
     }
 
     public static void breakBarrier(World world, BlockPos pos, int radius)

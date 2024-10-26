@@ -83,6 +83,15 @@
 					]
 				}
 			]
+		},
+		{
+			"rolls": 1.0,
+			"entries": [
+				{
+					"type": "item",
+					"name": "soulsweapons:lost_soul"
+				}
+			]
 		}
 	]
 }

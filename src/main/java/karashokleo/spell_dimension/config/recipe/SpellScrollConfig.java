@@ -93,6 +93,7 @@ public class SpellScrollConfig
             fromCrafting(AllSpells.ELDRITCH_BLAST, ComplementItems.WARDEN_BONE_SHARD);
             fromCrafting(AllSpells.SHIFT, ModItems.HEART_OF_THE_END);
             fromCrafting(AllSpells.FORCE_LANDING, LHTraits.GRAVITY.asItem());
+            fromCrafting(AllSpells.ARCANE_BARRIER, Items.GLASS);
             fromCrafting(AllSpells.INCARCERATE, ComplementItems.BLACKSTONE_CORE);
             fromCrafting(AllSpells.MAELSTROM, "soulsweapons:lord_soul_purple");
             fromCrafting(AllSpells.FINALSTRIKE, "deeperdarker:soul_crystal");

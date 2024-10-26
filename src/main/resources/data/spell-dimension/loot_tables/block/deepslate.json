@@ -11,6 +11,16 @@
         },
         {
           "type": "item",
+          "name": "soulsweapons:moonstone",
+          "weight": 1
+        },
+        {
+          "type": "item",
+          "name": "soulsweapons:verglas",
+          "weight": 1
+        },
+        {
+          "type": "item",
           "name": "minecraft:amethyst_shard",
           "weight": 2
         },
