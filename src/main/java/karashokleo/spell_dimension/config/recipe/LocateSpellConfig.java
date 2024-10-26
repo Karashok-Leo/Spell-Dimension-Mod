@@ -3,15 +3,17 @@ package karashokleo.spell_dimension.config.recipe;
 import karashokleo.l2hostility.content.item.ComplementItems;
 import karashokleo.leobrary.datagen.util.StringUtil;
 import karashokleo.spell_dimension.SpellDimension;
+import net.fabricmc.fabric.api.tag.convention.v1.ConventionalBiomeTags;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.BiomeTags;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.gen.structure.Structure;
 import net.minecraft.world.gen.structure.StructureKeys;
 import net.runes.api.RuneItems;
@@ -19,40 +21,39 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.BiConsumer;
 
 public class LocateSpellConfig
 {
-    private static final Map<Item, RegistryKey<Structure>> STRUCTURE_CONFIG = new HashMap<>();
-    private static final Map<Item, RegistryKey<Biome>> BIOME_CONFIG = new HashMap<>();
+    public static final Map<Item, RegistryKey<Structure>> STRUCTURE_CONFIG = new HashMap<>();
+    public static final Map<Item, TagKey<Biome>> BIOME_CONFIG = new HashMap<>();
 
     public static final RegistryKey<Structure> DARK_DUNGEON = RegistryKey.of(RegistryKeys.STRUCTURE, new Identifier("dungeonz:dark_dungeon_structure"));
+    public static final RegistryKey<Structure> DESERT_DUNGEON = RegistryKey.of(RegistryKeys.STRUCTURE, new Identifier("dungeonz:desert_dungeon_structure"));
 
     static
     {
-        STRUCTURE_CONFIG.put(Items.SCULK, StructureKeys.ANCIENT_CITY);
-        STRUCTURE_CONFIG.put(RuneItems.get(RuneItems.RuneType.FIRE), StructureKeys.FORTRESS);
-        STRUCTURE_CONFIG.put(RuneItems.get(RuneItems.RuneType.HEALING), StructureKeys.BASTION_REMNANT);
-        STRUCTURE_CONFIG.put(Items.DRAGON_BREATH, StructureKeys.END_CITY);
-        STRUCTURE_CONFIG.put(Items.EMERALD_BLOCK, StructureKeys.MANSION);
-        STRUCTURE_CONFIG.put(ComplementItems.CURSED_DROPLET, DARK_DUNGEON);
+        register(StructureKeys.ANCIENT_CITY, Items.SCULK, "远古城市");
+        register(StructureKeys.FORTRESS, RuneItems.get(RuneItems.RuneType.FIRE), "下界要塞");
+        register(StructureKeys.BASTION_REMNANT, RuneItems.get(RuneItems.RuneType.HEALING), "堡垒遗迹");
+        register(StructureKeys.END_CITY, Items.DRAGON_BREATH, "末地城");
+        register(StructureKeys.MANSION, Items.EMERALD_BLOCK, "林地府邸");
+        register(DARK_DUNGEON, ComplementItems.CURSED_DROPLET, "暗黑地牢");
+        register(DESERT_DUNGEON, ComplementItems.SUN_MEMBRANE, "沙漠地牢");
 
-        BIOME_CONFIG.put(RuneItems.get(RuneItems.RuneType.FROST), BiomeKeys.SNOWY_PLAINS);
-        BIOME_CONFIG.put(Items.SAND, BiomeKeys.DESERT);
-        BIOME_CONFIG.put(Items.GRASS_BLOCK, BiomeKeys.PLAINS);
-        BIOME_CONFIG.put(Items.CANDLE, BiomeKeys.DEEP_DARK);
-        BIOME_CONFIG.put(Items.RED_MUSHROOM, BiomeKeys.CRIMSON_FOREST);
-        BIOME_CONFIG.put(Items.BROWN_MUSHROOM, BiomeKeys.WARPED_FOREST);
-    }
-
-    public static void addTranslation()
-    {
-        addTranslation(StructureKeys.ANCIENT_CITY, "远古城市");
-        addTranslation(StructureKeys.FORTRESS, "下界要塞");
-        addTranslation(StructureKeys.BASTION_REMNANT, "堡垒遗迹");
-        addTranslation(StructureKeys.END_CITY, "末地城");
-        addTranslation(StructureKeys.MANSION, "林地府邸");
-        addTranslation(DARK_DUNGEON, "暗黑地牢");
+        register(ConventionalBiomeTags.TAIGA, Items.SWEET_BERRIES, "针叶林");
+        register(ConventionalBiomeTags.JUNGLE, Items.COCOA_BEANS, "热带雨林");
+        register(ConventionalBiomeTags.SAVANNA, Items.ACACIA_LOG, "热带草原");
+        register(ConventionalBiomeTags.SWAMP, Items.VINE, "沼泽");
+        register(ConventionalBiomeTags.MUSHROOM, Items.BROWN_MUSHROOM, "蘑菇岛");
+        register(ConventionalBiomeTags.BADLANDS, Items.CLAY_BALL, "恶地");
+        register(ConventionalBiomeTags.SNOWY, Items.SNOWBALL, "覆雪地带");
+        register(ConventionalBiomeTags.ICY, RuneItems.get(RuneItems.RuneType.FROST), "冰冻地带");
+        register(ConventionalBiomeTags.OCEAN, Items.KELP, "海洋");
+        register(ConventionalBiomeTags.DEEP_OCEAN, Items.PRISMARINE_SHARD, "深海");
+        register(ConventionalBiomeTags.DESERT, Items.SAND, "沙漠");
+        register(ConventionalBiomeTags.PLAINS, Items.GRASS_BLOCK, "平原");
+        register(BiomeTags.ANCIENT_CITY_HAS_STRUCTURE, Items.CANDLE, "存在远古城市的群系");
+        register(ConventionalBiomeTags.NETHER_FORESTS, Items.NETHER_WART, "下界森林");
     }
 
     @Nullable
@@ -62,7 +63,7 @@ public class LocateSpellConfig
     }
 
     @Nullable
-    public static RegistryKey<Biome> getBiome(Item item)
+    public static TagKey<Biome> getBiome(Item item)
     {
         return BIOME_CONFIG.get(item);
     }
@@ -70,28 +71,43 @@ public class LocateSpellConfig
     public static Text getSpotName(RegistryKey<?> registryKey)
     {
         return Text.translatable(
-                getSpotKey(registryKey)
+                getSpotKey(registryKey.getRegistry(), registryKey.getValue())
         ).formatted(Formatting.BOLD);
     }
 
-    public static String getSpotKey(RegistryKey<?> registryKey)
+    public static Text getSpotName(TagKey<?> tagKey)
     {
-        return registryKey.getValue().toTranslationKey(
-                registryKey.getRegistry().getPath().split("/")[1]
-        );
+        return Text.translatable(
+                getSpotKey(tagKey.registry().getValue(), tagKey.id())
+        ).formatted(Formatting.BOLD);
     }
 
-    public static void addTranslation(RegistryKey<?> registryKey, String zh)
+    public static String getSpotKey(Identifier registry, Identifier id)
     {
-        String spotKey = getSpotKey(registryKey);
+        String[] split = registry.getPath().split("/");
+        return id.toTranslationKey(split[split.length - 1]).replace("/", "_");
+    }
+
+    public static void addTranslation(String spotKey, String zh)
+    {
         String[] split = spotKey.split("\\.");
         SpellDimension.EN_TEXTS.addText(spotKey, StringUtil.defaultName(split[split.length - 1]));
         SpellDimension.ZH_TEXTS.addText(spotKey, zh);
     }
 
-    public static void forEach(BiConsumer<Item, RegistryKey<?>> action)
+    public static void register(RegistryKey<Structure> registryKey, Item item, String zh)
     {
-        STRUCTURE_CONFIG.forEach(action);
-        BIOME_CONFIG.forEach(action);
+        STRUCTURE_CONFIG.put(item, registryKey);
+        addTranslation(getSpotKey(registryKey.getRegistry(), registryKey.getValue()), zh);
+    }
+
+    public static void register(TagKey<Biome> tagKey, Item item, String zh)
+    {
+        BIOME_CONFIG.put(item, tagKey);
+        addTranslation(getSpotKey(tagKey.registry().getValue(), tagKey.id()), zh);
+    }
+
+    public static void register()
+    {
     }
 }

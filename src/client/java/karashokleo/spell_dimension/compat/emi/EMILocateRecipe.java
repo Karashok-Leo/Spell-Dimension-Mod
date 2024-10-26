@@ -11,6 +11,7 @@ import karashokleo.spell_dimension.init.AllTags;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.item.Item;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
@@ -24,6 +25,11 @@ public record EMILocateRecipe(EmiStack input, Text text, Text id) implements Emi
     public EMILocateRecipe(Item item, RegistryKey<?> registryKey)
     {
         this(EmiStack.of(item), LocateSpellConfig.getSpotName(registryKey), Text.of(registryKey.getValue().toString()));
+    }
+
+    public EMILocateRecipe(Item item, TagKey<?> tagKey)
+    {
+        this(EmiStack.of(item), LocateSpellConfig.getSpotName(tagKey), Text.of(tagKey.id().toString()));
     }
 
     @Override

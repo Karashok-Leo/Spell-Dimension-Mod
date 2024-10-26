@@ -188,7 +188,7 @@ public enum SDTexts
         addGroupTranslation();
         addLootBagTranslation();
         addEventAwardTranslation();
-        LocateSpellConfig.addTranslation();
+        LocateSpellConfig.register( );
         SpellDimension.EN_TEXTS.addEntityType(AllEntities.LOCATE_PORTAL, "Locate Portal");
         SpellDimension.ZH_TEXTS.addEntityType(AllEntities.LOCATE_PORTAL, "定位传送门");
     }

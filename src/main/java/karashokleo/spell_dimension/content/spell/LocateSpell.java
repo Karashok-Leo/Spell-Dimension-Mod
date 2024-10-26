@@ -14,6 +14,7 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.entry.RegistryEntryList;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -40,7 +41,7 @@ public class LocateSpell
 
         ItemStack offHandStack = living.getOffHandStack();
         RegistryKey<Structure> structureRegistryKey = LocateSpellConfig.getStructure(offHandStack.getItem());
-        RegistryKey<Biome> biomeRegistryKey = LocateSpellConfig.getBiome(offHandStack.getItem());
+        TagKey<Biome> biomeTagKey = LocateSpellConfig.getBiome(offHandStack.getItem());
 
         boolean consume = false;
 
@@ -55,16 +56,16 @@ public class LocateSpell
             {
                 player.sendMessage(Text.translatable("commands.locate.structure.not_found", structureRegistryKey.getValue()), true);
             }
-        } else if (biomeRegistryKey != null)
+        } else if (biomeTagKey != null)
         {
-            Optional<BlockPos> optional = locateBiome(world, blockPos, biomeRegistryKey);
+            Optional<BlockPos> optional = locateBiome(world, blockPos, biomeTagKey);
             if (optional.isPresent())
             {
                 spawnLocatePortal(world, optional.get(), blockPos);
                 consume = true;
             } else if (living instanceof PlayerEntity player)
             {
-                player.sendMessage(Text.translatable("commands.locate.biome.not_found", biomeRegistryKey.getValue()), true);
+                player.sendMessage(Text.translatable("commands.locate.biome.not_found", biomeTagKey.id()), true);
             }
         } else if (living instanceof PlayerEntity player)
             player.sendMessage(SDTexts.TEXT$INVALID_KEY_ITEM.get(), true);
@@ -79,9 +80,9 @@ public class LocateSpell
         }
     }
 
-    private static Optional<BlockPos> locateBiome(ServerWorld world, BlockPos pos, RegistryKey<Biome> registryKey)
+    private static Optional<BlockPos> locateBiome(ServerWorld world, BlockPos pos, TagKey<Biome> tagKey)
     {
-        Pair<BlockPos, RegistryEntry<Biome>> pair = world.locateBiome(e -> e.matchesKey(registryKey), pos, 6400, 32, 64);
+        Pair<BlockPos, RegistryEntry<Biome>> pair = world.locateBiome(e -> e.isIn(tagKey), pos, 6400, 32, 64);
         return Optional.ofNullable(pair).map(Pair::getFirst);
     }
 

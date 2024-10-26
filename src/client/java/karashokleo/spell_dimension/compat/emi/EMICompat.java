@@ -31,7 +31,8 @@ public class EMICompat implements EmiPlugin
         registry.addCategory(SUMMON_CATEGORY);
         registry.addCategory(SPELL_INFUSION_CATEGORY);
 
-        LocateSpellConfig.forEach((item, key) -> registry.addRecipe(new EMILocateRecipe(item, key)));
+        LocateSpellConfig.STRUCTURE_CONFIG.forEach((item, key) -> registry.addRecipe(new EMILocateRecipe(item, key)));
+        LocateSpellConfig.BIOME_CONFIG.forEach((item, key) -> registry.addRecipe(new EMILocateRecipe(item, key)));
         SummonSpellConfig.forEach((item, entry) -> registry.addRecipe(new EMISummonRecipe(item, entry)));
         InfusionRecipes.getAll().forEach(entry -> registry.addRecipe(new EMIInfusionRecipe(entry.getRowKey(), entry.getColumnKey(), entry.getValue())));
 

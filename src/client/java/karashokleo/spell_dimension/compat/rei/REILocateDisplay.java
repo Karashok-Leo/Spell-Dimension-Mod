@@ -7,6 +7,7 @@ import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
 import net.minecraft.item.Item;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.text.Text;
 
 import java.util.List;
@@ -16,6 +17,11 @@ public record REILocateDisplay(EntryIngredient input, Text text, Text id) implem
     public REILocateDisplay(Item item, RegistryKey<?> registryKey)
     {
         this(EntryIngredients.of(item), LocateSpellConfig.getSpotName(registryKey), Text.of(registryKey.getValue().toString()));
+    }
+
+    public REILocateDisplay(Item item, TagKey<?> tagKey)
+    {
+        this(EntryIngredients.of(item), LocateSpellConfig.getSpotName(tagKey), Text.of(tagKey.id().toString()));
     }
 
     @Override

@@ -82,7 +82,7 @@ public class SpellScrollConfig
 
         // Infusion
         {
-            fromCrafting(AllSpells.LOCATE, Items.RECOVERY_COMPASS);
+            fromCrafting(AllSpells.LOCATE, Items.COMPASS);
             fromCrafting(AllSpells.SUMMON, AllItems.SPAWNER_SOUL);
             fromCrafting(AllSpells.PLACE, ModRegistry.ENDERSOUL_HAND_ITEM.get());
             fromCrafting(AllSpells.LIGHT, Items.GLOWSTONE);
