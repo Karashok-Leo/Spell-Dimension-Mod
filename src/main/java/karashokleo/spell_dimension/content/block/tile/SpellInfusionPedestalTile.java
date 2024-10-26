@@ -18,6 +18,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class SpellInfusionPedestalTile extends AbstractInfusionTile
 {
+    public static final int CRAFT_TIME = 100;
+
     @Nullable
     private ItemStack crafting = null;
     private int craftTime = 0;
@@ -28,11 +30,11 @@ public class SpellInfusionPedestalTile extends AbstractInfusionTile
         super(AllBlocks.SPELL_INFUSION_PEDESTAL_TILE, pos, state);
     }
 
-    private void startCrafting(ItemStack stack, int time)
+    private void startCrafting(ItemStack stack)
     {
         this.crafting = stack;
-        this.craftTime = time;
-        this.craftTimeMax = time;
+        this.craftTime = CRAFT_TIME;
+        this.craftTimeMax = CRAFT_TIME;
         this.update();
     }
 
@@ -41,12 +43,11 @@ public class SpellInfusionPedestalTile extends AbstractInfusionTile
     {
         if (this.craftTime != 0) return;
         ItemStack mainHandStack = player.getMainHandStack();
-        InfusionRecipes.RecipeEntry recipe = InfusionRecipes.getRecipe(this.getStack().getItem(), mainHandStack.getItem());
-        if (recipe != null)
+        ItemStack output = InfusionRecipes.getRecipe(this.getStack().getItem(), mainHandStack.getItem());
+        if (output != null)
         {
-            this.startCrafting(recipe.output().copy(), recipe.time());
-            if (recipe.consume())
-                mainHandStack.decrement(1);
+            this.startCrafting(output.copy());
+            mainHandStack.decrement(1);
             return;
         }
         super.onUse(world, pos, player);

@@ -179,6 +179,6 @@ public class SpellScrollConfig
     {
         SPELL_TEXTS.put(spellId, SDTexts.SCROLL$CRAFT.get(item.getName().copy().formatted(Formatting.BOLD)));
         CRAFT_SPELLS.add(spellId);
-        InfusionRecipes.register(Items.PAPER, item, AllItems.SPELL_SCROLL.getStack(spellId), false, 20 * 60);
+        InfusionRecipes.register(Items.PAPER, item, AllItems.SPELL_SCROLL.getStack(spellId));
     }
 }

@@ -33,7 +33,7 @@ public class EMICompat implements EmiPlugin
 
         LocateSpellConfig.forEach((item, key) -> registry.addRecipe(new EMILocateRecipe(item, key)));
         SummonSpellConfig.forEach((item, entry) -> registry.addRecipe(new EMISummonRecipe(item, entry)));
-        InfusionRecipes.getAll().forEach(entry -> registry.addRecipe(new EMIInfusionRecipe(entry)));
+        InfusionRecipes.getAll().forEach(entry -> registry.addRecipe(new EMIInfusionRecipe(entry.getRowKey(), entry.getColumnKey(), entry.getValue())));
 
         registry.addWorkstation(LOCATE_CATEGORY, EMILocateRecipe.CATALYSTS);
         registry.addWorkstation(SUMMON_CATEGORY, EMISummonRecipe.CATALYSTS);

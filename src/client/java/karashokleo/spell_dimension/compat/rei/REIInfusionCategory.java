@@ -7,7 +7,6 @@ import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.gui.Renderer;
 import me.shedaniel.rei.api.client.gui.widgets.Slot;
-import me.shedaniel.rei.api.client.gui.widgets.Tooltip;
 import me.shedaniel.rei.api.client.gui.widgets.Widget;
 import me.shedaniel.rei.api.client.gui.widgets.Widgets;
 import me.shedaniel.rei.api.client.registry.display.DisplayCategory;
@@ -39,17 +38,6 @@ public class REIInfusionCategory implements DisplayCategory<REIInfusionDisplay>
         widgets.add(base);
         widgets.add(addition);
         widgets.add(output);
-
-        widgets.add(Widgets.createTooltip(point ->
-                !display.consume() &&
-                addition.getBounds().contains(point) ?
-                        Tooltip.create(point, SDTexts.TOOLTIP$NOT_CONSUMED.get()) : null));
-        widgets.add(Widgets.createTooltip(point ->
-                bounds.contains(point) &&
-                !(base.getBounds().contains(point) ||
-                  addition.getBounds().contains(point) ||
-                  output.getBounds().contains(point)) ?
-                        Tooltip.create(point, SDTexts.TOOLTIP$TOOK_SECONDS.get(display.time() / 20)) : null));
         return widgets;
     }
 

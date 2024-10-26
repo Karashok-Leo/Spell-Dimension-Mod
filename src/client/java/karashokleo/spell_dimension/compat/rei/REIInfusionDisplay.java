@@ -1,29 +1,26 @@
 package karashokleo.spell_dimension.compat.rei;
 
-import karashokleo.spell_dimension.config.recipe.InfusionRecipes;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.Display;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 import java.util.List;
 
 public record REIInfusionDisplay(
         EntryIngredient base,
         EntryIngredient addition,
-        EntryIngredient output,
-        boolean consume,
-        int time
+        EntryIngredient output
 ) implements Display
 {
-    public REIInfusionDisplay(InfusionRecipes.RecipeEntry entry)
+    public REIInfusionDisplay(Item base, Item addition, ItemStack output)
     {
         this(
-                EntryIngredients.of(entry.base()),
-                EntryIngredients.of(entry.addition()),
-                EntryIngredients.of(entry.output()),
-                entry.consume(),
-                entry.time()
+                EntryIngredients.of(base),
+                EntryIngredients.of(addition),
+                EntryIngredients.of(output)
         );
     }
 
