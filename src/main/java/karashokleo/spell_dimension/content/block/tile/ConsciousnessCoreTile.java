@@ -1,13 +1,13 @@
 package karashokleo.spell_dimension.content.block.tile;
 
 import com.google.common.collect.Lists;
-import io.wispforest.owo.ops.WorldOps;
 import karashokleo.spell_dimension.content.block.ConsciousnessBaseBlock;
 import karashokleo.spell_dimension.content.entity.ConsciousnessEventEntity;
 import karashokleo.spell_dimension.content.event.conscious.ConsciousnessEventManager;
 import karashokleo.spell_dimension.content.event.conscious.EventAward;
 import karashokleo.spell_dimension.init.AllBlocks;
 import karashokleo.spell_dimension.util.RandomUtil;
+import karashokleo.spell_dimension.util.TeleportUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Stainable;
@@ -27,6 +27,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.World;
@@ -197,8 +198,24 @@ public class ConsciousnessCoreTile extends BlockEntity
                 {
                     ServerWorld destinationWorld = world.getServer().getOverworld();
                     this.destinationWorld = destinationWorld.getRegistryKey();
-                    BlockPos destinationPos = ConsciousnessEventManager.findTeleportPos(world, destinationWorld, pos);
-                    WorldOps.teleportToWorld(player, destinationWorld, destinationPos.toCenterPos());
+
+                    BlockPos.Mutable destinationPos = TeleportUtil.findTeleportPos(world, destinationWorld, pos).mutableCopy();
+                    BlockState blockState;
+                    do
+                    {
+                        destinationPos.move(Direction.DOWN);
+                        if (destinationPos.getY()<world.getBottomY()) break;
+                        blockState = destinationWorld.getBlockState(destinationPos);
+                    } while ((blockState.isOf(AllBlocks.PROTECTIVE_COVER.block()) ||
+                              blockState.isAir()));
+                    while (!world.isSpaceEmpty(player, new Box(destinationPos).expand(0, 1, 0)))
+                    {
+                        destinationPos.move(Direction.UP);
+                        if (destinationPos.getY() > world.getTopY()) break;
+                    }
+                    destinationPos.move(Direction.UP);
+
+                    TeleportUtil.teleportPlayerChangeDimension(player, destinationWorld, destinationPos);
                     this.playerTicks.remove(playerUuid);
                     if (!this.triggered && this.level != null && this.award != null)
                     {

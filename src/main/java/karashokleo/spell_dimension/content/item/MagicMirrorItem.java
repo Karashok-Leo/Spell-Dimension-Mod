@@ -1,12 +1,12 @@
 package karashokleo.spell_dimension.content.item;
 
-import io.wispforest.owo.ops.WorldOps;
 import karashokleo.spell_dimension.api.buff.Buff;
 import karashokleo.spell_dimension.content.buff.Conscious;
 import karashokleo.spell_dimension.content.event.conscious.ConsciousnessEventManager;
 import karashokleo.spell_dimension.content.network.S2CFloatingItem;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllWorldGen;
+import karashokleo.spell_dimension.util.TeleportUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.item.TooltipContext;
@@ -76,8 +76,8 @@ public class MagicMirrorItem extends Item
                     stack.decrement(1);
                     Buff.apply(player, Conscious.TYPE, new Conscious(), player);
                 }
-                BlockPos destinationPos = ConsciousnessEventManager.findTeleportPos(serverWorld, destinationWorld, player.getBlockPos());
-                WorldOps.teleportToWorld(player, destinationWorld, destinationPos.toCenterPos());
+                BlockPos destinationPos = TeleportUtil.findTeleportPos(serverWorld, destinationWorld, player.getBlockPos());
+                TeleportUtil.teleportPlayerChangeDimension(player, destinationWorld, destinationPos);
                 if (!player.getSpawnPointDimension().equals(AllWorldGen.OC_WORLD))
                     player.setSpawnPoint(AllWorldGen.OC_WORLD, destinationPos, player.getSpawnAngle(), true, true);
             }

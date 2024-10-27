@@ -12,13 +12,8 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkSectionPos;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.world.Heightmap;
 import net.minecraft.world.World;
-import net.minecraft.world.border.WorldBorder;
-import net.minecraft.world.chunk.WorldChunk;
-import net.minecraft.world.dimension.DimensionType;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
@@ -37,12 +32,12 @@ public class ConsciousnessEventManager
     @Nullable
     public static ConsciousnessEventEntity startEvent(ServerWorld world, BlockPos pos, int level, EventAward award)
     {
-        ProtectiveCoverBlock.placeAsBarrier(world, pos, RADIUS, TIME_LIMIT);
         ConsciousnessEventEntity event = AllEntities.CONSCIOUSNESS_EVENT.spawn(world, pos, SpawnReason.EVENT);
         if (event == null) return null;
         event.setPos(pos.getX(), pos.getY(), pos.getZ());
         event.setBoundingBox(RADIUS);
         event.init(level, award);
+        ProtectiveCoverBlock.placeAsBarrier(world, pos, RADIUS, TIME_LIMIT);
         return event;
     }
 
@@ -93,21 +88,5 @@ public class ConsciousnessEventManager
             y++;
         }
         return Optional.empty();
-    }
-
-    public static BlockPos findTeleportPos(ServerWorld source, ServerWorld destination, BlockPos pos)
-    {
-        WorldBorder worldBorder = destination.getWorldBorder();
-        double factor = DimensionType.getCoordinateScaleFactor(source.getDimension(), destination.getDimension());
-        int resultX = (int) (pos.getX() * factor);
-        int resultZ = (int) (pos.getZ() * factor);
-        int resultY = getTopY(destination, resultX, resultZ) + 1;
-        return worldBorder.clamp(resultX, resultY, resultZ);
-    }
-
-    private static int getTopY(ServerWorld world, int x, int z)
-    {
-        WorldChunk worldChunk = world.getChunk(ChunkSectionPos.getSectionCoord(x), ChunkSectionPos.getSectionCoord(z));
-        return worldChunk.sampleHeightmap(Heightmap.Type.MOTION_BLOCKING, x & 15, z & 15);
     }
 }

@@ -1,6 +1,7 @@
 package karashokleo.spell_dimension.content.entity;
 
 import karashokleo.spell_dimension.init.AllEntities;
+import karashokleo.spell_dimension.util.TeleportUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.nbt.NbtCompound;
@@ -60,6 +61,7 @@ public class LocatePortalEntity extends Entity
             entities.forEach(entity ->
             {
                 if (entity.hasPortalCooldown()) return;
+                TeleportUtil.teleportPlayer(entity, this.getDestination());
                 entity.teleport(this.getDestination().getX(), this.getDestination().getY(), this.getDestination().getZ());
                 entity.setPortalCooldown(PORTAL_COOLDOWN);
             });

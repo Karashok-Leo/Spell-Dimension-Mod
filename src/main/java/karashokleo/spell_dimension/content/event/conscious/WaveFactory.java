@@ -119,7 +119,7 @@ public enum WaveFactory
         {
             int waveNum = 3 + level / 30;
             for (int i = 0; i < waveNum; i++)
-                waves.add(new Wave(Summoner.fromTag(AllTags.RAIDERS_VANILLA), 6 + random.nextInt(i)));
+                waves.add(new Wave(Summoner.fromTag(AllTags.RAIDERS_VANILLA), 6 + random.nextInt(i + 1)));
             waves.add(new Wave(Summoner.fromEntityType(EntityType.RAVAGER), random.nextInt(3) + 1));
             waves.add(new Wave(Summoner.fromEntityType(EntityType.EVOKER), random.nextInt(4) + 1));
         }
@@ -128,23 +128,23 @@ public enum WaveFactory
         {
             int waveNum = random.nextBetween(2, 4);
             for (int i = 0; i < waveNum; i++)
-                waves.add(new Wave(Summoner.fromTag(EntityTypeTags.RAIDERS), 10 + random.nextInt(i * 2)));
+                waves.add(new Wave(Summoner.fromTag(EntityTypeTags.RAIDERS), 10 + random.nextInt(i * 2 + 1)));
             for (int i = 0; i < 6 - waveNum; i++)
-                waves.add(new Wave(Summoner.fromTag(AllTags.RAIDERS_INVADE), 14 + random.nextInt(i * 2)));
+                waves.add(new Wave(Summoner.fromTag(AllTags.RAIDERS_INVADE), 14 + random.nextInt(i * 2 + 1)));
             waves.add(new Wave(Summoner.fromEntityType(ModRegistry.FIRECALLER_ENTITY_TYPE.get()), 3 + random.nextInt(2)));
             waves.add(new Wave(Summoner.fromEntityType(ModRegistry.INVOKER_ENTITY_TYPE.get()), 1 + random.nextInt(2)));
         }
 
         static void fillNether(int level, Random random, ArrayList<Wave> waves)
         {
-            int waveNum = random.nextBetween(4, 6) + random.nextInt((level - 30) / 10);
+            int waveNum = random.nextBetween(3, 5) + random.nextInt((level - 30) / 10 + 1);
             for (int i = 0; i < waveNum; i++)
                 waves.add(new Wave(Summoner.fromTag(AllTags.NETHER), 4 + i * 2));
         }
 
         static void fillSculk(int level, Random random, ArrayList<Wave> waves)
         {
-            int waveNum = random.nextBetween(4, 6) + random.nextInt((level - 45) / 10);
+            int waveNum = random.nextBetween(3, 5) + random.nextInt((level - 45) / 10 + 1);
             for (int i = 0; i < waveNum; i++)
                 waves.add(new Wave(Summoner.fromTag(AllTags.SCULK), 4 + i * 2));
             if (random.nextBoolean())
@@ -155,14 +155,14 @@ public enum WaveFactory
 
         static void fillMelee(int level, Random random, ArrayList<Wave> waves)
         {
-            int waveNum = random.nextBetween(4, 6) + random.nextInt((level - 30) / 10);
+            int waveNum = random.nextBetween(3, 5) + random.nextInt((level - 30) / 10 + 1);
             for (int i = 0; i < waveNum; i++)
                 waves.add(new Wave(Summoner.fromTag(LHTags.MELEE_WEAPON_TARGET), 6 + i * 2));
         }
 
         static void fillRanged(int level, Random random, ArrayList<Wave> waves)
         {
-            int waveNum = random.nextBetween(4, 6) + random.nextInt((level - 30) / 10);
+            int waveNum = random.nextBetween(3, 5) + random.nextInt((level - 30) / 10 + 1);
             for (int i = 0; i < waveNum; i++)
                 waves.add(new Wave(Summoner.fromTag(LHTags.RANGED_WEAPON_TARGET), 6 + i * 2));
         }

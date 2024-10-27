@@ -2,12 +2,12 @@ package karashokleo.spell_dimension.content.buff;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import io.wispforest.owo.ops.WorldOps;
 import karashokleo.spell_dimension.api.buff.Buff;
 import karashokleo.spell_dimension.api.buff.BuffType;
 import karashokleo.spell_dimension.content.event.conscious.ConsciousnessEventManager;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllWorldGen;
+import karashokleo.spell_dimension.util.TeleportUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.boss.ServerBossBar;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -63,8 +63,9 @@ public class Conscious implements Buff
         if (serverWorld.getRegistryKey().equals(AllWorldGen.OC_WORLD))
         {
             ServerWorld destinationWorld = serverWorld.getServer().getOverworld();
-            BlockPos destinationPos = ConsciousnessEventManager.findTeleportPos(serverWorld, destinationWorld, player.getBlockPos());
-            WorldOps.teleportToWorld(player, destinationWorld, destinationPos.toCenterPos());
+            BlockPos destinationPos = TeleportUtil.findTeleportPos(serverWorld, destinationWorld, player.getBlockPos());
+
+            TeleportUtil.teleportPlayerChangeDimension(player, destinationWorld, destinationPos);
         }
     }
 

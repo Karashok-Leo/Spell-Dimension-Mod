@@ -174,7 +174,9 @@ public class ConsciousnessEventEntity extends Entity
             if (this.waveIndex >= this.waves.size())
                 this.turnToFinish(world, true);
             else this.turnToWaiting(world);
-        } else if (this.age > ConsciousnessEventManager.TIME_LIMIT)
+        }
+
+        else if (this.age > ConsciousnessEventManager.TIME_LIMIT)
         {
             this.turnToFinish(world, false);
         }
@@ -247,7 +249,8 @@ public class ConsciousnessEventEntity extends Entity
                         SDTexts.TEXT$EVENT$FINISH$FAIL.get()
         );
 
-        ConsciousnessEventManager.giveReward(world, this.getBlockPos(), this);
+        if (success)
+            ConsciousnessEventManager.giveReward(world, this.getBlockPos(), this);
     }
 
     protected void summon(ServerWorld world)

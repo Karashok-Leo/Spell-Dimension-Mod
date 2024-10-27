@@ -6,6 +6,7 @@ import karashokleo.spell_dimension.content.entity.LocatePortalEntity;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.init.AllTags;
+import karashokleo.spell_dimension.util.TeleportUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -83,7 +84,12 @@ public class LocateSpell
     private static Optional<BlockPos> locateBiome(ServerWorld world, BlockPos pos, TagKey<Biome> tagKey)
     {
         Pair<BlockPos, RegistryEntry<Biome>> pair = world.locateBiome(e -> e.isIn(tagKey), pos, 6400, 32, 64);
-        return Optional.ofNullable(pair).map(Pair::getFirst);
+        return Optional.ofNullable(pair).map(p ->
+        {
+            BlockPos blockPos = p.getFirst();
+            int topY = TeleportUtil.getTopY(world, blockPos.getX(), blockPos.getZ());
+            return new BlockPos(blockPos.getX(), topY, blockPos.getZ());
+        });
     }
 
     private static Optional<BlockPos> locateStructure(ServerWorld world, BlockPos pos, RegistryKey<Structure> registryKey)
@@ -98,7 +104,12 @@ public class LocateSpell
                 .getChunkManager()
                 .getChunkGenerator()
                 .locateStructure(world, registryEntryList, pos, 100, false);
-        return Optional.ofNullable(pair).map(Pair::getFirst);
+        return Optional.ofNullable(pair).map(p ->
+        {
+            BlockPos blockPos = p.getFirst();
+            int topY = TeleportUtil.getTopY(world, blockPos.getX(), blockPos.getZ());
+            return new BlockPos(blockPos.getX(), topY, blockPos.getZ());
+        });
     }
 
     private static void spawnLocatePortal(ServerWorld world, BlockPos destination, BlockPos pos)

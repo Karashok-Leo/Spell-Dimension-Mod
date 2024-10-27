@@ -9,6 +9,7 @@ import karashokleo.spell_dimension.content.event.conscious.EventAward;
 import karashokleo.spell_dimension.data.SDTexts;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
 
@@ -33,13 +34,18 @@ public class ConsciousCoreOverlay extends InfoSideBar<SideBar.IntSignature>
     protected List<Text> getText()
     {
         ArrayList<Text> texts = new ArrayList<>();
-        texts.add(this.triggered ? SDTexts.TEXT$CONSCIOUSNESS_CORE$TRIGGERED.get() : SDTexts.TEXT$CONSCIOUSNESS_CORE$NOT_TRIGGERED.get());
-        String factorStr = String.format("%.2f", this.levelFactor);
-        texts.add(SDTexts.TEXT$CONSCIOUSNESS_CORE$LEVEL_FACTOR.get(factorStr));
-        if (this.award != null)
-            texts.add(SDTexts.TEXT$CONSCIOUSNESS_CORE$AWARD.get(this.award.getText()));
-        if (this.level != null)
-            texts.add(SDTexts.TEXT$CONSCIOUSNESS_CORE$LEVEL.get(this.level));
+        if (this.triggered)
+            texts.add(SDTexts.TEXT$CONSCIOUSNESS_CORE$TRIGGERED.get().formatted(Formatting.GREEN));
+        else
+        {
+            texts.add(SDTexts.TEXT$CONSCIOUSNESS_CORE$NOT_TRIGGERED.get().formatted(Formatting.RED));
+            String factorStr = String.format("%.2f", this.levelFactor);
+            texts.add(SDTexts.TEXT$CONSCIOUSNESS_CORE$LEVEL_FACTOR.get(factorStr).formatted(Formatting.GOLD));
+            if (this.award != null)
+                texts.add(SDTexts.TEXT$CONSCIOUSNESS_CORE$AWARD.get(this.award.getText()).formatted(Formatting.AQUA));
+            if (this.level != null)
+                texts.add(SDTexts.TEXT$CONSCIOUSNESS_CORE$LEVEL.get(this.level).formatted(Formatting.LIGHT_PURPLE));
+        }
         return texts;
     }
 
