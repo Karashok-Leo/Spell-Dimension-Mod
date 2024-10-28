@@ -1,9 +1,8 @@
 package karashokleo.spell_dimension.content.loot.entry;
 
 import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonSerializationContext;
+import karashokleo.l2hostility.content.component.player.PlayerDifficulty;
 import karashokleo.spell_dimension.config.AttributeModifier;
 import karashokleo.spell_dimension.content.item.logic.EnchantedModifier;
 import karashokleo.spell_dimension.content.item.logic.EnlighteningModifier;
@@ -13,26 +12,22 @@ import karashokleo.spell_dimension.util.LootContextUtil;
 import karashokleo.spell_dimension.util.RandomUtil;
 import karashokleo.spell_dimension.util.UuidUtil;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.condition.LootCondition;
 import net.minecraft.loot.context.LootContext;
 import net.minecraft.loot.entry.LeafEntry;
 import net.minecraft.loot.entry.LootPoolEntryType;
 import net.minecraft.loot.function.LootFunction;
-import net.minecraft.loot.provider.number.LootNumberProvider;
-import net.minecraft.util.JsonHelper;
 import net.minecraft.util.math.random.Random;
 
 import java.util.function.Consumer;
 
 public class RandomEnchantedEssenceEntry extends LeafEntry
 {
-    private final LootNumberProvider threshold;
-
-    protected RandomEnchantedEssenceEntry(LootNumberProvider threshold, int weight, int quality, LootCondition[] conditions, LootFunction[] functions)
+    protected RandomEnchantedEssenceEntry(int weight, int quality, LootCondition[] conditions, LootFunction[] functions)
     {
         super(weight, quality, conditions, functions);
-        this.threshold = threshold;
     }
 
     @Override
@@ -46,9 +41,15 @@ public class RandomEnchantedEssenceEntry extends LeafEntry
         // Determine Modifier
         AttributeModifier modifier = LootContextUtil.getContextModifier(random, context);
 
+        // Determine Threshold
+        PlayerEntity player = LootContextUtil.getContextPlayer(context);
+        int maxThreshold = 20;
+        if (player != null)
+            maxThreshold += PlayerDifficulty.get(player).getLevel().level;
+
         lootConsumer.accept(AllItems.ENCHANTED_ESSENCE.getStack(
                 new EnchantedModifier(
-                        threshold.nextInt(context),
+                        context.getRandom().nextInt(maxThreshold),
                         slot,
                         new EnlighteningModifier(
                                 modifier.attribute(),
@@ -60,9 +61,9 @@ public class RandomEnchantedEssenceEntry extends LeafEntry
         ));
     }
 
-    public static LeafEntry.Builder<?> builder(LootNumberProvider threshold)
+    public static LeafEntry.Builder<?> builder()
     {
-        return builder((weight, quality, conditions, functions) -> new RandomEnchantedEssenceEntry(threshold, weight, quality, conditions, functions));
+        return builder(RandomEnchantedEssenceEntry::new);
     }
 
     @Override
@@ -74,18 +75,9 @@ public class RandomEnchantedEssenceEntry extends LeafEntry
     public static class Serializer extends LeafEntry.Serializer<RandomEnchantedEssenceEntry>
     {
         @Override
-        public void addEntryFields(JsonObject jsonObject, RandomEnchantedEssenceEntry entry, JsonSerializationContext jsonSerializationContext)
-        {
-            super.addEntryFields(jsonObject, entry, jsonSerializationContext);
-            JsonElement jsonElement = jsonSerializationContext.serialize(entry.threshold);
-            jsonObject.add("threshold", jsonElement);
-        }
-
-        @Override
         protected RandomEnchantedEssenceEntry fromJson(JsonObject entryJson, JsonDeserializationContext context, int weight, int quality, LootCondition[] conditions, LootFunction[] functions)
         {
-            LootNumberProvider threshold = JsonHelper.deserialize(entryJson, "threshold", context, LootNumberProvider.class);
-            return new RandomEnchantedEssenceEntry(threshold, weight, quality, conditions, functions);
+            return new RandomEnchantedEssenceEntry(weight, quality, conditions, functions);
         }
     }
 }

@@ -15,11 +15,7 @@ public class EssenceLootConfig
             0.90F, 0.99F
     );
 
-    public static final EcEntry[] EC_ENTRIES = {
-            new EcEntry(9, 1, 20),
-            new EcEntry(3, 20, 40),
-            new EcEntry(1, 40, 60)
-    };
+    public static final int EC_WEIGHT = 8;
     public static final int EL_WEIGHT = 3;
     public static final int MD_WEIGHT = 2;
 
@@ -60,10 +56,6 @@ public class EssenceLootConfig
 //                else return 2;
 //            }
         }
-    }
-
-    public record EcEntry(int weight, int minThreshold, int maxThreshold)
-    {
     }
 
     public record LootPool(int minRolls, int maxRolls, int emptyWeight)

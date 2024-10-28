@@ -95,8 +95,7 @@ public class AllLoots
         builder.with(emptyEntry);
 
         // EnchantedEssence
-        for (EssenceLootConfig.EcEntry entry : EssenceLootConfig.EC_ENTRIES)
-            builder.with(RandomEnchantedEssenceEntry.builder(UniformLootNumberProvider.create(entry.minThreshold(), entry.maxThreshold())).weight(entry.weight()));
+        builder.with(RandomEnchantedEssenceEntry.builder().weight(EssenceLootConfig.EC_WEIGHT));
 
         // EnlighteningEssence
         builder.with(RandomEnlighteningEssenceEntry.builder().weight(EssenceLootConfig.EL_WEIGHT));
