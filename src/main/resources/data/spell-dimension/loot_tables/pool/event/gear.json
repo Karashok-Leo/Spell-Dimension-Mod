@@ -1,0 +1,45 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:tag",
+          "expand": true,
+          "name": "spell-dimension:common/gear",
+          "weight": 16
+        },
+        {
+          "type": "minecraft:tag",
+          "expand": true,
+          "name": "spell-dimension:uncommon/gear",
+          "weight": 11
+        },
+        {
+          "type": "minecraft:tag",
+          "expand": true,
+          "name": "spell-dimension:rare/gear",
+          "weight": 7
+        },
+        {
+          "type": "minecraft:tag",
+          "expand": true,
+          "name": "spell-dimension:epic/gear",
+          "weight": 4
+        },
+        {
+          "type": "minecraft:tag",
+          "expand": true,
+          "name": "spell-dimension:legendary/gear",
+          "weight": 2
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "min": 6,
+        "max": 12
+      }
+    }
+  ]
+}

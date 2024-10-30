@@ -73,13 +73,13 @@ public class EnchantedEntry extends BaseEntryProvider
         this.lang().add(context.pageText(),
                 """
                         \\
-                        Primary, Intermediate, and Advanced Basic Essences can be crafted into Intermediate Essences with a Threshold of 10, 20, and 30 respectively. The maximum Threshold of Enchanted Essence that can be obtained from loot is 60.
+                        Primary, Intermediate, and Advanced Basic Essences can be crafted into Intermediate Essences with a Threshold of 10, 20, and 30 respectively. The upper limit of the threshold value of Enchanted Essence that can be obtained from the loot depends on your hostility difficulty level.
                         """
         );
         this.lang("zh_cn").add(context.pageText(),
                 """
                         \\
-                        初级、中级、高级的基础精华分别可以合成阈值为10、20、30的束魔精华。战利品中最高能获取到阈值为60的束魔精华。
+                        初级、中级、高级的基础精华分别可以合成阈值为10、20、30的束魔精华。战利品中能获取到的束魔精华的阈值上限取决于你的恶意难度等级。
                         """
         );
 

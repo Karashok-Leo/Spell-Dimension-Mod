@@ -46,7 +46,7 @@
   "book.spell-dimension-book.magic_guidance.mage.disenchant.name": "Disenchanted Essence",
   "book.spell-dimension-book.magic_guidance.mage.enchant.description": "Enchant your equipment.",
   "book.spell-dimension-book.magic_guidance.mage.enchant.name": "Enchanted Essence",
-  "book.spell-dimension-book.magic_guidance.mage.enchant.next.text": "\\\nPrimary, Intermediate, and Advanced Basic Essences can be crafted into Intermediate Essences with a Threshold of 10, 20, and 30 respectively. The maximum Threshold of Enchanted Essence that can be obtained from loot is 60.\n",
+  "book.spell-dimension-book.magic_guidance.mage.enchant.next.text": "\\\nPrimary, Intermediate, and Advanced Basic Essences can be crafted into Intermediate Essences with a Threshold of 10, 20, and 30 respectively. The upper limit of the threshold value of Enchanted Essence that can be obtained from the loot depends on your hostility difficulty level.\n",
   "book.spell-dimension-book.magic_guidance.mage.enchant.prev.text": "\\\nEnchanted Essence can imbue an item with magic power to increase some of its attributes. Be aware that Enchanted Essence can only work on an item if its Threshold is not less than the item's Enchanted Level.\n",
   "book.spell-dimension-book.magic_guidance.mage.enchant.prev.title": "Enchanted Essence",
   "book.spell-dimension-book.magic_guidance.mage.enlighten.description": "Strike at the heart.",

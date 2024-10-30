@@ -43,9 +43,9 @@ public class RandomEnchantedEssenceEntry extends LeafEntry
 
         // Determine Threshold
         PlayerEntity player = LootContextUtil.getContextPlayer(context);
-        int maxThreshold = 20;
+        int maxThreshold = 10;
         if (player != null)
-            maxThreshold += PlayerDifficulty.get(player).getLevel().level;
+            maxThreshold += PlayerDifficulty.get(player).getLevel().level / 4;
 
         lootConsumer.accept(AllItems.ENCHANTED_ESSENCE.getStack(
                 new EnchantedModifier(

@@ -233,11 +233,13 @@ public enum SDTexts
 
     private static void addEventAwardTranslation()
     {
-        SpellDimension.EN_TEXTS.addText(EventAward.BAG.getTranslationKey(), "Random Loot Bags");
-        SpellDimension.EN_TEXTS.addText(EventAward.ESSENCE.getTranslationKey(), "Random Spell Essences");
-        SpellDimension.EN_TEXTS.addText(EventAward.SPELL_SCROLL.getTranslationKey(), "Random Spell Scrolls");
-        SpellDimension.ZH_TEXTS.addText(EventAward.BAG.getTranslationKey(), "随机战利品袋");
-        SpellDimension.ZH_TEXTS.addText(EventAward.ESSENCE.getTranslationKey(), "随机魔法精华");
-        SpellDimension.ZH_TEXTS.addText(EventAward.SPELL_SCROLL.getTranslationKey(), "随机法术卷轴");
+        EventAward.BAG.addText("Random Loot Bags", "随机战利品袋");
+        EventAward.ESSENCE.addText("Random Spell Essences", "随机魔法精华");
+        EventAward.SPELL_SCROLL.addText("Random Spell Scrolls", "随机法术卷轴");
+        EventAward.BOOK.addText("Random Enchanted Books", "随机附魔书");
+        EventAward.GEAR.addText("Random Gears", "随机装备");
+        EventAward.MATERIAL.addText("Random Materials", "随机材料");
+        EventAward.TRINKET.addText("Random Trinkets", "随机饰品");
+        EventAward.VICTUS.addText("Random Victus Heart Aspects", "随机Victus之心");
     }
 }

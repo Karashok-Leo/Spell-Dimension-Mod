@@ -8,7 +8,13 @@ public enum EventAward
 {
     BAG("pool/event/bag"),
     ESSENCE("pool/event/essence"),
-    SPELL_SCROLL("pool/event/spell_scroll");
+    SPELL_SCROLL("pool/event/spell_scroll"),
+    BOOK("pool/event/book"),
+    GEAR("pool/event/gear"),
+    MATERIAL("pool/event/material"),
+    TRINKET("pool/event/trinket"),
+    VICTUS("pool/event/victus"),
+    ;
 
     public final Identifier lootTable;
 
@@ -30,5 +36,11 @@ public enum EventAward
     public Text getText()
     {
         return Text.translatable(this.getTranslationKey());
+    }
+
+    public void addText(String en, String zh)
+    {
+        SpellDimension.EN_TEXTS.addText(this.getTranslationKey(), en);
+        SpellDimension.ZH_TEXTS.addText(this.getTranslationKey(), zh);
     }
 }
