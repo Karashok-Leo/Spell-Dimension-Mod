@@ -1,8 +1,6 @@
 package karashokleo.spell_dimension.content.item;
 
-import karashokleo.spell_dimension.api.buff.Buff;
-import karashokleo.spell_dimension.content.buff.Conscious;
-import karashokleo.spell_dimension.content.event.conscious.ConsciousnessEventManager;
+import karashokleo.spell_dimension.content.component.ConsciousModeComponent;
 import karashokleo.spell_dimension.content.network.S2CFloatingItem;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllWorldGen;
@@ -18,7 +16,6 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -70,16 +67,19 @@ public class MagicMirrorItem extends Item
             ServerWorld destinationWorld = world.getServer().getWorld(AllWorldGen.OC_WORLD);
             if (destinationWorld != null && serverWorld != destinationWorld)
             {
+                // Render floating item
                 ServerPlayNetworking.send(player, new S2CFloatingItem(stack.copy()));
-                if (broken)
-                {
-                    stack.decrement(1);
-                    Buff.apply(player, Conscious.TYPE, new Conscious(), player);
-                }
-                BlockPos destinationPos = TeleportUtil.findTeleportPos(serverWorld, destinationWorld, player.getBlockPos());
-                TeleportUtil.teleportPlayerChangeDimension(player, destinationWorld, destinationPos);
-                if (!player.getSpawnPointDimension().equals(AllWorldGen.OC_WORLD))
-                    player.setSpawnPoint(AllWorldGen.OC_WORLD, destinationPos, player.getSpawnAngle(), true, true);
+
+                // Consume if broken, else cancel the cost
+                if (broken) stack.decrement(1);
+                else ConsciousModeComponent.get(player).cost = false;
+
+                // Do teleport
+                TeleportUtil.teleportPlayerChangeDimension(
+                        player,
+                        destinationWorld,
+                        TeleportUtil.findTeleportPos(serverWorld, destinationWorld, player.getBlockPos())
+                );
             }
         }
         return stack;

@@ -44,7 +44,7 @@ public class LootContextUtil
         List<SpellSchool> schools = school == null ?
                 (player == null ?
                         SchoolUtil.SCHOOLS :
-                        SchoolUtil.getPlayerSchool(player)):
+                        SchoolUtil.getEntitySchool(player)):
                 List.of(school);
 //        PlayerEntity player = getContextPlayer(context);
 //        List<SpellSchool> schools = player == null ?

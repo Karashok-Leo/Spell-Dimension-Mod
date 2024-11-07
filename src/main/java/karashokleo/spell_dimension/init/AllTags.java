@@ -24,6 +24,8 @@ import java.util.stream.Stream;
 
 public class AllTags
 {
+    public static final TagKey<Item> BREASTPLATE_SLOT = TagUtil.itemTag(new Identifier("trinkets", "chest/breastplate"));
+
     public static final List<TagKey<Item>> MATERIAL = List.of(
             TagUtil.itemTag("common/material"),
             TagUtil.itemTag("uncommon/material"),

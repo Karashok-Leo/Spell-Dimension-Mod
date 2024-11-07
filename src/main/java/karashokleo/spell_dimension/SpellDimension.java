@@ -4,15 +4,9 @@ import com.klikli_dev.modonomicon.api.datagen.LanguageProviderCache;
 import dev.onyxstudios.cca.api.v3.entity.EntityComponentFactoryRegistry;
 import dev.onyxstudios.cca.api.v3.entity.EntityComponentInitializer;
 import dev.onyxstudios.cca.api.v3.entity.RespawnCopyStrategy;
-import karashokleo.leobrary.datagen.generator.BlockLootGenerator;
-import karashokleo.leobrary.datagen.generator.LanguageGenerator;
-import karashokleo.leobrary.datagen.generator.ModelGenerator;
-import karashokleo.leobrary.datagen.generator.TagGenerator;
+import karashokleo.leobrary.datagen.generator.*;
 import karashokleo.leobrary.datagen.generator.init.GeneratorStorage;
-import karashokleo.spell_dimension.content.component.BuffComponentImpl;
-import karashokleo.spell_dimension.content.component.EndStageComponent;
-import karashokleo.spell_dimension.content.component.EnlighteningComponent;
-import karashokleo.spell_dimension.content.component.QuestComponent;
+import karashokleo.spell_dimension.content.component.*;
 import karashokleo.spell_dimension.content.item.logic.EnchantedModifier;
 import karashokleo.spell_dimension.content.item.logic.EnlighteningModifier;
 import karashokleo.spell_dimension.content.misc.DebugStaffCommand;
@@ -33,8 +27,10 @@ import net.minecraft.block.Block;
 import net.minecraft.data.DataOutput;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageType;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
+import net.minecraft.registry.RegistryBuilder;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 
@@ -62,6 +58,7 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
         AllEnchantments.register();
         AllStatusEffects.register();
         AllRecipeSerializers.register();
+        AllDamageTypes.register();
         AllSpells.register();
 
         EnchantedModifier.init();
@@ -93,10 +90,17 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
     }
 
     @Override
+    public void buildRegistry(RegistryBuilder registryBuilder)
+    {
+        DYNAMICS.register(registryBuilder);
+    }
+
+    @Override
     public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry)
     {
         registry.registerForPlayers(AllComponents.ENLIGHTENING, player -> new EnlighteningComponent(), RespawnCopyStrategy.ALWAYS_COPY);
         registry.registerForPlayers(AllComponents.ENTER_END, player -> new EndStageComponent(), RespawnCopyStrategy.ALWAYS_COPY);
+        registry.registerForPlayers(AllComponents.CONSCIOUS_MODE, player -> new ConsciousModeComponent(), RespawnCopyStrategy.ALWAYS_COPY);
         registry.registerForPlayers(AllComponents.QUEST, player -> new QuestComponent(), RespawnCopyStrategy.ALWAYS_COPY);
         registry.registerFor(LivingEntity.class, AllComponents.BUFF, BuffComponentImpl::new);
     }
@@ -109,6 +113,9 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
     public static final TagGenerator<Block> BLOCK_TAGS = new TagGenerator<>(RegistryKeys.BLOCK);
     public static final TagGenerator<EntityType<?>> ENTITY_TYPE_TAGS = new TagGenerator<>(RegistryKeys.ENTITY_TYPE);
     public static final TagGenerator<Fluid> FLUID_TAGS = new TagGenerator<>(RegistryKeys.FLUID);
+    public static final TagGenerator<DamageType> DAMAGE_TYPE_TAGS = new TagGenerator<>(RegistryKeys.DAMAGE_TYPE);
+
+    public static final DynamicRegistryGenerator<DamageType> DYNAMICS = new DynamicRegistryGenerator<>("Spell Dimension Dynamic Registries", RegistryKeys.DAMAGE_TYPE);
 
     @Override
     public String getModId()

@@ -5,18 +5,12 @@ import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.trait.common.AdaptingTrait;
 import karashokleo.l2hostility.init.LHTraits;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
-import karashokleo.spell_dimension.api.buff.Buff;
-import karashokleo.spell_dimension.content.buff.Conscious;
-import karashokleo.spell_dimension.content.event.DifficultyEvent;
-import karashokleo.spell_dimension.content.event.EnchantmentEvent;
-import karashokleo.spell_dimension.content.event.PlayerHealthEvent;
-import karashokleo.spell_dimension.content.event.TrinketEvent;
+import karashokleo.spell_dimension.content.event.*;
 import karashokleo.spell_dimension.content.misc.ISpawnerExtension;
 import karashokleo.spell_dimension.content.spell.LightSpell;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.util.SchoolUtil;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
-import net.fabricmc.fabric.api.entity.event.v1.ServerEntityWorldChangeEvents;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
@@ -42,12 +36,7 @@ public class AllEvents
         DifficultyEvent.init();
         TrinketEvent.init();
         LightSpell.init();
-
-        ServerEntityWorldChangeEvents.AFTER_PLAYER_CHANGE_WORLD.register((player, origin, destination) ->
-        {
-            if (origin.getRegistryKey().equals(AllWorldGen.OC_WORLD))
-                Buff.remove(player, Conscious.TYPE);
-        });
+        ConsciousOceanEvent.init();
 
         ServerEntityCombatEvents.AFTER_KILLED_OTHER_ENTITY.register((world, entity, killedEntity) ->
         {
@@ -76,7 +65,7 @@ public class AllEvents
             if (!world.isClient() &&
                 player.getStackInHand(hand).isOf(AllItems.DEBUG_STAFF))
             {
-                SchoolUtil.getPlayerSchool(player).stream().findFirst().ifPresent(school ->
+                SchoolUtil.getEntitySchool(player).stream().findFirst().ifPresent(school ->
                         entity.damage(SpellDamageSource.player(school, player), 999999));
             }
             return ActionResult.PASS;

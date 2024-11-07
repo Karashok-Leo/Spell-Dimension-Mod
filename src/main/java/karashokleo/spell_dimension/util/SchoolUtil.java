@@ -1,8 +1,8 @@
 package karashokleo.spell_dimension.util;
 
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.player.PlayerEntity;
 import net.spell_power.api.SpellPower;
 import net.spell_power.api.SpellSchool;
 import net.spell_power.api.SpellSchools;
@@ -24,7 +24,7 @@ public class SchoolUtil
             SpellSchools.SOUL
     );
 
-    public static List<SpellSchool> getPlayerSchool(PlayerEntity player)
+    public static List<SpellSchool> getEntitySchool(LivingEntity player)
     {
         Map<SpellSchool, Double> map = SCHOOLS.stream().collect(Collectors.toMap(
                 school -> school,
@@ -32,6 +32,14 @@ public class SchoolUtil
         ));
         Double max = Collections.max(map.values());
         return SCHOOLS.stream().filter(school -> map.get(school).equals(max)).toList();
+    }
+
+    public static double getEntitySpellPower(LivingEntity player)
+    {
+        List<SpellSchool> schools = SchoolUtil.getEntitySchool(player);
+        if (!schools.isEmpty())
+            return SpellPower.getSpellPower(schools.get(0), player).baseValue();
+        return 0;
     }
 
     @Nullable

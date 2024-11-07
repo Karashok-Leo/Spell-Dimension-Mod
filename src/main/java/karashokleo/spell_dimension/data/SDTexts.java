@@ -117,7 +117,18 @@ public enum SDTexts
     TOOLTIP$MAGIC_MIRROR$USAGE("Use to teleport to the Ocean of Consciousness", "使用后传送至识之海"),
     TOOLTIP$MAGIC_MIRROR$WARNING("Warning: After entering the Ocean of Consciousness, you can only be reborn in the dimension of the Ocean of Consciousness", "警告: 进入识之海后, 你只能在识之海维度中重生"),
     TOOLTIP$MAGIC_MIRROR$BROKEN_1("This item is a consumable", "该物品为消耗品"),
-    TOOLTIP$MAGIC_MIRROR$BROKEN_2("After entering the Ocean of Consciousness, obtain 'Conscious' with a " + Conscious.COUNT_DOWN / 20 + " timer, and force return to the overworld after the countdown ends", "进入识之海后, 获得计时" + Conscious.COUNT_DOWN / 20 + "秒的意识留存, 倒计时结束后强制返回主世界"),
+    TOOLTIP$MAGIC_MIRROR$BROKEN_2("After entering the Ocean of Consciousness, obtain 'Conscious' of 3 seconds per hostility level timer, and force return to the overworld after the countdown ends", "进入识之海后, 获得计时每恶意等级3秒的意识留存, 倒计时结束后强制返回主世界"),
+    TOOLTIP$ATOMIC_BREASTPLATE_PROGRESS("Current progress: %s", "当前进度: %s"),
+    TOOLTIP$ATOMIC_TO_ENCHANTED("After dealing a total of %s magic damage, upgrade to Enchanted Breastplate", "总共造成%s点魔法伤害后升级为束魔护心镜"),
+    TOOLTIP$ATOMIC_TO_FLEX("After suffering a total of %s damage, upgrade to Flex Breastplate", "总共承受%s点伤害后升级为曲御护心镜"),
+    TOOLTIP$ATOMIC_TO_FLICKER("After rolling a total of %s times, upgrade to Flicker Breastplate", "总共翻滚%s次后升级为闪曳护心镜"),
+    TOOLTIP$ATOMIC_TO_OBLIVION("After restoring with a total of %s health, upgrade to Oblivion Breastplate", "总共恢复%s点生命值后升级为湮灭护心镜"),
+    TOOLTIP$ENCHANTED_BREASTPLATE("For every 1 spell power, your max health increases by %s, armor increases by %s, and armor toughness increases by %s", "每拥有1点法术强度, 最大生命值增加%s, 护甲增加%s, 护甲韧性增加%s"),
+    TOOLTIP$FLEX_BREASTPLATE("Gain a certain damage reduction ratio, which depends on the %s of your spell power, %s of armor, and %s of armor toughness", "获得一定免伤比例, 该比例取决于你的法术强度的%s, 护甲值的%s和护甲韧性的%s"),
+    TOOLTIP$FLICKER_BREASTPLATE("Gain a certain probability of dodging enemy attacks, which depends on the ratio of your speed to the enemy's speed and doubles when in the air", "获得一定闪避敌人攻击的概率, 该概率取决于你与敌人的速度之比, 且在空中时翻倍"),
+    TOOLTIP$OBLIVION_BREASTPLATE_1("When your health is higher than %s of your max health, the Oblivion Breastplate will absorb %s of your health every second and convert it into Oblivion Amount.", "当你的生命值高于你的最大生命值的%s时, 湮灭护心镜将每秒汲取你%s的生命值, 并将其转化为湮灭值"),
+    TOOLTIP$OBLIVION_BREASTPLATE_2("The max Oblivion Amount is %s of your max health value. When you are injured, it will try to consume Oblivion Amount to resist this damage", "湮灭值最大为你的最大生命值的%s, 当你受伤时将优先消耗湮灭值抵挡此次伤害"),
+    TOOLTIP$OBLIVION_BREASTPLATE_3("Current Oblivion Amount: %s", "当前湮灭值: %s"),
 
     /**
      * Scrolls
@@ -196,6 +207,8 @@ public enum SDTexts
         LocateSpellConfig.register();
         SpellDimension.EN_TEXTS.addEntityType(AllEntities.LOCATE_PORTAL, "Locate Portal");
         SpellDimension.ZH_TEXTS.addEntityType(AllEntities.LOCATE_PORTAL, "定位传送门");
+        SpellDimension.EN_TEXTS.addText("trinkets.slot.chest.breastplate", "Breastplate");
+        SpellDimension.ZH_TEXTS.addText("trinkets.slot.chest.breastplate", "护心镜");
     }
 
     private static void addGroupTranslation()

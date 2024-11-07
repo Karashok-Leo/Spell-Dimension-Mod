@@ -88,6 +88,11 @@ public class AllGroups
                             entries.add(AllItems.SPELL_CONTAINER);
                             entries.add(AllItems.MAGIC_MIRROR);
                             entries.add(AllItems.BROKEN_MAGIC_MIRROR);
+                            entries.add(AllItems.ATOMIC_BREASTPLATE);
+                            entries.add(AllItems.ENCHANTED_BREASTPLATE);
+                            entries.add(AllItems.FLEX_BREASTPLATE);
+                            entries.add(AllItems.FLICKER_BREASTPLATE);
+                            entries.add(AllItems.OBLIVION_BREASTPLATE);
                         })
                         .build()
         );

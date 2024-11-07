@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "spell-dimension:atomic_breastplate",
+    "spell-dimension:enchanted_breastplate",
+    "spell-dimension:flex_breastplate",
+    "spell-dimension:flicker_breastplate",
+    "spell-dimension:oblivion_breastplate"
+  ]
+}

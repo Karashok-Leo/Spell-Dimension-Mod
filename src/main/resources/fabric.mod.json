@@ -77,6 +77,7 @@
     "cardinal-components": [
       "spell-dimension:enlightening",
       "spell-dimension:end_stage",
+      "spell-dimension:conscious_mode",
       "spell-dimension:buff",
       "spell-dimension:quest"
     ]

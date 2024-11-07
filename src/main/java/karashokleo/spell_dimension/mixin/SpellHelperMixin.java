@@ -64,7 +64,7 @@ public abstract class SpellHelperMixin
     {
         if (itemStack.isOf(AllItems.SPELL_SCROLL) &&
             spell.school != AllSpells.GENERIC &&
-            !SchoolUtil.getPlayerSchool(player).contains(spell.school))
+            !SchoolUtil.getEntitySchool(player).contains(spell.school))
         {
             player.sendMessage(SDTexts.TEXT$SKILLED_SCHOOL.get(), true);
             cir.setReturnValue(SpellCast.Attempt.none());

@@ -8,8 +8,7 @@ import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.item.*;
 import karashokleo.spell_dimension.content.item.essence.*;
 import karashokleo.spell_dimension.content.item.essence.base.ColorProvider;
-import karashokleo.spell_dimension.content.item.trinket.HeartSpellSteelItem;
-import karashokleo.spell_dimension.content.item.trinket.RejuvenatingBlossomItem;
+import karashokleo.spell_dimension.content.item.trinket.*;
 import karashokleo.spell_dimension.util.SchoolUtil;
 import karashokleo.spell_dimension.util.TagUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -49,6 +48,11 @@ public class AllItems
     public static SpellContainerItem SPELL_CONTAINER;
     public static MagicMirrorItem MAGIC_MIRROR;
     public static MagicMirrorItem BROKEN_MAGIC_MIRROR;
+    public static AtomicBreastplateItem ATOMIC_BREASTPLATE;
+    public static EnchantedBreastplateItem ENCHANTED_BREASTPLATE;
+    public static FlexBreastplateItem FLEX_BREASTPLATE;
+    public static FlickerBreastplateItem FLICKER_BREASTPLATE;
+    public static OblivionBreastplateItem OBLIVION_BREASTPLATE;
 
     public static void register()
     {
@@ -155,6 +159,37 @@ public class AllItems
         BROKEN_MAGIC_MIRROR = Entry.of("broken_magic_mirror", new MagicMirrorItem(true))
                 .addEN()
                 .addZH("破碎魔镜")
+                .addModel()
+                .register();
+
+        ATOMIC_BREASTPLATE = Entry.of("atomic_breastplate", new AtomicBreastplateItem())
+                .addEN()
+                .addZH("原子护心镜")
+                .addTag(AllTags.BREASTPLATE_SLOT)
+                .addModel()
+                .register();
+        ENCHANTED_BREASTPLATE = Entry.of("enchanted_breastplate", new EnchantedBreastplateItem())
+                .addEN()
+                .addZH("束魔护心镜")
+                .addTag(AllTags.BREASTPLATE_SLOT)
+                .addModel()
+                .register();
+        FLEX_BREASTPLATE = Entry.of("flex_breastplate", new FlexBreastplateItem())
+                .addEN()
+                .addZH("曲御护心镜")
+                .addTag(AllTags.BREASTPLATE_SLOT)
+                .addModel()
+                .register();
+        FLICKER_BREASTPLATE = Entry.of("flicker_breastplate", new FlickerBreastplateItem())
+                .addEN()
+                .addZH("闪曳护心镜")
+                .addTag(AllTags.BREASTPLATE_SLOT)
+                .addModel()
+                .register();
+        OBLIVION_BREASTPLATE = Entry.of("oblivion_breastplate", new OblivionBreastplateItem())
+                .addEN()
+                .addZH("湮灭护心镜")
+                .addTag(AllTags.BREASTPLATE_SLOT)
                 .addModel()
                 .register();
     }

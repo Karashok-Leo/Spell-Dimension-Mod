@@ -4,7 +4,6 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import karashokleo.spell_dimension.api.buff.Buff;
 import karashokleo.spell_dimension.api.buff.BuffType;
-import karashokleo.spell_dimension.content.event.conscious.ConsciousnessEventManager;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllWorldGen;
 import karashokleo.spell_dimension.util.TeleportUtil;
@@ -21,24 +20,26 @@ public class Conscious implements Buff
 {
     public static final Codec<Conscious> CODEC = RecordCodecBuilder.create(
             ins -> ins.group(
+                    Codecs.NONNEGATIVE_INT.fieldOf("maxCountDown").forGetter(e -> e.countDown),
                     Codecs.NONNEGATIVE_INT.fieldOf("countDown").forGetter(e -> e.countDown)
             ).apply(ins, Conscious::new)
     );
     public static final BuffType<Conscious> TYPE = new BuffType<>(CODEC, false);
-    public static final int COUNT_DOWN = 20 * 60 * 10;
 
     private final ServerBossBar bossBar = new ServerBossBar(Text.empty(), ServerBossBar.Color.PURPLE, ServerBossBar.Style.PROGRESS);
     private ServerPlayerEntity player;
+    private final int maxCountDown;
     private int countDown;
 
     public Conscious(int countDown)
     {
-        this.countDown = countDown;
+        this(countDown, countDown);
     }
 
-    public Conscious()
+    private Conscious(int maxCountDown, int countDown)
     {
-        this(COUNT_DOWN);
+        this.maxCountDown = maxCountDown;
+        this.countDown = countDown;
     }
 
     @Override
@@ -91,7 +92,7 @@ public class Conscious implements Buff
 
     private void tickBossBar()
     {
-        bossBar.setPercent(1.0F * countDown / COUNT_DOWN);
+        bossBar.setPercent(1.0F * countDown / maxCountDown);
         bossBar.setName(SDTexts.TEXT$CONSCIOUS$COUNTDOWN.get(countDown / 20));
         if (!bossBar.getPlayers().contains(player))
             bossBar.addPlayer(player);
