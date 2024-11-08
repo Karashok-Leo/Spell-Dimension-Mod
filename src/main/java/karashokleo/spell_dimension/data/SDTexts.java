@@ -2,7 +2,6 @@ package karashokleo.spell_dimension.data;
 
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.config.recipe.LocateSpellConfig;
-import karashokleo.spell_dimension.content.buff.Conscious;
 import karashokleo.spell_dimension.content.event.conscious.EventAward;
 import karashokleo.spell_dimension.data.loot_bag.SDBags;
 import karashokleo.spell_dimension.data.loot_bag.SDContents;
@@ -57,6 +56,7 @@ public enum SDTexts
     TEXT$EVENT$FINISH$SUCCESS("Invasion End - Successful", "入侵结束 - 成功"),
     TEXT$EVENT$FINISH$FAIL("Invasion End - Failed", "入侵结束 - 失败"),
     TEXT$CONSCIOUS$COUNTDOWN("Conscious - Countdown: %s seconds", "意识留存 - 倒计时: %s秒"),
+    TEXT$CONSCIOUS$BAN_ITEM("You cannot use this item in the conscious mode", "你不能在意识模式下使用该物品"),
 
     /**
      * Spell School

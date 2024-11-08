@@ -281,6 +281,7 @@
   "structure.minecraft.mansion": "林地府邸",
   "text.spell-dimension.abyss_guard": "你需要在物品栏中持有深渊守护才能吹响号角！",
   "text.spell-dimension.blank_book": "空白法术书!",
+  "text.spell-dimension.conscious.ban_item": "你不能在意识模式下使用该物品",
   "text.spell-dimension.conscious.countdown": "意识留存 - 倒计时: %s秒",
   "text.spell-dimension.consciousness_core.award": "奖励: %s",
   "text.spell-dimension.consciousness_core.level": "激活等级: %s",

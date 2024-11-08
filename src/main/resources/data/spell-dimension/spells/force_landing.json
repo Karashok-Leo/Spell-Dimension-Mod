@@ -23,9 +23,9 @@
     "target": {
       "type": "AREA",
       "area": {
-        "horizontal_range_multiplier":1.2,
-        "vertical_range_multiplier":1.2,
-        "angle_degrees":360
+        "horizontal_range_multiplier": 1.2,
+        "vertical_range_multiplier": 1.2,
+        "angle_degrees": 360
       }
     },
     "particles": [
@@ -66,6 +66,6 @@
   ],
   "cost": {
     "cooldown_duration": 45,
-    "exhaust" : 0.5
+    "exhaust": 0.5
   }
 }

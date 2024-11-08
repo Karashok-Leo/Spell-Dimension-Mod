@@ -1,5 +1,15 @@
 {
+  "type": "minecraft:entity",
   "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "endrem:wither_eye"
+        }
+      ]
+    },
     {
       "rolls": 1,
       "entries": [

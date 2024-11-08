@@ -1,4 +1,5 @@
 {
+  "type": "minecraft:entity",
   "pools": [
     {
       "rolls": 1,
@@ -18,10 +19,10 @@
           "name": "minecraft:leather",
           "weight": 3
         },
-				{
-					"type": "minecraft:empty",
-					"weight": 10
-				}
+        {
+          "type": "minecraft:empty",
+          "weight": 10
+        }
       ]
     }
   ]

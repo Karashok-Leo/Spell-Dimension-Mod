@@ -1,63 +1,63 @@
 {
-    "type": "minecraft:entity",
-    "pools": [
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "rolls": {
+        "type": "minecraft:uniform",
+        "min": 0,
+        "max": 2
+      },
+      "entries": [
         {
-            "rolls": {
-                "type": "minecraft:uniform",
-                "min": 0,
-                "max": 2
-            },
-            "entries": [
-                {
-                    "type": "item",
-                    "name": "minecraft:netherite_scrap",
-                    "weight": 1
-                },
-                {
-                    "type": "item",
-                    "name": "minecraft:diamond",
-                    "weight": 2
-                },
-                {
-                    "type": "item",
-                    "name": "minecraft:emerald",
-                    "weight": 2
-                },
-                {
-                    "type": "item",
-                    "name": "minecraft:redstone",
-                    "weight": 2
-                },
-                {
-                    "type": "item",
-                    "name": "minecraft:raw_copper",
-                    "weight": 2
-                },
-                {
-                    "type": "item",
-                    "name": "minecraft:coal",
-                    "weight": 4
-                },
-                {
-                    "type": "item",
-                    "name": "minecraft:raw_iron",
-                    "weight": 6
-                },
-                {
-                    "type": "item",
-                    "name": "minecraft:amethyst_shard",
-                    "weight": 8
-                },
-                {
-                    "type": "item",
-                    "name": "minecraft:lapis_lazuli",
-                    "weight": 14
-                },
-                {
-                    "type": "minecraft:empty",
-                    "weight": 40
-                }
-            ]
+          "type": "item",
+          "name": "minecraft:netherite_scrap",
+          "weight": 1
+        },
+        {
+          "type": "item",
+          "name": "minecraft:diamond",
+          "weight": 2
+        },
+        {
+          "type": "item",
+          "name": "minecraft:emerald",
+          "weight": 2
+        },
+        {
+          "type": "item",
+          "name": "minecraft:redstone",
+          "weight": 2
+        },
+        {
+          "type": "item",
+          "name": "minecraft:raw_copper",
+          "weight": 2
+        },
+        {
+          "type": "item",
+          "name": "minecraft:coal",
+          "weight": 4
+        },
+        {
+          "type": "item",
+          "name": "minecraft:raw_iron",
+          "weight": 6
+        },
+        {
+          "type": "item",
+          "name": "minecraft:amethyst_shard",
+          "weight": 8
+        },
+        {
+          "type": "item",
+          "name": "minecraft:lapis_lazuli",
+          "weight": 14
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 40
         }
-    ]
+      ]
+    }
+  ]
 }

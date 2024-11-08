@@ -1,12 +1,12 @@
 package karashokleo.spell_dimension.content.component;
 
-import dev.onyxstudios.cca.api.v3.component.Component;
+import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import karashokleo.spell_dimension.init.AllComponents;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import org.jetbrains.annotations.NotNull;
 
-public class ConsciousModeComponent implements Component
+public class ConsciousModeComponent implements AutoSyncedComponent
 {
     public static ConsciousModeComponent get(PlayerEntity player)
     {
@@ -15,11 +15,33 @@ public class ConsciousModeComponent implements Component
 
     public static final String KEY = "ConsciousMode";
 
-    public boolean consciousMode = false;
-    public boolean cost = true;
+    private boolean consciousMode = false;
+    private boolean cost = true;
 
     public ConsciousModeComponent()
     {
+    }
+
+    public boolean isConsciousMode()
+    {
+        return consciousMode;
+    }
+
+    public void setConsciousMode(boolean consciousMode)
+    {
+        this.consciousMode = consciousMode;
+        AllComponents.CONSCIOUS_MODE.sync(this);
+    }
+
+    public boolean isCost()
+    {
+        return cost;
+    }
+
+    public void setCost(boolean cost)
+    {
+        this.cost = cost;
+        AllComponents.CONSCIOUS_MODE.sync(this);
     }
 
     @Override

@@ -281,6 +281,7 @@
   "structure.minecraft.mansion": "Mansion",
   "text.spell-dimension.abyss_guard": "You need to have Abyss Guard in your inventory to sound the shell horn!",
   "text.spell-dimension.blank_book": "Blank spell book!",
+  "text.spell-dimension.conscious.ban_item": "You cannot use this item in the conscious mode",
   "text.spell-dimension.conscious.countdown": "Conscious - Countdown: %s seconds",
   "text.spell-dimension.consciousness_core.award": "Award: %s",
   "text.spell-dimension.consciousness_core.level": "Active Level: %s",

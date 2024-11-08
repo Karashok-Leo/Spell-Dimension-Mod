@@ -72,7 +72,7 @@ public class MagicMirrorItem extends Item
 
                 // Consume if broken, else cancel the cost
                 if (broken) stack.decrement(1);
-                else ConsciousModeComponent.get(player).cost = false;
+                else ConsciousModeComponent.get(player).setCost(false);
 
                 // Do teleport
                 TeleportUtil.teleportPlayerChangeDimension(

@@ -41,7 +41,6 @@
                 "max_speed": 0.1
               }
             ],
-
             "model": {
               "model_id": "spellbladenext:projectile/flamewaveprojectile",
               "render": "DEEP",
@@ -69,7 +68,7 @@
           "min_speed": 0.2,
           "max_speed": 0.7
         }
-        ],
+      ],
       "sound": {
         "id": "spell_engine:generic_healing_impact_1"
       }

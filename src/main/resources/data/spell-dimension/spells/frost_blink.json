@@ -17,7 +17,7 @@
     {
       "action": {
         "type": "TELEPORT",
-        "teleport" : {
+        "teleport": {
           "mode": "FORWARD",
           "forward": {
             "distance": 8

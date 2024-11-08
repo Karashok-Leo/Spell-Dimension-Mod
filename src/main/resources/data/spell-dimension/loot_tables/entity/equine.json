@@ -19,10 +19,10 @@
           "name": "minecraft:leather",
           "weight": 4
         },
-				{
-					"type": "minecraft:empty",
-					"weight": 10
-				}
+        {
+          "type": "minecraft:empty",
+          "weight": 10
+        }
       ]
     }
   ],

@@ -1,5 +1,7 @@
 {
   "icon": "spell-dimension:slot/empty_breastplate_slot",
   "order": 666,
-  "validator_predicates": ["trinkets:tag"]
+  "validator_predicates": [
+    "trinkets:tag"
+  ]
 }
