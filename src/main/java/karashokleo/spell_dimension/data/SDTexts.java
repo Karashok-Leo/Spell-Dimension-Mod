@@ -55,7 +55,6 @@ public enum SDTexts
     TEXT$EVENT$WAITING("Wave %s/%s is about to start - Countdown: %s seconds", "第%s/%s波即将开始 - 倒计时: %s秒"),
     TEXT$EVENT$FINISH$SUCCESS("Invasion End - Successful", "入侵结束 - 成功"),
     TEXT$EVENT$FINISH$FAIL("Invasion End - Failed", "入侵结束 - 失败"),
-    TEXT$CONSCIOUS$COUNTDOWN("Conscious - Countdown: %s seconds", "意识留存 - 倒计时: %s秒"),
     TEXT$CONSCIOUS$BAN_ITEM("You cannot use this item in the conscious mode", "你不能在意识模式下使用该物品"),
 
     /**
@@ -116,8 +115,7 @@ public enum SDTexts
     TOOLTIP$REJUVENATING_BLOSSOM$USAGE_2("- When injured, gain a regeneration effect that restores health equivalent to the amount of damage received * the count of this item equipped.", "- 受伤时获得生命恢复效果, 该效果将恢复的生命值等同于受到的伤害值 * 装备的该物品数量"),
     TOOLTIP$MAGIC_MIRROR$USAGE("Use to teleport to the Ocean of Consciousness", "使用后传送至识之海"),
     TOOLTIP$MAGIC_MIRROR$WARNING("Warning: After entering the Ocean of Consciousness, you can only be reborn in the dimension of the Ocean of Consciousness", "警告: 进入识之海后, 你只能在识之海维度中重生"),
-    TOOLTIP$MAGIC_MIRROR$BROKEN_1("This item is a consumable", "该物品为消耗品"),
-    TOOLTIP$MAGIC_MIRROR$BROKEN_2("After entering the Ocean of Consciousness, obtain 'Conscious' of 3 seconds per hostility level timer, and force return to the overworld after the countdown ends", "进入识之海后, 获得计时每恶意等级3秒的意识留存, 倒计时结束后强制返回主世界"),
+    TOOLTIP$MAGIC_MIRROR$BROKEN("This item is a consumable", "该物品为消耗品"),
     TOOLTIP$ATOMIC_BREASTPLATE_PROGRESS("Current progress: %s", "当前进度: %s"),
     TOOLTIP$ATOMIC_TO_ENCHANTED("After dealing a total of %s magic damage, upgrade to Enchanted Breastplate", "总共造成%s点魔法伤害后升级为束魔护心镜"),
     TOOLTIP$ATOMIC_TO_FLEX("After suffering a total of %s damage, upgrade to Flex Breastplate", "总共承受%s点伤害后升级为曲御护心镜"),

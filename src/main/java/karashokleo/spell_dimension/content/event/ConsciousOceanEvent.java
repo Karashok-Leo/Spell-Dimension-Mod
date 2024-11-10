@@ -3,8 +3,6 @@ package karashokleo.spell_dimension.content.event;
 import karashokleo.l2hostility.content.component.player.PlayerDifficulty;
 import karashokleo.l2hostility.content.item.ConsumableItems;
 import karashokleo.l2hostility.content.logic.LevelEditor;
-import karashokleo.spell_dimension.api.buff.Buff;
-import karashokleo.spell_dimension.content.buff.Conscious;
 import karashokleo.spell_dimension.content.component.ConsciousModeComponent;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllWorldGen;
@@ -35,22 +33,9 @@ public class ConsciousOceanEvent
             // Set conscious mode to true
             mode.setConsciousMode(true);
 
-            // Set remaining time if cost
-            if (mode.isCost())
-            {
-                // Apply the Conscious buff
-                Buff.apply(player, Conscious.TYPE, new Conscious(playerLevel * 60), player);
-            } else mode.setCost(true);
-
             // Set spawn point to the ocean if it's not already set in the ocean
             if (!player.getSpawnPointDimension().equals(AllWorldGen.OC_WORLD))
                 player.setSpawnPoint(AllWorldGen.OC_WORLD, player.getBlockPos(), player.getSpawnAngle(), true, true);
-        });
-
-        ServerEntityWorldChangeEvents.AFTER_PLAYER_CHANGE_WORLD.register((player, origin, destination) ->
-        {
-            if (origin.getRegistryKey().equals(AllWorldGen.OC_WORLD))
-                Buff.remove(player, Conscious.TYPE);
         });
 
         UseItemCallback.EVENT.register((player, world, hand) ->

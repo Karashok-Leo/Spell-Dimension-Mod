@@ -1,6 +1,5 @@
 package karashokleo.spell_dimension.content.item;
 
-import karashokleo.spell_dimension.content.component.ConsciousModeComponent;
 import karashokleo.spell_dimension.content.network.S2CFloatingItem;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllWorldGen;
@@ -70,9 +69,8 @@ public class MagicMirrorItem extends Item
                 // Render floating item
                 ServerPlayNetworking.send(player, new S2CFloatingItem(stack.copy()));
 
-                // Consume if broken, else cancel the cost
+                // Consume if broken
                 if (broken) stack.decrement(1);
-                else ConsciousModeComponent.get(player).setCost(false);
 
                 // Do teleport
                 TeleportUtil.teleportPlayerChangeDimension(
@@ -93,8 +91,7 @@ public class MagicMirrorItem extends Item
         tooltip.add(SDTexts.TOOLTIP$MAGIC_MIRROR$WARNING.get().formatted(Formatting.RED));
         if (broken)
         {
-            tooltip.add(SDTexts.TOOLTIP$MAGIC_MIRROR$BROKEN_1.get().formatted(Formatting.GRAY));
-            tooltip.add(SDTexts.TOOLTIP$MAGIC_MIRROR$BROKEN_2.get().formatted(Formatting.GRAY));
+            tooltip.add(SDTexts.TOOLTIP$MAGIC_MIRROR$BROKEN.get().formatted(Formatting.GRAY));
         }
     }
 }

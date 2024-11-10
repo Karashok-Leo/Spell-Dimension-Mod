@@ -52,6 +52,24 @@ public class SDRecipeProvider extends FabricRecipeProvider
 
     private static void addMiscItemRecipe(Consumer<RecipeJsonProvider> exporter)
     {
+        // Mending Essence
+        ShapedRecipeJsonBuilder
+                .create(RecipeCategory.MISC, AllItems.MENDING_ESSENCE)
+                .pattern(" E ")
+                .pattern("ESE")
+                .pattern(" E ")
+                .input('S', AllItems.SPAWNER_SOUL)
+                .input('E', AllItems.ENCHANTED_ESSENCE)
+                .criterion(
+                        FabricRecipeProvider.hasItem(AllItems.SPAWNER_SOUL),
+                        FabricRecipeProvider.conditionsFromItem(AllItems.SPAWNER_SOUL)
+                )
+                .criterion(
+                        FabricRecipeProvider.hasItem(AllItems.ENCHANTED_ESSENCE),
+                        FabricRecipeProvider.conditionsFromItem(AllItems.ENCHANTED_ESSENCE)
+                )
+                .offerTo(exporter);
+
         // Empty Quest Scroll
         ShapelessRecipeJsonBuilder
                 .create(RecipeCategory.MISC, AllItems.QUEST_SCROLL)

@@ -86,6 +86,7 @@ public class AllGroups
                             entries.add(AllItems.REJUVENATING_BLOSSOM);
                             entries.add(AllItems.ARMOR_OF_CONVERGENCE);
                             entries.add(AllItems.SPELL_CONTAINER);
+                            entries.add(AllItems.SPAWNER_SOUL);
                             entries.add(AllItems.MAGIC_MIRROR);
                             entries.add(AllItems.BROKEN_MAGIC_MIRROR);
                             entries.add(AllItems.ATOMIC_BREASTPLATE);

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "E": {
+      "item": "spell-dimension:enchanted_essence"
+    },
+    "S": {
+      "item": "spell-dimension:spawner_soul"
+    }
+  },
+  "pattern": [
+    " E ",
+    "ESE",
+    " E "
+  ],
+  "result": {
+    "item": "spell-dimension:mending_essence"
+  },
+  "show_notification": true
+}

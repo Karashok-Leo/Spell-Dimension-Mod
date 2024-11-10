@@ -1,6 +1,5 @@
 package karashokleo.spell_dimension.content.entity;
 
-import com.google.common.collect.Sets;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.component.player.PlayerDifficulty;
 import karashokleo.spell_dimension.content.event.conscious.ConsciousnessEventManager;
@@ -30,12 +29,14 @@ public class ConsciousnessEventEntity extends Entity
 {
     public static final int PREPARE_TIME = 20 * 10;
     public static final int WAIT_TIME = 20 * 5;
+    public static final int PENDING_TIME = 20 * 10;
     public static final int FINISH_TIME = 20 * 5;
 
     public static final double FACTOR_PER_WAVE = 0.4;
     public static final String STATE_KEY = "State";
     public static final String WAIT_TIMER_KEY = "WaitTimer";
     public static final String FINISH_TIMER_KEY = "FinishTimer";
+    public static final String PENDING_TIMER_KEY = "PendingTimer";
     public static final String WAVE_INDEX_KEY = "WaveIndex";
     public static final String LEVEL_KEY = "Level";
     public static final String AWARD_KEY = "Award";
@@ -46,6 +47,7 @@ public class ConsciousnessEventEntity extends Entity
     private State state = State.PREPARE;
     private int waitTimer = 0;
     private int finishTimer = 0;
+    private int pendingTimer = 0;
     private int waveIndex = 0;
     private int level;
     private float totalMaxHealth = 0;
@@ -144,18 +146,6 @@ public class ConsciousnessEventEntity extends Entity
         return player -> this.getBoundingBox().contains(player.getPos());
     }
 
-    protected void updateBarToPlayers(ServerWorld world)
-    {
-        Set<ServerPlayerEntity> set = Sets.newHashSet(this.bossBar.getPlayers());
-        List<ServerPlayerEntity> list = this.getPlayers(world);
-        for (ServerPlayerEntity player : list)
-            if (!set.contains(player))
-                this.bossBar.addPlayer(player);
-        for (ServerPlayerEntity player : set)
-            if (!list.contains(player))
-                this.bossBar.removePlayer(player);
-    }
-
     protected void tickPrepare(ServerWorld world)
     {
         if (this.age == PREPARE_TIME)
@@ -168,6 +158,7 @@ public class ConsciousnessEventEntity extends Entity
 
     protected void tickRunning(ServerWorld world)
     {
+        // if enemies are cleared, go to next wave or finish
         if (checkSummonedClear(world))
         {
             this.waveIndex++;
@@ -176,11 +167,24 @@ public class ConsciousnessEventEntity extends Entity
             else this.turnToWaiting(world);
         }
 
-        else if (this.age > ConsciousnessEventManager.TIME_LIMIT)
+        // if no player, pending
+        else if (this.getPlayers(world).isEmpty())
+        {
+            this.pendingTimer++;
+            if (this.pendingTimer > PENDING_TIME)
+                this.turnToFinish(world, false);
+        }
+        //
+        else this.pendingTimer = 0;
+
+        // if exceed time limit or players escape, fail
+        if (this.pendingTimer > PENDING_TIME ||
+            this.age > ConsciousnessEventManager.TIME_LIMIT)
         {
             this.turnToFinish(world, false);
         }
 
+        // Update boss bar
         float current = (float) this.summoned.stream().mapToDouble(LivingEntity::getHealth).sum();
         this.bossBar.setPercent(current / this.totalMaxHealth);
         if (this.age % 10 == 0)
@@ -319,6 +323,7 @@ public class ConsciousnessEventEntity extends Entity
         this.state = State.valueOf(nbt.getString(STATE_KEY));
         this.waitTimer = nbt.getInt(WAIT_TIMER_KEY);
         this.finishTimer = nbt.getInt(FINISH_TIMER_KEY);
+        this.pendingTimer = nbt.getInt(PENDING_TIMER_KEY);
         this.waveIndex = nbt.getInt(WAVE_INDEX_KEY);
         this.level = nbt.getInt(LEVEL_KEY);
         this.totalMaxHealth = nbt.getFloat(TOTAL_MAX_HEALTH_KEY);
@@ -346,6 +351,7 @@ public class ConsciousnessEventEntity extends Entity
         nbt.putString(STATE_KEY, this.state.name());
         nbt.putInt(WAIT_TIMER_KEY, this.waitTimer);
         nbt.putInt(FINISH_TIMER_KEY, this.finishTimer);
+        nbt.putInt(PENDING_TIMER_KEY, this.pendingTimer);
         nbt.putInt(WAVE_INDEX_KEY, this.waveIndex);
         nbt.putInt(LEVEL_KEY, this.level);
         nbt.putFloat(TOTAL_MAX_HEALTH_KEY, this.totalMaxHealth);

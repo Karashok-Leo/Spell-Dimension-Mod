@@ -7,10 +7,21 @@
         {
           "type": "minecraft:tag",
           "expand": true,
-          "name": "spell-dimension:rare/gear"
+          "name": "spell-dimension:rare/armor",
+          "weight": 4
+        },
+        {
+          "type": "minecraft:tag",
+          "expand": true,
+          "name": "spell-dimension:rare/weapon",
+          "weight": 1
         }
       ],
-      "rolls": 1.0
+      "rolls": {
+        "type": "minecraft:uniform",
+        "min": 1,
+        "max": 2
+      }
     }
   ],
   "functions": [

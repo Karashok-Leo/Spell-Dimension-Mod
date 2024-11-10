@@ -20,6 +20,15 @@
         }
       ],
       "rolls": 1.0
+    },
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "victus:blank_heart_aspect"
+        }
+      ],
+      "rolls": 1.0
     }
   ]
 }

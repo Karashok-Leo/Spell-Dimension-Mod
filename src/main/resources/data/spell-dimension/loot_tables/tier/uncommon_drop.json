@@ -26,11 +26,11 @@
         {
           "type": "loot-bag:loot_bag",
           "bag": "spell-dimension:uncommon/material",
-          "weight": 1
+          "weight": 2
         },
         {
           "type": "minecraft:empty",
-          "weight": 30
+          "weight": 20
         }
       ],
       "rolls": 1.0

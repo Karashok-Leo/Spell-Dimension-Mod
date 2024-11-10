@@ -165,10 +165,10 @@ public class AtomicBreastplateItem extends TrinketItem
 
     public enum Upgrade
     {
-        ENCHANTED("EnchantedProgress", 20000, AllItems.ENCHANTED_BREASTPLATE::getDefaultStack),
-        FLEX("FlexProgress", 1000, AllItems.FLEX_BREASTPLATE::getDefaultStack),
+        ENCHANTED("EnchantedProgress", 30000, AllItems.ENCHANTED_BREASTPLATE::getDefaultStack),
+        FLEX("FlexProgress", 2000, AllItems.FLEX_BREASTPLATE::getDefaultStack),
         FLICKER("FlickerProgress", 1000, AllItems.FLICKER_BREASTPLATE::getDefaultStack),
-        OBLIVION("OblivionProgress", 4000, AllItems.OBLIVION_BREASTPLATE::getDefaultStack);
+        OBLIVION("OblivionProgress", 1000, AllItems.OBLIVION_BREASTPLATE::getDefaultStack);
 
         public final String progressKey;
         public final double maxProgress;

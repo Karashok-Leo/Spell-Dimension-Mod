@@ -16,7 +16,6 @@ public class ConsciousModeComponent implements AutoSyncedComponent
     public static final String KEY = "ConsciousMode";
 
     private boolean consciousMode = false;
-    private boolean cost = true;
 
     public ConsciousModeComponent()
     {
@@ -30,17 +29,6 @@ public class ConsciousModeComponent implements AutoSyncedComponent
     public void setConsciousMode(boolean consciousMode)
     {
         this.consciousMode = consciousMode;
-        AllComponents.CONSCIOUS_MODE.sync(this);
-    }
-
-    public boolean isCost()
-    {
-        return cost;
-    }
-
-    public void setCost(boolean cost)
-    {
-        this.cost = cost;
         AllComponents.CONSCIOUS_MODE.sync(this);
     }
 
