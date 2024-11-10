@@ -26,10 +26,10 @@ public class ConsciousModeComponent implements AutoSyncedComponent
         return consciousMode;
     }
 
-    public void setConsciousMode(boolean consciousMode)
+    public void setConsciousMode(boolean consciousMode, PlayerEntity player)
     {
         this.consciousMode = consciousMode;
-        AllComponents.CONSCIOUS_MODE.sync(this);
+        AllComponents.CONSCIOUS_MODE.sync(player);
     }
 
     @Override

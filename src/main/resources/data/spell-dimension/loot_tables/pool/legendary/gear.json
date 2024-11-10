@@ -5,29 +5,23 @@
       "bonus_rolls": 0.0,
       "entries": [
         {
-          "bonus_rolls": 0.0,
-          "entries": [
-            {
-              "type": "minecraft:tag",
-              "expand": true,
-              "name": "spell-dimension:legendary/armor",
-              "weight": 4
-            },
-            {
-              "type": "minecraft:tag",
-              "expand": true,
-              "name": "spell-dimension:legendary/weapon",
-              "weight": 1
-            }
-          ],
-          "rolls": {
-            "type": "minecraft:uniform",
-            "min": 1,
-            "max": 2
-          }
+          "type": "minecraft:tag",
+          "expand": true,
+          "name": "spell-dimension:legendary/armor",
+          "weight": 4
+        },
+        {
+          "type": "minecraft:tag",
+          "expand": true,
+          "name": "spell-dimension:legendary/weapon",
+          "weight": 1
         }
       ],
-      "rolls": 1.0
+      "rolls": {
+        "type": "minecraft:uniform",
+        "min": 1,
+        "max": 2
+      }
     }
   ],
   "functions": [

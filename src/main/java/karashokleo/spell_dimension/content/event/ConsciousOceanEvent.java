@@ -31,7 +31,7 @@ public class ConsciousOceanEvent
 
             ConsciousModeComponent mode = ConsciousModeComponent.get(player);
             // Set conscious mode to true
-            mode.setConsciousMode(true);
+            mode.setConsciousMode(true, player);
 
             // Set spawn point to the ocean if it's not already set in the ocean
             if (!player.getSpawnPointDimension().equals(AllWorldGen.OC_WORLD))

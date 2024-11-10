@@ -18,12 +18,14 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.function.Predicate;
+
+import static karashokleo.spell_dimension.content.event.conscious.ConsciousnessEventManager.RADIUS;
 
 public class ConsciousnessEventEntity extends Entity
 {
@@ -84,16 +86,6 @@ public class ConsciousnessEventEntity extends Entity
         return award;
     }
 
-    public void setBoundingBox(int radius)
-    {
-        BlockPos pos = this.getBlockPos();
-        Box box = new Box(
-                pos.add(-radius, -radius, -radius),
-                pos.add(radius, radius, radius)
-        );
-        this.setBoundingBox(box);
-    }
-
     @Override
     public void tick()
     {
@@ -117,9 +109,6 @@ public class ConsciousnessEventEntity extends Entity
             case WAITING -> this.tickWaiting(world);
             case FINISH -> this.tickFinish(world);
         }
-
-//        if (this.age % 10 == 0)
-//            this.updateBarToPlayers(world);
     }
 
     @Override
@@ -143,7 +132,13 @@ public class ConsciousnessEventEntity extends Entity
 
     protected Predicate<ServerPlayerEntity> isInEventRange()
     {
-        return player -> this.getBoundingBox().contains(player.getPos());
+        return player ->
+        {
+            Vec3d subtract = this.getPos().subtract(player.getPos());
+            return Math.abs(subtract.getX()) <= RADIUS &&
+                   Math.abs(subtract.getY()) <= RADIUS &&
+                   Math.abs(subtract.getZ()) <= RADIUS;
+        };
     }
 
     protected void tickPrepare(ServerWorld world)

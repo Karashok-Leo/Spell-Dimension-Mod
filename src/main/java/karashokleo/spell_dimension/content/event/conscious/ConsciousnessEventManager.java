@@ -34,8 +34,6 @@ public class ConsciousnessEventManager
     {
         ConsciousnessEventEntity event = AllEntities.CONSCIOUSNESS_EVENT.spawn(world, pos, SpawnReason.EVENT);
         if (event == null) return null;
-        event.setPos(pos.getX(), pos.getY(), pos.getZ());
-        event.setBoundingBox(RADIUS);
         event.init(level, award);
         ProtectiveCoverBlock.placeAsBarrier(world, pos, RADIUS, TIME_LIMIT);
         return event;

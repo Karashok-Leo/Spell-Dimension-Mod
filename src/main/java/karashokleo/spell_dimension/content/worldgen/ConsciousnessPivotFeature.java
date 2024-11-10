@@ -24,7 +24,7 @@ public class ConsciousnessPivotFeature extends Feature<DefaultFeatureConfig>
     public boolean generate(FeatureContext<DefaultFeatureConfig> context)
     {
         double levelFactor = context.getRandom().nextDouble();
-        int maxHeight = (int) (levelFactor / 0.1);
+        int maxHeight = (int) (levelFactor / 0.1) + 1;
         StructureWorldAccess worldAccess = context.getWorld();
         BlockPos origin = context.getOrigin().down();
         Set<BlockPos> set = Sets.newHashSet();
