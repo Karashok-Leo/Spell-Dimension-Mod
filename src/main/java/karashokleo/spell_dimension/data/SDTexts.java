@@ -114,7 +114,7 @@ public enum SDTexts
     TOOLTIP$REJUVENATING_BLOSSOM$USAGE_1("- When injured, if the amount of health that your existing regeneration effect will recover is less than the damage dealt * the count of this item equipped, then remove all negative effects from you.", "- 受伤时, 如果你还未恢复的生命值低于受到伤害 * 装备的该物品数量, 则移除你身上所有负面效果"),
     TOOLTIP$REJUVENATING_BLOSSOM$USAGE_2("- When injured, gain a regeneration effect that restores health equivalent to the amount of damage received * the count of this item equipped.", "- 受伤时获得生命恢复效果, 该效果将恢复的生命值等同于受到的伤害值 * 装备的该物品数量"),
     TOOLTIP$MAGIC_MIRROR$USAGE("Use to teleport to the Ocean of Consciousness", "使用后传送至识之海"),
-    TOOLTIP$MAGIC_MIRROR$WARNING("Warning: After entering the Ocean of Consciousness, you can only be reborn in the dimension of the Ocean of Consciousness", "警告: 进入识之海后, 你只能在识之海维度中重生"),
+    TOOLTIP$MAGIC_MIRROR$WARNING("Warning: After entering the Ocean of Consciousness, you can only be reborn in the dimension of the Ocean of Consciousness, and your hostility base level will be raised to at least level 100", "警告: 进入识之海后, 你只能在识之海维度中重生, 且恶意基础等级提高至至少100级"),
     TOOLTIP$MAGIC_MIRROR$BROKEN("This item is a consumable", "该物品为消耗品"),
     TOOLTIP$ATOMIC_BREASTPLATE_PROGRESS("Current progress: %s", "当前进度: %s"),
     TOOLTIP$ATOMIC_TO_ENCHANTED("After dealing a total of %s magic damage, upgrade to Enchanted Breastplate", "总共造成%s点魔法伤害后升级为束魔护心镜"),

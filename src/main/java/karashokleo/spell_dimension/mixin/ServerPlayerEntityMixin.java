@@ -1,5 +1,6 @@
 package karashokleo.spell_dimension.mixin;
 
+import karashokleo.spell_dimension.content.component.ConsciousModeComponent;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllWorldGen;
 import net.minecraft.registry.RegistryKey;
@@ -17,9 +18,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class ServerPlayerEntityMixin
 {
     @Shadow
-    private RegistryKey<World> spawnPointDimension;
-
-    @Shadow
     public abstract void sendMessage(Text message, boolean overlay);
 
     @Inject(
@@ -29,11 +27,9 @@ public abstract class ServerPlayerEntityMixin
     )
     private void inject_setSpawnPoint(RegistryKey<World> dimension, BlockPos pos, float angle, boolean forced, boolean sendMessage, CallbackInfo ci)
     {
-        if (this.spawnPointDimension.equals(AllWorldGen.OC_WORLD) &&
-            !dimension.equals(AllWorldGen.OC_WORLD))
-        {
-            this.sendMessage(SDTexts.TEXT$SPAWN_POINT_RESTRICTION.get(), false);
-            ci.cancel();
-        }
+        if (!ConsciousModeComponent.get((ServerPlayerEntity) (Object) this).isConsciousMode()) return;
+        if (dimension.equals(AllWorldGen.OC_WORLD)) return;
+        this.sendMessage(SDTexts.TEXT$SPAWN_POINT_RESTRICTION.get(), false);
+        ci.cancel();
     }
 }

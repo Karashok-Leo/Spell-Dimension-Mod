@@ -13,6 +13,7 @@
     "SpellInfinityEnchantmentMixin",
     "SpellProjectileMixin",
     "SpellRegistryAccessor",
+    "StorageTerminalBlockEntityMixin",
     "phase.EntityPredicatesMixin",
     "phase.LivingEntityMixin",
     "phase.PlayerEntityMixin"

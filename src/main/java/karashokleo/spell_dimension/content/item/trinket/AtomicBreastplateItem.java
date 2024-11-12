@@ -17,15 +17,18 @@ import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.Hand;
 import net.minecraft.util.Rarity;
+import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.TreeMap;
 import java.util.UUID;
 import java.util.function.Supplier;
 
@@ -40,43 +43,27 @@ public class AtomicBreastplateItem extends TrinketItem
         LivingDamageEvent.DAMAGE.register(event ->
         {
             float amount = event.getAmount();
-            TrinketCompat.getItemAccessInTrinket(event.getEntity())
-                    .stream()
-                    .filter(access -> access.get().isOf(AllItems.ATOMIC_BREASTPLATE))
-                    .forEach(access ->
-                            AllItems.ATOMIC_BREASTPLATE.addProgress(access.get(), AtomicBreastplateItem.Upgrade.FLEX, amount).ifPresent(access::set)
-                    );
+            for (ItemStack stack : TrinketCompat.getTrinketItems(event.getEntity(), stack -> stack.isOf(AllItems.ATOMIC_BREASTPLATE)))
+                Upgrade.FLEX.addProgress(stack, amount);
             DamageSource source = event.getSource();
             if (source.isIn(LHTags.MAGIC) &&
                 source.getAttacker() instanceof LivingEntity attacker)
-                TrinketCompat.getItemAccessInTrinket(attacker)
-                        .stream()
-                        .filter(access -> access.get().isOf(AllItems.ATOMIC_BREASTPLATE))
-                        .forEach(access ->
-                                AllItems.ATOMIC_BREASTPLATE.addProgress(access.get(), AtomicBreastplateItem.Upgrade.ENCHANTED, amount).ifPresent(access::set)
-                        );
+                for (ItemStack stack : TrinketCompat.getTrinketItems(attacker, stack -> stack.isOf(AllItems.ATOMIC_BREASTPLATE)))
+                    Upgrade.ENCHANTED.addProgress(stack, amount);
         });
 
         // To Flicker Breastplate
         ServerSideRollEvents.PLAYER_START_ROLLING.register((player, vec3d) ->
         {
-            TrinketCompat.getItemAccessInTrinket(player)
-                    .stream()
-                    .filter(access -> access.get().isOf(AllItems.ATOMIC_BREASTPLATE))
-                    .forEach(access ->
-                            AllItems.ATOMIC_BREASTPLATE.addProgress(access.get(), AtomicBreastplateItem.Upgrade.FLICKER, 1).ifPresent(access::set)
-                    );
+            for (ItemStack stack : TrinketCompat.getTrinketItems(player, stack -> stack.isOf(AllItems.ATOMIC_BREASTPLATE)))
+                Upgrade.FLICKER.addProgress(stack, 1);
         });
 
         // To Oblivion Breastplate
         LivingHeal.EVENT.register((entity, amount, ci) ->
         {
-            TrinketCompat.getItemAccessInTrinket(entity)
-                    .stream()
-                    .filter(access -> access.get().isOf(AllItems.ATOMIC_BREASTPLATE))
-                    .forEach(access ->
-                            AllItems.ATOMIC_BREASTPLATE.addProgress(access.get(), Upgrade.OBLIVION, amount).ifPresent(access::set)
-                    );
+            for (ItemStack stack : TrinketCompat.getTrinketItems(entity, stack -> stack.isOf(AllItems.ATOMIC_BREASTPLATE)))
+                Upgrade.OBLIVION.addProgress(stack, amount);
         });
     }
 
@@ -90,16 +77,17 @@ public class AtomicBreastplateItem extends TrinketItem
         );
     }
 
-    public Optional<ItemStack> addProgress(ItemStack stack, Upgrade upgrade, double toAdd)
+    @Override
+    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand)
     {
-        double progress = upgrade.getProgress(stack);
-        progress += toAdd;
-        if (progress >= upgrade.maxProgress)
-        {
-            stack.decrement(1);
-            return Optional.of(upgrade.itemSupplier.get());
-        } else upgrade.setProgress(stack, progress);
-        return Optional.empty();
+        ItemStack stack = user.getStackInHand(hand);
+        TreeMap<Double, Upgrade> map = new TreeMap<>();
+        for (Upgrade upgrade : Upgrade.values())
+            map.put(upgrade.getProgressRate(stack), upgrade);
+        var entry = map.lastEntry();
+        if (entry.getKey() >= 1)
+            return TypedActionResult.success(entry.getValue().itemSupplier.get());
+        return super.use(world, user, hand);
     }
 
     @Override
@@ -121,69 +109,65 @@ public class AtomicBreastplateItem extends TrinketItem
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
         super.appendTooltip(stack, world, tooltip, context);
-        tooltip.add(
-                SDTexts.TOOLTIP$ATOMIC_TO_ENCHANTED.get(
-                        Upgrade.ENCHANTED.maxProgress
-                ).formatted(Formatting.DARK_PURPLE)
-        );
-        tooltip.add(
-                SDTexts.TOOLTIP$ATOMIC_BREASTPLATE_PROGRESS.get(
-                        Upgrade.ENCHANTED.getProgressText(stack)
-                ).formatted(Formatting.DARK_PURPLE)
-        );
-        tooltip.add(
-                SDTexts.TOOLTIP$ATOMIC_TO_FLEX.get(
-                        Upgrade.FLEX.maxProgress
-                ).formatted(Formatting.DARK_RED)
-        );
-        tooltip.add(
-                SDTexts.TOOLTIP$ATOMIC_BREASTPLATE_PROGRESS.get(
-                        Upgrade.FLEX.getProgressText(stack)
-                ).formatted(Formatting.DARK_RED)
-        );
-        tooltip.add(
-                SDTexts.TOOLTIP$ATOMIC_TO_FLICKER.get(
-                        Upgrade.FLICKER.maxProgress
-                ).formatted(Formatting.GOLD)
-        );
-        tooltip.add(
-                SDTexts.TOOLTIP$ATOMIC_BREASTPLATE_PROGRESS.get(
-                        Upgrade.FLICKER.getProgressText(stack)
-                ).formatted(Formatting.GOLD)
-        );
-        tooltip.add(
-                SDTexts.TOOLTIP$ATOMIC_TO_OBLIVION.get(
-                        Upgrade.OBLIVION.maxProgress
-                ).formatted(Formatting.AQUA)
-        );
-        tooltip.add(
-                SDTexts.TOOLTIP$ATOMIC_BREASTPLATE_PROGRESS.get(
-                        Upgrade.OBLIVION.getProgressText(stack)
-                ).formatted(Formatting.AQUA)
-        );
+        for (Upgrade upgrade : Upgrade.values())
+            upgrade.appendTooltip(tooltip, stack);
     }
 
     public enum Upgrade
     {
-        ENCHANTED("EnchantedProgress", 30000, AllItems.ENCHANTED_BREASTPLATE::getDefaultStack),
-        FLEX("FlexProgress", 2000, AllItems.FLEX_BREASTPLATE::getDefaultStack),
-        FLICKER("FlickerProgress", 1000, AllItems.FLICKER_BREASTPLATE::getDefaultStack),
-        OBLIVION("OblivionProgress", 1000, AllItems.OBLIVION_BREASTPLATE::getDefaultStack);
+        ENCHANTED(
+                AllItems.ENCHANTED_BREASTPLATE::getDefaultStack,
+                "EnchantedProgress",
+                30000,
+                Formatting.DARK_PURPLE,
+                SDTexts.TOOLTIP$ATOMIC_TO_ENCHANTED
+        ),
+        FLEX(
+                AllItems.FLEX_BREASTPLATE::getDefaultStack,
+                "FlexProgress",
+                2000,
+                Formatting.DARK_RED,
+                SDTexts.TOOLTIP$ATOMIC_TO_FLEX
+        ),
+        FLICKER(
+                AllItems.FLICKER_BREASTPLATE::getDefaultStack,
+                "FlickerProgress",
+                1000,
+                Formatting.GOLD,
+                SDTexts.TOOLTIP$ATOMIC_TO_FLICKER
+        ),
+        OBLIVION(
+                AllItems.OBLIVION_BREASTPLATE::getDefaultStack,
+                "OblivionProgress",
+                1000,
+                Formatting.AQUA,
+                SDTexts.TOOLTIP$ATOMIC_TO_OBLIVION
+        );
 
+        public final Supplier<ItemStack> itemSupplier;
         public final String progressKey;
         public final double maxProgress;
-        public final Supplier<ItemStack> itemSupplier;
+        public final Formatting formatting;
+        public final SDTexts tooltipText;
 
-        Upgrade(String progressKey, double maxProgress, Supplier<ItemStack> itemSupplier)
+        Upgrade(
+                Supplier<ItemStack> itemSupplier,
+                String progressKey,
+                double maxProgress,
+                Formatting formatting,
+                SDTexts tooltipText
+        )
         {
+            this.itemSupplier = itemSupplier;
             this.progressKey = progressKey;
             this.maxProgress = maxProgress;
-            this.itemSupplier = itemSupplier;
+            this.formatting = formatting;
+            this.tooltipText = tooltipText;
         }
 
         public String getProgressText(ItemStack stack)
         {
-            return String.format("%.1f/%f", getProgress(stack), maxProgress);
+            return String.format("%.1f%%", getProgressRate(stack) * 100);
         }
 
         public double getProgress(ItemStack stack)
@@ -191,9 +175,28 @@ public class AtomicBreastplateItem extends TrinketItem
             return stack.getOrCreateNbt().getDouble(progressKey);
         }
 
-        public void setProgress(ItemStack stack, double progress)
+        public double getProgressRate(ItemStack stack)
         {
-            stack.getOrCreateNbt().putDouble(progressKey, progress);
+            return getProgress(stack) / maxProgress;
+        }
+
+        public void addProgress(ItemStack stack, double toAdd)
+        {
+            stack.getOrCreateNbt().putDouble(this.progressKey, this.getProgress(stack) + toAdd);
+        }
+
+        public void appendTooltip(List<Text> tooltip, ItemStack stack)
+        {
+            tooltip.add(
+                    this.tooltipText.get(
+                            this.maxProgress
+                    ).formatted(this.formatting)
+            );
+            tooltip.add(
+                    SDTexts.TOOLTIP$ATOMIC_BREASTPLATE_PROGRESS.get(
+                            this.getProgressText(stack)
+                    ).formatted(this.formatting)
+            );
         }
     }
 }
