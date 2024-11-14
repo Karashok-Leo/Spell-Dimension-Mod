@@ -1,6 +1,7 @@
 package karashokleo.spell_dimension.mixin;
 
 import com.tom.storagemod.tile.StorageTerminalBlockEntity;
+import karashokleo.spell_dimension.content.block.tile.ConsciousnessCoreTile;
 import karashokleo.spell_dimension.init.AllBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -38,7 +39,9 @@ public abstract class StorageTerminalBlockEntityMixin extends BlockEntity
                 .stream((new Box(this.pos)).expand(8.0))
                 .anyMatch(
                         (blockPos) -> this.world != null &&
-                                      this.world.getBlockEntity(blockPos, AllBlocks.CONSCIOUSNESS_CORE_TILE).isPresent()
+                                      this.world.getBlockEntity(blockPos, AllBlocks.CONSCIOUSNESS_CORE_TILE)
+                                              .map(ConsciousnessCoreTile::isActivated)
+                                              .orElse(false)
                 ) ? 6 : value;
     }
 }
