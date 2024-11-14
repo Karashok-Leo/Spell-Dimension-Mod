@@ -60,7 +60,7 @@ public class AtomicBreastplateItem extends TrinketItem
         });
 
         // To Oblivion Breastplate
-        LivingHeal.EVENT.register((entity, amount, ci) ->
+        LivingHeal.EVENT.register((entity, amount, amountRef, ci) ->
         {
             for (ItemStack stack : TrinketCompat.getTrinketItems(entity, stack -> stack.isOf(AllItems.ATOMIC_BREASTPLATE)))
                 Upgrade.OBLIVION.addProgress(stack, amount);

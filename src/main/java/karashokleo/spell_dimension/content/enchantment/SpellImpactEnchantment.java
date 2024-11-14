@@ -1,7 +1,6 @@
 package karashokleo.spell_dimension.content.enchantment;
 
-import karashokleo.l2hostility.content.enchantment.UnobtainableEnchantment;
-import net.minecraft.enchantment.Enchantment;
+import karashokleo.l2hostility.content.enchantment.core.UnobtainableEnchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;

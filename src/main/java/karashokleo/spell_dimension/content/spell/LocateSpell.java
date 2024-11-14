@@ -9,6 +9,7 @@ import karashokleo.spell_dimension.init.AllTags;
 import karashokleo.spell_dimension.util.TeleportUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.RegistryKey;
@@ -41,8 +42,9 @@ public class LocateSpell
         if (!isLocateTargetBlock(world, blockPos)) return;
 
         ItemStack offHandStack = living.getOffHandStack();
-        RegistryKey<Structure> structureRegistryKey = LocateSpellConfig.getStructure(offHandStack.getItem());
-        TagKey<Biome> biomeTagKey = LocateSpellConfig.getBiome(offHandStack.getItem());
+        Item item = offHandStack.getItem();
+        RegistryKey<Structure> structureRegistryKey = LocateSpellConfig.STRUCTURE_CONFIG.get(item, world.getRegistryKey());
+        TagKey<Biome> biomeTagKey = LocateSpellConfig.BIOME_CONFIG.get(item, world.getRegistryKey());
 
         boolean consume = false;
 

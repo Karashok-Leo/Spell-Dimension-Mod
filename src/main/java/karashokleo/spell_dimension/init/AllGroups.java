@@ -1,7 +1,9 @@
 package karashokleo.spell_dimension.init;
 
+import karashokleo.loot_bag.internal.item.LootBagItemRegistry;
 import karashokleo.spell_dimension.SpellDimension;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -97,5 +99,12 @@ public class AllGroups
                         })
                         .build()
         );
+
+        ItemGroupEvents.modifyEntriesEvent(LootBagItemRegistry.ITEM_GROUP_KEY).register(entries ->
+        {
+            AllItems.RANDOM_MATERIAL.forEach(entries::add);
+            AllItems.RANDOM_GEAR.forEach(entries::add);
+            AllItems.RANDOM_BOOK.forEach(entries::add);
+        });
     }
 }

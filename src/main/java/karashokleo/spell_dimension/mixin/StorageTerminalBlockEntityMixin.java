@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-@Mixin(StorageTerminalBlockEntity.class)
+@Mixin(value = StorageTerminalBlockEntity.class, remap = false)
 public abstract class StorageTerminalBlockEntityMixin extends BlockEntity
 {
     @Shadow

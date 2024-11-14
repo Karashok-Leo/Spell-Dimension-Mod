@@ -26,14 +26,6 @@ public class AllTags
 {
     public static final TagKey<Item> BREASTPLATE_SLOT = TagUtil.itemTag(new Identifier("trinkets", "chest/breastplate"));
 
-    public static final List<TagKey<Item>> MATERIAL = List.of(
-            TagUtil.itemTag("common/material"),
-            TagUtil.itemTag("uncommon/material"),
-            TagUtil.itemTag("rare/material"),
-            TagUtil.itemTag("epic/material"),
-            TagUtil.itemTag("legendary/material")
-    );
-
     public static final List<TagKey<Item>> ESSENCE = List.of(
             TagUtil.itemTag("essence/0"),
             TagUtil.itemTag("essence/1"),

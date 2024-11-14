@@ -7,6 +7,7 @@ import karashokleo.l2hostility.content.item.ConsumableItems;
 import karashokleo.l2hostility.content.item.MiscItems;
 import karashokleo.l2hostility.init.LHEnchantments;
 import karashokleo.spell_dimension.SpellDimension;
+import karashokleo.spell_dimension.content.item.logic.Tier;
 import karashokleo.spell_dimension.content.recipe.essence.EnchantedEssenceRecipeJsonProvider;
 import karashokleo.spell_dimension.init.AllBlocks;
 import karashokleo.spell_dimension.init.AllEnchantments;
@@ -128,7 +129,7 @@ public class SDRecipeProvider extends FabricRecipeProvider
                 .pattern("MMM")
                 .pattern("MBM")
                 .pattern("MMM")
-                .input('M', Ingredient.fromTag(AllTags.MATERIAL.get(4)))
+                .input('M', Ingredient.fromTag(Tier.LEGENDARY.getTag("material")))
                 .input('B', AllItems.BROKEN_MAGIC_MIRROR)
                 .criterion(
                         FabricRecipeProvider.hasItem(AllItems.BROKEN_MAGIC_MIRROR),

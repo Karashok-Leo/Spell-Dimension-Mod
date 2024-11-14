@@ -8,6 +8,7 @@ import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.item.*;
 import karashokleo.spell_dimension.content.item.essence.*;
 import karashokleo.spell_dimension.content.item.essence.base.ColorProvider;
+import karashokleo.spell_dimension.content.item.logic.Tier;
 import karashokleo.spell_dimension.content.item.trinket.*;
 import karashokleo.spell_dimension.util.SchoolUtil;
 import karashokleo.spell_dimension.util.TagUtil;
@@ -28,8 +29,13 @@ import java.util.List;
 public class AllItems
 {
     public static final List<Item> COLOR_PROVIDERS = new ArrayList<>();
+
     public static final ArrayListMultimap<SpellSchool, BaseEssenceItem> BASE_ESSENCES = ArrayListMultimap.create();
     public static final ArrayListMultimap<SpellSchool, DynamicSpellBookItem> SPELL_BOOKS = ArrayListMultimap.create();
+
+    public static List<SpecifiedLootBagItem> RANDOM_MATERIAL = new ArrayList<>();
+    public static List<SpecifiedLootBagItem> RANDOM_GEAR = new ArrayList<>();
+    public static List<SpecifiedLootBagItem> RANDOM_BOOK = new ArrayList<>();
 
     public static SpellScrollItem SPELL_SCROLL;
     public static Item DEBUG_STAFF;
@@ -63,6 +69,12 @@ public class AllItems
                 BASE_ESSENCES.put(school, registerBaseEssence(school, grade));
                 SPELL_BOOKS.put(school, registerSpellBook(school, grade));
             }
+        }
+        for (Tier tier : Tier.values())
+        {
+            RANDOM_MATERIAL.add(registerRandomLoot(tier, "material"));
+            RANDOM_GEAR.add(registerRandomLoot(tier, "gear"));
+            RANDOM_BOOK.add(registerRandomLoot(tier, "book"));
         }
 
         SPELL_SCROLL = Entry.of("spell_scroll", new SpellScrollItem())
@@ -221,6 +233,17 @@ public class AllItems
         SpellBooks.all.add(item);
         SpellRegistry.book_containers.put(SpellDimension.modLoc(name), item.getSpellContainer());
         return item;
+    }
+
+    public static SpecifiedLootBagItem registerRandomLoot(Tier tier, String suffix)
+    {
+        Identifier id = SpellDimension.modLoc(tier.name + "/" + suffix);
+        return Entry.of(
+                        "random_" + tier.name + "_" + suffix,
+                        new SpecifiedLootBagItem(id, tier)
+                )
+                .addModel("random/" + suffix)
+                .register();
     }
 
     public static class Entry<T extends Item> extends ItemBuilder<T>
