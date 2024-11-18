@@ -13,6 +13,7 @@ public class AllEnchantments
     public static StressResponseEnchantment STRESS_RESPONSE;
     public static SpellLeechEnchantment SPELL_LEECH;
     public static SpellResistanceEnchantment SPELL_RESISTANCE;
+    public static SpellMendingEnchantment SPELL_MENDING;
 
     public static void register()
     {
@@ -51,6 +52,12 @@ public class AllEnchantments
                 .addENDesc("Your spell power will help you resist some damage.")
                 .addZH("魔力御体")
                 .addZHDesc("你的法术强度将会为你抵御部分伤害。")
+                .register();
+        SPELL_MENDING = new Entry<>("spell_mending", new SpellMendingEnchantment())
+                .addEN()
+                .addENDesc("Each cast will repair your damaged equipment.")
+                .addZH("魔力修补")
+                .addZHDesc("每次施法将修复你的受损装备。")
                 .register();
     }
 

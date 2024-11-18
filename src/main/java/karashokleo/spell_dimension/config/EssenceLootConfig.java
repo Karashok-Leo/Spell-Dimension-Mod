@@ -12,7 +12,7 @@ public class EssenceLootConfig
             List.of(Dummmmmmy.TARGET_DUMMY.get()),
             0.1F,
             100, 200,
-            0.90F, 0.99F
+            0.80F, 0.96F
     );
 
     public static final int EC_WEIGHT = 8;
@@ -43,6 +43,7 @@ public class EssenceLootConfig
             if (f >= advancedChance) randomGrade++;
 
             return Math.min(maxGrade, randomGrade);
+
 //            if (mobLevel < intermediateLevel) return 0;
 //            else if (mobLevel < advancedLevel)
 //            {

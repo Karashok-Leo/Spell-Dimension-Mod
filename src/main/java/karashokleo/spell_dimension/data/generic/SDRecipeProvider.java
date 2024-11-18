@@ -154,9 +154,12 @@ public class SDRecipeProvider extends FabricRecipeProvider
 //                        .criterion(FabricRecipeProvider.hasItem(highGrade), FabricRecipeProvider.conditionsFromItem(highGrade))
 //                        .offerTo(exporter, SpellDimension.modLoc(school.id.getPath() + "/decompose_" + i));
 
-                ShapelessRecipeJsonBuilder
+                ShapedRecipeJsonBuilder
                         .create(RecipeCategory.MISC, highGrade)
-                        .input(lowGrade, 9)
+                        .pattern(" L ")
+                        .pattern("LLL")
+                        .pattern(" L ")
+                        .input('L', lowGrade)
                         .criterion(FabricRecipeProvider.hasItem(lowGrade), FabricRecipeProvider.conditionsFromItem(lowGrade))
                         .criterion(FabricRecipeProvider.hasItem(highGrade), FabricRecipeProvider.conditionsFromItem(highGrade))
                         .offerTo(exporter, SpellDimension.modLoc(school.id.getPath() + "/compose_" + i));
@@ -519,6 +522,47 @@ public class SDRecipeProvider extends FabricRecipeProvider
                         level,
                         exporter,
                         SpellDimension.modLoc("enchantment/spell_resistance/" + level)
+                );
+            }
+
+            // Mending
+            {
+                EIRecipeUtil.set(
+                        builder -> builder
+                                .withPedestalItem(1, Ingredient.fromTag(AllTags.ESSENCE.get(2)))
+                                .withPedestalItem(3, AllItems.MENDING_ESSENCE),
+                        Enchantments.MENDING,
+                        1,
+                        exporter,
+                        SpellDimension.modLoc("enchantment/mending/vanilla_mending")
+                );
+
+                EIRecipeUtil.set(
+                        builder -> builder
+                                .withTableIngredient(Enchantments.MENDING, 1)
+                                .withPedestalItem(5, Ingredient.fromTag(AllTags.ESSENCE.get(0))),
+                        AllEnchantments.SPELL_MENDING,
+                        1,
+                        exporter,
+                        SpellDimension.modLoc("enchantment/mending/spell_mending/" + 1)
+                );
+
+                EIRecipeUtil.add(
+                        builder -> builder
+                                .withPedestalItem(3, Ingredient.fromTag(AllTags.ESSENCE.get(1))),
+                        AllEnchantments.SPELL_MENDING,
+                        2,
+                        exporter,
+                        SpellDimension.modLoc("enchantment/mending/spell_mending/" + 2)
+                );
+
+                EIRecipeUtil.add(
+                        builder -> builder
+                                .withPedestalItem(1, Ingredient.fromTag(AllTags.ESSENCE.get(2))),
+                        AllEnchantments.SPELL_MENDING,
+                        3,
+                        exporter,
+                        SpellDimension.modLoc("enchantment/mending/spell_mending/" + 3)
                 );
             }
         }

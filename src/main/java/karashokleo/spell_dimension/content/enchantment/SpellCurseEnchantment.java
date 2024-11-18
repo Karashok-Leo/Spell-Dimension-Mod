@@ -8,6 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 import net.spell_engine.api.spell.SpellInfo;
 
@@ -36,5 +37,11 @@ public class SpellCurseEnchantment extends SpellImpactEnchantment
                 EffectUtil.forceAddEffect(living, new StatusEffectInstance(LHEffects.CURSE, 20 * (totalLevel + 1), 0), caster);
 //                living.addStatusEffect(new StatusEffectInstance(LHEffects.CURSE, 20 * (totalLevel + 1), 0));
             }
+    }
+
+    @Override
+    public Formatting getColor()
+    {
+        return Formatting.DARK_PURPLE;
     }
 }

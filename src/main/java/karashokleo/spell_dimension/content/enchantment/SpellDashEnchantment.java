@@ -7,6 +7,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 import net.spell_engine.api.spell.SpellInfo;
 
@@ -30,5 +31,11 @@ public class SpellDashEnchantment extends SpellImpactEnchantment
     public int getMaxLevel()
     {
         return 1;
+    }
+
+    @Override
+    public Formatting getColor()
+    {
+        return Formatting.AQUA;
     }
 }

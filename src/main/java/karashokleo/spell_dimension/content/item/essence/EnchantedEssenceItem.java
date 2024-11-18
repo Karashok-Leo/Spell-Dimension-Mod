@@ -73,9 +73,27 @@ public class EnchantedEssenceItem extends StackClickEssenceItem
     @Override
     protected boolean applyEffect(ItemStack essence, ItemStack target)
     {
+        if (target.isOf(this))
+            return mergeEnchantedEssences(essence, target);
         EnchantedModifier enchantedModifier = getModifier(essence);
         if (enchantedModifier == null) return false;
         else return enchantedModifier.apply(target);
+    }
+
+    private boolean mergeEnchantedEssences(ItemStack essence, ItemStack target)
+    {
+        EnchantedModifier modifier = getModifier(essence);
+        EnchantedModifier targetModifier = getModifier(target);
+        if (modifier == null || targetModifier == null) return false;
+        if (modifier.slot() != targetModifier.slot()) return false;
+        if (modifier.modifier().attribute() != targetModifier.modifier().attribute()) return false;
+        if (modifier.modifier().operation() != targetModifier.modifier().operation()) return false;
+        new EnchantedModifier(
+                modifier.threshold() + targetModifier.threshold(),
+                targetModifier.slot(),
+                targetModifier.modifier()
+        ).toNbt(target.getOrCreateSubNbt(ENCHANTED_MODIFIERS));
+        return true;
     }
 
     @Override

@@ -1,0 +1,20 @@
+{
+  "type": "enchantment_infusion:enchantment_infusion",
+  "enchantment": "minecraft:mending",
+  "force": false,
+  "ingredients": [
+    {
+      "tag": "spell-dimension:essence/2"
+    },
+    {
+      "item": "spell-dimension:mending_essence"
+    },
+    {
+      "item": "spell-dimension:mending_essence"
+    },
+    {
+      "item": "spell-dimension:mending_essence"
+    }
+  ],
+  "level": 1
+}

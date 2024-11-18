@@ -6,6 +6,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 import net.spell_engine.api.spell.SpellInfo;
 import net.spell_power.api.SpellPowerMechanics;
@@ -38,5 +39,11 @@ public class SpellHasteEnchantment extends SpellImpactEnchantment
     public void onSpellImpact(World world, LivingEntity caster, int totalLevel, List<Entity> targets, SpellInfo spellInfo)
     {
         caster.addStatusEffect(new StatusEffectInstance(SpellPowerMechanics.HASTE.boostEffect, 40, totalLevel));
+    }
+
+    @Override
+    public Formatting getColor()
+    {
+        return Formatting.GOLD;
     }
 }

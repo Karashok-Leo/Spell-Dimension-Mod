@@ -6,6 +6,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.spell.SpellContainer;
 import net.spell_engine.internals.SpellContainerHelper;
@@ -42,5 +43,11 @@ public class StressResponseEnchantment extends UnobtainableEnchantment
             float progress = manager.getCooldownProgress(spellId, 0);
             if (progress < level * MULTIPLIER) manager.set(spellId, 0);
         }
+    }
+
+    @Override
+    public Formatting getColor()
+    {
+        return Formatting.DARK_AQUA;
     }
 }

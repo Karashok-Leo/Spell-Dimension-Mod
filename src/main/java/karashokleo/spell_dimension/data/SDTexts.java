@@ -56,6 +56,7 @@ public enum SDTexts
     TEXT$EVENT$FINISH$SUCCESS("Invasion End - Successful", "入侵结束 - 成功"),
     TEXT$EVENT$FINISH$FAIL("Invasion End - Failed", "入侵结束 - 失败"),
     TEXT$CONSCIOUS$BAN_ITEM("You cannot use this item in the conscious mode", "你不能在意识模式下使用该物品"),
+    TEXT$RANDOM_LOOT_NAME("? %s ?", "? %s ?"),
 
     /**
      * Spell School

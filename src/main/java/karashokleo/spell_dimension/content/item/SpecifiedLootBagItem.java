@@ -5,10 +5,10 @@ import karashokleo.loot_bag.api.common.bag.BagEntry;
 import karashokleo.loot_bag.internal.item.LootBagItem;
 import karashokleo.spell_dimension.content.item.essence.base.ColorProvider;
 import karashokleo.spell_dimension.content.item.logic.Tier;
+import karashokleo.spell_dimension.data.SDTexts;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 
 import java.util.Optional;
@@ -52,7 +52,7 @@ public class SpecifiedLootBagItem extends LootBagItem implements ColorProvider
     @Override
     public Text getName()
     {
-        return Text.translatable(id.toTranslationKey("content")).formatted(Formatting.OBFUSCATED);
+        return SDTexts.TEXT$RANDOM_LOOT_NAME.get(Text.translatable(id.toTranslationKey("content")));
     }
 
     @Override
