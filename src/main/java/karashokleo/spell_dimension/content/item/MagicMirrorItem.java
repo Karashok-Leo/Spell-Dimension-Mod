@@ -15,10 +15,13 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.*;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Optional;
 
 public class MagicMirrorItem extends Item
 {
@@ -72,11 +75,27 @@ public class MagicMirrorItem extends Item
                 // Consume if broken
                 if (broken) stack.decrement(1);
 
+                BlockPos destinationPos = null;
+
+                // Teleport to spawn point if it is in the OC world
+                if (player.getSpawnPointDimension() == AllWorldGen.OC_WORLD)
+                {
+                    BlockPos blockPos = player.getSpawnPointPosition();
+                    float spawnAngle = player.getSpawnAngle();
+                    Optional<Vec3d> respawnPosition = PlayerEntity.findRespawnPosition(destinationWorld, blockPos, spawnAngle, true, true);
+                    if (respawnPosition.isPresent())
+                        destinationPos = BlockPos.ofFloored(respawnPosition.get());
+                }
+
+                // Teleport to the coordinate position if the spawn point is not set
+                if (destinationPos == null)
+                    destinationPos = TeleportUtil.findTeleportPos(serverWorld, destinationWorld, player.getBlockPos());
+
                 // Do teleport
                 TeleportUtil.teleportPlayerChangeDimension(
                         player,
                         destinationWorld,
-                        TeleportUtil.findTeleportPos(serverWorld, destinationWorld, player.getBlockPos())
+                        destinationPos
                 );
             }
         }

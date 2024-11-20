@@ -16,6 +16,7 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.data.client.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.Identifier;
 
 public class AllBlocks
@@ -43,6 +44,7 @@ public class AllBlocks
                 .addZH("魔力灌注基座")
                 .addLoot()
                 .addSimpleItem()
+                .addTag(BlockTags.PICKAXE_MINEABLE)
                 .registerWithItem();
         SPELL_INFUSION_PEDESTAL_TILE = Registry.register(
                 Registries.BLOCK_ENTITY_TYPE,

@@ -21,6 +21,33 @@
       },
       "item": [
         {
+          "item": "spell-dimension:essence_lightning_0"
+        },
+        {
+          "item": "spell-dimension:essence_lightning_1"
+        },
+        {
+          "item": "spell-dimension:essence_lightning_2"
+        },
+        {
+          "item": "spell-dimension:essence_fire_0"
+        },
+        {
+          "item": "spell-dimension:essence_fire_1"
+        },
+        {
+          "item": "spell-dimension:essence_fire_2"
+        },
+        {
+          "item": "spell-dimension:essence_frost_0"
+        },
+        {
+          "item": "spell-dimension:essence_frost_1"
+        },
+        {
+          "item": "spell-dimension:essence_frost_2"
+        },
+        {
           "item": "spell-dimension:essence_healing_0"
         },
         {
@@ -46,33 +73,6 @@
         },
         {
           "item": "spell-dimension:essence_arcane_2"
-        },
-        {
-          "item": "spell-dimension:essence_fire_0"
-        },
-        {
-          "item": "spell-dimension:essence_fire_1"
-        },
-        {
-          "item": "spell-dimension:essence_fire_2"
-        },
-        {
-          "item": "spell-dimension:essence_frost_0"
-        },
-        {
-          "item": "spell-dimension:essence_frost_1"
-        },
-        {
-          "item": "spell-dimension:essence_frost_2"
-        },
-        {
-          "item": "spell-dimension:essence_lightning_0"
-        },
-        {
-          "item": "spell-dimension:essence_lightning_1"
-        },
-        {
-          "item": "spell-dimension:essence_lightning_2"
         }
       ],
       "text": "book.spell-dimension-book.magic_guidance.mage.essence.base.text",
