@@ -106,18 +106,18 @@ public class AllItems
                 .addZH("任务卷轴")
                 .addModel()
                 .register();
-        ABYSS_GUARD = Entry.of("abyss_guard", new NetherStarItem(new FabricItemSettings().maxCount(1).rarity(Rarity.EPIC)))
+        ABYSS_GUARD = Entry.of("abyss_guard", new NetherStarItem(new FabricItemSettings().fireproof().maxCount(1).rarity(Rarity.EPIC)))
                 .addEN()
                 .addZH("深渊守护")
                 .addModel()
                 .addTag(AllTags.SHELL_HORN_REQUIREMENT)
                 .register();
-        ACCURSED_BLACKSTONE = Entry.of("accursed_blackstone", new NetherStarItem(new FabricItemSettings().maxCount(1).rarity(Rarity.EPIC)))
+        ACCURSED_BLACKSTONE = Entry.of("accursed_blackstone", new NetherStarItem(new FabricItemSettings().fireproof().maxCount(1).rarity(Rarity.EPIC)))
                 .addEN()
                 .addZH("朽咒黑石")
                 .addModel()
                 .register();
-        SUN_MOON_STAR = Entry.of("sun_moon_star", new EndStageItem(new FabricItemSettings().maxCount(1).rarity(Rarity.EPIC)))
+        SUN_MOON_STAR = Entry.of("sun_moon_star", new EndStageItem())
                 .addEN()
                 .addZH("日月星")
                 .addModel()

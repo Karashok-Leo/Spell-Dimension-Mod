@@ -5,6 +5,7 @@ import karashokleo.l2hostility.init.LHNetworking;
 import karashokleo.spell_dimension.content.component.EndStageComponent;
 import karashokleo.spell_dimension.content.network.S2CTitle;
 import karashokleo.spell_dimension.data.SDTexts;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
@@ -13,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Rarity;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -21,9 +23,9 @@ import java.util.List;
 
 public class EndStageItem extends Item
 {
-    public EndStageItem(Settings settings)
+    public EndStageItem()
     {
-        super(settings);
+        super(new FabricItemSettings().fireproof().maxCount(1).rarity(Rarity.EPIC));
     }
 
     @Override
