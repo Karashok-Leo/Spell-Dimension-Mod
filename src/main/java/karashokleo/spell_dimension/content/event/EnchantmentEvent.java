@@ -12,7 +12,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.spell_power.api.SpellPower;
 import net.spell_power.api.SpellSchool;
+import org.apache.commons.lang3.mutable.MutableInt;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,14 +24,30 @@ public class EnchantmentEvent
     {
         SpellImpactEvents.BEFORE.register((world, caster, targets, spellInfo) ->
         {
-            Map<SpellImpactEnchantment, Integer> map = new HashMap<>();
+            Map<SpellImpactEnchantment, SpellImpactEnchantment.Context> map = new HashMap<>();
             for (ItemStack e : TrinketCompat.getItems(caster, e -> true))
                 EnchantmentHelper.get(e).forEach((enchantment, level) ->
                 {
                     if (enchantment instanceof SpellImpactEnchantment impactEnchantment)
-                        map.compute(impactEnchantment, (en, lv) -> (lv == null ? 0 : lv) + level);
+                    {
+                        map.compute(impactEnchantment, (en, ctx) ->
+                        {
+                            if (ctx == null)
+                            {
+                                MutableInt lv = new MutableInt(level);
+                                ArrayList<ItemStack> list = new ArrayList<>();
+                                list.add(e);
+                                return new SpellImpactEnchantment.Context(lv, list);
+                            }
+                            else {
+                                ctx.level().add(level);
+                                ctx.stacks().add(e);
+                                return ctx;
+                            }
+                        });
+                    }
                 });
-            map.forEach((enchantment, level) -> enchantment.onSpellImpact(world, caster, level, targets, spellInfo));
+            map.forEach((enchantment, context) -> enchantment.onSpellImpact(world, caster, context, targets, spellInfo));
         });
 
         DamagePhase.ARMOR.registerModifier(0, damageAccess ->

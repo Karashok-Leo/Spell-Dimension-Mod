@@ -28,13 +28,13 @@ public class SpellCurseEnchantment extends SpellImpactEnchantment
     }
 
     @Override
-    public void onSpellImpact(World world, LivingEntity caster, int totalLevel, List<Entity> targets, SpellInfo spellInfo)
+    public void onSpellImpact(World world, LivingEntity caster, Context context, List<Entity> targets, SpellInfo spellInfo)
     {
         for (Entity entity : targets)
             if (entity instanceof LivingEntity living)
             {
                 if (ImpactUtil.isAlly(caster, living)) continue;
-                EffectUtil.forceAddEffect(living, new StatusEffectInstance(LHEffects.CURSE, 20 * (totalLevel + 1), 0), caster);
+                EffectUtil.forceAddEffect(living, new StatusEffectInstance(LHEffects.CURSE, 20 * (context.totalLevel() + 1), 0), caster);
 //                living.addStatusEffect(new StatusEffectInstance(LHEffects.CURSE, 20 * (totalLevel + 1), 0));
             }
     }

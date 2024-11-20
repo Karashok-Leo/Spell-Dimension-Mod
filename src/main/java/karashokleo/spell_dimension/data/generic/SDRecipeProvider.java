@@ -2,6 +2,7 @@ package karashokleo.spell_dimension.data.generic;
 
 import karashokleo.enchantment_infusion.api.util.EIRecipeUtil;
 import karashokleo.enchantment_infusion.init.EIItems;
+import karashokleo.fusion_smithing.item.FusionSmithingTemplateItem;
 import karashokleo.l2hostility.content.item.ComplementItems;
 import karashokleo.l2hostility.content.item.ConsumableItems;
 import karashokleo.l2hostility.content.item.MiscItems;
@@ -21,6 +22,7 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.SmithingTransformRecipeJsonBuilder;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.Item;
@@ -136,6 +138,17 @@ public class SDRecipeProvider extends FabricRecipeProvider
                         FabricRecipeProvider.conditionsFromItem(AllItems.BROKEN_MAGIC_MIRROR)
                 )
                 .offerTo(exporter);
+
+        SmithingTransformRecipeJsonBuilder
+                .create(
+                        Ingredient.EMPTY,
+                        Ingredient.ofItems(FusionSmithingTemplateItem.FUSION_SMITHING_TEMPLATE),
+                        Ingredient.ofItems(Items.NETHERITE_INGOT),
+                        RecipeCategory.MISC,
+                        Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE
+                )
+                .criterion(FabricRecipeProvider.hasItem(Items.NETHERITE_INGOT), FabricRecipeProvider.conditionsFromItem(Items.NETHERITE_INGOT))
+                .offerTo(exporter, SpellDimension.modLoc("netherite_upgrade_smithing_template"));
     }
 
     private static void addBaseEssenceRecipe(Consumer<RecipeJsonProvider> exporter)

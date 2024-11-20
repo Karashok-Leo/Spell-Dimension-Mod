@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:netherite_ingot"
+  },
+  "base": {
+    "item": "fusion-smithing:fusion_smithing_template"
+  },
+  "result": {
+    "item": "minecraft:netherite_upgrade_smithing_template"
+  },
+  "template": []
+}

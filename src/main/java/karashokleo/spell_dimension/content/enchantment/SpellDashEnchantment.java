@@ -21,7 +21,7 @@ public class SpellDashEnchantment extends SpellImpactEnchantment
     }
 
     @Override
-    public void onSpellImpact(World world, LivingEntity caster, int totalLevel, List<Entity> targets, SpellInfo spellInfo)
+    public void onSpellImpact(World world, LivingEntity caster, Context context, List<Entity> targets, SpellInfo spellInfo)
     {
         if (caster instanceof ServerPlayerEntity player)
             ServerPlayNetworking.send(player, new S2CSpellDash());

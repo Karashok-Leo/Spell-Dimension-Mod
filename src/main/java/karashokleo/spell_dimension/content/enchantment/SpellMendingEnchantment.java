@@ -1,8 +1,6 @@
 package karashokleo.spell_dimension.content.enchantment;
 
-import karashokleo.spell_dimension.init.AllEnchantments;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
@@ -34,13 +32,6 @@ public class SpellMendingEnchantment extends SpellImpactEnchantment
         return 3;
     }
 
-    private void doRepair(int level, ItemStack stack)
-    {
-        int repair = (int) (stack.getMaxDamage() * level * 0.01);
-        int toSet = Math.max(0, stack.getDamage() - repair);
-        stack.setDamage(toSet);
-    }
-
     @Override
     protected boolean canAccept(Enchantment other)
     {
@@ -48,16 +39,22 @@ public class SpellMendingEnchantment extends SpellImpactEnchantment
     }
 
     @Override
-    public void onSpellImpact(World world, LivingEntity caster, int totalLevel, List<Entity> targets, SpellInfo spellInfo)
-    {
-        var entry = EnchantmentHelper.chooseEquipmentWith(AllEnchantments.SPELL_MENDING, caster, ItemStack::isDamaged);
-        if (entry == null) return;
-        doRepair(totalLevel, entry.getValue());
-    }
-
-    @Override
     public Formatting getColor()
     {
         return Formatting.LIGHT_PURPLE;
+    }
+
+    private void doRepair(int level, ItemStack stack)
+    {
+        int repair = (int) (stack.getMaxDamage() * level * 0.02);
+        int toSet = Math.max(0, stack.getDamage() - repair);
+        stack.setDamage(toSet);
+    }
+
+    @Override
+    public void onSpellImpact(World world, LivingEntity caster, Context context, List<Entity> targets, SpellInfo spellInfo)
+    {
+        int level = context.totalLevel();
+        context.stacks().forEach(stack -> doRepair(level, stack));
     }
 }
