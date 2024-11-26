@@ -82,7 +82,17 @@ public class HeartSpellSteelItem extends TrinketItem
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
-        tooltip.add(SDTexts.TOOLTIP$HEART_SPELL_STEEL$USAGE.get(MIN_DISTANCE, MIN_MOB_LEVEL, String.format("%.1f%%", ACCUMULATE_RATE * 100)).formatted(Formatting.DARK_PURPLE));
-        tooltip.add(SDTexts.TOOLTIP$HEART_SPELL_STEEL$ACCUMULATED.get(String.format("%.1f", stack.getOrCreateNbt().getDouble(KEY))).formatted(Formatting.GOLD));
+        tooltip.add(
+                SDTexts.TOOLTIP$HEART_SPELL_STEEL$USAGE.get(
+                        MIN_DISTANCE,
+                        MIN_MOB_LEVEL,
+                        "%.1f%%".formatted(ACCUMULATE_RATE * 100)
+                ).formatted(Formatting.DARK_PURPLE)
+        );
+        tooltip.add(
+                SDTexts.TOOLTIP$HEART_SPELL_STEEL$ACCUMULATED.get(
+                        "%.1f".formatted(stack.getOrCreateNbt().getDouble(KEY))
+                ).formatted(Formatting.GOLD)
+        );
     }
 }

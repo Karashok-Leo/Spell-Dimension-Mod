@@ -4,6 +4,7 @@ import dev.emi.trinkets.api.TrinketItem;
 import karashokleo.spell_dimension.data.SDTexts;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -23,6 +24,15 @@ public class FlickerBreastplateItem extends TrinketItem
                         .fireproof()
                         .rarity(Rarity.EPIC)
         );
+    }
+
+    public boolean willFlicker(LivingEntity entity, LivingEntity attacker)
+    {
+        double entitySpeed = entity.getMovementSpeed();
+        double attackerSpeed = attacker.getMovementSpeed();
+        double flickerRatio = attackerSpeed / entitySpeed;
+        if (!entity.isOnGround()) flickerRatio /= 2;
+        return entity.getRandom().nextDouble() > flickerRatio;
     }
 
     @Override

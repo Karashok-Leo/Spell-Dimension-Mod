@@ -86,8 +86,9 @@ public class EnchantedEssenceItem extends StackClickEssenceItem
         EnchantedModifier targetModifier = getModifier(target);
         if (modifier == null || targetModifier == null) return false;
         if (modifier.slot() != targetModifier.slot()) return false;
-        if (modifier.modifier().attribute() != targetModifier.modifier().attribute()) return false;
-        if (modifier.modifier().operation() != targetModifier.modifier().operation()) return false;
+        // only check slot but not attribute and operation
+//        if (modifier.modifier().attribute() != targetModifier.modifier().attribute()) return false;
+//        if (modifier.modifier().operation() != targetModifier.modifier().operation()) return false;
         new EnchantedModifier(
                 modifier.threshold() + targetModifier.threshold(),
                 targetModifier.slot(),

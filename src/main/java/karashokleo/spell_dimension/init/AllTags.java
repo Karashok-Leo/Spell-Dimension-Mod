@@ -1,6 +1,7 @@
 package karashokleo.spell_dimension.init;
 
 import com.kyanite.deeperdarker.content.DDEntities;
+import karashokleo.l2hostility.init.LHEnchantments;
 import karashokleo.l2hostility.init.LHTags;
 import karashokleo.leobrary.datagen.generator.TagGenerator;
 import karashokleo.spell_dimension.SpellDimension;
@@ -8,6 +9,7 @@ import karashokleo.spell_dimension.util.TagUtil;
 import net.adventurez.init.EntityInit;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
@@ -59,8 +61,6 @@ public class AllTags
 
     public static final List<TagKey<Item>> REFORGE_CORE_TAGS = Stream.of(1, 2, 3).map(i -> TagUtil.itemTag(new Identifier("equipment_standard:reforge_core/lv" + i))).toList();
 
-    public static final TagKey<Item> SHELL_HORN_REQUIREMENT = TagUtil.itemTag("shell_horn_requirement");
-
     public static final TagKey<Item> VICTUS_ITEM = TagUtil.itemTag("victus_item");
 
     public static final TagKey<Block> LOCATE_TARGET = TagUtil.blockTag("locate_target");
@@ -77,36 +77,38 @@ public class AllTags
     public static final TagKey<EntityType<?>> ADVZ_MONSTER = TagUtil.entityTypeTag("advz_monster");
     public static final TagKey<EntityType<?>> SW_MONSTER = TagUtil.entityTypeTag("sw_monster");
 
+    public static final TagKey<Enchantment> LOOTABLE = TagUtil.enchantmentTag("lootable");
+    public static final TagKey<Enchantment> TRADABLE = TagUtil.enchantmentTag("tradable");
+    public static final TagKey<Enchantment> ENCHANTABLE = TagUtil.enchantmentTag("enchantable");
+
     public static void register()
     {
-        TagGenerator<Item> generator = SpellDimension.ITEM_TAGS;
-
         RuneItems.entries.stream().map(RuneItems.Entry::id)
-                .forEach(id -> generator.getOrCreateContainer(RUNE).add(id));
+                .forEach(id -> SpellDimension.ITEM_TAGS.getOrCreateContainer(RUNE).add(id));
 
-        generator.getOrCreateContainer(HEART_FOOD)
+        SpellDimension.ITEM_TAGS.getOrCreateContainer(HEART_FOOD)
                 .add(Items.ENCHANTED_GOLDEN_APPLE)
                 .addOptional(
                         new Identifier("l2hostility:life_essence"),
                         new Identifier("midashunger:enchanted_golden_carrot")
                 );
 
-        generator.getOrCreateContainer(REFORGE_CORE_TAGS.get(0), true)
+        SpellDimension.ITEM_TAGS.getOrCreateContainer(REFORGE_CORE_TAGS.get(0), true)
                 .add(AllItems.SPAWNER_SOUL);
-        generator.getOrCreateContainer(REFORGE_CORE_TAGS.get(1), true)
+        SpellDimension.ITEM_TAGS.getOrCreateContainer(REFORGE_CORE_TAGS.get(1), true)
                 .addOptional(new Identifier("l2hostility:chaos_ingot"));
-        generator.getOrCreateContainer(REFORGE_CORE_TAGS.get(2), true)
+        SpellDimension.ITEM_TAGS.getOrCreateContainer(REFORGE_CORE_TAGS.get(2), true)
                 .addOptional(new Identifier("l2hostility:miracle_ingot"));
 
-        TagGenerator.Container<Item> essenceAllContainer = generator.getOrCreateContainer(ESSENCE_ALL);
+        TagGenerator.Container<Item> essenceAllContainer = SpellDimension.ITEM_TAGS.getOrCreateContainer(ESSENCE_ALL);
         for (TagKey<Item> key : ESSENCE)
             essenceAllContainer.addTag(key);
 
-        TagGenerator.Container<Item> bookAllContainer = generator.getOrCreateContainer(BOOK_ALL);
+        TagGenerator.Container<Item> bookAllContainer = SpellDimension.ITEM_TAGS.getOrCreateContainer(BOOK_ALL);
         for (TagKey<Item> key : BOOK)
             bookAllContainer.addTag(key);
 
-        generator.getOrCreateContainer(VICTUS_ITEM)
+        SpellDimension.ITEM_TAGS.getOrCreateContainer(VICTUS_ITEM)
                 .addOptional(
                         new Identifier("victus:grilled_heart_aspect"),
                         new Identifier("victus:bundle_heart_aspect"),
@@ -252,6 +254,25 @@ public class AllTags
                 .addTag(
                         ADVZ_MONSTER,
                         SW_MONSTER
+                );
+
+        SpellDimension.ENCHANTMENT_TAGS.getOrCreateContainer(LOOTABLE)
+                .add(
+                        LHEnchantments.SHULKER_ARMOR,
+                        LHEnchantments.STABLE_BODY,
+                        LHEnchantments.DURABLE_ARMOR,
+                        LHEnchantments.LIFE_SYNC,
+                        LHEnchantments.LIFE_MENDING,
+                        LHEnchantments.SAFEGUARD,
+                        LHEnchantments.HARDENED,
+                        LHEnchantments.DAMPENED,
+                        LHEnchantments.WIND_SWEEP,
+                        LHEnchantments.FLAME_BLADE,
+                        LHEnchantments.ICE_BLADE,
+                        LHEnchantments.SHARP_BLADE,
+                        LHEnchantments.CURSE_BLADE,
+                        LHEnchantments.ICE_THORN,
+                        LHEnchantments.FLAME_THORN
                 );
     }
 }

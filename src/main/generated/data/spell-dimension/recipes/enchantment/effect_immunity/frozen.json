@@ -1,0 +1,26 @@
+{
+  "type": "enchantment_infusion:enchantment_infusion",
+  "enchantment": "spell-dimension:freezing_immunity",
+  "force": false,
+  "ingredients": [
+    {
+      "tag": "spell-dimension:essence/2"
+    },
+    {
+      "tag": "spell-dimension:essence/2"
+    },
+    {
+      "tag": "spell-dimension:essence/2"
+    },
+    {
+      "item": "l2hostility:freezing"
+    },
+    {
+      "item": "l2hostility:freezing"
+    },
+    {
+      "item": "l2hostility:freezing"
+    }
+  ],
+  "level": 1
+}

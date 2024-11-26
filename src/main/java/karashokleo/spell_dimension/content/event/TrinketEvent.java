@@ -6,7 +6,6 @@ import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.leobrary.damage.api.modify.DamageModifier;
 import karashokleo.leobrary.damage.api.modify.DamagePhase;
 import karashokleo.spell_dimension.content.item.trinket.AtomicBreastplateItem;
-import karashokleo.spell_dimension.content.item.trinket.FlexBreastplateItem;
 import karashokleo.spell_dimension.content.spell.ConvergeSpell;
 import karashokleo.spell_dimension.init.AllDamageTypes;
 import karashokleo.spell_dimension.init.AllItems;
@@ -58,7 +57,7 @@ public class TrinketEvent
             LivingEntity entity = damageAccess.getEntity();
             if (TrinketCompat.hasItemInTrinket(entity, AllItems.FLEX_BREASTPLATE))
             {
-                damageAccess.addModifier(DamageModifier.multiply(FlexBreastplateItem.getDamageFactor(entity)));
+                damageAccess.addModifier(DamageModifier.multiply(AllItems.FLEX_BREASTPLATE.getDamageFactor(entity)));
             } else if (!damageAccess.getSource().isOf(AllDamageTypes.OBLIVION_BREASTPLATE))
             {
                 List<ItemStack> trinketItems = TrinketCompat.getTrinketItems(entity, e -> e.isOf(AllItems.OBLIVION_BREASTPLATE));
@@ -88,15 +87,9 @@ public class TrinketEvent
         {
             if (!(event.getSource().getAttacker() instanceof LivingEntity attacker)) return;
             LivingEntity entity = event.getEntity();
-            if (TrinketCompat.hasItemInTrinket(entity, AllItems.FLICKER_BREASTPLATE))
-            {
-                double entitySpeed = entity.getMovementSpeed();
-                double attackerSpeed = attacker.getMovementSpeed();
-                double flickerRatio = attackerSpeed / entitySpeed;
-                if (!entity.isOnGround()) flickerRatio /= 2;
-                if (entity.getRandom().nextDouble() > flickerRatio)
-                    event.setCanceled(true);
-            }
+            if (TrinketCompat.hasItemInTrinket(entity, AllItems.FLICKER_BREASTPLATE)
+                && AllItems.FLICKER_BREASTPLATE.willFlicker(entity, attacker))
+                event.setCanceled(true);
         });
     }
 }

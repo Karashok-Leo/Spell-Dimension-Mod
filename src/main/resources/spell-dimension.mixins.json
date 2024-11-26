@@ -4,6 +4,9 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "AmplifierEnchantmentMixin",
+    "EnchantBookFactoryMixin",
+    "EnchantmentHelperMixin",
+    "EnchantRandomlyLootFunctionMixin",
     "EndPortalBlockMixin",
     "LivingEntityMixin",
     "MobSpawnerLogicMixin",

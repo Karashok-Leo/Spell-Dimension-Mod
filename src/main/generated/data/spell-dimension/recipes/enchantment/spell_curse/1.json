@@ -4,6 +4,12 @@
   "force": false,
   "ingredients": [
     {
+      "item": "minecraft:fermented_spider_eye"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
       "item": "l2hostility:cursed_droplet"
     },
     {

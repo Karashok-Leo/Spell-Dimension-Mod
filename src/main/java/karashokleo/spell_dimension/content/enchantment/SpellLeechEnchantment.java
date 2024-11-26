@@ -9,7 +9,7 @@ public class SpellLeechEnchantment extends UnobtainableEnchantment
 {
     public SpellLeechEnchantment()
     {
-        super(Rarity.VERY_RARE, EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
+        super(Rarity.VERY_RARE, EnchantmentTarget.BREAKABLE, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
     }
 
     @Override

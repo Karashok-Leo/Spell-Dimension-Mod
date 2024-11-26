@@ -1,0 +1,26 @@
+{
+  "type": "enchantment_infusion:enchantment_infusion",
+  "enchantment": "spell-dimension:levitation_immunity",
+  "force": false,
+  "ingredients": [
+    {
+      "tag": "spell-dimension:essence/2"
+    },
+    {
+      "tag": "spell-dimension:essence/2"
+    },
+    {
+      "tag": "spell-dimension:essence/2"
+    },
+    {
+      "item": "l2hostility:levitation"
+    },
+    {
+      "item": "l2hostility:levitation"
+    },
+    {
+      "item": "l2hostility:levitation"
+    }
+  ],
+  "level": 1
+}

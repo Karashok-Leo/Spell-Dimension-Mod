@@ -17,7 +17,7 @@ public class SpellDashEnchantment extends SpellImpactEnchantment
 {
     public SpellDashEnchantment()
     {
-        super(Rarity.UNCOMMON, EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
+        super(Rarity.UNCOMMON, EnchantmentTarget.BREAKABLE, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
     }
 
     @Override

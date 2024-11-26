@@ -60,7 +60,7 @@ public class SpellPowerScreen extends BaseTextScreen
         SpellPower.Result result = SpellPower.getSpellPower(school, player);
         return new SpellPowerEntry(
                 school.attribute,
-                String.format("%.1f", result.baseValue())
+                "%.1f".formatted(result.baseValue())
         ).getText().setStyle(Style.EMPTY.withColor(school.color));
     }
 
@@ -70,15 +70,15 @@ public class SpellPowerScreen extends BaseTextScreen
         return List.of(
                 new SpellPowerEntry(
                         SpellPowerMechanics.CRITICAL_CHANCE.attribute,
-                        String.format("%.1f%%", result.criticalChance() * 100)
+                        "%.1f%%".formatted(result.criticalChance() * 100)
                 ).getText(),
                 new SpellPowerEntry(
                         SpellPowerMechanics.CRITICAL_DAMAGE.attribute,
-                        String.format("× %.1f%%", result.criticalDamage() * 100)
+                        "× %.1f%%".formatted(result.criticalDamage() * 100)
                 ).getText(),
                 new SpellPowerEntry(
                         SpellPowerMechanics.HASTE.attribute,
-                        String.format("+ %.1f%%", (SpellPower.getHaste(player, school) - 1) * 100)
+                        "+ %.1f%%".formatted((SpellPower.getHaste(player, school) - 1) * 100)
                 ).getText()
         );
     }

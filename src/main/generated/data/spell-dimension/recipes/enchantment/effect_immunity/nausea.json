@@ -1,0 +1,26 @@
+{
+  "type": "enchantment_infusion:enchantment_infusion",
+  "enchantment": "spell-dimension:nausea_immunity",
+  "force": false,
+  "ingredients": [
+    {
+      "tag": "spell-dimension:essence/2"
+    },
+    {
+      "tag": "spell-dimension:essence/2"
+    },
+    {
+      "tag": "spell-dimension:essence/2"
+    },
+    {
+      "item": "l2hostility:nausea"
+    },
+    {
+      "item": "l2hostility:nausea"
+    },
+    {
+      "item": "l2hostility:nausea"
+    }
+  ],
+  "level": 1
+}

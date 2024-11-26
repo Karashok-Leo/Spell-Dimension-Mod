@@ -29,6 +29,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
+import net.minecraft.registry.Registries;
+import net.minecraft.util.Identifier;
 import net.spell_engine.api.enchantment.Enchantments_SpellEngine;
 import net.spell_power.api.SpellSchool;
 import net.spell_power.api.SpellSchools;
@@ -385,6 +387,8 @@ public class SDRecipeProvider extends FabricRecipeProvider
                     EIRecipeUtil.set(
                             builder -> builder
                                     .withTableIngredient(LHEnchantments.CURSE_BLADE, level)
+                                    .withPedestalItem(1, Items.FERMENTED_SPIDER_EYE)
+                                    .withPedestalItem(1, Items.SUGAR)
                                     .withPedestalItem(baseIngredient, ComplementItems.CURSED_DROPLET)
                                     .withPedestalItem(essenceIngredient,
                                             Ingredient.fromTag(AllTags.ESSENCE.get(essenceGrade))),
@@ -396,6 +400,7 @@ public class SDRecipeProvider extends FabricRecipeProvider
                     EIRecipeUtil.set(
                             builder -> builder
                                     .withTableIngredient(Enchantments_SpellPowerMechanics.HASTE, level)
+                                    .withPedestalItem(2, MiscItems.CHAOS.ingot())
                                     .withPedestalItem(baseIngredient, ComplementItems.RESONANT_FEATHER)
                                     .withPedestalItem(essenceIngredient,
                                             Ingredient.fromTag(AllTags.ESSENCE.get(essenceGrade))),
@@ -409,6 +414,8 @@ public class SDRecipeProvider extends FabricRecipeProvider
                     EIRecipeUtil.add(
                             builder -> builder
                                     .withPedestalItem(baseIngredient, ComplementItems.CURSED_DROPLET)
+                                    .withPedestalItem(1, Items.FERMENTED_SPIDER_EYE)
+                                    .withPedestalItem(1, Items.SUGAR)
                                     .withPedestalItem(essenceIngredient,
                                             Ingredient.fromTag(AllTags.ESSENCE.get(essenceGrade))),
                             AllEnchantments.SPELL_CURSE,
@@ -418,6 +425,7 @@ public class SDRecipeProvider extends FabricRecipeProvider
                     );
                     EIRecipeUtil.add(
                             builder -> builder
+                                    .withPedestalItem(2, MiscItems.CHAOS.ingot())
                                     .withPedestalItem(baseIngredient, ComplementItems.RESONANT_FEATHER)
                                     .withPedestalItem(essenceIngredient,
                                             Ingredient.fromTag(AllTags.ESSENCE.get(essenceGrade))),
@@ -578,6 +586,24 @@ public class SDRecipeProvider extends FabricRecipeProvider
                         SpellDimension.modLoc("enchantment/mending/spell_mending/" + 3)
                 );
             }
+        }
+
+        // Effect Immunity Enchantments
+        {
+            AllEnchantments.EFFECT_IMMUNITY.forEach((enchantment, trait) ->
+            {
+                Identifier id = Registries.STATUS_EFFECT.getId(enchantment.getEffect());
+                assert id != null;
+                EIRecipeUtil.set(
+                        builder -> builder
+                                .withPedestalItem(3, Ingredient.fromTag(AllTags.ESSENCE.get(2)))
+                                .withPedestalItem(3, trait),
+                        enchantment,
+                        1,
+                        exporter,
+                        SpellDimension.modLoc("enchantment/effect_immunity/" + id.getPath())
+                );
+            });
         }
     }
 }

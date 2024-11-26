@@ -28,7 +28,7 @@ public record AttributeModifier(EntityAttribute attribute, double amount, Entity
             new AttributeModifier(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 0.1, EntityAttributeModifier.Operation.ADDITION),
             new AttributeModifier(EntityAttributes.GENERIC_LUCK, 1, EntityAttributeModifier.Operation.ADDITION),
             new AttributeModifier(EntityAttributes.GENERIC_MAX_HEALTH, 1, EntityAttributeModifier.Operation.ADDITION),
-            new AttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.02, EntityAttributeModifier.Operation.ADDITION),
+            new AttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.01, EntityAttributeModifier.Operation.ADDITION),
             new AttributeModifier(SpellPowerMechanics.HASTE.attribute, 0.01, EntityAttributeModifier.Operation.MULTIPLY_BASE),
             new AttributeModifier(SpellPowerMechanics.CRITICAL_DAMAGE.attribute, 0.01, EntityAttributeModifier.Operation.MULTIPLY_BASE),
             new AttributeModifier(SpellPowerMechanics.CRITICAL_CHANCE.attribute, 0.01, EntityAttributeModifier.Operation.MULTIPLY_BASE)

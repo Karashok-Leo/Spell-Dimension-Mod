@@ -1,0 +1,26 @@
+{
+  "type": "enchantment_infusion:enchantment_infusion",
+  "enchantment": "spell-dimension:wither_immunity",
+  "force": false,
+  "ingredients": [
+    {
+      "tag": "spell-dimension:essence/2"
+    },
+    {
+      "tag": "spell-dimension:essence/2"
+    },
+    {
+      "tag": "spell-dimension:essence/2"
+    },
+    {
+      "item": "l2hostility:wither"
+    },
+    {
+      "item": "l2hostility:wither"
+    },
+    {
+      "item": "l2hostility:wither"
+    }
+  ],
+  "level": 1
+}

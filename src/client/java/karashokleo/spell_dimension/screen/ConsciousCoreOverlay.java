@@ -39,8 +39,7 @@ public class ConsciousCoreOverlay extends InfoSideBar<SideBar.IntSignature>
         else
         {
             texts.add(SDTexts.TEXT$CONSCIOUSNESS_CORE$NOT_TRIGGERED.get().formatted(Formatting.RED));
-            String factorStr = String.format("%.2f", this.levelFactor);
-            texts.add(SDTexts.TEXT$CONSCIOUSNESS_CORE$LEVEL_FACTOR.get(factorStr).formatted(Formatting.GOLD));
+            texts.add(SDTexts.TEXT$CONSCIOUSNESS_CORE$LEVEL_FACTOR.get("%.2f".formatted(this.levelFactor)).formatted(Formatting.GOLD));
             if (this.award != null)
                 texts.add(SDTexts.TEXT$CONSCIOUSNESS_CORE$AWARD.get(this.award.getText()).formatted(Formatting.AQUA));
             if (this.level != null)

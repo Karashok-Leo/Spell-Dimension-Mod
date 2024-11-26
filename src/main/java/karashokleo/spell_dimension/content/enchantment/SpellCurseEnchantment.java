@@ -18,7 +18,7 @@ public class SpellCurseEnchantment extends SpellImpactEnchantment
 {
     public SpellCurseEnchantment()
     {
-        super(Rarity.UNCOMMON, EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
+        super(Rarity.UNCOMMON, EnchantmentTarget.BREAKABLE, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
     }
 
     @Override

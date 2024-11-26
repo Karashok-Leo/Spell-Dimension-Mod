@@ -3,15 +3,19 @@ package karashokleo.spell_dimension.content.event;
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.leobrary.damage.api.modify.DamageModifier;
 import karashokleo.leobrary.damage.api.modify.DamagePhase;
+import karashokleo.leobrary.effect.api.event.EffectApplicable;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
+import karashokleo.spell_dimension.content.enchantment.EffectImmunityEnchantment;
 import karashokleo.spell_dimension.content.enchantment.SpellImpactEnchantment;
 import karashokleo.spell_dimension.init.AllEnchantments;
+import karashokleo.spell_dimension.init.AllTags;
 import karashokleo.spell_dimension.util.SchoolUtil;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.spell_power.api.SpellPower;
 import net.spell_power.api.SpellSchool;
+import net.spell_power.api.enchantment.EnchantmentRestriction;
 import org.apache.commons.lang3.mutable.MutableInt;
 
 import java.util.ArrayList;
@@ -22,6 +26,21 @@ public class EnchantmentEvent
 {
     public static void init()
     {
+        EffectApplicable.EVENT.register((entity, effect, cir) ->
+        {
+            if (TrinketCompat.getTrinketItems(entity,
+                    e -> e.isIn(AllTags.BREASTPLATE_SLOT)).stream().anyMatch(
+                    e -> EnchantmentHelper.get(e).keySet().stream().anyMatch(
+                            enchantment -> enchantment instanceof EffectImmunityEnchantment immunity &&
+                                           immunity.test(effect))))
+                cir.setReturnValue(false);
+        });
+        AllEnchantments.EFFECT_IMMUNITY.keySet().forEach(enchantment ->
+        {
+            EnchantmentRestriction.permit(enchantment, stack -> stack.isIn(AllTags.BREASTPLATE_SLOT));
+            EnchantmentRestriction.prohibit(enchantment, stack -> !stack.isIn(AllTags.BREASTPLATE_SLOT));
+        });
+
         SpellImpactEvents.BEFORE.register((world, caster, targets, spellInfo) ->
         {
             Map<SpellImpactEnchantment, SpellImpactEnchantment.Context> map = new HashMap<>();
@@ -38,8 +57,8 @@ public class EnchantmentEvent
                                 ArrayList<ItemStack> list = new ArrayList<>();
                                 list.add(e);
                                 return new SpellImpactEnchantment.Context(lv, list);
-                            }
-                            else {
+                            } else
+                            {
                                 ctx.level().add(level);
                                 ctx.stacks().add(e);
                                 return ctx;

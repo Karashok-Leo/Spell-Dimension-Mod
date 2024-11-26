@@ -44,6 +44,7 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.client.render.entity.EmptyEntityRenderer;
 import net.minecraft.item.Item;
 import net.minecraft.text.TranslatableTextContent;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.effect.CustomModelStatusEffect;
 import net.spell_engine.api.effect.CustomParticleStatusEffect;
@@ -158,6 +159,17 @@ public class SpellDimensionClient implements ClientModInitializer
                     optional.isPresent() &&
                     QuestUsage.isQuestCompleted(player, optional.get()))
                     lines.add(SDTexts.TEXT$QUEST_COMPLETED.get());
+            }
+        });
+        ItemTooltipCallback.EVENT.register((stack, context, lines) ->
+        {
+            if (stack.isOf(AllItems.FLEX_BREASTPLATE))
+            {
+                ClientPlayerEntity player = MinecraftClient.getInstance().player;
+                if (player != null)
+                    lines.add(SDTexts.TOOLTIP$FLEX_BREASTPLATE$DAMAGE_FACTOR.get(
+                            "%.1f%%".formatted((1 - AllItems.FLEX_BREASTPLATE.getDamageFactor(player)) * 100)
+                    ).formatted(Formatting.RED));
             }
         });
         ItemTooltipCallback.EVENT.register(tooltipFinal, (stack, context, lines) ->

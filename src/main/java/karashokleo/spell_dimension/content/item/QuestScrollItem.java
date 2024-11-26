@@ -116,7 +116,7 @@ public class QuestScrollItem extends Item
                 // All completed
                 if (currentQuests.isEmpty())
                     player.sendMessage(SDTexts.TEXT$QUEST_ALL_COMPLETED.get(), true);
-                // Offer all current quests
+                    // Offer all current quests
                 else
                 {
                     currentQuests.stream()

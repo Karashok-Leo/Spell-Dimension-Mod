@@ -41,6 +41,7 @@ public class LocateSpellConfig
 
     static
     {
+        register(StructureKeys.MONUMENT, World.OVERWORLD, Items.SEA_LANTERN, "海底神殿");
         register(StructureKeys.ANCIENT_CITY, World.OVERWORLD, Items.SCULK, "远古城市");
         register(StructureKeys.MANSION, World.OVERWORLD, Items.EMERALD_BLOCK, "林地府邸");
         register(DARK_DUNGEON, World.OVERWORLD, ComplementItems.CURSED_DROPLET, "暗黑地牢");

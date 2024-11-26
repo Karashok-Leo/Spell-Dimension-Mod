@@ -1,0 +1,27 @@
+{
+  "replace": false,
+  "values": [
+    "l2hostility:shulker_armor",
+    "l2hostility:stable_body",
+    "l2hostility:durable_armor",
+    "l2hostility:life_sync",
+    "l2hostility:life_mending",
+    "l2hostility:safeguard",
+    "l2hostility:hardened",
+    "l2hostility:dampened",
+    "l2hostility:wind_sweep",
+    "l2hostility:soul_flame_blade",
+    "l2hostility:ice_blade",
+    "l2hostility:sharp_blade",
+    "l2hostility:cursed_blade",
+    "l2hostility:ice_thorn",
+    "l2hostility:flame_thorn",
+    "spell-dimension:spell_curse",
+    "spell-dimension:spell_haste",
+    "spell-dimension:spell_dash",
+    "spell-dimension:stress_response",
+    "spell-dimension:spell_leech",
+    "spell-dimension:spell_resistance",
+    "spell-dimension:spell_mending"
+  ]
+}

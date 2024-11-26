@@ -107,6 +107,8 @@ dependencies {
 
 //	modImplementation "curse.maven:puffish-skills-835091:${project.puffer_fish_skills_version}"
 //	modImplementation "curse.maven:lootr-fabric-615106:${project.lootr_version}"
+//    modImplementation "curse.maven:dusk-468908:${project.dusk_version}"
+
 
     // Book Datagen
     modImplementation "com.klikli_dev:modonomicon-${project.minecraft_version}-fabric:${project.modonomicon_version}"

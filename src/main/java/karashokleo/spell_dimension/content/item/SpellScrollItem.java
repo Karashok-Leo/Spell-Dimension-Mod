@@ -15,6 +15,7 @@ import net.minecraft.world.World;
 import net.spell_engine.api.spell.Spell;
 import net.spell_engine.api.spell.SpellContainer;
 import net.spell_engine.api.spell.SpellInfo;
+import net.spell_engine.client.gui.SpellTooltip;
 import net.spell_engine.internals.SpellContainerHelper;
 import net.spell_engine.internals.SpellRegistry;
 import org.jetbrains.annotations.Nullable;
@@ -73,7 +74,13 @@ public class SpellScrollItem extends Item implements ColorProvider
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
         super.appendTooltip(stack, world, tooltip, context);
-        tooltip.add(SDTexts.SCROLL$OBTAIN.get().formatted(Formatting.GRAY));
-        tooltip.add(SpellScrollConfig.getSpellScrollText(this.getSpellInfo(stack)));
+        SpellInfo spellInfo = this.getSpellInfo(stack);
+        if (spellInfo != null)
+            tooltip.add(Text.translatable(
+                    SpellTooltip.spellTranslationKey(spellInfo.id())
+            ).formatted(Formatting.BOLD));
+        tooltip.add(SDTexts.SCROLL$OBTAIN.get(
+                SpellScrollConfig.getSpellScrollText(spellInfo)
+        ).formatted(Formatting.GRAY));
     }
 }

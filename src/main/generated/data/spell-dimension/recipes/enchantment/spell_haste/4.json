@@ -4,6 +4,12 @@
   "force": false,
   "ingredients": [
     {
+      "item": "l2hostility:chaos_ingot"
+    },
+    {
+      "item": "l2hostility:chaos_ingot"
+    },
+    {
       "item": "l2hostility:resonant_feather"
     },
     {

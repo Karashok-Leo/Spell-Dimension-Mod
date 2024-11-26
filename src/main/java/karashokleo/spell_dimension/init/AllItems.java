@@ -110,7 +110,6 @@ public class AllItems
                 .addEN()
                 .addZH("深渊守护")
                 .addModel()
-                .addTag(AllTags.SHELL_HORN_REQUIREMENT)
                 .register();
         ACCURSED_BLACKSTONE = Entry.of("accursed_blackstone", new NetherStarItem(new FabricItemSettings().fireproof().maxCount(1).rarity(Rarity.EPIC)))
                 .addEN()

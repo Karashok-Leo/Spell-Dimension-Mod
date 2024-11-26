@@ -5,10 +5,13 @@ import dev.emi.trinkets.api.SlotReference;
 import dev.emi.trinkets.api.TrinketItem;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDamageEvent;
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
+import karashokleo.l2hostility.content.item.ComplementItems;
 import karashokleo.l2hostility.init.LHTags;
 import karashokleo.leobrary.effect.api.event.LivingHeal;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllItems;
+import karashokleo.spell_dimension.util.SoundUtil;
+import net.aleganza.plentyofarmors.item.ModItems;
 import net.combatroll.api.event.ServerSideRollEvents;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
@@ -18,17 +21,21 @@ import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.StackReference;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.registry.Registries;
+import net.minecraft.screen.slot.Slot;
 import net.minecraft.text.Text;
+import net.minecraft.util.ClickType;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
-import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.TreeMap;
 import java.util.UUID;
 import java.util.function.Supplier;
 
@@ -78,16 +85,19 @@ public class AtomicBreastplateItem extends TrinketItem
     }
 
     @Override
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand)
+    public boolean onClicked(ItemStack stack, ItemStack otherStack, Slot slot, ClickType clickType, PlayerEntity player, StackReference cursorStackReference)
     {
-        ItemStack stack = user.getStackInHand(hand);
-        TreeMap<Double, Upgrade> map = new TreeMap<>();
-        for (Upgrade upgrade : Upgrade.values())
-            map.put(upgrade.getProgressRate(stack), upgrade);
-        var entry = map.lastEntry();
-        if (entry.getKey() >= 1)
-            return TypedActionResult.success(entry.getValue().itemSupplier.get());
-        return super.use(world, user, hand);
+        if (clickType == ClickType.RIGHT && slot.canTakePartial(player))
+            for (Upgrade upgrade : Upgrade.values())
+                if (upgrade.getProgressRate(stack) >= 1 &&
+                    otherStack.isOf(upgrade.ingredientSupplier.get()))
+                {
+                    slot.setStack(upgrade.itemSupplier.get());
+                    cursorStackReference.set(ItemStack.EMPTY);
+                    SoundUtil.playSound(player, SoundUtil.ANVIL);
+                    return true;
+                }
+        return false;
     }
 
     @Override
@@ -117,27 +127,31 @@ public class AtomicBreastplateItem extends TrinketItem
     {
         ENCHANTED(
                 AllItems.ENCHANTED_BREASTPLATE::getDefaultStack,
+                () -> Items.NETHERITE_BLOCK,
                 "EnchantedProgress",
-                30000,
+                100000,
                 Formatting.DARK_PURPLE,
                 SDTexts.TOOLTIP$ATOMIC_TO_ENCHANTED
         ),
         FLEX(
                 AllItems.FLEX_BREASTPLATE::getDefaultStack,
+                () -> ModItems.HEART_OF_THE_END,
                 "FlexProgress",
-                2000,
+                1000,
                 Formatting.DARK_RED,
                 SDTexts.TOOLTIP$ATOMIC_TO_FLEX
         ),
         FLICKER(
                 AllItems.FLICKER_BREASTPLATE::getDefaultStack,
+                () -> ComplementItems.CAPTURED_WIND,
                 "FlickerProgress",
-                1000,
+                300,
                 Formatting.GOLD,
                 SDTexts.TOOLTIP$ATOMIC_TO_FLICKER
         ),
         OBLIVION(
                 AllItems.OBLIVION_BREASTPLATE::getDefaultStack,
+                () -> Registries.ITEM.get(new Identifier("simplyswords:runic_tablet")),
                 "OblivionProgress",
                 1000,
                 Formatting.AQUA,
@@ -145,6 +159,7 @@ public class AtomicBreastplateItem extends TrinketItem
         );
 
         public final Supplier<ItemStack> itemSupplier;
+        public final Supplier<Item> ingredientSupplier;
         public final String progressKey;
         public final double maxProgress;
         public final Formatting formatting;
@@ -152,6 +167,7 @@ public class AtomicBreastplateItem extends TrinketItem
 
         Upgrade(
                 Supplier<ItemStack> itemSupplier,
+                Supplier<Item> ingredientSupplier,
                 String progressKey,
                 double maxProgress,
                 Formatting formatting,
@@ -159,15 +175,11 @@ public class AtomicBreastplateItem extends TrinketItem
         )
         {
             this.itemSupplier = itemSupplier;
+            this.ingredientSupplier = ingredientSupplier;
             this.progressKey = progressKey;
             this.maxProgress = maxProgress;
             this.formatting = formatting;
             this.tooltipText = tooltipText;
-        }
-
-        public String getProgressText(ItemStack stack)
-        {
-            return String.format("%.1f%%", getProgressRate(stack) * 100);
         }
 
         public double getProgress(ItemStack stack)
@@ -192,11 +204,18 @@ public class AtomicBreastplateItem extends TrinketItem
                             this.maxProgress
                     ).formatted(this.formatting)
             );
+            double progressRate = getProgressRate(stack);
             tooltip.add(
                     SDTexts.TOOLTIP$ATOMIC_BREASTPLATE_PROGRESS.get(
-                            this.getProgressText(stack)
+                            "%.1f%%".formatted(progressRate * 100)
                     ).formatted(this.formatting)
             );
+            if (progressRate >= 1)
+                tooltip.add(
+                        SDTexts.TOOLTIP$ATOMIC_BREASTPLATE_UPGRADEABLE.get(
+                                this.ingredientSupplier.get().getName()
+                        ).formatted(Formatting.GREEN)
+                );
         }
     }
 }

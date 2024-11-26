@@ -1,0 +1,26 @@
+{
+  "type": "enchantment_infusion:enchantment_infusion",
+  "enchantment": "spell-dimension:cursed_immunity",
+  "force": false,
+  "ingredients": [
+    {
+      "tag": "spell-dimension:essence/2"
+    },
+    {
+      "tag": "spell-dimension:essence/2"
+    },
+    {
+      "tag": "spell-dimension:essence/2"
+    },
+    {
+      "item": "l2hostility:cursed"
+    },
+    {
+      "item": "l2hostility:cursed"
+    },
+    {
+      "item": "l2hostility:cursed"
+    }
+  ],
+  "level": 1
+}

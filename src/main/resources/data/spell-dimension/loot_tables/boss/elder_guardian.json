@@ -15,6 +15,15 @@
       "entries": [
         {
           "type": "item",
+          "name": "spell-dimension:abyss_guard"
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
           "name": "plentyofarmors:marine_diamond",
           "weight": 1
         },
