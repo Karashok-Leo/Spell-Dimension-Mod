@@ -140,8 +140,8 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
                         player.sendMessage(Text.translatable("gui.spell_engine.spell_binding.no_more_slots"));
                 case APPLICABLE ->
                 {
-                    SpellContainer container = SpellContainerHelper.containerFromItemStack(stack);
-                    if (container == null || !container.isValid()) return;
+                    // Must copy the container to avoid modifying the original
+                    SpellContainer container = SpellContainerHelper.containerFromItemStack(stack).copy();
                     SpellContainer modifiedContainer = SpellContainerUtil.addSpell(container, spellInfo.id());
                     SpellContainerHelper.addContainerToItemStack(modifiedContainer, stack);
                     scroll.decrement(1);
@@ -156,19 +156,22 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
         SpellContainer container = SpellContainerHelper.containerFromItemStack(stack);
         if (container == null || !container.isValid())
         {
-            player.sendMessage(SDTexts.TOOLTIP$INVALID.get());
+            if (player.getWorld().isClient())
+                player.sendMessage(SDTexts.TOOLTIP$INVALID.get());
             return Optional.empty();
         }
         int size = container.spell_ids.size();
         if (size < 1)
         {
-            player.sendMessage(SDTexts.TEXT$BLANK_BOOK.get());
+            if (player.getWorld().isClient())
+                player.sendMessage(SDTexts.TEXT$BLANK_BOOK.get());
             return Optional.empty();
         }
         String spellId = container.spell_ids.get(size - 1);
         ItemStack scroll = AllItems.SPELL_SCROLL.getStack(new Identifier(spellId));
         SpellContainer modifiedContainer = SpellContainerUtil.removeLastSpell(container);
         SpellContainerHelper.addContainerToItemStack(modifiedContainer, stack);
+        this.playSound(player);
         return Optional.of(scroll);
     }
 
@@ -185,8 +188,10 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
         if (clicking.isEmpty())
         {
             this.removeSpell(holding, player).ifPresent(slot::insertStack);
-            this.playSound(player);
-        } else tryAddScroll(holding, clicking, player);
+        } else
+        {
+            tryAddScroll(holding, clicking, player);
+        }
         return true;
     }
 
@@ -196,12 +201,12 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
         if (clickType == ClickType.RIGHT && slot.canTakePartial(player))
         {
             if (holding.isEmpty())
-                removeSpell(clicking, player).ifPresent((itemStack) ->
-                {
-                    this.playSound(player);
-                    cursorStackReference.set(itemStack);
-                });
-            else tryAddScroll(clicking, holding, player);
+            {
+                removeSpell(clicking, player).ifPresent(cursorStackReference::set);
+            } else
+            {
+                tryAddScroll(clicking, holding, player);
+            }
             return true;
         } else return false;
     }

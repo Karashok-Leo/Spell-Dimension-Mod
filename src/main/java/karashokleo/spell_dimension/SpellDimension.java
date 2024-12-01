@@ -51,7 +51,6 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
         AllBlocks.register();
         AllEntities.register();
         AllWorldGen.register();
-        AllTags.register();
         AllGroups.register();
         AllLoots.register();
         AllBuffs.register();
@@ -73,6 +72,7 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
     {
         FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
 
+        AllTags.register();
         SDTexts.register();
         SpellTexts.register();
 

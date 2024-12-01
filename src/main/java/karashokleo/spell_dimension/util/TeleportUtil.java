@@ -14,8 +14,11 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.TeleportTarget;
 import net.minecraft.world.border.WorldBorder;
-import net.minecraft.world.chunk.WorldChunk;
+import net.minecraft.world.chunk.ChunkStatus;
 import net.minecraft.world.dimension.DimensionType;
+
+import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 public class TeleportUtil
 {
@@ -46,7 +49,7 @@ public class TeleportUtil
         player.detach();
         TeleportTarget target = new TeleportTarget(
                 targetPos.toCenterPos(),
-                new Vec3d(0, 0, 0),
+                Vec3d.ZERO,
                 player.getYaw(),
                 player.getPitch()
         );
@@ -60,19 +63,39 @@ public class TeleportUtil
         serverWorld.playSound(null, entity.getBlockPos(), SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.BLOCKS, 1F, 1F);
     }
 
-    public static BlockPos findTeleportPos(ServerWorld source, ServerWorld destination, BlockPos pos)
+    public static CompletableFuture<Optional<BlockPos>> getTeleportPosFuture(ServerWorld source, ServerWorld destination, BlockPos pos)
     {
-        WorldBorder worldBorder = destination.getWorldBorder();
-        double factor = DimensionType.getCoordinateScaleFactor(source.getDimension(), destination.getDimension());
-        int resultX = (int) (pos.getX() * factor);
-        int resultZ = (int) (pos.getZ() * factor);
-        int resultY = getTopY(destination, resultX, resultZ) + 1;
-        return worldBorder.clamp(resultX, resultY, resultZ);
+        return getTopYFuture(destination, pos.getX(), pos.getZ())
+                .thenApply(
+                        optionalY -> optionalY.map(
+                                resultY ->
+                                {
+                                    WorldBorder worldBorder = destination.getWorldBorder();
+                                    double factor = DimensionType.getCoordinateScaleFactor(source.getDimension(), destination.getDimension());
+                                    int resultX = (int) (pos.getX() * factor);
+                                    int resultZ = (int) (pos.getZ() * factor);
+                                    return worldBorder.clamp(resultX, resultY, resultZ);
+                                }
+                        )
+                );
     }
 
-    public static int getTopY(ServerWorld world, int x, int z)
+    public static CompletableFuture<Optional<BlockPos>> getTopPosFuture(ServerWorld world, BlockPos pos)
     {
-        WorldChunk worldChunk = world.getChunk(ChunkSectionPos.getSectionCoord(x), ChunkSectionPos.getSectionCoord(z));
-        return worldChunk.sampleHeightmap(Heightmap.Type.MOTION_BLOCKING, x & 15, z & 15);
+        return getTopYFuture(world, pos.getX(), pos.getZ())
+                .thenApply(optionalY -> optionalY.map(topY -> new BlockPos(pos.getX(), topY, pos.getZ())));
+    }
+
+    public static CompletableFuture<Optional<Integer>> getTopYFuture(ServerWorld world, int x, int z)
+    {
+        return world.getChunkManager()
+                .getChunkFutureSyncOnMainThread(
+                        ChunkSectionPos.getSectionCoord(x),
+                        ChunkSectionPos.getSectionCoord(z),
+                        ChunkStatus.FULL,
+                        true
+                )
+                .thenApply(either -> either.left()
+                        .map(chunk -> chunk.sampleHeightmap(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, x & 15, z & 15)));
     }
 }

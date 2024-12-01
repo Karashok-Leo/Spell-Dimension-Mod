@@ -46,7 +46,6 @@ public class ConsciousnessCoreBlock extends BlockWithEntity
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit)
     {
-        if (world.isClient()) return ActionResult.SUCCESS;
         if (world.getBlockEntity(pos) instanceof ConsciousnessCoreTile tile &&
             tile.testStack(player.getStackInHand(hand)))
             tile.activate(pos, PlayerDifficulty.get(player).getLevel().getLevel());

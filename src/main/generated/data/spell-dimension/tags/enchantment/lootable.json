@@ -1,6 +1,13 @@
 {
   "replace": false,
   "values": [
+    "spell-dimension:spell_curse",
+    "spell-dimension:spell_haste",
+    "spell-dimension:spell_dash",
+    "spell-dimension:stress_response",
+    "spell-dimension:spell_leech",
+    "spell-dimension:spell_resistance",
+    "spell-dimension:spell_mending",
     "l2hostility:shulker_armor",
     "l2hostility:stable_body",
     "l2hostility:durable_armor",
@@ -15,13 +22,6 @@
     "l2hostility:sharp_blade",
     "l2hostility:cursed_blade",
     "l2hostility:ice_thorn",
-    "l2hostility:flame_thorn",
-    "spell-dimension:spell_curse",
-    "spell-dimension:spell_haste",
-    "spell-dimension:spell_dash",
-    "spell-dimension:stress_response",
-    "spell-dimension:spell_leech",
-    "spell-dimension:spell_resistance",
-    "spell-dimension:spell_mending"
+    "l2hostility:flame_thorn"
   ]
 }

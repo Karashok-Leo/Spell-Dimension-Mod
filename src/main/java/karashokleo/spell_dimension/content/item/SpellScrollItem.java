@@ -78,7 +78,7 @@ public class SpellScrollItem extends Item implements ColorProvider
         if (spellInfo != null)
             tooltip.add(Text.translatable(
                     SpellTooltip.spellTranslationKey(spellInfo.id())
-            ).formatted(Formatting.BOLD));
+            ).setStyle(Style.EMPTY.withColor(spellInfo.spell().school.color)).formatted(Formatting.BOLD));
         tooltip.add(SDTexts.SCROLL$OBTAIN.get(
                 SpellScrollConfig.getSpellScrollText(spellInfo)
         ).formatted(Formatting.GRAY));

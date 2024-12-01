@@ -3,6 +3,7 @@ package karashokleo.spell_dimension.content.item;
 import karashokleo.spell_dimension.content.network.S2CFloatingItem;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllWorldGen;
+import karashokleo.spell_dimension.util.FutureTask;
 import karashokleo.spell_dimension.util.TeleportUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -89,14 +90,25 @@ public class MagicMirrorItem extends Item
 
                 // Teleport to the coordinate position if the spawn point is not set
                 if (destinationPos == null)
-                    destinationPos = TeleportUtil.findTeleportPos(serverWorld, destinationWorld, player.getBlockPos());
-
-                // Do teleport
-                TeleportUtil.teleportPlayerChangeDimension(
-                        player,
-                        destinationWorld,
-                        destinationPos
-                );
+                {
+                    FutureTask.submit(
+                            TeleportUtil.getTeleportPosFuture(serverWorld, destinationWorld, player.getBlockPos()),
+                            optional -> optional.ifPresent(
+                                    pos -> TeleportUtil.teleportPlayerChangeDimension(
+                                            player,
+                                            destinationWorld,
+                                            pos
+                                    )
+                            )
+                    );
+                } else
+                {
+                    TeleportUtil.teleportPlayerChangeDimension(
+                            player,
+                            destinationWorld,
+                            destinationPos
+                    );
+                }
             }
         }
         return stack;

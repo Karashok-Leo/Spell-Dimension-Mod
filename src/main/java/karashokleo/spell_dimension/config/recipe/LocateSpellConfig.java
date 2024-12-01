@@ -35,13 +35,14 @@ public class LocateSpellConfig
     public static final RegistryKey<Structure> CHAMPIONS_GRAVES = RegistryKey.of(RegistryKeys.STRUCTURE, new Identifier("soulsweapons:champions_graves"));
     public static final RegistryKey<Structure> CATHEDRAL_OF_RESURRECTION = RegistryKey.of(RegistryKeys.STRUCTURE, new Identifier("soulsweapons:cathedral_of_resurrection"));
     public static final RegistryKey<Structure> DECAYING_KINGDOM = RegistryKey.of(RegistryKeys.STRUCTURE, new Identifier("soulsweapons:decaying_kingdom"));
+    public static final RegistryKey<Structure> MONUMENT = RegistryKey.of(RegistryKeys.STRUCTURE, new Identifier("betteroceanmonuments:ocean_monument"));
 
     public static final Item BOSS_COMPASS = Registries.ITEM.get(new Identifier("soulsweapons:boss_compass"));
     public static final Item LOST_SOUL = Registries.ITEM.get(new Identifier("soulsweapons:lost_soul"));
 
     static
     {
-        register(StructureKeys.MONUMENT, World.OVERWORLD, Items.SEA_LANTERN, "海底神殿");
+        register(MONUMENT, World.OVERWORLD, Items.SEA_LANTERN, "海底神殿");
         register(StructureKeys.ANCIENT_CITY, World.OVERWORLD, Items.SCULK, "远古城市");
         register(StructureKeys.MANSION, World.OVERWORLD, Items.EMERALD_BLOCK, "林地府邸");
         register(DARK_DUNGEON, World.OVERWORLD, ComplementItems.CURSED_DROPLET, "暗黑地牢");

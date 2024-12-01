@@ -18,6 +18,7 @@ import java.util.List;
 
 public class ConsciousCoreOverlay extends InfoSideBar<SideBar.IntSignature>
 {
+    private boolean activating = false;
     private boolean triggered = false;
     private double levelFactor;
     @Nullable
@@ -34,7 +35,9 @@ public class ConsciousCoreOverlay extends InfoSideBar<SideBar.IntSignature>
     protected List<Text> getText()
     {
         ArrayList<Text> texts = new ArrayList<>();
-        if (this.triggered)
+        if (this.activating)
+            texts.add(SDTexts.TEXT$CONSCIOUSNESS_CORE$ACTIVATING.get().formatted(Formatting.YELLOW));
+        else if (this.triggered)
             texts.add(SDTexts.TEXT$CONSCIOUSNESS_CORE$TRIGGERED.get().formatted(Formatting.GREEN));
         else
         {
@@ -69,6 +72,7 @@ public class ConsciousCoreOverlay extends InfoSideBar<SideBar.IntSignature>
         BlockPos pos = RayTraceUtil.rayTraceBlock(player.getWorld(), player, 5).getBlockPos();
         if (player.getWorld().getBlockEntity(pos) instanceof ConsciousnessCoreTile tile)
         {
+            this.activating = tile.isActivating();
             this.triggered = tile.isTriggered();
             this.levelFactor = tile.getLevelFactor();
             this.award = tile.getAward();

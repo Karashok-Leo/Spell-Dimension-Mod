@@ -26,7 +26,7 @@ public class InfusionRecipes
         register(MiscItems.DETECTOR_GLASSES, Items.GOLDEN_CARROT, ModItems.NIGHT_VISION_GOGGLES.get().getDefaultStack());
         register(Items.NETHERITE_PICKAXE, VictusItems.BLAZING_HEART_ASPECT, ModItems.PICKAXE_HEATER.get().getDefaultStack());
         register(Items.GOLDEN_HOE, VictusItems.GOLDEN_HEART_ASPECT, ModItems.GOLDEN_HOOK.get().getDefaultStack());
-        register(Items.HEART_OF_THE_SEA, VictusItems.OCEAN_HEART_ASPECT, ModItems.SNORKEL.get().getDefaultStack());
+        register(Items.HEART_OF_THE_SEA, VictusItems.OCEAN_HEART_ASPECT, Registries.ITEM.get(new Identifier("ringsofascension:ring_water_breathing")).getDefaultStack());
         register(net.aleganza.plentyofarmors.item.ModItems.HARDENED_PHANTOM_MEMBRANE, ComplementItems.WIND_BOTTLE, ModItems.CLOUD_IN_A_BOTTLE.get().getDefaultStack());
         register(net.aleganza.plentyofarmors.item.ModItems.HARDENED_PHANTOM_MEMBRANE, ComplementItems.SUN_MEMBRANE, ModItems.HELIUM_FLAMINGO.get().getDefaultStack());
         register(Registries.ITEM.get(new Identifier("midashunger:cooked_golden_beef")), ComplementItems.LIFE_ESSENCE, ModItems.EVERLASTING_BEEF.get().getDefaultStack());

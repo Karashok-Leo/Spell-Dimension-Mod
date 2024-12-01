@@ -6,8 +6,8 @@ import karashokleo.spell_dimension.content.entity.LocatePortalEntity;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.init.AllTags;
+import karashokleo.spell_dimension.util.FutureTask;
 import karashokleo.spell_dimension.util.TeleportUtil;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -28,6 +28,8 @@ import net.minecraft.world.gen.structure.Structure;
 import net.spell_engine.entity.SpellProjectile;
 
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class LocateSpell
 {
@@ -37,81 +39,85 @@ public class LocateSpell
     {
         if (!spellId.equals(AllSpells.LOCATE)) return;
         if (!(projectile.getWorld() instanceof ServerWorld world)) return;
-        if (!(projectile.getOwner() instanceof LivingEntity living)) return;
+        if (!(projectile.getOwner() instanceof PlayerEntity player)) return;
         BlockPos blockPos = hitResult.getBlockPos();
         if (!isLocateTargetBlock(world, blockPos)) return;
 
-        ItemStack offHandStack = living.getOffHandStack();
+        ItemStack offHandStack = player.getOffHandStack();
         Item item = offHandStack.getItem();
         RegistryKey<Structure> structureRegistryKey = LocateSpellConfig.STRUCTURE_CONFIG.get(item, world.getRegistryKey());
         TagKey<Biome> biomeTagKey = LocateSpellConfig.BIOME_CONFIG.get(item, world.getRegistryKey());
 
-        boolean consume = false;
+        AtomicBoolean consume = new AtomicBoolean(false);
 
         if (structureRegistryKey != null)
         {
-            Optional<BlockPos> optional = locateStructure(world, blockPos, structureRegistryKey);
-            if (optional.isPresent())
-            {
-                spawnLocatePortal(world, optional.get(), blockPos);
-                consume = true;
-            } else if (living instanceof PlayerEntity player)
-            {
-                player.sendMessage(Text.translatable("commands.locate.structure.not_found", structureRegistryKey.getValue()), true);
-            }
+            Text spotName = LocateSpellConfig.getSpotName(structureRegistryKey);
+            player.sendMessage(SDTexts.TEXT$LOCATING.get(spotName), false);
+
+            FutureTask.submit(
+                    locateStructure(world, blockPos, structureRegistryKey),
+                    optional ->
+                    {
+                        if (optional.isPresent())
+                        {
+                            spawnLocatePortal(world, optional.get(), blockPos);
+                            consume.set(true);
+                        } else
+                            player.sendMessage(Text.translatable("commands.locate.structure.not_found", spotName), false);
+                    }
+            );
         } else if (biomeTagKey != null)
         {
-            Optional<BlockPos> optional = locateBiome(world, blockPos, biomeTagKey);
-            if (optional.isPresent())
-            {
-                spawnLocatePortal(world, optional.get(), blockPos);
-                consume = true;
-            } else if (living instanceof PlayerEntity player)
-            {
-                player.sendMessage(Text.translatable("commands.locate.biome.not_found", biomeTagKey.id()), true);
-            }
-        } else if (living instanceof PlayerEntity player)
-            player.sendMessage(SDTexts.TEXT$INVALID_KEY_ITEM.get(), true);
+            Text spotName = LocateSpellConfig.getSpotName(biomeTagKey);
+            player.sendMessage(SDTexts.TEXT$LOCATING.get(spotName), false);
 
-        if (consume)
+            FutureTask.submit(
+                    locateBiome(world, blockPos, biomeTagKey),
+                    optional ->
+                    {
+                        if (optional.isPresent())
+                        {
+                            spawnLocatePortal(world, optional.get(), blockPos);
+                            consume.set(true);
+                        } else
+                            player.sendMessage(Text.translatable("commands.locate.biome.not_found", spotName), false);
+                    }
+            );
+        } else player.sendMessage(SDTexts.TEXT$INVALID_KEY_ITEM.get(), true);
+
+        if (consume.get() && !player.getAbilities().creativeMode)
         {
-            if (!(living instanceof PlayerEntity player &&
-                  player.getAbilities().creativeMode))
-                offHandStack.decrement(1);
-            if (living.getRandom().nextFloat() < BREAK_CHANCE)
+            offHandStack.decrement(1);
+            if (player.getRandom().nextFloat() < BREAK_CHANCE)
                 world.breakBlock(blockPos, false);
         }
     }
 
-    private static Optional<BlockPos> locateBiome(ServerWorld world, BlockPos pos, TagKey<Biome> tagKey)
+    private static CompletableFuture<Optional<BlockPos>> locateBiome(ServerWorld world, BlockPos pos, TagKey<Biome> tagKey)
     {
         Pair<BlockPos, RegistryEntry<Biome>> pair = world.locateBiome(e -> e.isIn(tagKey), pos, 6400, 32, 64);
-        return Optional.ofNullable(pair).map(p ->
-        {
-            BlockPos blockPos = p.getFirst();
-            int topY = TeleportUtil.getTopY(world, blockPos.getX(), blockPos.getZ());
-            return new BlockPos(blockPos.getX(), topY, blockPos.getZ());
-        });
+        if (pair == null)
+            return CompletableFuture.completedFuture(Optional.empty());
+        return TeleportUtil.getTopPosFuture(world, pair.getFirst());
     }
 
-    private static Optional<BlockPos> locateStructure(ServerWorld world, BlockPos pos, RegistryKey<Structure> registryKey)
+    private static CompletableFuture<Optional<BlockPos>> locateStructure(ServerWorld world, BlockPos pos, RegistryKey<Structure> registryKey)
     {
-        RegistryEntryList<Structure> registryEntryList = world
+        Optional<RegistryEntryList<Structure>> optional = world
                 .getRegistryManager()
                 .get(RegistryKeys.STRUCTURE)
                 .getEntry(registryKey)
-                .map(RegistryEntryList::of)
-                .orElseThrow();
+                .map(RegistryEntryList::of);
+        if (optional.isEmpty())
+            return CompletableFuture.completedFuture(Optional.empty());
         Pair<BlockPos, RegistryEntry<Structure>> pair = world
                 .getChunkManager()
                 .getChunkGenerator()
-                .locateStructure(world, registryEntryList, pos, 100, false);
-        return Optional.ofNullable(pair).map(p ->
-        {
-            BlockPos blockPos = p.getFirst();
-            int topY = TeleportUtil.getTopY(world, blockPos.getX(), blockPos.getZ());
-            return new BlockPos(blockPos.getX(), topY, blockPos.getZ());
-        });
+                .locateStructure(world, optional.get(), pos, 100, false);
+        if (pair == null)
+            return CompletableFuture.completedFuture(Optional.empty());
+        return TeleportUtil.getTopPosFuture(world, pair.getFirst());
     }
 
     private static void spawnLocatePortal(ServerWorld world, BlockPos destination, BlockPos pos)

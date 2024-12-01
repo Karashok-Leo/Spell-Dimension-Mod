@@ -289,7 +289,7 @@
             },
             "nbt": {
               "EnlighteningModifiers": {
-                "Amount": 0.02,
+                "Amount": 0.01,
                 "Attribute": "minecraft:generic.movement_speed",
                 "Operation": 0,
                 "Uuid": [

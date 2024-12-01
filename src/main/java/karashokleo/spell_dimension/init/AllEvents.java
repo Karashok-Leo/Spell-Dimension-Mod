@@ -77,26 +77,11 @@ public class AllEvents
             ItemStack stack = player.getStackInHand(hand);
             PlayerInventory inventory = player.getInventory();
             if (!world.isClient() &&
-                stack.isOf(AquamiraeItems.SHELL_HORN))
+                stack.isOf(AquamiraeItems.SHELL_HORN) &&
+                !inventory.containsAny(itemStack -> itemStack.isOf(AllItems.ABYSS_GUARD)))
             {
-                ItemStack consumeStack = ItemStack.EMPTY;
-                for (int i = 0; i < inventory.size(); ++i)
-                {
-                    ItemStack itemStack = inventory.getStack(i);
-                    if (itemStack.isOf(AllItems.ABYSS_GUARD))
-                    {
-                        consumeStack = itemStack;
-                        break;
-                    }
-                }
-                if (consumeStack.isEmpty())
-                {
-                    player.sendMessage(SDTexts.TEXT$ABYSS_GUARD.get(), true);
-                    return TypedActionResult.fail(stack);
-                } else
-                {
-                    consumeStack.decrement(1);
-                }
+                player.sendMessage(SDTexts.TEXT$ABYSS_GUARD.get(), true);
+                return TypedActionResult.fail(stack);
             }
             return TypedActionResult.pass(stack);
         });
