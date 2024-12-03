@@ -156,6 +156,8 @@
   "enchantment.spell-dimension.spell_mending.desc": "每次施法将修复你的受损装备。",
   "enchantment.spell-dimension.spell_resistance": "魔力御体",
   "enchantment.spell-dimension.spell_resistance.desc": "你的法术强度将会为你抵御部分伤害。",
+  "enchantment.spell-dimension.spell_tearing": "法术穿透",
+  "enchantment.spell-dimension.spell_tearing.desc": "你的法术有25%概率删除目标的破魔词条。佩戴破风拳套时此概率提升至50%。",
   "enchantment.spell-dimension.stress_response": "应激急速",
   "enchantment.spell-dimension.stress_response.desc": "受伤时如果有法术冷却进度（百分比）小于 魔咒等级 × 0.16, 则该法术立即冷却完毕。",
   "enchantment.spell-dimension.weakness_immunity": "虚弱免疫",

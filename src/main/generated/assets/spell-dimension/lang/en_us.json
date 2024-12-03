@@ -156,6 +156,8 @@
   "enchantment.spell-dimension.spell_mending.desc": "Each cast will repair your damaged equipment.",
   "enchantment.spell-dimension.spell_resistance": "Spell Resistance",
   "enchantment.spell-dimension.spell_resistance.desc": "Your spell power will help you resist some damage.",
+  "enchantment.spell-dimension.spell_tearing": "Spell Tearing",
+  "enchantment.spell-dimension.spell_tearing.desc": "Your spell has a 25% chance of deleting the target's Dispell trait. The probability increases to 50% when wearing the Platinum Star.",
   "enchantment.spell-dimension.stress_response": "Stress Response",
   "enchantment.spell-dimension.stress_response.desc": "If the cooldown progress (percentage) of a spell when injured is less than the enchantment levelFactor × 0.16, the spell will immediately cool down.",
   "enchantment.spell-dimension.weakness_immunity": "Weakness Immunity",

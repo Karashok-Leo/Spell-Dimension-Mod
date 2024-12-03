@@ -21,6 +21,7 @@ public class AllEnchantments
     public static SpellLeechEnchantment SPELL_LEECH;
     public static SpellResistanceEnchantment SPELL_RESISTANCE;
     public static SpellMendingEnchantment SPELL_MENDING;
+    public static SpellTearingEnchantment SPELL_TEARING;
 
     public static TraitEffectImmunityEnchantment WEAKNESS_IMMUNITY;
     public static TraitEffectImmunityEnchantment SLOWNESS_IMMUNITY;
@@ -85,6 +86,12 @@ public class AllEnchantments
                 .addZH("魔力修补")
                 .addZHDesc("每次施法将修复你的受损装备。")
                 .addTag(AllTags.LOOTABLE)
+                .register();
+        SPELL_TEARING = new Entry<>("spell_tearing", new SpellTearingEnchantment())
+                .addEN()
+                .addENDesc("Your spell has a 25% chance of deleting the target's Dispell trait. The probability increases to 50% when wearing the Platinum Star.")
+                .addZH("法术穿透")
+                .addZHDesc("你的法术有25%概率删除目标的破魔词条。佩戴破风拳套时此概率提升至50%。")
                 .register();
 
         WEAKNESS_IMMUNITY = new Entry<>("weakness_immunity", new TraitEffectImmunityEnchantment(StatusEffects.WEAKNESS))

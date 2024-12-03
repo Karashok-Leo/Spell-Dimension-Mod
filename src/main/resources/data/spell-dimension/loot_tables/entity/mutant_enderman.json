@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "item",
+          "name": "mutantmonsters:endersoul_hand"
+        }
+      ]
+    }
+  ]
+}

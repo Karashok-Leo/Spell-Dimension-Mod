@@ -1,0 +1,30 @@
+{
+  "type": "enchantment_infusion:enchantment_infusion",
+  "enchantment": "l2hostility:hardened",
+  "force": false,
+  "ingredients": [
+    {
+      "item": "l2hostility:shulkerate_ingot"
+    },
+    {
+      "item": "l2hostility:shulkerate_ingot"
+    },
+    {
+      "item": "l2hostility:explosion_shard"
+    },
+    {
+      "item": "l2hostility:explosion_shard"
+    },
+    {
+      "item": "spell-dimension:mending_essence"
+    },
+    {
+      "item": "spell-dimension:mending_essence"
+    }
+  ],
+  "input": {
+    "enchantment": "minecraft:unbreaking",
+    "min_level": 3
+  },
+  "level": 1
+}

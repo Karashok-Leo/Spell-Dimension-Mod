@@ -21,22 +21,13 @@
       },
       "item": [
         {
-          "item": "spell-dimension:essence_healing_0"
+          "item": "spell-dimension:essence_arcane_0"
         },
         {
-          "item": "spell-dimension:essence_healing_1"
+          "item": "spell-dimension:essence_arcane_1"
         },
         {
-          "item": "spell-dimension:essence_healing_2"
-        },
-        {
-          "item": "spell-dimension:essence_soul_0"
-        },
-        {
-          "item": "spell-dimension:essence_soul_1"
-        },
-        {
-          "item": "spell-dimension:essence_soul_2"
+          "item": "spell-dimension:essence_arcane_2"
         },
         {
           "item": "spell-dimension:essence_frost_0"
@@ -48,6 +39,24 @@
           "item": "spell-dimension:essence_frost_2"
         },
         {
+          "item": "spell-dimension:essence_lightning_0"
+        },
+        {
+          "item": "spell-dimension:essence_lightning_1"
+        },
+        {
+          "item": "spell-dimension:essence_lightning_2"
+        },
+        {
+          "item": "spell-dimension:essence_healing_0"
+        },
+        {
+          "item": "spell-dimension:essence_healing_1"
+        },
+        {
+          "item": "spell-dimension:essence_healing_2"
+        },
+        {
           "item": "spell-dimension:essence_fire_0"
         },
         {
@@ -57,22 +66,13 @@
           "item": "spell-dimension:essence_fire_2"
         },
         {
-          "item": "spell-dimension:essence_arcane_0"
+          "item": "spell-dimension:essence_soul_0"
         },
         {
-          "item": "spell-dimension:essence_arcane_1"
+          "item": "spell-dimension:essence_soul_1"
         },
         {
-          "item": "spell-dimension:essence_arcane_2"
-        },
-        {
-          "item": "spell-dimension:essence_lightning_0"
-        },
-        {
-          "item": "spell-dimension:essence_lightning_1"
-        },
-        {
-          "item": "spell-dimension:essence_lightning_2"
+          "item": "spell-dimension:essence_soul_2"
         }
       ],
       "text": "book.spell-dimension-book.magic_guidance.mage.essence.base.text",

@@ -546,6 +546,32 @@ public class SDRecipeProvider extends FabricRecipeProvider
                 );
             }
 
+            // Spell Tearing
+            EIRecipeUtil.set(
+                    builder -> builder
+                            .withTableIngredient(Enchantments_SpellPowerMechanics.MAGIC_PROTECTION, 1)
+                            .withPedestalItem(1, ComplementItems.VOID_EYE)
+                            .withPedestalItem(2, ComplementItems.CURSED_DROPLET)
+                            .withPedestalItem(3, ComplementItems.EXPLOSION_SHARD),
+                    AllEnchantments.SPELL_TEARING,
+                    1,
+                    exporter,
+                    SpellDimension.modLoc("enchantment/spell_tearing")
+            );
+
+            // Hardened
+            EIRecipeUtil.set(
+                    builder -> builder
+                            .withTableIngredient(Enchantments.UNBREAKING, 3)
+                            .withPedestalItem(2, ComplementItems.SHULKERATE.ingot())
+                            .withPedestalItem(2, ComplementItems.EXPLOSION_SHARD)
+                            .withPedestalItem(2, AllItems.MENDING_ESSENCE),
+                    LHEnchantments.HARDENED,
+                    1,
+                    exporter,
+                    SpellDimension.modLoc("enchantment/hardened")
+            );
+
             // Mending
             {
                 EIRecipeUtil.set(

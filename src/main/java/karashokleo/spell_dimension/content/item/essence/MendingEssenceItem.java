@@ -4,6 +4,7 @@ import karashokleo.spell_dimension.content.item.essence.base.StackClickEssenceIt
 import karashokleo.spell_dimension.data.SDTexts;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Text;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -20,12 +21,18 @@ public class MendingEssenceItem extends StackClickEssenceItem
     @Override
     protected boolean applyEffect(ItemStack essence, ItemStack target)
     {
-        if (target.getItem().isDamageable())
+        NbtCompound nbt = target.getNbt();
+        if (nbt == null)
         {
-            target.setDamage(0);
-            target.setRepairCost(0);
+            return false;
+        } else
+        {
+            if (nbt.contains("Damage"))
+                target.setDamage(0);
+            if (nbt.contains("RepairCost"))
+                target.setRepairCost(0);
             return true;
-        } else return false;
+        }
     }
 
     @Override
