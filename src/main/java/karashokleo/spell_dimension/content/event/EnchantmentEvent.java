@@ -1,9 +1,10 @@
 package karashokleo.spell_dimension.content.event;
 
+import io.github.fabricators_of_create.porting_lib.core.event.BaseEvent;
+import io.github.fabricators_of_create.porting_lib.entity.events.living.MobEffectEvent;
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.leobrary.damage.api.modify.DamageModifier;
 import karashokleo.leobrary.damage.api.modify.DamagePhase;
-import karashokleo.leobrary.effect.api.event.EffectApplicable;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
 import karashokleo.spell_dimension.content.enchantment.EffectImmunityEnchantment;
 import karashokleo.spell_dimension.content.enchantment.SpellImpactEnchantment;
@@ -26,15 +27,16 @@ public class EnchantmentEvent
 {
     public static void init()
     {
-        EffectApplicable.EVENT.register((entity, effect, cir) ->
+        MobEffectEvent.APPLICABLE.register(event ->
         {
-            if (TrinketCompat.getTrinketItems(entity,
+            if (TrinketCompat.getTrinketItems(event.getEntity(),
                     e -> e.isIn(AllTags.BREASTPLATE_SLOT)).stream().anyMatch(
                     e -> EnchantmentHelper.get(e).keySet().stream().anyMatch(
                             enchantment -> enchantment instanceof EffectImmunityEnchantment immunity &&
-                                           immunity.test(effect))))
-                cir.setReturnValue(false);
+                                           immunity.test(event.getEffectInstance()))))
+                event.setResult(BaseEvent.Result.DENY);
         });
+
         AllEnchantments.EFFECT_IMMUNITY.keySet().forEach(enchantment ->
         {
             EnchantmentRestriction.permit(enchantment, stack -> stack.isIn(AllTags.BREASTPLATE_SLOT));

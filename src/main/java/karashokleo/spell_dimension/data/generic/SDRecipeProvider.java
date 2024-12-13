@@ -15,6 +15,7 @@ import karashokleo.spell_dimension.init.AllEnchantments;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllTags;
 import karashokleo.spell_dimension.util.SchoolUtil;
+import net.adventurez.init.ItemInit;
 import net.aleganza.plentyofarmors.item.ModItems;
 import net.combatroll.api.Enchantments_CombatRoll;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -151,6 +152,15 @@ public class SDRecipeProvider extends FabricRecipeProvider
                 )
                 .criterion(FabricRecipeProvider.hasItem(Items.NETHERITE_INGOT), FabricRecipeProvider.conditionsFromItem(Items.NETHERITE_INGOT))
                 .offerTo(exporter, SpellDimension.modLoc("netherite_upgrade_smithing_template"));
+
+        ShapelessRecipeJsonBuilder
+                .create(RecipeCategory.MISC, ItemInit.GILDED_BLACKSTONE_SHARD)
+                .input(ComplementItems.BLACKSTONE_CORE)
+                .criterion(
+                        FabricRecipeProvider.hasItem(ComplementItems.BLACKSTONE_CORE),
+                        FabricRecipeProvider.conditionsFromItem(ComplementItems.BLACKSTONE_CORE)
+                )
+                .offerTo(exporter, SpellDimension.modLoc("gilded_blackstone_shard"));
     }
 
     private static void addBaseEssenceRecipe(Consumer<RecipeJsonProvider> exporter)

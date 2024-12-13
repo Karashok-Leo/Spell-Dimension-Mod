@@ -2,6 +2,7 @@ package karashokleo.spell_dimension.config.recipe;
 
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
+import com.kyanite.deeperdarker.content.DDItems;
 import com.spellbladenext.Spellblades;
 import karashokleo.l2hostility.content.item.ComplementItems;
 import karashokleo.leobrary.datagen.util.StringUtil;
@@ -36,6 +37,11 @@ public class LocateSpellConfig
     public static final RegistryKey<Structure> CATHEDRAL_OF_RESURRECTION = RegistryKey.of(RegistryKeys.STRUCTURE, new Identifier("soulsweapons:cathedral_of_resurrection"));
     public static final RegistryKey<Structure> DECAYING_KINGDOM = RegistryKey.of(RegistryKeys.STRUCTURE, new Identifier("soulsweapons:decaying_kingdom"));
     public static final RegistryKey<Structure> MONUMENT = RegistryKey.of(RegistryKeys.STRUCTURE, new Identifier("betteroceanmonuments:ocean_monument"));
+    public static final RegistryKey<Structure> FORTRESS = RegistryKey.of(RegistryKeys.STRUCTURE, new Identifier("betterfortresses:fortress"));
+    public static final RegistryKey<Structure> ANCIENT_TEMPLE = RegistryKey.of(RegistryKeys.STRUCTURE, new Identifier("deeperdarker:ancient_temple"));
+    public static final RegistryKey<Structure> GRAVE_RUINS = RegistryKey.of(RegistryKeys.STRUCTURE, new Identifier("graveyard:runes"));
+    public static final RegistryKey<Structure> LICH_PRISON = RegistryKey.of(RegistryKeys.STRUCTURE, new Identifier("graveyard:lich_prison"));
+    public static final RegistryKey<World> OTHERSIDE = RegistryKey.of(RegistryKeys.WORLD, new Identifier("deeperdarker:otherside"));
 
     public static final Item BOSS_COMPASS = Registries.ITEM.get(new Identifier("soulsweapons:boss_compass"));
     public static final Item LOST_SOUL = Registries.ITEM.get(new Identifier("soulsweapons:lost_soul"));
@@ -52,7 +58,10 @@ public class LocateSpellConfig
         register(CATHEDRAL_OF_RESURRECTION, World.OVERWORLD, LOST_SOUL, "复苏教堂");
         register(CHAMPIONS_GRAVES, World.OVERWORLD, BOSS_COMPASS, "古英雄的陵墓");
         register(DECAYING_KINGDOM, World.NETHER, BOSS_COMPASS, "腐朽王国");
-        register(StructureKeys.FORTRESS, World.NETHER, RuneItems.get(RuneItems.RuneType.FIRE), "下界要塞");
+        register(FORTRESS, World.NETHER, RuneItems.get(RuneItems.RuneType.FIRE), "下界要塞");
+        register(ANCIENT_TEMPLE, OTHERSIDE, DDItems.HEART_OF_THE_DEEP, "远古神殿");
+        register(GRAVE_RUINS, World.OVERWORLD, Items.BONE_BLOCK, "死者遗迹");
+        register(LICH_PRISON, World.OVERWORLD, Registries.ITEM.get(new Identifier("graveyard:corruption")), "巫妖之狱");
         register(StructureKeys.BASTION_REMNANT, World.NETHER, RuneItems.get(RuneItems.RuneType.HEALING), "堡垒遗迹");
         register(StructureKeys.END_CITY, World.END, Items.DRAGON_BREATH, "末地城");
 

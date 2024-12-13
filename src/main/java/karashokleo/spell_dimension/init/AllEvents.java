@@ -17,7 +17,6 @@ import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.MobSpawnerBlockEntity;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
@@ -91,8 +90,6 @@ public class AllEvents
 
     private static void adaptiveCompat()
     {
-        String adaptiveDataPrefix = "[SpellCache]";
-
         SpellImpactEvents.BEFORE.register((world, caster, targets, spellInfo) ->
         {
             for (Entity target : targets)
@@ -103,18 +100,8 @@ public class AllEvents
                 AdaptingTrait.Data data = diff.getOrCreateData(LHTraits.ADAPTIVE.getId(), AdaptingTrait.Data::new);
                 int adaptLv = diff.getTraitLevel(LHTraits.ADAPTIVE);
                 if (adaptLv > 0)
-                    data.adapt(adaptiveDataPrefix + spellInfo.id().toString(), adaptLv);
+                    data.adapt("[SpellCache]" + spellInfo.id().toString(), adaptLv);
             }
-        });
-
-        AdaptingTrait.EVENT.register((level, entity, event, data) ->
-        {
-            if (event.getSource().isOf(DamageTypes.MAGIC))
-            {
-                Optional<String> first = data.memory.stream().filter(s -> s.startsWith(adaptiveDataPrefix)).findFirst();
-                if (first.isPresent()) return first.get();
-            }
-            return null;
         });
     }
 }

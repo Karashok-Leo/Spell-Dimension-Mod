@@ -1,7 +1,7 @@
 package karashokleo.spell_dimension.content.item.trinket;
 
 import dev.emi.trinkets.api.TrinketItem;
-import karashokleo.leobrary.effect.api.util.EffectUtil;
+import karashokleo.l2hostility.util.EffectHelper;
 import karashokleo.spell_dimension.data.SDTexts;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
@@ -42,7 +42,7 @@ public class RejuvenatingBlossomItem extends TrinketItem
                 if (effect.getCategory() == StatusEffectCategory.HARMFUL)
                     entity.removeStatusEffect(effect);
         }
-        EffectUtil.forceAddEffect(entity, new StatusEffectInstance(StatusEffects.REGENERATION, duration, 9, false, false), entity);
+        EffectHelper.forceAddEffectWithEvent(entity, new StatusEffectInstance(StatusEffects.REGENERATION, duration, 9, false, false), entity);
     }
 
     @Override

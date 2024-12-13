@@ -1,6 +1,6 @@
 package karashokleo.spell_dimension.content.effect;
 
-import karashokleo.leobrary.effect.api.util.EffectUtil;
+import karashokleo.l2hostility.util.EffectHelper;
 import karashokleo.spell_dimension.init.AllStatusEffects;
 import karashokleo.spell_dimension.util.ImpactUtil;
 import net.minecraft.block.Blocks;
@@ -35,8 +35,7 @@ public class FrostAuraEffect extends StatusEffect
             world.getOtherEntities(entity, entity.getBoundingBox().expand(3 + amplifier, 2 + amplifier, 3 + amplifier), EntityPredicates.VALID_LIVING_ENTITY).forEach(e ->
             {
                 if (e instanceof LivingEntity target && !ImpactUtil.isAlly(entity, target))
-                    EffectUtil.forceAddEffect(target, new StatusEffectInstance(AllStatusEffects.FROSTED, 100, amplifier, false, false), entity);
-//                    target.addStatusEffect(new StatusEffectInstance(AllStatusEffects.FROSTED, 100, amplifier, false, false));
+                    EffectHelper.forceAddEffectWithEvent(target, new StatusEffectInstance(AllStatusEffects.FROSTED, 100, amplifier, false, false), entity);
             });
     }
 

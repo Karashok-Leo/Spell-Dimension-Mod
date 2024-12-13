@@ -29,7 +29,7 @@ public class SummonSpellConfig
         register(Items.CRYING_OBSIDIAN, EntityType.ENDERMAN);
         register(Items.GREEN_DYE, EntityType.SLIME);
         register(Items.POTION, EntityType.WITCH);
-        register(Items.PIGLIN_HEAD, EntityType.PIGLIN_BRUTE, 6);
+        register(Items.PIGLIN_HEAD, EntityType.PIGLIN_BRUTE);
         register(Items.ZOMBIE_HEAD, ModRegistry.MUTANT_ZOMBIE_ENTITY_TYPE.get(), 1);
         register(Items.SKELETON_SKULL, ModRegistry.MUTANT_SKELETON_ENTITY_TYPE.get(), 1);
         register(Items.CREEPER_HEAD, ModRegistry.MUTANT_CREEPER_ENTITY_TYPE.get(), 1);

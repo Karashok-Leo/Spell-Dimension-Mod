@@ -7,7 +7,7 @@ import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDa
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.l2hostility.content.item.ComplementItems;
 import karashokleo.l2hostility.init.LHTags;
-import karashokleo.leobrary.effect.api.event.LivingHeal;
+import karashokleo.leobrary.effect.api.event.LivingHealCallback;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.util.SoundUtil;
@@ -67,10 +67,11 @@ public class AtomicBreastplateItem extends TrinketItem
         });
 
         // To Oblivion Breastplate
-        LivingHeal.EVENT.register((entity, amount, amountRef, ci) ->
+        LivingHealCallback.EVENT.register(event ->
         {
-            for (ItemStack stack : TrinketCompat.getTrinketItems(entity, stack -> stack.isOf(AllItems.ATOMIC_BREASTPLATE)))
-                Upgrade.OBLIVION.addProgress(stack, amount);
+            for (ItemStack stack : TrinketCompat.getTrinketItems(event.getEntity(), stack -> stack.isOf(AllItems.ATOMIC_BREASTPLATE)))
+                Upgrade.OBLIVION.addProgress(stack, event.getAmount());
+            return true;
         });
     }
 
