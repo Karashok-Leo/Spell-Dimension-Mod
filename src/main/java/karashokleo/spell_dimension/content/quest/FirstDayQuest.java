@@ -9,7 +9,8 @@ import java.util.List;
 
 public record FirstDayQuest(List<ItemStack> rewards) implements ItemRewardQuest, AutoDescQuest
 {
-    private static final int ONE_DAY = 24000;
+    // 20 minutes
+    private static final int ONE_DAY = 20 * 60 * 20;
 
     @Override
     public List<ItemStack> getRewards()

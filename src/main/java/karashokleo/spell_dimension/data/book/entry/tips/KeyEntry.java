@@ -55,16 +55,10 @@ public class KeyEntry extends BaseEntryProvider
                         R: Combat Roll
                         \\
                         \\
-                        R: Refresh Trades
-                        \\
-                        \\
                         B: Open Backpack
                         \\
                         \\
                         G: Open Ender Bag
-                        \\
-                        \\
-                        K: Open Skill Menu
                         """
         );
         this.lang("zh_cn").add(context.pageTitle(), "键位绑定");
@@ -77,16 +71,10 @@ public class KeyEntry extends BaseEntryProvider
                         R: 翻滚
                         \\
                         \\
-                        R: 刷新交易
-                        \\
-                        \\
                         B: 打开背包
                         \\
                         \\
                         G: 打开末影袋
-                        \\
-                        \\
-                        K: 打开技能菜单
                         """
         );
 

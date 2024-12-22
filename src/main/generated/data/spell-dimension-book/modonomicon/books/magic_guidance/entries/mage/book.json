@@ -65,15 +65,6 @@
           "item": "spell-dimension:spell_book_lightning_2"
         },
         {
-          "item": "spell-dimension:spell_book_arcane_0"
-        },
-        {
-          "item": "spell-dimension:spell_book_arcane_1"
-        },
-        {
-          "item": "spell-dimension:spell_book_arcane_2"
-        },
-        {
           "item": "spell-dimension:spell_book_healing_0"
         },
         {
@@ -99,6 +90,15 @@
         },
         {
           "item": "spell-dimension:spell_book_fire_2"
+        },
+        {
+          "item": "spell-dimension:spell_book_arcane_0"
+        },
+        {
+          "item": "spell-dimension:spell_book_arcane_1"
+        },
+        {
+          "item": "spell-dimension:spell_book_arcane_2"
         }
       ],
       "text": "book.spell-dimension-book.magic_guidance.mage.book.next.text",

@@ -247,7 +247,7 @@
   "book.spell-dimension-book.magic_guidance.tips.key.description": "Some keys you need to know.",
   "book.spell-dimension-book.magic_guidance.tips.key.name": "Key Binds",
   "book.spell-dimension-book.magic_guidance.tips.key.next.text": "\\\nJ: Turn on/off auto step-up\n\\\n\\\nMiddle Button / Double-click: Sort Inventory\n\\\n\\\nLeft Shift + W: Wall-Jumping\n",
-  "book.spell-dimension-book.magic_guidance.tips.key.prev.text": "\\\n` (~): Chain Mining\n\\\n\\\nR: Combat Roll\n\\\n\\\nR: Refresh Trades\n\\\n\\\nB: Open Backpack\n\\\n\\\nG: Open Ender Bag\n\\\n\\\nK: Open Skill Menu\n",
+  "book.spell-dimension-book.magic_guidance.tips.key.prev.text": "\\\n` (~): Chain Mining\n\\\n\\\nR: Combat Roll\n\\\n\\\nB: Open Backpack\n\\\n\\\nG: Open Ender Bag\n",
   "book.spell-dimension-book.magic_guidance.tips.key.prev.title": "Key Binds",
   "book.spell-dimension-book.magic_guidance.tips.name": "Tips",
   "book.spell-dimension-book.magic_guidance.tips.storage.description": "Well organized.",

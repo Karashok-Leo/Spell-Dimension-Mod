@@ -247,7 +247,7 @@
   "book.spell-dimension-book.magic_guidance.tips.key.description": "一些你需要知道的键位。",
   "book.spell-dimension-book.magic_guidance.tips.key.name": "键位绑定",
   "book.spell-dimension-book.magic_guidance.tips.key.next.text": "\\\nJ: 开启/关闭自动上坡\n\\\n\\\n鼠标中键 / 双击: 整理物品栏\n\\\n\\\n左Shift + W: 攀墙跳\n",
-  "book.spell-dimension-book.magic_guidance.tips.key.prev.text": "\\\n` (~): 连锁采集\n\\\n\\\nR: 翻滚\n\\\n\\\nR: 刷新交易\n\\\n\\\nB: 打开背包\n\\\n\\\nG: 打开末影袋\n\\\n\\\nK: 打开技能菜单\n",
+  "book.spell-dimension-book.magic_guidance.tips.key.prev.text": "\\\n` (~): 连锁采集\n\\\n\\\nR: 翻滚\n\\\n\\\nB: 打开背包\n\\\n\\\nG: 打开末影袋\n",
   "book.spell-dimension-book.magic_guidance.tips.key.prev.title": "键位绑定",
   "book.spell-dimension-book.magic_guidance.tips.name": "提示",
   "book.spell-dimension-book.magic_guidance.tips.storage.description": "井然有序。",
