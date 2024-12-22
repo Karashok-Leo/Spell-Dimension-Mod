@@ -2,6 +2,10 @@
   "background_u_index": 0,
   "background_v_index": 0,
   "category": "spell-dimension-book:boss",
+  "condition": {
+    "type": "modonomicon:entry_read",
+    "entry_id": "spell-dimension-book:boss/warden"
+  },
   "description": "book.spell-dimension-book.magic_guidance.boss.stalker.description",
   "hide_while_locked": false,
   "icon": {
@@ -22,6 +26,17 @@
       "title": "book.spell-dimension-book.magic_guidance.boss.stalker.boss.title"
     },
     {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "show_title_separator": true,
+      "text": "book.spell-dimension-book.magic_guidance.boss.stalker.next.text",
+      "title": "",
+      "use_markdown_in_title": false
+    },
+    {
       "type": "modonomicon:entity",
       "anchor": "",
       "condition": {
@@ -34,20 +49,17 @@
       "rotate": true,
       "scale": 1.0,
       "text": ""
-    },
+    }
+  ],
+  "parents": [
     {
-      "type": "modonomicon:text",
-      "anchor": "",
-      "condition": {
-        "type": "modonomicon:none"
-      },
-      "show_title_separator": true,
-      "text": "book.spell-dimension-book.magic_guidance.boss.stalker.next.text",
-      "title": "",
-      "use_markdown_in_title": false
+      "draw_arrow": true,
+      "entry": "spell-dimension-book:boss/warden",
+      "line_enabled": true,
+      "line_reversed": false
     }
   ],
   "show_when_any_parent_unlocked": false,
-  "x": -4,
-  "y": -1
+  "x": 5,
+  "y": -2
 }

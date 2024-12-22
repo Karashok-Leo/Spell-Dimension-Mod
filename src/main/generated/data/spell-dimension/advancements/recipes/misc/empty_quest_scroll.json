@@ -1,28 +1,28 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_the_recipe": {
-      "conditions": {
-        "recipe": "spell-dimension:empty_quest_scroll"
-      },
-      "trigger": "minecraft:recipe_unlocked"
-    },
-    "has_writable_book": {
+    "has_paper": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:writable_book"
+              "minecraft:paper"
             ]
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "spell-dimension:empty_quest_scroll"
+      },
+      "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_writable_book",
+      "has_paper",
       "has_the_recipe"
     ]
   ],

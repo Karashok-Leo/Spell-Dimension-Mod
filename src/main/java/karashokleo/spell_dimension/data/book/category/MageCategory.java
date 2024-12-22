@@ -1,6 +1,5 @@
 package karashokleo.spell_dimension.data.book.category;
 
-import com.klikli_dev.modonomicon.api.ModonomiconAPI;
 import com.klikli_dev.modonomicon.api.datagen.BookContextHelper;
 import com.klikli_dev.modonomicon.api.datagen.BookProvider;
 import com.klikli_dev.modonomicon.api.datagen.CategoryProvider;
@@ -8,7 +7,6 @@ import com.klikli_dev.modonomicon.api.datagen.book.BookCategoryModel;
 import com.klikli_dev.modonomicon.api.datagen.book.BookEntryModel;
 import karashokleo.spell_dimension.data.book.entry.mage.*;
 import karashokleo.spell_dimension.util.BookGenUtil;
-import net.minecraft.util.Identifier;
 import net.wizards.item.Weapons;
 
 public class MageCategory extends CategoryProvider
@@ -22,17 +20,14 @@ public class MageCategory extends CategoryProvider
     protected String[] generateEntryMap()
     {
         return new String[]{
-                "_____________________",
-                "________d___m________",
-                "______c_______l______",
-                "__________e__________",
-                "_____________________",
-                "______u___a___h______",
-                "_____________________",
-                "__________n__________",
-                "______k_______r______",
-                "_____________________",
-                "_____________________",
+                "__d___m__",
+                "c_______l",
+                "____e____",
+                "_________",
+                "u___a___h",
+                "_________",
+                "____n____",
+                "k_______r",
         };
     }
 
@@ -82,6 +77,6 @@ public class MageCategory extends CategoryProvider
         return BookCategoryModel
                 .create(this.modLoc(context.categoryId()), context.categoryName())
                 .withIcon(Weapons.arcaneWand.item())
-                .withBackground(new Identifier(ModonomiconAPI.ID, "textures/gui/parallax/flow/1.png"));
+                .withBackground(BookGenUtil.id("textures/background/1.png"));
     }
 }

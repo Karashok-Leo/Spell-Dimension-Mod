@@ -24,12 +24,6 @@ public enum SDBags
             SDContents.START.nameEn + " Bag",
             SDContents.START.nameZh + "袋"
     ),
-    CHARM(
-            SDContents.CHARM,
-            Rarity.RARE,
-            14277107,
-            15132922
-    ),
     ARTIFACT(
             SDContents.ARTIFACT,
             Rarity.EPIC,
@@ -155,6 +149,20 @@ public enum SDBags
             Rarity.EPIC,
             3100495,
             16775920
+    ),
+    ROBE(
+            List.of(
+                    SDContents.ROBE_GENERAL,
+                    SDContents.ROBE_ARCANE,
+                    SDContents.ROBE_FIRE,
+                    SDContents.ROBE_FROST,
+                    SDContents.ROBE_HEALING
+            ),
+            Rarity.COMMON,
+            10040013,
+            10444703,
+            "Apprentice Robe Bag",
+            "新手法袍袋"
     ),
     WAND(
             List.of(

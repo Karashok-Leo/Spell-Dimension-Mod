@@ -41,6 +41,8 @@ public class LocateSpellConfig
     public static final RegistryKey<Structure> ANCIENT_TEMPLE = RegistryKey.of(RegistryKeys.STRUCTURE, new Identifier("deeperdarker:ancient_temple"));
     public static final RegistryKey<Structure> GRAVE_RUINS = RegistryKey.of(RegistryKeys.STRUCTURE, new Identifier("graveyard:runes"));
     public static final RegistryKey<Structure> LICH_PRISON = RegistryKey.of(RegistryKeys.STRUCTURE, new Identifier("graveyard:lich_prison"));
+    public static final RegistryKey<Structure> GAUNTLET_ARENA = RegistryKey.of(RegistryKeys.STRUCTURE, new Identifier("bosses_of_mass_destruction:gauntlet_arena"));
+    public static final RegistryKey<Structure> OBSIDILITH_ARENA = RegistryKey.of(RegistryKeys.STRUCTURE, new Identifier("bosses_of_mass_destruction:obsidilith_arena"));
     public static final RegistryKey<World> OTHERSIDE = RegistryKey.of(RegistryKeys.WORLD, new Identifier("deeperdarker:otherside"));
 
     public static final Item BOSS_COMPASS = Registries.ITEM.get(new Identifier("soulsweapons:boss_compass"));
@@ -59,6 +61,8 @@ public class LocateSpellConfig
         register(CHAMPIONS_GRAVES, World.OVERWORLD, BOSS_COMPASS, "古英雄的陵墓");
         register(DECAYING_KINGDOM, World.NETHER, BOSS_COMPASS, "腐朽王国");
         register(FORTRESS, World.NETHER, RuneItems.get(RuneItems.RuneType.FIRE), "下界要塞");
+        register(GAUNTLET_ARENA, World.NETHER, com.spellbladenext.items.Items.fire_orb.item(), "下界铁掌竞技场");
+        register(OBSIDILITH_ARENA, World.END, Items.CRYING_OBSIDIAN, "黑曜巨石柱竞技场");
         register(ANCIENT_TEMPLE, OTHERSIDE, DDItems.HEART_OF_THE_DEEP, "远古神殿");
         register(GRAVE_RUINS, World.OVERWORLD, Items.BONE_BLOCK, "死者遗迹");
         register(LICH_PRISON, World.OVERWORLD, Registries.ITEM.get(new Identifier("graveyard:corruption")), "巫妖之狱");

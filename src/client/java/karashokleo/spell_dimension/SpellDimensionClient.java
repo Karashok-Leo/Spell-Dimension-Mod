@@ -24,6 +24,7 @@ import karashokleo.spell_dimension.init.AllStatusEffects;
 import karashokleo.spell_dimension.mixin.RollManagerInvoker;
 import karashokleo.spell_dimension.render.*;
 import karashokleo.spell_dimension.screen.ConsciousCoreOverlay;
+import karashokleo.spell_dimension.screen.GameOverOverlay;
 import karashokleo.spell_dimension.screen.QuestOverlay;
 import karashokleo.spell_dimension.screen.SpellPowerTab;
 import net.combatroll.internals.RollingEntity;
@@ -97,6 +98,7 @@ public class SpellDimensionClient implements ClientModInitializer
 
         GuiOverlayRegistry.registerLayer(6, new QuestOverlay());
         GuiOverlayRegistry.registerLayer(7, new ConsciousCoreOverlay());
+        GuiOverlayRegistry.registerLayer(3, new GameOverOverlay());
 
         TextureOverlayRegistry.register(PHASE_LAYER, 0.5F, (client, player, context, tickDelta) -> INoClip.noClip(player));
 

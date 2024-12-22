@@ -1,0 +1,74 @@
+{
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "category": "spell-dimension-book:resource",
+  "description": "book.spell-dimension-book.magic_guidance.resource.alloy.description",
+  "hide_while_locked": false,
+  "icon": {
+    "item": "alloy_forgery:prismarine_bricks_forge_controller"
+  },
+  "name": "book.spell-dimension-book.magic_guidance.resource.alloy.name",
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "item": [
+        {
+          "item": "alloy_forgery:prismarine_bricks_forge_controller"
+        },
+        {
+          "item": "alloy_forgery:adamantite_block_forge_controller"
+        },
+        {
+          "item": "alloy_forgery:polished_blackstone_forge_controller"
+        },
+        {
+          "item": "alloy_forgery:bricks_forge_controller"
+        },
+        {
+          "item": "alloy_forgery:end_stone_bricks_forge_controller"
+        },
+        {
+          "item": "alloy_forgery:deepslate_bricks_forge_controller"
+        },
+        {
+          "item": "alloy_forgery:stone_bricks_forge_controller"
+        }
+      ],
+      "text": "book.spell-dimension-book.magic_guidance.resource.alloy.alloy.text",
+      "title": "book.spell-dimension-book.magic_guidance.resource.alloy.alloy.title"
+    },
+    {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "show_title_separator": true,
+      "text": "book.spell-dimension-book.magic_guidance.resource.alloy.build.text",
+      "title": "",
+      "use_markdown_in_title": false
+    },
+    {
+      "type": "modonomicon:image",
+      "anchor": "",
+      "border": true,
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "images": [
+        "spell-dimension-book:textures/alloy_forge/1.png",
+        "spell-dimension-book:textures/alloy_forge/2.png",
+        "spell-dimension-book:textures/alloy_forge/3.png"
+      ],
+      "text": "",
+      "title": ""
+    }
+  ],
+  "show_when_any_parent_unlocked": false,
+  "x": -2,
+  "y": -1
+}

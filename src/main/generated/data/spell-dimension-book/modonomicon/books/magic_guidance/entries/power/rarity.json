@@ -1,0 +1,83 @@
+{
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "category": "spell-dimension-book:power",
+  "description": "book.spell-dimension-book.magic_guidance.power.rarity.description",
+  "hide_while_locked": false,
+  "icon": {
+    "item": "spell-dimension:random_common_gear"
+  },
+  "name": "book.spell-dimension-book.magic_guidance.power.rarity.name",
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "item": [
+        {
+          "item": "spell-dimension:random_common_material"
+        },
+        {
+          "item": "spell-dimension:random_uncommon_material"
+        },
+        {
+          "item": "spell-dimension:random_rare_material"
+        },
+        {
+          "item": "spell-dimension:random_epic_material"
+        },
+        {
+          "item": "spell-dimension:random_legendary_material"
+        },
+        {
+          "item": "spell-dimension:random_common_gear"
+        },
+        {
+          "item": "spell-dimension:random_uncommon_gear"
+        },
+        {
+          "item": "spell-dimension:random_rare_gear"
+        },
+        {
+          "item": "spell-dimension:random_epic_gear"
+        },
+        {
+          "item": "spell-dimension:random_legendary_gear"
+        },
+        {
+          "item": "spell-dimension:random_common_book"
+        },
+        {
+          "item": "spell-dimension:random_uncommon_book"
+        },
+        {
+          "item": "spell-dimension:random_rare_book"
+        },
+        {
+          "item": "spell-dimension:random_epic_book"
+        },
+        {
+          "item": "spell-dimension:random_legendary_book"
+        }
+      ],
+      "text": "book.spell-dimension-book.magic_guidance.power.rarity.rarity.text",
+      "title": "book.spell-dimension-book.magic_guidance.power.rarity.rarity.title"
+    },
+    {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "show_title_separator": true,
+      "text": "book.spell-dimension-book.magic_guidance.power.rarity.text.text",
+      "title": "",
+      "use_markdown_in_title": false
+    }
+  ],
+  "show_when_any_parent_unlocked": false,
+  "x": 3,
+  "y": -1
+}

@@ -84,13 +84,13 @@ public class ScrollEntry extends BaseEntryProvider
         this.lang().add(context.pageText(),
                 """
                         \\
-                        Spell Scrolls can be used directly to cast spells, or they can be freely bound or unbound to Spell Books. Spell Scrolls are usually obtained by killing specific monsters or crafted from specific materials.
+                        Spell Scrolls can be used directly to cast spells, or they can be freely bound or unbound to Spell Books. Spell Scrolls are usually obtained by infusing specific materials with magic.
                         """
         );
         this.lang("zh_cn").add(context.pageText(),
                 """
                         \\
-                        法术卷轴可以直接用于施法，也可以自由地与法术书绑定或解绑。法术卷轴通常需要通过击杀特定的怪物获取，或是用特定的材料合成。
+                        法术卷轴可以直接用于施法，也可以自由地与法术书绑定或解绑。法术卷轴通常需要使用特定的材料进行魔力灌注获得。
                         """
         );
 

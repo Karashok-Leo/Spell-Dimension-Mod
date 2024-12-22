@@ -16,7 +16,7 @@
         "type": "modonomicon:none"
       },
       "item": {
-        "item": "minecraft:sculk_sensor"
+        "item": "minecraft:sculk_shrieker"
       },
       "text": "book.spell-dimension-book.magic_guidance.boss.warden.boss.text",
       "title": "book.spell-dimension-book.magic_guidance.boss.warden.boss.title"
@@ -37,6 +37,6 @@
     }
   ],
   "show_when_any_parent_unlocked": false,
-  "x": 2,
-  "y": -3
+  "x": 5,
+  "y": -4
 }

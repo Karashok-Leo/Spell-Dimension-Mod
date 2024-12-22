@@ -1,7 +1,6 @@
 package karashokleo.spell_dimension.mixin;
 
 import com.tom.storagemod.tile.StorageTerminalBlockEntity;
-import karashokleo.spell_dimension.content.block.tile.ConsciousnessCoreTile;
 import karashokleo.spell_dimension.init.AllBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -36,12 +35,20 @@ public abstract class StorageTerminalBlockEntityMixin extends BlockEntity
     private void redirect_beaconLevel_putField(StorageTerminalBlockEntity instance, int value)
     {
         this.beaconLevel = BlockPos
-                .stream((new Box(this.pos)).expand(8.0))
-                .anyMatch(
-                        (blockPos) -> this.world != null &&
-                                      this.world.getBlockEntity(blockPos, AllBlocks.CONSCIOUSNESS_CORE_TILE)
-                                              .map(ConsciousnessCoreTile::isActivated)
-                                              .orElse(false)
-                ) ? 6 : value;
+                .stream(new Box(this.pos).expand(8.0))
+                .mapToInt(
+                        (blockPos) ->
+                        {
+                            if (this.world != null)
+                            {
+                                var optional = this.world.getBlockEntity(blockPos, AllBlocks.CONSCIOUSNESS_CORE_TILE);
+                                if (optional.isPresent())
+                                {
+                                    return (int) (optional.get().getLevelFactor() / 0.1) + 1;
+                                }
+                            }
+                            return 0;
+                        }
+                ).max().orElse(0);
     }
 }

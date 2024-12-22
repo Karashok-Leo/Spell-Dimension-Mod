@@ -1,0 +1,54 @@
+{
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "category": "spell-dimension-book:boss",
+  "condition": {
+    "type": "modonomicon:entry_read",
+    "entry_id": "spell-dimension-book:boss/invoker"
+  },
+  "description": "book.spell-dimension-book.magic_guidance.boss.returning_knight.description",
+  "hide_while_locked": false,
+  "icon": {
+    "item": "soulsweapons:nightfall"
+  },
+  "name": "book.spell-dimension-book.magic_guidance.boss.returning_knight.name",
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "item": {
+        "item": "soulsweapons:nightfall"
+      },
+      "text": "book.spell-dimension-book.magic_guidance.boss.returning_knight.boss.text",
+      "title": "book.spell-dimension-book.magic_guidance.boss.returning_knight.boss.title"
+    },
+    {
+      "type": "modonomicon:entity",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "default_rotation": -45.0,
+      "entity_id": "soulsweapons:returning_knight",
+      "name": "",
+      "offset": 0.2,
+      "rotate": true,
+      "scale": 1.0,
+      "text": ""
+    }
+  ],
+  "parents": [
+    {
+      "draw_arrow": true,
+      "entry": "spell-dimension-book:boss/invoker",
+      "line_enabled": true,
+      "line_reversed": false
+    }
+  ],
+  "show_when_any_parent_unlocked": false,
+  "x": 3,
+  "y": -2
+}

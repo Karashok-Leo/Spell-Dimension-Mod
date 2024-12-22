@@ -89,7 +89,7 @@ public class SpellScrollConfig
             fromCrafting(AllSpells.MOON_SWIM, ModItems.HARDENED_PHANTOM_MEMBRANE);
 
             fromCrafting(AllSpells.PHASE, Items.ECHO_SHARD);
-            fromCrafting(AllSpells.CONVERGE, "illagerinvasion:primal_essence");
+            fromCrafting(AllSpells.CONVERGE, fuzs.illagerinvasion.init.ModRegistry.PRIMAL_ESSENCE_ITEM.get());
             fromCrafting(AllSpells.ELDRITCH_BLAST, ComplementItems.WARDEN_BONE_SHARD);
             fromCrafting(AllSpells.SHIFT, ModItems.HEART_OF_THE_END);
             fromCrafting(AllSpells.FORCE_LANDING, LHTraits.GRAVITY.asItem());
@@ -125,36 +125,6 @@ public class SpellScrollConfig
             fromCrafting(AllSpells.REGEN, "bosses_of_mass_destruction:void_thorn");
         }
     }
-
-    public static final String[] BOSSES = {
-            "soulsweapons:lord_soul_void",
-            "soulsweapons:lord_soul_day_stalker",
-            "soulsweapons:lord_soul_night_prowler",
-            "illagerinvasion:invoker", "minecraft:totem_of_undying",
-            "soulsweapons:draugr_boss", "soulsweapons:essence_of_eventide",
-            """
-                古英雄的遗骸生成于Champion's Grave内。
-                可以用月石罗盘寻找。
-                结构名称Champion Graves
-                结构定位指令/locate structure soulsweapons:champions_graves
-                或手持德拉古尔对破旧的月光祭坛右键召唤古英雄的残骸，德拉古尔不会消耗。
-                """,
-            "soulsweapons:returning_knight", "soulsweapons:arkenstone",
-            "手持迷失的灵魂对破旧的月光祭坛右键召唤复仇骑士。",
-            "soulsweapons:moonknight", "soulsweapons:essence_of_luminescence",
-            "手持日暮精粹对破旧的月光祭坛右键召唤陨落王者。",
-            "bosses_of_mass_destruction:lich", "bosses_of_mass_destruction:ancient_anima",
-            "bosses_of_mass_destruction:void_blossom", "bosses_of_mass_destruction:void_thorn",
-
-            "bosses_of_mass_destruction:gauntlet", "bosses_of_mass_destruction:blazing_eye",
-            "adventurez:stone_golem", "adventurez:blackstone_golem_heart",
-            "soulsweapons:accursed_lord_boss", "soulsweapons:darkin_blade",
-            "soulsweapons:chaos_monarch", "soulsweapons:chaos_crown",
-            "graveyard:lich", "graveyard:upper_bone_staff",
-            "soulsweapons:day_stalker", "soulsweapons:soul_reaper",
-            "soulsweapons:night_prowler", "soulsweapons:forlorn_scythe",
-            "使用混沌宝珠召唤。"
-    };
 
     private static void fromPrimary(Identifier spellId)
     {

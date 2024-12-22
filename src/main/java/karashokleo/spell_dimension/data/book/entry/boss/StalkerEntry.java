@@ -52,7 +52,7 @@ public class StalkerEntry extends BaseEntryProvider
         this.lang().add(context.pageText(),
                 """
                         \\
-                        Spawns rarely when an **Ancient Vase** is broken.
+                        May spawn when an **Ancient Vase** is broken.
                         \\
                         \\
                         *Ancient Vase: Generated in the Ancient Temple in the Deeper Darker.*
@@ -62,7 +62,7 @@ public class StalkerEntry extends BaseEntryProvider
         this.lang("zh_cn").add(context.pageText(),
                 """
                         \\
-                        在**远古花瓶**被打破时有小概率生成。
+                        在**远古花瓶**被打破时有概率生成。
                         \\
                         \\
                         *远古花瓶: 生成于深暗维度的远古神庙。*
@@ -74,11 +74,6 @@ public class StalkerEntry extends BaseEntryProvider
                 .withTitle(context.pageTitle())
                 .withText(context.pageText())
                 .withItem(BookGenUtil.getIngredient(new Identifier("deeperdarker", "ancient_vase")))
-                .build();
-
-        BookEntityPageModel entity = BookEntityPageModel
-                .builder()
-                .withEntityId("deeperdarker:stalker")
                 .build();
 
         context.page("next");
@@ -106,7 +101,12 @@ public class StalkerEntry extends BaseEntryProvider
                 .withText(context.pageText())
                 .build();
 
-        return List.of(boss, entity, next);
+        BookEntityPageModel entity = BookEntityPageModel
+                .builder()
+                .withEntityId("deeperdarker:stalker")
+                .build();
+
+        return List.of(boss, next, entity);
     }
 
     @Override

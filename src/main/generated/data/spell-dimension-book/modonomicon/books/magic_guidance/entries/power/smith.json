@@ -1,0 +1,48 @@
+{
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "category": "spell-dimension-book:power",
+  "description": "book.spell-dimension-book.magic_guidance.power.smith.description",
+  "hide_while_locked": false,
+  "icon": {
+    "item": "equipment_standard:reforge_table"
+  },
+  "name": "book.spell-dimension-book.magic_guidance.power.smith.name",
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "item": {
+        "item": "equipment_standard:reforge_table"
+      },
+      "text": "book.spell-dimension-book.magic_guidance.power.smith.modifier.text",
+      "title": "book.spell-dimension-book.magic_guidance.power.smith.modifier.title"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "item": [
+        {
+          "item": "equipment_standard:reforge_scroll_lv1"
+        },
+        {
+          "item": "equipment_standard:reforge_scroll_lv2"
+        },
+        {
+          "item": "equipment_standard:reforge_scroll_lv3"
+        }
+      ],
+      "text": "book.spell-dimension-book.magic_guidance.power.smith.reforge.text",
+      "title": "book.spell-dimension-book.magic_guidance.power.smith.reforge.title"
+    }
+  ],
+  "show_when_any_parent_unlocked": false,
+  "x": 3,
+  "y": -3
+}

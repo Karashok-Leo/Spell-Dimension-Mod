@@ -16,10 +16,21 @@
         "type": "modonomicon:none"
       },
       "item": {
-        "item": "minecraft:wither_skeleton_skull"
+        "item": "soulsweapons:shard_of_uncertainty"
       },
       "text": "book.spell-dimension-book.magic_guidance.boss.wither.boss.text",
       "title": "book.spell-dimension-book.magic_guidance.boss.wither.boss.title"
+    },
+    {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "show_title_separator": true,
+      "text": "book.spell-dimension-book.magic_guidance.boss.wither.next.text",
+      "title": "",
+      "use_markdown_in_title": false
     },
     {
       "type": "modonomicon:entity",
@@ -37,6 +48,6 @@
     }
   ],
   "show_when_any_parent_unlocked": false,
-  "x": -4,
-  "y": -3
+  "x": 1,
+  "y": -4
 }

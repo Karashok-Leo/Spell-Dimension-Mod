@@ -59,6 +59,11 @@ public enum SDTexts
     TEXT$CONSCIOUS$BAN_ITEM("You cannot use this item in the conscious mode", "你不能在意识模式下使用该物品"),
     TEXT$RANDOM_LOOT_NAME("? %s ?", "? %s ?"),
     TEXT$LOCATING("Locating: %s", "正在定位: %s"),
+    TEXT$GAME_OVER$HEAD("To players:", "致玩家:"),
+    TEXT$GAME_OVER$THANKS("Congrats on the pass, and thank you very much for traveling this far.", "恭喜你通关了！非常感谢你游玩至此。"),
+    TEXT$GAME_OVER$MAKING("I have put a lot of time and effort into this integration pack since I started working on it. From developing exclusive modules for this pack, customizing the loot table, and optimizing performance, to fixing bugs and balancing the game's difficulty, I've encountered countless challenges, and luckily I've finally finished it.", "自从开始制作这个整合包以来，我投入了大量的时间和精力。从开发这个整合包的专属模组、定制战利品表、优化性能，到修复Bug、平衡游戏难度，我遇到了无数挑战，幸运的是我最后完成了它。"),
+    TEXT$GAME_OVER$FEEDBACK("If you have any suggestions, please give me feedback, I would appreciate it.", "如果你有任何建议，请反馈给我，我将感激不尽。"),
+    TEXT$GAME_OVER$WISH("Lastly, I wish you a happy life. Have fun playing!", "最后，祝你生活愉快。玩的开心！"),
 
     /**
      * Spell School

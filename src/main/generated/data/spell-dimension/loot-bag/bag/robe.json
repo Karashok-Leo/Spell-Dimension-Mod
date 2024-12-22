@@ -1,0 +1,14 @@
+{
+  "type": "loot-bag:optional",
+  "color": {
+    "bag_body": 10040013,
+    "bag_string": 10444703
+  },
+  "options": [
+    "spell-dimension:robe/general",
+    "spell-dimension:robe/arcane",
+    "spell-dimension:robe/fire",
+    "spell-dimension:robe/frost",
+    "spell-dimension:robe/healing"
+  ]
+}

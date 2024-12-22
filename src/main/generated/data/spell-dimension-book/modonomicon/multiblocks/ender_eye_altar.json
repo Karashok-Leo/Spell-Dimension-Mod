@@ -1,0 +1,67 @@
+{
+  "type": "modonomicon:dense",
+  "mapping": {
+    "*": {
+      "type": "modonomicon:display",
+      "display": "minecraft:basalt"
+    },
+    "+": {
+      "type": "modonomicon:display",
+      "display": "minecraft:stone"
+    },
+    "0": {
+      "type": "modonomicon:block",
+      "block": "minecraft:obsidian"
+    },
+    "C": {
+      "type": "modonomicon:block",
+      "block": "minecraft:crying_obsidian"
+    },
+    "L": {
+      "type": "modonomicon:block",
+      "block": "minecraft:end_rod"
+    },
+    "O": {
+      "type": "modonomicon:block",
+      "block": "minecraft:obsidian"
+    }
+  },
+  "pattern": [
+    [
+      "_______",
+      "_______",
+      "__L_L__",
+      "_______",
+      "__L_L__",
+      "_______",
+      "_______"
+    ],
+    [
+      "_______",
+      "_L___L_",
+      "__CCC__",
+      "__CCC__",
+      "__CCC__",
+      "_L___L_",
+      "_______"
+    ],
+    [
+      "_______",
+      "_OOOOO_",
+      "_OOOOO_",
+      "_OO0OO_",
+      "_OOOOO_",
+      "_OOOOO_",
+      "_______"
+    ],
+    [
+      "*+*+*+*",
+      "+*+*+*+",
+      "*+*+*+*",
+      "+*+*+*+",
+      "*+*+*+*",
+      "+*+*+*+",
+      "*+*+*+*"
+    ]
+  ]
+}

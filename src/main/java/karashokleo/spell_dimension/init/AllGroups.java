@@ -79,7 +79,7 @@ public class AllGroups
                             entries.add(AllItems.DEBUG_STAFF);
                             entries.add(AllItems.ABYSS_GUARD);
                             entries.add(AllItems.ACCURSED_BLACKSTONE);
-                            entries.add(AllItems.SUN_MOON_STAR);
+                            entries.add(AllItems.CELESTIAL_LUMINARY);
                             entries.add(AllBlocks.SPELL_INFUSION_PEDESTAL.item());
                             entries.add(AllBlocks.CONSCIOUSNESS_BASE.item());
                             entries.add(AllBlocks.CONSCIOUSNESS_CORE.item());
@@ -96,6 +96,7 @@ public class AllGroups
                             entries.add(AllItems.FLEX_BREASTPLATE);
                             entries.add(AllItems.FLICKER_BREASTPLATE);
                             entries.add(AllItems.OBLIVION_BREASTPLATE);
+                            entries.add(AllItems.MEDAL);
                         })
                         .build()
         );

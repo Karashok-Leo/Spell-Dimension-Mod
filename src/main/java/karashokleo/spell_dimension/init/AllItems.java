@@ -1,6 +1,7 @@
 package karashokleo.spell_dimension.init;
 
 import com.google.common.collect.ArrayListMultimap;
+import com.klikli_dev.modonomicon.item.ModonomiconItem;
 import dev.emi.trinkets.api.TrinketItem;
 import karashokleo.l2hostility.init.LHTags;
 import karashokleo.leobrary.datagen.builder.ItemBuilder;
@@ -46,7 +47,7 @@ public class AllItems
     public static QuestScrollItem QUEST_SCROLL;
     public static Item ABYSS_GUARD;
     public static Item ACCURSED_BLACKSTONE;
-    public static EndStageItem SUN_MOON_STAR;
+    public static EndStageItem CELESTIAL_LUMINARY;
     public static SpawnerSoulItem SPAWNER_SOUL;
     public static HeartSpellSteelItem HEART_STEEL;
     public static RejuvenatingBlossomItem REJUVENATING_BLOSSOM;
@@ -59,6 +60,7 @@ public class AllItems
     public static FlexBreastplateItem FLEX_BREASTPLATE;
     public static FlickerBreastplateItem FLICKER_BREASTPLATE;
     public static OblivionBreastplateItem OBLIVION_BREASTPLATE;
+    public static Item MEDAL;
 
     public static void register()
     {
@@ -116,9 +118,9 @@ public class AllItems
                 .addZH("朽咒黑石")
                 .addModel()
                 .register();
-        SUN_MOON_STAR = Entry.of("sun_moon_star", new EndStageItem())
+        CELESTIAL_LUMINARY = Entry.of("celestial_luminary", new EndStageItem())
                 .addEN()
-                .addZH("日月星")
+                .addZH("无尽星辉")
                 .addModel()
                 .register();
         SPAWNER_SOUL = Entry.of("spawner_soul", new SpawnerSoulItem())
@@ -201,6 +203,11 @@ public class AllItems
                 .addEN()
                 .addZH("湮灭护心镜")
                 .addTag(AllTags.BREASTPLATE_SLOT)
+                .addModel()
+                .register();
+        MEDAL = Entry.of("medal", new Item(new FabricItemSettings().maxCount(1).rarity(Rarity.EPIC)))
+                .addEN()
+                .addZH("勋章")
                 .addModel()
                 .register();
     }

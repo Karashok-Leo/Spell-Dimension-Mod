@@ -4,9 +4,13 @@ import artifacts.registry.ModItems;
 import com.glisco.victus.item.VictusItems;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
+import com.klikli_dev.modonomicon.api.ModonomiconConstants;
+import com.klikli_dev.modonomicon.registry.ItemRegistry;
 import karashokleo.l2hostility.content.item.ComplementItems;
 import karashokleo.l2hostility.content.item.ConsumableItems;
 import karashokleo.l2hostility.content.item.MiscItems;
+import karashokleo.spell_dimension.data.book.MagicGuidanceProvider;
+import karashokleo.spell_dimension.init.AllItems;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -23,6 +27,9 @@ public class InfusionRecipes
 
     static
     {
+        ItemStack guide_book = ItemRegistry.MODONOMICON_PURPLE.get().getDefaultStack();
+        guide_book.getOrCreateNbt().putString(ModonomiconConstants.Nbt.ITEM_BOOK_ID_TAG, MagicGuidanceProvider.BOOK_ID.toString());
+        register(Items.BOOK, AllItems.ENCHANTED_ESSENCE, guide_book);
         register(MiscItems.DETECTOR_GLASSES, Items.GOLDEN_CARROT, ModItems.NIGHT_VISION_GOGGLES.get().getDefaultStack());
         register(Items.NETHERITE_PICKAXE, VictusItems.BLAZING_HEART_ASPECT, ModItems.PICKAXE_HEATER.get().getDefaultStack());
         register(Items.GOLDEN_HOE, VictusItems.GOLDEN_HEART_ASPECT, ModItems.GOLDEN_HOOK.get().getDefaultStack());

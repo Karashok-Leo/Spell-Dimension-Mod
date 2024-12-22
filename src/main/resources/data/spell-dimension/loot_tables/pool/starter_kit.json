@@ -1,0 +1,55 @@
+{
+  "type": "minecraft:advancement_reward",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "loot-bag:loot_bag",
+          "bag": "spell-dimension:robe"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "loot-bag:loot_bag",
+          "bag": "spell-dimension:wand"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "loot-bag:loot_bag",
+          "bag": "spell-dimension:rune"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "loot-bag:loot_bag",
+          "bag": "spell-dimension:midas"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "loot-bag:loot_bag",
+          "bag": "spell-dimension:start"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

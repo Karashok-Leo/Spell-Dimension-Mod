@@ -394,7 +394,7 @@ public class AllQuests
                         new SimpleLootItemQuest(
                                 "graveyard:lich",
                                 "endrem:undead_soul",
-                                SDBags.CHARM.getStack()
+                                SDBags.ARING.getStack()
                         )
                 )
                 .addDependencies(KILL_MUTANT_ENDERMAN)
@@ -441,7 +441,7 @@ public class AllQuests
                                         () -> Registries.ENTITY_TYPE.get(new Identifier("soulsweapons:night_prowler"))
                                 ),
                                 List.of(
-                                        () -> AllItems.SUN_MOON_STAR
+                                        () -> AllItems.CELESTIAL_LUMINARY
                                 ),
                                 List.of(
                                         SDBags.ARING.getStack()
@@ -487,7 +487,7 @@ public class AllQuests
                         "kill_the_eye",
                         new SimpleLootItemQuest(
                                 () -> EntityInit.THE_EYE,
-                                () -> Items.NETHER_STAR,
+                                () -> Items.ENDER_EYE,
                                 SDBags.LEGENDARY_GEAR.getStack()
                         )
                 )
@@ -497,8 +497,8 @@ public class AllQuests
                         "kill_void_shadow",
                         new SimpleLootItemQuest(
                                 () -> EntityInit.VOID_SHADOW,
-                                () -> Items.NETHER_STAR,
-                                SDBags.LEGENDARY_MATERIAL.getStack()
+                                () -> ItemInit.SOURCE_STONE,
+                                AllItems.MEDAL.getDefaultStack()
                         )
                 )
                 .addDependencies(KILL_DAY_NIGHT)
@@ -518,6 +518,7 @@ public class AllQuests
         {
             for (Pair<Quest, Quest> relation : RELATIONS)
                 QuestUsage.configure(relation.getLeft(), relation.getRight());
+            RELATIONS.clear();
         }
 
         public Entry(String name, Q content)

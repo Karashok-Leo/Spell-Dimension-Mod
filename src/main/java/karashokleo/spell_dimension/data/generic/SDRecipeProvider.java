@@ -6,8 +6,11 @@ import karashokleo.fusion_smithing.item.FusionSmithingTemplateItem;
 import karashokleo.l2hostility.content.item.ComplementItems;
 import karashokleo.l2hostility.content.item.ConsumableItems;
 import karashokleo.l2hostility.content.item.MiscItems;
+import karashokleo.l2hostility.content.trait.base.TargetEffectTrait;
 import karashokleo.l2hostility.init.LHEnchantments;
+import karashokleo.l2hostility.init.LHTraits;
 import karashokleo.spell_dimension.SpellDimension;
+import karashokleo.spell_dimension.content.enchantment.TraitEffectImmunityEnchantment;
 import karashokleo.spell_dimension.content.item.logic.Tier;
 import karashokleo.spell_dimension.content.recipe.essence.EnchantedEssenceRecipeJsonProvider;
 import karashokleo.spell_dimension.init.AllBlocks;
@@ -38,6 +41,7 @@ import net.spell_power.api.SpellSchools;
 import net.spell_power.api.enchantment.Enchantments_SpellPower;
 import net.spell_power.api.enchantment.Enchantments_SpellPowerMechanics;
 
+import java.util.Map;
 import java.util.function.Consumer;
 
 public class SDRecipeProvider extends FabricRecipeProvider
@@ -79,11 +83,11 @@ public class SDRecipeProvider extends FabricRecipeProvider
         // Empty Quest Scroll
         ShapelessRecipeJsonBuilder
                 .create(RecipeCategory.MISC, AllItems.QUEST_SCROLL)
-                .input(Items.WRITABLE_BOOK)
+                .input(Items.PAPER)
                 .input(Ingredient.fromTag(AllTags.ESSENCE_ALL))
                 .criterion(
-                        FabricRecipeProvider.hasItem(Items.WRITABLE_BOOK),
-                        FabricRecipeProvider.conditionsFromItem(Items.WRITABLE_BOOK)
+                        FabricRecipeProvider.hasItem(Items.PAPER),
+                        FabricRecipeProvider.conditionsFromItem(Items.PAPER)
                 )
                 .offerTo(exporter, SpellDimension.modLoc("empty_quest_scroll"));
 
@@ -626,7 +630,19 @@ public class SDRecipeProvider extends FabricRecipeProvider
 
         // Effect Immunity Enchantments
         {
-            AllEnchantments.EFFECT_IMMUNITY.forEach((enchantment, trait) ->
+            Map<TraitEffectImmunityEnchantment, TargetEffectTrait> effect_immunity = Map.of(
+                    AllEnchantments.WEAKNESS_IMMUNITY, LHTraits.WEAKNESS,
+                    AllEnchantments.SLOWNESS_IMMUNITY, LHTraits.SLOWNESS,
+                    AllEnchantments.POISON_IMMUNITY, LHTraits.POISON,
+                    AllEnchantments.WITHER_IMMUNITY, LHTraits.WITHER,
+                    AllEnchantments.BLINDNESS_IMMUNITY, LHTraits.BLIND,
+                    AllEnchantments.CONFUSION_IMMUNITY, LHTraits.CONFUSION,
+                    AllEnchantments.LEVITATION_IMMUNITY, LHTraits.LEVITATION,
+                    AllEnchantments.SOUL_BURNER_IMMUNITY, LHTraits.SOUL_BURNER,
+                    AllEnchantments.FREEZING_IMMUNITY, LHTraits.FREEZING,
+                    AllEnchantments.CURSED_IMMUNITY, LHTraits.CURSED
+            );
+            effect_immunity.forEach((enchantment, trait) ->
             {
                 Identifier id = Registries.STATUS_EFFECT.getId(enchantment.getEffect());
                 assert id != null;

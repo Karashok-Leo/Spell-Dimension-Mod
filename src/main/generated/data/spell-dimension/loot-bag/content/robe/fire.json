@@ -1,0 +1,7 @@
+{
+  "type": "loot-bag:loot_table",
+  "icon": {
+    "texture": "wizards:textures/item/fire_robe_head.png"
+  },
+  "id": "spell-dimension:pool/robe/fire"
+}

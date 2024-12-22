@@ -19,15 +19,8 @@ public enum SDContents
             "wizards:textures/item/wand_arcane.png",
             "Starter Kit",
             "初始装备",
-            "Includes random digging tool, 16 bottles of recall potion, bottle of curse, ender pouch, broken magic mirror",
-            "包含随机挖掘工具、16瓶回忆药水、瓶装恶意、末影袋、破碎的魔镜"
-    ),
-    CHARM(
-            "mythic_charms:textures/item/fragile_charm_of_gaze_serenity.png",
-            "Charm",
-            "护符",
-            "Random 1 piece of charm",
-            "随机1件护符"
+            "Includes random digging tool, 16 bottles of recall potion, bottle of curse, ender pouch, broken magic mirror, blank quest scroll, guide book",
+            "包含随机挖掘工具、16瓶回忆药水、瓶装恶意、末影袋、破碎的魔镜、空白任务卷轴、指南书"
     ),
     ARTIFACT(
             "artifacts:textures/item/crystal_heart.png",
@@ -145,6 +138,41 @@ public enum SDContents
             "mythicmetals:textures/item/metallurgium_ingot.png",
             4,
             2
+    ),
+    ROBE_GENERAL(
+            "wizards:textures/item/wizard_robe_head.png",
+            "General Robe",
+            "通用法袍",
+            "Includes full set of general robe",
+            "包含全套通用法袍"
+    ),
+    ROBE_ARCANE(
+            "wizards:textures/item/arcane_robe_head.png",
+            "Arcane Robe",
+            "奥秘法袍",
+            "Includes full set of arcane robe",
+            "包含全套奥秘法袍"
+    ),
+    ROBE_FIRE(
+            "wizards:textures/item/fire_robe_head.png",
+            "Fire Robe",
+            "烈焰法袍",
+            "Includes full set of fire robe",
+            "包含全套烈焰法袍"
+    ),
+    ROBE_FROST(
+            "wizards:textures/item/frost_robe_head.png",
+            "Frost Robe",
+            "寒冰法袍",
+            "Includes full set of frost robe",
+            "包含全套寒冰法袍"
+    ),
+    ROBE_HEALING(
+            "paladins:textures/item/priest_robe_head.png",
+            "Healing Robe",
+            "治愈法袍",
+            "Includes full set of healing robe",
+            "包含全套治愈法袍"
     ),
     WAND_ARCANE(
             Weapons.arcaneWand.item().getDefaultStack(),

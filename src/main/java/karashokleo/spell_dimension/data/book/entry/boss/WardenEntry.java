@@ -59,7 +59,7 @@ public class WardenEntry extends BaseEntryProvider
                         *Sculk Sensor: Generated in the Deep Dark.*
                         \\
                         \\
-                        *Deep Dark: Biome ID minecraft:deep_dark*
+                        Drops **Heart of the Deep** upon defeating Warden.
                         """
         );
         this.lang("zh_cn").add(context.pageTitle(), "监守者");
@@ -72,7 +72,7 @@ public class WardenEntry extends BaseEntryProvider
                         *幽匿尖啸体: 生成于深暗之域。*
                         \\
                         \\
-                        *深暗之域: 群系ID为 minecraft:deep_dark*
+                        击败监守者后掉落**深渊之心**。
                         """
         );
 
@@ -80,7 +80,7 @@ public class WardenEntry extends BaseEntryProvider
                 .builder()
                 .withTitle(context.pageTitle())
                 .withText(context.pageText())
-                .withItem(Ingredient.ofItems(Items.SCULK_SENSOR))
+                .withItem(Ingredient.ofItems(Items.SCULK_SHRIEKER))
                 .build();
 
         BookEntityPageModel entity = BookEntityPageModel

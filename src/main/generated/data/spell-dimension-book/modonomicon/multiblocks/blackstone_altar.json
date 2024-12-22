@@ -1,0 +1,57 @@
+{
+  "type": "modonomicon:dense",
+  "mapping": {
+    "*": {
+      "type": "modonomicon:display",
+      "display": "minecraft:basalt"
+    },
+    "+": {
+      "type": "modonomicon:display",
+      "display": "minecraft:stone"
+    },
+    "0": {
+      "type": "modonomicon:block",
+      "block": "minecraft:polished_blackstone"
+    },
+    "A": {
+      "type": "modonomicon:block",
+      "block": "adventurez:chiseled_polished_blackstone_holder"
+    },
+    "B": {
+      "type": "modonomicon:block",
+      "block": "minecraft:polished_blackstone"
+    }
+  },
+  "pattern": [
+    [
+      "_____________",
+      "______A______",
+      "__BBBBBBBBB__",
+      "__BBBBBBBBB__",
+      "__BBBBBBBBB__",
+      "__BBBBBBBBB__",
+      "_ABBBB0BBBBA_",
+      "__BBBBBBBBB__",
+      "__BBBBBBBBB__",
+      "__BBBBBBBBB__",
+      "__BBBBBBBBB__",
+      "______A______",
+      "_____________"
+    ],
+    [
+      "*+*+*+*+*+*+*",
+      "+*+*+*+*+*+*+",
+      "*+*+*+*+*+*+*",
+      "+*+*+*+*+*+*+",
+      "*+*+*+*+*+*+*",
+      "+*+*+*+*+*+*+",
+      "*+*+*+*+*+*+*",
+      "+*+*+*+*+*+*+",
+      "*+*+*+*+*+*+*",
+      "+*+*+*+*+*+*+",
+      "*+*+*+*+*+*+*",
+      "+*+*+*+*+*+*+",
+      "*+*+*+*+*+*+*"
+    ]
+  ]
+}

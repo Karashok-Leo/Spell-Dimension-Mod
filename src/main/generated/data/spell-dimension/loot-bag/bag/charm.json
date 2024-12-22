@@ -1,9 +1,0 @@
-{
-  "type": "loot-bag:single",
-  "color": {
-    "bag_body": 14277107,
-    "bag_string": 15132922
-  },
-  "content": "spell-dimension:charm",
-  "rarity": "RARE"
-}

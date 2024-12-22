@@ -1,0 +1,48 @@
+{
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "category": "spell-dimension-book:resource",
+  "description": "book.spell-dimension-book.magic_guidance.resource.curse.description",
+  "hide_while_locked": false,
+  "icon": {
+    "item": "l2hostility:curse_of_envy"
+  },
+  "name": "book.spell-dimension-book.magic_guidance.resource.curse.name",
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "item": [
+        {
+          "item": "l2hostility:curse_of_envy"
+        },
+        {
+          "item": "l2hostility:curse_of_pride"
+        },
+        {
+          "item": "l2hostility:curse_of_gluttony"
+        },
+        {
+          "item": "l2hostility:curse_of_greed"
+        },
+        {
+          "item": "l2hostility:curse_of_lust"
+        },
+        {
+          "item": "l2hostility:curse_of_sloth"
+        },
+        {
+          "item": "l2hostility:curse_of_wrath"
+        }
+      ],
+      "text": "book.spell-dimension-book.magic_guidance.resource.curse.curse.text",
+      "title": "book.spell-dimension-book.magic_guidance.resource.curse.curse.title"
+    }
+  ],
+  "show_when_any_parent_unlocked": false,
+  "x": 2,
+  "y": 1
+}

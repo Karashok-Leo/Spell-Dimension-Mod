@@ -1,16 +1,14 @@
 package karashokleo.spell_dimension.init;
 
-import karashokleo.l2hostility.content.trait.base.TargetEffectTrait;
 import karashokleo.l2hostility.init.LHEffects;
-import karashokleo.l2hostility.init.LHTraits;
 import karashokleo.leobrary.datagen.builder.EnchantmentBuilder;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.enchantment.*;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.effect.StatusEffects;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AllEnchantments
 {
@@ -34,7 +32,7 @@ public class AllEnchantments
     public static TraitEffectImmunityEnchantment FREEZING_IMMUNITY;
     public static TraitEffectImmunityEnchantment CURSED_IMMUNITY;
 
-    public static final Map<TraitEffectImmunityEnchantment, TargetEffectTrait> EFFECT_IMMUNITY = new HashMap<>();
+    public static final List<TraitEffectImmunityEnchantment> EFFECT_IMMUNITY = new ArrayList<>();
 
     public static void register()
     {
@@ -100,7 +98,6 @@ public class AllEnchantments
                 .addZH("虚弱免疫")
                 .addZHDesc("你对虚弱效果免疫。")
                 .register();
-        EFFECT_IMMUNITY.put(WEAKNESS_IMMUNITY, LHTraits.WEAKNESS);
 
         SLOWNESS_IMMUNITY = new Entry<>("slowness_immunity", new TraitEffectImmunityEnchantment(StatusEffects.SLOWNESS))
                 .addEN()
@@ -108,7 +105,6 @@ public class AllEnchantments
                 .addZH("缓慢免疫")
                 .addZHDesc("你对缓慢效果免疫。")
                 .register();
-        EFFECT_IMMUNITY.put(SLOWNESS_IMMUNITY, LHTraits.SLOWNESS);
 
         POISON_IMMUNITY = new Entry<>("poison_immunity", new TraitEffectImmunityEnchantment(StatusEffects.POISON))
                 .addEN()
@@ -116,7 +112,6 @@ public class AllEnchantments
                 .addZH("毒性免疫")
                 .addZHDesc("你对中毒效果免疫。")
                 .register();
-        EFFECT_IMMUNITY.put(POISON_IMMUNITY, LHTraits.POISON);
 
         WITHER_IMMUNITY = new Entry<>("wither_immunity", new TraitEffectImmunityEnchantment(StatusEffects.WITHER))
                 .addEN()
@@ -124,7 +119,6 @@ public class AllEnchantments
                 .addZH("凋零免疫")
                 .addZHDesc("你对凋零效果免疫。")
                 .register();
-        EFFECT_IMMUNITY.put(WITHER_IMMUNITY, LHTraits.WITHER);
 
         BLINDNESS_IMMUNITY = new Entry<>("blindness_immunity", new TraitEffectImmunityEnchantment(StatusEffects.BLINDNESS))
                 .addEN()
@@ -132,7 +126,6 @@ public class AllEnchantments
                 .addZH("失明免疫")
                 .addZHDesc("你对失明效果免疫。")
                 .register();
-        EFFECT_IMMUNITY.put(BLINDNESS_IMMUNITY, LHTraits.BLIND);
 
         CONFUSION_IMMUNITY = new Entry<>("nausea_immunity", new TraitEffectImmunityEnchantment(StatusEffects.NAUSEA))
                 .addEN()
@@ -140,7 +133,6 @@ public class AllEnchantments
                 .addZH("反胃免疫")
                 .addZHDesc("你对反胃效果免疫。")
                 .register();
-        EFFECT_IMMUNITY.put(CONFUSION_IMMUNITY, LHTraits.CONFUSION);
 
         LEVITATION_IMMUNITY = new Entry<>("levitation_immunity", new TraitEffectImmunityEnchantment(StatusEffects.LEVITATION))
                 .addEN()
@@ -148,7 +140,6 @@ public class AllEnchantments
                 .addZH("飘浮免疫")
                 .addZHDesc("你对飘浮效果免疫。")
                 .register();
-        EFFECT_IMMUNITY.put(LEVITATION_IMMUNITY, LHTraits.LEVITATION);
 
         SOUL_BURNER_IMMUNITY = new Entry<>("soul_burner_immunity", new TraitEffectImmunityEnchantment(LHEffects.FLAME))
                 .addEN()
@@ -156,7 +147,6 @@ public class AllEnchantments
                 .addZH("魂火免疫")
                 .addZHDesc("你对魂火效果免疫。")
                 .register();
-        EFFECT_IMMUNITY.put(SOUL_BURNER_IMMUNITY, LHTraits.SOUL_BURNER);
 
         FREEZING_IMMUNITY = new Entry<>("freezing_immunity", new TraitEffectImmunityEnchantment(LHEffects.ICE))
                 .addEN()
@@ -164,7 +154,6 @@ public class AllEnchantments
                 .addZH("寒流免疫")
                 .addZHDesc("你对寒流效果免疫。")
                 .register();
-        EFFECT_IMMUNITY.put(FREEZING_IMMUNITY, LHTraits.FREEZING);
 
         CURSED_IMMUNITY = new Entry<>("cursed_immunity", new TraitEffectImmunityEnchantment(LHEffects.CURSE))
                 .addEN()
@@ -172,7 +161,17 @@ public class AllEnchantments
                 .addZH("诅咒免疫")
                 .addZHDesc("你对诅咒效果免疫。")
                 .register();
-        EFFECT_IMMUNITY.put(CURSED_IMMUNITY, LHTraits.CURSED);
+
+        EFFECT_IMMUNITY.add(WEAKNESS_IMMUNITY);
+        EFFECT_IMMUNITY.add(SLOWNESS_IMMUNITY);
+        EFFECT_IMMUNITY.add(POISON_IMMUNITY);
+        EFFECT_IMMUNITY.add(WITHER_IMMUNITY);
+        EFFECT_IMMUNITY.add(BLINDNESS_IMMUNITY);
+        EFFECT_IMMUNITY.add(CONFUSION_IMMUNITY);
+        EFFECT_IMMUNITY.add(LEVITATION_IMMUNITY);
+        EFFECT_IMMUNITY.add(SOUL_BURNER_IMMUNITY);
+        EFFECT_IMMUNITY.add(FREEZING_IMMUNITY);
+        EFFECT_IMMUNITY.add(CURSED_IMMUNITY);
     }
 
     public static class Entry<T extends Enchantment> extends EnchantmentBuilder<T>

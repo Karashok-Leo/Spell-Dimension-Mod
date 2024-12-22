@@ -37,7 +37,7 @@ public class EnchantmentEvent
                 event.setResult(BaseEvent.Result.DENY);
         });
 
-        AllEnchantments.EFFECT_IMMUNITY.keySet().forEach(enchantment ->
+        AllEnchantments.EFFECT_IMMUNITY.forEach(enchantment ->
         {
             EnchantmentRestriction.permit(enchantment, stack -> stack.isIn(AllTags.BREASTPLATE_SLOT));
             EnchantmentRestriction.prohibit(enchantment, stack -> !stack.isIn(AllTags.BREASTPLATE_SLOT));

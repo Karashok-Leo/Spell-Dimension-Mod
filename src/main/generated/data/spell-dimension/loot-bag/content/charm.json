@@ -1,7 +1,0 @@
-{
-  "type": "loot-bag:loot_table",
-  "icon": {
-    "texture": "mythic_charms:textures/item/fragile_charm_of_gaze_serenity.png"
-  },
-  "id": "spell-dimension:pool/charm"
-}

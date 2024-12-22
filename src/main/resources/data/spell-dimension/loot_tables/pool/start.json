@@ -51,6 +51,32 @@
         }
       ],
       "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "spell-dimension:quest_scroll"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "modonomicon:modonomicon",
+          "functions": [
+            {
+              "function": "minecraft:set_nbt",
+              "tag": "{\"modonomicon:book_id\":\"spell-dimension-book:magic_guidance\"}"
+            }
+          ]
+        }
+      ],
+      "rolls": 1.0
     }
   ]
 }
