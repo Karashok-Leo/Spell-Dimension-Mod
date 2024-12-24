@@ -2,9 +2,12 @@ package karashokleo.spell_dimension.content.item.trinket;
 
 import dev.emi.trinkets.api.TrinketItem;
 import karashokleo.spell_dimension.data.SDTexts;
+import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.util.SchoolUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -54,5 +57,11 @@ public class FlexBreastplateItem extends TrinketItem
                 "%d%%".formatted((int) (ARMOR_RATIO * 100)),
                 "%d%%".formatted((int) (ARMOR_TOUGHNESS_RATIO * 100))
         ).formatted(Formatting.DARK_RED));
+
+        ClientPlayerEntity player = MinecraftClient.getInstance().player;
+        if (player != null)
+            tooltip.add(SDTexts.TOOLTIP$FLEX_BREASTPLATE$DAMAGE_FACTOR.get(
+                    "%.1f%%".formatted((1 - AllItems.FLEX_BREASTPLATE.getDamageFactor(player)) * 100)
+            ).formatted(Formatting.RED));
     }
 }

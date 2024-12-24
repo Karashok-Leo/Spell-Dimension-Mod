@@ -18,7 +18,7 @@
       "karashokleo.spell_dimension.SpellDimension"
     ],
     "client": [
-      "karashokleo.spell_dimension.SpellDimensionClient"
+      "karashokleo.spell_dimension.client.SpellDimensionClient"
     ],
     "fabric-datagen": [
       "karashokleo.spell_dimension.SpellDimension"
@@ -30,18 +30,14 @@
       "karashokleo.spell_dimension.SpellDimension"
     ],
     "emi": [
-      "karashokleo.spell_dimension.compat.emi.EMICompat"
+      "karashokleo.spell_dimension.client.compat.emi.EMICompat"
     ],
     "rei_client": [
-      "karashokleo.spell_dimension.compat.rei.REICompat"
+      "karashokleo.spell_dimension.client.compat.rei.REICompat"
     ]
   },
   "mixins": [
-    "spell-dimension.mixins.json",
-    {
-      "config": "spell-dimension.client.mixins.json",
-      "environment": "client"
-    }
+    "spell-dimension.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.14.22",

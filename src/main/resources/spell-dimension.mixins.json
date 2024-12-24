@@ -18,6 +18,7 @@
     "SpellProjectileMixin",
     "SpellRegistryAccessor",
     "StorageTerminalBlockEntityMixin",
+    "client.RollManagerInvoker",
     "phase.EntityPredicatesMixin",
     "phase.LivingEntityMixin",
     "phase.PlayerEntityMixin"
@@ -25,5 +26,13 @@
   "injectors": {
     "defaultRequire": 1,
     "maxShiftBy": 5
-  }
+  },
+  "client": [
+    "client.DrawContextMixin",
+    "client.phase.ClientPlayerEntityMixin",
+    "client.phase.ClientPlayerInteractionManagerMixin",
+    "client.phase.EntityRenderDispatcherMixin",
+    "client.phase.InGameOverlayRendererMixin",
+    "client.phase.WorldRendererMixin"
+  ]
 }
