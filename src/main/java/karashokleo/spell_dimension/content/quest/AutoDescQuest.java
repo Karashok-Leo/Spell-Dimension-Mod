@@ -3,6 +3,7 @@ package karashokleo.spell_dimension.content.quest;
 import karashokleo.spell_dimension.api.quest.Quest;
 import karashokleo.spell_dimension.api.quest.QuestRegistry;
 import net.minecraft.text.Text;
+import net.minecraft.world.World;
 
 import java.util.List;
 import java.util.Objects;
@@ -20,7 +21,7 @@ public interface AutoDescQuest extends Quest
     }
 
     @Override
-    default void appendTaskDesc(List<Text> desc)
+    default void appendTaskDesc(World world, List<Text> desc)
     {
         desc.add(getDescText());
     }

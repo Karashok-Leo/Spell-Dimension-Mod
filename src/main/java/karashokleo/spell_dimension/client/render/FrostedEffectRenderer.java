@@ -1,6 +1,6 @@
 package karashokleo.spell_dimension.client.render;
 
-import karashokleo.spell_dimension.SpellDimensionClient;
+import karashokleo.spell_dimension.client.SpellDimensionClient;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;

@@ -4,6 +4,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.text.Text;
+import net.minecraft.world.World;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public interface ItemTaskQuest extends IngredientTaskQuest
     }
 
     @Override
-    default void appendTaskDesc(List<Text> desc)
+    default void appendTaskDesc(World world, List<Text> desc)
     {
         for (ItemConvertible c : this.getTaskItems())
         {

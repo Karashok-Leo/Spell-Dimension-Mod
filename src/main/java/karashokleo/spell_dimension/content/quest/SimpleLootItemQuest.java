@@ -11,6 +11,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.World;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -49,7 +50,7 @@ public record SimpleLootItemQuest(
     }
 
     @Override
-    public void appendTaskDesc(List<Text> desc)
+    public void appendTaskDesc(World world, List<Text> desc)
     {
         List<? extends EntityType<?>> entities = this.entities.stream().map(Supplier::get).toList();
         MutableText entity = this.entities.isEmpty() ? Text.empty() : Text.empty().append(entities.get(0).getName());

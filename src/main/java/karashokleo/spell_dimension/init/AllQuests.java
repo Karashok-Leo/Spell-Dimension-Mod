@@ -108,14 +108,14 @@ public class AllQuests
                         AllItems.ENLIGHTENING_ESSENCE.getStack(
                                 new AttributeModifier(SpellPowerMechanics.CRITICAL_CHANCE.attribute, 0.05, EntityAttributeModifier.Operation.MULTIPLY_BASE).toELM()
                         )
-                )))
+                ), "advancements.rpg_series.classes.description"))
                 .addDependencies(FIRST_DAY)
                 .register();
         KILL_TRAIT = Entry.of("kill_trait", new SimpleAdvancementQuest(L2Hostility.id("hostility/kill_first"), List.of(
                         AllItems.ENLIGHTENING_ESSENCE.getStack(
                                 new AttributeModifier(SpellPowerMechanics.CRITICAL_DAMAGE.attribute, 0.05, EntityAttributeModifier.Operation.MULTIPLY_BASE).toELM()
                         )
-                )))
+                ), "advancements.l2hostility.kill_first.description"))
                 .addDependencies(FIRST_DAY)
                 .register();
     }

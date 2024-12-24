@@ -137,7 +137,7 @@ public class QuestScrollItem extends Item
     {
         super.appendTooltip(stack, world, tooltip, context);
         Optional<Quest> quest = this.getQuest(stack);
-        if (quest.isPresent()) tooltip.addAll(quest.get().getDesc());
+        if (quest.isPresent()) tooltip.addAll(quest.get().getDesc(world));
         else tooltip.add(SDTexts.TOOLTIP$QUEST$OBTAIN_CURRENT.get());
 
         if (!context.isAdvanced()) return;

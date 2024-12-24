@@ -6,6 +6,7 @@ import karashokleo.spell_dimension.util.SchoolUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
+import net.minecraft.world.World;
 import net.spell_power.api.SpellPower;
 
 import java.util.List;
@@ -39,7 +40,7 @@ public record SpellPowerQuest(
     }
 
     @Override
-    public void appendTaskDesc(List<Text> desc)
+    public void appendTaskDesc(World world, List<Text> desc)
     {
         desc.add(SDTexts.TEXT$QUEST$SPELL_POWER.get(min));
     }

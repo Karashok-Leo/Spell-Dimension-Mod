@@ -5,6 +5,7 @@ import karashokleo.spell_dimension.api.quest.ItemRewardQuest;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.World;
 
 import java.util.List;
 
@@ -27,9 +28,9 @@ public record EnderDragonAdvancementQuest(
     }
 
     @Override
-    public void appendTaskDesc(List<Text> desc)
+    public void appendTaskDesc(World world, List<Text> desc)
     {
-        AutoDescQuest.super.appendTaskDesc(desc);
-        AdvancementQuest.super.appendTaskDesc(desc);
+        AutoDescQuest.super.appendTaskDesc(world, desc);
+        desc.add(Text.translatable("advancements.end.kill_dragon.description"));
     }
 }

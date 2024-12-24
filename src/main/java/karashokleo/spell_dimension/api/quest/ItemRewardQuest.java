@@ -4,6 +4,7 @@ import karashokleo.spell_dimension.data.SDTexts;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
+import net.minecraft.world.World;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public interface ItemRewardQuest extends Quest
     }
 
     @Override
-    default void appendRewardDesc(List<Text> desc)
+    default void appendRewardDesc(World world, List<Text> desc)
     {
         for (ItemStack reward : this.getRewards())
             desc.add(
