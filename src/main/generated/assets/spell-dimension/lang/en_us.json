@@ -281,7 +281,7 @@
   "spell.spell-dimension.light.name": "Spell Light",
   "spell.spell-dimension.lightmoon.description": "Leaves a cloud of spells on the target, dealing {damage} damage.",
   "spell.spell-dimension.lightmoon.name": "Light Moon",
-  "spell.spell-dimension.locate.description": "Launch a spell, if it touches a lodestone, it will consume the item in your off-hand as a key item to find the corresponding structure or biome. If found, it will shatter the lodestone with a probability of 10% to summon a portal to the corresponding structure or biome.",
+  "spell.spell-dimension.locate.description": "Launch a spell, if it touches a lodestone, it will consume the item in your off-hand as a key item to find the corresponding structure or biome. If found, it will shatter the lodestone with a probability of 10%% to summon a portal to the corresponding structure or biome.",
   "spell.spell-dimension.locate.name": "Spell Locate",
   "spell.spell-dimension.moon_swim.description": "Apply Air Hop and Slow Falling effects to oneself for {effect_duration} seconds.",
   "spell.spell-dimension.moon_swim.name": "Moon Swim",
