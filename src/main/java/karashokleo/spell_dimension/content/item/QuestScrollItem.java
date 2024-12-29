@@ -11,9 +11,7 @@ import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllItems;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -139,13 +137,5 @@ public class QuestScrollItem extends Item
         Optional<Quest> quest = this.getQuest(stack);
         if (quest.isPresent()) tooltip.addAll(quest.get().getDesc(world));
         else tooltip.add(SDTexts.TOOLTIP$QUEST$OBTAIN_CURRENT.get());
-
-        if (!context.isAdvanced()) return;
-        ClientPlayerEntity player = MinecraftClient.getInstance().player;
-        Optional<Quest> optional = getQuest(stack);
-        if (player != null &&
-            optional.isPresent() &&
-            QuestUsage.isQuestCompleted(player, optional.get()))
-            tooltip.add(SDTexts.TEXT$QUEST_COMPLETED.get());
     }
 }

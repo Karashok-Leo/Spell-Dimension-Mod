@@ -1,7 +1,6 @@
 package karashokleo.spell_dimension.init;
 
 import com.google.common.collect.ArrayListMultimap;
-import com.klikli_dev.modonomicon.item.ModonomiconItem;
 import dev.emi.trinkets.api.TrinketItem;
 import karashokleo.l2hostility.init.LHTags;
 import karashokleo.leobrary.datagen.builder.ItemBuilder;

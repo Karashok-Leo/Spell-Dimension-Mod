@@ -7,6 +7,8 @@ import karashokleo.enchantment_infusion.api.render.InfusionTableTileRenderer;
 import karashokleo.leobrary.gui.api.GuiOverlayRegistry;
 import karashokleo.leobrary.gui.api.TextureOverlayRegistry;
 import karashokleo.spell_dimension.SpellDimension;
+import karashokleo.spell_dimension.api.quest.Quest;
+import karashokleo.spell_dimension.api.quest.QuestUsage;
 import karashokleo.spell_dimension.client.render.*;
 import karashokleo.spell_dimension.client.screen.ConsciousCoreOverlay;
 import karashokleo.spell_dimension.client.screen.GameOverOverlay;
@@ -42,6 +44,7 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.client.render.entity.EmptyEntityRenderer;
 import net.minecraft.item.Item;
 import net.minecraft.text.TranslatableTextContent;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.effect.CustomModelStatusEffect;
 import net.spell_engine.api.effect.CustomParticleStatusEffect;
@@ -49,6 +52,7 @@ import net.spell_engine.api.render.CustomModels;
 import net.wizards.item.Armors;
 
 import java.util.List;
+import java.util.Optional;
 
 public class SpellDimensionClient implements ClientModInitializer
 {
@@ -145,6 +149,32 @@ public class SpellDimensionClient implements ClientModInitializer
                 lines.removeIf(line ->
                         line.getContent() instanceof TranslatableTextContent content &&
                         content.getKey().equals("spell.tooltip.spell_binding_tip"));
+        });
+
+        ItemTooltipCallback.EVENT.register((stack, context, lines) ->
+        {
+            if (!context.isAdvanced()) return;
+            if (stack.isOf(AllItems.QUEST_SCROLL))
+            {
+                var player = MinecraftClient.getInstance().player;
+                Optional<Quest> optional = AllItems.QUEST_SCROLL.getQuest(stack);
+                if (player != null &&
+                    optional.isPresent() &&
+                    QuestUsage.isQuestCompleted(player, optional.get()))
+                    lines.add(SDTexts.TEXT$QUEST_COMPLETED.get());
+            }
+        });
+
+        ItemTooltipCallback.EVENT.register((stack, context, lines) ->
+        {
+            if (stack.isOf(AllItems.FLEX_BREASTPLATE))
+            {
+                var player = MinecraftClient.getInstance().player;
+                if (player != null)
+                    lines.add(SDTexts.TOOLTIP$FLEX_BREASTPLATE$DAMAGE_FACTOR.get(
+                            "%.1f%%".formatted((1 - AllItems.FLEX_BREASTPLATE.getDamageFactor(player)) * 100)
+                    ).formatted(Formatting.RED));
+            }
         });
     }
 }
