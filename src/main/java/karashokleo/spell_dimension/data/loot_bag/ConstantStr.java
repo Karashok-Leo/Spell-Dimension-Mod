@@ -7,10 +7,11 @@ public class ConstantStr
     public static final String[] ITEMS_EN = {"Enchanted Book", "Gear", "Material"};
     public static final String[] ITEMS_ZH = {"附魔书", "装备", "材料"};
     public static final String[][] COUNT = {
-            {"1~3", "1", "1~11"},
-            {"1~3", "1", "1~9"},
-            {"1~3", "1", "1~7"},
-            {"1~3", "1", "1~5"},
-            {"1~3", "1", "1~3"},
+            // Book, Gear, Material
+            {"4~8", "1~2", "11~21"},
+            {"4~7", "1~2", "9~17"},
+            {"4~6", "1~2", "7~13"},
+            {"3~5", "1~2", "5~9"},
+            {"3~4", "1~2", "3~5"},
     };
 }
