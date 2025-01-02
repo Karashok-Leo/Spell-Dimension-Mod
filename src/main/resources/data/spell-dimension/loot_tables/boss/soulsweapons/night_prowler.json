@@ -10,7 +10,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "spell-dimension:sun_moon_star"
+          "name": "spell-dimension:celestial_luminary"
         }
       ],
       "rolls": 1.0

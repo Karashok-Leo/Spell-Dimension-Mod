@@ -1,62 +1,56 @@
 {
-  "type": "minecraft:entity",
+  "type": "minecraft:generic",
   "pools": [
     {
       "entries": [
         {
           "type": "loot-bag:loot_bag",
-          "bag": "spell-dimension:epic/book",
-          "weight": 4
+          "bag": "spell-dimension:common/book",
+          "weight": 3
         },
         {
           "type": "loot-bag:loot_bag",
-          "bag": "spell-dimension:epic/gear",
-          "weight": 4
+          "bag": "spell-dimension:common/gear",
+          "weight": 3
         },
         {
           "type": "loot-bag:loot_bag",
-          "bag": "spell-dimension:epic/material",
-          "weight": 4
+          "bag": "spell-dimension:common/material",
+          "weight": 3
         },
         {
           "type": "loot-bag:loot_bag",
-          "bag": "spell-dimension:legendary/book",
+          "bag": "spell-dimension:uncommon/book",
           "weight": 2
         },
         {
           "type": "loot-bag:loot_bag",
-          "bag": "spell-dimension:legendary/gear",
+          "bag": "spell-dimension:uncommon/gear",
           "weight": 2
         },
         {
           "type": "loot-bag:loot_bag",
-          "bag": "spell-dimension:legendary/material",
+          "bag": "spell-dimension:uncommon/material",
           "weight": 2
         },
         {
           "type": "loot-bag:loot_bag",
-          "bag": "spell-dimension:artifact",
+          "bag": "spell-dimension:rare/book",
           "weight": 1
         },
         {
           "type": "loot-bag:loot_bag",
-          "bag": "spell-dimension:aring",
+          "bag": "spell-dimension:rare/gear",
           "weight": 1
         },
         {
           "type": "loot-bag:loot_bag",
-          "bag": "spell-dimension:victus",
+          "bag": "spell-dimension:rare/material",
           "weight": 1
         },
         {
-          "type": "loot-bag:loot_bag",
-          "bag": "spell-dimension:jewelry/rings",
-          "weight": 1
-        },
-        {
-          "type": "loot-bag:loot_bag",
-          "bag": "spell-dimension:jewelry/necklaces",
-          "weight": 1
+          "type": "minecraft:empty",
+          "weight": 180
         }
       ],
       "rolls": {

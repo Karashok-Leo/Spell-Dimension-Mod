@@ -5,7 +5,7 @@
   "description": "book.spell-dimension-book.magic_guidance.resource.alloy.description",
   "hide_while_locked": false,
   "icon": {
-    "item": "alloy_forgery:prismarine_bricks_forge_controller"
+    "item": "alloy_forgery:adamantite_block_forge_controller"
   },
   "name": "book.spell-dimension-book.magic_guidance.resource.alloy.name",
   "pages": [
@@ -20,22 +20,22 @@
           "item": "alloy_forgery:bricks_forge_controller"
         },
         {
-          "item": "alloy_forgery:polished_blackstone_forge_controller"
-        },
-        {
-          "item": "alloy_forgery:adamantite_block_forge_controller"
-        },
-        {
           "item": "alloy_forgery:end_stone_bricks_forge_controller"
-        },
-        {
-          "item": "alloy_forgery:deepslate_bricks_forge_controller"
         },
         {
           "item": "alloy_forgery:stone_bricks_forge_controller"
         },
         {
           "item": "alloy_forgery:prismarine_bricks_forge_controller"
+        },
+        {
+          "item": "alloy_forgery:adamantite_block_forge_controller"
+        },
+        {
+          "item": "alloy_forgery:deepslate_bricks_forge_controller"
+        },
+        {
+          "item": "alloy_forgery:polished_blackstone_forge_controller"
         }
       ],
       "text": "book.spell-dimension-book.magic_guidance.resource.alloy.alloy.text",
