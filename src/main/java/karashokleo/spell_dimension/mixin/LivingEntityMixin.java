@@ -1,7 +1,5 @@
 package karashokleo.spell_dimension.mixin;
 
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import karashokleo.spell_dimension.api.ApplyFoodEffectsCallback;
 import karashokleo.spell_dimension.content.block.fluid.ConsciousnessFluid;
 import net.minecraft.entity.LivingEntity;
@@ -36,19 +34,4 @@ public abstract class LivingEntityMixin
         if (fluidState.getFluid() instanceof ConsciousnessFluid)
             info.setReturnValue(true);
     }
-
-    // deprecated
-//    @WrapOperation(
-//            method = "travel",
-//            at = @At(
-//                    value = "INVOKE",
-//                    target = "Lnet/minecraft/entity/LivingEntity;canWalkOnFluid(Lnet/minecraft/fluid/FluidState;)Z"
-//            )
-//    )
-//    private boolean wrap_travel(LivingEntity instance, FluidState fluidState, Operation<Boolean> original)
-//    {
-//        if (fluidState.getFluid() instanceof ConsciousnessFluid)
-//            return false;
-//        else return original.call(instance, fluidState);
-//    }
 }

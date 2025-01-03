@@ -11,7 +11,8 @@ import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = StorageTerminalBlockEntity.class, remap = false)
 public abstract class StorageTerminalBlockEntityMixin extends BlockEntity
@@ -24,17 +25,19 @@ public abstract class StorageTerminalBlockEntityMixin extends BlockEntity
         super(type, pos, state);
     }
 
-    @Redirect(
+    @Inject(
             method = "updateServer",
             at = @At(
                     value = "FIELD",
                     target = "Lcom/tom/storagemod/tile/StorageTerminalBlockEntity;beaconLevel:I",
-                    opcode = Opcodes.PUTFIELD
+                    opcode = Opcodes.PUTFIELD,
+                    shift = At.Shift.AFTER,
+                    by = 1
             )
     )
-    private void redirect_beaconLevel_putField(StorageTerminalBlockEntity instance, int value)
+    private void inject_beaconLevel_putField(CallbackInfo ci)
     {
-        this.beaconLevel = BlockPos
+        int coreLv = BlockPos
                 .stream(new Box(this.pos).expand(8.0))
                 .mapToInt(
                         (blockPos) ->
@@ -50,5 +53,6 @@ public abstract class StorageTerminalBlockEntityMixin extends BlockEntity
                             return 0;
                         }
                 ).max().orElse(0);
+        this.beaconLevel = Math.max(this.beaconLevel, coreLv);
     }
 }
