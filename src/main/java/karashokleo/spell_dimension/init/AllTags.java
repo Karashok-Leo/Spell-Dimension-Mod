@@ -147,6 +147,9 @@ public class AllTags
                         AllBlocks.FLOWING_CONSCIOUSNESS
                 );
 
+        SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(LHTags.WHITELIST)
+                .add(EntityInit.THE_EYE);
+
         SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(ZOMBIES)
                 .add(
                         EntityType.ZOMBIE,

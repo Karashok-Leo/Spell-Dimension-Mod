@@ -52,7 +52,7 @@ public class TheEyeEntry extends BaseEntryProvider
         this.lang().add(context.pageText(),
                 """
                         \\
-                        Level: 0
+                        Level: 300
                         \\
                         \\
                         Use 25 obsidian, 9 crying obsidian, and 8 end rods to build the altar, wait a moment to summon.
@@ -62,7 +62,7 @@ public class TheEyeEntry extends BaseEntryProvider
         this.lang("zh_cn").add(context.pageText(),
                 """
                         \\
-                        等级: 0
+                        等级: 300
                         \\
                         \\
                         使用25块黑曜石，9块哭泣的黑曜石和8根末地烛搭建祭坛，等待片刻后即可召唤。

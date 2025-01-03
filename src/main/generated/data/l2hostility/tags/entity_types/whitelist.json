@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "adventurez:the_eye",
     "#spell-dimension:advz_monster",
     "#spell-dimension:sw_monster"
   ]

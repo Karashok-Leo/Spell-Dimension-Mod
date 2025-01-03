@@ -53,14 +53,14 @@ public class BookEntry extends BaseEntryProvider
         this.lang().add(context.pageText(),
                 """
                         \\
-                        A spell book is a vehicle for recording spells. You can use the Spell Binding Table to transform a normal book into the most basic spell book.
+                        A spell book is a vehicle for recording spells. You can use the Spell Binding Table to transform a normal book into the most basic spell book. But this is just the beginning, you can then use the craft table to craft it into primary, intermediate, and advanced spell books.
                         """
         );
         this.lang("zh_cn").add(context.pageTitle(), "法术书");
         this.lang("zh_cn").add(context.pageText(),
                 """
                         \\
-                        法术书是记录法术的载体。你可以使用法术绑定台将普通的书转化为最基本的法术书。
+                        法术书是记录法术的载体。你可以使用法术绑定台将普通的书转化为最基本的法术书。但这只是一个开始，之后你可以使用工作台将其合成至初级、中级、高级法术书。
                         """
         );
 
