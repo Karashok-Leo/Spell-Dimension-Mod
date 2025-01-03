@@ -20,6 +20,11 @@ import java.util.List;
 
 public abstract class RightPressEssenceItem extends SpellEssenceItem
 {
+    protected RightPressEssenceItem(Settings settings)
+    {
+        super(settings);
+    }
+
     protected abstract boolean applyEffect(ItemStack essence, LivingEntity entity);
 
     @Override

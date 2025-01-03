@@ -2,6 +2,7 @@ package karashokleo.spell_dimension.content.item.essence;
 
 import karashokleo.spell_dimension.content.item.essence.base.StackClickEssenceItem;
 import karashokleo.spell_dimension.data.SDTexts;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
@@ -15,7 +16,7 @@ public class MendingEssenceItem extends StackClickEssenceItem
 {
     public MendingEssenceItem()
     {
-        super();
+        super(new FabricItemSettings());
     }
 
     @Override

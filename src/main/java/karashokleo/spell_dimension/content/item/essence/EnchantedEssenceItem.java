@@ -7,6 +7,7 @@ import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.util.AttributeUtil;
 import karashokleo.spell_dimension.util.ParticleUtil;
 import karashokleo.spell_dimension.util.SchoolUtil;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
@@ -26,7 +27,7 @@ public class EnchantedEssenceItem extends StackClickEssenceItem
 
     public EnchantedEssenceItem()
     {
-        super();
+        super(new FabricItemSettings().maxCount(1));
     }
 
     @Override
@@ -85,10 +86,10 @@ public class EnchantedEssenceItem extends StackClickEssenceItem
         EnchantedModifier modifier = getModifier(essence);
         EnchantedModifier targetModifier = getModifier(target);
         if (modifier == null || targetModifier == null) return false;
-        if (modifier.slot() != targetModifier.slot()) return false;
-        // only check slot but not attribute and operation
-//        if (modifier.modifier().attribute() != targetModifier.modifier().attribute()) return false;
-//        if (modifier.modifier().operation() != targetModifier.modifier().operation()) return false;
+        // do not check slot
+//        if (modifier.slot() != targetModifier.slot()) return false;
+        if (modifier.modifier().attribute() != targetModifier.modifier().attribute()) return false;
+        if (modifier.modifier().operation() != targetModifier.modifier().operation()) return false;
         new EnchantedModifier(
                 modifier.threshold() + targetModifier.threshold(),
                 targetModifier.slot(),

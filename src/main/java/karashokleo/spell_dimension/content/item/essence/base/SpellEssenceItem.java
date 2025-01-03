@@ -11,9 +11,9 @@ public abstract class SpellEssenceItem extends Item implements ColorProvider, Pa
 {
     protected static int COOLDOWN = 40;
 
-    protected SpellEssenceItem()
+    protected SpellEssenceItem(Settings settings)
     {
-        super(new FabricItemSettings().maxCount(1));
+        super(settings);
     }
 
     protected void success(ItemStack essence, PlayerEntity player)

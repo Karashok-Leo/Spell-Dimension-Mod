@@ -7,6 +7,7 @@ import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.util.AttributeUtil;
 import karashokleo.spell_dimension.util.ParticleUtil;
 import karashokleo.spell_dimension.util.SchoolUtil;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -26,7 +27,7 @@ public class EnlighteningEssenceItem extends RightPressEssenceItem
 {
     public EnlighteningEssenceItem()
     {
-        super();
+        super(new FabricItemSettings().maxCount(1));
     }
 
     @Override

@@ -16,6 +16,11 @@ import java.util.List;
 
 public abstract class StackClickEssenceItem extends SpellEssenceItem
 {
+    protected StackClickEssenceItem(Settings settings)
+    {
+        super(settings);
+    }
+
     protected abstract boolean applyEffect(ItemStack essence, ItemStack target);
 
     @Override
