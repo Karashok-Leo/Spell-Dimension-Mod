@@ -9,9 +9,11 @@ import com.klikli_dev.modonomicon.api.datagen.book.page.BookSpotlightPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
 import karashokleo.spell_dimension.data.book.entry.BaseEntryProvider;
 import karashokleo.spell_dimension.util.BookGenUtil;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import wraith.alloyforgery.forges.ForgeRegistry;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class AlloyEntry extends BaseEntryProvider
@@ -67,7 +69,15 @@ public class AlloyEntry extends BaseEntryProvider
                 .builder()
                 .withTitle(context.pageTitle())
                 .withText(context.pageText())
-                .withItem(BookGenUtil.getIngredient(ForgeRegistry.controllerBlocksView().stream().map(block -> block.asItem().getDefaultStack())))
+                .withItem(
+                        BookGenUtil.getIngredient(
+                                ForgeRegistry
+                                        .controllerBlocksView()
+                                        .stream()
+                                        .sorted(Comparator.comparing(Registries.BLOCK::getId))
+                                        .map(block -> block.asItem().getDefaultStack())
+                        )
+                )
                 .build();
 
         context.page("build");

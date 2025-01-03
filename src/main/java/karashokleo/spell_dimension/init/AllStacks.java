@@ -7,6 +7,7 @@ import karashokleo.spell_dimension.content.item.logic.EnchantedModifier;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.spell.SpellInfo;
 import net.wizards.WizardsMod;
@@ -28,9 +29,19 @@ public class AllStacks
 
     static
     {
-        BASE_ESSENCE_STACKS = AllItems.BASE_ESSENCES.values().stream().map(Item::getDefaultStack).toList();
+        BASE_ESSENCE_STACKS = AllItems.BASE_ESSENCES
+                .values()
+                .stream()
+                .sorted(Comparator.comparing(Registries.ITEM::getId))
+                .map(Item::getDefaultStack)
+                .toList();
 
-        SPELL_BOOK_STACKS = AllItems.SPELL_BOOKS.values().stream().map(Item::getDefaultStack).toList();
+        SPELL_BOOK_STACKS = AllItems.SPELL_BOOKS
+                .values()
+                .stream()
+                .sorted(Comparator.comparing(Registries.ITEM::getId))
+                .map(Item::getDefaultStack)
+                .toList();
 
         List<AttributeModifier> allModifiers = AttributeModifier.getAll();
 
