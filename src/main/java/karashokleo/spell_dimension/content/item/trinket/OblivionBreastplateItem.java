@@ -91,7 +91,10 @@ public class OblivionBreastplateItem extends TrinketItem
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
         super.appendTooltip(stack, world, tooltip, context);
-        tooltip.add(SDTexts.TOOLTIP$OBLIVION_BREASTPLATE_1.get(THRESHOLD_RATIO, OBLIVION_RATIO).formatted(Formatting.GRAY));
+        tooltip.add(SDTexts.TOOLTIP$OBLIVION_BREASTPLATE_1.get(
+                "%d%%".formatted((int) (THRESHOLD_RATIO * 100)),
+                "%d%%".formatted((int) (OBLIVION_RATIO * 100))
+        ).formatted(Formatting.GRAY));
         tooltip.add(SDTexts.TOOLTIP$OBLIVION_BREASTPLATE_2.get(MAX_RATIO).formatted(Formatting.DARK_GRAY));
         tooltip.add(SDTexts.TOOLTIP$OBLIVION_BREASTPLATE_3.get(getOblivionAmount(stack)).formatted(Formatting.AQUA));
     }
