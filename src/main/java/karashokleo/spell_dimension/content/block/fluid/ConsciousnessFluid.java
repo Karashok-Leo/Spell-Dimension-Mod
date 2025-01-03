@@ -87,7 +87,7 @@ public abstract class ConsciousnessFluid extends WaterFluid
     @Override
     public int getLevelDecreasePerBlock(WorldView world)
     {
-        return 1;
+        return 0;
     }
 
     @Override
