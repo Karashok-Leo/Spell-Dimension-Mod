@@ -63,7 +63,7 @@
     },
     {
       "draw_arrow": true,
-      "entry": "spell-dimension-book:boss/bomb_lich",
+      "entry": "spell-dimension-book:boss/bomd_lich",
       "line_enabled": true,
       "line_reversed": false
     },

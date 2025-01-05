@@ -5,6 +5,7 @@ import karashokleo.l2hostility.init.LHNetworking;
 import karashokleo.spell_dimension.api.quest.Quest;
 import karashokleo.spell_dimension.api.quest.QuestRegistry;
 import karashokleo.spell_dimension.api.quest.QuestUsage;
+import karashokleo.spell_dimension.config.QuestToEntryConfig;
 import karashokleo.spell_dimension.content.component.QuestComponent;
 import karashokleo.spell_dimension.content.network.S2CTitle;
 import karashokleo.spell_dimension.data.SDTexts;
@@ -72,7 +73,12 @@ public class QuestScrollItem extends Item
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand)
     {
         ItemStack stack = user.getStackInHand(hand);
-        if (user instanceof ServerPlayerEntity player)
+        if (world.isClient() && user.isSneaking())
+        {
+            Optional<Quest> optional = this.getQuest(stack);
+            optional.ifPresent(QuestToEntryConfig::openEntry);
+        } else if (user instanceof ServerPlayerEntity player &&
+                   !player.isSneaking())
         {
             Optional<Quest> optional = this.getQuest(stack);
             // Valid quest

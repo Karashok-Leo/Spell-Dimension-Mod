@@ -117,6 +117,6 @@ public class BomdLichEntry extends BaseEntryProvider
     @Override
     protected String entryId()
     {
-        return "bomb_lich";
+        return "bomd_lich";
     }
 }

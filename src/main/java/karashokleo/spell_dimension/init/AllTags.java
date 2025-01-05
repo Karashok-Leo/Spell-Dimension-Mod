@@ -11,6 +11,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityType;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.registry.tag.BlockTags;
@@ -81,6 +82,8 @@ public class AllTags
     public static final TagKey<Enchantment> TRADABLE = TagUtil.enchantmentTag("tradable");
     public static final TagKey<Enchantment> ENCHANTABLE = TagUtil.enchantmentTag("enchantable");
 
+    public static final TagKey<Fluid> CONSCIOUSNESS = TagUtil.fluidTag("consciousness");
+
     public static void register()
     {
         RuneItems.entries.stream().map(RuneItems.Entry::id)
@@ -142,6 +145,12 @@ public class AllTags
                 );
 
         SpellDimension.FLUID_TAGS.getOrCreateContainer(FluidTags.WATER)
+                .add(
+                        AllBlocks.STILL_CONSCIOUSNESS,
+                        AllBlocks.FLOWING_CONSCIOUSNESS
+                );
+
+        SpellDimension.FLUID_TAGS.getOrCreateContainer(CONSCIOUSNESS)
                 .add(
                         AllBlocks.STILL_CONSCIOUSNESS,
                         AllBlocks.FLOWING_CONSCIOUSNESS

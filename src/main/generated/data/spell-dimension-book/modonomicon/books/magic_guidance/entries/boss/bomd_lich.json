@@ -2,12 +2,12 @@
   "background_u_index": 0,
   "background_v_index": 0,
   "category": "spell-dimension-book:boss",
-  "description": "book.spell-dimension-book.magic_guidance.boss.bomb_lich.description",
+  "description": "book.spell-dimension-book.magic_guidance.boss.bomd_lich.description",
   "hide_while_locked": false,
   "icon": {
     "item": "bosses_of_mass_destruction:ancient_anima"
   },
-  "name": "book.spell-dimension-book.magic_guidance.boss.bomb_lich.name",
+  "name": "book.spell-dimension-book.magic_guidance.boss.bomd_lich.name",
   "pages": [
     {
       "type": "modonomicon:spotlight",
@@ -18,8 +18,8 @@
       "item": {
         "item": "bosses_of_mass_destruction:soul_star"
       },
-      "text": "book.spell-dimension-book.magic_guidance.boss.bomb_lich.boss.text",
-      "title": "book.spell-dimension-book.magic_guidance.boss.bomb_lich.boss.title"
+      "text": "book.spell-dimension-book.magic_guidance.boss.bomd_lich.boss.text",
+      "title": "book.spell-dimension-book.magic_guidance.boss.bomd_lich.boss.title"
     },
     {
       "type": "modonomicon:text",
@@ -28,7 +28,7 @@
         "type": "modonomicon:none"
       },
       "show_title_separator": true,
-      "text": "book.spell-dimension-book.magic_guidance.boss.bomb_lich.next.text",
+      "text": "book.spell-dimension-book.magic_guidance.boss.bomd_lich.next.text",
       "title": "",
       "use_markdown_in_title": false
     },

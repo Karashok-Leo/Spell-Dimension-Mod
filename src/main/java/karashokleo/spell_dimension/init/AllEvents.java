@@ -1,11 +1,13 @@
 package karashokleo.spell_dimension.init;
 
 import com.obscuria.aquamirae.registry.AquamiraeItems;
+import io.github.fabricators_of_create.porting_lib.entity.events.LivingEntityEvents;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.trait.common.AdaptingTrait;
 import karashokleo.l2hostility.init.LHTraits;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
+import karashokleo.spell_dimension.config.QuestToEntryConfig;
 import karashokleo.spell_dimension.content.event.*;
 import karashokleo.spell_dimension.content.misc.ISpawnerExtension;
 import karashokleo.spell_dimension.content.spell.LightSpell;
@@ -39,6 +41,15 @@ public class AllEvents
         TrinketEvent.init();
         LightSpell.init();
         ConsciousOceanEvent.init();
+
+        QuestToEntryConfig.init();
+
+        LivingEntityEvents.LivingTickEvent.TICK.register(event ->
+        {
+            LivingEntity entity = event.getEntity();
+            if (entity.getWorld().getFluidState(entity.getBlockPos()).isIn(AllTags.CONSCIOUSNESS))
+                entity.setVelocity(entity.getVelocity().add(0.0, 0.08, 0.0));
+        });
 
         ServerEntityCombatEvents.AFTER_KILLED_OTHER_ENTITY.register((world, entity, killedEntity) ->
         {
