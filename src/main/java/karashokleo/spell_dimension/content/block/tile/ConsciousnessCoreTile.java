@@ -1,8 +1,10 @@
 package karashokleo.spell_dimension.content.block.tile;
 
 import com.google.common.collect.Lists;
+import karashokleo.l2hostility.content.component.player.PlayerDifficulty;
 import karashokleo.spell_dimension.content.block.ConsciousnessBaseBlock;
-import karashokleo.spell_dimension.content.entity.ConsciousnessEventEntity;
+import karashokleo.spell_dimension.content.block.ProtectiveCoverBlock;
+import karashokleo.spell_dimension.content.entity.ConsciousnessEventLogic;
 import karashokleo.spell_dimension.content.event.conscious.ConsciousnessEventManager;
 import karashokleo.spell_dimension.content.event.conscious.EventAward;
 import karashokleo.spell_dimension.init.AllBlocks;
@@ -13,7 +15,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Stainable;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.loot.LootTable;
+import net.minecraft.loot.context.LootContextParameterSet;
+import net.minecraft.loot.context.LootContextParameters;
+import net.minecraft.loot.context.LootContextTypes;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
@@ -25,6 +32,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
@@ -41,20 +49,25 @@ import java.util.UUID;
 
 public class ConsciousnessCoreTile extends BlockEntity
 {
-    public static final String ACTIVATING_KEY = "Activating";
-    public static final String ACTIVATED_KEY = "Activated";
-    public static final String TRIGGERED_KEY = "Triggered";
+    public static final String STATE_KEY = "CoreState";
     public static final String LEVEL_FACTOR_KEY = "LevelFactor";
     public static final String AWARD_KEY = "Award";
     public static final String LEVEL_KEY = "Level";
     public static final String DESTINATION_WORLD_KEY = "DestinationWorld";
     public static final String DESTINATION_POS_KEY = "DestinationPos";
-    public static final String EVENT_KEY = "EventUUID";
+    public static final String EVENT_KEY = "Event";
 
     public int tick = 0;
-    private boolean activating = false;
-    private boolean activated = false;
-    private boolean triggered = false;
+    private CoreState state = CoreState.INACTIVE;
+
+    public enum CoreState
+    {
+        INACTIVE,
+        TRIGGERING,
+        TRIGGERED,
+        ACTIVATED
+    }
+
     private double levelFactor;
     @Nullable
     private EventAward award;
@@ -65,7 +78,7 @@ public class ConsciousnessCoreTile extends BlockEntity
     @Nullable
     private BlockPos destinationPos;
     @Nullable
-    private ConsciousnessEventEntity event;
+    private ConsciousnessEventLogic event;
 
     private final HashMap<UUID, Integer> playerTicks = new HashMap<>();
 
@@ -76,16 +89,6 @@ public class ConsciousnessCoreTile extends BlockEntity
     public ConsciousnessCoreTile(BlockPos pos, BlockState state)
     {
         super(AllBlocks.CONSCIOUSNESS_CORE_TILE, pos, state);
-    }
-
-    public boolean isActivating()
-    {
-        return activating;
-    }
-
-    public boolean isTriggered()
-    {
-        return triggered;
     }
 
     public double getLevelFactor()
@@ -114,6 +117,7 @@ public class ConsciousnessCoreTile extends BlockEntity
     public static void tick(World world, BlockPos pos, BlockState state, ConsciousnessCoreTile tile)
     {
         tile.tick++;
+        boolean dirty = false;
         if ((tile.levelFactor == 0 || tile.award == null) &&
             !world.isClient())
         {
@@ -122,74 +126,109 @@ public class ConsciousnessCoreTile extends BlockEntity
                     random.nextDouble(),
                     RandomUtil.randomEnum(random, EventAward.class)
             );
+            dirty = true;
+        }
+        if (tile.event != null && world instanceof ServerWorld serverWorld)
+        {
+            tile.event.tick(serverWorld);
+            if (tile.event.isFinishedLast())
+            {
+                ConsciousnessEventManager.breakBarrier(world, pos, ConsciousnessEventManager.RADIUS);
+                tile.event.discard();
+                tile.event = null;
+            }
+            dirty = true;
+        }
+        switch (tile.state)
+        {
+            case TRIGGERING -> tile.tickTriggering(world);
+            case TRIGGERED -> tile.tickTriggered(world);
+            case ACTIVATED -> tile.tickActivated(world);
+        }
+        if (dirty)
             tile.markDirty();
-            world.updateListeners(pos, state, state, Block.NOTIFY_ALL);
-        }
+    }
 
-        if (!tile.isActivated()) return;
+    private void tickTriggering(World world)
+    {
+        if (event == null || !event.isFinished()) return;
 
-        if (world.getTime() % 80L == 0L)
+        this.state = CoreState.TRIGGERED;
+        this.markDirty();
+        world.updateListeners(pos, getCachedState(), getCachedState(), Block.NOTIFY_ALL);
+    }
+
+    private void tickTriggered(World world)
+    {
+        if (world instanceof ServerWorld serverWorld)
+            tryActivate(serverWorld);
+    }
+
+    private void tickActivated(World world)
+    {
+        if (world.isClient())
         {
-            world.playSound(null, pos, SoundEvents.BLOCK_BEACON_AMBIENT, SoundCategory.BLOCKS, 1f, 1f);
-        }
-
-        int posX = pos.getX();
-        int posY = pos.getY();
-        int posZ = pos.getZ();
-        BlockPos currentPos;
-
-        if (tile.minY < posY)
-        {
-            currentPos = pos;
-            tile.beamSegmentsTemp = Lists.newArrayList();
-            tile.minY = currentPos.getY() - 1;
-        } else currentPos = new BlockPos(posX, tile.minY + 1, posZ);
-
-        BeamSegment beamSegment = tile.beamSegmentsTemp.isEmpty() ? null : tile.beamSegmentsTemp.get(tile.beamSegmentsTemp.size() - 1);
-        int topY = world.getTopY(Heightmap.Type.WORLD_SURFACE, posX, posZ);
-
-        int i = 0;
-        for (; i < 10 && currentPos.getY() <= topY; i++)
-        {
-            BlockState blockState = world.getBlockState(currentPos);
-            Block block = blockState.getBlock();
-
-            float[] colors = {1.0F, 1.0F, 1.0F};
-
-            if (block instanceof Stainable stainable)
-                colors = stainable.getColor().getColorComponents();
-
-            if (tile.beamSegmentsTemp.size() <= 1)
+            if (world.getTime() % 80L == 0L)
             {
-                beamSegment = new BeamSegment(colors);
-                tile.beamSegmentsTemp.add(beamSegment);
-            } else if (beamSegment != null)
-            {
-                if (Arrays.equals(colors, beamSegment.color))
-                    beamSegment.increaseHeight();
-                else
-                {
-                    beamSegment = new BeamSegment(new float[]{
-                            (beamSegment.color[0] + colors[0]) / 2.0F,
-                            (beamSegment.color[1] + colors[1]) / 2.0F,
-                            (beamSegment.color[2] + colors[2]) / 2.0F
-                    });
-                    tile.beamSegmentsTemp.add(beamSegment);
-                }
+                world.playSound(null, pos, SoundEvents.BLOCK_BEACON_AMBIENT, SoundCategory.BLOCKS, 1f, 1f);
             }
 
-            currentPos = currentPos.up();
-            ++tile.minY;
-        }
+            int posX = pos.getX();
+            int posY = pos.getY();
+            int posZ = pos.getZ();
+            BlockPos currentPos;
 
-        if (tile.minY >= topY)
-        {
-            tile.minY = world.getBottomY() - 1;
-            tile.beamSegments = tile.beamSegmentsTemp;
-        }
+            if (minY < posY)
+            {
+                currentPos = pos;
+                beamSegmentsTemp = Lists.newArrayList();
+                minY = currentPos.getY() - 1;
+            } else currentPos = new BlockPos(posX, minY + 1, posZ);
 
-        if (world instanceof ServerWorld serverWorld)
-            tile.tryTeleport(serverWorld);
+            BeamSegment beamSegment = beamSegmentsTemp.isEmpty() ? null : beamSegmentsTemp.get(beamSegmentsTemp.size() - 1);
+            int topY = world.getTopY(Heightmap.Type.WORLD_SURFACE, posX, posZ);
+
+            int i = 0;
+            for (; i < 10 && currentPos.getY() <= topY; i++)
+            {
+                BlockState blockState = world.getBlockState(currentPos);
+                Block block = blockState.getBlock();
+
+                float[] colors = {1.0F, 1.0F, 1.0F};
+
+                if (block instanceof Stainable stainable)
+                    colors = stainable.getColor().getColorComponents();
+
+                if (beamSegmentsTemp.size() <= 1)
+                {
+                    beamSegment = new BeamSegment(colors);
+                    beamSegmentsTemp.add(beamSegment);
+                } else if (beamSegment != null)
+                {
+                    if (Arrays.equals(colors, beamSegment.color))
+                        beamSegment.increaseHeight();
+                    else
+                    {
+                        beamSegment = new BeamSegment(new float[]{
+                                (beamSegment.color[0] + colors[0]) / 2.0F,
+                                (beamSegment.color[1] + colors[1]) / 2.0F,
+                                (beamSegment.color[2] + colors[2]) / 2.0F
+                        });
+                        beamSegmentsTemp.add(beamSegment);
+                    }
+                }
+
+                currentPos = currentPos.up();
+                ++minY;
+            }
+
+            if (minY >= topY)
+            {
+                minY = world.getBottomY() - 1;
+                beamSegments = beamSegmentsTemp;
+            }
+        } else if (world instanceof ServerWorld serverWorld)
+            tryTeleport(serverWorld);
     }
 
     private void tryTeleport(ServerWorld world)
@@ -211,16 +250,7 @@ public class ConsciousnessCoreTile extends BlockEntity
                 if (currentTick >= 100)
                 {
                     TeleportUtil.teleportPlayerChangeDimension(player, destinationWorld, destinationPos);
-
                     this.playerTicks.remove(playerUuid);
-                    if (!this.triggered && this.level != null && this.award != null)
-                    {
-                        this.triggered = true;
-                        this.event = ConsciousnessEventManager.startEvent(destinationWorld, this.destinationPos, this.level, this.award);
-
-                        this.markDirty();
-                        world.updateListeners(pos, getCachedState(), getCachedState(), Block.NOTIFY_ALL);
-                    }
                 }
             } else this.playerTicks.remove(playerUuid);
         }
@@ -231,12 +261,12 @@ public class ConsciousnessCoreTile extends BlockEntity
         return beamSegments;
     }
 
-    public boolean isActivated()
+    public CoreState getState()
     {
-        return this.activated && !this.activating;
+        return state;
     }
 
-    public boolean testStack(ItemStack stack)
+    private boolean testStack(ItemStack stack)
     {
         return true;
 //        int tier = MathHelper.clamp((int) (this.levelFactor / 0.1), 0, 4);
@@ -249,14 +279,12 @@ public class ConsciousnessCoreTile extends BlockEntity
     public void setDestinationPos(@NotNull BlockPos destinationPos)
     {
         this.destinationPos = pos;
-        this.activating = false;
-        this.activated = true;
 
         if (this.world instanceof ServerWorld serverWorld)
         {
             this.markDirty();
             world.updateListeners(pos, getCachedState(), getCachedState(), Block.NOTIFY_ALL);
-            serverWorld.playSound(null, pos, activated ? SoundEvents.BLOCK_BEACON_ACTIVATE : SoundEvents.BLOCK_BEACON_DEACTIVATE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+            serverWorld.playSound(null, pos, SoundEvents.BLOCK_BEACON_ACTIVATE, SoundCategory.BLOCKS, 1.0F, 1.0F);
 
             BlockPos logPos = pos.down();
             BlockState logState = serverWorld.getBlockState(logPos);
@@ -272,27 +300,57 @@ public class ConsciousnessCoreTile extends BlockEntity
         world.createExplosion(null, this.pos.getX(), this.pos.getY(), this.pos.getZ(), 1.0F, false, World.ExplosionSourceType.BLOCK);
     }
 
-    public void activate(BlockPos pos, double playerLevel)
+    private void tryTrigger(ServerWorld serverWorld, ServerPlayerEntity player)
     {
-        if (this.activated) return;
-        if (this.world instanceof ServerWorld serverWorld)
-        {
-            this.activating = true;
-            this.level = ConsciousnessEventManager.randomEventLevel(serverWorld.getRandom(), playerLevel, this.levelFactor);
+        this.state = CoreState.TRIGGERING;
+        this.level = ConsciousnessEventManager.randomEventLevel(serverWorld.getRandom(), PlayerDifficulty.get(player).getLevel().getLevel(), this.levelFactor);
 
-            ServerWorld destinationWorld = serverWorld.getServer().getOverworld();
-            this.destinationWorld = destinationWorld.getRegistryKey();
-            FutureTask.submit(
-                    TeleportUtil.getTeleportPosFuture(serverWorld, destinationWorld, this.pos),
-                    optional -> optional.ifPresentOrElse(
-                            this::setDestinationPos,
-                            this::selfDestruct
-                    )
-            );
+        ServerWorld destinationWorld = serverWorld.getServer().getOverworld();
+        this.destinationWorld = destinationWorld.getRegistryKey();
+        FutureTask.submit(
+                TeleportUtil.getTeleportPosFuture(serverWorld, destinationWorld, this.pos),
+                optional -> optional.ifPresentOrElse(
+                        this::setDestinationPos,
+                        this::selfDestruct
+                )
+        );
 
-            this.markDirty();
-            serverWorld.updateListeners(pos, getCachedState(), getCachedState(), Block.NOTIFY_ALL);
-        }
+        this.markDirty();
+        serverWorld.updateListeners(pos, getCachedState(), getCachedState(), Block.NOTIFY_ALL);
+
+        this.event = new ConsciousnessEventLogic(serverWorld.getRandom(), pos, level);
+        ProtectiveCoverBlock.placeAsBarrier(world, pos, ConsciousnessEventManager.RADIUS, ConsciousnessEventManager.TIME_LIMIT);
+    }
+
+    private void tryActivate(ServerWorld world)
+    {
+        if (this.event == null) return;
+        if (this.event.isSuccess())
+            reward(world);
+
+        this.state = CoreState.ACTIVATED;
+        this.markDirty();
+        world.updateListeners(pos, getCachedState(), getCachedState(), Block.NOTIFY_ALL);
+    }
+
+    private void reward(ServerWorld world)
+    {
+        if (this.award == null) return;
+        LootContextParameterSet lootContextParameterSet = new LootContextParameterSet.Builder(world)
+                .add(LootContextParameters.ORIGIN, pos.toCenterPos())
+                .build(LootContextTypes.CHEST);
+        LootTable lootTable = world.getServer().getLootManager().getLootTable(award.lootTable);
+        var stacks = lootTable.generateLoot(lootContextParameterSet);
+        stacks.forEach(stack -> Block.dropStack(world, pos, stack));
+    }
+
+    public void onUse(PlayerEntity player, Hand hand)
+    {
+        if (!testStack(player.getStackInHand(hand))) return;
+        if (this.world instanceof ServerWorld serverWorld &&
+            player instanceof ServerPlayerEntity serverPlayer &&
+            state == CoreState.INACTIVE)
+            tryTrigger(serverWorld, serverPlayer);
     }
 
     @Nullable
@@ -312,9 +370,7 @@ public class ConsciousnessCoreTile extends BlockEntity
     protected void writeNbt(NbtCompound nbt)
     {
         super.writeNbt(nbt);
-        nbt.putBoolean(ACTIVATING_KEY, this.activating);
-        nbt.putBoolean(ACTIVATED_KEY, this.activated);
-        nbt.putBoolean(TRIGGERED_KEY, this.triggered);
+        nbt.putString(STATE_KEY, this.state.name());
         nbt.putDouble(LEVEL_FACTOR_KEY, this.levelFactor);
         if (this.award != null)
             nbt.putString(AWARD_KEY, this.award.name());
@@ -325,16 +381,14 @@ public class ConsciousnessCoreTile extends BlockEntity
         if (this.destinationPos != null)
             nbt.putLong(DESTINATION_POS_KEY, this.destinationPos.asLong());
         if (this.event != null)
-            nbt.putUuid(EVENT_KEY, this.event.getUuid());
+            nbt.put(EVENT_KEY, this.event.toNbt());
     }
 
     @Override
     public void readNbt(NbtCompound nbt)
     {
         super.readNbt(nbt);
-        this.activating = nbt.getBoolean(ACTIVATING_KEY);
-        this.activated = nbt.getBoolean(ACTIVATED_KEY);
-        this.triggered = nbt.getBoolean(TRIGGERED_KEY);
+        this.state = CoreState.valueOf(nbt.getString(STATE_KEY));
         this.levelFactor = nbt.getDouble(LEVEL_FACTOR_KEY);
         if (nbt.contains(AWARD_KEY))
             this.award = EventAward.valueOf(nbt.getString(AWARD_KEY));
@@ -344,10 +398,8 @@ public class ConsciousnessCoreTile extends BlockEntity
             this.destinationWorld = RegistryKey.of(RegistryKeys.WORLD, new Identifier(nbt.getString(DESTINATION_WORLD_KEY)));
         if (nbt.contains(DESTINATION_POS_KEY))
             this.destinationPos = BlockPos.fromLong(nbt.getLong(DESTINATION_POS_KEY));
-        if (nbt.containsUuid(EVENT_KEY) &&
-            world instanceof ServerWorld serverWorld &&
-            serverWorld.getEntity(nbt.getUuid(EVENT_KEY)) instanceof ConsciousnessEventEntity eventEntity)
-            this.event = eventEntity;
+        if (nbt.contains(EVENT_KEY))
+            this.event = ConsciousnessEventLogic.fromNbt(pos, nbt.getCompound(EVENT_KEY));
     }
 
     /**

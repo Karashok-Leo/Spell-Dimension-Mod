@@ -3,7 +3,6 @@ package karashokleo.spell_dimension.content.entity;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.component.player.PlayerDifficulty;
 import karashokleo.spell_dimension.content.event.conscious.ConsciousnessEventManager;
-import karashokleo.spell_dimension.content.event.conscious.EventAward;
 import karashokleo.spell_dimension.content.event.conscious.Wave;
 import karashokleo.spell_dimension.content.event.conscious.WaveFactory;
 import karashokleo.spell_dimension.data.SDTexts;
@@ -19,15 +18,14 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.util.math.random.Random;
 
 import java.util.*;
 import java.util.function.Predicate;
 
 import static karashokleo.spell_dimension.content.event.conscious.ConsciousnessEventManager.RADIUS;
 
-public class ConsciousnessEventEntity extends Entity
+public class ConsciousnessEventLogic
 {
     public static final int PREPARE_TIME = 20 * 10;
     public static final int WAIT_TIME = 20 * 5;
@@ -35,32 +33,34 @@ public class ConsciousnessEventEntity extends Entity
     public static final int FINISH_TIME = 20 * 5;
 
     public static final double FACTOR_PER_WAVE = 0.4;
-    public static final String STATE_KEY = "State";
+    public static final String STATE_KEY = "EventState";
+    public static final String TICK_KEY = "EventTick";
     public static final String WAIT_TIMER_KEY = "WaitTimer";
     public static final String FINISH_TIMER_KEY = "FinishTimer";
     public static final String PENDING_TIMER_KEY = "PendingTimer";
     public static final String WAVE_INDEX_KEY = "WaveIndex";
     public static final String LEVEL_KEY = "Level";
-    public static final String AWARD_KEY = "Award";
     public static final String WAVES_KEY = "Waves";
     public static final String SUMMONED_KEY = "Summoned";
     public static final String TOTAL_MAX_HEALTH_KEY = "TotalMaxHealth";
+    public static final String SUCCESS_KEY = "Success";
 
-    private State state = State.PREPARE;
+    private final BlockPos pos;
+    private EventState state = EventState.PREPARE;
+    private int tick = 0;
     private int waitTimer = 0;
     private int finishTimer = 0;
     private int pendingTimer = 0;
     private int waveIndex = 0;
     private int level;
     private float totalMaxHealth = 0;
-    @Nullable
-    private EventAward award;
+    private boolean success = false;
     private final ArrayList<Wave> waves = new ArrayList<>();
     private final LinkedList<UUID> summonedUuids = new LinkedList<>();
     private final Set<LivingEntity> summoned = new HashSet<>();
     private final ServerBossBar bossBar = new ServerBossBar(Text.empty(), ServerBossBar.Color.RED, ServerBossBar.Style.NOTCHED_10);
 
-    enum State
+    enum EventState
     {
         PREPARE,
         RUNNING,
@@ -68,31 +68,55 @@ public class ConsciousnessEventEntity extends Entity
         FINISH
     }
 
-    public ConsciousnessEventEntity(EntityType<?> type, World world)
+    private ConsciousnessEventLogic(BlockPos pos)
     {
-        super(type, world);
+        this.pos = pos;
     }
 
-    public void init(int level, EventAward award)
+    public ConsciousnessEventLogic(Random random, BlockPos pos, int level)
     {
+        this.pos = pos;
         this.level = level;
-        this.award = award;
-        WaveFactory.getRandom(this.random, this.level).fillWaves(random, this.waves);
+        WaveFactory.getRandom(random, this.level).fillWaves(random, this.waves);
     }
 
-    @Nullable
-    public EventAward getAward()
+    public void discard()
     {
-        return award;
+        this.summoned.clear();
+        this.summonedUuids.clear();
+        this.bossBar.clearPlayers();
     }
 
-    @Override
-    public void tick()
+    protected void updateBarToPlayers(ServerWorld world)
     {
-        super.tick();
+        Set<ServerPlayerEntity> set = new HashSet<>(this.bossBar.getPlayers());
+        List<ServerPlayerEntity> list = this.getPlayers(world);
+        for (ServerPlayerEntity player : list)
+            if (!set.contains(player))
+                this.bossBar.addPlayer(player);
+        for (ServerPlayerEntity player : set)
+            if (!list.contains(player))
+                this.bossBar.removePlayer(player);
+    }
 
-        if (!(this.getWorld() instanceof ServerWorld world)) return;
+    public boolean isSuccess()
+    {
+        return success;
+    }
 
+    public boolean isFinished()
+    {
+        return this.state == EventState.FINISH;
+    }
+
+    public boolean isFinishedLast()
+    {
+        return this.state == EventState.FINISH && this.finishTimer >= FINISH_TIME;
+    }
+
+    public void tick(ServerWorld world)
+    {
+        this.tick++;
         while (!this.summonedUuids.isEmpty())
         {
             UUID uuid = this.summonedUuids.poll();
@@ -102,6 +126,9 @@ public class ConsciousnessEventEntity extends Entity
                 this.summoned.add(living);
         }
 
+        if (this.tick % 20 == 0)
+            this.updateBarToPlayers(world);
+
         switch (this.state)
         {
             case PREPARE -> this.tickPrepare(world);
@@ -109,20 +136,6 @@ public class ConsciousnessEventEntity extends Entity
             case WAITING -> this.tickWaiting(world);
             case FINISH -> this.tickFinish(world);
         }
-    }
-
-    @Override
-    public void onStartedTrackingBy(ServerPlayerEntity player)
-    {
-        super.onStartedTrackingBy(player);
-        this.bossBar.addPlayer(player);
-    }
-
-    @Override
-    public void onStoppedTrackingBy(ServerPlayerEntity player)
-    {
-        super.onStoppedTrackingBy(player);
-        this.bossBar.removePlayer(player);
     }
 
     public List<ServerPlayerEntity> getPlayers(ServerWorld world)
@@ -134,7 +147,7 @@ public class ConsciousnessEventEntity extends Entity
     {
         return player ->
         {
-            Vec3d subtract = this.getPos().subtract(player.getPos());
+            Vec3d subtract = this.pos.toCenterPos().subtract(player.getPos());
             return Math.abs(subtract.getX()) <= RADIUS &&
                    Math.abs(subtract.getY()) <= RADIUS &&
                    Math.abs(subtract.getZ()) <= RADIUS;
@@ -143,12 +156,12 @@ public class ConsciousnessEventEntity extends Entity
 
     protected void tickPrepare(ServerWorld world)
     {
-        if (this.age == PREPARE_TIME)
+        if (this.tick == PREPARE_TIME)
             this.turnToRunning(world);
 
-        this.bossBar.setPercent((float) this.age / PREPARE_TIME);
-        if (this.age % 10 == 0)
-            this.bossBar.setName(SDTexts.TEXT$EVENT$PREPARE.get((PREPARE_TIME - this.age) / 20));
+        this.bossBar.setPercent((float) this.tick / PREPARE_TIME);
+        if (this.tick % 10 == 0)
+            this.bossBar.setName(SDTexts.TEXT$EVENT$PREPARE.get((PREPARE_TIME - this.tick) / 20));
     }
 
     protected void tickRunning(ServerWorld world)
@@ -174,7 +187,7 @@ public class ConsciousnessEventEntity extends Entity
 
         // if exceed time limit or players escape, fail
         if (this.pendingTimer > PENDING_TIME ||
-            this.age > ConsciousnessEventManager.TIME_LIMIT)
+            this.tick > ConsciousnessEventManager.TIME_LIMIT)
         {
             this.turnToFinish(world, false);
         }
@@ -182,7 +195,7 @@ public class ConsciousnessEventEntity extends Entity
         // Update boss bar
         float current = (float) this.summoned.stream().mapToDouble(LivingEntity::getHealth).sum();
         this.bossBar.setPercent(current / this.totalMaxHealth);
-        if (this.age % 10 == 0)
+        if (this.tick % 10 == 0)
             this.bossBar.setName(
                     SDTexts.TEXT$EVENT$RUNNING.get(
                             this.waveIndex + 1,
@@ -202,7 +215,7 @@ public class ConsciousnessEventEntity extends Entity
         }
 
         this.bossBar.setPercent((float) this.waitTimer / WAIT_TIME);
-        if (this.age % 10 == 0)
+        if (this.tick % 10 == 0)
             this.bossBar.setName(
                     SDTexts.TEXT$EVENT$WAITING.get(
                             this.waveIndex + 1,
@@ -217,39 +230,30 @@ public class ConsciousnessEventEntity extends Entity
         if (this.finishTimer < FINISH_TIME)
         {
             this.finishTimer++;
-            if (this.finishTimer == FINISH_TIME)
-            {
-                this.bossBar.clearPlayers();
-                ConsciousnessEventManager.breakBarrier(world, this.getBlockPos(), ConsciousnessEventManager.RADIUS);
-                this.remove(RemovalReason.DISCARDED);
-            }
         }
     }
 
     protected void turnToRunning(ServerWorld world)
     {
-        this.state = State.RUNNING;
+        this.state = EventState.RUNNING;
         this.summon(world);
     }
 
     protected void turnToWaiting(ServerWorld world)
     {
-        this.state = State.WAITING;
+        this.state = EventState.WAITING;
         this.waitTimer = 0;
     }
 
     protected void turnToFinish(ServerWorld world, boolean success)
     {
-        this.state = State.FINISH;
+        this.state = EventState.FINISH;
         this.finishTimer = 0;
         this.bossBar.setName(
                 success ?
                         SDTexts.TEXT$EVENT$FINISH$SUCCESS.get() :
                         SDTexts.TEXT$EVENT$FINISH$FAIL.get()
         );
-
-        if (success)
-            ConsciousnessEventManager.giveReward(world, this.getBlockPos(), this);
     }
 
     protected void summon(ServerWorld world)
@@ -268,7 +272,7 @@ public class ConsciousnessEventEntity extends Entity
             if (entityTypeOptional.isEmpty()) continue;
             EntityType<?> entityType = entityTypeOptional.get();
 
-            Optional<BlockPos> posOptional = ConsciousnessEventManager.tryFindSummonPos(world, this.getBlockPos(), entityType);
+            Optional<BlockPos> posOptional = ConsciousnessEventManager.tryFindSummonPos(world, this.pos, entityType);
             if (posOptional.isEmpty()) continue;
 
             Entity spawn = entityType.spawn(world, posOptional.get(), SpawnReason.EVENT);
@@ -306,52 +310,47 @@ public class ConsciousnessEventEntity extends Entity
         return summoned.isEmpty();
     }
 
-    @Override
-    protected void setWorld(World world)
+    public static ConsciousnessEventLogic fromNbt(BlockPos pos, NbtCompound nbt)
     {
-        super.setWorld(world);
-    }
-
-    @Override
-    protected void readCustomDataFromNbt(NbtCompound nbt)
-    {
-        this.state = State.valueOf(nbt.getString(STATE_KEY));
-        this.waitTimer = nbt.getInt(WAIT_TIMER_KEY);
-        this.finishTimer = nbt.getInt(FINISH_TIMER_KEY);
-        this.pendingTimer = nbt.getInt(PENDING_TIMER_KEY);
-        this.waveIndex = nbt.getInt(WAVE_INDEX_KEY);
-        this.level = nbt.getInt(LEVEL_KEY);
-        this.totalMaxHealth = nbt.getFloat(TOTAL_MAX_HEALTH_KEY);
-        if (nbt.contains(AWARD_KEY))
-            this.award = EventAward.valueOf(nbt.getString(AWARD_KEY));
-        this.waves.clear();
+        ConsciousnessEventLogic logic = new ConsciousnessEventLogic(pos);
+        logic.state = EventState.valueOf(nbt.getString(STATE_KEY));
+        logic.tick = nbt.getInt("EventTick");
+        logic.waitTimer = nbt.getInt(WAIT_TIMER_KEY);
+        logic.finishTimer = nbt.getInt(FINISH_TIMER_KEY);
+        logic.pendingTimer = nbt.getInt(PENDING_TIMER_KEY);
+        logic.waveIndex = nbt.getInt(WAVE_INDEX_KEY);
+        logic.level = nbt.getInt(LEVEL_KEY);
+        logic.totalMaxHealth = nbt.getFloat(TOTAL_MAX_HEALTH_KEY);
+        logic.success = nbt.getBoolean(SUCCESS_KEY);
+        logic.waves.clear();
         NbtList wavesNbt = nbt.getList(WAVES_KEY, NbtElement.COMPOUND_TYPE);
         for (NbtElement element : wavesNbt)
             if (element instanceof NbtCompound waveNbt)
             {
                 Wave wave = Wave.fromNbt(waveNbt);
                 if (wave != null)
-                    this.waves.add(wave);
+                    logic.waves.add(wave);
             }
-        this.summonedUuids.clear();
+        logic.summonedUuids.clear();
         NbtList summonedNbt = nbt.getList(SUMMONED_KEY, NbtElement.INT_ARRAY_TYPE);
         for (NbtElement i : summonedNbt)
             if (i instanceof NbtIntArray uuidNbt)
-                this.summonedUuids.add(NbtHelper.toUuid(uuidNbt));
+                logic.summonedUuids.add(NbtHelper.toUuid(uuidNbt));
+        return logic;
     }
 
-    @Override
-    protected void writeCustomDataToNbt(NbtCompound nbt)
+    public NbtCompound toNbt()
     {
+        NbtCompound nbt = new NbtCompound();
         nbt.putString(STATE_KEY, this.state.name());
+        nbt.putInt(TICK_KEY, this.tick);
         nbt.putInt(WAIT_TIMER_KEY, this.waitTimer);
         nbt.putInt(FINISH_TIMER_KEY, this.finishTimer);
         nbt.putInt(PENDING_TIMER_KEY, this.pendingTimer);
         nbt.putInt(WAVE_INDEX_KEY, this.waveIndex);
         nbt.putInt(LEVEL_KEY, this.level);
         nbt.putFloat(TOTAL_MAX_HEALTH_KEY, this.totalMaxHealth);
-        if (this.award != null)
-            nbt.putString(AWARD_KEY, this.award.name());
+        nbt.putBoolean(SUCCESS_KEY, this.success);
         NbtList wavesNbt = new NbtList();
         for (Wave wave : this.waves)
         {
@@ -364,10 +363,6 @@ public class ConsciousnessEventEntity extends Entity
         for (Entity entity : this.summoned)
             summonedNbt.add(NbtHelper.fromUuid(entity.getUuid()));
         nbt.put(SUMMONED_KEY, summonedNbt);
-    }
-
-    @Override
-    protected void initDataTracker()
-    {
+        return nbt;
     }
 }

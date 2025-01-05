@@ -48,7 +48,7 @@ public enum SDTexts
     TEXT$CONSCIOUSNESS_CORE$LEVEL("Active Level: %s", "激活等级: %s"),
     TEXT$CONSCIOUSNESS_CORE$LEVEL_FACTOR("Difficulty Factor: %s", "难度系数: %s"),
     TEXT$CONSCIOUSNESS_CORE$AWARD("Award: %s", "奖励: %s"),
-    TEXT$CONSCIOUSNESS_CORE$ACTIVATING("Activating...", "激活中..."),
+    TEXT$CONSCIOUSNESS_CORE$TRIGGERING("Invasion Event on going...", "入侵事件进行中..."),
     TEXT$CONSCIOUSNESS_CORE$TRIGGERED("Invasion Event has been triggered", "入侵事件已触发"),
     TEXT$CONSCIOUSNESS_CORE$NOT_TRIGGERED("Invasion Event not triggered", "入侵事件未触发"),
     TEXT$EVENT$PREPARE("The invasion is about to begin - Countdown: %s seconds", "入侵即将开始 - 倒计时: %s秒"),

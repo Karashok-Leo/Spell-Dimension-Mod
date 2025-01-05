@@ -60,7 +60,7 @@ public class ProtectiveCoverBlock extends AbstractGlassBlock implements BlockEnt
                         z == -radius || z == radius)
                     {
                         BlockPos placePos = pos.add(x, y, z);
-                        if (world.getBlockState(placePos).isReplaceable())
+                        if (world.getBlockState(placePos).isAir())
                         {
                             world.setBlockState(placePos, AllBlocks.PROTECTIVE_COVER.block().getDefaultState());
                             if (world.getBlockEntity(placePos) instanceof ProtectiveCoverBlockTile tile)

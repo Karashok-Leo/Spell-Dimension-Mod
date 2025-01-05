@@ -18,8 +18,7 @@ import java.util.List;
 
 public class ConsciousCoreOverlay extends InfoSideBar<SideBar.IntSignature>
 {
-    private boolean activating = false;
-    private boolean triggered = false;
+    private ConsciousnessCoreTile.CoreState state = ConsciousnessCoreTile.CoreState.INACTIVE;
     private double levelFactor;
     @Nullable
     private EventAward award = null;
@@ -35,11 +34,11 @@ public class ConsciousCoreOverlay extends InfoSideBar<SideBar.IntSignature>
     protected List<Text> getText()
     {
         ArrayList<Text> texts = new ArrayList<>();
-        if (this.activating)
-            texts.add(SDTexts.TEXT$CONSCIOUSNESS_CORE$ACTIVATING.get().formatted(Formatting.YELLOW));
-        else if (this.triggered)
+        if (this.state == ConsciousnessCoreTile.CoreState.TRIGGERING)
+            texts.add(SDTexts.TEXT$CONSCIOUSNESS_CORE$TRIGGERING.get().formatted(Formatting.YELLOW));
+        else if (this.state == ConsciousnessCoreTile.CoreState.TRIGGERED)
             texts.add(SDTexts.TEXT$CONSCIOUSNESS_CORE$TRIGGERED.get().formatted(Formatting.GREEN));
-        else
+        else if (this.state == ConsciousnessCoreTile.CoreState.INACTIVE)
         {
             texts.add(SDTexts.TEXT$CONSCIOUSNESS_CORE$NOT_TRIGGERED.get().formatted(Formatting.RED));
             texts.add(SDTexts.TEXT$CONSCIOUSNESS_CORE$LEVEL_FACTOR.get("%.2f".formatted(this.levelFactor)).formatted(Formatting.GOLD));
@@ -72,12 +71,11 @@ public class ConsciousCoreOverlay extends InfoSideBar<SideBar.IntSignature>
         BlockPos pos = RayTraceUtil.rayTraceBlock(player.getWorld(), player, 5).getBlockPos();
         if (player.getWorld().getBlockEntity(pos) instanceof ConsciousnessCoreTile tile)
         {
-            this.activating = tile.isActivating();
-            this.triggered = tile.isTriggered();
+            this.state = tile.getState();
             this.levelFactor = tile.getLevelFactor();
             this.award = tile.getAward();
             this.level = tile.getLevel();
-            return true;
+            return state != ConsciousnessCoreTile.CoreState.ACTIVATED;
         }
         return false;
     }

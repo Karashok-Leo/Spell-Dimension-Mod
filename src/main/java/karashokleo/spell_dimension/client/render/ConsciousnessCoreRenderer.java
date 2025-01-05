@@ -177,7 +177,7 @@ public class ConsciousnessCoreRenderer implements BlockEntityRenderer<Consciousn
     {
         renderCore(entity, tickDelta, matrices, vertexConsumers, light);
         World world = entity.getWorld();
-        if (world == null || !entity.isActivated()) return;
+        if (world == null || entity.getState() != ConsciousnessCoreTile.CoreState.ACTIVATED) return;
         renderBeam(entity, tickDelta, matrices, vertexConsumers, world);
     }
 }
