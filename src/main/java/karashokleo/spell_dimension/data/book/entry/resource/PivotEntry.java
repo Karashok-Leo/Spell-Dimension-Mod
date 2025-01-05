@@ -49,14 +49,14 @@ public class PivotEntry extends BaseEntryProvider
         this.lang().add(context.pageText(),
                 """
                         \\
-                        Consciousness Pivots are distributed on the surface of the ocean of consciousness, right-clicking on the **Consciousness Core** will activate the pivot, standing on the light column will teleport you to the corresponding position in the overworld.
+                        Consciousness Pivots are distributed on the surface of the ocean of consciousness, right-clicking on the **Consciousness Core** will activate the pivot and trigger the Invasion Event, monsters will appear in waves and attack the player, defeating all monsters will grant special rewards.
                         """
         );
         this.lang("zh_cn").add(context.pageTitle(), "识之枢纽");
         this.lang("zh_cn").add(context.pageText(),
                 """
                         \\
-                        意识枢纽分布在在识之海维度表面，右击其上的识之核心即可激活枢纽，站在光柱上即可传送至主世界对应位置。
+                        意识枢纽分布在在识之海维度表面，右击其上的**识之核心**即可激活枢纽，同时触发入侵事件，怪物将会分波次出现并攻击玩家，击败所有怪物即可获得特殊奖励。
                         """
         );
         BookTextPageModel pivot = BookTextPageModel
@@ -69,11 +69,17 @@ public class PivotEntry extends BaseEntryProvider
         this.lang().add(context.pageText(),
                 """
                         \\
+                        After the Invasion Event, a light column will be generated from the Consciousness Core. Standing on the light column will teleport you to the corresponding position in the overworld.
+                        \\
+                        \\
                         Activated consciousness pivots can affect the surrounding storage system, acting as a beacon.
                         """
         );
         this.lang("zh_cn").add(context.pageText(),
                 """
+                        \\
+                        入侵事件结束后识之核心会产生一道光柱，站在光柱上即可传送至主世界对应位置。
+                        \\
                         \\
                         已激活的意识枢纽可以影响周围的存储系统，起到相当于信标的作用。
                         """
@@ -83,28 +89,7 @@ public class PivotEntry extends BaseEntryProvider
                 .withText(context.pageText())
                 .build();
 
-        context.page("event");
-        this.lang().add(context.pageTitle(), "Invasion Event");
-        this.lang().add(context.pageText(),
-                """
-                        \\
-                        The first time you teleport to the overworld through the pivot, an invasion event will be triggered, monsters will appear in waves and attack the player, defeating all monsters will grant special rewards.
-                        """
-        );
-        this.lang("zh_cn").add(context.pageTitle(), "入侵事件");
-        this.lang("zh_cn").add(context.pageText(),
-                """
-                        \\
-                        首次通过枢纽传送至主世界时，会触发入侵事件，怪物将会分波次出现并攻击玩家，击败所有怪物即可获得特殊奖励。
-                        """
-        );
-        BookTextPageModel event = BookTextPageModel
-                .builder()
-                .withTitle(context.pageTitle())
-                .withText(context.pageText())
-                .build();
-
-        return List.of(pivot, beacon, event);
+        return List.of(pivot, beacon);
     }
 
     @Override

@@ -1,0 +1,39 @@
+{
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "category": "spell-dimension-book:resource",
+  "description": "book.spell-dimension-book.magic_guidance.resource.ocean.description",
+  "hide_while_locked": false,
+  "icon": {
+    "item": "spell-dimension:magic_mirror"
+  },
+  "name": "book.spell-dimension-book.magic_guidance.resource.ocean.name",
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "item": {
+        "item": "spell-dimension:magic_mirror"
+      },
+      "text": "book.spell-dimension-book.magic_guidance.resource.ocean.world.text",
+      "title": "book.spell-dimension-book.magic_guidance.resource.ocean.world.title"
+    },
+    {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "show_title_separator": true,
+      "text": "book.spell-dimension-book.magic_guidance.resource.ocean.text.text",
+      "title": "",
+      "use_markdown_in_title": false
+    }
+  ],
+  "show_when_any_parent_unlocked": false,
+  "x": -3,
+  "y": 1
+}

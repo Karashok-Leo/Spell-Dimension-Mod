@@ -20,9 +20,9 @@ public class ResourceCategory extends CategoryProvider
     protected String[] generateEntryMap()
     {
         return new String[]{
-                "a_b_c",
-                "_____",
-                "d_e_f",
+                "_a_b_c_",
+                "_______",
+                "d_e_f_g",
         };
     }
 
@@ -32,13 +32,15 @@ public class ResourceCategory extends CategoryProvider
         BookEntryModel alloy = new AlloyEntry(this).generate('a');
         BookEntryModel trader = new TraderEntry(this).generate('b');
         BookEntryModel dungeon = new DungeonEntry(this).generate('c');
-        BookEntryModel event = new PivotEntry(this).generate('d');
-        BookEntryModel lootCharm = new LootCharmEntry(this).generate('e');
-        BookEntryModel curse = new CurseEntry(this).generate('f');
+        BookEntryModel ocean = new OceanEntry(this).generate('d');
+        BookEntryModel event = new PivotEntry(this).generate('e');
+        BookEntryModel lootCharm = new LootCharmEntry(this).generate('f');
+        BookEntryModel curse = new CurseEntry(this).generate('g');
 
         this.add(alloy);
         this.add(trader);
         this.add(dungeon);
+        this.add(ocean);
         this.add(event);
         this.add(lootCharm);
         this.add(curse);

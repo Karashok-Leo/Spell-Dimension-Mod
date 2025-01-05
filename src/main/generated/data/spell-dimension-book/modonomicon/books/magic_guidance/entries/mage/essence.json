@@ -77,6 +77,17 @@
       ],
       "text": "book.spell-dimension-book.magic_guidance.mage.essence.base.text",
       "title": "book.spell-dimension-book.magic_guidance.mage.essence.base.title"
+    },
+    {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "show_title_separator": true,
+      "text": "book.spell-dimension-book.magic_guidance.mage.essence.loot.text",
+      "title": "",
+      "use_markdown_in_title": false
     }
   ],
   "parents": [

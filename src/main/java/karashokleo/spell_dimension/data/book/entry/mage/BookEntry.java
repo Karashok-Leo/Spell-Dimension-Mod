@@ -52,7 +52,6 @@ public class BookEntry extends BaseEntryProvider
         this.lang().add(context.pageTitle(), "Spell Book");
         this.lang().add(context.pageText(),
                 """
-                        \\
                         A spell book is a vehicle for recording spells. You can use the Spell Binding Table to transform a normal book into the most basic spell book. But this is just the beginning, you can then use the craft table to craft it into primary, intermediate, and advanced spell books.
                         """
         );
@@ -78,14 +77,14 @@ public class BookEntry extends BaseEntryProvider
                 .build();
 
         context.page("next");
-        this.lang().add(context.pageTitle(), "Spell Book");
+        this.lang().add(context.pageTitle(), "Advanced Spell Book");
         this.lang().add(context.pageText(),
                 """
                         \\
                         Advanced spell books require special materials to synthesise. The more advanced the spell book, the more spell slots it provides.
                         """
         );
-        this.lang("zh_cn").add(context.pageTitle(), "法术书");
+        this.lang("zh_cn").add(context.pageTitle(), "高级法术书");
         this.lang("zh_cn").add(context.pageText(),
                 """
                         \\
@@ -95,7 +94,6 @@ public class BookEntry extends BaseEntryProvider
 
         BookSpotlightPageModel next = BookSpotlightPageModel
                 .builder()
-                .withTitle(context.pageTitle())
                 .withText(context.pageText())
                 .withItem(BookGenUtil.getIngredient(AllStacks.SPELL_BOOK_STACKS))
                 .build();

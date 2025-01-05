@@ -1,10 +1,11 @@
-package karashokleo.spell_dimension.data.book.entry.power;
+package karashokleo.spell_dimension.data.book.entry.resource;
 
 import com.klikli_dev.modonomicon.api.datagen.BookContextHelper;
 import com.klikli_dev.modonomicon.api.datagen.CategoryProvider;
 import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookSpotlightPageModel;
+import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
 import karashokleo.spell_dimension.data.book.entry.BaseEntryProvider;
 import karashokleo.spell_dimension.init.AllItems;
 import net.minecraft.recipe.Ingredient;
@@ -45,15 +46,16 @@ public class OceanEntry extends BaseEntryProvider
     @Override
     protected List<BookPageModel> pages(BookContextHelper context)
     {
-        context.page("text");
+        context.page("world");
         this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
                 """
-                        \\
                         The Ocean of Consciousness is a world of nothingness.
                         \\
+                        Once you enter this world, your game difficulty will be greatly increased:
                         \\
-                        Once you enter this world, your spawn point will be permanently anchored here, and your hostility level will be raised to at least 100 levels.
+                        \\
+                        You will lose your current spawn point and can only set your spawn point in this world.
                         """
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
@@ -63,17 +65,50 @@ public class OceanEntry extends BaseEntryProvider
                         识之海是一个一无所有的世界。
                         \\
                         \\
-                        一旦你进入这个世界，你的出生点将被永远锚定在这里，你的恶意等级将被提升至至少100级。
+                        一旦你进入这个世界，你的游戏难度将大幅提升:
+                        \\
+                        \\
+                        你将丢失当前的出生点，从此只能将出生点设置在这个世界。
                         """
         );
-        BookSpotlightPageModel text = BookSpotlightPageModel
+        BookSpotlightPageModel world = BookSpotlightPageModel
                 .builder()
                 .withTitle(context.pageTitle())
                 .withText(context.pageText())
                 .withItem(Ingredient.ofItems(AllItems.MAGIC_MIRROR))
                 .build();
 
-        return List.of(text);
+        context.page("text");
+        this.lang().add(context.pageText(),
+                """
+                        \\
+                        Your hostility level will be raised to at least level 100.
+                        \\
+                        \\
+                        You can no longer use Hostility Orbs and Bottles of Sanity.
+                        \\
+                        \\
+                        You cannot use Waystones to enter or exit the Ocean of Consciousness, the only way to enter is to use the **Magic Mirror**, and the only exit is the **Consciousness Pivot**.
+                        """
+        );
+        this.lang("zh_cn").add(context.pageText(),
+                """
+                        \\
+                        你的恶意等级将被提升至至少100级。
+                        \\
+                        \\
+                        你不再能够使用恶意吸收宝珠和恶意净化药水。
+                        \\
+                        \\
+                        你不能使用传送石碑出入识之海，唯一的进入方法是使用**魔镜**，唯一的出口是**意识枢纽**。
+                        """
+        );
+        BookTextPageModel text = BookTextPageModel
+                .builder()
+                .withText(context.pageText())
+                .build();
+
+        return List.of(world, text);
     }
 
     @Override

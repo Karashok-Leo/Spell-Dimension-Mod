@@ -61,6 +61,17 @@
       ],
       "text": "book.spell-dimension-book.magic_guidance.mage.cast.cast.text",
       "title": "book.spell-dimension-book.magic_guidance.mage.cast.cast.title"
+    },
+    {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "show_title_separator": true,
+      "text": "book.spell-dimension-book.magic_guidance.mage.cast.pool.text",
+      "title": "",
+      "use_markdown_in_title": false
     }
   ],
   "show_when_any_parent_unlocked": false,

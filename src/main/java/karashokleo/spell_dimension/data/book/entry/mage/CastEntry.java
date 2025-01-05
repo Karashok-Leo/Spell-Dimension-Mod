@@ -5,6 +5,7 @@ import com.klikli_dev.modonomicon.api.datagen.CategoryProvider;
 import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookSpotlightPageModel;
+import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
 import karashokleo.spell_dimension.data.book.entry.BaseEntryProvider;
 import karashokleo.spell_dimension.util.BookGenUtil;
 import net.wizards.item.Weapons;
@@ -68,7 +69,25 @@ public class CastEntry extends BaseEntryProvider
                 .withItem(BookGenUtil.getIngredient(Weapons.entries.stream().map(entry -> entry.item().getDefaultStack())))
                 .build();
 
-        return List.of(cast);
+        context.page("pool");
+        this.lang().add(context.pageText(),
+                """
+                        \\
+                        Which spells a mage can cast depends on their spell pool. A mage's spell pool is determined by the item they are holding and the spell book they have equipped.
+                        """
+        );
+        this.lang("zh_cn").add(context.pageText(),
+                """
+                        \\
+                        魔法师能够施展哪些法术取决于他们的法术池。魔法师的法术池由他们手持的物品和装备的法术书决定。
+                        """
+        );
+        BookTextPageModel pool = BookTextPageModel
+                .builder()
+                .withText(context.pageText())
+                .build();
+
+        return List.of(cast, pool);
     }
 
     @Override

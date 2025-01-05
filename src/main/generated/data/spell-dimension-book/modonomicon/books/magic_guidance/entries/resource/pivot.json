@@ -30,20 +30,9 @@
       "text": "book.spell-dimension-book.magic_guidance.resource.pivot.beacon.text",
       "title": "",
       "use_markdown_in_title": false
-    },
-    {
-      "type": "modonomicon:text",
-      "anchor": "",
-      "condition": {
-        "type": "modonomicon:none"
-      },
-      "show_title_separator": true,
-      "text": "book.spell-dimension-book.magic_guidance.resource.pivot.event.text",
-      "title": "book.spell-dimension-book.magic_guidance.resource.pivot.event.title",
-      "use_markdown_in_title": false
     }
   ],
   "show_when_any_parent_unlocked": false,
-  "x": -2,
+  "x": -1,
   "y": 1
 }

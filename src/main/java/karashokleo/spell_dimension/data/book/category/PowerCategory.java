@@ -34,11 +34,10 @@ public class PowerCategory extends CategoryProvider
     protected void generateEntries()
     {
         BookEntryModel health = new HealthEntry(this).generate('a');
-        BookEntryModel ocean = new OceanEntry(this).generate('b');
         BookEntryModel hostility = new HostilityEntry(this).generate('c');
         BookEntryModel trait = new TraitEntry(this).generate('d');
         BookEntryModel smith = new SmithEntry(this).generate('e');
-        BookEntryModel armor_set = new ArmorSetEntry(this).generate('f');
+        BookEntryModel armor_set = new ArmorSetEntry(this).generate('b');
         BookEntryModel spell_infusion = new SpellInfusionEntry(this).generate('g');
         BookEntryModel locate = new LocateSpellEntry(this).generate('h');
         BookEntryModel summon = new SummonSpellEntry(this).generate('i');
@@ -46,7 +45,6 @@ public class PowerCategory extends CategoryProvider
         BookEntryModel rarity = new RarityEntry(this).generate('k');
 
         this.add(health);
-        this.add(ocean);
         this.add(hostility);
         this.add(trait);
         this.add(smith);
