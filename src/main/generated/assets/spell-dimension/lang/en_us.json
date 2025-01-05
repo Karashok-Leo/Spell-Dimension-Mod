@@ -397,6 +397,7 @@
   "tooltip.spell-dimension.quest.loot_item": "Defeat %s to obtain %s",
   "tooltip.spell-dimension.quest.mul": "%s × %s",
   "tooltip.spell-dimension.quest.obtain_current": "Right click to obtain all current quests",
+  "tooltip.spell-dimension.quest.open_entry": "Shift + Right click to open the related guide page",
   "tooltip.spell-dimension.quest.reward": "Reward:",
   "tooltip.spell-dimension.quest.task": "Task:",
   "tooltip.spell-dimension.rejuvenating_blossom.usage_1": "- When injured, if the amount of health that your existing regeneration effect will recover is less than the damage dealt * the count of this item equipped, then remove all negative effects from you.",

@@ -14,6 +14,11 @@ public class QuestToEntryConfig
 {
     private static final Map<Quest, Identifier> QUEST_TO_ENTRY = new HashMap<>();
 
+    public static boolean hasEntry(Quest quest)
+    {
+        return QUEST_TO_ENTRY.containsKey(quest);
+    }
+
     public static void openEntry(Quest quest)
     {
         Identifier entryId = QUEST_TO_ENTRY.get(quest);

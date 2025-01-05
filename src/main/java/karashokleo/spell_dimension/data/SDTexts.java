@@ -109,6 +109,7 @@ public enum SDTexts
     TOOLTIP$QUEST$TASK("Task:", "任务目标:"),
     TOOLTIP$QUEST$REWARD("Reward:", "任务奖励:"),
     TOOLTIP$QUEST$COMPLETE("Right click to submit", "右键提交任务"),
+    TOOLTIP$QUEST$OPEN_ENTRY("Shift + Right click to open the related guide page", "Shift+右键打开相关指引页面"),
     TOOLTIP$QUEST$OBTAIN_CURRENT("Right click to obtain all current quests", "右键获取当前所有任务"),
     TOOLTIP$QUEST$MUL("%s × %s", "%s × %s"),
     TOOLTIP$QUEST$AND(" and ", "和"),
