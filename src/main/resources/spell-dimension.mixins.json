@@ -10,6 +10,7 @@
     "EnchantRandomlyLootFunctionMixin",
     "EndPortalBlockMixin",
     "LivingEntityMixin",
+    "LootingCharmMixin",
     "MobSpawnerLogicMixin",
     "PlayerInventoryAccessor",
     "ServerPlayerEntityMixin",

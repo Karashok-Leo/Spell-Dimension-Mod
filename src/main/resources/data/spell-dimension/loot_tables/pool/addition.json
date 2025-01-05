@@ -6,21 +6,6 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "backpacked:backpack",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:empty",
-          "weight": 66
-        }
-      ],
-      "rolls": 1
-    },
-    {
-      "bonus_rolls": 0.0,
-      "entries": [
-        {
-          "type": "minecraft:item",
           "name": "fusion-smithing:fusion_smithing_template",
           "weight": 1
         },
