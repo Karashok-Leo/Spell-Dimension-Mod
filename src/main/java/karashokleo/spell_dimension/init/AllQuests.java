@@ -38,6 +38,7 @@ public class AllQuests
     public static SimpleAdvancementQuest KILL_TRAIT;
 
     public static SimpleTagIngredientQuest BASE_ESSENCE;
+    public static SimpleTagIngredientQuest RUNE;
     public static SimpleItemQuest MORE_ESSENCE;
     public static SimpleTagIngredientQuest SPELL_BOOK_0;
     public static SimpleTagIngredientQuest SPELL_BOOK_1;
@@ -132,6 +133,17 @@ public class AllQuests
                 .addEnDesc("Obtain any basic magic essence")
                 .addZhDesc("获取任意基础魔法精华")
                 .register();
+        RUNE = Entry.of(
+                        "rune",
+                        new SimpleTagIngredientQuest(
+                                AllTags.RUNE,
+                                SDBags.ARTIFACT.getStack()
+                        )
+                )
+                .addDependencies(BASE_ESSENCE)
+                .addEnDesc("Use basic magic essence to craft runes at the rune altar")
+                .addZhDesc("使用基础魔法精华在符文祭坛上合成符文")
+                .register();
         MORE_ESSENCE = Entry.of(
                         "more_essence",
                         new SimpleItemQuest(
@@ -153,8 +165,8 @@ public class AllQuests
                         )
                 )
                 .addDependencies(CHOOSE_PATH)
-                .addEnDesc("Craft a Primary Spell Book")
-                .addZhDesc("合成一本初级法术书")
+                .addEnDesc("Craft your Apprentice Spell Book into a Primary Spell Book")
+                .addZhDesc("将学徒法术书合成为初级法术书")
                 .register();
         SPELL_BOOK_1 = Entry.of(
                         "spell_book_1",
@@ -164,8 +176,8 @@ public class AllQuests
                         )
                 )
                 .addDependencies(SPELL_BOOK_0)
-                .addEnDesc("Craft a Intermediate Spell Book")
-                .addZhDesc("合成一本中级法术书")
+                .addEnDesc("Craft your Primary Spell Book into a Intermediate Spell Book")
+                .addZhDesc("将初级法术书合成为中级法术书")
                 .register();
         SPELL_BOOK_2 = Entry.of(
                         "spell_book_2",
@@ -175,8 +187,8 @@ public class AllQuests
                         )
                 )
                 .addDependencies(SPELL_BOOK_1)
-                .addEnDesc("Craft a Advanced Spell Book")
-                .addZhDesc("合成一本高级法术书")
+                .addEnDesc("Craft your Intermediate Spell Book into a Advanced Spell Book")
+                .addZhDesc("将中级法术书合成为高级法术书")
                 .register();
         SPELL_POWER_0 = Entry.of(
                         "spell_power_0",
@@ -359,7 +371,7 @@ public class AllQuests
                         new SimpleLootItemQuest(
                                 "soulsweapons:chaos_monarch",
                                 "soulsweapons:chaos_crown",
-                                SDBags.RARE_GEAR.getStack()
+                                TrinketItems.LOOT_2.getDefaultStack()
                         )
                 )
                 .addDependencies(KILL_WITHER)
@@ -379,7 +391,7 @@ public class AllQuests
                         new SimpleLootItemQuest(
                                 "deeperdarker:stalker",
                                 "deeperdarker:soul_crystal",
-                                TrinketItems.LOOT_2.getDefaultStack()
+                                SDBags.RARE_GEAR.getStack()
                         )
                 )
                 .addDependencies(KILL_WARDEN)

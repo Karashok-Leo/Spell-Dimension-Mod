@@ -5,6 +5,7 @@ import com.klikli_dev.modonomicon.api.datagen.CategoryProvider;
 import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookSpotlightPageModel;
+import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
 import karashokleo.l2hostility.content.item.TrinketItems;
 import karashokleo.spell_dimension.data.book.entry.BaseEntryProvider;
 import karashokleo.spell_dimension.util.BookGenUtil;
@@ -82,7 +83,37 @@ public class LootCharmEntry extends BaseEntryProvider
                 .withItem(BookGenUtil.getIngredient(charms.stream().map(Item::getDefaultStack)))
                 .build();
 
-        return List.of(charm);
+        context.page("obtain");
+        this.lang().add(context.pageText(),
+                """
+                        \\
+                        To obtain looting charms of levels 1-4, you need to complete different tasks:
+                        \\
+                        \\
+                        1: Kill The Decaying King
+                        2: Kill Monarch of Chaos
+                        3: Kill Void Blossom
+                        4: Kill Ender Dragon
+                        """
+        );
+        this.lang("zh_cn").add(context.pageText(),
+                """
+                        \\
+                        获取1~4级的抢夺宝珠需要完成不同任务，分别为：
+                        \\
+                        \\
+                        1: 击杀腐朽之王
+                        2: 击杀混沌君主
+                        3: 击杀虚空之花
+                        4: 击杀末影龙
+                        """
+        );
+
+        BookTextPageModel obtain = BookTextPageModel.builder()
+                .withText(context.pageText())
+                .build();
+
+        return List.of(charm, obtain);
     }
 
     @Override

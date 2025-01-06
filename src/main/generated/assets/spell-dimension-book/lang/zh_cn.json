@@ -223,6 +223,7 @@
   "book.spell-dimension-book.magic_guidance.resource.loot_charm.charm.title": "抢夺宝珠",
   "book.spell-dimension-book.magic_guidance.resource.loot_charm.description": "",
   "book.spell-dimension-book.magic_guidance.resource.loot_charm.name": "抢夺宝珠",
+  "book.spell-dimension-book.magic_guidance.resource.loot_charm.obtain.text": "\\\n获取1~4级的抢夺宝珠需要完成不同任务，分别为：\n\\\n\\\n1: 击杀腐朽之王\n2: 击杀混沌君主\n3: 击杀虚空之花\n4: 击杀末影龙\n",
   "book.spell-dimension-book.magic_guidance.resource.name": "资源",
   "book.spell-dimension-book.magic_guidance.resource.ocean.description": "",
   "book.spell-dimension-book.magic_guidance.resource.ocean.name": "识之海",

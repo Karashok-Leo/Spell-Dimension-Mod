@@ -223,6 +223,7 @@
   "book.spell-dimension-book.magic_guidance.resource.loot_charm.charm.title": "Looting Charm",
   "book.spell-dimension-book.magic_guidance.resource.loot_charm.description": "",
   "book.spell-dimension-book.magic_guidance.resource.loot_charm.name": "Looting Charm",
+  "book.spell-dimension-book.magic_guidance.resource.loot_charm.obtain.text": "\\\nTo obtain looting charms of levels 1-4, you need to complete different tasks:\n\\\n\\\n1: Kill The Decaying King\n2: Kill Monarch of Chaos\n3: Kill Void Blossom\n4: Kill Ender Dragon\n",
   "book.spell-dimension-book.magic_guidance.resource.name": "Resource",
   "book.spell-dimension-book.magic_guidance.resource.ocean.description": "",
   "book.spell-dimension-book.magic_guidance.resource.ocean.name": "Ocean of Consciousness",

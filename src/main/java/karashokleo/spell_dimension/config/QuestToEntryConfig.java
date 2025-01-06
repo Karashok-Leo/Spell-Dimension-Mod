@@ -32,6 +32,7 @@ public class QuestToEntryConfig
         QUEST_TO_ENTRY.put(AllQuests.CHOOSE_PATH, BookGenUtil.id("mage/bind"));
         QUEST_TO_ENTRY.put(AllQuests.KILL_TRAIT, BookGenUtil.id("power/hostility"));
         QUEST_TO_ENTRY.put(AllQuests.BASE_ESSENCE, BookGenUtil.id("mage/essence"));
+        QUEST_TO_ENTRY.put(AllQuests.RUNE, BookGenUtil.id("mage/rune"));
         QUEST_TO_ENTRY.put(AllQuests.MORE_ESSENCE, BookGenUtil.id("mage/enchant"));
         QUEST_TO_ENTRY.put(AllQuests.SPELL_BOOK_0, BookGenUtil.id("mage/book"));
         QUEST_TO_ENTRY.put(AllQuests.SPELL_BOOK_1, BookGenUtil.id("mage/book"));
