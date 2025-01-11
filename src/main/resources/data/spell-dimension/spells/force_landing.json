@@ -1,5 +1,5 @@
 {
-  "school": "ARCANE",
+  "school": "spell-dimension:generic",
   "range": 12,
   "cast": {
     "duration": 2.0,
@@ -56,8 +56,8 @@
       "action": {
         "type": "STATUS_EFFECT",
         "status_effect": {
-          "effect_id": "l2hostility:gravity",
-          "amplifier": 9,
+          "effect_id": "spell-dimension:force_landing",
+          "amplifier": 0,
           "duration": 8,
           "show_particles": false
         }
@@ -65,7 +65,7 @@
     }
   ],
   "cost": {
-    "cooldown_duration": 45,
+    "cooldown_duration": 4,
     "exhaust": 0.5
   }
 }

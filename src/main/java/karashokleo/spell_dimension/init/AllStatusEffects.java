@@ -9,11 +9,12 @@ import net.spell_engine.api.effect.Synchronized;
 
 public class AllStatusEffects
 {
-    public static PhaseEffect PHASE = new PhaseEffect();
-    public static IgniteEffect IGNITE = new IgniteEffect();
-    public static FrostAuraEffect FROST_AURA = new FrostAuraEffect();
-    public static FrostedEffect FROSTED = new FrostedEffect();
-    public static AirHopEffect AIR_HOP = new AirHopEffect();
+    public static PhaseEffect PHASE;
+    public static IgniteEffect IGNITE;
+    public static FrostAuraEffect FROST_AURA;
+    public static FrostedEffect FROSTED;
+    public static AirHopEffect AIR_HOP;
+    public static ForceLandingEffect FORCE_LANDING;
     //    public static final PhaseEffect ASTRAL_TRIP = new PhaseEffect();
 
     public static void register()
@@ -47,6 +48,12 @@ public class AllStatusEffects
                 .addENDesc("Jump in the air")
                 .addZH("空中跳跃")
                 .addZHDesc("在空中跳跃")
+                .register();
+        FORCE_LANDING = new Entry<>("force_landing", new ForceLandingEffect())
+                .addEN()
+                .addENDesc("Force landing")
+                .addZH("迫降")
+                .addZHDesc("强制着陆")
                 .register();
 
         Synchronized.configure(PHASE, true);

@@ -50,8 +50,8 @@ public enum SpellTexts
     FORCE_LANDING(
             "Force Landing",
             "迫降",
-            "Make all targets within a certain range get the gravity {effect_amplifier} effect for {effect_duration} seconds.",
-            "使一定范围内所有目标获得重力{effect_amplifier}效果, 持续{effect_duration}秒."
+            "Make all targets within a certain range get the Force Landing {effect_amplifier} effect for {effect_duration} seconds.",
+            "使一定范围内所有目标获得迫降{effect_amplifier}效果, 持续{effect_duration}秒."
     ),
     CONVERGE(
             "Converge",
