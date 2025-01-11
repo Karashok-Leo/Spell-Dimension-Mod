@@ -92,7 +92,7 @@ public class AllTags
         SpellDimension.ITEM_TAGS.getOrCreateContainer(HEART_FOOD)
                 .add(Items.ENCHANTED_GOLDEN_APPLE)
                 .addOptional(
-                        new Identifier("l2hostility:life_essence"),
+//                        new Identifier("l2hostility:life_essence"),
                         new Identifier("midashunger:enchanted_golden_carrot")
                 );
 

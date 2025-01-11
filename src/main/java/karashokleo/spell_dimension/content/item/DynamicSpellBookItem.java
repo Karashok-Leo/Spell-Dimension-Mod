@@ -98,8 +98,10 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
                 SDTexts.TOOLTIP$BOOK_REQUIREMENT.get(
                         this.getRequirementSpellPower(),
                         Text.translatable("attribute.name.spell_power." + school.id.getPath())
-                ).formatted(Formatting.DARK_GRAY)
+                ).setStyle(Style.EMPTY.withColor(this.school.color))
         );
+        tooltip.add(SDTexts.TOOLTIP$DYNAMIC_BOOK$USAGE_1.get().formatted(Formatting.BOLD));
+        tooltip.add(SDTexts.TOOLTIP$DYNAMIC_BOOK$USAGE_2.get());
     }
 
     @Override

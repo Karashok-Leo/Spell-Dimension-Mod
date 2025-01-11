@@ -92,7 +92,7 @@ public class MagicMirrorItem extends Item
                 if (destinationPos == null)
                 {
                     FutureTask.submit(
-                            TeleportUtil.getTeleportPosFuture(serverWorld, destinationWorld, player.getBlockPos()),
+                            TeleportUtil.getChangeWorldPosFuture(serverWorld, destinationWorld, player.getBlockPos()),
                             optional -> optional.ifPresent(
                                     pos -> TeleportUtil.teleportPlayerChangeDimension(
                                             player,

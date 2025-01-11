@@ -1,6 +1,7 @@
 package karashokleo.spell_dimension.util;
 
 import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ChunkTicketType;
@@ -63,7 +64,7 @@ public class TeleportUtil
         serverWorld.playSound(null, entity.getBlockPos(), SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.BLOCKS, 1F, 1F);
     }
 
-    public static CompletableFuture<Optional<BlockPos>> getTeleportPosFuture(ServerWorld source, ServerWorld destination, BlockPos pos)
+    public static CompletableFuture<Optional<BlockPos>> getChangeWorldPosFuture(ServerWorld source, ServerWorld destination, BlockPos pos)
     {
         return getTopYFuture(destination, pos.getX(), pos.getZ())
                 .thenApply(
@@ -80,10 +81,38 @@ public class TeleportUtil
                 );
     }
 
-    public static CompletableFuture<Optional<BlockPos>> getTopPosFuture(ServerWorld world, BlockPos pos)
+    public static CompletableFuture<Optional<BlockPos>> getTeleportPosFuture(ServerWorld world, BlockPos pos)
     {
-        return getTopYFuture(world, pos.getX(), pos.getZ())
-                .thenApply(optionalY -> optionalY.map(topY -> new BlockPos(pos.getX(), topY, pos.getZ())));
+        return world.getDimension().hasCeiling() ?
+                CompletableFuture.supplyAsync(() -> Optional.ofNullable(getLandingPos(world, pos))) :
+                getTopYFuture(world, pos.getX(), pos.getZ())
+                        .thenApply(optionalY -> optionalY.map(topY -> new BlockPos(pos.getX(), topY, pos.getZ())));
+    }
+
+    public static BlockPos getLandingPos(ServerWorld world, BlockPos pos)
+    {
+        BlockState state = world.getBlockState(pos);
+        BlockPos.Mutable mutable = pos.mutableCopy();
+
+        if (state.isAir())
+        {
+            while (state.isAir())
+            {
+                mutable.move(0, -1, 0);
+                state = world.getBlockState(mutable);
+                if (mutable.getY() < world.getBottomY())
+                    break;
+            }
+            return mutable.up();
+        } else
+        {
+            while (!state.isAir())
+            {
+                mutable.move(0, 1, 0);
+                state = world.getBlockState(mutable);
+            }
+            return mutable;
+        }
     }
 
     public static CompletableFuture<Optional<Integer>> getTopYFuture(ServerWorld world, int x, int z)
@@ -96,6 +125,6 @@ public class TeleportUtil
                         true
                 )
                 .thenApply(either -> either.left()
-                        .map(chunk -> chunk.sampleHeightmap(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, x & 15, z & 15)));
+                        .map(chunk -> chunk.sampleHeightmap(Heightmap.Type.MOTION_BLOCKING, x & 15, z & 15)));
     }
 }

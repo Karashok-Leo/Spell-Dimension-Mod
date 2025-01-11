@@ -96,7 +96,9 @@ public enum SDTexts
      * Tooltip
      */
     TOOLTIP$INVALID("Invalid Nbt Data!", "无效的Nbt数据!"),
-    TOOLTIP$USE$CLICK("Usage: Right click on other item in the inventory.", "用法: 物品栏中用该物品右键其他物品."),
+    TOOLTIP$DYNAMIC_BOOK$USAGE_1("Can be used as a container for spell scrolls", "可作为法术卷轴的容器"),
+    TOOLTIP$DYNAMIC_BOOK$USAGE_2("Usage: In the inventory, right-click on the book with a spell scroll to put it in, or right-click on an empty slot with the book to take the scroll out.", "用法: 物品栏中用法术卷轴右键该物品将其放入, 或使用该物品右键空槽位将卷轴取出."),
+    TOOLTIP$USE$CLICK("Usage: Right-click on other item with this item in the inventory.", "用法: 物品栏中用该物品右键其他物品."),
     TOOLTIP$USE$PRESS("Usage: Main hand holding, press the right button.", "用法: 主手持有时，长按右键."),
     TOOLTIP$BOOK_REQUIREMENT("Must have at least %s %s to equip", "需要拥有至少%s的%s才能装备"),
     TOOLTIP$EFFECT("Effect:", "效果:"),
@@ -108,9 +110,9 @@ public enum SDTexts
     TOOLTIP$END_STAGE("Use to unlock the End stage.", "使用后解锁终末阶段."),
     TOOLTIP$QUEST$TASK("Task:", "任务目标:"),
     TOOLTIP$QUEST$REWARD("Reward:", "任务奖励:"),
-    TOOLTIP$QUEST$COMPLETE("Right click to submit", "右键提交任务"),
-    TOOLTIP$QUEST$OPEN_ENTRY("Shift + Right click to open the related guide page", "Shift+右键打开相关指引页面"),
-    TOOLTIP$QUEST$OBTAIN_CURRENT("Right click to obtain all current quests", "右键获取当前所有任务"),
+    TOOLTIP$QUEST$COMPLETE("Right-click to submit", "右键提交任务"),
+    TOOLTIP$QUEST$OPEN_ENTRY("Shift + Right-click to open the related guide page", "Shift+右键打开相关指引页面"),
+    TOOLTIP$QUEST$OBTAIN_CURRENT("Right-click to obtain all current quests", "右键获取当前所有任务"),
     TOOLTIP$QUEST$MUL("%s × %s", "%s × %s"),
     TOOLTIP$QUEST$AND(" and ", "和"),
     TOOLTIP$QUEST$LOOT_ITEM("Defeat %s to obtain %s", "击杀%s并获取%s"),

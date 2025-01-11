@@ -99,7 +99,7 @@ public class LocateSpell
         Pair<BlockPos, RegistryEntry<Biome>> pair = world.locateBiome(e -> e.isIn(tagKey), pos, 6400, 32, 64);
         if (pair == null)
             return CompletableFuture.completedFuture(Optional.empty());
-        return TeleportUtil.getTopPosFuture(world, pair.getFirst());
+        return TeleportUtil.getTeleportPosFuture(world, pair.getFirst());
     }
 
     private static CompletableFuture<Optional<BlockPos>> locateStructure(ServerWorld world, BlockPos pos, RegistryKey<Structure> registryKey)
@@ -117,7 +117,7 @@ public class LocateSpell
                 .locateStructure(world, optional.get(), pos, 100, false);
         if (pair == null)
             return CompletableFuture.completedFuture(Optional.empty());
-        return TeleportUtil.getTopPosFuture(world, pair.getFirst());
+        return TeleportUtil.getTeleportPosFuture(world, pair.getFirst());
     }
 
     private static void spawnLocatePortal(ServerWorld world, BlockPos destination, BlockPos pos)

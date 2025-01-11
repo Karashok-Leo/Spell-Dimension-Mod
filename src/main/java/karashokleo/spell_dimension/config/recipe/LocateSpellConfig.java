@@ -39,7 +39,7 @@ public class LocateSpellConfig
     public static final RegistryKey<Structure> MONUMENT = RegistryKey.of(RegistryKeys.STRUCTURE, new Identifier("betteroceanmonuments:ocean_monument"));
     public static final RegistryKey<Structure> FORTRESS = RegistryKey.of(RegistryKeys.STRUCTURE, new Identifier("betterfortresses:fortress"));
     public static final RegistryKey<Structure> ANCIENT_TEMPLE = RegistryKey.of(RegistryKeys.STRUCTURE, new Identifier("deeperdarker:ancient_temple"));
-    public static final RegistryKey<Structure> GRAVE_RUINS = RegistryKey.of(RegistryKeys.STRUCTURE, new Identifier("graveyard:runes"));
+    public static final RegistryKey<Structure> GRAVE_RUINS = RegistryKey.of(RegistryKeys.STRUCTURE, new Identifier("graveyard:ruins"));
     public static final RegistryKey<Structure> LICH_PRISON = RegistryKey.of(RegistryKeys.STRUCTURE, new Identifier("graveyard:lich_prison"));
     public static final RegistryKey<Structure> GAUNTLET_ARENA = RegistryKey.of(RegistryKeys.STRUCTURE, new Identifier("bosses_of_mass_destruction:gauntlet_arena"));
     public static final RegistryKey<Structure> OBSIDILITH_ARENA = RegistryKey.of(RegistryKeys.STRUCTURE, new Identifier("bosses_of_mass_destruction:obsidilith_arena"));

@@ -3,10 +3,6 @@
   "values": [
     "minecraft:enchanted_golden_apple",
     {
-      "id": "l2hostility:life_essence",
-      "required": false
-    },
-    {
       "id": "midashunger:enchanted_golden_carrot",
       "required": false
     }

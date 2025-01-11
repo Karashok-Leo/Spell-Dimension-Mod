@@ -56,7 +56,7 @@ public class DayNightEntry extends BaseEntryProvider
                         Level: 250+
                         \\
                         \\
-                        Use Arkenstone to summon.
+                        Use Chaos Orb to summon.
                         \\
                         \\
                         Drops **Celestial Luminary** upon defeating Night Prowler.
@@ -69,7 +69,7 @@ public class DayNightEntry extends BaseEntryProvider
                         等级: 250+
                         \\
                         \\
-                        使用阿肯宝钻召唤。
+                        使用混沌宝珠召唤。
                         \\
                         \\
                         击败夜伏者后掉落**无尽星辉**。

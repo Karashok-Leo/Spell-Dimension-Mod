@@ -308,7 +308,7 @@ public class ConsciousnessCoreTile extends BlockEntity
         ServerWorld destinationWorld = serverWorld.getServer().getOverworld();
         this.destinationWorld = destinationWorld.getRegistryKey();
         FutureTask.submit(
-                TeleportUtil.getTeleportPosFuture(serverWorld, destinationWorld, this.pos),
+                TeleportUtil.getChangeWorldPosFuture(serverWorld, destinationWorld, this.pos),
                 optional -> optional.ifPresentOrElse(
                         this::setDestinationPos,
                         this::selfDestruct
