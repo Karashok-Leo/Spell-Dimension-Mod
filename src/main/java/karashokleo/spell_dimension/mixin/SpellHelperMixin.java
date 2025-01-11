@@ -1,12 +1,15 @@
 package karashokleo.spell_dimension.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
+import karashokleo.l2hostility.util.EffectHelper;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.util.SchoolUtil;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
@@ -18,6 +21,7 @@ import net.spell_engine.internals.casting.SpellCast;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -69,5 +73,18 @@ public abstract class SpellHelperMixin
             player.sendMessage(SDTexts.TEXT$SKILLED_SCHOOL.get(), true);
             cir.setReturnValue(SpellCast.Attempt.none());
         }
+    }
+
+    @Redirect(
+            method = "performImpact",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/entity/LivingEntity;addStatusEffect(Lnet/minecraft/entity/effect/StatusEffectInstance;Lnet/minecraft/entity/Entity;)Z"
+            )
+    )
+    private static boolean inject_performImpact(LivingEntity instance, StatusEffectInstance effect, Entity source)
+    {
+        EffectHelper.forceAddEffectWithEvent(instance, effect, source);
+        return true;
     }
 }
