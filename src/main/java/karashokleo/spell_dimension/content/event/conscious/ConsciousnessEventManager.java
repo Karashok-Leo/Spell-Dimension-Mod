@@ -18,7 +18,7 @@ public class ConsciousnessEventManager
 
     public static int randomEventLevel(Random random, double playerLevel, double levelFactor)
     {
-        return (int) (playerLevel * (1 + levelFactor * (1 + random.nextGaussian() * 0.4)));
+        return (int) playerLevel + random.nextInt((int) (100 * (levelFactor + 0.2)));
     }
 
     public static void breakBarrier(World world, BlockPos pos, int radius)
