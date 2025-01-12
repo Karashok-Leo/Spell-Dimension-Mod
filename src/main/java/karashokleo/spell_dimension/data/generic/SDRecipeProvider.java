@@ -103,23 +103,6 @@ public class SDRecipeProvider extends FabricRecipeProvider
                 .offerTo(exporter, SpellDimension.modLoc("spell_infusion_pedestal"));
 
         ShapedRecipeJsonBuilder
-                .create(RecipeCategory.MISC, Items.ENCHANTED_GOLDEN_APPLE)
-                .pattern("SSS")
-                .pattern("SAS")
-                .pattern("SSS")
-                .input('S', AllItems.SPAWNER_SOUL)
-                .input('A', Items.GOLDEN_APPLE)
-                .criterion(
-                        FabricRecipeProvider.hasItem(AllItems.SPAWNER_SOUL),
-                        FabricRecipeProvider.conditionsFromItem(AllItems.SPAWNER_SOUL)
-                )
-                .criterion(
-                        FabricRecipeProvider.hasItem(Items.GOLDEN_APPLE),
-                        FabricRecipeProvider.conditionsFromItem(Items.GOLDEN_APPLE)
-                )
-                .offerTo(exporter, SpellDimension.modLoc("enchanted_golden_apple"));
-
-        ShapedRecipeJsonBuilder
                 .create(RecipeCategory.MISC, AllItems.BROKEN_MAGIC_MIRROR)
                 .pattern("MMM")
                 .pattern("LPL")

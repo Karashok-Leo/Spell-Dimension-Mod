@@ -128,7 +128,7 @@
   "book.spell-dimension-book.magic_guidance.mage.essence.base.text": "Perhaps you have noticed that there is a probability of dropping some magic essences on spell hits. They are important materials on a mage's growth path, and can be used to craft some magic items, such as spell books, runes and enchanted essences.",
   "book.spell-dimension-book.magic_guidance.mage.essence.base.title": "Base Essence",
   "book.spell-dimension-book.magic_guidance.mage.essence.description": "Subtle crystals of magic.",
-  "book.spell-dimension-book.magic_guidance.mage.essence.loot.text": "The drop chance of base essence is 10.0%%. The advanced looting charm you wear can increase this chance. When the hostility level of the spell target is greater than 100, there is a 80.0%% probability of dropping intermediate essence. When the level of the spell target is greater than 200, there is a 96.0%% probability of dropping advanced essence.",
+  "book.spell-dimension-book.magic_guidance.mage.essence.loot.text": "The drop chance of base essence is 15.0%%. The advanced looting charm you wear can increase this chance. When the hostility level of the spell target is greater than 100, there is a 80.0%% probability of dropping intermediate essence. When the level of the spell target is greater than 200, there is a 96.0%% probability of dropping advanced essence.",
   "book.spell-dimension-book.magic_guidance.mage.essence.name": "Spell Essence",
   "book.spell-dimension-book.magic_guidance.mage.mending.description": "Untouched.",
   "book.spell-dimension-book.magic_guidance.mage.mending.mending.text": "\\\nMending Essence completely repairs an item and removes its accumulated repair penalties. Mending Essence cannot be crafted and can only be obtained from loot.\n",
