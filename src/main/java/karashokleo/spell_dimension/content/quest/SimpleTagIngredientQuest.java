@@ -8,15 +8,16 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.tag.TagKey;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 public record SimpleTagIngredientQuest(
         List<TagKey<Item>> tags,
-        List<ItemStack> rewards
+        Supplier<ItemStack> reward
 ) implements IngredientTaskQuest, ItemRewardQuest, AutoDescQuest
 {
-    public SimpleTagIngredientQuest(TagKey<Item> tag, ItemStack reward)
+    public SimpleTagIngredientQuest(TagKey<Item> tag, Supplier<ItemStack> reward)
     {
-        this(List.of(tag), List.of(reward));
+        this(List.of(tag), reward);
     }
 
     @Override
@@ -28,6 +29,6 @@ public record SimpleTagIngredientQuest(
     @Override
     public List<ItemStack> getRewards()
     {
-        return rewards;
+        return List.of(reward.get());
     }
 }

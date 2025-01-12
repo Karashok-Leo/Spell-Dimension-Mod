@@ -10,17 +10,13 @@ import net.minecraft.world.World;
 import net.spell_power.api.SpellPower;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 public record SpellPowerQuest(
         double min,
-        List<ItemStack> rewards
+        Supplier<ItemStack> reward
 ) implements ItemRewardQuest
 {
-    public SpellPowerQuest(double min, ItemStack reward)
-    {
-        this(min, List.of(reward));
-    }
-
     @Override
     public boolean completeTasks(ServerPlayerEntity player)
     {
@@ -36,7 +32,7 @@ public record SpellPowerQuest(
     @Override
     public List<ItemStack> getRewards()
     {
-        return rewards;
+        return List.of(reward.get());
     }
 
     @Override

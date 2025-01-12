@@ -40,7 +40,7 @@ public enum SDTexts
     TEXT$QUEST_COMPLETED("The quest has been completed", "该任务已完成"),
     TEXT$QUEST_ALL_COMPLETED("All quests have been completed", "所有任务已完成"),
     TEXT$QUEST_REQUIREMENT("Quest requirements not met!", "任务要求未达成！"),
-    TEXT$QUEST$HEALTH("Gain experience to increase your %s to %s", "获取经验以提升你的%s至%s"),
+    TEXT$QUEST$HEALTH("Kill monsters to increase your %s to %s", "击杀怪物以提升你的%s至%s"),
     TEXT$QUEST$SPELL_POWER("Increase any Spell Power to %s", "将任意法术强度提升至%s"),
     TEXT$INVALID_KEY_ITEM("Invalid Key Item!", "无效的索引物品！"),
     TEXT$SPELL_INFUSION("Spell Infusion", "魔力灌注"),

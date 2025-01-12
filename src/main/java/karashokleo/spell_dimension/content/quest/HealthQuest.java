@@ -9,8 +9,9 @@ import net.minecraft.text.Text;
 import net.minecraft.world.World;
 
 import java.util.List;
+import java.util.function.Supplier;
 
-public record HealthQuest(float health, List<ItemStack> rewards) implements ItemRewardQuest
+public record HealthQuest(float health, Supplier<ItemStack> reward) implements ItemRewardQuest
 {
     @Override
     public boolean completeTasks(ServerPlayerEntity player)
@@ -21,7 +22,7 @@ public record HealthQuest(float health, List<ItemStack> rewards) implements Item
     @Override
     public List<ItemStack> getRewards()
     {
-        return this.rewards;
+        return List.of(reward.get());
     }
 
     @Override

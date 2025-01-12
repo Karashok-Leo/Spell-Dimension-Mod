@@ -8,9 +8,10 @@ import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 public record EnderDragonAdvancementQuest(
-        List<ItemStack> rewards
+        Supplier<ItemStack> reward
 ) implements AdvancementQuest, ItemRewardQuest, AutoDescQuest
 {
     private static final Identifier ADVANCEMENT_ID = new Identifier("minecraft:end/kill_dragon");
@@ -24,7 +25,7 @@ public record EnderDragonAdvancementQuest(
     @Override
     public List<ItemStack> getRewards()
     {
-        return rewards;
+        return List.of(reward.get());
     }
 
     @Override

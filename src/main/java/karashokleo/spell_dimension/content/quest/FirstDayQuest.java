@@ -6,8 +6,9 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.stat.Stats;
 
 import java.util.List;
+import java.util.function.Supplier;
 
-public record FirstDayQuest(List<ItemStack> rewards) implements ItemRewardQuest, AutoDescQuest
+public record FirstDayQuest(Supplier<ItemStack> reward) implements ItemRewardQuest, AutoDescQuest
 {
     // 20 minutes
     private static final int ONE_DAY = 20 * 60 * 20;
@@ -15,7 +16,7 @@ public record FirstDayQuest(List<ItemStack> rewards) implements ItemRewardQuest,
     @Override
     public List<ItemStack> getRewards()
     {
-        return this.rewards;
+        return List.of(reward.get());
     }
 
     @Override

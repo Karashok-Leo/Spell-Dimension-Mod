@@ -353,7 +353,7 @@
   "text.spell-dimension.locating": "正在定位: %s",
   "text.spell-dimension.mage": "法师",
   "text.spell-dimension.progress_rollback": "进度已回退！",
-  "text.spell-dimension.quest.health": "获取经验以提升你的%s至%s",
+  "text.spell-dimension.quest.health": "击杀怪物以提升你的%s至%s",
   "text.spell-dimension.quest.spell_power": "将任意法术强度提升至%s",
   "text.spell-dimension.quest_all_completed": "所有任务已完成",
   "text.spell-dimension.quest_complete": "任务完成！",

@@ -353,7 +353,7 @@
   "text.spell-dimension.locating": "Locating: %s",
   "text.spell-dimension.mage": "Mage",
   "text.spell-dimension.progress_rollback": "Progress has been rolled back!",
-  "text.spell-dimension.quest.health": "Gain experience to increase your %s to %s",
+  "text.spell-dimension.quest.health": "Kill monsters to increase your %s to %s",
   "text.spell-dimension.quest.spell_power": "Increase any Spell Power to %s",
   "text.spell-dimension.quest_all_completed": "All quests have been completed",
   "text.spell-dimension.quest_complete": "Quest completed!",

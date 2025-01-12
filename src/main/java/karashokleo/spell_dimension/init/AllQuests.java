@@ -11,7 +11,6 @@ import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.api.quest.Quest;
 import karashokleo.spell_dimension.api.quest.QuestRegistry;
 import karashokleo.spell_dimension.api.quest.QuestUsage;
-import karashokleo.spell_dimension.api.quest.SimpleItemQuest;
 import karashokleo.spell_dimension.config.AttributeModifier;
 import karashokleo.spell_dimension.content.quest.*;
 import karashokleo.spell_dimension.data.loot_bag.SDBags;
@@ -93,29 +92,33 @@ public class AllQuests
 
     public static void registerQuestsBase()
     {
-        FIRST_DAY = Entry.of("first_day", new FirstDayQuest(List.of(
-                        SDBags.MIDAS.getStack()
-                )))
+        FIRST_DAY = Entry.of("first_day", new FirstDayQuest(
+                        SDBags.MIDAS::getStack
+                ))
                 .addEnDesc("Survive for one day")
                 .addZhDesc("存活一天")
                 .register();
-        HEALTH = Entry.of("health", new HealthQuest(20, List.of(
-                        Items.ENCHANTED_GOLDEN_APPLE.getDefaultStack()
-                )))
+        HEALTH = Entry.of("health", new HealthQuest(20,
+                        Items.ENCHANTED_GOLDEN_APPLE::getDefaultStack
+                ))
                 .addDependencies(FIRST_DAY)
                 .register();
-        CHOOSE_PATH = Entry.of("choose_path", new SimpleAdvancementQuest(new Identifier("rpg_series:classes"), List.of(
-                        AllItems.ENLIGHTENING_ESSENCE.getStack(
+        CHOOSE_PATH = Entry.of("choose_path", new SimpleAdvancementQuest(
+                        new Identifier("rpg_series:classes"),
+                        () -> AllItems.ENLIGHTENING_ESSENCE.getStack(
                                 new AttributeModifier(SpellPowerMechanics.CRITICAL_CHANCE.attribute, 0.05, EntityAttributeModifier.Operation.MULTIPLY_BASE).toELM()
-                        )
-                ), "advancements.rpg_series.classes.description"))
+                        ),
+                        "advancements.rpg_series.classes.description"
+                ))
                 .addDependencies(FIRST_DAY)
                 .register();
-        KILL_TRAIT = Entry.of("kill_trait", new SimpleAdvancementQuest(L2Hostility.id("hostility/kill_first"), List.of(
-                        AllItems.ENLIGHTENING_ESSENCE.getStack(
+        KILL_TRAIT = Entry.of("kill_trait", new SimpleAdvancementQuest(
+                        L2Hostility.id("hostility/kill_first"),
+                        () -> AllItems.ENLIGHTENING_ESSENCE.getStack(
                                 new AttributeModifier(SpellPowerMechanics.CRITICAL_DAMAGE.attribute, 0.05, EntityAttributeModifier.Operation.MULTIPLY_BASE).toELM()
-                        )
-                ), "advancements.l2hostility.kill_first.description"))
+                        ),
+                        "advancements.l2hostility.kill_first.description"
+                ))
                 .addDependencies(FIRST_DAY)
                 .register();
     }
@@ -126,7 +129,7 @@ public class AllQuests
                         "base_essence",
                         new SimpleTagIngredientQuest(
                                 AllTags.ESSENCE_ALL,
-                                SDBags.JEWELRY_RINGS.getStack()
+                                SDBags.JEWELRY_RINGS::getStack
                         )
                 )
                 .addDependencies(CHOOSE_PATH)
@@ -137,7 +140,7 @@ public class AllQuests
                         "rune",
                         new SimpleTagIngredientQuest(
                                 AllTags.RUNE,
-                                SDBags.ARTIFACT.getStack()
+                                SDBags.ARTIFACT::getStack
                         )
                 )
                 .addDependencies(BASE_ESSENCE)
@@ -148,11 +151,11 @@ public class AllQuests
                         "more_essence",
                         new SimpleItemQuest(
                                 List.of(
-                                        AllItems.ENLIGHTENING_ESSENCE,
-                                        AllItems.ENCHANTED_ESSENCE,
-                                        AllItems.MENDING_ESSENCE
+                                        () -> AllItems.ENLIGHTENING_ESSENCE,
+                                        () -> AllItems.ENCHANTED_ESSENCE,
+                                        () -> AllItems.MENDING_ESSENCE
                                 ),
-                                SDBags.JEWELRY_NECKLACES.getStack()
+                                SDBags.JEWELRY_NECKLACES::getStack
                         )
                 )
                 .addDependencies(BASE_ESSENCE)
@@ -161,7 +164,7 @@ public class AllQuests
                         "spell_book_0",
                         new SimpleTagIngredientQuest(
                                 AllTags.BOOK.get(0),
-                                SDBags.UNCOMMON_GEAR.getStack()
+                                SDBags.UNCOMMON_GEAR::getStack
                         )
                 )
                 .addDependencies(CHOOSE_PATH)
@@ -172,7 +175,7 @@ public class AllQuests
                         "spell_book_1",
                         new SimpleTagIngredientQuest(
                                 AllTags.BOOK.get(1),
-                                SDBags.RARE_GEAR.getStack()
+                                SDBags.RARE_GEAR::getStack
                         )
                 )
                 .addDependencies(SPELL_BOOK_0)
@@ -183,7 +186,7 @@ public class AllQuests
                         "spell_book_2",
                         new SimpleTagIngredientQuest(
                                 AllTags.BOOK.get(2),
-                                SDBags.EPIC_GEAR.getStack()
+                                SDBags.EPIC_GEAR::getStack
                         )
                 )
                 .addDependencies(SPELL_BOOK_1)
@@ -194,7 +197,7 @@ public class AllQuests
                         "spell_power_0",
                         new SpellPowerQuest(
                                 33,
-                                SDBags.UNCOMMON_MATERIAL.getStack()
+                                SDBags.UNCOMMON_MATERIAL::getStack
                         )
                 )
                 .addDependencies(CHOOSE_PATH)
@@ -203,7 +206,7 @@ public class AllQuests
                         "spell_power_1",
                         new SpellPowerQuest(
                                 66,
-                                SDBags.RARE_MATERIAL.getStack()
+                                SDBags.RARE_MATERIAL::getStack
                         )
                 )
                 .addDependencies(SPELL_POWER_0)
@@ -212,7 +215,7 @@ public class AllQuests
                         "spell_power_2",
                         new SpellPowerQuest(
                                 99,
-                                SDBags.EPIC_MATERIAL.getStack()
+                                SDBags.EPIC_MATERIAL::getStack
                         )
                 )
                 .addDependencies(SPELL_POWER_1)
@@ -226,7 +229,7 @@ public class AllQuests
                         new SimpleLootItemQuest(
                                 ModRegistry.MUTANT_ZOMBIE_ENTITY_TYPE::get,
                                 ModRegistry.HULK_HAMMER_ITEM::get,
-                                SDBags.RARE_MATERIAL.getStack()
+                                SDBags.RARE_MATERIAL::getStack
                         )
                 )
                 .addDependencies(KILL_TRAIT)
@@ -236,7 +239,7 @@ public class AllQuests
                         new SimpleLootItemQuest(
                                 ModRegistry.MUTANT_SKELETON_ENTITY_TYPE::get,
                                 ModRegistry.MUTANT_SKELETON_SKULL_ITEM::get,
-                                SDBags.RARE_MATERIAL.getStack()
+                                SDBags.RARE_MATERIAL::getStack
                         )
                 )
                 .addDependencies(KILL_TRAIT)
@@ -246,7 +249,7 @@ public class AllQuests
                         new SimpleLootItemQuest(
                                 ModRegistry.MUTANT_CREEPER_ENTITY_TYPE::get,
                                 ModRegistry.CREEPER_SHARD_ITEM::get,
-                                SDBags.RARE_GEAR.getStack()
+                                SDBags.RARE_GEAR::getStack
                         )
                 )
                 .addDependencies(KILL_TRAIT)
@@ -256,7 +259,7 @@ public class AllQuests
                         new SimpleLootItemQuest(
                                 ModRegistry.MUTANT_ENDERMAN_ENTITY_TYPE::get,
                                 ModRegistry.ENDERSOUL_HAND_ITEM::get,
-                                SDBags.RARE_GEAR.getStack()
+                                SDBags.RARE_GEAR::getStack
                         )
                 )
                 .addDependencies(KILL_TRAIT)
@@ -272,12 +275,8 @@ public class AllQuests
                                         () -> Registries.ENTITY_TYPE.get(new Identifier("soulsweapons:draugr_boss")),
                                         () -> Registries.ENTITY_TYPE.get(new Identifier("soulsweapons:night_shade"))
                                 ),
-                                List.of(
-                                        () -> Registries.ITEM.get(new Identifier("soulsweapons:essence_of_eventide"))
-                                ),
-                                List.of(
-                                        SDBags.RARE_MATERIAL.getStack()
-                                )
+                                List.of(() -> Registries.ITEM.get(new Identifier("soulsweapons:essence_of_eventide"))),
+                                SDBags.RARE_MATERIAL::getStack
                         )
                 )
                 .addDependencies(KILL_MUTANT_ZOMBIE)
@@ -287,7 +286,7 @@ public class AllQuests
                         new SimpleLootItemQuest(
                                 () -> Registries.ENTITY_TYPE.get(new Identifier("soulsweapons:accursed_lord_boss")),
                                 () -> AllItems.ACCURSED_BLACKSTONE,
-                                TrinketItems.LOOT_1.getDefaultStack()
+                                TrinketItems.LOOT_1::getDefaultStack
                         )
                 )
                 .addDependencies(KILL_MUTANT_ZOMBIE)
@@ -297,7 +296,7 @@ public class AllQuests
                         new SimpleLootItemQuest(
                                 () -> EntityType.ELDER_GUARDIAN,
                                 () -> AllItems.ABYSS_GUARD,
-                                SDBags.RARE_MATERIAL.getStack()
+                                SDBags.RARE_MATERIAL::getStack
                         )
                 )
                 .addDependencies(KILL_MUTANT_SKELETON)
@@ -307,7 +306,7 @@ public class AllQuests
                         new SimpleLootItemQuest(
                                 () -> EntityType.WITHER,
                                 () -> Items.NETHER_STAR,
-                                SDBags.JEWELRY_RINGS.getStack()
+                                SDBags.JEWELRY_RINGS::getStack
                         )
                 )
                 .addDependencies(KILL_MUTANT_SKELETON)
@@ -317,7 +316,7 @@ public class AllQuests
                         new SimpleLootItemQuest(
                                 "illagerinvasion:invoker",
                                 "illagerinvasion:primal_essence",
-                                SDBags.RARE_GEAR.getStack()
+                                SDBags.RARE_GEAR::getStack
                         )
                 )
                 .addDependencies(KILL_MUTANT_CREEPER)
@@ -327,7 +326,7 @@ public class AllQuests
                         new SimpleLootItemQuest(
                                 () -> EntityType.WARDEN,
                                 () -> Registries.ITEM.get(new Identifier("deeperdarker:heart_of_the_deep")),
-                                SDBags.JEWELRY_NECKLACES.getStack()
+                                SDBags.JEWELRY_NECKLACES::getStack
                         )
                 )
                 .addDependencies(KILL_MUTANT_CREEPER)
@@ -341,7 +340,7 @@ public class AllQuests
                         new SimpleLootItemQuest(
                                 "soulsweapons:moonknight",
                                 "soulsweapons:essence_of_luminescence",
-                                SDBags.RARE_BOOK.getStack()
+                                SDBags.RARE_BOOK::getStack
                         )
                 )
                 .addDependencies(KILL_OLD_CHAMPION)
@@ -351,7 +350,7 @@ public class AllQuests
                         new SimpleLootItemQuest(
                                 () -> EntityInit.BLACKSTONE_GOLEM,
                                 () -> ItemInit.BLACKSTONE_GOLEM_HEART,
-                                SDBags.RARE_BOOK.getStack()
+                                SDBags.RARE_BOOK::getStack
                         )
                 )
                 .addDependencies(KILL_DECAYING_KING)
@@ -361,7 +360,7 @@ public class AllQuests
                         new SimpleLootItemQuest(
                                 () -> AquamiraeEntities.CAPTAIN_CORNELIA,
                                 () -> AquamiraeItems.SHIP_GRAVEYARD_ECHO,
-                                SDBags.ARING.getStack()
+                                SDBags.ARING::getStack
                         )
                 )
                 .addDependencies(KILL_ELDER_GUARDIAN)
@@ -371,7 +370,7 @@ public class AllQuests
                         new SimpleLootItemQuest(
                                 "soulsweapons:chaos_monarch",
                                 "soulsweapons:chaos_crown",
-                                TrinketItems.LOOT_2.getDefaultStack()
+                                TrinketItems.LOOT_2::getDefaultStack
                         )
                 )
                 .addDependencies(KILL_WITHER)
@@ -381,7 +380,7 @@ public class AllQuests
                         new SimpleLootItemQuest(
                                 "soulsweapons:returning_knight",
                                 "soulsweapons:arkenstone",
-                                SDBags.RARE_MATERIAL.getStack()
+                                SDBags.RARE_MATERIAL::getStack
                         )
                 )
                 .addDependencies(KILL_INVOKER)
@@ -391,7 +390,7 @@ public class AllQuests
                         new SimpleLootItemQuest(
                                 "deeperdarker:stalker",
                                 "deeperdarker:soul_crystal",
-                                SDBags.RARE_GEAR.getStack()
+                                SDBags.RARE_GEAR::getStack
                         )
                 )
                 .addDependencies(KILL_WARDEN)
@@ -405,7 +404,7 @@ public class AllQuests
                         new SimpleLootItemQuest(
                                 "graveyard:lich",
                                 "endrem:undead_soul",
-                                SDBags.EPIC_GEAR.getStack()
+                                SDBags.EPIC_GEAR::getStack
                         )
                 )
                 .addDependencies(KILL_MUTANT_ENDERMAN)
@@ -415,7 +414,7 @@ public class AllQuests
                         new SimpleLootItemQuest(
                                 "bosses_of_mass_destruction:lich",
                                 "bosses_of_mass_destruction:ancient_anima",
-                                SDBags.EPIC_BOOK.getStack()
+                                SDBags.EPIC_BOOK::getStack
                         )
                 )
                 .addDependencies(KILL_MUTANT_ENDERMAN)
@@ -425,7 +424,7 @@ public class AllQuests
                         new SimpleLootItemQuest(
                                 "bosses_of_mass_destruction:void_blossom",
                                 "bosses_of_mass_destruction:void_thorn",
-                                TrinketItems.LOOT_3.getDefaultStack()
+                                TrinketItems.LOOT_3::getDefaultStack
                         )
                 )
                 .addDependencies(KILL_MUTANT_ENDERMAN)
@@ -435,7 +434,7 @@ public class AllQuests
                         new SimpleLootItemQuest(
                                 "bosses_of_mass_destruction:gauntlet",
                                 "bosses_of_mass_destruction:blazing_eye",
-                                SDBags.EPIC_MATERIAL.getStack()
+                                SDBags.EPIC_MATERIAL::getStack
                         )
                 )
                 .addDependencies(KILL_MUTANT_ENDERMAN)
@@ -451,12 +450,8 @@ public class AllQuests
                                         () -> Registries.ENTITY_TYPE.get(new Identifier("soulsweapons:day_stalker")),
                                         () -> Registries.ENTITY_TYPE.get(new Identifier("soulsweapons:night_prowler"))
                                 ),
-                                List.of(
-                                        () -> AllItems.CELESTIAL_LUMINARY
-                                ),
-                                List.of(
-                                        SDBags.ARING.getStack()
-                                )
+                                List.of(() -> AllItems.CELESTIAL_LUMINARY),
+                                SDBags.ARING::getStack
                         )
                 )
                 .addDependencies(
@@ -477,7 +472,7 @@ public class AllQuests
         KILL_ENDER_DRAGON = Entry.of(
                         "kill_ender_dragon",
                         new EnderDragonAdvancementQuest(
-                                List.of(TrinketItems.LOOT_4.getDefaultStack())
+                                TrinketItems.LOOT_4::getDefaultStack
                         )
                 )
                 .addDependencies(KILL_DAY_NIGHT)
@@ -489,7 +484,7 @@ public class AllQuests
                         new SimpleLootItemQuest(
                                 "bosses_of_mass_destruction:obsidilith",
                                 "bosses_of_mass_destruction:obsidian_heart",
-                                SDBags.LEGENDARY_BOOK.getStack()
+                                SDBags.LEGENDARY_BOOK::getStack
                         )
                 )
                 .addDependencies(KILL_DAY_NIGHT)
@@ -499,7 +494,7 @@ public class AllQuests
                         new SimpleLootItemQuest(
                                 () -> EntityInit.THE_EYE,
                                 () -> Items.ENDER_EYE,
-                                SDBags.LEGENDARY_GEAR.getStack()
+                                SDBags.LEGENDARY_GEAR::getStack
                         )
                 )
                 .addDependencies(KILL_DAY_NIGHT)
@@ -509,7 +504,7 @@ public class AllQuests
                         new SimpleLootItemQuest(
                                 () -> EntityInit.VOID_SHADOW,
                                 () -> ItemInit.SOURCE_STONE,
-                                AllItems.MEDAL.getDefaultStack()
+                                AllItems.MEDAL::getDefaultStack
                         )
                 )
                 .addDependencies(KILL_DAY_NIGHT)

@@ -19,20 +19,20 @@ import java.util.function.Supplier;
 public record SimpleLootItemQuest(
         List<Supplier<EntityType<?>>> entities,
         List<Supplier<ItemConvertible>> tasks,
-        List<ItemStack> rewards
+        Supplier<ItemStack> reward
 ) implements ItemTaskQuest, ItemRewardQuest
 {
-    public SimpleLootItemQuest(Supplier<EntityType<?>> entity, Supplier<ItemConvertible> task, ItemStack reward)
+    public SimpleLootItemQuest(Supplier<EntityType<?>> entity, Supplier<ItemConvertible> task, Supplier<ItemStack> reward)
     {
-        this(List.of(entity), List.of(task), List.of(reward));
+        this(List.of(entity), List.of(task), reward);
     }
 
-    public SimpleLootItemQuest(Identifier entity, Identifier task, ItemStack reward)
+    public SimpleLootItemQuest(Identifier entity, Identifier task, Supplier<ItemStack> reward)
     {
         this(() -> Registries.ENTITY_TYPE.get(entity), () -> Registries.ITEM.get(task), reward);
     }
 
-    public SimpleLootItemQuest(String entity, String task, ItemStack reward)
+    public SimpleLootItemQuest(String entity, String task, Supplier<ItemStack> reward)
     {
         this(new Identifier(entity), new Identifier(task), reward);
     }
@@ -46,7 +46,7 @@ public record SimpleLootItemQuest(
     @Override
     public List<ItemStack> getRewards()
     {
-        return this.rewards;
+        return List.of(this.reward.get());
     }
 
     @Override

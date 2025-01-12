@@ -8,10 +8,11 @@ import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 public record SimpleAdvancementQuest(
         Identifier advancementId,
-        List<ItemStack> rewards,
+        Supplier<ItemStack> reward,
         String taskDesc
 ) implements AdvancementQuest, ItemRewardQuest
 {
@@ -24,7 +25,7 @@ public record SimpleAdvancementQuest(
     @Override
     public List<ItemStack> getRewards()
     {
-        return rewards;
+        return List.of(reward.get());
     }
 
     @Override
