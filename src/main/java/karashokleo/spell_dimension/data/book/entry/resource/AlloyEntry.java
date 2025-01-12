@@ -9,12 +9,15 @@ import com.klikli_dev.modonomicon.api.datagen.book.page.BookSpotlightPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
 import karashokleo.spell_dimension.data.book.entry.BaseEntryProvider;
 import karashokleo.spell_dimension.util.BookGenUtil;
+import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.NotNull;
 import wraith.alloyforgery.forges.ForgeRegistry;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class AlloyEntry extends BaseEntryProvider
 {
@@ -71,11 +74,7 @@ public class AlloyEntry extends BaseEntryProvider
                 .withText(context.pageText())
                 .withItem(
                         BookGenUtil.getIngredient(
-                                ForgeRegistry
-                                        .controllerBlocksView()
-                                        .stream()
-                                        .sorted(Comparator.comparing(Registries.BLOCK::getId))
-                                        .map(block -> block.asItem().getDefaultStack())
+                                controllerStacks()
                         )
                 )
                 .build();
@@ -118,10 +117,19 @@ public class AlloyEntry extends BaseEntryProvider
         return List.of(alloy, build, image);
     }
 
+    private static @NotNull Stream<ItemStack> controllerStacks()
+    {
+        return ForgeRegistry
+                .controllerBlocksView()
+                .stream()
+                .sorted(Comparator.comparing(Registries.BLOCK::getId))
+                .map(block -> block.asItem().getDefaultStack());
+    }
+
     @Override
     protected BookIconModel entryIcon()
     {
-        return BookIconModel.create(ForgeRegistry.getControllerBlocks().get(0));
+        return BookIconModel.create(controllerStacks().findFirst().orElse(ItemStack.EMPTY));
     }
 
     @Override
