@@ -86,20 +86,21 @@ public class AllLoots
                     int lootCharmLevel = 0;
                     for (ItemStack lootCharm : TrinketCompat.getTrinketItems(caster, e -> e.getItem() instanceof LootingCharm))
                     {
-                        if (lootCharm.isOf(TrinketItems.LOOT_1))
+                        if (lootCharm.isOf(TrinketItems.LOOT_1) &&
+                            lootCharmLevel < 1)
                             lootCharmLevel = 1;
-                        if (lootCharm.isOf(TrinketItems.LOOT_2))
+                        if (lootCharm.isOf(TrinketItems.LOOT_2) &&
+                            lootCharmLevel < 2)
                             lootCharmLevel = 2;
-                        if (lootCharm.isOf(TrinketItems.LOOT_3))
+                        if (lootCharm.isOf(TrinketItems.LOOT_3) &&
+                            lootCharmLevel < 3)
                             lootCharmLevel = 3;
-                        if (lootCharm.isOf(TrinketItems.LOOT_4))
-                        {
+                        if (lootCharm.isOf(TrinketItems.LOOT_4) &&
+                            lootCharmLevel < 4)
                             lootCharmLevel = 4;
-                            break;
-                        }
                     }
 
-                    float dropChance = EssenceLootConfig.BASE_CONFIG.dropChance() * (1 + lootCharmLevel);
+                    float dropChance = EssenceLootConfig.BASE_CONFIG.dropChance() + lootCharmLevel * 0.1F;
                     if (caster.getRandom().nextFloat() > dropChance) continue;
 
                     int grade = EssenceLootConfig.BASE_CONFIG.getRandomGrade(caster.getRandom(), op.get().getLevel());

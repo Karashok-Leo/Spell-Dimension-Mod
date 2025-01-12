@@ -1,6 +1,7 @@
 package karashokleo.spell_dimension.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
+import io.github.fabricators_of_create.porting_lib.entity.events.living.MobEffectEvent;
 import karashokleo.l2hostility.util.EffectHelper;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
 import karashokleo.spell_dimension.data.SDTexts;
@@ -82,9 +83,15 @@ public abstract class SpellHelperMixin
                     target = "Lnet/minecraft/entity/LivingEntity;addStatusEffect(Lnet/minecraft/entity/effect/StatusEffectInstance;Lnet/minecraft/entity/Entity;)Z"
             )
     )
-    private static boolean inject_performImpact(LivingEntity instance, StatusEffectInstance effect, Entity source)
+    private static boolean inject_performImpact(LivingEntity target, StatusEffectInstance effect, Entity caster)
     {
-        EffectHelper.forceAddEffectWithEvent(instance, effect, source);
-        return true;
+        MobEffectEvent.Applicable event = new MobEffectEvent.Applicable(target, effect);
+        event.sendEvent();
+        if (event.getResult() == MobEffectEvent.Result.DENY) return false;
+        else
+        {
+            EffectHelper.forceAddEffectWithEvent(target, effect, caster);
+            return true;
+        }
     }
 }

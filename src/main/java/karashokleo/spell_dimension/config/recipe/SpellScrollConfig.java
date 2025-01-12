@@ -85,6 +85,7 @@ public class SpellScrollConfig
             fromCrafting(AllSpells.LOCATE, Items.COMPASS);
             fromCrafting(AllSpells.SUMMON, AllItems.SPAWNER_SOUL);
             fromCrafting(AllSpells.PLACE, ModRegistry.ENDERSOUL_HAND_ITEM.get());
+            fromCrafting(AllSpells.BREAK, ModRegistry.CREEPER_SHARD_ITEM.get());
             fromCrafting(AllSpells.LIGHT, Items.GLOWSTONE);
             fromCrafting(AllSpells.MOON_SWIM, ModItems.HARDENED_PHANTOM_MEMBRANE);
 
