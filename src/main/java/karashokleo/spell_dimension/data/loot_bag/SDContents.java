@@ -36,13 +36,6 @@ public enum SDContents
             "Random 1 piece of ascension ring",
             "随机1件提升戒指"
     ),
-    VICTUS(
-            "victus:textures/item/golden_heart_aspect.png",
-            "Victus Heart Aspect",
-            "Victus之心",
-            "Random 1 piece of Victus heart aspect",
-            "随机1件Victus之心"
-    ),
     JEWELRY_RINGS(
             "jewelry:textures/item/ruby_ring.png",
             "Jewelry Ring",

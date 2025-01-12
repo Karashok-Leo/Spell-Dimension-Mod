@@ -264,6 +264,5 @@ public enum SDTexts
         EventAward.GEAR.addText("Random Gears", "随机装备");
         EventAward.MATERIAL.addText("Random Materials", "随机材料");
         EventAward.TRINKET.addText("Random Trinkets", "随机饰品");
-        EventAward.VICTUS.addText("Random Victus Heart Aspects", "随机Victus之心");
     }
 }

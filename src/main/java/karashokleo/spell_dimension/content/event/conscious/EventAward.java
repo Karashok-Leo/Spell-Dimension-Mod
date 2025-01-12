@@ -13,7 +13,6 @@ public enum EventAward
     GEAR("pool/event/gear"),
     MATERIAL("pool/event/material"),
     TRINKET("pool/event/trinket"),
-    VICTUS("pool/event/victus"),
     ;
 
     public final Identifier lootTable;

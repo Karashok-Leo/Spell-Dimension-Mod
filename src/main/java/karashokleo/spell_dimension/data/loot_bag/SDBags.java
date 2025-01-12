@@ -36,12 +36,6 @@ public enum SDBags
             9408445,
             9315179
     ),
-    VICTUS(
-            SDContents.VICTUS,
-            Rarity.EPIC,
-            16711935,
-            16776960
-    ),
     JEWELRY_RINGS(
             SDContents.JEWELRY_RINGS,
             Rarity.EPIC,

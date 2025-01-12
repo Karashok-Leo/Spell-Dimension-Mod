@@ -168,8 +168,6 @@
   "book.spell-dimension-book.magic_guidance.power.health.name": "生命机制",
   "book.spell-dimension-book.magic_guidance.power.health.rally.text": "\\\n被敌人击中后，如果你迅速反击对手，可以重获失去的生命值。\n",
   "book.spell-dimension-book.magic_guidance.power.health.rally.title": "反击",
-  "book.spell-dimension-book.magic_guidance.power.health.victus.text": "\\\n你可以制作定制的心，即所谓的 “心之相位”，然后将其应用于你的血条上，当它们碎掉时，可以产生有趣且有用的效果。\n",
-  "book.spell-dimension-book.magic_guidance.power.health.victus.title": "Victus",
   "book.spell-dimension-book.magic_guidance.power.hostility.description": "这充斥着恶意的世界。",
   "book.spell-dimension-book.magic_guidance.power.hostility.name": "莱特兰·恶意",
   "book.spell-dimension-book.magic_guidance.power.hostility.next.text": "\\\n怪物的等级越高，它们的伤害与血量等属性也就越高，拥有的词条越强大。每一种词条都有独特的应对方法。\n\\\n\\\n[更多详细信息见《莱特兰恶意教程》](patchouli://l2hostility:hostility_guide//traits/tank)",

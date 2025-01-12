@@ -5,7 +5,7 @@
   "description": "book.spell-dimension-book.magic_guidance.power.health.description",
   "hide_while_locked": false,
   "icon": {
-    "item": "victus:bundle_heart_aspect"
+    "item": "minecraft:enchanted_golden_apple"
   },
   "name": "book.spell-dimension-book.magic_guidance.power.health.name",
   "pages": [
@@ -31,74 +31,6 @@
       },
       "text": "book.spell-dimension-book.magic_guidance.power.health.food.text",
       "title": ""
-    },
-    {
-      "type": "modonomicon:spotlight",
-      "anchor": "",
-      "condition": {
-        "type": "modonomicon:none"
-      },
-      "item": [
-        {
-          "item": "victus:grilled_heart_aspect"
-        },
-        {
-          "item": "victus:bundle_heart_aspect"
-        },
-        {
-          "item": "victus:creeper_heart_aspect"
-        },
-        {
-          "item": "victus:diamond_heart_aspect"
-        },
-        {
-          "item": "victus:light_heart_aspect"
-        },
-        {
-          "item": "victus:ocean_heart_aspect"
-        },
-        {
-          "item": "victus:totem_heart_aspect"
-        },
-        {
-          "item": "victus:potion_heart_aspect"
-        },
-        {
-          "item": "victus:archery_heart_aspect"
-        },
-        {
-          "item": "victus:blazing_heart_aspect"
-        },
-        {
-          "item": "victus:draconic_heart_aspect"
-        },
-        {
-          "item": "victus:emerald_heart_aspect"
-        },
-        {
-          "item": "victus:evoking_heart_aspect"
-        },
-        {
-          "item": "victus:golden_heart_aspect"
-        },
-        {
-          "item": "victus:icy_heart_aspect"
-        },
-        {
-          "item": "victus:iron_heart_aspect"
-        },
-        {
-          "item": "victus:lapis_heart_aspect"
-        },
-        {
-          "item": "victus:sweet_heart_aspect"
-        },
-        {
-          "item": "victus:cheese_heart_aspect"
-        }
-      ],
-      "text": "book.spell-dimension-book.magic_guidance.power.health.victus.text",
-      "title": "book.spell-dimension-book.magic_guidance.power.health.victus.title"
     },
     {
       "type": "modonomicon:text",

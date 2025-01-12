@@ -168,8 +168,6 @@
   "book.spell-dimension-book.magic_guidance.power.health.name": "Health Mechanics",
   "book.spell-dimension-book.magic_guidance.power.health.rally.text": "\\\nAfter being hit by an enemy, you may jump back in the action and attack your opponent to quickly refill lost health.\n",
   "book.spell-dimension-book.magic_guidance.power.health.rally.title": "Rally",
-  "book.spell-dimension-book.magic_guidance.power.health.victus.text": "\\\nYou craft custom hearts, the so called Heart Aspects which you can then apply on top of your health bar for interesting and often useful effects when they get broken.\n",
-  "book.spell-dimension-book.magic_guidance.power.health.victus.title": "Victus",
   "book.spell-dimension-book.magic_guidance.power.hostility.description": "This hostile world.",
   "book.spell-dimension-book.magic_guidance.power.hostility.name": "Lightland Hostility",
   "book.spell-dimension-book.magic_guidance.power.hostility.next.text": "\\\nThe higher the level of the monster, the higher their attributes such as damage and health, and the more powerful the traits they possess. Each trait has a unique way of dealing with it.\n\\\n\\\n[See the *L2Hostility Guide* for more details](patchouli://l2hostility:hostility_guide//traits/tank)",
