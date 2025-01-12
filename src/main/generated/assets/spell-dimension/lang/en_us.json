@@ -246,6 +246,8 @@
   "spell.spell-dimension.blast.name": "Blast",
   "spell.spell-dimension.bloodthirster.description": "Build up your strength and swing your sword forward to deal {damage} melee damage and heal {heal} health.",
   "spell.spell-dimension.bloodthirster.name": "Blood Thirster",
+  "spell.spell-dimension.break.description": "Launch a spell, if it touches a block, it will break it and drop the item it was supposed to drop.",
+  "spell.spell-dimension.break.name": "Remote Destruction",
   "spell.spell-dimension.cleanse.description": "Apply cleanse effect to oneself or an ally.",
   "spell.spell-dimension.cleanse.name": "Cleanse",
   "spell.spell-dimension.converge.description": "Launch a spell to explode at the landing point and make enemies converged.",

@@ -56,6 +56,7 @@ public class AllSpells
     public static final Identifier LOCATE = SpellDimension.modLoc("locate");
     public static final Identifier SUMMON = SpellDimension.modLoc("summon");
     public static final Identifier PLACE = SpellDimension.modLoc("place");
+    public static final Identifier BREAK = SpellDimension.modLoc("break");
     public static final Identifier LIGHT = SpellDimension.modLoc("light");
     public static final Identifier MOON_SWIM = SpellDimension.modLoc("moon_swim");
 
@@ -115,6 +116,7 @@ public class AllSpells
         SpellProjectileHitBlockCallback.EVENT.register(LocateSpell::handle);
         SpellProjectileHitBlockCallback.EVENT.register(SummonSpell::handle);
         SpellProjectileHitBlockCallback.EVENT.register(PlaceSpell::handle);
+        SpellProjectileHitBlockCallback.EVENT.register(BreakSpell::handle);
 
         SpellImpactEvents.BEFORE.register(FrostBlinkSpell::handle);
         SpellImpactEvents.BEFORE.register(FireOfRetributionSpell::handle);

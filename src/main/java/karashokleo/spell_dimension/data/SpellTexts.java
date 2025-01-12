@@ -35,6 +35,12 @@ public enum SpellTexts
             "Launch a spell, if it touches a block, it will use the item in your off-hand on the block.",
             "发射一道咒语, 若其触碰到方块, 则会对其使用你副手的物品."
     ),
+    BREAK(
+            "Remote Destruction",
+            "远端瓦解",
+            "Launch a spell, if it touches a block, it will break it and drop the item it was supposed to drop.",
+            "发射一道咒语, 若其触碰到方块, 则会将其破坏并掉落其本应掉落的物品."
+    ),
     MOON_SWIM(
             "Moon Swim",
             "月泳",

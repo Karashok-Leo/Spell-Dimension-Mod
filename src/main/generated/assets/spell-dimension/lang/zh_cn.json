@@ -246,6 +246,8 @@
   "spell.spell-dimension.blast.name": "热爆",
   "spell.spell-dimension.bloodthirster.description": "蓄力后向前挥剑造成{damage}点近战伤害并回复{heal}点生命值.",
   "spell.spell-dimension.bloodthirster.name": "渴血",
+  "spell.spell-dimension.break.description": "发射一道咒语, 若其触碰到方块, 则会将其破坏并掉落其本应掉落的物品.",
+  "spell.spell-dimension.break.name": "远端瓦解",
   "spell.spell-dimension.cleanse.description": "施法者或者目标友军获得净化效果.",
   "spell.spell-dimension.cleanse.name": "净化",
   "spell.spell-dimension.converge.description": "发射一道咒语, 在落点处爆炸并汇聚敌人.",
