@@ -4,6 +4,9 @@ import dev.xkmc.l2tabs.tabs.core.TabToken;
 import dev.xkmc.l2tabs.tabs.inventory.InvTabData;
 import dev.xkmc.l2tabs.tabs.inventory.TabRegistry;
 import karashokleo.enchantment_infusion.api.render.InfusionTableTileRenderer;
+import karashokleo.l2hostility.content.item.TrinketItems;
+import karashokleo.l2hostility.content.logic.DifficultyLevel;
+import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.leobrary.gui.api.GuiOverlayRegistry;
 import karashokleo.leobrary.gui.api.TextureOverlayRegistry;
 import karashokleo.spell_dimension.SpellDimension;
@@ -168,10 +171,24 @@ public class SpellDimensionClient implements ClientModInitializer
             if (stack.isOf(AllItems.FLEX_BREASTPLATE))
             {
                 var player = MinecraftClient.getInstance().player;
-                if (player != null)
-                    lines.add(SDTexts.TOOLTIP$FLEX_BREASTPLATE$DAMAGE_FACTOR.get(
-                            "%.1f%%".formatted((1 - AllItems.FLEX_BREASTPLATE.getDamageFactor(player)) * 100)
-                    ).formatted(Formatting.RED));
+                if (player == null) return;
+                lines.add(SDTexts.TOOLTIP$FLEX_BREASTPLATE$DAMAGE_FACTOR.get(
+                        "%.1f%%".formatted((1 - AllItems.FLEX_BREASTPLATE.getDamageFactor(player)) * 100)
+                ).formatted(Formatting.RED));
+            }
+        });
+
+        ItemTooltipCallback.EVENT.register((stack, context, lines) ->
+        {
+            if (stack.isOf(TrinketItems.CURSE_PRIDE))
+            {
+                var player = MinecraftClient.getInstance().player;
+                if (player == null) return;
+                int level = DifficultyLevel.ofAny(player);
+                double rate = LHConfig.common().items.curse.prideDamageBonus;
+                lines.add(SDTexts.TOOLTIP$CURSE_PRIDE_2.get(
+                        "%.1f%%".formatted((level * rate) * 100)
+                ).formatted(Formatting.AQUA));
             }
         });
     }

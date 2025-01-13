@@ -373,6 +373,8 @@
   "tooltip.spell-dimension.atomic_to_flicker": "总共翻滚%s次后升级为闪曳护心镜",
   "tooltip.spell-dimension.atomic_to_oblivion": "总共恢复%s点生命值后升级为湮灭护心镜",
   "tooltip.spell-dimension.book_requirement": "需要拥有至少%s的%s才能装备",
+  "tooltip.spell-dimension.curse_pride_1": "根据玩家难度，造成伤害与受到伤害每级提升%s%%",
+  "tooltip.spell-dimension.curse_pride_2": "当前增伤: +%s%%",
   "tooltip.spell-dimension.disenchant": "从物品上移除所有通过束魔精华获得的属性修饰符.",
   "tooltip.spell-dimension.dynamic_book.usage_1": "可作为法术卷轴的容器",
   "tooltip.spell-dimension.dynamic_book.usage_2": "用法: 物品栏中用法术卷轴右键该物品将其放入, 或使用该物品右键空槽位将卷轴取出.",

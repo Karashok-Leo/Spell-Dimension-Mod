@@ -140,6 +140,8 @@ public enum SDTexts
     TOOLTIP$OBLIVION_BREASTPLATE_1("When your health is higher than %s of your max health, the Oblivion Breastplate will absorb %s of your health every second and convert it into Oblivion Amount.", "当你的生命值高于你的最大生命值的%s时, 湮灭护心镜将每秒汲取你%s的生命值, 并将其转化为湮灭值"),
     TOOLTIP$OBLIVION_BREASTPLATE_2("The max Oblivion Amount is %s of your max health value. When you are injured, it will try to consume Oblivion Amount to resist this damage", "湮灭值最大为你的最大生命值的%s, 当你受伤时将优先消耗湮灭值抵挡此次伤害"),
     TOOLTIP$OBLIVION_BREASTPLATE_3("Current Oblivion Amount: %s", "当前湮灭值: %s"),
+    TOOLTIP$CURSE_PRIDE_1("Both damage dealt and damage taken are increased by %s%% per difficulty level", "根据玩家难度，造成伤害与受到伤害每级提升%s%%"),
+    TOOLTIP$CURSE_PRIDE_2("Current damage increment: +%s%%", "当前增伤: +%s%%"),
 
     /**
      * Scrolls

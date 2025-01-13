@@ -5,6 +5,7 @@
   "mixins": [
     "AdaptingTraitMixin",
     "AmplifierEnchantmentMixin",
+    "CurseOfPrideMixin",
     "EnchantBookFactoryMixin",
     "EnchantmentHelperMixin",
     "EnchantRandomlyLootFunctionMixin",

@@ -373,6 +373,8 @@
   "tooltip.spell-dimension.atomic_to_flicker": "After rolling a total of %s times, upgrade to Flicker Breastplate",
   "tooltip.spell-dimension.atomic_to_oblivion": "After restoring with a total of %s health, upgrade to Oblivion Breastplate",
   "tooltip.spell-dimension.book_requirement": "Must have at least %s %s to equip",
+  "tooltip.spell-dimension.curse_pride_1": "Both damage dealt and damage taken are increased by %s%% per difficulty level",
+  "tooltip.spell-dimension.curse_pride_2": "Current damage increment: +%s%%",
   "tooltip.spell-dimension.disenchant": "Remove attribute modifiers from the item.",
   "tooltip.spell-dimension.dynamic_book.usage_1": "Can be used as a container for spell scrolls",
   "tooltip.spell-dimension.dynamic_book.usage_2": "Usage: In the inventory, right-click on the book with a spell scroll to put it in, or right-click on an empty slot with the book to take the scroll out.",
