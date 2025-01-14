@@ -17,6 +17,10 @@
       "type": "modonomicon:block",
       "block": "minecraft:crying_obsidian"
     },
+    "D": {
+      "type": "modonomicon:block",
+      "block": "minecraft:dragon_egg"
+    },
     "L": {
       "type": "modonomicon:block",
       "block": "minecraft:end_rod"
@@ -31,7 +35,7 @@
       "_______",
       "_______",
       "__L_L__",
-      "_______",
+      "___D___",
       "__L_L__",
       "_______",
       "_______"

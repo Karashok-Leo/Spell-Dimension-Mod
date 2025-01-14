@@ -1,6 +1,8 @@
 package karashokleo.spell_dimension.mixin;
 
 import karashokleo.spell_dimension.content.component.EndStageComponent;
+import karashokleo.spell_dimension.data.SDTexts;
+import karashokleo.spell_dimension.init.AllItems;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.EndPortalBlock;
 import net.minecraft.entity.Entity;
@@ -23,7 +25,10 @@ public abstract class EndPortalBlockMixin
     private void inject_onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity, CallbackInfo ci)
     {
         if (entity instanceof PlayerEntity player &&
-                !EndStageComponent.canEnterEnd(player))
+            !EndStageComponent.canEnterEnd(player))
+        {
+            player.sendMessage(SDTexts.TEXT$END_STAGE$LOCK.get(AllItems.CELESTIAL_LUMINARY.getName()), true);
             ci.cancel();
+        }
     }
 }

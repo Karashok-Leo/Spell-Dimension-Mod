@@ -96,7 +96,7 @@
   "book.spell-dimension-book.magic_guidance.boss.wither.description": "万物凋零...",
   "book.spell-dimension-book.magic_guidance.boss.wither.name": "凋灵",
   "book.spell-dimension-book.magic_guidance.boss.wither.next.text": "\\\n击败凋灵后掉落**不确定性的残片**。\n",
-  "book.spell-dimension-book.magic_guidance.mage.bind.bind.text": "\\\n使用法术绑定台来获取你的第一本法术书，并绑定一些法术！你可以在村庄里找到法术绑定台或是自己合成一个。\n",
+  "book.spell-dimension-book.magic_guidance.mage.bind.bind.text": "\\\n使用法术绑定台来获取你的第一本法术书，并绑定一些法术！你可以在村庄里找到法术绑定台或是自己合成一个。你需要在法术绑定台周围放置一些书架才能绑定更多的法术。\n",
   "book.spell-dimension-book.magic_guidance.mage.bind.bind.title": "法术绑定",
   "book.spell-dimension-book.magic_guidance.mage.bind.description": "绑定你的法术！",
   "book.spell-dimension-book.magic_guidance.mage.bind.name": "法术绑定",

@@ -50,14 +50,14 @@ public class BindEntry extends BaseEntryProvider
         this.lang().add(context.pageText(),
                 """
                         \\
-                        Use the Spell Binding Table to get your first spell book and bind some spells! You can find a Spell Binding Table in the village or craft one yourself.
+                        Use the Spell Binding Table to get your first spell book and bind some spells! You can find a Spell Binding Table in the village or craft one yourself. You need to place some Bookshelves around the Spell Binding Table to bind more spells.
                         """
         );
         this.lang("zh_cn").add(context.pageTitle(), "法术绑定");
         this.lang("zh_cn").add(context.pageText(),
                 """
                         \\
-                        使用法术绑定台来获取你的第一本法术书，并绑定一些法术！你可以在村庄里找到法术绑定台或是自己合成一个。
+                        使用法术绑定台来获取你的第一本法术书，并绑定一些法术！你可以在村庄里找到法术绑定台或是自己合成一个。你需要在法术绑定台周围放置一些书架才能绑定更多的法术。
                         """
         );
 

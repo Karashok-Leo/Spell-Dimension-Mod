@@ -22,7 +22,7 @@ public class MultiBlockProvider extends MultiblockProvider
                         .layer(
                                 "     ",
                                 " L L ",
-                                "     ",
+                                "  D  ",
                                 " L L ",
                                 "     "
                         )
@@ -44,6 +44,7 @@ public class MultiBlockProvider extends MultiblockProvider
                         .block('O', () -> Blocks.OBSIDIAN)
                         .block('C', () -> Blocks.CRYING_OBSIDIAN)
                         .block('L', () -> Blocks.END_ROD)
+                        .block('D', () -> Blocks.DRAGON_EGG)
         );
 
         add(

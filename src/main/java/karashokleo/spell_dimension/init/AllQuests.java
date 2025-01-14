@@ -493,7 +493,7 @@ public class AllQuests
                         "kill_the_eye",
                         new SimpleLootItemQuest(
                                 () -> EntityInit.THE_EYE,
-                                () -> Items.ENDER_EYE,
+                                () -> ItemInit.PRIME_EYE,
                                 SDBags.LEGENDARY_GEAR::getStack
                         )
                 )

@@ -51,7 +51,7 @@ public class CastEntry extends BaseEntryProvider
         this.lang().add(context.pageText(),
                 """
                         \\
-                        Spell casting is the basic skill of a mage. Mage need to hold **spell casting items** in hand to cast spells. Common spell casting items are **staffs, swords and some other weapons**. Which spells a mage can cast depends on their spell pool. A mage's spell pool is determined by the item they are holding and the spell book they have equipped.
+                        Spell casting is the basic skill of a mage. Mage need to hold **spell casting items** in hand to cast spells. Common spell casting items are **staffs, swords and some other weapons**.
                         """
         );
         this.lang("zh_cn").add(context.pageTitle(), "施法");
