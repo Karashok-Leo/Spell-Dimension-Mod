@@ -105,6 +105,7 @@ dependencies {
     modImplementation "com.klikli_dev:modonomicon-${project.minecraft_version}-fabric:${project.modonomicon_version}"
 
     // Book Information
+    modImplementation "maven.modrinth:armor-set-bonuses:${project.asb_version}"
     modImplementation "maven.modrinth:aquamirae:${project.aquamirae_version}"
     modImplementation "maven.modrinth:obscure-api:${project.obscure_api_version}"
     modImplementation "maven.modrinth:mmmmmmmmmmmm:${project.mmmmmmmmmmmm_version}"
