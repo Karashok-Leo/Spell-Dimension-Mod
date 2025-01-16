@@ -43,6 +43,12 @@ public class LocateSpellConfig
     public static final RegistryKey<Structure> LICH_PRISON = RegistryKey.of(RegistryKeys.STRUCTURE, new Identifier("graveyard:lich_prison"));
     public static final RegistryKey<Structure> GAUNTLET_ARENA = RegistryKey.of(RegistryKeys.STRUCTURE, new Identifier("bosses_of_mass_destruction:gauntlet_arena"));
     public static final RegistryKey<Structure> OBSIDILITH_ARENA = RegistryKey.of(RegistryKeys.STRUCTURE, new Identifier("bosses_of_mass_destruction:obsidilith_arena"));
+    public static final RegistryKey<Structure> FIRECALLER_HUT = RegistryKey.of(RegistryKeys.STRUCTURE, new Identifier("illagerinvasion:firecaller_hut"));
+    public static final RegistryKey<Structure> SORCERER_HUT = RegistryKey.of(RegistryKeys.STRUCTURE, new Identifier("illagerinvasion:sorcerer_hut"));
+    public static final RegistryKey<Structure> ILLUSIONER_TOWER = RegistryKey.of(RegistryKeys.STRUCTURE, new Identifier("illagerinvasion:illusioner_tower"));
+    public static final RegistryKey<Structure> ILLAGER_FORT = RegistryKey.of(RegistryKeys.STRUCTURE, new Identifier("illagerinvasion:illager_fort"));
+    public static final RegistryKey<Structure> LABYRINTH = RegistryKey.of(RegistryKeys.STRUCTURE, new Identifier("illagerinvasion:labyrinth"));
+
     public static final RegistryKey<World> OTHERSIDE = RegistryKey.of(RegistryKeys.WORLD, new Identifier("deeperdarker:otherside"));
 
     public static final Item BOSS_COMPASS = Registries.ITEM.get(new Identifier("soulsweapons:boss_compass"));
@@ -63,6 +69,11 @@ public class LocateSpellConfig
         register(FORTRESS, World.NETHER, RuneItems.get(RuneItems.RuneType.FIRE), "下界要塞");
         register(GAUNTLET_ARENA, World.NETHER, com.spellbladenext.items.Items.fire_orb.item(), "下界铁掌竞技场");
         register(OBSIDILITH_ARENA, World.END, Items.CRYING_OBSIDIAN, "黑曜巨石柱竞技场");
+        register(FIRECALLER_HUT, World.OVERWORLD, Items.RED_SANDSTONE, "唤火师小屋");
+        register(SORCERER_HUT, World.OVERWORLD, Items.PURPLE_WOOL, "不祥术士小屋");
+        register(ILLUSIONER_TOWER, World.OVERWORLD, Items.COBBLESTONE_WALL, "幻术师高塔");
+        register(ILLAGER_FORT, World.OVERWORLD, Items.SPRUCE_FENCE, "灾厄堡垒");
+        register(LABYRINTH, World.OVERWORLD, Items.POLISHED_ANDESITE, "地下迷宫");
         register(ANCIENT_TEMPLE, OTHERSIDE, DDItems.HEART_OF_THE_DEEP, "远古神殿");
         register(GRAVE_RUINS, World.OVERWORLD, Items.BONE_BLOCK, "死者遗迹");
         register(LICH_PRISON, World.OVERWORLD, Registries.ITEM.get(new Identifier("graveyard:corruption")), "巫妖之狱");

@@ -9,6 +9,7 @@ import karashokleo.l2hostility.init.LHTraits;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
 import karashokleo.spell_dimension.config.QuestToEntryConfig;
 import karashokleo.spell_dimension.content.event.*;
+import karashokleo.spell_dimension.content.item.SpellScrollItem;
 import karashokleo.spell_dimension.content.misc.ISpawnerExtension;
 import karashokleo.spell_dimension.content.spell.LightSpell;
 import karashokleo.spell_dimension.data.SDTexts;
@@ -23,8 +24,10 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.spell_power.api.SpellDamageSource;
 import net.spell_power.api.SpellPowerTags;
@@ -43,6 +46,18 @@ public class AllEvents
         ConsciousOceanEvent.init();
 
         QuestToEntryConfig.init();
+
+        // cancel offhand block placement interaction while holding spell scroll
+        UseItemCallback.EVENT.register((player, world, hand) ->
+        {
+            if (world.isClient() &&
+                hand == Hand.OFF_HAND &&
+                player.getOffHandStack().getItem() instanceof BlockItem &&
+                player.getMainHandStack().getItem() instanceof SpellScrollItem
+            )
+                return TypedActionResult.fail(player.getOffHandStack());
+            return TypedActionResult.pass(player.getOffHandStack());
+        });
 
         LivingEntityEvents.LivingTickEvent.TICK.register(event ->
         {
