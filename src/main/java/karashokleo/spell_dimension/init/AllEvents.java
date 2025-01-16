@@ -17,6 +17,7 @@ import karashokleo.spell_dimension.util.SchoolUtil;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
+import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.MobSpawnerBlockEntity;
@@ -48,16 +49,11 @@ public class AllEvents
         QuestToEntryConfig.init();
 
         // cancel offhand block placement interaction while holding spell scroll
-        UseItemCallback.EVENT.register((player, world, hand) ->
-        {
-            if (world.isClient() &&
-                hand == Hand.OFF_HAND &&
-                player.getOffHandStack().getItem() instanceof BlockItem &&
-                player.getMainHandStack().getItem() instanceof SpellScrollItem
-            )
-                return TypedActionResult.fail(player.getOffHandStack());
-            return TypedActionResult.pass(player.getOffHandStack());
-        });
+        UseBlockCallback.EVENT.register((player, world, hand, hitResult) ->
+                (world.isClient() &&
+                 hand == Hand.OFF_HAND &&
+                 player.getOffHandStack().getItem() instanceof BlockItem &&
+                 player.getMainHandStack().getItem() instanceof SpellScrollItem) ? ActionResult.FAIL : ActionResult.PASS);
 
         LivingEntityEvents.LivingTickEvent.TICK.register(event ->
         {
