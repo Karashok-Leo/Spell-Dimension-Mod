@@ -1,4 +1,4 @@
-package karashokleo.spell_dimension.mixin;
+package karashokleo.spell_dimension.mixin.modded;
 
 import karashokleo.spell_dimension.api.SpellProjectileHitBlockCallback;
 import karashokleo.spell_dimension.api.SpellProjectileHitEntityCallback;

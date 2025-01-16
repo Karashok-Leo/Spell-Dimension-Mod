@@ -1,4 +1,4 @@
-package karashokleo.spell_dimension.mixin;
+package karashokleo.spell_dimension.mixin.vanilla;
 
 import karashokleo.spell_dimension.content.component.ConsciousModeComponent;
 import karashokleo.spell_dimension.data.SDTexts;

@@ -1,4 +1,4 @@
-package karashokleo.spell_dimension.mixin;
+package karashokleo.spell_dimension.mixin.vanilla;
 
 import karashokleo.spell_dimension.api.ApplyFoodEffectsCallback;
 import karashokleo.spell_dimension.content.block.fluid.ConsciousnessFluid;

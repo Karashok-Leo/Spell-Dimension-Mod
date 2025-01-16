@@ -1,6 +1,6 @@
 package karashokleo.spell_dimension.api.quest;
 
-import karashokleo.spell_dimension.mixin.PlayerInventoryAccessor;
+import karashokleo.spell_dimension.mixin.vanilla.PlayerInventoryAccessor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.network.ServerPlayerEntity;

@@ -1,4 +1,4 @@
-package karashokleo.spell_dimension.mixin;
+package karashokleo.spell_dimension.mixin.modded;
 
 import com.google.common.collect.Multimap;
 import com.obscuria.aquamirae.common.items.weapon.TerribleSwordItem;

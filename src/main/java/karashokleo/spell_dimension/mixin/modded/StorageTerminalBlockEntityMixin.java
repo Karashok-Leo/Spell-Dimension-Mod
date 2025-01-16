@@ -1,4 +1,4 @@
-package karashokleo.spell_dimension.mixin;
+package karashokleo.spell_dimension.mixin.modded;
 
 import com.tom.storagemod.tile.StorageTerminalBlockEntity;
 import karashokleo.spell_dimension.init.AllBlocks;

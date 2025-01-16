@@ -1,4 +1,4 @@
-package karashokleo.spell_dimension.mixin;
+package karashokleo.spell_dimension.mixin.vanilla;
 
 import karashokleo.spell_dimension.content.component.EndStageComponent;
 import karashokleo.spell_dimension.data.SDTexts;

@@ -1,4 +1,4 @@
-package karashokleo.spell_dimension.mixin;
+package karashokleo.spell_dimension.mixin.modded;
 
 import com.google.common.collect.Multimap;
 import dev.emi.trinkets.api.SlotReference;

@@ -1,4 +1,4 @@
-package karashokleo.spell_dimension.mixin;
+package karashokleo.spell_dimension.mixin.modded;
 
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.spell.SpellPool;

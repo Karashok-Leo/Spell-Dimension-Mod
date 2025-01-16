@@ -1,4 +1,4 @@
-package karashokleo.spell_dimension.mixin;
+package karashokleo.spell_dimension.mixin.modded;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.MobEffectEvent;

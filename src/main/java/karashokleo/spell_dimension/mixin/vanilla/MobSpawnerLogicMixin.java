@@ -1,4 +1,4 @@
-package karashokleo.spell_dimension.mixin;
+package karashokleo.spell_dimension.mixin.vanilla;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import karashokleo.spell_dimension.content.misc.ISpawnerExtension;

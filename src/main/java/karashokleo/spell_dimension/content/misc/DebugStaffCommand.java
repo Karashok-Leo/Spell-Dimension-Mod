@@ -2,7 +2,7 @@ package karashokleo.spell_dimension.content.misc;
 
 import com.mojang.brigadier.Command;
 import karashokleo.spell_dimension.init.AllItems;
-import karashokleo.spell_dimension.mixin.SpellRegistryAccessor;
+import karashokleo.spell_dimension.mixin.modded.SpellRegistryAccessor;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;

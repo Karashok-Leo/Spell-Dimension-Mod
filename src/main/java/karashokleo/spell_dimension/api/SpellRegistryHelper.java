@@ -1,6 +1,6 @@
 package karashokleo.spell_dimension.api;
 
-import karashokleo.spell_dimension.mixin.SpellRegistryAccessor;
+import karashokleo.spell_dimension.mixin.modded.SpellRegistryAccessor;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.spell.SpellPool;
 import net.spell_engine.internals.SpellRegistry;
