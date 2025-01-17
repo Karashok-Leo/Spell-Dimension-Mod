@@ -6,12 +6,15 @@ import com.klikli_dev.modonomicon.api.datagen.CategoryProvider;
 import com.klikli_dev.modonomicon.api.datagen.book.BookCategoryModel;
 import com.klikli_dev.modonomicon.api.datagen.book.BookEntryModel;
 import karashokleo.spell_dimension.data.book.entry.resource.*;
+import karashokleo.spell_dimension.data.book.entry.tips.DummyEntry;
+import karashokleo.spell_dimension.data.book.entry.tips.KeyEntry;
+import karashokleo.spell_dimension.data.book.entry.tips.StorageEntry;
 import karashokleo.spell_dimension.util.BookGenUtil;
 import net.minecraft.item.Items;
 
-public class ResourceCategory extends CategoryProvider
+public class ResourcesTipsCategory extends CategoryProvider
 {
-    public ResourceCategory(BookProvider parent)
+    public ResourcesTipsCategory(BookProvider parent)
     {
         super(parent, "resource");
     }
@@ -23,6 +26,8 @@ public class ResourceCategory extends CategoryProvider
                 "_a_b_c_",
                 "_______",
                 "d_e_f_g",
+                "_______",
+                "_h_i_j_",
         };
     }
 
@@ -36,6 +41,9 @@ public class ResourceCategory extends CategoryProvider
         BookEntryModel event = new PivotEntry(this).generate('e');
         BookEntryModel lootCharm = new LootCharmEntry(this).generate('f');
         BookEntryModel curse = new CurseEntry(this).generate('g');
+        BookEntryModel key = new KeyEntry(this).generate('h');
+        BookEntryModel storage = new StorageEntry(this).generate('i');
+        BookEntryModel dummy = new DummyEntry(this).generate('j');
 
         this.add(alloy);
         this.add(trader);
@@ -44,14 +52,17 @@ public class ResourceCategory extends CategoryProvider
         this.add(event);
         this.add(lootCharm);
         this.add(curse);
+        this.add(key);
+        this.add(storage);
+        this.add(dummy);
     }
 
     @Override
     protected BookCategoryModel generateCategory()
     {
         BookContextHelper context = this.context();
-        this.lang().add(context.categoryName(), "Resource");
-        this.lang("zh_cn").add(context.categoryName(), "资源");
+        this.lang().add(context.categoryName(), "Resources & Tips");
+        this.lang("zh_cn").add(context.categoryName(), "资源 & 提示");
         return BookCategoryModel
                 .create(this.modLoc(context.categoryId()), context.categoryName())
                 .withIcon(Items.DIAMOND)

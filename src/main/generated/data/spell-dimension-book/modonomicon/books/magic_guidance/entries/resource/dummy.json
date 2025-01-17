@@ -1,13 +1,13 @@
 {
   "background_u_index": 0,
   "background_v_index": 0,
-  "category": "spell-dimension-book:tips",
-  "description": "book.spell-dimension-book.magic_guidance.tips.dummy.description",
+  "category": "spell-dimension-book:resource",
+  "description": "book.spell-dimension-book.magic_guidance.resource.dummy.description",
   "hide_while_locked": false,
   "icon": {
     "item": "dummmmmmy:target_dummy"
   },
-  "name": "book.spell-dimension-book.magic_guidance.tips.dummy.name",
+  "name": "book.spell-dimension-book.magic_guidance.resource.dummy.name",
   "pages": [
     {
       "type": "modonomicon:spotlight",
@@ -18,8 +18,8 @@
       "item": {
         "item": "dummmmmmy:target_dummy"
       },
-      "text": "book.spell-dimension-book.magic_guidance.tips.dummy.prev.text",
-      "title": "book.spell-dimension-book.magic_guidance.tips.dummy.prev.title"
+      "text": "book.spell-dimension-book.magic_guidance.resource.dummy.prev.text",
+      "title": "book.spell-dimension-book.magic_guidance.resource.dummy.prev.title"
     },
     {
       "type": "modonomicon:entity",
@@ -42,7 +42,7 @@
         "type": "modonomicon:none"
       },
       "show_title_separator": true,
-      "text": "book.spell-dimension-book.magic_guidance.tips.dummy.next.text",
+      "text": "book.spell-dimension-book.magic_guidance.resource.dummy.next.text",
       "title": "",
       "use_markdown_in_title": false
     },
@@ -53,12 +53,12 @@
         "type": "modonomicon:none"
       },
       "show_title_separator": true,
-      "text": "book.spell-dimension-book.magic_guidance.tips.dummy.last.text",
+      "text": "book.spell-dimension-book.magic_guidance.resource.dummy.last.text",
       "title": "",
       "use_markdown_in_title": false
     }
   ],
   "show_when_any_parent_unlocked": false,
   "x": 2,
-  "y": 0
+  "y": 2
 }

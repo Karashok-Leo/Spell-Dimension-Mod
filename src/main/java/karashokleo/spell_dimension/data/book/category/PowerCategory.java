@@ -43,6 +43,7 @@ public class PowerCategory extends CategoryProvider
         BookEntryModel summon = new SummonSpellEntry(this).generate('i');
         BookEntryModel enchant = new EnchantEntry(this).generate('j');
         BookEntryModel rarity = new RarityEntry(this).generate('k');
+        BookEntryModel durability = new DurabilityEntry(this).generate('l');
 
         this.add(health);
         this.add(hostility);
@@ -54,6 +55,7 @@ public class PowerCategory extends CategoryProvider
         this.add(summon);
         this.add(enchant);
         this.add(rarity);
+        this.add(durability);
     }
 
     @Override

@@ -5,8 +5,10 @@ import com.klikli_dev.modonomicon.api.datagen.BookProvider;
 import com.klikli_dev.modonomicon.api.datagen.ModonomiconLanguageProvider;
 import com.klikli_dev.modonomicon.api.datagen.book.BookModel;
 import com.klikli_dev.modonomicon.registry.ItemRegistry;
-import karashokleo.spell_dimension.SpellDimension;
-import karashokleo.spell_dimension.data.book.category.*;
+import karashokleo.spell_dimension.data.book.category.BossCategory;
+import karashokleo.spell_dimension.data.book.category.MageCategory;
+import karashokleo.spell_dimension.data.book.category.PowerCategory;
+import karashokleo.spell_dimension.data.book.category.ResourcesTipsCategory;
 import karashokleo.spell_dimension.init.AllGroups;
 import karashokleo.spell_dimension.util.BookGenUtil;
 import net.minecraft.data.DataOutput;
@@ -39,8 +41,7 @@ public class MagicGuidanceProvider extends BookProvider
                 .withCategories(
                         new MageCategory(this).generate(),
                         new PowerCategory(this).generate(),
-                        new ResourceCategory(this).generate(),
-                        new TipsCategory(this).generate(),
+                        new ResourcesTipsCategory(this).generate(),
                         new BossCategory(this).generate()
                 );
     }

@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(VoidShadowEntity.class)
+@Mixin(value = VoidShadowEntity.class, remap = false)
 public abstract class VoidShadowEntityMixin extends FlyingEntity
 {
     @Shadow

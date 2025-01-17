@@ -105,12 +105,16 @@ public class TraitEntry extends BaseEntryProvider
                 """
                         \\
                         Weakener/Stray/Poisonous/Withering/Blinder/Distorter/Levitater/Soul Burner/Freezing/Cursed: **Ring of Divinity** or **Ring of Reflection** can make you immune to almost all negative effects. But as an alternative, you can also use the **exclusive enchantments** of the Breastplate to be immune to specific negative effects.
+                        \\
+                        Adaptive: In addition to using various negative effects, you can refresh a monster's adaptation by switching spells. Each spell is equivalent to a damage type.
                         """
         );
         this.lang("zh_cn").add(context.pageText(),
                 """
                         \\
                         虚弱/流沙/剧毒/凋零/致盲/扭曲/升空/业火/寒流/诅咒: **圣光守护之戒**或**诅咒扭曲之戒**可以让你免疫几乎所有的负面效果。但作为替代，你也可以使用护心镜的**专属附魔**来免疫特定的负面效果。
+                        \\
+                        适应: 除了使用各种负面效果，你还可以通过切换法术来刷新怪物的适应性。每种法术都相当于一种伤害类型。
                         """
         );
         BookTextPageModel trait2 = BookTextPageModel
