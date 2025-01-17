@@ -33,9 +33,10 @@ public class ConsciousOceanEvent
             // Set conscious mode to true
             mode.setConsciousMode(true, player);
 
+            // 0.5.2 removed the spawn point restriction
             // Set spawn point to the ocean if it's not already set in the ocean
-            if (!player.getSpawnPointDimension().equals(AllWorldGen.OC_WORLD))
-                player.setSpawnPoint(AllWorldGen.OC_WORLD, player.getBlockPos(), player.getSpawnAngle(), true, true);
+//            if (!player.getSpawnPointDimension().equals(AllWorldGen.OC_WORLD))
+//                player.setSpawnPoint(AllWorldGen.OC_WORLD, player.getBlockPos(), player.getSpawnAngle(), true, true);
         });
 
         UseItemCallback.EVENT.register((player, world, hand) ->

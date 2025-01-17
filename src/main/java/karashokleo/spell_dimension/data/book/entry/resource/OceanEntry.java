@@ -53,9 +53,6 @@ public class OceanEntry extends BaseEntryProvider
                         The Ocean of Consciousness is a world of nothingness.
                         \\
                         Once you enter this world, your game difficulty will be greatly increased:
-                        \\
-                        \\
-                        You will lose your current spawn point and can only set your spawn point in this world.
                         """
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
@@ -66,9 +63,6 @@ public class OceanEntry extends BaseEntryProvider
                         \\
                         \\
                         一旦你进入这个世界，你的游戏难度将大幅提升:
-                        \\
-                        \\
-                        你将丢失当前的出生点，从此只能将出生点设置在这个世界。
                         """
         );
         BookSpotlightPageModel world = BookSpotlightPageModel
