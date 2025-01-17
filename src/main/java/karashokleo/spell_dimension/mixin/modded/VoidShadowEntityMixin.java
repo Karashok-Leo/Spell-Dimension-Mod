@@ -12,13 +12,13 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(value = VoidShadowEntity.class, remap = false)
+@Mixin(VoidShadowEntity.class)
 public abstract class VoidShadowEntityMixin extends FlyingEntity
 {
-    @Shadow
+    @Shadow(remap = false)
     protected abstract boolean hasVoidMiddleCoordinates();
 
-    @Shadow
+    @Shadow(remap = false)
     public abstract void setVoidMiddle(int x, int y, int z);
 
     @Shadow
