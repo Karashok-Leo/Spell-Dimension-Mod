@@ -6,6 +6,8 @@
     "client.RollManagerInvoker",
     "modded.AdaptingTraitMixin",
     "modded.AmplifierEnchantmentMixin",
+    "modded.ASBTooltipMixin",
+    "modded.BookEverythingMixin",
     "modded.CurseOfPrideMixin",
     "modded.LootingCharmMixin",
     "modded.SpellHelperMixin",

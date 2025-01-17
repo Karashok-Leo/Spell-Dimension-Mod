@@ -36,6 +36,7 @@ public enum SDTexts
     TEXT$ABYSS_GUARD("You need to have Abyss Guard in your inventory to sound the shell horn!", "你需要在物品栏中持有深渊守护才能吹响号角！"),
     TEXT$END_STAGE("End Stage Unlocked!", "终末阶段解锁！"),
     TEXT$END_STAGE$LOCK("You need to use %s to unlock the End Stage to enter the End!", "你需要使用%s解锁终末阶段才能进入末地！"),
+    TEXT$END_STAGE$BOOK_EVERYTHING("You need to use %s to unlock the End Stage to use Book of Omniscience!", "你需要使用%s解锁终末阶段才能使用全知之书！"),
     TEXT$PROGRESS_ROLLBACK("Progress has been rolled back!", "进度已回退！"),
     TEXT$QUEST_COMPLETE("Quest completed!", "任务完成！"),
     TEXT$QUEST_COMPLETED("The quest has been completed", "该任务已完成"),

@@ -337,6 +337,7 @@
   "text.spell-dimension.consciousness_core.triggered": "入侵事件已触发",
   "text.spell-dimension.consciousness_core.triggering": "入侵事件进行中...",
   "text.spell-dimension.end_stage": "终末阶段解锁！",
+  "text.spell-dimension.end_stage.book_everything": "你需要使用%s解锁终末阶段才能使用全知之书！",
   "text.spell-dimension.end_stage.lock": "你需要使用%s解锁终末阶段才能进入末地！",
   "text.spell-dimension.essence": "精华",
   "text.spell-dimension.essence.base": "基础精华",

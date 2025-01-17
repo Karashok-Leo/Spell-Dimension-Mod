@@ -337,6 +337,7 @@
   "text.spell-dimension.consciousness_core.triggered": "Invasion Event has been triggered",
   "text.spell-dimension.consciousness_core.triggering": "Invasion Event on going...",
   "text.spell-dimension.end_stage": "End Stage Unlocked!",
+  "text.spell-dimension.end_stage.book_everything": "You need to use %s to unlock the End Stage to use Book of Omniscience!",
   "text.spell-dimension.end_stage.lock": "You need to use %s to unlock the End Stage to enter the End!",
   "text.spell-dimension.essence": "Essence",
   "text.spell-dimension.essence.base": "Base Essence",
