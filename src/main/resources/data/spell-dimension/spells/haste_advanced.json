@@ -52,7 +52,7 @@
           "effect_id": "spell_power:haste",
           "duration": 12,
           "apply_mode": "SET",
-          "amplifier": 4,
+          "amplifier": 9,
           "show_particles": false
         }
       }

@@ -52,7 +52,7 @@
           "effect_id": "spell_power:critical_chance",
           "duration": 4,
           "apply_mode": "SET",
-          "amplifier": 9,
+          "amplifier": 4,
           "show_particles": false
         }
       }

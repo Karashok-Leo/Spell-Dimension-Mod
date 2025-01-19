@@ -139,10 +139,10 @@ public enum SpellTexts
             "目标或施法者获得魔力增强{effect_amplifier}效果，持续{effect_duration}秒。魔力增强：每级增加10%法术强度。"
     ),
     SPELL_POWER_ADVANCED(
-            "Empowering Presence",
-            "魔力增强",
-            "Apply Empowering Presence {effect_amplifier} effect to target or oneself for {effect_duration} seconds. Empowering Presence: Increases spell power by 10% per level.",
-            "目标或施法者获得魔力增强{effect_amplifier}效果，持续{effect_duration}秒。魔力增强：每级增加10%法术强度。"
+            "Advanced Empowering Presence",
+            "高级魔力增强",
+            "Apply Empowering Presence {effect_amplifier} effect to target or oneself for {effect_duration} seconds. Empowering Presence: Increases spell power by 10%% per level.",
+            "目标或施法者获得魔力增强{effect_amplifier}效果，持续{effect_duration}秒。魔力增强：每级增加10%%法术强度。"
     ),
     REGEN(
             "Regen",
