@@ -3,6 +3,7 @@ package karashokleo.spell_dimension.data;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.buff.BlazingMark;
 import karashokleo.spell_dimension.content.buff.Nucleus;
+import karashokleo.spell_dimension.content.effect.DivineAuraEffect;
 import karashokleo.spell_dimension.content.effect.FrostAuraEffect;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
@@ -122,8 +123,8 @@ public enum SpellTexts
     NUCLEUS(
             "Nucleus",
             "冰核",
-            "Freeze the target's heart into a ice nucleus, explode in " + Nucleus.TOTAL_DURATION / 20F + " seconds, and shoot icicles into the surrounding area.",
-            "将敌人的心脏化作一个冰核，" + Nucleus.TOTAL_DURATION / 20F + "秒后爆炸，并向周围射出冰刺。"
+            "Freeze the target's heart into a ice nucleus, explode in %s seconds, and shoot icicles into the surrounding area.".formatted(Nucleus.TOTAL_DURATION / 20F),
+            "将敌人的心脏化作一个冰核，%s秒后爆炸，并向周围射出冰刺。".formatted(Nucleus.TOTAL_DURATION / 20F)
     ),
     ICICLE(
             "Icicle",
@@ -179,17 +180,35 @@ public enum SpellTexts
             "Apply Spell Haste {effect_amplifier} effect to target or oneself for {effect_duration} seconds.",
             "目标或施法者获得施法加速{effect_amplifier}效果，持续{effect_duration}秒。"
     ),
+    SPEED(
+            "Speed",
+            "迅捷",
+            "Apply Speed {effect_amplifier} effect to target or oneself for {effect_duration} seconds.",
+            "目标或施法者获得速度{effect_amplifier}效果，持续{effect_duration}秒。"
+    ),
+    SPEED_ADVANCED(
+            "Advanced Speed",
+            "高级迅捷",
+            "Apply Speed {effect_amplifier} effect to target or oneself for {effect_duration} seconds.",
+            "目标或施法者获得速度{effect_amplifier}效果，持续{effect_duration}秒。"
+    ),
     CRITICAL_HIT(
             "Spell Volatility",
             "法术波动",
-            "Target or caster gains a 50% spell critical chance for {effect_duration} seconds.",
-            "目标或施法者获得50%法术暴击几率，持续{effect_duration}秒。"
+            "Target or caster gains a 50%% spell critical chance for {effect_duration} seconds.",
+            "目标或施法者获得50%%法术暴击几率，持续{effect_duration}秒。"
     ),
     CLEANSE(
             "Cleanse",
             "净化",
             "Apply Cleanse effect to target or oneself for {effect_duration} seconds.",
             "目标或施法者获得净化效果，持续{effect_duration}秒"
+    ),
+    DIVINE_AURA(
+            "Divine Aura",
+            "神圣光环",
+            "Apply Divine Aura effect to target or oneself for {effect_duration} seconds. Divine Aura: " + DivineAuraEffect.DESC_EN,
+            "目标或施法者获得神圣光环效果，持续{effect_duration}秒。神圣光环：" + DivineAuraEffect.DESC_ZH
     ),
     EXORCISM(
             "Exorcism",

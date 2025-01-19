@@ -104,6 +104,9 @@ public class AllSpells
     public static final Identifier RESIST_ADVANCED = SpellDimension.modLoc("resist_advanced");
     public static final Identifier HASTE = SpellDimension.modLoc("haste");
     public static final Identifier HASTE_ADVANCED = SpellDimension.modLoc("haste_advanced");
+    public static final Identifier SPEED = SpellDimension.modLoc("speed");
+    public static final Identifier SPEED_ADVANCED = SpellDimension.modLoc("speed_advanced");
+    public static final Identifier DIVINE_AURA = SpellDimension.modLoc("divine_aura");
 
     public static void register()
     {

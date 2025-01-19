@@ -139,6 +139,9 @@ public class SpellScrollConfig
             fromEventLoot(AllSpells.REGEN_ADVANCED);
             fromCrafting(AllSpells.HASTE, "soulsweapons:moonstone_block");
             fromEventLoot(AllSpells.HASTE_ADVANCED);
+            fromCrafting(AllSpells.SPEED, LHTraits.SPEEDY.asItem());
+            fromEventLoot(AllSpells.SPEED_ADVANCED);
+            fromCrafting(AllSpells.DIVINE_AURA, LHTraits.KILLER_AURA.asItem());
         }
     }
 

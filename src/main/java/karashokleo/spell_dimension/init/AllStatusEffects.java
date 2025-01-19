@@ -16,6 +16,7 @@ public class AllStatusEffects
     public static AirHopEffect AIR_HOP;
     public static ForceLandingEffect FORCE_LANDING;
     public static SpellPowerEffect SPELL_POWER;
+    public static DivineAuraEffect DIVINE_AURA;
     //    public static final PhaseEffect ASTRAL_TRIP = new PhaseEffect();
 
     public static void register()
@@ -62,9 +63,16 @@ public class AllStatusEffects
                 .addZH("魔力增强")
                 .addZHDesc("每级增加10%法术强度")
                 .register();
+        DIVINE_AURA = new Entry<>("divine_aura", new DivineAuraEffect())
+                .addEN()
+                .addENDesc(DivineAuraEffect.DESC_EN)
+                .addZH("神圣光环")
+                .addZHDesc(DivineAuraEffect.DESC_ZH)
+                .register();
 
         Synchronized.configure(PHASE, true);
         Synchronized.configure(FROSTED, true);
+        Synchronized.configure(DIVINE_AURA, true);
 //        ActionImpairing.configure(ASTRAL_TRIP_EFFECT, EntityActionsAllowed.STUN);
     }
 

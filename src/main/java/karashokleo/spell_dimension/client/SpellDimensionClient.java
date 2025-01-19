@@ -116,6 +116,7 @@ public class SpellDimensionClient implements ClientModInitializer
 
         CustomParticleStatusEffect.register(AllStatusEffects.PHASE, new PhaseParticleSpawner());
         CustomParticleStatusEffect.register(AllStatusEffects.FROSTED, new FrostedParticleSpawner());
+        CustomParticleStatusEffect.register(AllStatusEffects.DIVINE_AURA, new DivineAuraParticleSpawner());
         CustomModelStatusEffect.register(AllStatusEffects.FROSTED, new FrostedEffectRenderer());
 
         init_network();

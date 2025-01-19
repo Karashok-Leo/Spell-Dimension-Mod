@@ -6,8 +6,7 @@
 ### Fire
 ### Frost
 ### Healing
-- Speed
-- Divine Aura
+- Battle Banner
 - Immortal
 - Eternal?
 - Judge? Damage depends on the count of buffs

@@ -50,7 +50,7 @@
         "type": "STATUS_EFFECT",
         "status_effect": {
           "effect_id": "spell_power:haste",
-          "duration": 16,
+          "duration": 12,
           "apply_mode": "SET",
           "amplifier": 4,
           "show_particles": false
