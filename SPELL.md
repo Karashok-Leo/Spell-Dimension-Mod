@@ -1,107 +1,15 @@
 ## Spell
 ### Arcane
-#### Primary
-- wizards:arcane_bolt
-#### Pool
-- wizards:arcane_missile
-- wizards:arcane_blast
-- wizards:arcane_blink
-#### Dynamic
-- wizards:arcane_beam
-- spellbladenext:arcaneoverdrive
-- spellbladenext:arcaneflourish
-- spellbladenext:eldritchblast
-  - minecraft:warden
-- spellbladenext:maelstrom
-  - minecraft:ender_dragon
-- spellbladenext:finalstrike
-  - deeperdarker:stalker
-- spellbladenext:bladestorm
-- spellbladenext:amethystslash
-- spell-dimension:converge
-  - illagerinvasion:invoker
-- spell-dimension:phase
-  - bosses_of_mass_destruction:lich
 - Realm: Make some area(Chunk?) become Realm, in which mage gets more AP
 - BlackHole
-- Kingdom:
+- Kingdom
 ### Fire
-#### Primary
-- wizards:fire_scorch
-#### Pool
-- wizards:fireball
-- wizards:fire_wall
-- wizards:fire_meteor
-#### Dynamic
-- wizards:fire_breath
-  - soulsweapons:draugr_boss
-- spellbladenext:fireflourish
-  - soulsweapons:day_stalker
-- spellbladenext:overblaze
-- spellbladenext:combustion
-- spellbladenext:frostvert
-- spellbladenext:flameslash
-- spellbladenext:snuffout
-- spellbladenext:fireoverdrive
-- spellbladenext:phoenixdive
-- spellbladenext:flicker_strike
-  - bosses_of_mass_destruction:gauntlet
-- spellbladenext:inferno
-- spell-dimension:blast
-  - soulsweapons:accursed_lord_boss
-- spell-dimension:ignite
-  - adventurez:blackstone_golem
 ### Frost
-#### Primary
-- wizards:frost_shard
-#### Pool
-- wizards:frostbolt
-- wizards:frost_nova
-- wizards:frost_shield
-#### Dynamic
-- wizards:frost_blizzard
-  - soulsweapons:moonknight
-- spellbladenext:eviscerate
-- spellbladenext:frostbloom0
-- spellbladenext:frostoverdrive
-- spellbladenext:tempest
-- spellbladenext:deathchill
-- spellbladenext:whirlingblades
-- spellbladenext:frostflourish
-  - soulsweapons:night_prowler
-- spellbladenext:coldbuff
-- spellbladenext:frostslash
-- spell-dimension:nucleus
-  - aquamirae:maze_mother
-- spell-dimension:aura
-  - aquamirae:captain_cornelia
-- spell-dimension:icicle
-  - minecraft:elder_guardian
 ### Healing
-#### Primary
-- paladins:heal
-#### Pool
-- paladins:flash_heal
-- paladins:holy_shock
-- paladins:divine_protection
-#### Dynamic
-- paladins:holy_beam
-  - soulsweapons:chaos_monarch
-- paladins:circle_of_healing
-  - soulsweapons:returning_knight
-- paladins:barrier
-  - graveyard:lich
-- paladins:battle_banner
-- paladins:judgement
-  - minecraft:wither
-- spell-dimension:resist
-  - soulsweapons:draugr_boss
-- spell-dimension:regen
-  - bosses_of_mass_destruction:void_blossom
-- spell-dimension:power
-- Judge: Damage depends on the count of buffs
 - Speed
-- Absorb: Refresh when...
-- Eternal:
+- Divine Aura
+- Immortal
+- Eternal?
+- Judge? Damage depends on the count of buffs
 ### Lightning
 ### Soul

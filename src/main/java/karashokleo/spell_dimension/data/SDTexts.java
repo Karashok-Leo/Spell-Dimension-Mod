@@ -71,8 +71,8 @@ public enum SDTexts
      * Spell School
      */
     SCHOOL$ARCANE("Arcane ", "奥秘"),
-    SCHOOL$FIRE("Fire ", "烈焰"),
-    SCHOOL$FROST("Frost ", "冰霜"),
+    SCHOOL$FIRE("Fire ", "火焰"),
+    SCHOOL$FROST("Frost ", "寒冰"),
     SCHOOL$HEALING("Healing ", "治愈"),
     SCHOOL$LIGHTNING("Lightning ", "闪电"),
     SCHOOL$SOUL("Soul ", "灵魂"),
@@ -155,6 +155,7 @@ public enum SDTexts
     SCROLL$EXPLORING("Obtained through exploring %s", "探索%s获得"),
     SCROLL$KILLING("Dropped by killing %s", "击杀%s掉落"),
     SCROLL$CRAFT("Obtained through crafting using %s", "使用%s合成获得"),
+    SCROLL$EVENT("Can only be obtained through invasion event loot in the Ocean of Consciousness.", "只能通过识之海入侵事件战利品获得"),
     ;
 
 

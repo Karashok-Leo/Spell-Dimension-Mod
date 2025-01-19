@@ -34,7 +34,7 @@ public class REILocateCategory implements DisplayCategory<REILocateDisplay>
         widgets.add(Widgets.createArrow(new Point(startPoint.x + DISPLAY_OFFSET_X + ARROW_OFFSET, startPoint.y + DISPLAY_OFFSET_Y)));
         Slot input = Widgets.createSlot(new Point(startPoint.x + DISPLAY_OFFSET_X - SLOT_OFFSET - 8, startPoint.y + DISPLAY_OFFSET_Y)).entries(display.input()).markInput();
         Slot lodestone = Widgets.createSlot(new Point(startPoint.x + DISPLAY_OFFSET_X - SLOT_OFFSET + 8 + 6, startPoint.y + DISPLAY_OFFSET_Y)).entries(LOCATE_TARGET).noInteractable().disableBackground();
-        Label destination = Widgets.createLabel(new Point(startPoint.x, startPoint.y + 6), display.text()).shadow();
+        Label destination = Widgets.createLabel(new Point(startPoint.x, startPoint.y + 6), display.spot()).shadow();
         widgets.add(input);
         widgets.add(lodestone);
         widgets.add(destination);
@@ -43,7 +43,7 @@ public class REILocateCategory implements DisplayCategory<REILocateDisplay>
                 !(input.getBounds().contains(point) ||
                   lodestone.getBounds().contains(point) ||
                   destination.getBounds().contains(point)) ?
-                        Tooltip.create(point, display.id()) : null));
+                        Tooltip.create(point, display.tooltip()) : null));
         return widgets;
     }
 

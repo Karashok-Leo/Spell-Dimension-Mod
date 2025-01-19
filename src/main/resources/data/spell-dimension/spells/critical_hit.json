@@ -49,10 +49,10 @@
       "action": {
         "type": "STATUS_EFFECT",
         "status_effect": {
-          "effect_id": "minecraft:regeneration",
-          "duration": 16,
+          "effect_id": "spell_power:critical_chance",
+          "duration": 4,
           "apply_mode": "SET",
-          "amplifier": 2,
+          "amplifier": 9,
           "show_particles": false
         }
       }

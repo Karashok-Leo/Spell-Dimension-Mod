@@ -3,6 +3,7 @@ package karashokleo.spell_dimension.config.recipe;
 import com.obscuria.aquamirae.registry.AquamiraeItems;
 import fuzs.mutantmonsters.init.ModRegistry;
 import karashokleo.l2hostility.content.item.ComplementItems;
+import karashokleo.l2hostility.content.item.MiscItems;
 import karashokleo.l2hostility.init.LHTraits;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllItems;
@@ -37,6 +38,13 @@ public class SpellScrollConfig
         return CRAFT_SPELLS;
     }
 
+    public static Set<Identifier> getEventLootSpells()
+    {
+        Set<Identifier> spells = new HashSet<>(EVENT_LOOT_SPELLS);
+        spells.addAll(CRAFT_SPELLS);
+        return spells;
+    }
+
     public static Text getSpellScrollText(@Nullable SpellInfo spellInfo)
     {
         return spellInfo == null ?
@@ -50,6 +58,7 @@ public class SpellScrollConfig
 
     private static final Map<Identifier, MutableText> SPELL_TEXTS = new HashMap<>();
     private static final Set<Identifier> CRAFT_SPELLS = new HashSet<>();
+    private static final Set<Identifier> EVENT_LOOT_SPELLS = new HashSet<>();
 
     static
     {
@@ -121,9 +130,15 @@ public class SpellScrollConfig
             fromCrafting(AllSpells.JUDGEMENT, "soulsweapons:lord_soul_dark");
             fromCrafting(AllSpells.CLEANSE, ComplementItems.LIFE_ESSENCE);
             fromCrafting(AllSpells.EXORCISM, LHTraits.DISPELL.asItem());
-            fromCrafting(AllSpells.POWER, "soulsweapons:essence_of_luminescence");
+            fromCrafting(AllSpells.CRITICAL_HIT, MiscItems.CHAOS.blockSet().item());
+            fromCrafting(AllSpells.SPELL_POWER, "soulsweapons:essence_of_luminescence");
+            fromEventLoot(AllSpells.SPELL_POWER_ADVANCED);
             fromCrafting(AllSpells.RESIST, "soulsweapons:essence_of_eventide");
+            fromEventLoot(AllSpells.RESIST_ADVANCED);
             fromCrafting(AllSpells.REGEN, "bosses_of_mass_destruction:void_thorn");
+            fromEventLoot(AllSpells.REGEN_ADVANCED);
+            fromCrafting(AllSpells.HASTE, "soulsweapons:moonstone_block");
+            fromEventLoot(AllSpells.HASTE_ADVANCED);
         }
     }
 
@@ -152,5 +167,11 @@ public class SpellScrollConfig
         SPELL_TEXTS.put(spellId, SDTexts.SCROLL$CRAFT.get(item.getName().copy().formatted(Formatting.BOLD)));
         CRAFT_SPELLS.add(spellId);
         InfusionRecipes.register(Items.PAPER, item, AllItems.SPELL_SCROLL.getStack(spellId));
+    }
+
+    private static void fromEventLoot(Identifier spellId)
+    {
+        SPELL_TEXTS.put(spellId, SDTexts.SCROLL$EVENT.get());
+        EVENT_LOOT_SPELLS.add(spellId);
     }
 }

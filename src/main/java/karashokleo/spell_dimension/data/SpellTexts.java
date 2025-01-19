@@ -68,7 +68,7 @@ public enum SpellTexts
     PHASE(
             "Phase",
             "相位",
-            "Apply phase {effect_amplifier} effect to oneself for {effect_duration} seconds. Phase: Free to fly through walls.",
+            "Apply Phase {effect_amplifier} effect to oneself for {effect_duration} seconds. Phase: Free to fly through walls.",
             "施法者获得相位{effect_amplifier}效果，持续{effect_duration}秒。相位：自由穿墙飞行。"
     ),
     SHIFT(
@@ -92,7 +92,7 @@ public enum SpellTexts
     IGNITE(
             "Ignite",
             "引火",
-            "Apply ignite effect to oneself. Ignite: " + BlazingMark.DESC_EN,
+            "Apply Ignite effect to oneself. Ignite: " + BlazingMark.DESC_EN,
             "施法者获得引火效果。引火：" + BlazingMark.DESC_ZH
     ),
     FIRE_OF_RETRIBUTION(
@@ -104,7 +104,7 @@ public enum SpellTexts
     AURA(
             "Aura",
             "霜环",
-            "Apply aura {effect_amplifier} effect to oneself for {effect_duration} seconds. Aura: " + FrostAuraEffect.DESC_EN,
+            "Apply Frost Aura {effect_amplifier} effect to oneself for {effect_duration} seconds. Frost Aura: " + FrostAuraEffect.DESC_EN,
             "施法者获得霜环{effect_amplifier}效果，持续{effect_duration}秒。霜环：" + FrostAuraEffect.DESC_ZH
     ),
     FROST_BLINK(
@@ -131,29 +131,65 @@ public enum SpellTexts
             "Shooting an icicle, which deals {damage} frost spell damage to the hit enemy and can cause a chain reaction.",
             "发射一道冰刺，对命中的敌人造成{damage}点伤害，冰刺可以引发链式反应。"
     ),
-    POWER(
-            "Power",
-            "力量",
-            "Apply strength {effect_amplifier} effect to oneself for {effect_duration} seconds.",
-            "施法者获得力量{effect_amplifier}效果，持续{effect_duration}秒。"
+    SPELL_POWER(
+            "Empowering Presence",
+            "魔力增强",
+            "Apply Empowering Presence {effect_amplifier} effect to target or oneself for {effect_duration} seconds. Empowering Presence: Increases spell power by 10% per level.",
+            "目标或施法者获得魔力增强{effect_amplifier}效果，持续{effect_duration}秒。魔力增强：每级增加10%法术强度。"
+    ),
+    SPELL_POWER_ADVANCED(
+            "Empowering Presence",
+            "魔力增强",
+            "Apply Empowering Presence {effect_amplifier} effect to target or oneself for {effect_duration} seconds. Empowering Presence: Increases spell power by 10% per level.",
+            "目标或施法者获得魔力增强{effect_amplifier}效果，持续{effect_duration}秒。魔力增强：每级增加10%法术强度。"
     ),
     REGEN(
             "Regen",
             "再生",
-            "Apply regen {effect_amplifier} effect to oneself for {effect_duration} seconds.",
-            "施法者获得生命再生{effect_amplifier}效果，持续{effect_duration}秒。"
+            "Apply Regenerate {effect_amplifier} effect to target or oneself for {effect_duration} seconds.",
+            "目标或施法者获得生命再生{effect_amplifier}效果，持续{effect_duration}秒。"
+    ),
+    REGEN_ADVANCED(
+            "Advanced Regen",
+            "高级再生",
+            "Apply Regenerate {effect_amplifier} effect to target or oneself for {effect_duration} seconds.",
+            "目标或施法者获得生命再生{effect_amplifier}效果，持续{effect_duration}秒。"
     ),
     RESIST(
             "Resist",
             "抗性",
-            "Apply resist {effect_amplifier} effect to oneself for {effect_duration} seconds.",
-            "施法者获得抗性提升{effect_amplifier}效果，持续{effect_duration}秒。"
+            "Apply Resistance {effect_amplifier} effect to target or oneself for {effect_duration} seconds.",
+            "目标或施法者获得抗性提升{effect_amplifier}效果，持续{effect_duration}秒。"
+    ),
+    RESIST_ADVANCED(
+            "Advanced Resist",
+            "高级抗性",
+            "Apply Resistance {effect_amplifier} effect to target or oneself for {effect_duration} seconds.",
+            "目标或施法者获得抗性提升{effect_amplifier}效果，持续{effect_duration}秒。"
+    ),
+    HASTE(
+            "Spell Haste",
+            "施法急速",
+            "Apply Spell Haste {effect_amplifier} effect to target or oneself for {effect_duration} seconds.",
+            "目标或施法者获得施法加速{effect_amplifier}效果，持续{effect_duration}秒。"
+    ),
+    HASTE_ADVANCED(
+            "Advanced Spell Haste",
+            "高级施法急速",
+            "Apply Spell Haste {effect_amplifier} effect to target or oneself for {effect_duration} seconds.",
+            "目标或施法者获得施法加速{effect_amplifier}效果，持续{effect_duration}秒。"
+    ),
+    CRITICAL_HIT(
+            "Spell Volatility",
+            "法术波动",
+            "Target or caster gains a 50% spell critical chance for {effect_duration} seconds.",
+            "目标或施法者获得50%法术暴击几率，持续{effect_duration}秒。"
     ),
     CLEANSE(
             "Cleanse",
             "净化",
-            "Apply cleanse effect to oneself or an ally.",
-            "施法者或者目标友军获得净化效果。"
+            "Apply Cleanse effect to target or oneself for {effect_duration} seconds.",
+            "目标或施法者获得净化效果，持续{effect_duration}秒"
     ),
     EXORCISM(
             "Exorcism",

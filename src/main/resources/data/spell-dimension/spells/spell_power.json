@@ -24,7 +24,10 @@
   },
   "release": {
     "target": {
-      "type": "SELF"
+      "type": "CURSOR",
+      "cursor": {
+        "use_caster_as_fallback": true
+      }
     },
     "animation": "spell_engine:one_handed_area_release",
     "sound": {
@@ -46,8 +49,8 @@
       "action": {
         "type": "STATUS_EFFECT",
         "status_effect": {
-          "effect_id": "minecraft:strength",
-          "duration": 25,
+          "effect_id": "spell-dimension:spell_power",
+          "duration": 16,
           "apply_mode": "SET",
           "amplifier": 2,
           "show_particles": false

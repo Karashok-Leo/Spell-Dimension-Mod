@@ -14,22 +14,43 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public record EMILocateRecipe(EmiStack input, Text text, Text id) implements EmiRecipe
+public record EMILocateRecipe(EmiStack input, Text spot, Text tooltip) implements EmiRecipe
 {
     public static final EmiIngredient CATALYSTS = EmiIngredient.of(AllTags.LOCATE_TARGET);
 
-    public EMILocateRecipe(Item item, RegistryKey<?> registryKey)
+    public EMILocateRecipe(Item item, RegistryKey<World> worldKey, RegistryKey<?> spotKey)
     {
-        this(EmiStack.of(item), LocateSpellConfig.getSpotName(registryKey), Text.of(registryKey.getValue().toString()));
+        this(
+                EmiStack.of(item),
+                LocateSpellConfig.getSpotName(spotKey),
+                Text.translatable(
+                        "travelerstitles.%s.%s"
+                                .formatted(
+                                        worldKey.getValue().getNamespace(),
+                                        worldKey.getValue().getPath()
+                                )
+                ).append(" - ").append(Text.of(spotKey.getValue().toString()))
+        );
     }
 
-    public EMILocateRecipe(Item item, TagKey<?> tagKey)
+    public EMILocateRecipe(Item item, RegistryKey<World> worldKey, TagKey<?> spotKey)
     {
-        this(EmiStack.of(item), LocateSpellConfig.getSpotName(tagKey), Text.of(tagKey.id().toString()));
+        this(
+                EmiStack.of(item),
+                LocateSpellConfig.getSpotName(spotKey),
+                Text.translatable(
+                        "travelerstitles.%s.%s"
+                                .formatted(
+                                        worldKey.getValue().getNamespace(),
+                                        worldKey.getValue().getPath()
+                                )
+                ).append(" - ").append(Text.of(spotKey.id().toString()))
+        );
     }
 
     @Override
@@ -65,7 +86,7 @@ public record EMILocateRecipe(EmiStack input, Text text, Text id) implements Emi
     @Override
     public int getDisplayWidth()
     {
-        int width = MinecraftClient.getInstance().textRenderer.getWidth(text);
+        int width = MinecraftClient.getInstance().textRenderer.getWidth(spot);
         return 70 + width + 5;
     }
 
@@ -81,7 +102,7 @@ public record EMILocateRecipe(EmiStack input, Text text, Text id) implements Emi
         widgets.addSlot(input, 0, 0);
         widgets.addSlot(CATALYSTS, 20, 0).catalyst(true).drawBack(false);
         widgets.addTexture(EmiTexture.EMPTY_ARROW, 42, 0);
-        widgets.addText(text, 70, 4, -1, true);
-        widgets.addTooltipText(List.of(id), 0, 0, getDisplayWidth(), getDisplayHeight());
+        widgets.addText(spot, 70, 4, -1, true);
+        widgets.addTooltipText(List.of(tooltip), 0, 0, getDisplayWidth(), getDisplayHeight());
     }
 }

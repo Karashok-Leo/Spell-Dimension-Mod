@@ -149,9 +149,9 @@ public enum SDContents
     ROBE_FIRE(
             "wizards:textures/item/fire_robe_head.png",
             "Fire Robe",
-            "烈焰法袍",
+            "火焰法袍",
             "Includes full set of fire robe",
-            "包含全套烈焰法袍"
+            "包含全套火焰法袍"
     ),
     ROBE_FROST(
             "wizards:textures/item/frost_robe_head.png",

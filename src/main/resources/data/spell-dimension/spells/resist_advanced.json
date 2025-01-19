@@ -49,7 +49,7 @@
       "action": {
         "type": "STATUS_EFFECT",
         "status_effect": {
-          "effect_id": "minecraft:regeneration",
+          "effect_id": "minecraft:resistance",
           "duration": 16,
           "apply_mode": "SET",
           "amplifier": 2,

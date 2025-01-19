@@ -30,8 +30,8 @@ public class REICompat implements REIClientPlugin
     @Override
     public void registerDisplays(DisplayRegistry registry)
     {
-        LocateSpellConfig.STRUCTURE_CONFIG.cellSet().forEach(cell -> registry.add(new REILocateDisplay(cell.getRowKey(), cell.getValue())));
-        LocateSpellConfig.BIOME_CONFIG.cellSet().forEach(cell -> registry.add(new REILocateDisplay(cell.getRowKey(), cell.getValue())));
+        LocateSpellConfig.STRUCTURE_CONFIG.cellSet().forEach(cell -> registry.add(new REILocateDisplay(cell.getRowKey(), cell.getColumnKey(), cell.getValue())));
+        LocateSpellConfig.BIOME_CONFIG.cellSet().forEach(cell -> registry.add(new REILocateDisplay(cell.getRowKey(), cell.getColumnKey(), cell.getValue())));
         SummonSpellConfig.forEach((item, entry) -> registry.add(new REISummonDisplay(item, entry)));
         InfusionRecipes.getAll().forEach(entry -> registry.add(new REIInfusionDisplay(entry.getRowKey(), entry.getColumnKey(), entry.getValue())));
     }

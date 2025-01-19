@@ -15,6 +15,7 @@ public class AllStatusEffects
     public static FrostedEffect FROSTED;
     public static AirHopEffect AIR_HOP;
     public static ForceLandingEffect FORCE_LANDING;
+    public static SpellPowerEffect SPELL_POWER;
     //    public static final PhaseEffect ASTRAL_TRIP = new PhaseEffect();
 
     public static void register()
@@ -41,7 +42,7 @@ public class AllStatusEffects
                 .addEN()
                 .addENDesc("Frozen and continuously receiving frost spell damage")
                 .addZH("霜冻")
-                .addZHDesc("冻结并持续收到冰霜法术伤害")
+                .addZHDesc("冻结并持续收到寒冰法术伤害")
                 .register();
         AIR_HOP = new Entry<>("air_hop", new AirHopEffect())
                 .addEN()
@@ -54,6 +55,12 @@ public class AllStatusEffects
                 .addENDesc("Force landing")
                 .addZH("迫降")
                 .addZHDesc("强制着陆")
+                .register();
+        SPELL_POWER = new Entry<>("spell_power", new SpellPowerEffect())
+                .addEN("Empowering Presence")
+                .addENDesc("Increases spell power by 10% per level")
+                .addZH("魔力增强")
+                .addZHDesc("每级增加10%法术强度")
                 .register();
 
         Synchronized.configure(PHASE, true);

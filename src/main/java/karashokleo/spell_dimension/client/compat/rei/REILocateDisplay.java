@@ -9,19 +9,40 @@ import net.minecraft.item.Item;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.text.Text;
+import net.minecraft.world.World;
 
 import java.util.List;
 
-public record REILocateDisplay(EntryIngredient input, Text text, Text id) implements Display
+public record REILocateDisplay(EntryIngredient input, Text spot, Text tooltip) implements Display
 {
-    public REILocateDisplay(Item item, RegistryKey<?> registryKey)
+    public REILocateDisplay(Item item, RegistryKey<World> worldKey, RegistryKey<?> spotKey)
     {
-        this(EntryIngredients.of(item), LocateSpellConfig.getSpotName(registryKey), Text.of(registryKey.getValue().toString()));
+        this(
+                EntryIngredients.of(item),
+                LocateSpellConfig.getSpotName(spotKey),
+                Text.translatable(
+                        "travelerstitles.%s.%s"
+                                .formatted(
+                                        worldKey.getValue().getNamespace(),
+                                        worldKey.getValue().getPath()
+                                )
+                ).append(" - ").append(Text.of(spotKey.getValue().toString()))
+        );
     }
 
-    public REILocateDisplay(Item item, TagKey<?> tagKey)
+    public REILocateDisplay(Item item, RegistryKey<World> worldKey, TagKey<?> spotKey)
     {
-        this(EntryIngredients.of(item), LocateSpellConfig.getSpotName(tagKey), Text.of(tagKey.id().toString()));
+        this(
+                EntryIngredients.of(item),
+                LocateSpellConfig.getSpotName(spotKey),
+                Text.translatable(
+                        "travelerstitles.%s.%s"
+                                .formatted(
+                                        worldKey.getValue().getNamespace(),
+                                        worldKey.getValue().getPath()
+                                )
+                ).append(" - ").append(Text.of(spotKey.id().toString()))
+        );
     }
 
     @Override

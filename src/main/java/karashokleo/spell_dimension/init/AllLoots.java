@@ -59,7 +59,7 @@ public class AllLoots
             if (id.equals(EventAward.SPELL_SCROLL.lootTable))
             {
                 LootPool.Builder builder = LootPool.builder();
-                addCraftSpellLootPool(builder, SpellScrollConfig.getCraftSpells());
+                addCraftSpellLootPool(builder, SpellScrollConfig.getEventLootSpells());
                 tableBuilder.pool(builder.build());
             }
         });

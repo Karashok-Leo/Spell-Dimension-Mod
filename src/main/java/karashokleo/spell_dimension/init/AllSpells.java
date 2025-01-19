@@ -95,9 +95,15 @@ public class AllSpells
     public static final Identifier JUDGEMENT = new Identifier("paladins:judgement");
     public static final Identifier CLEANSE = SpellDimension.modLoc("cleanse");
     public static final Identifier EXORCISM = SpellDimension.modLoc("exorcism");
-    public static final Identifier POWER = SpellDimension.modLoc("power");
-    public static final Identifier RESIST = SpellDimension.modLoc("resist");
+    public static final Identifier CRITICAL_HIT = SpellDimension.modLoc("critical_hit");
+    public static final Identifier SPELL_POWER = SpellDimension.modLoc("spell_power");
+    public static final Identifier SPELL_POWER_ADVANCED = SpellDimension.modLoc("spell_power_advanced");
     public static final Identifier REGEN = SpellDimension.modLoc("regen");
+    public static final Identifier REGEN_ADVANCED = SpellDimension.modLoc("regen_advanced");
+    public static final Identifier RESIST = SpellDimension.modLoc("resist");
+    public static final Identifier RESIST_ADVANCED = SpellDimension.modLoc("resist_advanced");
+    public static final Identifier HASTE = SpellDimension.modLoc("haste");
+    public static final Identifier HASTE_ADVANCED = SpellDimension.modLoc("haste_advanced");
 
     public static void register()
     {
