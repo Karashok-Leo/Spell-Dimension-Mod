@@ -7,6 +7,7 @@ import com.klikli_dev.modonomicon.api.datagen.book.page.BookEntityPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookSpotlightPageModel;
 import karashokleo.spell_dimension.data.book.entry.BaseEntryProvider;
+import karashokleo.spell_dimension.data.loot_bag.TextConstants;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.util.BookGenUtil;
 import net.minecraft.recipe.Ingredient;
@@ -53,27 +54,27 @@ public class DayNightEntry extends BaseEntryProvider
         this.lang().add(context.pageText(),
                 """
                         \\
-                        Level: 250+
+                        Level: %d+
                         \\
                         \\
                         Use Chaos Orb to summon.
                         \\
                         \\
                         Drops **Celestial Luminary** upon defeating Night Prowler.
-                        """
+                        """.formatted(TextConstants.BOSS_LEVELS[3])
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
                 """
                         \\
-                        等级: 250+
+                        等级: %d+
                         \\
                         \\
                         使用混沌宝珠召唤。
                         \\
                         \\
                         击败夜伏者后掉落**无尽星辉**。
-                        """
+                        """.formatted(TextConstants.BOSS_LEVELS[3])
         );
 
         BookSpotlightPageModel boss = BookSpotlightPageModel

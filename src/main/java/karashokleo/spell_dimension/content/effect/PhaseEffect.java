@@ -30,6 +30,11 @@ public class PhaseEffect extends StatusEffect
     }
 
     @Override
+    public void applyUpdateEffect(LivingEntity entity, int amplifier)
+    {
+    }
+
+    @Override
     public void onRemoved(LivingEntity entity, AttributeContainer attributes, int amplifier)
     {
         super.onRemoved(entity, attributes, amplifier);
@@ -43,12 +48,12 @@ public class PhaseEffect extends StatusEffect
     {
         if (canFly)
         {
-            Pal.grantAbility(player, VanillaAbilities.ALLOW_FLYING, PHASE);
-            Pal.grantAbility(player, VanillaAbilities.FLYING, PHASE);
+            PHASE.grantTo(player, VanillaAbilities.ALLOW_FLYING);
+            PHASE.grantTo(player, VanillaAbilities.FLYING);
         } else
         {
-            Pal.revokeAbility(player, VanillaAbilities.ALLOW_FLYING, PHASE);
-            Pal.revokeAbility(player, VanillaAbilities.FLYING, PHASE);
+            PHASE.revokeFrom(player, VanillaAbilities.ALLOW_FLYING);
+            PHASE.revokeFrom(player, VanillaAbilities.FLYING);
         }
     }
 }

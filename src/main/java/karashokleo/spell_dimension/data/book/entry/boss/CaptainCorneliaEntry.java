@@ -8,6 +8,7 @@ import com.klikli_dev.modonomicon.api.datagen.book.page.BookPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookSpotlightPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
 import karashokleo.spell_dimension.data.book.entry.BaseEntryProvider;
+import karashokleo.spell_dimension.data.loot_bag.TextConstants;
 import karashokleo.spell_dimension.util.BookGenUtil;
 import net.minecraft.util.Identifier;
 
@@ -52,21 +53,21 @@ public class CaptainCorneliaEntry extends BaseEntryProvider
         this.lang().add(context.pageText(),
                 """
                         \\
-                        Level: 100+
+                        Level: %d+
                         \\
                         \\
                         When you hold the **Shell Horn** to blow it on the seashore of the Frozen Deep, Captain Cornelia Undead will emerge from the water.
-                        """
+                        """.formatted(TextConstants.BOSS_LEVELS[1])
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
                 """
                         \\
-                        等级: 100+
+                        等级: %d+
                         \\
                         \\
                         当你手持**贝壳号角**并在冰冻深海的海边吹响，船长科妮莉亚亡灵会从水中浮现。
-                        """
+                        """.formatted(TextConstants.BOSS_LEVELS[1])
         );
 
         BookSpotlightPageModel boss = BookSpotlightPageModel

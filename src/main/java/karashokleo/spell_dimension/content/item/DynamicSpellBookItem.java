@@ -44,7 +44,7 @@ import java.util.stream.Stream;
 
 public class DynamicSpellBookItem extends SpellBookTrinketItem
 {
-    public static final int REQUIREMENT_SPELL_POWER_PER_GRADE = 33;
+    public static final int REQUIREMENT_SPELL_POWER_PER_GRADE = 100;
     public static final Identifier DYNAMIC_POOL = SpellDimension.modLoc("dynamic");
     public static final Map<SpellSchool, Identifier> POOLS = Map.of(
             SpellSchools.ARCANE, SpellDimension.modLoc("arcane"),

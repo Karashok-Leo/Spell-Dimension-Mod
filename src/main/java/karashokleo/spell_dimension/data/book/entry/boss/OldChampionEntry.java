@@ -8,6 +8,7 @@ import com.klikli_dev.modonomicon.api.datagen.book.page.BookPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookSpotlightPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
 import karashokleo.spell_dimension.data.book.entry.BaseEntryProvider;
+import karashokleo.spell_dimension.data.loot_bag.TextConstants;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.util.BookGenUtil;
 import net.minecraft.recipe.Ingredient;
@@ -54,25 +55,25 @@ public class OldChampionEntry extends BaseEntryProvider
         this.lang().add(context.pageText(),
                 """
                         \\
-                        Level: 100+
+                        Level: %d+
                         \\
                         \\
                         Spawns inside the **Champion's Grave**(soulsweapons:champions_grave).
                         \\
                         This structure can be located in the Overworld using the Moonstone Compass.
-                        """
+                        """.formatted(TextConstants.BOSS_LEVELS[0])
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
                 """
                         \\
-                        等级: 100+
+                        等级: %d+
                         \\
                         \\
                         生成于**古英雄的坟墓**(soulsweapons:champions_grave)内。
                         \\
                         可用月石罗盘在主世界寻找该结构。
-                        """
+                        """.formatted(TextConstants.BOSS_LEVELS[0])
         );
 
         BookSpotlightPageModel boss = BookSpotlightPageModel

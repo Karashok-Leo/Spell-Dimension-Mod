@@ -8,6 +8,7 @@ import com.klikli_dev.modonomicon.api.datagen.book.page.BookPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookSpotlightPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
 import karashokleo.spell_dimension.data.book.entry.BaseEntryProvider;
+import karashokleo.spell_dimension.data.loot_bag.TextConstants;
 import karashokleo.spell_dimension.util.BookGenUtil;
 import net.minecraft.util.Identifier;
 
@@ -52,21 +53,27 @@ public class StalkerEntry extends BaseEntryProvider
         this.lang().add(context.pageText(),
                 """
                         \\
+                        Level: %d+
+                        \\
+                        \\
                         May spawn when an **Ancient Vase** is broken.
                         \\
                         \\
                         *Ancient Vase: Generated in the Ancient Temple in the Deeper Darker.*
-                        """
+                        """.formatted(TextConstants.BOSS_LEVELS[1])
         );
         this.lang("zh_cn").add(context.pageTitle(), "Stalker");
         this.lang("zh_cn").add(context.pageText(),
                 """
                         \\
+                        等级: %d+
+                        \\
+                        \\
                         在**远古花瓶**被打破时有概率生成。
                         \\
                         \\
                         *远古花瓶: 生成于深暗维度的远古神庙。*
-                        """
+                        """.formatted(TextConstants.BOSS_LEVELS[1])
         );
 
         BookSpotlightPageModel boss = BookSpotlightPageModel

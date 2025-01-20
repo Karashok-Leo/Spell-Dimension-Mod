@@ -9,6 +9,7 @@ import com.klikli_dev.modonomicon.api.datagen.book.page.BookSpotlightPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
 import karashokleo.l2hostility.content.item.ComplementItems;
 import karashokleo.spell_dimension.data.book.entry.BaseEntryProvider;
+import karashokleo.spell_dimension.data.loot_bag.TextConstants;
 import karashokleo.spell_dimension.init.AllItems;
 import net.minecraft.recipe.Ingredient;
 
@@ -53,25 +54,25 @@ public class ElderGuardianEntry extends BaseEntryProvider
         this.lang().add(context.pageText(),
                 """
                         \\
-                        Level: 100+
+                        Level: %d+
                         \\
                         \\
                         Spawns inside the **Ocean Monument**(betteroceanmonuments:ocean_monument).
                         \\
                         This structure can be located in the Overworld using the Locate Spell.
-                        """
+                        """.formatted(TextConstants.BOSS_LEVELS[0])
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
                 """
                         \\
-                        等级: 100+
+                        等级: %d+
                         \\
                         \\
                         生成于**海底神殿**(betteroceanmonuments:ocean_monument)内。
                         \\
                         可通过定位法术在主世界中定位到此结构。
-                        """
+                        """.formatted(TextConstants.BOSS_LEVELS[0])
         );
 
         BookSpotlightPageModel boss = BookSpotlightPageModel

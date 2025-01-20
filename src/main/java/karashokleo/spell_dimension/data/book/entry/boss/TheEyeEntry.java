@@ -8,6 +8,7 @@ import com.klikli_dev.modonomicon.api.datagen.book.page.BookMultiblockPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookSpotlightPageModel;
 import karashokleo.spell_dimension.data.book.entry.BaseEntryProvider;
+import karashokleo.spell_dimension.data.loot_bag.TextConstants;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 
@@ -52,21 +53,21 @@ public class TheEyeEntry extends BaseEntryProvider
         this.lang().add(context.pageText(),
                 """
                         \\
-                        Level: 300
+                        Level: %d+
                         \\
                         \\
                         Use 25 obsidian, 9 crying obsidian, and 8 end rods to build the altar, wait a moment to summon.
-                        """
+                        """.formatted(TextConstants.BOSS_LEVELS[3])
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
                 """
                         \\
-                        等级: 300
+                        等级: %d+
                         \\
                         \\
                         使用25块黑曜石，9块哭泣的黑曜石和8根末地烛搭建祭坛，等待片刻后即可召唤。
-                        """
+                        """.formatted(TextConstants.BOSS_LEVELS[3])
         );
 
         BookSpotlightPageModel boss = BookSpotlightPageModel

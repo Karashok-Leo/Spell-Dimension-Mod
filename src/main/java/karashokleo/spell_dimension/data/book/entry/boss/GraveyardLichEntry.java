@@ -8,6 +8,7 @@ import com.klikli_dev.modonomicon.api.datagen.book.page.BookPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookSpotlightPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
 import karashokleo.spell_dimension.data.book.entry.BaseEntryProvider;
+import karashokleo.spell_dimension.data.loot_bag.TextConstants;
 import karashokleo.spell_dimension.util.BookGenUtil;
 import net.minecraft.util.Identifier;
 
@@ -52,25 +53,25 @@ public class GraveyardLichEntry extends BaseEntryProvider
         this.lang().add(context.pageText(),
                 """
                         \\
-                        Level: 200+
+                        Level: %d+
                         \\
                         \\
                         Corrupted Lich can be summoned in the **Lich Prison**(graveyard:lich_prison).
                         \\
                         This structure can be located in the Overworld using the Locate Spell.
-                        """
+                        """.formatted(TextConstants.BOSS_LEVELS[2])
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
                 """
                         \\
-                        等级：200+
+                        等级：%d+
                         \\
                         \\
                         巫妖可在**巫妖之狱**(graveyard:lich_prison)召唤。
                         \\
                         可通过定位法术在主世界中定位到此结构。
-                        """
+                        """.formatted(TextConstants.BOSS_LEVELS[2])
         );
 
         BookSpotlightPageModel boss = BookSpotlightPageModel

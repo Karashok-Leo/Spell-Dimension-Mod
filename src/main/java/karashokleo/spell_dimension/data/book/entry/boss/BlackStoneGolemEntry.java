@@ -8,6 +8,7 @@ import com.klikli_dev.modonomicon.api.datagen.book.page.BookMultiblockPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookSpotlightPageModel;
 import karashokleo.spell_dimension.data.book.entry.BaseEntryProvider;
+import karashokleo.spell_dimension.data.loot_bag.TextConstants;
 import net.adventurez.init.ItemInit;
 import net.minecraft.recipe.Ingredient;
 
@@ -52,21 +53,21 @@ public class BlackStoneGolemEntry extends BaseEntryProvider
         this.lang().add(context.pageText(),
                 """
                         \\
-                        Level: 100+
+                        Level: %d+
                         \\
                         \\
-                        Use 4 chiseled polished blackstone holders and 81 polished blackstones to build the altar, place the gilded blackstone shards on the altar to summon.
-                        """
+                        Use 4 chiseled polished blackstone holders and 81 polished blackstones to build the altar in *The Nether*, place the gilded blackstone shards on the altar to summon.
+                        """.formatted(TextConstants.BOSS_LEVELS[1])
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
                 """
                         \\
-                        等级: 100+
+                        等级: %d+
                         \\
                         \\
-                        使用4块錾制黑石基座，81块磨制黑石搭建祭坛，在祭坛上放置镶金黑石碎片即可召唤。
-                        """
+                        使用4块錾制黑石基座，81块磨制黑石在*下界*搭建祭坛，在祭坛上放置镶金黑石碎片即可召唤。
+                        """.formatted(TextConstants.BOSS_LEVELS[1])
         );
 
         BookSpotlightPageModel boss = BookSpotlightPageModel

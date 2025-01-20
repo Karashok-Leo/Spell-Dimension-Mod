@@ -8,6 +8,7 @@ import com.klikli_dev.modonomicon.api.datagen.book.page.BookPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookSpotlightPageModel;
 import karashokleo.l2hostility.content.item.ComplementItems;
 import karashokleo.spell_dimension.data.book.entry.BaseEntryProvider;
+import karashokleo.spell_dimension.data.loot_bag.TextConstants;
 import net.minecraft.recipe.Ingredient;
 
 import java.util.List;
@@ -51,7 +52,7 @@ public class InvokerEntry extends BaseEntryProvider
         this.lang().add(context.pageText(),
                 """
                         \\
-                        Level: 100+
+                        Level: %d+
                         \\
                         \\
                         Spawns inside the **Mansion**(minecraft:mansion).
@@ -59,13 +60,13 @@ public class InvokerEntry extends BaseEntryProvider
                         \\
                         \\
                         Drops **Primal Essence** upon defeating Invoker.
-                        """
+                        """.formatted(TextConstants.BOSS_LEVELS[0])
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
                 """
                         \\
-                        等级: 100+
+                        等级: %d+
                         \\
                         \\
                         生成于**林地府邸**(minecraft:mansion)内。
@@ -73,7 +74,7 @@ public class InvokerEntry extends BaseEntryProvider
                         \\
                         \\
                         击败祈灵师后掉落**始源精华**。
-                        """
+                        """.formatted(TextConstants.BOSS_LEVELS[0])
         );
 
         BookSpotlightPageModel boss = BookSpotlightPageModel

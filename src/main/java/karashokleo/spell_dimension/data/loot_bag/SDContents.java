@@ -289,17 +289,17 @@ public enum SDContents
     {
         this(
                 texture,
-                ConstantStr.RARITIES_EN[rarityIndex] + " " + ConstantStr.ITEMS_EN[itemIndex],
-                ConstantStr.RARITIES_ZH[rarityIndex] + ConstantStr.ITEMS_ZH[itemIndex],
+                TextConstants.RARITIES_EN[rarityIndex] + " " + TextConstants.ITEMS_EN[itemIndex],
+                TextConstants.RARITIES_ZH[rarityIndex] + TextConstants.ITEMS_ZH[itemIndex],
                 "Random %s × %s"
                         .formatted(
-                                ConstantStr.COUNT[rarityIndex][itemIndex],
-                                (ConstantStr.RARITIES_EN[rarityIndex] + " " + ConstantStr.ITEMS_EN[itemIndex]).toLowerCase(Locale.ROOT)
+                                TextConstants.COUNT[rarityIndex][itemIndex],
+                                (TextConstants.RARITIES_EN[rarityIndex] + " " + TextConstants.ITEMS_EN[itemIndex]).toLowerCase(Locale.ROOT)
                         ),
                 "随机%s件%s"
                         .formatted(
-                                ConstantStr.COUNT[rarityIndex][itemIndex],
-                                (ConstantStr.RARITIES_ZH[rarityIndex] + ConstantStr.ITEMS_ZH[itemIndex]).toLowerCase(Locale.ROOT)
+                                TextConstants.COUNT[rarityIndex][itemIndex],
+                                (TextConstants.RARITIES_ZH[rarityIndex] + TextConstants.ITEMS_ZH[itemIndex]).toLowerCase(Locale.ROOT)
                         )
         );
     }

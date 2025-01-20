@@ -7,6 +7,7 @@ import com.klikli_dev.modonomicon.api.datagen.book.page.BookEntityPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookSpotlightPageModel;
 import karashokleo.spell_dimension.data.book.entry.BaseEntryProvider;
+import karashokleo.spell_dimension.data.loot_bag.TextConstants;
 import karashokleo.spell_dimension.util.BookGenUtil;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
@@ -53,6 +54,9 @@ public class WardenEntry extends BaseEntryProvider
         this.lang().add(context.pageText(),
                 """
                         \\
+                        Level: %d+
+                        \\
+                        \\
                         When **Sculk Sensor** is activated at least 4 times, Warden burrows out of the ground.
                         \\
                         \\
@@ -60,11 +64,14 @@ public class WardenEntry extends BaseEntryProvider
                         \\
                         \\
                         Drops **Heart of the Deep** upon defeating Warden.
-                        """
+                        """.formatted(TextConstants.BOSS_LEVELS[0])
         );
         this.lang("zh_cn").add(context.pageTitle(), "监守者");
         this.lang("zh_cn").add(context.pageText(),
                 """
+                        \\
+                        等级: %d+
+                        \\
                         \\
                         当**幽匿尖啸体**被激活至少4次时，监守者会从地面钻出。
                         \\
@@ -73,7 +80,7 @@ public class WardenEntry extends BaseEntryProvider
                         \\
                         \\
                         击败监守者后掉落**深渊之心**。
-                        """
+                        """.formatted(TextConstants.BOSS_LEVELS[0])
         );
 
         BookSpotlightPageModel boss = BookSpotlightPageModel

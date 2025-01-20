@@ -8,6 +8,7 @@ import com.klikli_dev.modonomicon.api.datagen.book.page.BookPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookSpotlightPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
 import karashokleo.spell_dimension.data.book.entry.BaseEntryProvider;
+import karashokleo.spell_dimension.data.loot_bag.TextConstants;
 import karashokleo.spell_dimension.util.BookGenUtil;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.util.Identifier;
@@ -53,25 +54,25 @@ public class BomdLichEntry extends BaseEntryProvider
         this.lang().add(context.pageText(),
                 """
                         \\
-                        Level: 200+
+                        Level: %d+
                         \\
                         \\
                         Spawns inside the **Lich Tower**(bosses_of_mass_destruction:lich_tower).
                         \\
                         This structure can be located in the Overworld using the Soul Star.
-                        """
+                        """.formatted(TextConstants.BOSS_LEVELS[2])
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
                 """
                         \\
-                        等级: 200+
+                        等级: %d+
                         \\
                         \\
                         生成于**巫妖塔**(bosses_of_mass_destruction:lich_tower)内。
                         \\
                         可用灵魂之星在主世界寻找该结构。
-                        """
+                        """.formatted(TextConstants.BOSS_LEVELS[2])
         );
 
         BookSpotlightPageModel boss = BookSpotlightPageModel

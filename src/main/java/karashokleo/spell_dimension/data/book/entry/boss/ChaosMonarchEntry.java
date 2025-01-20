@@ -7,6 +7,7 @@ import com.klikli_dev.modonomicon.api.datagen.book.page.BookEntityPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookSpotlightPageModel;
 import karashokleo.spell_dimension.data.book.entry.BaseEntryProvider;
+import karashokleo.spell_dimension.data.loot_bag.TextConstants;
 import karashokleo.spell_dimension.util.BookGenUtil;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.util.Identifier;
@@ -52,21 +53,21 @@ public class ChaosMonarchEntry extends BaseEntryProvider
         this.lang().add(context.pageText(),
                 """
                         \\
-                        Level: 100+
+                        Level: %d+
                         \\
                         \\
                         Use the Shard of Uncertainty on the Blackstone Pedestal to summon.
-                        """
+                        """.formatted(TextConstants.BOSS_LEVELS[1])
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
                 """
                         \\
-                        等级: 100+
+                        等级: %d+
                         \\
                         \\
                         对黑石基座使用不确定性的残片召唤。
-                        """
+                        """.formatted(TextConstants.BOSS_LEVELS[1])
         );
 
         BookSpotlightPageModel boss = BookSpotlightPageModel

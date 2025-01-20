@@ -7,6 +7,7 @@ import com.klikli_dev.modonomicon.api.datagen.book.page.BookEntityPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookSpotlightPageModel;
 import karashokleo.spell_dimension.data.book.entry.BaseEntryProvider;
+import karashokleo.spell_dimension.data.loot_bag.TextConstants;
 import net.adventurez.init.ItemInit;
 import net.minecraft.recipe.Ingredient;
 
@@ -51,21 +52,21 @@ public class VoidShadowEntry extends BaseEntryProvider
         this.lang().add(context.pageText(),
                 """
                         \\
-                        Level: 300
+                        Level: %d+
                         \\
                         \\
                         Defeat the Eye to spawn a floating island, enter the void shadow realm through the portal on it.
-                        """
+                        """.formatted(TextConstants.BOSS_LEVELS[4])
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
                 """
                         \\
-                        等级: 300
+                        等级: %d+
                         \\
                         \\
                         击败眼球后将生成一个浮岛，通过其上的传送门可进入虚空之影的领域。
-                        """
+                        """.formatted(TextConstants.BOSS_LEVELS[4])
         );
 
         BookSpotlightPageModel boss = BookSpotlightPageModel

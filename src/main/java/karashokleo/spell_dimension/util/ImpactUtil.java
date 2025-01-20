@@ -28,10 +28,11 @@ public class ImpactUtil
 
     public static boolean isAlly(LivingEntity origin, LivingEntity target)
     {
-        return origin == target
-               || origin.isTeammate(target)
-               || (target instanceof Tameable tameable && tameable.getOwner() == origin)
-               || (target instanceof Ownable ownable && ownable.getOwner() == origin);
+        return origin == target ||
+               origin.isTeammate(target) ||
+               (target instanceof Tameable tameable && tameable.getOwner() == origin) ||
+               (target instanceof Ownable ownable && ownable.getOwner() == origin) ||
+               PartyUtil.isPartner(origin, target);
     }
 
     public static Vec3d fromEulerAngle(float pitch, float yaw, float roll)

@@ -71,10 +71,10 @@ public class AllQuests
     public static SimpleLootItemQuest KILL_GAUNTLET;
 
     public static SimpleLootItemQuest KILL_DAY_NIGHT;
-
     public static EnderDragonAdvancementQuest KILL_ENDER_DRAGON;
-    public static SimpleLootItemQuest KILL_OBSIDLITH;
     public static SimpleLootItemQuest KILL_THE_EYE;
+
+    public static SimpleLootItemQuest KILL_OBSIDLITH;
     public static SimpleLootItemQuest KILL_VOID_SHADOW;
 
     public static void register()
@@ -82,11 +82,11 @@ public class AllQuests
         registerQuestsBase();
         registerQuestsMage();
         registerQuestsKillMutant();
-        registerQuestsKillLv100();
-        registerQuestsKillLv150();
-        registerQuestsKillLv200();
-        registerQuestsKillLv250();
-        registerQuestsKillLv300();
+        registerQuestsKillT4();
+        registerQuestsKillT3();
+        registerQuestsKillT2();
+        registerQuestsKillT1();
+        registerQuestsKillT0();
         Entry.buildRelations();
     }
 
@@ -266,7 +266,7 @@ public class AllQuests
                 .register();
     }
 
-    public static void registerQuestsKillLv100()
+    public static void registerQuestsKillT4()
     {
         KILL_OLD_CHAMPION = Entry.of(
                         "kill_old_champion",
@@ -333,7 +333,7 @@ public class AllQuests
                 .register();
     }
 
-    public static void registerQuestsKillLv150()
+    public static void registerQuestsKillT3()
     {
         KILL_MOON_KNIGHT = Entry.of(
                         "kill_moon_knight",
@@ -397,7 +397,7 @@ public class AllQuests
                 .register();
     }
 
-    public static void registerQuestsKillLv200()
+    public static void registerQuestsKillT2()
     {
         KILL_GRAVEYARD_LICH = Entry.of(
                         "kill_graveyard_lich",
@@ -441,7 +441,7 @@ public class AllQuests
                 .register();
     }
 
-    public static void registerQuestsKillLv250()
+    public static void registerQuestsKillT1()
     {
         KILL_DAY_NIGHT = Entry.of(
                         "kill_day_night",
@@ -465,10 +465,6 @@ public class AllQuests
                         KILL_BLACKSTONE_GOLEM
                 )
                 .register();
-    }
-
-    public static void registerQuestsKillLv300()
-    {
         KILL_ENDER_DRAGON = Entry.of(
                         "kill_ender_dragon",
                         new EnderDragonAdvancementQuest(
@@ -479,16 +475,6 @@ public class AllQuests
                 .addEnDesc("Defeat Ender Dragon and free the end")
                 .addZhDesc("击杀末影龙，解放末地")
                 .register();
-        KILL_OBSIDLITH = Entry.of(
-                        "kill_obsidilith",
-                        new SimpleLootItemQuest(
-                                "bosses_of_mass_destruction:obsidilith",
-                                "bosses_of_mass_destruction:obsidian_heart",
-                                SDBags.LEGENDARY_BOOK::getStack
-                        )
-                )
-                .addDependencies(KILL_DAY_NIGHT)
-                .register();
         KILL_THE_EYE = Entry.of(
                         "kill_the_eye",
                         new SimpleLootItemQuest(
@@ -497,7 +483,21 @@ public class AllQuests
                                 SDBags.LEGENDARY_GEAR::getStack
                         )
                 )
-                .addDependencies(KILL_DAY_NIGHT)
+                .addDependencies(KILL_ENDER_DRAGON)
+                .register();
+    }
+
+    public static void registerQuestsKillT0()
+    {
+        KILL_OBSIDLITH = Entry.of(
+                        "kill_obsidilith",
+                        new SimpleLootItemQuest(
+                                "bosses_of_mass_destruction:obsidilith",
+                                "bosses_of_mass_destruction:obsidian_heart",
+                                SDBags.LEGENDARY_BOOK::getStack
+                        )
+                )
+                .addDependencies(KILL_ENDER_DRAGON)
                 .register();
         KILL_VOID_SHADOW = Entry.of(
                         "kill_void_shadow",
@@ -507,7 +507,7 @@ public class AllQuests
                                 AllItems.MEDAL::getDefaultStack
                         )
                 )
-                .addDependencies(KILL_DAY_NIGHT)
+                .addDependencies(KILL_THE_EYE)
                 .register();
     }
 

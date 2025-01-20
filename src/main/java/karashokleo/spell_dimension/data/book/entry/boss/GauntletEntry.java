@@ -8,6 +8,7 @@ import com.klikli_dev.modonomicon.api.datagen.book.page.BookPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookSpotlightPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
 import karashokleo.spell_dimension.data.book.entry.BaseEntryProvider;
+import karashokleo.spell_dimension.data.loot_bag.TextConstants;
 import karashokleo.spell_dimension.util.BookGenUtil;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.util.Identifier;
@@ -53,25 +54,25 @@ public class GauntletEntry extends BaseEntryProvider
         this.lang().add(context.pageText(),
                 """
                         \\
-                        Level: 200+
+                        Level: %d+
                         \\
                         \\
                         Spawns inside the **Gauntlet Arena**(bosses_of_mass_destruction:gauntlet_arena).
                         \\
                         This structure can be located in the Nether using the Locate Spell.
-                        """
+                        """.formatted(TextConstants.BOSS_LEVELS[2])
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
                 """
                         \\
-                        等级: 200+
+                        等级: %d+
                         \\
                         \\
                         生成于**下界铁掌竞技场**(bosses_of_mass_destruction:gauntlet_arena)内。
                         \\
                         可通过定位法术在下界中定位到此结构。
-                        """
+                        """.formatted(TextConstants.BOSS_LEVELS[2])
         );
 
         BookSpotlightPageModel boss = BookSpotlightPageModel

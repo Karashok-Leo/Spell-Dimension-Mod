@@ -1,7 +1,7 @@
 package karashokleo.spell_dimension.mixin.phase;
 
-import karashokleo.spell_dimension.init.AllStatusEffects;
 import karashokleo.spell_dimension.content.misc.INoClip;
+import karashokleo.spell_dimension.init.AllStatusEffects;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -38,11 +38,12 @@ public abstract class LivingEntityMixin extends Entity implements INoClip
         return super.isInSneakingPose() && !this.isNoClip();
     }
 
-    @Override
-    public boolean hasNoGravity()
-    {
-        return super.hasNoGravity() || this.isNoClip();
-    }
+    // Disable the to fix the bug that player keeps in air after re-entering the world
+//    @Override
+//    public boolean hasNoGravity()
+//    {
+//        return super.hasNoGravity() || this.isNoClip();
+//    }
 
     @Override
     public PistonBehavior getPistonBehavior()
