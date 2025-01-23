@@ -1,5 +1,6 @@
 package karashokleo.spell_dimension.content.block.tile;
 
+import karashokleo.spell_dimension.content.block.ProtectiveCoverBlock;
 import karashokleo.spell_dimension.init.AllBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -60,10 +61,7 @@ public class ProtectiveCoverBlockTile extends BlockEntity
     public static void tick(World world, BlockPos pos, BlockState state, ProtectiveCoverBlockTile tile)
     {
         tile.life--;
-        if (tile.life <= 0)
-        {
-            world.setBlockState(pos, world.getFluidState(pos).getBlockState(), 3);
-            world.removeBlockEntity(pos);
-        }
+        if (tile.life > 0) return;
+        ProtectiveCoverBlock.breakNonPersistent(world, pos);
     }
 }

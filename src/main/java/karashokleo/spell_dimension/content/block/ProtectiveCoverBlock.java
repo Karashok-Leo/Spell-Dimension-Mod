@@ -69,6 +69,32 @@ public class ProtectiveCoverBlock extends AbstractGlassBlock implements BlockEnt
                     }
     }
 
+    public static void breakBarrier(World world, BlockPos pos, int radius)
+    {
+        for (int x = -radius; x <= radius; x++)
+            for (int y = -radius; y <= radius; y++)
+                for (int z = -radius; z <= radius; z++)
+                    if (x == -radius || x == radius ||
+                        y == -radius || y == radius ||
+                        z == -radius || z == radius)
+                    {
+                        BlockPos breakPos = pos.add(x, y, z);
+                        BlockState blockState = world.getBlockState(breakPos);
+                        if (blockState.isOf(AllBlocks.PROTECTIVE_COVER.block()))
+                        {
+                            breakNonPersistent(world, breakPos);
+//                            world.breakBlock(breakPos, false);
+//                            world.removeBlockEntity(breakPos);
+                        }
+                    }
+    }
+
+    public static void breakNonPersistent(World world, BlockPos pos)
+    {
+        world.setBlockState(pos, world.getFluidState(pos).getBlockState(), 3);
+        world.removeBlockEntity(pos);
+    }
+
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder)
     {

@@ -44,6 +44,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
+import net.minecraft.client.render.entity.EmptyEntityRenderer;
 import net.minecraft.item.Item;
 import net.minecraft.text.TranslatableTextContent;
 import net.minecraft.util.Formatting;
@@ -92,6 +93,7 @@ public class SpellDimensionClient implements ClientModInitializer
         );
 
         EntityRendererRegistry.register(AllEntities.LOCATE_PORTAL, LocatePortalRenderer::new);
+        EntityRendererRegistry.register(AllEntities.CONSCIOUSNESS_EVENT, EmptyEntityRenderer::new);
 
         GuiOverlayRegistry.registerLayer(6, new QuestOverlay());
         GuiOverlayRegistry.registerLayer(7, new ConsciousCoreOverlay());

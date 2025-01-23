@@ -36,8 +36,6 @@ public class ConsciousCoreOverlay extends InfoSideBar<SideBar.IntSignature>
         ArrayList<Text> texts = new ArrayList<>();
         if (this.state == ConsciousnessCoreTile.CoreState.TRIGGERING)
             texts.add(SDTexts.TEXT$CONSCIOUSNESS_CORE$TRIGGERING.get().formatted(Formatting.YELLOW));
-        else if (this.state == ConsciousnessCoreTile.CoreState.TRIGGERED)
-            texts.add(SDTexts.TEXT$CONSCIOUSNESS_CORE$TRIGGERED.get().formatted(Formatting.GREEN));
         else if (this.state == ConsciousnessCoreTile.CoreState.INACTIVE)
         {
             texts.add(SDTexts.TEXT$CONSCIOUSNESS_CORE$NOT_TRIGGERED.get().formatted(Formatting.RED));

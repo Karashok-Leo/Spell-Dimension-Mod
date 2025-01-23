@@ -3,8 +3,7 @@ package karashokleo.spell_dimension.content.block.tile;
 import com.google.common.collect.Lists;
 import karashokleo.l2hostility.content.component.player.PlayerDifficulty;
 import karashokleo.spell_dimension.content.block.ConsciousnessBaseBlock;
-import karashokleo.spell_dimension.content.block.ProtectiveCoverBlock;
-import karashokleo.spell_dimension.content.entity.ConsciousnessEventLogic;
+import karashokleo.spell_dimension.content.entity.ConsciousnessEventEntity;
 import karashokleo.spell_dimension.content.event.conscious.ConsciousnessEventManager;
 import karashokleo.spell_dimension.content.event.conscious.EventAward;
 import karashokleo.spell_dimension.init.AllBlocks;
@@ -55,7 +54,6 @@ public class ConsciousnessCoreTile extends BlockEntity
     public static final String LEVEL_KEY = "Level";
     public static final String DESTINATION_WORLD_KEY = "DestinationWorld";
     public static final String DESTINATION_POS_KEY = "DestinationPos";
-    public static final String EVENT_KEY = "Event";
 
     public int tick = 0;
     private CoreState state = CoreState.INACTIVE;
@@ -64,7 +62,6 @@ public class ConsciousnessCoreTile extends BlockEntity
     {
         INACTIVE,
         TRIGGERING,
-        TRIGGERED,
         ACTIVATED
     }
 
@@ -77,8 +74,6 @@ public class ConsciousnessCoreTile extends BlockEntity
     private RegistryKey<World> destinationWorld;
     @Nullable
     private BlockPos destinationPos;
-    @Nullable
-    private ConsciousnessEventLogic event;
 
     private final HashMap<UUID, Integer> playerTicks = new HashMap<>();
 
@@ -128,40 +123,11 @@ public class ConsciousnessCoreTile extends BlockEntity
             );
             dirty = true;
         }
-        if (tile.event != null && world instanceof ServerWorld serverWorld)
-        {
-            tile.event.tick(serverWorld);
-            if (tile.event.isFinishedLast())
-            {
-                ConsciousnessEventManager.breakBarrier(world, pos, ConsciousnessEventManager.RADIUS);
-                tile.event.discard();
-                tile.event = null;
-            }
-            dirty = true;
-        }
-        switch (tile.state)
-        {
-            case TRIGGERING -> tile.tickTriggering(world);
-            case TRIGGERED -> tile.tickTriggered(world);
-            case ACTIVATED -> tile.tickActivated(world);
-        }
+
+        if (tile.state == CoreState.ACTIVATED)
+            tile.tickActivated(world);
         if (dirty)
             tile.markDirty();
-    }
-
-    private void tickTriggering(World world)
-    {
-        if (event == null || !event.isFinished()) return;
-
-        this.state = CoreState.TRIGGERED;
-        this.markDirty();
-        world.updateListeners(pos, getCachedState(), getCachedState(), Block.NOTIFY_ALL);
-    }
-
-    private void tickTriggered(World world)
-    {
-        if (world instanceof ServerWorld serverWorld)
-            tryActivate(serverWorld);
     }
 
     private void tickActivated(World world)
@@ -318,16 +284,15 @@ public class ConsciousnessCoreTile extends BlockEntity
         this.markDirty();
         serverWorld.updateListeners(pos, getCachedState(), getCachedState(), Block.NOTIFY_ALL);
 
-        this.event = new ConsciousnessEventLogic(serverWorld.getRandom(), pos, level);
-        ProtectiveCoverBlock.placeAsBarrier(world, pos, ConsciousnessEventManager.RADIUS, ConsciousnessEventManager.TIME_LIMIT);
+        var event = new ConsciousnessEventEntity(serverWorld, level);
+        event.setPosition(pos.getX(), pos.getY(), pos.getZ());
+        serverWorld.spawnEntity(event);
     }
 
-    private void tryActivate(ServerWorld world)
+    public void tryActivate(ServerWorld world, boolean success)
     {
-        if (this.event == null) return;
-        if (this.event.isSuccess())
+        if (success)
             reward(world);
-
         this.state = CoreState.ACTIVATED;
         this.markDirty();
         world.updateListeners(pos, getCachedState(), getCachedState(), Block.NOTIFY_ALL);
@@ -380,8 +345,6 @@ public class ConsciousnessCoreTile extends BlockEntity
             nbt.putString(DESTINATION_WORLD_KEY, this.destinationWorld.getValue().toString());
         if (this.destinationPos != null)
             nbt.putLong(DESTINATION_POS_KEY, this.destinationPos.asLong());
-        if (this.event != null)
-            nbt.put(EVENT_KEY, this.event.toNbt());
     }
 
     @Override
@@ -398,8 +361,6 @@ public class ConsciousnessCoreTile extends BlockEntity
             this.destinationWorld = RegistryKey.of(RegistryKeys.WORLD, new Identifier(nbt.getString(DESTINATION_WORLD_KEY)));
         if (nbt.contains(DESTINATION_POS_KEY))
             this.destinationPos = BlockPos.fromLong(nbt.getLong(DESTINATION_POS_KEY));
-        if (nbt.contains(EVENT_KEY))
-            this.event = ConsciousnessEventLogic.fromNbt(pos, nbt.getCompound(EVENT_KEY));
     }
 
     /**

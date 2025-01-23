@@ -357,7 +357,6 @@
   "text.spell-dimension.consciousness_core.level": "Active Level: %s",
   "text.spell-dimension.consciousness_core.level_factor": "Difficulty Factor: %s",
   "text.spell-dimension.consciousness_core.not_triggered": "Invasion Event not triggered",
-  "text.spell-dimension.consciousness_core.triggered": "Invasion Event has been triggered",
   "text.spell-dimension.consciousness_core.triggering": "Invasion Event on going...",
   "text.spell-dimension.end_stage": "End Stage Unlocked!",
   "text.spell-dimension.end_stage.book_everything": "You need to use %s to unlock the End Stage to use Book of Omniscience!",
