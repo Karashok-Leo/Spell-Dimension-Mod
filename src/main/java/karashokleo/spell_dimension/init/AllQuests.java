@@ -12,6 +12,7 @@ import karashokleo.spell_dimension.api.quest.Quest;
 import karashokleo.spell_dimension.api.quest.QuestRegistry;
 import karashokleo.spell_dimension.api.quest.QuestUsage;
 import karashokleo.spell_dimension.config.AttributeModifier;
+import karashokleo.spell_dimension.content.item.DynamicSpellBookItem;
 import karashokleo.spell_dimension.content.quest.*;
 import karashokleo.spell_dimension.data.loot_bag.SDBags;
 import net.adventurez.init.EntityInit;
@@ -196,7 +197,7 @@ public class AllQuests
         SPELL_POWER_0 = Entry.of(
                         "spell_power_0",
                         new SpellPowerQuest(
-                                33,
+                                DynamicSpellBookItem.REQUIREMENT_SPELL_POWER_PER_GRADE,
                                 SDBags.UNCOMMON_MATERIAL::getStack
                         )
                 )
@@ -205,7 +206,7 @@ public class AllQuests
         SPELL_POWER_1 = Entry.of(
                         "spell_power_1",
                         new SpellPowerQuest(
-                                66,
+                                DynamicSpellBookItem.REQUIREMENT_SPELL_POWER_PER_GRADE * 2,
                                 SDBags.RARE_MATERIAL::getStack
                         )
                 )
@@ -214,7 +215,7 @@ public class AllQuests
         SPELL_POWER_2 = Entry.of(
                         "spell_power_2",
                         new SpellPowerQuest(
-                                99,
+                                DynamicSpellBookItem.REQUIREMENT_SPELL_POWER_PER_GRADE * 3,
                                 SDBags.EPIC_MATERIAL::getStack
                         )
                 )
