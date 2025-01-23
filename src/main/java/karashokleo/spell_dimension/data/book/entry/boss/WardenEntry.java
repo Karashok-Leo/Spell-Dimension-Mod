@@ -60,9 +60,6 @@ public class WardenEntry extends BaseEntryProvider
                         When **Sculk Sensor** is activated at least 4 times, Warden burrows out of the ground.
                         \\
                         \\
-                        *Sculk Sensor: Generated in the Deep Dark.*
-                        \\
-                        \\
                         Drops **Heart of the Deep** upon defeating Warden.
                         """.formatted(TextConstants.BOSS_LEVELS[0])
         );
@@ -74,9 +71,6 @@ public class WardenEntry extends BaseEntryProvider
                         \\
                         \\
                         当**幽匿尖啸体**被激活至少4次时，监守者会从地面钻出。
-                        \\
-                        \\
-                        *幽匿尖啸体: 生成于深暗之域。*
                         \\
                         \\
                         击败监守者后掉落**深渊之心**。
