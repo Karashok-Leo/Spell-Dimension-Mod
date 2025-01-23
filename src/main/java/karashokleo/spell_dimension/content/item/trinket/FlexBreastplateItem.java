@@ -42,7 +42,7 @@ public class FlexBreastplateItem extends TrinketItem
         double armor = armorIns == null ? 0 : armorIns.getValue();
         double armorToughness = armorToughnessIns == null ? 0 : armorToughnessIns.getValue();
         double total = spellPower * SPELL_POWER_RATIO + armor * ARMOR_RATIO + armorToughness * ARMOR_TOUGHNESS_RATIO;
-        return MathHelper.clamp(40 / (float) total, 0, 0.5F);
+        return MathHelper.clamp(40 / (float) total, 0.5F, 1.0F);
     }
 
     @Override
