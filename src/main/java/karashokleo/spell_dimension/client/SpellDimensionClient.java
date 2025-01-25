@@ -94,6 +94,7 @@ public class SpellDimensionClient implements ClientModInitializer
 
         EntityRendererRegistry.register(AllEntities.LOCATE_PORTAL, LocatePortalRenderer::new);
         EntityRendererRegistry.register(AllEntities.CONSCIOUSNESS_EVENT, EmptyEntityRenderer::new);
+        EntityRendererRegistry.register(AllEntities.BLACK_HOLE, BlackHoleRenderer::new);
 
         GuiOverlayRegistry.registerLayer(6, new QuestOverlay());
         GuiOverlayRegistry.registerLayer(7, new ConsciousCoreOverlay());

@@ -132,16 +132,21 @@ public class SpellScrollConfig
             fromCrafting(AllSpells.EXORCISM, LHTraits.DISPELL.asItem());
             fromCrafting(AllSpells.CRITICAL_HIT, MiscItems.CHAOS.blockSet().item());
             fromCrafting(AllSpells.SPELL_POWER, "soulsweapons:essence_of_luminescence");
-            fromEventLoot(AllSpells.SPELL_POWER_ADVANCED);
             fromCrafting(AllSpells.RESIST, "soulsweapons:essence_of_eventide");
-            fromEventLoot(AllSpells.RESIST_ADVANCED);
             fromCrafting(AllSpells.REGEN, "bosses_of_mass_destruction:void_thorn");
-            fromEventLoot(AllSpells.REGEN_ADVANCED);
             fromCrafting(AllSpells.HASTE, "soulsweapons:moonstone_block");
-            fromEventLoot(AllSpells.HASTE_ADVANCED);
             fromCrafting(AllSpells.SPEED, LHTraits.SPEEDY.asItem());
-            fromEventLoot(AllSpells.SPEED_ADVANCED);
             fromCrafting(AllSpells.DIVINE_AURA, LHTraits.KILLER_AURA.asItem());
+        }
+
+        // Event loot
+        {
+            fromEventLoot(AllSpells.BLACK_HOLE);
+            fromEventLoot(AllSpells.SPELL_POWER_ADVANCED);
+            fromEventLoot(AllSpells.RESIST_ADVANCED);
+            fromEventLoot(AllSpells.REGEN_ADVANCED);
+            fromEventLoot(AllSpells.HASTE_ADVANCED);
+            fromEventLoot(AllSpells.SPEED_ADVANCED);
         }
     }
 

@@ -70,6 +70,7 @@ public class AllSpells
     public static final Identifier INCARCERATE = SpellDimension.modLoc("incarcerate");
     public static final Identifier MAELSTROM = new Identifier("spellbladenext:maelstrom");
     public static final Identifier FINALSTRIKE = new Identifier("spellbladenext:finalstrike");
+    public static final Identifier BLACK_HOLE = SpellDimension.modLoc("black_hole");
 
     // Fire
     public static final Identifier FIRE_BREATH = new Identifier("wizards:fire_breath");
@@ -121,6 +122,8 @@ public class AllSpells
         SpellProjectileHitEntityCallback.EVENT.register(ShiftSpell::handle);
         SpellProjectileHitEntityCallback.EVENT.register(ConvergeSpell::handle);
         SpellProjectileHitBlockCallback.EVENT.register(ConvergeSpell::handle);
+        SpellProjectileHitEntityCallback.EVENT.register(BlackHoleSpell::handle);
+        SpellProjectileHitBlockCallback.EVENT.register(BlackHoleSpell::handle);
         SpellProjectileHitBlockCallback.EVENT.register(LightSpell::handle);
         SpellProjectileHitBlockCallback.EVENT.register(LocateSpell::handle);
         SpellProjectileHitBlockCallback.EVENT.register(SummonSpell::handle);

@@ -9,6 +9,7 @@
     "modded.ASBTooltipMixin",
     "modded.BookEverythingMixin",
     "modded.CurseOfPrideMixin",
+    "modded.DispellTraitMixin",
     "modded.LootingCharmMixin",
     "modded.SpellHelperMixin",
     "modded.SpellInfinityEnchantmentMixin",
