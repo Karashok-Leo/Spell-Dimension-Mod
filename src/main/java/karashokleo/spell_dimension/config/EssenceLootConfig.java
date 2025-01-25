@@ -10,8 +10,8 @@ public class EssenceLootConfig
 {
     public static final BaseConfig BASE_CONFIG = new BaseConfig(
             List.of(Dummmmmmy.TARGET_DUMMY.get()),
-            0.15F,
-            100, 200,
+            0.2F,
+            200, 400,
             0.80F, 0.96F
     );
 
