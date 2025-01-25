@@ -87,9 +87,9 @@ public class AllEnchantments
                 .register();
         SPELL_TEARING = new Entry<>("spell_tearing", new SpellTearingEnchantment())
                 .addEN()
-                .addENDesc("Your spell has a 25% chance of deleting the target's Dispell trait. The probability increases to 50% when wearing the Platinum Star.")
+                .addENDesc("Your spells can penetrate the target's Dispell trait. Restores 20% of the original damage per level.")
                 .addZH("法术穿透")
-                .addZHDesc("你的法术有25%概率删除目标的破魔词条。佩戴破风拳套时此概率提升至50%。")
+                .addZHDesc("你的法术可以穿透目标的破魔词条。每级恢复原有伤害的20%。")
                 .register();
 
         WEAKNESS_IMMUNITY = new Entry<>("weakness_immunity", new TraitEffectImmunityEnchantment(StatusEffects.WEAKNESS))

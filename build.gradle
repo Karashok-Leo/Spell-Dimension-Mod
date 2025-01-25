@@ -72,7 +72,8 @@ dependencies {
     modImplementation "maven.modrinth:jewelry:${project.jewelry_version}"
 
     modImplementation "maven.modrinth:spellblades-and-such:${project.spellbladenext_version}"
-    modImplementation "maven.modrinth:extra-rpg-attributes:${project.extra_rpg_attributes_version}"
+//    modImplementation "maven.modrinth:extra-rpg-attributes:${project.extra_rpg_attributes_version}"
+    modImplementation "curse.maven:extra-spell-attributes-941480:6086867"
 
     modImplementation "maven.modrinth:combat-roll:${project.combat_roll_version}-fabric"
     modImplementation "maven.modrinth:shield-api:${project.shield_api_version}"
