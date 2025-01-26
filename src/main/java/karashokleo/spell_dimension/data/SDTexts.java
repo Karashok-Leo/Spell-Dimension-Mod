@@ -222,6 +222,10 @@ public enum SDTexts
         LocateSpellConfig.register();
         SpellDimension.EN_TEXTS.addEntityType(AllEntities.LOCATE_PORTAL, "Locate Portal");
         SpellDimension.ZH_TEXTS.addEntityType(AllEntities.LOCATE_PORTAL, "定位传送门");
+        SpellDimension.EN_TEXTS.addEntityType(AllEntities.CONSCIOUSNESS_EVENT, "Consciousness Invasion Event");
+        SpellDimension.ZH_TEXTS.addEntityType(AllEntities.CONSCIOUSNESS_EVENT, "意识入侵事件");
+        SpellDimension.EN_TEXTS.addEntityType(AllEntities.BLACK_HOLE, "Black Hole");
+        SpellDimension.ZH_TEXTS.addEntityType(AllEntities.BLACK_HOLE, "黑洞");
         SpellDimension.EN_TEXTS.addText("trinkets.slot.chest.breastplate", "Breastplate");
         SpellDimension.ZH_TEXTS.addText("trinkets.slot.chest.breastplate", "护心镜");
     }

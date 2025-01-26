@@ -103,23 +103,23 @@ public class GraveyardLichEntry extends BaseEntryProvider
         this.lang().add(context.pageText(),
                 """
                         \\
-                        Ominous Bone Staff Fragment: Can be found in the Ruins(graveyard:ruins).
+                        Ominous Bone Staff Fragment: Craftable, or found in the Ruins(graveyard:ruins).
                         \\
                         This structure can be located in the Overworld using the Locate Spell.
                         \\
                         \\
-                        Blood Bottle: When main hand holding a bone dagger and the offhand holding an empty glass bottle, killing villagers can fill the empty glass bottle and turn it into a blood bottle.
+                        Blood Bottle: When main hand holding a bone dagger and the offhand holding an empty glass bottle, killing zombies or villagers can fill the empty glass bottle and turn it into a blood bottle.
                         """
         );
         this.lang("zh_cn").add(context.pageText(),
                 """
                         \\
-                        不祥的骨杖残片: 可以在遗迹(graveyard:ruins)中发现。
+                        不祥的骨杖残片: 可合成或在遗迹(graveyard:ruins)中找到。
                         \\
                         可通过定位法术在主世界中定位到此结构。
                         \\
                         \\
-                        血瓶：主手持骨头匕首，副手持空玻璃瓶时杀死村民可以填充空玻璃瓶，将玻璃瓶变为血瓶。
+                        血瓶：主手持骨头匕首，副手持空玻璃瓶时杀死僵尸或村民可以填充空玻璃瓶，将玻璃瓶变为血瓶。
                         """
         );
 

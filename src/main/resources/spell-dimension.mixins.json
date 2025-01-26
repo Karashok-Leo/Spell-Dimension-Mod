@@ -17,6 +17,7 @@
     "modded.SpellRegistryAccessor",
     "modded.StorageTerminalBlockEntityMixin",
     "modded.TerribleSwordItemMixin",
+    "modded.TrinketInventoryMixin",
     "modded.VoidShadowEntityMixin",
     "phase.EntityPredicatesMixin",
     "phase.LivingEntityMixin",

@@ -66,6 +66,12 @@ public enum SpellTexts
             "Launch a spell to explode at the landing point and make enemies converged.",
             "发射一道咒语，在落点处爆炸并汇聚敌人。"
     ),
+    BLACK_HOLE(
+            "Black Hole",
+            "黑洞",
+            "Create a Black Hole that continuously attracts surrounding creatures and deals damage. The higher your spell power, the larger the radius of the black hole.",
+            "制造一个黑洞，持续吸引周围的生物并造成伤害。法术强度越高，黑洞半径越大。"
+    ),
     PHASE(
             "Phase",
             "相位",

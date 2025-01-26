@@ -1,6 +1,7 @@
 package karashokleo.spell_dimension.mixin.modded;
 
 import karashokleo.spell_dimension.init.AllTags;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.ItemStack;
 import net.spell_power.internals.AmplifierEnchantment;
 import org.spongepowered.asm.mixin.Mixin;
@@ -12,6 +13,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class AmplifierEnchantmentMixin
 {
     @Inject(
+            method = "canAccept",
+            at = @At("HEAD"),
+            cancellable = true
+    )
+    private void inject_canAccept(Enchantment other, CallbackInfoReturnable<Boolean> cir)
+    {
+        cir.setReturnValue(true);
+    }
+
+    @Inject(
             method = "matchesRequiredTag",
             at = @At("RETURN"),
             cancellable = true
@@ -20,8 +31,8 @@ public abstract class AmplifierEnchantmentMixin
     {
         cir.setReturnValue(
                 cir.getReturnValue() ||
-                        stack.isIn(AllTags.ARMOR) ||
-                        stack.isIn(AllTags.MELEE_WEAPONS)
+                stack.isIn(AllTags.ARMOR) ||
+                stack.isIn(AllTags.MELEE_WEAPONS)
         );
     }
 }

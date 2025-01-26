@@ -1,11 +1,11 @@
 {
   "school": "ARCANE",
-  "range": 16,
+  "range": 6,
   "learn": {
     "tier": 4
   },
   "cast": {
-    "duration": 1.6,
+    "duration": 2.5,
     "animation": "spell_engine:one_handed_projectile_charge",
     "sound": {
       "id": "spell_engine:generic_arcane_casting",
@@ -79,6 +79,6 @@
   ],
   "cost": {
     "cooldown_duration": 3.0,
-    "exhaust": 0.2
+    "exhaust": 2.0
   }
 }

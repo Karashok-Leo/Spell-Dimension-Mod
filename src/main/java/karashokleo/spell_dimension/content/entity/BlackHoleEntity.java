@@ -1,5 +1,7 @@
 package karashokleo.spell_dimension.content.entity;
 
+import karashokleo.spell_dimension.config.SpellConfig;
+import karashokleo.spell_dimension.util.DamageUtil;
 import karashokleo.spell_dimension.util.ImpactUtil;
 import net.minecraft.entity.*;
 import net.minecraft.entity.data.DataTracker;
@@ -11,6 +13,7 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.spell_power.api.SpellSchools;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -19,11 +22,11 @@ import java.util.UUID;
 
 public class BlackHoleEntity extends Entity implements Ownable
 {
-    public static final float MAX_RADIUS = 32.0f;
-    public static final float MIN_RADIUS = 0.1f;
+    public static final float MAX_RADIUS = 32f;
+    public static final float MIN_RADIUS = 2f;
     public static final int LIFESPAN = 20 * 10;
     public static final int IDLE_SOUND_INTERVAL = 60;
-    public static final int DAMAGE_INTERVAL = 10;
+
     private static final TrackedData<Float> RADIUS = DataTracker.registerData(BlackHoleEntity.class, TrackedDataHandlerRegistry.FLOAT);
 
     @Nullable
@@ -104,7 +107,8 @@ public class BlackHoleEntity extends Entity implements Ownable
         if (RADIUS.equals(data))
         {
             this.calculateDimensions();
-            if (this.getRadius() < MIN_RADIUS)
+            if (this.getRadius() < MIN_RADIUS ||
+                this.getRadius() > MAX_RADIUS)
                 this.discard();
         }
         super.onTrackedDataSet(data);
@@ -137,8 +141,6 @@ public class BlackHoleEntity extends Entity implements Ownable
 
     private void updateTrackingEntities()
     {
-        int updateInterval = Math.max(2, (int) this.getRadius() / 2);
-        if (this.age % updateInterval != 0) return;
         trackingEntities = this.getWorld().getOtherEntities(this, this.getBoundingBox().expand(1.0));
     }
 
@@ -146,24 +148,32 @@ public class BlackHoleEntity extends Entity implements Ownable
     public void tick()
     {
         super.tick();
+
         if (this.getWorld().isClient()) return;
+
+        int effectInterval = Math.max(2, (int) this.getRadius() / 2);
+        if (this.age % effectInterval != 0) return;
 
         updateTrackingEntities();
 
         Box box = this.getBoundingBox();
         Vec3d center = box.getCenter();
         float radius = (float) box.getXLength();
-        if (radius <= MIN_RADIUS)
+        if (radius <= MIN_RADIUS ||
+            radius >= MAX_RADIUS)
         {
             this.discard();
             return;
         }
-        boolean shouldDamage = this.age % DAMAGE_INTERVAL == 0;
+
+        LivingEntity caster = this.getOwner() instanceof LivingEntity living ? living : null;
+
+        float damage = caster == null ? 0 : (float) DamageUtil.calculateDamage(caster, SpellSchools.ARCANE, SpellConfig.BLACK_HOLE, radius);
         for (Entity entity : this.trackingEntities)
         {
-            if (entity == this.getOwner()) continue;
-            if (this.getOwner() instanceof LivingEntity caster &&
-                entity instanceof LivingEntity living &&
+            if (entity == caster) continue;
+            if (entity instanceof LivingEntity living &&
+                caster != null &&
                 ImpactUtil.isAlly(caster, living)) continue;
 
             Vec3d pos = entity.getPos();
@@ -177,8 +187,8 @@ public class BlackHoleEntity extends Entity implements Ownable
             entity.addVelocity(d.x, d.y, d.z);
             entity.fallDistance = 0.0f;
 
-            if (shouldDamage)
-                entity.damage(this.getDamageSources().indirectMagic(this, this.getOwner()), 2.0f);
+            if (entity instanceof LivingEntity target)
+                DamageUtil.spellDamage(target, SpellSchools.ARCANE, caster, damage, false);
         }
 
         if (this.age > LIFESPAN)

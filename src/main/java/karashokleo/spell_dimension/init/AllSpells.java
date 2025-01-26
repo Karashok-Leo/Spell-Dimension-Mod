@@ -5,6 +5,7 @@ import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
 import karashokleo.spell_dimension.api.SpellProjectileHitBlockCallback;
 import karashokleo.spell_dimension.api.SpellProjectileHitEntityCallback;
+import karashokleo.spell_dimension.api.SpellProjectileOutOfRangeCallback;
 import karashokleo.spell_dimension.content.buff.BlazingMark;
 import karashokleo.spell_dimension.content.buff.Nucleus;
 import karashokleo.spell_dimension.content.spell.*;
@@ -66,7 +67,7 @@ public class AllSpells
     public static final Identifier ELDRITCH_BLAST = new Identifier("spellbladenext:eldritchblast");
     public static final Identifier SHIFT = SpellDimension.modLoc("shift");
     public static final Identifier FORCE_LANDING = SpellDimension.modLoc("force_landing");
-    public static final Identifier ARCANE_BARRIER= SpellDimension.modLoc("arcane_barrier");
+    public static final Identifier ARCANE_BARRIER = SpellDimension.modLoc("arcane_barrier");
     public static final Identifier INCARCERATE = SpellDimension.modLoc("incarcerate");
     public static final Identifier MAELSTROM = new Identifier("spellbladenext:maelstrom");
     public static final Identifier FINALSTRIKE = new Identifier("spellbladenext:finalstrike");
@@ -120,10 +121,14 @@ public class AllSpells
         CustomSpellHandler.register(EXORCISM, data -> ExorcismSpell.handle((CustomSpellHandler.Data) data));
 
         SpellProjectileHitEntityCallback.EVENT.register(ShiftSpell::handle);
+
         SpellProjectileHitEntityCallback.EVENT.register(ConvergeSpell::handle);
         SpellProjectileHitBlockCallback.EVENT.register(ConvergeSpell::handle);
-        SpellProjectileHitEntityCallback.EVENT.register(BlackHoleSpell::handle);
-        SpellProjectileHitBlockCallback.EVENT.register(BlackHoleSpell::handle);
+
+        SpellProjectileHitEntityCallback.EVENT.register((projectile, spellId, hitResult) -> BlackHoleSpell.handle(projectile, spellId));
+        SpellProjectileHitBlockCallback.EVENT.register((projectile, spellId, hitResult) -> BlackHoleSpell.handle(projectile, spellId));
+        SpellProjectileOutOfRangeCallback.EVENT.register(BlackHoleSpell::handle);
+
         SpellProjectileHitBlockCallback.EVENT.register(LightSpell::handle);
         SpellProjectileHitBlockCallback.EVENT.register(LocateSpell::handle);
         SpellProjectileHitBlockCallback.EVENT.register(SummonSpell::handle);

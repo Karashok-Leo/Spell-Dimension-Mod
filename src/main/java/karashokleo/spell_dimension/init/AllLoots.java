@@ -2,7 +2,6 @@ package karashokleo.spell_dimension.init;
 
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
-import karashokleo.l2hostility.content.item.TrinketItems;
 import karashokleo.l2hostility.content.item.trinket.misc.LootingCharm;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
@@ -14,7 +13,6 @@ import karashokleo.spell_dimension.content.loot.entry.RandomEnlighteningEssenceE
 import karashokleo.spell_dimension.content.loot.entry.SpellScrollEntry;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.minecraft.entity.Entity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.condition.KilledByPlayerLootCondition;
 import net.minecraft.loot.entry.EmptyEntry;
@@ -83,22 +81,7 @@ public class AllLoots
                     if (op.get().noDrop) continue;
 
                     // Determine the loot charm level
-                    int lootCharmLevel = 0;
-                    for (ItemStack lootCharm : TrinketCompat.getTrinketItems(caster, e -> e.getItem() instanceof LootingCharm))
-                    {
-                        if (lootCharm.isOf(TrinketItems.LOOT_1) &&
-                            lootCharmLevel < 1)
-                            lootCharmLevel = 1;
-                        if (lootCharm.isOf(TrinketItems.LOOT_2) &&
-                            lootCharmLevel < 2)
-                            lootCharmLevel = 2;
-                        if (lootCharm.isOf(TrinketItems.LOOT_3) &&
-                            lootCharmLevel < 3)
-                            lootCharmLevel = 3;
-                        if (lootCharm.isOf(TrinketItems.LOOT_4) &&
-                            lootCharmLevel < 4)
-                            lootCharmLevel = 4;
-                    }
+                    int lootCharmLevel = TrinketCompat.getTrinketItems(caster, e -> e.getItem() instanceof LootingCharm).size();
 
                     float dropChance = EssenceLootConfig.BASE_CONFIG.dropChance() + lootCharmLevel * 0.1F;
                     if (caster.getRandom().nextFloat() > dropChance) continue;

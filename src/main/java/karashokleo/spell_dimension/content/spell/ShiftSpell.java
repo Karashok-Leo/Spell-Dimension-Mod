@@ -1,5 +1,6 @@
 package karashokleo.spell_dimension.content.spell;
 
+import karashokleo.spell_dimension.content.trait.ShiftTrait;
 import karashokleo.spell_dimension.init.AllSpells;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.Identifier;
@@ -14,11 +15,6 @@ public class ShiftSpell
         Entity owner = projectile.getOwner();
         if (owner == null || owner.isRemoved() || owner.getWorld().isClient()) return;
         Entity entity = hitResult.getEntity();
-        if (owner.getWorld() != entity.getWorld()) return;
-        double x = owner.getX();
-        double y = owner.getY();
-        double z = owner.getZ();
-        owner.teleport(entity.getX(), entity.getY(), entity.getZ());
-        entity.teleport(x, y, z);
+        ShiftTrait.exchangePosition(owner, entity);
     }
 }

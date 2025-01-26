@@ -137,6 +137,7 @@ dependencies {
     modImplementation "maven.modrinth:voidz:${project.voidz_version}"
     modImplementation "maven.modrinth:artifacts:${project.artifacts_version}-fabric"
     modImplementation "be.florens:expandability-fabric:${project.expandability_version}"
+//    modImplementation "maven.modrinth:the-graveyard-fabric:${project.graveyard_version}"
 
     // Compat
     modCompileOnly "dev.emi:emi-fabric:${project.emi_version}:api"
