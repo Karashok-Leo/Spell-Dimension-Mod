@@ -9,7 +9,6 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -151,21 +150,20 @@ public class BlackHoleEntity extends Entity implements Ownable
 
         if (this.getWorld().isClient()) return;
 
+        float radius = this.getRadius();
         int effectInterval = Math.max(2, (int) this.getRadius() / 2);
         if (this.age % effectInterval != 0) return;
 
         updateTrackingEntities();
 
-        Box box = this.getBoundingBox();
-        Vec3d center = box.getCenter();
-        float radius = (float) box.getXLength();
-        if (radius <= MIN_RADIUS ||
-            radius >= MAX_RADIUS)
+        if (radius < MIN_RADIUS ||
+            radius > MAX_RADIUS)
         {
             this.discard();
             return;
         }
 
+        Vec3d center = this.getBoundingBox().getCenter();
         LivingEntity caster = this.getOwner() instanceof LivingEntity living ? living : null;
 
         float damage = caster == null ? 0 : (float) DamageUtil.calculateDamage(caster, SpellSchools.ARCANE, SpellConfig.BLACK_HOLE, radius);
@@ -180,7 +178,7 @@ public class BlackHoleEntity extends Entity implements Ownable
             float distance = (float) center.distanceTo(pos);
             if (distance > radius) continue;
 
-            float f = 1.0f - distance / radius;
+            float f = 1.0f - distance / radius / 2;
             float scale = f * f * f * f * 0.25f;
 
             Vec3d d = center.subtract(pos).multiply(scale);

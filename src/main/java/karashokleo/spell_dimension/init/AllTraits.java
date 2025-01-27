@@ -24,7 +24,6 @@ import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 
 import java.util.function.BiFunction;
-import java.util.function.Consumer;
 
 public class AllTraits
 {
@@ -41,7 +40,7 @@ public class AllTraits
                 .addENDesc("Every %s seconds, swap its position with the target the next time it deals damage or takes damage")
                 .addZH("换影")
                 .addZHDesc("每隔%s秒，下一次造成伤害或受到伤害时交换自身与目标的位置")
-                .configure(config -> config.addBlacklist(LHTags.SEMIBOSS))
+                .addBlacklist(LHTags.SEMIBOSS)
                 .register();
         AIRBORNE = Entry.of(
                         "airborne",
@@ -51,7 +50,8 @@ public class AllTraits
                 .addENDesc("Every %s seconds, the next attack will knock the target into the air")
                 .addZH("击飞")
                 .addZHDesc("每隔%s秒，下一次攻击将击飞目标")
-                .configure(config -> config.addWhitelist(EntityType.WARDEN).addWhitelist(LHTags.MELEE_WEAPON_TARGET))
+                .addWhitelist(EntityType.WARDEN)
+                .addWhitelist(LHTags.MELEE_WEAPON_TARGET)
                 .register();
     }
 
@@ -119,6 +119,30 @@ public class AllTraits
             return this;
         }
 
+        public Entry<T> addBlacklist(TagKey<EntityType<?>> tag)
+        {
+            SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(config.getBlacklistTag()).addOptionalTag(tag);
+            return this;
+        }
+
+        public Entry<T> addBlacklist(EntityType<?>... types)
+        {
+            SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(config.getBlacklistTag()).add(types);
+            return this;
+        }
+
+        public Entry<T> addWhitelist(TagKey<EntityType<?>> tag)
+        {
+            SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(config.getWhitelistTag()).addOptionalTag(tag);
+            return this;
+        }
+
+        public Entry<T> addWhitelist(EntityType<?>... types)
+        {
+            SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(config.getWhitelistTag()).add(types);
+            return this;
+        }
+
         public Entry<T> addTag(TagKey<MobTrait> key)
         {
             this.getTagGenerator(LHTraits.TRAIT_KEY).getOrCreateContainer(key).add(getId());
@@ -139,12 +163,6 @@ public class AllTraits
             if (translationKey == null)
                 translationKey = getId().toTranslationKey(LHTraits.TRAIT_KEY.getValue().getPath());
             return translationKey;
-        }
-
-        public Entry<T> configure(Consumer<TraitConfig.Config> consumer)
-        {
-            consumer.accept(config);
-            return this;
         }
 
         @Override

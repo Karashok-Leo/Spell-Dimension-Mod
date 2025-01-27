@@ -24,6 +24,7 @@ public abstract class BookEverythingMixin
     )
     private void inject_use(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir)
     {
+        if (world.isClient()) return;
         if (EndStageComponent.canEnterEnd(user)) return;
         user.sendMessage(SDTexts.TEXT$END_STAGE$BOOK_EVERYTHING.get(AllItems.CELESTIAL_LUMINARY.getName()), true);
         cir.setReturnValue(TypedActionResult.fail(user.getStackInHand(hand)));
