@@ -147,6 +147,9 @@ public class SpellScrollConfig
             fromEventLoot(AllSpells.REGEN_ADVANCED);
             fromEventLoot(AllSpells.HASTE_ADVANCED);
             fromEventLoot(AllSpells.SPEED_ADVANCED);
+            fromEventLoot(AllSpells.BLESSING);
+            fromEventLoot(AllSpells.MISFORTUNE);
+            fromEventLoot(AllSpells.HEAVENLY_JUSTICE);
         }
     }
 

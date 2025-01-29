@@ -20,7 +20,6 @@ import net.minecraft.world.World;
 
 public class PlayerHealthEvent
 {
-    public static final int XP_THRESHOLD = 6;
     public static final int HEALTH_THRESHOLD = 66;
 
     public static void init()

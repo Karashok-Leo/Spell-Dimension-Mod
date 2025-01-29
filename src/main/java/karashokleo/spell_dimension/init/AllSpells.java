@@ -10,6 +10,7 @@ import karashokleo.spell_dimension.content.buff.BlazingMark;
 import karashokleo.spell_dimension.content.buff.Nucleus;
 import karashokleo.spell_dimension.content.spell.*;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.spell.CustomSpellHandler;
 import net.spell_power.api.SpellSchool;
@@ -109,6 +110,9 @@ public class AllSpells
     public static final Identifier SPEED = SpellDimension.modLoc("speed");
     public static final Identifier SPEED_ADVANCED = SpellDimension.modLoc("speed_advanced");
     public static final Identifier DIVINE_AURA = SpellDimension.modLoc("divine_aura");
+    public static final Identifier BLESSING = SpellDimension.modLoc("blessing");
+    public static final Identifier MISFORTUNE = SpellDimension.modLoc("misfortune");
+    public static final Identifier HEAVENLY_JUSTICE = SpellDimension.modLoc("heavenly_justice");
 
     public static void register()
     {
@@ -119,6 +123,8 @@ public class AllSpells
         CustomSpellHandler.register(ARCANE_BARRIER, data -> ArcaneBarrierSpell.handle((CustomSpellHandler.Data) data));
         CustomSpellHandler.register(NUCLEUS, data -> Nucleus.handle((CustomSpellHandler.Data) data));
         CustomSpellHandler.register(EXORCISM, data -> ExorcismSpell.handle((CustomSpellHandler.Data) data));
+        CustomSpellHandler.register(BLESSING, data -> RandomEffectSpell.handle((CustomSpellHandler.Data) data, StatusEffectCategory.BENEFICIAL));
+        CustomSpellHandler.register(MISFORTUNE, data -> RandomEffectSpell.handle((CustomSpellHandler.Data) data, StatusEffectCategory.HARMFUL));
 
         SpellProjectileHitEntityCallback.EVENT.register(ShiftSpell::handle);
 
@@ -137,5 +143,6 @@ public class AllSpells
 
         SpellImpactEvents.BEFORE.register(FrostBlinkSpell::handle);
         SpellImpactEvents.BEFORE.register(FireOfRetributionSpell::handle);
+        SpellImpactEvents.BEFORE.register(HeavenlyJusticeSpell::handle);
     }
 }

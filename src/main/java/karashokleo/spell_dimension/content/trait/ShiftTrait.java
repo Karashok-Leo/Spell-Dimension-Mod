@@ -12,7 +12,7 @@ public class ShiftTrait extends CooldownTrait
 {
     public ShiftTrait()
     {
-        super(() -> 0xfa00ff, lv -> 100 - 20 * lv);
+        super(() -> 0xfa00ff, lv -> 200 - 40 * lv);
     }
 
     @Override

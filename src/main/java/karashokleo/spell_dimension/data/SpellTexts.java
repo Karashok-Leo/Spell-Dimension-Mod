@@ -5,6 +5,7 @@ import karashokleo.spell_dimension.content.buff.BlazingMark;
 import karashokleo.spell_dimension.content.buff.Nucleus;
 import karashokleo.spell_dimension.content.effect.DivineAuraEffect;
 import karashokleo.spell_dimension.content.effect.FrostAuraEffect;
+import karashokleo.spell_dimension.content.spell.RandomEffectSpell;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 
@@ -221,6 +222,36 @@ public enum SpellTexts
             "驱邪",
             "Reduce the target's levelFactor to half of the original, and reacquire the traits, while the caster takes damage equal to the target's original levelFactor.",
             "使目标等级降至原来的一半，并且重新获取词条，同时施法者受到相当于目标原有等级的伤害。"
+    ),
+    BLESSING(
+            "Blessing",
+            "祝福",
+            "Apply a random beneficial effect (up to level %d) to the target or oneself for %d seconds.".formatted(
+                    RandomEffectSpell.MAX_AMPLIFIER,
+                    RandomEffectSpell.DURATION
+            ),
+            "目标或施法者获得一个随机正面效果（最高%d级），持续%d秒。".formatted(
+                    RandomEffectSpell.MAX_AMPLIFIER,
+                    RandomEffectSpell.DURATION
+            )
+    ),
+    MISFORTUNE(
+            "Misfortune",
+            "厄运",
+            "Apply a random harmful effect (up to level %d) to the target for %d seconds.".formatted(
+                    RandomEffectSpell.MAX_AMPLIFIER,
+                    RandomEffectSpell.DURATION
+            ),
+            "目标获得一个随机负面效果（最高%d级），持续%d秒。".formatted(
+                    RandomEffectSpell.MAX_AMPLIFIER,
+                    RandomEffectSpell.DURATION
+            )
+    ),
+    HEAVENLY_JUSTICE(
+            "Heavenly Justice",
+            "天降正义",
+            "Execute Justice Verdict on the target, dealing {damage} damage and additional damage based on the sum of the caster's positive effect and the target's negative effect type number.",
+            "对目标执行正义裁决，造成{damage}伤害和基于施法者的正面效果和目标的负面效果种类数量之和倍率的额外伤害。"
     ),
     LIGHTMOON(
             "Light Moon",

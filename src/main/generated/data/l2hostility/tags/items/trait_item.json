@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "spell-dimension:shift",
-    "spell-dimension:airborne"
+    "spell-dimension:airborne",
+    "spell-dimension:leech"
   ]
 }

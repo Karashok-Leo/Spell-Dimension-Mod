@@ -14,6 +14,7 @@ import karashokleo.leobrary.datagen.generator.TagGenerator;
 import karashokleo.leobrary.datagen.util.StringUtil;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.trait.AirborneTrait;
+import karashokleo.spell_dimension.content.trait.LeechTrait;
 import karashokleo.spell_dimension.content.trait.ShiftTrait;
 import karashokleo.spell_dimension.data.generic.SDTraitConfigProvider;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -29,13 +30,14 @@ public class AllTraits
 {
     public static ShiftTrait SHIFT;
     public static AirborneTrait AIRBORNE;
+    public static LeechTrait LEECH;
 
     public static void register()
     {
         SHIFT = Entry.of(
                         "shift",
                         new ShiftTrait(),
-                        80, 80, 3, 175)
+                        120, 60, 3, 200)
                 .addEN()
                 .addENDesc("Every %s seconds, swap its position with the target the next time it deals damage or takes damage")
                 .addZH("换影")
@@ -51,6 +53,16 @@ public class AllTraits
                 .addZH("击飞")
                 .addZHDesc("每隔%s秒，下一次攻击将击飞目标")
                 .addWhitelist(EntityType.WARDEN)
+                .addWhitelist(LHTags.MELEE_WEAPON_TARGET)
+                .register();
+        LEECH = Entry.of(
+                        "leech",
+                        new LeechTrait(),
+                        30, 100, 5, 50)
+                .addEN()
+                .addENDesc("%s%% of damage dealt will heal itself")
+                .addZH("蛭吸")
+                .addZHDesc("造成的%s%%的伤害将治疗自身")
                 .addWhitelist(LHTags.MELEE_WEAPON_TARGET)
                 .register();
     }
