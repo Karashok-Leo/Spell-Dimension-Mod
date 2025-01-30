@@ -1,4 +1,4 @@
-package karashokleo.spell_dimension.content.quest;
+package karashokleo.spell_dimension.content.quest.base;
 
 import karashokleo.spell_dimension.api.quest.ItemRewardQuest;
 import karashokleo.spell_dimension.api.quest.ItemTaskQuest;

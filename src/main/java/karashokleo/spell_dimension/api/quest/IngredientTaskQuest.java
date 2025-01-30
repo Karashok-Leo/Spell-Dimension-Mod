@@ -1,13 +1,17 @@
 package karashokleo.spell_dimension.api.quest;
 
+import karashokleo.l2hostility.compat.trinket.TrinketCompat;
+import karashokleo.l2hostility.compat.trinket.slot.EntitySlotAccess;
+import karashokleo.spell_dimension.client.quest.QuestItemTooltipData;
 import karashokleo.spell_dimension.mixin.vanilla.PlayerInventoryAccessor;
+import net.minecraft.client.item.TooltipData;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.collection.DefaultedList;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Arrays;
 import java.util.List;
 
 public interface IngredientTaskQuest extends Quest
@@ -17,14 +21,21 @@ public interface IngredientTaskQuest extends Quest
     @Override
     default boolean completeTasks(ServerPlayerEntity player)
     {
-        Iterator<DefaultedList<ItemStack>> iterator = ((PlayerInventoryAccessor) player.getInventory()).getCombinedInventory().iterator();
         List<Ingredient> tasks = new ArrayList<>(this.getTasks());
-        while (iterator.hasNext())
-        {
-            List<ItemStack> list = iterator.next();
+        for (var list : ((PlayerInventoryAccessor) player.getInventory()).getCombinedInventory())
             for (ItemStack stack : list)
                 tasks.removeIf(goal -> goal.test(stack));
-        }
+        for (EntitySlotAccess access : TrinketCompat.getItemAccess(player))
+            tasks.removeIf(goal -> goal.test(access.get()));
         return tasks.isEmpty();
+    }
+
+    @Override
+    default TooltipData getTooltipData()
+    {
+        DefaultedList<ItemStack> stacks = DefaultedList.of();
+        for (Ingredient goal : this.getTasks())
+            stacks.addAll(Arrays.asList(goal.getMatchingStacks()));
+        return new QuestItemTooltipData(stacks);
     }
 }

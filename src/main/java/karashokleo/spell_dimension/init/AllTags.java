@@ -1,6 +1,7 @@
 package karashokleo.spell_dimension.init;
 
 import com.kyanite.deeperdarker.content.DDEntities;
+import karashokleo.l2hostility.content.item.TrinketItems;
 import karashokleo.l2hostility.init.LHEnchantments;
 import karashokleo.l2hostility.init.LHTags;
 import karashokleo.leobrary.datagen.generator.TagGenerator;
@@ -62,10 +63,15 @@ public class AllTags
 
     public static final List<TagKey<Item>> REFORGE_CORE_TAGS = Stream.of(1, 2, 3).map(i -> TagUtil.itemTag(new Identifier("equipment_standard:reforge_core/lv" + i))).toList();
 
+    public static final List<TagKey<Item>> FORGE_CONTROLLERS = Stream.of(1, 2, 3).map(i -> TagUtil.itemTag("forge_controller/" + i)).toList();
+
     public static final TagKey<Block> LOCATE_TARGET = TagUtil.blockTag("locate_target");
 
     public static final TagKey<Item> BACK = TagUtil.itemTag(new Identifier("trinkets", "chest/back"));
     public static final TagKey<Item> CAPE = TagUtil.itemTag(new Identifier("trinkets", "chest/cape"));
+
+    public static final TagKey<Item> HOSTILITY_CURSE = TagUtil.itemTag("hostility_curse");
+    public static final TagKey<Item> HOSTILITY_RING = TagUtil.itemTag("hostility_ring");
 
     public static final TagKey<EntityType<?>> ZOMBIES = TagUtil.entityTypeTag(new Identifier("zombies"));
     public static final TagKey<EntityType<?>> SKELETONS = EntityTypeTags.SKELETONS;
@@ -100,6 +106,44 @@ public class AllTags
                 .addOptional(new Identifier("l2hostility:chaos_ingot"));
         SpellDimension.ITEM_TAGS.getOrCreateContainer(REFORGE_CORE_TAGS.get(2), true)
                 .addOptional(new Identifier("l2hostility:miracle_ingot"));
+
+        SpellDimension.ITEM_TAGS.getOrCreateContainer(FORGE_CONTROLLERS.get(0), true)
+                .addOptional(
+                        new Identifier("alloy_forgery:deepslate_bricks_forge_controller"),
+                        new Identifier("alloy_forgery:bricks_forge_controller"),
+                        new Identifier("alloy_forgery:stone_bricks_forge_controller")
+                );
+        SpellDimension.ITEM_TAGS.getOrCreateContainer(FORGE_CONTROLLERS.get(1), true)
+                .addOptional(
+                        new Identifier("alloy_forgery:prismarine_bricks_forge_controller"),
+                        new Identifier("alloy_forgery:polished_blackstone_forge_controller")
+                );
+        SpellDimension.ITEM_TAGS.getOrCreateContainer(FORGE_CONTROLLERS.get(2), true)
+                .addOptional(
+                        new Identifier("alloy_forgery:adamantite_block_forge_controller"),
+                        new Identifier("alloy_forgery:end_stone_bricks_forge_controller")
+                );
+
+        SpellDimension.ITEM_TAGS.getOrCreateContainer(HOSTILITY_CURSE)
+                .add(
+                        TrinketItems.CURSE_ENVY,
+                        TrinketItems.CURSE_GLUTTONY,
+                        TrinketItems.CURSE_GREED,
+                        TrinketItems.CURSE_LUST,
+                        TrinketItems.CURSE_PRIDE,
+                        TrinketItems.CURSE_SLOTH,
+                        TrinketItems.CURSE_WRATH
+                );
+        SpellDimension.ITEM_TAGS.getOrCreateContainer(HOSTILITY_RING)
+                .add(
+                        TrinketItems.RING_OCEAN,
+                        TrinketItems.RING_LIFE,
+                        TrinketItems.RING_DIVINITY,
+                        TrinketItems.RING_REFLECTION,
+                        TrinketItems.RING_INCARCERATION,
+                        TrinketItems.RING_CORROSION,
+                        TrinketItems.RING_HEALING
+                );
 
         TagGenerator.Container<Item> essenceAllContainer = SpellDimension.ITEM_TAGS.getOrCreateContainer(ESSENCE_ALL);
         for (TagKey<Item> key : ESSENCE)

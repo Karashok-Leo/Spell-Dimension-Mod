@@ -64,6 +64,9 @@ public enum SDTexts
     TEXT$GAME_OVER$MAKING("I have put a lot of time and effort into this integration pack since I started working on it. From developing exclusive modules for this pack, customizing the loot table, and optimizing performance, to fixing bugs and balancing the game's difficulty, I've encountered countless challenges, and luckily I've finally finished it.", "自从开始制作这个整合包以来，我投入了大量的时间和精力。从开发这个整合包的专属模组、定制战利品表、优化性能，到修复Bug、平衡游戏难度，我遇到了无数挑战，幸运的是我最后完成了它。"),
     TEXT$GAME_OVER$FEEDBACK("If you have any suggestions, please give me feedback, I would appreciate it.", "如果你有任何建议，请反馈给我，我将感激不尽。"),
     TEXT$GAME_OVER$WISH("Lastly, I wish you a happy life. Have fun playing!", "最后，祝你生活愉快。玩的开心！"),
+    TEXT$QUEST$BEGINNING("[BEGINNING]", "[起点]"),
+    TEXT$QUEST$END("[END]", "[终点]"),
+    TEXT$QUEST$CHALLENGE("[CHALLENGE]", "[挑战]"),
 
     /**
      * Spell School
@@ -115,7 +118,9 @@ public enum SDTexts
     TOOLTIP$QUEST$OBTAIN_CURRENT("Right-click to obtain all current quests", "右键获取当前所有任务"),
     TOOLTIP$QUEST$MUL("%s × %s", "%s × %s"),
     TOOLTIP$QUEST$AND(" and ", "和"),
+    TOOLTIP$QUEST$TASK_ITEM("Obtain the following items:", "获取以下物品:"),
     TOOLTIP$QUEST$LOOT_ITEM("Defeat %s to obtain %s", "击杀%s并获取%s"),
+    TOOLTIP$QUEST$TAG_ITEM("Search %s for the required item", "搜索 %s 以查询对应物品"),
     TOOLTIP$NOT_CONSUMED("Will not be consumed", "不消耗"),
     TOOLTIP$TOOK_SECONDS("Took %s second(s)", "耗时%s秒"),
     TOOLTIP$SUMMON_ENTITY("Entity Type: %s", "实体类型：%s"),

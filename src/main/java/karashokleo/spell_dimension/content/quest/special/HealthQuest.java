@@ -1,17 +1,21 @@
-package karashokleo.spell_dimension.content.quest;
+package karashokleo.spell_dimension.content.quest.special;
 
 import karashokleo.spell_dimension.api.quest.ItemRewardQuest;
-import karashokleo.spell_dimension.data.SDTexts;
+import karashokleo.spell_dimension.content.quest.base.AutoDescQuest;
+import karashokleo.spell_dimension.content.quest.base.AutoTitleQuest;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
-import net.minecraft.world.World;
 
 import java.util.List;
 import java.util.function.Supplier;
 
-public record HealthQuest(float health, Supplier<ItemStack> reward) implements ItemRewardQuest
+public record HealthQuest(
+        float health,
+        Supplier<ItemStack> reward,
+        boolean challenge
+) implements ItemRewardQuest, AutoTitleQuest, AutoDescQuest
 {
     @Override
     public boolean completeTasks(ServerPlayerEntity player)
@@ -26,11 +30,18 @@ public record HealthQuest(float health, Supplier<ItemStack> reward) implements I
     }
 
     @Override
-    public void appendTaskDesc(World world, List<Text> desc)
+    public boolean isChallenge()
     {
-        desc.add(SDTexts.TEXT$QUEST$HEALTH.get(
+        return this.challenge;
+    }
+
+    @Override
+    public Text getDescText()
+    {
+        return Text.translatable(
+                this.getDescKey(),
                 Text.translatable(EntityAttributes.GENERIC_MAX_HEALTH.getTranslationKey()),
                 this.health
-        ));
+        );
     }
 }

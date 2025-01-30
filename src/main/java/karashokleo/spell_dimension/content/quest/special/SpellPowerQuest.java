@@ -1,6 +1,7 @@
-package karashokleo.spell_dimension.content.quest;
+package karashokleo.spell_dimension.content.quest.special;
 
 import karashokleo.spell_dimension.api.quest.ItemRewardQuest;
+import karashokleo.spell_dimension.content.quest.base.AutoTitleQuest;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.util.SchoolUtil;
 import net.minecraft.item.ItemStack;
@@ -14,8 +15,9 @@ import java.util.function.Supplier;
 
 public record SpellPowerQuest(
         double min,
-        Supplier<ItemStack> reward
-) implements ItemRewardQuest
+        Supplier<ItemStack> reward,
+        boolean challenge
+) implements ItemRewardQuest, AutoTitleQuest
 {
     @Override
     public boolean completeTasks(ServerPlayerEntity player)
@@ -33,6 +35,12 @@ public record SpellPowerQuest(
     public List<ItemStack> getRewards()
     {
         return List.of(reward.get());
+    }
+
+    @Override
+    public boolean isChallenge()
+    {
+        return challenge;
     }
 
     @Override

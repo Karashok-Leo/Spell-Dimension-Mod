@@ -7,7 +7,6 @@ import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.trait.common.AdaptingTrait;
 import karashokleo.l2hostility.init.LHTraits;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
-import karashokleo.spell_dimension.config.QuestToEntryConfig;
 import karashokleo.spell_dimension.content.event.*;
 import karashokleo.spell_dimension.content.item.SpellScrollItem;
 import karashokleo.spell_dimension.content.misc.ISpawnerExtension;
@@ -45,8 +44,6 @@ public class AllEvents
         TrinketEvent.init();
         LightSpell.init();
         ConsciousOceanEvent.init();
-
-        QuestToEntryConfig.init();
 
         // cancel offhand block placement interaction while holding spell scroll
         UseBlockCallback.EVENT.register((player, world, hand, hitResult) ->

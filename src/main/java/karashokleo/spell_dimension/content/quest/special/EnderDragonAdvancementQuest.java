@@ -1,7 +1,8 @@
-package karashokleo.spell_dimension.content.quest;
+package karashokleo.spell_dimension.content.quest.special;
 
 import karashokleo.spell_dimension.api.quest.AdvancementQuest;
 import karashokleo.spell_dimension.api.quest.ItemRewardQuest;
+import karashokleo.spell_dimension.content.quest.base.AutoDescQuest;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -26,6 +27,12 @@ public record EnderDragonAdvancementQuest(
     public List<ItemStack> getRewards()
     {
         return List.of(reward.get());
+    }
+
+    @Override
+    public Text getTitle(World world)
+    {
+        return Text.translatable("advancements.end.kill_dragon.title");
     }
 
     @Override

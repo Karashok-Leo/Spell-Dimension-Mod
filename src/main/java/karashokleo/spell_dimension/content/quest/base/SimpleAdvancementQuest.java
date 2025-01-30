@@ -1,4 +1,4 @@
-package karashokleo.spell_dimension.content.quest;
+package karashokleo.spell_dimension.content.quest.base;
 
 import karashokleo.spell_dimension.api.quest.AdvancementQuest;
 import karashokleo.spell_dimension.api.quest.ItemRewardQuest;
@@ -13,9 +13,20 @@ import java.util.function.Supplier;
 public record SimpleAdvancementQuest(
         Identifier advancementId,
         Supplier<ItemStack> reward,
-        String taskDesc
+        String titleKey,
+        String descKey
 ) implements AdvancementQuest, ItemRewardQuest
 {
+    public SimpleAdvancementQuest(Identifier advancementId, Supplier<ItemStack> reward, String translationKey)
+    {
+        this(
+                advancementId,
+                reward,
+                translationKey + ".title",
+                translationKey + ".description"
+        );
+    }
+
     @Override
     public Identifier getAdvancementId()
     {
@@ -29,8 +40,14 @@ public record SimpleAdvancementQuest(
     }
 
     @Override
+    public Text getTitle(World world)
+    {
+        return Text.translatable(titleKey);
+    }
+
+    @Override
     public void appendTaskDesc(World world, List<Text> desc)
     {
-        desc.add(Text.translatable(taskDesc));
+        desc.add(Text.translatable(descKey));
     }
 }

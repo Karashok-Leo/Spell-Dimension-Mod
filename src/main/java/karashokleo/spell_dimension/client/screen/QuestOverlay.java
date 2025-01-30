@@ -10,7 +10,9 @@ import karashokleo.spell_dimension.init.AllItems;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
+import net.minecraft.world.World;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +32,15 @@ public class QuestOverlay extends InfoSideBar<SideBar.IntSignature>
         if (stack.getItem() instanceof QuestScrollItem scroll)
         {
             Optional<Quest> quest = scroll.getQuest(stack);
-            if (quest.isPresent()) return quest.get().getDesc(player.getWorld());
+            if (quest.isPresent())
+            {
+                World world = player.getWorld();
+                ArrayList<Text> texts = new ArrayList<>();
+                Text title = quest.get().getTitle(world);
+                if (title != null) texts.add(title);
+                texts.addAll(quest.get().getDesc(world));
+                return texts;
+            }
         }
         return List.of(SDTexts.TOOLTIP$QUEST$OBTAIN_CURRENT.get());
     }

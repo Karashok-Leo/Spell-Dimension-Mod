@@ -12,6 +12,8 @@ import karashokleo.leobrary.gui.api.TextureOverlayRegistry;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.api.quest.Quest;
 import karashokleo.spell_dimension.api.quest.QuestUsage;
+import karashokleo.spell_dimension.client.quest.QuestItemTooltipComponent;
+import karashokleo.spell_dimension.client.quest.QuestItemTooltipData;
 import karashokleo.spell_dimension.client.render.*;
 import karashokleo.spell_dimension.client.screen.ConsciousCoreOverlay;
 import karashokleo.spell_dimension.client.screen.GameOverOverlay;
@@ -39,6 +41,7 @@ import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback;
+import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
 import net.fabricmc.fabric.api.event.Event;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.InGameHud;
@@ -95,6 +98,13 @@ public class SpellDimensionClient implements ClientModInitializer
         EntityRendererRegistry.register(AllEntities.LOCATE_PORTAL, LocatePortalRenderer::new);
         EntityRendererRegistry.register(AllEntities.CONSCIOUSNESS_EVENT, EmptyEntityRenderer::new);
         EntityRendererRegistry.register(AllEntities.BLACK_HOLE, BlackHoleRenderer::new);
+
+        TooltipComponentCallback.EVENT.register(data ->
+        {
+            if (data instanceof QuestItemTooltipData questData)
+                return new QuestItemTooltipComponent(questData);
+            return null;
+        });
 
         GuiOverlayRegistry.registerLayer(6, new QuestOverlay());
         GuiOverlayRegistry.registerLayer(7, new ConsciousCoreOverlay());

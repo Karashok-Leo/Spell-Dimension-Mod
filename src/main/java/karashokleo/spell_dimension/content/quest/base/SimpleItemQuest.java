@@ -1,4 +1,4 @@
-package karashokleo.spell_dimension.content.quest;
+package karashokleo.spell_dimension.content.quest.base;
 
 import karashokleo.spell_dimension.api.quest.ItemRewardQuest;
 import karashokleo.spell_dimension.api.quest.ItemTaskQuest;
@@ -8,11 +8,17 @@ import net.minecraft.item.ItemStack;
 import java.util.List;
 import java.util.function.Supplier;
 
-public record SimpleItemQuest(
-        List<Supplier<ItemConvertible>> tasks,
-        Supplier<ItemStack> reward
-) implements ItemTaskQuest, ItemRewardQuest
+public class SimpleItemQuest implements ItemTaskQuest, ItemRewardQuest
 {
+    private final List<Supplier<ItemConvertible>> tasks;
+    private final Supplier<ItemStack> reward;
+
+    public SimpleItemQuest(List<Supplier<ItemConvertible>> tasks, Supplier<ItemStack> reward)
+    {
+        this.tasks = tasks;
+        this.reward = reward;
+    }
+
     public SimpleItemQuest(Supplier<ItemConvertible> task, Supplier<ItemStack> reward)
     {
         this(List.of(task), reward);

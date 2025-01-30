@@ -1,4 +1,4 @@
-package karashokleo.spell_dimension.content.quest;
+package karashokleo.spell_dimension.content.quest.base;
 
 import karashokleo.spell_dimension.api.quest.Quest;
 import karashokleo.spell_dimension.api.quest.QuestRegistry;
@@ -10,14 +10,14 @@ import java.util.Objects;
 
 public interface AutoDescQuest extends Quest
 {
-    default String getTranslationKey()
+    default String getDescKey()
     {
         return Objects.requireNonNull(QuestRegistry.QUEST_REGISTRY.getId(this), "Unregistered quest!").toTranslationKey("quest", "description");
     }
 
     default Text getDescText()
     {
-        return Text.translatable(this.getTranslationKey());
+        return Text.translatable(this.getDescKey());
     }
 
     @Override

@@ -2,10 +2,12 @@ package karashokleo.spell_dimension.api.quest;
 
 import karashokleo.spell_dimension.config.QuestToEntryConfig;
 import karashokleo.spell_dimension.data.SDTexts;
+import net.minecraft.client.item.TooltipData;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +28,12 @@ public interface Quest
         desc.add(Text.empty());
     }
 
+    @Nullable
+    default Text getTitle(World world)
+    {
+        return null;
+    }
+
     default List<Text> getDesc(World world)
     {
         List<Text> desc = new ArrayList<>();
@@ -37,5 +45,11 @@ public interface Quest
         if (QuestToEntryConfig.hasEntry(this))
             desc.add(SDTexts.TOOLTIP$QUEST$OPEN_ENTRY.get().formatted(Formatting.DARK_AQUA));
         return desc;
+    }
+
+    @Nullable
+    default TooltipData getTooltipData()
+    {
+        return null;
     }
 }
