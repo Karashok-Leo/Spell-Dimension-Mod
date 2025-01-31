@@ -106,7 +106,7 @@ public class AllEnchantments
                 .register();
         SPELL_BLADE_SOULFROST = new Entry<>("spell_blade_soulfrost", new SpellBladeEnchantment(SpellSchools.SOUL, SpellSchools.FROST))
                 .addEN("Spell Blade - Soulfrost")
-                .addZH("咒剑-灵动")
+                .addZH("咒剑-灵冻")
                 .addENDesc("Increases Soul and Frost spell power by an amount equal to the damage bonus of physical attacks.")
                 .addZHDesc("增加与物理攻击伤害加成等额的灵魂和寒冰法术强度。")
                 .addTag(AllTags.LOOTABLE)

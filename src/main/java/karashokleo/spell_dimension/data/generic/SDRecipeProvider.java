@@ -1,5 +1,6 @@
 package karashokleo.spell_dimension.data.generic;
 
+import karashokleo.enchantment_infusion.api.recipe.EnchantmentIngredient;
 import karashokleo.enchantment_infusion.api.util.EIRecipeUtil;
 import karashokleo.enchantment_infusion.init.EIItems;
 import karashokleo.fusion_smithing.item.FusionSmithingTemplateItem;
@@ -639,6 +640,37 @@ public class SDRecipeProvider extends FabricRecipeProvider
                         SpellDimension.modLoc("enchantment/effect_immunity/" + id.getPath())
                 );
             });
+        }
+
+        // Spell Blade Enchantments
+        {
+            EIRecipeUtil.set(
+                    builder -> builder
+                            .withTableIngredient(Enchantments_SpellPower.SUNFIRE, 1)
+                            .withPedestalItem(1, EnchantmentIngredient.of(Enchantments.SHARPNESS, 1)),
+                    AllEnchantments.SPELL_BLADE_SUNFIRE,
+                    1,
+                    exporter,
+                    SpellDimension.modLoc("enchantment/spell_blade/sunfire")
+            );
+            EIRecipeUtil.set(
+                    builder -> builder
+                            .withTableIngredient(Enchantments_SpellPower.SOULFROST, 1)
+                            .withPedestalItem(1, EnchantmentIngredient.of(Enchantments.SHARPNESS, 1)),
+                    AllEnchantments.SPELL_BLADE_SOULFROST,
+                    1,
+                    exporter,
+                    SpellDimension.modLoc("enchantment/spell_blade/soulfrost")
+            );
+            EIRecipeUtil.set(
+                    builder -> builder
+                            .withTableIngredient(Enchantments_SpellPower.ENERGIZE, 1)
+                            .withPedestalItem(1, EnchantmentIngredient.of(Enchantments.SHARPNESS, 1)),
+                    AllEnchantments.SPELL_BLADE_ENERGIZE,
+                    1,
+                    exporter,
+                    SpellDimension.modLoc("enchantment/spell_blade/enegize")
+            );
         }
     }
 }

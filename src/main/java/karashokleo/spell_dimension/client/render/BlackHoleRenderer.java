@@ -35,7 +35,6 @@ public class BlackHoleRenderer extends EntityRenderer<BlackHoleEntity>
 
         matrices.translate(0, entity.getBoundingBox().getYLength() / 2, 0);
 
-        // 200f refer to lifecycle of the animation
         float animationProgress = (entity.age + tickDelta) / BlackHoleEntity.LIFESPAN;
         float m = Math.min(animationProgress > 0.8F ? (animationProgress - 0.8F) / 0.2F : 0.0F, 1.0F);
         int alpha = (int) (255.0F * (1.0F - m));
@@ -60,7 +59,8 @@ public class BlackHoleRenderer extends EntityRenderer<BlackHoleEntity>
 
         matrices.push();
         {
-            float total = (animationProgress + animationProgress * animationProgress) * blackHoleRadius * 3;
+            float segments = Math.min(animationProgress, 0.8f);
+            float total = (segments + segments * segments) * (12 + blackHoleRadius / 2);
             for (int n = 0; n < total; ++n)
             {
                 float radius = random.nextFloat() + blackHoleRadius + m * blackHoleRadius * 0.4F;
@@ -76,7 +76,6 @@ public class BlackHoleRenderer extends EntityRenderer<BlackHoleEntity>
 
     private static void renderCore(VertexConsumer centerBuffer, MatrixStack matrices, int alpha)
     {
-
         MatrixStack.Entry peek = matrices.peek();
         Matrix4f positionMatrix = peek.getPositionMatrix();
         Matrix3f normalMatrix = peek.getNormalMatrix();

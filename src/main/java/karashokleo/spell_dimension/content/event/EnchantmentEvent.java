@@ -21,6 +21,7 @@ import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.SwordItem;
 import net.spell_power.api.SpellPower;
 import net.spell_power.api.SpellSchool;
 import net.spell_power.api.enchantment.EnchantmentRestriction;
@@ -37,6 +38,7 @@ public class EnchantmentEvent
     {
         ModifyItemAttributeModifiersCallback.EVENT.register((stack, slot, attributeModifiers) ->
         {
+            if (!(stack.getItem() instanceof SwordItem)) return;
             if (slot == EquipmentSlot.MAINHAND || slot == EquipmentSlot.OFFHAND)
             {
                 UUID uuid = switch (slot)

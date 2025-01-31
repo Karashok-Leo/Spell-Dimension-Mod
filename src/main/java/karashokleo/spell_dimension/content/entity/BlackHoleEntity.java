@@ -23,7 +23,7 @@ public class BlackHoleEntity extends Entity implements Ownable
 {
     public static final float MAX_RADIUS = 32f;
     public static final float MIN_RADIUS = 2f;
-    public static final int LIFESPAN = 20 * 10;
+    public static final int LIFESPAN = 20 * 16;
     public static final int IDLE_SOUND_INTERVAL = 60;
 
     private static final TrackedData<Float> RADIUS = DataTracker.registerData(BlackHoleEntity.class, TrackedDataHandlerRegistry.FLOAT);

@@ -1,6 +1,6 @@
 {
   "school": "HEALING",
-  "range": 0,
+  "range": 16,
   "learn": {
     "tier": 2
   },

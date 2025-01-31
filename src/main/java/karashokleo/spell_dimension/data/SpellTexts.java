@@ -5,6 +5,7 @@ import karashokleo.spell_dimension.content.buff.BlazingMark;
 import karashokleo.spell_dimension.content.buff.Nucleus;
 import karashokleo.spell_dimension.content.effect.DivineAuraEffect;
 import karashokleo.spell_dimension.content.effect.FrostAuraEffect;
+import karashokleo.spell_dimension.content.entity.BlackHoleEntity;
 import karashokleo.spell_dimension.content.spell.RandomEffectSpell;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
@@ -70,8 +71,8 @@ public enum SpellTexts
     BLACK_HOLE(
             "Black Hole",
             "黑洞",
-            "Create a Black Hole that continuously attracts surrounding creatures and deals damage. The higher your spell power, the larger the radius of the black hole.",
-            "制造一个黑洞，持续吸引周围的生物并造成伤害。法术强度越高，黑洞半径越大。"
+            "Create a Black Hole that continuously attracts surrounding creatures and deals damage, disappearing after %d seconds. The higher your spell power, the larger the radius of the black hole.".formatted(BlackHoleEntity.LIFESPAN / 20),
+            "制造一个黑洞，持续吸引周围的生物并造成伤害，%d秒后消失。法术强度越高，黑洞半径越大。".formatted(BlackHoleEntity.LIFESPAN / 20)
     ),
     PHASE(
             "Phase",
@@ -214,8 +215,8 @@ public enum SpellTexts
     DIVINE_AURA(
             "Divine Aura",
             "神圣光环",
-            "Apply Divine Aura effect to target or oneself for {effect_duration} seconds. Divine Aura: " + DivineAuraEffect.DESC_EN,
-            "目标或施法者获得神圣光环效果，持续{effect_duration}秒。神圣光环：" + DivineAuraEffect.DESC_ZH
+            "Apply Divine Aura effect to oneself for {effect_duration} seconds. Divine Aura: " + DivineAuraEffect.DESC_EN,
+            "施法者获得神圣光环效果，持续{effect_duration}秒。神圣光环：" + DivineAuraEffect.DESC_ZH
     ),
     EXORCISM(
             "Exorcism",

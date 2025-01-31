@@ -1,6 +1,6 @@
 {
-  "range": 2.5,
   "school": "HEALING",
+  "range": 2.5,
   "learn": {
     "tier": 4
   },
@@ -24,11 +24,7 @@
   },
   "release": {
     "target": {
-      "type": "AREA",
-      "area": {
-        "vertical_range_multiplier": 0.6,
-        "include_caster": true
-      }
+      "type": "SELF"
     },
     "animation": "spell_engine:one_handed_area_release",
     "sound": {

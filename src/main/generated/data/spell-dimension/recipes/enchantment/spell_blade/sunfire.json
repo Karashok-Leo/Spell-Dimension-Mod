@@ -1,0 +1,17 @@
+{
+  "type": "enchantment_infusion:enchantment_infusion",
+  "enchantment": "spell-dimension:spell_blade_sunfire",
+  "force": false,
+  "ingredients": [
+    {
+      "fabric:type": "enchantment_infusion:enchantment",
+      "enchantment": "minecraft:sharpness",
+      "min_level": 1
+    }
+  ],
+  "input": {
+    "enchantment": "spell_power:sunfire",
+    "min_level": 1
+  },
+  "level": 1
+}
