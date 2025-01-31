@@ -27,7 +27,7 @@ public class LeechTrait extends MobTrait
     public void addDetail(List<Text> list)
     {
         list.add(Text.translatable(getDescKey(),
-                        mapLevel(i -> Text.literal(Math.round(LEECH_RATIO_PER_LV * 100) + "")
+                        mapLevel(i -> Text.literal(Math.round(LEECH_RATIO_PER_LV * i * 100) + "%")
                                 .formatted(Formatting.AQUA)))
                 .formatted(Formatting.GRAY));
     }

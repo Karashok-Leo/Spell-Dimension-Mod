@@ -30,7 +30,6 @@ import org.apache.commons.lang3.mutable.MutableInt;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 public class EnchantmentEvent
 {
@@ -39,28 +38,21 @@ public class EnchantmentEvent
         ModifyItemAttributeModifiersCallback.EVENT.register((stack, slot, attributeModifiers) ->
         {
             if (!(stack.getItem() instanceof SwordItem)) return;
-            if (slot == EquipmentSlot.MAINHAND || slot == EquipmentSlot.OFFHAND)
+            if (slot != EquipmentSlot.MAINHAND) return;
+            double sum = attributeModifiers.get(EntityAttributes.GENERIC_ATTACK_DAMAGE)
+                    .stream()
+                    .filter(m -> m.getOperation() == EntityAttributeModifier.Operation.ADDITION)
+                    .mapToDouble(EntityAttributeModifier::getValue)
+                    .sum();
+            sum += EnchantmentHelper.getAttackDamage(stack, EntityGroup.DEFAULT);
+            if (sum <= 0) return;
+            for (Enchantment enchantment : EnchantmentHelper.get(stack).keySet())
             {
-                UUID uuid = switch (slot)
+                if (!(enchantment instanceof SpellBladeEnchantment spellBladeEnchantment)) continue;
+                for (SpellSchool school : spellBladeEnchantment.getSchools())
                 {
-                    case MAINHAND -> SpellBladeEnchantment.MAINHAND_MODIFIER_ID;
-                    case OFFHAND -> SpellBladeEnchantment.OFFHAND_MODIFIER_ID;
-                    default -> throw new IllegalStateException("Unexpected value: " + slot);
-                };
-                double sum = attributeModifiers.get(EntityAttributes.GENERIC_ATTACK_DAMAGE)
-                        .stream()
-                        .filter(m -> m.getOperation() == EntityAttributeModifier.Operation.ADDITION)
-                        .mapToDouble(EntityAttributeModifier::getValue)
-                        .sum();
-                sum += EnchantmentHelper.getAttackDamage(stack, EntityGroup.DEFAULT);
-                for (Enchantment enchantment : EnchantmentHelper.get(stack).keySet())
-                {
-                    if (!(enchantment instanceof SpellBladeEnchantment spellBladeEnchantment)) continue;
-                    for (SpellSchool school : spellBladeEnchantment.getSchools())
-                    {
-                        EntityAttributeModifier modifier = new EntityAttributeModifier(uuid, "Spell Blade Enchantment", sum, EntityAttributeModifier.Operation.ADDITION);
-                        attributeModifiers.put(school.attribute, modifier);
-                    }
+                    EntityAttributeModifier modifier = new EntityAttributeModifier(SpellBladeEnchantment.MODIFIER_ID, "Spell Blade Enchantment", sum, EntityAttributeModifier.Operation.ADDITION);
+                    attributeModifiers.put(school.attribute, modifier);
                 }
             }
         });

@@ -13,7 +13,7 @@
     },
     "particles": [
       {
-        "particle_id": "spell_engine:healing_ascend",
+        "particle_id": "spell_engine:holy_ascend",
         "shape": "PIPE",
         "origin": "FEET",
         "count": 2,

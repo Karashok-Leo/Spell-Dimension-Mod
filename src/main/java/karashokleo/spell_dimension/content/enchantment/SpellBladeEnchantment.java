@@ -10,14 +10,13 @@ import java.util.UUID;
 
 public class SpellBladeEnchantment extends Enchantment
 {
-    public static final UUID MAINHAND_MODIFIER_ID = UUID.fromString("9ed774ce-6bd0-4216-9ca5-1ec2adf3b4ed");
-    public static final UUID OFFHAND_MODIFIER_ID = UUID.fromString("ffad9f1c-e94d-492c-b874-bb5a81f8a248");
+    public static final UUID MODIFIER_ID = UUID.fromString("9ed774ce-6bd0-4216-9ca5-1ec2adf3b4ed");
 
     private final Set<SpellSchool> schools;
 
     public SpellBladeEnchantment(SpellSchool... schools)
     {
-        super(Rarity.UNCOMMON, EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND});
+        super(Rarity.UNCOMMON, EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
         this.schools = Set.of(schools);
     }
 

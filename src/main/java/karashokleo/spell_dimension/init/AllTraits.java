@@ -60,10 +60,9 @@ public class AllTraits
                         new LeechTrait(),
                         30, 100, 5, 50)
                 .addEN()
-                .addENDesc("%s%% of damage dealt will heal itself")
+                .addENDesc("%s of damage dealt will heal itself")
                 .addZH("蛭吸")
-                .addZHDesc("造成的%s%%的伤害将治疗自身")
-                .addWhitelist(LHTags.MELEE_WEAPON_TARGET)
+                .addZHDesc("造成的%s的伤害将治疗自身")
                 .register();
     }
 
