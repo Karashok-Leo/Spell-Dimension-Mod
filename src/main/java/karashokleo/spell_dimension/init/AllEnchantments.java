@@ -6,6 +6,7 @@ import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.enchantment.*;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.effect.StatusEffects;
+import net.spell_power.api.SpellSchools;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,10 @@ public class AllEnchantments
     public static SpellResistanceEnchantment SPELL_RESISTANCE;
     public static SpellMendingEnchantment SPELL_MENDING;
     public static SpellTearingEnchantment SPELL_TEARING;
+
+    public static SpellBladeEnchantment SPELL_BLADE_SUNFIRE;
+    public static SpellBladeEnchantment SPELL_BLADE_SOULFROST;
+    public static SpellBladeEnchantment SPELL_BLADE_ENERGIZE;
 
     public static TraitEffectImmunityEnchantment WEAKNESS_IMMUNITY;
     public static TraitEffectImmunityEnchantment SLOWNESS_IMMUNITY;
@@ -90,6 +95,28 @@ public class AllEnchantments
                 .addENDesc("Your spells can penetrate the target's Dispell trait. Restores 20% of the original damage per level.")
                 .addZH("法术穿透")
                 .addZHDesc("你的法术可以穿透目标的破魔词条。每级恢复原有伤害的20%。")
+                .register();
+
+        SPELL_BLADE_SUNFIRE = new Entry<>("spell_blade_sunfire", new SpellBladeEnchantment(SpellSchools.ARCANE, SpellSchools.FIRE))
+                .addEN("Spell Blade - Sunfire")
+                .addZH("咒剑-阳炎")
+                .addENDesc("Increases Arcane and Fire spell power by an amount equal to the damage bonus of physical attacks.")
+                .addZHDesc("增加与物理攻击伤害加成等额的奥秘和火焰法术强度。")
+                .addTag(AllTags.LOOTABLE)
+                .register();
+        SPELL_BLADE_SOULFROST = new Entry<>("spell_blade_soulfrost", new SpellBladeEnchantment(SpellSchools.SOUL, SpellSchools.FROST))
+                .addEN("Spell Blade - Soulfrost")
+                .addZH("咒剑-灵动")
+                .addENDesc("Increases Soul and Frost spell power by an amount equal to the damage bonus of physical attacks.")
+                .addZHDesc("增加与物理攻击伤害加成等额的灵魂和寒冰法术强度。")
+                .addTag(AllTags.LOOTABLE)
+                .register();
+        SPELL_BLADE_ENERGIZE = new Entry<>("spell_blade_energize", new SpellBladeEnchantment(SpellSchools.HEALING, SpellSchools.LIGHTNING))
+                .addEN("Spell Blade - Energize")
+                .addZH("咒剑-蓄能")
+                .addENDesc("Increases Healing and Lightning spell power by an amount equal to the damage bonus of physical attacks.")
+                .addZHDesc("增加与物理攻击伤害加成等额的治愈和雷电法术强度。")
+                .addTag(AllTags.LOOTABLE)
                 .register();
 
         WEAKNESS_IMMUNITY = new Entry<>("weakness_immunity", new TraitEffectImmunityEnchantment(StatusEffects.WEAKNESS))

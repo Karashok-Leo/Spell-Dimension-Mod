@@ -7,11 +7,18 @@ import karashokleo.leobrary.damage.api.modify.DamageModifier;
 import karashokleo.leobrary.damage.api.modify.DamagePhase;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
 import karashokleo.spell_dimension.content.enchantment.EffectImmunityEnchantment;
+import karashokleo.spell_dimension.content.enchantment.SpellBladeEnchantment;
 import karashokleo.spell_dimension.content.enchantment.SpellImpactEnchantment;
 import karashokleo.spell_dimension.init.AllEnchantments;
 import karashokleo.spell_dimension.init.AllTags;
 import karashokleo.spell_dimension.util.SchoolUtil;
+import net.fabricmc.fabric.api.item.v1.ModifyItemAttributeModifiersCallback;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.EntityGroup;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.spell_power.api.SpellPower;
@@ -22,11 +29,40 @@ import org.apache.commons.lang3.mutable.MutableInt;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class EnchantmentEvent
 {
     public static void init()
     {
+        ModifyItemAttributeModifiersCallback.EVENT.register((stack, slot, attributeModifiers) ->
+        {
+            if (slot == EquipmentSlot.MAINHAND || slot == EquipmentSlot.OFFHAND)
+            {
+                UUID uuid = switch (slot)
+                {
+                    case MAINHAND -> SpellBladeEnchantment.MAINHAND_MODIFIER_ID;
+                    case OFFHAND -> SpellBladeEnchantment.OFFHAND_MODIFIER_ID;
+                    default -> throw new IllegalStateException("Unexpected value: " + slot);
+                };
+                double sum = attributeModifiers.get(EntityAttributes.GENERIC_ATTACK_DAMAGE)
+                        .stream()
+                        .filter(m -> m.getOperation() == EntityAttributeModifier.Operation.ADDITION)
+                        .mapToDouble(EntityAttributeModifier::getValue)
+                        .sum();
+                sum += EnchantmentHelper.getAttackDamage(stack, EntityGroup.DEFAULT);
+                for (Enchantment enchantment : EnchantmentHelper.get(stack).keySet())
+                {
+                    if (!(enchantment instanceof SpellBladeEnchantment spellBladeEnchantment)) continue;
+                    for (SpellSchool school : spellBladeEnchantment.getSchools())
+                    {
+                        EntityAttributeModifier modifier = new EntityAttributeModifier(uuid, "Spell Blade Enchantment", sum, EntityAttributeModifier.Operation.ADDITION);
+                        attributeModifiers.put(school.attribute, modifier);
+                    }
+                }
+            }
+        });
+
         MobEffectEvent.APPLICABLE.register(event ->
         {
             if (TrinketCompat.getTrinketItems(event.getEntity(),
