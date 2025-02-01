@@ -7,7 +7,7 @@ import karashokleo.leobrary.damage.api.modify.DamageModifier;
 import karashokleo.leobrary.damage.api.modify.DamagePhase;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
 import karashokleo.spell_dimension.content.enchantment.EffectImmunityEnchantment;
-import karashokleo.spell_dimension.content.enchantment.SpellBladeEnchantment;
+import karashokleo.spell_dimension.content.enchantment.SpellBladeAmplifyEnchantment;
 import karashokleo.spell_dimension.content.enchantment.SpellImpactEnchantment;
 import karashokleo.spell_dimension.init.AllEnchantments;
 import karashokleo.spell_dimension.init.AllTags;
@@ -15,10 +15,7 @@ import karashokleo.spell_dimension.util.SchoolUtil;
 import net.fabricmc.fabric.api.item.v1.ModifyItemAttributeModifiersCallback;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
@@ -37,23 +34,12 @@ public class EnchantmentEvent
     {
         ModifyItemAttributeModifiersCallback.EVENT.register((stack, slot, attributeModifiers) ->
         {
-            if (!(stack.getItem() instanceof SwordItem)) return;
             if (slot != EquipmentSlot.MAINHAND) return;
-            double sum = attributeModifiers.get(EntityAttributes.GENERIC_ATTACK_DAMAGE)
-                    .stream()
-                    .filter(m -> m.getOperation() == EntityAttributeModifier.Operation.ADDITION)
-                    .mapToDouble(EntityAttributeModifier::getValue)
-                    .sum();
-            sum += EnchantmentHelper.getAttackDamage(stack, EntityGroup.DEFAULT);
-            if (sum <= 0) return;
+            if (!(stack.getItem() instanceof SwordItem)) return;
             for (Enchantment enchantment : EnchantmentHelper.get(stack).keySet())
             {
-                if (!(enchantment instanceof SpellBladeEnchantment spellBladeEnchantment)) continue;
-                for (SpellSchool school : spellBladeEnchantment.getSchools())
-                {
-                    EntityAttributeModifier modifier = new EntityAttributeModifier(SpellBladeEnchantment.MODIFIER_ID, "Spell Blade Enchantment", sum, EntityAttributeModifier.Operation.ADDITION);
-                    attributeModifiers.put(school.attribute, modifier);
-                }
+                if (!(enchantment instanceof SpellBladeAmplifyEnchantment ench)) continue;
+                ench.operateModifiers(stack, attributeModifiers);
             }
         });
 

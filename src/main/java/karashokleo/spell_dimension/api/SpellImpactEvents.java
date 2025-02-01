@@ -21,16 +21,4 @@ public interface SpellImpactEvents
     {
         void beforeImpact(World world, LivingEntity caster, List<Entity> targets, SpellInfo spellInfo);
     }
-
-    @Deprecated
-    Event<After> AFTER = EventFactory.createArrayBacked(After.class, (listeners) -> ((world, caster, target, spellInfo) ->
-    {
-        for (After listener : listeners)
-            listener.afterImpact(world, caster, target, spellInfo);
-    }));
-
-    interface After
-    {
-        void afterImpact(World world, LivingEntity caster, List<Entity> targets, SpellInfo spellInfo);
-    }
 }

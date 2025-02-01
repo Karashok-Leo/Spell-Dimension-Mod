@@ -671,6 +671,15 @@ public class SDRecipeProvider extends FabricRecipeProvider
                     exporter,
                     SpellDimension.modLoc("enchantment/spell_blade/enegize")
             );
+            EIRecipeUtil.set(
+                    builder -> builder
+                            .withTableIngredient(Enchantments_SpellPowerMechanics.HASTE, 1)
+                            .withPedestalItem(1, EnchantmentIngredient.of(Enchantments.SHARPNESS, 1)),
+                    AllEnchantments.SPELL_BLADE_HASTE,
+                    1,
+                    exporter,
+                    SpellDimension.modLoc("enchantment/spell_blade/haste")
+            );
         }
     }
 }
