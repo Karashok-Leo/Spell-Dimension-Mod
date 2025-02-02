@@ -18,7 +18,7 @@ public class KillMutantQuests
                         new SimpleLootItemQuest(
                                 ModRegistry.MUTANT_ZOMBIE_ENTITY_TYPE::get,
                                 ModRegistry.HULK_HAMMER_ITEM::get,
-                                SDBags.RARE_MATERIAL::getStack
+                                SDBags.UNCOMMON_MATERIAL::getStack
                         )
                 )
                 .addDependencies(BaseQuests.KILL_TRAIT)
@@ -28,7 +28,7 @@ public class KillMutantQuests
                         new SimpleLootItemQuest(
                                 ModRegistry.MUTANT_SKELETON_ENTITY_TYPE::get,
                                 ModRegistry.MUTANT_SKELETON_SKULL_ITEM::get,
-                                SDBags.RARE_MATERIAL::getStack
+                                SDBags.UNCOMMON_MATERIAL::getStack
                         )
                 )
                 .addDependencies(BaseQuests.KILL_TRAIT)
@@ -38,7 +38,7 @@ public class KillMutantQuests
                         new SimpleLootItemQuest(
                                 ModRegistry.MUTANT_CREEPER_ENTITY_TYPE::get,
                                 ModRegistry.CREEPER_SHARD_ITEM::get,
-                                SDBags.RARE_GEAR::getStack
+                                SDBags.UNCOMMON_GEAR::getStack
                         )
                 )
                 .addDependencies(BaseQuests.KILL_TRAIT)
@@ -48,7 +48,7 @@ public class KillMutantQuests
                         new SimpleLootItemQuest(
                                 ModRegistry.MUTANT_ENDERMAN_ENTITY_TYPE::get,
                                 ModRegistry.ENDERSOUL_HAND_ITEM::get,
-                                SDBags.RARE_GEAR::getStack
+                                SDBags.UNCOMMON_BOOK::getStack
                         )
                 )
                 .addDependencies(BaseQuests.KILL_TRAIT)

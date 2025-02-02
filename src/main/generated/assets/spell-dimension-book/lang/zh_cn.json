@@ -91,7 +91,7 @@
   "book.spell-dimension-book.magic_guidance.boss.warden.boss.title": "监守者",
   "book.spell-dimension-book.magic_guidance.boss.warden.description": "",
   "book.spell-dimension-book.magic_guidance.boss.warden.name": "监守者",
-  "book.spell-dimension-book.magic_guidance.boss.wither.boss.text": "\\\n等级: 80+\n\\\n\\\n凋灵现在额外拥有一个冲撞技能，冲撞过程中，凋灵会无视硬度破坏它碰到的所有方块(包括基岩)，并对目标造成大量伤害。\n",
+  "book.spell-dimension-book.magic_guidance.boss.wither.boss.text": "\\\n等级: 80+\n\\\n\\\n凋灵现在额外拥有一个冲撞技能，冲撞过程中，凋灵会破坏它碰到的方块。\n",
   "book.spell-dimension-book.magic_guidance.boss.wither.boss.title": "凋灵",
   "book.spell-dimension-book.magic_guidance.boss.wither.description": "万物凋零...",
   "book.spell-dimension-book.magic_guidance.boss.wither.name": "凋灵",

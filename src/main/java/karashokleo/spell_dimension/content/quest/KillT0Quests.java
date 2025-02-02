@@ -19,7 +19,7 @@ public class KillT0Quests
                         new SimpleLootItemQuest(
                                 "bosses_of_mass_destruction:obsidilith",
                                 "bosses_of_mass_destruction:obsidian_heart",
-                                SDBags.LEGENDARY_BOOK::getStack
+                                SDBags.LEGENDARY_MATERIAL::getStack
                         )
                 )
                 .toEntry("boss/obsidilith")

@@ -30,7 +30,7 @@ public class MageQuests
                         "base_essence",
                         new SimpleTagIngredientQuest(
                                 AllTags.ESSENCE_ALL,
-                                SDBags.JEWELRY_RINGS::getStack
+                                SDBags.COMMON_MATERIAL::getStack
                         )
                 )
                 .addEnDesc("Obtain any basic magic essence")
@@ -42,7 +42,7 @@ public class MageQuests
                         "rune",
                         new SimpleTagIngredientQuest(
                                 AllTags.RUNE,
-                                SDBags.ARTIFACT::getStack
+                                SDBags.UNCOMMON_MATERIAL::getStack
                         )
                 )
                 .addEnDesc("Use basic magic essence to craft runes at the rune altar")
@@ -58,7 +58,7 @@ public class MageQuests
                                         () -> AllItems.ENCHANTED_ESSENCE,
                                         () -> AllItems.MENDING_ESSENCE
                                 ),
-                                SDBags.JEWELRY_NECKLACES::getStack
+                                SDBags.RARE_MATERIAL::getStack
                         )
                 )
                 .toEntry("mage/enchant")
@@ -68,7 +68,7 @@ public class MageQuests
                         "spell_book_0",
                         new SimpleTagIngredientQuest(
                                 AllTags.BOOK.get(0),
-                                SDBags.UNCOMMON_GEAR::getStack
+                                SDBags.RARE_GEAR::getStack
                         )
                 )
                 .addEnDesc("Craft your Apprentice Spell Book into a Primary Spell Book")
@@ -80,7 +80,7 @@ public class MageQuests
                         "spell_book_1",
                         new SimpleTagIngredientQuest(
                                 AllTags.BOOK.get(1),
-                                SDBags.RARE_GEAR::getStack
+                                SDBags.EPIC_GEAR::getStack
                         )
                 )
                 .addEnDesc("Craft your Primary Spell Book into a Intermediate Spell Book")
@@ -92,7 +92,7 @@ public class MageQuests
                         "spell_book_2",
                         new SimpleTagIngredientQuest(
                                 AllTags.BOOK.get(2),
-                                SDBags.EPIC_GEAR::getStack
+                                SDBags.LEGENDARY_GEAR::getStack
                         )
                 )
                 .addEnDesc("Craft your Intermediate Spell Book into a Advanced Spell Book")
@@ -134,7 +134,7 @@ public class MageQuests
                         "spell_power_3",
                         new SpellPowerQuest(
                                 2048,
-                                SDBags.EPIC_MATERIAL::getStack,
+                                SDBags.LEGENDARY_MATERIAL::getStack,
                                 true
                         )
                 )
@@ -146,7 +146,7 @@ public class MageQuests
                         "spell_power_4",
                         new SpellPowerQuest(
                                 65536,
-                                SDBags.EPIC_MATERIAL::getStack,
+                                SDBags.LEGENDARY_MATERIAL::getStack,
                                 true
                         )
                 )

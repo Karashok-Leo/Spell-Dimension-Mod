@@ -35,7 +35,7 @@ public class KillT3Quests
                         new SimpleLootItemQuest(
                                 () -> EntityInit.BLACKSTONE_GOLEM,
                                 () -> ItemInit.BLACKSTONE_GOLEM_HEART,
-                                SDBags.RARE_BOOK::getStack
+                                SDBags.RARE_GEAR::getStack
                         )
                 )
                 .toEntry("boss/blackstone_golem")
@@ -46,7 +46,7 @@ public class KillT3Quests
                         new SimpleLootItemQuest(
                                 () -> AquamiraeEntities.CAPTAIN_CORNELIA,
                                 () -> AquamiraeItems.FROZEN_KEY,
-                                SDBags.ARING::getStack
+                                SDBags.RARE_GEAR::getStack
                         )
                 )
                 .toEntry("boss/captain")
@@ -79,7 +79,7 @@ public class KillT3Quests
                         new SimpleLootItemQuest(
                                 "deeperdarker:stalker",
                                 "deeperdarker:soul_crystal",
-                                SDBags.RARE_GEAR::getStack
+                                SDBags.RARE_MATERIAL::getStack
                         )
                 )
                 .toEntry("boss/stalker")

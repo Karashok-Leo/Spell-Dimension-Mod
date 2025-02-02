@@ -28,7 +28,7 @@ public class KillT1Quests
                                         () -> Registries.ENTITY_TYPE.get(new Identifier("soulsweapons:night_prowler"))
                                 ),
                                 List.of(() -> AllItems.CELESTIAL_LUMINARY),
-                                SDBags.ARING::getStack
+                                SDBags.LEGENDARY_GEAR::getStack
                         )
                 )
                 .toEntry("boss/day_night")
@@ -59,7 +59,7 @@ public class KillT1Quests
                         new SimpleLootItemQuest(
                                 () -> EntityInit.THE_EYE,
                                 () -> ItemInit.PRIME_EYE,
-                                SDBags.LEGENDARY_GEAR::getStack
+                                SDBags.LEGENDARY_BOOK::getStack
                         )
                 )
                 .toEntry("boss/the_eye")

@@ -58,7 +58,7 @@ public class WitherEntry extends BaseEntryProvider
                         Level: %d+
                         \\
                         \\
-                        Wither now has an additional charge skill. During the charge, the Wither will ignore hardness and destroy all blocks it touches (including bedrock), dealing a large amount of damage to the target.
+                        Wither now has an additional charge skill. During the charge, the Wither will destroy the blocks it touches.
                         """.formatted(TextConstants.BOSS_LEVELS[0])
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
@@ -68,7 +68,7 @@ public class WitherEntry extends BaseEntryProvider
                         等级: %d+
                         \\
                         \\
-                        凋灵现在额外拥有一个冲撞技能，冲撞过程中，凋灵会无视硬度破坏它碰到的所有方块(包括基岩)，并对目标造成大量伤害。
+                        凋灵现在额外拥有一个冲撞技能，冲撞过程中，凋灵会破坏它碰到的方块。
                         """.formatted(TextConstants.BOSS_LEVELS[0])
         );
 

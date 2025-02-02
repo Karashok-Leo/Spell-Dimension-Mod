@@ -33,7 +33,7 @@ public class CraftQuests
                         "forge_0",
                         new SimpleTagIngredientQuest(
                                 AllTags.FORGE_CONTROLLERS.get(0),
-                                SDBags.UNCOMMON_MATERIAL::getStack
+                                SDBags.ARTIFACT::getStack
                         )
                 )
                 .addEnDesc("Craft any level 1 Forge Controller and build a level 1 Alloy Forge")
@@ -45,7 +45,7 @@ public class CraftQuests
                         "forge_1",
                         new SimpleTagIngredientQuest(
                                 AllTags.FORGE_CONTROLLERS.get(1),
-                                SDBags.UNCOMMON_MATERIAL::getStack
+                                SDBags.ARING::getStack
                         )
                 )
                 .addEnDesc("Craft any level 2 Forge Controller and build a level 2 Alloy Forge")
@@ -57,7 +57,7 @@ public class CraftQuests
                         "forge_2",
                         new SimpleTagIngredientQuest(
                                 AllTags.FORGE_CONTROLLERS.get(2),
-                                SDBags.UNCOMMON_MATERIAL::getStack
+                                SDBags.ARTIFACT::getStack
                         )
                 )
                 .addEnDesc("Craft any level 3 Forge Controller and build a level 3 Alloy Forge")
@@ -69,7 +69,7 @@ public class CraftQuests
                         "random_material_0",
                         new SimpleItemQuest(
                                 () -> AllItems.RANDOM_MATERIAL.get(2),
-                                SDBags.UNCOMMON_MATERIAL::getStack
+                                SDBags.ARING::getStack
                         )
                 )
                 .addDependencies(FORGE_0)
@@ -78,7 +78,7 @@ public class CraftQuests
                         "random_material_1",
                         new SimpleItemQuest(
                                 () -> AllItems.RANDOM_MATERIAL.get(3),
-                                SDBags.UNCOMMON_MATERIAL::getStack
+                                SDBags.ARTIFACT::getStack
                         )
                 )
                 .addDependencies(FORGE_1)
@@ -87,7 +87,7 @@ public class CraftQuests
                         "random_material_2",
                         new SimpleItemQuest(
                                 () -> AllItems.RANDOM_MATERIAL.get(4),
-                                SDBags.UNCOMMON_MATERIAL::getStack
+                                SDBags.ARING::getStack
                         )
                 )
                 .addDependencies(FORGE_2)
@@ -96,7 +96,7 @@ public class CraftQuests
                         "doge",
                         new SimpleItemChallengeQuest(
                                 () -> Registries.ITEM.get(new Identifier("mythicmetals:doge")),
-                                SDBags.UNCOMMON_MATERIAL::getStack
+                                SDBags.ARTIFACT::getStack
                         )
                 )
                 .addEnTitle("Doge:)")
@@ -109,7 +109,7 @@ public class CraftQuests
                         "froge",
                         new SimpleItemChallengeQuest(
                                 () -> Registries.ITEM.get(new Identifier("mythicmetals:froge")),
-                                SDBags.UNCOMMON_MATERIAL::getStack
+                                SDBags.ARING::getStack
                         )
                 )
                 .addEnTitle("Croak~")
@@ -125,7 +125,7 @@ public class CraftQuests
                                         () -> EIItems.INFUSION_PEDESTAL_ITEM,
                                         () -> EIItems.INFUSION_TABLE_ITEM
                                 ),
-                                SDBags.UNCOMMON_MATERIAL::getStack
+                                SDBags.ARTIFACT::getStack
                         )
                 )
                 .toEntry("power/enchant")
@@ -135,7 +135,7 @@ public class CraftQuests
                         "spell_infusion",
                         new SimpleItemQuest(
                                 () -> AllBlocks.SPELL_INFUSION_PEDESTAL.item(),
-                                SDBags.UNCOMMON_MATERIAL::getStack
+                                SDBags.ARING::getStack
                         )
                 )
                 .toEntry("power/spell_infusion")
@@ -145,7 +145,7 @@ public class CraftQuests
                         "spell_scroll",
                         new SimpleItemQuest(
                                 () -> AllItems.SPELL_SCROLL,
-                                SDBags.UNCOMMON_MATERIAL::getStack
+                                SDBags.ARTIFACT::getStack
                         )
                 )
                 .toEntry("mage/scroll")

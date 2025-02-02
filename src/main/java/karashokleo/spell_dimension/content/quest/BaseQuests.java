@@ -53,7 +53,9 @@ public class BaseQuests
                         "hostility_orb",
                         new SimpleItemQuest(
                                 () -> ConsumableItems.HOSTILITY_ORB,
-                                SDBags.RARE_MATERIAL::getStack
+                                () -> AllItems.ENLIGHTENING_ESSENCE.getStack(
+                                        new AttributeModifier(SpellPowerMechanics.HASTE.attribute, 0.05, EntityAttributeModifier.Operation.MULTIPLY_BASE).toELM()
+                                )
                         )
                 )
                 .toEntry("power/hostility")

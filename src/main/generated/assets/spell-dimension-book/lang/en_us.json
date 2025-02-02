@@ -91,7 +91,7 @@
   "book.spell-dimension-book.magic_guidance.boss.warden.boss.title": "Warden",
   "book.spell-dimension-book.magic_guidance.boss.warden.description": "",
   "book.spell-dimension-book.magic_guidance.boss.warden.name": "Warden",
-  "book.spell-dimension-book.magic_guidance.boss.wither.boss.text": "\\\nLevel: 80+\n\\\n\\\nWither now has an additional charge skill. During the charge, the Wither will ignore hardness and destroy all blocks it touches (including bedrock), dealing a large amount of damage to the target.\n",
+  "book.spell-dimension-book.magic_guidance.boss.wither.boss.text": "\\\nLevel: 80+\n\\\n\\\nWither now has an additional charge skill. During the charge, the Wither will destroy the blocks it touches.\n",
   "book.spell-dimension-book.magic_guidance.boss.wither.boss.title": "Wither",
   "book.spell-dimension-book.magic_guidance.boss.wither.description": "Everything withers...",
   "book.spell-dimension-book.magic_guidance.boss.wither.name": "Wither",

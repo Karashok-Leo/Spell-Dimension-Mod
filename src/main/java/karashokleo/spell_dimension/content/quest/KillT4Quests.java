@@ -63,7 +63,7 @@ public class KillT4Quests
                         new SimpleLootItemQuest(
                                 () -> EntityType.WITHER,
                                 () -> Items.NETHER_STAR,
-                                SDBags.JEWELRY_RINGS::getStack
+                                SDBags.RARE_BOOK::getStack
                         )
                 )
                 .toEntry("boss/wither")
@@ -85,7 +85,7 @@ public class KillT4Quests
                         new SimpleLootItemQuest(
                                 () -> EntityType.WARDEN,
                                 () -> Registries.ITEM.get(new Identifier("deeperdarker:heart_of_the_deep")),
-                                SDBags.JEWELRY_NECKLACES::getStack
+                                SDBags.RARE_GEAR::getStack
                         )
                 )
                 .toEntry("boss/warden")

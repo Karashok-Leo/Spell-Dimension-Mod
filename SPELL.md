@@ -5,7 +5,6 @@
 ### Fire
 ### Frost
 ### Healing
-- Battle Banner
 - Immortal
 - Eternal?
 ### Lightning
