@@ -44,12 +44,6 @@ public record QuestComponent(Set<RegistryEntry<Quest>> completed) implements Aut
     }
 
     @Override
-    public Set<RegistryEntry<Quest>> completed()
-    {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
     public void readFromNbt(@NotNull NbtCompound tag)
     {
         this.completed.clear();
@@ -58,7 +52,7 @@ public record QuestComponent(Set<RegistryEntry<Quest>> completed) implements Aut
         {
             var optional = QuestRegistry.ENTRY_CODEC.decode(NbtOps.INSTANCE, element).result();
             if (optional.isPresent()) this.completed.add(optional.get().getFirst());
-            else throw new IllegalArgumentException("Unknown quest entry: " + element);
+            else System.out.println("Unknown quest entry: " + element);
         }
     }
 
@@ -70,7 +64,7 @@ public record QuestComponent(Set<RegistryEntry<Quest>> completed) implements Aut
         {
             Optional<NbtElement> optional = QuestRegistry.ENTRY_CODEC.encodeStart(NbtOps.INSTANCE, entry).result();
             if (optional.isPresent()) list.add(optional.get());
-            else throw new IllegalArgumentException("Unknown quest entry: " + entry);
+            else System.out.println("Unknown quest entry: " + entry);
         }
         tag.put(KEY, list);
     }
