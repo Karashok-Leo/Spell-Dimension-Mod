@@ -1,24 +1,120 @@
 package karashokleo.spell_dimension.util;
 
+import it.unimi.dsi.fastutil.Function;
+import karashokleo.spell_dimension.api.SpellImpactEvents;
+import karashokleo.spell_dimension.mixin.modded.SpellHelperInvoker;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.Ownable;
 import net.minecraft.entity.Tameable;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.spell_engine.api.event.CombatEvents;
+import net.spell_engine.api.spell.CustomSpellHandler;
+import net.spell_engine.api.spell.Spell;
 import net.spell_engine.api.spell.SpellEvents;
 import net.spell_engine.api.spell.SpellInfo;
 import net.spell_engine.entity.SpellProjectile;
 import net.spell_engine.internals.SpellHelper;
+import net.spell_engine.internals.SpellRegistry;
 import net.spell_engine.internals.WorldScheduler;
+import net.spell_engine.internals.arrow.ArrowHelper;
+import net.spell_engine.internals.casting.SpellCast;
+import net.spell_engine.particle.ParticleHelper;
+import net.spell_engine.utils.SoundHelper;
+import net.spell_power.api.SpellPower;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 public class ImpactUtil
 {
+    /// copied from SpellHelper
+    public static void performSpell(World world, LivingEntity caster, Identifier spellId, List<Entity> targets, SpellCast.Action action, float progress)
+    {
+        Spell spell = SpellRegistry.getSpell(spellId);
+        ItemStack itemStack = caster.getMainHandStack();
+        if (spell == null) return;
+        SpellInfo spellInfo = new SpellInfo(spell, spellId);
+        Spell.Release.Target targeting = spell.release.target;
+        boolean released = action == SpellCast.Action.RELEASE;
+        SpellImpactEvents.BEFORE.invoker().beforeImpact(world, caster, targets, spellInfo);
+        SpellHelper.ImpactContext context = new SpellHelper.ImpactContext(1.0F, 1.0F, null, SpellPower.getSpellPower(spell.school, caster), SpellHelper.impactTargetingMode(spell));
+        if (spell.release.custom_impact)
+        {
+            Function<CustomSpellHandler.Data, Boolean> handler = CustomSpellHandler.handlers.get(spellId);
+            released = false;
+            if (handler != null && caster instanceof PlayerEntity player)
+            {
+                released = handler.apply(new CustomSpellHandler.Data(player, targets, itemStack, action, progress, context));
+            }
+        } else
+        {
+            Optional<Entity> optionalTarget = targets.stream().findFirst();
+            switch (targeting.type)
+            {
+                case AREA:
+                    Vec3d center = caster.getPos().add(0.0, (double) (caster.getHeight() / 2.0F), 0.0);
+                    Spell.Release.Target.Area area = spell.release.target.area;
+                    SpellHelperInvoker.applyAreaImpact(world, caster, targets, spell.range, area, spellInfo, context.position(center), true);
+                    break;
+                case BEAM:
+                    SpellHelperInvoker.beamImpact(world, caster, targets, spellInfo, context);
+                    break;
+                case CLOUD:
+                    SpellHelper.placeCloud(world, caster, spellInfo, context);
+                    released = true;
+                    break;
+                case CURSOR:
+                    if (optionalTarget.isPresent())
+                    {
+                        SpellHelperInvoker.directImpact(world, caster, (Entity) optionalTarget.get(), spellInfo, context);
+                    } else
+                    {
+                        released = false;
+                    }
+                    break;
+                case PROJECTILE:
+                    optionalTarget.ifPresent(entity -> SpellHelper.shootProjectile(world, caster, entity, spellInfo, context));
+                    break;
+                case METEOR:
+                    if (optionalTarget.isPresent())
+                    {
+                        SpellHelper.fallProjectile(world, caster, optionalTarget.get(), spellInfo, context);
+                    } else
+                    {
+                        released = false;
+                    }
+                    break;
+                case SELF:
+                    SpellHelperInvoker.directImpact(world, caster, caster, spellInfo, context);
+                    released = true;
+                    break;
+                case SHOOT_ARROW:
+                    ArrowHelper.shootArrow(world, caster, spellInfo, context);
+                    released = true;
+            }
+        }
+
+        if (released)
+        {
+            ParticleHelper.sendBatches(caster, spell.release.particles);
+            SoundHelper.playSound(world, caster, spell.release.sound);
+
+            if (CombatEvents.SPELL_CAST.isListened() && caster instanceof PlayerEntity player)
+            {
+                CombatEvents.SpellCast.Args args = new CombatEvents.SpellCast.Args(player, spellInfo, targets, action, progress);
+                CombatEvents.SPELL_CAST.invoke((listener) -> listener.onSpellCast(args));
+            }
+        }
+    }
+
     public static void applyAreaImpact(Entity origin, double range, Predicate<LivingEntity> predicate, Consumer<LivingEntity> consumer)
     {
         List<LivingEntity> targets = getLivingsInRange(origin, range, predicate);

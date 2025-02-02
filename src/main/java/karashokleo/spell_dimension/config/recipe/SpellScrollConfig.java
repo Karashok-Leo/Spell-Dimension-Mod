@@ -1,13 +1,16 @@
 package karashokleo.spell_dimension.config.recipe;
 
+import com.kyanite.deeperdarker.content.DDItems;
 import com.obscuria.aquamirae.registry.AquamiraeItems;
 import fuzs.mutantmonsters.init.ModRegistry;
 import karashokleo.l2hostility.content.item.ComplementItems;
+import karashokleo.l2hostility.content.item.ConsumableItems;
 import karashokleo.l2hostility.content.item.MiscItems;
 import karashokleo.l2hostility.init.LHTraits;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllSpells;
+import net.adventurez.init.BlockInit;
 import net.adventurez.init.ItemInit;
 import net.aleganza.plentyofarmors.item.ModItems;
 import net.minecraft.item.Item;
@@ -19,6 +22,9 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.spell.SpellInfo;
+import nourl.mythicmetals.blocks.MythicBlocks;
+import nourl.mythicmetals.item.MythicItems;
+import nourl.mythicmetals.item.tools.MythicTools;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
@@ -80,7 +86,7 @@ public class SpellScrollConfig
             fromBinding(AllSpells.FIRE_WALL);
             fromBinding(AllSpells.FIRE_METEOR);
 
-            fromBinding(AllSpells.FROSTBOLT);
+            fromBinding(AllSpells.FROST_BOLT);
             fromBinding(AllSpells.FROST_NOVA);
             fromBinding(AllSpells.FROST_SHIELD);
 
@@ -105,24 +111,45 @@ public class SpellScrollConfig
             fromCrafting(AllSpells.FORCE_LANDING, LHTraits.GRAVITY.asItem());
             fromCrafting(AllSpells.ARCANE_BARRIER, Items.GLASS);
             fromCrafting(AllSpells.INCARCERATE, ComplementItems.BLACKSTONE_CORE);
-            fromCrafting(AllSpells.MAELSTROM, "soulsweapons:lord_soul_purple");
-            fromCrafting(AllSpells.FINALSTRIKE, "deeperdarker:soul_crystal");
-
+            fromCrafting(AllSpells.BLACK_HOLE, Items.DRAGON_EGG);
+            fromCrafting(AllSpells.FINAL_STRIKE, DDItems.SOUL_CRYSTAL);
+            fromCrafting(AllSpells.ARCANE_BEAM, "soulsweapons:lord_soul_purple");
+            fromCrafting(AllSpells.ARCANE_FLOURISH, MythicBlocks.PLATINUM.getStorageBlock().asItem());
+            fromCrafting(AllSpells.ARCANE_FLICKER, MythicBlocks.STAR_PLATINUM.getStorageBlock().asItem());
+            fromCrafting(AllSpells.ARCANE_OVERDRIVE, MythicBlocks.KYBER.getStorageBlock().asItem());
+            fromCrafting(AllSpells.ECHO_STORM, MythicItems.Mats.STORMYX_SHELL);
+            fromCrafting(AllSpells.MAELSTROM, MythicTools.STORMYX_SHIELD);
+            fromCrafting(AllSpells.AMETHYST_SLASH, AquamiraeItems.ABYSSAL_AMETHYST);
 
             fromCrafting(AllSpells.FIRE_BREATH, "soulsweapons:lord_soul_rose");
             fromCrafting(AllSpells.BLAST, AllItems.ACCURSED_BLACKSTONE);
             fromCrafting(AllSpells.IGNITE, ItemInit.BLACKSTONE_GOLEM_HEART);
             fromCrafting(AllSpells.FIRE_OF_RETRIBUTION, LHTraits.SOUL_BURNER.asItem());
-            fromCrafting(AllSpells.FIREFLOURISH, "bosses_of_mass_destruction:blazing_eye");
+            fromCrafting(AllSpells.FIRE_FLOURISH, "bosses_of_mass_destruction:blazing_eye");
+            fromCrafting(AllSpells.FLAME_OVERDRIVE, ComplementItems.EXPLOSION_SHARD);
             fromCrafting(AllSpells.FLICKER_STRIKE, "soulsweapons:lord_soul_red");
+            fromCrafting(AllSpells.FLAME_SLASH, com.spellbladenext.items.Items.flaming_falchion.item());
+            fromCrafting(AllSpells.OVER_BLAZE, MythicBlocks.QUADRILLUM.getStorageBlock().asItem());
+            fromCrafting(AllSpells.PHOENIX_DIVE, "soulsweapons:crimson_ingot");
+            fromCrafting(AllSpells.PHOENIX_CURSE, "soulsweapons:crimson_obsidian");
+            fromCrafting(AllSpells.INFERNO, "things:hades_crystal");
+            fromCrafting(AllSpells.DRAGON_SLAM, "dragonloot:dragon_scale");
+            fromCrafting(AllSpells.WILDFIRE, MythicItems.Mats.CARMOT_STONE);
 
             fromCrafting(AllSpells.FROST_BLIZZARD, "soulsweapons:lord_soul_white");
-            fromCrafting(AllSpells.NUCLEUS, "endrem:cold_eye");
-            fromCrafting(AllSpells.AURA, "aquamirae:maze_rose");
-            fromCrafting(AllSpells.ICICLE, "spell-dimension:abyss_guard");
+            fromCrafting(AllSpells.NUCLEUS, MythicBlocks.AQUARIUM.getStorageBlock().asItem());
+            fromCrafting(AllSpells.AURA, AquamiraeItems.MAZE_ROSE);
+            fromCrafting(AllSpells.ICICLE, AllItems.ABYSS_GUARD);
             fromCrafting(AllSpells.FROST_BLINK, AquamiraeItems.DEAD_SEA_SCROLL);
             fromCrafting(AllSpells.FROZEN, AquamiraeItems.SHIP_GRAVEYARD_ECHO);
-            fromCrafting(AllSpells.FROSTFLOURISH, "aquamirae:poisoned_chakra");
+            fromCrafting(AllSpells.FROST_FLOURISH, MythicBlocks.MYTHRIL.getStorageBlock().asItem());
+            fromCrafting(AllSpells.FROST_OVERDRIVE, MythicBlocks.SILVER.getStorageBlock().asItem());
+            fromCrafting(AllSpells.FROST_LOTUS, MythicBlocks.RUNITE.getStorageBlock().asItem());
+            fromCrafting(AllSpells.DEATH_CHILL, LHTraits.FREEZING.asItem());
+            fromCrafting(AllSpells.FROST_SLASH, com.spellbladenext.items.Items.glacial_gladius.item());
+            fromCrafting(AllSpells.MASSACRE, AquamiraeItems.POISONED_CHAKRA);
+            fromCrafting(AllSpells.RIPTIDE, MythicItems.Mats.AQUARIUM_PEARL);
+            fromCrafting(AllSpells.COLD_BUFF, "endrem:cold_eye");
 
             fromCrafting(AllSpells.HOLY_BEAM, "bosses_of_mass_destruction:ancient_anima");
             fromCrafting(AllSpells.CIRCLE_OF_HEALING, "soulsweapons:arkenstone");
@@ -137,19 +164,19 @@ public class SpellScrollConfig
             fromCrafting(AllSpells.HASTE, "soulsweapons:moonstone_block");
             fromCrafting(AllSpells.SPEED, LHTraits.SPEEDY.asItem());
             fromCrafting(AllSpells.DIVINE_AURA, LHTraits.KILLER_AURA.asItem());
+            fromCrafting(AllSpells.BLESSING, ConsumableItems.BOTTLE_SANITY);
+            fromCrafting(AllSpells.MISFORTUNE, LHTraits.CURSED.asItem());
+            fromCrafting(AllSpells.HEAVENLY_JUSTICE, ComplementItems.RESONANT_FEATHER);
+            fromCrafting(AllSpells.BATTLE_BANNER, BlockInit.PIGLIN_FLAG.asItem());
         }
 
         // Event loot
         {
-            fromEventLoot(AllSpells.BLACK_HOLE);
             fromEventLoot(AllSpells.SPELL_POWER_ADVANCED);
             fromEventLoot(AllSpells.RESIST_ADVANCED);
             fromEventLoot(AllSpells.REGEN_ADVANCED);
             fromEventLoot(AllSpells.HASTE_ADVANCED);
             fromEventLoot(AllSpells.SPEED_ADVANCED);
-            fromEventLoot(AllSpells.BLESSING);
-            fromEventLoot(AllSpells.MISFORTUNE);
-            fromEventLoot(AllSpells.HEAVENLY_JUSTICE);
         }
     }
 

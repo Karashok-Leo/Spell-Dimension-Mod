@@ -42,7 +42,7 @@ public class AllSpells
     public static final Identifier FIRE_METEOR = new Identifier("wizards:fire_meteor");
 
     // Frost
-    public static final Identifier FROSTBOLT = new Identifier("wizards:frostbolt");
+    public static final Identifier FROST_BOLT = new Identifier("wizards:frostbolt");
     public static final Identifier FROST_NOVA = new Identifier("wizards:frost_nova");
     public static final Identifier FROST_SHIELD = new Identifier("wizards:frost_shield");
 
@@ -71,16 +71,30 @@ public class AllSpells
     public static final Identifier ARCANE_BARRIER = SpellDimension.modLoc("arcane_barrier");
     public static final Identifier INCARCERATE = SpellDimension.modLoc("incarcerate");
     public static final Identifier MAELSTROM = new Identifier("spellbladenext:maelstrom");
-    public static final Identifier FINALSTRIKE = new Identifier("spellbladenext:finalstrike");
+    public static final Identifier FINAL_STRIKE = new Identifier("spellbladenext:finalstrike");
     public static final Identifier BLACK_HOLE = SpellDimension.modLoc("black_hole");
+    public static final Identifier ARCANE_BEAM = new Identifier("wizards:arcane_beam");
+    public static final Identifier ARCANE_FLOURISH = new Identifier("spellbladenext:arcaneflourish");
+    public static final Identifier ARCANE_FLICKER = new Identifier("spellbladenext:frostblink");
+    public static final Identifier ARCANE_OVERDRIVE = new Identifier("spellbladenext:arcaneoverdrive");
+    public static final Identifier ECHO_STORM = new Identifier("spellbladenext:bladestorm");
+    public static final Identifier AMETHYST_SLASH = new Identifier("spellbladenext:amethystslash");
 
     // Fire
     public static final Identifier FIRE_BREATH = new Identifier("wizards:fire_breath");
     public static final Identifier BLAST = SpellDimension.modLoc("blast");
     public static final Identifier IGNITE = SpellDimension.modLoc("ignite");
     public static final Identifier FIRE_OF_RETRIBUTION = SpellDimension.modLoc("fire_of_retribution");
-    public static final Identifier FIREFLOURISH = new Identifier("spellbladenext:fireflourish");
+    public static final Identifier FIRE_FLOURISH = new Identifier("spellbladenext:fireflourish");
     public static final Identifier FLICKER_STRIKE = new Identifier("spellbladenext:flicker_strike");
+    public static final Identifier FLAME_SLASH = new Identifier("spellbladenext:flameslash");
+    public static final Identifier OVER_BLAZE = new Identifier("spellbladenext:overblaze");
+    public static final Identifier PHOENIX_DIVE = new Identifier("spellbladenext:phoenixdive");
+    public static final Identifier PHOENIX_CURSE = new Identifier("spellbladenext:combustion");
+    public static final Identifier INFERNO = new Identifier("spellbladenext:inferno");
+    public static final Identifier DRAGON_SLAM = new Identifier("spellbladenext:frostvert");
+    public static final Identifier WILDFIRE = new Identifier("spellbladenext:snuffout");
+    public static final Identifier FLAME_OVERDRIVE = new Identifier("spellbladenext:fireoverdrive");
 
     // Frost
     public static final Identifier FROST_BLIZZARD = new Identifier("wizards:frost_blizzard");
@@ -89,7 +103,14 @@ public class AllSpells
     public static final Identifier ICICLE = SpellDimension.modLoc("icicle");
     public static final Identifier FROST_BLINK = SpellDimension.modLoc("frost_blink");
     public static final Identifier FROZEN = SpellDimension.modLoc("frozen");
-    public static final Identifier FROSTFLOURISH = new Identifier("spellbladenext:frostflourish");
+    public static final Identifier FROST_FLOURISH = new Identifier("spellbladenext:frostflourish");
+    public static final Identifier FROST_OVERDRIVE = new Identifier("spellbladenext:frostoverdrive");
+    public static final Identifier FROST_LOTUS = new Identifier("spellbladenext:frostbloom0");
+    public static final Identifier DEATH_CHILL = new Identifier("spellbladenext:deathchill");
+    public static final Identifier FROST_SLASH = new Identifier("spellbladenext:frostslash");
+    public static final Identifier MASSACRE = new Identifier("spellbladenext:eviscerate");
+    public static final Identifier RIPTIDE = new Identifier("spellbladenext:whirlingblades");
+    public static final Identifier COLD_BUFF = new Identifier("spellbladenext:coldbuff");
 
     // Healing
     public static final Identifier HOLY_BEAM = new Identifier("paladins:holy_beam");
@@ -113,6 +134,7 @@ public class AllSpells
     public static final Identifier BLESSING = SpellDimension.modLoc("blessing");
     public static final Identifier MISFORTUNE = SpellDimension.modLoc("misfortune");
     public static final Identifier HEAVENLY_JUSTICE = SpellDimension.modLoc("heavenly_justice");
+    public static final Identifier BATTLE_BANNER = new Identifier("paladins:battle_banner");
 
     public static void register()
     {

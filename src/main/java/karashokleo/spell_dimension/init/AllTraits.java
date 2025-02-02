@@ -16,12 +16,14 @@ import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.trait.AirborneTrait;
 import karashokleo.spell_dimension.content.trait.LeechTrait;
 import karashokleo.spell_dimension.content.trait.ShiftTrait;
+import karashokleo.spell_dimension.content.trait.SpellTrait;
 import karashokleo.spell_dimension.data.generic.SDTraitConfigProvider;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.tag.TagKey;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 
 import java.util.function.BiFunction;
@@ -31,6 +33,7 @@ public class AllTraits
     public static ShiftTrait SHIFT;
     public static AirborneTrait AIRBORNE;
     public static LeechTrait LEECH;
+//    public static SpellTrait ICICLE;
 
     public static void register()
     {
@@ -64,6 +67,15 @@ public class AllTraits
                 .addZH("蛭吸")
                 .addZHDesc("造成的%s的伤害将治疗自身")
                 .register();
+//        ICICLE = Entry.of(
+//                        "icicle",
+//                        new SpellTrait(Formatting.AQUA, () -> 20, SpellDimension.modLoc("icicle")),
+//                        120, 60, 3, 200)
+//                .addEN()
+//                .addENDesc("Every %s seconds, cast Icicle on the target")
+//                .addZH("冰刺")
+//                .addZHDesc("每隔%s秒，对目标施放冰刺")
+//                .register();
     }
 
     static class Entry<T extends MobTrait>

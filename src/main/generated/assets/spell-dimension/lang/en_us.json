@@ -157,6 +157,8 @@
   "enchantment.spell-dimension.soul_burner_immunity.desc": "You are immune to the Soul Burning effect.",
   "enchantment.spell-dimension.spell_blade_energize": "Spell Blade - Energize",
   "enchantment.spell-dimension.spell_blade_energize.desc": "Increases Healing and Lightning spell power by an amount equal to the damage bonus of physical attacks.",
+  "enchantment.spell-dimension.spell_blade_haste": "Spell Blade - Haste",
+  "enchantment.spell-dimension.spell_blade_haste.desc": "Increased Spell Haste based on attack speed bonus.",
   "enchantment.spell-dimension.spell_blade_soulfrost": "Spell Blade - Soulfrost",
   "enchantment.spell-dimension.spell_blade_soulfrost.desc": "Increases Soul and Frost spell power by an amount equal to the damage bonus of physical attacks.",
   "enchantment.spell-dimension.spell_blade_sunfire": "Spell Blade - Sunfire",
@@ -483,7 +485,7 @@
   "trait.spell-dimension.airborne": "Airborne",
   "trait.spell-dimension.airborne.desc": "Every %s seconds, the next attack will knock the target into the air",
   "trait.spell-dimension.leech": "Leech",
-  "trait.spell-dimension.leech.desc": "%s%% of damage dealt will heal itself",
+  "trait.spell-dimension.leech.desc": "%s of damage dealt will heal itself",
   "trait.spell-dimension.shift": "Shift",
   "trait.spell-dimension.shift.desc": "Every %s seconds, swap its position with the target the next time it deals damage or takes damage",
   "trinkets.slot.chest.breastplate": "Breastplate"

@@ -157,6 +157,8 @@
   "enchantment.spell-dimension.soul_burner_immunity.desc": "你对魂火效果免疫。",
   "enchantment.spell-dimension.spell_blade_energize": "咒剑-蓄能",
   "enchantment.spell-dimension.spell_blade_energize.desc": "增加与物理攻击伤害加成等额的治愈和雷电法术强度。",
+  "enchantment.spell-dimension.spell_blade_haste": "咒剑-急速",
+  "enchantment.spell-dimension.spell_blade_haste.desc": "根据攻击速度加成增加法术施放速度。",
   "enchantment.spell-dimension.spell_blade_soulfrost": "咒剑-灵冻",
   "enchantment.spell-dimension.spell_blade_soulfrost.desc": "增加与物理攻击伤害加成等额的灵魂和寒冰法术强度。",
   "enchantment.spell-dimension.spell_blade_sunfire": "咒剑-阳炎",
@@ -483,7 +485,7 @@
   "trait.spell-dimension.airborne": "击飞",
   "trait.spell-dimension.airborne.desc": "每隔%s秒，下一次攻击将击飞目标",
   "trait.spell-dimension.leech": "蛭吸",
-  "trait.spell-dimension.leech.desc": "造成的%s%%的伤害将治疗自身",
+  "trait.spell-dimension.leech.desc": "造成的%s的伤害将治疗自身",
   "trait.spell-dimension.shift": "换影",
   "trait.spell-dimension.shift.desc": "每隔%s秒，下一次造成伤害或受到伤害时交换自身与目标的位置",
   "trinkets.slot.chest.breastplate": "护心镜"

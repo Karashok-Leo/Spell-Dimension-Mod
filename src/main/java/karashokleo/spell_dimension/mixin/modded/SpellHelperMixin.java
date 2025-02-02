@@ -43,18 +43,6 @@ public abstract class SpellHelperMixin
         SpellImpactEvents.BEFORE.invoker().beforeImpact(world, player, targets, spellInfo);
     }
 
-//    @Inject(
-//            method = "performSpell",
-//            at = @At(
-//                    value = "INVOKE",
-//                    target = "Lnet/spell_engine/particle/ParticleHelper;sendBatches(Lnet/minecraft/entity/Entity;[Lnet/spell_engine/api/spell/ParticleBatch;)V"
-//            )
-//    )
-//    private static void inject_performSpell_after(World world, PlayerEntity player, Identifier spellId, List<Entity> targets, SpellCast.Action action, float progress, CallbackInfo ci, @Local SpellInfo spellInfo)
-//    {
-//        SpellImpactEvents.AFTER.invoker().afterImpact(world, player, targets, spellInfo);
-//    }
-
     @Inject(
             method = "attemptCasting(Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/item/ItemStack;Lnet/minecraft/util/Identifier;Z)Lnet/spell_engine/internals/casting/SpellCast$Attempt;",
             at = @At(
@@ -67,13 +55,12 @@ public abstract class SpellHelperMixin
     )
     private static void inject_attemptCasting(PlayerEntity player, ItemStack itemStack, Identifier spellId, boolean checkAmmo, CallbackInfoReturnable<SpellCast.Attempt> cir, @Local Spell spell)
     {
-        if (itemStack.isOf(AllItems.SPELL_SCROLL) &&
-            spell.school != AllSpells.GENERIC &&
-            !SchoolUtil.getEntitySchool(player).contains(spell.school))
-        {
-            player.sendMessage(SDTexts.TEXT$SKILLED_SCHOOL.get(), true);
-            cir.setReturnValue(SpellCast.Attempt.none());
-        }
+        if (player.getAbilities().creativeMode) return;
+        if (spell.school == AllSpells.GENERIC) return;
+        if (!itemStack.isOf(AllItems.SPELL_SCROLL)) return;
+        if (SchoolUtil.getEntitySchool(player).contains(spell.school)) return;
+        player.sendMessage(SDTexts.TEXT$SKILLED_SCHOOL.get(), true);
+        cir.setReturnValue(SpellCast.Attempt.none());
     }
 
     @Redirect(
