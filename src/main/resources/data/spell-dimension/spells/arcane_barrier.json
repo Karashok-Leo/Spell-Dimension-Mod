@@ -20,7 +20,6 @@
     ]
   },
   "release": {
-    "custom_impact": true,
     "target": {
       "type": "SELF"
     },

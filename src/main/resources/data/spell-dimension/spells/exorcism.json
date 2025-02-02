@@ -20,7 +20,6 @@
     ]
   },
   "release": {
-    "custom_impact": true,
     "target": {
       "type": "CURSOR"
     },
@@ -45,7 +44,7 @@
         "type": "DAMAGE",
         "damage": {
           "knockback": 0,
-          "spell_power_coefficient": 0.1
+          "spell_power_coefficient": 0.0
         }
       }
     }

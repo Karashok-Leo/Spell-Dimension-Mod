@@ -23,7 +23,6 @@
     ]
   },
   "release": {
-    "custom_impact": true,
     "target": {
       "type": "CURSOR",
       "cursor": {
@@ -46,6 +45,14 @@
     ]
   },
   "impact": [
+    {
+      "action": {
+        "type": "HEAL",
+        "heal": {
+          "spell_power_coefficient": 0
+        }
+      }
+    }
   ],
   "cost": {
     "exhaust": 5

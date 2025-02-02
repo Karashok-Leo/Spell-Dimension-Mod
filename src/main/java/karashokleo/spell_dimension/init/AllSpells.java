@@ -7,12 +7,9 @@ import karashokleo.spell_dimension.api.SpellProjectileHitBlockCallback;
 import karashokleo.spell_dimension.api.SpellProjectileHitEntityCallback;
 import karashokleo.spell_dimension.api.SpellProjectileOutOfRangeCallback;
 import karashokleo.spell_dimension.content.buff.BlazingMark;
-import karashokleo.spell_dimension.content.buff.Nucleus;
 import karashokleo.spell_dimension.content.spell.*;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.util.Identifier;
-import net.spell_engine.api.spell.CustomSpellHandler;
 import net.spell_power.api.SpellSchool;
 import net.spell_power.api.SpellSchools;
 
@@ -142,12 +139,6 @@ public class AllSpells
 
         LivingDamageEvent.DAMAGE.register(BlazingMark::mark);
 
-        CustomSpellHandler.register(ARCANE_BARRIER, data -> ArcaneBarrierSpell.handle((CustomSpellHandler.Data) data));
-        CustomSpellHandler.register(NUCLEUS, data -> Nucleus.handle((CustomSpellHandler.Data) data));
-        CustomSpellHandler.register(EXORCISM, data -> ExorcismSpell.handle((CustomSpellHandler.Data) data));
-        CustomSpellHandler.register(BLESSING, data -> RandomEffectSpell.handle((CustomSpellHandler.Data) data, StatusEffectCategory.BENEFICIAL));
-        CustomSpellHandler.register(MISFORTUNE, data -> RandomEffectSpell.handle((CustomSpellHandler.Data) data, StatusEffectCategory.HARMFUL));
-
         SpellProjectileHitEntityCallback.EVENT.register(ShiftSpell::handle);
 
         SpellProjectileHitEntityCallback.EVENT.register(ConvergeSpell::handle);
@@ -163,6 +154,11 @@ public class AllSpells
         SpellProjectileHitBlockCallback.EVENT.register(PlaceSpell::handle);
         SpellProjectileHitBlockCallback.EVENT.register(BreakSpell::handle);
 
+        SpellImpactEvents.BEFORE.register(ArcaneBarrierSpell::handle);
+        SpellImpactEvents.BEFORE.register(NucleusSpell::handle);
+        SpellImpactEvents.BEFORE.register(ExorcismSpell::handle);
+        SpellImpactEvents.BEFORE.register(RandomEffectSpell::handleBlessing);
+        SpellImpactEvents.BEFORE.register(RandomEffectSpell::handleMisfortune);
         SpellImpactEvents.BEFORE.register(FrostBlinkSpell::handle);
         SpellImpactEvents.BEFORE.register(FireOfRetributionSpell::handle);
         SpellImpactEvents.BEFORE.register(HeavenlyJusticeSpell::handle);

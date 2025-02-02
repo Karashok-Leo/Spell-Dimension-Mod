@@ -11,6 +11,7 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.particle.BlockStateParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.predicate.entity.EntityPredicates;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 
 public class FrostAuraEffect extends StatusEffect
@@ -47,13 +48,23 @@ public class FrostAuraEffect extends StatusEffect
 
     private static void auraParticles(LivingEntity entity, int amplifier)
     {
-        World world = entity.getWorld();
+        if (!(entity.getWorld() instanceof ServerWorld world)) return;
         double radian = Math.toRadians(world.getTime() * 4 % 360);
         int grade = Math.min(amplifier, 2);
         for (int i = 0; i <= amplifier; i++)
         {
             for (double offset : GRADES[grade])
-                world.addParticle(new BlockStateParticleEffect(ParticleTypes.FALLING_DUST, Blocks.SNOW.getDefaultState()), entity.getX() + RADIUS * Math.cos(radian), entity.getY() + 1 + offset, entity.getZ() + RADIUS * Math.sin(radian), VELOCITY * Math.sin(radian), 0, -VELOCITY * Math.cos(radian));
+                world.spawnParticles(
+                        new BlockStateParticleEffect(ParticleTypes.FALLING_DUST, Blocks.SNOW.getDefaultState()),
+                        entity.getX() + RADIUS * Math.cos(radian),
+                        entity.getY() + 1 + offset,
+                        entity.getZ() + RADIUS * Math.sin(radian),
+                        1,
+                        VELOCITY * Math.sin(radian),
+                        0,
+                        -VELOCITY * Math.cos(radian),
+                        0.1
+                );
             radian += Math.PI * 2 / (amplifier + 1);
         }
     }

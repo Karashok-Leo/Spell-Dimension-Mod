@@ -23,7 +23,6 @@
     ]
   },
   "release": {
-    "custom_impact": true,
     "target": {
       "type": "CURSOR",
       "cursor": {

@@ -9,13 +9,11 @@ import karashokleo.spell_dimension.config.SpellConfig;
 import karashokleo.spell_dimension.util.AttributeUtil;
 import karashokleo.spell_dimension.util.DamageUtil;
 import karashokleo.spell_dimension.util.ImpactUtil;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.dynamic.Codecs;
-import net.spell_engine.api.spell.CustomSpellHandler;
 import net.spell_engine.api.spell.Spell;
 import net.spell_engine.api.spell.SpellInfo;
 import net.spell_engine.internals.SpellHelper;
@@ -24,7 +22,6 @@ import net.spell_power.api.SpellPower;
 import net.spell_power.api.SpellSchools;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Optional;
 import java.util.UUID;
 
 public class Nucleus implements Buff
@@ -85,16 +82,6 @@ public class Nucleus implements Buff
     public void onRemoved(LivingEntity entity, @Nullable LivingEntity source)
     {
         AttributeUtil.removeModifier(entity, EntityAttributes.GENERIC_MOVEMENT_SPEED, uuid);
-    }
-
-    public static Boolean handle(CustomSpellHandler.Data data)
-    {
-        Optional<Entity> target = data.targets().stream().findFirst();
-        if (target.isPresent() && (target.get() instanceof LivingEntity livingEntity) && livingEntity.isAttackable())
-        {
-            Buff.apply(livingEntity, TYPE, new Nucleus(), data.caster());
-            return true;
-        } else return false;
     }
 
     public static void nucleusBoom(LivingEntity source, LivingEntity caster)
