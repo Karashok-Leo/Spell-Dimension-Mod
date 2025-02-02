@@ -16,14 +16,12 @@ import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.trait.AirborneTrait;
 import karashokleo.spell_dimension.content.trait.LeechTrait;
 import karashokleo.spell_dimension.content.trait.ShiftTrait;
-import karashokleo.spell_dimension.content.trait.SpellTrait;
 import karashokleo.spell_dimension.data.generic.SDTraitConfigProvider;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.tag.TagKey;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 
 import java.util.function.BiFunction;
@@ -94,6 +92,7 @@ public class AllTraits
         {
             super(name, trait);
             this.config = config;
+            this.addBlacklist().addWhitelist();
         }
 
         public <I extends Item> BiFunction<String, I, ItemBuilder<I>> getItemBuilder()
