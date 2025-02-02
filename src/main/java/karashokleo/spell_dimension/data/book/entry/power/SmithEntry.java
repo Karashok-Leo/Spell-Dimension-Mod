@@ -100,7 +100,30 @@ public class SmithEntry extends BaseEntryProvider
                 ))
                 .build();
 
-        return List.of(modifier, reforge);
+        context.page("fusion");
+        this.lang().add(context.pageTitle(), "Fusion Smithing");
+        this.lang().add(context.pageText(),
+                """
+                        \\
+                        Fusion Smithing Template allows you to transfer Enchantments, Enchanted Modifiers, etc. from one piece of equipment to another.
+                        """
+        );
+        this.lang("zh_cn").add(context.pageTitle(), "融锻");
+        this.lang("zh_cn").add(context.pageText(),
+                """
+                        \\
+                        融锻模板允许你将一件装备的附魔、束魔强化等转移到另一件装备上。
+                        """
+        );
+
+        BookSpotlightPageModel fusion = BookSpotlightPageModel
+                .builder()
+                .withTitle(context.pageTitle())
+                .withText(context.pageText())
+                .withItem(BookGenUtil.getIngredient(new Identifier("fusion-smithing:fusion_smithing_template")))
+                .build();
+
+        return List.of(modifier, reforge, fusion);
     }
 
     @Override

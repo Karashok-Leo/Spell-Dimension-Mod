@@ -6,9 +6,9 @@ import com.klikli_dev.modonomicon.api.datagen.CategoryProvider;
 import com.klikli_dev.modonomicon.api.datagen.book.BookCategoryModel;
 import com.klikli_dev.modonomicon.api.datagen.book.BookEntryModel;
 import karashokleo.spell_dimension.data.book.entry.resource.*;
-import karashokleo.spell_dimension.data.book.entry.tips.DummyEntry;
-import karashokleo.spell_dimension.data.book.entry.tips.KeyEntry;
-import karashokleo.spell_dimension.data.book.entry.tips.StorageEntry;
+import karashokleo.spell_dimension.data.book.entry.resource.DummyEntry;
+import karashokleo.spell_dimension.data.book.entry.resource.KeyEntry;
+import karashokleo.spell_dimension.data.book.entry.resource.StorageEntry;
 import karashokleo.spell_dimension.util.BookGenUtil;
 import net.minecraft.item.Items;
 

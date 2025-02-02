@@ -1,4 +1,4 @@
-package karashokleo.spell_dimension.data.book.entry.tips;
+package karashokleo.spell_dimension.data.book.entry.resource;
 
 import com.klikli_dev.modonomicon.api.datagen.BookContextHelper;
 import com.klikli_dev.modonomicon.api.datagen.CategoryProvider;
