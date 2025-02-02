@@ -47,10 +47,12 @@ public record QuestItemTooltipComponent(DefaultedList<ItemStack> stacks) impleme
         {
             for (int column = 0; column < columns; column++)
             {
+                if (index >= this.stacks.size()) continue;
                 int slotX = x + column * SLOT_SIZE + 2;
                 int slotY = y + row * SLOT_SIZE + 2;
-                ItemStack itemStack = this.stacks.get(index++);
+                ItemStack itemStack = this.stacks.get(index);
                 context.drawItem(itemStack, slotX, slotY, index);
+                index++;
             }
         }
 

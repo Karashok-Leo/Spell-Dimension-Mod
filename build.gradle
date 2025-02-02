@@ -71,8 +71,9 @@ dependencies {
     modImplementation "maven.modrinth:paladins-and-priests:${project.paladins_version}-fabric"
     modImplementation "maven.modrinth:jewelry:${project.jewelry_version}"
 
-    modImplementation "maven.modrinth:spellblades-and-such:${project.spellbladenext_version}"
+//    modImplementation "maven.modrinth:spellblades-and-such:${project.spellbladenext_version}"
 //    modImplementation "maven.modrinth:extra-rpg-attributes:${project.extra_rpg_attributes_version}"
+    modImplementation "curse.maven:spellblade-next-811662:6038237"
     modImplementation "curse.maven:extra-spell-attributes-941480:6131604"
 
     modImplementation "maven.modrinth:combat-roll:${project.combat_roll_version}-fabric"
