@@ -11,7 +11,6 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.collection.DefaultedList;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public interface IngredientTaskQuest extends Quest
@@ -34,8 +33,15 @@ public interface IngredientTaskQuest extends Quest
     default TooltipData getTooltipData()
     {
         DefaultedList<ItemStack> stacks = DefaultedList.of();
-        for (Ingredient goal : this.getTasks())
-            stacks.addAll(Arrays.asList(goal.getMatchingStacks()));
+        int capacity = 0;
+        for (Ingredient task : this.getTasks())
+        {
+            for (ItemStack stack : task.getMatchingStacks())
+            {
+                if (capacity++ > 27) break;
+                stacks.add(stack);
+            }
+        }
         return new QuestItemTooltipData(stacks);
     }
 }

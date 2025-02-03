@@ -59,7 +59,7 @@ public class BaseQuests
                         )
                 )
                 .toEntry("power/hostility")
-                .addDependencies(BaseQuests.KILL_TRAIT)
+                .addDependencies(FIRST_DAY)
                 .register();
     }
 }

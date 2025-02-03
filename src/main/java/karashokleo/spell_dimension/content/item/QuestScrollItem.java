@@ -97,24 +97,28 @@ public class QuestScrollItem extends Item
                     } else player.sendMessage(SDTexts.TEXT$QUEST_COMPLETED.get(), true);
                 }
                 // Do reward
-                else if (QuestUsage.allDependenciesCompleted(player, quest) &&
-                         quest.completeTasks(player))
+                else if (QuestUsage.allDependenciesCompleted(player, quest))
                 {
-                    quest.reward(player);
-                    QuestUsage.addQuestsCompleted(player, quest);
-                    QuestUsage.getDependents(quest)
-                            .stream()
-                            .filter(q1 -> QuestUsage.getDependencies(q1.value()).stream().allMatch(q2 -> QuestComponent.isCompleted(player, q2)))
-                            .map(this::getStack)
-                            .forEach(itemStack -> player.getInventory().offerOrDrop(itemStack));
-                    ServerPlayNetworking.send(player, new S2CTitle(SDTexts.TEXT$QUEST_COMPLETE.get()));
-                    S2CUndying packet = new S2CUndying(player);
-                    LHNetworking.toClientPlayer(player, packet);
-                    LHNetworking.toTracking(player, packet);
-                    if (!creativeMode) stack.decrement(1);
+                    if (quest.completeTasks(player))
+                    {
+                        quest.reward(player);
+                        QuestUsage.addQuestsCompleted(player, quest);
+                        QuestUsage.getDependents(quest)
+                                .stream()
+                                .filter(q1 -> QuestUsage.getDependencies(q1.value()).stream().allMatch(q2 -> QuestComponent.isCompleted(player, q2)))
+                                .map(this::getStack)
+                                .forEach(itemStack -> player.getInventory().offerOrDrop(itemStack));
+                        ServerPlayNetworking.send(player, new S2CTitle(SDTexts.TEXT$QUEST_COMPLETE.get()));
+                        S2CUndying packet = new S2CUndying(player);
+                        LHNetworking.toClientPlayer(player, packet);
+                        LHNetworking.toTracking(player, packet);
+                        if (!creativeMode) stack.decrement(1);
+                    }
+                    // Requirements not met
+                    else player.sendMessage(SDTexts.TEXT$QUEST_REQUIREMENT.get(), true);
                 }
-                // Requirements not met
-                else player.sendMessage(SDTexts.TEXT$QUEST_REQUIREMENT.get(), true);
+                // Dependencies not completed
+                else player.sendMessage(SDTexts.TEXT$QUEST_DEPENDENCIES.get(), true);
             }
             // Empty quest
             else
