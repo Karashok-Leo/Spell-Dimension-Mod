@@ -5,17 +5,7 @@
       "entries": [
         {
           "type": "loot-bag:loot_bag",
-          "bag": "spell-dimension:epic/book",
-          "weight": 4
-        },
-        {
-          "type": "loot-bag:loot_bag",
-          "bag": "spell-dimension:epic/gear",
-          "weight": 4
-        },
-        {
-          "type": "loot-bag:loot_bag",
-          "bag": "spell-dimension:epic/material",
+          "bag": "spell-dimension:legendary/material",
           "weight": 4
         },
         {
@@ -30,21 +20,6 @@
         },
         {
           "type": "loot-bag:loot_bag",
-          "bag": "spell-dimension:legendary/material",
-          "weight": 2
-        },
-        {
-          "type": "loot-bag:loot_bag",
-          "bag": "spell-dimension:artifact",
-          "weight": 1
-        },
-        {
-          "type": "loot-bag:loot_bag",
-          "bag": "spell-dimension:aring",
-          "weight": 1
-        },
-        {
-          "type": "loot-bag:loot_bag",
           "bag": "spell-dimension:jewelry/rings",
           "weight": 1
         },
@@ -56,8 +31,8 @@
       ],
       "rolls": {
         "type": "minecraft:uniform",
-        "min": 1,
-        "max": 3
+        "min": 3,
+        "max": 6
       }
     }
   ]

@@ -1,0 +1,34 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "loot-bag:loot_bag",
+          "bag": "spell-dimension:epic/material",
+          "weight": 4
+        },
+        {
+          "type": "loot-bag:loot_bag",
+          "bag": "spell-dimension:epic/book",
+          "weight": 2
+        },
+        {
+          "type": "loot-bag:loot_bag",
+          "bag": "spell-dimension:epic/gear",
+          "weight": 2
+        },
+        {
+          "type": "loot-bag:loot_bag",
+          "bag": "spell-dimension:aring",
+          "weight": 1
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "min": 3,
+        "max": 6
+      }
+    }
+  ]
+}
