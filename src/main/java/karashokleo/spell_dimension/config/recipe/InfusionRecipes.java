@@ -16,6 +16,9 @@ import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.paladins.item.Shields;
+import net.spell_power.api.SpellSchools;
+import nourl.mythicmetals.blocks.MythicBlocks;
+import nourl.mythicmetals.item.MythicItems;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
@@ -54,6 +57,9 @@ public class InfusionRecipes
         register(Items.LEATHER_BOOTS, Items.POWDER_SNOW_BUCKET, ModItems.SNOWSHOES.get().getDefaultStack());
         register(Items.LEATHER_BOOTS, ComplementItems.POSEIDITE.ingot(), ModItems.FLIPPERS.get().getDefaultStack());
         register(Items.LEATHER_BOOTS, Items.GRASS_BLOCK, ModItems.ROOTED_BOOTS.get().getDefaultStack());
+        register(MythicBlocks.STORMYX.getStorageBlock().asItem(), AllItems.BASE_ESSENCES.get(SpellSchools.ARCANE).get(2), MythicItems.Mats.STORMYX_SHELL.getDefaultStack());
+        register(MythicBlocks.CARMOT.getStorageBlock().asItem(), AllItems.BASE_ESSENCES.get(SpellSchools.FIRE).get(2), MythicItems.Mats.CARMOT_STONE.getDefaultStack());
+        register(MythicBlocks.AQUARIUM.getStorageBlock().asItem(), AllItems.BASE_ESSENCES.get(SpellSchools.FROST).get(2), MythicItems.Mats.AQUARIUM_PEARL.getDefaultStack());
     }
 
     public static void register(Item base, Item addition, ItemStack output)

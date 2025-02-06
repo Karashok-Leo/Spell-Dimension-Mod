@@ -90,6 +90,6 @@ public class SpellScrollItem extends Item implements ColorProvider
         int tier = spellInfo.spell().learn.tier;
         int grade = MathHelper.clamp(tier - 2, 0, 2);
         DynamicSpellBookItem bookItem = AllItems.SPELL_BOOKS.get(spellInfo.spell().school).get(grade);
-        tooltip.add(SDTexts.SCROLL$BOOK_REQUIREMENT.get(grade, bookItem.getName()).formatted(Formatting.GRAY));
+        tooltip.add(SDTexts.SCROLL$BOOK_REQUIREMENT.get(grade + 1, bookItem.getName()).formatted(Formatting.GRAY));
     }
 }
