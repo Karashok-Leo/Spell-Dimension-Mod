@@ -3,12 +3,15 @@ package karashokleo.spell_dimension.content.spell;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import karashokleo.spell_dimension.content.block.SpellLightBlock;
+import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllBlocks;
 import karashokleo.spell_dimension.init.AllSpells;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.minecraft.entity.Entity;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -147,6 +150,13 @@ public class LightSpell
     {
         if (!spellId.equals(AllSpells.LIGHT)) return;
         if (!(projectile.getWorld() instanceof ServerWorld world)) return;
+        Entity owner = projectile.getOwner();
+        if (owner == null) return;
+        if (AllSpells.inDungeon(world))
+        {
+            owner.sendMessage(SDTexts.TEXT$BANNED_SPELL.get().formatted(Formatting.RED));
+            return;
+        }
         SPAWNERS.put(world, new LightSpawner(hitResult.getBlockPos(), 7, 8000, 20));
     }
 }

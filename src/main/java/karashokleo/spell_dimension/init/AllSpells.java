@@ -9,12 +9,23 @@ import karashokleo.spell_dimension.api.SpellProjectileOutOfRangeCallback;
 import karashokleo.spell_dimension.content.buff.BlazingMark;
 import karashokleo.spell_dimension.content.spell.*;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.World;
 import net.spell_power.api.SpellSchool;
 import net.spell_power.api.SpellSchools;
 
 public class AllSpells
 {
+    // some spells are banned in the dungeon world
+    public static final RegistryKey<World> DUNGEON = RegistryKey.of(RegistryKeys.WORLD, new Identifier("dungeonz:dungeon"));
+
+    public static boolean inDungeon(World world)
+    {
+        return world.getRegistryKey().equals(DUNGEON);
+    }
+
     public static final SpellSchool GENERIC = SpellSchools.createMagic(SpellDimension.modLoc("generic"), 0xdddddd, false, EntityAttributes.GENERIC_ATTACK_DAMAGE, null);
 
     /**

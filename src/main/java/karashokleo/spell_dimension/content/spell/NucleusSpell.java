@@ -17,9 +17,11 @@ public class NucleusSpell
     {
         if (!spellInfo.id().equals(AllSpells.NUCLEUS)) return;
         Optional<Entity> target = targets.stream().findFirst();
-        if (target.isPresent() &&
-            (target.get() instanceof LivingEntity livingEntity) &&
-            livingEntity.isAttackable())
-            Buff.apply(livingEntity, Nucleus.TYPE, new Nucleus(), caster);
+        if (target.isEmpty()) return;
+        if (!(target.get() instanceof LivingEntity living)) return;
+        if (!living.isAttackable()) return;
+        Optional<Nucleus> nucleus = Buff.get(living, Nucleus.TYPE);
+        if (nucleus.isPresent()) return;
+        Buff.apply(living, Nucleus.TYPE, new Nucleus(), caster);
     }
 }
