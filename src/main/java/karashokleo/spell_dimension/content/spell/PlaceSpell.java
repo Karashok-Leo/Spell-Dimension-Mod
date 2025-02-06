@@ -18,7 +18,7 @@ public class PlaceSpell
         if (!spellId.equals(AllSpells.PLACE)) return;
         if (!(projectile.getWorld() instanceof ServerWorld world)) return;
         if (!(projectile.getOwner() instanceof PlayerEntity player)) return;
-        if (AllSpells.inDungeon(world))
+        if (AllSpells.disableInWorld(world))
         {
             player.sendMessage(SDTexts.TEXT$BANNED_SPELL.get().formatted(Formatting.RED));
             return;

@@ -26,6 +26,7 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import net.spell_engine.api.item.trinket.SpellBookTrinketItem;
+import net.spell_engine.api.spell.Spell;
 import net.spell_engine.api.spell.SpellContainer;
 import net.spell_engine.api.spell.SpellInfo;
 import net.spell_engine.internals.SpellContainerHelper;
@@ -63,6 +64,11 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
         super(POOLS.get(school), new FabricItemSettings().maxCount(1));
         this.school = school;
         this.grade = grade;
+    }
+
+    public boolean canContainSpell(Spell spell)
+    {
+        return this.grade + 2 >= spell.learn.tier;
     }
 
     public int getMaxSpellCount()
@@ -130,6 +136,11 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
             if (school != AllSpells.GENERIC && school != this.school)
             {
                 player.sendMessage(SDTexts.TEXT$INCOMPATIBLE_SCHOOL.get());
+                return;
+            }
+            if (this.canContainSpell(spellInfo.spell()))
+            {
+                player.sendMessage(SDTexts.TEXT$HIGHER_BOOK_REQUIRED.get());
                 return;
             }
             SpellBinding.State.ApplyState state = SpellBinding.State.of(spellInfo.id(), stack, 0, 0, 0).state;

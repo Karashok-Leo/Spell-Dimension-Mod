@@ -52,14 +52,14 @@ public class BookEntry extends BaseEntryProvider
         this.lang().add(context.pageTitle(), "Spell Book");
         this.lang().add(context.pageText(),
                 """
-                        A spell book is a vehicle for recording spells. You can use the Spell Binding Table to transform a normal book into the most basic spell book. But this is just the beginning, you can then use the craft table to craft it into primary, intermediate, and advanced spell books.
+                        A spell book is a vehicle for recording spells. You can use the Spell Binding Table to transform a normal book into the most basic apprentices spell book. But this is just the beginning, you can then use the craft table to craft it into primary, intermediate, and advanced spell books.
                         """
         );
         this.lang("zh_cn").add(context.pageTitle(), "法术书");
         this.lang("zh_cn").add(context.pageText(),
                 """
                         \\
-                        法术书是记录法术的载体。你可以使用法术绑定台将普通的书转化为最基本的法术书。但这只是一个开始，之后你可以使用工作台将其合成至初级、中级、高级法术书。
+                        法术书是记录法术的载体。你可以使用法术绑定台将普通的书转化为最基本的学徒法术书。但这只是一个开始，之后你可以使用工作台将其合成至初级、中级、高级法术书。
                         """
         );
 
@@ -81,7 +81,10 @@ public class BookEntry extends BaseEntryProvider
         this.lang().add(context.pageText(),
                 """
                         \\
-                        Advanced spell books require special materials to synthesise. The more advanced the spell book, the more spell slots it provides.
+                        Advanced spell books require special materials to craft. The more advanced the spell book, the more spell slots it provides.
+                        \\
+                        \\
+                        You can put spell scrolls into primary, intermediate, and advanced spell books (just as you would into a Bundle). Apprentice spell books do not have this feature.
                         """
         );
         this.lang("zh_cn").add(context.pageTitle(), "高级法术书");
@@ -89,6 +92,9 @@ public class BookEntry extends BaseEntryProvider
                 """
                         \\
                         高级的法术书需要特殊材料来合成。越高级的法术书提供越多的法术槽位。
+                        \\
+                        \\
+                        你可以将法术卷轴放入初级、中级、高级法术书中（就像放入收纳袋那样），学徒法术书则没有这个功能。
                         """
         );
 

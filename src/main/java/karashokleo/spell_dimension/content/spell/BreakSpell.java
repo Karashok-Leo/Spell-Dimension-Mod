@@ -17,7 +17,7 @@ public class BreakSpell
         if (!(projectile.getWorld() instanceof ServerWorld world)) return;
         Entity owner = projectile.getOwner();
         if (owner == null) return;
-        if (AllSpells.inDungeon(world))
+        if (AllSpells.disableInWorld(world))
         {
             owner.sendMessage(SDTexts.TEXT$BANNED_SPELL.get().formatted(Formatting.RED));
             return;

@@ -21,7 +21,7 @@ public class AllSpells
     // some spells are banned in the dungeon world
     public static final RegistryKey<World> DUNGEON = RegistryKey.of(RegistryKeys.WORLD, new Identifier("dungeonz:dungeon"));
 
-    public static boolean inDungeon(World world)
+    public static boolean disableInWorld(World world)
     {
         return world.getRegistryKey().equals(DUNGEON);
     }

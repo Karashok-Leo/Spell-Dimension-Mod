@@ -3,6 +3,8 @@ package karashokleo.spell_dimension.content.item;
 import karashokleo.spell_dimension.config.recipe.SpellScrollConfig;
 import karashokleo.spell_dimension.content.item.essence.base.ColorProvider;
 import karashokleo.spell_dimension.data.SDTexts;
+import karashokleo.spell_dimension.init.AllItems;
+import karashokleo.spell_dimension.util.SchoolUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
@@ -11,6 +13,7 @@ import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.spell_engine.api.spell.Spell;
 import net.spell_engine.api.spell.SpellContainer;
@@ -82,5 +85,11 @@ public class SpellScrollItem extends Item implements ColorProvider
         tooltip.add(SDTexts.SCROLL$OBTAIN.get(
                 SpellScrollConfig.getSpellScrollText(spellInfo)
         ).formatted(Formatting.GRAY));
+        if (spellInfo == null) return;
+        if (!SchoolUtil.SCHOOLS.contains(spellInfo.spell().school)) return;
+        int tier = spellInfo.spell().learn.tier;
+        int grade = MathHelper.clamp(tier - 2, 0, 2);
+        DynamicSpellBookItem bookItem = AllItems.SPELL_BOOKS.get(spellInfo.spell().school).get(grade);
+        tooltip.add(SDTexts.SCROLL$BOOK_REQUIREMENT.get(grade, bookItem.getName()).formatted(Formatting.GRAY));
     }
 }

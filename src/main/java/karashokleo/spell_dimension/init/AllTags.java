@@ -305,5 +305,8 @@ public class AllTags
                         LHEnchantments.ICE_THORN,
                         LHEnchantments.FLAME_THORN
                 );
+
+        SpellDimension.DAMAGE_TYPE_TAGS.getOrCreateContainer(LHTags.MAGIC)
+                .addOptional(new Identifier("mythicupgrades:deflecting_damage_type"));
     }
 }
