@@ -62,7 +62,7 @@ public class ArmorSetEntry extends BaseEntryProvider
                         穿戴一些装备可以获得特殊套装效果。
                         \\
                         \\
-                        搜索**set**以查看所有可用的套装效果。
+                        搜索**套装**（或拼音）以查看所有可用的套装效果。
                         """
         );
         BookTextPageModel text = BookTextPageModel
