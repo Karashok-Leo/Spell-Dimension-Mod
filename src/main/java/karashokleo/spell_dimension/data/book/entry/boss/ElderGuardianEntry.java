@@ -53,7 +53,6 @@ public class ElderGuardianEntry extends BaseEntryProvider
         this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
                 """
-                        \\
                         Level: %d+
                         \\
                         \\
@@ -65,7 +64,6 @@ public class ElderGuardianEntry extends BaseEntryProvider
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         等级: %d+
                         \\
                         \\
@@ -85,13 +83,11 @@ public class ElderGuardianEntry extends BaseEntryProvider
         context.page("next");
         this.lang().add(context.pageText(),
                 """
-                        \\
                         Drops **Abyss Guard** upon defeating Elder Guardian.
                         """
         );
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         击败远古守卫者后掉落**深渊守护**。
                         """
         );

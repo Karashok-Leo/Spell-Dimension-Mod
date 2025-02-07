@@ -53,27 +53,25 @@ public class DayNightEntry extends BaseEntryProvider
         this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
                 """
-                        \\
                         Level: %d+
                         \\
                         \\
                         Use Chaos Orb to summon.
                         \\
                         \\
-                        Drops **Celestial Debris** upon defeating Night Prowler.
+                        Drops **Celestial Debris** upon defeating the Day Stalker and Night Prowler.
                         """.formatted(TextConstants.BOSS_LEVELS[3])
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         等级: %d+
                         \\
                         \\
                         使用混沌宝珠召唤。
                         \\
                         \\
-                        击败夜伏者后掉落**日月星碎**。
+                        击败昼从者和夜伏者后掉落**日月星碎**。
                         """.formatted(TextConstants.BOSS_LEVELS[3])
         );
 

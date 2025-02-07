@@ -51,7 +51,6 @@ public class LootCharmEntry extends BaseEntryProvider
         this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
                 """
-                        \\
                         Wearing a looting charm can get you some special resources.
                         \\
                         \\
@@ -61,7 +60,6 @@ public class LootCharmEntry extends BaseEntryProvider
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         佩戴抢夺宝珠可以获取一些特殊的资源。
                         \\
                         \\
@@ -86,13 +84,11 @@ public class LootCharmEntry extends BaseEntryProvider
         context.page("obtain");
         this.lang().add(context.pageText(),
                 """
-                        \\
                         Wearing Looting Charms is usually the easiest way to obtain certain resources as opposed to burning transformations and completing specific challenges.
                         """
         );
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         相较于焚烧转化和完成特定挑战，佩戴抢夺宝珠通常是获取某些资源最简单的方法。
                         """
         );

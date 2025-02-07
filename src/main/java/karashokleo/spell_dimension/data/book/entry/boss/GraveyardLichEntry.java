@@ -52,7 +52,6 @@ public class GraveyardLichEntry extends BaseEntryProvider
         this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
                 """
-                        \\
                         Level: %d+
                         \\
                         \\
@@ -64,7 +63,6 @@ public class GraveyardLichEntry extends BaseEntryProvider
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         等级：%d+
                         \\
                         \\
@@ -84,13 +82,11 @@ public class GraveyardLichEntry extends BaseEntryProvider
         context.page("prev");
         this.lang().add(context.pageText(),
                 """
-                        \\
                         At night, place the top, middle, and bottom three **Ominous Bone Staff Fragments** in the center of the shattered deep stone in front of the altar from left to right. Then pour a bottle of blood onto the altar block in the center of the altar to summon the Lich.
                         """
         );
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         在夜晚依次将上、中、下共3块**不祥的骨杖残片**依次从左至右放置于祭坛前的碎裂深石中心，然后将一瓶血倒在祭坛中央的祭坛方块上，即可召唤巫妖。
                         """
         );
@@ -102,7 +98,6 @@ public class GraveyardLichEntry extends BaseEntryProvider
         context.page("next");
         this.lang().add(context.pageText(),
                 """
-                        \\
                         Ominous Bone Staff Fragment: Craftable, or found in the Ruins(graveyard:ruins).
                         \\
                         This structure can be located in the Overworld using the Locate Spell.
@@ -113,7 +108,6 @@ public class GraveyardLichEntry extends BaseEntryProvider
         );
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         不祥的骨杖残片: 可合成或在遗迹(graveyard:ruins)中找到。
                         \\
                         可通过定位法术在主世界中定位到此结构。

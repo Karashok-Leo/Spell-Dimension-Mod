@@ -54,7 +54,6 @@ public class OldChampionEntry extends BaseEntryProvider
         this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
                 """
-                        \\
                         Level: %d+
                         \\
                         \\
@@ -66,7 +65,6 @@ public class OldChampionEntry extends BaseEntryProvider
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         等级: %d+
                         \\
                         \\
@@ -86,7 +84,6 @@ public class OldChampionEntry extends BaseEntryProvider
         context.page("prev");
         this.lang().add(context.pageText(),
                 """
-                        \\
                         Or use Draugr on the Old Moon Altar to summon.
                         \\
                         \\
@@ -97,7 +94,6 @@ public class OldChampionEntry extends BaseEntryProvider
         );
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         或者对破旧的月光祭坛使用德拉古尔召唤。
                         \\
                         \\
@@ -115,7 +111,6 @@ public class OldChampionEntry extends BaseEntryProvider
         context.page("next");
         this.lang().add(context.pageText(),
                 """
-                        \\
                         Drops **Atom Breastplate** upon defeating the Champion's Remains.
                         \\
                         \\
@@ -124,7 +119,6 @@ public class OldChampionEntry extends BaseEntryProvider
         );
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         击败古英雄的遗骸后掉落**原子护心镜**。
                         \\
                         \\

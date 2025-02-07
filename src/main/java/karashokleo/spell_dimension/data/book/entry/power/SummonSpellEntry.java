@@ -51,7 +51,6 @@ public class SummonSpellEntry extends BaseEntryProvider
         this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
                 """
-                        \\
                         When the off-hand holds a specific catalyst, cast the summon spell on a **Spawner** to summon some special mobs.
                         \\
                         \\
@@ -61,7 +60,6 @@ public class SummonSpellEntry extends BaseEntryProvider
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         副手持有特定催化剂时对**刷怪笼**施放召唤法术可以召唤一些特殊的生物。
                         \\
                         \\

@@ -58,7 +58,6 @@ public class BookEntry extends BaseEntryProvider
         this.lang("zh_cn").add(context.pageTitle(), "法术书");
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         法术书是记录法术的载体。你可以使用法术绑定台将普通的书转化为最基本的学徒法术书。但这只是一个开始，之后你可以使用工作台将其合成至初级、中级、高级法术书。
                         """
         );
@@ -80,7 +79,6 @@ public class BookEntry extends BaseEntryProvider
         this.lang().add(context.pageTitle(), "Advanced Spell Book");
         this.lang().add(context.pageText(),
                 """
-                        \\
                         Advanced spell books require special materials to craft. The more advanced the spell book, the more spell slots it provides.
                         \\
                         \\
@@ -90,7 +88,6 @@ public class BookEntry extends BaseEntryProvider
         this.lang("zh_cn").add(context.pageTitle(), "高级法术书");
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         高级的法术书需要特殊材料来合成。越高级的法术书提供越多的法术槽位。
                         \\
                         \\

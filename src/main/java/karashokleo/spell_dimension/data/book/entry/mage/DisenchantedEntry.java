@@ -49,12 +49,10 @@ public class DisenchantedEntry extends BaseEntryProvider
         this.lang().add(context.pageTitle(), "Disenchanted Essence");
         this.lang().add(context.pageText(),
                 """
-                        \\
                         Disenchanted Essence removes all the magic infused into an item by Enchanted Essences. The only way to obtain an Disenchanted Essence is to purchase it from a Goblin Trader.""");
         this.lang("zh_cn").add(context.pageTitle(), "祛魔精华");
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         祛魔精华能够消除束魔精华注入在一件物品上的所有魔力。获取祛魔精华的唯一途径是从哥布林商人手中购买。
                         """
         );

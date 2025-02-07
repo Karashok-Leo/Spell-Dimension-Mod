@@ -52,7 +52,6 @@ public class StalkerEntry extends BaseEntryProvider
         this.lang().add(context.pageTitle(), "Stalker");
         this.lang().add(context.pageText(),
                 """
-                        \\
                         Level: %d+
                         \\
                         \\
@@ -65,7 +64,6 @@ public class StalkerEntry extends BaseEntryProvider
         this.lang("zh_cn").add(context.pageTitle(), "Stalker");
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         等级: %d+
                         \\
                         \\
@@ -86,7 +84,6 @@ public class StalkerEntry extends BaseEntryProvider
         context.page("next");
         this.lang().add(context.pageText(),
                 """
-                        \\
                         *Ancient Temple: Structure ID deeperdarker:ancient_temple*
                         \\
                         \\
@@ -95,7 +92,6 @@ public class StalkerEntry extends BaseEntryProvider
         );
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         *远古神庙: 结构ID为 deeperdarker:ancient_temple*
                         \\
                         \\

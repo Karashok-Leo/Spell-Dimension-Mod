@@ -54,7 +54,6 @@ public class WitherEntry extends BaseEntryProvider
         this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
                 """
-                        \\
                         Level: %d+
                         \\
                         \\
@@ -64,7 +63,6 @@ public class WitherEntry extends BaseEntryProvider
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         等级: %d+
                         \\
                         \\
@@ -82,13 +80,11 @@ public class WitherEntry extends BaseEntryProvider
         context.page("next");
         this.lang().add(context.pageText(),
                 """
-                        \\
                         Drops **Shard of Uncertainty** upon defeating Wither.
                         """
         );
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         击败凋灵后掉落**不确定性的残片**。
                         """
         );

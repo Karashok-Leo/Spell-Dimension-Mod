@@ -52,7 +52,6 @@ public class RarityEntry extends BaseEntryProvider
         this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
                 """
-                        \\
                         All materials and gear are divided into different rarities, from lowest to highest they are **Common**, **Uncommon**, **Rare**, **Epic** and **Legendary**.
                         \\
                         \\
@@ -62,7 +61,6 @@ public class RarityEntry extends BaseEntryProvider
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         所有材料和装备被分为不同的稀有度，从低到高分别是**普通**(common)、**不凡**(uncommon)、**稀有**(rare)、**史诗**(epic)和**传奇**(legendary)。
                         \\
                         \\
@@ -83,16 +81,16 @@ public class RarityEntry extends BaseEntryProvider
         context.page("text");
         this.lang().add(context.pageText(),
                 """
-                        \\
+                        **#common/gear**: All common gears
                         **#uncommon/material**: All uncommon materials
-                        **#rare/gear**: All rare gear
-                        **#epic/armor**: All epic armor
+                        **#rare/gear**: All rare gears
+                        **#epic/armor**: All epic armors
                         **#legendary/weapon**: All legendary weapons
                         """
         );
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
+                        **#common/gear**: 所有普通装备
                         **#uncommon/material**: 所有不凡材料
                         **#rare/gear**: 所有稀有装备
                         **#epic/armor**: 所有史诗盔甲

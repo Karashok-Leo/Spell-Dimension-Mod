@@ -53,7 +53,6 @@ public class ObsidlithEntry extends BaseEntryProvider
         this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
                 """
-                        \\
                         Level: %d+
                         \\
                         \\
@@ -65,7 +64,6 @@ public class ObsidlithEntry extends BaseEntryProvider
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         等级: %d+
                         \\
                         \\
@@ -85,7 +83,6 @@ public class ObsidlithEntry extends BaseEntryProvider
         context.page("next");
         this.lang().add(context.pageText(),
                 """
-                        \\
                         Use Ender Eye on the Obsidian Altar to summon.
                         \\
                         \\
@@ -94,7 +91,6 @@ public class ObsidlithEntry extends BaseEntryProvider
         );
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         对黑曜石祭坛使用末影之眼召唤。
                         \\
                         \\

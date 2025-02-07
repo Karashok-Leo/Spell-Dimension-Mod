@@ -53,14 +53,12 @@ public class HostilityEntry extends BaseEntryProvider
         this.lang().add(context.pageTitle(), "Lightland Hostility");
         this.lang().add(context.pageText(),
                 """
-                        \\
                         The game uses **L2 Hostility** to control the difficulty. Difficulty increases only when you kill strong enemies, and decreases when you die. Monsters are generated with special abilities called **'Trait'**.
                         """
         );
         this.lang("zh_cn").add(context.pageTitle(), "莱特兰·恶意");
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         游戏采用**莱特兰·恶意**控制难度。只有在杀死强大怪物时才增加难度，死亡时降低难度。怪物生成时会带有特殊能力，称为 **"词条"**。
                         """
         );
@@ -75,7 +73,6 @@ public class HostilityEntry extends BaseEntryProvider
         context.page("next");
         this.lang().add(context.pageText(),
                 """
-                        \\
                         The higher the level of the monster, the higher their attributes such as damage and health, and the more powerful the traits they possess. Each trait has a unique way of dealing with it.
                         \\
                         \\
@@ -83,7 +80,6 @@ public class HostilityEntry extends BaseEntryProvider
         );
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         怪物的等级越高，它们的伤害与血量等属性也就越高，拥有的词条越强大。每一种词条都有独特的应对方法。
                         \\
                         \\

@@ -26,6 +26,17 @@
       "title": "book.spell-dimension-book.magic_guidance.boss.dragon.boss.title"
     },
     {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "show_title_separator": true,
+      "text": "book.spell-dimension-book.magic_guidance.boss.dragon.spell.text",
+      "title": "",
+      "use_markdown_in_title": false
+    },
+    {
       "type": "modonomicon:entity",
       "anchor": "",
       "condition": {

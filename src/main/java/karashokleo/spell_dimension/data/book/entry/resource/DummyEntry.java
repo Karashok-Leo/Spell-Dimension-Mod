@@ -51,14 +51,12 @@ public class DummyEntry extends BaseEntryProvider
         this.lang().add(context.pageTitle(), "Target Dummy");
         this.lang().add(context.pageText(),
                 """
-                        \\
                         The dummy can be placed in the world, where it'll stand silently, judging your every action. It'll wiggle funny if you hit it, screaming large numbers of damage at you. It can be dressed up to look even more awesome. ~~This will please the dummy, making the numbers smaller.~~
                         """
         );
         this.lang("zh_cn").add(context.pageTitle(), "训练假人");
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         训练假人可以放置在世界中。它静静伫立在那里，判断你的一举一动。如果你击中它，它会滑稽地扭动起来，向你发出蛤人的尖叫。它甚至可以打扮得更加漂亮。~~这会让假人高兴，把你的数据变小。~~
                         """
         );
@@ -78,7 +76,6 @@ public class DummyEntry extends BaseEntryProvider
         context.page("next");
         this.lang().add(context.pageText(),
                 """
-                        \\
                         TL; DR: target dummies show damage dealt to them and can be equipped with armor.
                         \\
                         \\
@@ -87,8 +84,7 @@ public class DummyEntry extends BaseEntryProvider
         );
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
-                        太长不看: 训练假人记录并显示你对其造成的伤害，并且可以装备盔甲。
+                        太长不看？简而言之，训练假人记录并显示你对其造成的伤害，并且可以装备盔甲。
                         \\
                         \\
                         用法: 右键单击方块放置它。它可以根据放置时面对的方向旋转 16个不同的方向，类似于盔甲架。
@@ -103,7 +99,6 @@ public class DummyEntry extends BaseEntryProvider
         context.page("last");
         this.lang().add(context.pageText(),
                 """
-                        \\
                         You can start dressing the little dude with all kind of armors and equipment.Just right click him with the desired item.To unequip a certain armor piece just click on his corresponding body part.
                         \\
                         \\
@@ -112,7 +107,6 @@ public class DummyEntry extends BaseEntryProvider
         );
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         你可以给这家伙穿上各种盔甲和装备。只需用物品右键单击它即可。要取消装备某个盔甲，只需单击其相应的身体部位即可。
                         \\
                         \\

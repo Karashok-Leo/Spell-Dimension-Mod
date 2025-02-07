@@ -49,14 +49,12 @@ public class StorageEntry extends BaseEntryProvider
         this.lang().add(context.pageTitle(), "Tom's Simple Storage");
         this.lang().add(context.pageText(),
                 """
-                        \\
                         Place a storage connector with a terminal next to your chests, after which you can manage the items of all your chests in a unified way through the terminal.
                         """
         );
         this.lang("zh_cn").add(context.pageTitle(), "汤姆的简易存储");
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         在你的箱子旁放置存储整合器与终端，之后你便可以通过终端统一管理所有箱子里的物品。
                         """
         );

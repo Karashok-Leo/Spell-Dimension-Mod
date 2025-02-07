@@ -48,14 +48,12 @@ public class PivotEntry extends BaseEntryProvider
         this.lang().add(context.pageTitle(), "Consciousness Pivot");
         this.lang().add(context.pageText(),
                 """
-                        \\
                         Consciousness Pivots are distributed on the surface of the ocean of consciousness, right-clicking on the **Consciousness Core** will activate the pivot and trigger the Invasion Event, monsters will appear in waves and attack the player, defeating all monsters will grant special rewards.
                         """
         );
         this.lang("zh_cn").add(context.pageTitle(), "识之枢纽");
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         意识枢纽分布在在识之海维度表面，右击其上的**识之核心**即可激活枢纽，同时触发入侵事件，怪物将会分波次出现并攻击玩家，击败所有怪物即可获得特殊奖励。
                         """
         );
@@ -68,7 +66,6 @@ public class PivotEntry extends BaseEntryProvider
         context.page("beacon");
         this.lang().add(context.pageText(),
                 """
-                        \\
                         After the Invasion Event, a light column will be generated from the Consciousness Core. Standing on the light column will teleport you to the corresponding position in the overworld.
                         \\
                         \\
@@ -77,7 +74,6 @@ public class PivotEntry extends BaseEntryProvider
         );
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         入侵事件结束后识之核心会产生一道光柱，站在光柱上即可传送至主世界对应位置。
                         \\
                         \\

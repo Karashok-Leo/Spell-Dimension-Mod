@@ -54,7 +54,6 @@ public class DecayingKingEntry extends BaseEntryProvider
         this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
                 """
-                        \\
                         Level: %d+
                         \\
                         \\
@@ -66,7 +65,6 @@ public class DecayingKingEntry extends BaseEntryProvider
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         等级: %d+
                         \\
                         \\
@@ -86,7 +84,6 @@ public class DecayingKingEntry extends BaseEntryProvider
         context.page("next");
         this.lang().add(context.pageText(),
                 """
-                        \\
                         Or use Withered Demon Heart on the Blackstone Pedestal to summon.
                         \\
                         \\
@@ -95,7 +92,6 @@ public class DecayingKingEntry extends BaseEntryProvider
         );
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         或者对黑石基座使用凋零恶魔之心召唤。
                         \\
                         \\

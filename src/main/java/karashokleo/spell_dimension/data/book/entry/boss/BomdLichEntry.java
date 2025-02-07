@@ -53,7 +53,6 @@ public class BomdLichEntry extends BaseEntryProvider
         this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
                 """
-                        \\
                         Level: %d+
                         \\
                         \\
@@ -65,7 +64,6 @@ public class BomdLichEntry extends BaseEntryProvider
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         等级: %d+
                         \\
                         \\
@@ -85,13 +83,11 @@ public class BomdLichEntry extends BaseEntryProvider
         context.page("next");
         this.lang().add(context.pageText(),
                 """
-                        \\
                         Embed the Soul Star into the four altars on the tower to summon.
                         """
         );
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         在塔上的四个祭坛嵌入灵魂之星即可召唤。
                         """
         );

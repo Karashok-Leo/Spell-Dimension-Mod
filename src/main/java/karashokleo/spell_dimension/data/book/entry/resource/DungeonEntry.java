@@ -48,7 +48,6 @@ public class DungeonEntry extends BaseEntryProvider
         this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
                 """
-                        \\
                         Through special entrances on the surface, you can enter a special dungeon dimension with a lot of special loot, but also powerful monsters, you need to defeat the boss to safely return.
                         \\
                         \\
@@ -58,7 +57,6 @@ public class DungeonEntry extends BaseEntryProvider
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         通过地表上的特殊入口，你可以进入一个特殊的地牢维度，其中有着大量的特殊战利品，但也有着强大的怪物，你需要击败Boss才能安全返回。
                         \\
                         \\
@@ -74,7 +72,6 @@ public class DungeonEntry extends BaseEntryProvider
         context.page("entries");
         this.lang().add(context.pageText(),
                 """
-                        \\
                         Below will list the types of special loot contained in various dungeons:
                         \\
                         \\
@@ -86,7 +83,6 @@ public class DungeonEntry extends BaseEntryProvider
         );
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         下面将列出各种地牢包含的特殊战利品类型:
                         \\
                         \\

@@ -58,7 +58,6 @@ public class OceanEntry extends BaseEntryProvider
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         识之海是一个一无所有的世界。
                         \\
                         \\
@@ -75,7 +74,6 @@ public class OceanEntry extends BaseEntryProvider
         context.page("text");
         this.lang().add(context.pageText(),
                 """
-                        \\
                         Your hostility level will be raised to at least level 100.
                         \\
                         \\
@@ -87,7 +85,6 @@ public class OceanEntry extends BaseEntryProvider
         );
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         你的恶意等级将被提升至至少100级。
                         \\
                         \\

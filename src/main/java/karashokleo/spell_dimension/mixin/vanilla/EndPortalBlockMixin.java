@@ -24,6 +24,7 @@ public abstract class EndPortalBlockMixin
     )
     private void inject_onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity, CallbackInfo ci)
     {
+        if (world.isClient()) return;
         if (entity instanceof PlayerEntity player &&
             !EndStageComponent.canEnterEnd(player))
         {

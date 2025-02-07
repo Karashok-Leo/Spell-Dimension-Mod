@@ -52,7 +52,6 @@ public class CaptainCorneliaEntry extends BaseEntryProvider
         this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
                 """
-                        \\
                         Level: %d+
                         \\
                         \\
@@ -62,7 +61,6 @@ public class CaptainCorneliaEntry extends BaseEntryProvider
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         等级: %d+
                         \\
                         \\
@@ -80,7 +78,6 @@ public class CaptainCorneliaEntry extends BaseEntryProvider
         context.page("next");
         this.lang().add(context.pageText(),
                 """
-                        \\
                         Shell Horn: Can be obtained by killing the Marauders staying in the Captain's Room in the **Stranded Ship**(aquamirae:ship).
                         \\
                         \\
@@ -89,8 +86,6 @@ public class CaptainCorneliaEntry extends BaseEntryProvider
         );
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
-                        \\
                         贝壳号角: 击杀**搁浅舰船**遗迹(aquamirae:ship)中待在船长室的掠夺者可获得。
                         \\
                         可通过定位法术在主世界中定位到此结构。

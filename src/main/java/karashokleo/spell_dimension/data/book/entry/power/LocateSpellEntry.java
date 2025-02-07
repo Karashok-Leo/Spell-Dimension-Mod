@@ -52,7 +52,6 @@ public class LocateSpellEntry extends BaseEntryProvider
         this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
                 """
-                        \\
                         When the off-hand holds a specific catalyst, cast the locate spell on a **Lodestone** to locate some special structures.
                         \\
                         \\
@@ -62,7 +61,6 @@ public class LocateSpellEntry extends BaseEntryProvider
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         副手持有特定催化剂时对**磁石**施放定位法术可以定位到一些特殊的结构。
                         \\
                         \\

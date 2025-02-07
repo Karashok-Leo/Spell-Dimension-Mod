@@ -49,14 +49,12 @@ public class MendingEntry extends BaseEntryProvider
         this.lang().add(context.pageTitle(), "Mending Essence");
         this.lang().add(context.pageText(),
                 """
-                        \\
                         Mending Essence completely repairs an item and removes its accumulated repair penalties. Mending Essence cannot be crafted and can only be obtained from loot.
                         """
         );
         this.lang("zh_cn").add(context.pageTitle(), "修复精华");
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         修复精华可以完全修复一件物品, 并且清除其累积的修复惩罚。修复精华不能合成，只能从战利品中获取。
                         """
         );

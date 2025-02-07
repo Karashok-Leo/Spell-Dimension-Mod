@@ -51,7 +51,6 @@ public class TraitEntry extends BaseEntryProvider
         this.lang().add(context.pageTitle(), "Mob Trait");
         this.lang().add(context.pageText(),
                 """
-                        \\
                         Although monsters with traits are powerful, they are not invincible. Here are some ways to counteract traits.
                         \\
                         \\
@@ -61,7 +60,6 @@ public class TraitEntry extends BaseEntryProvider
         this.lang("zh_cn").add(context.pageTitle(), "怪物词条");
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         带有词条的怪物虽然强大，但并非不可反制。接下来将介绍一些词条的克制方法。
                         \\
                         \\
@@ -79,7 +77,6 @@ public class TraitEntry extends BaseEntryProvider
         context.page("trait1");
         this.lang().add(context.pageText(),
                 """
-                        \\
                         Repelling/Pulling: The **Insulator** enchantment can mitigate the target's repelling/pulling effect on you.
                         \\
                         \\
@@ -88,7 +85,6 @@ public class TraitEntry extends BaseEntryProvider
         );
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         排斥/吸引: **绝缘**附魔可以缓解目标对你的排斥/吸引效果。
                         \\
                         \\
@@ -103,13 +99,11 @@ public class TraitEntry extends BaseEntryProvider
         context.page("trait2");
         this.lang().add(context.pageText(),
                 """
-                        \\
                         Weakener/Stray/Poisonous/Withering/Blinder/Distorter/Levitater/Soul Burner/Freezing/Cursed: **Ring of Divinity** or **Ring of Reflection** can make you immune to almost all negative effects. But as an alternative, you can also use the **exclusive enchantments** of the Breastplate to be immune to specific negative effects.
                         """
         );
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         虚弱/流沙/剧毒/凋零/致盲/扭曲/升空/业火/寒流/诅咒: **圣光守护之戒**或**诅咒扭曲之戒**可以让你免疫几乎所有的负面效果。但作为替代，你也可以使用护心镜的**专属附魔**来免疫特定的负面效果。
                         """
         );
@@ -121,13 +115,11 @@ public class TraitEntry extends BaseEntryProvider
         context.page("trait3");
         this.lang().add(context.pageText(),
                 """
-                        \\
                         Adaptive: In addition to using various negative effects, you can refresh a monster's adaptation by switching spells. Each spell is equivalent to a damage type.
                         """
         );
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         适应: 除了使用各种负面效果，你还可以通过切换法术来刷新怪物的适应性。每种法术都相当于一种伤害类型。
                         """
         );

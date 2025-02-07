@@ -49,7 +49,6 @@ public class SpellInfusionEntry extends BaseEntryProvider
         this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
                 """
-                        \\
                         With spell infusion, you can craft most spell scrolls and some trinkets.
                         \\
                         \\
@@ -59,7 +58,6 @@ public class SpellInfusionEntry extends BaseEntryProvider
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         通过魔力灌注，你可以合成大部分法术卷轴和一部分饰品。
                         \\
                         \\

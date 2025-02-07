@@ -48,7 +48,6 @@ public class ArmorSetEntry extends BaseEntryProvider
         this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
                 """
-                        \\
                         Wearing certain sets of armor will grant you special set bonuses.
                         \\
                         \\
@@ -58,7 +57,6 @@ public class ArmorSetEntry extends BaseEntryProvider
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         穿戴一些装备可以获得特殊套装效果。
                         \\
                         \\

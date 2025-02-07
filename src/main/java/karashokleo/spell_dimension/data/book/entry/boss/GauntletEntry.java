@@ -53,7 +53,6 @@ public class GauntletEntry extends BaseEntryProvider
         this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
                 """
-                        \\
                         Level: %d+
                         \\
                         \\
@@ -65,7 +64,6 @@ public class GauntletEntry extends BaseEntryProvider
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         等级: %d+
                         \\
                         \\
@@ -85,13 +83,11 @@ public class GauntletEntry extends BaseEntryProvider
         context.page("next");
         this.lang().add(context.pageText(),
                 """
-                        \\
                         Spawns after the Ancient Carved Blackstone in the center of Gauntlet Arena gets destroyed.
                         """
         );
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         破坏竞技场中心的远古雕纹黑石后生成。
                         """
         );

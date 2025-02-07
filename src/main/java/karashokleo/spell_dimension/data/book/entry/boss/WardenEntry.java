@@ -53,7 +53,6 @@ public class WardenEntry extends BaseEntryProvider
         this.lang().add(context.pageTitle(), "Warden");
         this.lang().add(context.pageText(),
                 """
-                        \\
                         Level: %d+
                         \\
                         \\
@@ -66,7 +65,6 @@ public class WardenEntry extends BaseEntryProvider
         this.lang("zh_cn").add(context.pageTitle(), "监守者");
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        \\
                         等级: %d+
                         \\
                         \\
