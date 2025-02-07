@@ -79,6 +79,7 @@ public class AllGroups
                             entries.add(AllItems.DEBUG_STAFF);
                             entries.add(AllItems.ABYSS_GUARD);
                             entries.add(AllItems.ACCURSED_BLACKSTONE);
+                            entries.add(AllItems.CELESTIAL_DEBRIS);
                             entries.add(AllItems.CELESTIAL_LUMINARY);
                             entries.add(AllBlocks.SPELL_INFUSION_PEDESTAL.item());
                             entries.add(AllBlocks.CONSCIOUSNESS_BASE.item());

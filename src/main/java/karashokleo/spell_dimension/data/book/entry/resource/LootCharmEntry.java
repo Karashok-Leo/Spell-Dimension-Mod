@@ -87,25 +87,13 @@ public class LootCharmEntry extends BaseEntryProvider
         this.lang().add(context.pageText(),
                 """
                         \\
-                        To obtain looting charms of levels 1-4, you need to complete different tasks:
-                        \\
-                        \\
-                        1: Kill The Decaying King
-                        2: Kill Monarch of Chaos
-                        3: Kill Void Blossom
-                        4: Kill Ender Dragon
+                        Wearing Looting Charms is usually the easiest way to obtain certain resources as opposed to burning transformations and completing specific challenges.
                         """
         );
         this.lang("zh_cn").add(context.pageText(),
                 """
                         \\
-                        获取1~4级的抢夺宝珠需要完成不同任务，分别为：
-                        \\
-                        \\
-                        1: 击杀腐朽之王
-                        2: 击杀混沌君主
-                        3: 击杀虚空之花
-                        4: 击杀末影龙
+                        相较于焚烧转化和完成特定挑战，佩戴抢夺宝珠通常是获取某些资源最简单的方法。
                         """
         );
 

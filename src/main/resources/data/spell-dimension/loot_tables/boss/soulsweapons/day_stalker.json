@@ -5,10 +5,14 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "endrem:cryptic_eye"
+          "name": "spell-dimension:celestial_debris"
         }
       ],
-      "rolls": 1.0
+      "rolls": {
+        "type": "minecraft:uniform",
+        "min": 10,
+        "max": 12
+      }
     }
   ]
 }

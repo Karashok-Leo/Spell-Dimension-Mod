@@ -13,6 +13,7 @@ import karashokleo.spell_dimension.content.item.essence.*;
 import karashokleo.spell_dimension.content.item.essence.base.ColorProvider;
 import karashokleo.spell_dimension.content.item.logic.Tier;
 import karashokleo.spell_dimension.content.item.trinket.*;
+import karashokleo.spell_dimension.content.trait.SpellTrait;
 import karashokleo.spell_dimension.util.SchoolUtil;
 import karashokleo.spell_dimension.util.TagUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -50,6 +51,7 @@ public class AllItems
     public static QuestScrollItem QUEST_SCROLL;
     public static Item ABYSS_GUARD;
     public static Item ACCURSED_BLACKSTONE;
+    public static Item CELESTIAL_DEBRIS;
     public static EndStageItem CELESTIAL_LUMINARY;
     public static SpawnerSoulItem SPAWNER_SOUL;
     public static HeartSpellSteelItem HEART_STEEL;
@@ -116,9 +118,14 @@ public class AllItems
                 .addZH("深渊守护")
                 .addModel()
                 .register();
-        ACCURSED_BLACKSTONE = Entry.of("accursed_blackstone", new NetherStarItem(new FabricItemSettings().fireproof().maxCount(1).rarity(Rarity.EPIC)))
+        ACCURSED_BLACKSTONE = Entry.of("accursed_blackstone", new NetherStarItem(new FabricItemSettings().fireproof().maxCount(16).rarity(Rarity.EPIC)))
                 .addEN()
                 .addZH("朽咒黑石")
+                .addModel()
+                .register();
+        CELESTIAL_DEBRIS = Entry.of("celestial_debris", new Item(new FabricItemSettings().fireproof().rarity(Rarity.EPIC)))
+                .addEN()
+                .addZH("日月星碎")
                 .addModel()
                 .register();
         CELESTIAL_LUMINARY = Entry.of("celestial_luminary", new EndStageItem())
@@ -275,14 +282,23 @@ public class AllItems
         @Override
         public ItemBuilder<T> addModel()
         {
-            if (content instanceof TraitSymbol)
+            if (content instanceof TraitSymbol symbol)
             {
-                this.getModelGenerator().addItem(generator ->
-                        Models.GENERATED_TWO_LAYERS.upload(
-                                this.getId().withPrefixedPath("item/"),
-                                TextureMap.layered(SYMBOL_BG, this.getId().withPrefixedPath("item/trait/")),
-                                generator.writer
-                        ));
+                TextureMap layeredBg = TextureMap.layered(SYMBOL_BG, this.getId().withPrefixedPath("item/trait/"));
+                if (symbol.get() instanceof SpellTrait spellTrait)
+                    this.getModelGenerator().addItem(generator ->
+                            Models.GENERATED_TWO_LAYERS.upload(
+                                    spellTrait.getSpellId().withPrefixedPath("spell/"),
+                                    layeredBg,
+                                    generator.writer
+                            ));
+                else
+                    this.getModelGenerator().addItem(generator ->
+                            Models.GENERATED_TWO_LAYERS.upload(
+                                    this.getId().withPrefixedPath("item/"),
+                                    layeredBg,
+                                    generator.writer
+                            ));
                 return this;
             } else return super.addModel();
         }

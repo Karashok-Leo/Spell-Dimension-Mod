@@ -1,6 +1,5 @@
 package karashokleo.spell_dimension.content.quest;
 
-import karashokleo.l2hostility.content.item.TrinketItems;
 import karashokleo.spell_dimension.content.quest.base.SimpleLootItemQuest;
 import karashokleo.spell_dimension.content.quest.special.EnderDragonAdvancementQuest;
 import karashokleo.spell_dimension.data.loot_bag.SDBags;
@@ -27,7 +26,7 @@ public class KillT1Quests
                                         () -> Registries.ENTITY_TYPE.get(new Identifier("soulsweapons:day_stalker")),
                                         () -> Registries.ENTITY_TYPE.get(new Identifier("soulsweapons:night_prowler"))
                                 ),
-                                List.of(() -> AllItems.CELESTIAL_LUMINARY),
+                                List.of(() -> AllItems.CELESTIAL_DEBRIS),
                                 SDBags.LEGENDARY_GEAR::getStack
                         )
                 )
@@ -46,7 +45,7 @@ public class KillT1Quests
         KILL_ENDER_DRAGON = QuestBuilder.of(
                         "kill_ender_dragon",
                         new EnderDragonAdvancementQuest(
-                                TrinketItems.LOOT_4::getDefaultStack
+                                SDBags.LEGENDARY_MATERIAL::getStack
                         )
                 )
                 .addEnDesc("Defeat Ender Dragon")

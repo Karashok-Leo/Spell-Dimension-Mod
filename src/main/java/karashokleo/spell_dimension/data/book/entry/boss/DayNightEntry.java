@@ -60,7 +60,7 @@ public class DayNightEntry extends BaseEntryProvider
                         Use Chaos Orb to summon.
                         \\
                         \\
-                        Drops **Celestial Luminary** upon defeating Night Prowler.
+                        Drops **Celestial Debris** upon defeating Night Prowler.
                         """.formatted(TextConstants.BOSS_LEVELS[3])
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
@@ -73,7 +73,7 @@ public class DayNightEntry extends BaseEntryProvider
                         使用混沌宝珠召唤。
                         \\
                         \\
-                        击败夜伏者后掉落**无尽星辉**。
+                        击败夜伏者后掉落**日月星碎**。
                         """.formatted(TextConstants.BOSS_LEVELS[3])
         );
 
@@ -81,7 +81,7 @@ public class DayNightEntry extends BaseEntryProvider
                 .builder()
                 .withTitle(context.pageTitle())
                 .withText(context.pageText())
-                .withItem(Ingredient.ofItems(AllItems.CELESTIAL_LUMINARY))
+                .withItem(Ingredient.ofItems(AllItems.CELESTIAL_DEBRIS))
                 .build();
 
         BookEntityPageModel day = BookEntityPageModel

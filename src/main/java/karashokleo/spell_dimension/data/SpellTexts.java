@@ -111,7 +111,7 @@ public enum SpellTexts
             "每秒灼烧目标的随机一个词条，该词条的等级消耗越高，造成的伤害越高。"
     ),
     AURA(
-            "Aura",
+            "Frost Aura",
             "霜环",
             "Apply Frost Aura {effect_amplifier} effect to oneself for {effect_duration} seconds. Frost Aura: " + FrostAuraEffect.DESC_EN,
             "施法者获得霜环{effect_amplifier}效果，持续{effect_duration}秒。霜环：" + FrostAuraEffect.DESC_ZH
@@ -129,7 +129,7 @@ public enum SpellTexts
             "冻结一定范围内所有目标，持续{effect_duration}秒。"
     ),
     NUCLEUS(
-            "Nucleus",
+            "Icy Nucleus",
             "冰核",
             "Freeze the target's heart into a ice nucleus, explode in %s seconds, and shoot icicles into the surrounding area.".formatted(Nucleus.TOTAL_DURATION / 20F),
             "将敌人的心脏化作一个冰核，%s秒后爆炸，并向周围射出冰刺。".formatted(Nucleus.TOTAL_DURATION / 20F)

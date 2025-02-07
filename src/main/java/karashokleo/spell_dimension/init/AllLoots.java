@@ -13,6 +13,7 @@ import karashokleo.spell_dimension.content.loot.entry.RandomEnlighteningEssenceE
 import karashokleo.spell_dimension.content.loot.entry.SpellScrollEntry;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.condition.KilledByPlayerLootCondition;
 import net.minecraft.loot.entry.EmptyEntry;
@@ -69,6 +70,7 @@ public class AllLoots
     {
         SpellImpactEvents.BEFORE.register((world, caster, targets, spellInfo) ->
         {
+            if (!(caster instanceof PlayerEntity)) return;
             SpellSchool school = spellInfo.spell().school;
             for (Entity target : targets)
             {

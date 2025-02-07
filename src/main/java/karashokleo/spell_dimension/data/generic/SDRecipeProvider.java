@@ -103,6 +103,7 @@ public class SDRecipeProvider extends FabricRecipeProvider
                 )
                 .offerTo(exporter, SpellDimension.modLoc("spell_infusion_pedestal"));
 
+        // Broken Magic Mirror
         ShapedRecipeJsonBuilder
                 .create(RecipeCategory.MISC, AllItems.BROKEN_MAGIC_MIRROR)
                 .pattern("MMM")
@@ -117,6 +118,7 @@ public class SDRecipeProvider extends FabricRecipeProvider
                 )
                 .offerTo(exporter);
 
+        // Magic Mirror
         ShapedRecipeJsonBuilder
                 .create(RecipeCategory.MISC, AllItems.MAGIC_MIRROR)
                 .pattern("MMM")
@@ -130,6 +132,7 @@ public class SDRecipeProvider extends FabricRecipeProvider
                 )
                 .offerTo(exporter);
 
+        // Netherite Upgrade Smithing Template
         SmithingTransformRecipeJsonBuilder
                 .create(
                         Ingredient.EMPTY,
@@ -141,6 +144,7 @@ public class SDRecipeProvider extends FabricRecipeProvider
                 .criterion(FabricRecipeProvider.hasItem(Items.NETHERITE_INGOT), FabricRecipeProvider.conditionsFromItem(Items.NETHERITE_INGOT))
                 .offerTo(exporter, SpellDimension.modLoc("netherite_upgrade_smithing_template"));
 
+        // Gilded Blackstone Shard
         ShapelessRecipeJsonBuilder
                 .create(RecipeCategory.MISC, ItemInit.GILDED_BLACKSTONE_SHARD)
                 .input(ComplementItems.BLACKSTONE_CORE)
@@ -149,6 +153,19 @@ public class SDRecipeProvider extends FabricRecipeProvider
                         FabricRecipeProvider.conditionsFromItem(ComplementItems.BLACKSTONE_CORE)
                 )
                 .offerTo(exporter, SpellDimension.modLoc("gilded_blackstone_shard"));
+
+        // Celestial Luminary
+        ShapedRecipeJsonBuilder
+                .create(RecipeCategory.MISC, AllItems.CELESTIAL_LUMINARY)
+                .pattern(" D ")
+                .pattern("DDD")
+                .pattern(" D ")
+                .input('D', AllItems.CELESTIAL_DEBRIS)
+                .criterion(
+                        FabricRecipeProvider.hasItem(AllItems.CELESTIAL_DEBRIS),
+                        FabricRecipeProvider.conditionsFromItem(AllItems.CELESTIAL_DEBRIS)
+                )
+                .offerTo(exporter);
     }
 
     private static void addBaseEssenceRecipe(Consumer<RecipeJsonProvider> exporter)

@@ -2,7 +2,6 @@ package karashokleo.spell_dimension.content.quest;
 
 import com.obscuria.aquamirae.registry.AquamiraeEntities;
 import com.obscuria.aquamirae.registry.AquamiraeItems;
-import karashokleo.l2hostility.content.item.TrinketItems;
 import karashokleo.spell_dimension.content.quest.base.SimpleLootItemQuest;
 import karashokleo.spell_dimension.data.loot_bag.SDBags;
 import net.adventurez.init.EntityInit;
@@ -35,7 +34,7 @@ public class KillT3Quests
                         new SimpleLootItemQuest(
                                 () -> EntityInit.BLACKSTONE_GOLEM,
                                 () -> ItemInit.BLACKSTONE_GOLEM_HEART,
-                                SDBags.RARE_GEAR::getStack
+                                SDBags.RARE_BOOK::getStack
                         )
                 )
                 .toEntry("boss/blackstone_golem")
@@ -57,7 +56,7 @@ public class KillT3Quests
                         new SimpleLootItemQuest(
                                 "soulsweapons:chaos_monarch",
                                 "soulsweapons:chaos_crown",
-                                TrinketItems.LOOT_2::getDefaultStack
+                                SDBags.RARE_GEAR::getStack
                         )
                 )
                 .toEntry("boss/chaos_monarch")

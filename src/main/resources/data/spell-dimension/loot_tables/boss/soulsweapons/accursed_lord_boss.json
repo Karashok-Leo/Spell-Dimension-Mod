@@ -26,7 +26,11 @@
           "name": "spell-dimension:accursed_blackstone"
         }
       ],
-      "rolls": 1.0
+      "rolls": {
+        "type": "minecraft:uniform",
+        "min": 2,
+        "max": 4
+      }
     }
   ]
 }

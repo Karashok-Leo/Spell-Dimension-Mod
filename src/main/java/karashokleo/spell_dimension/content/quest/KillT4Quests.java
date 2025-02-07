@@ -1,6 +1,5 @@
 package karashokleo.spell_dimension.content.quest;
 
-import karashokleo.l2hostility.content.item.TrinketItems;
 import karashokleo.spell_dimension.content.quest.base.SimpleLootItemQuest;
 import karashokleo.spell_dimension.data.loot_bag.SDBags;
 import karashokleo.spell_dimension.init.AllItems;
@@ -41,7 +40,7 @@ public class KillT4Quests
                         new SimpleLootItemQuest(
                                 () -> Registries.ENTITY_TYPE.get(new Identifier("soulsweapons:accursed_lord_boss")),
                                 () -> AllItems.ACCURSED_BLACKSTONE,
-                                TrinketItems.LOOT_1::getDefaultStack
+                                SDBags.RARE_MATERIAL::getStack
                         )
                 )
                 .toEntry("boss/decaying_king")
@@ -52,7 +51,7 @@ public class KillT4Quests
                         new SimpleLootItemQuest(
                                 () -> EntityType.ELDER_GUARDIAN,
                                 () -> AllItems.ABYSS_GUARD,
-                                SDBags.RARE_MATERIAL::getStack
+                                SDBags.RARE_BOOK::getStack
                         )
                 )
                 .toEntry("boss/guardian")

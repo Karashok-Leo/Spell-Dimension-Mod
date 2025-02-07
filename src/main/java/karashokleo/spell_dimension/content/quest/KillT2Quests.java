@@ -1,6 +1,5 @@
 package karashokleo.spell_dimension.content.quest;
 
-import karashokleo.l2hostility.content.item.TrinketItems;
 import karashokleo.spell_dimension.content.quest.base.SimpleLootItemQuest;
 import karashokleo.spell_dimension.data.loot_bag.SDBags;
 
@@ -40,7 +39,7 @@ public class KillT2Quests
                         new SimpleLootItemQuest(
                                 "bosses_of_mass_destruction:void_blossom",
                                 "bosses_of_mass_destruction:void_thorn",
-                                TrinketItems.LOOT_3::getDefaultStack
+                                SDBags.EPIC_MATERIAL::getStack
                         )
                 )
                 .toEntry("boss/void_blossom")
