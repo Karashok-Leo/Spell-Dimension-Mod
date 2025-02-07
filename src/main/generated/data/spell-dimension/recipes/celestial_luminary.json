@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "spell-dimension:celestial_debris"
+    }
+  },
+  "pattern": [
+    " D ",
+    "DDD",
+    " D "
+  ],
+  "result": {
+    "item": "spell-dimension:celestial_luminary"
+  },
+  "show_notification": true
+}

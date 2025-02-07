@@ -23,6 +23,7 @@
     "phase.EntityPredicatesMixin",
     "phase.LivingEntityMixin",
     "phase.PlayerEntityMixin",
+    "vanilla.DragonFireballEntityMixin",
     "vanilla.EnchantBookFactoryMixin",
     "vanilla.EnchantmentHelperMixin",
     "vanilla.EnchantRandomlyLootFunctionMixin",

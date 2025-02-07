@@ -19,14 +19,16 @@ public class LocatePortalEntity extends Entity
     protected int lifespan;
     protected BlockPos destination;
 
-    public static LocatePortalEntity create(EntityType<?> type, World world)
+    public LocatePortalEntity(EntityType<?> type, World world)
     {
-        return new LocatePortalEntity(type, world, BlockPos.ORIGIN, 200);
+        super(type, world);
+        this.lifespan = 200;
+        this.destination = BlockPos.ORIGIN;
     }
 
     private LocatePortalEntity(EntityType<?> type, World world, BlockPos destination, int lifespan)
     {
-        super(type, world);
+        super(AllEntities.LOCATE_PORTAL, world);
         this.lifespan = lifespan;
         this.destination = destination;
     }

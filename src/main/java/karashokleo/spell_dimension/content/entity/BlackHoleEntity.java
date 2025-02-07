@@ -1,6 +1,7 @@
 package karashokleo.spell_dimension.content.entity;
 
 import karashokleo.spell_dimension.config.SpellConfig;
+import karashokleo.spell_dimension.init.AllEntities;
 import karashokleo.spell_dimension.util.DamageUtil;
 import karashokleo.spell_dimension.util.ImpactUtil;
 import net.minecraft.entity.*;
@@ -33,15 +34,17 @@ public class BlackHoleEntity extends Entity implements Ownable
     @Nullable
     private Entity owner;
 
-    public static BlackHoleEntity create(EntityType<BlackHoleEntity> type, World world)
-    {
-        return new BlackHoleEntity(type, world);
-    }
-
-    private BlackHoleEntity(EntityType<?> type, World world)
+    public BlackHoleEntity(EntityType<?> type, World world)
     {
         super(type, world);
         this.setOwner(null);
+    }
+
+    public BlackHoleEntity(World world, Entity owner, float radius)
+    {
+        super(AllEntities.BLACK_HOLE, world);
+        this.setOwner(owner);
+        this.setRadius(radius);
     }
 
     public void setOwner(@Nullable Entity owner)

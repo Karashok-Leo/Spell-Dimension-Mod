@@ -81,7 +81,7 @@ public class ImpactUtil
                     }
                     break;
                 case PROJECTILE:
-                    optionalTarget.ifPresent(entity -> SpellHelper.shootProjectile(world, caster, entity, spellInfo, context));
+                    optionalTarget.ifPresent(entity -> shootProjectile(world, caster, entity, spellInfo, context));
                     break;
                 case METEOR:
                     if (optionalTarget.isPresent())
@@ -139,12 +139,17 @@ public class ImpactUtil
         return new Vec3d(x, y, z);
     }
 
+    public static void shootProjectile(World world, LivingEntity caster, Entity target, SpellInfo spellInfo, SpellHelper.ImpactContext context)
+    {
+        shootProjectile(world, caster, SpellHelper.launchPoint(caster), target.getPos().subtract(caster.getPos()), spellInfo.spell().range, spellInfo, context);
+    }
+
     public static void shootProjectile(World world, LivingEntity caster, Vec3d position, Vec3d direction, float range, SpellInfo spellInfo, SpellHelper.ImpactContext context)
     {
         shootProjectile(world, caster, position, direction, range, spellInfo, context, 0);
     }
 
-    public static void shootProjectile(World world, LivingEntity caster, Vec3d position, Vec3d direction, float range, SpellInfo spellInfo, SpellHelper.ImpactContext context, int sequenceIndex)
+    private static void shootProjectile(World world, LivingEntity caster, Vec3d position, Vec3d direction, float range, SpellInfo spellInfo, SpellHelper.ImpactContext context, int sequenceIndex)
     {
         if (world.isClient()) return;
 

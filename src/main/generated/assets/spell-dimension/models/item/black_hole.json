@@ -2,6 +2,6 @@
   "parent": "minecraft:item/generated",
   "textures": {
     "layer0": "l2hostility:item/bg",
-    "layer1": "spell-dimension:spell/shift"
+    "layer1": "spell-dimension:spell/black_hole"
   }
 }

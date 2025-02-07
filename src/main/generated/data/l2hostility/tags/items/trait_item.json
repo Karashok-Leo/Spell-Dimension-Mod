@@ -1,8 +1,9 @@
 {
   "replace": false,
   "values": [
-    "spell-dimension:shift",
     "spell-dimension:airborne",
-    "spell-dimension:leech"
+    "spell-dimension:leech",
+    "spell-dimension:shift",
+    "spell-dimension:black_hole"
   ]
 }

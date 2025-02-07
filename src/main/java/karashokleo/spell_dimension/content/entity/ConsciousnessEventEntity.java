@@ -68,19 +68,14 @@ public class ConsciousnessEventEntity extends Entity
         FINISH
     }
 
-    public static ConsciousnessEventEntity create(EntityType<?> type, World world)
-    {
-        return new ConsciousnessEventEntity(type, world);
-    }
-
-    private ConsciousnessEventEntity(EntityType<?> type, World world)
+    public ConsciousnessEventEntity(EntityType<?> type, World world)
     {
         super(type, world);
     }
 
     public ConsciousnessEventEntity(World world, int level)
     {
-        this(AllEntities.CONSCIOUSNESS_EVENT, world);
+        super(AllEntities.CONSCIOUSNESS_EVENT, world);
         this.level = level;
         WaveFactory.getRandom(world.getRandom(), this.level)
                 .fillWaves(world.getRandom(), this.waves);

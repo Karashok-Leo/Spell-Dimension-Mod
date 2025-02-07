@@ -1,14 +1,15 @@
 package karashokleo.spell_dimension.content.spell;
 
 import karashokleo.spell_dimension.content.entity.BlackHoleEntity;
-import karashokleo.spell_dimension.init.AllEntities;
 import karashokleo.spell_dimension.init.AllSpells;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 import net.spell_engine.entity.SpellProjectile;
 import net.spell_power.api.SpellPower;
 import net.spell_power.api.SpellSchools;
@@ -33,22 +34,15 @@ public class BlackHoleSpell
             return;
         if (!(projectile.getWorld() instanceof ServerWorld serverWorld))
             return;
-        BlackHoleEntity blackHole = AllEntities.BLACK_HOLE.create(
-                serverWorld,
-                null,
-                null,
-                projectile.getBlockPos(),
-                SpawnReason.CONVERSION,
-                false,
-                false
-        );
-        if (blackHole == null)
-            return;
-        double power = SpellPower.getSpellPower(SpellSchools.ARCANE, player).randomValue();
+        spawn(serverWorld, player, projectile.getPos());
+    }
+
+    public static void spawn(World world, LivingEntity caster, Vec3d pos)
+    {
+        double power = SpellPower.getSpellPower(SpellSchools.ARCANE, caster).randomValue();
         double radius = MathHelper.clamp(power * 0.02, MIN_RADIUS, MAX_RADIUS);
-        blackHole.setOwner(player);
-        blackHole.setRadius((float) radius);
-        blackHole.setPosition(projectile.getPos().add(0, -radius, 0));
-        serverWorld.spawnEntity(blackHole);
+        BlackHoleEntity blackHole = new BlackHoleEntity(world, caster, (float) radius);
+        blackHole.setPosition(pos.add(0, -radius, 0));
+        world.spawnEntity(blackHole);
     }
 }

@@ -40,6 +40,18 @@
       ],
       "text": "book.spell-dimension-book.magic_guidance.power.smith.reforge.text",
       "title": "book.spell-dimension-book.magic_guidance.power.smith.reforge.title"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "item": {
+        "item": "fusion-smithing:fusion_smithing_template"
+      },
+      "text": "book.spell-dimension-book.magic_guidance.power.smith.fusion.text",
+      "title": "book.spell-dimension-book.magic_guidance.power.smith.fusion.title"
     }
   ],
   "show_when_any_parent_unlocked": false,

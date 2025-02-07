@@ -2,7 +2,6 @@ package karashokleo.spell_dimension.init;
 
 import com.google.common.collect.ArrayListMultimap;
 import dev.emi.trinkets.api.TrinketItem;
-import karashokleo.l2hostility.L2Hostility;
 import karashokleo.l2hostility.content.item.traits.TraitSymbol;
 import karashokleo.l2hostility.init.LHMiscs;
 import karashokleo.l2hostility.init.LHTags;
@@ -13,12 +12,10 @@ import karashokleo.spell_dimension.content.item.essence.*;
 import karashokleo.spell_dimension.content.item.essence.base.ColorProvider;
 import karashokleo.spell_dimension.content.item.logic.Tier;
 import karashokleo.spell_dimension.content.item.trinket.*;
-import karashokleo.spell_dimension.content.trait.SpellTrait;
 import karashokleo.spell_dimension.util.SchoolUtil;
 import karashokleo.spell_dimension.util.TagUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.data.client.Models;
-import net.minecraft.data.client.TextureMap;
 import net.minecraft.item.Item;
 import net.minecraft.item.NetherStarItem;
 import net.minecraft.util.Identifier;
@@ -264,8 +261,6 @@ public class AllItems
 
     public static class Entry<T extends Item> extends ItemBuilder<T>
     {
-        public static final Identifier SYMBOL_BG = L2Hostility.id("item/bg");
-
         public static <T extends Item> Entry<T> of(String name, T content)
         {
             return new Entry<>(name, content);
@@ -277,30 +272,6 @@ public class AllItems
             if (content instanceof ColorProvider) COLOR_PROVIDERS.add(content);
             if (content instanceof TraitSymbol)
                 this.setTab(LHMiscs.TRAITS);
-        }
-
-        @Override
-        public ItemBuilder<T> addModel()
-        {
-            if (content instanceof TraitSymbol symbol)
-            {
-                TextureMap layeredBg = TextureMap.layered(SYMBOL_BG, this.getId().withPrefixedPath("item/trait/"));
-                if (symbol.get() instanceof SpellTrait spellTrait)
-                    this.getModelGenerator().addItem(generator ->
-                            Models.GENERATED_TWO_LAYERS.upload(
-                                    spellTrait.getSpellId().withPrefixedPath("spell/"),
-                                    layeredBg,
-                                    generator.writer
-                            ));
-                else
-                    this.getModelGenerator().addItem(generator ->
-                            Models.GENERATED_TWO_LAYERS.upload(
-                                    this.getId().withPrefixedPath("item/"),
-                                    layeredBg,
-                                    generator.writer
-                            ));
-                return this;
-            } else return super.addModel();
         }
 
         public ItemBuilder<T> addModel(String textureId)

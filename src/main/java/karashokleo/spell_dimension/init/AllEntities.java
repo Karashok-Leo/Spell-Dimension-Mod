@@ -18,18 +18,18 @@ public class AllEntities
 
     public static void register()
     {
-        LOCATE_PORTAL = FabricEntityTypeBuilder.create()
-                .entityFactory(LocatePortalEntity::create)
+        LOCATE_PORTAL = FabricEntityTypeBuilder.<LocatePortalEntity>create()
+                .entityFactory(LocatePortalEntity::new)
                 .fireImmune()
                 .disableSummon()
                 .build();
-        CONSCIOUSNESS_EVENT = FabricEntityTypeBuilder.create()
-                .entityFactory(ConsciousnessEventEntity::create)
+        CONSCIOUSNESS_EVENT = FabricEntityTypeBuilder.<ConsciousnessEventEntity>create()
+                .entityFactory(ConsciousnessEventEntity::new)
                 .fireImmune()
                 .disableSummon()
                 .build();
-        BLACK_HOLE = FabricEntityTypeBuilder.create()
-                .entityFactory(BlackHoleEntity::create)
+        BLACK_HOLE = FabricEntityTypeBuilder.<BlackHoleEntity>create()
+                .entityFactory(BlackHoleEntity::new)
                 .spawnGroup(SpawnGroup.MISC)
                 .fireImmune()
                 .trackRangeChunks(10)
