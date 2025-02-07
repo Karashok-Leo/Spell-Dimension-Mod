@@ -1,9 +1,6 @@
 {
   "school": "PHYSICAL_MELEE",
   "range": 2,
-  "learn": {
-    "tier": 2
-  },
   "cast": {
     "duration": 0.4,
     "animation": "spellbladenext:polejump",

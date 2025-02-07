@@ -1,6 +1,7 @@
 package karashokleo.spell_dimension.content.trait;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
+import karashokleo.l2hostility.content.item.trinket.core.ReflectTrinket;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.MobEntity;
@@ -27,6 +28,7 @@ public class AirborneTrait extends CooldownTrait
     @Override
     public void action(int level, Data data, MobEntity mob, LivingEntity target)
     {
+        if (ReflectTrinket.canReflect(target, this)) return;
         double knockBackStrength = strength.applyAsInt(level);
         knockBackStrength *= 1.0 - target.getAttributeValue(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE);
         Vec3d vec3d = target.getPos().subtract(mob.getPos()).normalize().multiply(knockBackStrength);

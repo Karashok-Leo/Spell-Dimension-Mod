@@ -2,6 +2,7 @@ package karashokleo.spell_dimension.content.trait;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.EntityEvents;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
+import karashokleo.l2hostility.content.item.trinket.core.ReflectTrinket;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
@@ -31,6 +32,7 @@ public class ShiftTrait extends CooldownTrait
     @Override
     public void action(int level, Data data, MobEntity mob, LivingEntity target)
     {
+        if (ReflectTrinket.canReflect(target, this)) return;
         exchangePosition(mob, target);
     }
 

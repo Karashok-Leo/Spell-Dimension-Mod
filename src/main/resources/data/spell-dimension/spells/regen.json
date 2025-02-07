@@ -2,7 +2,7 @@
   "school": "HEALING",
   "range": 16,
   "learn": {
-    "tier": 2
+    "tier": 0
   },
   "cast": {
     "duration": 1.6,

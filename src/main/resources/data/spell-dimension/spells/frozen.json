@@ -1,6 +1,9 @@
 {
   "school": "FROST",
   "range": 8,
+  "learn": {
+    "tier": 0
+  },
   "cast": {
     "duration": 0
   },

@@ -1,9 +1,6 @@
 {
   "school": "PHYSICAL_RANGED",
   "range": 4,
-  "learn": {
-    "tier": 3
-  },
   "cast": {
     "duration": 0.8,
     "animation": "spellbladenext:dual_handed_slash_cross",

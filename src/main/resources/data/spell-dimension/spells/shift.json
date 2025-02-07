@@ -1,6 +1,9 @@
 {
   "school": "ARCANE",
   "range": 48,
+  "learn": {
+    "tier": 0
+  },
   "cast": {
     "duration": 2,
     "animation": "spell_engine:one_handed_projectile_charge",

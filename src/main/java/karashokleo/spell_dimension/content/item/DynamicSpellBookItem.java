@@ -68,7 +68,7 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
 
     public boolean canContainSpell(Spell spell)
     {
-        return this.grade + 2 >= spell.learn.tier;
+        return this.grade >= SpellScrollItem.getSpellGrade(spell);
     }
 
     public int getMaxSpellCount()
@@ -138,7 +138,7 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
                 player.sendMessage(SDTexts.TEXT$INCOMPATIBLE_SCHOOL.get());
                 return;
             }
-            if (this.canContainSpell(spellInfo.spell()))
+            if (!this.canContainSpell(spellInfo.spell()))
             {
                 player.sendMessage(SDTexts.TEXT$HIGHER_BOOK_REQUIRED.get());
                 return;

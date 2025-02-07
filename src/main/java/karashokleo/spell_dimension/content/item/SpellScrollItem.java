@@ -87,9 +87,17 @@ public class SpellScrollItem extends Item implements ColorProvider
         ).formatted(Formatting.GRAY));
         if (spellInfo == null) return;
         if (!SchoolUtil.SCHOOLS.contains(spellInfo.spell().school)) return;
-        int tier = spellInfo.spell().learn.tier;
-        int grade = MathHelper.clamp(tier - 2, 0, 2);
+        int grade = getSpellGrade(spellInfo.spell());
         DynamicSpellBookItem bookItem = AllItems.SPELL_BOOKS.get(spellInfo.spell().school).get(grade);
         tooltip.add(SDTexts.SCROLL$BOOK_REQUIREMENT.get(grade + 1, bookItem.getName()).formatted(Formatting.GRAY));
+    }
+
+    /**
+     * @return 0 for tier 0~3, 1 for tier 4~7, 2 for tier 8~
+     */
+    public static int getSpellGrade(Spell spell)
+    {
+        int tier = spell.learn.tier;
+        return MathHelper.clamp(tier / 4, 0, 2);
     }
 }

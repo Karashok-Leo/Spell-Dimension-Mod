@@ -1,6 +1,9 @@
 {
   "school": "ARCANE",
   "range": 2,
+  "learn": {
+    "tier": 0
+  },
   "cast": {
     "duration": 1,
     "animation": "spell_engine:one_handed_area_release",

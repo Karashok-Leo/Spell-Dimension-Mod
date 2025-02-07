@@ -2,7 +2,7 @@
   "school": "FROST",
   "range": 48,
   "learn": {
-    "tier": 2
+    "tier": 0
   },
   "cast": {
     "duration": 0.5,
