@@ -3,6 +3,7 @@ package karashokleo.spell_dimension.content.item;
 import com.google.common.collect.Multimap;
 import dev.emi.trinkets.api.SlotReference;
 import karashokleo.spell_dimension.SpellDimension;
+import karashokleo.spell_dimension.config.SpellConfig;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllSpells;
@@ -26,7 +27,6 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import net.spell_engine.api.item.trinket.SpellBookTrinketItem;
-import net.spell_engine.api.spell.Spell;
 import net.spell_engine.api.spell.SpellContainer;
 import net.spell_engine.api.spell.SpellInfo;
 import net.spell_engine.internals.SpellContainerHelper;
@@ -66,9 +66,10 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
         this.grade = grade;
     }
 
-    public boolean canContainSpell(Spell spell)
+    public boolean canContainSpell(Identifier spellId)
     {
-        return this.grade >= SpellScrollItem.getSpellGrade(spell);
+        return SpellConfig.enableSpellTier() &&
+               this.grade >= SpellConfig.getSpellTier(spellId);
     }
 
     public int getMaxSpellCount()
@@ -138,7 +139,7 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
                 player.sendMessage(SDTexts.TEXT$INCOMPATIBLE_SCHOOL.get());
                 return;
             }
-            if (!this.canContainSpell(spellInfo.spell()))
+            if (!this.canContainSpell(spellInfo.id()))
             {
                 player.sendMessage(SDTexts.TEXT$HIGHER_BOOK_REQUIRED.get());
                 return;

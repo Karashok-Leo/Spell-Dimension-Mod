@@ -1,5 +1,6 @@
 package karashokleo.spell_dimension.content.item;
 
+import karashokleo.spell_dimension.config.SpellConfig;
 import karashokleo.spell_dimension.config.recipe.SpellScrollConfig;
 import karashokleo.spell_dimension.content.item.essence.base.ColorProvider;
 import karashokleo.spell_dimension.data.SDTexts;
@@ -13,7 +14,6 @@ import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.spell_engine.api.spell.Spell;
 import net.spell_engine.api.spell.SpellContainer;
@@ -90,21 +90,15 @@ public class SpellScrollItem extends Item implements ColorProvider
                 SpellScrollConfig.getSpellScrollText(spellInfo)
         ).formatted(Formatting.GRAY));
         // book requirement
-        if (!SchoolUtil.SCHOOLS.contains(spell.school)) return;
-        int grade = getSpellGrade(spell);
-        DynamicSpellBookItem bookItem = AllItems.SPELL_BOOKS.get(spell.school).get(grade);
-        tooltip.add(SDTexts.SCROLL$BOOK_REQUIREMENT.get(grade + 1, bookItem.getName()).formatted(Formatting.GRAY));
+        if (SpellConfig.enableSpellTier() &&
+            SchoolUtil.SCHOOLS.contains(spell.school))
+        {
+            int grade = SpellConfig.getSpellTier(id);
+            DynamicSpellBookItem bookItem = AllItems.SPELL_BOOKS.get(spell.school).get(grade);
+            tooltip.add(SDTexts.SCROLL$BOOK_REQUIREMENT.get(grade + 1, bookItem.getName()).formatted(Formatting.GRAY));
+        }
         // id
         if (context.isAdvanced())
             tooltip.add(Text.literal("spell id: " + id).formatted(Formatting.DARK_GRAY));
-    }
-
-    /**
-     * @return 0 for tier 0~3, 1 for tier 4~7, 2 for tier 8~
-     */
-    public static int getSpellGrade(Spell spell)
-    {
-        int tier = spell.learn.tier;
-        return MathHelper.clamp(tier / 4, 0, 2);
     }
 }
