@@ -22,6 +22,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.spell.SpellInfo;
+import net.trique.mythicupgrades.block.MUBlocks;
 import nourl.mythicmetals.blocks.MythicBlocks;
 import nourl.mythicmetals.item.MythicItems;
 import nourl.mythicmetals.item.tools.MythicTools;
@@ -97,6 +98,11 @@ public class SpellScrollConfig
 
         // Infusion
         {
+            /// pending:
+            /// "bosses_of_mass_destruction:blazing_eye"
+            /// MythicBlocks.PLATINUM.getStorageBlock().asItem()
+            /// AquamiraeItems.ABYSSAL_AMETHYST
+
             fromCrafting(AllSpells.LOCATE, Items.COMPASS);
             fromCrafting(AllSpells.SUMMON, AllItems.SPAWNER_SOUL);
             fromCrafting(AllSpells.PLACE, ModRegistry.ENDERSOUL_HAND_ITEM.get());
@@ -113,21 +119,21 @@ public class SpellScrollConfig
             fromCrafting(AllSpells.INCARCERATE, ComplementItems.BLACKSTONE_CORE);
             fromCrafting(AllSpells.BLACK_HOLE, Items.DRAGON_EGG);
             fromCrafting(AllSpells.FINAL_STRIKE, DDItems.SOUL_CRYSTAL);
-            fromCrafting(AllSpells.ARCANE_BEAM, "soulsweapons:lord_soul_purple");
-            fromCrafting(AllSpells.ARCANE_FLOURISH, MythicBlocks.PLATINUM.getStorageBlock().asItem());
+            fromCrafting(AllSpells.ARCANE_BEAM, MythicBlocks.KYBER.getStorageBlock().asItem());
+            fromCrafting(AllSpells.ARCANE_FLOURISH, MUBlocks.AMETRINE_BLOCK.asItem());
             fromCrafting(AllSpells.ARCANE_FLICKER, MythicBlocks.STAR_PLATINUM.getStorageBlock().asItem());
-            fromCrafting(AllSpells.ARCANE_OVERDRIVE, MythicBlocks.KYBER.getStorageBlock().asItem());
+            fromCrafting(AllSpells.ARCANE_OVERDRIVE, com.spellbladenext.items.Items.arcane_orb.item());
             fromCrafting(AllSpells.ECHO_STORM, MythicItems.Mats.STORMYX_SHELL);
             fromCrafting(AllSpells.MAELSTROM, MythicTools.STORMYX_SHIELD);
-            fromCrafting(AllSpells.AMETHYST_SLASH, AquamiraeItems.ABYSSAL_AMETHYST);
+            fromCrafting(AllSpells.AMETHYST_SLASH, com.spellbladenext.items.Items.crystal_cutlass.item());
 
-            fromCrafting(AllSpells.FIRE_BREATH, "soulsweapons:lord_soul_rose");
-            fromCrafting(AllSpells.BLAST, AllItems.ACCURSED_BLACKSTONE);
+            fromCrafting(AllSpells.FIRE_BREATH, MUBlocks.TOPAZ_BLOCK.asItem());
+            fromCrafting(AllSpells.BLAST, ComplementItems.EXPLOSION_SHARD);
             fromCrafting(AllSpells.IGNITE, ItemInit.BLACKSTONE_GOLEM_HEART);
             fromCrafting(AllSpells.FIRE_OF_RETRIBUTION, LHTraits.SOUL_BURNER.asItem());
-            fromCrafting(AllSpells.FIRE_FLOURISH, "bosses_of_mass_destruction:blazing_eye");
-            fromCrafting(AllSpells.FLAME_OVERDRIVE, ComplementItems.EXPLOSION_SHARD);
-            fromCrafting(AllSpells.FLICKER_STRIKE, "soulsweapons:lord_soul_red");
+            fromCrafting(AllSpells.FIRE_FLOURISH, MUBlocks.RUBY_BLOCK.asItem());
+            fromCrafting(AllSpells.FLAME_OVERDRIVE, com.spellbladenext.items.Items.fire_orb.item());
+            fromCrafting(AllSpells.FLICKER_STRIKE, MUBlocks.RUBY_BLOCK.asItem());
             fromCrafting(AllSpells.FLAME_SLASH, com.spellbladenext.items.Items.flaming_falchion.item());
             fromCrafting(AllSpells.OVER_BLAZE, MythicBlocks.QUADRILLUM.getStorageBlock().asItem());
             fromCrafting(AllSpells.PHOENIX_DIVE, "soulsweapons:crimson_ingot");
@@ -136,14 +142,14 @@ public class SpellScrollConfig
             fromCrafting(AllSpells.DRAGON_SLAM, "dragonloot:dragon_scale");
             fromCrafting(AllSpells.WILDFIRE, MythicItems.Mats.CARMOT_STONE);
 
-            fromCrafting(AllSpells.FROST_BLIZZARD, "soulsweapons:lord_soul_white");
+            fromCrafting(AllSpells.FROST_BLIZZARD, MythicBlocks.SILVER.getStorageBlock().asItem());
             fromCrafting(AllSpells.NUCLEUS, MythicBlocks.AQUARIUM.getStorageBlock().asItem());
             fromCrafting(AllSpells.AURA, AquamiraeItems.MAZE_ROSE);
             fromCrafting(AllSpells.ICICLE, AllItems.ABYSS_GUARD);
             fromCrafting(AllSpells.FROST_BLINK, AquamiraeItems.DEAD_SEA_SCROLL);
             fromCrafting(AllSpells.FROZEN, AquamiraeItems.SHIP_GRAVEYARD_ECHO);
-            fromCrafting(AllSpells.FROST_FLOURISH, MythicBlocks.MYTHRIL.getStorageBlock().asItem());
-            fromCrafting(AllSpells.FROST_OVERDRIVE, MythicBlocks.SILVER.getStorageBlock().asItem());
+            fromCrafting(AllSpells.FROST_FLOURISH, MUBlocks.AQUAMARINE_BLOCK.asItem());
+            fromCrafting(AllSpells.FROST_OVERDRIVE, com.spellbladenext.items.Items.frost_orb.item());
             fromCrafting(AllSpells.FROST_LOTUS, MythicBlocks.RUNITE.getStorageBlock().asItem());
             fromCrafting(AllSpells.DEATH_CHILL, LHTraits.FREEZING.asItem());
             fromCrafting(AllSpells.FROST_SLASH, com.spellbladenext.items.Items.glacial_gladius.item());
@@ -154,7 +160,7 @@ public class SpellScrollConfig
             fromCrafting(AllSpells.HOLY_BEAM, "bosses_of_mass_destruction:ancient_anima");
             fromCrafting(AllSpells.CIRCLE_OF_HEALING, "soulsweapons:arkenstone");
             fromCrafting(AllSpells.BARRIER, "graveyard:dark_iron_block");
-            fromCrafting(AllSpells.JUDGEMENT, "soulsweapons:lord_soul_dark");
+            fromCrafting(AllSpells.JUDGEMENT, MUBlocks.JADE_BLOCK.asItem());
             fromCrafting(AllSpells.CLEANSE, ComplementItems.LIFE_ESSENCE);
             fromCrafting(AllSpells.EXORCISM, LHTraits.DISPELL.asItem());
             fromCrafting(AllSpells.CRITICAL_HIT, MiscItems.CHAOS.blockSet().item());

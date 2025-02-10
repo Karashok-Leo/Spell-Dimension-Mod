@@ -1,5 +1,6 @@
 package karashokleo.spell_dimension.config.recipe;
 
+import artifacts.registry.ModItems;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
 import com.kyanite.deeperdarker.content.DDItems;
@@ -57,7 +58,7 @@ public class LocateSpellConfig
     static
     {
         register(MONUMENT, World.OVERWORLD, Items.SEA_LANTERN, "海底神殿");
-        register(StructureKeys.ANCIENT_CITY, World.OVERWORLD, Items.SCULK, "远古城市");
+        register(StructureKeys.ANCIENT_CITY, World.OVERWORLD, RuneItems.get(RuneItems.RuneType.ARCANE), "远古城市");
         register(StructureKeys.MANSION, World.OVERWORLD, Items.EMERALD_BLOCK, "林地府邸");
         register(DARK_DUNGEON, World.OVERWORLD, ComplementItems.CURSED_DROPLET, "暗黑地牢");
         register(DESERT_DUNGEON, World.OVERWORLD, ComplementItems.SUN_MEMBRANE, "沙漠地牢");
@@ -67,7 +68,7 @@ public class LocateSpellConfig
         register(CHAMPIONS_GRAVES, World.OVERWORLD, BOSS_COMPASS, "古英雄的陵墓");
         register(DECAYING_KINGDOM, World.NETHER, BOSS_COMPASS, "腐朽王国");
         register(FORTRESS, World.NETHER, RuneItems.get(RuneItems.RuneType.FIRE), "下界要塞");
-        register(GAUNTLET_ARENA, World.NETHER, com.spellbladenext.items.Items.fire_orb.item(), "下界铁掌竞技场");
+        register(GAUNTLET_ARENA, World.NETHER, ModItems.FIRE_GAUNTLET.get(), "下界铁掌竞技场");
         register(OBSIDILITH_ARENA, World.END, Items.CRYING_OBSIDIAN, "黑曜巨石柱竞技场");
         register(FIRECALLER_HUT, World.OVERWORLD, Items.RED_SANDSTONE, "唤火师小屋");
         register(SORCERER_HUT, World.OVERWORLD, Items.PURPLE_WOOL, "不祥术士小屋");
