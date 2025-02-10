@@ -1,8 +1,5 @@
 {
   "school": "FIRE",
-  "learn": {
-    "tier": 4
-  },
   "cast": {
     "duration": 1.6,
     "animation": "spell_engine:one_handed_area_charge",

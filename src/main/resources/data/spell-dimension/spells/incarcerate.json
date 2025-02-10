@@ -1,9 +1,6 @@
 {
   "school": "spell-dimension:generic",
   "range": 16,
-  "cast": {
-    "duration": 0
-  },
   "release": {
     "target": {
       "type": "CURSOR"

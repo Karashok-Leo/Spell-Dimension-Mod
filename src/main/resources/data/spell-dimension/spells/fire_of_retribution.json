@@ -1,9 +1,6 @@
 {
   "school": "FIRE",
   "range": 10.0,
-  "learn": {
-    "tier": 8
-  },
   "cast": {
     "duration": 5,
     "animation": "spell_engine:two_handed_channeling",
