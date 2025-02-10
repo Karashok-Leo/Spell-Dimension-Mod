@@ -77,7 +77,7 @@ public class TraitEntry extends BaseEntryProvider
         context.page("trait1");
         this.lang().add(context.pageText(),
                 """
-                        Repelling/Pulling: The **Insulator** enchantment can mitigate the target's repelling/pulling effect on you.
+                        Repelling/Pulling: **Insulator** enchantment can mitigate the target's repelling/pulling effect on you.
                         \\
                         \\
                         Regenerate/Undying: Applying a curse effect to monsters can prevent them from regenerating health. This can be achieved by using the **Spell Curse** enchantment.
@@ -116,11 +116,17 @@ public class TraitEntry extends BaseEntryProvider
         this.lang().add(context.pageText(),
                 """
                         Adaptive: In addition to using various negative effects, you can refresh a monster's adaptation by switching spells. Each spell is equivalent to a damage type.
+                        \\
+                        \\
+                        Dispell: **Spell Tearing** enchantment allows spell damage to penetrate the protection of Dispell.
                         """
         );
         this.lang("zh_cn").add(context.pageText(),
                 """
                         适应: 除了使用各种负面效果，你还可以通过切换法术来刷新怪物的适应性。每种法术都相当于一种伤害类型。
+                        \\
+                        \\
+                        破魔: **法术穿透**附魔可以使法术伤害穿透破魔的保护。
                         """
         );
         BookTextPageModel trait3 = BookTextPageModel

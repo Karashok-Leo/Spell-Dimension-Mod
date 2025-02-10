@@ -16,11 +16,16 @@ import java.util.List;
 
 public class DivineAuraEffect extends StatusEffect
 {
+    public static String getDesc(boolean en)
+    {
+        return (en ?
+                "Every %s second, applies Absorption effect to surrounding allies and deals %.1fx spell power damage to surrounding enemies." :
+                "每隔%s秒，对周围友方施加伤害吸收效果，并对周围敌人造成%.1f倍法术强度的治愈法术伤害。")
+                .formatted(INTERVAL / 20, SpellConfig.DIVINE_AURA_FACTOR);
+    }
+
     public static final float RANGE = 2.5F;
     public static final int INTERVAL = 20;
-
-    public static final String DESC_EN = "Every %s second, applies Absorption effect to surrounding allies and deals a certain amount of healing spell damage to surrounding enemies.".formatted(INTERVAL / 20);
-    public static final String DESC_ZH = "每隔%s秒，对周围友方施加伤害吸收效果，并对周围敌人造成一定的治愈法术伤害。".formatted(INTERVAL / 20);
 
     public DivineAuraEffect()
     {

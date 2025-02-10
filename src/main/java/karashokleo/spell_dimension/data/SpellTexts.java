@@ -1,10 +1,12 @@
 package karashokleo.spell_dimension.data;
 
 import karashokleo.spell_dimension.SpellDimension;
+import karashokleo.spell_dimension.config.SpellConfig;
 import karashokleo.spell_dimension.content.buff.BlazingMark;
 import karashokleo.spell_dimension.content.buff.Nucleus;
 import karashokleo.spell_dimension.content.effect.DivineAuraEffect;
 import karashokleo.spell_dimension.content.effect.FrostAuraEffect;
+import karashokleo.spell_dimension.content.effect.FrostedEffect;
 import karashokleo.spell_dimension.content.entity.BlackHoleEntity;
 import karashokleo.spell_dimension.content.spell.RandomEffectSpell;
 import net.minecraft.text.MutableText;
@@ -65,14 +67,14 @@ public enum SpellTexts
     CONVERGE(
             "Converge",
             "汇聚",
-            "Launch a spell to explode at the landing point and make enemies converged.",
-            "发射一道咒语，在落点处爆炸并汇聚敌人。"
+            "Launch a spell to explode at the landing point and make enemies converged. Deal %.1fx spell power damage.".formatted(SpellConfig.CONVERGE_FACTOR),
+            "发射一道咒语，在落点处爆炸并汇聚敌人。造成%.1f倍法术强度的伤害。".formatted(SpellConfig.CONVERGE_FACTOR)
     ),
     BLACK_HOLE(
             "Black Hole",
             "黑洞",
-            "Create a Black Hole that continuously attracts surrounding creatures and deals damage, disappearing after %d seconds. The higher your spell power, the larger the radius of the black hole.".formatted(BlackHoleEntity.LIFESPAN / 20),
-            "制造一个黑洞，持续吸引周围的生物并造成伤害，%d秒后消失。法术强度越高，黑洞半径越大。".formatted(BlackHoleEntity.LIFESPAN / 20)
+            "Create a Black Hole that continuously attracts surrounding creatures and deals damage, disappearing after %d seconds. The higher your spell power, the larger the radius of the black hole. Each attraction deals %.1fx spell power damage.".formatted(BlackHoleEntity.LIFESPAN / 20, SpellConfig.BLACK_HOLE_FACTOR),
+            "制造一个黑洞，持续吸引周围的生物并造成伤害，%d秒后消失。法术强度越高，黑洞半径越大。每次吸引造成%.1f倍法术强度的伤害。".formatted(BlackHoleEntity.LIFESPAN / 20, SpellConfig.BLACK_HOLE_FACTOR)
     ),
     PHASE(
             "Phase",
@@ -101,8 +103,8 @@ public enum SpellTexts
     IGNITE(
             "Ignite",
             "引火",
-            "Apply Ignite effect to oneself. Ignite: " + BlazingMark.DESC_EN,
-            "施法者获得引火效果。引火：" + BlazingMark.DESC_ZH
+            "Apply Ignite effect to oneself. Ignite: " + BlazingMark.getDesc(true),
+            "施法者获得引火效果。引火：" + BlazingMark.getDesc(false)
     ),
     FIRE_OF_RETRIBUTION(
             "Fire of Retribution",
@@ -113,8 +115,8 @@ public enum SpellTexts
     AURA(
             "Frost Aura",
             "霜环",
-            "Apply Frost Aura {effect_amplifier} effect to oneself for {effect_duration} seconds. Frost Aura: " + FrostAuraEffect.DESC_EN,
-            "施法者获得霜环{effect_amplifier}效果，持续{effect_duration}秒。霜环：" + FrostAuraEffect.DESC_ZH
+            "Apply Frost Aura {effect_amplifier} effect to oneself for {effect_duration} seconds. Frost Aura: %s; Frosted: %s".formatted(FrostAuraEffect.getDesc(true), FrostedEffect.getDesc(true)),
+            "施法者获得霜环{effect_amplifier}效果，持续{effect_duration}秒。霜环：%s；霜冻：%s".formatted(FrostAuraEffect.getDesc(false), FrostedEffect.getDesc(false))
     ),
     FROST_BLINK(
             "Frost Blink",
@@ -131,8 +133,8 @@ public enum SpellTexts
     NUCLEUS(
             "Icy Nucleus",
             "冰核",
-            "Freeze the target's heart into a ice nucleus, explode in %s seconds, and shoot icicles into the surrounding area.".formatted(Nucleus.TOTAL_DURATION / 20F),
-            "将敌人的心脏化作一个冰核，%s秒后爆炸，并向周围射出冰刺。".formatted(Nucleus.TOTAL_DURATION / 20F)
+            "Freeze the target's heart into a ice nucleus that explodes in %s seconds, deals %.1fx spell power damage and shoots icicles into the surrounding area. ".formatted(Nucleus.TOTAL_DURATION / 20F, SpellConfig.NUCLEUS_FACTOR),
+            "将敌人的心脏化作一个冰核，%s秒后爆炸，造成%.1f倍法术强度的伤害并向周围射出冰刺。".formatted(Nucleus.TOTAL_DURATION / 20F, SpellConfig.NUCLEUS_FACTOR)
     ),
     ICICLE(
             "Icicle",
@@ -215,8 +217,8 @@ public enum SpellTexts
     DIVINE_AURA(
             "Divine Aura",
             "神圣光环",
-            "Apply Divine Aura effect to oneself for {effect_duration} seconds. Divine Aura: " + DivineAuraEffect.DESC_EN,
-            "施法者获得神圣光环效果，持续{effect_duration}秒。神圣光环：" + DivineAuraEffect.DESC_ZH
+            "Apply Divine Aura effect to oneself for {effect_duration} seconds. Divine Aura: " + DivineAuraEffect.getDesc(true),
+            "施法者获得神圣光环效果，持续{effect_duration}秒。神圣光环：" + DivineAuraEffect.getDesc(false)
     ),
     EXORCISM(
             "Exorcism",

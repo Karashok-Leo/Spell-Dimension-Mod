@@ -214,7 +214,7 @@
   "book.spell-dimension-book.magic_guidance.power.trait.trait.title": "怪物词条",
   "book.spell-dimension-book.magic_guidance.power.trait.trait1.text": "排斥/吸引: **绝缘**附魔可以缓解目标对你的排斥/吸引效果。\n\\\n\\\n再生/不死: 对怪物施加诅咒效果可以阻止它们回血。这可以通过**法术诅咒**附魔来实现。\n",
   "book.spell-dimension-book.magic_guidance.power.trait.trait2.text": "虚弱/流沙/剧毒/凋零/致盲/扭曲/升空/业火/寒流/诅咒: **圣光守护之戒**或**诅咒扭曲之戒**可以让你免疫几乎所有的负面效果。但作为替代，你也可以使用护心镜的**专属附魔**来免疫特定的负面效果。\n",
-  "book.spell-dimension-book.magic_guidance.power.trait.trait3.text": "适应: 除了使用各种负面效果，你还可以通过切换法术来刷新怪物的适应性。每种法术都相当于一种伤害类型。\n",
+  "book.spell-dimension-book.magic_guidance.power.trait.trait3.text": "适应: 除了使用各种负面效果，你还可以通过切换法术来刷新怪物的适应性。每种法术都相当于一种伤害类型。\n\\\n\\\n破魔: **法术穿透**附魔可以使法术伤害穿透破魔的保护。\n",
   "book.spell-dimension-book.magic_guidance.resource.alloy.alloy.text": "合金冶炼是提高矿石产量的简单方法。但更重要的是，它可以让你合成一些特殊的物品。\n",
   "book.spell-dimension-book.magic_guidance.resource.alloy.alloy.title": "合金冶炼",
   "book.spell-dimension-book.magic_guidance.resource.alloy.build.text": "要建造一个锻造炉，只需按照图中所示的指南，使用冶炼炉类型所支持的任何方块组合即可。\n\\\n\\\n注: 图中的除控制器外的不同方块表示可以互相替换。\n",

@@ -16,8 +16,13 @@ import net.minecraft.world.World;
 
 public class FrostAuraEffect extends StatusEffect
 {
-    public static final String DESC_EN = "Within the frozen aura, livings get Frosted.";
-    public static final String DESC_ZH = "在霜环内, 所有生物被霜冻.";
+    public static String getDesc(boolean en)
+    {
+        return (en ?
+                "Targets within the Frost Aura continue to receive the Frosted effect" :
+                "霜环内目标持续受到霜冻效果");
+    }
+
     public static final float RADIUS = 3;
     public static final float VELOCITY = 0.12F;
     public static final double[][] GRADES = {{0}, {-0.4, 0.4}, {-0.8, 0, 0.8}};

@@ -24,8 +24,13 @@ import org.jetbrains.annotations.Nullable;
 
 public class BlazingMark implements Buff
 {
-    public static final String DESC_EN = "Your attack will leave a mark on the enemy, and some of the damage you inflict during this period will damage the enemy again in " + BlazingMark.getTriggerTime() + " seconds.";
-    public static final String DESC_ZH = "你的攻击会在敌人身上留下一个印记, " + BlazingMark.getTriggerTime() + "秒内你造成的部分伤害将会在" + BlazingMark.getTriggerTime() + "秒后再次打击敌人, 并使其虚弱.";
+    public static String getDesc(boolean en)
+    {
+        return (en ?
+                "Your attack will leave a mark on the enemy, and some of the damage you inflict during this period will damage the enemy again in %.1f  seconds." :
+                "你的攻击会在敌人身上留下一个印记, 期间你造成的部分伤害将会在%.1f秒后再次打击敌人, 并使其虚弱.")
+                .formatted(BlazingMark.getTriggerTime());
+    }
 
     public static final Codec<BlazingMark> CODEC = RecordCodecBuilder.create(
             ins -> ins.group(

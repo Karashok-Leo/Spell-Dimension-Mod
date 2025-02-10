@@ -11,6 +11,14 @@ import net.spell_power.api.SpellSchools;
 
 public class FrostedEffect extends StatusEffect
 {
+    public static String getDesc(boolean en)
+    {
+        return (en ?
+                "Frozen and continuously receiving frost spell damage, based on %.1fx spell power." :
+                "冻结并持续收到寒冰法术伤害，基于%.1f倍法术强度。")
+                .formatted(SpellConfig.FROSTED_FACTOR);
+    }
+
     public static final String UUID = "D6FABA0B-44F5-FC1A-6F2D-5F3C26119D51";
     public static final double MULTIPLIER = -0.2D;
 
