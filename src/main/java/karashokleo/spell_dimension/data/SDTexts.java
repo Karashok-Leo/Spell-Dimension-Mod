@@ -156,7 +156,7 @@ public enum SDTexts
     /**
      * Scrolls
      */
-    SCROLL$BOOK_REQUIREMENT("%s Tier Spell: Can only be put into [%s] or higher Spell Books", "%s级法术：只能放入 [%s] 或更高级的法术书中"),
+    SCROLL$BOOK_REQUIREMENT("Tier %s Spell: Can only be put into [%s] or more advanced Spell Books", "%s级法术：只能放入 [%s] 或更高级的法术书中"),
     SCROLL$OBTAIN("How to obtain: %s", "获取方式：%s"),
     SCROLL$UNAVAILABLE("Not yet available", "暂无"),
     SCROLL$PRIMARY("Primary Wand (unable to acquire scrolls)", "初始法杖（无法获取卷轴）"),

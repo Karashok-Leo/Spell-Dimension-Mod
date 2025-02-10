@@ -41,7 +41,7 @@ public class DivineAuraEffect extends StatusEffect
                 target.addStatusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 20, amplifier));
             } else
             {
-                float damage = (float) DamageUtil.calculateDamage(entity, SpellSchools.HEALING, SpellConfig.DIVINE_AURA, amplifier);
+                float damage = (float) DamageUtil.calculateDamage(entity, SpellSchools.HEALING, SpellConfig.DIVINE_AURA_FACTOR, amplifier);
                 DamageUtil.spellDamage(target, SpellSchools.HEALING, entity, damage, false);
             }
         }

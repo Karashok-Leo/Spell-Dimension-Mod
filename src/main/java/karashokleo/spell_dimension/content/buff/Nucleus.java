@@ -93,7 +93,7 @@ public class Nucleus implements Buff
         if (spell == null) return;
 
         //Damage
-        float damage = (float) DamageUtil.calculateDamage(caster, SpellSchools.FROST, SpellConfig.NUCLEUS, amplifier);
+        float damage = (float) DamageUtil.calculateDamage(caster, SpellSchools.FROST, SpellConfig.NUCLEUS_FACTOR, amplifier);
         DamageUtil.spellDamage(source, SpellSchools.FROST, caster, damage, false);
 
         //Adjust amplifier

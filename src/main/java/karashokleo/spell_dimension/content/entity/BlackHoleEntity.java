@@ -169,7 +169,7 @@ public class BlackHoleEntity extends Entity implements Ownable
         Vec3d center = this.getBoundingBox().getCenter();
         LivingEntity caster = this.getOwner() instanceof LivingEntity living ? living : null;
 
-        float damage = caster == null ? 0 : (float) DamageUtil.calculateDamage(caster, SpellSchools.ARCANE, SpellConfig.BLACK_HOLE, radius);
+        float damage = caster == null ? 0 : (float) DamageUtil.calculateDamage(caster, SpellSchools.ARCANE, SpellConfig.BLACK_HOLE_FACTOR, radius);
         for (Entity entity : this.trackingEntities)
         {
             if (entity == caster) continue;

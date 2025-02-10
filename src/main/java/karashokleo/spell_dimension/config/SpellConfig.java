@@ -2,18 +2,14 @@ package karashokleo.spell_dimension.config;
 
 public class SpellConfig
 {
-    public static final Damage CONVERGE = new Damage(4, 0.6, 1.2);
-    public static final Damage BLACK_HOLE = new Damage(8, 0.2, 1);
-    public static final Damage NUCLEUS = new Damage(8, 0.8, 1.1);
-    public static final Damage FROSTED = new Damage(2, 0.4, 1.2);
-    public static final Damage DIVINE_AURA = new Damage(4, 0.4, 1.2);
-    public static final BlazingMark BLAZING_MARK = new BlazingMark(200, 100, 30, 0.5F);
+    public static final float CONVERGE_FACTOR = 0.6F;
+    public static final float BLACK_HOLE_FACTOR = 0.2F;
+    public static final float NUCLEUS_FACTOR = 0.8F;
+    public static final float FROSTED_FACTOR = 0.4F;
+    public static final float DIVINE_AURA_FACTOR = 0.4F;
+    public static final BlazingMarkConfig BLAZING_MARK_CONFIG = new BlazingMarkConfig(200, 100, 30, 0.5F);
 
-    public record Damage(double addition, double multiplier, double base)
-    {
-    }
-
-    public record BlazingMark(int totalDuration, int triggerDuration, int maxDamage, float proportion)
+    public record BlazingMarkConfig(int totalDuration, int triggerDuration, int maxDamage, float proportion)
     {
     }
 }

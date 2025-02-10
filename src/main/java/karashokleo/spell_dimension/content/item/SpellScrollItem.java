@@ -78,18 +78,25 @@ public class SpellScrollItem extends Item implements ColorProvider
     {
         super.appendTooltip(stack, world, tooltip, context);
         SpellInfo spellInfo = this.getSpellInfo(stack);
-        if (spellInfo != null)
-            tooltip.add(Text.translatable(
-                    SpellTooltip.spellTranslationKey(spellInfo.id())
-            ).setStyle(Style.EMPTY.withColor(spellInfo.spell().school.color)).formatted(Formatting.BOLD));
+        if (spellInfo == null) return;
+        Identifier id = spellInfo.id();
+        Spell spell = spellInfo.spell();
+        // name
+        tooltip.add(Text.translatable(
+                SpellTooltip.spellTranslationKey(id)
+        ).setStyle(Style.EMPTY.withColor(spell.school.color)).formatted(Formatting.BOLD));
+        // obtain
         tooltip.add(SDTexts.SCROLL$OBTAIN.get(
                 SpellScrollConfig.getSpellScrollText(spellInfo)
         ).formatted(Formatting.GRAY));
-        if (spellInfo == null) return;
-        if (!SchoolUtil.SCHOOLS.contains(spellInfo.spell().school)) return;
-        int grade = getSpellGrade(spellInfo.spell());
-        DynamicSpellBookItem bookItem = AllItems.SPELL_BOOKS.get(spellInfo.spell().school).get(grade);
+        // book requirement
+        if (!SchoolUtil.SCHOOLS.contains(spell.school)) return;
+        int grade = getSpellGrade(spell);
+        DynamicSpellBookItem bookItem = AllItems.SPELL_BOOKS.get(spell.school).get(grade);
         tooltip.add(SDTexts.SCROLL$BOOK_REQUIREMENT.get(grade + 1, bookItem.getName()).formatted(Formatting.GRAY));
+        // id
+        if (context.isAdvanced())
+            tooltip.add(Text.literal("spell id: " + id).formatted(Formatting.DARK_GRAY));
     }
 
     /**
