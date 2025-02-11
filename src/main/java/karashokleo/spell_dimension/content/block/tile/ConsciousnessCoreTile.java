@@ -24,7 +24,6 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
-import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -210,7 +209,7 @@ public class ConsciousnessCoreTile extends BlockEntity
             if (box.contains(player.getX(), player.getY(), player.getZ()))
             {
                 player.addVelocity(0, 0.09, 0);
-                player.networkHandler.sendPacket(new EntityVelocityUpdateS2CPacket(player));
+                player.velocityModified = true;
 
                 int currentTick = this.playerTicks.compute(playerUuid, (uuid, ticks) -> ticks == null ? 1 : ticks + 1);
                 if (currentTick >= 100)

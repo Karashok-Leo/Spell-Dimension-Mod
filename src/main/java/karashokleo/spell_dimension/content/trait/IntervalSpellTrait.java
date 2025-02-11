@@ -45,7 +45,7 @@ public class IntervalSpellTrait extends SpellTrait
 
     public Data getData(MobDifficulty diff)
     {
-        return diff.getOrCreateData(getId(), IntervalSpellTrait.Data::new);
+        return diff.getOrCreateData(getId(), Data::new);
     }
 
     public void action(MobEntity mob, int level, Data data)

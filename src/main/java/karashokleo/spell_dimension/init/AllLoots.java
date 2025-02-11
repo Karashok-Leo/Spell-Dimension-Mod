@@ -3,6 +3,7 @@ package karashokleo.spell_dimension.init;
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.item.trinket.misc.LootingCharm;
+import karashokleo.l2hostility.init.LHTraits;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
 import karashokleo.spell_dimension.config.EssenceLootConfig;
@@ -80,7 +81,11 @@ public class AllLoots
                 var op = MobDifficulty.get(target);
                 if (op.isPresent())
                 {
-                    if (op.get().noDrop) continue;
+                    MobDifficulty difficulty = op.get();
+                    if (difficulty.noDrop) continue;
+                    if (difficulty.hasTrait(LHTraits.UNDYING)) continue;
+                    if (difficulty.hasTrait(LHTraits.DISPELL)) continue;
+                    if (difficulty.hasTrait(LHTraits.ADAPTIVE)) continue;
 
                     // Determine the loot charm level
                     int lootCharmLevel = TrinketCompat.getTrinketItems(caster, e -> e.getItem() instanceof LootingCharm).size();
@@ -88,7 +93,7 @@ public class AllLoots
                     float dropChance = EssenceLootConfig.BASE_CONFIG.dropChance() + lootCharmLevel * 0.1F;
                     if (caster.getRandom().nextFloat() > dropChance) continue;
 
-                    int grade = EssenceLootConfig.BASE_CONFIG.getRandomGrade(caster.getRandom(), op.get().getLevel());
+                    int grade = EssenceLootConfig.BASE_CONFIG.getRandomGrade(caster.getRandom(), difficulty.getLevel());
 
                     target.dropItem(AllItems.BASE_ESSENCES.get(school).get(grade));
                 }
