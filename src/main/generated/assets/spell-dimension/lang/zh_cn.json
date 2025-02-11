@@ -423,6 +423,8 @@
   "text.spell-dimension.invalid_key_item": "无效的索引物品！",
   "text.spell-dimension.locating": "正在定位：%s",
   "text.spell-dimension.mage": "法师",
+  "text.spell-dimension.mage_book.1": "三岁小孩也能看懂的入门魔法书",
+  "text.spell-dimension.mage_book.2": "当你遇到窘境时，不妨翻开看看吧~",
   "text.spell-dimension.progress_rollback": "进度已回退！",
   "text.spell-dimension.quest.beginning": "[起点]",
   "text.spell-dimension.quest.challenge": "[挑战]",

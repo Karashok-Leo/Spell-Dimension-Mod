@@ -29,12 +29,9 @@ public class MagicGuidanceProvider extends BookProvider
     {
         BookContextHelper context = this.context();
         this.lang().add(context.bookName(), "Magic Guidance");
-        this.lang().add(context.bookTooltip(), "Guidebook for playing Spell Dimension.");
         this.lang("zh_cn").add(context.bookName(), "魔力接引");
-        this.lang("zh_cn").add(context.bookTooltip(), "三岁小孩也能看懂的入门魔法书。");
         return BookModel
                 .create(BOOK_ID, context.bookName())
-                .withTooltip(context.bookTooltip())
                 .withModel(ItemRegistry.MODONOMICON_PURPLE.getId())
                 .withCreativeTab(AllGroups.MISC_GROUP_KEY.getValue())
                 .withGenerateBookItem(true)

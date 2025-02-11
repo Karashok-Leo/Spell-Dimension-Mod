@@ -423,6 +423,8 @@
   "text.spell-dimension.invalid_key_item": "Invalid Key Item!",
   "text.spell-dimension.locating": "Locating: %s",
   "text.spell-dimension.mage": "Mage",
+  "text.spell-dimension.mage_book.1": "An Introductory Grimoire Even a Three-Year-Old Can Understand",
+  "text.spell-dimension.mage_book.2": "When you're in a quandary, turn to it~",
   "text.spell-dimension.progress_rollback": "Progress has been rolled back!",
   "text.spell-dimension.quest.beginning": "[BEGINNING]",
   "text.spell-dimension.quest.challenge": "[CHALLENGE]",

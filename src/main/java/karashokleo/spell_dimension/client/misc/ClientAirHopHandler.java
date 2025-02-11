@@ -1,4 +1,4 @@
-package karashokleo.spell_dimension.client;
+package karashokleo.spell_dimension.client.misc;
 
 import artifacts.item.wearable.belt.CloudInABottleItem;
 import artifacts.network.DoubleJumpPacket;

@@ -47,7 +47,7 @@
   },
   "search_button_x_offset": 0,
   "search_button_y_offset": 0,
-  "tooltip": "book.spell-dimension-book.magic_guidance.tooltip",
+  "tooltip": "",
   "top_frame_overlay": {
     "frame_height": 7,
     "frame_width": 72,

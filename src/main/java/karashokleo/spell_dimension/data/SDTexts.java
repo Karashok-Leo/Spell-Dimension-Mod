@@ -72,6 +72,8 @@ public enum SDTexts
     TEXT$QUEST$BEGINNING("[BEGINNING]", "[起点]"),
     TEXT$QUEST$END("[END]", "[终点]"),
     TEXT$QUEST$CHALLENGE("[CHALLENGE]", "[挑战]"),
+    TEXT$MAGE_BOOK$1("An Introductory Grimoire Even a Three-Year-Old Can Understand", "三岁小孩也能看懂的入门魔法书"),
+    TEXT$MAGE_BOOK$2("When you're in a quandary, turn to it~", "当你遇到窘境时，不妨翻开看看吧~"),
 
     /**
      * Spell School

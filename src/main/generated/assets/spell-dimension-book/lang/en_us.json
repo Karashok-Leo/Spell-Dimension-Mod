@@ -238,7 +238,7 @@
   "book.spell-dimension-book.magic_guidance.resource.key.description": "Some keys you need to know.",
   "book.spell-dimension-book.magic_guidance.resource.key.name": "Key Binds",
   "book.spell-dimension-book.magic_guidance.resource.key.next.text": "\\\nJ: Turn on/off auto step-up\n\\\n\\\nMiddle Button / Double-click: Sort Inventory\n\\\n\\\nLeft Shift + W: Wall-Jumping\n",
-  "book.spell-dimension-book.magic_guidance.resource.key.prev.text": "\\\n` (~): Chain Mining\n\\\n\\\nR: Combat Roll\n\\\n\\\nB: Open Backpack\n\\\n\\\nG: Open Ender Bag\n",
+  "book.spell-dimension-book.magic_guidance.resource.key.prev.text": "\\\n` (~): Chain Mining\n\\\n\\\nR: Combat Roll\n\\\n\\\nB: Open Backpack\n\\\n\\\nG: Open Ender Bag\n\\\n\\\nC: Zoom In\n",
   "book.spell-dimension-book.magic_guidance.resource.key.prev.title": "Key Binds",
   "book.spell-dimension-book.magic_guidance.resource.loot_charm.charm.text": "Wearing a looting charm can get you some special resources.\n\\\n\\\nYou can press U on the looting charm to check their additional looting effects.\n",
   "book.spell-dimension-book.magic_guidance.resource.loot_charm.charm.title": "Looting Charm",
@@ -258,12 +258,13 @@
   "book.spell-dimension-book.magic_guidance.resource.pivot.pivot.title": "Consciousness Pivot",
   "book.spell-dimension-book.magic_guidance.resource.storage.description": "Well organized.",
   "book.spell-dimension-book.magic_guidance.resource.storage.name": "Storage",
-  "book.spell-dimension-book.magic_guidance.resource.storage.storage.text": "Place a storage connector with a terminal next to your chests, after which you can manage the items of all your chests in a unified way through the terminal.\n",
+  "book.spell-dimension-book.magic_guidance.resource.storage.storage.text": "Place a **Storage Connector** with a **Storage Terminal** or **Crafting Terminal** next to your chests, after which you can manage the items of all your chests in a unified way through the terminal.\n",
   "book.spell-dimension-book.magic_guidance.resource.storage.storage.title": "Tom's Simple Storage",
+  "book.spell-dimension-book.magic_guidance.resource.storage.wireless.text": "Build a level 4+ **Beacon**, or place your storage system next to a high enough **Consciousness Pivot**, bind to the terminal using the **Advanced Wireless Terminal** (Shift + Right-click), and use **Chunk Loader** to load surrounding chunks to enable inter-dimensional remote access to your storage system.\n",
+  "book.spell-dimension-book.magic_guidance.resource.storage.wireless.title": "Wireless Storage",
   "book.spell-dimension-book.magic_guidance.resource.trader.description": "He really loves apples.",
   "book.spell-dimension-book.magic_guidance.resource.trader.name": "Trader",
   "book.spell-dimension-book.magic_guidance.resource.trader.next.text": "Goblin traders are often found in the overworld, while vein goblin traders are often found in the nether, with the latter selling much rarer items.\n",
   "book.spell-dimension-book.magic_guidance.resource.trader.prev.text": "Perhaps you have a chance to meet goblin traders, a cute race of people who like apples, and unlike wandering traders with llamas, the items they sell tend to be very helpful to you.\n",
-  "book.spell-dimension-book.magic_guidance.resource.trader.prev.title": "Goblin Trader",
-  "book.spell-dimension-book.magic_guidance.tooltip": "Guidebook for playing Spell Dimension."
+  "book.spell-dimension-book.magic_guidance.resource.trader.prev.title": "Goblin Trader"
 }

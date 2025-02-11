@@ -28,6 +28,26 @@
       ],
       "text": "book.spell-dimension-book.magic_guidance.resource.storage.storage.text",
       "title": "book.spell-dimension-book.magic_guidance.resource.storage.storage.title"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "item": [
+        {
+          "item": "minecraft:beacon"
+        },
+        {
+          "item": "toms_storage:ts.adv_wireless_terminal"
+        },
+        {
+          "item": "kibe:chunk_loader"
+        }
+      ],
+      "text": "book.spell-dimension-book.magic_guidance.resource.storage.wireless.text",
+      "title": "book.spell-dimension-book.magic_guidance.resource.storage.wireless.title"
     }
   ],
   "show_when_any_parent_unlocked": false,

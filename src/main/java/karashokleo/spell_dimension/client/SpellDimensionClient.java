@@ -4,14 +4,11 @@ import dev.xkmc.l2tabs.tabs.core.TabToken;
 import dev.xkmc.l2tabs.tabs.inventory.InvTabData;
 import dev.xkmc.l2tabs.tabs.inventory.TabRegistry;
 import karashokleo.enchantment_infusion.api.render.InfusionTableTileRenderer;
-import karashokleo.l2hostility.content.item.TrinketItems;
-import karashokleo.l2hostility.content.logic.DifficultyLevel;
-import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.leobrary.gui.api.GuiOverlayRegistry;
 import karashokleo.leobrary.gui.api.TextureOverlayRegistry;
 import karashokleo.spell_dimension.SpellDimension;
-import karashokleo.spell_dimension.api.quest.Quest;
-import karashokleo.spell_dimension.api.quest.QuestUsage;
+import karashokleo.spell_dimension.client.misc.AdditionalTooltip;
+import karashokleo.spell_dimension.client.misc.ClientAirHopHandler;
 import karashokleo.spell_dimension.client.quest.QuestItemTooltipComponent;
 import karashokleo.spell_dimension.client.quest.QuestItemTooltipData;
 import karashokleo.spell_dimension.client.render.*;
@@ -19,9 +16,7 @@ import karashokleo.spell_dimension.client.screen.ConsciousCoreOverlay;
 import karashokleo.spell_dimension.client.screen.GameOverOverlay;
 import karashokleo.spell_dimension.client.screen.QuestOverlay;
 import karashokleo.spell_dimension.client.screen.SpellPowerTab;
-import karashokleo.spell_dimension.content.item.DynamicSpellBookItem;
 import karashokleo.spell_dimension.content.item.essence.base.ColorProvider;
-import karashokleo.spell_dimension.content.item.logic.EnchantedModifier;
 import karashokleo.spell_dimension.content.misc.INoClip;
 import karashokleo.spell_dimension.content.network.S2CFloatingItem;
 import karashokleo.spell_dimension.content.network.S2CSpellDash;
@@ -35,22 +30,18 @@ import karashokleo.spell_dimension.mixin.client.RollManagerInvoker;
 import net.combatroll.internals.RollingEntity;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
-import net.fabricmc.fabric.api.event.Event;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.client.render.entity.EmptyEntityRenderer;
 import net.minecraft.item.Item;
-import net.minecraft.text.TranslatableTextContent;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.effect.CustomModelStatusEffect;
 import net.spell_engine.api.effect.CustomParticleStatusEffect;
@@ -58,7 +49,6 @@ import net.spell_engine.api.render.CustomModels;
 import net.wizards.item.Armors;
 
 import java.util.List;
-import java.util.Optional;
 
 public class SpellDimensionClient implements ClientModInitializer
 {
@@ -73,7 +63,7 @@ public class SpellDimensionClient implements ClientModInitializer
     @Override
     public void onInitializeClient()
     {
-        itemTooltip();
+        AdditionalTooltip.register();
 
         BlockEntityRendererFactories.register(AllBlocks.SPELL_INFUSION_PEDESTAL_TILE, ctx -> new InfusionTableTileRenderer<>(1.05F, ctx));
         BlockEntityRendererFactories.register(AllBlocks.CONSCIOUSNESS_CORE_TILE, ConsciousnessCoreRenderer::new);
@@ -151,59 +141,5 @@ public class SpellDimensionClient implements ClientModInitializer
         });
         ClientPlayNetworking.registerGlobalReceiver(S2CFloatingItem.TYPE, (packet, player, responseSender) ->
                 MinecraftClient.getInstance().gameRenderer.showFloatingItem(packet.stack()));
-    }
-
-    private static void itemTooltip()
-    {
-        Identifier tooltipFinal = SpellDimension.modLoc("tooltip_final");
-        ItemTooltipCallback.EVENT.addPhaseOrdering(Event.DEFAULT_PHASE, tooltipFinal);
-        ItemTooltipCallback.EVENT.register(EnchantedModifier::levelTooltip);
-        ItemTooltipCallback.EVENT.register(tooltipFinal, (stack, context, lines) ->
-        {
-            if (stack.getItem() instanceof DynamicSpellBookItem)
-                lines.removeIf(line ->
-                        line.getContent() instanceof TranslatableTextContent content &&
-                        content.getKey().equals("spell.tooltip.spell_binding_tip"));
-        });
-
-        ItemTooltipCallback.EVENT.register((stack, context, lines) ->
-        {
-            if (!context.isAdvanced()) return;
-            if (stack.isOf(AllItems.QUEST_SCROLL))
-            {
-                var player = MinecraftClient.getInstance().player;
-                Optional<Quest> optional = AllItems.QUEST_SCROLL.getQuest(stack);
-                if (player != null &&
-                    optional.isPresent() &&
-                    QuestUsage.isQuestCompleted(player, optional.get()))
-                    lines.add(SDTexts.TEXT$QUEST_COMPLETED.get());
-            }
-        });
-
-        ItemTooltipCallback.EVENT.register((stack, context, lines) ->
-        {
-            if (stack.isOf(AllItems.FLEX_BREASTPLATE))
-            {
-                var player = MinecraftClient.getInstance().player;
-                if (player == null) return;
-                lines.add(SDTexts.TOOLTIP$FLEX_BREASTPLATE$DAMAGE_FACTOR.get(
-                        "%.1f%%".formatted((1 - AllItems.FLEX_BREASTPLATE.getDamageFactor(player)) * 100)
-                ).formatted(Formatting.RED));
-            }
-        });
-
-        ItemTooltipCallback.EVENT.register((stack, context, lines) ->
-        {
-            if (stack.isOf(TrinketItems.CURSE_PRIDE))
-            {
-                var player = MinecraftClient.getInstance().player;
-                if (player == null) return;
-                int level = DifficultyLevel.ofAny(player);
-                double rate = LHConfig.common().items.curse.prideDamageBonus;
-                lines.add(SDTexts.TOOLTIP$CURSE_PRIDE_2.get(
-                        "%.1f%%".formatted((level * rate) * 100)
-                ).formatted(Formatting.AQUA));
-            }
-        });
     }
 }

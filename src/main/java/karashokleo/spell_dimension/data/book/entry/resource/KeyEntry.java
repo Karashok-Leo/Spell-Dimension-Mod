@@ -59,6 +59,9 @@ public class KeyEntry extends BaseEntryProvider
                         \\
                         \\
                         G: Open Ender Bag
+                        \\
+                        \\
+                        C: Zoom In
                         """
         );
         this.lang("zh_cn").add(context.pageTitle(), "键位绑定");
@@ -75,6 +78,9 @@ public class KeyEntry extends BaseEntryProvider
                         \\
                         \\
                         G: 打开末影袋
+                        \\
+                        \\
+                        C: 放大镜头
                         """
         );
 
