@@ -11,6 +11,7 @@
     "modded.CurseOfPrideMixin",
     "modded.DispellTraitMixin",
     "modded.LootingCharmMixin",
+    "modded.LootModifierFixer",
     "modded.SpellHelperInvoker",
     "modded.SpellHelperMixin",
     "modded.SpellInfinityEnchantmentMixin",

@@ -103,7 +103,7 @@ public class MageQuests
         SPELL_POWER_0 = QuestBuilder.of(
                         "spell_power_0",
                         new SpellPowerQuest(
-                                DynamicSpellBookItem.REQUIREMENT_SPELL_POWER_PER_GRADE,
+                                DynamicSpellBookItem.REQUIREMENT_SPELL_POWER_PER_GRADE[0],
                                 SDBags.UNCOMMON_MATERIAL::getStack,
                                 false
                         )
@@ -113,7 +113,7 @@ public class MageQuests
         SPELL_POWER_1 = QuestBuilder.of(
                         "spell_power_1",
                         new SpellPowerQuest(
-                                DynamicSpellBookItem.REQUIREMENT_SPELL_POWER_PER_GRADE * 2,
+                                DynamicSpellBookItem.REQUIREMENT_SPELL_POWER_PER_GRADE[1],
                                 SDBags.RARE_MATERIAL::getStack,
                                 false
                         )
@@ -123,7 +123,7 @@ public class MageQuests
         SPELL_POWER_2 = QuestBuilder.of(
                         "spell_power_2",
                         new SpellPowerQuest(
-                                DynamicSpellBookItem.REQUIREMENT_SPELL_POWER_PER_GRADE * 3,
+                                DynamicSpellBookItem.REQUIREMENT_SPELL_POWER_PER_GRADE[2],
                                 SDBags.EPIC_MATERIAL::getStack,
                                 false
                         )

@@ -34,6 +34,9 @@
     ],
     "rei_client": [
       "karashokleo.spell_dimension.client.compat.rei.REICompat"
+    ],
+    "mixinsquared-adjuster": [
+      "karashokleo.spell_dimension.SDMixinAnnotationAdjuster"
     ]
   },
   "mixins": [

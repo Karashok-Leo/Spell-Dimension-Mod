@@ -25,6 +25,7 @@ repositories {
     maven { url "https://maven.terraformersmc.com/" }
     maven { url "https://maven.florens.be/releases" }
     maven { url "https://maven.isxander.dev/releases" }
+    maven { url "https://maven.bawnorton.com/releases" }
     maven { url "https://maven.ladysnake.org/releases" }
     maven { url "https://maven.jamieswhiteshirt.com/libs-release" }
     maven { url "https://dl.cloudsmith.io/public/klikli-dev/mods/maven/" }
@@ -55,6 +56,7 @@ dependencies {
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
+    include(implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-fabric:0.2.0")))
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
     modImplementation "io.github.ladysnake:PlayerAbilityLib:${project.pal_version}"
     modImplementation "dev.emi:trinkets:${project.trinkets_version}"
@@ -97,6 +99,7 @@ dependencies {
     modImplementation "karashokleo.enchantment_infusion:enchantment_infusion:${project.enchantment_infusion_version}"
     modImplementation "karashokleo.fusion_smithing:Fusion-Smithing:${project.fusion_smithing_version}"
     modImplementation "io.github.fabricators_of_create.Porting-Lib:entity:${project.port_lib_version}"
+    modImplementation "io.github.fabricators_of_create.Porting-Lib:loot:${project.port_lib_version}"
 
     modImplementation "maven.modrinth:open-parties-and-claims:${project.opac_version}"
 
