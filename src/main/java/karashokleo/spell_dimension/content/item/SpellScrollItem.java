@@ -89,14 +89,6 @@ public class SpellScrollItem extends Item implements ColorProvider
         tooltip.add(SDTexts.SCROLL$OBTAIN.get(
                 SpellScrollConfig.getSpellScrollText(spellInfo)
         ).formatted(Formatting.GRAY));
-        // book requirement
-        if (SpellConfig.enableSpellTier() &&
-            SchoolUtil.SCHOOLS.contains(spell.school))
-        {
-            int grade = SpellConfig.getSpellTier(id);
-            DynamicSpellBookItem bookItem = AllItems.SPELL_BOOKS.get(spell.school).get(grade);
-            tooltip.add(SDTexts.SCROLL$BOOK_REQUIREMENT.get(grade + 1, bookItem.getName()).formatted(Formatting.GRAY));
-        }
         // id
         if (context.isAdvanced())
             tooltip.add(Text.literal("spell id: " + id).formatted(Formatting.DARK_GRAY));

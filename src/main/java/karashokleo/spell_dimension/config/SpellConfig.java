@@ -9,11 +9,6 @@ public class SpellConfig
     private static final HashSet<Identifier> INTERMEDIATE_SPELLS = new HashSet<>();
     private static final HashSet<Identifier> ADVANCED_SPELLS = new HashSet<>();
 
-    public static boolean enableSpellTier()
-    {
-        return true;
-    }
-
     public static int getSpellTier(Identifier spellId)
     {
         if (INTERMEDIATE_SPELLS.contains(spellId))

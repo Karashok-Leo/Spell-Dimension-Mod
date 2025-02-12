@@ -1,9 +1,17 @@
 package karashokleo.spell_dimension.content.component;
 
 import dev.onyxstudios.cca.api.v3.component.Component;
+import karashokleo.l2hostility.init.LHMiscs;
+import karashokleo.spell_dimension.content.network.S2CTitle;
+import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllComponents;
+import karashokleo.spell_dimension.util.AttributeUtil;
+import karashokleo.spell_dimension.util.UuidUtil;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.network.ServerPlayerEntity;
 import org.jetbrains.annotations.NotNull;
 
 public class GameStageComponent implements Component
@@ -17,9 +25,17 @@ public class GameStageComponent implements Component
         return player.getComponent(AllComponents.GAME_STAGE).difficulty;
     }
 
-    public static void setDifficulty(PlayerEntity player, int difficulty)
+    public static void addDifficulty(ServerPlayerEntity player)
     {
-        player.getComponent(AllComponents.GAME_STAGE).difficulty = difficulty;
+        GameStageComponent component = player.getComponent(AllComponents.GAME_STAGE);
+        component.difficulty++;
+        sync(player);
+        if (component.difficulty == HARDCORE)
+        {
+            ServerPlayNetworking.send(player, new S2CTitle(SDTexts.TEXT$QUEST_COMPLETE.get()));
+
+            AttributeUtil.addModifier(player, LHMiscs.ADD_LEVEL, UuidUtil.getUUIDFromString("spell_dimension:hardcore_difficulty"), "Hardcore Difficulty Bonus", 30, EntityAttributeModifier.Operation.ADDITION);
+        }
     }
 
     public static boolean canEnterEnd(PlayerEntity player)
@@ -27,9 +43,15 @@ public class GameStageComponent implements Component
         return player.getComponent(AllComponents.GAME_STAGE).canEnterEnd;
     }
 
-    public static void setCanEnterEnd(PlayerEntity player, boolean canEnterEnd)
+    public static void sync(ServerPlayerEntity player)
+    {
+        AllComponents.GAME_STAGE.sync(player);
+    }
+
+    public static void setCanEnterEnd(ServerPlayerEntity player, boolean canEnterEnd)
     {
         player.getComponent(AllComponents.GAME_STAGE).canEnterEnd = canEnterEnd;
+        sync(player);
     }
 
     private static final String DIFFICULTY_KEY = "Difficulty";

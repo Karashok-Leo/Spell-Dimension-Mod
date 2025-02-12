@@ -38,7 +38,7 @@ public class EndStageItem extends Item
                 if (player.getAbilities().creativeMode && player.isSneaking())
                 {
                     player.sendMessage(SDTexts.TEXT$PROGRESS_ROLLBACK.get(), true);
-                    GameStageComponent.setCanEnterEnd(user, true);
+                    GameStageComponent.setCanEnterEnd(player, false);
                 }
             } else
             {
@@ -46,7 +46,7 @@ public class EndStageItem extends Item
                 S2CUndying packet = new S2CUndying(player);
                 LHNetworking.toClientPlayer(player, packet);
                 LHNetworking.toTracking(player, packet);
-                GameStageComponent.setCanEnterEnd(user, true);
+                GameStageComponent.setCanEnterEnd(player, true);
             }
         }
         return TypedActionResult.success(user.getStackInHand(hand), world.isClient());

@@ -4,6 +4,7 @@ import com.google.common.collect.Multimap;
 import dev.emi.trinkets.api.SlotReference;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.config.SpellConfig;
+import karashokleo.spell_dimension.content.component.GameStageComponent;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllSpells;
@@ -66,9 +67,9 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
         this.grade = grade;
     }
 
-    public boolean canContainSpell(Identifier spellId)
+    public boolean canContainSpell(PlayerEntity player, Identifier spellId)
     {
-        return SpellConfig.enableSpellTier() &&
+        return GameStageComponent.getDifficulty(player) == GameStageComponent.NORMAL ||
                this.grade >= SpellConfig.getSpellTier(spellId);
     }
 
@@ -139,7 +140,7 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
                 player.sendMessage(SDTexts.TEXT$INCOMPATIBLE_SCHOOL.get());
                 return;
             }
-            if (!this.canContainSpell(spellInfo.id()))
+            if (!this.canContainSpell(player, spellInfo.id()))
             {
                 player.sendMessage(SDTexts.TEXT$HIGHER_BOOK_REQUIRED.get());
                 return;

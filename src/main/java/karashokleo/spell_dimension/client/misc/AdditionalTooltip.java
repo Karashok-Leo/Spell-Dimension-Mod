@@ -2,26 +2,33 @@ package karashokleo.spell_dimension.client.misc;
 
 import com.klikli_dev.modonomicon.book.Book;
 import com.klikli_dev.modonomicon.item.ModonomiconItem;
+import karashokleo.l2hostility.client.L2HostilityClient;
 import karashokleo.l2hostility.content.item.TrinketItems;
 import karashokleo.l2hostility.content.logic.DifficultyLevel;
 import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.api.quest.Quest;
 import karashokleo.spell_dimension.api.quest.QuestUsage;
+import karashokleo.spell_dimension.config.SpellConfig;
+import karashokleo.spell_dimension.content.component.GameStageComponent;
 import karashokleo.spell_dimension.content.item.DynamicSpellBookItem;
 import karashokleo.spell_dimension.content.item.logic.EnchantedModifier;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.data.book.MagicGuidanceProvider;
 import karashokleo.spell_dimension.init.AllItems;
+import karashokleo.spell_dimension.util.SchoolUtil;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.event.Event;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableTextContent;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
+import net.spell_engine.api.spell.SpellInfo;
+import net.spell_power.api.SpellSchool;
 
 import java.util.List;
 import java.util.Optional;
@@ -39,6 +46,7 @@ public class AdditionalTooltip
         ItemTooltipCallback.EVENT.register(AdditionalTooltip::appendFlexBreastplate);
         ItemTooltipCallback.EVENT.register(AdditionalTooltip::modifyCursePride);
         ItemTooltipCallback.EVENT.register(AdditionalTooltip::appendModonomicon);
+        ItemTooltipCallback.EVENT.register(AdditionalTooltip::appendSpellScroll);
     }
 
     private static void removeDynamicBookBindingTip(ItemStack stack, TooltipContext context, List<Text> lines)
@@ -96,5 +104,21 @@ public class AdditionalTooltip
         if (!book.getId().equals(MagicGuidanceProvider.BOOK_ID)) return;
         lines.add(SDTexts.TEXT$MAGE_BOOK$1.get().formatted(Formatting.GRAY).formatted(Formatting.STRIKETHROUGH));
         lines.add(SDTexts.TEXT$MAGE_BOOK$2.get().formatted(Formatting.LIGHT_PURPLE));
+    }
+
+    private static void appendSpellScroll(ItemStack stack, TooltipContext context, List<Text> lines)
+    {
+        // book requirement
+        if (!stack.isOf(AllItems.SPELL_SCROLL)) return;
+        ClientPlayerEntity player = L2HostilityClient.getClientPlayer();
+        if (player == null) return;
+        if (GameStageComponent.getDifficulty(player) == GameStageComponent.NORMAL) return;
+        SpellInfo spellInfo = AllItems.SPELL_SCROLL.getSpellInfo(stack);
+        if (spellInfo == null) return;
+        SpellSchool school = spellInfo.spell().school;
+        if (!SchoolUtil.SCHOOLS.contains(school)) return;
+        int grade = SpellConfig.getSpellTier(spellInfo.id());
+        DynamicSpellBookItem bookItem = AllItems.SPELL_BOOKS.get(school).get(grade);
+        lines.add(SDTexts.SCROLL$BOOK_REQUIREMENT.get(grade + 1, bookItem.getName()).formatted(Formatting.GRAY));
     }
 }

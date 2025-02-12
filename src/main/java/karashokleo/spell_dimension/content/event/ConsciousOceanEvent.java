@@ -2,13 +2,13 @@ package karashokleo.spell_dimension.content.event;
 
 import karashokleo.l2hostility.content.item.ConsumableItems;
 import karashokleo.l2hostility.init.LHMiscs;
-import karashokleo.l2hostility.util.MathHelper;
 import karashokleo.spell_dimension.content.component.GameStageComponent;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllWorldGen;
+import karashokleo.spell_dimension.util.AttributeUtil;
+import karashokleo.spell_dimension.util.UuidUtil;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityWorldChangeEvents;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
-import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.TypedActionResult;
@@ -21,11 +21,7 @@ public class ConsciousOceanEvent
         {
             if (!destination.getRegistryKey().equals(AllWorldGen.OC_WORLD)) return;
 
-            EntityAttributeInstance attributeInstance = player.getAttributeInstance(LHMiscs.ADD_LEVEL);
-            if (attributeInstance == null) return;
-            EntityAttributeModifier modifier = new EntityAttributeModifier(MathHelper.getUUIDFromString("spell_dimension:conscious_difficulty"), "Conscious Difficulty Bonus", 1, EntityAttributeModifier.Operation.ADDITION);
-            if (attributeInstance.hasModifier(modifier)) return;
-            attributeInstance.addPersistentModifier(modifier);
+            AttributeUtil.addModifier(player, LHMiscs.ADD_LEVEL, UuidUtil.getUUIDFromString("spell_dimension:conscious_difficulty"), "Conscious Difficulty Bonus", 100, EntityAttributeModifier.Operation.ADDITION);
         });
 
         UseItemCallback.EVENT.register((player, world, hand) ->
