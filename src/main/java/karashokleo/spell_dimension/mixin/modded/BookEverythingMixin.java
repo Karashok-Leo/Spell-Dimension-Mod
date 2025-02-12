@@ -1,7 +1,7 @@
 package karashokleo.spell_dimension.mixin.modded;
 
 import karashokleo.l2hostility.content.item.consumable.BookEverything;
-import karashokleo.spell_dimension.content.component.EndStageComponent;
+import karashokleo.spell_dimension.content.component.GameStageComponent;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllItems;
 import net.minecraft.entity.player.PlayerEntity;
@@ -25,7 +25,7 @@ public abstract class BookEverythingMixin
     private void inject_use(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir)
     {
         if (world.isClient()) return;
-        if (EndStageComponent.canEnterEnd(user)) return;
+        if (GameStageComponent.canEnterEnd(user)) return;
         user.sendMessage(SDTexts.TEXT$END_STAGE$BOOK_EVERYTHING.get(AllItems.CELESTIAL_LUMINARY.getName()), true);
         cir.setReturnValue(TypedActionResult.fail(user.getStackInHand(hand)));
     }

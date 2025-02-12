@@ -21,6 +21,7 @@
     "modded.TerribleSwordItemMixin",
     "modded.TrinketInventoryMixin",
     "modded.VoidShadowEntityMixin",
+    "modded.WraithEntityMixin",
     "phase.EntityPredicatesMixin",
     "phase.LivingEntityMixin",
     "phase.PlayerEntityMixin",

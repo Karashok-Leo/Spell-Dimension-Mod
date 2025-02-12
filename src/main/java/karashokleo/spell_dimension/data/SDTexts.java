@@ -61,7 +61,7 @@ public enum SDTexts
     TEXT$EVENT$WAITING("Wave %s/%s is about to start - Countdown: %s seconds", "第%s/%s波即将开始 - 倒计时：%s秒"),
     TEXT$EVENT$FINISH$SUCCESS("Invasion End - Successful", "入侵结束 - 成功"),
     TEXT$EVENT$FINISH$FAIL("Invasion End - Failed", "入侵结束 - 失败"),
-    TEXT$CONSCIOUS$BAN_ITEM("You have entered the Ocean of Consciousness and can no longer use this item.", "你已经进入过识之海，不再能够使用该物品"),
+    TEXT$DIFFICULTY$BAN_ITEM("You're in Hardcore mode and can no longer use this item.", "你处于硬核模式，不再能够使用该物品"),
     TEXT$RANDOM_LOOT_NAME("? %s ?", "? %s ?"),
     TEXT$LOCATING("Locating: %s", "正在定位：%s"),
     TEXT$GAME_OVER$HEAD("To players:", "致玩家:"),

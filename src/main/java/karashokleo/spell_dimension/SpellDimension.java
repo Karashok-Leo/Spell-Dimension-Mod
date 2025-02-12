@@ -6,7 +6,10 @@ import dev.onyxstudios.cca.api.v3.entity.EntityComponentInitializer;
 import dev.onyxstudios.cca.api.v3.entity.RespawnCopyStrategy;
 import karashokleo.leobrary.datagen.generator.*;
 import karashokleo.leobrary.datagen.generator.init.GeneratorStorage;
-import karashokleo.spell_dimension.content.component.*;
+import karashokleo.spell_dimension.content.component.BuffComponentImpl;
+import karashokleo.spell_dimension.content.component.EnlighteningComponent;
+import karashokleo.spell_dimension.content.component.GameStageComponent;
+import karashokleo.spell_dimension.content.component.QuestComponent;
 import karashokleo.spell_dimension.content.item.logic.EnchantedModifier;
 import karashokleo.spell_dimension.content.item.logic.EnlighteningModifier;
 import karashokleo.spell_dimension.content.misc.DebugStaffCommand;
@@ -105,8 +108,7 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
     public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry)
     {
         registry.registerForPlayers(AllComponents.ENLIGHTENING, player -> new EnlighteningComponent(), RespawnCopyStrategy.ALWAYS_COPY);
-        registry.registerForPlayers(AllComponents.ENTER_END, player -> new EndStageComponent(), RespawnCopyStrategy.ALWAYS_COPY);
-        registry.registerForPlayers(AllComponents.CONSCIOUS_MODE, player -> new ConsciousModeComponent(), RespawnCopyStrategy.ALWAYS_COPY);
+        registry.registerForPlayers(AllComponents.GAME_STAGE, player -> new GameStageComponent(), RespawnCopyStrategy.ALWAYS_COPY);
         registry.registerForPlayers(AllComponents.QUEST, player -> new QuestComponent(), RespawnCopyStrategy.ALWAYS_COPY);
         registry.registerFor(LivingEntity.class, AllComponents.BUFF, BuffComponentImpl::new);
     }

@@ -2,7 +2,7 @@ package karashokleo.spell_dimension.content.item;
 
 import karashokleo.l2hostility.content.network.S2CUndying;
 import karashokleo.l2hostility.init.LHNetworking;
-import karashokleo.spell_dimension.content.component.EndStageComponent;
+import karashokleo.spell_dimension.content.component.GameStageComponent;
 import karashokleo.spell_dimension.content.network.S2CTitle;
 import karashokleo.spell_dimension.data.SDTexts;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -33,12 +33,12 @@ public class EndStageItem extends Item
     {
         if (user instanceof ServerPlayerEntity player)
         {
-            if (EndStageComponent.canEnterEnd(user))
+            if (GameStageComponent.canEnterEnd(user))
             {
                 if (player.getAbilities().creativeMode && player.isSneaking())
                 {
                     player.sendMessage(SDTexts.TEXT$PROGRESS_ROLLBACK.get(), true);
-                    EndStageComponent.setCanEnterEnd(user, true);
+                    GameStageComponent.setCanEnterEnd(user, true);
                 }
             } else
             {
@@ -46,7 +46,7 @@ public class EndStageItem extends Item
                 S2CUndying packet = new S2CUndying(player);
                 LHNetworking.toClientPlayer(player, packet);
                 LHNetworking.toTracking(player, packet);
-                EndStageComponent.setCanEnterEnd(user, true);
+                GameStageComponent.setCanEnterEnd(user, true);
             }
         }
         return TypedActionResult.success(user.getStackInHand(hand), world.isClient());

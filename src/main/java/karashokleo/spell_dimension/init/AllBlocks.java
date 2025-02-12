@@ -1,7 +1,7 @@
 package karashokleo.spell_dimension.init;
 
 import karashokleo.leobrary.datagen.builder.BlockBuilder;
-import karashokleo.leobrary.datagen.builder.BlockSet;
+import karashokleo.leobrary.datagen.object.BlockSet;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.block.*;
 import karashokleo.spell_dimension.content.block.fluid.ConsciousnessFluid;
@@ -13,7 +13,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.data.client.*;
+import net.minecraft.data.client.BlockStateModelGenerator;
+import net.minecraft.data.client.Models;
+import net.minecraft.data.client.TextureMap;
+import net.minecraft.data.client.VariantsBlockStateSupplier;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.tag.BlockTags;
