@@ -1,6 +1,7 @@
 package karashokleo.spell_dimension.content.spell;
 
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
+import karashokleo.l2hostility.init.LHTags;
 import karashokleo.spell_dimension.init.AllSpells;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -17,19 +18,16 @@ public class ExorcismSpell
     {
         if (!spellInfo.id().equals(AllSpells.EXORCISM)) return;
         Optional<Entity> target = targets.stream().findFirst();
-        if (target.isPresent() && (target.get() instanceof LivingEntity livingEntity) && livingEntity.isAttackable())
-        {
-            Optional<MobDifficulty> optional = MobDifficulty.get(livingEntity);
-            if (optional.isPresent())
-            {
-                MobDifficulty difficulty = optional.get();
-                int level = difficulty.getLevel();
-                if (level > 0)
-                {
-                    caster.damage(livingEntity.getDamageSources().create(DamageTypes.INDIRECT_MAGIC, livingEntity), level);
-                    difficulty.reInit(level / 2, false);
-                }
-            }
-        }
+        if (target.isEmpty()) return;
+        if (!(target.get() instanceof LivingEntity livingEntity)) return;
+        if (!livingEntity.isAttackable()) return;
+        if (livingEntity.getType().isIn(LHTags.SEMIBOSS)) return;
+        Optional<MobDifficulty> optional = MobDifficulty.get(livingEntity);
+        if (optional.isEmpty()) return;
+        MobDifficulty difficulty = optional.get();
+        int level = difficulty.getLevel();
+        if (level <= 0) return;
+        caster.damage(livingEntity.getDamageSources().create(DamageTypes.INDIRECT_MAGIC, livingEntity), level);
+        difficulty.reInit(level / 2, false);
     }
 }

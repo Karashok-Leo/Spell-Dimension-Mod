@@ -6,6 +6,7 @@ import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHu
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.trait.common.AdaptingTrait;
 import karashokleo.l2hostility.init.LHTraits;
+import karashokleo.leobrary.damage.api.modify.DamagePhase;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
 import karashokleo.spell_dimension.content.event.*;
 import karashokleo.spell_dimension.content.item.SpellScrollItem;
@@ -31,6 +32,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.spell_power.api.SpellDamageSource;
 import net.spell_power.api.SpellPowerTags;
+import net.trique.mythicupgrades.MythicUpgradesDamageTypes;
 
 import java.util.Optional;
 
@@ -44,6 +46,15 @@ public class AllEvents
         TrinketEvent.init();
         LightSpell.init();
         ConsciousOceanEvent.init();
+
+        // Deflection
+        DamagePhase.SHIELD.registerModifier(0, access ->
+        {
+            if (!access.getSource().isOf(MythicUpgradesDamageTypes.DEFLECTING_DAMAGE_TYPE))
+                return;
+            float maxHealth = access.getEntity().getMaxHealth();
+            access.addModifier(originalDamage -> Math.min(originalDamage, maxHealth));
+        });
 
         // cancel offhand block placement interaction while holding spell scroll
         UseBlockCallback.EVENT.register((player, world, hand, hitResult) ->

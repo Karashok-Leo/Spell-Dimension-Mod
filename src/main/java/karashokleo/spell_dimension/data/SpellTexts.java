@@ -109,8 +109,8 @@ public enum SpellTexts
     FIRE_OF_RETRIBUTION(
             "Fire of Retribution",
             "业火",
-            "Burn a random trait of the target every second. The higher the levelFactor of the trait consumed, the higher the damage caused.",
-            "每秒灼烧目标的随机一个词条，该词条的等级消耗越高，造成的伤害越高。"
+            "Burn a random trait of the target every second. The higher the levelFactor of the trait consumed, the higher the damage caused. No effect on bosses.",
+            "每秒灼烧目标的随机一个词条，该词条的等级消耗越高，造成的伤害越高。对Boss无效。"
     ),
     AURA(
             "Frost Aura",
@@ -223,8 +223,8 @@ public enum SpellTexts
     EXORCISM(
             "Exorcism",
             "驱邪",
-            "Reduce the target's levelFactor to half of the original, and reacquire the traits, while the caster takes damage equal to the target's original levelFactor.",
-            "使目标等级降至原来的一半，并且重新获取词条，同时施法者受到相当于目标原有等级的伤害。"
+            "Reduce the target's levelFactor to half of the original, and reacquire the traits, while the caster takes damage equal to the target's original levelFactor. No effect on bosses.",
+            "使目标等级降至原来的一半，并且重新获取词条，同时施法者受到相当于目标原有等级的伤害。对Boss无效。"
     ),
     BLESSING(
             "Blessing",

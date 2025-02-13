@@ -3,6 +3,7 @@ package karashokleo.spell_dimension.content.spell;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.item.misc.wand.TraitAdderWand;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
+import karashokleo.l2hostility.init.LHTags;
 import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.util.DamageUtil;
 import karashokleo.spell_dimension.util.RandomUtil;
@@ -24,6 +25,8 @@ public class FireOfRetributionSpell
         for (Entity entity : targets)
         {
             if (!(entity instanceof LivingEntity target)) continue;
+            if (target.getType().isIn(LHTags.SEMIBOSS)) continue;
+
             if (target.age % 20 != 0) continue;
             var opt = MobDifficulty.get(target);
             if (opt.isEmpty()) return;
