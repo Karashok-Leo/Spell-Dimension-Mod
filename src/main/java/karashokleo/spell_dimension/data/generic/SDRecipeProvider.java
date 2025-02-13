@@ -12,6 +12,7 @@ import karashokleo.l2hostility.init.LHEnchantments;
 import karashokleo.l2hostility.init.LHTraits;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.enchantment.TraitEffectImmunityEnchantment;
+import karashokleo.spell_dimension.content.item.essence.EnchantedEssenceItem;
 import karashokleo.spell_dimension.content.item.logic.Tier;
 import karashokleo.spell_dimension.content.recipe.essence.EnchantedEssenceRecipeJsonProvider;
 import karashokleo.spell_dimension.init.AllBlocks;
@@ -224,7 +225,7 @@ public class SDRecipeProvider extends FabricRecipeProvider
         for (SpellSchool school : SchoolUtil.SCHOOLS)
             for (int i = 0; i < 3; i++)
                 for (EquipmentSlot slot : EquipmentSlot.values())
-                    exporter.accept(new EnchantedEssenceRecipeJsonProvider(SpellDimension.modLoc(school.id.getPath() + "/" + slot.getName() + "/" + i), i, (i + 1) * 10, slot, school));
+                    exporter.accept(new EnchantedEssenceRecipeJsonProvider(SpellDimension.modLoc(school.id.getPath() + "/" + slot.getName() + "/" + i), i, EnchantedEssenceItem.CRAFT_THRESHOLD[i], slot, school));
     }
 
     private static void addEnchantmentRecipe(Consumer<RecipeJsonProvider> exporter)

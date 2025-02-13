@@ -26,7 +26,7 @@ public class SDAdvancementProvider extends FabricAdvancementProvider
                         AllItems.MEDAL.getDefaultStack(),
                         SDTexts.ADVANCEMENT$MEDAL$TITLE.get(),
                         SDTexts.ADVANCEMENT$MEDAL$DESCRIPTION.get(),
-                        null,
+                        SpellDimension.modLoc("textures/block/protective_cover.png"),
                         AdvancementFrame.CHALLENGE,
                         true,
                         true,

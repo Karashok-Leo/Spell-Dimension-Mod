@@ -23,6 +23,7 @@ import java.util.List;
 
 public class EnchantedEssenceItem extends StackClickEssenceItem
 {
+    public static final int[] CRAFT_THRESHOLD = {33, 66, 99};
     private static final String ENCHANTED_MODIFIERS = "EnchantedModifiers";
 
     public EnchantedEssenceItem()
