@@ -20,6 +20,11 @@ public class GameStageComponent implements Component
     public static final int HARDCORE = 1;
     public static final int NIGHTMARE = 2;
 
+    public static boolean isNormalMode(PlayerEntity player)
+    {
+        return getDifficulty(player) == NORMAL;
+    }
+
     public static int getDifficulty(PlayerEntity player)
     {
         return player.getComponent(AllComponents.GAME_STAGE).difficulty;
@@ -43,22 +48,35 @@ public class GameStageComponent implements Component
         return player.getComponent(AllComponents.GAME_STAGE).canEnterEnd;
     }
 
-    public static void sync(ServerPlayerEntity player)
-    {
-        AllComponents.GAME_STAGE.sync(player);
-    }
-
     public static void setCanEnterEnd(ServerPlayerEntity player, boolean canEnterEnd)
     {
         player.getComponent(AllComponents.GAME_STAGE).canEnterEnd = canEnterEnd;
         sync(player);
     }
 
+    public static boolean keepInventory(PlayerEntity player)
+    {
+        return player.getComponent(AllComponents.GAME_STAGE).keepInventory;
+    }
+
+    public static void setKeepInventory(ServerPlayerEntity player, boolean keepInventory)
+    {
+        player.getComponent(AllComponents.GAME_STAGE).keepInventory = keepInventory;
+        sync(player);
+    }
+
+    public static void sync(ServerPlayerEntity player)
+    {
+        AllComponents.GAME_STAGE.sync(player);
+    }
+
     private static final String DIFFICULTY_KEY = "Difficulty";
     private static final String END_STAGE_KEY = "EndStage";
+    private static final String KEEP_INVENTORY_KEY = "KeepInventory";
 
     private int difficulty = NORMAL;
     private boolean canEnterEnd = false;
+    private boolean keepInventory = false;
 
     public GameStageComponent()
     {
@@ -69,6 +87,7 @@ public class GameStageComponent implements Component
     {
         this.difficulty = tag.getInt(DIFFICULTY_KEY);
         this.canEnterEnd = tag.getBoolean(END_STAGE_KEY);
+        this.keepInventory = tag.getBoolean(KEEP_INVENTORY_KEY);
     }
 
     @Override
@@ -76,5 +95,6 @@ public class GameStageComponent implements Component
     {
         tag.putInt(DIFFICULTY_KEY, this.difficulty);
         tag.putBoolean(END_STAGE_KEY, this.canEnterEnd);
+        tag.putBoolean(KEEP_INVENTORY_KEY, this.keepInventory);
     }
 }

@@ -17,6 +17,7 @@ import karashokleo.spell_dimension.util.TagUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.data.client.Models;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.item.NetherStarItem;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
@@ -62,7 +63,9 @@ public class AllItems
     public static FlexBreastplateItem FLEX_BREASTPLATE;
     public static FlickerBreastplateItem FLICKER_BREASTPLATE;
     public static OblivionBreastplateItem OBLIVION_BREASTPLATE;
-    public static Item MEDAL;
+    public static MedalItem MEDAL;
+    public static BottleOfNightmare BOTTLE_NIGHTMARE;
+    public static BottleOfSoulBinding BOTTLE_SOUL_BINDING;
 
     public static void register()
     {
@@ -212,10 +215,36 @@ public class AllItems
                 .addTag(AllTags.BREASTPLATE_SLOT)
                 .addModel()
                 .register();
-        MEDAL = Entry.of("medal", new Item(new FabricItemSettings().maxCount(1).rarity(Rarity.EPIC)))
+        MEDAL = Entry.of("medal", new MedalItem())
                 .addEN()
                 .addZH("勋章")
                 .addModel()
+                .register();
+        BOTTLE_NIGHTMARE = Entry.of(
+                        "bottle_of_nightmare",
+                        new BottleOfNightmare(
+                                new FabricItemSettings()
+                                        .maxCount(64)
+                                        .rarity(Rarity.EPIC)
+                                        .recipeRemainder(Items.GLASS_BOTTLE)
+                        )
+                )
+                .addModel()
+                .addEN()
+                .addZH("梦魇之瓶")
+                .register();
+        BOTTLE_SOUL_BINDING = Entry.of(
+                        "bottle_of_soul_binding",
+                        new BottleOfSoulBinding(
+                                new FabricItemSettings()
+                                        .maxCount(64)
+                                        .rarity(Rarity.RARE)
+                                        .recipeRemainder(Items.GLASS_BOTTLE)
+                        )
+                )
+                .addModel()
+                .addEN()
+                .addZH("灵魂羁绊之瓶")
                 .register();
     }
 

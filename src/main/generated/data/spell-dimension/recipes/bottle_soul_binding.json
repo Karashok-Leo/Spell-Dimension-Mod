@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "l2hostility:bottle_of_sanity"
+    },
+    {
+      "tag": "spell-dimension:essence/all"
+    }
+  ],
+  "result": {
+    "item": "spell-dimension:bottle_of_soul_binding"
+  }
+}

@@ -65,15 +65,23 @@ public enum SDTexts
     TEXT$RANDOM_LOOT_NAME("? %s ?", "? %s ?"),
     TEXT$LOCATING("Locating: %s", "正在定位：%s"),
     TEXT$GAME_OVER$HEAD("To players:", "致玩家:"),
-    TEXT$GAME_OVER$THANKS("Congrats on the pass, and thank you very much for traveling this far.", "恭喜你通关了！非常感谢你游玩至此。"),
-    TEXT$GAME_OVER$MAKING("I have put a lot of time and effort into this integration pack since I started working on it. From developing exclusive modules for this pack, customizing the loot table, and optimizing performance, to fixing bugs and balancing the game's difficulty, I've encountered countless challenges, and luckily I've finally finished it.", "自从开始制作这个整合包以来，我投入了大量的时间和精力。从开发这个整合包的专属模组、定制战利品表、优化性能，到修复Bug、平衡游戏难度，我遇到了无数挑战，幸运的是我最后完成了它。"),
+    TEXT$GAME_OVER$THANKS("Congrats on the pass, and thank you very much for traveling this far. My hands are still shaking as I write this - just as they were three years ago when I first successfully ran a mod I wrote.", "恭喜你通关啦！非常感谢你游玩至此。写这段话的时候，我的手还在抖——就像三年前第一次成功运行自己写的模组时那样。"),
+    TEXT$GAME_OVER$MAKING("I have put a lot of time and effort into this modpack since I started working on it. From developing exclusive mods for this pack, customizing loot tables, and optimizing performance, to fixing bugs and balancing difficulty, I've encountered countless challenges. Luckily and finally, I've finished it.", "自着手制作这个整合包以来，我投入了无数的时间和精力。从开发专属模组、定制战利品表、优化游戏性能，到修复各种Bug、平衡游戏难度，我遇到了一个又一个挑战。幸运的是，最终我完成了它。"),
+    TEXT$GAME_OVER$PASSION("During the making process, I gradually found my old passion for Minecraft. I think I've found something - that I truly love, which seems to be a luxury for most people. I hope you too can find what you love and stick with it.", "在制作过程中，我逐渐找回了自己从前对Minecraft的热情。我想我找到了某些东西——某些我真正热爱的东西，这似乎对大多数人来说是一种奢侈。希望你也能找到你的热爱并为之坚持下去。"),
     TEXT$GAME_OVER$FEEDBACK("If you have any suggestions, please give me feedback, I would appreciate it.", "如果你有任何建议，请反馈给我，我将感激不尽。"),
     TEXT$GAME_OVER$WISH("Lastly, I wish you a happy life. Have fun playing!", "最后，祝你生活愉快。玩的开心！"),
+    TEXT$GAME_OVER$TRUE_MAGIC("True magic is the love that can make time stand still", "真正的魔法，是能让时光驻留的热爱"),
     TEXT$QUEST$BEGINNING("[BEGINNING]", "[起点]"),
     TEXT$QUEST$END("[END]", "[终点]"),
     TEXT$QUEST$CHALLENGE("[CHALLENGE]", "[挑战]"),
     TEXT$MAGE_BOOK$1("An Introductory Grimoire Even a Three-Year-Old Can Understand", "三岁小孩也能看懂的入门魔法书"),
     TEXT$MAGE_BOOK$2("When you're in a quandary, turn to it~", "当你遇到窘境时，不妨翻开看看吧~"),
+
+    /**
+     * Advancements
+     */
+    ADVANCEMENT$MEDAL$TITLE("I knocked my tooth...", "磕到牙了..."),
+    ADVANCEMENT$MEDAL$DESCRIPTION("Try nibbling on a Medal", "尝试啃一口勋章"),
 
     /**
      * Spell School
@@ -101,6 +109,13 @@ public enum SDTexts
     SLOT$FEET("Slot: Feet", "槽位：靴子"),
     SLOT$MAINHAND("Slot: Main Hand", "槽位：主手"),
     SLOT$OFFHAND("Slot: Off Hand", "槽位：副手"),
+
+    /**
+     * Difficulty Tier
+     */
+    DIFFICULTY_TIER$0("Normal", "普通"),
+    DIFFICULTY_TIER$1("Hardcore", "硬核"),
+    DIFFICULTY_TIER$2("Nightmare", "梦魇"),
 
     /**
      * Tooltip
@@ -154,6 +169,17 @@ public enum SDTexts
     TOOLTIP$OBLIVION_BREASTPLATE_3("Current Oblivion Amount: %s", "当前湮灭值：%s"),
     TOOLTIP$CURSE_PRIDE_1("Both damage dealt and damage taken are increased by %s%% per difficulty level", "根据玩家难度，造成伤害与受到伤害每级提升%s%%"),
     TOOLTIP$CURSE_PRIDE_2("Current damage increment: +%s%%", "当前增伤：+%s%%"),
+    TOOLTIP$DIFFICULTY_TIER$CURRENT("Current Difficulty Tier: %s", "当前难度层级：%s"),
+    TOOLTIP$DIFFICULTY_TIER$TITLE("[%s]:", "[%s]:"),
+    TOOLTIP$DIFFICULTY_TIER$DESC("- %s", "- %s"),
+    TOOLTIP$DIFFICULTY_TIER$HARDCORE$1("Player initial extra difficulty increased by 30", "玩家初始额外难度增加30"),
+    TOOLTIP$DIFFICULTY_TIER$HARDCORE$2("Doubles the player's difficulty increment for inflicting kills", "玩家造成击杀提升的难度翻倍"),
+    TOOLTIP$DIFFICULTY_TIER$HARDCORE$3("Doubles the hostility damage bonus", "恶意伤害加成翻倍"),
+    TOOLTIP$DIFFICULTY_TIER$HARDCORE$4("Restriction on spell scroll tier", "限制法术卷轴装载等级"),
+    TOOLTIP$DIFFICULTY_TIER$HARDCORE$5("Enchanted Essence threshold from loot lowered.", "从战利品中获取的束魔精华阈值降低"),
+    TOOLTIP$BOTTLE_NIGHTMARE("Enter [%s] mode after use, cannot be undone", "使用后进入 [%s] 模式，不可撤销"),
+    TOOLTIP$BOTTLE_SOUL_BINDING("After using it, you will no longer lose the item when you die", "使用后，死亡不再丢失物品"),
+    TOOLTIP$BOTTLE_SOUL_BINDING$WARNING("By default, items dropped by a player upon death are retained in the Gravestone. However, for some unknown reason, it is still possible, albeit highly unlikely, for items in the gravestone to disappear. If you are completely intolerant of the possibility of losing everything you own, drink this potion.", "默认情况下，玩家死亡时掉落的物品将被保留在墓碑中。但由于某些不明原因，墓碑中的物品仍有可能不翼而飞，尽管这种可能性微乎其微。如果你完全无法容忍失去所有身家的可能性，请喝下这瓶药水。"),
 
     /**
      * Scrolls
@@ -219,6 +245,11 @@ public enum SDTexts
     public static MutableText getSlotText(EquipmentSlot slot)
     {
         return Text.translatable(Util.createTranslationKey("slot", SpellDimension.modLoc(slot.getName())));
+    }
+
+    public static MutableText getDifficultyTierText(int tier)
+    {
+        return Text.translatable(Util.createTranslationKey("difficulty_tier", SpellDimension.modLoc(tier + "")));
     }
 
     public static void register()

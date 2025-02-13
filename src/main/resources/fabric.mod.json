@@ -74,8 +74,7 @@
   "custom": {
     "cardinal-components": [
       "spell-dimension:enlightening",
-      "spell-dimension:end_stage",
-      "spell-dimension:conscious_mode",
+      "spell-dimension:game_stage",
       "spell-dimension:buff",
       "spell-dimension:quest"
     ]

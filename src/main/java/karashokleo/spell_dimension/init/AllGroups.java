@@ -97,7 +97,8 @@ public class AllGroups
                             entries.add(AllItems.FLEX_BREASTPLATE);
                             entries.add(AllItems.FLICKER_BREASTPLATE);
                             entries.add(AllItems.OBLIVION_BREASTPLATE);
-                            entries.add(AllItems.MEDAL);
+                            entries.add(AllItems.BOTTLE_NIGHTMARE);
+                            entries.add(AllItems.BOTTLE_SOUL_BINDING);
                         })
                         .build()
         );

@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_bottle_of_sanity": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "l2hostility:bottle_of_sanity"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "spell-dimension:bottle_soul_binding"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_bottle_of_sanity",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "spell-dimension:bottle_soul_binding"
+    ]
+  },
+  "sends_telemetry_event": false
+}

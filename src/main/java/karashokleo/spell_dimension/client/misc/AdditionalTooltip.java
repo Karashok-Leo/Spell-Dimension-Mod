@@ -47,6 +47,7 @@ public class AdditionalTooltip
         ItemTooltipCallback.EVENT.register(AdditionalTooltip::modifyCursePride);
         ItemTooltipCallback.EVENT.register(AdditionalTooltip::appendModonomicon);
         ItemTooltipCallback.EVENT.register(AdditionalTooltip::appendSpellScroll);
+        ItemTooltipCallback.EVENT.register(AdditionalTooltip::appendBottleNightmare);
     }
 
     private static void removeDynamicBookBindingTip(ItemStack stack, TooltipContext context, List<Text> lines)
@@ -112,7 +113,7 @@ public class AdditionalTooltip
         if (!stack.isOf(AllItems.SPELL_SCROLL)) return;
         ClientPlayerEntity player = L2HostilityClient.getClientPlayer();
         if (player == null) return;
-        if (GameStageComponent.getDifficulty(player) == GameStageComponent.NORMAL) return;
+        if (GameStageComponent.isNormalMode(player)) return;
         SpellInfo spellInfo = AllItems.SPELL_SCROLL.getSpellInfo(stack);
         if (spellInfo == null) return;
         SpellSchool school = spellInfo.spell().school;
@@ -120,5 +121,22 @@ public class AdditionalTooltip
         int grade = SpellConfig.getSpellTier(spellInfo.id());
         DynamicSpellBookItem bookItem = AllItems.SPELL_BOOKS.get(school).get(grade);
         lines.add(SDTexts.SCROLL$BOOK_REQUIREMENT.get(grade + 1, bookItem.getName()).formatted(Formatting.GRAY));
+    }
+
+    private static void appendBottleNightmare(ItemStack stack, TooltipContext context, List<Text> lines)
+    {
+        if (!stack.isOf(AllItems.BOTTLE_NIGHTMARE)) return;
+        ClientPlayerEntity player = L2HostilityClient.getClientPlayer();
+        if (player == null) return;
+        int difficulty = GameStageComponent.getDifficulty(player);
+        lines.add(SDTexts.TOOLTIP$BOTTLE_NIGHTMARE.get(difficulty).formatted(Formatting.RED));
+        lines.add(SDTexts.TOOLTIP$DIFFICULTY_TIER$CURRENT.get(SDTexts.getDifficultyTierText(difficulty)).formatted(Formatting.BOLD));
+        lines.add(SDTexts.TOOLTIP$DIFFICULTY_TIER$TITLE.get(SDTexts.getDifficultyTierText(1)).formatted(Formatting.DARK_RED));
+        for (int i = 1; i <= 5; i++)
+            lines.add(
+                    SDTexts.TOOLTIP$DIFFICULTY_TIER$DESC.get(
+                            Text.translatable("tooltip.spell-dimension.difficulty_tier.hardcore." + i)
+                    ).formatted(Formatting.DARK_RED)
+            );
     }
 }
