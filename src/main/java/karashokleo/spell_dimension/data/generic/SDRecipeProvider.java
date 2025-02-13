@@ -132,6 +132,28 @@ public class SDRecipeProvider extends FabricRecipeProvider
                 )
                 .offerTo(exporter);
 
+        // Bottle of Nightmare
+        ShapelessRecipeJsonBuilder
+                .create(RecipeCategory.MISC, AllItems.BOTTLE_NIGHTMARE)
+                .input(ConsumableItems.BOTTLE_CURSE)
+                .input(Ingredient.fromTag(AllTags.ESSENCE_ALL))
+                .criterion(
+                        FabricRecipeProvider.hasItem(ConsumableItems.BOTTLE_CURSE),
+                        FabricRecipeProvider.conditionsFromItem(ConsumableItems.BOTTLE_CURSE)
+                )
+                .offerTo(exporter, SpellDimension.modLoc("bottle_nightmare"));
+
+        // Bottle of Soul Binding
+        ShapelessRecipeJsonBuilder
+                .create(RecipeCategory.MISC, AllItems.BOTTLE_SOUL_BINDING)
+                .input(ConsumableItems.BOTTLE_SANITY)
+                .input(Ingredient.fromTag(AllTags.ESSENCE_ALL))
+                .criterion(
+                        FabricRecipeProvider.hasItem(ConsumableItems.BOTTLE_SANITY),
+                        FabricRecipeProvider.conditionsFromItem(ConsumableItems.BOTTLE_SANITY)
+                )
+                .offerTo(exporter, SpellDimension.modLoc("bottle_soul_binding"));
+
         // Netherite Upgrade Smithing Template
         SmithingTransformRecipeJsonBuilder
                 .create(

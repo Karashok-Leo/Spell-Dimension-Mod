@@ -27,14 +27,13 @@ public class ConsciousOceanEvent
         UseItemCallback.EVENT.register((player, world, hand) ->
         {
             ItemStack stack = player.getStackInHand(hand);
-            if ((stack.isOf(ConsumableItems.HOSTILITY_ORB) ||
-                 stack.isOf(ConsumableItems.BOTTLE_SANITY)) &&
-                GameStageComponent.getDifficulty(player) > GameStageComponent.NORMAL)
-            {
-                player.sendMessage(SDTexts.TEXT$DIFFICULTY$BAN_ITEM.get(), true);
-                return TypedActionResult.fail(stack);
-            }
-            return TypedActionResult.pass(stack);
+            if (GameStageComponent.isNormalMode(player))
+                return TypedActionResult.pass(stack);
+            if (!stack.isOf(ConsumableItems.HOSTILITY_ORB) &&
+                !stack.isOf(ConsumableItems.BOTTLE_SANITY))
+                return TypedActionResult.pass(stack);
+            player.sendMessage(SDTexts.TEXT$DIFFICULTY$BAN_ITEM.get(), true);
+            return TypedActionResult.fail(stack);
         });
     }
 }

@@ -9,9 +9,11 @@
     "modded.ASBTooltipMixin",
     "modded.BookEverythingMixin",
     "modded.CurseOfPrideMixin",
+    "modded.DifficultyEventsMixin",
     "modded.DispellTraitMixin",
     "modded.LootingCharmMixin",
     "modded.LootModifierFixer",
+    "modded.PlayerDifficultyMixin",
     "modded.SpellHelperInvoker",
     "modded.SpellHelperMixin",
     "modded.SpellInfinityEnchantmentMixin",
@@ -32,6 +34,7 @@
     "vanilla.EndPortalBlockMixin",
     "vanilla.LivingEntityMixin",
     "vanilla.MobSpawnerLogicMixin",
+    "vanilla.PlayerEntityMixin",
     "vanilla.PlayerInventoryAccessor"
   ],
   "injectors": {

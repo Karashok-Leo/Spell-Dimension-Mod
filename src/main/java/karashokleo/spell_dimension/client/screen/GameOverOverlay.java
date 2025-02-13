@@ -21,7 +21,8 @@ public class GameOverOverlay extends SideBar<SideBar.IntSignature> implements IG
             SDTexts.TEXT$GAME_OVER$HEAD.get().formatted(Formatting.AQUA),
             SDTexts.TEXT$GAME_OVER$THANKS.get().formatted(Formatting.YELLOW),
             SDTexts.TEXT$GAME_OVER$MAKING.get().formatted(Formatting.LIGHT_PURPLE),
-            SDTexts.TEXT$GAME_OVER$FEEDBACK.get().formatted(Formatting.GREEN),
+            SDTexts.TEXT$GAME_OVER$PASSION.get().formatted(Formatting.GREEN),
+            SDTexts.TEXT$GAME_OVER$FEEDBACK.get().formatted(Formatting.DARK_AQUA),
             SDTexts.TEXT$GAME_OVER$WISH.get().formatted(Formatting.GOLD)
     );
 

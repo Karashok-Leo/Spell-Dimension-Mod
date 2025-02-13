@@ -19,6 +19,7 @@ import karashokleo.spell_dimension.data.book.MagicGuidanceProvider;
 import karashokleo.spell_dimension.data.book.MultiBlockProvider;
 import karashokleo.spell_dimension.data.book.lang.BookChineseProvider;
 import karashokleo.spell_dimension.data.book.lang.BookEnglishProvider;
+import karashokleo.spell_dimension.data.generic.SDAdvancementProvider;
 import karashokleo.spell_dimension.data.generic.SDRecipeProvider;
 import karashokleo.spell_dimension.data.generic.SDTraitConfigProvider;
 import karashokleo.spell_dimension.data.loot_bag.BagProvider;
@@ -93,6 +94,7 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
         pack.addProvider((FabricDataOutput output) -> new MultiBlockProvider(output));
 
         pack.addProvider(SDRecipeProvider::new);
+        pack.addProvider(SDAdvancementProvider::new);
         pack.addProvider(SDTraitConfigProvider::new);
 
         GeneratorStorage.generate(this.getModId(), pack);

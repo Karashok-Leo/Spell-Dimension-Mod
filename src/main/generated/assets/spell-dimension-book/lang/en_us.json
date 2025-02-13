@@ -248,7 +248,7 @@
   "book.spell-dimension-book.magic_guidance.resource.name": "Resources & Tips",
   "book.spell-dimension-book.magic_guidance.resource.ocean.description": "",
   "book.spell-dimension-book.magic_guidance.resource.ocean.name": "Ocean of Consciousness",
-  "book.spell-dimension-book.magic_guidance.resource.ocean.text.text": "Your hostility level will be raised to at least level 100.\n\\\n\\\nYou can no longer use Hostility Orbs and Bottles of Sanity.\n\\\n\\\nYou cannot use Waystones to enter or exit the Ocean of Consciousness, the only way to enter is to use the **Magic Mirror**, and the only exit is the **Consciousness Pivot**.\n",
+  "book.spell-dimension-book.magic_guidance.resource.ocean.text.text": "Your hostility extra level will increase by 100.\n\\\n\\\nYou cannot use Waystones to enter or exit the Ocean of Consciousness, the only way to enter is to use the **Magic Mirror**, and the only exit is the **Consciousness Pivot**.\n",
   "book.spell-dimension-book.magic_guidance.resource.ocean.world.text": "The Ocean of Consciousness is a world of nothingness.\n\\\nOnce you enter this world, your game difficulty will be greatly increased:\n",
   "book.spell-dimension-book.magic_guidance.resource.ocean.world.title": "Ocean of Consciousness",
   "book.spell-dimension-book.magic_guidance.resource.pivot.beacon.text": "After the Invasion Event, a light column will be generated from the Consciousness Core. Standing on the light column will teleport you to the corresponding position in the overworld.\n\\\n\\\nActivated consciousness pivots can affect the surrounding storage system, acting as a beacon.\n",

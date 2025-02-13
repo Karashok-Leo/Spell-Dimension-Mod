@@ -4,6 +4,7 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import karashokleo.l2hostility.content.component.player.PlayerDifficulty;
 import karashokleo.spell_dimension.config.AttributeModifier;
+import karashokleo.spell_dimension.content.component.GameStageComponent;
 import karashokleo.spell_dimension.content.item.logic.EnchantedModifier;
 import karashokleo.spell_dimension.content.item.logic.EnlighteningModifier;
 import karashokleo.spell_dimension.init.AllItems;
@@ -45,7 +46,12 @@ public class RandomEnchantedEssenceEntry extends LeafEntry
         PlayerEntity player = LootContextUtil.getContextPlayer(context);
         int maxThreshold = 10;
         if (player != null)
-            maxThreshold += PlayerDifficulty.get(player).getLevel().level / 4;
+        {
+            int level = PlayerDifficulty.get(player).getLevel().getLevel();
+            maxThreshold += level / 4;
+            if (!GameStageComponent.isNormalMode(player))
+                maxThreshold -= random.nextInt(1 + level / 6);
+        }
 
         lootConsumer.accept(AllItems.ENCHANTED_ESSENCE.getStack(
                 new EnchantedModifier(

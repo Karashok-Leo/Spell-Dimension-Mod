@@ -74,10 +74,7 @@ public class OceanEntry extends BaseEntryProvider
         context.page("text");
         this.lang().add(context.pageText(),
                 """
-                        Your hostility level will be raised to at least level 100.
-                        \\
-                        \\
-                        You can no longer use Hostility Orbs and Bottles of Sanity.
+                        Your hostility extra level will increase by 100.
                         \\
                         \\
                         You cannot use Waystones to enter or exit the Ocean of Consciousness, the only way to enter is to use the **Magic Mirror**, and the only exit is the **Consciousness Pivot**.
@@ -85,10 +82,7 @@ public class OceanEntry extends BaseEntryProvider
         );
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        你的恶意等级将被提升至至少100级。
-                        \\
-                        \\
-                        你不再能够使用恶意吸收宝珠和恶意净化药水。
+                        你的恶意额外难度将提升100级。
                         \\
                         \\
                         你不能使用传送石碑出入识之海，唯一的进入方法是使用**魔镜**，唯一的出口是**意识枢纽**。

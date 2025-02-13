@@ -248,7 +248,7 @@
   "book.spell-dimension-book.magic_guidance.resource.name": "资源 & 提示",
   "book.spell-dimension-book.magic_guidance.resource.ocean.description": "",
   "book.spell-dimension-book.magic_guidance.resource.ocean.name": "识之海",
-  "book.spell-dimension-book.magic_guidance.resource.ocean.text.text": "你的恶意等级将被提升至至少100级。\n\\\n\\\n你不再能够使用恶意吸收宝珠和恶意净化药水。\n\\\n\\\n你不能使用传送石碑出入识之海，唯一的进入方法是使用**魔镜**，唯一的出口是**意识枢纽**。\n",
+  "book.spell-dimension-book.magic_guidance.resource.ocean.text.text": "你的恶意额外难度将提升100级。\n\\\n\\\n你不能使用传送石碑出入识之海，唯一的进入方法是使用**魔镜**，唯一的出口是**意识枢纽**。\n",
   "book.spell-dimension-book.magic_guidance.resource.ocean.world.text": "识之海是一个一无所有的世界。\n\\\n\\\n一旦你进入这个世界，你的游戏难度将大幅提升:\n",
   "book.spell-dimension-book.magic_guidance.resource.ocean.world.title": "识之海",
   "book.spell-dimension-book.magic_guidance.resource.pivot.beacon.text": "入侵事件结束后识之核心会产生一道光柱，站在光柱上即可传送至主世界对应位置。\n\\\n\\\n已激活的意识枢纽可以影响周围的存储系统，起到相当于信标的作用。\n",

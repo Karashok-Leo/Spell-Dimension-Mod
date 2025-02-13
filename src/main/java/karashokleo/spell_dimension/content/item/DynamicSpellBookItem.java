@@ -69,7 +69,7 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
 
     public boolean canContainSpell(PlayerEntity player, Identifier spellId)
     {
-        return GameStageComponent.getDifficulty(player) == GameStageComponent.NORMAL ||
+        return GameStageComponent.isNormalMode(player) ||
                this.grade >= SpellConfig.getSpellTier(spellId);
     }
 
