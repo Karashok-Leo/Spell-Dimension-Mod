@@ -31,7 +31,7 @@ public enum SDTexts
     TEXT$ESSENCE$FAIL("Failed to use essence!", "精华使用失败!"),
     TEXT$INCOMPATIBLE_SCHOOL("Incompatible spell school!", "不兼容的法术学派!"),
     TEXT$HIGHER_BOOK_REQUIRED("A higher level Spell Book is required to hold the spell!", "需要更高级的法术书才能收纳该法术!"),
-    TEXT$SKILLED_SCHOOL("This is not the magic school you are skilled in!", "这不是你擅长的法术学派!"),
+    TEXT$SKILLED_SCHOOL("This is not the spell school you are skilled in!", "这不是你擅长的法术学派!"),
     TEXT$BLANK_BOOK("Blank spell book!", "空白法术书!"),
     TEXT$SPELL_POWER_INFO("Spell Power Information", "魔法信息"),
     TEXT$ABYSS_GUARD("You need to have Abyss Guard in your inventory to sound the shell horn!", "你需要在物品栏中持有深渊守护才能吹响号角！"),
@@ -76,6 +76,9 @@ public enum SDTexts
     TEXT$QUEST$CHALLENGE("[CHALLENGE]", "[挑战]"),
     TEXT$MAGE_BOOK$1("An Introductory Grimoire Even a Three-Year-Old Can Understand", "三岁小孩也能看懂的入门魔法书"),
     TEXT$MAGE_BOOK$2("When you're in a quandary, turn to it~", "当你遇到窘境时，不妨翻开看看吧~"),
+    TEXT$SOUL_BIND("You feel the connection between your soul and your body becoming stronger...", "你感觉灵魂与身体的联系变得紧密..."),
+    TEXT$SOUL_UNBIND("You feel the connection between your soul and your body becoming tenuous...", "你感到灵魂与身体的联系变得脆弱..."),
+    TEXT$TRADER$OLDEN("Mysterious Olden", "神秘老登"),
 
     /**
      * Advancements
@@ -172,14 +175,16 @@ public enum SDTexts
     TOOLTIP$DIFFICULTY_TIER$CURRENT("Current Difficulty Tier: %s", "当前难度层级：%s"),
     TOOLTIP$DIFFICULTY_TIER$TITLE("[%s]:", "[%s]:"),
     TOOLTIP$DIFFICULTY_TIER$DESC("- %s", "- %s"),
-    TOOLTIP$DIFFICULTY_TIER$HARDCORE$1("Player initial extra difficulty increased by 30", "玩家初始额外难度增加30"),
+    TOOLTIP$DIFFICULTY_TIER$ENTER("Difficulty Tier - %s", "难度层级 - %s"),
+    TOOLTIP$DIFFICULTY_TIER$HARDCORE$1("Player initial extra difficulty increases by 30", "玩家初始额外难度增加30"),
     TOOLTIP$DIFFICULTY_TIER$HARDCORE$2("Doubles the player's difficulty increment for inflicting kills", "玩家造成击杀提升的难度翻倍"),
     TOOLTIP$DIFFICULTY_TIER$HARDCORE$3("Doubles the hostility damage bonus", "恶意伤害加成翻倍"),
-    TOOLTIP$DIFFICULTY_TIER$HARDCORE$4("Restriction on spell scroll tier", "限制法术卷轴装载等级"),
-    TOOLTIP$DIFFICULTY_TIER$HARDCORE$5("Enchanted Essence threshold from loot lowered.", "从战利品中获取的束魔精华阈值降低"),
+    TOOLTIP$DIFFICULTY_TIER$HARDCORE$4("High tier spell scrolls cannot be put into low tier spell books", "高级法术卷轴不能放入低级法术书"),
+    TOOLTIP$DIFFICULTY_TIER$HARDCORE$5("Enchanted Essence threshold from loot gets lowered", "从战利品中获取的束魔精华阈值降低"),
+    TOOLTIP$DIFFICULTY_TIER$HARDCORE$6("Unable to use Bottle of Sanity and Hostility Orb", "无法使用恶意净化药水和恶意吸收宝珠"),
     TOOLTIP$BOTTLE_NIGHTMARE("Enter [%s] mode after use, cannot be undone", "使用后进入 [%s] 模式，不可撤销"),
     TOOLTIP$BOTTLE_SOUL_BINDING("After using it, you will no longer lose the item when you die", "使用后，死亡不再丢失物品"),
-    TOOLTIP$BOTTLE_SOUL_BINDING$WARNING("By default, items dropped by a player upon death are retained in the Gravestone. However, for some unknown reason, it is still possible, albeit highly unlikely, for items in the gravestone to disappear. If you are completely intolerant of the possibility of losing everything you own, drink this potion.", "默认情况下，玩家死亡时掉落的物品将被保留在墓碑中。但由于某些不明原因，墓碑中的物品仍有可能不翼而飞，尽管这种可能性微乎其微。如果你完全无法容忍失去所有身家的可能性，请喝下这瓶药水。"),
+    TOOLTIP$BOTTLE_SOUL_BINDING$WARNING("By default, items other than trinkets dropped by a player upon death are retained in the Gravestone. However, for some unknown reason, it is still possible, albeit highly unlikely, for items in the gravestone to disappear. If you are completely intolerant of the possibility of losing everything you own, drink this potion.", "默认情况下，玩家死亡时掉落的除饰品外的其他物品将被保留在墓碑中。但由于某些不明原因，墓碑中的物品仍有可能不翼而飞，尽管这种可能性微乎其微。如果你完全无法容忍失去所有身家的可能性，请喝下这瓶药水。"),
 
     /**
      * Scrolls

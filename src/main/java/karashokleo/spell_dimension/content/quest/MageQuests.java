@@ -108,6 +108,7 @@ public class MageQuests
                                 false
                         )
                 )
+                .toEntry("mage/power")
                 .addDependencies(BaseQuests.CHOOSE_PATH)
                 .register();
         SPELL_POWER_1 = QuestBuilder.of(
@@ -118,6 +119,7 @@ public class MageQuests
                                 false
                         )
                 )
+                .toEntry("mage/power")
                 .addDependencies(SPELL_POWER_0)
                 .register();
         SPELL_POWER_2 = QuestBuilder.of(
@@ -128,6 +130,7 @@ public class MageQuests
                                 false
                         )
                 )
+                .toEntry("mage/power")
                 .addDependencies(SPELL_POWER_1)
                 .register();
         SPELL_POWER_3 = QuestBuilder.of(
@@ -140,6 +143,7 @@ public class MageQuests
                 )
                 .addEnTitle("Ancient Ones")
                 .addZhTitle("旧日支配者")
+                .toEntry("mage/power")
                 .addDependencies(SPELL_POWER_2)
                 .register();
         SPELL_POWER_4 = QuestBuilder.of(
@@ -152,6 +156,7 @@ public class MageQuests
                 )
                 .addEnTitle("Ultimate Limit")
                 .addZhTitle("最终极限")
+                .toEntry("mage/power")
                 .addDependencies(SPELL_POWER_3)
                 .register();
     }

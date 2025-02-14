@@ -49,13 +49,13 @@ public class RandomEnchantedEssenceEntry extends LeafEntry
         {
             int level = PlayerDifficulty.get(player).getLevel().getLevel();
             maxThreshold += level / 4;
-            if (!GameStageComponent.isNormalMode(player))
-                maxThreshold -= random.nextInt(1 + level / 6);
+            if (GameStageComponent.isNormalMode(player))
+                maxThreshold += random.nextInt(level / 6 + 1);
         }
 
         lootConsumer.accept(AllItems.ENCHANTED_ESSENCE.getStack(
                 new EnchantedModifier(
-                        context.getRandom().nextInt(maxThreshold),
+                        context.getRandom().nextInt(maxThreshold) + 1,
                         slot,
                         new EnlighteningModifier(
                                 modifier.attribute(),

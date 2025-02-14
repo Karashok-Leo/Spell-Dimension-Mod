@@ -2,11 +2,11 @@ package karashokleo.spell_dimension.content.item;
 
 import karashokleo.spell_dimension.content.network.S2CFloatingItem;
 import karashokleo.spell_dimension.data.SDTexts;
+import karashokleo.spell_dimension.init.AllPackets;
 import karashokleo.spell_dimension.init.AllWorldGen;
 import karashokleo.spell_dimension.util.FutureTask;
 import karashokleo.spell_dimension.util.TeleportUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -71,7 +71,8 @@ public class MagicMirrorItem extends Item
             if (destinationWorld != null && serverWorld != destinationWorld)
             {
                 // Render floating item
-                ServerPlayNetworking.send(player, new S2CFloatingItem(stack.copy()));
+                S2CFloatingItem floatingItem = new S2CFloatingItem(stack.copy());
+                AllPackets.toClientPlayer(player, floatingItem);
 
                 // Consume if broken
                 if (broken) stack.decrement(1);

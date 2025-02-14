@@ -27,7 +27,17 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "l2hostility:bottle_of_curse"
+          "name": "spell-dimension:bottle_of_nightmare"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "spell-dimension:bottle_of_soul_binding"
         }
       ],
       "rolls": 1.0

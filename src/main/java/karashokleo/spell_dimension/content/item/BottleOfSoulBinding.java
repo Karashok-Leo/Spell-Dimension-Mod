@@ -23,8 +23,9 @@ public class BottleOfSoulBinding extends DrinkableBottleItem
     @Override
     protected void doServerLogic(ServerPlayerEntity player)
     {
-        boolean keepInventory = GameStageComponent.keepInventory(player);
-        GameStageComponent.setKeepInventory(player, !keepInventory);
+        boolean value = !GameStageComponent.keepInventory(player);
+        GameStageComponent.setKeepInventory(player, value);
+        player.sendMessage(value ? SDTexts.TEXT$SOUL_BIND.get() : SDTexts.TEXT$SOUL_UNBIND.get(), true);
     }
 
     @Override

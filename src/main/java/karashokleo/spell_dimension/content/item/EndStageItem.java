@@ -1,17 +1,17 @@
 package karashokleo.spell_dimension.content.item;
 
-import karashokleo.l2hostility.content.network.S2CUndying;
-import karashokleo.l2hostility.init.LHNetworking;
 import karashokleo.spell_dimension.content.component.GameStageComponent;
 import karashokleo.spell_dimension.content.network.S2CTitle;
+import karashokleo.spell_dimension.content.network.S2CUndyingParticles;
 import karashokleo.spell_dimension.data.SDTexts;
+import karashokleo.spell_dimension.init.AllPackets;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Rarity;
@@ -42,11 +42,13 @@ public class EndStageItem extends Item
                 }
             } else
             {
-                ServerPlayNetworking.send(player, new S2CTitle(SDTexts.TEXT$END_STAGE.get()));
-                S2CUndying packet = new S2CUndying(player);
-                LHNetworking.toClientPlayer(player, packet);
-                LHNetworking.toTracking(player, packet);
                 GameStageComponent.setCanEnterEnd(player, true);
+                S2CTitle title = new S2CTitle(SDTexts.TEXT$END_STAGE.get());
+                AllPackets.toClientPlayer(player, title);
+                S2CUndyingParticles undyingParticles = new S2CUndyingParticles(player);
+                AllPackets.toClientPlayer(player, undyingParticles);
+                AllPackets.toTracking(player, undyingParticles);
+                world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENTITY_PLAYER_LEVELUP, player.getSoundCategory(), 1.0F, 1.0F);
             }
         }
         return TypedActionResult.success(user.getStackInHand(hand), world.isClient());

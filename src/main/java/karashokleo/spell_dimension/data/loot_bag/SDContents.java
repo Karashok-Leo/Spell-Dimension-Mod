@@ -19,8 +19,8 @@ public enum SDContents
             "wizards:textures/item/wand_arcane.png",
             "Starter Kit",
             "初始装备",
-            "Includes random digging tool, 16 bottles of recall potion, bottle of curse, ender pouch, broken magic mirror, blank quest scroll, guide book",
-            "包含随机挖掘工具、16瓶回忆药水、瓶装恶意、末影袋、破碎的魔镜、空白任务卷轴、指南书"
+            "Includes random digging tool, 16 bottles of recall potion, bottle of nightmare, bottle of soul binding, ender pouch, broken magic mirror, blank quest scroll, guide book",
+            "包含随机挖掘工具、16瓶回忆药水、梦魇之瓶、灵魂羁绊之瓶、末影袋、破碎的魔镜、空白任务卷轴、指南书"
     ),
     ARTIFACT(
             "artifacts:textures/item/crystal_heart.png",

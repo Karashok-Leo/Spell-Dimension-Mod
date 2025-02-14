@@ -22,6 +22,7 @@ import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.runes.api.RuneItems;
 import net.spell_engine.internals.SpellInfinityEnchantment;
+import net.trique.mythicupgrades.MythicUpgradesDamageTypes;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -307,6 +308,6 @@ public class AllTags
                 );
 
         SpellDimension.DAMAGE_TYPE_TAGS.getOrCreateContainer(LHTags.MAGIC)
-                .addOptional(new Identifier("mythicupgrades:deflecting_damage_type"));
+                .addOptional(MythicUpgradesDamageTypes.DEFLECTING_DAMAGE_TYPE);
     }
 }

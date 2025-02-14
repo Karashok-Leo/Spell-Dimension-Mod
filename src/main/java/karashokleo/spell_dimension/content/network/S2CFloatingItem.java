@@ -1,24 +1,17 @@
 package karashokleo.spell_dimension.content.network;
 
-import karashokleo.spell_dimension.SpellDimension;
-import net.fabricmc.fabric.api.networking.v1.FabricPacket;
-import net.fabricmc.fabric.api.networking.v1.PacketType;
+import dev.xkmc.l2serial.network.SerialPacketS2C;
+import dev.xkmc.l2serial.serialization.SerialClass;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketByteBuf;
 
-public record S2CFloatingItem(ItemStack stack) implements FabricPacket
+@SerialClass
+public record S2CFloatingItem(ItemStack stack) implements SerialPacketS2C
 {
-    public static final PacketType<S2CFloatingItem> TYPE = PacketType.create(SpellDimension.modLoc("floating_item"), buf -> new S2CFloatingItem(buf.readItemStack()));
-
     @Override
-    public void write(PacketByteBuf buf)
+    public void handle(ClientPlayerEntity player)
     {
-        buf.writeItemStack(stack);
-    }
-
-    @Override
-    public PacketType<?> getType()
-    {
-        return TYPE;
+        MinecraftClient.getInstance().gameRenderer.showFloatingItem(stack);
     }
 }

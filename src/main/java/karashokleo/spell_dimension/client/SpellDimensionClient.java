@@ -18,26 +18,15 @@ import karashokleo.spell_dimension.client.screen.QuestOverlay;
 import karashokleo.spell_dimension.client.screen.SpellPowerTab;
 import karashokleo.spell_dimension.content.item.essence.base.ColorProvider;
 import karashokleo.spell_dimension.content.misc.INoClip;
-import karashokleo.spell_dimension.content.network.S2CFloatingItem;
-import karashokleo.spell_dimension.content.network.S2CSpellDash;
-import karashokleo.spell_dimension.content.network.S2CTitle;
 import karashokleo.spell_dimension.data.SDTexts;
-import karashokleo.spell_dimension.init.AllBlocks;
-import karashokleo.spell_dimension.init.AllEntities;
-import karashokleo.spell_dimension.init.AllItems;
-import karashokleo.spell_dimension.init.AllStatusEffects;
-import karashokleo.spell_dimension.mixin.client.RollManagerInvoker;
-import net.combatroll.internals.RollingEntity;
+import karashokleo.spell_dimension.init.*;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.client.render.entity.EmptyEntityRenderer;
@@ -122,24 +111,7 @@ public class SpellDimensionClient implements ClientModInitializer
         CustomParticleStatusEffect.register(AllStatusEffects.DIVINE_AURA, new DivineAuraParticleSpawner());
         CustomModelStatusEffect.register(AllStatusEffects.FROSTED, new FrostedEffectRenderer());
 
-        init_network();
+        AllPackets.initClient();
         ClientAirHopHandler.register();
-    }
-
-    private static void init_network()
-    {
-        ClientPlayNetworking.registerGlobalReceiver(S2CTitle.TYPE, (packet, player, responseSender) ->
-        {
-            InGameHud inGameHud = MinecraftClient.getInstance().inGameHud;
-            inGameHud.setTitle(packet.title());
-            if (packet.subTitle() != null) inGameHud.setSubtitle(packet.subTitle());
-        });
-        ClientPlayNetworking.registerGlobalReceiver(S2CSpellDash.TYPE, (packet, player, responseSender) ->
-        {
-            if (player instanceof RollingEntity rolling)
-                ((RollManagerInvoker) rolling.getRollManager()).invokeRechargeRoll(player);
-        });
-        ClientPlayNetworking.registerGlobalReceiver(S2CFloatingItem.TYPE, (packet, player, responseSender) ->
-                MinecraftClient.getInstance().gameRenderer.showFloatingItem(packet.stack()));
     }
 }

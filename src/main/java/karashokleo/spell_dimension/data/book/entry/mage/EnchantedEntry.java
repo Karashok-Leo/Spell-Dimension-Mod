@@ -6,6 +6,7 @@ import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookSpotlightPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
+import karashokleo.spell_dimension.content.item.essence.EnchantedEssenceItem;
 import karashokleo.spell_dimension.data.book.entry.BaseEntryProvider;
 import karashokleo.spell_dimension.init.AllStacks;
 import karashokleo.spell_dimension.util.BookGenUtil;
@@ -70,13 +71,21 @@ public class EnchantedEntry extends BaseEntryProvider
         context.page("next");
         this.lang().add(context.pageText(),
                 """
-                        Primary, Intermediate, and Advanced Basic Essences can be crafted into Intermediate Essences with a Threshold of 10, 20, and 30 respectively. The upper limit of the threshold value of Enchanted Essence that can be obtained from the loot depends on your hostility difficulty level.
-                        """
+                        Primary, Intermediate, and Advanced Basic Essences can be crafted into Intermediate Essences with a Threshold of %d, %d, and %d respectively. The upper limit of the threshold value of Enchanted Essence that can be obtained from the loot depends on your hostility difficulty level.
+                        """.formatted(
+                        EnchantedEssenceItem.CRAFT_THRESHOLD[0],
+                        EnchantedEssenceItem.CRAFT_THRESHOLD[1],
+                        EnchantedEssenceItem.CRAFT_THRESHOLD[2]
+                )
         );
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        初级、中级、高级的基础精华分别可以合成阈值为10、20、30的束魔精华。战利品中能获取到的束魔精华的阈值上限取决于你的恶意难度等级。
-                        """
+                        初级、中级、高级的基础精华分别可以合成阈值为%d、%d、%d的束魔精华。战利品中能获取到的束魔精华的阈值上限取决于你的恶意难度等级。
+                        """.formatted(
+                        EnchantedEssenceItem.CRAFT_THRESHOLD[0],
+                        EnchantedEssenceItem.CRAFT_THRESHOLD[1],
+                        EnchantedEssenceItem.CRAFT_THRESHOLD[2]
+                )
         );
 
         BookTextPageModel next = BookTextPageModel

@@ -63,9 +63,9 @@ public class AllItems
     public static FlexBreastplateItem FLEX_BREASTPLATE;
     public static FlickerBreastplateItem FLICKER_BREASTPLATE;
     public static OblivionBreastplateItem OBLIVION_BREASTPLATE;
-    public static MedalItem MEDAL;
     public static BottleOfNightmare BOTTLE_NIGHTMARE;
     public static BottleOfSoulBinding BOTTLE_SOUL_BINDING;
+    public static MedalItem MEDAL;
 
     public static void register()
     {
@@ -215,11 +215,6 @@ public class AllItems
                 .addTag(AllTags.BREASTPLATE_SLOT)
                 .addModel()
                 .register();
-        MEDAL = Entry.of("medal", new MedalItem())
-                .addEN()
-                .addZH("勋章")
-                .addModel()
-                .register();
         BOTTLE_NIGHTMARE = Entry.of(
                         "bottle_of_nightmare",
                         new BottleOfNightmare(
@@ -245,6 +240,11 @@ public class AllItems
                 .addModel()
                 .addEN()
                 .addZH("灵魂羁绊之瓶")
+                .register();
+        MEDAL = Entry.of("medal", new MedalItem())
+                .addEN()
+                .addZH("勋章")
+                .addModel()
                 .register();
     }
 

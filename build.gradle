@@ -94,7 +94,7 @@ dependencies {
     modImplementation "karashokleo.leobrary:effect:${project.leobrary_version}"
     modImplementation "karashokleo.leobrary:gui:${project.leobrary_version}"
     modImplementation "karashokleo.effect_overlay:effect-overlay:${project.effect_overlay_version}"
-    modImplementation "karashokleo.loot_bag:loot-bag:${project.loot_bag_version}"
+    modImplementation "karashokleo.loot_bag:Loot-Bag:${project.loot_bag_version}"
     modImplementation "karashokleo.l2hostility:L2Hostility:${project.l2hostility_version}"
     modImplementation "karashokleo.enchantment_infusion:enchantment_infusion:${project.enchantment_infusion_version}"
     modImplementation "karashokleo.fusion_smithing:Fusion-Smithing:${project.fusion_smithing_version}"

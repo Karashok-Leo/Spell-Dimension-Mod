@@ -1,22 +1,18 @@
 package karashokleo.spell_dimension.content.network;
 
-import karashokleo.spell_dimension.SpellDimension;
-import net.fabricmc.fabric.api.networking.v1.FabricPacket;
-import net.fabricmc.fabric.api.networking.v1.PacketType;
-import net.minecraft.network.PacketByteBuf;
+import dev.xkmc.l2serial.network.SerialPacketS2C;
+import dev.xkmc.l2serial.serialization.SerialClass;
+import karashokleo.spell_dimension.mixin.client.RollManagerInvoker;
+import net.combatroll.internals.RollingEntity;
+import net.minecraft.client.network.ClientPlayerEntity;
 
-public record S2CSpellDash() implements FabricPacket
+@SerialClass
+public record S2CSpellDash() implements SerialPacketS2C
 {
-    public static final PacketType<S2CSpellDash> TYPE = PacketType.create(SpellDimension.modLoc("spell_dash"), buf -> new S2CSpellDash());
-
     @Override
-    public void write(PacketByteBuf buf)
+    public void handle(ClientPlayerEntity player)
     {
-    }
-
-    @Override
-    public PacketType<?> getType()
-    {
-        return TYPE;
+        if (player instanceof RollingEntity rolling)
+            ((RollManagerInvoker) rolling.getRollManager()).invokeRechargeRoll(player);
     }
 }

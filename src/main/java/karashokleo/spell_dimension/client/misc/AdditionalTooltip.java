@@ -23,6 +23,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableTextContent;
 import net.minecraft.util.Formatting;
@@ -129,10 +130,11 @@ public class AdditionalTooltip
         ClientPlayerEntity player = L2HostilityClient.getClientPlayer();
         if (player == null) return;
         int difficulty = GameStageComponent.getDifficulty(player);
-        lines.add(SDTexts.TOOLTIP$BOTTLE_NIGHTMARE.get(difficulty).formatted(Formatting.RED));
+        MutableText hardcore = SDTexts.getDifficultyTierText(1);
+        lines.add(SDTexts.TOOLTIP$BOTTLE_NIGHTMARE.get(hardcore).formatted(Formatting.RED));
         lines.add(SDTexts.TOOLTIP$DIFFICULTY_TIER$CURRENT.get(SDTexts.getDifficultyTierText(difficulty)).formatted(Formatting.BOLD));
-        lines.add(SDTexts.TOOLTIP$DIFFICULTY_TIER$TITLE.get(SDTexts.getDifficultyTierText(1)).formatted(Formatting.DARK_RED));
-        for (int i = 1; i <= 5; i++)
+        lines.add(SDTexts.TOOLTIP$DIFFICULTY_TIER$TITLE.get(hardcore).formatted(Formatting.DARK_RED));
+        for (int i = 1; i <= 6; i++)
             lines.add(
                     SDTexts.TOOLTIP$DIFFICULTY_TIER$DESC.get(
                             Text.translatable("tooltip.spell-dimension.difficulty_tier.hardcore." + i)

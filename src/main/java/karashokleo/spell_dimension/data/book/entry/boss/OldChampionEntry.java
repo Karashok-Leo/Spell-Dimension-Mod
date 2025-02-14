@@ -60,6 +60,8 @@ public class OldChampionEntry extends BaseEntryProvider
                         Spawns inside the **Champion's Grave**(soulsweapons:champions_grave).
                         \\
                         This structure can be located in the Overworld using the Moonstone Compass.
+                        \\
+                        Old Champion's Remains is attuned to damage from the same weapon (main hand item).
                         """.formatted(TextConstants.BOSS_LEVELS[0])
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
@@ -71,6 +73,8 @@ public class OldChampionEntry extends BaseEntryProvider
                         生成于**古英雄的坟墓**(soulsweapons:champions_grave)内。
                         \\
                         可用月石罗盘在主世界寻找该结构。
+                        \\
+                        古英雄的遗骸对同一武器（主手物品）的伤害有适应性。
                         """.formatted(TextConstants.BOSS_LEVELS[0])
         );
 

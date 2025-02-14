@@ -1,7 +1,7 @@
 package karashokleo.spell_dimension.content.enchantment;
 
 import karashokleo.spell_dimension.content.network.S2CSpellDash;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import karashokleo.spell_dimension.init.AllPackets;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
@@ -17,14 +17,15 @@ public class SpellDashEnchantment extends SpellImpactEnchantment
 {
     public SpellDashEnchantment()
     {
-        super(Rarity.UNCOMMON, EnchantmentTarget.BREAKABLE, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
+        super(Rarity.UNCOMMON, EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
     }
 
     @Override
     public void onSpellImpact(World world, LivingEntity caster, Context context, List<Entity> targets, SpellInfo spellInfo)
     {
-        if (caster instanceof ServerPlayerEntity player)
-            ServerPlayNetworking.send(player, new S2CSpellDash());
+        if (!(caster instanceof ServerPlayerEntity player)) return;
+        S2CSpellDash spellDash = new S2CSpellDash();
+        AllPackets.toClientPlayer(player, spellDash);
     }
 
     @Override

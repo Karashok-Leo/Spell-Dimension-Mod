@@ -1,6 +1,8 @@
 package karashokleo.spell_dimension.init;
 
 import com.obscuria.aquamirae.registry.AquamiraeItems;
+import dev.emi.trinkets.api.TrinketEnums;
+import dev.emi.trinkets.api.event.TrinketDropCallback;
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingEntityEvents;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
@@ -46,6 +48,19 @@ public class AllEvents
         TrinketEvent.init();
         LightSpell.init();
         ConsciousOceanEvent.init();
+
+        // keep trinkets
+        TrinketDropCallback.EVENT.register((rule, stack, ref, entity) ->
+        {
+            return entity instanceof PlayerEntity ?
+                    TrinketEnums.DropRule.KEEP : rule;
+//            if (entity instanceof PlayerEntity player &&
+//                GameStageComponent.keepInventory(player))
+//            {
+//                return TrinketEnums.DropRule.KEEP;
+//            }
+//            return rule;
+        });
 
         // Deflection
         DamagePhase.SHIELD.registerModifier(0, access ->

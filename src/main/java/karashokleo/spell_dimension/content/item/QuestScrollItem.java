@@ -1,17 +1,16 @@
 package karashokleo.spell_dimension.content.item;
 
-import karashokleo.l2hostility.content.network.S2CUndying;
-import karashokleo.l2hostility.init.LHNetworking;
 import karashokleo.spell_dimension.api.quest.Quest;
 import karashokleo.spell_dimension.api.quest.QuestRegistry;
 import karashokleo.spell_dimension.api.quest.QuestUsage;
 import karashokleo.spell_dimension.config.QuestToEntryConfig;
 import karashokleo.spell_dimension.content.component.QuestComponent;
 import karashokleo.spell_dimension.content.network.S2CTitle;
+import karashokleo.spell_dimension.content.network.S2CUndyingParticles;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllItems;
+import karashokleo.spell_dimension.init.AllPackets;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.client.item.TooltipData;
 import net.minecraft.entity.player.PlayerEntity;
@@ -21,6 +20,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
@@ -108,10 +108,12 @@ public class QuestScrollItem extends Item
                                 .filter(q1 -> QuestUsage.getDependencies(q1.value()).stream().allMatch(q2 -> QuestComponent.isCompleted(player, q2)))
                                 .map(this::getStack)
                                 .forEach(itemStack -> player.getInventory().offerOrDrop(itemStack));
-                        ServerPlayNetworking.send(player, new S2CTitle(SDTexts.TEXT$QUEST_COMPLETE.get()));
-                        S2CUndying packet = new S2CUndying(player);
-                        LHNetworking.toClientPlayer(player, packet);
-                        LHNetworking.toTracking(player, packet);
+                        S2CTitle title = new S2CTitle(SDTexts.TEXT$QUEST_COMPLETE.get());
+                        AllPackets.toClientPlayer(player, title);
+                        S2CUndyingParticles packet = new S2CUndyingParticles(player);
+                        AllPackets.toClientPlayer(player, packet);
+                        AllPackets.toTracking(player, packet);
+                        world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENTITY_PLAYER_LEVELUP, player.getSoundCategory(), 1.0F, 1.0F);
                         if (!creativeMode) stack.decrement(1);
                     }
                     // Requirements not met

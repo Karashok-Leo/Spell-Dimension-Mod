@@ -34,8 +34,9 @@
     "vanilla.EndPortalBlockMixin",
     "vanilla.LivingEntityMixin",
     "vanilla.MobSpawnerLogicMixin",
-    "vanilla.PlayerEntityMixin",
-    "vanilla.PlayerInventoryAccessor"
+    "vanilla.PlayerInventoryAccessor",
+    "vanilla.PlayerKeepInventoryMixin",
+    "vanilla.ServerPlayerEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1,

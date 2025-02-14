@@ -28,6 +28,7 @@ public class MageCategory extends CategoryProvider
                 "_________",
                 "____n____",
                 "k_______r",
+                "____s____",
         };
     }
 
@@ -45,6 +46,7 @@ public class MageCategory extends CategoryProvider
         BookEntryModel bind = new BindEntry(this).generate('n');
         BookEntryModel book = new BookEntry(this).generate('k');
         BookEntryModel scroll = new ScrollEntry(this).generate('r');
+        BookEntryModel power = new SpellPowerEntry(this).generate('s');
         BookGenUtil.setParent(school, cast);
         BookGenUtil.setParent(rune, cast);
         BookGenUtil.setParent(essence, cast);
@@ -55,6 +57,7 @@ public class MageCategory extends CategoryProvider
         BookGenUtil.setParent(bind, cast);
         BookGenUtil.setParent(book, bind);
         BookGenUtil.setParent(scroll, bind);
+        BookGenUtil.setParent(power, bind);
         this.add(cast);
         this.add(school);
         this.add(rune);
@@ -66,6 +69,7 @@ public class MageCategory extends CategoryProvider
         this.add(bind);
         this.add(book);
         this.add(scroll);
+        this.add(power);
     }
 
     @Override
