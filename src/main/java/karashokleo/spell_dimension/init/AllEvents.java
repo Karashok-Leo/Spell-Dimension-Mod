@@ -6,6 +6,7 @@ import dev.emi.trinkets.api.event.TrinketDropCallback;
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingEntityEvents;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
+import karashokleo.l2hostility.content.feature.EntityFeature;
 import karashokleo.l2hostility.content.trait.common.AdaptingTrait;
 import karashokleo.l2hostility.init.LHTraits;
 import karashokleo.leobrary.damage.api.modify.DamagePhase;
@@ -67,8 +68,9 @@ public class AllEvents
         {
             if (!access.getSource().isOf(MythicUpgradesDamageTypes.DEFLECTING_DAMAGE_TYPE))
                 return;
-            float maxHealth = access.getEntity().getMaxHealth();
-            access.addModifier(originalDamage -> Math.min(originalDamage, maxHealth));
+            float maxDamage = EntityFeature.MAGIC_REJECT.test(access.getEntity()) ?
+                    0 : access.getEntity().getMaxHealth();
+            access.addModifier(originalDamage -> Math.min(originalDamage, maxDamage));
         });
 
         // cancel offhand block placement interaction while holding spell scroll

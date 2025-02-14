@@ -17,9 +17,9 @@ public abstract class ServerPlayerEntityMixin
                     target = "Lnet/minecraft/world/GameRules;getBoolean(Lnet/minecraft/world/GameRules$Key;)Z"
             )
     )
-    private boolean inject_copyFrom(boolean original, @Local(name = "oldPlayer") ServerPlayerEntity oldPlayer)
+    private boolean inject_copyFrom(boolean original, @Local(ordinal = 1, argsOnly = true) ServerPlayerEntity oldPlayer)
     {
-        boolean keepInventory = GameStageComponent.keepInventory((oldPlayer));
+        boolean keepInventory = GameStageComponent.keepInventory(oldPlayer);
         return original || keepInventory;
     }
 }

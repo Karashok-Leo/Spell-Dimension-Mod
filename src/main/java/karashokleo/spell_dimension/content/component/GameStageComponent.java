@@ -14,12 +14,14 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.UUID;
+
 public class GameStageComponent implements AutoSyncedComponent
 {
     public static final int NORMAL = 0;
     public static final int HARDCORE = 1;
     public static final int NIGHTMARE = 2;
-    public static final java.util.UUID HARDCORE_DIFFICULTY_BONUS = UuidUtil.getUUIDFromString("spell_dimension:hardcore_difficulty");
+    public static final UUID HARDCORE_DIFFICULTY_BONUS = UuidUtil.getUUIDFromString("spell_dimension:hardcore_difficulty");
 
     public static boolean isNormalMode(PlayerEntity player)
     {
