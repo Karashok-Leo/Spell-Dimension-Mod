@@ -55,7 +55,7 @@ public class BlackStoneGolemEntry extends BaseEntryProvider
                         Level: %d+
                         \\
                         \\
-                        Use 4 chiseled polished blackstone holders and 81 polished blackstones to build the altar in *The Nether*, place the gilded blackstone shards on the altar to summon.
+                        Use 4 chiseled polished blackstone holders and 81 polished blackstones to build the altar in **The Nether**, place the gilded blackstone shards on the altar to summon.
                         """.formatted(TextConstants.BOSS_LEVELS[1])
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
@@ -64,7 +64,7 @@ public class BlackStoneGolemEntry extends BaseEntryProvider
                         等级: %d+
                         \\
                         \\
-                        使用4块錾制黑石基座，81块磨制黑石在*下界*搭建祭坛，在祭坛上放置镶金黑石碎片即可召唤。
+                        使用4块錾制黑石基座，81块磨制黑石在**下界**搭建祭坛，在祭坛上放置镶金黑石碎片即可召唤。
                         """.formatted(TextConstants.BOSS_LEVELS[1])
         );
 

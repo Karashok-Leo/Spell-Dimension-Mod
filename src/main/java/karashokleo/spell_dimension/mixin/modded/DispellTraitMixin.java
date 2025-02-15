@@ -26,6 +26,7 @@ public abstract class DispellTraitMixin extends MobTrait
         super(color);
     }
 
+    // cancel the original logic
     @Inject(
             method = "onAttacked",
             at = @At("HEAD"),
@@ -36,6 +37,7 @@ public abstract class DispellTraitMixin extends MobTrait
         ci.cancel();
     }
 
+    // new logic with Spell Tearing enchantment
     @Override
     public void onDamaged(int level, LivingEntity entity, LivingDamageEvent event)
     {

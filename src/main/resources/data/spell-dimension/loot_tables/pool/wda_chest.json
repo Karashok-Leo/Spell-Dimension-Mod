@@ -35,11 +35,6 @@
         },
         {
           "type": "loot-bag:loot_bag",
-          "bag": "spell-dimension:charm",
-          "weight": 1
-        },
-        {
-          "type": "loot-bag:loot_bag",
           "bag": "spell-dimension:artifact",
           "weight": 1
         },

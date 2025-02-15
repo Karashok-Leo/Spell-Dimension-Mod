@@ -3,6 +3,7 @@ package karashokleo.spell_dimension.content.event;
 import io.github.fabricators_of_create.porting_lib.core.event.BaseEvent;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.MobEffectEvent;
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
+import karashokleo.l2hostility.init.LHTags;
 import karashokleo.leobrary.damage.api.modify.DamageModifier;
 import karashokleo.leobrary.damage.api.modify.DamagePhase;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
@@ -19,6 +20,7 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
+import net.minecraft.registry.tag.DamageTypeTags;
 import net.spell_power.api.SpellPower;
 import net.spell_power.api.SpellSchool;
 import net.spell_power.api.enchantment.EnchantmentRestriction;
@@ -92,6 +94,9 @@ public class EnchantmentEvent
             if (!(damageAccess.getEntity() instanceof PlayerEntity player))
                 return;
 
+            if (damageAccess.getSource().isIn(DamageTypeTags.BYPASSES_INVULNERABILITY))
+                return;
+
             int totalLevel = 0;
             for (ItemStack stack : player.getArmorItems())
                 totalLevel += EnchantmentHelper.getLevel(AllEnchantments.SPELL_RESISTANCE, stack);
@@ -101,11 +106,13 @@ public class EnchantmentEvent
                 totalSpellPower += SpellPower.getSpellPower(school, player).baseValue();
 
             float damageReduction = (float) (totalLevel * 0.01 * totalSpellPower);
-            damageAccess.addModifier(DamageModifier.add(-damageReduction));
+            damageAccess.addModifier(originalDamage -> Math.max(0, originalDamage - damageReduction));
         });
 
         DamagePhase.APPLY.registerModifier(0, damageAccess ->
         {
+            if (!damageAccess.getSource().isIn(LHTags.MAGIC))
+                return;
             if (!(damageAccess.getAttacker() instanceof PlayerEntity player))
                 return;
 
