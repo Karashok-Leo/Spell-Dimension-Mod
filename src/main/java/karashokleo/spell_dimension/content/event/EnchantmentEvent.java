@@ -34,6 +34,7 @@ public class EnchantmentEvent
 {
     public static void init()
     {
+        // Spell blade amplify enchantment
         ModifyItemAttributeModifiersCallback.EVENT.register((stack, slot, attributeModifiers) ->
         {
             if (slot != EquipmentSlot.MAINHAND) return;
@@ -45,6 +46,7 @@ public class EnchantmentEvent
             }
         });
 
+        // Breastplate immunity
         MobEffectEvent.APPLICABLE.register(event ->
         {
             if (TrinketCompat.getTrinketItems(event.getEntity(),
@@ -55,12 +57,14 @@ public class EnchantmentEvent
                 event.setResult(BaseEvent.Result.DENY);
         });
 
+        // Breastplate immunity
         AllEnchantments.EFFECT_IMMUNITY.forEach(enchantment ->
         {
             EnchantmentRestriction.permit(enchantment, stack -> stack.isIn(AllTags.BREASTPLATE_SLOT));
             EnchantmentRestriction.prohibit(enchantment, stack -> !stack.isIn(AllTags.BREASTPLATE_SLOT));
         });
 
+        // Spell impact enchantment
         SpellImpactEvents.BEFORE.register((world, caster, targets, spellInfo) ->
         {
             Map<SpellImpactEnchantment, SpellImpactEnchantment.Context> map = new HashMap<>();
@@ -89,6 +93,7 @@ public class EnchantmentEvent
             map.forEach((enchantment, context) -> enchantment.onSpellImpact(world, caster, context, targets, spellInfo));
         });
 
+        // Spell resistance
         DamagePhase.ARMOR.registerModifier(0, damageAccess ->
         {
             if (!(damageAccess.getEntity() instanceof PlayerEntity player))
@@ -109,6 +114,7 @@ public class EnchantmentEvent
             damageAccess.addModifier(originalDamage -> Math.max(0, originalDamage - damageReduction));
         });
 
+        // Spell leech
         DamagePhase.APPLY.registerModifier(0, damageAccess ->
         {
             if (!damageAccess.getSource().isIn(LHTags.MAGIC))
@@ -123,6 +129,8 @@ public class EnchantmentEvent
                 totalSpellPower += SpellPower.getSpellPower(school, player).baseValue();
 
             float damageLeech = (float) (totalLevel * 0.01 * totalSpellPower);
+            // Cap the leech amount to the original damage
+            damageLeech = Math.min(damageAccess.getOriginalDamage(), damageLeech);
             player.heal(damageLeech);
             damageAccess.addModifier(DamageModifier.add(-damageLeech));
         });

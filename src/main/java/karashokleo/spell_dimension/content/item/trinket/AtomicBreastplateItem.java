@@ -8,6 +8,7 @@ import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.l2hostility.content.item.ComplementItems;
 import karashokleo.l2hostility.init.LHTags;
 import karashokleo.leobrary.effect.api.event.LivingHealCallback;
+import karashokleo.spell_dimension.config.EssenceLootConfig;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.util.SoundUtil;
@@ -49,6 +50,9 @@ public class AtomicBreastplateItem extends TrinketItem
         // To Flex Breastplate / Enchanted Breastplate
         LivingDamageEvent.DAMAGE.register(event ->
         {
+            // Blacklist
+            if (EssenceLootConfig.BASE_CONFIG.blacklist().contains(event.getEntity().getType()))
+                return;
             float amount = event.getAmount();
             for (ItemStack stack : TrinketCompat.getTrinketItems(event.getEntity(), stack -> stack.isOf(AllItems.ATOMIC_BREASTPLATE)))
                 Upgrade.FLEX.addProgress(stack, amount);

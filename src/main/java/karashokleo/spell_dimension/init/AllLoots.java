@@ -46,13 +46,13 @@ public class AllLoots
             if (id.getPath().contains("chests/"))
             {
                 LootPool.Builder builder = LootPool.builder();
-                addEssenceLootPool(builder, EssenceLootConfig.CHEST_POOL);
+                addEssenceLootPool(builder, EssenceLootConfig.CHEST_POOL, false);
                 tableBuilder.pool(builder.build());
             }
             if (id.getPath().contains("entities/"))
             {
                 LootPool.Builder builder = LootPool.builder();
-                addEssenceLootPool(builder, EssenceLootConfig.ENTITY_POOL);
+                addEssenceLootPool(builder, EssenceLootConfig.ENTITY_POOL, true);
                 builder.conditionally(KilledByPlayerLootCondition.builder());
                 tableBuilder.pool(builder.build());
             }
@@ -101,13 +101,16 @@ public class AllLoots
         });
     }
 
-    private static void addEssenceLootPool(LootPool.Builder builder, EssenceLootConfig.LootPool pool)
+    private static void addEssenceLootPool(LootPool.Builder builder, EssenceLootConfig.LootPool pool, boolean playerKill)
     {
         builder.rolls(UniformLootNumberProvider.create(pool.minRolls(), pool.maxRolls()));
         LeafEntry.Builder<?> emptyEntry = EmptyEntry
                 .builder()
                 .weight(pool.emptyWeight());
         builder.with(emptyEntry);
+
+        if (playerKill)
+            builder.conditionally(KilledByPlayerLootCondition.builder().build());
 
         // EnchantedEssence
         builder.with(RandomEnchantedEssenceEntry.builder().weight(EssenceLootConfig.EC_WEIGHT));
