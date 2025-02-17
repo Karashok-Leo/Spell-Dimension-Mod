@@ -276,6 +276,8 @@ public enum SDTexts
         SpellDimension.ZH_TEXTS.addEntityType(AllEntities.BLACK_HOLE, "黑洞");
         SpellDimension.EN_TEXTS.addText("trinkets.slot.chest.breastplate", "Breastplate");
         SpellDimension.ZH_TEXTS.addText("trinkets.slot.chest.breastplate", "护心镜");
+        SpellDimension.EN_TEXTS.addText("trinkets.slot.chest.breastplate", "Breastplate");
+        SpellDimension.ZH_TEXTS.addText("trinkets.slot.chest.breastplate", "护心镜");
     }
 
     private static void addGroupTranslation()

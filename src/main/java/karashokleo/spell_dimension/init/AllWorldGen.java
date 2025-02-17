@@ -23,6 +23,8 @@ public class AllWorldGen
     public static final ConsciousnessTreeFeature CONSCIOUSNESS_TREE = new ConsciousnessTreeFeature(TFTreeFeatureConfig.CODEC);
     public static final ConsciousnessPivotFeature CONSCIOUSNESS_PIVOT = new ConsciousnessPivotFeature();
 
+    public static final RegistryKey<World> DUNGEON = RegistryKey.of(RegistryKeys.WORLD, new Identifier("dungeonz:dungeon"));
+
     public static void register()
     {
         Registry.register(Registries.FEATURE, SpellDimension.modLoc("tree_of_consciousness"), CONSCIOUSNESS_TREE);
@@ -34,5 +36,11 @@ public class AllWorldGen
         biome_key += ".color";
         SpellDimension.EN_TEXTS.addText(biome_key, "ff00ff");
         SpellDimension.ZH_TEXTS.addText(biome_key, "ff00ff");
+    }
+
+    // some spells and items are banned in the dungeon world
+    public static boolean disableInWorld(World world)
+    {
+        return world.getRegistryKey().equals(DUNGEON);
     }
 }

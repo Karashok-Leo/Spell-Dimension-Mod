@@ -83,12 +83,12 @@ public class EnchantEntry extends BaseEntryProvider
         context.page("pos");
         this.lang().add(context.pageText(),
                 """
-                        You need to place a enchantment infusion table (centre position) and pedestals (surrounding position) like the picture, then place the items on the pedestals according to the recipe (the order doesn't matter), and finally place the item you want to enchant on the infusion table in the centre, and wait for seconds for it to finish enchanting.
+                        You need to place a enchantment infusion table (centre position) and pedestals (surrounding position) like the picture, then place the items on the pedestals according to the recipe (the order doesn't matter), and finally place the item (level no less than that required for the recipe) you want to enchant on the infusion table in the centre, and wait for seconds for it to finish enchanting.
                         """
         );
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        你需要像图中这样摆放魔咒灌注台（中心位置）与魔咒灌注基座（周围的位置），然后按照配方在基座上摆放对应的物品（次序不重要），最后在中心的灌注台上摆放你想要附魔的物品，等待若干秒即可完成附魔。
+                        你需要像图中这样摆放魔咒灌注台（中心位置）与魔咒灌注基座（周围的位置），然后按照配方在基座上摆放对应的物品（次序不重要），最后在中心的灌注台上摆放你想要附魔的物品（魔咒等级不小于配方需求即可），等待若干秒即可完成附魔。
                         """
         );
 

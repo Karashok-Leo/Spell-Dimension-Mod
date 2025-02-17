@@ -10,6 +10,8 @@ import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.util.SchoolUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -80,5 +82,17 @@ public abstract class SpellHelperMixin
             EffectHelper.forceAddEffectWithEvent(target, effect, caster);
             return true;
         }
+    }
+
+    @Redirect(
+            method = "intent",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/entity/effect/StatusEffect;isBeneficial()Z"
+            )
+    )
+    private static boolean wrap_intent(StatusEffect instance)
+    {
+        return instance.getCategory() != StatusEffectCategory.HARMFUL;
     }
 }

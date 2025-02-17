@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "mythicmetals:legendary_banglum_pickaxe",
+    {
+      "id": "#constructionwand:wands",
+      "required": false
+    }
+  ]
+}

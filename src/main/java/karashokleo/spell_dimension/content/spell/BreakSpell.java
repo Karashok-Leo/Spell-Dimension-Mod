@@ -2,6 +2,7 @@ package karashokleo.spell_dimension.content.spell;
 
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllSpells;
+import karashokleo.spell_dimension.init.AllWorldGen;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Formatting;
@@ -17,7 +18,7 @@ public class BreakSpell
         if (!(projectile.getWorld() instanceof ServerWorld world)) return;
         Entity owner = projectile.getOwner();
         if (owner == null) return;
-        if (AllSpells.disableInWorld(world))
+        if (AllWorldGen.disableInWorld(world))
         {
             owner.sendMessage(SDTexts.TEXT$BANNED_SPELL.get().formatted(Formatting.RED));
             return;

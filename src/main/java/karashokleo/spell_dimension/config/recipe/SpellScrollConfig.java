@@ -131,7 +131,7 @@ public class SpellScrollConfig
             fromCrafting(AllSpells.BLAST, ComplementItems.EXPLOSION_SHARD);
             fromCrafting(AllSpells.IGNITE, ItemInit.BLACKSTONE_GOLEM_HEART);
             fromCrafting(AllSpells.FIRE_OF_RETRIBUTION, LHTraits.SOUL_BURNER.asItem());
-            fromCrafting(AllSpells.FIRE_FLOURISH, MUBlocks.RUBY_BLOCK.asItem());
+            fromCrafting(AllSpells.FIRE_FLOURISH, MythicBlocks.PALLADIUM.getStorageBlock().asItem());
             fromCrafting(AllSpells.FLAME_OVERDRIVE, com.spellbladenext.items.Items.fire_orb.item());
             fromCrafting(AllSpells.FLICKER_STRIKE, MUBlocks.RUBY_BLOCK.asItem());
             fromCrafting(AllSpells.FLAME_SLASH, com.spellbladenext.items.Items.flaming_falchion.item());

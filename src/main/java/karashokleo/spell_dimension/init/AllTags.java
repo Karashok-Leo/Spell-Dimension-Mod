@@ -1,6 +1,7 @@
 package karashokleo.spell_dimension.init;
 
 import com.kyanite.deeperdarker.content.DDEntities;
+import karashokleo.l2hostility.L2Hostility;
 import karashokleo.l2hostility.content.item.TrinketItems;
 import karashokleo.l2hostility.init.LHEnchantments;
 import karashokleo.l2hostility.init.LHTags;
@@ -23,6 +24,7 @@ import net.minecraft.util.Identifier;
 import net.runes.api.RuneItems;
 import net.spell_engine.internals.SpellInfinityEnchantment;
 import net.trique.mythicupgrades.MythicUpgradesDamageTypes;
+import nourl.mythicmetals.item.tools.MythicTools;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -49,6 +51,8 @@ public class AllTags
 
     public static final TagKey<Item> MELEE_WEAPONS = TagUtil.itemTag(new Identifier("equipment_standard:melee_weapons"));
     public static final TagKey<Item> ARMOR = TagUtil.itemTag(new Identifier("equipment_standard:armor"));
+
+    public static final TagKey<Item> DUNGEON_BANNED = TagUtil.itemTag("dungeon_banned");
 
     public static final List<TagKey<Item>> SPELL_POWER_ENCHANTMENT_TAGS = Stream.of(
             "enchant_spell_power_generic",
@@ -153,6 +157,10 @@ public class AllTags
         TagGenerator.Container<Item> bookAllContainer = SpellDimension.ITEM_TAGS.getOrCreateContainer(BOOK_ALL);
         for (TagKey<Item> key : BOOK)
             bookAllContainer.addTag(key);
+
+        SpellDimension.ITEM_TAGS.getOrCreateContainer(DUNGEON_BANNED)
+                .add(MythicTools.LEGENDARY_BANGLUM.getPickaxe())
+                .addOptionalTag(new Identifier("constructionwand:wands"));
 
         SpellDimension.BLOCK_TAGS.getOrCreateContainer(LOCATE_TARGET)
                 .add(
@@ -287,6 +295,14 @@ public class AllTags
                         ADVZ_MONSTER,
                         SW_MONSTER
                 );
+
+        SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(TagUtil.entityTypeTag(L2Hostility.id("levitation_whitelist")))
+                .addOptionalTag(LHTags.RANGED_WEAPON_TARGET);
+
+        SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(TagUtil.entityTypeTag(L2Hostility.id("dispell_blacklist")))
+                .add(EntityType.WARDEN)
+                .add(DDEntities.STALKER)
+                .addTag(SCULK);
 
         SpellDimension.ENCHANTMENT_TAGS.getOrCreateContainer(LOOTABLE)
                 .add(

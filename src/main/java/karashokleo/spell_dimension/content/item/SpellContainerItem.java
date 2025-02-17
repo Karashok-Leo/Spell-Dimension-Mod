@@ -60,7 +60,7 @@ public class SpellContainerItem extends Item
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand)
     {
-        ProtectiveCoverBlock.placeAsBarrier(world, user.getBlockPos(), 16, 200);
+        ProtectiveCoverBlock.placeAsCube(world, user.getBlockPos(), 16, 200);
         return super.use(world, user, hand);
     }
 

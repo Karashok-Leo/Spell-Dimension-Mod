@@ -6,6 +6,7 @@ import karashokleo.spell_dimension.content.block.SpellLightBlock;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllBlocks;
 import karashokleo.spell_dimension.init.AllSpells;
+import karashokleo.spell_dimension.init.AllWorldGen;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.entity.Entity;
@@ -152,7 +153,7 @@ public class LightSpell
         if (!(projectile.getWorld() instanceof ServerWorld world)) return;
         Entity owner = projectile.getOwner();
         if (owner == null) return;
-        if (AllSpells.disableInWorld(world))
+        if (AllWorldGen.disableInWorld(world))
         {
             owner.sendMessage(SDTexts.TEXT$BANNED_SPELL.get().formatted(Formatting.RED));
             return;

@@ -69,7 +69,14 @@ public interface Summoner
         {
             return Registries.ENTITY_TYPE
                     .getEntryList(TagUtil.entityTypeTag(this.entry.id()))
-                    .flatMap(list -> list.getRandom(random))
+                    .flatMap(list ->
+                    {
+                        var randomOne = list.getRandom(random);
+                        while (randomOne.isPresent() &&
+                               randomOne.get().value() == EntityType.ENDER_DRAGON)
+                            randomOne = list.getRandom(random);
+                        return randomOne;
+                    })
                     .map(RegistryEntry::value);
         }
 

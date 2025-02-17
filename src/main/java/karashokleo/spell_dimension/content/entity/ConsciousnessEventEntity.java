@@ -2,6 +2,8 @@ package karashokleo.spell_dimension.content.entity;
 
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.component.player.PlayerDifficulty;
+import karashokleo.l2hostility.init.LHEffects;
+import karashokleo.l2hostility.util.EffectHelper;
 import karashokleo.spell_dimension.content.block.ProtectiveCoverBlock;
 import karashokleo.spell_dimension.content.block.tile.ConsciousnessCoreTile;
 import karashokleo.spell_dimension.content.event.conscious.ConsciousnessEventManager;
@@ -14,6 +16,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.boss.ServerBossBar;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.nbt.*;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -102,6 +105,15 @@ public class ConsciousnessEventEntity extends Entity
                 this.bossBar.removePlayer(player);
     }
 
+    protected void forceAddAntibuild(ServerWorld world)
+    {
+        List<ServerPlayerEntity> list = this.getPlayers(world);
+        for (ServerPlayerEntity player : list)
+        {
+            EffectHelper.forceAddEffectWithEvent(player, new StatusEffectInstance(LHEffects.ANTI_BUILD, 40, 0, true, true), this);
+        }
+    }
+
     @Override
     public void tick()
     {
@@ -110,8 +122,11 @@ public class ConsciousnessEventEntity extends Entity
 
         updateSummonedEntities(world);
 
-//        if (this.tick % 20 == 0)
+        if (this.age % 20 == 0)
+        {
 //            this.updateBarToPlayers(world);
+            this.forceAddAntibuild(world);
+        }
 
         switch (this.state)
         {
@@ -156,7 +171,13 @@ public class ConsciousnessEventEntity extends Entity
                 this.turnToFinish(world, false);
                 return;
             }
-            ProtectiveCoverBlock.placeAsBarrier(world, this.getBlockPos(), ConsciousnessEventManager.RADIUS, ConsciousnessEventManager.TIME_LIMIT);
+            BlockPos placeCenter = this.getBlockPos().withY(63);
+            ProtectiveCoverBlock.placeAsCube(world, placeCenter, ConsciousnessEventManager.RADIUS, ConsciousnessEventManager.RADIUS, ConsciousnessEventManager.TIME_LIMIT);
+            for (ServerPlayerEntity player : this.getPlayers(world))
+            {
+                player.addVelocity(0, 0.5, 0);
+                player.velocityModified = true;
+            }
             this.turnToRunning(world);
         }
 
@@ -233,7 +254,8 @@ public class ConsciousnessEventEntity extends Entity
             this.finishTimer++;
             if (this.finishTimer == FINISH_TIME)
             {
-                ProtectiveCoverBlock.breakBarrier(world, this.getBlockPos(), ConsciousnessEventManager.RADIUS);
+                BlockPos placeCenter = this.getBlockPos().withY(63);
+                ProtectiveCoverBlock.breakAsCube(world, placeCenter, ConsciousnessEventManager.RADIUS, ConsciousnessEventManager.RADIUS);
                 this.discard();
             }
         }

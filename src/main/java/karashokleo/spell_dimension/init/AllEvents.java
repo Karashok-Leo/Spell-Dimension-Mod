@@ -50,6 +50,16 @@ public class AllEvents
         LightSpell.init();
         ConsciousOceanEvent.init();
 
+        // dungeon item blacklist
+        UseItemCallback.EVENT.register((player, world, hand) ->
+        {
+            ItemStack stack = player.getStackInHand(hand);
+            if (stack.isIn(AllTags.DUNGEON_BANNED) &&
+                AllWorldGen.disableInWorld(world))
+                return TypedActionResult.fail(stack);
+            return TypedActionResult.pass(stack);
+        });
+
         // keep trinkets
         TrinketDropCallback.EVENT.register((rule, stack, ref, entity) ->
         {

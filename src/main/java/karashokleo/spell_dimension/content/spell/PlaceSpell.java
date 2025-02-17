@@ -2,6 +2,7 @@ package karashokleo.spell_dimension.content.spell;
 
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllSpells;
+import karashokleo.spell_dimension.init.AllWorldGen;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.server.world.ServerWorld;
@@ -18,7 +19,7 @@ public class PlaceSpell
         if (!spellId.equals(AllSpells.PLACE)) return;
         if (!(projectile.getWorld() instanceof ServerWorld world)) return;
         if (!(projectile.getOwner() instanceof PlayerEntity player)) return;
-        if (AllSpells.disableInWorld(world))
+        if (AllWorldGen.disableInWorld(world))
         {
             player.sendMessage(SDTexts.TEXT$BANNED_SPELL.get().formatted(Formatting.RED));
             return;

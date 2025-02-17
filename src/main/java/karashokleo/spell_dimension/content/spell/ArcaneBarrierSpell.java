@@ -16,6 +16,6 @@ public class ArcaneBarrierSpell
     public static void handle(World world, LivingEntity caster, List<Entity> targets, SpellInfo spellInfo)
     {
         if (!spellInfo.id().equals(AllSpells.ARCANE_BARRIER)) return;
-        ProtectiveCoverBlock.placeAsBarrier(caster.getWorld(), caster.getBlockPos(), RADIUS, 20 * 15);
+        ProtectiveCoverBlock.placeAsCube(caster.getWorld(), caster.getBlockPos(), RADIUS, 20 * 15);
     }
 }

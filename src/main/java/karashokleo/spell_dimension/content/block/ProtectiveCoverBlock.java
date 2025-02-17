@@ -1,5 +1,6 @@
 package karashokleo.spell_dimension.content.block;
 
+import karashokleo.spell_dimension.content.block.fluid.ConsciousnessFluid;
 import karashokleo.spell_dimension.content.block.tile.ProtectiveCoverBlockTile;
 import karashokleo.spell_dimension.init.AllBlocks;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -50,7 +51,21 @@ public class ProtectiveCoverBlock extends AbstractGlassBlock implements BlockEnt
         world.setBlockState(pos, AllBlocks.PROTECTIVE_COVER.block().getDefaultState().with(Properties.PERSISTENT, true));
     }
 
-    public static void placeAsBarrier(World world, BlockPos pos, int radius, int life)
+    public static void placeAsCube(World world, BlockPos pos, int radius, int height, int life)
+    {
+        for (int x = -radius; x <= radius; x++)
+            for (int y = 0; y <= height; y++)
+                for (int z = -radius; z <= radius; z++)
+                    if (x == -radius || x == radius ||
+                        y == 0 || y == height ||
+                        z == -radius || z == radius)
+                    {
+                        placeWithOffset(world, pos, life, x, y, z);
+                    }
+
+    }
+
+    public static void placeAsCube(World world, BlockPos pos, int radius, int life)
     {
         for (int x = -radius; x <= radius; x++)
             for (int y = -radius; y <= radius; y++)
@@ -59,17 +74,37 @@ public class ProtectiveCoverBlock extends AbstractGlassBlock implements BlockEnt
                         y == -radius || y == radius ||
                         z == -radius || z == radius)
                     {
-                        BlockPos placePos = pos.add(x, y, z);
-                        if (world.getBlockState(placePos).isAir())
-                        {
-                            world.setBlockState(placePos, AllBlocks.PROTECTIVE_COVER.block().getDefaultState());
-                            if (world.getBlockEntity(placePos) instanceof ProtectiveCoverBlockTile tile)
-                                tile.setLife(life);
-                        }
+                        placeWithOffset(world, pos, life, x, y, z);
                     }
     }
 
-    public static void breakBarrier(World world, BlockPos pos, int radius)
+    private static void placeWithOffset(World world, BlockPos pos, int life, int x, int y, int z)
+    {
+        BlockPos placePos = pos.add(x, y, z);
+        if (world.getBlockState(placePos).isAir() ||
+            world.getFluidState(placePos).getFluid() instanceof ConsciousnessFluid)
+        {
+            world.setBlockState(placePos, AllBlocks.PROTECTIVE_COVER.block().getDefaultState());
+            if (world.getBlockEntity(placePos) instanceof ProtectiveCoverBlockTile tile)
+                tile.setLife(life);
+        }
+    }
+
+    public static void breakAsCube(World world, BlockPos pos, int radius, int height)
+    {
+        for (int x = -radius; x <= radius; x++)
+            for (int y = 0; y <= height; y++)
+                for (int z = -radius; z <= radius; z++)
+                    if (x == -radius || x == radius ||
+                        y == 0 || y == height ||
+                        z == -radius || z == radius)
+                    {
+                        breakWithOffset(world, pos, x, y, z);
+                    }
+
+    }
+
+    public static void breakAsCube(World world, BlockPos pos, int radius)
     {
         for (int x = -radius; x <= radius; x++)
             for (int y = -radius; y <= radius; y++)
@@ -78,15 +113,20 @@ public class ProtectiveCoverBlock extends AbstractGlassBlock implements BlockEnt
                         y == -radius || y == radius ||
                         z == -radius || z == radius)
                     {
-                        BlockPos breakPos = pos.add(x, y, z);
-                        BlockState blockState = world.getBlockState(breakPos);
-                        if (blockState.isOf(AllBlocks.PROTECTIVE_COVER.block()))
-                        {
-                            breakNonPersistent(world, breakPos);
+                        breakWithOffset(world, pos, x, y, z);
+                    }
+    }
+
+    private static void breakWithOffset(World world, BlockPos pos, int x, int y, int z)
+    {
+        BlockPos breakPos = pos.add(x, y, z);
+        BlockState blockState = world.getBlockState(breakPos);
+        if (blockState.isOf(AllBlocks.PROTECTIVE_COVER.block()))
+        {
+            breakNonPersistent(world, breakPos);
 //                            world.breakBlock(breakPos, false);
 //                            world.removeBlockEntity(breakPos);
-                        }
-                    }
+        }
     }
 
     public static void breakNonPersistent(World world, BlockPos pos)

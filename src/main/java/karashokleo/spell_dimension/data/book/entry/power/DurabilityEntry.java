@@ -50,13 +50,13 @@ public class DurabilityEntry extends BaseEntryProvider
         this.lang().add(context.pageTitle(), "Hardened");
         this.lang().add(context.pageText(),
                 """
-                        Typically, the more damage a monster does to you, the more damage it does to your armor. *Hardened* can make durability loss of items up to 1.
+                        Typically, the more damage a monster does to you, the more damage it does to your armor. **Hardened** can make durability loss of items up to 1.
                         """
         );
         this.lang("zh_cn").add(context.pageTitle(), "硬化");
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        通常，怪物对你造成的伤害越多，对你的盔甲造成的损伤也就越多。*硬化*魔咒可以使物品的单次耐久损耗最多为1。
+                        通常，怪物对你造成的伤害越多，对你的盔甲造成的损伤也就越多。**硬化**魔咒可以使物品的单次耐久损耗最多为1。
                         """
         );
 
@@ -71,7 +71,7 @@ public class DurabilityEntry extends BaseEntryProvider
         this.lang().add(context.pageTitle(), "Durable Armor");
         this.lang().add(context.pageText(),
                 """
-                        *Durable* can make your armor have higher durability. It is incompatible with Unbreaking.
+                        **Durable** can make your armor have higher durability. It is incompatible with Unbreaking.
                         \\
                         \\
                         Note: For some reason, this enchantment is currently not working!
@@ -80,7 +80,7 @@ public class DurabilityEntry extends BaseEntryProvider
         this.lang("zh_cn").add(context.pageTitle(), "盔甲耐久");
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        *盔甲耐久*魔咒可以使你的盔甲获得更高的耐久。它和耐久附魔不兼容。
+                        **盔甲耐久**魔咒可以使你的盔甲获得更高的耐久。它和耐久附魔不兼容。
                         \\
                         \\
                         注意：由于某些原因，该魔咒暂时无法生效！
@@ -98,13 +98,13 @@ public class DurabilityEntry extends BaseEntryProvider
         this.lang().add(context.pageTitle(), "Safeguard");
         this.lang().add(context.pageText(),
                 """
-                        *Safeguard* can make items with durability greater than 1 keep at least 1 durability if damaged. If the original durability is not restored after a while, Safeguard enchantment will be removed.
+                        **Safeguard** can make items with durability greater than 1 keep at least 1 durability if damaged. If the original durability is not restored after a while, Safeguard enchantment will be removed.
                         """
         );
         this.lang("zh_cn").add(context.pageTitle(), "保险");
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        *保险*魔咒可以使耐久大于1的此物品受到耐久损耗时，最多削减耐久到1。一段时间后如果没有恢复原来的耐久，则移除该附魔。
+                        **保险**魔咒可以使耐久大于1的此物品受到耐久损耗时，最多削减耐久到1。一段时间后如果没有恢复原来的耐久，则移除该附魔。
                         """
         );
 

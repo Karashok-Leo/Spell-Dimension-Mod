@@ -588,7 +588,7 @@ public class SDRecipeProvider extends FabricRecipeProvider
             EIRecipeUtil.set(
                     builder -> builder
                             .withTableIngredient(Enchantments_SpellPowerMechanics.MAGIC_PROTECTION, 1)
-                            .withPedestalItem(1, ComplementItems.VOID_EYE)
+                            .withPedestalItem(1, MiscItems.WITCH_DROPLET)
                             .withPedestalItem(2, ComplementItems.CURSED_DROPLET)
                             .withPedestalItem(3, ComplementItems.EXPLOSION_SHARD),
                     AllEnchantments.SPELL_TEARING,

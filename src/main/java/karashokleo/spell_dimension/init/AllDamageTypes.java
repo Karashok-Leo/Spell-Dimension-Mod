@@ -28,19 +28,32 @@ public class AllDamageTypes
                 DamageTypeTags.BYPASSES_EFFECTS,
                 DamageTypeTags.NO_IMPACT
         );
+
+        generateMessages(
+                "real_damage",
+                "%s died of real damage",
+                "%s died of real damage by %s",
+                "%s死于真实伤害",
+                "%s死于%s的真实伤害"
+        );
     }
 
     @SafeVarargs
     public static void register(RegistryKey<DamageType> registryKey, DamageType damageType, String deathMsgEn, String deathMsgPlayerEn, String deathMsgZh, String deathMsgPlayerZh, TagKey<DamageType>... tags)
     {
         SpellDimension.DYNAMICS.add(registryKey, damageType);
-        String deathMsg = "death.attack." + damageType.msgId();
-        String deathMsgPlayer = "death.attack." + damageType.msgId() + ".player";
+        generateMessages(damageType.msgId(), deathMsgEn, deathMsgPlayerEn, deathMsgZh, deathMsgPlayerZh);
+        for (TagKey<DamageType> tag : tags)
+            SpellDimension.DAMAGE_TYPE_TAGS.getOrCreateContainer(tag).add(registryKey);
+    }
+
+    private static void generateMessages(String msgId, String deathMsgEn, String deathMsgPlayerEn, String deathMsgZh, String deathMsgPlayerZh)
+    {
+        String deathMsg = "death.attack." + msgId;
+        String deathMsgPlayer = "death.attack." + msgId + ".player";
         SpellDimension.EN_TEXTS.addText(deathMsg, deathMsgEn);
         SpellDimension.EN_TEXTS.addText(deathMsgPlayer, deathMsgPlayerEn);
         SpellDimension.ZH_TEXTS.addText(deathMsg, deathMsgZh);
         SpellDimension.ZH_TEXTS.addText(deathMsgPlayer, deathMsgPlayerZh);
-        for (TagKey<DamageType> tag : tags)
-            SpellDimension.DAMAGE_TYPE_TAGS.getOrCreateContainer(tag).add(registryKey);
     }
 }
