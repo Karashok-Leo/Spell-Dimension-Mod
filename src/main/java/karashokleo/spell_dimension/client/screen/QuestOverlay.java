@@ -42,7 +42,8 @@ public class QuestOverlay extends InfoSideBar<SideBar.IntSignature>
                 return texts;
             }
         }
-        return List.of(SDTexts.TOOLTIP$QUEST$OBTAIN_CURRENT.get());
+        return List.of(SDTexts.TOOLTIP$QUEST$VIEW_CURRENT.get());
+//        return List.of(SDTexts.TOOLTIP$QUEST$OBTAIN_CURRENT.get());
     }
 
     @Override

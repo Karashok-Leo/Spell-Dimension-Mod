@@ -3,10 +3,7 @@ package karashokleo.spell_dimension.init;
 import dev.xkmc.l2serial.network.PacketHandler;
 import dev.xkmc.l2serial.network.SimplePacketBase;
 import karashokleo.spell_dimension.SpellDimension;
-import karashokleo.spell_dimension.content.network.S2CFloatingItem;
-import karashokleo.spell_dimension.content.network.S2CSpellDash;
-import karashokleo.spell_dimension.content.network.S2CTitle;
-import karashokleo.spell_dimension.content.network.S2CUndyingParticles;
+import karashokleo.spell_dimension.content.network.*;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
@@ -27,7 +24,12 @@ public class AllPackets
                 S2CTitle.class,
                 S2CFloatingItem.class,
                 S2CSpellDash.class,
-                S2CUndyingParticles.class
+                S2COpenQuestScreen.class,
+                C2SSelectQuest.class
+        );
+
+        HANDLER.configureC2S(
+                C2SSelectQuest.class
         );
     }
 
@@ -37,7 +39,7 @@ public class AllPackets
                 S2CTitle.class,
                 S2CFloatingItem.class,
                 S2CSpellDash.class,
-                S2CUndyingParticles.class
+                S2COpenQuestScreen.class
         );
     }
 

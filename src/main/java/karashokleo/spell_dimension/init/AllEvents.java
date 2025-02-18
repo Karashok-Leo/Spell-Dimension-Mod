@@ -4,6 +4,7 @@ import com.obscuria.aquamirae.registry.AquamiraeItems;
 import dev.emi.trinkets.api.TrinketEnums;
 import dev.emi.trinkets.api.event.TrinketDropCallback;
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingEntityEvents;
+import io.github.fabricators_of_create.porting_lib.entity.events.PlayerInteractionEvents;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.feature.EntityFeature;
@@ -14,6 +15,7 @@ import karashokleo.spell_dimension.api.SpellImpactEvents;
 import karashokleo.spell_dimension.content.event.*;
 import karashokleo.spell_dimension.content.item.SpellScrollItem;
 import karashokleo.spell_dimension.content.misc.ISpawnerExtension;
+import karashokleo.spell_dimension.content.network.C2SSelectQuest;
 import karashokleo.spell_dimension.content.spell.LightSpell;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.util.SchoolUtil;
@@ -49,6 +51,12 @@ public class AllEvents
         TrinketEvent.init();
         LightSpell.init();
         ConsciousOceanEvent.init();
+
+        PlayerInteractionEvents.LEFT_CLICK_EMPTY.register(event ->
+        {
+            if (event.getItemStack().isOf(AllItems.QUEST_SCROLL))
+                AllPackets.toServer(new C2SSelectQuest(null, event.getHand()));
+        });
 
         // dungeon item blacklist
         UseItemCallback.EVENT.register((player, world, hand) ->

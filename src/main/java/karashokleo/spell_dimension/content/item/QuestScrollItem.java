@@ -1,12 +1,14 @@
 package karashokleo.spell_dimension.content.item;
 
+import karashokleo.l2hostility.content.network.S2CUndying;
+import karashokleo.l2hostility.init.LHNetworking;
 import karashokleo.spell_dimension.api.quest.Quest;
 import karashokleo.spell_dimension.api.quest.QuestRegistry;
 import karashokleo.spell_dimension.api.quest.QuestUsage;
 import karashokleo.spell_dimension.config.QuestToEntryConfig;
 import karashokleo.spell_dimension.content.component.QuestComponent;
+import karashokleo.spell_dimension.content.network.S2COpenQuestScreen;
 import karashokleo.spell_dimension.content.network.S2CTitle;
-import karashokleo.spell_dimension.content.network.S2CUndyingParticles;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllPackets;
@@ -30,7 +32,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 public class QuestScrollItem extends Item
 {
@@ -70,6 +71,12 @@ public class QuestScrollItem extends Item
         return this.getQuestId(stack).map(QuestRegistry.QUEST_REGISTRY::get);
     }
 
+    public void setQuest(ItemStack stack, @Nullable Identifier questId)
+    {
+        if (questId == null) stack.getOrCreateNbt().remove(KEY);
+        else stack.getOrCreateNbt().putString(KEY, questId.toString());
+    }
+
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand)
     {
@@ -103,18 +110,15 @@ public class QuestScrollItem extends Item
                     {
                         quest.reward(player);
                         QuestUsage.addQuestsCompleted(player, quest);
-                        QuestUsage.getDependents(quest)
-                                .stream()
-                                .filter(q1 -> QuestUsage.getDependencies(q1.value()).stream().allMatch(q2 -> QuestComponent.isCompleted(player, q2)))
-                                .map(this::getStack)
-                                .forEach(itemStack -> player.getInventory().offerOrDrop(itemStack));
+//                        giveDependentQuests(player, quest);
                         S2CTitle title = new S2CTitle(SDTexts.TEXT$QUEST_COMPLETE.get());
                         AllPackets.toClientPlayer(player, title);
-                        S2CUndyingParticles packet = new S2CUndyingParticles(player);
-                        AllPackets.toClientPlayer(player, packet);
-                        AllPackets.toTracking(player, packet);
+                        S2CUndying packet = new S2CUndying(player);
+                        LHNetworking.toClientPlayer(player, packet);
+                        LHNetworking.toTracking(player, packet);
                         world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENTITY_PLAYER_LEVELUP, player.getSoundCategory(), 1.0F, 1.0F);
-                        if (!creativeMode) stack.decrement(1);
+//                        if (!creativeMode) stack.decrement(1);
+                        AllItems.QUEST_SCROLL.setQuest(stack, null);
                     }
                     // Requirements not met
                     else player.sendMessage(SDTexts.TEXT$QUEST_REQUIREMENT.get(), true);
@@ -125,22 +129,32 @@ public class QuestScrollItem extends Item
             // Empty quest
             else
             {
-                Set<RegistryEntry<Quest>> currentQuests = QuestUsage.getCurrentQuests(player);
-                // All completed
-                if (currentQuests.isEmpty())
-                    player.sendMessage(SDTexts.TEXT$QUEST_ALL_COMPLETED.get(), true);
-                    // Offer all current quests
-                else
-                {
-                    currentQuests.stream()
-                            .map(AllItems.QUEST_SCROLL::getStack)
-                            .forEach(itemStack -> player.getInventory().offerOrDrop(itemStack));
-                    if (!player.getAbilities().creativeMode)
-                        stack.decrement(1);
-                }
+                AllPackets.toClientPlayer(player, new S2COpenQuestScreen(hand));
+//                Set<RegistryEntry<Quest>> currentQuests = QuestUsage.getCurrentQuests(player);
+//                // All completed
+//                if (currentQuests.isEmpty())
+//                    player.sendMessage(SDTexts.TEXT$QUEST_ALL_COMPLETED.get(), true);
+//                    // Offer all current quests
+//                else
+//                {
+//                    currentQuests.stream()
+//                            .map(AllItems.QUEST_SCROLL::getStack)
+//                            .forEach(itemStack -> player.getInventory().offerOrDrop(itemStack));
+//                    if (!player.getAbilities().creativeMode)
+//                        stack.decrement(1);
+//                }
             }
         }
         return TypedActionResult.success(stack, world.isClient());
+    }
+
+    private void giveDependentQuests(ServerPlayerEntity player, Quest quest)
+    {
+        QuestUsage.getDependents(quest)
+                .stream()
+                .filter(q1 -> QuestUsage.getDependencies(q1.value()).stream().allMatch(q2 -> QuestComponent.isCompleted(player, q2)))
+                .map(this::getStack)
+                .forEach(itemStack -> player.getInventory().offerOrDrop(itemStack));
     }
 
     @Override
@@ -153,7 +167,11 @@ public class QuestScrollItem extends Item
             Text title = quest.get().getTitle(world);
             if (title != null) tooltip.add(title);
             tooltip.addAll(quest.get().getDesc(world));
-        } else tooltip.add(SDTexts.TOOLTIP$QUEST$OBTAIN_CURRENT.get());
+        } else
+        {
+            tooltip.add(SDTexts.TOOLTIP$QUEST$VIEW_CURRENT.get());
+//            tooltip.add(SDTexts.TOOLTIP$QUEST$OBTAIN_CURRENT.get());
+        }
     }
 
     @Override
