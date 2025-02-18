@@ -8,7 +8,11 @@
           "type": "spell-dimension:random_enchanted_essence"
         }
       ],
-      "rolls": 1
+      "rolls": {
+        "type": "minecraft:uniform",
+        "min": 0,
+        "max": 1
+      }
     }
   ]
 }

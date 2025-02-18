@@ -3,6 +3,11 @@
   "pools": [
     {
       "rolls": 1,
+      "conditions": [
+        {
+          "condition": "minecraft:killed_by_player"
+        }
+      ],
       "entries": [
         {
           "type": "item",
@@ -25,6 +30,5 @@
         }
       ]
     }
-  ],
-  "random_sequence": "minecraft:entities/donkey"
+  ]
 }

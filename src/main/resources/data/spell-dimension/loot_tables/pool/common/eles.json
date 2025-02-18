@@ -8,7 +8,11 @@
           "type": "spell-dimension:random_enlightening_essence"
         }
       ],
-      "rolls": 1
+      "rolls": {
+        "type": "minecraft:uniform",
+        "min": 0,
+        "max": 1
+      }
     }
   ]
 }

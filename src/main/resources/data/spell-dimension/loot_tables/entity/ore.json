@@ -7,6 +7,11 @@
         "min": 0,
         "max": 2
       },
+      "conditions": [
+        {
+          "condition": "minecraft:killed_by_player"
+        }
+      ],
       "entries": [
         {
           "type": "item",
