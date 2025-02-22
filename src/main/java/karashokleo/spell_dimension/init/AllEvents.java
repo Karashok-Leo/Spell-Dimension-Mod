@@ -55,6 +55,16 @@ public class AllEvents
         LightSpell.init();
         ConsciousOceanEvent.init();
 
+        // attempt to fix NaN health
+        LivingEntityEvents.LivingTickEvent.TICK.register(event ->
+        {
+            LivingEntity entity = event.getEntity();
+            if (entity.age % 10 != 0) return;
+            if (!Float.isNaN(entity.getHealth())) return;
+            entity.setHealth(0);
+            System.out.printf("Fixed NaN health for %s, why is this happening?", entity);
+        });
+
         PlayerInteractionEvents.LEFT_CLICK_EMPTY.register(event ->
         {
             if (event.getItemStack().isOf(AllItems.QUEST_SCROLL))

@@ -12,6 +12,7 @@ import karashokleo.spell_dimension.util.ImpactUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.dynamic.Codecs;
 import net.spell_engine.api.spell.Spell;
@@ -106,6 +107,8 @@ public class Nucleus implements Buff
         for (int i = 0; i < 360; i += step)
             for (int j = 0; j < 360; j += step)
                 ImpactUtil.shootProjectile(source.getWorld(), caster, source.getPos().add(0, height / 2, 0), ImpactUtil.fromEulerAngle(i, j, 0), range, spellInfo, context);
+
+        source.getWorld().playSound(null, source.getBlockPos(), SoundEvents.BLOCK_GLASS_BREAK, source.getSoundCategory(), 1.0F, 1.0F);
     }
 
     public int getDuration()

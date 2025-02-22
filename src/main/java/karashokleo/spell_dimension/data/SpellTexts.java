@@ -112,7 +112,7 @@ public enum SpellTexts
             "Burn a random trait of the target every second. The higher the levelFactor of the trait consumed, the higher the damage caused. No effect on bosses.",
             "每秒灼烧目标的随机一个词条，该词条的等级消耗越高，造成的伤害越高。对Boss无效。"
     ),
-    AURA(
+    FROST_AURA(
             "Frost Aura",
             "霜环",
             "Apply Frost Aura {effect_amplifier} effect to oneself for {effect_duration} seconds. Frost Aura: %s; Frosted: %s".formatted(FrostAuraEffect.getDesc(true), FrostedEffect.getDesc(true)),
@@ -130,7 +130,7 @@ public enum SpellTexts
             "Freeze all targets within a certain range for {effect_duration} seconds.",
             "冻结一定范围内所有目标，持续{effect_duration}秒。"
     ),
-    NUCLEUS(
+    ICY_NUCLEUS(
             "Icy Nucleus",
             "冰核",
             "Freeze the target's heart into a ice nucleus that explodes in %s seconds, deals %.1fx spell power damage and shoots icicles into the surrounding area. ".formatted(Nucleus.TOTAL_DURATION / 20F, SpellConfig.NUCLEUS_FACTOR),

@@ -33,7 +33,7 @@
       "action": {
         "type": "STATUS_EFFECT",
         "status_effect": {
-          "effect_id": "spell-dimension:aura",
+          "effect_id": "spell-dimension:frost_aura",
           "duration": 15,
           "amplifier": 1,
           "show_particles": false

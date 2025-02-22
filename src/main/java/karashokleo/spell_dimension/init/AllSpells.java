@@ -109,8 +109,8 @@ public class AllSpells
     public static final Identifier FROST_FLOURISH = new Identifier("spellbladenext:frostflourish");
     public static final Identifier FROST_SLASH = new Identifier("spellbladenext:frostslash");
     public static final Identifier FROST_BLINK = SpellDimension.modLoc("frost_blink");
-    public static final Identifier NUCLEUS = SpellDimension.modLoc("nucleus");
-    public static final Identifier AURA = SpellDimension.modLoc("aura");
+    public static final Identifier ICY_NUCLEUS = SpellDimension.modLoc("icy_nucleus");
+    public static final Identifier FROST_AURA = SpellDimension.modLoc("frost_aura");
     public static final Identifier COLD_BUFF = new Identifier("spellbladenext:coldbuff");
     // Tier 3
     public static final Identifier FROST_OVERDRIVE = new Identifier("spellbladenext:frostoverdrive");
@@ -197,8 +197,8 @@ public class AllSpells
         SpellConfig.addIntermediateSpell(FROST_FLOURISH);
         SpellConfig.addIntermediateSpell(FROST_SLASH);
         SpellConfig.addIntermediateSpell(FROST_BLINK);
-        SpellConfig.addIntermediateSpell(NUCLEUS);
-        SpellConfig.addIntermediateSpell(AURA);
+        SpellConfig.addIntermediateSpell(ICY_NUCLEUS);
+        SpellConfig.addIntermediateSpell(FROST_AURA);
         SpellConfig.addIntermediateSpell(COLD_BUFF);
 
         SpellConfig.addIntermediateSpell(CLEANSE);

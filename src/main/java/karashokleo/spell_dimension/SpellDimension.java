@@ -12,7 +12,7 @@ import karashokleo.spell_dimension.content.component.GameStageComponent;
 import karashokleo.spell_dimension.content.component.QuestComponent;
 import karashokleo.spell_dimension.content.item.logic.EnchantedModifier;
 import karashokleo.spell_dimension.content.item.logic.EnlighteningModifier;
-import karashokleo.spell_dimension.content.misc.DebugStaffCommand;
+import karashokleo.spell_dimension.content.misc.SDDebugCommand;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.data.SpellTexts;
 import karashokleo.spell_dimension.data.book.MagicGuidanceProvider;
@@ -72,7 +72,7 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
         EnchantedModifier.init();
         EnlighteningModifier.init();
         AllEvents.init();
-        DebugStaffCommand.init();
+        SDDebugCommand.init();
     }
 
     @Override

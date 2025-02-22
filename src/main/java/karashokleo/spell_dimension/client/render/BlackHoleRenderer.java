@@ -28,6 +28,22 @@ public class BlackHoleRenderer extends EntityRenderer<BlackHoleEntity>
         return CORE;
     }
 
+    public RenderLayer getRenderLayer()
+    {
+        return RenderLayer.getEntityTranslucent(CORE);
+//        return RenderLayer.of(
+//                "black_hole",
+//                VertexFormats.POSITION_TEXTURE,
+//                VertexFormat.DrawMode.QUADS, 256, false, true,
+//                RenderLayer.MultiPhaseParameters.builder()
+//                        .program(RenderPhase.ENTITY_GLINT_PROGRAM)
+//                        .texture(new RenderPhase.Texture(CORE, false, false))
+//                        .transparency(RenderPhase.ADDITIVE_TRANSPARENCY)
+//                        .depthTest(RenderPhase.ALWAYS_DEPTH_TEST)
+//                        .build(false)
+//        );
+    }
+
     @Override
     public void render(BlackHoleEntity entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light)
     {
@@ -41,14 +57,14 @@ public class BlackHoleRenderer extends EntityRenderer<BlackHoleEntity>
 
         matrices.push();
         {
-            float scale = entity.getWidth() * 0.0125f;
+            float scale = entity.getWidth() * 0.015f;
 
             matrices.scale(scale, scale, scale);
             matrices.multiply(this.dispatcher.getRotation());
             matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(90f));
 
             //        VertexConsumer centerBuffer = vertexConsumers.getBuffer(RenderLayer.getEndGateway());
-            VertexConsumer centerBuffer = vertexConsumers.getBuffer(RenderLayer.getEntityTranslucent(CORE));
+            VertexConsumer centerBuffer = vertexConsumers.getBuffer(this.getRenderLayer());
             renderCore(centerBuffer, matrices, alpha);
         }
         matrices.pop();
@@ -63,7 +79,7 @@ public class BlackHoleRenderer extends EntityRenderer<BlackHoleEntity>
             float total = (segments + segments * segments) * (12 + blackHoleRadius / 2);
             for (int n = 0; n < total; ++n)
             {
-                float radius = random.nextFloat() + blackHoleRadius + m * blackHoleRadius * 0.4F;
+                float radius = random.nextFloat() + blackHoleRadius + m * blackHoleRadius * 0.5F;
                 float width = random.nextFloat() * 2.0F + 1.0F + m * 2.0F;
                 renderBeam(beamBuffer, matrices, animationProgress, alpha, radius, width);
             }

@@ -143,8 +143,8 @@ public class SpellScrollConfig
             fromCrafting(AllSpells.WILDFIRE, MythicItems.Mats.CARMOT_STONE);
 
             fromCrafting(AllSpells.FROST_BLIZZARD, MythicBlocks.SILVER.getStorageBlock().asItem());
-            fromCrafting(AllSpells.NUCLEUS, MythicBlocks.AQUARIUM.getStorageBlock().asItem());
-            fromCrafting(AllSpells.AURA, AquamiraeItems.MAZE_ROSE);
+            fromCrafting(AllSpells.ICY_NUCLEUS, MythicBlocks.AQUARIUM.getStorageBlock().asItem());
+            fromCrafting(AllSpells.FROST_AURA, AquamiraeItems.MAZE_ROSE);
             fromCrafting(AllSpells.ICICLE, AllItems.ABYSS_GUARD);
             fromCrafting(AllSpells.FROST_BLINK, AquamiraeItems.DEAD_SEA_SCROLL);
             fromCrafting(AllSpells.FROZEN, AquamiraeItems.SHIP_GRAVEYARD_ECHO);

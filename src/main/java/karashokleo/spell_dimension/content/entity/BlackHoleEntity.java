@@ -1,7 +1,9 @@
 package karashokleo.spell_dimension.content.entity;
 
+import karashokleo.spell_dimension.api.SpellImpactEvents;
 import karashokleo.spell_dimension.config.SpellConfig;
 import karashokleo.spell_dimension.init.AllEntities;
+import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.util.DamageUtil;
 import karashokleo.spell_dimension.util.ImpactUtil;
 import net.minecraft.entity.*;
@@ -10,14 +12,18 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.spell_engine.api.spell.SpellInfo;
+import net.spell_engine.internals.SpellRegistry;
 import net.spell_power.api.SpellSchools;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 public class BlackHoleEntity extends Entity implements Ownable
@@ -29,6 +35,8 @@ public class BlackHoleEntity extends Entity implements Ownable
 
     private static final TrackedData<Float> RADIUS = DataTracker.registerData(BlackHoleEntity.class, TrackedDataHandlerRegistry.FLOAT);
 
+    @Nullable
+    private SpellInfo spellInfo;
     @Nullable
     private UUID ownerUuid;
     @Nullable
@@ -45,6 +53,15 @@ public class BlackHoleEntity extends Entity implements Ownable
         super(AllEntities.BLACK_HOLE, world);
         this.setOwner(owner);
         this.setRadius(radius);
+    }
+
+    public SpellInfo getSpellInfo()
+    {
+        if (this.spellInfo == null)
+        {
+            this.spellInfo = new SpellInfo(SpellRegistry.getSpell(AllSpells.BLACK_HOLE), AllSpells.BLACK_HOLE);
+        }
+        return spellInfo;
     }
 
     public void setOwner(@Nullable Entity owner)
@@ -139,11 +156,27 @@ public class BlackHoleEntity extends Entity implements Ownable
         }
     }
 
-    private List<Entity> trackingEntities = new ArrayList<>();
-
-    private void updateTrackingEntities()
+    private Map<Entity, Float> getEntityDistanceMap(@Nullable LivingEntity caster)
     {
-        trackingEntities = this.getWorld().getOtherEntities(this, this.getBoundingBox().expand(1.0));
+        Box boundingBox = this.getBoundingBox();
+        Vec3d center = boundingBox.getCenter();
+        float radius = this.getRadius();
+        var trackingEntities = this.getWorld().getOtherEntities(this, boundingBox.expand(1.0));
+        trackingEntities.removeIf(
+                entity -> entity == caster ||
+                          (entity instanceof LivingEntity living &&
+                           caster != null &&
+                           ImpactUtil.isAlly(caster, living))
+        );
+        Map<Entity, Float> entityDistanceMap = new HashMap<>();
+        for (Entity entity : trackingEntities)
+        {
+            Vec3d pos = entity.getPos();
+            float distance = (float) center.distanceTo(pos);
+            if (distance > radius) continue;
+            entityDistanceMap.put(entity, distance);
+        }
+        return entityDistanceMap;
     }
 
     @Override
@@ -157,8 +190,6 @@ public class BlackHoleEntity extends Entity implements Ownable
         int effectInterval = Math.max(2, (int) this.getRadius() / 2);
         if (this.age % effectInterval != 0) return;
 
-        updateTrackingEntities();
-
         if (radius < MIN_RADIUS ||
             radius > MAX_RADIUS)
         {
@@ -170,21 +201,20 @@ public class BlackHoleEntity extends Entity implements Ownable
         LivingEntity caster = this.getOwner() instanceof LivingEntity living ? living : null;
 
         float damage = caster == null ? 0 : (float) DamageUtil.calculateDamage(caster, SpellSchools.ARCANE, SpellConfig.BLACK_HOLE_FACTOR, radius);
-        for (Entity entity : this.trackingEntities)
+
+        var entityDistanceMap = this.getEntityDistanceMap(caster);
+        List<Entity> targets = entityDistanceMap.keySet().stream().toList();
+        if (caster != null)
         {
-            if (entity == caster) continue;
-            if (entity instanceof LivingEntity living &&
-                caster != null &&
-                ImpactUtil.isAlly(caster, living)) continue;
-
-            Vec3d pos = entity.getPos();
-            float distance = (float) center.distanceTo(pos);
-            if (distance > radius) continue;
-
-            float f = 1.0f - distance / radius / 2;
+            SpellImpactEvents.BEFORE.invoker().beforeImpact(this.getWorld(), caster, targets, this.getSpellInfo());
+        }
+        for (var entry : entityDistanceMap.entrySet())
+        {
+            Entity entity = entry.getKey();
+            float f = 1.0f - entry.getValue() / radius / 2;
             float scale = f * f * f * f * 0.25f;
 
-            Vec3d d = center.subtract(pos).multiply(scale);
+            Vec3d d = center.subtract(entity.getPos()).multiply(scale);
             entity.addVelocity(d.x, d.y, d.z);
             entity.fallDistance = 0.0f;
 

@@ -15,7 +15,7 @@ public class NucleusSpell
 {
     public static void handle(World world, LivingEntity caster, List<Entity> targets, SpellInfo spellInfo)
     {
-        if (!spellInfo.id().equals(AllSpells.NUCLEUS)) return;
+        if (!spellInfo.id().equals(AllSpells.ICY_NUCLEUS)) return;
         Optional<Entity> target = targets.stream().findFirst();
         if (target.isEmpty()) return;
         if (!(target.get() instanceof LivingEntity living)) return;

@@ -51,6 +51,7 @@ public class AllTags
 
     public static final TagKey<Item> MELEE_WEAPONS = TagUtil.itemTag(new Identifier("equipment_standard:melee_weapons"));
     public static final TagKey<Item> ARMOR = TagUtil.itemTag(new Identifier("equipment_standard:armor"));
+    public static final TagKey<Item> MAGIC_WEAPON = TagUtil.itemTag(new Identifier("equipment_standard:magic/weapons"));
 
     public static final TagKey<Item> DUNGEON_BANNED = TagUtil.itemTag("dungeon_banned");
 

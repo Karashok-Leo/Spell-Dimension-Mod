@@ -7,6 +7,7 @@ import karashokleo.spell_dimension.content.enchantment.*;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.effect.StatusEffects;
 import net.spell_power.api.SpellSchools;
+import net.spell_power.api.enchantment.EnchantmentRestriction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -207,6 +208,12 @@ public class AllEnchantments
         EFFECT_IMMUNITY.add(SOUL_BURNER_IMMUNITY);
         EFFECT_IMMUNITY.add(FREEZING_IMMUNITY);
         EFFECT_IMMUNITY.add(CURSED_IMMUNITY);
+
+        EnchantmentRestriction.Condition condition = stack -> stack.isIn(AllTags.MAGIC_WEAPON);
+        EnchantmentRestriction.permit(SPELL_CURSE, condition);
+        EnchantmentRestriction.permit(SPELL_LEECH, condition);
+        EnchantmentRestriction.permit(SPELL_TEARING, condition);
+        EnchantmentRestriction.permit(SPELL_DASH, condition);
     }
 
     public static class Entry<T extends Enchantment> extends EnchantmentBuilder<T>

@@ -1,11 +1,8 @@
 package karashokleo.spell_dimension.content.item;
 
-import karashokleo.spell_dimension.config.SpellConfig;
 import karashokleo.spell_dimension.config.recipe.SpellScrollConfig;
 import karashokleo.spell_dimension.content.item.essence.base.ColorProvider;
 import karashokleo.spell_dimension.data.SDTexts;
-import karashokleo.spell_dimension.init.AllItems;
-import karashokleo.spell_dimension.util.SchoolUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
