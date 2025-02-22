@@ -9,6 +9,15 @@
           "name": "endrem:nether_eye"
         }
       ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "adventurez:blackstone_golem_heart"
+        }
+      ]
     }
   ]
 }

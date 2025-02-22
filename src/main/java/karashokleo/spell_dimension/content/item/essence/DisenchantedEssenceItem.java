@@ -5,6 +5,7 @@ import karashokleo.spell_dimension.content.item.logic.EnchantedModifier;
 import karashokleo.spell_dimension.data.SDTexts;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.world.World;
@@ -20,7 +21,7 @@ public class DisenchantedEssenceItem extends StackClickEssenceItem
     }
 
     @Override
-    protected boolean applyEffect(ItemStack essence, ItemStack target)
+    protected boolean applyEffect(ItemStack essence, ItemStack target, PlayerEntity player)
     {
         return EnchantedModifier.remove(target);
     }

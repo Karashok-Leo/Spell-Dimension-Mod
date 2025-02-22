@@ -6,11 +6,24 @@ import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllPackets;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.render.DiffuseLighting;
+import net.minecraft.client.render.OverlayTexture;
+import net.minecraft.client.render.item.ItemRenderer;
+import net.minecraft.client.render.model.BakedModel;
+import net.minecraft.client.render.model.json.ModelTransformationMode;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.crash.CrashException;
+import net.minecraft.util.crash.CrashReport;
+import net.minecraft.util.crash.CrashReportSection;
+import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
+import org.joml.Matrix4f;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.List;
@@ -100,15 +113,61 @@ public class QuestScreen extends Screen
             var stackX = startX + ix * iconSize;
             var stackY = startY + iy * iconSize;
 
-            if (mouseX > stackX && mouseY > stackY && mouseX <= (stackX + 16) && mouseY <= (stackY + 16))
-                this.current = stack;
+            var scale = 1f;
 
-            context.drawItem(stack, stackX, stackY);
-            context.drawItemInSlot(this.textRenderer, stack, mouseX, mouseY);
+            if (mouseX > stackX && mouseY > stackY && mouseX <= (stackX + 16) && mouseY <= (stackY + 16))
+            {
+                scale = 1.3f;
+                this.current = stack;
+            }
+
+            drawItem(context, client.getItemRenderer(), player, client.world, stack, stackX, stackY, scale);
+
             index++;
         }
 
         if (!this.current.isEmpty())
             context.drawTooltip(this.textRenderer, getTooltipFromItem(client, this.current), mouseX, mouseY);
     }
+
+    private void drawItem(DrawContext context, ItemRenderer itemRenderer, @Nullable LivingEntity entity, @Nullable World world, ItemStack stack, int x, int y, float scale)
+    {
+        if (stack.isEmpty()) return;
+
+        BakedModel bakedModel = itemRenderer.getModel(stack, world, entity, 0);
+        MatrixStack matrices = context.getMatrices();
+        matrices.push();
+        matrices.translate((float) (x + 8), (float) (y + 8), 150f);
+
+        try
+        {
+            matrices.multiplyPositionMatrix((new Matrix4f()).scaling(1.0F, -1.0F, 1.0F));
+            matrices.scale(16.0F, 16.0F, 16.0F);
+            matrices.scale(scale, scale, scale);
+            boolean bl = !bakedModel.isSideLit();
+            if (bl)
+            {
+                DiffuseLighting.disableGuiDepthLighting();
+            }
+
+            itemRenderer.renderItem(stack, ModelTransformationMode.GUI, false, matrices, context.getVertexConsumers(), 15728880, OverlayTexture.DEFAULT_UV, bakedModel);
+            context.draw();
+            if (bl)
+            {
+                DiffuseLighting.enableGuiDepthLighting();
+            }
+        } catch (Throwable throwable)
+        {
+            CrashReport crashReport = CrashReport.create(throwable, "Rendering item");
+            CrashReportSection crashReportSection = crashReport.addElement("Item being rendered");
+            crashReportSection.add("Item Type", () -> String.valueOf(stack.getItem()));
+            crashReportSection.add("Item Damage", () -> String.valueOf(stack.getDamage()));
+            crashReportSection.add("Item NBT", () -> String.valueOf(stack.getNbt()));
+            crashReportSection.add("Item Foil", () -> String.valueOf(stack.hasGlint()));
+            throw new CrashException(crashReport);
+        }
+
+        matrices.pop();
+    }
+
 }

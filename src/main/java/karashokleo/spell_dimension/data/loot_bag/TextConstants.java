@@ -8,10 +8,10 @@ public class TextConstants
     public static final String[] ITEMS_ZH = {"附魔书", "装备", "材料"};
     public static final String[][] COUNT = {
             // Book, Gear, Material
-            {"2~4", "1~2", "9~11"},
-            {"2~4", "1~2", "7~9"},
-            {"2~4", "1~2", "5~7"},
-            {"2~4", "1~2", "3~5"},
+            {"1~2", "1~2", "9~11"},
+            {"1~2", "1~2", "7~9"},
+            {"1~3", "1~2", "5~7"},
+            {"2~3", "1~2", "3~5"},
             {"2~4", "1~2", "1~3"},
     };
     public static final int[] BOSS_LEVELS = {80, 160, 320, 560, 880};

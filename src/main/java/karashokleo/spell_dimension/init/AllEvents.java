@@ -3,11 +3,14 @@ package karashokleo.spell_dimension.init;
 import com.obscuria.aquamirae.registry.AquamiraeItems;
 import dev.emi.trinkets.api.TrinketEnums;
 import dev.emi.trinkets.api.event.TrinketDropCallback;
+import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEvent;
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingEntityEvents;
 import io.github.fabricators_of_create.porting_lib.entity.events.PlayerInteractionEvents;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
+import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.feature.EntityFeature;
+import karashokleo.l2hostility.content.item.TrinketItems;
 import karashokleo.l2hostility.content.trait.common.AdaptingTrait;
 import karashokleo.l2hostility.init.LHTraits;
 import karashokleo.leobrary.damage.api.modify.DamagePhase;
@@ -82,12 +85,21 @@ public class AllEvents
         });
 
         // Deflection
+        LivingAttackEvent.ATTACK.register(event ->
+        {
+            if (!event.getSource().isOf(MythicUpgradesDamageTypes.DEFLECTING_DAMAGE_TYPE))
+                return;
+            LivingEntity entity = event.getEntity();
+            if (EntityFeature.MAGIC_REJECT.test(entity) ||
+                TrinketCompat.hasItemInTrinket(entity, TrinketItems.RING_DIVINITY))
+                event.setCanceled(true);
+        });
+
         DamagePhase.SHIELD.registerModifier(0, access ->
         {
             if (!access.getSource().isOf(MythicUpgradesDamageTypes.DEFLECTING_DAMAGE_TYPE))
                 return;
-            float maxDamage = EntityFeature.MAGIC_REJECT.test(access.getEntity()) ?
-                    0 : access.getEntity().getMaxHealth();
+            float maxDamage = access.getEntity().getMaxHealth();
             access.addModifier(originalDamage -> Math.min(originalDamage, maxDamage));
         });
 

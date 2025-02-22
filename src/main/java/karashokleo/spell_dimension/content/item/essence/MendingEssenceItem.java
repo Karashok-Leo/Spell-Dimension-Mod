@@ -4,6 +4,7 @@ import karashokleo.spell_dimension.content.item.essence.base.StackClickEssenceIt
 import karashokleo.spell_dimension.data.SDTexts;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Text;
@@ -20,7 +21,7 @@ public class MendingEssenceItem extends StackClickEssenceItem
     }
 
     @Override
-    protected boolean applyEffect(ItemStack essence, ItemStack target)
+    protected boolean applyEffect(ItemStack essence, ItemStack target, PlayerEntity player)
     {
         NbtCompound nbt = target.getNbt();
         if (nbt == null)

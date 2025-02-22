@@ -21,7 +21,7 @@ public abstract class StackClickEssenceItem extends SpellEssenceItem
         super(settings);
     }
 
-    protected abstract boolean applyEffect(ItemStack essence, ItemStack target);
+    protected abstract boolean applyEffect(ItemStack essence, ItemStack target, PlayerEntity player);
 
     @Override
     public boolean onStackClicked(ItemStack stack, Slot slot, ClickType clickType, PlayerEntity player)
@@ -29,7 +29,7 @@ public abstract class StackClickEssenceItem extends SpellEssenceItem
         if (clickType == ClickType.RIGHT &&
                 !player.getItemCooldownManager().isCoolingDown(stack.getItem()) &&
                 !slot.getStack().isEmpty() &&
-                applyEffect(stack, slot.getStack()))
+                applyEffect(stack, slot.getStack(), player))
         {
             success(stack, player);
             return true;

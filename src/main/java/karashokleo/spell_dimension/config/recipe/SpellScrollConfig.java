@@ -110,7 +110,7 @@ public class SpellScrollConfig
             fromCrafting(AllSpells.LIGHT, Items.GLOWSTONE);
             fromCrafting(AllSpells.MOON_SWIM, ModItems.HARDENED_PHANTOM_MEMBRANE);
 
-            fromCrafting(AllSpells.PHASE, Items.ECHO_SHARD);
+            fromCrafting(AllSpells.PHASE, DDItems.REINFORCED_ECHO_SHARD);
             fromCrafting(AllSpells.CONVERGE, fuzs.illagerinvasion.init.ModRegistry.PRIMAL_ESSENCE_ITEM.get());
             fromCrafting(AllSpells.ELDRITCH_BLAST, ComplementItems.WARDEN_BONE_SHARD);
             fromCrafting(AllSpells.SHIFT, ModItems.HEART_OF_THE_END);

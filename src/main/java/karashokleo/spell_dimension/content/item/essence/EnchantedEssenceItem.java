@@ -1,6 +1,7 @@
 package karashokleo.spell_dimension.content.item.essence;
 
 import karashokleo.spell_dimension.config.AttributeColorConfig;
+import karashokleo.spell_dimension.content.component.GameStageComponent;
 import karashokleo.spell_dimension.content.item.essence.base.StackClickEssenceItem;
 import karashokleo.spell_dimension.content.item.logic.EnchantedModifier;
 import karashokleo.spell_dimension.data.SDTexts;
@@ -9,6 +10,7 @@ import karashokleo.spell_dimension.util.ParticleUtil;
 import karashokleo.spell_dimension.util.SchoolUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleEffect;
@@ -73,9 +75,10 @@ public class EnchantedEssenceItem extends StackClickEssenceItem
     }
 
     @Override
-    protected boolean applyEffect(ItemStack essence, ItemStack target)
+    protected boolean applyEffect(ItemStack essence, ItemStack target, PlayerEntity player)
     {
-        if (target.isOf(this))
+        if (target.isOf(this) &&
+            GameStageComponent.isNormalMode(player))
             return mergeEnchantedEssences(essence, target);
         EnchantedModifier enchantedModifier = getModifier(essence);
         if (enchantedModifier == null) return false;

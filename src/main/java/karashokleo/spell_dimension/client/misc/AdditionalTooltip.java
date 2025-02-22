@@ -134,7 +134,7 @@ public class AdditionalTooltip
         lines.add(SDTexts.TOOLTIP$BOTTLE_NIGHTMARE.get(hardcore).formatted(Formatting.RED));
         lines.add(SDTexts.TOOLTIP$DIFFICULTY_TIER$CURRENT.get(SDTexts.getDifficultyTierText(difficulty)).formatted(Formatting.BOLD));
         lines.add(SDTexts.TOOLTIP$DIFFICULTY_TIER$TITLE.get(hardcore).formatted(Formatting.DARK_RED));
-        for (int i = 1; i <= 6; i++)
+        for (int i = 1; i <= 7; i++)
             lines.add(
                     SDTexts.TOOLTIP$DIFFICULTY_TIER$DESC.get(
                             Text.translatable("tooltip.spell-dimension.difficulty_tier.hardcore." + i)
