@@ -1,4 +1,4 @@
-package karashokleo.spell_dimension.content.event.conscious;
+package karashokleo.spell_dimension.content.object;
 
 import com.kyanite.deeperdarker.content.DDEntities;
 import fuzs.illagerinvasion.init.ModRegistry;

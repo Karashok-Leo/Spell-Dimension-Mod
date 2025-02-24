@@ -2,16 +2,15 @@ package karashokleo.spell_dimension.content.component;
 
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import karashokleo.l2hostility.init.LHMiscs;
-import karashokleo.spell_dimension.content.network.S2CTitle;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllComponents;
-import karashokleo.spell_dimension.init.AllPackets;
 import karashokleo.spell_dimension.util.AttributeUtil;
 import karashokleo.spell_dimension.util.UuidUtil;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
@@ -22,6 +21,12 @@ public class GameStageComponent implements AutoSyncedComponent
     public static final int HARDCORE = 1;
     public static final int NIGHTMARE = 2;
     public static final UUID HARDCORE_DIFFICULTY_BONUS = UuidUtil.getUUIDFromString("spell_dimension:hardcore_difficulty");
+    public static final UUID NIGHTMARE_DIFFICULTY_BONUS = UuidUtil.getUUIDFromString("spell_dimension:nightmare_difficulty");
+
+    public static int getNextDifficulty(int difficulty)
+    {
+        return MathHelper.clamp(difficulty + 1, NORMAL, NIGHTMARE);
+    }
 
     public static boolean isNormalMode(PlayerEntity player)
     {
@@ -36,13 +41,10 @@ public class GameStageComponent implements AutoSyncedComponent
     public static void addDifficulty(ServerPlayerEntity player)
     {
         GameStageComponent component = player.getComponent(AllComponents.GAME_STAGE);
-        component.difficulty++;
+        component.difficulty = getNextDifficulty(component.difficulty);
         sync(player);
-        if (component.difficulty == HARDCORE)
+        if (component.difficulty >= HARDCORE)
         {
-            S2CTitle title = new S2CTitle(SDTexts.TEXT$QUEST_COMPLETE.get());
-            AllPackets.toClientPlayer(player, title);
-
             AttributeUtil.addModifier(player, LHMiscs.ADD_LEVEL, HARDCORE_DIFFICULTY_BONUS, "Hardcore Difficulty Bonus", 30, EntityAttributeModifier.Operation.ADDITION);
         }
     }

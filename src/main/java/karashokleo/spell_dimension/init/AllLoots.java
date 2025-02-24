@@ -8,7 +8,7 @@ import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
 import karashokleo.spell_dimension.config.EssenceLootConfig;
 import karashokleo.spell_dimension.config.recipe.SpellScrollConfig;
-import karashokleo.spell_dimension.content.event.conscious.EventAward;
+import karashokleo.spell_dimension.content.object.EventAward;
 import karashokleo.spell_dimension.content.loot.entry.RandomEnchantedEssenceEntry;
 import karashokleo.spell_dimension.content.loot.entry.RandomEnlighteningEssenceEntry;
 import karashokleo.spell_dimension.content.loot.entry.SpellScrollEntry;

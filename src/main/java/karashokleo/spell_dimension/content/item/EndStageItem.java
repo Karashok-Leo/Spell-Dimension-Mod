@@ -14,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.TypedActionResult;
@@ -60,5 +61,7 @@ public class EndStageItem extends Item
     {
         super.appendTooltip(stack, world, tooltip, context);
         tooltip.add(SDTexts.TOOLTIP$END_STAGE.get());
+        if (context.isCreative())
+            tooltip.add(SDTexts.TOOLTIP$SHIFT_RESET.get().formatted(Formatting.GRAY));
     }
 }

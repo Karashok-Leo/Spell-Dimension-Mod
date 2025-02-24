@@ -1,5 +1,7 @@
 package karashokleo.spell_dimension.content.event;
 
+import dev.emi.trinkets.api.TrinketEnums;
+import dev.emi.trinkets.api.event.TrinketDropCallback;
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEvent;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDamageEvent;
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
@@ -12,14 +14,28 @@ import karashokleo.spell_dimension.init.AllItems;
 import net.combatroll.api.event.ServerSideRollEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 
 import java.util.List;
 
-public class TrinketEvent
+public class TrinketEvents
 {
     public static void init()
     {
+        // keep trinkets
+        TrinketDropCallback.EVENT.register((rule, stack, ref, entity) ->
+        {
+            return entity instanceof PlayerEntity ?
+                    TrinketEnums.DropRule.KEEP : rule;
+//            if (entity instanceof PlayerEntity player &&
+//                GameStageComponent.keepInventory(player))
+//            {
+//                return TrinketEnums.DropRule.KEEP;
+//            }
+//            return rule;
+        });
+
         // Heart Steel
         ServerLivingEntityEvents.ALLOW_DEATH.register((entity, source, amount) ->
         {

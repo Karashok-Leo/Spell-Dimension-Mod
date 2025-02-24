@@ -2,7 +2,7 @@ package karashokleo.spell_dimension.data;
 
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.config.recipe.LocateSpellConfig;
-import karashokleo.spell_dimension.content.event.conscious.EventAward;
+import karashokleo.spell_dimension.content.object.EventAward;
 import karashokleo.spell_dimension.data.loot_bag.SDBags;
 import karashokleo.spell_dimension.data.loot_bag.SDContents;
 import karashokleo.spell_dimension.init.AllEntities;
@@ -185,9 +185,11 @@ public enum SDTexts
     TOOLTIP$DIFFICULTY_TIER$HARDCORE$5("Enchanted Essence threshold from loot gets lowered", "从战利品中获取的束魔精华阈值降低"),
     TOOLTIP$DIFFICULTY_TIER$HARDCORE$6("Enchanted Essences cannot be merged", "束魔精华无法合并"),
     TOOLTIP$DIFFICULTY_TIER$HARDCORE$7("Unable to use Bottle of Sanity and Hostility Orb", "无法使用恶意净化药水和恶意吸收宝珠"),
+    TOOLTIP$DIFFICULTY_TIER$NIGHTMARE("Add 0.5 Extra Difficulty for each 1 Spell Power you have", "每拥有1点法术强度，增加0.5额外难度"),
     TOOLTIP$BOTTLE_NIGHTMARE("Enter [%s] mode after use, cannot be undone", "使用后进入 [%s] 模式，不可撤销"),
     TOOLTIP$BOTTLE_SOUL_BINDING("After using it, you will no longer lose the item when you die", "使用后，死亡不再丢失物品"),
     TOOLTIP$BOTTLE_SOUL_BINDING$WARNING("By default, items other than trinkets dropped by a player upon death are retained in the Gravestone. However, for some unknown reason, it is still possible, albeit highly unlikely, for items in the gravestone to disappear. If you are completely intolerant of the possibility of losing everything you own, drink this potion.", "默认情况下，玩家死亡时掉落的除饰品外的其他物品将被保留在墓碑中。但由于某些不明原因，墓碑中的物品仍有可能不翼而飞，尽管这种可能性微乎其微。如果你完全无法容忍失去所有身家的可能性，请喝下这瓶药水。"),
+    TOOLTIP$SHIFT_RESET("Shift + Right-click to reset the progress", "Shift + 右键重置进度"),
 
     /**
      * Scrolls

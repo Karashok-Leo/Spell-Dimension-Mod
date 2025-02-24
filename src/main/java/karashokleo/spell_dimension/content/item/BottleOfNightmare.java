@@ -23,7 +23,7 @@ public class BottleOfNightmare extends DrinkableBottleItem
         {
             GameStageComponent.resetDifficulty(player);
             sendTitle(player);
-        } else if (GameStageComponent.isNormalMode(player))
+        } else
         {
             GameStageComponent.addDifficulty(player);
             sendTitle(player);

@@ -5,7 +5,7 @@ import karashokleo.l2hostility.util.raytrace.RayTraceUtil;
 import karashokleo.leobrary.gui.api.overlay.InfoSideBar;
 import karashokleo.leobrary.gui.api.overlay.SideBar;
 import karashokleo.spell_dimension.content.block.tile.ConsciousnessCoreTile;
-import karashokleo.spell_dimension.content.event.conscious.EventAward;
+import karashokleo.spell_dimension.content.object.EventAward;
 import karashokleo.spell_dimension.data.SDTexts;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.text.Text;

@@ -2,7 +2,7 @@ package karashokleo.spell_dimension.content.worldgen;
 
 import com.google.common.collect.Sets;
 import karashokleo.spell_dimension.content.block.tile.ConsciousnessCoreTile;
-import karashokleo.spell_dimension.content.event.conscious.EventAward;
+import karashokleo.spell_dimension.content.object.EventAward;
 import karashokleo.spell_dimension.init.AllBlocks;
 import karashokleo.spell_dimension.util.RandomUtil;
 import net.minecraft.util.math.BlockPos;

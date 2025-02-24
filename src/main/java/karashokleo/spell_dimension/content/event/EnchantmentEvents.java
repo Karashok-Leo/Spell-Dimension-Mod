@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EnchantmentEvent
+public class EnchantmentEvents
 {
     public static void init()
     {

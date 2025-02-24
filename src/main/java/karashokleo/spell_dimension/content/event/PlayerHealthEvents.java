@@ -18,15 +18,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
 
-public class PlayerHealthEvent
+public class PlayerHealthEvents
 {
     public static final int HEALTH_THRESHOLD = 66;
 
     public static void init()
     {
-        ServerPlayerCreationCallback.EVENT.register(PlayerHealthEvent::setPlayerBaseHealth);
-        ServerEntityCombatEvents.AFTER_KILLED_OTHER_ENTITY.register(PlayerHealthEvent::onKill);
-        ApplyFoodEffectsCallback.EVENT.register(PlayerHealthEvent::onEatHeartFood);
+        ServerPlayerCreationCallback.EVENT.register(PlayerHealthEvents::setPlayerBaseHealth);
+        ServerEntityCombatEvents.AFTER_KILLED_OTHER_ENTITY.register(PlayerHealthEvents::onKill);
+        ApplyFoodEffectsCallback.EVENT.register(PlayerHealthEvents::onEatHeartFood);
     }
 
     private static void setPlayerBaseHealth(PlayerEntity player)

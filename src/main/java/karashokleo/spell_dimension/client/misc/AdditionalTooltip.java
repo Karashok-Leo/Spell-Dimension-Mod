@@ -71,6 +71,8 @@ public class AdditionalTooltip
                 QuestUsage.isQuestCompleted(player, optional.get()))
                 lines.add(SDTexts.TEXT$QUEST_COMPLETED.get());
         }
+        if (context.isCreative())
+            lines.add(SDTexts.TOOLTIP$SHIFT_RESET.get().formatted(Formatting.GRAY));
     }
 
     private static void appendFlexBreastplate(ItemStack stack, TooltipContext context, List<Text> lines)
@@ -129,16 +131,36 @@ public class AdditionalTooltip
         if (!stack.isOf(AllItems.BOTTLE_NIGHTMARE)) return;
         ClientPlayerEntity player = L2HostilityClient.getClientPlayer();
         if (player == null) return;
-        int difficulty = GameStageComponent.getDifficulty(player);
-        MutableText hardcore = SDTexts.getDifficultyTierText(1);
-        lines.add(SDTexts.TOOLTIP$BOTTLE_NIGHTMARE.get(hardcore).formatted(Formatting.RED));
-        lines.add(SDTexts.TOOLTIP$DIFFICULTY_TIER$CURRENT.get(SDTexts.getDifficultyTierText(difficulty)).formatted(Formatting.BOLD));
-        lines.add(SDTexts.TOOLTIP$DIFFICULTY_TIER$TITLE.get(hardcore).formatted(Formatting.DARK_RED));
-        for (int i = 1; i <= 7; i++)
+
+        int currentDifficulty = GameStageComponent.getDifficulty(player);
+        int nextDifficulty = GameStageComponent.getNextDifficulty(currentDifficulty);
+        MutableText currentTierText = SDTexts.getDifficultyTierText(currentDifficulty);
+        MutableText nextTierText = SDTexts.getDifficultyTierText(nextDifficulty);
+
+        Formatting formatting = nextDifficulty == GameStageComponent.HARDCORE ? Formatting.DARK_RED : Formatting.DARK_PURPLE;
+
+        lines.add(SDTexts.TOOLTIP$BOTTLE_NIGHTMARE.get(nextTierText).formatted(Formatting.RED));
+        lines.add(SDTexts.TOOLTIP$DIFFICULTY_TIER$CURRENT.get(currentTierText).formatted(Formatting.BOLD));
+        lines.add(SDTexts.TOOLTIP$DIFFICULTY_TIER$TITLE.get(nextTierText).formatted(formatting));
+
+        if (nextDifficulty == GameStageComponent.HARDCORE)
+        {
+            for (int i = 1; i <= 7; i++)
+                lines.add(
+                        SDTexts.TOOLTIP$DIFFICULTY_TIER$DESC.get(
+                                Text.translatable("tooltip.spell-dimension.difficulty_tier.hardcore." + i)
+                        ).formatted(formatting)
+                );
+        } else if (nextDifficulty == GameStageComponent.NIGHTMARE)
+        {
             lines.add(
                     SDTexts.TOOLTIP$DIFFICULTY_TIER$DESC.get(
-                            Text.translatable("tooltip.spell-dimension.difficulty_tier.hardcore." + i)
-                    ).formatted(Formatting.DARK_RED)
+                            SDTexts.TOOLTIP$DIFFICULTY_TIER$NIGHTMARE.get()
+                    ).formatted(formatting)
             );
+        }
+
+        if (context.isCreative())
+            lines.add(SDTexts.TOOLTIP$SHIFT_RESET.get().formatted(Formatting.GRAY));
     }
 }

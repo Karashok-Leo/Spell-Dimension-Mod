@@ -6,9 +6,8 @@ import karashokleo.l2hostility.init.LHEffects;
 import karashokleo.l2hostility.util.EffectHelper;
 import karashokleo.spell_dimension.content.block.ProtectiveCoverBlock;
 import karashokleo.spell_dimension.content.block.tile.ConsciousnessCoreTile;
-import karashokleo.spell_dimension.content.event.conscious.ConsciousnessEventManager;
-import karashokleo.spell_dimension.content.event.conscious.Wave;
-import karashokleo.spell_dimension.content.event.conscious.WaveFactory;
+import karashokleo.spell_dimension.content.object.Wave;
+import karashokleo.spell_dimension.content.object.WaveFactory;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllEntities;
 import net.minecraft.entity.Entity;
@@ -24,14 +23,17 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 
 import java.util.*;
 
-import static karashokleo.spell_dimension.content.event.conscious.ConsciousnessEventManager.RADIUS;
-
 public class ConsciousnessEventEntity extends Entity
 {
+    public static final int TIME_LIMIT = 20 * 60 * 10;
+    public static final int RADIUS = 32;
+    public static final int SPAWN_LIMIT = 100;
+
     public static final int PREPARE_TIME = 20 * 10;
     public static final int WAIT_TIME = 20 * 5;
     public static final int PENDING_TIME = 20 * 10;
@@ -172,7 +174,7 @@ public class ConsciousnessEventEntity extends Entity
                 return;
             }
             BlockPos placeCenter = this.getBlockPos().withY(63);
-            ProtectiveCoverBlock.placeAsCube(world, placeCenter, ConsciousnessEventManager.RADIUS, ConsciousnessEventManager.RADIUS, ConsciousnessEventManager.TIME_LIMIT);
+            ProtectiveCoverBlock.placeAsCube(world, placeCenter, RADIUS, RADIUS, TIME_LIMIT);
             for (ServerPlayerEntity player : this.getPlayers(world))
             {
                 player.addVelocity(0, 0.5, 0);
@@ -209,7 +211,7 @@ public class ConsciousnessEventEntity extends Entity
 
         // if exceed time limit or players escape, fail
         if (this.pendingTimer > PENDING_TIME ||
-            this.age > ConsciousnessEventManager.TIME_LIMIT)
+            this.age > TIME_LIMIT)
         {
             this.turnToFinish(world, false);
         }
@@ -255,7 +257,7 @@ public class ConsciousnessEventEntity extends Entity
             if (this.finishTimer == FINISH_TIME)
             {
                 BlockPos placeCenter = this.getBlockPos().withY(63);
-                ProtectiveCoverBlock.breakAsCube(world, placeCenter, ConsciousnessEventManager.RADIUS, ConsciousnessEventManager.RADIUS);
+                ProtectiveCoverBlock.breakAsCube(world, placeCenter, RADIUS, RADIUS);
                 this.discard();
             }
         }
@@ -299,13 +301,13 @@ public class ConsciousnessEventEntity extends Entity
         int time = 0;
         while (this.summoned.size() < wave.count())
         {
-            if ((++time) > ConsciousnessEventManager.SPAWN_LIMIT) break;
+            if ((++time) > SPAWN_LIMIT) break;
 
             Optional<EntityType<?>> entityTypeOptional = wave.summoner().getEntityType(world);
             if (entityTypeOptional.isEmpty()) continue;
             EntityType<?> entityType = entityTypeOptional.get();
 
-            Optional<BlockPos> posOptional = ConsciousnessEventManager.tryFindSummonPos(world, this.getBlockPos(), entityType);
+            Optional<BlockPos> posOptional = tryFindSummonPos(world, this.getBlockPos(), entityType);
             if (posOptional.isEmpty()) continue;
 
             Entity spawn = entityType.spawn(world, posOptional.get(), SpawnReason.EVENT);
@@ -326,6 +328,24 @@ public class ConsciousnessEventEntity extends Entity
         }
 
         this.totalMaxHealth = (float) this.summoned.stream().mapToDouble(LivingEntity::getMaxHealth).sum();
+    }
+
+    public static Optional<BlockPos> tryFindSummonPos(ServerWorld world, BlockPos pos, EntityType<?> entityType)
+    {
+        Random random = world.getRandom();
+        int range = RADIUS / 2;
+        int x = random.nextBetweenExclusive(-range, range);
+        int z = random.nextBetweenExclusive(-range, range);
+        int y = -range;
+        while (y < pos.getY() + range)
+        {
+            BlockPos checkPos = pos.add(x, y, z);
+            if (world.getBlockState(checkPos).isAir() &&
+                world.isSpaceEmpty(entityType.createSimpleBoundingBox(checkPos.getX(), checkPos.getY(), checkPos.getZ())))
+                return Optional.of(checkPos);
+            y++;
+        }
+        return Optional.empty();
     }
 
     protected double calcPlayerLevel(ServerWorld world)

@@ -4,8 +4,7 @@ import com.google.common.collect.Lists;
 import karashokleo.l2hostility.content.component.player.PlayerDifficulty;
 import karashokleo.spell_dimension.content.block.ConsciousnessBaseBlock;
 import karashokleo.spell_dimension.content.entity.ConsciousnessEventEntity;
-import karashokleo.spell_dimension.content.event.conscious.ConsciousnessEventManager;
-import karashokleo.spell_dimension.content.event.conscious.EventAward;
+import karashokleo.spell_dimension.content.object.EventAward;
 import karashokleo.spell_dimension.init.AllBlocks;
 import karashokleo.spell_dimension.util.FutureTask;
 import karashokleo.spell_dimension.util.RandomUtil;
@@ -265,10 +264,15 @@ public class ConsciousnessCoreTile extends BlockEntity
         world.createExplosion(null, this.pos.getX(), this.pos.getY(), this.pos.getZ(), 1.0F, false, World.ExplosionSourceType.BLOCK);
     }
 
+    public static int randomEventLevel(Random random, double playerLevel, double levelFactor)
+    {
+        return (int) playerLevel + random.nextInt((int) (100 * (levelFactor + 0.2)));
+    }
+
     private void tryTrigger(ServerWorld serverWorld, ServerPlayerEntity player)
     {
         this.state = CoreState.TRIGGERING;
-        this.level = ConsciousnessEventManager.randomEventLevel(serverWorld.getRandom(), PlayerDifficulty.get(player).getLevel().getLevel(), this.levelFactor);
+        this.level = randomEventLevel(serverWorld.getRandom(), PlayerDifficulty.get(player).getLevel().getLevel(), this.levelFactor);
 
         ServerWorld destinationWorld = serverWorld.getServer().getOverworld();
         this.destinationWorld = destinationWorld.getRegistryKey();
