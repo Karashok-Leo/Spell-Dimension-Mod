@@ -29,6 +29,7 @@ repositories {
     maven { url "https://maven.ladysnake.org/releases" }
     maven { url "https://maven.jamieswhiteshirt.com/libs-release" }
     maven { url "https://dl.cloudsmith.io/public/klikli-dev/mods/maven/" }
+    maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
     maven { url "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" }
 }
 
@@ -142,6 +143,7 @@ dependencies {
     modImplementation "maven.modrinth:artifacts:${project.artifacts_version}-fabric"
     modImplementation "be.florens:expandability-fabric:${project.expandability_version}"
     modImplementation "maven.modrinth:the-graveyard-fabric:${project.graveyard_version}"
+    modImplementation "software.bernie.geckolib:geckolib-fabric-1.20:${project.geckolib_version_fabric}"
 
     // Compat
     modCompileOnly "dev.emi:emi-fabric:${project.emi_version}:api"

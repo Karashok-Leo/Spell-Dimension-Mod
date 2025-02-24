@@ -6,7 +6,10 @@ import karashokleo.spell_dimension.init.AllEntities;
 import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.util.DamageUtil;
 import karashokleo.spell_dimension.util.ImpactUtil;
-import net.minecraft.entity.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.Ownable;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
@@ -99,22 +102,6 @@ public class BlackHoleEntity extends Entity implements Ownable
     }
 
     @Override
-    public EntityDimensions getDimensions(EntityPose pose)
-    {
-        return EntityDimensions.changing(this.getRadius() * 2.0f, this.getRadius() * 2.0f);
-    }
-
-    @Override
-    public void calculateDimensions()
-    {
-        double d = this.getX();
-        double e = this.getY();
-        double f = this.getZ();
-        super.calculateDimensions();
-        this.setPosition(d, e, f);
-    }
-
-    @Override
     protected void initDataTracker()
     {
         this.getDataTracker().startTracking(RADIUS, 3.0f);
@@ -156,11 +143,23 @@ public class BlackHoleEntity extends Entity implements Ownable
         }
     }
 
+    public static Box getAffectedBox(Vec3d center, float radius)
+    {
+        return new Box(
+                center.x - radius,
+                center.y - radius,
+                center.z - radius,
+                center.x + radius,
+                center.y + radius,
+                center.z + radius
+        );
+    }
+
     private Map<Entity, Float> getEntityDistanceMap(@Nullable LivingEntity caster)
     {
-        Box boundingBox = this.getBoundingBox();
-        Vec3d center = boundingBox.getCenter();
+        Vec3d center = this.getPos();
         float radius = this.getRadius();
+        Box boundingBox = getAffectedBox(center, radius);
         var trackingEntities = this.getWorld().getOtherEntities(this, boundingBox.expand(1.0));
         trackingEntities.removeIf(
                 entity -> entity == caster ||
@@ -197,7 +196,7 @@ public class BlackHoleEntity extends Entity implements Ownable
             return;
         }
 
-        Vec3d center = this.getBoundingBox().getCenter();
+        Vec3d center = this.getPos();
         LivingEntity caster = this.getOwner() instanceof LivingEntity living ? living : null;
 
         float damage = caster == null ? 0 : (float) DamageUtil.calculateDamage(caster, SpellSchools.ARCANE, SpellConfig.BLACK_HOLE_FACTOR, radius);

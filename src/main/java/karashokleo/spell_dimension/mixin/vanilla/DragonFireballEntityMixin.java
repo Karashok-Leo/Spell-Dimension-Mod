@@ -39,6 +39,6 @@ public abstract class DragonFireballEntityMixin extends ExplosiveProjectileEntit
         if (diff.isEmpty()) return;
         int traitLevel = diff.get().getTraitLevel(AllTraits.BLACK_HOLE);
         if (traitLevel <= 0) return;
-        BlackHoleSpell.spawn(this.getWorld(), living, this.getPos());
+        BlackHoleSpell.handle(this, hitResult);
     }
 }

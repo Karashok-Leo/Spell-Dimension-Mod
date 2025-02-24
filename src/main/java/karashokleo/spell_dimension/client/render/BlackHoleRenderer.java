@@ -7,6 +7,7 @@ import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.random.Random;
 import org.joml.Matrix3f;
@@ -15,6 +16,7 @@ import org.joml.Matrix4f;
 public class BlackHoleRenderer extends EntityRenderer<BlackHoleEntity>
 {
     public static final Identifier CORE = SpellDimension.modLoc("textures/entity/black_hole.png");
+    public static final RenderLayer RENDER_LAYER = createRenderLayer();
     private final Random random = Random.create();
 
     public BlackHoleRenderer(EntityRendererFactory.Context ctx)
@@ -28,20 +30,19 @@ public class BlackHoleRenderer extends EntityRenderer<BlackHoleEntity>
         return CORE;
     }
 
-    public RenderLayer getRenderLayer()
+    public static RenderLayer createRenderLayer()
     {
-        return RenderLayer.getEntityTranslucent(CORE);
-//        return RenderLayer.of(
-//                "black_hole",
-//                VertexFormats.POSITION_TEXTURE,
-//                VertexFormat.DrawMode.QUADS, 256, false, true,
-//                RenderLayer.MultiPhaseParameters.builder()
-//                        .program(RenderPhase.ENTITY_GLINT_PROGRAM)
-//                        .texture(new RenderPhase.Texture(CORE, false, false))
-//                        .transparency(RenderPhase.ADDITIVE_TRANSPARENCY)
-//                        .depthTest(RenderPhase.ALWAYS_DEPTH_TEST)
-//                        .build(false)
-//        );
+        return RenderLayer.of(
+                "black_hole",
+                VertexFormats.POSITION_COLOR_TEXTURE_OVERLAY_LIGHT_NORMAL,
+                VertexFormat.DrawMode.TRIANGLE_FAN, 256, true, true,
+                RenderLayer.MultiPhaseParameters.builder()
+                        .program(RenderPhase.ENTITY_TRANSLUCENT_PROGRAM)
+                        .texture(new RenderPhase.Texture(CORE, false, false))
+                        .transparency(RenderPhase.TRANSLUCENT_TRANSPARENCY)
+                        .depthTest(RenderPhase.ALWAYS_DEPTH_TEST)
+                        .build(false)
+        );
     }
 
     @Override
@@ -49,28 +50,26 @@ public class BlackHoleRenderer extends EntityRenderer<BlackHoleEntity>
     {
         matrices.push();
 
-        matrices.translate(0, entity.getBoundingBox().getYLength() / 2, 0);
+        float blackHoleRadius = entity.getRadius();
 
         float animationProgress = (entity.age + tickDelta) / BlackHoleEntity.LIFESPAN;
         float m = Math.min(animationProgress > 0.8F ? (animationProgress - 0.8F) / 0.2F : 0.0F, 1.0F);
-        int alpha = (int) (255.0F * (1.0F - m));
+        int alpha = (int) (200.0F * (1.0F - m));
 
         matrices.push();
         {
-            float scale = entity.getWidth() * 0.015f;
+            float scale = blackHoleRadius * 0.08f;
 
             matrices.scale(scale, scale, scale);
             matrices.multiply(this.dispatcher.getRotation());
             matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(90f));
 
-            //        VertexConsumer centerBuffer = vertexConsumers.getBuffer(RenderLayer.getEndGateway());
-            VertexConsumer centerBuffer = vertexConsumers.getBuffer(this.getRenderLayer());
+            VertexConsumer centerBuffer = vertexConsumers.getBuffer(RENDER_LAYER);
             renderCore(centerBuffer, matrices, alpha);
         }
         matrices.pop();
 
         random.setSeed(entity.getId() * 6666L + entity.getId() * entity.getId() * 77777L);
-        float blackHoleRadius = entity.getRadius();
         VertexConsumer beamBuffer = vertexConsumers.getBuffer(RenderLayer.getLightning());
 
         matrices.push();
@@ -92,37 +91,33 @@ public class BlackHoleRenderer extends EntityRenderer<BlackHoleEntity>
 
     private static void renderCore(VertexConsumer centerBuffer, MatrixStack matrices, int alpha)
     {
+        int segments = 32;
+        float radius = 4F;
+
         MatrixStack.Entry peek = matrices.peek();
         Matrix4f positionMatrix = peek.getPositionMatrix();
         Matrix3f normalMatrix = peek.getNormalMatrix();
-        centerBuffer.vertex(positionMatrix, 0, -8, -8)
+
+        centerBuffer.vertex(positionMatrix, 0, 0, 0)
                 .color(255, 255, 255, alpha)
-                .texture(0, 1)
+                .texture(0.5f, 0.5f)
                 .overlay(OverlayTexture.DEFAULT_UV)
                 .light(LightmapTextureManager.MAX_LIGHT_COORDINATE)
                 .normal(normalMatrix, 0, 1, 0)
                 .next();
-        centerBuffer.vertex(positionMatrix, 0, 8, -8)
-                .color(255, 255, 255, alpha)
-                .texture(0, 0)
-                .overlay(OverlayTexture.DEFAULT_UV)
-                .light(LightmapTextureManager.MAX_LIGHT_COORDINATE)
-                .normal(normalMatrix, 0, 1, 0)
-                .next();
-        centerBuffer.vertex(positionMatrix, 0, 8, 8)
-                .color(255, 255, 255, alpha)
-                .texture(1, 0)
-                .overlay(OverlayTexture.DEFAULT_UV)
-                .light(LightmapTextureManager.MAX_LIGHT_COORDINATE)
-                .normal(normalMatrix, 0, 1, 0)
-                .next();
-        centerBuffer.vertex(positionMatrix, 0, -8, 8)
-                .color(255, 255, 255, alpha)
-                .texture(1, 1)
-                .overlay(OverlayTexture.DEFAULT_UV)
-                .light(LightmapTextureManager.MAX_LIGHT_COORDINATE)
-                .normal(normalMatrix, 0, 1, 0)
-                .next();
+        for (int i = 0; i <= segments; i++)
+        {
+            float theta = 2.0f * MathHelper.PI * i / segments;
+            float cos = MathHelper.cos(theta);
+            float sin = MathHelper.sin(theta);
+            centerBuffer.vertex(positionMatrix, 0, radius * cos, radius * sin)
+                    .color(255, 255, 255, alpha)
+                    .texture(0.5f + 0.5f * cos, 0.5f + 0.5f * sin)
+                    .overlay(OverlayTexture.DEFAULT_UV)
+                    .light(LightmapTextureManager.MAX_LIGHT_COORDINATE)
+                    .normal(normalMatrix, 0, 1, 0)
+                    .next();
+        }
     }
 
     private static final float HALF_SQRT_3 = (float) (Math.sqrt(3.0) / 2.0);

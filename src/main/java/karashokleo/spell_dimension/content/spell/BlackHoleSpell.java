@@ -4,15 +4,20 @@ import karashokleo.spell_dimension.content.entity.BlackHoleEntity;
 import karashokleo.spell_dimension.init.AllSpells;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.Ownable;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.hit.HitResult;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.spell_engine.entity.SpellProjectile;
 import net.spell_power.api.SpellPower;
 import net.spell_power.api.SpellSchools;
+import org.jetbrains.annotations.Nullable;
 
 import static karashokleo.spell_dimension.content.entity.BlackHoleEntity.MAX_RADIUS;
 import static karashokleo.spell_dimension.content.entity.BlackHoleEntity.MIN_RADIUS;
@@ -21,28 +26,52 @@ public class BlackHoleSpell
 {
     public static void handle(SpellProjectile projectile, Identifier spellId)
     {
-        if (spellId.equals(AllSpells.BLACK_HOLE))
-            blackHoleImpact(projectile);
+        handle(projectile, spellId, null);
     }
 
-    public static void blackHoleImpact(SpellProjectile projectile)
+    public static void handle(SpellProjectile projectile, Identifier spellId, @Nullable HitResult hitResult)
     {
-        Entity owner = projectile.getOwner();
+        if (!spellId.equals(AllSpells.BLACK_HOLE)) return;
+        handle(projectile, hitResult);
+    }
+
+    public static <T extends Entity & Ownable> void handle(T entity, @Nullable HitResult hitResult)
+    {
+        Entity owner = entity.getOwner();
         if (owner == null ||
             owner.isRemoved() ||
             (!(owner instanceof PlayerEntity player)))
             return;
-        if (!(projectile.getWorld() instanceof ServerWorld serverWorld))
+        if (!(entity.getWorld() instanceof ServerWorld serverWorld))
             return;
-        spawn(serverWorld, player, projectile.getPos());
+
+        double power = SpellPower.getSpellPower(SpellSchools.ARCANE, player).randomValue();
+        float radius = (float) MathHelper.clamp(power * 0.02, MIN_RADIUS, MAX_RADIUS);
+
+        Vec3d center = hitResult == null ?
+                entity.getPos() :
+                adjustCenterPosition(hitResult, radius / 4);
+
+        spawn(serverWorld, player, center, radius);
     }
 
-    public static void spawn(World world, LivingEntity caster, Vec3d pos)
+    public static void spawn(World world, LivingEntity caster, Vec3d center, float radius)
     {
-        double power = SpellPower.getSpellPower(SpellSchools.ARCANE, caster).randomValue();
-        double radius = MathHelper.clamp(power * 0.02, MIN_RADIUS, MAX_RADIUS);
-        BlackHoleEntity blackHole = new BlackHoleEntity(world, caster, (float) radius);
-        blackHole.setPosition(pos.add(0, -radius, 0));
+//        level.playSound(null, center.x, center.y, center.z, SoundRegistry.BLACK_HOLE_CAST.get(), SoundSource.AMBIENT, 4, 1);
+
+        BlackHoleEntity blackHole = new BlackHoleEntity(world, caster, radius);
+        blackHole.refreshPositionAfterTeleport(center);
         world.spawnEntity(blackHole);
+    }
+
+    private static Vec3d adjustCenterPosition(HitResult hitResult, float offset)
+    {
+        Vec3d center = hitResult.getPos();
+        if (hitResult instanceof BlockHitResult blockHitResult)
+        {
+            Direction side = blockHitResult.getSide();
+            center = center.offset(side, offset);
+        }
+        return center;
     }
 }

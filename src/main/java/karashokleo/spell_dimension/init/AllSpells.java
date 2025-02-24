@@ -154,8 +154,8 @@ public class AllSpells
         SpellProjectileHitEntityCallback.EVENT.register(ConvergeSpell::handle);
         SpellProjectileHitBlockCallback.EVENT.register(ConvergeSpell::handle);
 
-        SpellProjectileHitEntityCallback.EVENT.register((projectile, spellId, hitResult) -> BlackHoleSpell.handle(projectile, spellId));
-        SpellProjectileHitBlockCallback.EVENT.register((projectile, spellId, hitResult) -> BlackHoleSpell.handle(projectile, spellId));
+        SpellProjectileHitEntityCallback.EVENT.register(BlackHoleSpell::handle);
+        SpellProjectileHitBlockCallback.EVENT.register(BlackHoleSpell::handle);
         SpellProjectileOutOfRangeCallback.EVENT.register(BlackHoleSpell::handle);
 
         SpellProjectileHitBlockCallback.EVENT.register(LightSpell::handle);
