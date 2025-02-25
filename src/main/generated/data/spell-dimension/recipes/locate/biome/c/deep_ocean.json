@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_biome",
+  "biome": "c:deep_ocean",
+  "ingredient": {
+    "item": "minecraft:prismarine_shard"
+  },
+  "world": "minecraft:overworld"
+}

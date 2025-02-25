@@ -2,8 +2,8 @@ package karashokleo.spell_dimension.client.compat.rei;
 
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.config.recipe.InfusionRecipes;
-import karashokleo.spell_dimension.config.recipe.LocateSpellConfig;
 import karashokleo.spell_dimension.config.recipe.SummonSpellConfig;
+import karashokleo.spell_dimension.content.recipe.locate.LocateRecipe;
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
 import me.shedaniel.rei.api.client.registry.category.CategoryRegistry;
 import me.shedaniel.rei.api.client.registry.display.DisplayRegistry;
@@ -30,8 +30,9 @@ public class REICompat implements REIClientPlugin
     @Override
     public void registerDisplays(DisplayRegistry registry)
     {
-        LocateSpellConfig.STRUCTURE_CONFIG.cellSet().forEach(cell -> registry.add(new REILocateDisplay(cell.getRowKey(), cell.getColumnKey(), cell.getValue())));
-        LocateSpellConfig.BIOME_CONFIG.cellSet().forEach(cell -> registry.add(new REILocateDisplay(cell.getRowKey(), cell.getColumnKey(), cell.getValue())));
+        for (LocateRecipe locateRecipe : registry.getRecipeManager().listAllOfType(LocateRecipe.TYPE))
+            registry.add(new REILocateDisplay(locateRecipe));
+
         SummonSpellConfig.forEach((item, entry) -> registry.add(new REISummonDisplay(item, entry)));
         InfusionRecipes.getAll().forEach(entry -> registry.add(new REIInfusionDisplay(entry.getRowKey(), entry.getColumnKey(), entry.getValue())));
     }

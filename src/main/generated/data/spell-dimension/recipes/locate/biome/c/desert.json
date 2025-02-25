@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_biome",
+  "biome": "c:desert",
+  "ingredient": {
+    "item": "minecraft:sand"
+  },
+  "world": "minecraft:overworld"
+}

@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_structure",
+  "ingredient": {
+    "item": "l2hostility:sun_membrane"
+  },
+  "structure": "dungeonz:desert_dungeon_structure",
+  "world": "minecraft:overworld"
+}

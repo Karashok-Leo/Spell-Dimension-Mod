@@ -1,8 +1,8 @@
 package karashokleo.spell_dimension.data;
 
 import karashokleo.spell_dimension.SpellDimension;
-import karashokleo.spell_dimension.config.recipe.LocateSpellConfig;
 import karashokleo.spell_dimension.content.object.EventAward;
+import karashokleo.spell_dimension.data.generic.SDLocateRecipes;
 import karashokleo.spell_dimension.data.loot_bag.SDBags;
 import karashokleo.spell_dimension.data.loot_bag.SDContents;
 import karashokleo.spell_dimension.init.AllEntities;
@@ -272,7 +272,7 @@ public enum SDTexts
         addGroupTranslation();
         addLootBagTranslation();
         addEventAwardTranslation();
-        LocateSpellConfig.register();
+        SDLocateRecipes.addTranslations();
         SpellDimension.EN_TEXTS.addEntityType(AllEntities.LOCATE_PORTAL, "Locate Portal");
         SpellDimension.ZH_TEXTS.addEntityType(AllEntities.LOCATE_PORTAL, "定位传送门");
         SpellDimension.EN_TEXTS.addEntityType(AllEntities.CONSCIOUSNESS_EVENT, "Consciousness Invasion Event");

@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_structure",
+  "ingredient": {
+    "item": "runes:frost_stone"
+  },
+  "structure": "aquamirae:ship",
+  "world": "minecraft:overworld"
+}

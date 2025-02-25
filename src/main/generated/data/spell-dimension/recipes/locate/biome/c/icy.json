@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_biome",
+  "biome": "c:icy",
+  "ingredient": {
+    "item": "minecraft:ice"
+  },
+  "world": "minecraft:overworld"
+}

@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_structure",
+  "ingredient": {
+    "item": "l2hostility:cursed_droplet"
+  },
+  "structure": "dungeonz:dark_dungeon_structure",
+  "world": "minecraft:overworld"
+}

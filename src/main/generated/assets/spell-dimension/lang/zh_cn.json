@@ -38,7 +38,7 @@
   "biome.c.snowy": "覆雪地带",
   "biome.c.swamp": "沼泽",
   "biome.c.taiga": "针叶林",
-  "biome.minecraft.has_structure_ancient_city": "存在远古城市的群系",
+  "biome.minecraft.has_structure.ancient_city": "存在远古城市的群系",
   "biome.spell-dimension.ocean_of_consciousness": "识之海",
   "biome.spell-dimension.ocean_of_consciousness.color": "ff00ff",
   "block.spell-dimension.consciousness": "识",

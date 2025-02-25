@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_biome",
+  "biome": "c:badlands",
+  "ingredient": {
+    "item": "minecraft:clay_ball"
+  },
+  "world": "minecraft:overworld"
+}

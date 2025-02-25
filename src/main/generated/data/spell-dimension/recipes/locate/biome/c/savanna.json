@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_biome",
+  "biome": "c:savanna",
+  "ingredient": {
+    "item": "minecraft:acacia_log"
+  },
+  "world": "minecraft:overworld"
+}

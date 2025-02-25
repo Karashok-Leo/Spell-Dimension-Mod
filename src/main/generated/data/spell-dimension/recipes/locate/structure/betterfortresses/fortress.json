@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_structure",
+  "ingredient": {
+    "item": "runes:fire_stone"
+  },
+  "structure": "betterfortresses:fortress",
+  "world": "minecraft:the_nether"
+}

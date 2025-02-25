@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_biome",
+  "biome": "c:mushroom",
+  "ingredient": {
+    "item": "minecraft:brown_mushroom"
+  },
+  "world": "minecraft:overworld"
+}

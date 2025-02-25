@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_structure",
+  "ingredient": {
+    "item": "soulsweapons:lost_soul"
+  },
+  "structure": "soulsweapons:cathedral_of_resurrection",
+  "world": "minecraft:overworld"
+}

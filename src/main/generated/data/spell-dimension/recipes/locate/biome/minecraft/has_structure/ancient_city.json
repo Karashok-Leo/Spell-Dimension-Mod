@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_biome",
+  "biome": "minecraft:has_structure/ancient_city",
+  "ingredient": {
+    "item": "minecraft:candle"
+  },
+  "world": "minecraft:overworld"
+}

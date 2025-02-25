@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_structure",
+  "ingredient": {
+    "item": "graveyard:corruption"
+  },
+  "structure": "graveyard:lich_prison",
+  "world": "minecraft:overworld"
+}

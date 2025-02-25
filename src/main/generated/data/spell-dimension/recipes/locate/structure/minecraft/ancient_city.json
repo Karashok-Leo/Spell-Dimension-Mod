@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_structure",
+  "ingredient": {
+    "item": "runes:arcane_stone"
+  },
+  "structure": "minecraft:ancient_city",
+  "world": "minecraft:overworld"
+}

@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_structure",
+  "ingredient": {
+    "item": "minecraft:dragon_breath"
+  },
+  "structure": "minecraft:end_city",
+  "world": "minecraft:the_end"
+}

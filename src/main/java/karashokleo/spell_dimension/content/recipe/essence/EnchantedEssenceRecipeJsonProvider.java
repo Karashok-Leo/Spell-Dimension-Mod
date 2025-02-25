@@ -8,30 +8,21 @@ import net.minecraft.util.Identifier;
 import net.spell_power.api.SpellSchool;
 import org.jetbrains.annotations.Nullable;
 
-public class EnchantedEssenceRecipeJsonProvider implements RecipeJsonProvider
+public record EnchantedEssenceRecipeJsonProvider(
+        Identifier recipeId,
+        int grade,
+        int threshold,
+        EquipmentSlot slot,
+        SpellSchool school
+) implements RecipeJsonProvider
 {
-    final Identifier recipeId;
-    final int grade;
-    final int threshold;
-    final EquipmentSlot slot;
-    final SpellSchool school;
-
-    public EnchantedEssenceRecipeJsonProvider(Identifier recipeId, int grade, int threshold, EquipmentSlot slot, SpellSchool school)
-    {
-        this.recipeId = recipeId;
-        this.grade = grade;
-        this.threshold = threshold;
-        this.slot = slot;
-        this.school = school;
-    }
-
     @Override
     public void serialize(JsonObject json)
     {
-        json.addProperty(EnchantedEssenceRecipe.GRADE_KEY, grade);
-        json.addProperty(EnchantedEssenceRecipe.THRESHOLD_KEY, threshold);
-        json.addProperty(EnchantedEssenceRecipe.SLOT_KEY, slot.name());
-        json.addProperty(EnchantedEssenceRecipe.SCHOOL_KEY, school.id.toString());
+        json.addProperty("grade", grade);
+        json.addProperty("threshold", threshold);
+        json.addProperty("slot", slot.name());
+        json.addProperty("school", school.id.toString());
     }
 
     @Override
@@ -43,7 +34,7 @@ public class EnchantedEssenceRecipeJsonProvider implements RecipeJsonProvider
     @Override
     public RecipeSerializer<?> getSerializer()
     {
-        return EnchantedEssenceRecipe.Serializer.INSTANCE;
+        return EnchantedEssenceRecipeSerializer.INSTANCE;
     }
 
     @Nullable

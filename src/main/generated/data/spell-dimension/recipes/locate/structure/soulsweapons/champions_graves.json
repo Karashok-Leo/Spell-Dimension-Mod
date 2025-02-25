@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_structure",
+  "ingredient": {
+    "item": "soulsweapons:boss_compass"
+  },
+  "structure": "soulsweapons:champions_graves",
+  "world": "minecraft:overworld"
+}

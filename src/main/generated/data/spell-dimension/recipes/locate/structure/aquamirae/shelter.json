@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_structure",
+  "ingredient": {
+    "item": "spellbladenext:runefrost_ingot"
+  },
+  "structure": "aquamirae:shelter",
+  "world": "minecraft:overworld"
+}

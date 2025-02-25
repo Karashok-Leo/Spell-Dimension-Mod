@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_structure",
+  "ingredient": {
+    "item": "artifacts:fire_gauntlet"
+  },
+  "structure": "bosses_of_mass_destruction:gauntlet_arena",
+  "world": "minecraft:the_nether"
+}

@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_structure",
+  "ingredient": {
+    "item": "minecraft:sea_lantern"
+  },
+  "structure": "betteroceanmonuments:ocean_monument",
+  "world": "minecraft:overworld"
+}

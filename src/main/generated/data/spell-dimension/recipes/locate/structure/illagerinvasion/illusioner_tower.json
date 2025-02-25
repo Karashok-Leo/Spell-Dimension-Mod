@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_structure",
+  "ingredient": {
+    "item": "minecraft:cobblestone_wall"
+  },
+  "structure": "illagerinvasion:illusioner_tower",
+  "world": "minecraft:overworld"
+}

@@ -38,7 +38,7 @@
   "biome.c.snowy": "Snowy",
   "biome.c.swamp": "Swamp",
   "biome.c.taiga": "Taiga",
-  "biome.minecraft.has_structure_ancient_city": "Has Structure Ancient City",
+  "biome.minecraft.has_structure.ancient_city": "Has Structure Ancient City",
   "biome.spell-dimension.ocean_of_consciousness": "Ocean of Consciousness",
   "biome.spell-dimension.ocean_of_consciousness.color": "ff00ff",
   "block.spell-dimension.consciousness": "Consciousness",

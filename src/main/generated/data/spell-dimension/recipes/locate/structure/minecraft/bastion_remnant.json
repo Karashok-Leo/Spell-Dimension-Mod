@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_structure",
+  "ingredient": {
+    "item": "runes:healing_stone"
+  },
+  "structure": "minecraft:bastion_remnant",
+  "world": "minecraft:the_nether"
+}

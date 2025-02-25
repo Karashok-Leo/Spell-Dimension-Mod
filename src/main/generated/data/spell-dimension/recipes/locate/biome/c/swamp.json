@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_biome",
+  "biome": "c:swamp",
+  "ingredient": {
+    "item": "minecraft:vine"
+  },
+  "world": "minecraft:overworld"
+}

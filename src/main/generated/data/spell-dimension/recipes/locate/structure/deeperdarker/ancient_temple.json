@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_structure",
+  "ingredient": {
+    "item": "deeperdarker:heart_of_the_deep"
+  },
+  "structure": "deeperdarker:ancient_temple",
+  "world": "deeperdarker:otherside"
+}

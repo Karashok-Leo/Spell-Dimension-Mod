@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_biome",
+  "biome": "c:nether_forests",
+  "ingredient": {
+    "item": "minecraft:red_mushroom"
+  },
+  "world": "minecraft:the_nether"
+}

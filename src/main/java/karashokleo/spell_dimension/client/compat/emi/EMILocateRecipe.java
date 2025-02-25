@@ -6,50 +6,25 @@ import dev.emi.emi.api.render.EmiTexture;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
-import karashokleo.spell_dimension.config.recipe.LocateSpellConfig;
+import karashokleo.spell_dimension.content.recipe.locate.LocateRecipe;
 import karashokleo.spell_dimension.init.AllTags;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.item.Item;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.tag.TagKey;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public record EMILocateRecipe(EmiStack input, Text spot, Text tooltip) implements EmiRecipe
+public record EMILocateRecipe(EmiIngredient input, Text spot, Text tooltip) implements EmiRecipe
 {
     public static final EmiIngredient CATALYSTS = EmiIngredient.of(AllTags.LOCATE_TARGET);
 
-    public EMILocateRecipe(Item item, RegistryKey<World> worldKey, RegistryKey<?> spotKey)
+    public EMILocateRecipe(LocateRecipe recipe)
     {
         this(
-                EmiStack.of(item),
-                LocateSpellConfig.getSpotName(spotKey),
-                Text.translatable(
-                        "travelerstitles.%s.%s"
-                                .formatted(
-                                        worldKey.getValue().getNamespace(),
-                                        worldKey.getValue().getPath()
-                                )
-                ).append(" - ").append(Text.of(spotKey.getValue().toString()))
-        );
-    }
-
-    public EMILocateRecipe(Item item, RegistryKey<World> worldKey, TagKey<?> spotKey)
-    {
-        this(
-                EmiStack.of(item),
-                LocateSpellConfig.getSpotName(spotKey),
-                Text.translatable(
-                        "travelerstitles.%s.%s"
-                                .formatted(
-                                        worldKey.getValue().getNamespace(),
-                                        worldKey.getValue().getPath()
-                                )
-                ).append(" - ").append(Text.of(spotKey.id().toString()))
+                EmiIngredient.of(recipe.getIngredient()),
+                recipe.getTargetName(),
+                recipe.getWorldName().append(" - ").append(Text.of(recipe.getTargetId().toString()))
         );
     }
 

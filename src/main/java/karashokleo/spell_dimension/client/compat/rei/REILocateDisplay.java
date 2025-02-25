@@ -1,47 +1,22 @@
 package karashokleo.spell_dimension.client.compat.rei;
 
-import karashokleo.spell_dimension.config.recipe.LocateSpellConfig;
+import karashokleo.spell_dimension.content.recipe.locate.LocateRecipe;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.Display;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
-import net.minecraft.item.Item;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.tag.TagKey;
 import net.minecraft.text.Text;
-import net.minecraft.world.World;
 
 import java.util.List;
 
 public record REILocateDisplay(EntryIngredient input, Text spot, Text tooltip) implements Display
 {
-    public REILocateDisplay(Item item, RegistryKey<World> worldKey, RegistryKey<?> spotKey)
+    public REILocateDisplay(LocateRecipe recipe)
     {
         this(
-                EntryIngredients.of(item),
-                LocateSpellConfig.getSpotName(spotKey),
-                Text.translatable(
-                        "travelerstitles.%s.%s"
-                                .formatted(
-                                        worldKey.getValue().getNamespace(),
-                                        worldKey.getValue().getPath()
-                                )
-                ).append(" - ").append(Text.of(spotKey.getValue().toString()))
-        );
-    }
-
-    public REILocateDisplay(Item item, RegistryKey<World> worldKey, TagKey<?> spotKey)
-    {
-        this(
-                EntryIngredients.of(item),
-                LocateSpellConfig.getSpotName(spotKey),
-                Text.translatable(
-                        "travelerstitles.%s.%s"
-                                .formatted(
-                                        worldKey.getValue().getNamespace(),
-                                        worldKey.getValue().getPath()
-                                )
-                ).append(" - ").append(Text.of(spotKey.id().toString()))
+                EntryIngredients.ofIngredient(recipe.getIngredient()),
+                recipe.getTargetName(),
+                recipe.getWorldName().append(" - ").append(Text.of(recipe.getTargetId().toString()))
         );
     }
 

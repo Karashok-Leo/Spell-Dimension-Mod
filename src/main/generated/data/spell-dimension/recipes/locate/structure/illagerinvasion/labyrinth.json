@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_structure",
+  "ingredient": {
+    "item": "minecraft:polished_andesite"
+  },
+  "structure": "illagerinvasion:labyrinth",
+  "world": "minecraft:overworld"
+}
