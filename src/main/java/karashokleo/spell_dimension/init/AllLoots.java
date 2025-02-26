@@ -7,11 +7,11 @@ import karashokleo.l2hostility.init.LHTraits;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
 import karashokleo.spell_dimension.config.EssenceLootConfig;
-import karashokleo.spell_dimension.config.recipe.SpellScrollConfig;
-import karashokleo.spell_dimension.content.object.EventAward;
 import karashokleo.spell_dimension.content.loot.entry.RandomEnchantedEssenceEntry;
 import karashokleo.spell_dimension.content.loot.entry.RandomEnlighteningEssenceEntry;
 import karashokleo.spell_dimension.content.loot.entry.SpellScrollEntry;
+import karashokleo.spell_dimension.content.object.EventAward;
+import karashokleo.spell_dimension.content.object.ScrollType;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -59,7 +59,7 @@ public class AllLoots
             if (id.equals(EventAward.SPELL_SCROLL.lootTable))
             {
                 LootPool.Builder builder = LootPool.builder();
-                addCraftSpellLootPool(builder, SpellScrollConfig.getEventLootSpells());
+                addSpellScrollLootPool(builder, AllSpells.getSpells(type -> type == ScrollType.CRAFTING || type == ScrollType.EVENT_AWARD));
                 tableBuilder.pool(builder.build());
             }
         });
@@ -122,7 +122,7 @@ public class AllLoots
         builder.with(ItemEntry.builder(AllItems.MENDING_ESSENCE).weight(EssenceLootConfig.MD_WEIGHT));
     }
 
-    private static void addCraftSpellLootPool(LootPool.Builder builder, Set<Identifier> pool)
+    private static void addSpellScrollLootPool(LootPool.Builder builder, Set<Identifier> pool)
     {
         builder.rolls(UniformLootNumberProvider.create(1, 3));
         for (Identifier spellId : pool)

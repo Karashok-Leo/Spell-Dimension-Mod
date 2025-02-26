@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:summon",
+  "count": 1,
+  "entity_type": "artifacts:mimic",
+  "ingredient": {
+    "item": "l2hostility:chaos_ingot"
+  }
+}

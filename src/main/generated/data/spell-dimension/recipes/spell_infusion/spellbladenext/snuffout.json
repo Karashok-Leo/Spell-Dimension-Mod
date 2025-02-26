@@ -1,0 +1,15 @@
+{
+  "type": "spell-dimension:spell_infusion",
+  "ingredients": [
+    {
+      "item": "mythicmetals:carmot_stone"
+    },
+    {
+      "item": "spell-dimension:essence_fire_0"
+    }
+  ],
+  "input": {
+    "item": "minecraft:paper"
+  },
+  "spell_id": "spellbladenext:snuffout"
+}

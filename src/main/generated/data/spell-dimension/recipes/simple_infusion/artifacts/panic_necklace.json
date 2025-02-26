@@ -1,0 +1,19 @@
+{
+  "type": "enchantment_infusion:simple_infusion",
+  "copy_nbt": false,
+  "ingredients": [
+    {
+      "item": "minecraft:rabbit_foot"
+    },
+    {
+      "tag": "spell-dimension:essence/0"
+    }
+  ],
+  "input": {
+    "item": "minecraft:sugar"
+  },
+  "output": {
+    "Count": 1,
+    "id": "artifacts:panic_necklace"
+  }
+}

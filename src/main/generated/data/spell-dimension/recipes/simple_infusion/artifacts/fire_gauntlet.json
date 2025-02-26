@@ -1,0 +1,19 @@
+{
+  "type": "enchantment_infusion:simple_infusion",
+  "copy_nbt": false,
+  "ingredients": [
+    {
+      "item": "minecraft:blaze_powder"
+    },
+    {
+      "tag": "spell-dimension:essence/0"
+    }
+  ],
+  "input": {
+    "item": "minecraft:leather"
+  },
+  "output": {
+    "Count": 1,
+    "id": "artifacts:fire_gauntlet"
+  }
+}

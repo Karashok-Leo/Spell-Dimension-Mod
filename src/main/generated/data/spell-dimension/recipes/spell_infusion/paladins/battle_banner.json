@@ -1,0 +1,15 @@
+{
+  "type": "spell-dimension:spell_infusion",
+  "ingredients": [
+    {
+      "item": "adventurez:piglin_flag"
+    },
+    {
+      "item": "spell-dimension:essence_healing_1"
+    }
+  ],
+  "input": {
+    "item": "minecraft:paper"
+  },
+  "spell_id": "paladins:battle_banner"
+}

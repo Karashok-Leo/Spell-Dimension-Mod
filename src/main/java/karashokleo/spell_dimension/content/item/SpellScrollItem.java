@@ -1,8 +1,8 @@
 package karashokleo.spell_dimension.content.item;
 
-import karashokleo.spell_dimension.config.recipe.SpellScrollConfig;
 import karashokleo.spell_dimension.content.item.essence.base.ColorProvider;
 import karashokleo.spell_dimension.data.SDTexts;
+import karashokleo.spell_dimension.init.AllSpells;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
@@ -82,9 +82,10 @@ public class SpellScrollItem extends Item implements ColorProvider
         tooltip.add(Text.translatable(
                 SpellTooltip.spellTranslationKey(id)
         ).setStyle(Style.EMPTY.withColor(spell.school.color)).formatted(Formatting.BOLD));
+
         // obtain
         tooltip.add(SDTexts.SCROLL$OBTAIN.get(
-                SpellScrollConfig.getSpellScrollText(spellInfo)
+                AllSpells.getSpellObtainText(id)
         ).formatted(Formatting.GRAY));
         // id
         if (context.isAdvanced())

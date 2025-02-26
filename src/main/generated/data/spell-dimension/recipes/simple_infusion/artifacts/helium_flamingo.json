@@ -1,0 +1,19 @@
+{
+  "type": "enchantment_infusion:simple_infusion",
+  "copy_nbt": false,
+  "ingredients": [
+    {
+      "item": "l2hostility:sun_membrane"
+    },
+    {
+      "tag": "spell-dimension:essence/0"
+    }
+  ],
+  "input": {
+    "item": "plentyofarmors:hardened_phantom_membrane"
+  },
+  "output": {
+    "Count": 1,
+    "id": "artifacts:helium_flamingo"
+  }
+}

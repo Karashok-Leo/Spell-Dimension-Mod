@@ -1,0 +1,19 @@
+{
+  "type": "enchantment_infusion:simple_infusion",
+  "copy_nbt": false,
+  "ingredients": [
+    {
+      "item": "minecraft:emerald"
+    },
+    {
+      "tag": "spell-dimension:essence/0"
+    }
+  ],
+  "input": {
+    "item": "minecraft:leather_helmet"
+  },
+  "output": {
+    "Count": 1,
+    "id": "artifacts:villager_hat"
+  }
+}

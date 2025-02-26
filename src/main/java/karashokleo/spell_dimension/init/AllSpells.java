@@ -6,142 +6,156 @@ import karashokleo.spell_dimension.api.SpellImpactEvents;
 import karashokleo.spell_dimension.api.SpellProjectileHitBlockCallback;
 import karashokleo.spell_dimension.api.SpellProjectileHitEntityCallback;
 import karashokleo.spell_dimension.api.SpellProjectileOutOfRangeCallback;
-import karashokleo.spell_dimension.config.SpellConfig;
 import karashokleo.spell_dimension.content.buff.BlazingMark;
+import karashokleo.spell_dimension.content.object.ScrollType;
 import karashokleo.spell_dimension.content.spell.*;
+import karashokleo.spell_dimension.data.SDTexts;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.text.MutableText;
 import net.minecraft.util.Identifier;
 import net.spell_power.api.SpellSchool;
 import net.spell_power.api.SpellSchools;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class AllSpells
 {
+    private static final Set<Identifier> ALL = new HashSet<>();
+    private static final HashMap<Identifier, ScrollType> SPELL_TO_SCROLL_TYPE = new HashMap<>();
+    private static final HashMap<Identifier, Integer> SPELL_TO_TIER = new HashMap<>();
+
     public static final SpellSchool GENERIC = SpellSchools.createMagic(SpellDimension.modLoc("generic"), 0xdddddd, false, EntityAttributes.GENERIC_ATTACK_DAMAGE, null);
 
     /**
      * Primary spells
      */
-    public static final Identifier ARCANE_BOLT = new Identifier("wizards:arcane_bolt");
-    public static final Identifier FIRE_SCORCH = new Identifier("wizards:fire_scorch");
-    public static final Identifier FROST_SHARD = new Identifier("wizards:frost_shard");
-    public static final Identifier HEAL = new Identifier("paladins:heal");
+    public static final Identifier ARCANE_BOLT = fromPrimary("wizards:arcane_bolt");
+    public static final Identifier FIRE_SCORCH = fromPrimary("wizards:fire_scorch");
+    public static final Identifier FROST_SHARD = fromPrimary("wizards:frost_shard");
+    public static final Identifier HEAL = fromPrimary("paladins:heal");
 
     /**
      * Binding spells
      */
     // Arcane
-    public static final Identifier ARCANE_MISSILE = new Identifier("wizards:arcane_missile");
-    public static final Identifier ARCANE_BLAST = new Identifier("wizards:arcane_blast");
-    public static final Identifier ARCANE_BLINK = new Identifier("wizards:arcane_blink");
+    public static final Identifier ARCANE_MISSILE = fromBinding("wizards:arcane_missile");
+    public static final Identifier ARCANE_BLAST = fromBinding("wizards:arcane_blast");
+    public static final Identifier ARCANE_BLINK = fromBinding("wizards:arcane_blink");
 
     // Fire
-    public static final Identifier FIREBALL = new Identifier("wizards:fireball");
-    public static final Identifier FIRE_WALL = new Identifier("wizards:fire_wall");
-    public static final Identifier FIRE_METEOR = new Identifier("wizards:fire_meteor");
+    public static final Identifier FIREBALL = fromBinding("wizards:fireball");
+    public static final Identifier FIRE_WALL = fromBinding("wizards:fire_wall");
+    public static final Identifier FIRE_METEOR = fromBinding("wizards:fire_meteor");
 
     // Frost
-    public static final Identifier FROST_BOLT = new Identifier("wizards:frostbolt");
-    public static final Identifier FROST_NOVA = new Identifier("wizards:frost_nova");
-    public static final Identifier FROST_SHIELD = new Identifier("wizards:frost_shield");
+    public static final Identifier FROST_BOLT = fromBinding("wizards:frostbolt");
+    public static final Identifier FROST_NOVA = fromBinding("wizards:frost_nova");
+    public static final Identifier FROST_SHIELD = fromBinding("wizards:frost_shield");
 
     // Healing
-    public static final Identifier FLASH_HEAL = new Identifier("paladins:flash_heal");
-    public static final Identifier HOLY_SHOCK = new Identifier("paladins:holy_shock");
-    public static final Identifier DIVINE_PROTECTION = new Identifier("paladins:divine_protection");
+    public static final Identifier FLASH_HEAL = fromBinding("paladins:flash_heal");
+    public static final Identifier HOLY_SHOCK = fromBinding("paladins:holy_shock");
+    public static final Identifier DIVINE_PROTECTION = fromBinding("paladins:divine_protection");
 
     /**
      * Infusion spells
      */
     // Generic
-    public static final Identifier LOCATE = SpellDimension.modLoc("locate");
-    public static final Identifier SUMMON = SpellDimension.modLoc("summon");
-    public static final Identifier PLACE = SpellDimension.modLoc("place");
-    public static final Identifier BREAK = SpellDimension.modLoc("break");
-    public static final Identifier LIGHT = SpellDimension.modLoc("light");
-    public static final Identifier MOON_SWIM = SpellDimension.modLoc("moon_swim");
-    public static final Identifier INCARCERATE = SpellDimension.modLoc("incarcerate");
+    public static final Identifier LOCATE = fromCrafting("locate").build();
+    public static final Identifier SUMMON = fromCrafting("summon").build();
+    public static final Identifier PLACE = fromCrafting("place").build();
+    public static final Identifier BREAK = fromCrafting("break").build();
+    public static final Identifier LIGHT = fromCrafting("light").build();
+    public static final Identifier MOON_SWIM = fromCrafting("moon_swim").build();
+    public static final Identifier INCARCERATE = fromCrafting("incarcerate").build();
 
     // Arcane
     // Tier 1
-    public static final Identifier CONVERGE = SpellDimension.modLoc("converge");
-    public static final Identifier SHIFT = SpellDimension.modLoc("shift");
-    public static final Identifier FORCE_LANDING = SpellDimension.modLoc("force_landing");
-    public static final Identifier ARCANE_BARRIER = SpellDimension.modLoc("arcane_barrier");
-    public static final Identifier FINAL_STRIKE = new Identifier("spellbladenext:finalstrike");
+    public static final Identifier CONVERGE = fromCrafting("converge").build();
+    public static final Identifier SHIFT = fromCrafting("shift").build();
+    public static final Identifier FORCE_LANDING = fromCrafting("force_landing").build();
+    public static final Identifier ARCANE_BARRIER = fromCrafting("arcane_barrier").build();
+    public static final Identifier FINAL_STRIKE = builderWithId("spellbladenext:finalstrike").build();
     // Tier 2
-    public static final Identifier ARCANE_FLOURISH = new Identifier("spellbladenext:arcaneflourish");
-    public static final Identifier AMETHYST_SLASH = new Identifier("spellbladenext:amethystslash");
-    public static final Identifier ARCANE_BEAM = new Identifier("wizards:arcane_beam");
-    public static final Identifier PHASE = SpellDimension.modLoc("phase");
-    public static final Identifier ARCANE_FLICKER = new Identifier("spellbladenext:frostblink");
-    public static final Identifier ELDRITCH_BLAST = new Identifier("spellbladenext:eldritchblast");
+    public static final Identifier ARCANE_FLOURISH = builderWithId("spellbladenext:arcaneflourish").withTier(1).build();
+    public static final Identifier AMETHYST_SLASH = builderWithId("spellbladenext:amethystslash").withTier(1).build();
+    public static final Identifier ARCANE_BEAM = builderWithId("wizards:arcane_beam").withTier(1).build();
+    public static final Identifier PHASE = fromCrafting("phase").withTier(1).build();
+    public static final Identifier ARCANE_FLICKER = builderWithId("spellbladenext:frostblink").withTier(1).build();
+    public static final Identifier ELDRITCH_BLAST = builderWithId("spellbladenext:eldritchblast").withTier(1).build();
     // Tier 3
-    public static final Identifier ARCANE_OVERDRIVE = new Identifier("spellbladenext:arcaneoverdrive");
-    public static final Identifier BLACK_HOLE = SpellDimension.modLoc("black_hole");
-    public static final Identifier MAELSTROM = new Identifier("spellbladenext:maelstrom");
-    public static final Identifier ECHO_STORM = new Identifier("spellbladenext:bladestorm");
+    public static final Identifier ARCANE_OVERDRIVE = builderWithId("spellbladenext:arcaneoverdrive").withTier(2).build();
+    public static final Identifier BLACK_HOLE = fromCrafting("black_hole").withTier(2).build();
+    public static final Identifier MAELSTROM = builderWithId("spellbladenext:maelstrom").withTier(2).build();
+    public static final Identifier ECHO_STORM = builderWithId("spellbladenext:bladestorm").withTier(2).build();
 
     // Fire
-    public static final Identifier FIRE_BREATH = new Identifier("wizards:fire_breath");
-    public static final Identifier OVER_BLAZE = new Identifier("spellbladenext:overblaze");
-    public static final Identifier WILDFIRE = new Identifier("spellbladenext:snuffout");
+    public static final Identifier FIRE_BREATH = builderWithId("wizards:fire_breath").build();
+    public static final Identifier OVER_BLAZE = builderWithId("spellbladenext:overblaze").build();
+    public static final Identifier WILDFIRE = builderWithId("spellbladenext:snuffout").build();
     // Tier 2
-    public static final Identifier FIRE_FLOURISH = new Identifier("spellbladenext:fireflourish");
-    public static final Identifier FLAME_SLASH = new Identifier("spellbladenext:flameslash");
-    public static final Identifier BLAST = SpellDimension.modLoc("blast");
-    public static final Identifier IGNITE = SpellDimension.modLoc("ignite");
-    public static final Identifier PHOENIX_DIVE = new Identifier("spellbladenext:phoenixdive");
-    public static final Identifier PHOENIX_CURSE = new Identifier("spellbladenext:combustion");
-    public static final Identifier DRAGON_SLAM = new Identifier("spellbladenext:frostvert");
+    public static final Identifier FIRE_FLOURISH = builderWithId("spellbladenext:fireflourish").withTier(1).build();
+    public static final Identifier FLAME_SLASH = builderWithId("spellbladenext:flameslash").withTier(1).build();
+    public static final Identifier BLAST = fromCrafting("blast").withTier(1).build();
+    public static final Identifier IGNITE = fromCrafting("ignite").withTier(1).build();
+    public static final Identifier PHOENIX_DIVE = builderWithId("spellbladenext:phoenixdive").withTier(1).build();
+    public static final Identifier PHOENIX_CURSE = builderWithId("spellbladenext:combustion").withTier(1).build();
+    public static final Identifier DRAGON_SLAM = builderWithId("spellbladenext:frostvert").withTier(1).build();
     // Tier 3
-    public static final Identifier FLAME_OVERDRIVE = new Identifier("spellbladenext:fireoverdrive");
-    public static final Identifier FIRE_OF_RETRIBUTION = SpellDimension.modLoc("fire_of_retribution");
-    public static final Identifier INFERNO = new Identifier("spellbladenext:inferno");
-    public static final Identifier FLICKER_STRIKE = new Identifier("spellbladenext:flicker_strike");
+    public static final Identifier FLAME_OVERDRIVE = builderWithId("spellbladenext:fireoverdrive").withTier(2).build();
+    public static final Identifier FIRE_OF_RETRIBUTION = fromCrafting("fire_of_retribution").withTier(2).build();
+    public static final Identifier INFERNO = builderWithId("spellbladenext:inferno").withTier(2).build();
+    public static final Identifier FLICKER_STRIKE = builderWithId("spellbladenext:flicker_strike").withTier(2).build();
 
     // Frost
-    public static final Identifier ICICLE = SpellDimension.modLoc("icicle");
-    public static final Identifier FROZEN = SpellDimension.modLoc("frozen");
-    public static final Identifier FROST_LOTUS = new Identifier("spellbladenext:frostbloom0");
-    public static final Identifier DEATH_CHILL = new Identifier("spellbladenext:deathchill");
-    public static final Identifier FROST_BLIZZARD = new Identifier("wizards:frost_blizzard");
+    public static final Identifier ICICLE = fromCrafting("icicle").build();
+    public static final Identifier FROZEN = fromCrafting("frozen").build();
+    public static final Identifier FROST_LOTUS = builderWithId("spellbladenext:frostbloom0").build();
+    public static final Identifier DEATH_CHILL = builderWithId("spellbladenext:deathchill").build();
+    public static final Identifier FROST_BLIZZARD = builderWithId("wizards:frost_blizzard").build();
     // Tier 2
-    public static final Identifier FROST_FLOURISH = new Identifier("spellbladenext:frostflourish");
-    public static final Identifier FROST_SLASH = new Identifier("spellbladenext:frostslash");
-    public static final Identifier FROST_BLINK = SpellDimension.modLoc("frost_blink");
-    public static final Identifier ICY_NUCLEUS = SpellDimension.modLoc("icy_nucleus");
-    public static final Identifier FROST_AURA = SpellDimension.modLoc("frost_aura");
-    public static final Identifier COLD_BUFF = new Identifier("spellbladenext:coldbuff");
+    public static final Identifier FROST_FLOURISH = builderWithId("spellbladenext:frostflourish").withTier(1).build();
+    public static final Identifier FROST_SLASH = builderWithId("spellbladenext:frostslash").withTier(1).build();
+    public static final Identifier FROST_BLINK = fromCrafting("frost_blink").withTier(1).build();
+    public static final Identifier ICY_NUCLEUS = fromCrafting("icy_nucleus").withTier(1).build();
+    public static final Identifier FROST_AURA = fromCrafting("frost_aura").withTier(1).build();
+    public static final Identifier COLD_BUFF = builderWithId("spellbladenext:coldbuff").withTier(1).build();
     // Tier 3
-    public static final Identifier FROST_OVERDRIVE = new Identifier("spellbladenext:frostoverdrive");
-    public static final Identifier MASSACRE = new Identifier("spellbladenext:eviscerate");
-    public static final Identifier RIPTIDE = new Identifier("spellbladenext:whirlingblades");
+    public static final Identifier FROST_OVERDRIVE = builderWithId("spellbladenext:frostoverdrive").withTier(2).build();
+    public static final Identifier MASSACRE = builderWithId("spellbladenext:eviscerate").withTier(2).build();
+    public static final Identifier RIPTIDE = builderWithId("spellbladenext:whirlingblades").withTier(2).build();
 
     // Healing
-    public static final Identifier HOLY_BEAM = new Identifier("paladins:holy_beam");
-    public static final Identifier CIRCLE_OF_HEALING = new Identifier("paladins:circle_of_healing");
-    public static final Identifier JUDGEMENT = new Identifier("paladins:judgement");
-    public static final Identifier CRITICAL_HIT = SpellDimension.modLoc("critical_hit");
-    public static final Identifier SPELL_POWER = SpellDimension.modLoc("spell_power");
-    public static final Identifier REGEN = SpellDimension.modLoc("regen");
-    public static final Identifier RESIST = SpellDimension.modLoc("resist");
-    public static final Identifier HASTE = SpellDimension.modLoc("haste");
-    public static final Identifier SPEED = SpellDimension.modLoc("speed");
+    public static final Identifier HOLY_BEAM = builderWithId("paladins:holy_beam").build();
+    public static final Identifier CIRCLE_OF_HEALING = builderWithId("paladins:circle_of_healing").build();
+    public static final Identifier JUDGEMENT = builderWithId("paladins:judgement").build();
+    public static final Identifier CRITICAL_HIT = fromCrafting("critical_hit").build();
+    public static final Identifier SPELL_POWER = fromCrafting("spell_power").build();
+    public static final Identifier REGEN = fromCrafting("regen").build();
+    public static final Identifier RESIST = fromCrafting("resist").build();
+    public static final Identifier HASTE = fromCrafting("haste").build();
+    public static final Identifier SPEED = fromCrafting("speed").build();
     // Tier 2
-    public static final Identifier CLEANSE = SpellDimension.modLoc("cleanse");
-    public static final Identifier BARRIER = new Identifier("paladins:barrier");
-    public static final Identifier BATTLE_BANNER = new Identifier("paladins:battle_banner");
-    public static final Identifier BLESSING = SpellDimension.modLoc("blessing");
-    public static final Identifier MISFORTUNE = SpellDimension.modLoc("misfortune");
-    public static final Identifier HEAVENLY_JUSTICE = SpellDimension.modLoc("heavenly_justice");
+    public static final Identifier CLEANSE = fromCrafting("cleanse").withTier(1).build();
+    public static final Identifier BARRIER = builderWithId("paladins:barrier").withTier(1).build();
+    public static final Identifier BATTLE_BANNER = builderWithId("paladins:battle_banner").withTier(1).build();
+    public static final Identifier BLESSING = fromCrafting("blessing").withTier(1).build();
+    public static final Identifier MISFORTUNE = fromCrafting("misfortune").withTier(1).build();
+    public static final Identifier HEAVENLY_JUSTICE = fromCrafting("heavenly_justice").withTier(1).build();
     // Tier 3
-    public static final Identifier DIVINE_AURA = SpellDimension.modLoc("divine_aura");
-    public static final Identifier EXORCISM = SpellDimension.modLoc("exorcism");
-    public static final Identifier SPELL_POWER_ADVANCED = SpellDimension.modLoc("spell_power_advanced");
-    public static final Identifier REGEN_ADVANCED = SpellDimension.modLoc("regen_advanced");
-    public static final Identifier RESIST_ADVANCED = SpellDimension.modLoc("resist_advanced");
-    public static final Identifier HASTE_ADVANCED = SpellDimension.modLoc("haste_advanced");
-    public static final Identifier SPEED_ADVANCED = SpellDimension.modLoc("speed_advanced");
+    public static final Identifier DIVINE_AURA = fromCrafting("divine_aura").withTier(2).build();
+    public static final Identifier EXORCISM = fromCrafting("exorcism").withTier(2).build();
+    public static final Identifier SPELL_POWER_ADVANCED = builderWithName("spell_power_advanced").withScrollType(ScrollType.EVENT_AWARD).withTier(2).build();
+    public static final Identifier REGEN_ADVANCED = builderWithName("regen_advanced").withScrollType(ScrollType.EVENT_AWARD).withTier(2).build();
+    public static final Identifier RESIST_ADVANCED = builderWithName("resist_advanced").withScrollType(ScrollType.EVENT_AWARD).withTier(2).build();
+    public static final Identifier HASTE_ADVANCED = builderWithName("haste_advanced").withScrollType(ScrollType.EVENT_AWARD).withTier(2).build();
+    public static final Identifier SPEED_ADVANCED = builderWithName("speed_advanced").withScrollType(ScrollType.EVENT_AWARD).withTier(2).build();
 
     public static void register()
     {
@@ -172,65 +186,98 @@ public class AllSpells
         SpellImpactEvents.BEFORE.register(FrostBlinkSpell::handle);
         SpellImpactEvents.BEFORE.register(FireOfRetributionSpell::handle);
         SpellImpactEvents.BEFORE.register(HeavenlyJusticeSpell::handle);
-
-        registerIntermediateSpells();
-        registerAdvancedSpells();
     }
 
-    public static void registerIntermediateSpells()
+    public static Set<Identifier> getAll()
     {
-        SpellConfig.addIntermediateSpell(ARCANE_FLOURISH);
-        SpellConfig.addIntermediateSpell(AMETHYST_SLASH);
-        SpellConfig.addIntermediateSpell(ARCANE_BEAM);
-        SpellConfig.addIntermediateSpell(PHASE);
-        SpellConfig.addIntermediateSpell(ARCANE_FLICKER);
-        SpellConfig.addIntermediateSpell(ELDRITCH_BLAST);
-
-        SpellConfig.addIntermediateSpell(FIRE_FLOURISH);
-        SpellConfig.addIntermediateSpell(FLAME_SLASH);
-        SpellConfig.addIntermediateSpell(BLAST);
-        SpellConfig.addIntermediateSpell(IGNITE);
-        SpellConfig.addIntermediateSpell(PHOENIX_DIVE);
-        SpellConfig.addIntermediateSpell(PHOENIX_CURSE);
-        SpellConfig.addIntermediateSpell(DRAGON_SLAM);
-
-        SpellConfig.addIntermediateSpell(FROST_FLOURISH);
-        SpellConfig.addIntermediateSpell(FROST_SLASH);
-        SpellConfig.addIntermediateSpell(FROST_BLINK);
-        SpellConfig.addIntermediateSpell(ICY_NUCLEUS);
-        SpellConfig.addIntermediateSpell(FROST_AURA);
-        SpellConfig.addIntermediateSpell(COLD_BUFF);
-
-        SpellConfig.addIntermediateSpell(CLEANSE);
-        SpellConfig.addIntermediateSpell(BARRIER);
-        SpellConfig.addIntermediateSpell(BATTLE_BANNER);
-        SpellConfig.addIntermediateSpell(BLESSING);
-        SpellConfig.addIntermediateSpell(MISFORTUNE);
-        SpellConfig.addIntermediateSpell(HEAVENLY_JUSTICE);
+        return ALL;
     }
 
-    public static void registerAdvancedSpells()
+    public static Set<Identifier> getSpells(Predicate<ScrollType> predicate)
     {
-        SpellConfig.addAdvancedSpell(ARCANE_OVERDRIVE);
-        SpellConfig.addAdvancedSpell(BLACK_HOLE);
-        SpellConfig.addAdvancedSpell(MAELSTROM);
-        SpellConfig.addAdvancedSpell(ECHO_STORM);
+        return SPELL_TO_SCROLL_TYPE.entrySet()
+                .stream()
+                .filter(entry -> predicate.test(entry.getValue()))
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toSet());
+    }
 
-        SpellConfig.addAdvancedSpell(FLAME_OVERDRIVE);
-        SpellConfig.addAdvancedSpell(FIRE_OF_RETRIBUTION);
-        SpellConfig.addAdvancedSpell(INFERNO);
-        SpellConfig.addAdvancedSpell(FLICKER_STRIKE);
+    public static MutableText getSpellObtainText(Identifier spellId)
+    {
+        ScrollType scrollType = SPELL_TO_SCROLL_TYPE.get(spellId);
+        return scrollType == null ?
+                SDTexts.SCROLL$UNAVAILABLE.get() :
+                scrollType.getTooltip();
+    }
 
-        SpellConfig.addAdvancedSpell(FROST_OVERDRIVE);
-        SpellConfig.addAdvancedSpell(MASSACRE);
-        SpellConfig.addAdvancedSpell(RIPTIDE);
+    public static int getSpellTier(Identifier spellId)
+    {
+        return SPELL_TO_TIER.getOrDefault(spellId, 0);
+    }
 
-        SpellConfig.addAdvancedSpell(DIVINE_AURA);
-        SpellConfig.addAdvancedSpell(EXORCISM);
-        SpellConfig.addAdvancedSpell(SPELL_POWER_ADVANCED);
-        SpellConfig.addAdvancedSpell(REGEN_ADVANCED);
-        SpellConfig.addAdvancedSpell(RESIST_ADVANCED);
-        SpellConfig.addAdvancedSpell(HASTE_ADVANCED);
-        SpellConfig.addAdvancedSpell(SPEED_ADVANCED);
+    private static Entry builderWithName(String name)
+    {
+        return new Entry(name);
+    }
+
+    private static Entry builderWithId(String id)
+    {
+        return new Entry(new Identifier(id));
+    }
+
+    private static Identifier fromPrimary(String id)
+    {
+        return new Entry(new Identifier(id)).withScrollType(ScrollType.PRIMARY).build();
+    }
+
+    private static Identifier fromBinding(String id)
+    {
+        return new Entry(new Identifier(id)).withScrollType(ScrollType.BINDING).build();
+    }
+
+    private static Entry fromCrafting(String name)
+    {
+        return new Entry(name).withScrollType(ScrollType.CRAFTING);
+    }
+
+    public static class Entry
+    {
+        private final Identifier id;
+        @Nullable
+        private Integer tier;
+        @Nullable
+        private ScrollType scrollType;
+
+        public Entry(String name)
+        {
+            this(new Identifier(name));
+        }
+
+        public Entry(Identifier id)
+        {
+            this.id = id;
+        }
+
+        public Entry withTier(int tier)
+        {
+            this.tier = tier;
+            return this;
+        }
+
+        public Entry withScrollType(ScrollType type)
+        {
+            this.scrollType = type;
+            return this;
+        }
+
+        public Identifier build()
+        {
+            ALL.add(id);
+            if (tier != null)
+                SPELL_TO_TIER.put(id, tier);
+            if (scrollType != null)
+                SPELL_TO_SCROLL_TYPE.put(id, scrollType);
+            return id;
+        }
     }
 }

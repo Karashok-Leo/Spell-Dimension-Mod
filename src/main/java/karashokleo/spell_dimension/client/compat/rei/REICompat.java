@@ -1,13 +1,13 @@
 package karashokleo.spell_dimension.client.compat.rei;
 
 import karashokleo.spell_dimension.SpellDimension;
-import karashokleo.spell_dimension.config.recipe.InfusionRecipes;
-import karashokleo.spell_dimension.config.recipe.SummonSpellConfig;
 import karashokleo.spell_dimension.content.recipe.locate.LocateRecipe;
+import karashokleo.spell_dimension.content.recipe.summon.SummonRecipe;
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
 import me.shedaniel.rei.api.client.registry.category.CategoryRegistry;
 import me.shedaniel.rei.api.client.registry.display.DisplayRegistry;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
+import net.minecraft.recipe.RecipeManager;
 
 public class REICompat implements REIClientPlugin
 {
@@ -30,10 +30,10 @@ public class REICompat implements REIClientPlugin
     @Override
     public void registerDisplays(DisplayRegistry registry)
     {
-        for (LocateRecipe locateRecipe : registry.getRecipeManager().listAllOfType(LocateRecipe.TYPE))
+        RecipeManager recipeManager = registry.getRecipeManager();
+        for (LocateRecipe locateRecipe : recipeManager.listAllOfType(LocateRecipe.TYPE))
             registry.add(new REILocateDisplay(locateRecipe));
-
-        SummonSpellConfig.forEach((item, entry) -> registry.add(new REISummonDisplay(item, entry)));
-        InfusionRecipes.getAll().forEach(entry -> registry.add(new REIInfusionDisplay(entry.getRowKey(), entry.getColumnKey(), entry.getValue())));
+        for (SummonRecipe summonRecipe : recipeManager.listAllOfType(SummonRecipe.TYPE))
+            registry.add(new REISummonDisplay(summonRecipe));
     }
 }

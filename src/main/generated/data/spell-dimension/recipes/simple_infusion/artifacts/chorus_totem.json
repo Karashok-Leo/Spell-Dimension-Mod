@@ -1,0 +1,19 @@
+{
+  "type": "enchantment_infusion:simple_infusion",
+  "copy_nbt": false,
+  "ingredients": [
+    {
+      "item": "minecraft:chorus_fruit"
+    },
+    {
+      "tag": "spell-dimension:essence/0"
+    }
+  ],
+  "input": {
+    "item": "minecraft:totem_of_undying"
+  },
+  "output": {
+    "Count": 1,
+    "id": "artifacts:chorus_totem"
+  }
+}

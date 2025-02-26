@@ -1,11 +1,9 @@
 package karashokleo.spell_dimension.content.block.tile;
 
 import karashokleo.enchantment_infusion.api.block.entity.AbstractInfusionTile;
-import karashokleo.spell_dimension.config.recipe.InfusionRecipes;
 import karashokleo.spell_dimension.init.AllBlocks;
 import karashokleo.spell_dimension.util.ParticleUtil;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
@@ -38,20 +36,20 @@ public class SpellInfusionPedestalTile extends AbstractInfusionTile
         this.update();
     }
 
-    @Override
-    public void onUse(ServerWorld world, BlockPos pos, PlayerEntity player)
-    {
-        if (this.craftTime != 0) return;
-        ItemStack mainHandStack = player.getMainHandStack();
-        ItemStack output = InfusionRecipes.getRecipe(this.getStack().getItem(), mainHandStack.getItem());
-        if (output != null)
-        {
-            this.startCrafting(output.copy());
-            mainHandStack.decrement(1);
-            return;
-        }
-        super.onUse(world, pos, player);
-    }
+//    @Override
+//    public void onUse(ServerWorld world, BlockPos pos, PlayerEntity player)
+//    {
+//        if (this.craftTime != 0) return;
+//        ItemStack mainHandStack = player.getMainHandStack();
+//        ItemStack output = InfusionRecipes.getRecipe(this.getStack().getItem(), mainHandStack.getItem());
+//        if (output != null)
+//        {
+//            this.startCrafting(output.copy());
+//            mainHandStack.decrement(1);
+//            return;
+//        }
+//        super.onUse(world, pos, player);
+//    }
 
     @SuppressWarnings("unused")
     public static void clientTick(World world, BlockPos pos, BlockState state, SpellInfusionPedestalTile entity)

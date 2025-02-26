@@ -1,20 +1,19 @@
 package karashokleo.spell_dimension.client.compat.rei;
 
 import karashokleo.spell_dimension.client.compat.EntityWrapper;
-import karashokleo.spell_dimension.config.recipe.SummonSpellConfig;
+import karashokleo.spell_dimension.content.recipe.summon.SummonRecipe;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.Display;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
-import net.minecraft.item.Item;
 
 import java.util.List;
 
 public record REISummonDisplay(EntryIngredient input, EntityWrapper wrapper) implements Display
 {
-    public REISummonDisplay(Item item, SummonSpellConfig.Entry entry)
+    public REISummonDisplay(SummonRecipe recipe)
     {
-        this(EntryIngredients.of(item), EntityWrapper.of(entry));
+        this(EntryIngredients.ofIngredient(recipe.ingredient()), EntityWrapper.of(recipe.entityType(), recipe.count()));
     }
 
     @Override

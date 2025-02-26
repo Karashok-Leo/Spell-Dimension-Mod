@@ -1,0 +1,19 @@
+{
+  "type": "enchantment_infusion:simple_infusion",
+  "copy_nbt": false,
+  "ingredients": [
+    {
+      "item": "l2hostility:totemic_gold_ingot"
+    },
+    {
+      "tag": "spell-dimension:essence/0"
+    }
+  ],
+  "input": {
+    "item": "l2hostility:booster_potion"
+  },
+  "output": {
+    "Count": 1,
+    "id": "artifacts:antidote_vessel"
+  }
+}

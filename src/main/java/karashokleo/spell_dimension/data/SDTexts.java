@@ -2,7 +2,7 @@ package karashokleo.spell_dimension.data;
 
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.object.EventAward;
-import karashokleo.spell_dimension.data.generic.SDLocateRecipes;
+import karashokleo.spell_dimension.data.generic.recipe.SDLocateRecipes;
 import karashokleo.spell_dimension.data.loot_bag.SDBags;
 import karashokleo.spell_dimension.data.loot_bag.SDContents;
 import karashokleo.spell_dimension.init.AllEntities;
@@ -199,10 +199,10 @@ public enum SDTexts
     SCROLL$UNAVAILABLE("Not yet available", "暂无"),
     SCROLL$PRIMARY("Primary Wand (unable to acquire scrolls)", "初始法杖（无法获取卷轴）"),
     SCROLL$BINDING("Bound via Spellbinding Table", "通过法术绑定台绑定"),
-    SCROLL$EXPLORING("Obtained through exploring %s", "探索%s获得"),
-    SCROLL$KILLING("Dropped by killing %s", "击杀%s掉落"),
-    SCROLL$CRAFT("Obtained through crafting using %s", "使用%s合成获得"),
-    SCROLL$EVENT("Can only be obtained through invasion event loot in the Ocean of Consciousness.", "只能通过识之海入侵事件战利品获得"),
+    SCROLL$EXPLORING("Explore specific structures to obtain", "探索特定结构获得"),
+    SCROLL$KILLING("Dropped by killing certain mobs, see recipes for details", "击杀特定生物掉落，详情查看配方"),
+    SCROLL$CRAFTING("Obtained through crafting using specific materials, see recipes for details", "使用特定材料合成获得，详情查看配方"),
+    SCROLL$EVENT_AWARD("Can only be obtained through invasion event loot in the Ocean of Consciousness.", "只能通过识之海入侵事件战利品获得"),
     ;
 
 

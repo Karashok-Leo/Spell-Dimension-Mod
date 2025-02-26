@@ -1,0 +1,19 @@
+{
+  "type": "enchantment_infusion:simple_infusion",
+  "copy_nbt": false,
+  "ingredients": [
+    {
+      "item": "minecraft:grass_block"
+    },
+    {
+      "tag": "spell-dimension:essence/0"
+    }
+  ],
+  "input": {
+    "item": "minecraft:leather_boots"
+  },
+  "output": {
+    "Count": 1,
+    "id": "artifacts:rooted_boots"
+  }
+}

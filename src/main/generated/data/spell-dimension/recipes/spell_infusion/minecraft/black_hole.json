@@ -1,0 +1,15 @@
+{
+  "type": "spell-dimension:spell_infusion",
+  "ingredients": [
+    {
+      "item": "minecraft:dragon_egg"
+    },
+    {
+      "item": "spell-dimension:essence_arcane_2"
+    }
+  ],
+  "input": {
+    "item": "minecraft:paper"
+  },
+  "spell_id": "minecraft:black_hole"
+}

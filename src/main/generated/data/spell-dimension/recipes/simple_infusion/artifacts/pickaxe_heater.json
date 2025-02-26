@@ -1,0 +1,19 @@
+{
+  "type": "enchantment_infusion:simple_infusion",
+  "copy_nbt": false,
+  "ingredients": [
+    {
+      "item": "l2hostility:soul_flame"
+    },
+    {
+      "tag": "spell-dimension:essence/0"
+    }
+  ],
+  "input": {
+    "item": "minecraft:netherite_pickaxe"
+  },
+  "output": {
+    "Count": 1,
+    "id": "artifacts:pickaxe_heater"
+  }
+}

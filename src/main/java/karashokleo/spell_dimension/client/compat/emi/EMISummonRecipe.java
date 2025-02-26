@@ -7,19 +7,18 @@ import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
 import karashokleo.spell_dimension.client.compat.EntityWrapper;
-import karashokleo.spell_dimension.config.recipe.SummonSpellConfig;
-import net.minecraft.item.Item;
+import karashokleo.spell_dimension.content.recipe.summon.SummonRecipe;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public record EMISummonRecipe(EmiStack input, EntityWrapper wrapper) implements EmiRecipe
+public record EMISummonRecipe(EmiIngredient input, EntityWrapper wrapper) implements EmiRecipe
 {
-    public EMISummonRecipe(Item item, SummonSpellConfig.Entry entry)
+    public EMISummonRecipe(SummonRecipe recipe)
     {
-        this(EmiStack.of(item), EntityWrapper.of(entry));
+        this(EmiIngredient.of(recipe.ingredient()), EntityWrapper.of(recipe.entityType(), recipe.count()));
     }
 
     public static final EmiStack CATALYSTS = EmiStack.of(Items.SPAWNER);

@@ -8,6 +8,7 @@ import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.item.essence.EnchantedEssenceItem;
 import karashokleo.spell_dimension.content.item.logic.Tier;
 import karashokleo.spell_dimension.content.recipe.essence.EnchantedEssenceRecipeJsonProvider;
+import karashokleo.spell_dimension.data.generic.recipe.*;
 import karashokleo.spell_dimension.init.AllBlocks;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllTags;
@@ -43,6 +44,9 @@ public class SDRecipeProvider extends FabricRecipeProvider
         addEnchantedEssenceRecipe(exporter);
         SDEnchantmentRecipes.add(exporter);
         SDLocateRecipes.add(exporter);
+        SDSummonRecipes.add(exporter);
+        SDSimpleInfusionRecipes.add(exporter);
+        SDSpellInfusionRecipes.add(exporter);
     }
 
     private static void addMiscItemRecipe(Consumer<RecipeJsonProvider> exporter)

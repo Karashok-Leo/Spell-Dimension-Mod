@@ -1,0 +1,22 @@
+{
+  "type": "enchantment_infusion:simple_infusion",
+  "copy_nbt": false,
+  "ingredients": [
+    {
+      "item": "spell-dimension:enchanted_essence"
+    },
+    {
+      "tag": "spell-dimension:essence/0"
+    }
+  ],
+  "input": {
+    "item": "minecraft:book"
+  },
+  "output": {
+    "Count": 1,
+    "id": "modonomicon:modonomicon_purple",
+    "tag": {
+      "modonomicon:book_id": "spell-dimension-book:magic_guidance"
+    }
+  }
+}

@@ -1,12 +1,13 @@
 package karashokleo.spell_dimension.client.compat;
 
 import karashokleo.l2hostility.client.L2HostilityClient;
-import karashokleo.spell_dimension.config.recipe.SummonSpellConfig;
 import karashokleo.spell_dimension.data.SDTexts;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.SlimeEntity;
 import net.minecraft.text.Text;
@@ -20,10 +21,10 @@ public record EntityWrapper(
         Text text
 )
 {
-    public static EntityWrapper of(SummonSpellConfig.Entry entry)
+    public static EntityWrapper of(EntityType<?> entityType, int count)
     {
-        LivingEntity entity = entry.entityType().create(L2HostilityClient.getClientWorld());
-        if (entity != null)
+        Entity entity = entityType.create(L2HostilityClient.getClientWorld());
+        if (entity instanceof LivingEntity living)
         {
             Box box = entity.getBoundingBox();
             double len = box.getAverageSideLength();
@@ -34,7 +35,7 @@ public record EntityWrapper(
                 ((SlimeEntity) entity).setSize(5, false);
             int scale = (int) (1.05 / len * 8.0);
 
-            return new EntityWrapper(entity, scale * 3, SDTexts.TOOLTIP$QUEST$MUL.get(entity.getName(), entry.count()).formatted(Formatting.BOLD));
+            return new EntityWrapper(living, scale * 3, SDTexts.TOOLTIP$QUEST$MUL.get(entity.getName(), count).formatted(Formatting.BOLD));
         } else
             return new EntityWrapper(null, 0, SDTexts.TEXT$INVALID_KEY_ITEM.get());
     }

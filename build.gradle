@@ -144,6 +144,11 @@ dependencies {
     modImplementation "be.florens:expandability-fabric:${project.expandability_version}"
     modImplementation "maven.modrinth:the-graveyard-fabric:${project.graveyard_version}"
     modImplementation "software.bernie.geckolib:geckolib-fabric-1.20:${project.geckolib_version_fabric}"
+    modImplementation "curse.maven:midas-hunger-fabric-436224:5187761"
+    modImplementation "curse.maven:fabric-rings-of-ascension-388793:4789480"
+    modImplementation "curse.maven:things-fabric-456151:4921204"
+    modImplementation "curse.maven:dragonloot-424480:4656260"
+    modImplementation "curse.maven:endremastered-fabric-515523:4972591"
 
     // Compat
     modCompileOnly "dev.emi:emi-fabric:${project.emi_version}:api"

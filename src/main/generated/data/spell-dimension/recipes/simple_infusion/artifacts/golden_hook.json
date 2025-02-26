@@ -1,0 +1,19 @@
+{
+  "type": "enchantment_infusion:simple_infusion",
+  "copy_nbt": false,
+  "ingredients": [
+    {
+      "item": "minecraft:experience_bottle"
+    },
+    {
+      "tag": "spell-dimension:essence/0"
+    }
+  ],
+  "input": {
+    "item": "minecraft:golden_hoe"
+  },
+  "output": {
+    "Count": 1,
+    "id": "artifacts:golden_hook"
+  }
+}

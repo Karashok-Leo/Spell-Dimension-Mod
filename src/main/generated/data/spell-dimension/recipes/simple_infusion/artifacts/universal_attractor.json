@@ -1,0 +1,19 @@
+{
+  "type": "enchantment_infusion:simple_infusion",
+  "copy_nbt": false,
+  "ingredients": [
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "tag": "spell-dimension:essence/0"
+    }
+  ],
+  "input": {
+    "item": "minecraft:redstone_block"
+  },
+  "output": {
+    "Count": 1,
+    "id": "artifacts:universal_attractor"
+  }
+}

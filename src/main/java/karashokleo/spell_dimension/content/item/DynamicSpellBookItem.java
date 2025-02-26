@@ -3,7 +3,6 @@ package karashokleo.spell_dimension.content.item;
 import com.google.common.collect.Multimap;
 import dev.emi.trinkets.api.SlotReference;
 import karashokleo.spell_dimension.SpellDimension;
-import karashokleo.spell_dimension.config.SpellConfig;
 import karashokleo.spell_dimension.content.component.GameStageComponent;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllItems;
@@ -70,7 +69,7 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
     public boolean canContainSpell(PlayerEntity player, Identifier spellId)
     {
         return GameStageComponent.isNormalMode(player) ||
-               this.grade >= SpellConfig.getSpellTier(spellId);
+               this.grade >= AllSpells.getSpellTier(spellId);
     }
 
     public int getMaxSpellCount()

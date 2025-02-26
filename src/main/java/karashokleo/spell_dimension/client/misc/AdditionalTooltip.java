@@ -9,13 +9,13 @@ import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.api.quest.Quest;
 import karashokleo.spell_dimension.api.quest.QuestUsage;
-import karashokleo.spell_dimension.config.SpellConfig;
 import karashokleo.spell_dimension.content.component.GameStageComponent;
 import karashokleo.spell_dimension.content.item.DynamicSpellBookItem;
 import karashokleo.spell_dimension.content.item.logic.EnchantedModifier;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.data.book.MagicGuidanceProvider;
 import karashokleo.spell_dimension.init.AllItems;
+import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.util.SchoolUtil;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.event.Event;
@@ -121,7 +121,7 @@ public class AdditionalTooltip
         if (spellInfo == null) return;
         SpellSchool school = spellInfo.spell().school;
         if (!SchoolUtil.SCHOOLS.contains(school)) return;
-        int grade = SpellConfig.getSpellTier(spellInfo.id());
+        int grade = AllSpells.getSpellTier(spellInfo.id());
         DynamicSpellBookItem bookItem = AllItems.SPELL_BOOKS.get(school).get(grade);
         lines.add(SDTexts.SCROLL$BOOK_REQUIREMENT.get(grade + 1, bookItem.getName()).formatted(Formatting.GRAY));
     }

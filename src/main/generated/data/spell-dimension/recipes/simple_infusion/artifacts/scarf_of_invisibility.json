@@ -1,0 +1,19 @@
+{
+  "type": "enchantment_infusion:simple_infusion",
+  "copy_nbt": false,
+  "ingredients": [
+    {
+      "item": "l2hostility:force_field"
+    },
+    {
+      "tag": "spell-dimension:essence/0"
+    }
+  ],
+  "input": {
+    "item": "minecraft:light_blue_wool"
+  },
+  "output": {
+    "Count": 1,
+    "id": "artifacts:scarf_of_invisibility"
+  }
+}

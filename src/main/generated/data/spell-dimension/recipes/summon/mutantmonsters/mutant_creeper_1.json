@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:summon",
+  "count": 1,
+  "entity_type": "mutantmonsters:mutant_creeper",
+  "ingredient": {
+    "item": "minecraft:creeper_head"
+  }
+}

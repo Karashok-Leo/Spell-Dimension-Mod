@@ -1,0 +1,19 @@
+{
+  "type": "enchantment_infusion:simple_infusion",
+  "copy_nbt": false,
+  "ingredients": [
+    {
+      "item": "spell-dimension:essence_fire_2"
+    },
+    {
+      "tag": "spell-dimension:essence/0"
+    }
+  ],
+  "input": {
+    "item": "mythicmetals:carmot_block"
+  },
+  "output": {
+    "Count": 1,
+    "id": "mythicmetals:carmot_stone"
+  }
+}

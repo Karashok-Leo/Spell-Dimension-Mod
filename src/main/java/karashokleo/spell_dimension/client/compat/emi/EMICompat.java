@@ -5,11 +5,11 @@ import dev.emi.emi.api.EmiRegistry;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import karashokleo.l2hostility.compat.emi.EMICategory;
 import karashokleo.spell_dimension.SpellDimension;
-import karashokleo.spell_dimension.config.recipe.InfusionRecipes;
-import karashokleo.spell_dimension.config.recipe.SummonSpellConfig;
 import karashokleo.spell_dimension.content.recipe.locate.LocateRecipe;
+import karashokleo.spell_dimension.content.recipe.summon.SummonRecipe;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.data.SpellTexts;
+import net.minecraft.recipe.RecipeManager;
 import net.minecraft.util.Identifier;
 
 public class EMICompat implements EmiPlugin
@@ -31,11 +31,11 @@ public class EMICompat implements EmiPlugin
         registry.addCategory(SUMMON_CATEGORY);
         registry.addCategory(SPELL_INFUSION_CATEGORY);
 
-        for (LocateRecipe locateRecipe : registry.getRecipeManager().listAllOfType(LocateRecipe.TYPE))
+        RecipeManager recipeManager = registry.getRecipeManager();
+        for (LocateRecipe locateRecipe : recipeManager.listAllOfType(LocateRecipe.TYPE))
             registry.addRecipe(new EMILocateRecipe(locateRecipe));
-
-        SummonSpellConfig.forEach((item, entry) -> registry.addRecipe(new EMISummonRecipe(item, entry)));
-        InfusionRecipes.getAll().forEach(entry -> registry.addRecipe(new EMIInfusionRecipe(entry.getRowKey(), entry.getColumnKey(), entry.getValue())));
+        for (SummonRecipe summonRecipe : recipeManager.listAllOfType(SummonRecipe.TYPE))
+            registry.addRecipe(new EMISummonRecipe(summonRecipe));
 
         registry.addWorkstation(LOCATE_CATEGORY, EMILocateRecipe.CATALYSTS);
         registry.addWorkstation(SUMMON_CATEGORY, EMISummonRecipe.CATALYSTS);

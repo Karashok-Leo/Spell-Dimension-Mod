@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:summon",
+  "count": 20,
+  "entity_type": "artifacts:mimic",
+  "ingredient": {
+    "item": "l2hostility:miracle_ingot"
+  }
+}

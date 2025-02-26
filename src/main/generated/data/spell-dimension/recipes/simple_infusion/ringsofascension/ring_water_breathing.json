@@ -1,0 +1,19 @@
+{
+  "type": "enchantment_infusion:simple_infusion",
+  "copy_nbt": false,
+  "ingredients": [
+    {
+      "item": "plentyofarmors:marine_diamond"
+    },
+    {
+      "tag": "spell-dimension:essence/0"
+    }
+  ],
+  "input": {
+    "item": "minecraft:heart_of_the_sea"
+  },
+  "output": {
+    "Count": 1,
+    "id": "ringsofascension:ring_water_breathing"
+  }
+}

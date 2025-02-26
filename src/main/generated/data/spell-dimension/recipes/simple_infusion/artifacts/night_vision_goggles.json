@@ -1,0 +1,19 @@
+{
+  "type": "enchantment_infusion:simple_infusion",
+  "copy_nbt": false,
+  "ingredients": [
+    {
+      "item": "minecraft:golden_carrot"
+    },
+    {
+      "tag": "spell-dimension:essence/0"
+    }
+  ],
+  "input": {
+    "item": "l2hostility:detector_glasses"
+  },
+  "output": {
+    "Count": 1,
+    "id": "artifacts:night_vision_goggles"
+  }
+}
