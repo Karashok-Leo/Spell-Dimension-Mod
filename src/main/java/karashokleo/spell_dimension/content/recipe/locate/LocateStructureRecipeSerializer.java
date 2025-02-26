@@ -15,7 +15,7 @@ public class LocateStructureRecipeSerializer implements RecipeSerializer<LocateS
     public LocateStructureRecipe read(Identifier id, JsonObject json)
     {
         Identifier world = new Identifier(JsonHelper.getString(json, "world"));
-        Ingredient ingredient = Ingredient.fromJson(JsonHelper.getObject(json, "ingredient"));
+        Ingredient ingredient = Ingredient.fromJson(JsonHelper.getElement(json, "ingredient"));
         Identifier structure = new Identifier(JsonHelper.getString(json, "structure"));
         return new LocateStructureRecipe(id, world, ingredient, structure);
     }

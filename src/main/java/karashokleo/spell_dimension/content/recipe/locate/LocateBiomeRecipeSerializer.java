@@ -15,7 +15,7 @@ public class LocateBiomeRecipeSerializer implements RecipeSerializer<LocateBiome
     public LocateBiomeRecipe read(Identifier id, JsonObject json)
     {
         Identifier world = new Identifier(JsonHelper.getString(json, "world"));
-        Ingredient ingredient = Ingredient.fromJson(JsonHelper.getObject(json, "ingredient"));
+        Ingredient ingredient = Ingredient.fromJson(JsonHelper.getElement(json, "ingredient"));
         Identifier biomeTag = new Identifier(JsonHelper.getString(json, "biomeTag"));
         return new LocateBiomeRecipe(id, world, ingredient, biomeTag);
     }

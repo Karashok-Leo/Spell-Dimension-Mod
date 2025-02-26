@@ -25,7 +25,7 @@ import java.util.List;
 
 public class EnchantedEssenceItem extends StackClickEssenceItem
 {
-    public static final int[] CRAFT_THRESHOLD = {33, 66, 99};
+    public static final int[] CRAFT_THRESHOLD = {10, 20, 30};
     private static final String ENCHANTED_MODIFIERS = "EnchantedModifiers";
 
     public EnchantedEssenceItem()
