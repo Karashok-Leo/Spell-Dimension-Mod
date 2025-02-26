@@ -1,6 +1,6 @@
 {
   "type": "spell-dimension:locate_biome",
-  "biome": "c:snowy",
+  "biomeTag": "c:snowy",
   "ingredient": {
     "item": "minecraft:snowball"
   },

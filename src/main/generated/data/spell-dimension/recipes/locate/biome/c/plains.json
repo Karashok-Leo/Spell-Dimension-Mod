@@ -1,6 +1,6 @@
 {
   "type": "spell-dimension:locate_biome",
-  "biome": "c:plains",
+  "biomeTag": "c:plains",
   "ingredient": {
     "item": "minecraft:grass_block"
   },

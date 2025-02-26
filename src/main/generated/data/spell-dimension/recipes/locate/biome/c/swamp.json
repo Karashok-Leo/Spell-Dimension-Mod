@@ -1,6 +1,6 @@
 {
   "type": "spell-dimension:locate_biome",
-  "biome": "c:swamp",
+  "biomeTag": "c:swamp",
   "ingredient": {
     "item": "minecraft:vine"
   },

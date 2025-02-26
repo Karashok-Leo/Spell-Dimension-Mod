@@ -1,6 +1,6 @@
 {
   "type": "spell-dimension:locate_biome",
-  "biome": "c:mushroom",
+  "biomeTag": "c:mushroom",
   "ingredient": {
     "item": "minecraft:brown_mushroom"
   },

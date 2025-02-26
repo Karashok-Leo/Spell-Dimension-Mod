@@ -1,6 +1,6 @@
 {
   "type": "spell-dimension:locate_biome",
-  "biome": "c:desert",
+  "biomeTag": "c:desert",
   "ingredient": {
     "item": "minecraft:sand"
   },

@@ -1,6 +1,6 @@
 {
   "type": "spell-dimension:locate_biome",
-  "biome": "c:ocean",
+  "biomeTag": "c:ocean",
   "ingredient": {
     "item": "minecraft:kelp"
   },

@@ -1,6 +1,6 @@
 {
   "type": "spell-dimension:locate_biome",
-  "biome": "c:jungle",
+  "biomeTag": "c:jungle",
   "ingredient": {
     "item": "minecraft:cocoa_beans"
   },

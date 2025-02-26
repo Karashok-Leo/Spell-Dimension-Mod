@@ -1,6 +1,6 @@
 {
   "type": "spell-dimension:locate_biome",
-  "biome": "c:badlands",
+  "biomeTag": "c:badlands",
   "ingredient": {
     "item": "minecraft:clay_ball"
   },

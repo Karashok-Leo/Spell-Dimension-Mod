@@ -19,7 +19,7 @@ public class LocateBiomeRecipeProvider extends LocateRecipeProvider
     public void serialize(JsonObject json)
     {
         super.serialize(json);
-        json.addProperty("biome", biomeTag.toString());
+        json.addProperty("biomeTag", biomeTag.toString());
     }
 
     @Override

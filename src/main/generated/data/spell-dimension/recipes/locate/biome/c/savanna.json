@@ -1,6 +1,6 @@
 {
   "type": "spell-dimension:locate_biome",
-  "biome": "c:savanna",
+  "biomeTag": "c:savanna",
   "ingredient": {
     "item": "minecraft:acacia_log"
   },

@@ -1,6 +1,6 @@
 {
   "type": "spell-dimension:locate_biome",
-  "biome": "c:taiga",
+  "biomeTag": "c:taiga",
   "ingredient": {
     "item": "minecraft:sweet_berries"
   },

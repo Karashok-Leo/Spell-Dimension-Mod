@@ -1,6 +1,6 @@
 {
   "type": "spell-dimension:locate_biome",
-  "biome": "c:icy",
+  "biomeTag": "c:icy",
   "ingredient": {
     "item": "minecraft:ice"
   },
