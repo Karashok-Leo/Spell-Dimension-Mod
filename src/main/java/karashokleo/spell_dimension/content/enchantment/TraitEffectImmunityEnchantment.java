@@ -3,24 +3,26 @@ package karashokleo.spell_dimension.content.enchantment;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 
+import java.util.function.Supplier;
+
 public class TraitEffectImmunityEnchantment extends EffectImmunityEnchantment
 {
-    private final StatusEffect effect;
+    private final Supplier<StatusEffect> effectSupplier;
 
-    public TraitEffectImmunityEnchantment(StatusEffect effect)
+    public TraitEffectImmunityEnchantment(Supplier<StatusEffect> effectSupplier)
     {
         super();
-        this.effect = effect;
+        this.effectSupplier = effectSupplier;
     }
 
     @Override
     public boolean test(StatusEffectInstance effectInstance)
     {
-        return this.effect == effectInstance.getEffectType();
+        return this.getEffect() == effectInstance.getEffectType();
     }
 
     public StatusEffect getEffect()
     {
-        return effect;
+        return effectSupplier.get();
     }
 }

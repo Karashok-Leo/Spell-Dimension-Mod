@@ -6,15 +6,20 @@ import karashokleo.l2hostility.content.item.ConsumableItems;
 import karashokleo.l2hostility.data.config.WeaponConfig;
 import karashokleo.l2hostility.init.LHData;
 import karashokleo.l2hostility.init.LHMiscs;
+import karashokleo.l2hostility.init.LHTags;
 import karashokleo.spell_dimension.content.component.GameStageComponent;
 import karashokleo.spell_dimension.data.SDTexts;
+import karashokleo.spell_dimension.data.loot_bag.TextConstants;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.util.AttributeUtil;
 import karashokleo.spell_dimension.util.SchoolUtil;
 import karashokleo.spell_dimension.util.TagUtil;
+import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -30,10 +35,19 @@ import java.util.ArrayList;
 
 public class DifficultyEvents
 {
-    private static final String[] rarities = {"common", "uncommon", "rare", "epic", "legendary"};
-
     public static void init()
     {
+        // 逝不过一
+        ServerEntityCombatEvents.AFTER_KILLED_OTHER_ENTITY.register((world, entity, killedEntity) ->
+        {
+            if (!entity.getType().isIn(LHTags.SEMIBOSS)) return;
+            if (!(killedEntity instanceof PlayerEntity)) return;
+            if (!(entity instanceof LivingEntity living)) return;
+            // if other players are in the range
+            if (!world.getPlayers(player -> player.isAlive() && player.isInRange(entity, 32)).isEmpty()) return;
+            living.setHealth(living.getMaxHealth());
+        });
+
         // Ban items in hard mode
         UseItemCallback.EVENT.register((player, world, hand) ->
         {
@@ -94,8 +108,8 @@ public class DifficultyEvents
             for (int i = 0; i < 5; i++)
             {
                 int level = 40 * (i + 1);
-                TagKey<Item> armorTag = TagUtil.itemTag(rarities[i] + "/armor");
-                TagKey<Item> weaponTag = TagUtil.itemTag(rarities[i] + "/weapon");
+                TagKey<Item> armorTag = TagUtil.itemTag(TextConstants.RARITIES[i] + "/armor");
+                TagKey<Item> weaponTag = TagUtil.itemTag(TextConstants.RARITIES[i] + "/weapon");
                 putArmors(armorTag, level, config);
                 putWeapons(weaponTag, level, config);
             }

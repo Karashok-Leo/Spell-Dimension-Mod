@@ -1,0 +1,15 @@
+{
+  "type": "spell-dimension:spell_infusion",
+  "ingredients": [
+    {
+      "item": "plentyofarmors:heart_of_the_end"
+    },
+    {
+      "item": "spell-dimension:essence_arcane_0"
+    }
+  ],
+  "input": {
+    "item": "minecraft:paper"
+  },
+  "spell_id": "spell-dimension:shift"
+}

@@ -1,0 +1,15 @@
+{
+  "type": "spell-dimension:spell_infusion",
+  "ingredients": [
+    {
+      "item": "l2hostility:killer_aura"
+    },
+    {
+      "item": "spell-dimension:essence_healing_2"
+    }
+  ],
+  "input": {
+    "item": "minecraft:paper"
+  },
+  "spell_id": "spell-dimension:divine_aura"
+}

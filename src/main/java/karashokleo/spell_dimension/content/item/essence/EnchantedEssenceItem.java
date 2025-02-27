@@ -3,7 +3,7 @@ package karashokleo.spell_dimension.content.item.essence;
 import karashokleo.spell_dimension.config.AttributeColorConfig;
 import karashokleo.spell_dimension.content.component.GameStageComponent;
 import karashokleo.spell_dimension.content.item.essence.base.StackClickEssenceItem;
-import karashokleo.spell_dimension.content.item.logic.EnchantedModifier;
+import karashokleo.spell_dimension.content.object.EnchantedModifier;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.util.AttributeUtil;
 import karashokleo.spell_dimension.util.ParticleUtil;

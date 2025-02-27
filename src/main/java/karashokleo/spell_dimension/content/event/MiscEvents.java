@@ -6,7 +6,9 @@ import io.github.fabricators_of_create.porting_lib.entity.events.PlayerInteracti
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.l2hostility.content.feature.EntityFeature;
 import karashokleo.l2hostility.content.item.TrinketItems;
+import karashokleo.l2hostility.init.LHTags;
 import karashokleo.leobrary.damage.api.modify.DamagePhase;
+import karashokleo.spell_dimension.content.item.SpellPrismItem;
 import karashokleo.spell_dimension.content.item.SpellScrollItem;
 import karashokleo.spell_dimension.content.misc.ISpawnerExtension;
 import karashokleo.spell_dimension.content.network.C2SSelectQuest;
@@ -15,7 +17,6 @@ import karashokleo.spell_dimension.init.AllPackets;
 import karashokleo.spell_dimension.init.AllTags;
 import karashokleo.spell_dimension.init.AllWorldGen;
 import karashokleo.spell_dimension.util.SchoolUtil;
-import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
@@ -23,8 +24,6 @@ import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.MobSpawnerBlockEntity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
@@ -37,6 +36,20 @@ public class MiscEvents
 {
     public static void init()
     {
+        // Spell Prism
+        DamagePhase.ARMOR.registerModifier(0, access ->
+        {
+            if (!access.getSource().isIn(LHTags.MAGIC))
+                return;
+            if (!(access.getAttacker() instanceof LivingEntity attacker))
+                return;
+            ItemStack stack = attacker.getOffHandStack();
+            if (!(stack.getItem() instanceof SpellPrismItem))
+                return;
+            stack.damage(1, attacker, e -> e.sendToolBreakStatus(Hand.OFF_HAND));
+            access.getSource().setBypassMagic();
+        });
+
         // attempt to fix NaN health
         LivingEntityEvents.LivingTickEvent.TICK.register(event ->
         {
@@ -89,16 +102,6 @@ public class MiscEvents
                  player.getOffHandStack().getItem() instanceof BlockItem &&
                  player.getMainHandStack().getItem() instanceof SpellScrollItem) ? ActionResult.FAIL : ActionResult.PASS);
 
-        // Spell Container
-        ServerEntityCombatEvents.AFTER_KILLED_OTHER_ENTITY.register((world, entity, killedEntity) ->
-        {
-            if (entity instanceof PlayerEntity player)
-            {
-                PlayerInventory inventory = player.getInventory();
-                AllItems.SPELL_CONTAINER.addKillCredit(inventory, killedEntity);
-            }
-        });
-
         // Spawner Soul
         PlayerBlockBreakEvents.AFTER.register((world, player, pos, state, blockEntity) ->
         {
@@ -107,9 +110,6 @@ public class MiscEvents
             ItemStack spawnerSoulStack = AllItems.SPAWNER_SOUL.getStack((ISpawnerExtension) spawner.getLogic());
             if (spawnerSoulStack.isEmpty()) return;
             Block.dropStack(world, pos, spawnerSoulStack);
-
-            // 刷怪笼破坏计数
-            AllItems.SPELL_CONTAINER.addBreakSpawnerCredit(player.getInventory());
         });
 
         // 调试棒伤害

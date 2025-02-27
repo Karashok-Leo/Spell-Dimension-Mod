@@ -190,6 +190,7 @@ public enum SDTexts
     TOOLTIP$BOTTLE_SOUL_BINDING("After using it, you will no longer lose the item when you die", "使用后，死亡不再丢失物品"),
     TOOLTIP$BOTTLE_SOUL_BINDING$WARNING("By default, items other than trinkets dropped by a player upon death are retained in the Gravestone. However, for some unknown reason, it is still possible, albeit highly unlikely, for items in the gravestone to disappear. If you are completely intolerant of the possibility of losing everything you own, drink this potion.", "默认情况下，玩家死亡时掉落的除饰品外的其他物品将被保留在墓碑中。但由于某些不明原因，墓碑中的物品仍有可能不翼而飞，尽管这种可能性微乎其微。如果你完全无法容忍失去所有身家的可能性，请喝下这瓶药水。"),
     TOOLTIP$SHIFT_RESET("Shift + Right-click to reset the progress", "Shift + 右键重置进度"),
+    TOOLTIP$SPELL_PRISM("Consuming durability to make your spell damage bypass magical protection.","消耗耐久使你的法术伤害可以穿透魔法防御"),
 
     /**
      * Scrolls

@@ -1,7 +1,7 @@
 package karashokleo.spell_dimension.content.component;
 
 import dev.onyxstudios.cca.api.v3.component.Component;
-import karashokleo.spell_dimension.content.item.logic.EnlighteningModifier;
+import karashokleo.spell_dimension.content.object.EnlighteningModifier;
 import karashokleo.spell_dimension.init.AllComponents;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;

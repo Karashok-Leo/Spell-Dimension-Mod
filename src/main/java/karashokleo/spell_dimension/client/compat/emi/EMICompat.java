@@ -16,20 +16,16 @@ public class EMICompat implements EmiPlugin
 {
     public static final Identifier LOCATE = SpellDimension.modLoc("locate");
     public static final Identifier SUMMON = SpellDimension.modLoc("summon");
-    public static final Identifier SPELL_INFUSION = SpellDimension.modLoc("spell_infusion");
 
     public static final EmiRecipeCategory LOCATE_CATEGORY = new EMICategory(LOCATE, EMILocateRecipe.CATALYSTS, SpellTexts.LOCATE::getNameText);
 
     public static final EmiRecipeCategory SUMMON_CATEGORY = new EMICategory(SUMMON, EMISummonRecipe.CATALYSTS, SpellTexts.SUMMON::getNameText);
-
-    public static final EmiRecipeCategory SPELL_INFUSION_CATEGORY = new EMICategory(SPELL_INFUSION, EMIInfusionRecipe.CATALYSTS, SDTexts.TEXT$SPELL_INFUSION::get);
 
     @Override
     public void register(EmiRegistry registry)
     {
         registry.addCategory(LOCATE_CATEGORY);
         registry.addCategory(SUMMON_CATEGORY);
-        registry.addCategory(SPELL_INFUSION_CATEGORY);
 
         RecipeManager recipeManager = registry.getRecipeManager();
         for (LocateRecipe locateRecipe : recipeManager.listAllOfType(LocateRecipe.TYPE))
@@ -39,6 +35,5 @@ public class EMICompat implements EmiPlugin
 
         registry.addWorkstation(LOCATE_CATEGORY, EMILocateRecipe.CATALYSTS);
         registry.addWorkstation(SUMMON_CATEGORY, EMISummonRecipe.CATALYSTS);
-        registry.addWorkstation(SPELL_INFUSION_CATEGORY, EMIInfusionRecipe.CATALYSTS);
     }
 }

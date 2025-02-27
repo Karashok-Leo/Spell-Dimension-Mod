@@ -5,7 +5,7 @@
   "description": "book.spell-dimension-book.magic_guidance.power.spell_infusion.description",
   "hide_while_locked": false,
   "icon": {
-    "item": "spell-dimension:spell_infusion_pedestal"
+    "item": "spell-dimension:spell_prism"
   },
   "name": "book.spell-dimension-book.magic_guidance.power.spell_infusion.name",
   "pages": [
@@ -15,9 +15,14 @@
       "condition": {
         "type": "modonomicon:none"
       },
-      "item": {
-        "item": "spell-dimension:spell_infusion_pedestal"
-      },
+      "item": [
+        {
+          "item": "enchantment_infusion:enchantment_infusion_table"
+        },
+        {
+          "item": "enchantment_infusion:enchantment_infusion_pedestal"
+        }
+      ],
       "text": "book.spell-dimension-book.magic_guidance.power.spell_infusion.text.text",
       "title": "book.spell-dimension-book.magic_guidance.power.spell_infusion.text.title"
     }

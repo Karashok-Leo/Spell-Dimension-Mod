@@ -1,0 +1,28 @@
+{
+  "type": "enchantment_infusion:simple_infusion",
+  "copy_nbt": false,
+  "ingredients": [
+    {
+      "item": "l2hostility:soul_flame"
+    },
+    {
+      "item": "l2hostility:hard_ice"
+    },
+    {
+      "item": "l2hostility:cursed_droplet"
+    },
+    {
+      "item": "l2hostility:witch_droplet"
+    }
+  ],
+  "input": {
+    "item": "minecraft:glass_pane"
+  },
+  "output": {
+    "Count": 1,
+    "id": "spell-dimension:spell_prism",
+    "tag": {
+      "Damage": 0
+    }
+  }
+}

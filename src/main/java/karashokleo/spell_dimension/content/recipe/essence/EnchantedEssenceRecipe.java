@@ -1,7 +1,7 @@
 package karashokleo.spell_dimension.content.recipe.essence;
 
-import karashokleo.spell_dimension.content.item.logic.EnchantedModifier;
-import karashokleo.spell_dimension.content.item.logic.EnlighteningModifier;
+import karashokleo.spell_dimension.content.object.EnchantedModifier;
+import karashokleo.spell_dimension.content.object.EnlighteningModifier;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.util.UuidUtil;
 import net.minecraft.entity.EquipmentSlot;

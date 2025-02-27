@@ -2,7 +2,7 @@ package karashokleo.spell_dimension.mixin.client;
 
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.item.essence.EnchantedEssenceItem;
-import karashokleo.spell_dimension.content.item.logic.EnchantedModifier;
+import karashokleo.spell_dimension.content.object.EnchantedModifier;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;

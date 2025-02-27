@@ -6,6 +6,7 @@ import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookEntityPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookSpotlightPageModel;
+import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
 import karashokleo.spell_dimension.data.book.entry.BaseEntryProvider;
 import karashokleo.spell_dimension.data.loot_bag.TextConstants;
 import net.adventurez.init.ItemInit;
@@ -66,19 +67,52 @@ public class VoidShadowEntry extends BaseEntryProvider
                         击败眼球后将生成一个浮岛，通过其上的传送门可进入虚空之影的领域。
                         """.formatted(TextConstants.BOSS_LEVELS[4])
         );
-
         BookSpotlightPageModel boss = BookSpotlightPageModel
                 .builder()
                 .withTitle(context.pageTitle())
                 .withText(context.pageText())
                 .withItem(Ingredient.ofItems(ItemInit.SOURCE_STONE))
                 .build();
-        BookEntityPageModel entity = BookEntityPageModel
+
+        context.page("behavior");
+        this.lang().add(context.pageText(),
+                """
+                        When Void Shadow has at least half its health, you can deal damage to its body by killing the Servants He summons. Each hit deals damage equal to the Servant's max health, but not more than 1%% of Void Shadow's max health.
+                        \\
+                        \\
+                        When Void Shadow has less than half of its health left, He will enter a berserk state. At this point, if you destroy all the Void Fragments on the platform, he will stop rotating around the platform and come to the center to duel with you.
+                        """
+        );
+        this.lang("zh_cn").add(context.pageText(),
+                """
+                        当虚空之影至少有一半生命值时，你可以通过击杀祂召唤的侍从对其本体造成伤害。每次击杀造成的伤害等于侍从的最大生命值，但不会超过虚空之影的最大生命值的1%%。
+                        \\
+                        \\
+                        当虚空之影只剩下不到一半生命值时，祂将进入狂暴状态。此时如果你摧毁了平台上的所有虚空碎片，祂将停止围绕平台旋转，并来到平台中心与你决战。
+                        """
+        );
+        BookTextPageModel behavior = BookTextPageModel
                 .builder()
-                .withEntityId("adventurez:void_shadow")
+                .withText(context.pageText())
                 .build();
 
-        return List.of(boss, entity);
+        BookEntityPageModel shadow = BookEntityPageModel
+                .builder()
+                .withOffset(-0.4f)
+                .withEntityId("adventurez:void_shadow")
+                .build();
+        BookEntityPageModel shade = BookEntityPageModel
+                .builder()
+                .withOffset(-0.4f)
+                .withEntityId("adventurez:void_shade")
+                .build();
+        BookEntityPageModel fragment = BookEntityPageModel
+                .builder()
+                .withOffset(-0.8f)
+                .withEntityId("adventurez:void_fragment")
+                .build();
+
+        return List.of(boss, behavior, shadow, shade, fragment);
     }
 
     @Override

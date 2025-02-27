@@ -237,7 +237,7 @@ public class AllSpells
 
     private static Entry fromCrafting(String name)
     {
-        return new Entry(name).withScrollType(ScrollType.CRAFTING);
+        return new Entry(SpellDimension.modLoc(name)).withScrollType(ScrollType.CRAFTING);
     }
 
     public static class Entry

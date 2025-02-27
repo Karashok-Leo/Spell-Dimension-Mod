@@ -26,6 +26,17 @@
       "title": "book.spell-dimension-book.magic_guidance.boss.void_shadow.boss.title"
     },
     {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "show_title_separator": true,
+      "text": "book.spell-dimension-book.magic_guidance.boss.void_shadow.behavior.text",
+      "title": "",
+      "use_markdown_in_title": false
+    },
+    {
       "type": "modonomicon:entity",
       "anchor": "",
       "condition": {
@@ -34,7 +45,35 @@
       "default_rotation": -45.0,
       "entity_id": "adventurez:void_shadow",
       "name": "",
-      "offset": 0.0,
+      "offset": -0.4,
+      "rotate": true,
+      "scale": 1.0,
+      "text": ""
+    },
+    {
+      "type": "modonomicon:entity",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "default_rotation": -45.0,
+      "entity_id": "adventurez:void_shade",
+      "name": "",
+      "offset": -0.4,
+      "rotate": true,
+      "scale": 1.0,
+      "text": ""
+    },
+    {
+      "type": "modonomicon:entity",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "default_rotation": -45.0,
+      "entity_id": "adventurez:void_fragment",
+      "name": "",
+      "offset": -0.8,
       "rotate": true,
       "scale": 1.0,
       "text": ""

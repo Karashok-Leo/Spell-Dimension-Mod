@@ -5,7 +5,6 @@ import karashokleo.spell_dimension.content.quest.base.SimpleItemChallengeQuest;
 import karashokleo.spell_dimension.content.quest.base.SimpleItemQuest;
 import karashokleo.spell_dimension.content.quest.base.SimpleTagIngredientQuest;
 import karashokleo.spell_dimension.data.loot_bag.SDBags;
-import karashokleo.spell_dimension.init.AllBlocks;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllTags;
 import net.minecraft.registry.Registries;
@@ -24,7 +23,6 @@ public class CraftQuests
     public static SimpleItemChallengeQuest DOGE;
     public static SimpleItemChallengeQuest FROGE;
     public static SimpleItemQuest ENCHANTMENT_INFUSION;
-    public static SimpleItemQuest SPELL_INFUSION;
     public static SimpleItemQuest SPELL_SCROLL;
 
     public static void register()
@@ -131,25 +129,15 @@ public class CraftQuests
                 .toEntry("power/enchant")
                 .addDependencies(BaseQuests.HOSTILITY_ORB)
                 .register();
-        SPELL_INFUSION = QuestBuilder.of(
-                        "spell_infusion",
-                        new SimpleItemQuest(
-                                () -> AllBlocks.SPELL_INFUSION_PEDESTAL.item(),
-                                SDBags.ARING::getStack
-                        )
-                )
-                .toEntry("power/spell_infusion")
-                .addDependencies(ENCHANTMENT_INFUSION)
-                .register();
         SPELL_SCROLL = QuestBuilder.of(
                         "spell_scroll",
                         new SimpleItemQuest(
                                 () -> AllItems.SPELL_SCROLL,
-                                SDBags.ARTIFACT::getStack
+                                SDBags.ARING::getStack
                         )
                 )
                 .toEntry("mage/scroll")
-                .addDependencies(SPELL_INFUSION)
+                .addDependencies(ENCHANTMENT_INFUSION)
                 .register();
     }
 }

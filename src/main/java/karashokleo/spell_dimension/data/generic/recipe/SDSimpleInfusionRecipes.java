@@ -75,5 +75,15 @@ public class SDSimpleInfusionRecipes
         add(exporter, MythicBlocks.STORMYX.getStorageBlock().asItem(), AllItems.BASE_ESSENCES.get(SpellSchools.ARCANE).get(2), MythicItems.Mats.STORMYX_SHELL.getDefaultStack());
         add(exporter, MythicBlocks.CARMOT.getStorageBlock().asItem(), AllItems.BASE_ESSENCES.get(SpellSchools.FIRE).get(2), MythicItems.Mats.CARMOT_STONE.getDefaultStack());
         add(exporter, MythicBlocks.AQUARIUM.getStorageBlock().asItem(), AllItems.BASE_ESSENCES.get(SpellSchools.FROST).get(2), MythicItems.Mats.AQUARIUM_PEARL.getDefaultStack());
+
+        // Spell Prism
+        new SimpleInfusionRecipeBuilder()
+                .withTableIngredient(Ingredient.ofItems(Items.GLASS_PANE))
+                .withPedestalItem(1, ComplementItems.SOUL_FLAME)
+                .withPedestalItem(1, ComplementItems.HARD_ICE)
+                .withPedestalItem(1, ComplementItems.CURSED_DROPLET)
+                .withPedestalItem(1, MiscItems.WITCH_DROPLET)
+                .copyNbt(false)
+                .offerTo(exporter, SpellDimension.modLoc("spell_prism"), AllItems.SPELL_PRISM.getDefaultStack());
     }
 }

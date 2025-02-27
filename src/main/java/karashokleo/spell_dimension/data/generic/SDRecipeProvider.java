@@ -1,15 +1,13 @@
 package karashokleo.spell_dimension.data.generic;
 
-import karashokleo.enchantment_infusion.init.EIItems;
 import karashokleo.fusion_smithing.item.FusionSmithingTemplateItem;
 import karashokleo.l2hostility.content.item.ComplementItems;
 import karashokleo.l2hostility.content.item.ConsumableItems;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.item.essence.EnchantedEssenceItem;
-import karashokleo.spell_dimension.content.item.logic.Tier;
+import karashokleo.spell_dimension.content.object.Tier;
 import karashokleo.spell_dimension.content.recipe.essence.EnchantedEssenceRecipeJsonProvider;
 import karashokleo.spell_dimension.data.generic.recipe.*;
-import karashokleo.spell_dimension.init.AllBlocks;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllTags;
 import karashokleo.spell_dimension.util.SchoolUtil;
@@ -79,17 +77,6 @@ public class SDRecipeProvider extends FabricRecipeProvider
                         FabricRecipeProvider.conditionsFromItem(Items.PAPER)
                 )
                 .offerTo(exporter, SpellDimension.modLoc("empty_quest_scroll"));
-
-        // Spell Infusion Pedestal
-        ShapelessRecipeJsonBuilder
-                .create(RecipeCategory.MISC, AllBlocks.SPELL_INFUSION_PEDESTAL.item())
-                .input(EIItems.INFUSION_PEDESTAL_ITEM)
-                .input(Ingredient.fromTag(AllTags.ESSENCE_ALL))
-                .criterion(
-                        FabricRecipeProvider.hasItem(EIItems.INFUSION_PEDESTAL_ITEM),
-                        FabricRecipeProvider.conditionsFromItem(EIItems.INFUSION_PEDESTAL_ITEM)
-                )
-                .offerTo(exporter, SpellDimension.modLoc("spell_infusion_pedestal"));
 
         // Broken Magic Mirror
         ShapedRecipeJsonBuilder

@@ -1,7 +1,13 @@
 package karashokleo.spell_dimension.mixin.modded;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.llamalad7.mixinextras.sugar.Local;
+import net.adventurez.entity.VoidShadeEntity;
 import net.adventurez.entity.VoidShadowEntity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.FlyingEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -41,5 +47,18 @@ public abstract class VoidShadowEntityMixin extends FlyingEntity
             this.setVoidMiddle(0, 100, 0);
         if (this.getBlockPos().getManhattanDistance(this.getVoidMiddle()) > 200)
             this.teleport(this.getVoidMiddle().getX(), this.getVoidMiddle().getY(), this.getVoidMiddle().getZ());
+    }
+
+    @WrapOperation(
+            method = "damage",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/entity/LivingEntity;takeKnockback(DDD)V"
+            )
+    )
+    private void inject_damage(LivingEntity instance, double strength, double x, double z, Operation<Void> original, @Local(argsOnly = true) DamageSource source)
+    {
+        if (!(source.getSource() instanceof VoidShadeEntity))
+            original.call(instance, strength, x, z);
     }
 }

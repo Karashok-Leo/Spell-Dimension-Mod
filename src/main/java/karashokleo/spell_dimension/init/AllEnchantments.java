@@ -128,70 +128,70 @@ public class AllEnchantments
                 .addTag(AllTags.LOOTABLE)
                 .register();
 
-        WEAKNESS_IMMUNITY = new Entry<>("weakness_immunity", new TraitEffectImmunityEnchantment(StatusEffects.WEAKNESS))
+        WEAKNESS_IMMUNITY = new Entry<>("weakness_immunity", new TraitEffectImmunityEnchantment(() -> StatusEffects.WEAKNESS))
                 .addEN()
                 .addENDesc("You are immune to the Weakness effect.")
                 .addZH("虚弱免疫")
                 .addZHDesc("你对虚弱效果免疫。")
                 .register();
 
-        SLOWNESS_IMMUNITY = new Entry<>("slowness_immunity", new TraitEffectImmunityEnchantment(StatusEffects.SLOWNESS))
+        SLOWNESS_IMMUNITY = new Entry<>("slowness_immunity", new TraitEffectImmunityEnchantment(() -> StatusEffects.SLOWNESS))
                 .addEN()
                 .addENDesc("You are immune to the Slowness effect.")
                 .addZH("缓慢免疫")
                 .addZHDesc("你对缓慢效果免疫。")
                 .register();
 
-        POISON_IMMUNITY = new Entry<>("poison_immunity", new TraitEffectImmunityEnchantment(StatusEffects.POISON))
+        POISON_IMMUNITY = new Entry<>("poison_immunity", new TraitEffectImmunityEnchantment(() -> StatusEffects.POISON))
                 .addEN()
                 .addENDesc("You are immune to the Poison effect.")
                 .addZH("毒性免疫")
                 .addZHDesc("你对中毒效果免疫。")
                 .register();
 
-        WITHER_IMMUNITY = new Entry<>("wither_immunity", new TraitEffectImmunityEnchantment(StatusEffects.WITHER))
+        WITHER_IMMUNITY = new Entry<>("wither_immunity", new TraitEffectImmunityEnchantment(() -> StatusEffects.WITHER))
                 .addEN()
                 .addENDesc("You are immune to the Wither effect.")
                 .addZH("凋零免疫")
                 .addZHDesc("你对凋零效果免疫。")
                 .register();
 
-        BLINDNESS_IMMUNITY = new Entry<>("blindness_immunity", new TraitEffectImmunityEnchantment(StatusEffects.BLINDNESS))
+        BLINDNESS_IMMUNITY = new Entry<>("blindness_immunity", new TraitEffectImmunityEnchantment(() -> StatusEffects.BLINDNESS))
                 .addEN()
                 .addENDesc("You are immune to the Blindness effect.")
                 .addZH("失明免疫")
                 .addZHDesc("你对失明效果免疫。")
                 .register();
 
-        CONFUSION_IMMUNITY = new Entry<>("nausea_immunity", new TraitEffectImmunityEnchantment(StatusEffects.NAUSEA))
+        CONFUSION_IMMUNITY = new Entry<>("nausea_immunity", new TraitEffectImmunityEnchantment(() -> StatusEffects.NAUSEA))
                 .addEN()
                 .addENDesc("You are immune to the Nausea effect.")
                 .addZH("反胃免疫")
                 .addZHDesc("你对反胃效果免疫。")
                 .register();
 
-        LEVITATION_IMMUNITY = new Entry<>("levitation_immunity", new TraitEffectImmunityEnchantment(StatusEffects.LEVITATION))
+        LEVITATION_IMMUNITY = new Entry<>("levitation_immunity", new TraitEffectImmunityEnchantment(() -> StatusEffects.LEVITATION))
                 .addEN()
                 .addENDesc("You are immune to the Levitation effect.")
                 .addZH("飘浮免疫")
                 .addZHDesc("你对飘浮效果免疫。")
                 .register();
 
-        SOUL_BURNER_IMMUNITY = new Entry<>("soul_burner_immunity", new TraitEffectImmunityEnchantment(LHEffects.FLAME))
+        SOUL_BURNER_IMMUNITY = new Entry<>("soul_burner_immunity", new TraitEffectImmunityEnchantment(() -> LHEffects.FLAME))
                 .addEN()
                 .addENDesc("You are immune to the Soul Burning effect.")
                 .addZH("魂火免疫")
                 .addZHDesc("你对魂火效果免疫。")
                 .register();
 
-        FREEZING_IMMUNITY = new Entry<>("freezing_immunity", new TraitEffectImmunityEnchantment(LHEffects.ICE))
+        FREEZING_IMMUNITY = new Entry<>("freezing_immunity", new TraitEffectImmunityEnchantment(() -> LHEffects.ICE))
                 .addEN()
                 .addENDesc("You are immune to the Frost effect.")
                 .addZH("寒流免疫")
                 .addZHDesc("你对寒流效果免疫。")
                 .register();
 
-        CURSED_IMMUNITY = new Entry<>("cursed_immunity", new TraitEffectImmunityEnchantment(LHEffects.CURSE))
+        CURSED_IMMUNITY = new Entry<>("cursed_immunity", new TraitEffectImmunityEnchantment(() -> LHEffects.CURSE))
                 .addEN()
                 .addENDesc("You are immune to the Cursed effect.")
                 .addZH("诅咒免疫")

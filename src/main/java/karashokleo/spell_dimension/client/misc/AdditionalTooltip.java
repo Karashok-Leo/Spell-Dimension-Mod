@@ -11,7 +11,7 @@ import karashokleo.spell_dimension.api.quest.Quest;
 import karashokleo.spell_dimension.api.quest.QuestUsage;
 import karashokleo.spell_dimension.content.component.GameStageComponent;
 import karashokleo.spell_dimension.content.item.DynamicSpellBookItem;
-import karashokleo.spell_dimension.content.item.logic.EnchantedModifier;
+import karashokleo.spell_dimension.content.object.EnchantedModifier;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.data.book.MagicGuidanceProvider;
 import karashokleo.spell_dimension.init.AllItems;
@@ -137,30 +137,45 @@ public class AdditionalTooltip
         MutableText currentTierText = SDTexts.getDifficultyTierText(currentDifficulty);
         MutableText nextTierText = SDTexts.getDifficultyTierText(nextDifficulty);
 
-        Formatting formatting = nextDifficulty == GameStageComponent.HARDCORE ? Formatting.DARK_RED : Formatting.DARK_PURPLE;
+        if (currentDifficulty != GameStageComponent.NIGHTMARE)
+            lines.add(SDTexts.TOOLTIP$BOTTLE_NIGHTMARE.get(nextTierText).formatted(Formatting.RED));
 
-        lines.add(SDTexts.TOOLTIP$BOTTLE_NIGHTMARE.get(nextTierText).formatted(Formatting.RED));
         lines.add(SDTexts.TOOLTIP$DIFFICULTY_TIER$CURRENT.get(currentTierText).formatted(Formatting.BOLD));
-        lines.add(SDTexts.TOOLTIP$DIFFICULTY_TIER$TITLE.get(nextTierText).formatted(formatting));
 
-        if (nextDifficulty == GameStageComponent.HARDCORE)
+        if (currentDifficulty == GameStageComponent.NORMAL)
         {
-            for (int i = 1; i <= 7; i++)
-                lines.add(
-                        SDTexts.TOOLTIP$DIFFICULTY_TIER$DESC.get(
-                                Text.translatable("tooltip.spell-dimension.difficulty_tier.hardcore." + i)
-                        ).formatted(formatting)
-                );
-        } else if (nextDifficulty == GameStageComponent.NIGHTMARE)
+            appendHardcoreTooltip(lines);
+        } else if (currentDifficulty == GameStageComponent.HARDCORE)
         {
-            lines.add(
-                    SDTexts.TOOLTIP$DIFFICULTY_TIER$DESC.get(
-                            SDTexts.TOOLTIP$DIFFICULTY_TIER$NIGHTMARE.get()
-                    ).formatted(formatting)
-            );
+            appendHardcoreTooltip(lines);
+            appendNightmareTooltip(lines);
+        } else if (currentDifficulty == GameStageComponent.NIGHTMARE)
+        {
+            appendNightmareTooltip(lines);
         }
 
         if (context.isCreative())
             lines.add(SDTexts.TOOLTIP$SHIFT_RESET.get().formatted(Formatting.GRAY));
+    }
+
+    private static void appendHardcoreTooltip(List<Text> lines)
+    {
+        lines.add(SDTexts.TOOLTIP$DIFFICULTY_TIER$TITLE.get(GameStageComponent.HARDCORE).formatted(Formatting.DARK_RED));
+        for (int i = 1; i <= 7; i++)
+            lines.add(
+                    SDTexts.TOOLTIP$DIFFICULTY_TIER$DESC.get(
+                            Text.translatable("tooltip.spell-dimension.difficulty_tier.hardcore." + i)
+                    ).formatted(Formatting.DARK_RED)
+            );
+    }
+
+    private static void appendNightmareTooltip(List<Text> lines)
+    {
+        lines.add(SDTexts.TOOLTIP$DIFFICULTY_TIER$TITLE.get(GameStageComponent.NIGHTMARE).formatted(Formatting.DARK_PURPLE));
+        lines.add(
+                SDTexts.TOOLTIP$DIFFICULTY_TIER$DESC.get(
+                        SDTexts.TOOLTIP$DIFFICULTY_TIER$NIGHTMARE.get()
+                ).formatted(Formatting.DARK_PURPLE)
+        );
     }
 }

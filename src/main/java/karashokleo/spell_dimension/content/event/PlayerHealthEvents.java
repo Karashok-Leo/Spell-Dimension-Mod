@@ -4,7 +4,7 @@ import io.github.fabricators_of_create.porting_lib.entity.events.ServerPlayerCre
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.component.player.PlayerDifficulty;
 import karashokleo.spell_dimension.api.ApplyFoodEffectsCallback;
-import karashokleo.spell_dimension.content.item.logic.EnlighteningModifier;
+import karashokleo.spell_dimension.content.object.EnlighteningModifier;
 import karashokleo.spell_dimension.init.AllTags;
 import karashokleo.spell_dimension.util.UuidUtil;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;

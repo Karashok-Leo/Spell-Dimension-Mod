@@ -13,18 +13,15 @@ public class REICompat implements REIClientPlugin
 {
     public static final CategoryIdentifier<REILocateDisplay> LOCATE = CategoryIdentifier.of(SpellDimension.MOD_ID, "locate");
     public static final CategoryIdentifier<REISummonDisplay> SUMMON = CategoryIdentifier.of(SpellDimension.MOD_ID, "summon");
-    public static final CategoryIdentifier<REIInfusionDisplay> SPELL_INFUSION = CategoryIdentifier.of(SpellDimension.MOD_ID, "spell_infusion");
 
     @Override
     public void registerCategories(CategoryRegistry registry)
     {
         registry.add(new REILocateCategory());
         registry.add(new REISummonCategory());
-        registry.add(new REIInfusionCategory());
 
         registry.addWorkstations(LOCATE, REILocateCategory.LOCATE_TARGET);
         registry.addWorkstations(SUMMON, REISummonCategory.SPAWNER);
-        registry.addWorkstations(SPELL_INFUSION, REIInfusionCategory.PEDESTAL);
     }
 
     @Override

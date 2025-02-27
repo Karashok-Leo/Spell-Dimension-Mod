@@ -10,8 +10,8 @@ import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.item.*;
 import karashokleo.spell_dimension.content.item.essence.*;
 import karashokleo.spell_dimension.content.item.essence.base.ColorProvider;
-import karashokleo.spell_dimension.content.item.logic.Tier;
 import karashokleo.spell_dimension.content.item.trinket.*;
+import karashokleo.spell_dimension.content.object.Tier;
 import karashokleo.spell_dimension.util.SchoolUtil;
 import karashokleo.spell_dimension.util.TagUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -65,6 +65,7 @@ public class AllItems
     public static OblivionBreastplateItem OBLIVION_BREASTPLATE;
     public static BottleOfNightmare BOTTLE_NIGHTMARE;
     public static BottleOfSoulBinding BOTTLE_SOUL_BINDING;
+    public static SpellPrismItem SPELL_PRISM;
     public static MedalItem MEDAL;
 
     public static void register()
@@ -240,6 +241,11 @@ public class AllItems
                 .addModel()
                 .addEN()
                 .addZH("灵魂羁绊之瓶")
+                .register();
+        SPELL_PRISM = Entry.of("spell_prism", new SpellPrismItem())
+                .addEN()
+                .addZH("法术棱镜")
+                .addModel()
                 .register();
         MEDAL = Entry.of("medal", new MedalItem())
                 .addEN()

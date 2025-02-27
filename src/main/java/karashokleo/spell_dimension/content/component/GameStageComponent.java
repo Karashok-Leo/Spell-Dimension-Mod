@@ -55,6 +55,7 @@ public class GameStageComponent implements AutoSyncedComponent
         component.difficulty = NORMAL;
         sync(player);
         AttributeUtil.removeModifier(player, LHMiscs.ADD_LEVEL, HARDCORE_DIFFICULTY_BONUS);
+        AttributeUtil.removeModifier(player, LHMiscs.ADD_LEVEL, NIGHTMARE_DIFFICULTY_BONUS);
         player.sendMessage(SDTexts.TEXT$PROGRESS_ROLLBACK.get(), true);
     }
 

@@ -4,7 +4,7 @@ import karashokleo.loot_bag.api.LootBagManager;
 import karashokleo.loot_bag.api.common.bag.BagEntry;
 import karashokleo.loot_bag.internal.item.LootBagItem;
 import karashokleo.spell_dimension.content.item.essence.base.ColorProvider;
-import karashokleo.spell_dimension.content.item.logic.Tier;
+import karashokleo.spell_dimension.content.object.Tier;
 import karashokleo.spell_dimension.data.SDTexts;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.ItemStack;

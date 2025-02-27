@@ -1,6 +1,6 @@
 package karashokleo.spell_dimension.config;
 
-import karashokleo.spell_dimension.content.item.logic.EnlighteningModifier;
+import karashokleo.spell_dimension.content.object.EnlighteningModifier;
 import karashokleo.spell_dimension.util.RandomUtil;
 import karashokleo.spell_dimension.util.SchoolUtil;
 import karashokleo.spell_dimension.util.UuidUtil;
