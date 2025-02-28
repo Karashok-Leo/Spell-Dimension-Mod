@@ -34,7 +34,8 @@ public class BaseQuests
                         () -> AllItems.ENLIGHTENING_ESSENCE.getStack(
                                 new AttributeModifier(SpellPowerMechanics.CRITICAL_CHANCE.attribute, 0.05, EntityAttributeModifier.Operation.MULTIPLY_BASE).toELM()
                         ),
-                        "advancements.rpg_series.classes"
+                        "advancements.rpg_series.classes",
+                        "spell_engine:spell_binding"
                 ))
                 .toEntry("mage/bind")
                 .addDependencies(FIRST_DAY)
@@ -44,7 +45,8 @@ public class BaseQuests
                         () -> AllItems.ENLIGHTENING_ESSENCE.getStack(
                                 new AttributeModifier(SpellPowerMechanics.CRITICAL_DAMAGE.attribute, 0.05, EntityAttributeModifier.Operation.MULTIPLY_BASE).toELM()
                         ),
-                        "advancements.l2hostility.kill_first"
+                        "advancements.l2hostility.kill_first",
+                        "minecraft:zombie_head"
                 ))
                 .toEntry("power/hostility")
                 .addDependencies(FIRST_DAY)

@@ -9,6 +9,8 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.world.World;
 import net.spell_power.api.SpellPower;
+import net.wizards.item.Armors;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -47,5 +49,13 @@ public record SpellPowerQuest(
     public void appendTaskDesc(World world, List<Text> desc)
     {
         desc.add(SDTexts.TEXT$QUEST$SPELL_POWER.get(min));
+    }
+
+    @Override
+    public @Nullable ItemStack getIcon()
+    {
+        return isChallenge() ?
+                Armors.netherite_arcaneRobeSet.head.getDefaultStack() :
+                Armors.arcaneRobeSet.head.getDefaultStack();
     }
 }

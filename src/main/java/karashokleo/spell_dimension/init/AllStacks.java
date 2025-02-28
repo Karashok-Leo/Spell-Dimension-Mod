@@ -1,15 +1,17 @@
 package karashokleo.spell_dimension.init;
 
+import com.klikli_dev.modonomicon.api.ModonomiconConstants;
+import com.klikli_dev.modonomicon.registry.ItemRegistry;
 import karashokleo.spell_dimension.api.quest.QuestRegistry;
 import karashokleo.spell_dimension.config.AttributeModifier;
 import karashokleo.spell_dimension.content.object.EnchantedModifier;
+import karashokleo.spell_dimension.data.book.MagicGuidanceProvider;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.spell.SpellInfo;
-import net.wizards.WizardsMod;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -24,7 +26,7 @@ public class AllStacks
     public static final List<ItemStack> ECES_STACKS;
     private static final List<ItemStack> SPELL_SCROLL_STACKS;
     public static final List<ItemStack> QUEST_SCROLL_STACKS;
-    public static final ItemStack SCROLL = AllItems.SPELL_SCROLL.getStack(new Identifier(WizardsMod.ID, "fire_breath"));
+    public static final ItemStack GUIDE_BOOK;
 
     static
     {
@@ -63,6 +65,9 @@ public class AllStacks
         QUEST_SCROLL_STACKS = new ArrayList<>();
         QUEST_SCROLL_STACKS.add(AllItems.QUEST_SCROLL.getDefaultStack());
         QUEST_SCROLL_STACKS.addAll(QuestRegistry.QUEST_REGISTRY.streamEntries().map(entry -> AllItems.QUEST_SCROLL.getStack(entry)).toList());
+
+        GUIDE_BOOK = ItemRegistry.MODONOMICON.get().getDefaultStack();
+        GUIDE_BOOK.getOrCreateNbt().putString(ModonomiconConstants.Nbt.ITEM_BOOK_ID_TAG, MagicGuidanceProvider.BOOK_ID.toString());
     }
 
     public static List<ItemStack> getScrolls()

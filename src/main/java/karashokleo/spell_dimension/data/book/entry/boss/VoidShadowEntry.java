@@ -108,7 +108,7 @@ public class VoidShadowEntry extends BaseEntryProvider
 
         BookEntityPageModel shadow = BookEntityPageModel
                 .builder()
-                .withOffset(0.35f)
+                .withOffset(0.4f)
                 .withEntityId("adventurez:void_shadow")
                 .build();
         BookEntityPageModel shade = BookEntityPageModel

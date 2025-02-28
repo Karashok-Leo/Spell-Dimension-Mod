@@ -4,9 +4,11 @@ import karashokleo.spell_dimension.api.quest.AdvancementQuest;
 import karashokleo.spell_dimension.api.quest.ItemRewardQuest;
 import karashokleo.spell_dimension.content.quest.base.AutoDescQuest;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -40,5 +42,11 @@ public record EnderDragonAdvancementQuest(
     {
         AutoDescQuest.super.appendTaskDesc(world, desc);
         desc.add(Text.translatable("advancements.end.kill_dragon.description"));
+    }
+
+    @Override
+    public @Nullable ItemStack getIcon()
+    {
+        return Items.DRAGON_HEAD.getDefaultStack();
     }
 }

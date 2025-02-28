@@ -2,15 +2,13 @@ package karashokleo.spell_dimension.data.generic.recipe;
 
 import accieo.midas.hunger.items.MidasItems;
 import artifacts.registry.ModItems;
-import com.klikli_dev.modonomicon.api.ModonomiconConstants;
-import com.klikli_dev.modonomicon.registry.ItemRegistry;
 import karashokleo.enchantment_infusion.content.data.SimpleInfusionRecipeBuilder;
 import karashokleo.l2hostility.content.item.ComplementItems;
 import karashokleo.l2hostility.content.item.ConsumableItems;
 import karashokleo.l2hostility.content.item.MiscItems;
 import karashokleo.spell_dimension.SpellDimension;
-import karashokleo.spell_dimension.data.book.MagicGuidanceProvider;
 import karashokleo.spell_dimension.init.AllItems;
+import karashokleo.spell_dimension.init.AllStacks;
 import karashokleo.spell_dimension.init.AllTags;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.item.Item;
@@ -47,9 +45,7 @@ public class SDSimpleInfusionRecipes
 
     public static void add(Consumer<RecipeJsonProvider> exporter)
     {
-        ItemStack guideBook = ItemRegistry.MODONOMICON.get().getDefaultStack();
-        guideBook.getOrCreateNbt().putString(ModonomiconConstants.Nbt.ITEM_BOOK_ID_TAG, MagicGuidanceProvider.BOOK_ID.toString());
-        add(exporter, Items.BOOK, AllItems.ENCHANTED_ESSENCE, guideBook);
+        add(exporter, Items.BOOK, AllItems.ENCHANTED_ESSENCE, AllStacks.GUIDE_BOOK.copy());
 
         add(exporter, MiscItems.DETECTOR_GLASSES, Items.GOLDEN_CARROT, ModItems.NIGHT_VISION_GOGGLES.get().getDefaultStack());
         add(exporter, Items.NETHERITE_PICKAXE, ComplementItems.SOUL_FLAME, ModItems.PICKAXE_HEATER.get().getDefaultStack());
