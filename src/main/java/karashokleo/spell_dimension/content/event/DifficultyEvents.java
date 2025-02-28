@@ -81,9 +81,9 @@ public class DifficultyEvents
         {
             if (player.getWorld().isClient()) return;
             if (player.age % 40 != 0) return;
-            if (GameStageComponent.getDifficulty(player) < GameStageComponent.NIGHTMARE) return;
             // first remove the old modifier
             AttributeUtil.removeModifier(player, LHMiscs.ADD_LEVEL, GameStageComponent.NIGHTMARE_DIFFICULTY_BONUS);
+            if (GameStageComponent.getDifficulty(player) < GameStageComponent.NIGHTMARE) return;
             // then add the new modifier
             // get the sum of all spell power
             double sum = SchoolUtil.SCHOOLS

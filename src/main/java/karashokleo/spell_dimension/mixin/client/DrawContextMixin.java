@@ -1,6 +1,8 @@
 package karashokleo.spell_dimension.mixin.client;
 
 import karashokleo.spell_dimension.SpellDimension;
+import karashokleo.spell_dimension.api.quest.Quest;
+import karashokleo.spell_dimension.content.item.QuestScrollItem;
 import karashokleo.spell_dimension.content.item.essence.EnchantedEssenceItem;
 import karashokleo.spell_dimension.content.object.EnchantedModifier;
 import net.minecraft.client.MinecraftClient;
@@ -9,6 +11,7 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
@@ -37,6 +40,9 @@ public abstract class DrawContextMixin
     public abstract int drawText(TextRenderer textRenderer, @Nullable String text, int x, int y, int color, boolean shadow);
 
 
+    @Shadow
+    public abstract void drawItem(ItemStack stack, int x, int y, int seed, int z);
+
     @Inject(method = "drawItem(Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/world/World;Lnet/minecraft/item/ItemStack;IIII)V", at = @At(value = "TAIL"))
     private void drawIcon(LivingEntity entity, World world, ItemStack stack, int x, int y, int seed, int z, CallbackInfo ci)
     {
@@ -48,7 +54,7 @@ public abstract class DrawContextMixin
                 if (enchantedModifier != null)
                 {
                     Identifier texture = SpellDimension.modLoc("textures/slot/" + enchantedModifier.slot().getName() + ".png");
-                    drawTexture(texture, x, y, 200, 0, 0, 16, 16, 16, 16);
+                    drawTexture(texture, x, y, z + 200, 0, 0, 16, 16, 16, 16);
                     TextRenderer textRenderer = this.client.textRenderer;
                     String threshold = String.valueOf(enchantedModifier.threshold());
                     this.matrices.push();
@@ -56,6 +62,11 @@ public abstract class DrawContextMixin
                     drawText(textRenderer, threshold, x + 19 - 2 - textRenderer.getWidth(threshold), y - 1, 0xffffff, true);
                     this.matrices.pop();
                 }
+            } else if (stack.getItem() instanceof QuestScrollItem scroll)
+            {
+                scroll.getQuest(stack)
+                        .map(Quest::getIcon)
+                        .ifPresent(itemStack -> drawItem(itemStack, x, y, seed, z + (itemStack.getItem() instanceof BlockItem ? 5 : 200)));
             }
         }
     }

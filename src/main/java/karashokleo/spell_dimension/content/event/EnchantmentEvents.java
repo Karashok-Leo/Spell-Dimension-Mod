@@ -24,10 +24,7 @@ import net.minecraft.registry.tag.DamageTypeTags;
 import net.spell_power.api.SpellPower;
 import net.spell_power.api.SpellSchool;
 import net.spell_power.api.enchantment.EnchantmentRestriction;
-import org.apache.commons.lang3.mutable.MutableInt;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 public class EnchantmentEvents
@@ -67,29 +64,7 @@ public class EnchantmentEvents
         // Spell impact enchantment
         SpellImpactEvents.BEFORE.register((world, caster, targets, spellInfo) ->
         {
-            Map<SpellImpactEnchantment, SpellImpactEnchantment.Context> map = new HashMap<>();
-            for (ItemStack e : TrinketCompat.getItems(caster, e -> true))
-                EnchantmentHelper.get(e).forEach((enchantment, level) ->
-                {
-                    if (enchantment instanceof SpellImpactEnchantment impactEnchantment)
-                    {
-                        map.compute(impactEnchantment, (en, ctx) ->
-                        {
-                            if (ctx == null)
-                            {
-                                MutableInt lv = new MutableInt(level);
-                                ArrayList<ItemStack> list = new ArrayList<>();
-                                list.add(e);
-                                return new SpellImpactEnchantment.Context(lv, list);
-                            } else
-                            {
-                                ctx.level().add(level);
-                                ctx.stacks().add(e);
-                                return ctx;
-                            }
-                        });
-                    }
-                });
+            Map<SpellImpactEnchantment, SpellImpactEnchantment.Context> map = SpellImpactEnchantment.getContexts(caster);
             map.forEach((enchantment, context) -> enchantment.onSpellImpact(world, caster, context, targets, spellInfo));
         });
 
@@ -135,4 +110,5 @@ public class EnchantmentEvents
             damageAccess.addModifier(DamageModifier.add(-damageLeech));
         });
     }
+
 }

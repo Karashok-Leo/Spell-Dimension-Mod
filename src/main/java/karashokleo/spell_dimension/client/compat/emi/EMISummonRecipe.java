@@ -6,8 +6,10 @@ import dev.emi.emi.api.render.EmiTexture;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
+import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.client.compat.EntityWrapper;
 import karashokleo.spell_dimension.content.recipe.summon.SummonRecipe;
+import karashokleo.spell_dimension.init.AllItems;
 import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
@@ -16,12 +18,13 @@ import java.util.List;
 
 public record EMISummonRecipe(EmiIngredient input, EntityWrapper wrapper) implements EmiRecipe
 {
+    public static final EmiStack WORKSTATION = EmiStack.of(Items.SPAWNER);
+    public static final EmiStack SPELL_SCROLL = EmiStack.of(AllItems.SPELL_SCROLL.getStack(SpellDimension.modLoc("summon")));
+
     public EMISummonRecipe(SummonRecipe recipe)
     {
         this(EmiIngredient.of(recipe.ingredient()), EntityWrapper.of(recipe.entityType(), recipe.count()));
     }
-
-    public static final EmiStack CATALYSTS = EmiStack.of(Items.SPAWNER);
 
     @Override
     public EmiRecipeCategory getCategory()
@@ -32,7 +35,7 @@ public record EMISummonRecipe(EmiIngredient input, EntityWrapper wrapper) implem
     @Override
     public List<EmiIngredient> getCatalysts()
     {
-        return List.of(CATALYSTS);
+        return List.of(WORKSTATION, SPELL_SCROLL);
     }
 
     @Override
@@ -62,35 +65,27 @@ public record EMISummonRecipe(EmiIngredient input, EntityWrapper wrapper) implem
     @Override
     public int getDisplayHeight()
     {
-        return 100;
+        return 110;
     }
 
     @Override
     public void addWidgets(WidgetHolder widgets)
     {
-        int space = 18 + 2;
+        int centerX = widgets.getWidth() / 2;
 
-        widgets.addSlot(
-                input,
-                this.getDisplayWidth() / 2 - 24 - space * 2,
-                (this.getDisplayHeight() - 18) / 2
-        );
+        widgets.addSlot(SPELL_SCROLL, centerX - 9 - 20, 4)
+                .catalyst(true)
+                .drawBack(false);
 
-        widgets.addSlot(
-                CATALYSTS,
-                this.getDisplayWidth() / 2 - 24 - space,
-                (this.getDisplayHeight() - 18) / 2
-        ).catalyst(true).drawBack(false);
+        widgets.addSlot(input, centerX - 9, 4);
 
-        widgets.addTexture(
-                EmiTexture.EMPTY_ARROW,
-                this.getDisplayWidth() / 2 - 24,
-                (this.getDisplayHeight() - 18) / 2
-        );
+        widgets.addSlot(WORKSTATION, centerX - 9 + 20, 4)
+                .catalyst(true)
+                .drawBack(false);
 
         widgets.addDrawable(
                 0, 0, 40, 40,
-                (draw, mouseX, mouseY, delta) -> wrapper.render(draw, this.getDisplayWidth() / 2 + 32, 75, mouseX, mouseY)
+                (draw, mouseX, mouseY, delta) -> wrapper.render(draw, centerX, 84, mouseX, mouseY)
         );
     }
 }

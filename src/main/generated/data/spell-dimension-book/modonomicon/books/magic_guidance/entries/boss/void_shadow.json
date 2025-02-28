@@ -37,6 +37,17 @@
       "use_markdown_in_title": false
     },
     {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "show_title_separator": true,
+      "text": "book.spell-dimension-book.magic_guidance.boss.void_shadow.state.text",
+      "title": "",
+      "use_markdown_in_title": false
+    },
+    {
       "type": "modonomicon:entity",
       "anchor": "",
       "condition": {
@@ -45,7 +56,7 @@
       "default_rotation": -45.0,
       "entity_id": "adventurez:void_shadow",
       "name": "",
-      "offset": -0.4,
+      "offset": 0.35,
       "rotate": true,
       "scale": 1.0,
       "text": ""
@@ -59,7 +70,7 @@
       "default_rotation": -45.0,
       "entity_id": "adventurez:void_shade",
       "name": "",
-      "offset": -0.4,
+      "offset": 0.3,
       "rotate": true,
       "scale": 1.0,
       "text": ""
@@ -73,7 +84,7 @@
       "default_rotation": -45.0,
       "entity_id": "adventurez:void_fragment",
       "name": "",
-      "offset": -0.8,
+      "offset": 0.4,
       "rotate": true,
       "scale": 1.0,
       "text": ""

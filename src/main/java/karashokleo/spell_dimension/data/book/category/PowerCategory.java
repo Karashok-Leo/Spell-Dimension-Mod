@@ -20,13 +20,11 @@ public class PowerCategory extends CategoryProvider
     protected String[] generateEntryMap()
     {
         return new String[]{
-                "a_b_c_d_e_f",
-                "___________",
-                "g_h_i_j_k_l",
-                "___________",
-                "m_n_o_p_q_r",
-                "___________",
-                "s_t_u_v_w_x",
+                "_a_b_c_",
+                "_______",
+                "d_e_f_g",
+                "_______",
+                "h_i_j_k",
         };
     }
 
@@ -34,26 +32,26 @@ public class PowerCategory extends CategoryProvider
     protected void generateEntries()
     {
         BookEntryModel health = new HealthEntry(this).generate('a');
-        BookEntryModel hostility = new HostilityEntry(this).generate('c');
-        BookEntryModel trait = new TraitEntry(this).generate('d');
-        BookEntryModel smith = new SmithEntry(this).generate('e');
-        BookEntryModel armor_set = new ArmorSetEntry(this).generate('b');
+        BookEntryModel hostility = new HostilityEntry(this).generate('b');
+        BookEntryModel trait = new TraitEntry(this).generate('c');
+        BookEntryModel smith = new SmithEntry(this).generate('d');
+        BookEntryModel armor_set = new ArmorSetEntry(this).generate('e');
+        BookEntryModel enchant = new EnchantEntry(this).generate('f');
         BookEntryModel spell_infusion = new SpellInfusionEntry(this).generate('g');
         BookEntryModel locate = new LocateSpellEntry(this).generate('h');
         BookEntryModel summon = new SummonSpellEntry(this).generate('i');
-        BookEntryModel enchant = new EnchantEntry(this).generate('j');
-        BookEntryModel rarity = new RarityEntry(this).generate('k');
-        BookEntryModel durability = new DurabilityEntry(this).generate('l');
+        BookEntryModel rarity = new RarityEntry(this).generate('j');
+        BookEntryModel durability = new DurabilityEntry(this).generate('k');
 
         this.add(health);
         this.add(hostility);
         this.add(trait);
         this.add(smith);
         this.add(armor_set);
+        this.add(enchant);
         this.add(spell_infusion);
         this.add(locate);
         this.add(summon);
-        this.add(enchant);
         this.add(rarity);
         this.add(durability);
     }

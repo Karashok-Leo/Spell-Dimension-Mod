@@ -4,12 +4,14 @@ import karashokleo.l2hostility.client.L2HostilityClient;
 import karashokleo.leobrary.gui.api.overlay.InfoSideBar;
 import karashokleo.leobrary.gui.api.overlay.SideBar;
 import karashokleo.spell_dimension.api.quest.Quest;
+import karashokleo.spell_dimension.config.QuestToEntryConfig;
 import karashokleo.spell_dimension.content.item.QuestScrollItem;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllItems;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
@@ -36,9 +38,11 @@ public class QuestOverlay extends InfoSideBar<SideBar.IntSignature>
             {
                 World world = player.getWorld();
                 ArrayList<Text> texts = new ArrayList<>();
-                Text title = quest.get().getTitle(world);
-                if (title != null) texts.add(title);
-                texts.addAll(quest.get().getDesc(world));
+                quest.get().appendTooltip(world, texts);
+                texts.add(SDTexts.TOOLTIP$QUEST$COMPLETE.get().formatted(Formatting.GOLD));
+                texts.add(SDTexts.TOOLTIP$QUEST$RESELECT.get().formatted(Formatting.DARK_GREEN));
+                if (QuestToEntryConfig.hasEntry(quest.get()))
+                    texts.add(SDTexts.TOOLTIP$QUEST$OPEN_ENTRY.get().formatted(Formatting.DARK_AQUA));
                 return texts;
             }
         }

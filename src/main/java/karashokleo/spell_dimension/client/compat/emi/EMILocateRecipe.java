@@ -2,11 +2,12 @@ package karashokleo.spell_dimension.client.compat.emi;
 
 import dev.emi.emi.api.recipe.EmiRecipe;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
-import dev.emi.emi.api.render.EmiTexture;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
+import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.recipe.locate.LocateRecipe;
+import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllTags;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.Text;
@@ -17,7 +18,8 @@ import java.util.List;
 
 public record EMILocateRecipe(EmiIngredient input, Text spot, Text tooltip) implements EmiRecipe
 {
-    public static final EmiIngredient CATALYSTS = EmiIngredient.of(AllTags.LOCATE_TARGET);
+    public static final EmiIngredient WORKSTATION = EmiIngredient.of(AllTags.LOCATE_TARGET);
+    public static final EmiStack SPELL_SCROLL = EmiStack.of(AllItems.SPELL_SCROLL.getStack(SpellDimension.modLoc("locate")));
 
     public EMILocateRecipe(LocateRecipe recipe)
     {
@@ -37,7 +39,7 @@ public record EMILocateRecipe(EmiIngredient input, Text spot, Text tooltip) impl
     @Override
     public List<EmiIngredient> getCatalysts()
     {
-        return List.of(CATALYSTS);
+        return List.of(WORKSTATION, SPELL_SCROLL);
     }
 
     @Override
@@ -61,23 +63,33 @@ public record EMILocateRecipe(EmiIngredient input, Text spot, Text tooltip) impl
     @Override
     public int getDisplayWidth()
     {
-        int width = MinecraftClient.getInstance().textRenderer.getWidth(spot);
-        return 70 + width + 5;
+        return 200;
     }
 
     @Override
     public int getDisplayHeight()
     {
-        return 18;
+        return 38;
     }
 
     @Override
     public void addWidgets(WidgetHolder widgets)
     {
-        widgets.addSlot(input, 0, 0);
-        widgets.addSlot(CATALYSTS, 20, 0).catalyst(true).drawBack(false);
-        widgets.addTexture(EmiTexture.EMPTY_ARROW, 42, 0);
-        widgets.addText(spot, 70, 4, -1, true);
+        int centerX = widgets.getWidth() / 2;
+
+        widgets.addSlot(SPELL_SCROLL, centerX - 9 - 20, 4)
+                .catalyst(true)
+                .drawBack(false);
+
+        widgets.addSlot(input, centerX - 9, 4);
+
+        widgets.addSlot(WORKSTATION, centerX - 9 + 20, 4)
+                .catalyst(true)
+                .drawBack(false);
+
+        int width = MinecraftClient.getInstance().textRenderer.getWidth(spot);
+        widgets.addText(spot, centerX - width / 2, 26, -1, true);
+
         widgets.addTooltipText(List.of(tooltip), 0, 0, getDisplayWidth(), getDisplayHeight());
     }
 }

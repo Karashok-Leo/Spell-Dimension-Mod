@@ -1,7 +1,9 @@
 package karashokleo.spell_dimension.client.compat.rei;
 
 import com.google.common.collect.Lists;
+import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.data.SpellTexts;
+import karashokleo.spell_dimension.init.AllItems;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.gui.Renderer;
@@ -20,12 +22,8 @@ import java.util.List;
 
 public class REISummonCategory implements DisplayCategory<REISummonDisplay>
 {
-    public static final EntryStack<ItemStack> SPAWNER = EntryStacks.of(Items.SPAWNER);
-
-    private static final int DISPLAY_OFFSET_X = 12;
-    private static final int DISPLAY_OFFSET_Y = -44;
-    private static final int SLOT_OFFSET = 36;
-    private static final int ARROW_OFFSET = -1;
+    public static final EntryStack<ItemStack> WORKSTATION = EntryStacks.of(Items.SPAWNER);
+    public static final EntryStack<ItemStack> SPELL_SCROLL = EntryStacks.of(AllItems.SPELL_SCROLL.getStack(SpellDimension.modLoc("summon")));
 
     @Override
     public List<Widget> setupDisplay(REISummonDisplay display, Rectangle bounds)
@@ -33,12 +31,13 @@ public class REISummonCategory implements DisplayCategory<REISummonDisplay>
         Point startPoint = new Point(bounds.getCenterX(), bounds.getCenterY());
         List<Widget> widgets = Lists.newArrayList();
         widgets.add(Widgets.createRecipeBase(bounds));
-        widgets.add(Widgets.createArrow(new Point(startPoint.x + DISPLAY_OFFSET_X + ARROW_OFFSET, startPoint.y + DISPLAY_OFFSET_Y)));
-        Slot input = Widgets.createSlot(new Point(startPoint.x + DISPLAY_OFFSET_X - SLOT_OFFSET - 8, startPoint.y + DISPLAY_OFFSET_Y)).entries(display.input()).markInput();
-        Slot spawner = Widgets.createSlot(new Point(startPoint.x + DISPLAY_OFFSET_X - SLOT_OFFSET + 8 + 6, startPoint.y + DISPLAY_OFFSET_Y)).entries(List.of(SPAWNER)).noInteractable().disableBackground();
+        Slot scroll = Widgets.createSlot(new Point(startPoint.x - 8 - 20, startPoint.y - 44)).entry(SPELL_SCROLL).noInteractable().disableBackground();
+        Slot input = Widgets.createSlot(new Point(startPoint.x - 8, startPoint.y - 44)).entries(display.input()).markInput();
+        Slot station = Widgets.createSlot(new Point(startPoint.x - 8 + 20, startPoint.y - 44)).entries(List.of(WORKSTATION)).noInteractable().disableBackground();
         Widget entity = Widgets.createDrawableWidget((graphics, mouseX, mouseY, delta) -> display.wrapper().render(graphics, startPoint.x, bounds.y + 84, mouseX, mouseY));
+        widgets.add(scroll);
         widgets.add(input);
-        widgets.add(spawner);
+        widgets.add(station);
         widgets.add(entity);
         return widgets;
     }
@@ -64,6 +63,6 @@ public class REISummonCategory implements DisplayCategory<REISummonDisplay>
     @Override
     public Renderer getIcon()
     {
-        return SPAWNER;
+        return WORKSTATION;
     }
 }

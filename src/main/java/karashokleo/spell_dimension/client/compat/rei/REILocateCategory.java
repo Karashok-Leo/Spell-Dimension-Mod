@@ -1,7 +1,9 @@
 package karashokleo.spell_dimension.client.compat.rei;
 
 import com.google.common.collect.Lists;
+import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.data.SpellTexts;
+import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllTags;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
@@ -18,12 +20,8 @@ import java.util.List;
 
 public class REILocateCategory implements DisplayCategory<REILocateDisplay>
 {
-    public static final EntryIngredient LOCATE_TARGET = EntryIngredients.ofItemTag(AllTags.LOCATE_TARGET);
-
-    private static final int DISPLAY_OFFSET_X = 12;
-    private static final int DISPLAY_OFFSET_Y = -18;
-    private static final int SLOT_OFFSET = 36;
-    private static final int ARROW_OFFSET = -1;
+    public static final EntryIngredient WORKSTATION = EntryIngredients.ofItemTag(AllTags.LOCATE_TARGET);
+    public static final EntryIngredient SPELL_SCROLL = EntryIngredients.of(AllItems.SPELL_SCROLL.getStack(SpellDimension.modLoc("locate")));
 
     @Override
     public List<Widget> setupDisplay(REILocateDisplay display, Rectangle bounds)
@@ -31,17 +29,19 @@ public class REILocateCategory implements DisplayCategory<REILocateDisplay>
         Point startPoint = new Point(bounds.getCenterX(), bounds.getCenterY());
         List<Widget> widgets = Lists.newArrayList();
         widgets.add(Widgets.createRecipeBase(bounds));
-        widgets.add(Widgets.createArrow(new Point(startPoint.x + DISPLAY_OFFSET_X + ARROW_OFFSET, startPoint.y + DISPLAY_OFFSET_Y)));
-        Slot input = Widgets.createSlot(new Point(startPoint.x + DISPLAY_OFFSET_X - SLOT_OFFSET - 8, startPoint.y + DISPLAY_OFFSET_Y)).entries(display.input()).markInput();
-        Slot lodestone = Widgets.createSlot(new Point(startPoint.x + DISPLAY_OFFSET_X - SLOT_OFFSET + 8 + 6, startPoint.y + DISPLAY_OFFSET_Y)).entries(LOCATE_TARGET).noInteractable().disableBackground();
+        Slot scroll = Widgets.createSlot(new Point(startPoint.x - 8 - 20, startPoint.y - 18)).entries(SPELL_SCROLL).noInteractable().disableBackground();
+        Slot input = Widgets.createSlot(new Point(startPoint.x - 8, startPoint.y - 18)).entries(display.input()).markInput();
+        Slot station = Widgets.createSlot(new Point(startPoint.x - 8 + 20, startPoint.y - 18)).entries(WORKSTATION).noInteractable().disableBackground();
         Label destination = Widgets.createLabel(new Point(startPoint.x, startPoint.y + 6), display.spot()).shadow();
+        widgets.add(scroll);
         widgets.add(input);
-        widgets.add(lodestone);
+        widgets.add(station);
         widgets.add(destination);
         widgets.add(Widgets.createTooltip(point ->
                 bounds.contains(point) &&
                 !(input.getBounds().contains(point) ||
-                  lodestone.getBounds().contains(point) ||
+                  scroll.getBounds().contains(point) ||
+                  station.getBounds().contains(point) ||
                   destination.getBounds().contains(point)) ?
                         Tooltip.create(point, display.tooltip()) : null));
         return widgets;
@@ -74,7 +74,7 @@ public class REILocateCategory implements DisplayCategory<REILocateDisplay>
     @Override
     public Renderer getIcon()
     {
-        if (LOCATE_TARGET.isEmpty()) return EntryStack.empty();
-        return LOCATE_TARGET.get(0);
+        if (WORKSTATION.isEmpty()) return EntryStack.empty();
+        return WORKSTATION.get(0);
     }
 }

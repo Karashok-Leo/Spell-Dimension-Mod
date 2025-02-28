@@ -99,6 +99,7 @@ public class AllGroups
                             entries.add(AllItems.OBLIVION_BREASTPLATE);
                             entries.add(AllItems.BOTTLE_NIGHTMARE);
                             entries.add(AllItems.BOTTLE_SOUL_BINDING);
+                            entries.add(AllItems.SPELL_PRISM);
                         })
                         .build()
         );

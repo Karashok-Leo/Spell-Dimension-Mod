@@ -61,7 +61,9 @@ public class TrinketEvents
         ServerSideRollEvents.PLAYER_START_ROLLING.register((player, vec3d) ->
         {
             if (TrinketCompat.hasItemInTrinket(player, AllItems.ARMOR_OF_CONVERGENCE))
+            {
                 ConvergeSpell.convergeImpact(player, player, player.getPos().add(0, 1, 0));
+            }
         });
 
         AtomicBreastplateItem.registerUpgradeEvents();

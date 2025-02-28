@@ -7,7 +7,6 @@ import com.klikli_dev.modonomicon.api.datagen.book.page.BookPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookSpotlightPageModel;
 import karashokleo.enchantment_infusion.init.EIItems;
 import karashokleo.spell_dimension.data.book.entry.BaseEntryProvider;
-import karashokleo.spell_dimension.init.AllBlocks;
 import karashokleo.spell_dimension.init.AllItems;
 import net.minecraft.recipe.Ingredient;
 
@@ -52,12 +51,18 @@ public class SpellInfusionEntry extends BaseEntryProvider
         this.lang().add(context.pageText(),
                 """
                         Enchantment Infusion can be used for enchanting in addition to craft most Spell Scrolls and some special items.
+                        \\
+                        \\
+                        Crafting items using the Infusion Table is the same as enchanting.
                         """
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
                 """
                         魔咒灌注除了可以用于附魔，还可以合成大部分法术卷轴和一部分特殊物品。
+                        \\
+                        \\
+                        使用灌注台合成物品的操作方法与附魔相同。
                         """
         );
         BookSpotlightPageModel text = BookSpotlightPageModel

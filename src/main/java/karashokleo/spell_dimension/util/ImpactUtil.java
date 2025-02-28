@@ -30,7 +30,6 @@ import net.spell_power.api.SpellPower;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 public class ImpactUtil
@@ -113,13 +112,6 @@ public class ImpactUtil
                 CombatEvents.SPELL_CAST.invoke((listener) -> listener.onSpellCast(args));
             }
         }
-    }
-
-    public static void applyAreaImpact(Entity origin, double range, Predicate<LivingEntity> predicate, Consumer<LivingEntity> consumer)
-    {
-        List<LivingEntity> targets = getLivingsInRange(origin, range, predicate);
-        if (targets.isEmpty()) return;
-        targets.forEach(consumer);
     }
 
     public static boolean isAlly(LivingEntity origin, LivingEntity target)

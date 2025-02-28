@@ -215,26 +215,31 @@ public class AllSpells
         return SPELL_TO_TIER.getOrDefault(spellId, 0);
     }
 
+    // local namespace
     private static Entry builderWithName(String name)
     {
-        return new Entry(name);
+        return new Entry(SpellDimension.modLoc(name));
     }
 
+    // other namespace
     private static Entry builderWithId(String id)
     {
         return new Entry(new Identifier(id));
     }
 
+    // other namespace
     private static Identifier fromPrimary(String id)
     {
         return new Entry(new Identifier(id)).withScrollType(ScrollType.PRIMARY).build();
     }
 
+    // other namespace
     private static Identifier fromBinding(String id)
     {
         return new Entry(new Identifier(id)).withScrollType(ScrollType.BINDING).build();
     }
 
+    // local namespace
     private static Entry fromCrafting(String name)
     {
         return new Entry(SpellDimension.modLoc(name)).withScrollType(ScrollType.CRAFTING);
@@ -247,11 +252,6 @@ public class AllSpells
         private Integer tier;
         @Nullable
         private ScrollType scrollType;
-
-        public Entry(String name)
-        {
-            this(new Identifier(name));
-        }
 
         public Entry(Identifier id)
         {

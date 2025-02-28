@@ -110,7 +110,11 @@ dependencies {
 
 
     // Book Datagen
-    modImplementation "com.klikli_dev:modonomicon-${project.minecraft_version}-fabric:${project.modonomicon_version}"
+    modImplementation("com.klikli_dev:modonomicon-${project.minecraft_version}-fabric:${project.modonomicon_version}") {
+        exclude group: 'mezz.jei', module: "jei-${minecraft_version}-common-api"
+        exclude group: 'mezz.jei', module: "jei-${minecraft_version}-fabric-api"
+        exclude group: 'mezz.jei', module: "jei-${minecraft_version}-fabric"
+    }
 
     // Book Information
     modImplementation "maven.modrinth:armor-set-bonuses:${project.asb_version}"
@@ -152,9 +156,9 @@ dependencies {
 
     // Compat
     modCompileOnly "dev.emi:emi-fabric:${project.emi_version}:api"
-//    modLocalRuntime "dev.emi:emi-fabric:${project.emi_version}"
+    modLocalRuntime "dev.emi:emi-fabric:${project.emi_version}"
     modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:${project.rei_version}"
-    modLocalRuntime "me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}"
+//    modLocalRuntime "me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}"
 }
 
 processResources {

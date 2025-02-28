@@ -14,7 +14,7 @@
   },
   "output": {
     "Count": 1,
-    "id": "modonomicon:modonomicon_purple",
+    "id": "modonomicon:modonomicon",
     "tag": {
       "modonomicon:book_id": "spell-dimension-book:magic_guidance"
     }

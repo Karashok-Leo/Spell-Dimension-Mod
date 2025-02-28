@@ -1,6 +1,8 @@
 package karashokleo.spell_dimension.client.screen;
 
+import com.google.common.collect.Lists;
 import karashokleo.spell_dimension.api.quest.Quest;
+import karashokleo.spell_dimension.api.quest.QuestRegistry;
 import karashokleo.spell_dimension.content.network.C2SSelectQuest;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllPackets;
@@ -32,22 +34,23 @@ import java.util.Set;
 public class QuestScreen extends Screen
 {
     private final Hand hand;
-    private final List<ItemStack> scrolls;
-    private ItemStack current;
+    private final List<Quest> quests;
+    @Nullable
+    private Quest current;
 
     public QuestScreen(Hand hand, Set<RegistryEntry<Quest>> quests)
     {
         super(Text.empty());
         this.hand = hand;
-        this.scrolls = quests.stream().map(AllItems.QUEST_SCROLL::getStack).toList();
+        this.quests = quests.stream().map(RegistryEntry::value).toList();
     }
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button)
     {
-        if (this.current.isEmpty() || button != GLFW.GLFW_MOUSE_BUTTON_LEFT)
+        if (this.current == null || button != GLFW.GLFW_MOUSE_BUTTON_LEFT)
             return super.mouseClicked(mouseX, mouseY, button);
-        Identifier questId = AllItems.QUEST_SCROLL.getQuestId(this.current).orElse(null);
+        Identifier questId = QuestRegistry.QUEST_REGISTRY.getId(this.current);
         AllPackets.toServer(new C2SSelectQuest(questId, this.hand));
         this.close();
         return true;
@@ -87,7 +90,7 @@ public class QuestScreen extends Screen
         super.render(context, mouseX, mouseY, delta);
 
         var window = client.getWindow();
-        int n = scrolls.size();
+        int n = quests.size();
         int w = (int) Math.ceil(Math.sqrt(n));
         int h = (int) Math.ceil(n * 1d / w);
         var iconSize = 18;
@@ -100,13 +103,13 @@ public class QuestScreen extends Screen
                 startY - padding,
                 startX + iconSize * w + padding,
                 startY + iconSize * h + padding,
-                0x22000000
+                0x66000000
         );
 
-        this.current = ItemStack.EMPTY;
+        this.current = null;
         var index = 0;
 
-        for (var stack : this.scrolls)
+        for (var quest : this.quests)
         {
             int iy = index / w;
             int ix = index - iy * w;
@@ -118,16 +121,23 @@ public class QuestScreen extends Screen
             if (mouseX > stackX && mouseY > stackY && mouseX <= (stackX + 16) && mouseY <= (stackY + 16))
             {
                 scale = 1.3f;
-                this.current = stack;
+                this.current = quest;
             }
 
-            drawItem(context, client.getItemRenderer(), player, client.world, stack, stackX, stackY, scale);
+            ItemStack icon = quest.getIcon();
+            if (icon == null)
+                icon = AllItems.QUEST_SCROLL.getDefaultStack();
+            drawItem(context, client.getItemRenderer(), player, client.world, icon, stackX, stackY, scale);
 
             index++;
         }
 
-        if (!this.current.isEmpty())
-            context.drawTooltip(this.textRenderer, getTooltipFromItem(client, this.current), mouseX, mouseY);
+        if (this.current != null)
+        {
+            List<Text> list = Lists.newArrayList();
+            this.current.appendTooltip(client.world, list);
+            context.drawTooltip(this.textRenderer, list, mouseX, mouseY);
+        }
     }
 
     private void drawItem(DrawContext context, ItemRenderer itemRenderer, @Nullable LivingEntity entity, @Nullable World world, ItemStack stack, int x, int y, float scale)

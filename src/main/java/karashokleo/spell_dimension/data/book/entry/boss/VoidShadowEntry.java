@@ -78,17 +78,11 @@ public class VoidShadowEntry extends BaseEntryProvider
         this.lang().add(context.pageText(),
                 """
                         When Void Shadow has at least half its health, you can deal damage to its body by killing the Servants He summons. Each hit deals damage equal to the Servant's max health, but not more than 1%% of Void Shadow's max health.
-                        \\
-                        \\
-                        When Void Shadow has less than half of its health left, He will enter a berserk state. At this point, if you destroy all the Void Fragments on the platform, he will stop rotating around the platform and come to the center to duel with you.
                         """
         );
         this.lang("zh_cn").add(context.pageText(),
                 """
                         当虚空之影至少有一半生命值时，你可以通过击杀祂召唤的侍从对其本体造成伤害。每次击杀造成的伤害等于侍从的最大生命值，但不会超过虚空之影的最大生命值的1%%。
-                        \\
-                        \\
-                        当虚空之影只剩下不到一半生命值时，祂将进入狂暴状态。此时如果你摧毁了平台上的所有虚空碎片，祂将停止围绕平台旋转，并来到平台中心与你决战。
                         """
         );
         BookTextPageModel behavior = BookTextPageModel
@@ -96,23 +90,39 @@ public class VoidShadowEntry extends BaseEntryProvider
                 .withText(context.pageText())
                 .build();
 
+        context.page("state");
+        this.lang().add(context.pageText(),
+                """
+                        When Void Shadow has less than half of its health left, He will enter a berserk state. At this point, if you destroy all the Void Fragments on the platform, he will stop rotating around the platform and come to the center to duel with you.
+                        """
+        );
+        this.lang("zh_cn").add(context.pageText(),
+                """
+                        当虚空之影只剩下不到一半生命值时，祂将进入狂暴状态。此时如果你摧毁了平台上的所有虚空碎片，祂将停止围绕平台旋转，并来到平台中心与你决战。
+                        """
+        );
+        BookTextPageModel state = BookTextPageModel
+                .builder()
+                .withText(context.pageText())
+                .build();
+
         BookEntityPageModel shadow = BookEntityPageModel
                 .builder()
-                .withOffset(-0.4f)
+                .withOffset(0.35f)
                 .withEntityId("adventurez:void_shadow")
                 .build();
         BookEntityPageModel shade = BookEntityPageModel
                 .builder()
-                .withOffset(-0.4f)
+                .withOffset(0.3f)
                 .withEntityId("adventurez:void_shade")
                 .build();
         BookEntityPageModel fragment = BookEntityPageModel
                 .builder()
-                .withOffset(-0.8f)
+                .withOffset(0.4f)
                 .withEntityId("adventurez:void_fragment")
                 .build();
 
-        return List.of(boss, behavior, shadow, shade, fragment);
+        return List.of(boss, behavior, state, shadow, shade, fragment);
     }
 
     @Override

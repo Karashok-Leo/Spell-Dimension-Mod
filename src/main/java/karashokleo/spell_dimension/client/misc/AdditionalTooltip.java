@@ -61,44 +61,37 @@ public class AdditionalTooltip
 
     private static void appendQuestScroll(ItemStack stack, TooltipContext context, List<Text> lines)
     {
-        if (!context.isAdvanced()) return;
-        if (stack.isOf(AllItems.QUEST_SCROLL))
-        {
-            var player = MinecraftClient.getInstance().player;
-            Optional<Quest> optional = AllItems.QUEST_SCROLL.getQuest(stack);
-            if (player != null &&
-                optional.isPresent() &&
-                QuestUsage.isQuestCompleted(player, optional.get()))
-                lines.add(SDTexts.TEXT$QUEST_COMPLETED.get());
-        }
-        if (context.isCreative())
+        if (!stack.isOf(AllItems.QUEST_SCROLL)) return;
+        var player = MinecraftClient.getInstance().player;
+        Optional<Quest> optional = AllItems.QUEST_SCROLL.getQuest(stack);
+        if (player != null &&
+            optional.isPresent() &&
+            QuestUsage.isQuestCompleted(player, optional.get()))
+            lines.add(SDTexts.TEXT$QUEST_COMPLETED.get());
+        if (player != null && player.isCreative())
             lines.add(SDTexts.TOOLTIP$SHIFT_RESET.get().formatted(Formatting.GRAY));
     }
 
     private static void appendFlexBreastplate(ItemStack stack, TooltipContext context, List<Text> lines)
     {
-        if (stack.isOf(AllItems.FLEX_BREASTPLATE))
-        {
-            var player = MinecraftClient.getInstance().player;
-            if (player == null) return;
-            lines.add(SDTexts.TOOLTIP$FLEX_BREASTPLATE$DAMAGE_FACTOR.get(
-                    "%.1f%%".formatted((1 - AllItems.FLEX_BREASTPLATE.getDamageFactor(player)) * 100)
-            ).formatted(Formatting.RED));
-        }
+        if (!stack.isOf(AllItems.FLEX_BREASTPLATE)) return;
+        var player = MinecraftClient.getInstance().player;
+        if (player == null) return;
+        lines.add(SDTexts.TOOLTIP$FLEX_BREASTPLATE$DAMAGE_FACTOR.get(
+                "%.1f%%".formatted((1 - AllItems.FLEX_BREASTPLATE.getDamageFactor(player)) * 100)
+        ).formatted(Formatting.RED));
     }
 
     private static void modifyCursePride(ItemStack stack, TooltipContext context, List<Text> lines)
     {
-        if (stack.isOf(TrinketItems.CURSE_PRIDE))
-        {
-            var player = MinecraftClient.getInstance().player;
-            if (player == null) return;
-            int level = DifficultyLevel.ofAny(player);
-            double rate = LHConfig.common().items.curse.prideDamageBonus;
-            lines.add(SDTexts.TOOLTIP$CURSE_PRIDE_2.get(
-                    "%.1f%%".formatted((level * rate) * 100)
-            ).formatted(Formatting.AQUA));
-        }
+        if (!stack.isOf(TrinketItems.CURSE_PRIDE)) return;
+        var player = MinecraftClient.getInstance().player;
+        if (player == null) return;
+        int level = DifficultyLevel.ofAny(player);
+        double rate = LHConfig.common().items.curse.prideDamageBonus;
+        lines.add(SDTexts.TOOLTIP$CURSE_PRIDE_2.get(
+                "%.1f%%".formatted((level * rate) * 100)
+        ).formatted(Formatting.AQUA));
     }
 
     private static void appendModonomicon(ItemStack stack, TooltipContext context, List<Text> lines)
@@ -154,13 +147,13 @@ public class AdditionalTooltip
             appendNightmareTooltip(lines);
         }
 
-        if (context.isCreative())
+        if (player.isCreative())
             lines.add(SDTexts.TOOLTIP$SHIFT_RESET.get().formatted(Formatting.GRAY));
     }
 
     private static void appendHardcoreTooltip(List<Text> lines)
     {
-        lines.add(SDTexts.TOOLTIP$DIFFICULTY_TIER$TITLE.get(GameStageComponent.HARDCORE).formatted(Formatting.DARK_RED));
+        lines.add(SDTexts.TOOLTIP$DIFFICULTY_TIER$TITLE.get(SDTexts.DIFFICULTY_TIER$1.get()).formatted(Formatting.DARK_RED));
         for (int i = 1; i <= 7; i++)
             lines.add(
                     SDTexts.TOOLTIP$DIFFICULTY_TIER$DESC.get(
@@ -171,7 +164,7 @@ public class AdditionalTooltip
 
     private static void appendNightmareTooltip(List<Text> lines)
     {
-        lines.add(SDTexts.TOOLTIP$DIFFICULTY_TIER$TITLE.get(GameStageComponent.NIGHTMARE).formatted(Formatting.DARK_PURPLE));
+        lines.add(SDTexts.TOOLTIP$DIFFICULTY_TIER$TITLE.get(SDTexts.DIFFICULTY_TIER$2.get()).formatted(Formatting.DARK_PURPLE));
         lines.add(
                 SDTexts.TOOLTIP$DIFFICULTY_TIER$DESC.get(
                         SDTexts.TOOLTIP$DIFFICULTY_TIER$NIGHTMARE.get()

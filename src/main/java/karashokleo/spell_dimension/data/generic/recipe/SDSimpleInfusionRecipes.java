@@ -23,26 +23,31 @@ import net.paladins.item.Shields;
 import net.spell_power.api.SpellSchools;
 import nourl.mythicmetals.blocks.MythicBlocks;
 import nourl.mythicmetals.item.MythicItems;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
 public class SDSimpleInfusionRecipes
 {
-    public static void add(Consumer<RecipeJsonProvider> exporter, Item base, Item addition, ItemStack output)
+    private static @NotNull Identifier getRecipeId(ItemStack output)
     {
         Identifier itemId = Registries.ITEM.getId(output.getItem());
-        Identifier recipeId = SpellDimension.modLoc("simple_infusion/%s/%s".formatted(itemId.getNamespace(), itemId.getPath()));
+        return SpellDimension.modLoc("simple_infusion/%s/%s".formatted(itemId.getNamespace(), itemId.getPath()));
+    }
+
+    public static void add(Consumer<RecipeJsonProvider> exporter, Item base, Item addition, ItemStack output)
+    {
         new SimpleInfusionRecipeBuilder()
                 .withTableIngredient(Ingredient.ofItems(base))
                 .withPedestalItem(1, addition)
                 .withPedestalItem(1, Ingredient.fromTag(AllTags.ESSENCE.get(0)))
                 .copyNbt(false)
-                .offerTo(exporter, recipeId, output);
+                .offerTo(exporter, getRecipeId(output), output);
     }
 
     public static void add(Consumer<RecipeJsonProvider> exporter)
     {
-        ItemStack guideBook = ItemRegistry.MODONOMICON_PURPLE.get().getDefaultStack();
+        ItemStack guideBook = ItemRegistry.MODONOMICON.get().getDefaultStack();
         guideBook.getOrCreateNbt().putString(ModonomiconConstants.Nbt.ITEM_BOOK_ID_TAG, MagicGuidanceProvider.BOOK_ID.toString());
         add(exporter, Items.BOOK, AllItems.ENCHANTED_ESSENCE, guideBook);
 
@@ -72,9 +77,27 @@ public class SDSimpleInfusionRecipes
         add(exporter, Items.LEATHER_BOOTS, ComplementItems.POSEIDITE.ingot(), ModItems.FLIPPERS.get().getDefaultStack());
         add(exporter, Items.LEATHER_BOOTS, Items.GRASS_BLOCK, ModItems.ROOTED_BOOTS.get().getDefaultStack());
         add(exporter, Items.LEATHER, Items.BLAZE_POWDER, ModItems.FIRE_GAUNTLET.get().getDefaultStack());
-        add(exporter, MythicBlocks.STORMYX.getStorageBlock().asItem(), AllItems.BASE_ESSENCES.get(SpellSchools.ARCANE).get(2), MythicItems.Mats.STORMYX_SHELL.getDefaultStack());
-        add(exporter, MythicBlocks.CARMOT.getStorageBlock().asItem(), AllItems.BASE_ESSENCES.get(SpellSchools.FIRE).get(2), MythicItems.Mats.CARMOT_STONE.getDefaultStack());
-        add(exporter, MythicBlocks.AQUARIUM.getStorageBlock().asItem(), AllItems.BASE_ESSENCES.get(SpellSchools.FROST).get(2), MythicItems.Mats.AQUARIUM_PEARL.getDefaultStack());
+
+        ItemStack stormyxShell = MythicItems.Mats.STORMYX_SHELL.getDefaultStack();
+        new SimpleInfusionRecipeBuilder()
+                .withTableIngredient(Ingredient.ofItems(MythicBlocks.STORMYX.getStorageBlock().asItem()))
+                .withPedestalItem(2, AllItems.BASE_ESSENCES.get(SpellSchools.ARCANE).get(2))
+                .copyNbt(false)
+                .offerTo(exporter, getRecipeId(stormyxShell), stormyxShell);
+
+        ItemStack carmotStone = MythicItems.Mats.CARMOT_STONE.getDefaultStack();
+        new SimpleInfusionRecipeBuilder()
+                .withTableIngredient(Ingredient.ofItems(MythicBlocks.CARMOT.getStorageBlock().asItem()))
+                .withPedestalItem(2, AllItems.BASE_ESSENCES.get(SpellSchools.FIRE).get(2))
+                .copyNbt(false)
+                .offerTo(exporter, getRecipeId(carmotStone), carmotStone);
+
+        ItemStack aquariumPearl = MythicItems.Mats.AQUARIUM_PEARL.getDefaultStack();
+        new SimpleInfusionRecipeBuilder()
+                .withTableIngredient(Ingredient.ofItems(MythicBlocks.AQUARIUM.getStorageBlock().asItem()))
+                .withPedestalItem(2, AllItems.BASE_ESSENCES.get(SpellSchools.FROST).get(2))
+                .copyNbt(false)
+                .offerTo(exporter, getRecipeId(aquariumPearl), aquariumPearl);
 
         // Spell Prism
         new SimpleInfusionRecipeBuilder()

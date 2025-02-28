@@ -115,7 +115,7 @@ public class TraitEntry extends BaseEntryProvider
         context.page("trait3");
         this.lang().add(context.pageText(),
                 """
-                        Adaptive: In addition to using various negative effects, you can refresh a monster's adaptation by switching spells. Each spell is equivalent to a damage type. Or use Spell Prism or Imagine Breaker to penetrate the protection of Adaptation.
+                        Adaptive: In addition to using various negative effects, you can refresh a monster's adaptation by switching spells. Each spell is equivalent to a damage type. Or use Spell Prism or Imagine Breaker to penetrate the protection.
                         \\
                         \\
                         Dispell: **Spell Tearing** enchantment, Spell Prism and Imagine Breaker all allow spell damage to penetrate the protection of Dispell.

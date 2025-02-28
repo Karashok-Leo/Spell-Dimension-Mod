@@ -1,5 +1,6 @@
 package karashokleo.spell_dimension.content.spell;
 
+import karashokleo.spell_dimension.api.SpellImpactEvents;
 import karashokleo.spell_dimension.config.SpellConfig;
 import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.util.DamageUtil;
@@ -11,11 +12,16 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Vec3d;
 import net.spell_engine.api.spell.ParticleBatch;
+import net.spell_engine.api.spell.SpellInfo;
 import net.spell_engine.entity.SpellProjectile;
+import net.spell_engine.internals.SpellRegistry;
 import net.spell_engine.particle.ParticleHelper;
 import net.spell_engine.utils.SoundHelper;
 import net.spell_power.api.SpellPower;
 import net.spell_power.api.SpellSchools;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ConvergeSpell
 {
@@ -58,16 +64,19 @@ public class ConvergeSpell
         ParticleHelper.sendBatches(tracked, PARTICLE);
         SoundHelper.playSoundEvent(tracked.getWorld(), tracked, SoundEvents.ENTITY_GENERIC_EXPLODE);
         float damage = (float) DamageUtil.calculateDamage(caster, SpellSchools.ARCANE, SpellConfig.CONVERGE_FACTOR, amplifier);
-        ImpactUtil.applyAreaImpact(
+        List<LivingEntity> targets = ImpactUtil.getLivingsInRange(
                 tracked,
                 3 + amplifier * 0.8F,
-                target -> !ImpactUtil.isAlly(caster, target),
-                target ->
-                {
-                    Vec3d movement = pos.subtract(target.getPos()).multiply(0.12 + amplifier * 0.03);
-                    target.setVelocity(movement);
-                    DamageUtil.spellDamage(target, SpellSchools.ARCANE, caster, damage, false);
-                }
+                target -> !ImpactUtil.isAlly(caster, target)
         );
+        if (targets.isEmpty()) return;
+        SpellInfo spellInfo = new SpellInfo(SpellRegistry.getSpell(AllSpells.CONVERGE), AllSpells.CONVERGE);
+        SpellImpactEvents.BEFORE.invoker().beforeImpact(caster.getWorld(), caster, new ArrayList<>(targets), spellInfo);
+        for (LivingEntity target : targets)
+        {
+            Vec3d movement = pos.subtract(target.getPos()).multiply(0.12 + amplifier * 0.03);
+            target.setVelocity(movement);
+            DamageUtil.spellDamage(target, SpellSchools.ARCANE, caster, damage, false);
+        }
     }
 }

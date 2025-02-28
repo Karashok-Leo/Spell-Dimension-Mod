@@ -24,6 +24,7 @@ import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
@@ -164,9 +165,11 @@ public class QuestScrollItem extends Item
         Optional<Quest> quest = this.getQuest(stack);
         if (quest.isPresent())
         {
-            Text title = quest.get().getTitle(world);
-            if (title != null) tooltip.add(title);
-            tooltip.addAll(quest.get().getDesc(world));
+            quest.get().appendTooltip(world, tooltip);
+            tooltip.add(SDTexts.TOOLTIP$QUEST$COMPLETE.get().formatted(Formatting.GOLD));
+            tooltip.add(SDTexts.TOOLTIP$QUEST$RESELECT.get().formatted(Formatting.DARK_GREEN));
+            if (QuestToEntryConfig.hasEntry(quest.get()))
+                tooltip.add(SDTexts.TOOLTIP$QUEST$OPEN_ENTRY.get().formatted(Formatting.DARK_AQUA));
         } else
         {
             tooltip.add(SDTexts.TOOLTIP$QUEST$VIEW_CURRENT.get());
