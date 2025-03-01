@@ -55,7 +55,7 @@ public class StalkerEntry extends BaseEntryProvider
                         Level: %d+
                         \\
                         \\
-                        May spawn when an **Ancient Vase** is broken.
+                        May spawn when the player breaks an **Ancient Vase** in the **Deeper Darker**.
                         \\
                         \\
                         *Ancient Vase: Generated in the Ancient Temple in the Deeper Darker.*
@@ -67,7 +67,7 @@ public class StalkerEntry extends BaseEntryProvider
                         等级: %d+
                         \\
                         \\
-                        在**远古花瓶**被打破时有概率生成。
+                        玩家在**深暗维度**打破**远古花瓶**时有概率生成。
                         \\
                         \\
                         *远古花瓶: 生成于深暗维度的远古神庙。*

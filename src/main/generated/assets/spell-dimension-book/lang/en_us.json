@@ -71,7 +71,7 @@
   "book.spell-dimension-book.magic_guidance.boss.returning_knight.boss.title": "Returning Knight",
   "book.spell-dimension-book.magic_guidance.boss.returning_knight.description": "",
   "book.spell-dimension-book.magic_guidance.boss.returning_knight.name": "Returning Knight",
-  "book.spell-dimension-book.magic_guidance.boss.stalker.boss.text": "Level: 160+\n\\\n\\\nMay spawn when an **Ancient Vase** is broken.\n\\\n\\\n*Ancient Vase: Generated in the Ancient Temple in the Deeper Darker.*\n",
+  "book.spell-dimension-book.magic_guidance.boss.stalker.boss.text": "Level: 160+\n\\\n\\\nMay spawn when the player breaks an **Ancient Vase** in the **Deeper Darker**.\n\\\n\\\n*Ancient Vase: Generated in the Ancient Temple in the Deeper Darker.*\n",
   "book.spell-dimension-book.magic_guidance.boss.stalker.boss.title": "Stalker",
   "book.spell-dimension-book.magic_guidance.boss.stalker.description": "",
   "book.spell-dimension-book.magic_guidance.boss.stalker.name": "Stalker",

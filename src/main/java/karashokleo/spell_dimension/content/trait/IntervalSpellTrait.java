@@ -4,6 +4,7 @@ import dev.xkmc.l2serial.serialization.SerialClass;
 import karashokleo.l2hostility.content.component.mob.CapStorageData;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.spell_dimension.data.SDTexts;
+import karashokleo.spell_dimension.init.AllMiscInit;
 import karashokleo.spell_dimension.util.ImpactUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
@@ -19,12 +20,6 @@ import java.util.function.IntUnaryOperator;
 public class IntervalSpellTrait extends SpellTrait
 {
     protected final IntUnaryOperator interval;
-
-    public IntervalSpellTrait(IntUnaryOperator interval, Identifier spellId)
-    {
-        super(spellId);
-        this.interval = interval;
-    }
 
     public IntervalSpellTrait(IntUnaryOperator interval, Identifier spellId, float powerFactor)
     {
@@ -55,10 +50,13 @@ public class IntervalSpellTrait extends SpellTrait
         {
             World world = mob.getWorld();
 
-            target.sendMessage(SDTexts.TEXT$SPELL_TRAIT$ACTION.get(
-                    mob.getName(),
-                    this.getName()
-            ));
+            if (world.getGameRules().get(AllMiscInit.NOTIFY_SPELL_TRAIT_CASTING).get())
+            {
+                target.sendMessage(SDTexts.TEXT$SPELL_TRAIT$ACTION.get(
+                        mob.getName(),
+                        this.getName()
+                ));
+            }
             ImpactUtil.performSpell(world, mob, spellId, List.of(target), SpellCast.Action.RELEASE, 1.0F);
 
             data.tickCount = 0;

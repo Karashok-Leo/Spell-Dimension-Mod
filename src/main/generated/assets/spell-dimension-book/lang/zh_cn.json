@@ -71,7 +71,7 @@
   "book.spell-dimension-book.magic_guidance.boss.returning_knight.boss.title": "复仇骑士",
   "book.spell-dimension-book.magic_guidance.boss.returning_knight.description": "",
   "book.spell-dimension-book.magic_guidance.boss.returning_knight.name": "复仇骑士",
-  "book.spell-dimension-book.magic_guidance.boss.stalker.boss.text": "等级: 160+\n\\\n\\\n在**远古花瓶**被打破时有概率生成。\n\\\n\\\n*远古花瓶: 生成于深暗维度的远古神庙。*\n",
+  "book.spell-dimension-book.magic_guidance.boss.stalker.boss.text": "等级: 160+\n\\\n\\\n玩家在**深暗维度**打破**远古花瓶**时有概率生成。\n\\\n\\\n*远古花瓶: 生成于深暗维度的远古神庙。*\n",
   "book.spell-dimension-book.magic_guidance.boss.stalker.boss.title": "Stalker",
   "book.spell-dimension-book.magic_guidance.boss.stalker.description": "",
   "book.spell-dimension-book.magic_guidance.boss.stalker.name": "Stalker",

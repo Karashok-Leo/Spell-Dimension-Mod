@@ -25,11 +25,6 @@ public class SpellTrait extends MobTrait
     protected Spell spell;
     protected final float powerFactor;
 
-    public SpellTrait(Identifier spellId)
-    {
-        this(spellId, 0.1F);
-    }
-
     public SpellTrait(Identifier spellId, float powerFactor)
     {
         super(Formatting.LIGHT_PURPLE);

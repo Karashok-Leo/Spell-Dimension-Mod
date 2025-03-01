@@ -77,13 +77,13 @@ public class AllTraits
                 .register();
         SHIFT = Entry.of(
                         "shift",
-                        new IntervalSpellTrait(lv -> 200 - 40 * lv, AllSpells.SHIFT),
+                        new IntervalSpellTrait(lv -> 200 - 40 * lv, AllSpells.SHIFT, 0.2f),
                         120, 60, 3, 200)
                 .addBlacklistOptional(LHTags.SEMIBOSS)
                 .register();
         BLACK_HOLE = Entry.of(
                         "black_hole",
-                        new SpellTrait(AllSpells.BLACK_HOLE, 0.2f),
+                        new SpellTrait(AllSpells.BLACK_HOLE, 1f),
                         0, 1, 1, 0)
                 .addENDesc("Fireballs spawns a black hole in place when they explode.")
                 .addZHDesc("发射的火球爆炸时在原地形成一个黑洞")
