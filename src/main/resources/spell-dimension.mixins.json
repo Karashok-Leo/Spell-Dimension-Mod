@@ -21,6 +21,7 @@
     "modded.SpellRegistryAccessor",
     "modded.StorageTerminalBlockEntityMixin",
     "modded.TerribleSwordItemMixin",
+    "modded.TraitGeneratorMixin",
     "modded.TrinketInventoryMixin",
     "modded.VoidShadeEntityMixin",
     "modded.VoidShadowEntityMixin",
@@ -37,7 +38,8 @@
     "vanilla.MobSpawnerLogicMixin",
     "vanilla.PlayerInventoryAccessor",
     "vanilla.PlayerKeepInventoryMixin",
-    "vanilla.ServerPlayerEntityMixin"
+    "vanilla.ServerPlayerEntityMixin",
+    "vanilla.SlimeEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1,

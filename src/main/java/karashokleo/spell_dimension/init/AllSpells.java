@@ -132,6 +132,7 @@ public class AllSpells
     public static final Identifier RIPTIDE = builderWithId("spellbladenext:whirlingblades").withTier(2).build();
 
     // Healing
+    public static final Identifier DIVINE_CLOUD = fromCrafting("divine_cloud").build();
     public static final Identifier HOLY_BEAM = builderWithId("paladins:holy_beam").build();
     public static final Identifier CIRCLE_OF_HEALING = builderWithId("paladins:circle_of_healing").build();
     public static final Identifier JUDGEMENT = builderWithId("paladins:judgement").build();

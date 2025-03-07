@@ -3,8 +3,10 @@ package karashokleo.spell_dimension.content.trait;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
 import karashokleo.spell_dimension.data.SDTexts;
+import karashokleo.spell_dimension.util.UuidUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
@@ -17,6 +19,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.UUID;
 
 public class SpellTrait extends MobTrait
 {
@@ -41,7 +44,10 @@ public class SpellTrait extends MobTrait
         SpellSchool school = this.getSpell().school;
         EntityAttributeInstance attributeInstance = mob.getAttributeInstance(school.attribute);
         if (attributeInstance == null) return;
-        attributeInstance.setBaseValue(mobLevel * powerFactor);
+        String spellIdString = this.getSpellId().toString();
+        UUID uuid = UuidUtil.getUUIDFromString(spellIdString);
+        EntityAttributeModifier modifier = new EntityAttributeModifier(uuid, "Spell Trait Bonus - %s".formatted(spellIdString), mobLevel * powerFactor, EntityAttributeModifier.Operation.ADDITION);
+        attributeInstance.addPersistentModifier(modifier);
     }
 
     public Identifier getSpellId()

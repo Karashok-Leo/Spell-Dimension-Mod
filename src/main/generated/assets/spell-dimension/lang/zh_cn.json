@@ -304,6 +304,8 @@
   "spell.spell-dimension.dawnbreaker.name": "破晓",
   "spell.spell-dimension.divine_aura.description": "施法者获得神圣光环效果，持续{effect_duration}秒。神圣光环：每隔1秒，对周围友方施加伤害吸收效果，并对周围敌人造成0.4倍法术强度的治愈法术伤害。",
   "spell.spell-dimension.divine_aura.name": "神圣光环",
+  "spell.spell-dimension.divine_cloud.description": "在目标处留下法术云，造成{damage}点伤害并施加诅咒效果。",
+  "spell.spell-dimension.divine_cloud.name": "圣咒之云",
   "spell.spell-dimension.exorcism.description": "使目标等级降至原来的一半，并且重新获取词条，同时施法者受到相当于目标原有等级的伤害。对Boss无效。",
   "spell.spell-dimension.exorcism.name": "驱邪",
   "spell.spell-dimension.featherlight.description": "获得短暂的迅捷和缓降效果。",

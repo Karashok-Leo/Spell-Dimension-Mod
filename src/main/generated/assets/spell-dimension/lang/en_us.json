@@ -304,6 +304,8 @@
   "spell.spell-dimension.dawnbreaker.name": "Dawnbreaker",
   "spell.spell-dimension.divine_aura.description": "Apply Divine Aura effect to oneself for {effect_duration} seconds. Divine Aura: Every 1 second, applies Absorption effect to surrounding allies and deals 0.4x spell power damage to surrounding enemies.",
   "spell.spell-dimension.divine_aura.name": "Divine Aura",
+  "spell.spell-dimension.divine_cloud.description": "Leaves a cloud of spells on the target, dealing {damage} damage and applying a Curse effect.",
+  "spell.spell-dimension.divine_cloud.name": "Divine Curse Cloud",
   "spell.spell-dimension.exorcism.description": "Reduce the target's levelFactor to half of the original, and reacquire the traits, while the caster takes damage equal to the target's original levelFactor. No effect on bosses.",
   "spell.spell-dimension.exorcism.name": "Exorcism",
   "spell.spell-dimension.featherlight.description": "Gain a short-lived Speed and Slow-Falling effect",

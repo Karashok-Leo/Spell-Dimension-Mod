@@ -142,6 +142,12 @@ public enum SpellTexts
             "Shooting an icicle, which deals {damage} frost spell damage to the hit enemy and can cause a chain reaction.",
             "发射一道冰刺，对命中的敌人造成{damage}点伤害，冰刺可以引发链式反应。"
     ),
+    DIVINE_CLOUD(
+            "Divine Curse Cloud",
+            "圣咒之云",
+            "Leaves a cloud of spells on the target, dealing {damage} damage and applying a Curse effect.",
+            "在目标处留下法术云，造成{damage}点伤害并施加诅咒效果。"
+    ),
     SPELL_POWER(
             "Empowering Presence",
             "魔力增强",

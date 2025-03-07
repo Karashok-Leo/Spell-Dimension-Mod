@@ -98,7 +98,7 @@ public class AtomicBreastplateItem extends TrinketItem
                     otherStack.isOf(upgrade.ingredientSupplier.get()))
                 {
                     slot.setStack(upgrade.itemSupplier.get());
-                    cursorStackReference.set(ItemStack.EMPTY);
+                    cursorStackReference.get().decrement(1);
                     SoundUtil.playSound(player, SoundUtil.ANVIL);
                     return true;
                 }
