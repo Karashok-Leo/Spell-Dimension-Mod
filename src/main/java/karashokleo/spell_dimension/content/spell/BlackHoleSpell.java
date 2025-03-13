@@ -5,7 +5,6 @@ import karashokleo.spell_dimension.init.AllSpells;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.Ownable;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
@@ -35,24 +34,29 @@ public class BlackHoleSpell
         handle(projectile, hitResult);
     }
 
+    public static float getRadius(LivingEntity caster)
+    {
+        double power = SpellPower.getSpellPower(SpellSchools.ARCANE, caster).randomValue();
+        return (float) MathHelper.clamp(power * 0.02, MIN_RADIUS, MAX_RADIUS);
+    }
+
     public static <T extends Entity & Ownable> void handle(T entity, @Nullable HitResult hitResult)
     {
         Entity owner = entity.getOwner();
         if (owner == null ||
             owner.isRemoved() ||
-            (!(owner instanceof PlayerEntity player)))
+            (!(owner instanceof LivingEntity caster)))
             return;
         if (!(entity.getWorld() instanceof ServerWorld serverWorld))
             return;
 
-        double power = SpellPower.getSpellPower(SpellSchools.ARCANE, player).randomValue();
-        float radius = (float) MathHelper.clamp(power * 0.02, MIN_RADIUS, MAX_RADIUS);
+        float radius = getRadius(caster);
 
         Vec3d center = hitResult == null ?
                 entity.getPos() :
                 adjustCenterPosition(hitResult, radius / 4);
 
-        spawn(serverWorld, player, center, radius);
+        spawn(serverWorld, caster, center, radius);
     }
 
     public static void spawn(World world, LivingEntity caster, Vec3d center, float radius)

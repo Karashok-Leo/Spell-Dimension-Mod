@@ -1,6 +1,6 @@
 {
   "school": "HEALING",
-  "range": 2.5,
+  "range": 3,
   "cast": {
     "duration": 2.0,
     "animation": "spell_engine:one_handed_area_charge",
@@ -95,6 +95,7 @@
           "duration": 12,
           "apply_mode": "SET",
           "amplifier": 2,
+          "amplifier_power_multiplier": 0.01,
           "show_particles": false
         }
       }

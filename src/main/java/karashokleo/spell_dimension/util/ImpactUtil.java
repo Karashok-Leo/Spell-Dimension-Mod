@@ -34,6 +34,11 @@ import java.util.function.Predicate;
 
 public class ImpactUtil
 {
+    public static SpellHelper.ImpactContext createContext(LivingEntity caster, Spell spell)
+    {
+        return new SpellHelper.ImpactContext(1.0F, 1.0F, null, SpellPower.getSpellPower(spell.school, caster), SpellHelper.impactTargetingMode(spell));
+    }
+
     /// copied from SpellHelper
     public static void performSpell(World world, LivingEntity caster, Identifier spellId, List<Entity> targets, SpellCast.Action action, float progress)
     {
@@ -44,7 +49,7 @@ public class ImpactUtil
         Spell.Release.Target targeting = spell.release.target;
         boolean released = action == SpellCast.Action.RELEASE;
         SpellImpactEvents.BEFORE.invoker().beforeImpact(world, caster, targets, spellInfo);
-        SpellHelper.ImpactContext context = new SpellHelper.ImpactContext(1.0F, 1.0F, null, SpellPower.getSpellPower(spell.school, caster), SpellHelper.impactTargetingMode(spell));
+        SpellHelper.ImpactContext context = createContext(caster, spell);
         if (spell.release.custom_impact)
         {
             Function<CustomSpellHandler.Data, Boolean> handler = CustomSpellHandler.handlers.get(spellId);

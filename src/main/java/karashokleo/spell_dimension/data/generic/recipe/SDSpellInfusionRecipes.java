@@ -120,7 +120,7 @@ public class SDSpellInfusionRecipes
         add(exporter, MythicItems.Mats.AQUARIUM_PEARL, AllSpells.RIPTIDE, SpellSchools.FROST);
         add(exporter, ERItems.COLD_EYE, AllSpells.COLD_BUFF, SpellSchools.FROST);
 
-        add(exporter, "bosses_of_mass_destruction:ancient_anima", AllSpells.DIVINE_CLOUD, SpellSchools.HEALING);
+        add(exporter, ComplementItems.TOTEMIC_GOLD.ingot(), AllSpells.DIVINE_CLOUD, SpellSchools.HEALING);
         add(exporter, "bosses_of_mass_destruction:ancient_anima", AllSpells.HOLY_BEAM, SpellSchools.HEALING);
         add(exporter, "soulsweapons:arkenstone", AllSpells.CIRCLE_OF_HEALING, SpellSchools.HEALING);
         add(exporter, TGItems.DARK_IRON_BLOCK.get(), AllSpells.BARRIER, SpellSchools.HEALING);

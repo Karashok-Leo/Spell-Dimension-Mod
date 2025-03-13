@@ -223,8 +223,8 @@ public enum SpellTexts
     DIVINE_AURA(
             "Divine Aura",
             "神圣光环",
-            "Apply Divine Aura effect to oneself for {effect_duration} seconds. Divine Aura: " + DivineAuraEffect.getDesc(true),
-            "施法者获得神圣光环效果，持续{effect_duration}秒。神圣光环：" + DivineAuraEffect.getDesc(false)
+            "Apply Divine Aura {effect_amplifier} effect to oneself for {effect_duration} seconds. Divine Aura: " + DivineAuraEffect.getDesc(true),
+            "施法者获得神圣光环{effect_amplifier}效果，持续{effect_duration}秒。神圣光环：" + DivineAuraEffect.getDesc(false)
     ),
     EXORCISM(
             "Exorcism",
