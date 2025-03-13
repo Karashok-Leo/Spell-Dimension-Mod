@@ -26,8 +26,8 @@ public class BaseQuests
                 ))
                 .addEnTitle("The Will Live")
                 .addZhTitle("求生意志")
-                .addEnDesc("Continuous survival for one day without death (20 minutes)")
-                .addZhDesc("不死亡的情况下连续存活一天（20分钟）")
+                .addEnDesc("Continuous survival for half a day without death (10 minutes)")
+                .addZhDesc("不死亡的情况下连续存活半天（10分钟）")
                 .register();
         CHOOSE_PATH = QuestBuilder.of("choose_path", new SimpleAdvancementQuest(
                         new Identifier("rpg_series:classes"),

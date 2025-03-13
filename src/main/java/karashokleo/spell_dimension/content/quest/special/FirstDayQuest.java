@@ -14,8 +14,8 @@ import java.util.function.Supplier;
 
 public record FirstDayQuest(Supplier<ItemStack> reward) implements ItemRewardQuest, AutoTitleQuest, AutoDescQuest
 {
-    // 20 minutes
-    private static final int ONE_DAY = 20 * 60 * 20;
+    // 10 minutes
+    private static final int ONE_DAY = 10 * 60 * 20;
 
     @Override
     public List<ItemStack> getRewards()
