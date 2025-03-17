@@ -24,6 +24,7 @@ import net.spell_engine.internals.casting.SpellCast;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -33,6 +34,18 @@ import java.util.List;
 @Mixin(SpellHelper.class)
 public abstract class SpellHelperMixin
 {
+    // fix context position being null
+    @ModifyArg(
+            method = "directImpact",
+            at = @At(value = "INVOKE", target = "Lnet/spell_engine/internals/SpellHelper;performImpacts(Lnet/minecraft/world/World;Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/entity/Entity;Lnet/minecraft/entity/Entity;Lnet/spell_engine/api/spell/SpellInfo;Lnet/spell_engine/internals/SpellHelper$ImpactContext;)Z"
+            ),
+            index = 5
+    )
+    private static SpellHelper.ImpactContext inject_directImpact(SpellHelper.ImpactContext context, @Local(argsOnly = true) Entity target)
+    {
+        return context.position(target.getPos());
+    }
+
     @Inject(
             method = "performSpell",
             at = @At(
