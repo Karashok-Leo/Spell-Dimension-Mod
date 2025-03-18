@@ -34,7 +34,7 @@
         "status_effect": {
           "effect_id": "spell-dimension:ignite",
           "duration": 15,
-          "amplifier": 1,
+          "amplifier": 0,
           "show_particles": false
         }
       },

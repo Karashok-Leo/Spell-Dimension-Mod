@@ -19,7 +19,7 @@ public class DivineAuraParticleSpawner implements CustomParticleStatusEffect.Spa
             0.01F,
             0.05F,
             0,
-            DivineAuraEffect.RANGE,
+            0,
             0,
             false
     );
@@ -28,6 +28,7 @@ public class DivineAuraParticleSpawner implements CustomParticleStatusEffect.Spa
     public void spawnParticles(LivingEntity livingEntity, int amplifier)
     {
         ParticleBatch scaledParticles = new ParticleBatch(PARTICLE);
+        scaledParticles.extent = DivineAuraEffect.getRadius(amplifier);
         scaledParticles.count *= (float) (amplifier + 1);
         scaledParticles.max_speed *= livingEntity.getScaleFactor();
         ParticleHelper.play(livingEntity.getWorld(), livingEntity, scaledParticles);

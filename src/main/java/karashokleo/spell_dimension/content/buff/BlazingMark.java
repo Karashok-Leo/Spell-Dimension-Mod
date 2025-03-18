@@ -19,6 +19,7 @@ import net.minecraft.util.dynamic.Codecs;
 import net.minecraft.util.math.Vec3d;
 import net.spell_engine.api.spell.ParticleBatch;
 import net.spell_engine.particle.ParticleHelper;
+import net.spell_power.api.SpellPower;
 import net.spell_power.api.SpellSchools;
 import org.jetbrains.annotations.Nullable;
 
@@ -35,7 +36,6 @@ public class BlazingMark implements Buff
     public static final Codec<BlazingMark> CODEC = RecordCodecBuilder.create(
             ins -> ins.group(
                     Codecs.NONNEGATIVE_INT.fieldOf("duration").forGetter(BlazingMark::getDuration),
-                    Codecs.NONNEGATIVE_INT.fieldOf("amplifier").forGetter(BlazingMark::getAmplifier),
                     Codec.FLOAT.fieldOf("damage").forGetter(BlazingMark::getDamage)
             ).apply(ins, BlazingMark::new)
     );
@@ -74,22 +74,19 @@ public class BlazingMark implements Buff
             )
     };
 
-    private int duration = 0;
-    private int amplifier = 0;
-    private float damage = 0;
+    private int duration;
+    private float damage;
 
-    private BlazingMark(int duration, int amplifier, float damage)
+    private BlazingMark(int duration, float damage)
     {
         this.duration = duration;
-        this.amplifier = amplifier;
         this.damage = damage;
     }
 
-    public BlazingMark(int amplifier)
+    public BlazingMark()
     {
         this(
                 SpellConfig.BLAZING_MARK_CONFIG.totalDuration(),
-                amplifier,
                 0
         );
     }
@@ -104,7 +101,7 @@ public class BlazingMark implements Buff
         }
         --duration;
         if (duration == SpellConfig.BLAZING_MARK_CONFIG.triggerDuration())
-            trigger(entity, source, damage, amplifier);
+            trigger(entity, source, damage);
         if (duration % 20 == 0)
         {
             if (duration == 0 || entity.isSubmergedInWater())
@@ -125,28 +122,29 @@ public class BlazingMark implements Buff
             Buff.get(entity, TYPE).ifPresentOrElse(blazingMark ->
             {
                 if (blazingMark.getDuration() > SpellConfig.BLAZING_MARK_CONFIG.triggerDuration())
-                    blazingMark.accumulateDamage(event.getAmount());
-            }, () -> Buff.apply(entity, TYPE, new BlazingMark(instance.getAmplifier() + 1), attacker));
+                    blazingMark.accumulateDamage(attacker, event.getAmount());
+            }, () -> Buff.apply(entity, TYPE, new BlazingMark(), attacker));
         }
     }
 
-    public void accumulateDamage(float amount)
+    public void accumulateDamage(LivingEntity caster, float amount)
     {
-        this.damage = Math.min(this.damage + amount, this.amplifier * SpellConfig.BLAZING_MARK_CONFIG.maxDamage());
+        double baseValue = SpellPower.getSpellPower(SpellSchools.FIRE, caster).baseValue();
+        this.damage = Math.min(this.damage + amount, (float) baseValue * SpellConfig.BLAZING_MARK_CONFIG.maxDamageRatio());
     }
 
-    public static void trigger(LivingEntity source, LivingEntity caster, float damage, int amplifier)
+    public static void trigger(LivingEntity source, LivingEntity caster, float damage)
     {
         ParticleHelper.sendBatches(source, PARTICLES);
-        DamageUtil.spellDamage(source, SpellSchools.FIRE, caster, damage * amplifier * SpellConfig.BLAZING_MARK_CONFIG.proportion(), false);
-        EffectHelper.forceAddEffectWithEvent(source, new StatusEffectInstance(StatusEffects.WEAKNESS, 100, amplifier, false, false), caster);
+        DamageUtil.spellDamage(source, SpellSchools.FIRE, caster, damage * SpellConfig.BLAZING_MARK_CONFIG.reDamageRatio(), false);
+        EffectHelper.forceAddEffectWithEvent(source, new StatusEffectInstance(StatusEffects.WEAKNESS, 100, 2, false, false), caster);
     }
 
     private void particle(LivingEntity owner)
     {
         float f = Math.min(owner.getWidth(), owner.getHeight()) * 0.5F;
         int color = duration >= SpellConfig.BLAZING_MARK_CONFIG.triggerDuration() ?
-                0xffff00 - 0x100 * (int) (0xff * damage / (amplifier * SpellConfig.BLAZING_MARK_CONFIG.maxDamage())) :
+                0xffff00 - 0x100 * (int) (0xff * damage / SpellConfig.BLAZING_MARK_CONFIG.maxDamageRatio()) :
                 0x888888;
         Vec3d pos = owner.getPos()
                 .add(0, owner.getHeight() + f, 0).addRandom(owner.getRandom(), 0.5F)
@@ -174,11 +172,6 @@ public class BlazingMark implements Buff
     public int getDuration()
     {
         return duration;
-    }
-
-    public int getAmplifier()
-    {
-        return amplifier;
     }
 
     public float getDamage()

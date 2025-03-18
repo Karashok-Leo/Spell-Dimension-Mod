@@ -73,12 +73,12 @@ public class AllSpells
     public static final Identifier BREAK = fromCrafting("break").build();
     public static final Identifier LIGHT = fromCrafting("light").build();
     public static final Identifier MOON_SWIM = fromCrafting("moon_swim").build();
-    public static final Identifier INCARCERATE = fromCrafting("incarcerate").build();
 
     // Arcane
     // Tier 1
     public static final Identifier CONVERGE = fromCrafting("converge").build();
     public static final Identifier SHIFT = fromCrafting("shift").build();
+    public static final Identifier INCARCERATE = fromCrafting("incarcerate").build();
     public static final Identifier FORCE_LANDING = fromCrafting("force_landing").build();
     public static final Identifier ARCANE_BARRIER = fromCrafting("arcane_barrier").build();
     public static final Identifier FINAL_STRIKE = builderWithId("spellbladenext:finalstrike").build();

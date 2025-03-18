@@ -36,8 +36,8 @@ public class FireOfRetributionSpell
             MobTrait trait = RandomUtil.randomFromSet(target.getRandom(), traitSet);
             Integer ans = cap.traits.compute(trait, TraitAdderWand::decrease);
             int val = ans == null ? 0 : ans;
-            trait.initialize(target, val);
-            trait.postInit(target, val);
+            trait.initialize(cap, target, val);
+            trait.postInit(cap, target, val);
             cap.sync();
 
             SpellSchool school = spellInfo.spell().school;

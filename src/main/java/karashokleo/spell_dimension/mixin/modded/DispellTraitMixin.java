@@ -2,8 +2,10 @@ package karashokleo.spell_dimension.mixin.modded;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEvent;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDamageEvent;
+import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
 import karashokleo.l2hostility.content.trait.legendary.DispellTrait;
+import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHTags;
 import karashokleo.spell_dimension.init.AllEnchantments;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -32,25 +34,33 @@ public abstract class DispellTraitMixin extends MobTrait
             at = @At("HEAD"),
             cancellable = true
     )
-    private void inject_onAttacked(int level, LivingEntity entity, LivingAttackEvent event, CallbackInfo ci)
+    private void inject_onAttacked(MobDifficulty difficulty, LivingEntity entity, int level, LivingAttackEvent event, CallbackInfo ci)
     {
         ci.cancel();
     }
 
     // new logic with Spell Tearing enchantment
     @Override
-    public void onDamaged(int level, LivingEntity entity, LivingDamageEvent event)
+    public void onDamaged(MobDifficulty difficulty, LivingEntity entity, int level, LivingDamageEvent event)
     {
+        var data = difficulty.getOrCreateData(getId(), DispellTrait.Data::new);
+        if (data.immuneCooldown > 0) return;
+
         DamageSource source = event.getSource();
         if (source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY) ||
             source.isIn(DamageTypeTags.BYPASSES_EFFECTS) ||
             !source.isIn(LHTags.MAGIC))
             return;
+
+        data.immuneCooldown = LHConfig.common().traits.dispellImmuneCooldown;
         if (source.getAttacker() instanceof LivingEntity attacker)
         {
             int tearingLv = EnchantmentHelper.getEquipmentLevel(AllEnchantments.SPELL_TEARING, attacker);
             float factor = MathHelper.clamp(tearingLv * 0.2f, 0f, 1f);
             event.setAmount(event.getAmount() * factor);
-        } else event.setCanceled(true);
+        } else
+        {
+            event.setCanceled(true);
+        }
     }
 }

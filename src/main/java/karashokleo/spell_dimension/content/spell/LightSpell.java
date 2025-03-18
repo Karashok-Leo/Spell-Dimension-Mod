@@ -3,6 +3,7 @@ package karashokleo.spell_dimension.content.spell;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import karashokleo.spell_dimension.content.block.SpellLightBlock;
+import karashokleo.spell_dimension.content.item.SpellPrismItem;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllBlocks;
 import karashokleo.spell_dimension.init.AllSpells;
@@ -10,6 +11,7 @@ import karashokleo.spell_dimension.init.AllWorldGen;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Formatting;
@@ -158,6 +160,13 @@ public class LightSpell
             owner.sendMessage(SDTexts.TEXT$BANNED_SPELL.get().formatted(Formatting.RED));
             return;
         }
-        SPAWNERS.put(world, new LightSpawner(hitResult.getBlockPos(), 7, 8000, 20));
+
+        int total = 8000;
+        if (owner instanceof LivingEntity living &&
+            living.getOffHandStack().getItem() instanceof SpellPrismItem)
+        {
+            total = 16000;
+        }
+        SPAWNERS.put(world, new LightSpawner(hitResult.getBlockPos(), 7, total, 20));
     }
 }

@@ -28,14 +28,11 @@ public class IntervalSpellTrait extends SpellTrait
     }
 
     @Override
-    public void serverTick(LivingEntity e, int level)
+    public void serverTick(MobDifficulty difficulty, LivingEntity e, int level)
     {
-        var diff = MobDifficulty.get(e);
-        if (diff.isEmpty()) return;
-        var cap = diff.get();
-        var data = getData(cap);
+        var data = getData(difficulty);
         if (data.tickCount++ < interval.applyAsInt(level)) return;
-        action(cap.owner, level, data);
+        action(difficulty.owner, level, data);
     }
 
     public Data getData(MobDifficulty diff)

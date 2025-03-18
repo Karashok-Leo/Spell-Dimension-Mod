@@ -30,6 +30,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.client.render.entity.EmptyEntityRenderer;
+import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.effect.CustomModelStatusEffect;
@@ -97,7 +98,14 @@ public class SpellDimensionClient implements ClientModInitializer
         for (Item item : AllItems.COLOR_PROVIDERS)
             ColorProviderRegistry.ITEM.register((stack, tintIndex) -> (stack.getItem() instanceof ColorProvider c) ? c.getColor(stack) : 0xffffff, item);
 
-        LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, entityRenderer, registrationHelper, context) -> registrationHelper.register(new NucleusRenderer<>(entityRenderer)));
+        LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, entityRenderer, registrationHelper, context) ->
+        {
+            registrationHelper.register(new NucleusRenderer<>(entityRenderer));
+            if (entityRenderer instanceof MobEntityRenderer<?, ?> mobEntityRenderer)
+            {
+                registrationHelper.register(new MobBeamRenderer<>(mobEntityRenderer));
+            }
+        });
 
         CustomModels.registerModelIds(List.of(
                 FROSTED_MODEL,

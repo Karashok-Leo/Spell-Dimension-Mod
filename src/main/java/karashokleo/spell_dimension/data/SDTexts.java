@@ -70,7 +70,6 @@ public enum SDTexts
     TEXT$GAME_OVER$PASSION("During the making process, I gradually found my old passion for Minecraft. I think I've found something - that I truly love, which seems to be a luxury for most people. I hope you too can find what you love and stick with it.", "在制作过程中，我逐渐找回了自己从前对Minecraft的热情。我想我找到了某些东西——某些我真正热爱的东西，这似乎对大多数人来说是一种奢侈。希望你也能找到你的热爱并为之坚持下去。"),
     TEXT$GAME_OVER$FEEDBACK("If you have any suggestions, please give me feedback, I would appreciate it.", "如果你有任何建议，请反馈给我，我将感激不尽。"),
     TEXT$GAME_OVER$WISH("Lastly, I wish you a happy life. Have fun playing!", "最后，祝你生活愉快。玩的开心！"),
-    TEXT$GAME_OVER$TRUE_MAGIC("True magic is the love that can make time stand still", "真正的魔法，是能让时光驻留的热爱"),
     TEXT$QUEST$BEGINNING("[BEGINNING]", "[起点]"),
     TEXT$QUEST$END("[END]", "[终点]"),
     TEXT$QUEST$CHALLENGE("[CHALLENGE]", "[挑战]"),
@@ -191,6 +190,9 @@ public enum SDTexts
     TOOLTIP$BOTTLE_SOUL_BINDING$WARNING("By default, items other than trinkets dropped by a player upon death are retained in the Gravestone. However, for some unknown reason, it is still possible, albeit highly unlikely, for items in the gravestone to disappear. If you are completely intolerant of the possibility of losing everything you own, drink this potion.", "默认情况下，玩家死亡时掉落的除饰品外的其他物品将被保留在墓碑中。但由于某些不明原因，墓碑中的物品仍有可能不翼而飞，尽管这种可能性微乎其微。如果你完全无法容忍失去所有身家的可能性，请喝下这瓶药水。"),
     TOOLTIP$SHIFT_RESET("Shift + Right-click to reset the progress", "Shift + 右键重置进度"),
     TOOLTIP$SPELL_PRISM("Consuming durability to make your spell damage bypass magical protection.","消耗耐久使你的法术伤害可以穿透魔法防御"),
+    TOOLTIP$SPELL_PRISM_ADVANCED("Maybe enhance the effects of certain spells?","或许可以增强某些法术的效果？"),
+    TOOLTIP$CURSED_APPLE("+7 Curse slots after use", "食用后 +7 恶意 - 诅咒 饰品槽"),
+    TOOLTIP$MEDAL$TRUE_MAGIC("True magic is the love that can make time stand still", "真正的魔法，是能让时光驻留的热爱"),
 
     /**
      * Scrolls

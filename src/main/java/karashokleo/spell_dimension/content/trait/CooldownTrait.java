@@ -24,12 +24,9 @@ public abstract class CooldownTrait extends MobTrait
     }
 
     @Override
-    public void serverTick(LivingEntity mob, int level)
+    public void serverTick(MobDifficulty difficulty, LivingEntity mob, int level)
     {
-        var diff = MobDifficulty.get(mob);
-        if (diff.isEmpty()) return;
-        var cap = diff.get();
-        var data = getData(cap);
+        var data = getData(difficulty);
         if (data.cooldown <= 0) return;
         data.cooldown--;
     }

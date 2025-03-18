@@ -305,6 +305,9 @@ public class AllTags
                 .add(DDEntities.STALKER)
                 .addTag(SCULK);
 
+        SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(TagUtil.entityTypeTag(L2Hostility.id("counter_strike_whitelist")))
+                .add(DDEntities.STALKER);
+
         SpellDimension.ENCHANTMENT_TAGS.getOrCreateContainer(LOOTABLE)
                 .add(
                         LHEnchantments.SHULKER_ARMOR,

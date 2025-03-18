@@ -9,10 +9,7 @@ import karashokleo.l2hostility.init.LHTags;
 import karashokleo.l2hostility.init.LHTraits;
 import karashokleo.leobrary.datagen.builder.ItemBuilder;
 import karashokleo.spell_dimension.SpellDimension;
-import karashokleo.spell_dimension.content.trait.AirborneTrait;
-import karashokleo.spell_dimension.content.trait.IntervalSpellTrait;
-import karashokleo.spell_dimension.content.trait.LeechTrait;
-import karashokleo.spell_dimension.content.trait.SpellTrait;
+import karashokleo.spell_dimension.content.trait.*;
 import karashokleo.spell_dimension.data.generic.SDTraitConfigProvider;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.data.client.Models;
@@ -28,30 +25,53 @@ public class AllTraits
 {
     public static AirborneTrait AIRBORNE;
     public static LeechTrait LEECH;
+
+    // Arcane Tier 1
     public static IntervalSpellTrait SHIFT;
-    public static SpellTrait BLACK_HOLE;
-//    public static IntervalSpellTrait ARCANE_MISSILE;
+    public static IntervalSpellTrait CONVERGE;
+    public static IntervalSpellTrait ARCANE_MISSILE;
     public static IntervalSpellTrait ARCANE_BLAST;
     public static IntervalSpellTrait ARCANE_BLINK;
+
+    // Arcane Tier 2
+    public static ChanelIntervalSpellTrait AMETHYST_SLASH;
+    public static ChanelIntervalSpellTrait ARCANE_BEAM;
+
+    // Arcane Tier 3
+    public static CycloneTrait ECHO_STORM;
+
+    // Fire Tier 1
     public static IntervalSpellTrait FIREBALL;
     public static IntervalSpellTrait FIRE_WALL;
     public static IntervalSpellTrait FIRE_METEOR;
+
+    // Fire Tier 2
+    public static ChanelIntervalSpellTrait FLAME_SLASH;
+
+    // Frost Tier 1
     public static IntervalSpellTrait FROST_NOVA;
-    public static IntervalSpellTrait DIVINE_PROTECTION;
-    public static IntervalSpellTrait INCARCERATE;
-    public static IntervalSpellTrait CONVERGE;
-    public static IntervalSpellTrait ECHO_STORM;
-    public static IntervalSpellTrait AMETHYST_SLASH;
-    public static IntervalSpellTrait FLAME_SLASH;
-    public static IntervalSpellTrait FROST_BLIZZARD;
-    public static IntervalSpellTrait NUCLEUS;
-    public static IntervalSpellTrait AURA;
+    public static IntervalSpellTrait FROST_SHIELD;
     public static IntervalSpellTrait ICICLE;
+    public static IntervalSpellTrait FROST_BLIZZARD;
+
+    // Frost Tier 2
+    public static IntervalSpellTrait NUCLEUS;
+    public static IntervalSpellTrait FROST_AURA;
     public static IntervalSpellTrait FROST_BLINK;
-    public static IntervalSpellTrait FROST_SLASH;
+    public static ChanelIntervalSpellTrait FROST_SLASH;
+
+    // Healing Tier 1
+    public static IntervalSpellTrait DIVINE_PROTECTION;
+    public static ChanelIntervalSpellTrait HOLY_BEAM;
+
+    // Healing Tier 2
     public static IntervalSpellTrait BLESSING;
     public static IntervalSpellTrait MISFORTUNE;
     public static IntervalSpellTrait HEAVENLY_JUSTICE;
+
+    // Boss
+    public static SpellTrait BLACK_HOLE;
+    public static IntervalSpellTrait INCARCERATE;
 
     public static void register()
     {
@@ -75,12 +95,142 @@ public class AllTraits
                 .addENDesc("%s of damage dealt will heal itself")
                 .addZHDesc("造成的%s的伤害将治疗自身")
                 .register();
+
         SHIFT = Entry.of(
                         "shift",
                         new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.SHIFT, 0.2f),
-                        120, 60, 3, 200)
+                        200, 30, 3, 300)
                 .addBlacklistOptional(LHTags.SEMIBOSS)
                 .register();
+        CONVERGE = Entry.of(
+                        "converge",
+                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.CONVERGE, 0.2f),
+                        200, 30, 3, 300)
+                .register();
+        ARCANE_MISSILE = Entry.of(
+                        "arcane_missile",
+                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.ARCANE_MISSILE, 0.2f),
+                        200, 30, 3, 300)
+                .register();
+        ARCANE_BLAST = Entry.of(
+                        "arcane_blast",
+                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.ARCANE_BLAST, 0.2f),
+                        200, 30, 3, 300)
+                .register();
+        ARCANE_BLINK = Entry.of(
+                        "arcane_blink",
+                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.ARCANE_BLINK, 0.2f),
+                        200, 30, 3, 300)
+                .register();
+
+        AMETHYST_SLASH = Entry.of(
+                        "amethyst_slash",
+                        new ChanelIntervalSpellTrait(lv -> 300 - 40 * lv, lv -> 10, AllSpells.AMETHYST_SLASH, 0.2f),
+                        300, 20, 3, 600)
+                .register();
+        ARCANE_BEAM = Entry.of(
+                        "arcane_beam",
+                        new ChanelIntervalSpellTrait(lv -> 300 - 40 * lv, lv -> 10, AllSpells.ARCANE_BEAM, 0.2f),
+                        300, 20, 3, 600)
+                .register();
+
+        ECHO_STORM = Entry.of(
+                        "echo_storm",
+                        new CycloneTrait(lv -> 300 - 40 * lv, AllSpells.ECHO_STORM, 0.2f),
+                        400, 10, 3, 900)
+                .register();
+
+        FIREBALL = Entry.of(
+                        "fireball",
+                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.FIREBALL, 0.2f),
+                        200, 30, 3, 300)
+                .register();
+        FIRE_WALL = Entry.of(
+                        "fire_wall",
+                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.FIRE_WALL, 0.2f),
+                        200, 30, 3, 300)
+                .register();
+        FIRE_METEOR = Entry.of(
+                        "fire_meteor",
+                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.FIRE_METEOR, 0.2f),
+                        200, 30, 3, 300)
+                .register();
+
+        FLAME_SLASH = Entry.of(
+                        "flame_slash",
+                        new ChanelIntervalSpellTrait(lv -> 300 - 40 * lv, lv -> 10, AllSpells.FLAME_SLASH, 0.2f),
+                        300, 20, 3, 600)
+                .register();
+
+        FROST_NOVA = Entry.of(
+                        "frost_nova",
+                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.FROST_NOVA, 0.2f),
+                        200, 30, 3, 300)
+                .register();
+        FROST_SHIELD = Entry.of(
+                        "frost_shield",
+                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.FROST_SHIELD, 0.2f),
+                        200, 30, 3, 300)
+                .register();
+        ICICLE = Entry.of(
+                        "icicle",
+                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.ICICLE, 0.2f),
+                        200, 30, 3, 300)
+                .register();
+        FROST_BLIZZARD = Entry.of(
+                        "frost_blizzard",
+                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.FROST_BLIZZARD, 0.2f),
+                        200, 30, 3, 300)
+                .register();
+
+        NUCLEUS = Entry.of(
+                        "icy_nucleus",
+                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.ICY_NUCLEUS, 0.2f),
+                        300, 20, 3, 600)
+                .register();
+        FROST_AURA = Entry.of(
+                        "frost_aura",
+                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.FROST_AURA, 0.2f),
+                        300, 20, 3, 600)
+                .register();
+        FROST_BLINK = Entry.of(
+                        "frost_blink",
+                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.FROST_BLINK, 0.2f),
+                        300, 20, 3, 600)
+                .register();
+        FROST_SLASH = Entry.of(
+                        "frost_slash",
+                        new ChanelIntervalSpellTrait(lv -> 300 - 40 * lv, lv -> 10, AllSpells.FROST_SLASH, 0.2f),
+                        300, 20, 3, 600)
+                .register();
+
+        DIVINE_PROTECTION = Entry.of(
+                        "divine_protection",
+                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.DIVINE_PROTECTION, 0.2f),
+                        200, 30, 3, 300)
+                .register();
+        HOLY_BEAM = Entry.of(
+                        "holy_beam",
+                        new ChanelIntervalSpellTrait(lv -> 300 - 40 * lv, lv -> 10, AllSpells.HOLY_BEAM, 0.2f),
+                        300, 20, 3, 600)
+                .register();
+
+        BLESSING = Entry.of(
+                        "blessing",
+                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.BLESSING, 0.2f),
+                        300, 20, 3, 600)
+                .register();
+        MISFORTUNE = Entry.of(
+                        "misfortune",
+                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.MISFORTUNE, 0.2f),
+                        300, 20, 3, 600)
+                .register();
+        HEAVENLY_JUSTICE = Entry.of(
+                        "heavenly_justice",
+                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.HEAVENLY_JUSTICE, 0.2f),
+                        300, 20, 3, 600)
+                .register();
+
         BLACK_HOLE = Entry.of(
                         "black_hole",
                         new SpellTrait(AllSpells.BLACK_HOLE, 1f),
@@ -89,137 +239,10 @@ public class AllTraits
                 .addZHDesc("发射的火球爆炸时在原地形成一个黑洞")
                 .addWhitelist(EntityType.ENDER_DRAGON)
                 .register();
-//        ARCANE_MISSILE = Entry.of(
-//                        "arcane_missile",
-//                        new IntervalSpellTrait(lv -> 20, AllSpells.ARCANE_MISSILE),
-//                        0, 1, 1, 0)
-//                .addWhitelistOptional(new Identifier("bosses_of_mass_destruction:obsidilith"))
-//                .register();
-        ARCANE_BLAST = Entry.of(
-                        "arcane_blast",
-                        new IntervalSpellTrait(lv -> 20, AllSpells.ARCANE_BLAST, 0.2f),
-                        0, 1, 1, 0)
-//                .addWhitelistOptional(new Identifier("bosses_of_mass_destruction:obsidilith"))
-                .register();
-        ARCANE_BLINK = Entry.of(
-                        "arcane_blink",
-                        new IntervalSpellTrait(lv -> 20, AllSpells.ARCANE_BLINK, 0.2f),
-                        0, 1, 1, 0)
-//                .addWhitelistOptional(new Identifier("bosses_of_mass_destruction:obsidilith"))
-                .register();
-        FIREBALL = Entry.of(
-                        "fireball",
-                        new IntervalSpellTrait(lv -> 20, AllSpells.FIREBALL, 0.2f),
-                        0, 1, 1, 0)
-//                .addWhitelistOptional(new Identifier("bosses_of_mass_destruction:obsidilith"))
-                .register();
-        FIRE_WALL = Entry.of(
-                        "fire_wall",
-                        new IntervalSpellTrait(lv -> 20, AllSpells.FIRE_WALL, 0.2f),
-                        0, 1, 1, 0)
-//                .addWhitelistOptional(new Identifier("bosses_of_mass_destruction:obsidilith"))
-                .register();
-        FIRE_METEOR = Entry.of(
-                        "fire_meteor",
-                        new IntervalSpellTrait(lv -> 20, AllSpells.FIRE_METEOR, 0.2f),
-                        0, 1, 1, 0)
-//                .addWhitelistOptional(new Identifier("bosses_of_mass_destruction:obsidilith"))
-                .register();
-        FROST_NOVA = Entry.of(
-                        "frost_nova",
-                        new IntervalSpellTrait(lv -> 20, AllSpells.FROST_NOVA, 0.2f),
-                        0, 1, 1, 0)
-//                .addWhitelistOptional(new Identifier("bosses_of_mass_destruction:obsidilith"))
-                .register();
-        DIVINE_PROTECTION = Entry.of(
-                        "divine_protection",
-                        new IntervalSpellTrait(lv -> 20, AllSpells.DIVINE_PROTECTION, 0.2f),
-                        0, 1, 1, 0)
-//                .addWhitelistOptional(new Identifier("bosses_of_mass_destruction:obsidilith"))
-                .register();
         INCARCERATE = Entry.of(
                         "incarcerate",
-                        new IntervalSpellTrait(lv -> 20, AllSpells.INCARCERATE, 0.2f),
+                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.INCARCERATE, 0.2f),
                         0, 1, 1, 0)
-//                .addWhitelistOptional(new Identifier("bosses_of_mass_destruction:obsidilith"))
-                .register();
-        CONVERGE = Entry.of(
-                        "converge",
-                        new IntervalSpellTrait(lv -> 20, AllSpells.CONVERGE, 0.2f),
-                        0, 1, 1, 0)
-//                .addWhitelistOptional(new Identifier("bosses_of_mass_destruction:obsidilith"))
-                .register();
-        ECHO_STORM = Entry.of(
-                        "echo_storm",
-                        new IntervalSpellTrait(lv -> 20, AllSpells.ECHO_STORM, 0.2f),
-                        0, 1, 1, 0)
-//                .addWhitelistOptional(new Identifier("bosses_of_mass_destruction:obsidilith"))
-                .register();
-        AMETHYST_SLASH = Entry.of(
-                        "amethyst_slash",
-                        new IntervalSpellTrait(lv -> 20, AllSpells.AMETHYST_SLASH, 0.2f),
-                        0, 1, 1, 0)
-//                .addWhitelistOptional(new Identifier("bosses_of_mass_destruction:obsidilith"))
-                .register();
-        FLAME_SLASH = Entry.of(
-                        "flame_slash",
-                        new IntervalSpellTrait(lv -> 20, AllSpells.FLAME_SLASH, 0.2f),
-                        0, 1, 1, 0)
-//                .addWhitelistOptional(new Identifier("bosses_of_mass_destruction:obsidilith"))
-                .register();
-        FROST_BLIZZARD = Entry.of(
-                        "frost_blizzard",
-                        new IntervalSpellTrait(lv -> 20, AllSpells.FROST_BLIZZARD, 0.2f),
-                        0, 1, 1, 0)
-//                .addWhitelistOptional(new Identifier("bosses_of_mass_destruction:obsidilith"))
-                .register();
-        NUCLEUS = Entry.of(
-                        "icy_nucleus",
-                        new IntervalSpellTrait(lv -> 20, AllSpells.ICY_NUCLEUS, 0.2f),
-                        0, 1, 1, 0)
-//                .addWhitelistOptional(new Identifier("bosses_of_mass_destruction:obsidilith"))
-                .register();
-        AURA = Entry.of(
-                        "frost_aura",
-                        new IntervalSpellTrait(lv -> 20, AllSpells.FROST_AURA, 0.2f),
-                        0, 1, 1, 0)
-//                .addWhitelistOptional(new Identifier("bosses_of_mass_destruction:obsidilith"))
-                .register();
-        ICICLE = Entry.of(
-                        "icicle",
-                        new IntervalSpellTrait(lv -> 20, AllSpells.ICICLE, 0.2f),
-                        0, 1, 1, 0)
-//                .addWhitelistOptional(new Identifier("bosses_of_mass_destruction:obsidilith"))
-                .register();
-        FROST_BLINK = Entry.of(
-                        "frost_blink",
-                        new IntervalSpellTrait(lv -> 20, AllSpells.FROST_BLINK, 0.2f),
-                        0, 1, 1, 0)
-//                .addWhitelistOptional(new Identifier("bosses_of_mass_destruction:obsidilith"))
-                .register();
-        FROST_SLASH = Entry.of(
-                        "frost_slash",
-                        new IntervalSpellTrait(lv -> 20, AllSpells.FROST_SLASH, 0.2f),
-                        0, 1, 1, 0)
-//                .addWhitelistOptional(new Identifier("bosses_of_mass_destruction:obsidilith"))
-                .register();
-        BLESSING = Entry.of(
-                        "blessing",
-                        new IntervalSpellTrait(lv -> 20, AllSpells.BLESSING, 0.2f),
-                        0, 1, 1, 0)
-//                .addWhitelistOptional(new Identifier("bosses_of_mass_destruction:obsidilith"))
-                .register();
-        MISFORTUNE = Entry.of(
-                        "misfortune",
-                        new IntervalSpellTrait(lv -> 20, AllSpells.MISFORTUNE, 0.2f),
-                        0, 1, 1, 0)
-//                .addWhitelistOptional(new Identifier("bosses_of_mass_destruction:obsidilith"))
-                .register();
-        HEAVENLY_JUSTICE = Entry.of(
-                        "heavenly_justice",
-                        new IntervalSpellTrait(lv -> 20, AllSpells.HEAVENLY_JUSTICE, 0.2f),
-                        0, 1, 1, 0)
-//                .addWhitelistOptional(new Identifier("bosses_of_mass_destruction:obsidilith"))
                 .register();
     }
 

@@ -1,13 +1,18 @@
 package karashokleo.spell_dimension.content.spell;
 
+import karashokleo.spell_dimension.content.item.SpellPrismItem;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.init.AllWorldGen;
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.Item;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.math.BlockPos;
 import net.spell_engine.entity.SpellProjectile;
 
 public class BreakSpell
@@ -23,6 +28,17 @@ public class BreakSpell
             owner.sendMessage(SDTexts.TEXT$BANNED_SPELL.get().formatted(Formatting.RED));
             return;
         }
-        world.breakBlock(hitResult.getBlockPos(), true, owner);
+
+        BlockPos blockPos = hitResult.getBlockPos();
+        if (owner instanceof LivingEntity living &&
+            living.getOffHandStack().getItem() instanceof SpellPrismItem)
+        {
+            Item blockItem = world.getBlockState(blockPos).getBlock().asItem();
+            Block.dropStack(world, blockPos, blockItem.getDefaultStack());
+            world.breakBlock(blockPos, false, owner);
+        } else
+        {
+            world.breakBlock(blockPos, true, owner);
+        }
     }
 }

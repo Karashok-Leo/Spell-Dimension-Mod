@@ -7,9 +7,9 @@ public class SpellConfig
     public static final float NUCLEUS_FACTOR = 1.5F;
     public static final float FROSTED_FACTOR = 0.4F;
     public static final float DIVINE_AURA_FACTOR = 0.4F;
-    public static final BlazingMarkConfig BLAZING_MARK_CONFIG = new BlazingMarkConfig(200, 100, 30, 0.5F);
+    public static final BlazingMarkConfig BLAZING_MARK_CONFIG = new BlazingMarkConfig(200, 100, 0.5f, 0.5F);
 
-    public record BlazingMarkConfig(int totalDuration, int triggerDuration, int maxDamage, float proportion)
+    public record BlazingMarkConfig(int totalDuration, int triggerDuration, float maxDamageRatio, float reDamageRatio)
     {
     }
 }

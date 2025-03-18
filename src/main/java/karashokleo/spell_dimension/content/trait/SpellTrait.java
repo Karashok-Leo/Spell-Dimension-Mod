@@ -7,8 +7,6 @@ import karashokleo.spell_dimension.util.UuidUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
@@ -36,7 +34,13 @@ public class SpellTrait extends MobTrait
     }
 
     @Override
-    public void postInit(LivingEntity mob, int lv)
+    public boolean compatibleWith(MobTrait trait, int lv)
+    {
+        return !(trait instanceof SpellTrait);
+    }
+
+    @Override
+    public void postInit(MobDifficulty difficulty, LivingEntity mob, int lv)
     {
         var diff = MobDifficulty.get(mob);
         if (diff.isEmpty()) return;
@@ -46,6 +50,7 @@ public class SpellTrait extends MobTrait
         if (attributeInstance == null) return;
         String spellIdString = this.getSpellId().toString();
         UUID uuid = UuidUtil.getUUIDFromString(spellIdString);
+        attributeInstance.removeModifier(uuid);
         EntityAttributeModifier modifier = new EntityAttributeModifier(uuid, "Spell Trait Bonus - %s".formatted(spellIdString), mobLevel * powerFactor, EntityAttributeModifier.Operation.ADDITION);
         attributeInstance.addPersistentModifier(modifier);
     }
@@ -82,13 +87,6 @@ public class SpellTrait extends MobTrait
     public @NotNull String getDescKey()
     {
         return spellId.toTranslationKey("spell", "description");
-    }
-
-    @Override
-    public MutableText getName()
-    {
-        return Text.translatable(getNameKey())
-                .setStyle(Style.EMPTY.withColor(this.getColor()));
     }
 
     @Override

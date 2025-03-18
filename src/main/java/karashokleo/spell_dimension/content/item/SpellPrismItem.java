@@ -62,5 +62,6 @@ public class SpellPrismItem extends Item
         tooltip.add(ScreenTexts.EMPTY);
         tooltip.add(Text.translatable("item.modifiers.offhand").formatted(Formatting.GRAY));
         tooltip.add(SDTexts.TOOLTIP$SPELL_PRISM.get().formatted(Formatting.GRAY));
+        tooltip.add(SDTexts.TOOLTIP$SPELL_PRISM_ADVANCED.get().formatted(Formatting.GRAY));
     }
 }

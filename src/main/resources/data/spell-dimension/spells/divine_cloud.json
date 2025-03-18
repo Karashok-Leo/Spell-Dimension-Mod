@@ -2,13 +2,12 @@
   "school": "HEALING",
   "range": 32,
   "cast": {
-    "duration": 4,
-    "animation": "spellbladenext:flameslash",
+    "duration": 2,
+    "animation": "spell_engine:one_handed_healing_charge",
     "sound": {
       "id": "spell_engine:generic_healing_casting",
       "randomness": 0
     },
-    "channel_ticks": 6,
     "particles": [
       {
         "particle_id": "spell_engine:holy_ascend",
@@ -22,31 +21,12 @@
   },
   "release": {
     "target": {
-      "type": "CLOUD",
-      "cloud": {
-        "time_to_live_seconds": 2,
-        "impact_tick_interval": 10,
-        "volume": {
-          "radius": 3,
-          "area": {
-            "angle_degrees": 180,
-            "vertical_range_multiplier": 1
-          },
-          "particles": [
-            {
-              "particle_id": "spell_engine:holy_ascend",
-              "shape": "SPHERE",
-              "origin": "CENTER",
-              "count": 40.0,
-              "min_speed": 0.2,
-              "max_speed": 0.6
-            }
-          ],
-          "sound": {
-            "id": "spell_engine:generic_healing_impact_1"
-          }
-        }
-      }
+      "type": "CURSOR",
+      "cursor": { }
+    },
+    "animation": "spell_engine:one_handed_projectile_release",
+    "sound": {
+      "id": "wizards:generic_healing_release"
     }
   },
   "impact": [
@@ -54,7 +34,7 @@
       "action": {
         "type": "DAMAGE",
         "damage": {
-          "spell_power_coefficient": 0.36
+          "spell_power_coefficient": 0.8
         }
       },
       "particles": [
@@ -83,7 +63,25 @@
       }
     }
   ],
+  "area_impact": {
+    "radius": 3,
+    "area": {
+      "distance_dropoff": "SQUARED"
+    },
+    "particles": [
+      {
+        "particle_id": "spell_engine:holy_ascend",
+        "shape": "SPHERE",
+        "origin": "CENTER",
+        "count": 5.0,
+        "min_speed": 0.2,
+        "max_speed": 0.3
+      }
+    ],
+    "sound": {
+      "id": "spell_engine:generic_healing_impact_1"
+    }
+  },
   "cost": {
-    "cooldown_duration": 2.5
   }
 }

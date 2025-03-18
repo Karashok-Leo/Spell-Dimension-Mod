@@ -102,7 +102,8 @@ public class Nucleus implements Buff
         float range = Math.max(3 + amplifier, height * (1.6F + amplifier * 0.4F));
 
         SpellInfo spellInfo = new SpellInfo(spell, MINI_ICICLE);
-        SpellHelper.ImpactContext context = new SpellHelper.ImpactContext(1.0F, 1.0F, null, SpellPower.getSpellPower(spell.school, caster), SpellHelper.impactTargetingMode(spell));
+        SpellHelper.ImpactContext context = ImpactUtil.createContext(caster, spell);
+
         int step = 72 / (amplifier + 1);
         for (int i = 0; i < 360; i += step)
             for (int j = 0; j < 360; j += step)

@@ -66,6 +66,7 @@ public class AllItems
     public static BottleOfNightmare BOTTLE_NIGHTMARE;
     public static BottleOfSoulBinding BOTTLE_SOUL_BINDING;
     public static SpellPrismItem SPELL_PRISM;
+    public static CursedAppleItem CURED_APPLE;
     public static MedalItem MEDAL;
 
     public static void register()
@@ -245,6 +246,11 @@ public class AllItems
         SPELL_PRISM = Entry.of("spell_prism", new SpellPrismItem())
                 .addEN()
                 .addZH("法术棱镜")
+                .addModel()
+                .register();
+        CURED_APPLE = Entry.of("cursed_apple", new CursedAppleItem())
+                .addEN()
+                .addZH("诅咒禁果")
                 .addModel()
                 .register();
         MEDAL = Entry.of("medal", new MedalItem())

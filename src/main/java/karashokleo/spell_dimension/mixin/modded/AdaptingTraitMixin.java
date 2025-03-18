@@ -1,6 +1,7 @@
 package karashokleo.spell_dimension.mixin.modded;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
+import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.trait.common.AdaptingTrait;
 import karashokleo.spell_dimension.init.AllEvents;
 import net.minecraft.entity.LivingEntity;
@@ -17,7 +18,7 @@ public abstract class AdaptingTraitMixin
             at = @At("HEAD"),
             cancellable = true
     )
-    private void inject_onHurt(int level, LivingEntity entity, LivingHurtEvent event, CallbackInfo ci)
+    private void inject_onHurt(MobDifficulty difficulty, LivingEntity entity, int level, LivingHurtEvent event, CallbackInfo ci)
     {
         if (AllEvents.adaptSpell(level, entity, event))
             ci.cancel();
