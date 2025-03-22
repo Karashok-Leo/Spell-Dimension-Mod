@@ -1,7 +1,7 @@
 package karashokleo.spell_dimension.content.spell;
 
-import karashokleo.spell_dimension.content.item.SpellPrismItem;
 import karashokleo.spell_dimension.data.SDTexts;
+import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.init.AllWorldGen;
 import net.minecraft.block.Block;
@@ -31,7 +31,7 @@ public class BreakSpell
 
         BlockPos blockPos = hitResult.getBlockPos();
         if (owner instanceof LivingEntity living &&
-            living.getOffHandStack().getItem() instanceof SpellPrismItem)
+            living.getOffHandStack().isOf(AllItems.SPELL_PRISM))
         {
             Item blockItem = world.getBlockState(blockPos).getBlock().asItem();
             Block.dropStack(world, blockPos, blockItem.getDefaultStack());

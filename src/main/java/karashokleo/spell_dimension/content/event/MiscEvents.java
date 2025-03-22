@@ -3,12 +3,13 @@ package karashokleo.spell_dimension.content.event;
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEvent;
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingEntityEvents;
 import io.github.fabricators_of_create.porting_lib.entity.events.PlayerInteractionEvents;
+import karashokleo.enchantment_infusion.api.event.InfusionCompleteCallback;
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.l2hostility.content.feature.EntityFeature;
 import karashokleo.l2hostility.content.item.TrinketItems;
 import karashokleo.l2hostility.init.LHTags;
 import karashokleo.leobrary.damage.api.modify.DamagePhase;
-import karashokleo.spell_dimension.content.item.SpellPrismItem;
+import karashokleo.spell_dimension.content.item.DynamicSpellBookItem;
 import karashokleo.spell_dimension.content.item.SpellScrollItem;
 import karashokleo.spell_dimension.content.misc.ISpawnerExtension;
 import karashokleo.spell_dimension.content.network.C2SSelectQuest;
@@ -29,6 +30,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
+import net.spell_engine.api.spell.SpellContainer;
+import net.spell_engine.internals.SpellContainerHelper;
 import net.spell_power.api.SpellDamageSource;
 import net.trique.mythicupgrades.MythicUpgradesDamageTypes;
 
@@ -36,6 +39,17 @@ public class MiscEvents
 {
     public static void init()
     {
+        // Fix dynamic spell book nbt copy
+        InfusionCompleteCallback.EVENT.register((world, pos, output, inventory, recipe) ->
+        {
+            if (!(output.getItem() instanceof DynamicSpellBookItem bookItem))
+                return;
+            SpellContainer container = SpellContainerHelper.containerFromItemStack(output).copy();
+            SpellContainer modifiedContainer = container.copy();
+            modifiedContainer.max_spell_count = bookItem.getMaxSpellCount();
+            SpellContainerHelper.addContainerToItemStack(modifiedContainer, output);
+        });
+
         // Spell Prism
         DamagePhase.ARMOR.registerModifier(0, access ->
         {
@@ -44,7 +58,7 @@ public class MiscEvents
             if (!(access.getAttacker() instanceof LivingEntity attacker))
                 return;
             ItemStack stack = attacker.getOffHandStack();
-            if (!(stack.getItem() instanceof SpellPrismItem))
+            if (!(stack.isOf(AllItems.SPELL_PRISM)))
                 return;
             stack.damage(1, attacker, e -> e.sendToolBreakStatus(Hand.OFF_HAND));
             access.getSource().setBypassMagic();

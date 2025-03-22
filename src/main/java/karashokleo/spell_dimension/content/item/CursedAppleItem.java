@@ -70,9 +70,9 @@ public class CursedAppleItem extends Item
         var inventory = group.get("hostility_curse");
         if (inventory == null)
             return stack;
-
         if (inventory.getModifiers().containsKey(CURSED_APPLE_BONUS_UUID))
             return stack;
+
         inventory.addPersistentModifier(new EntityAttributeModifier(CURSED_APPLE_BONUS_UUID, "Cursed Apple Bonus", 7, EntityAttributeModifier.Operation.ADDITION));
 
         world.playSound(null, user.getX(), user.getY(), user.getZ(), user.getEatSound(stack), SoundCategory.NEUTRAL, 1.0F, 1.0F + (world.random.nextFloat() - world.random.nextFloat()) * 0.4F);

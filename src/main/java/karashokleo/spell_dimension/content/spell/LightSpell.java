@@ -3,9 +3,9 @@ package karashokleo.spell_dimension.content.spell;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import karashokleo.spell_dimension.content.block.SpellLightBlock;
-import karashokleo.spell_dimension.content.item.SpellPrismItem;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllBlocks;
+import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.init.AllWorldGen;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
@@ -163,7 +163,7 @@ public class LightSpell
 
         int total = 8000;
         if (owner instanceof LivingEntity living &&
-            living.getOffHandStack().getItem() instanceof SpellPrismItem)
+            living.getOffHandStack().isOf(AllItems.SPELL_PRISM))
         {
             total = 16000;
         }
