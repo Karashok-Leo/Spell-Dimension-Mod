@@ -3,14 +3,17 @@ package karashokleo.spell_dimension.content.spell;
 import karashokleo.spell_dimension.content.entity.LocatePortalEntity;
 import karashokleo.spell_dimension.content.recipe.locate.LocateRecipe;
 import karashokleo.spell_dimension.data.SDTexts;
+import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.init.AllTags;
 import karashokleo.spell_dimension.util.FutureTask;
+import karashokleo.spell_dimension.util.RandomUtil;
 import karashokleo.spell_dimension.util.TeleportUtil;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -32,17 +35,28 @@ public class LocateSpell
         if (!isLocateTargetBlock(world, castPos)) return;
 
         ItemStack offHandStack = player.getOffHandStack();
+        LocateRecipe locateRecipe;
 
-        Optional<LocateRecipe> recipe = world.getRecipeManager()
-                .getFirstMatch(LocateRecipe.TYPE, player.getInventory(), world);
-
-        if (recipe.isEmpty())
+        // if spell prism, locate a random spot
+        if (offHandStack.isOf(AllItems.SPELL_PRISM))
         {
-            player.sendMessage(SDTexts.TEXT$INVALID_KEY_ITEM.get(), true);
-            return;
-        }
+            locateRecipe = RandomUtil.randomFromList(
+                    player.getRandom(),
+                    world.getRecipeManager().listAllOfType(LocateRecipe.TYPE)
+            );
+        } else
+        {
+            Optional<LocateRecipe> recipe = world.getRecipeManager()
+                    .getFirstMatch(LocateRecipe.TYPE, player.getInventory(), world);
 
-        LocateRecipe locateRecipe = recipe.get();
+            if (recipe.isEmpty())
+            {
+                player.sendMessage(SDTexts.TEXT$INVALID_KEY_ITEM.get(), true);
+                return;
+            }
+
+            locateRecipe = recipe.get();
+        }
 
         Optional<BlockPos> located = locateRecipe.locate(world, castPos, player);
         if (located.isEmpty()) return;
@@ -54,9 +68,16 @@ public class LocateSpell
         );
 
         if (player.getAbilities().creativeMode) return;
-        offHandStack.decrement(1);
-        if (player.getRandom().nextFloat() < BREAK_CHANCE)
-            world.breakBlock(castPos, false);
+
+        if (offHandStack.isOf(AllItems.SPELL_PRISM))
+        {
+            offHandStack.damage(1, player, e -> e.sendToolBreakStatus(Hand.OFF_HAND));
+        } else
+        {
+            offHandStack.decrement(1);
+            if (player.getRandom().nextFloat() < BREAK_CHANCE)
+                world.breakBlock(castPos, false);
+        }
     }
 
     public static void spawnLocatePortal(ServerWorld world, BlockPos destination, BlockPos pos)

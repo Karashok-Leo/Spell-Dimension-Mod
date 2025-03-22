@@ -8,8 +8,10 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -30,12 +32,17 @@ public class BreakSpell
         }
 
         BlockPos blockPos = hitResult.getBlockPos();
-        if (owner instanceof LivingEntity living &&
-            living.getOffHandStack().isOf(AllItems.SPELL_PRISM))
+        if (owner instanceof LivingEntity living)
         {
-            Item blockItem = world.getBlockState(blockPos).getBlock().asItem();
-            Block.dropStack(world, blockPos, blockItem.getDefaultStack());
-            world.breakBlock(blockPos, false, owner);
+            ItemStack offHandStack = living.getOffHandStack();
+            if (offHandStack.isOf(AllItems.SPELL_PRISM))
+            {
+                offHandStack.damage(1, living, e -> e.sendToolBreakStatus(Hand.OFF_HAND));
+
+                Item blockItem = world.getBlockState(blockPos).getBlock().asItem();
+                Block.dropStack(world, blockPos, blockItem.getDefaultStack());
+                world.breakBlock(blockPos, false, owner);
+            }
         } else
         {
             world.breakBlock(blockPos, true, owner);

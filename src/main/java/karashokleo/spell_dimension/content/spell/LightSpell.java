@@ -12,9 +12,11 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -162,10 +164,15 @@ public class LightSpell
         }
 
         int total = 8000;
-        if (owner instanceof LivingEntity living &&
-            living.getOffHandStack().isOf(AllItems.SPELL_PRISM))
+        if (owner instanceof LivingEntity living)
         {
-            total = 24000;
+            ItemStack offHandStack = living.getOffHandStack();
+            if (offHandStack.isOf(AllItems.SPELL_PRISM))
+            {
+                offHandStack.damage(1, living, e -> e.sendToolBreakStatus(Hand.OFF_HAND));
+
+                total = 24000;
+            }
         }
         SPAWNERS.put(world, new LightSpawner(hitResult.getBlockPos(), 7, total, 20));
     }
