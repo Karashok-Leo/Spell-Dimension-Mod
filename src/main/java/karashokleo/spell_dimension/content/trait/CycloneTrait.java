@@ -12,9 +12,12 @@ import java.util.function.IntUnaryOperator;
 
 public class CycloneTrait extends IntervalSpellTrait
 {
-    public CycloneTrait(IntUnaryOperator interval, Identifier spellId, float powerFactor)
+    protected final int color;
+
+    public CycloneTrait(IntUnaryOperator interval, Identifier spellId, float powerFactor, int color)
     {
         super(interval, spellId, powerFactor);
+        this.color = color;
     }
 
     @Override
@@ -30,7 +33,7 @@ public class CycloneTrait extends IntervalSpellTrait
         if (target == null) return;
         SpellHelper.ImpactContext context = ImpactUtil.createContext(owner, this.getSpell());
         CycloneEntity cyclone = new CycloneEntity(Spellblades.CYCLONEENTITY, target.getWorld());
-        cyclone.setColor(5);
+        cyclone.setColor(color);
         cyclone.setOwner(owner);
         cyclone.setPosition(owner.getPos());
         cyclone.target = target;

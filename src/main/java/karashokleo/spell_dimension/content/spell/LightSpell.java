@@ -165,7 +165,7 @@ public class LightSpell
         if (owner instanceof LivingEntity living &&
             living.getOffHandStack().isOf(AllItems.SPELL_PRISM))
         {
-            total = 16000;
+            total = 24000;
         }
         SPAWNERS.put(world, new LightSpawner(hitResult.getBlockPos(), 7, total, 20));
     }

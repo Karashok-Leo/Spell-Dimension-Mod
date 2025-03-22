@@ -38,6 +38,7 @@ public class AllTraits
     public static ChanelIntervalSpellTrait ARCANE_BEAM;
 
     // Arcane Tier 3
+    public static CycloneTrait MAELSTROM;
     public static CycloneTrait ECHO_STORM;
 
     // Fire Tier 1
@@ -47,6 +48,9 @@ public class AllTraits
 
     // Fire Tier 2
     public static ChanelIntervalSpellTrait FLAME_SLASH;
+
+    // Fire Tier 3
+    public static CycloneTrait INFERNO;
 
     // Frost Tier 1
     public static IntervalSpellTrait FROST_NOVA;
@@ -59,6 +63,9 @@ public class AllTraits
     public static IntervalSpellTrait FROST_AURA;
     public static IntervalSpellTrait FROST_BLINK;
     public static ChanelIntervalSpellTrait FROST_SLASH;
+
+    // Frost Tier 3
+    public static CycloneTrait TEMPEST;
 
     // Healing Tier 1
     public static IntervalSpellTrait DIVINE_PROTECTION;
@@ -134,9 +141,14 @@ public class AllTraits
                         300, 20, 3, 600)
                 .register();
 
+        MAELSTROM = Entry.of(
+                        "maelstrom",
+                        new CycloneTrait(lv -> 300 - 40 * lv, AllSpells.MAELSTROM, 0.2f, 2),
+                        400, 10, 3, 900)
+                .register();
         ECHO_STORM = Entry.of(
                         "echo_storm",
-                        new CycloneTrait(lv -> 300 - 40 * lv, AllSpells.ECHO_STORM, 0.2f),
+                        new CycloneTrait(lv -> 300 - 40 * lv, AllSpells.ECHO_STORM, 0.2f, 5),
                         400, 10, 3, 900)
                 .register();
 
@@ -160,6 +172,12 @@ public class AllTraits
                         "flame_slash",
                         new ChanelIntervalSpellTrait(lv -> 300 - 40 * lv, lv -> 10, AllSpells.FLAME_SLASH, 0.2f),
                         300, 20, 3, 600)
+                .register();
+
+        INFERNO = Entry.of(
+                        "inferno",
+                        new CycloneTrait(lv -> 300 - 40 * lv, AllSpells.INFERNO, 0.2f, 4),
+                        400, 10, 3, 900)
                 .register();
 
         FROST_NOVA = Entry.of(
@@ -202,6 +220,12 @@ public class AllTraits
                         "frost_slash",
                         new ChanelIntervalSpellTrait(lv -> 300 - 40 * lv, lv -> 10, AllSpells.FROST_SLASH, 0.2f),
                         300, 20, 3, 600)
+                .register();
+
+        TEMPEST = Entry.of(
+                        "tempest",
+                        new CycloneTrait(lv -> 300 - 40 * lv, AllSpells.TEMPEST, 0.2f, 3),
+                        400, 10, 3, 900)
                 .register();
 
         DIVINE_PROTECTION = Entry.of(
