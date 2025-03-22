@@ -32,13 +32,13 @@ public class PivotEntry extends BaseEntryProvider
     @Override
     protected String descEN()
     {
-        return "";
+        return "The beacon will lead you home";
     }
 
     @Override
     protected String descZH()
     {
-        return "";
+        return "信标会指引你回家";
     }
 
     @Override

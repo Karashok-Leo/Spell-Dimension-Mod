@@ -36,13 +36,13 @@ public class BookEntry extends BaseEntryProvider
     @Override
     protected String descEN()
     {
-        return "A carrier for recording spells.";
+        return "A carrier for recording spells";
     }
 
     @Override
     protected String descZH()
     {
-        return "记录法术的载体。";
+        return "记录法术的载体";
     }
 
     @Override

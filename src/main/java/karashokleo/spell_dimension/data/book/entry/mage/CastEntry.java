@@ -34,13 +34,13 @@ public class CastEntry extends BaseEntryProvider
     @Override
     protected String descEN()
     {
-        return "The basic skill of a mage.";
+        return "The basic skill of a mage";
     }
 
     @Override
     protected String descZH()
     {
-        return "魔法师的基本功。";
+        return "魔法师的基本功";
     }
 
     @Override

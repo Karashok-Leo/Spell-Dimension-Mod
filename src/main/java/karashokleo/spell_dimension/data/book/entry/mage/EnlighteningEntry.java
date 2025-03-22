@@ -34,13 +34,13 @@ public class EnlighteningEntry extends BaseEntryProvider
     @Override
     protected String descEN()
     {
-        return "Strike at the heart.";
+        return "Strike at the heart";
     }
 
     @Override
     protected String descZH()
     {
-        return "直击心灵。";
+        return "直击心灵";
     }
 
     @Override

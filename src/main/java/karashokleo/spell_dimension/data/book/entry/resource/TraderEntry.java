@@ -33,13 +33,13 @@ public class TraderEntry extends BaseEntryProvider
     @Override
     protected String descEN()
     {
-        return "He really loves apples.";
+        return "He really loves apples";
     }
 
     @Override
     protected String descZH()
     {
-        return "他真的很喜欢吃苹果。";
+        return "他真的很喜欢吃苹果";
     }
 
     @Override

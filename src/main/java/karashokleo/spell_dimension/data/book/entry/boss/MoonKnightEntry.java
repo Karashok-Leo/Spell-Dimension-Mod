@@ -36,13 +36,13 @@ public class MoonKnightEntry extends BaseEntryProvider
     @Override
     protected String descEN()
     {
-        return "";
+        return "The true heir to the throne has returned to his body";
     }
 
     @Override
     protected String descZH()
     {
-        return "";
+        return "正统的储君已回归其身躯";
     }
 
     @Override

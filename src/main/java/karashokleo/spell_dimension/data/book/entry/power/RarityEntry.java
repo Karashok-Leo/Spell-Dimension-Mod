@@ -36,13 +36,13 @@ public class RarityEntry extends BaseEntryProvider
     @Override
     protected String descEN()
     {
-        return "";
+        return "\"Unmistakably genuine at first glance\"";
     }
 
     @Override
     protected String descZH()
     {
-        return "";
+        return "“一眼大开门”";
     }
 
     @Override

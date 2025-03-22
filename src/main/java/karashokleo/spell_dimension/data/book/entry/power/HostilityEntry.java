@@ -35,13 +35,13 @@ public class HostilityEntry extends BaseEntryProvider
     @Override
     protected String descEN()
     {
-        return "This hostile world.";
+        return "This hostile world";
     }
 
     @Override
     protected String descZH()
     {
-        return "这充斥着恶意的世界。";
+        return "这充斥着恶意的世界";
     }
 
     @Override

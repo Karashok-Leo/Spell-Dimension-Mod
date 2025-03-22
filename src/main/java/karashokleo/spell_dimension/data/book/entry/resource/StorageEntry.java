@@ -36,13 +36,13 @@ public class StorageEntry extends BaseEntryProvider
     @Override
     protected String descEN()
     {
-        return "Well organized.";
+        return "Well organized";
     }
 
     @Override
     protected String descZH()
     {
-        return "井然有序。";
+        return "井然有序";
     }
 
     @Override

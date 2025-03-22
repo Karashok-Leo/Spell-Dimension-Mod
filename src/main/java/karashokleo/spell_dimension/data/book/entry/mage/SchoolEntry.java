@@ -32,13 +32,13 @@ public class SchoolEntry extends BaseEntryProvider
     @Override
     protected String descEN()
     {
-        return "The six branches of the magic system.";
+        return "The six branches of the magic system";
     }
 
     @Override
     protected String descZH()
     {
-        return "魔法体系的六大分支。";
+        return "魔法体系的六大分支";
     }
 
     @Override

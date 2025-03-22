@@ -35,13 +35,13 @@ public class InvokerEntry extends BaseEntryProvider
     @Override
     protected String descEN()
     {
-        return "";
+        return "The Sage of the Ravagers";
     }
 
     @Override
     protected String descZH()
     {
-        return "";
+        return "掠夺者们的贤者";
     }
 
     @Override

@@ -37,13 +37,13 @@ public class EssenceEntry extends BaseEntryProvider
     @Override
     protected String descEN()
     {
-        return "Subtle crystals of magic.";
+        return "Subtle crystals of magic";
     }
 
     @Override
     protected String descZH()
     {
-        return "魔法凝结而成的微妙结晶。";
+        return "魔法凝结而成的微妙结晶";
     }
 
     @Override

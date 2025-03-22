@@ -36,13 +36,13 @@ public class BlackStoneGolemEntry extends BaseEntryProvider
     @Override
     protected String descEN()
     {
-        return "";
+        return "The spirit birthed from the blackstone";
     }
 
     @Override
     protected String descZH()
     {
-        return "";
+        return "黑石中孕育出的灵魂";
     }
 
     @Override

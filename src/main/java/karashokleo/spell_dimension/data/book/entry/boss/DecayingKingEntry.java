@@ -38,13 +38,13 @@ public class DecayingKingEntry extends BaseEntryProvider
     @Override
     protected String descEN()
     {
-        return "";
+        return "Kingdom that fell under the lava sea";
     }
 
     @Override
     protected String descZH()
     {
-        return "";
+        return "沦陷于熔岩之海的王国";
     }
 
     @Override

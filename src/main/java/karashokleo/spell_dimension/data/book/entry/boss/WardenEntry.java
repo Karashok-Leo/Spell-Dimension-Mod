@@ -37,13 +37,13 @@ public class WardenEntry extends BaseEntryProvider
     @Override
     protected String descEN()
     {
-        return "";
+        return "Silent Fury";
     }
 
     @Override
     protected String descZH()
     {
-        return "";
+        return "无声之暴怒";
     }
 
     @Override

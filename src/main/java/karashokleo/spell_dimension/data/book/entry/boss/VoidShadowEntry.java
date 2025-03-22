@@ -36,13 +36,13 @@ public class VoidShadowEntry extends BaseEntryProvider
     @Override
     protected String descEN()
     {
-        return "";
+        return "Dark magic on the prowl...";
     }
 
     @Override
     protected String descZH()
     {
-        return "";
+        return "黑暗魔法徘徊...";
     }
 
     @Override

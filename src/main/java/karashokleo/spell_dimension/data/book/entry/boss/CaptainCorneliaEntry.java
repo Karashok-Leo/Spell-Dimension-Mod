@@ -36,13 +36,13 @@ public class CaptainCorneliaEntry extends BaseEntryProvider
     @Override
     protected String descEN()
     {
-        return "The sparse trumpets of the survivors would have awakened her soul.";
+        return "The sparse trumpets of the survivors would have awakened her soul";
     }
 
     @Override
     protected String descZH()
     {
-        return "求生者吹响的稀疏号角自会惊醒她的灵魂。";
+        return "求生者吹响的稀疏号角自会惊醒她的灵魂";
     }
 
     @Override

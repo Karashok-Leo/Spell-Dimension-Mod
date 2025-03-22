@@ -30,26 +30,26 @@ public class StalkerEntry extends BaseEntryProvider
     @Override
     protected String nameZH()
     {
-        return "Stalker";
+        return "追猎者";
     }
 
     @Override
     protected String descEN()
     {
-        return "";
+        return "Hunting Despair";
     }
 
     @Override
     protected String descZH()
     {
-        return "";
+        return "狩猎绝望";
     }
 
     @Override
     protected List<BookPageModel> pages(BookContextHelper context)
     {
         context.page("boss");
-        this.lang().add(context.pageTitle(), "Stalker");
+        this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
                 """
                         Level: %d+
@@ -61,7 +61,7 @@ public class StalkerEntry extends BaseEntryProvider
                         *Ancient Vase: Generated in the Ancient Temple in the Deeper Darker.*
                         """.formatted(TextConstants.BOSS_LEVELS[1])
         );
-        this.lang("zh_cn").add(context.pageTitle(), "Stalker");
+        this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
                 """
                         等级: %d+

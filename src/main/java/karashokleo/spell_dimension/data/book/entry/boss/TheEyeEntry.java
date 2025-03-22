@@ -36,13 +36,13 @@ public class TheEyeEntry extends BaseEntryProvider
     @Override
     protected String descEN()
     {
-        return "";
+        return "Only lifeless remains";
     }
 
     @Override
     protected String descZH()
     {
-        return "";
+        return "只余毫无生气的残骸";
     }
 
     @Override

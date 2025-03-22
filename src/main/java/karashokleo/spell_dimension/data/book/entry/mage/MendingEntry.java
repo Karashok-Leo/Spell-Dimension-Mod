@@ -33,13 +33,13 @@ public class MendingEntry extends BaseEntryProvider
     @Override
     protected String descEN()
     {
-        return "Untouched.";
+        return "Untouched";
     }
 
     @Override
     protected String descZH()
     {
-        return "完好如初。";
+        return "完好如初";
     }
 
     @Override

@@ -34,13 +34,13 @@ public class SpellInfusionEntry extends BaseEntryProvider
     @Override
     protected String descEN()
     {
-        return "";
+        return "Infinite possibilities are born from the convergence of magic";
     }
 
     @Override
     protected String descZH()
     {
-        return "";
+        return "魔力汇聚下诞生的是无限的可能性";
     }
 
     @Override

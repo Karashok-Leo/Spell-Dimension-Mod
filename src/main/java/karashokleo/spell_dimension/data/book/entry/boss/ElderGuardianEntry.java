@@ -37,13 +37,13 @@ public class ElderGuardianEntry extends BaseEntryProvider
     @Override
     protected String descEN()
     {
-        return "";
+        return "Gazing from the abyss";
     }
 
     @Override
     protected String descZH()
     {
-        return "";
+        return "来自深渊的凝视";
     }
 
     @Override

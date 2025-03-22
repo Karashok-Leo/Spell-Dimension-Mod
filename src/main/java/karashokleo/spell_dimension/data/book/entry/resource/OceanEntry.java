@@ -34,13 +34,13 @@ public class OceanEntry extends BaseEntryProvider
     @Override
     protected String descEN()
     {
-        return "";
+        return "Travel to infinity";
     }
 
     @Override
     protected String descZH()
     {
-        return "";
+        return "遨游无尽";
     }
 
     @Override

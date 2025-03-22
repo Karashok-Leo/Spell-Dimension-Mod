@@ -32,13 +32,13 @@ public class DungeonEntry extends BaseEntryProvider
     @Override
     protected String descEN()
     {
-        return "";
+        return "Fortune favors the bold";
     }
 
     @Override
     protected String descZH()
     {
-        return "";
+        return "富贵险中求";
     }
 
     @Override

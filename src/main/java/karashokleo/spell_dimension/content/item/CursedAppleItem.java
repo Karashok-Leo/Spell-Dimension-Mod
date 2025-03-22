@@ -17,10 +17,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.Hand;
-import net.minecraft.util.Rarity;
-import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
@@ -47,6 +44,12 @@ public class CursedAppleItem extends Item
     {
         user.setCurrentHand(hand);
         return TypedActionResult.consume(user.getStackInHand(hand));
+    }
+
+    @Override
+    public UseAction getUseAction(ItemStack stack)
+    {
+        return UseAction.EAT;
     }
 
     @Override

@@ -36,13 +36,13 @@ public class GraveyardLichEntry extends BaseEntryProvider
     @Override
     protected String descEN()
     {
-        return "";
+        return "He will live forever in blood";
     }
 
     @Override
     protected String descZH()
     {
-        return "";
+        return "祂将在鲜血中永生";
     }
 
     @Override

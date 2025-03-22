@@ -37,13 +37,13 @@ public class GauntletEntry extends BaseEntryProvider
     @Override
     protected String descEN()
     {
-        return "";
+        return "Fist and eye as one";
     }
 
     @Override
     protected String descZH()
     {
-        return "";
+        return "拳眼合一";
     }
 
     @Override

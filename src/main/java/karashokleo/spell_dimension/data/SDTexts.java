@@ -65,7 +65,7 @@ public enum SDTexts
     TEXT$RANDOM_LOOT_NAME("? %s ?", "? %s ?"),
     TEXT$LOCATING("Locating: %s", "正在定位：%s"),
     TEXT$GAME_OVER$HEAD("To players:", "致玩家:"),
-    TEXT$GAME_OVER$THANKS("Congrats on the pass, and thank you very much for traveling this far. My hands are still shaking as I write this - just as they were three years ago when I first successfully ran a mod I wrote.", "恭喜你通关啦！非常感谢你游玩至此。写这段话的时候，我的手还在抖——就像三年前第一次成功运行自己写的模组时那样。"),
+    TEXT$GAME_OVER$THANKS("Congrats on the pass, and thank you very much for traveling this far. My hands are still shaking as I write this - just as they were three years ago when I first successfully ran a mod I wrote.", "恭喜你通关啦！非常感谢你游玩至此。《咒次元》是我的第一个整合包，也是我献给MC社区的最用心"),
     TEXT$GAME_OVER$MAKING("I have put a lot of time and effort into this modpack since I started working on it. From developing exclusive mods for this pack, customizing loot tables, and optimizing performance, to fixing bugs and balancing difficulty, I've encountered countless challenges. Luckily and finally, I've finished it.", "自着手制作这个整合包以来，我投入了无数的时间和精力。从开发专属模组、定制战利品表、优化游戏性能，到修复各种Bug、平衡游戏难度，我遇到了一个又一个挑战。幸运的是，最终我完成了它。"),
     TEXT$GAME_OVER$PASSION("During the making process, I gradually found my old passion for Minecraft. I think I've found something - that I truly love, which seems to be a luxury for most people. I hope you too can find what you love and stick with it.", "在制作过程中，我逐渐找回了自己从前对Minecraft的热情。我想我找到了某些东西——某些我真正热爱的东西，这似乎对大多数人来说是一种奢侈。希望你也能找到你的热爱并为之坚持下去。"),
     TEXT$GAME_OVER$FEEDBACK("If you have any suggestions, please give me feedback, I would appreciate it.", "如果你有任何建议，请反馈给我，我将感激不尽。"),
@@ -191,7 +191,7 @@ public enum SDTexts
     TOOLTIP$SHIFT_RESET("Shift + Right-click to reset the progress", "Shift + 右键重置进度"),
     TOOLTIP$SPELL_PRISM("Consuming durability to make your spell damage bypass magical protection.","消耗耐久使你的法术伤害可以穿透魔法防御"),
     TOOLTIP$SPELL_PRISM_ADVANCED("Maybe enhance the effects of certain spells?","或许可以增强某些法术的效果？"),
-    TOOLTIP$CURSED_APPLE("+7 Curse slots after use", "食用后 +7 恶意 - 诅咒 饰品槽"),
+    TOOLTIP$CURSED_APPLE("+7 Curse slots when consumed", "食用后 +7 恶意 - 诅咒 饰品槽"),
     TOOLTIP$MEDAL$TRUE_MAGIC("True magic is the love that can make time stand still", "真正的魔法，是能让时光驻留的热爱"),
 
     /**

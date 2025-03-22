@@ -36,13 +36,13 @@ public class LocateSpellEntry extends BaseEntryProvider
     @Override
     protected String descEN()
     {
-        return "";
+        return "No compass required";
     }
 
     @Override
     protected String descZH()
     {
-        return "";
+        return "无需指南针";
     }
 
     @Override

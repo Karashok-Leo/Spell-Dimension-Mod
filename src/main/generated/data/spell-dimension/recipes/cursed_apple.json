@@ -1,0 +1,37 @@
+{
+  "type": "enchantment_infusion:simple_infusion",
+  "copy_nbt": false,
+  "ingredients": [
+    {
+      "item": "l2hostility:curse_of_envy"
+    },
+    {
+      "item": "l2hostility:curse_of_gluttony"
+    },
+    {
+      "item": "l2hostility:curse_of_greed"
+    },
+    {
+      "item": "l2hostility:curse_of_lust"
+    },
+    {
+      "item": "l2hostility:curse_of_pride"
+    },
+    {
+      "item": "l2hostility:curse_of_sloth"
+    },
+    {
+      "item": "l2hostility:curse_of_wrath"
+    },
+    {
+      "item": "things:agglomeration"
+    }
+  ],
+  "input": {
+    "item": "minecraft:enchanted_golden_apple"
+  },
+  "output": {
+    "Count": 1,
+    "id": "spell-dimension:cursed_apple"
+  }
+}

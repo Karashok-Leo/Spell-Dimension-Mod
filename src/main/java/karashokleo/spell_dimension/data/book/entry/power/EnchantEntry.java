@@ -83,7 +83,7 @@ public class EnchantEntry extends BaseEntryProvider
         context.page("pos");
         this.lang().add(context.pageText(),
                 """
-                        You need to place a enchantment infusion table (centre position) and pedestals (surrounding position) like the picture, then place the items on the pedestals according to the recipe (the order doesn't matter), and finally place the item (level no less than that required for the recipe) you want to enchant on the infusion table in the centre, and wait for seconds for it to finish enchanting.
+                        You need to place an enchantment infusion table (centre position) and pedestals (surrounding position) like the picture, then place the items on the pedestals according to the recipe (the order doesn't matter), and finally place the item (level no less than that required for the recipe) you want to enchant on the infusion table in the centre, and wait for seconds for it to finish enchanting.
                         """
         );
         this.lang("zh_cn").add(context.pageText(),

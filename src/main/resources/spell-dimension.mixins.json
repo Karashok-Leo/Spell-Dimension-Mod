@@ -9,6 +9,7 @@
     "modded.ASBTooltipMixin",
     "modded.BookEverythingMixin",
     "modded.CurseOfPrideMixin",
+    "modded.CycloneEntityMixin",
     "modded.DifficultyEventsMixin",
     "modded.DispellTraitMixin",
     "modded.LootingCharmMixin",

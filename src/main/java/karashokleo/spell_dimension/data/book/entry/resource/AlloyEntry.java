@@ -41,13 +41,13 @@ public class AlloyEntry extends BaseEntryProvider
     @Override
     protected String descEN()
     {
-        return "An easy way to increase ore yield.";
+        return "An easy way to increase ore yield";
     }
 
     @Override
     protected String descZH()
     {
-        return "提高矿石产量的简单方法。";
+        return "提高矿石产量的简单方法";
     }
 
     @Override

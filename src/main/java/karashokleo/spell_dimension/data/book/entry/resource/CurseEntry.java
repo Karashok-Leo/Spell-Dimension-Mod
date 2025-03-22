@@ -34,13 +34,13 @@ public class CurseEntry extends BaseEntryProvider
     @Override
     protected String descEN()
     {
-        return "";
+        return "\"...but at what cost?\"";
     }
 
     @Override
     protected String descZH()
     {
-        return "";
+        return "“但代价是什么呢？”";
     }
 
     @Override

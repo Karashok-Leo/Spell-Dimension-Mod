@@ -32,13 +32,13 @@ public class ArmorSetEntry extends BaseEntryProvider
     @Override
     protected String descEN()
     {
-        return "";
+        return "Resonance of similarity";
     }
 
     @Override
     protected String descZH()
     {
-        return "";
+        return "相似相合的共鸣";
     }
 
     @Override

@@ -64,7 +64,6 @@ public class SDSpellInfusionRecipes
         /// pending:
         /// "bosses_of_mass_destruction:blazing_eye"
         /// MythicBlocks.PLATINUM.getStorageBlock().asItem()
-        /// AquamiraeItems.ABYSSAL_AMETHYST
 
         add(exporter, Items.COMPASS, AllSpells.LOCATE, AllSpells.GENERIC);
         add(exporter, AllItems.SPAWNER_SOUL, AllSpells.SUMMON, AllSpells.GENERIC);
@@ -119,8 +118,9 @@ public class SDSpellInfusionRecipes
         add(exporter, AquamiraeItems.POISONED_CHAKRA, AllSpells.MASSACRE, SpellSchools.FROST);
         add(exporter, MythicItems.Mats.AQUARIUM_PEARL, AllSpells.RIPTIDE, SpellSchools.FROST);
         add(exporter, ERItems.COLD_EYE, AllSpells.COLD_BUFF, SpellSchools.FROST);
+        add(exporter, AquamiraeItems.ABYSSAL_AMETHYST, AllSpells.TEMPEST, SpellSchools.FROST);
 
-        add(exporter, ComplementItems.TOTEMIC_GOLD.ingot(), AllSpells.DIVINE_CLOUD, SpellSchools.HEALING);
+        add(exporter, ComplementItems.TOTEMIC_GOLD.ingot(), AllSpells.DIVINE_CURSE_BLAST, SpellSchools.HEALING);
         add(exporter, "bosses_of_mass_destruction:ancient_anima", AllSpells.HOLY_BEAM, SpellSchools.HEALING);
         add(exporter, "soulsweapons:arkenstone", AllSpells.CIRCLE_OF_HEALING, SpellSchools.HEALING);
         add(exporter, TGItems.DARK_IRON_BLOCK.get(), AllSpells.BARRIER, SpellSchools.HEALING);

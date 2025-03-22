@@ -37,13 +37,13 @@ public class ObsidlithEntry extends BaseEntryProvider
     @Override
     protected String descEN()
     {
-        return "";
+        return "Last Stand";
     }
 
     @Override
     protected String descZH()
     {
-        return "";
+        return "屹立不倒";
     }
 
     @Override

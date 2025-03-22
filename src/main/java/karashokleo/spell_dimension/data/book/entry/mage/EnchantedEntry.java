@@ -35,13 +35,13 @@ public class EnchantedEntry extends BaseEntryProvider
     @Override
     protected String descEN()
     {
-        return "Enchant your equipment.";
+        return "Enchant your equipment";
     }
 
     @Override
     protected String descZH()
     {
-        return "为你的装备注入魔力。";
+        return "为你的装备注入魔力";
     }
 
     @Override

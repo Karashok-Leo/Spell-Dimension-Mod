@@ -35,13 +35,13 @@ public class LootCharmEntry extends BaseEntryProvider
     @Override
     protected String descEN()
     {
-        return "";
+        return "\"Fountain of Wealth\"";
     }
 
     @Override
     protected String descZH()
     {
-        return "";
+        return "“财富之源”";
     }
 
     @Override

@@ -32,13 +32,13 @@ public class KeyEntry extends BaseEntryProvider
     @Override
     protected String descEN()
     {
-        return "Some keys you need to know.";
+        return "Some keys you need to know";
     }
 
     @Override
     protected String descZH()
     {
-        return "一些你需要知道的键位。";
+        return "一些你需要知道的键位";
     }
 
     @Override

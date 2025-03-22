@@ -36,13 +36,13 @@ public class ReturningKnightEntry extends BaseEntryProvider
     @Override
     protected String descEN()
     {
-        return "";
+        return "Return from hell and charge the world";
     }
 
     @Override
     protected String descZH()
     {
-        return "";
+        return "从地狱中归来，向世界发起冲锋";
     }
 
     @Override

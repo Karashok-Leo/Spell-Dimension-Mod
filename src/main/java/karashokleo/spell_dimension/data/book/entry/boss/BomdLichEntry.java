@@ -37,13 +37,13 @@ public class BomdLichEntry extends BaseEntryProvider
     @Override
     protected String descEN()
     {
-        return "";
+        return "Returning in the midnight";
     }
 
     @Override
     protected String descZH()
     {
-        return "";
+        return "于极夜中归来";
     }
 
     @Override

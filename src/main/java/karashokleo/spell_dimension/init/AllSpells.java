@@ -81,61 +81,62 @@ public class AllSpells
     public static final Identifier INCARCERATE = fromCrafting("incarcerate").build();
     public static final Identifier FORCE_LANDING = fromCrafting("force_landing").build();
     public static final Identifier ARCANE_BARRIER = fromCrafting("arcane_barrier").build();
-    public static final Identifier FINAL_STRIKE = builderWithId("spellbladenext:finalstrike").build();
+    public static final Identifier FINAL_STRIKE = fromCraftingWithId("spellbladenext:finalstrike").build();
     // Tier 2
-    public static final Identifier ARCANE_FLOURISH = builderWithId("spellbladenext:arcaneflourish").withTier(1).build();
-    public static final Identifier AMETHYST_SLASH = builderWithId("spellbladenext:amethystslash").withTier(1).build();
-    public static final Identifier ARCANE_BEAM = builderWithId("wizards:arcane_beam").withTier(1).build();
+    public static final Identifier ARCANE_FLOURISH = fromCraftingWithId("spellbladenext:arcaneflourish").withTier(1).build();
+    public static final Identifier AMETHYST_SLASH = fromCraftingWithId("spellbladenext:amethystslash").withTier(1).build();
+    public static final Identifier ARCANE_BEAM = fromCraftingWithId("wizards:arcane_beam").withTier(1).build();
     public static final Identifier PHASE = fromCrafting("phase").withTier(1).build();
-    public static final Identifier ARCANE_FLICKER = builderWithId("spellbladenext:frostblink").withTier(1).build();
-    public static final Identifier ELDRITCH_BLAST = builderWithId("spellbladenext:eldritchblast").withTier(1).build();
+    public static final Identifier ARCANE_FLICKER = fromCraftingWithId("spellbladenext:frostblink").withTier(1).build();
+    public static final Identifier ELDRITCH_BLAST = fromCraftingWithId("spellbladenext:eldritchblast").withTier(1).build();
     // Tier 3
-    public static final Identifier ARCANE_OVERDRIVE = builderWithId("spellbladenext:arcaneoverdrive").withTier(2).build();
+    public static final Identifier ARCANE_OVERDRIVE = fromCraftingWithId("spellbladenext:arcaneoverdrive").withTier(2).build();
     public static final Identifier BLACK_HOLE = fromCrafting("black_hole").withTier(2).build();
-    public static final Identifier MAELSTROM = builderWithId("spellbladenext:maelstrom").withTier(2).build();
-    public static final Identifier ECHO_STORM = builderWithId("spellbladenext:bladestorm").withTier(2).build();
+    public static final Identifier MAELSTROM = fromCraftingWithId("spellbladenext:maelstrom").withTier(2).build();
+    public static final Identifier ECHO_STORM = fromCraftingWithId("spellbladenext:bladestorm").withTier(2).build();
 
     // Fire
-    public static final Identifier FIRE_BREATH = builderWithId("wizards:fire_breath").build();
-    public static final Identifier OVER_BLAZE = builderWithId("spellbladenext:overblaze").build();
-    public static final Identifier WILDFIRE = builderWithId("spellbladenext:snuffout").build();
+    public static final Identifier FIRE_BREATH = fromCraftingWithId("wizards:fire_breath").build();
+    public static final Identifier OVER_BLAZE = fromCraftingWithId("spellbladenext:overblaze").build();
+    public static final Identifier WILDFIRE = fromCraftingWithId("spellbladenext:snuffout").build();
     // Tier 2
-    public static final Identifier FIRE_FLOURISH = builderWithId("spellbladenext:fireflourish").withTier(1).build();
-    public static final Identifier FLAME_SLASH = builderWithId("spellbladenext:flameslash").withTier(1).build();
+    public static final Identifier FIRE_FLOURISH = fromCraftingWithId("spellbladenext:fireflourish").withTier(1).build();
+    public static final Identifier FLAME_SLASH = fromCraftingWithId("spellbladenext:flameslash").withTier(1).build();
     public static final Identifier BLAST = fromCrafting("blast").withTier(1).build();
     public static final Identifier IGNITE = fromCrafting("ignite").withTier(1).build();
-    public static final Identifier PHOENIX_DIVE = builderWithId("spellbladenext:phoenixdive").withTier(1).build();
-    public static final Identifier PHOENIX_CURSE = builderWithId("spellbladenext:combustion").withTier(1).build();
-    public static final Identifier DRAGON_SLAM = builderWithId("spellbladenext:frostvert").withTier(1).build();
+    public static final Identifier PHOENIX_DIVE = fromCraftingWithId("spellbladenext:phoenixdive").withTier(1).build();
+    public static final Identifier PHOENIX_CURSE = fromCraftingWithId("spellbladenext:combustion").withTier(1).build();
+    public static final Identifier DRAGON_SLAM = fromCraftingWithId("spellbladenext:frostvert").withTier(1).build();
     // Tier 3
-    public static final Identifier FLAME_OVERDRIVE = builderWithId("spellbladenext:fireoverdrive").withTier(2).build();
+    public static final Identifier FLAME_OVERDRIVE = fromCraftingWithId("spellbladenext:fireoverdrive").withTier(2).build();
     public static final Identifier FIRE_OF_RETRIBUTION = fromCrafting("fire_of_retribution").withTier(2).build();
-    public static final Identifier INFERNO = builderWithId("spellbladenext:inferno").withTier(2).build();
-    public static final Identifier FLICKER_STRIKE = builderWithId("spellbladenext:flicker_strike").withTier(2).build();
+    public static final Identifier INFERNO = fromCraftingWithId("spellbladenext:inferno").withTier(2).build();
+    public static final Identifier FLICKER_STRIKE = fromCraftingWithId("spellbladenext:flicker_strike").withTier(2).build();
 
     // Frost
     public static final Identifier ICICLE = fromCrafting("icicle").build();
     public static final Identifier FROZEN = fromCrafting("frozen").build();
-    public static final Identifier FROST_LOTUS = builderWithId("spellbladenext:frostbloom0").build();
-    public static final Identifier DEATH_CHILL = builderWithId("spellbladenext:deathchill").build();
-    public static final Identifier FROST_BLIZZARD = builderWithId("wizards:frost_blizzard").build();
+    public static final Identifier FROST_LOTUS = fromCraftingWithId("spellbladenext:frostbloom0").build();
+    public static final Identifier DEATH_CHILL = fromCraftingWithId("spellbladenext:deathchill").build();
+    public static final Identifier FROST_BLIZZARD = fromCraftingWithId("wizards:frost_blizzard").build();
     // Tier 2
-    public static final Identifier FROST_FLOURISH = builderWithId("spellbladenext:frostflourish").withTier(1).build();
-    public static final Identifier FROST_SLASH = builderWithId("spellbladenext:frostslash").withTier(1).build();
+    public static final Identifier FROST_FLOURISH = fromCraftingWithId("spellbladenext:frostflourish").withTier(1).build();
+    public static final Identifier FROST_SLASH = fromCraftingWithId("spellbladenext:frostslash").withTier(1).build();
     public static final Identifier FROST_BLINK = fromCrafting("frost_blink").withTier(1).build();
     public static final Identifier ICY_NUCLEUS = fromCrafting("icy_nucleus").withTier(1).build();
     public static final Identifier FROST_AURA = fromCrafting("frost_aura").withTier(1).build();
-    public static final Identifier COLD_BUFF = builderWithId("spellbladenext:coldbuff").withTier(1).build();
+    public static final Identifier COLD_BUFF = fromCraftingWithId("spellbladenext:coldbuff").withTier(1).build();
     // Tier 3
-    public static final Identifier FROST_OVERDRIVE = builderWithId("spellbladenext:frostoverdrive").withTier(2).build();
-    public static final Identifier MASSACRE = builderWithId("spellbladenext:eviscerate").withTier(2).build();
-    public static final Identifier RIPTIDE = builderWithId("spellbladenext:whirlingblades").withTier(2).build();
+    public static final Identifier FROST_OVERDRIVE = fromCraftingWithId("spellbladenext:frostoverdrive").withTier(2).build();
+    public static final Identifier MASSACRE = fromCraftingWithId("spellbladenext:eviscerate").withTier(2).build();
+    public static final Identifier RIPTIDE = fromCraftingWithId("spellbladenext:whirlingblades").withTier(2).build();
+    public static final Identifier TEMPEST = fromCraftingWithId("spellbladenext:tempest").withTier(2).build();
 
     // Healing
-    public static final Identifier DIVINE_CLOUD = fromCrafting("divine_cloud").build();
-    public static final Identifier HOLY_BEAM = builderWithId("paladins:holy_beam").build();
-    public static final Identifier CIRCLE_OF_HEALING = builderWithId("paladins:circle_of_healing").build();
-    public static final Identifier JUDGEMENT = builderWithId("paladins:judgement").build();
+    public static final Identifier DIVINE_CURSE_BLAST = fromCrafting("divine_curse_blast").build();
+    public static final Identifier HOLY_BEAM = fromCraftingWithId("paladins:holy_beam").build();
+    public static final Identifier CIRCLE_OF_HEALING = fromCraftingWithId("paladins:circle_of_healing").build();
+    public static final Identifier JUDGEMENT = fromCraftingWithId("paladins:judgement").build();
     public static final Identifier CRITICAL_HIT = fromCrafting("critical_hit").build();
     public static final Identifier SPELL_POWER = fromCrafting("spell_power").build();
     public static final Identifier REGEN = fromCrafting("regen").build();
@@ -144,8 +145,8 @@ public class AllSpells
     public static final Identifier SPEED = fromCrafting("speed").build();
     // Tier 2
     public static final Identifier CLEANSE = fromCrafting("cleanse").withTier(1).build();
-    public static final Identifier BARRIER = builderWithId("paladins:barrier").withTier(1).build();
-    public static final Identifier BATTLE_BANNER = builderWithId("paladins:battle_banner").withTier(1).build();
+    public static final Identifier BARRIER = fromCraftingWithId("paladins:barrier").withTier(1).build();
+    public static final Identifier BATTLE_BANNER = fromCraftingWithId("paladins:battle_banner").withTier(1).build();
     public static final Identifier BLESSING = fromCrafting("blessing").withTier(1).build();
     public static final Identifier MISFORTUNE = fromCrafting("misfortune").withTier(1).build();
     public static final Identifier HEAVENLY_JUSTICE = fromCrafting("heavenly_justice").withTier(1).build();
@@ -223,12 +224,6 @@ public class AllSpells
     }
 
     // other namespace
-    private static Entry builderWithId(String id)
-    {
-        return new Entry(new Identifier(id));
-    }
-
-    // other namespace
     private static Identifier fromPrimary(String id)
     {
         return new Entry(new Identifier(id)).withScrollType(ScrollType.PRIMARY).build();
@@ -244,6 +239,12 @@ public class AllSpells
     private static Entry fromCrafting(String name)
     {
         return new Entry(SpellDimension.modLoc(name)).withScrollType(ScrollType.CRAFTING);
+    }
+
+    // other namespace
+    private static Entry fromCraftingWithId(String id)
+    {
+        return new Entry(new Identifier(id)).withScrollType(ScrollType.CRAFTING);
     }
 
     public static class Entry

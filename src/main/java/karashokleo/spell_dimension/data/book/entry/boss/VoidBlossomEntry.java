@@ -36,13 +36,13 @@ public class VoidBlossomEntry extends BaseEntryProvider
     @Override
     protected String descEN()
     {
-        return "";
+        return "Blooming in the abyss...";
     }
 
     @Override
     protected String descZH()
     {
-        return "";
+        return "于深渊中绽放...";
     }
 
     @Override

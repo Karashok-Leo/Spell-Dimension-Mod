@@ -36,13 +36,13 @@ public class EnderDragonEntry extends BaseEntryProvider
     @Override
     protected String descEN()
     {
-        return "";
+        return "Is it over......?";
     }
 
     @Override
     protected String descZH()
     {
-        return "";
+        return "结束了……吗？";
     }
 
     @Override

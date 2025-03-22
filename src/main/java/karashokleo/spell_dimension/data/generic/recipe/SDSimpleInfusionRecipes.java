@@ -2,10 +2,12 @@ package karashokleo.spell_dimension.data.generic.recipe;
 
 import accieo.midas.hunger.items.MidasItems;
 import artifacts.registry.ModItems;
+import com.glisco.things.items.ThingsItems;
 import karashokleo.enchantment_infusion.content.data.SimpleInfusionRecipeBuilder;
 import karashokleo.l2hostility.content.item.ComplementItems;
 import karashokleo.l2hostility.content.item.ConsumableItems;
 import karashokleo.l2hostility.content.item.MiscItems;
+import karashokleo.l2hostility.content.item.TrinketItems;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllStacks;
@@ -104,5 +106,19 @@ public class SDSimpleInfusionRecipes
                 .withPedestalItem(1, MiscItems.WITCH_DROPLET)
                 .copyNbt(false)
                 .offerTo(exporter, SpellDimension.modLoc("spell_prism"), AllItems.SPELL_PRISM.getDefaultStack());
+
+        // Cursed Apple
+        new SimpleInfusionRecipeBuilder()
+                .withTableIngredient(Ingredient.ofItems(Items.ENCHANTED_GOLDEN_APPLE))
+                .withPedestalItem(1, TrinketItems.CURSE_ENVY)
+                .withPedestalItem(1, TrinketItems.CURSE_GLUTTONY)
+                .withPedestalItem(1, TrinketItems.CURSE_GREED)
+                .withPedestalItem(1, TrinketItems.CURSE_LUST)
+                .withPedestalItem(1, TrinketItems.CURSE_PRIDE)
+                .withPedestalItem(1, TrinketItems.CURSE_SLOTH)
+                .withPedestalItem(1, TrinketItems.CURSE_WRATH)
+                .withPedestalItem(1, ThingsItems.AGGLOMERATION)
+                .copyNbt(false)
+                .offerTo(exporter, SpellDimension.modLoc("cursed_apple"), AllItems.CURED_APPLE.getDefaultStack());
     }
 }

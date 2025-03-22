@@ -35,13 +35,13 @@ public class SummonSpellEntry extends BaseEntryProvider
     @Override
     protected String descEN()
     {
-        return "";
+        return "Fettered Souls in the Cage";
     }
 
     @Override
     protected String descZH()
     {
-        return "";
+        return "牢笼中的被缚之魂";
     }
 
     @Override

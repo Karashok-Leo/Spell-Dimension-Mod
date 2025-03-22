@@ -37,13 +37,13 @@ public class DayNightEntry extends BaseEntryProvider
     @Override
     protected String descEN()
     {
-        return "";
+        return "Gatekeepers of the End";
     }
 
     @Override
     protected String descZH()
     {
-        return "";
+        return "终末的守门人";
     }
 
     @Override

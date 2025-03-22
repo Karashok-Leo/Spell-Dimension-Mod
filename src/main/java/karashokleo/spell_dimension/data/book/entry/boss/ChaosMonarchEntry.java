@@ -36,13 +36,13 @@ public class ChaosMonarchEntry extends BaseEntryProvider
     @Override
     protected String descEN()
     {
-        return "";
+        return "The crown brings not only status but disaster";
     }
 
     @Override
     protected String descZH()
     {
-        return "";
+        return "冠冕带来的不仅仅是地位还有无尽的灾难";
     }
 
     @Override
