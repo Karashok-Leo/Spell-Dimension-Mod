@@ -265,6 +265,8 @@
   "book.spell-dimension-book.magic_guidance.resource.pivot.pivot.title": "Consciousness Pivot",
   "book.spell-dimension-book.magic_guidance.resource.storage.description": "Well organized",
   "book.spell-dimension-book.magic_guidance.resource.storage.name": "Storage",
+  "book.spell-dimension-book.magic_guidance.resource.storage.nbt.text": "A special note: Items carrying NBT tags are items with additional data, including enchanted items, items with durability, etc., and they are usually not stackable.\n\\\n\\\nIf a large number of these items are put into the storage system, they are prone to severe lagging and have a performance impact on the server. Therefore, it is recommended to store these items in separate chests.\n",
+  "book.spell-dimension-book.magic_guidance.resource.storage.nbt.title": "NBT Item",
   "book.spell-dimension-book.magic_guidance.resource.storage.storage.text": "Place a **Storage Connector** with a **Storage Terminal** or **Crafting Terminal** next to your chests, after which you can manage the items of all your chests in a unified way through the terminal.\n",
   "book.spell-dimension-book.magic_guidance.resource.storage.storage.title": "Tom's Simple Storage",
   "book.spell-dimension-book.magic_guidance.resource.storage.wireless.text": "Build a level 4+ **Beacon**, or place your storage system next to a high enough **Consciousness Pivot**, bind to the terminal using the **Advanced Wireless Terminal** (Shift + Right-click), and use **Chunk Loader** to load surrounding chunks to enable inter-dimensional remote access to your storage system.\n",

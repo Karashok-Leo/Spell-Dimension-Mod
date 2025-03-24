@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "soulsweapons:forlorn",
+      "required": false
+    },
+    {
+      "id": "soulsweapons:evil_forlorn",
+      "required": false
+    }
+  ]
+}

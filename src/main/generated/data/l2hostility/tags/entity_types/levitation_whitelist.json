@@ -1,9 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    {
-      "id": "#l2hostility:ranged_weapon_target",
-      "required": false
-    }
-  ]
-}

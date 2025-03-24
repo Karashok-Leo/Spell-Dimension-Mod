@@ -90,8 +90,6 @@ public class AllTraits
                 .addZH("击飞")
                 .addENDesc("Every %s seconds, the next attack will knock the target into the air")
                 .addZHDesc("每隔%s秒，下一次攻击将击飞目标")
-                .addWhitelist(EntityType.WARDEN)
-                .addWhitelistOptional(LHTags.MELEE_WEAPON_TARGET)
                 .register();
         LEECH = Entry.of(
                         "leech",

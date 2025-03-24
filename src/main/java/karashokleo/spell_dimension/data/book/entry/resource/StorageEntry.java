@@ -5,6 +5,7 @@ import com.klikli_dev.modonomicon.api.datagen.CategoryProvider;
 import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookSpotlightPageModel;
+import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
 import com.tom.storagemod.Content;
 import karashokleo.spell_dimension.data.book.entry.BaseEntryProvider;
 import karashokleo.spell_dimension.util.BookGenUtil;
@@ -90,7 +91,33 @@ public class StorageEntry extends BaseEntryProvider
                 .withItem(Ingredient.ofItems(Items.BEACON, Content.advWirelessTerminal.get(), BookGenUtil.getItem(new Identifier("kibe:chunk_loader"))))
                 .build();
 
-        return List.of(storage, wireless);
+        context.page("nbt");
+        this.lang().add(context.pageTitle(), "NBT Item");
+        this.lang().add(context.pageText(),
+                """
+                        A special note: Items carrying NBT tags are items with additional data, including enchanted items, items with durability, etc., and they are usually not stackable.
+                        \\
+                        \\
+                        If a large number of these items are put into the storage system, they are prone to severe lagging and have a performance impact on the server. Therefore, it is recommended to store these items in separate chests.
+                        """
+        );
+        this.lang("zh_cn").add(context.pageTitle(), "NBT物品");
+        this.lang("zh_cn").add(context.pageText(),
+                """
+                        需要特别说明的是：携带NBT标签的物品是指带有额外数据的物品，包括已附魔物品、有耐久度的物品等，它们通常无法堆叠。
+                        \\
+                        \\
+                        如果将大量此类物品接入存储系统，容易造成严重卡顿，对服务器产生性能影响。因此，推荐将这些物品存入独立的箱子中。
+                        """
+        );
+
+        BookTextPageModel nbt = BookTextPageModel
+                .builder()
+                .withTitle(context.pageTitle())
+                .withText(context.pageText())
+                .build();
+
+        return List.of(storage, wireless, nbt);
     }
 
     @Override

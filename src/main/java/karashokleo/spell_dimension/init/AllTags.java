@@ -297,16 +297,19 @@ public class AllTags
                         SW_MONSTER
                 );
 
-        SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(TagUtil.entityTypeTag(L2Hostility.id("levitation_whitelist")))
-                .addOptionalTag(LHTags.RANGED_WEAPON_TARGET);
+        SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(LHTags.RANGED_ENEMY)
+                .addTag(SKELETONS);
+
+        SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(TagUtil.entityTypeTag(L2Hostility.id("shulker_blacklist")))
+                .addOptional(
+                        new Identifier("soulsweapons:forlorn"),
+                        new Identifier("soulsweapons:evil_forlorn")
+                );
 
         SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(TagUtil.entityTypeTag(L2Hostility.id("dispell_blacklist")))
                 .add(EntityType.WARDEN)
                 .add(DDEntities.STALKER)
                 .addTag(SCULK);
-
-        SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(TagUtil.entityTypeTag(L2Hostility.id("counter_strike_whitelist")))
-                .add(DDEntities.STALKER);
 
         SpellDimension.ENCHANTMENT_TAGS.getOrCreateContainer(LOOTABLE)
                 .add(
