@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_structure",
+  "ingredient": {
+    "item": "minecraft:seagrass"
+  },
+  "structure": "dungeons_arise:typhon",
+  "world": "minecraft:overworld"
+}

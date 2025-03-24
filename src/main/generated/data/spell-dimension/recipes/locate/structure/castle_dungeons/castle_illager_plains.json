@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_structure",
+  "ingredient": {
+    "item": "minecraft:cracked_stone_bricks"
+  },
+  "structure": "castle_dungeons:castle_illager_plains",
+  "world": "minecraft:overworld"
+}

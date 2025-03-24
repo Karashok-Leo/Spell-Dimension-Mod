@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_structure",
+  "ingredient": {
+    "item": "minecraft:chiseled_quartz_block"
+  },
+  "structure": "dungeons_arise_seven_seas:small_yacht",
+  "world": "minecraft:overworld"
+}

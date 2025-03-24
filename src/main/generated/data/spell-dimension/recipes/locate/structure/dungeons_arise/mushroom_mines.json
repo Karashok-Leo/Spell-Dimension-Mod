@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_structure",
+  "ingredient": {
+    "item": "minecraft:gold_ore"
+  },
+  "structure": "dungeons_arise:mushroom_mines",
+  "world": "minecraft:overworld"
+}

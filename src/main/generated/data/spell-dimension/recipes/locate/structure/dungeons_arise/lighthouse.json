@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_structure",
+  "ingredient": {
+    "item": "minecraft:redstone_lamp"
+  },
+  "structure": "dungeons_arise:lighthouse",
+  "world": "minecraft:overworld"
+}

@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_structure",
+  "ingredient": {
+    "item": "minecraft:beetroot"
+  },
+  "structure": "dungeons_arise:mushroom_village",
+  "world": "minecraft:overworld"
+}

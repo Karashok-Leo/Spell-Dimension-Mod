@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_structure",
+  "ingredient": {
+    "item": "minecraft:orange_wool"
+  },
+  "structure": "dungeons_arise:bandit_village",
+  "world": "minecraft:overworld"
+}

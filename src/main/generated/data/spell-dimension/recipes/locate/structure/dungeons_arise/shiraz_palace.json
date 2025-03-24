@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_structure",
+  "ingredient": {
+    "item": "minecraft:rose_bush"
+  },
+  "structure": "dungeons_arise:shiraz_palace",
+  "world": "minecraft:overworld"
+}

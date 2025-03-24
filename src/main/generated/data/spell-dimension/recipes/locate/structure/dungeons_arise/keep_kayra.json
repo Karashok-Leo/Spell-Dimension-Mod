@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_structure",
+  "ingredient": {
+    "item": "minecraft:mud_bricks"
+  },
+  "structure": "dungeons_arise:keep_kayra",
+  "world": "minecraft:overworld"
+}

@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_structure",
+  "ingredient": {
+    "item": "minecraft:stone_button"
+  },
+  "structure": "dungeons_arise_seven_seas:unicorn_galleon",
+  "world": "minecraft:overworld"
+}

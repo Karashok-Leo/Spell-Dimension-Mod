@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_structure",
+  "ingredient": {
+    "item": "minecraft:polished_granite"
+  },
+  "structure": "dungeons_arise:thornborn_towers",
+  "world": "minecraft:overworld"
+}

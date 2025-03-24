@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_structure",
+  "ingredient": {
+    "item": "minecraft:polished_blackstone_bricks"
+  },
+  "structure": "dungeons_arise:scorched_mines",
+  "world": "minecraft:overworld"
+}

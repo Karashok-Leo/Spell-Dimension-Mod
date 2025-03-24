@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_structure",
+  "ingredient": {
+    "item": "minecraft:birch_leaves"
+  },
+  "structure": "dungeons_arise:greenwood_pub",
+  "world": "minecraft:overworld"
+}

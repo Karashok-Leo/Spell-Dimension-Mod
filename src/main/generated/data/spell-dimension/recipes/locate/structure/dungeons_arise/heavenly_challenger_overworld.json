@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_structure",
+  "ingredient": {
+    "item": "minecraft:shroomlight"
+  },
+  "structure": "dungeons_arise:heavenly_challenger",
+  "world": "minecraft:overworld"
+}

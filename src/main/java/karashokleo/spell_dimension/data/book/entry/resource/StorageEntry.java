@@ -96,18 +96,12 @@ public class StorageEntry extends BaseEntryProvider
         this.lang().add(context.pageText(),
                 """
                         A special note: Items carrying NBT tags are items with additional data, including enchanted items, items with durability, etc., and they are usually not stackable.
-                        \\
-                        \\
-                        If a large number of these items are put into the storage system, they are prone to severe lagging and have a performance impact on the server. Therefore, it is recommended to store these items in separate chests.
                         """
         );
         this.lang("zh_cn").add(context.pageTitle(), "NBT物品");
         this.lang("zh_cn").add(context.pageText(),
                 """
                         需要特别说明的是：携带NBT标签的物品是指带有额外数据的物品，包括已附魔物品、有耐久度的物品等，它们通常无法堆叠。
-                        \\
-                        \\
-                        如果将大量此类物品接入存储系统，容易造成严重卡顿，对服务器产生性能影响。因此，推荐将这些物品存入独立的箱子中。
                         """
         );
 
@@ -117,7 +111,24 @@ public class StorageEntry extends BaseEntryProvider
                 .withText(context.pageText())
                 .build();
 
-        return List.of(storage, wireless, nbt);
+        context.page("separate");
+        this.lang().add(context.pageText(),
+                """
+                        If a large number of these items are put into the storage system, they are prone to severe lagging and have a performance impact on the server. Therefore, it is recommended to store these items in separate chests.
+                        """
+        );
+        this.lang("zh_cn").add(context.pageText(),
+                """
+                        如果将大量此类物品接入存储系统，容易造成严重卡顿，对服务器产生性能影响。因此，推荐将这些物品存入独立的箱子中。
+                        """
+        );
+
+        BookTextPageModel separate = BookTextPageModel
+                .builder()
+                .withText(context.pageText())
+                .build();
+
+        return List.of(storage, wireless, nbt, separate);
     }
 
     @Override

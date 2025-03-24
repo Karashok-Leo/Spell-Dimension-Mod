@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_structure",
+  "ingredient": {
+    "item": "minecraft:wheat_seeds"
+  },
+  "structure": "dungeons_arise:illager_windmill",
+  "world": "minecraft:overworld"
+}

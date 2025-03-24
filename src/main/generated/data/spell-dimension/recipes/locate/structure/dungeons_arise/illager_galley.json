@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_structure",
+  "ingredient": {
+    "item": "minecraft:melon"
+  },
+  "structure": "dungeons_arise:illager_galley",
+  "world": "minecraft:overworld"
+}

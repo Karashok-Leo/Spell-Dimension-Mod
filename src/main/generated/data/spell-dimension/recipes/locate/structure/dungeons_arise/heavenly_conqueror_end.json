@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_structure",
+  "ingredient": {
+    "item": "minecraft:end_stone_bricks"
+  },
+  "structure": "dungeons_arise:heavenly_conqueror",
+  "world": "minecraft:the_end"
+}

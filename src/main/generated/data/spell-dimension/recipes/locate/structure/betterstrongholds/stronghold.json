@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_structure",
+  "ingredient": {
+    "item": "minecraft:ender_eye"
+  },
+  "structure": "betterstrongholds:stronghold",
+  "world": "minecraft:overworld"
+}

@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_structure",
+  "ingredient": {
+    "item": "minecraft:brown_wool"
+  },
+  "structure": "dungeons_arise:merchant_campsite",
+  "world": "minecraft:overworld"
+}

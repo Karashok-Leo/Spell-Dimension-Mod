@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_structure",
+  "ingredient": {
+    "item": "minecraft:acacia_wood"
+  },
+  "structure": "dungeons_arise:heavenly_rider",
+  "world": "minecraft:the_end"
+}

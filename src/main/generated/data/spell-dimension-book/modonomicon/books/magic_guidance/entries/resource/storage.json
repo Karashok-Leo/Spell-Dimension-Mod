@@ -59,6 +59,17 @@
       "text": "book.spell-dimension-book.magic_guidance.resource.storage.nbt.text",
       "title": "book.spell-dimension-book.magic_guidance.resource.storage.nbt.title",
       "use_markdown_in_title": false
+    },
+    {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "show_title_separator": true,
+      "text": "book.spell-dimension-book.magic_guidance.resource.storage.separate.text",
+      "title": "",
+      "use_markdown_in_title": false
     }
   ],
   "show_when_any_parent_unlocked": false,
