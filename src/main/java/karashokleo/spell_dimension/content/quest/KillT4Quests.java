@@ -3,6 +3,7 @@ package karashokleo.spell_dimension.content.quest;
 import karashokleo.spell_dimension.content.quest.base.SimpleLootItemQuest;
 import karashokleo.spell_dimension.data.loot_bag.SDBags;
 import karashokleo.spell_dimension.init.AllItems;
+import karashokleo.spell_dimension.init.AllTags;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
@@ -33,6 +34,7 @@ public class KillT4Quests
                         )
                 )
                 .toEntry("boss/old_champion")
+                .addTag(AllTags.MAIN)
                 .addDependencies(KillMutantQuests.KILL_MUTANT_ZOMBIE)
                 .register();
         KILL_DECAYING_KING = QuestBuilder.of(
@@ -44,6 +46,7 @@ public class KillT4Quests
                         )
                 )
                 .toEntry("boss/decaying_king")
+                .addTag(AllTags.MAIN)
                 .addDependencies(KillMutantQuests.KILL_MUTANT_ZOMBIE)
                 .register();
         KILL_ELDER_GUARDIAN = QuestBuilder.of(
@@ -55,6 +58,7 @@ public class KillT4Quests
                         )
                 )
                 .toEntry("boss/guardian")
+                .addTag(AllTags.MAIN)
                 .addDependencies(KillMutantQuests.KILL_MUTANT_SKELETON)
                 .register();
         KILL_WITHER = QuestBuilder.of(
@@ -66,6 +70,7 @@ public class KillT4Quests
                         )
                 )
                 .toEntry("boss/wither")
+                .addTag(AllTags.MAIN)
                 .addDependencies(KillMutantQuests.KILL_MUTANT_SKELETON)
                 .register();
         KILL_INVOKER = QuestBuilder.of(
@@ -77,6 +82,7 @@ public class KillT4Quests
                         )
                 )
                 .toEntry("boss/invoker")
+                .addTag(AllTags.MAIN)
                 .addDependencies(KillMutantQuests.KILL_MUTANT_CREEPER)
                 .register();
         KILL_WARDEN = QuestBuilder.of(
@@ -88,6 +94,7 @@ public class KillT4Quests
                         )
                 )
                 .toEntry("boss/warden")
+                .addTag(AllTags.MAIN)
                 .addDependencies(KillMutantQuests.KILL_MUTANT_CREEPER)
                 .register();
     }

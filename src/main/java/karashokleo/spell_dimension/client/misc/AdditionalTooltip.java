@@ -153,7 +153,11 @@ public class AdditionalTooltip
 
     private static void appendHardcoreTooltip(List<Text> lines)
     {
-        lines.add(SDTexts.TOOLTIP$DIFFICULTY_TIER$TITLE.get(SDTexts.DIFFICULTY_TIER$1.get()).formatted(Formatting.DARK_RED));
+        lines.add(
+                SDTexts.TOOLTIP$BRACKETS.get(SDTexts.DIFFICULTY_TIER$1.get())
+                        .append(":")
+                        .formatted(Formatting.DARK_RED)
+        );
         for (int i = 1; i <= 7; i++)
             lines.add(
                     SDTexts.TOOLTIP$DIFFICULTY_TIER$DESC.get(
@@ -164,7 +168,11 @@ public class AdditionalTooltip
 
     private static void appendNightmareTooltip(List<Text> lines)
     {
-        lines.add(SDTexts.TOOLTIP$DIFFICULTY_TIER$TITLE.get(SDTexts.DIFFICULTY_TIER$2.get()).formatted(Formatting.DARK_PURPLE));
+        lines.add(
+                SDTexts.TOOLTIP$BRACKETS.get(SDTexts.DIFFICULTY_TIER$2.get())
+                        .append(":")
+                        .formatted(Formatting.DARK_PURPLE)
+        );
         lines.add(
                 SDTexts.TOOLTIP$DIFFICULTY_TIER$DESC.get(
                         SDTexts.TOOLTIP$DIFFICULTY_TIER$NIGHTMARE.get()

@@ -7,6 +7,7 @@ import karashokleo.l2hostility.init.LHEnchantments;
 import karashokleo.l2hostility.init.LHTags;
 import karashokleo.leobrary.datagen.generator.TagGenerator;
 import karashokleo.spell_dimension.SpellDimension;
+import karashokleo.spell_dimension.api.quest.Quest;
 import karashokleo.spell_dimension.util.TagUtil;
 import net.adventurez.init.EntityInit;
 import net.minecraft.block.Block;
@@ -94,6 +95,12 @@ public class AllTags
 
     public static final TagKey<Fluid> CONSCIOUSNESS = TagUtil.fluidTag("consciousness");
 
+    public static final TagKey<Quest> MAIN = TagUtil.questTag("main");
+    public static final TagKey<Quest> BRANCH = TagUtil.questTag("branch");
+    public static final TagKey<Quest> BEGINNING = TagUtil.questTag("beginning");
+    public static final TagKey<Quest> END = TagUtil.questTag("end");
+    public static final TagKey<Quest> CHALLENGE = TagUtil.questTag("challenge");
+
     public static void register()
     {
         RuneItems.entries.stream().map(RuneItems.Entry::id)
@@ -102,7 +109,6 @@ public class AllTags
         SpellDimension.ITEM_TAGS.getOrCreateContainer(HEART_FOOD)
                 .add(Items.ENCHANTED_GOLDEN_APPLE)
                 .addOptional(
-//                        new Identifier("l2hostility:life_essence"),
                         new Identifier("midashunger:enchanted_golden_carrot")
                 );
 

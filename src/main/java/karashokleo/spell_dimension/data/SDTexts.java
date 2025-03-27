@@ -1,12 +1,14 @@
 package karashokleo.spell_dimension.data;
 
 import karashokleo.spell_dimension.SpellDimension;
+import karashokleo.spell_dimension.api.quest.QuestTag;
 import karashokleo.spell_dimension.content.object.EventAward;
 import karashokleo.spell_dimension.data.generic.recipe.SDLocateRecipes;
 import karashokleo.spell_dimension.data.loot_bag.SDBags;
 import karashokleo.spell_dimension.data.loot_bag.SDContents;
 import karashokleo.spell_dimension.init.AllEntities;
 import karashokleo.spell_dimension.init.AllGroups;
+import karashokleo.spell_dimension.init.AllTags;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
@@ -70,9 +72,6 @@ public enum SDTexts
     TEXT$GAME_OVER$PASSION("During the making process, I gradually found my old passion for Minecraft. I think I've found something - that I truly love, which seems to be a luxury for most people. I hope you too can find what you love and stick with it.", "在制作过程中，我逐渐找回了自己从前对Minecraft的热情。我想我找到了某些东西——某些我真正热爱的东西，这似乎对大多数人来说是一种奢侈。希望你也能找到你的热爱并为之坚持下去。"),
     TEXT$GAME_OVER$FEEDBACK("If you have any suggestions, please give me feedback, I would appreciate it.", "如果你有任何建议，请反馈给我，我将感激不尽。"),
     TEXT$GAME_OVER$WISH("Lastly, I wish you a happy life. Have fun playing!", "最后，祝你生活愉快。玩的开心！"),
-    TEXT$QUEST$BEGINNING("[BEGINNING]", "[起点]"),
-    TEXT$QUEST$END("[END]", "[终点]"),
-    TEXT$QUEST$CHALLENGE("[CHALLENGE]", "[挑战]"),
     TEXT$MAGE_BOOK$1("An Introductory Grimoire Even a Three-Year-Old Can Understand", "三岁小孩也能看懂的入门魔法书"),
     TEXT$MAGE_BOOK$2("When you're in a quandary, turn to it~", "当你遇到窘境时，不妨翻开看看吧~"),
     TEXT$SOUL_BIND("You feel the connection between your soul and your body becoming stronger...", "你感觉灵魂与身体的联系变得紧密..."),
@@ -135,6 +134,7 @@ public enum SDTexts
     TOOLTIP$DISENCHANT("Remove attribute modifiers from the item.", "从物品上移除所有通过束魔精华获得的属性修饰符."),
     TOOLTIP$MENDING("Completely repair the item and eliminate the repair cost of the item.", "完全修复物品，并且清除物品的修复惩罚."),
     TOOLTIP$END_STAGE("Use to unlock the End stage.", "使用后解锁终末阶段."),
+    TOOLTIP$BRACKETS("[%s]", "[%s]"),
     TOOLTIP$QUEST$TASK("Task:", "任务目标:"),
     TOOLTIP$QUEST$REWARD("Reward:", "任务奖励:"),
     TOOLTIP$QUEST$COMPLETE("Right-click to submit", "右键提交任务"),
@@ -174,7 +174,6 @@ public enum SDTexts
     TOOLTIP$CURSE_PRIDE_1("Both damage dealt and damage taken are increased by %s%% per difficulty level", "根据玩家难度，造成伤害与受到伤害每级提升%s%%"),
     TOOLTIP$CURSE_PRIDE_2("Current damage increment: +%s%%", "当前增伤：+%s%%"),
     TOOLTIP$DIFFICULTY_TIER$CURRENT("Current Difficulty Tier: %s", "当前难度层级：%s"),
-    TOOLTIP$DIFFICULTY_TIER$TITLE("[%s]:", "[%s]:"),
     TOOLTIP$DIFFICULTY_TIER$DESC("- %s", "- %s"),
     TOOLTIP$DIFFICULTY_TIER$ENTER("Difficulty Tier - %s", "难度层级 - %s"),
     TOOLTIP$DIFFICULTY_TIER$HARDCORE$1("Player initial extra difficulty increases by 30", "玩家初始额外难度增加30"),
@@ -189,8 +188,8 @@ public enum SDTexts
     TOOLTIP$BOTTLE_SOUL_BINDING("After using it, you will no longer lose the item when you die", "使用后，死亡不再丢失物品"),
     TOOLTIP$BOTTLE_SOUL_BINDING$WARNING("By default, items other than trinkets dropped by a player upon death are retained in the Gravestone. However, for some unknown reason, it is still possible, albeit highly unlikely, for items in the gravestone to disappear. If you are completely intolerant of the possibility of losing everything you own, drink this potion.", "默认情况下，玩家死亡时掉落的除饰品外的其他物品将被保留在墓碑中。但由于某些不明原因，墓碑中的物品仍有可能不翼而飞，尽管这种可能性微乎其微。如果你完全无法容忍失去所有身家的可能性，请喝下这瓶药水。"),
     TOOLTIP$SHIFT_RESET("Shift + Right-click to reset the progress", "Shift + 右键重置进度"),
-    TOOLTIP$SPELL_PRISM("Consuming durability to make your spell damage bypass magical protection.","消耗耐久使你的法术伤害可以穿透魔法防御"),
-    TOOLTIP$SPELL_PRISM_ADVANCED("Maybe enhance the effects of certain spells?","或许可以增强某些法术的效果？"),
+    TOOLTIP$SPELL_PRISM("Consuming durability to make your spell damage bypass magical protection.", "消耗耐久使你的法术伤害可以穿透魔法防御"),
+    TOOLTIP$SPELL_PRISM_ADVANCED("Maybe enhance the effects of certain spells?", "或许可以增强某些法术的效果？"),
     TOOLTIP$CURSED_APPLE("+7 Curse slots when consumed", "食用后 +7 恶意 - 诅咒 饰品槽"),
     TOOLTIP$MEDAL$TRUE_MAGIC("True magic is the love that can make time stand still", "真正的魔法，是能让时光驻留的热爱"),
 
@@ -275,6 +274,7 @@ public enum SDTexts
         addGroupTranslation();
         addLootBagTranslation();
         addEventAwardTranslation();
+        addTagTranslation();
         SDLocateRecipes.addTranslations();
         SpellDimension.EN_TEXTS.addEntityType(AllEntities.LOCATE_PORTAL, "Locate Portal");
         SpellDimension.ZH_TEXTS.addEntityType(AllEntities.LOCATE_PORTAL, "定位传送门");
@@ -330,5 +330,19 @@ public enum SDTexts
         EventAward.GEAR.addText("Random Gears", "随机装备");
         EventAward.MATERIAL.addText("Random Materials", "随机材料");
         EventAward.TRINKET.addText("Random Trinkets", "随机饰品");
+    }
+
+    private static void addTagTranslation()
+    {
+        SpellDimension.EN_TEXTS.addText(QuestTag.getTagTranslationKey(AllTags.MAIN), "Main");
+        SpellDimension.EN_TEXTS.addText(QuestTag.getTagTranslationKey(AllTags.BRANCH), "Branch");
+        SpellDimension.EN_TEXTS.addText(QuestTag.getTagTranslationKey(AllTags.BEGINNING), "Beginning");
+        SpellDimension.EN_TEXTS.addText(QuestTag.getTagTranslationKey(AllTags.END), "End");
+        SpellDimension.EN_TEXTS.addText(QuestTag.getTagTranslationKey(AllTags.CHALLENGE), "Challenge");
+        SpellDimension.ZH_TEXTS.addText(QuestTag.getTagTranslationKey(AllTags.MAIN), "主线");
+        SpellDimension.ZH_TEXTS.addText(QuestTag.getTagTranslationKey(AllTags.BRANCH), "支线");
+        SpellDimension.ZH_TEXTS.addText(QuestTag.getTagTranslationKey(AllTags.BEGINNING), "起点");
+        SpellDimension.ZH_TEXTS.addText(QuestTag.getTagTranslationKey(AllTags.END), "终点");
+        SpellDimension.ZH_TEXTS.addText(QuestTag.getTagTranslationKey(AllTags.CHALLENGE), "挑战");
     }
 }

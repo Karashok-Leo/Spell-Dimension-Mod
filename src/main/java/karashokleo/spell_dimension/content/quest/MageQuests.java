@@ -36,6 +36,7 @@ public class MageQuests
                 .addEnDesc("Obtain any basic magic essence")
                 .addZhDesc("获取任意基础魔法精华")
                 .toEntry("mage/essence")
+                .addTag(AllTags.MAIN)
                 .addDependencies(BaseQuests.CHOOSE_PATH)
                 .register();
         RUNE = QuestBuilder.of(
@@ -48,6 +49,7 @@ public class MageQuests
                 .addEnDesc("Use basic magic essence to craft runes at the rune altar")
                 .addZhDesc("使用基础魔法精华在符文祭坛上合成符文")
                 .toEntry("mage/rune")
+                .addTag(AllTags.MAIN)
                 .addDependencies(BASE_ESSENCE)
                 .register();
         MORE_ESSENCE = QuestBuilder.of(
@@ -62,6 +64,7 @@ public class MageQuests
                         )
                 )
                 .toEntry("mage/enchant")
+                .addTag(AllTags.MAIN)
                 .addDependencies(BASE_ESSENCE)
                 .register();
         SPELL_BOOK_0 = QuestBuilder.of(
@@ -74,6 +77,7 @@ public class MageQuests
                 .addEnDesc("Craft your Apprentice Spell Book into a Primary Spell Book")
                 .addZhDesc("将学徒法术书合成为初级法术书")
                 .toEntry("mage/book")
+                .addTag(AllTags.MAIN)
                 .addDependencies(BaseQuests.CHOOSE_PATH)
                 .register();
         SPELL_BOOK_1 = QuestBuilder.of(
@@ -86,6 +90,7 @@ public class MageQuests
                 .addEnDesc("Craft your Primary Spell Book into a Intermediate Spell Book")
                 .addZhDesc("将初级法术书合成为中级法术书")
                 .toEntry("mage/book")
+                .addTag(AllTags.MAIN)
                 .addDependencies(SPELL_BOOK_0)
                 .register();
         SPELL_BOOK_2 = QuestBuilder.of(
@@ -98,65 +103,66 @@ public class MageQuests
                 .addEnDesc("Craft your Intermediate Spell Book into a Advanced Spell Book")
                 .addZhDesc("将中级法术书合成为高级法术书")
                 .toEntry("mage/book")
+                .addTag(AllTags.MAIN)
                 .addDependencies(SPELL_BOOK_1)
                 .register();
         SPELL_POWER_0 = QuestBuilder.of(
                         "spell_power_0",
                         new SpellPowerQuest(
                                 DynamicSpellBookItem.REQUIREMENT_SPELL_POWER_PER_GRADE[0],
-                                SDBags.UNCOMMON_MATERIAL::getStack,
-                                false
+                                SDBags.UNCOMMON_MATERIAL::getStack
                         )
                 )
                 .toEntry("mage/power")
+                .addTag(AllTags.MAIN)
                 .addDependencies(BaseQuests.CHOOSE_PATH)
                 .register();
         SPELL_POWER_1 = QuestBuilder.of(
                         "spell_power_1",
                         new SpellPowerQuest(
                                 DynamicSpellBookItem.REQUIREMENT_SPELL_POWER_PER_GRADE[1],
-                                SDBags.RARE_MATERIAL::getStack,
-                                false
+                                SDBags.RARE_MATERIAL::getStack
                         )
                 )
                 .toEntry("mage/power")
+                .addTag(AllTags.MAIN)
                 .addDependencies(SPELL_POWER_0)
                 .register();
         SPELL_POWER_2 = QuestBuilder.of(
                         "spell_power_2",
                         new SpellPowerQuest(
                                 DynamicSpellBookItem.REQUIREMENT_SPELL_POWER_PER_GRADE[2],
-                                SDBags.EPIC_MATERIAL::getStack,
-                                false
+                                SDBags.EPIC_MATERIAL::getStack
                         )
                 )
                 .toEntry("mage/power")
+                .addTag(AllTags.MAIN)
                 .addDependencies(SPELL_POWER_1)
                 .register();
         SPELL_POWER_3 = QuestBuilder.of(
                         "spell_power_3",
                         new SpellPowerQuest(
                                 2048,
-                                SDBags.LEGENDARY_MATERIAL::getStack,
-                                true
+                                SDBags.LEGENDARY_MATERIAL::getStack
                         )
                 )
                 .addEnTitle("Ancient Ones")
                 .addZhTitle("旧日支配者")
                 .toEntry("mage/power")
+                .addTag(AllTags.BRANCH, AllTags.CHALLENGE)
                 .addDependencies(SPELL_POWER_2)
                 .register();
         SPELL_POWER_4 = QuestBuilder.of(
                         "spell_power_4",
                         new SpellPowerQuest(
                                 65536,
-                                SDBags.LEGENDARY_MATERIAL::getStack,
-                                true
+                                SDBags.LEGENDARY_MATERIAL::getStack
                         )
                 )
                 .addEnTitle("Ultimate Limit")
                 .addZhTitle("最终极限")
                 .toEntry("mage/power")
+                .addTag(AllTags.BRANCH, AllTags.CHALLENGE)
                 .addDependencies(SPELL_POWER_3)
                 .register();
     }

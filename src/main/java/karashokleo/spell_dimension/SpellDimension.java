@@ -6,13 +6,15 @@ import dev.onyxstudios.cca.api.v3.entity.EntityComponentInitializer;
 import dev.onyxstudios.cca.api.v3.entity.RespawnCopyStrategy;
 import karashokleo.leobrary.datagen.generator.*;
 import karashokleo.leobrary.datagen.generator.init.GeneratorStorage;
+import karashokleo.spell_dimension.api.quest.Quest;
+import karashokleo.spell_dimension.api.quest.QuestRegistry;
 import karashokleo.spell_dimension.content.component.BuffComponentImpl;
 import karashokleo.spell_dimension.content.component.EnlighteningComponent;
 import karashokleo.spell_dimension.content.component.GameStageComponent;
 import karashokleo.spell_dimension.content.component.QuestComponent;
+import karashokleo.spell_dimension.content.misc.SDDebugCommand;
 import karashokleo.spell_dimension.content.object.EnchantedModifier;
 import karashokleo.spell_dimension.content.object.EnlighteningModifier;
-import karashokleo.spell_dimension.content.misc.SDDebugCommand;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.data.SpellTexts;
 import karashokleo.spell_dimension.data.book.MagicGuidanceProvider;
@@ -127,6 +129,7 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
     public static final TagGenerator<Fluid> FLUID_TAGS = new TagGenerator<>(RegistryKeys.FLUID);
     public static final TagGenerator<DamageType> DAMAGE_TYPE_TAGS = new TagGenerator<>(RegistryKeys.DAMAGE_TYPE);
     public static final TagGenerator<Enchantment> ENCHANTMENT_TAGS = new TagGenerator<>(RegistryKeys.ENCHANTMENT);
+    public static final TagGenerator<Quest> QUEST_TAGS = new TagGenerator<>(QuestRegistry.QUEST_REGISTRY_KEY);
 
     public static final DynamicRegistryGenerator<DamageType> DYNAMICS = new DynamicRegistryGenerator<>("Spell Dimension Dynamic Registries", RegistryKeys.DAMAGE_TYPE);
 

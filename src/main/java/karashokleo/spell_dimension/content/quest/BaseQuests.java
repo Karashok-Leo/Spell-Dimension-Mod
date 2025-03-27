@@ -8,6 +8,7 @@ import karashokleo.spell_dimension.content.quest.base.SimpleItemQuest;
 import karashokleo.spell_dimension.content.quest.special.FirstDayQuest;
 import karashokleo.spell_dimension.data.loot_bag.SDBags;
 import karashokleo.spell_dimension.init.AllItems;
+import karashokleo.spell_dimension.init.AllTags;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.util.Identifier;
 import net.spell_power.api.SpellPowerMechanics;
@@ -28,6 +29,7 @@ public class BaseQuests
                 .addZhTitle("求生意志")
                 .addEnDesc("Continuous survival for half a day without death (10 minutes)")
                 .addZhDesc("不死亡的情况下连续存活半天（10分钟）")
+                .addTag(AllTags.MAIN, AllTags.BEGINNING)
                 .register();
         CHOOSE_PATH = QuestBuilder.of("choose_path", new SimpleAdvancementQuest(
                         new Identifier("rpg_series:classes"),
@@ -38,6 +40,7 @@ public class BaseQuests
                         "spell_engine:spell_binding"
                 ))
                 .toEntry("mage/bind")
+                .addTag(AllTags.MAIN)
                 .addDependencies(FIRST_DAY)
                 .register();
         KILL_TRAIT = QuestBuilder.of("kill_trait", new SimpleAdvancementQuest(
@@ -49,6 +52,7 @@ public class BaseQuests
                         "minecraft:zombie_head"
                 ))
                 .toEntry("power/hostility")
+                .addTag(AllTags.MAIN)
                 .addDependencies(FIRST_DAY)
                 .register();
         HOSTILITY_ORB = QuestBuilder.of(
@@ -61,6 +65,7 @@ public class BaseQuests
                         )
                 )
                 .toEntry("power/hostility")
+                .addTag(AllTags.MAIN)
                 .addDependencies(FIRST_DAY)
                 .register();
     }

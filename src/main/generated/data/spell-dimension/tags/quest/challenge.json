@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "spell-dimension:doge",
+    "spell-dimension:froge",
+    "spell-dimension:health_3",
+    "spell-dimension:spell_power_3",
+    "spell-dimension:spell_power_4"
+  ]
+}

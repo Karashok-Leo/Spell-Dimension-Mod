@@ -15,8 +15,7 @@ import java.util.function.Supplier;
 
 public record HealthQuest(
         float health,
-        Supplier<ItemStack> reward,
-        boolean challenge
+        Supplier<ItemStack> reward
 ) implements ItemRewardQuest, AutoTitleQuest, AutoDescQuest
 {
     @Override
@@ -29,12 +28,6 @@ public record HealthQuest(
     public List<ItemStack> getRewards()
     {
         return List.of(reward.get());
-    }
-
-    @Override
-    public boolean isChallenge()
-    {
-        return this.challenge;
     }
 
     @Override

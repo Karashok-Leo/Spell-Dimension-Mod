@@ -107,7 +107,7 @@ public class QuestScrollItem extends Item
                 // Do reward
                 else if (QuestUsage.allDependenciesCompleted(player, quest))
                 {
-                    if (quest.completeTasks(player))
+                    if (quest.completeTasks(player) || creativeMode)
                     {
                         quest.reward(player);
                         QuestUsage.addQuestsCompleted(player, quest);

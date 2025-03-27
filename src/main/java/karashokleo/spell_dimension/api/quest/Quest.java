@@ -4,6 +4,7 @@ import karashokleo.spell_dimension.client.quest.QuestItemTooltipData;
 import karashokleo.spell_dimension.data.SDTexts;
 import net.minecraft.client.item.TooltipData;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -11,7 +12,9 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Stream;
 
 public interface Quest
 {
@@ -27,6 +30,16 @@ public interface Quest
     default void appendRewardDesc(World world, List<Text> desc)
     {
         desc.add(Text.empty());
+    }
+
+    @Nullable
+    default Text getTagsText(World world)
+    {
+        return streamTags()
+                .sorted(Comparator.comparingInt(QuestTag::getTagPriority))
+                .map(QuestTag::getTagText)
+                .reduce((a, b) -> a.append(" ").append(b))
+                .orElse(null);
     }
 
     @Nullable
@@ -61,8 +74,20 @@ public interface Quest
 
     default void appendTooltip(@Nullable World world, List<Text> tooltip)
     {
+        Text tagsText = this.getTagsText(world);
+        if (tagsText != null) tooltip.add(tagsText);
         Text title = this.getTitle(world);
         if (title != null) tooltip.add(title);
         tooltip.addAll(this.getDesc(world));
+    }
+
+    default boolean isIn(TagKey<Quest> tag)
+    {
+        return QuestRegistry.QUEST_REGISTRY.getEntry(this).isIn(tag);
+    }
+
+    default Stream<TagKey<Quest>> streamTags()
+    {
+        return QuestRegistry.QUEST_REGISTRY.getEntry(this).streamTags();
     }
 }

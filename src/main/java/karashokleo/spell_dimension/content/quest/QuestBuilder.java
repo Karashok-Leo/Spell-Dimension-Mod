@@ -2,17 +2,20 @@ package karashokleo.spell_dimension.content.quest;
 
 import karashokleo.leobrary.datagen.builder.NamedEntryBuilder;
 import karashokleo.leobrary.datagen.builder.provider.DefaultLanguageGeneratorProvider;
+import karashokleo.leobrary.datagen.builder.provider.TagGeneratorProvider;
+import karashokleo.leobrary.datagen.generator.TagGenerator;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.api.quest.Quest;
 import karashokleo.spell_dimension.api.quest.QuestRegistry;
 import karashokleo.spell_dimension.api.quest.QuestUsage;
 import karashokleo.spell_dimension.config.QuestToEntryConfig;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Pair;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class QuestBuilder<Q extends Quest> extends NamedEntryBuilder<Q> implements DefaultLanguageGeneratorProvider
+public class QuestBuilder<Q extends Quest> extends NamedEntryBuilder<Q> implements DefaultLanguageGeneratorProvider, TagGeneratorProvider
 {
     private static final Set<Pair<Quest, Quest>> RELATIONS = new HashSet<>();
 
@@ -37,6 +40,21 @@ public class QuestBuilder<Q extends Quest> extends NamedEntryBuilder<Q> implemen
     {
         QuestRegistry.register(getId(), content);
         return content;
+    }
+
+    public QuestBuilder<Q> addTag(TagKey<Quest> key)
+    {
+        this.getTagGenerator(QuestRegistry.QUEST_REGISTRY_KEY).getOrCreateContainer(key).add(getId());
+        return this;
+    }
+
+    @SafeVarargs
+    public final QuestBuilder<Q> addTag(TagKey<Quest>... keys)
+    {
+        TagGenerator<Quest> tagGenerator = getTagGenerator(QuestRegistry.QUEST_REGISTRY_KEY);
+        for (TagKey<Quest> key : keys)
+            tagGenerator.getOrCreateContainer(key).add(getId());
+        return this;
     }
 
     public QuestBuilder<Q> addDependencies(Quest... dependencies)

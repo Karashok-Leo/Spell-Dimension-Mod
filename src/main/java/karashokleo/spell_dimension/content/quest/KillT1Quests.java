@@ -4,6 +4,7 @@ import karashokleo.spell_dimension.content.quest.base.SimpleLootItemQuest;
 import karashokleo.spell_dimension.content.quest.special.EnderDragonAdvancementQuest;
 import karashokleo.spell_dimension.data.loot_bag.SDBags;
 import karashokleo.spell_dimension.init.AllItems;
+import karashokleo.spell_dimension.init.AllTags;
 import net.adventurez.init.EntityInit;
 import net.adventurez.init.ItemInit;
 import net.minecraft.registry.Registries;
@@ -31,6 +32,7 @@ public class KillT1Quests
                         )
                 )
                 .toEntry("boss/day_night")
+                .addTag(AllTags.MAIN)
                 .addDependencies(
                         KillT2Quests.KILL_BOMD_LICH,
                         KillT2Quests.KILL_VOID_BLOSSOM,
@@ -51,6 +53,7 @@ public class KillT1Quests
                 .addEnDesc("Defeat Ender Dragon")
                 .addZhDesc("击杀末影龙")
                 .toEntry("boss/dragon")
+                .addTag(AllTags.MAIN)
                 .addDependencies(KILL_DAY_NIGHT)
                 .register();
         KILL_THE_EYE = QuestBuilder.of(
@@ -62,6 +65,7 @@ public class KillT1Quests
                         )
                 )
                 .toEntry("boss/the_eye")
+                .addTag(AllTags.MAIN)
                 .addDependencies(KILL_ENDER_DRAGON)
                 .register();
     }

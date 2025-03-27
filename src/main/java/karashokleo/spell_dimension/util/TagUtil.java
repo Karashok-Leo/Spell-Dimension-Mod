@@ -1,6 +1,8 @@
 package karashokleo.spell_dimension.util;
 
 import karashokleo.spell_dimension.SpellDimension;
+import karashokleo.spell_dimension.api.quest.Quest;
+import karashokleo.spell_dimension.api.quest.QuestTag;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityType;
@@ -60,5 +62,10 @@ public class TagUtil
     public static TagKey<Fluid> fluidTag(String path)
     {
         return fluidTag(SpellDimension.modLoc(path));
+    }
+
+    public static TagKey<Quest> questTag(String path)
+    {
+        return QuestTag.of(SpellDimension.modLoc(path));
     }
 }

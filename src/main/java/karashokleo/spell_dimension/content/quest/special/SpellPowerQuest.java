@@ -3,6 +3,7 @@ package karashokleo.spell_dimension.content.quest.special;
 import karashokleo.spell_dimension.api.quest.ItemRewardQuest;
 import karashokleo.spell_dimension.content.quest.base.AutoTitleQuest;
 import karashokleo.spell_dimension.data.SDTexts;
+import karashokleo.spell_dimension.init.AllTags;
 import karashokleo.spell_dimension.util.SchoolUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -17,8 +18,7 @@ import java.util.function.Supplier;
 
 public record SpellPowerQuest(
         double min,
-        Supplier<ItemStack> reward,
-        boolean challenge
+        Supplier<ItemStack> reward
 ) implements ItemRewardQuest, AutoTitleQuest
 {
     @Override
@@ -40,12 +40,6 @@ public record SpellPowerQuest(
     }
 
     @Override
-    public boolean isChallenge()
-    {
-        return challenge;
-    }
-
-    @Override
     public void appendTaskDesc(World world, List<Text> desc)
     {
         desc.add(SDTexts.TEXT$QUEST$SPELL_POWER.get(min));
@@ -54,7 +48,7 @@ public record SpellPowerQuest(
     @Override
     public @Nullable ItemStack getIcon()
     {
-        return isChallenge() ?
+        return isIn(AllTags.CHALLENGE) ?
                 Armors.netherite_arcaneRobeSet.head.getDefaultStack() :
                 Armors.arcaneRobeSet.head.getDefaultStack();
     }

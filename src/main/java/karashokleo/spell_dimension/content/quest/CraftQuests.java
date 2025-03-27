@@ -1,7 +1,6 @@
 package karashokleo.spell_dimension.content.quest;
 
 import karashokleo.enchantment_infusion.init.EIItems;
-import karashokleo.spell_dimension.content.quest.base.SimpleItemChallengeQuest;
 import karashokleo.spell_dimension.content.quest.base.SimpleItemQuest;
 import karashokleo.spell_dimension.content.quest.base.SimpleTagIngredientQuest;
 import karashokleo.spell_dimension.data.loot_bag.SDBags;
@@ -20,8 +19,8 @@ public class CraftQuests
     public static SimpleItemQuest RANDOM_MATERIAL_0;
     public static SimpleItemQuest RANDOM_MATERIAL_1;
     public static SimpleItemQuest RANDOM_MATERIAL_2;
-    public static SimpleItemChallengeQuest DOGE;
-    public static SimpleItemChallengeQuest FROGE;
+    public static SimpleItemQuest DOGE;
+    public static SimpleItemQuest FROGE;
     public static SimpleItemQuest ENCHANTMENT_INFUSION;
     public static SimpleItemQuest SPELL_SCROLL;
 
@@ -37,6 +36,7 @@ public class CraftQuests
                 .addEnDesc("Craft any level 1 Forge Controller and build a level 1 Alloy Forge")
                 .addZhDesc("合成任意1级冶炼控制器，并建造1级合金冶炼炉")
                 .toEntry("resource/alloy")
+                .addTag(AllTags.MAIN)
                 .addDependencies(BaseQuests.HOSTILITY_ORB)
                 .register();
         FORGE_1 = QuestBuilder.of(
@@ -49,6 +49,7 @@ public class CraftQuests
                 .addEnDesc("Craft any level 2 Forge Controller and build a level 2 Alloy Forge")
                 .addZhDesc("合成任意2级冶炼控制器，并建造2级合金冶炼炉")
                 .toEntry("resource/alloy")
+                .addTag(AllTags.MAIN)
                 .addDependencies(FORGE_0)
                 .register();
         FORGE_2 = QuestBuilder.of(
@@ -61,6 +62,7 @@ public class CraftQuests
                 .addEnDesc("Craft any level 3 Forge Controller and build a level 3 Alloy Forge")
                 .addZhDesc("合成任意3级冶炼控制器，并建造3级合金冶炼炉")
                 .toEntry("resource/alloy")
+                .addTag(AllTags.MAIN)
                 .addDependencies(FORGE_1)
                 .register();
         RANDOM_MATERIAL_0 = QuestBuilder.of(
@@ -70,6 +72,7 @@ public class CraftQuests
                                 SDBags.ARING::getStack
                         )
                 )
+                .addTag(AllTags.BRANCH)
                 .addDependencies(FORGE_0)
                 .register();
         RANDOM_MATERIAL_1 = QuestBuilder.of(
@@ -79,6 +82,7 @@ public class CraftQuests
                                 SDBags.ARTIFACT::getStack
                         )
                 )
+                .addTag(AllTags.BRANCH)
                 .addDependencies(FORGE_1)
                 .register();
         RANDOM_MATERIAL_2 = QuestBuilder.of(
@@ -88,11 +92,12 @@ public class CraftQuests
                                 SDBags.ARING::getStack
                         )
                 )
+                .addTag(AllTags.BRANCH)
                 .addDependencies(FORGE_2)
                 .register();
         DOGE = QuestBuilder.of(
                         "doge",
-                        new SimpleItemChallengeQuest(
+                        new SimpleItemQuest(
                                 () -> Registries.ITEM.get(new Identifier("mythicmetals:doge")),
                                 SDBags.ARTIFACT::getStack
                         )
@@ -101,11 +106,12 @@ public class CraftQuests
                 .addZhTitle("Doge:)")
                 .addEnDesc("Use a level 3 Alloy Forge to craft")
                 .addZhDesc("使用3级冶炼炉合成")
+                .addTag(AllTags.BRANCH, AllTags.CHALLENGE)
                 .addDependencies(FORGE_2)
                 .register();
         FROGE = QuestBuilder.of(
                         "froge",
-                        new SimpleItemChallengeQuest(
+                        new SimpleItemQuest(
                                 () -> Registries.ITEM.get(new Identifier("mythicmetals:froge")),
                                 SDBags.ARING::getStack
                         )
@@ -114,6 +120,7 @@ public class CraftQuests
                 .addZhTitle("呱呱乐")
                 .addEnDesc("Use a level 3 Alloy Forge to craft")
                 .addZhDesc("使用3级冶炼炉合成")
+                .addTag(AllTags.BRANCH, AllTags.CHALLENGE)
                 .addDependencies(FORGE_2)
                 .register();
         ENCHANTMENT_INFUSION = QuestBuilder.of(
@@ -127,6 +134,7 @@ public class CraftQuests
                         )
                 )
                 .toEntry("power/enchant")
+                .addTag(AllTags.MAIN)
                 .addDependencies(BaseQuests.HOSTILITY_ORB)
                 .register();
         SPELL_SCROLL = QuestBuilder.of(
@@ -137,6 +145,7 @@ public class CraftQuests
                         )
                 )
                 .toEntry("mage/scroll")
+                .addTag(AllTags.MAIN)
                 .addDependencies(ENCHANTMENT_INFUSION)
                 .register();
     }

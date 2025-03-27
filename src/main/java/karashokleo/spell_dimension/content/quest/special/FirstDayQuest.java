@@ -32,12 +32,6 @@ public record FirstDayQuest(Supplier<ItemStack> reward) implements ItemRewardQue
     }
 
     @Override
-    public boolean isBeginning()
-    {
-        return true;
-    }
-
-    @Override
     public @Nullable ItemStack getIcon()
     {
         return AllStacks.GUIDE_BOOK;

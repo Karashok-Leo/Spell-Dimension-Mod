@@ -37,6 +37,7 @@ public class HostilityQuests
                                 SDBags.JEWELRY_RINGS::getStack
                         )
                 )
+                .addTag(AllTags.MAIN)
                 .addDependencies(BaseQuests.HOSTILITY_ORB)
                 .register();
         ODDEYES_GLASSES = QuestBuilder.of(
@@ -46,6 +47,7 @@ public class HostilityQuests
                                 SDBags.JEWELRY_NECKLACES::getStack
                         )
                 )
+                .addTag(AllTags.BRANCH)
                 .addDependencies(CHAOS_INGOT)
                 .register();
         TRIPLE_STRIP_CAPE = QuestBuilder.of(
@@ -55,6 +57,7 @@ public class HostilityQuests
                                 SDBags.JEWELRY_RINGS::getStack
                         )
                 )
+                .addTag(AllTags.BRANCH)
                 .addDependencies(CHAOS_INGOT)
                 .register();
         CURSE_ENVY = QuestBuilder.of(
@@ -64,6 +67,7 @@ public class HostilityQuests
                                 SDBags.JEWELRY_NECKLACES::getStack
                         )
                 )
+                .addTag(AllTags.MAIN)
                 .addDependencies(CHAOS_INGOT)
                 .register();
         TRAIT_ITEM = QuestBuilder.of(
@@ -76,6 +80,7 @@ public class HostilityQuests
                 .addEnDesc("Obtain any Hostility Trait")
                 .addZhDesc("获得任意恶意词条")
                 .toEntry("power/trait")
+                .addTag(AllTags.MAIN)
                 .addDependencies(CURSE_ENVY)
                 .register();
         HOSTILITY_CURSE = QuestBuilder.of(
@@ -88,6 +93,7 @@ public class HostilityQuests
                 .addEnDesc("Obtain any Hostility Curse")
                 .addZhDesc("获得任意恶意诅咒")
                 .toEntry("resource/curse")
+                .addTag(AllTags.BRANCH)
                 .addDependencies(TRAIT_ITEM)
                 .register();
         HOSTILITY_RING = QuestBuilder.of(
@@ -99,6 +105,7 @@ public class HostilityQuests
                 )
                 .addEnDesc("Obtain any Hostility Ring")
                 .addZhDesc("获得任意恶意戒指")
+                .addTag(AllTags.BRANCH)
                 .addDependencies(TRAIT_ITEM)
                 .register();
         INFINITY_GLOVE = QuestBuilder.of(
@@ -108,6 +115,7 @@ public class HostilityQuests
                                 SDBags.JEWELRY_NECKLACES::getStack
                         )
                 )
+                .addTag(AllTags.BRANCH)
                 .addDependencies(TRAIT_ITEM)
                 .register();
         MIRACLE_INGOT = QuestBuilder.of(
@@ -117,6 +125,7 @@ public class HostilityQuests
                                 SDBags.JEWELRY_RINGS::getStack
                         )
                 )
+                .addTag(AllTags.MAIN)
                 .addDependencies(CHAOS_INGOT)
                 .register();
         DIVINITY_CROSS = QuestBuilder.of(
@@ -126,6 +135,7 @@ public class HostilityQuests
                                 SDBags.JEWELRY_NECKLACES::getStack
                         )
                 )
+                .addTag(AllTags.BRANCH)
                 .addDependencies(MIRACLE_INGOT, TRAIT_ITEM)
                 .register();
         DIVINITY_LIGHT = QuestBuilder.of(
@@ -135,6 +145,7 @@ public class HostilityQuests
                                 SDBags.JEWELRY_RINGS::getStack
                         )
                 )
+                .addTag(AllTags.BRANCH)
                 .addDependencies(MIRACLE_INGOT, TRAIT_ITEM)
                 .register();
         ETERNIUM_INGOT = QuestBuilder.of(
@@ -144,6 +155,7 @@ public class HostilityQuests
                                 SDBags.JEWELRY_NECKLACES::getStack
                         )
                 )
+                .addTag(AllTags.MAIN)
                 .addDependencies(MIRACLE_INGOT)
                 .register();
         RESTORATION = QuestBuilder.of(
@@ -153,6 +165,7 @@ public class HostilityQuests
                                 SDBags.JEWELRY_RINGS::getStack
                         )
                 )
+                .addTag(AllTags.BRANCH)
                 .addDependencies(ETERNIUM_INGOT, TRAIT_ITEM)
                 .register();
         ABYSSAL_THORN = QuestBuilder.of(
@@ -162,6 +175,7 @@ public class HostilityQuests
                                 SDBags.JEWELRY_NECKLACES::getStack
                         )
                 )
+                .addTag(AllTags.BRANCH)
                 .addDependencies(ETERNIUM_INGOT)
                 .register();
         ABRAHADABRA = QuestBuilder.of(
@@ -171,6 +185,7 @@ public class HostilityQuests
                                 SDBags.JEWELRY_RINGS::getStack
                         )
                 )
+                .addTag(AllTags.MAIN)
                 .addDependencies(ETERNIUM_INGOT, TRAIT_ITEM)
                 .register();
         NIDHOGGUR = QuestBuilder.of(
@@ -180,6 +195,7 @@ public class HostilityQuests
                                 SDBags.JEWELRY_NECKLACES::getStack
                         )
                 )
+                .addTag(AllTags.BRANCH)
                 .addDependencies(ETERNIUM_INGOT, TRAIT_ITEM)
                 .register();
     }

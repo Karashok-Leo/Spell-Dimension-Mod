@@ -3,6 +3,7 @@ package karashokleo.spell_dimension.content.quest;
 import fuzs.mutantmonsters.init.ModRegistry;
 import karashokleo.spell_dimension.content.quest.base.SimpleLootItemQuest;
 import karashokleo.spell_dimension.data.loot_bag.SDBags;
+import karashokleo.spell_dimension.init.AllTags;
 
 public class KillMutantQuests
 {
@@ -21,6 +22,7 @@ public class KillMutantQuests
                                 SDBags.UNCOMMON_MATERIAL::getStack
                         )
                 )
+                .addTag(AllTags.MAIN)
                 .addDependencies(BaseQuests.KILL_TRAIT)
                 .register();
         KILL_MUTANT_SKELETON = QuestBuilder.of(
@@ -31,6 +33,7 @@ public class KillMutantQuests
                                 SDBags.UNCOMMON_MATERIAL::getStack
                         )
                 )
+                .addTag(AllTags.MAIN)
                 .addDependencies(BaseQuests.KILL_TRAIT)
                 .register();
         KILL_MUTANT_CREEPER = QuestBuilder.of(
@@ -41,6 +44,7 @@ public class KillMutantQuests
                                 SDBags.UNCOMMON_GEAR::getStack
                         )
                 )
+                .addTag(AllTags.MAIN)
                 .addDependencies(BaseQuests.KILL_TRAIT)
                 .register();
         KILL_MUTANT_ENDERMAN = QuestBuilder.of(
@@ -51,6 +55,7 @@ public class KillMutantQuests
                                 SDBags.UNCOMMON_BOOK::getStack
                         )
                 )
+                .addTag(AllTags.MAIN)
                 .addDependencies(BaseQuests.KILL_TRAIT)
                 .register();
     }

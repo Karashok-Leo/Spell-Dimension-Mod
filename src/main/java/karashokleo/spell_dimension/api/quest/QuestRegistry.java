@@ -11,18 +11,18 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
 
-@SuppressWarnings("all")
-public class QuestRegistry
+public interface QuestRegistry
 {
-    public static final RegistryKey<Registry<Quest>> QUEST_REGISTRY_KEY = RegistryKey.ofRegistry(SpellDimension.modLoc("quest"));
+    RegistryKey<Registry<Quest>> QUEST_REGISTRY_KEY = RegistryKey.ofRegistry(SpellDimension.modLoc("quest"));
 
-    public static final Registry<Quest> QUEST_REGISTRY = FabricRegistryBuilder.createSimple(QUEST_REGISTRY_KEY).attribute(RegistryAttribute.SYNCED).buildAndRegister();
+    Registry<Quest> QUEST_REGISTRY = FabricRegistryBuilder.createSimple(QUEST_REGISTRY_KEY).attribute(RegistryAttribute.SYNCED).buildAndRegister();
 
-    public static final Codec<RegistryEntry<Quest>> ENTRY_CODEC = QUEST_REGISTRY.createEntryCodec();
+    Codec<RegistryEntry<Quest>> ENTRY_CODEC = QUEST_REGISTRY.createEntryCodec();
 
-    public static final MutableGraph<RegistryEntry<Quest>> QUEST_GRAPH = GraphBuilder.directed().allowsSelfLoops(false).build();
+    @SuppressWarnings("UnstableApiUsage")
+    MutableGraph<RegistryEntry<Quest>> QUEST_GRAPH = GraphBuilder.directed().allowsSelfLoops(false).build();
 
-    public static void register(Identifier id, Quest quest)
+    static void register(Identifier id, Quest quest)
     {
         Registry.register(QUEST_REGISTRY, id, quest);
     }

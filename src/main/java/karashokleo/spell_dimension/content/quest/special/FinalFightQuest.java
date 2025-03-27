@@ -32,12 +32,6 @@ public record FinalFightQuest(
     }
 
     @Override
-    public boolean isEnd()
-    {
-        return true;
-    }
-
-    @Override
     public void appendTaskDesc(World world, List<Text> desc)
     {
         desc.add(SDTexts.TOOLTIP$QUEST$LOOT_ITEM.get(entity.get().getName(), task.get().asItem().getName()));

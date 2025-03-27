@@ -4,6 +4,7 @@ import com.obscuria.aquamirae.registry.AquamiraeEntities;
 import com.obscuria.aquamirae.registry.AquamiraeItems;
 import karashokleo.spell_dimension.content.quest.base.SimpleLootItemQuest;
 import karashokleo.spell_dimension.data.loot_bag.SDBags;
+import karashokleo.spell_dimension.init.AllTags;
 import net.adventurez.init.EntityInit;
 import net.adventurez.init.ItemInit;
 
@@ -27,6 +28,7 @@ public class KillT3Quests
                         )
                 )
                 .toEntry("boss/moon_knight")
+                .addTag(AllTags.MAIN)
                 .addDependencies(KillT4Quests.KILL_OLD_CHAMPION)
                 .register();
         KILL_BLACKSTONE_GOLEM = QuestBuilder.of(
@@ -38,6 +40,7 @@ public class KillT3Quests
                         )
                 )
                 .toEntry("boss/blackstone_golem")
+                .addTag(AllTags.MAIN)
                 .addDependencies(KillT4Quests.KILL_DECAYING_KING)
                 .register();
         KILL_CAPTAIN_CORNELIA = QuestBuilder.of(
@@ -49,6 +52,7 @@ public class KillT3Quests
                         )
                 )
                 .toEntry("boss/captain")
+                .addTag(AllTags.MAIN)
                 .addDependencies(KillT4Quests.KILL_ELDER_GUARDIAN)
                 .register();
         KILL_CHAOS_MONARCH = QuestBuilder.of(
@@ -60,6 +64,7 @@ public class KillT3Quests
                         )
                 )
                 .toEntry("boss/chaos_monarch")
+                .addTag(AllTags.MAIN)
                 .addDependencies(KillT4Quests.KILL_WITHER)
                 .register();
         KILL_RETURNING_KNIGHT = QuestBuilder.of(
@@ -71,6 +76,7 @@ public class KillT3Quests
                         )
                 )
                 .toEntry("boss/returning_knight")
+                .addTag(AllTags.MAIN)
                 .addDependencies(KillT4Quests.KILL_INVOKER)
                 .register();
         KILL_STALKER = QuestBuilder.of(
@@ -82,6 +88,7 @@ public class KillT3Quests
                         )
                 )
                 .toEntry("boss/stalker")
+                .addTag(AllTags.MAIN)
                 .addDependencies(KillT4Quests.KILL_WARDEN)
                 .register();
     }

@@ -2,6 +2,7 @@ package karashokleo.spell_dimension.content.quest;
 
 import karashokleo.spell_dimension.content.quest.base.SimpleLootItemQuest;
 import karashokleo.spell_dimension.data.loot_bag.SDBags;
+import karashokleo.spell_dimension.init.AllTags;
 
 public class KillT2Quests
 {
@@ -21,6 +22,7 @@ public class KillT2Quests
                         )
                 )
                 .toEntry("boss/graveyard_lich")
+                .addTag(AllTags.MAIN)
                 .addDependencies(KillMutantQuests.KILL_MUTANT_ENDERMAN)
                 .register();
         KILL_BOMD_LICH = QuestBuilder.of(
@@ -32,6 +34,7 @@ public class KillT2Quests
                         )
                 )
                 .toEntry("boss/bomd_lich")
+                .addTag(AllTags.MAIN)
                 .addDependencies(KillMutantQuests.KILL_MUTANT_ENDERMAN)
                 .register();
         KILL_VOID_BLOSSOM = QuestBuilder.of(
@@ -43,6 +46,7 @@ public class KillT2Quests
                         )
                 )
                 .toEntry("boss/void_blossom")
+                .addTag(AllTags.MAIN)
                 .addDependencies(KillMutantQuests.KILL_MUTANT_ENDERMAN)
                 .register();
         KILL_GAUNTLET = QuestBuilder.of(
@@ -54,6 +58,7 @@ public class KillT2Quests
                         )
                 )
                 .toEntry("boss/gauntlet")
+                .addTag(AllTags.MAIN)
                 .addDependencies(KillMutantQuests.KILL_MUTANT_ENDERMAN)
                 .register();
     }
