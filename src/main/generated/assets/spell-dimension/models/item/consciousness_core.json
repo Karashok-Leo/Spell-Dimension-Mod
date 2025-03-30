@@ -1,3 +1,6 @@
 {
-  "parent": "spell-dimension:block/consciousness_core"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "spell-dimension:item/consciousness_core"
+  }
 }

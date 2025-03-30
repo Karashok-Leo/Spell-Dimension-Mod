@@ -97,7 +97,9 @@ public class OblivionBreastplateItem extends TrinketItem
                 "%d%%".formatted((int) (THRESHOLD_RATIO * 100)),
                 "%d%%".formatted((int) (OBLIVION_RATIO * 100))
         ).formatted(Formatting.GRAY));
-        tooltip.add(SDTexts.TOOLTIP$OBLIVION_BREASTPLATE_2.get(MAX_SPELL_POWER_RATIO).formatted(Formatting.DARK_GRAY));
+        tooltip.add(SDTexts.TOOLTIP$OBLIVION_BREASTPLATE_2.get(
+                "%d%%".formatted((int) (MAX_SPELL_POWER_RATIO * 100))
+        ).formatted(Formatting.DARK_GRAY));
         tooltip.add(SDTexts.TOOLTIP$OBLIVION_BREASTPLATE_3.get(getOblivionAmount(stack)).formatted(Formatting.AQUA));
     }
 }

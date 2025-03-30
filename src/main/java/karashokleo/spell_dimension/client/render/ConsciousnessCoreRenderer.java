@@ -1,5 +1,6 @@
 package karashokleo.spell_dimension.client.render;
 
+import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.block.tile.ConsciousnessCoreTile;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.OverlayTexture;
@@ -24,7 +25,7 @@ import java.util.List;
 
 public class ConsciousnessCoreRenderer implements BlockEntityRenderer<ConsciousnessCoreTile>
 {
-    private static final Identifier TEXTURE = new Identifier("textures/entity/end_crystal/end_crystal.png");
+    private static final Identifier TEXTURE = SpellDimension.modLoc("textures/entity/consciousness_core.png");
     private static final RenderLayer END_CRYSTAL = RenderLayer.getEntityCutoutNoCull(TEXTURE);
     private static final float SINE_45_DEGREES = (float) Math.sin(0.7853981633974483);
     private final ModelPart core;
@@ -94,7 +95,7 @@ public class ConsciousnessCoreRenderer implements BlockEntityRenderer<Consciousn
         s = outerRadius;
         t = outerRadius;
         w = -1.0F + h;
-        x = (float) maxY * heightScale + w;
+        x = maxY * heightScale + w;
         renderBeamLayer(matrices, vertexConsumers.getBuffer(RenderLayer.getBeaconBeam(textureId, true)), j, k, l, 0.125F, yOffset, i, m, n, o, p, q, r, s, t, 0.0F, 1.0F, x, w);
         matrices.pop();
     }

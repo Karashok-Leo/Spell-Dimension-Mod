@@ -8,6 +8,7 @@ import karashokleo.spell_dimension.content.block.fluid.ConsciousnessFluid;
 import karashokleo.spell_dimension.content.block.tile.ConsciousnessCoreTile;
 import karashokleo.spell_dimension.content.block.tile.ProtectiveCoverBlockTile;
 import karashokleo.spell_dimension.content.block.tile.SpellInfusionPedestalTile;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -21,6 +22,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
 
 public class AllBlocks
 {
@@ -61,12 +63,13 @@ public class AllBlocks
         CONSCIOUSNESS_BASE = Entry.of("consciousness_base", new ConsciousnessBaseBlock())
                 .addEN()
                 .addZH("识之基座")
-                .addSimpleItem()
+                .addSimpleItem(new FabricItemSettings().rarity(Rarity.EPIC))
                 .registerWithItem();
         CONSCIOUSNESS_CORE = Entry.of("consciousness_core", new ConsciousnessCoreBlock())
                 .addEN()
                 .addZH("识之核心")
-                .addSimpleItem()
+                .addSimpleItem(new FabricItemSettings().rarity(Rarity.EPIC))
+                .addModel()
                 .registerWithItem();
         CONSCIOUSNESS_CORE_TILE = Registry.register(
                 Registries.BLOCK_ENTITY_TYPE,
@@ -94,13 +97,15 @@ public class AllBlocks
                 .addZH("识")
                 .register();
 
-        SpellDimension.MODELS.addBlock(generator -> generator.registerSimpleState(SPELL_INFUSION_PEDESTAL.block()));
-        SpellDimension.MODELS.addBlock(generator -> generator.registerSimpleState(SPELL_LIGHT));
-        SpellDimension.MODELS.addBlock(generator -> generator.registerSimpleState(CONSCIOUSNESS));
-        SpellDimension.MODELS.addBlock(generator -> generator.registerSimpleState(CONSCIOUSNESS_CORE.block()));
         SpellDimension.MODELS.addBlock(generator ->
         {
-
+            generator.registerSimpleState(SPELL_INFUSION_PEDESTAL.block());
+            generator.registerSimpleState(SPELL_LIGHT);
+            generator.registerSimpleState(CONSCIOUSNESS);
+            generator.registerItemModel(CONSCIOUSNESS_CORE.item());
+        });
+        SpellDimension.MODELS.addBlock(generator ->
+        {
             Identifier base = Models.CUBE_ALL.upload(CONSCIOUSNESS_BASE.block(), TextureMap.all(SpellDimension.modLoc("block/lopy/consciousness_base")), generator.modelCollector);
             Identifier base_turned = Models.CUBE_ALL.upload(CONSCIOUSNESS_BASE.block(), "_turned", TextureMap.all(SpellDimension.modLoc("block/lopy/consciousness_base_turned")), generator.modelCollector);
             generator.blockStateCollector.accept(VariantsBlockStateSupplier.create(CONSCIOUSNESS_BASE.block()).coordinate(BlockStateModelGenerator.createBooleanModelMap(ConsciousnessBaseBlock.TURNED, base_turned, base)));
