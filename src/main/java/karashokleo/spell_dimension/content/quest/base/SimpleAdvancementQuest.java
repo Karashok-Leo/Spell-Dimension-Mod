@@ -50,7 +50,7 @@ public record SimpleAdvancementQuest(
     }
 
     @Override
-    public void appendTaskDesc(World world, List<Text> desc)
+    public void appendTaskDescription(World world, List<Text> desc)
     {
         desc.add(Text.translatable(descKey));
     }

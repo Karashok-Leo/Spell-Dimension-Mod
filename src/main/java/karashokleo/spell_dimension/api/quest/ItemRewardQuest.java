@@ -19,7 +19,7 @@ public interface ItemRewardQuest extends Quest
     }
 
     @Override
-    default void appendRewardDesc(World world, List<Text> desc)
+    default void appendRewardDescription(World world, List<Text> desc)
     {
         for (ItemStack reward : this.getRewards())
             desc.add(

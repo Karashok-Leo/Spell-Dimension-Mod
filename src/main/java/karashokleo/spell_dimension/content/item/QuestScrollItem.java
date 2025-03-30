@@ -102,7 +102,7 @@ public class QuestScrollItem extends Item
                     {
                         player.sendMessage(SDTexts.TEXT$PROGRESS_ROLLBACK.get(), true);
                         QuestUsage.removeQuestsCompleted(player, quest);
-                    } else player.sendMessage(SDTexts.TEXT$QUEST_COMPLETED.get(), true);
+                    } else player.sendMessage(SDTexts.TEXT$QUEST$COMPLETED.get(), true);
                 }
                 // Do reward
                 else if (QuestUsage.allDependenciesCompleted(player, quest))
@@ -112,7 +112,16 @@ public class QuestScrollItem extends Item
                         quest.reward(player);
                         QuestUsage.addQuestsCompleted(player, quest);
 //                        giveDependentQuests(player, quest);
-                        S2CTitle title = new S2CTitle(SDTexts.TEXT$QUEST_COMPLETE.get());
+                        Text feedback = quest.getFeedback(world);
+                        if (feedback != null)
+                        {
+                            player.sendMessage(
+                                    SDTexts.TEXT$QUEST$FEEDBACK.get()
+                                            .formatted(Formatting.LIGHT_PURPLE)
+                                            .append(feedback)
+                            );
+                        }
+                        S2CTitle title = new S2CTitle(SDTexts.TEXT$QUEST$COMPLETE.get());
                         AllPackets.toClientPlayer(player, title);
                         S2CUndying packet = new S2CUndying(player);
                         LHNetworking.toClientPlayer(player, packet);
@@ -122,10 +131,10 @@ public class QuestScrollItem extends Item
                         AllItems.QUEST_SCROLL.setQuest(stack, null);
                     }
                     // Requirements not met
-                    else player.sendMessage(SDTexts.TEXT$QUEST_REQUIREMENT.get(), true);
+                    else player.sendMessage(SDTexts.TEXT$QUEST$REQUIREMENT.get(), true);
                 }
                 // Dependencies not completed
-                else player.sendMessage(SDTexts.TEXT$QUEST_DEPENDENCIES.get(), true);
+                else player.sendMessage(SDTexts.TEXT$QUEST$DEPENDENCIES.get(), true);
             }
             // Empty quest
             else

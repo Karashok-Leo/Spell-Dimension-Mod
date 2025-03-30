@@ -1,7 +1,6 @@
 package karashokleo.spell_dimension.content.quest.special;
 
 import karashokleo.spell_dimension.api.quest.ItemRewardQuest;
-import karashokleo.spell_dimension.content.quest.base.AutoTitleQuest;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllTags;
 import karashokleo.spell_dimension.util.SchoolUtil;
@@ -19,7 +18,7 @@ import java.util.function.Supplier;
 public record SpellPowerQuest(
         double min,
         Supplier<ItemStack> reward
-) implements ItemRewardQuest, AutoTitleQuest
+) implements ItemRewardQuest
 {
     @Override
     public boolean completeTasks(ServerPlayerEntity player)
@@ -40,7 +39,7 @@ public record SpellPowerQuest(
     }
 
     @Override
-    public void appendTaskDesc(World world, List<Text> desc)
+    public void appendTaskDescription(World world, List<Text> desc)
     {
         desc.add(SDTexts.TEXT$QUEST$SPELL_POWER.get(min));
     }

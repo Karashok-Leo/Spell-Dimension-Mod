@@ -67,7 +67,7 @@ public class AdditionalTooltip
         if (player != null &&
             optional.isPresent() &&
             QuestUsage.isQuestCompleted(player, optional.get()))
-            lines.add(SDTexts.TEXT$QUEST_COMPLETED.get());
+            lines.add(SDTexts.TEXT$QUEST$COMPLETED.get());
         if (player != null && player.isCreative())
             lines.add(SDTexts.TOOLTIP$SHIFT_RESET.get().formatted(Formatting.GRAY));
     }

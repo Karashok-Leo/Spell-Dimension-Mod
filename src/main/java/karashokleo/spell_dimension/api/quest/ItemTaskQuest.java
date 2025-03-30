@@ -20,7 +20,7 @@ public interface ItemTaskQuest extends IngredientTaskQuest
     }
 
     @Override
-    default void appendTaskDesc(World world, List<Text> desc)
+    default void appendTaskDescription(World world, List<Text> desc)
     {
         desc.add(SDTexts.TOOLTIP$QUEST$TASK_ITEM.get());
         for (ItemConvertible c : this.getTaskItems())

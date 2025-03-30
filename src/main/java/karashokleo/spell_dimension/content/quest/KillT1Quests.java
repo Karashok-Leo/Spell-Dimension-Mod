@@ -31,6 +31,8 @@ public class KillT1Quests
                                 SDBags.LEGENDARY_GEAR::getStack
                         )
                 )
+                .addEnFeedback("Day and night shift, and the Gatekeepers are reduced to dust and ash. The invisible barrier blasts open and the embers scatter into the void, while the end is still far away.")
+                .addZhFeedback("昼夜变换，守门人化作尘灰。隐形的屏障轰然洞开，余烬散入虚空，而末路仍在远方。")
                 .toEntry("boss/day_night")
                 .addTag(AllTags.MAIN)
                 .addDependencies(
@@ -52,6 +54,8 @@ public class KillT1Quests
                 )
                 .addEnDesc("Defeat Ender Dragon")
                 .addZhDesc("击杀末影龙")
+                .addEnFeedback("When the last touch of the dragon's breath dissipated in the void, the End once again fell into silence. The fragments of the stars fell like teardrops, the remnants of the crystal's ringing still echoed among the obsidian pillars, and the dragon that had once coiled in the rift between time and space had now turned into a drifting purple mist. The final chapter of this epic was but a prelude to the next journey.")
+                .addZhFeedback("当最后一抹龙息在虚空中消散，终末之地再次陷入寂静。星辰的碎片如泪滴般坠落，水晶的残响仍在黑曜石柱间回荡，而那曾盘踞时空裂隙的巨龙，此刻已化作飘散的紫雾。这场史诗的终章，不过是下一征程的序曲。")
                 .toEntry("boss/dragon")
                 .addTag(AllTags.MAIN)
                 .addDependencies(KILL_DAY_NIGHT)
@@ -64,6 +68,8 @@ public class KillT1Quests
                                 SDBags.LEGENDARY_BOOK::getStack
                         )
                 )
+                .addEnFeedback("When the giant crystalline lens shatters, the entrance to the deep void opens. You drift through this boundless void as if immersed in a never-ending dream.")
+                .addZhFeedback("当巨大的晶状体碎裂，通往深邃虚无的入口随之开启。你在这无边的虚空中漂游，宛如沉浸于一个永无止境的幻梦之中。")
                 .toEntry("boss/the_eye")
                 .addTag(AllTags.MAIN)
                 .addDependencies(KILL_ENDER_DRAGON)

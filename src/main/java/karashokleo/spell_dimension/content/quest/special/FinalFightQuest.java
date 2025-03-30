@@ -2,7 +2,6 @@ package karashokleo.spell_dimension.content.quest.special;
 
 import karashokleo.spell_dimension.api.quest.ItemRewardQuest;
 import karashokleo.spell_dimension.api.quest.ItemTaskQuest;
-import karashokleo.spell_dimension.content.quest.base.AutoTitleQuest;
 import karashokleo.spell_dimension.data.SDTexts;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemConvertible;
@@ -17,7 +16,7 @@ public record FinalFightQuest(
         Supplier<EntityType<?>> entity,
         Supplier<ItemConvertible> task,
         Supplier<ItemStack> reward
-) implements ItemTaskQuest, ItemRewardQuest, AutoTitleQuest
+) implements ItemTaskQuest, ItemRewardQuest
 {
     @Override
     public List<ItemConvertible> getTaskItems()
@@ -32,7 +31,7 @@ public record FinalFightQuest(
     }
 
     @Override
-    public void appendTaskDesc(World world, List<Text> desc)
+    public void appendTaskDescription(World world, List<Text> desc)
     {
         desc.add(SDTexts.TOOLTIP$QUEST$LOOT_ITEM.get(entity.get().getName(), task.get().asItem().getName()));
     }

@@ -3,6 +3,7 @@ package karashokleo.spell_dimension.api.quest;
 import karashokleo.spell_dimension.client.quest.QuestItemTooltipData;
 import karashokleo.spell_dimension.data.SDTexts;
 import net.minecraft.client.item.TooltipData;
+import net.minecraft.client.resource.language.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -14,6 +15,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 public interface Quest
@@ -22,12 +24,50 @@ public interface Quest
 
     void reward(ServerPlayerEntity player);
 
-    default void appendTaskDesc(World world, List<Text> desc)
+    default String getTranslationKey(String suffix)
     {
-        desc.add(Text.empty());
+        return Objects.requireNonNull(
+                QuestRegistry.QUEST_REGISTRY.getId(this),
+                "Unregistered quest!"
+        ).toTranslationKey("quest", suffix);
     }
 
-    default void appendRewardDesc(World world, List<Text> desc)
+    default String getTitleKey()
+    {
+        return getTranslationKey("title");
+    }
+
+    default String getDescriptionKey()
+    {
+        return getTranslationKey("description");
+    }
+
+    default String getFeedbackKey()
+    {
+        return getTranslationKey("feedback");
+    }
+
+    default Text getTitleText()
+    {
+        return Text.translatable(getTitleKey());
+    }
+
+    default Text getDescriptionText()
+    {
+        return Text.translatable(getDescriptionKey());
+    }
+
+    default Text getFeedbackText()
+    {
+        return Text.translatable(getFeedbackKey());
+    }
+
+    default void appendTaskDescription(World world, List<Text> desc)
+    {
+        desc.add(getDescriptionText());
+    }
+
+    default void appendRewardDescription(World world, List<Text> desc)
     {
         desc.add(Text.empty());
     }
@@ -45,17 +85,27 @@ public interface Quest
     @Nullable
     default Text getTitle(World world)
     {
-        return null;
+        String titleKey = this.getTitleKey();
+        if (!I18n.hasTranslation(titleKey)) return null;
+        return Text.translatable(titleKey);
     }
 
-    default List<Text> getDesc(World world)
+    default List<Text> getDescriptions(World world)
     {
         List<Text> desc = new ArrayList<>();
         desc.add(SDTexts.TOOLTIP$QUEST$TASK.get().formatted(Formatting.BOLD));
-        this.appendTaskDesc(world, desc);
+        this.appendTaskDescription(world, desc);
         desc.add(SDTexts.TOOLTIP$QUEST$REWARD.get().formatted(Formatting.BOLD));
-        this.appendRewardDesc(world, desc);
+        this.appendRewardDescription(world, desc);
         return desc;
+    }
+
+    @Nullable
+    default Text getFeedback(World world)
+    {
+        String feedbackKey = this.getFeedbackKey();
+        if (!I18n.hasTranslation(feedbackKey)) return null;
+        return Text.translatable(feedbackKey);
     }
 
     @Nullable
@@ -78,7 +128,7 @@ public interface Quest
         if (tagsText != null) tooltip.add(tagsText);
         Text title = this.getTitle(world);
         if (title != null) tooltip.add(title);
-        tooltip.addAll(this.getDesc(world));
+        tooltip.addAll(this.getDescriptions(world));
     }
 
     default boolean isIn(TagKey<Quest> tag)

@@ -50,7 +50,7 @@ public record SimpleLootItemQuest(
     }
 
     @Override
-    public void appendTaskDesc(World world, List<Text> desc)
+    public void appendTaskDescription(World world, List<Text> desc)
     {
         List<? extends EntityType<?>> entities = this.entities.stream().map(Supplier::get).toList();
         MutableText entity = this.entities.isEmpty() ? Text.empty() : Text.empty().append(entities.get(0).getName());

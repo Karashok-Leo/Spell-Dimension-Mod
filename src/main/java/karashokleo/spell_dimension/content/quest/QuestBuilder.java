@@ -70,27 +70,39 @@ public class QuestBuilder<Q extends Quest> extends NamedEntryBuilder<Q> implemen
         return this;
     }
 
-    public QuestBuilder<Q> addEnTitle(String desc)
+    public QuestBuilder<Q> addEnTitle(String text)
     {
-        getEnglishGenerator().addText(getTitleKey(), desc);
+        getEnglishGenerator().addText(getTitleKey(), text);
         return this;
     }
 
-    public QuestBuilder<Q> addZhTitle(String desc)
+    public QuestBuilder<Q> addZhTitle(String text)
     {
-        getChineseGenerator().addText(getTitleKey(), desc);
+        getChineseGenerator().addText(getTitleKey(), text);
         return this;
     }
 
-    public QuestBuilder<Q> addEnDesc(String desc)
+    public QuestBuilder<Q> addEnDesc(String text)
     {
-        getEnglishGenerator().addText(getDescKey(), desc);
+        getEnglishGenerator().addText(getDescriptionKey(), text);
         return this;
     }
 
-    public QuestBuilder<Q> addZhDesc(String desc)
+    public QuestBuilder<Q> addZhDesc(String text)
     {
-        getChineseGenerator().addText(getDescKey(), desc);
+        getChineseGenerator().addText(getDescriptionKey(), text);
+        return this;
+    }
+
+    public QuestBuilder<Q> addEnFeedback(String text)
+    {
+        getEnglishGenerator().addText(getFeedbackKey(), text);
+        return this;
+    }
+
+    public QuestBuilder<Q> addZhFeedback(String text)
+    {
+        getChineseGenerator().addText(getFeedbackKey(), text);
         return this;
     }
 
@@ -99,9 +111,14 @@ public class QuestBuilder<Q extends Quest> extends NamedEntryBuilder<Q> implemen
         return super.getTranslationKey("quest") + ".title";
     }
 
-    public String getDescKey()
+    public String getDescriptionKey()
     {
         return super.getTranslationKey("quest") + ".description";
+    }
+
+    public String getFeedbackKey()
+    {
+        return super.getTranslationKey("quest") + ".feedback";
     }
 
     @Override
