@@ -20,9 +20,10 @@ import java.util.List;
 
 public class FlexBreastplateItem extends TrinketItem
 {
-    public static final double SPELL_POWER_RATIO = 0.1;
-    public static final double ARMOR_RATIO = 0.4;
-    public static final double ARMOR_TOUGHNESS_RATIO = 1;
+    public static final float SPELL_POWER_RATIO = 0.1F;
+    public static final float ARMOR_RATIO = 0.4F;
+    public static final float ARMOR_TOUGHNESS_RATIO = 1F;
+    public static final float MAX_REDUCTION_RATIO = 0.6F;
 
     public FlexBreastplateItem()
     {
@@ -42,7 +43,7 @@ public class FlexBreastplateItem extends TrinketItem
         double armor = armorIns == null ? 0 : armorIns.getValue();
         double armorToughness = armorToughnessIns == null ? 0 : armorToughnessIns.getValue();
         double total = spellPower * SPELL_POWER_RATIO + armor * ARMOR_RATIO + armorToughness * ARMOR_TOUGHNESS_RATIO;
-        return MathHelper.clamp(40 / (float) total, 0.5F, 1.0F);
+        return MathHelper.clamp(40 / (float) total, 1.0F - MAX_REDUCTION_RATIO, 1.0F);
     }
 
     @Override
@@ -52,7 +53,8 @@ public class FlexBreastplateItem extends TrinketItem
         tooltip.add(SDTexts.TOOLTIP$FLEX_BREASTPLATE.get(
                 "%d%%".formatted((int) (SPELL_POWER_RATIO * 100)),
                 "%d%%".formatted((int) (ARMOR_RATIO * 100)),
-                "%d%%".formatted((int) (ARMOR_TOUGHNESS_RATIO * 100))
+                "%d%%".formatted((int) (ARMOR_TOUGHNESS_RATIO * 100)),
+                "%d%%".formatted((int) (MAX_REDUCTION_RATIO * 100))
         ).formatted(Formatting.DARK_RED));
     }
 }

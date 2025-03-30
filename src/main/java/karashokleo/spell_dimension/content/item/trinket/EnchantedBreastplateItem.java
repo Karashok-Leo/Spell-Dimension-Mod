@@ -24,9 +24,9 @@ import java.util.UUID;
 
 public class EnchantedBreastplateItem extends TrinketItem
 {
-    public static final double MAX_HEALTH_RATIO = 0.2;
-    public static final double ARMOR_RATIO = 0.4;
-    public static final double ARMOR_TOUGHNESS_RATIO = 0.1;
+    public static final float MAX_HEALTH_RATIO = 0.1F;
+    public static final float ARMOR_RATIO = 0.2F;
+    public static final float ARMOR_TOUGHNESS_RATIO = 0.05F;
 
     public EnchantedBreastplateItem()
     {

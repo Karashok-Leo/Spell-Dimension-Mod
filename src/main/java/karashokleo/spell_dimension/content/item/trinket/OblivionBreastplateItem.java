@@ -4,6 +4,7 @@ import dev.emi.trinkets.api.SlotReference;
 import dev.emi.trinkets.api.TrinketItem;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllDamageTypes;
+import karashokleo.spell_dimension.util.SchoolUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
@@ -21,7 +22,7 @@ public class OblivionBreastplateItem extends TrinketItem
 {
     public static final float THRESHOLD_RATIO = 0.5F;
     public static final float OBLIVION_RATIO = 0.1F;
-    public static final float MAX_RATIO = 0.8F;
+    public static final float MAX_SPELL_POWER_RATIO = 0.5F;
     private static final String AMOUNT_KEY = "OblivionAmount";
     private static final String MAX_AMOUNT_KEY = "MaxOblivionAmount";
 
@@ -42,11 +43,12 @@ public class OblivionBreastplateItem extends TrinketItem
         // Check client side and interval
         if (entity.getWorld().isClient()) return;
         if (entity.age % 20 != 0) return;
-        float maxHealth = entity.getMaxHealth();
         // Refresh max oblivion amount
-        float maxOblivionAmount = maxHealth * MAX_RATIO;
+        double spellPower = SchoolUtil.getEntitySpellPower(entity);
+        float maxOblivionAmount = (float) (spellPower * MAX_SPELL_POWER_RATIO);
         stack.getOrCreateNbt().putFloat(MAX_AMOUNT_KEY, maxOblivionAmount);
         // Check health threshold
+        float maxHealth = entity.getMaxHealth();
         if (entity.getHealth() < maxHealth * THRESHOLD_RATIO) return;
         // Check if oblivion amount reaches the maximum
         double oblivionAmount = getOblivionAmount(stack);
@@ -95,7 +97,7 @@ public class OblivionBreastplateItem extends TrinketItem
                 "%d%%".formatted((int) (THRESHOLD_RATIO * 100)),
                 "%d%%".formatted((int) (OBLIVION_RATIO * 100))
         ).formatted(Formatting.GRAY));
-        tooltip.add(SDTexts.TOOLTIP$OBLIVION_BREASTPLATE_2.get(MAX_RATIO).formatted(Formatting.DARK_GRAY));
+        tooltip.add(SDTexts.TOOLTIP$OBLIVION_BREASTPLATE_2.get(MAX_SPELL_POWER_RATIO).formatted(Formatting.DARK_GRAY));
         tooltip.add(SDTexts.TOOLTIP$OBLIVION_BREASTPLATE_3.get(getOblivionAmount(stack)).formatted(Formatting.AQUA));
     }
 }
