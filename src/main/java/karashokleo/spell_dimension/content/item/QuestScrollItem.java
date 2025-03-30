@@ -33,10 +33,14 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public class QuestScrollItem extends Item
 {
     private static final String KEY = "Quest";
+    public static final Text SPACING_LINE = Text.literal("?????????????????????????????????????????????????????")
+            .formatted(Formatting.DARK_PURPLE)
+            .formatted(Formatting.OBFUSCATED);
 
     public QuestScrollItem()
     {
@@ -98,7 +102,7 @@ public class QuestScrollItem extends Item
                 // Already completed
                 if (QuestUsage.isQuestCompleted(player, quest))
                 {
-                    if (creativeMode && player.isSneaking())
+                    if (creativeMode)
                     {
                         player.sendMessage(SDTexts.TEXT$PROGRESS_ROLLBACK.get(), true);
                         QuestUsage.removeQuestsCompleted(player, quest);
@@ -107,6 +111,7 @@ public class QuestScrollItem extends Item
                 // Do reward
                 else if (QuestUsage.allDependenciesCompleted(player, quest))
                 {
+                    // Requirements met or creative mode
                     if (quest.completeTasks(player) || creativeMode)
                     {
                         quest.reward(player);
@@ -115,11 +120,9 @@ public class QuestScrollItem extends Item
                         Text feedback = quest.getFeedback(world);
                         if (feedback != null)
                         {
-                            player.sendMessage(
-                                    SDTexts.TEXT$QUEST$FEEDBACK.get()
-                                            .formatted(Formatting.LIGHT_PURPLE)
-                                            .append(feedback)
-                            );
+                            player.sendMessage(SPACING_LINE);
+                            player.sendMessage(feedback);
+                            player.sendMessage(SPACING_LINE);
                         }
                         S2CTitle title = new S2CTitle(SDTexts.TEXT$QUEST$COMPLETE.get());
                         AllPackets.toClientPlayer(player, title);
@@ -139,20 +142,20 @@ public class QuestScrollItem extends Item
             // Empty quest
             else
             {
-                AllPackets.toClientPlayer(player, new S2COpenQuestScreen(hand));
-//                Set<RegistryEntry<Quest>> currentQuests = QuestUsage.getCurrentQuests(player);
-//                // All completed
-//                if (currentQuests.isEmpty())
-//                    player.sendMessage(SDTexts.TEXT$QUEST_ALL_COMPLETED.get(), true);
-//                    // Offer all current quests
-//                else
-//                {
+                Set<RegistryEntry<Quest>> currentQuests = QuestUsage.getCurrentQuests(player);
+                // All completed
+                if (currentQuests.isEmpty())
+                {
+                    player.sendMessage(SDTexts.TEXT$QUEST$ALL_COMPLETED.get(), true);
+                } else
+                {
+                    AllPackets.toClientPlayer(player, new S2COpenQuestScreen(hand));
 //                    currentQuests.stream()
 //                            .map(AllItems.QUEST_SCROLL::getStack)
 //                            .forEach(itemStack -> player.getInventory().offerOrDrop(itemStack));
 //                    if (!player.getAbilities().creativeMode)
 //                        stack.decrement(1);
-//                }
+                }
             }
         }
         return TypedActionResult.success(stack, world.isClient());

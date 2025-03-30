@@ -105,7 +105,7 @@ public interface Quest
     {
         String feedbackKey = this.getFeedbackKey();
         if (!I18n.hasTranslation(feedbackKey)) return null;
-        return Text.translatable(feedbackKey);
+        return Text.translatable(feedbackKey).formatted(Formatting.LIGHT_PURPLE);
     }
 
     @Nullable
