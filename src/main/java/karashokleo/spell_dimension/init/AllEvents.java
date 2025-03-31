@@ -49,14 +49,13 @@ public class AllEvents
     /**
      * @return true to cancel further processing
      */
-    public static boolean adaptSpell(int level, LivingEntity entity, LivingHurtEvent event)
+    public static boolean adaptSpell(int level, LivingEntity entity, LivingHurtEvent event, AdaptingTrait.Data data)
     {
         if (event.getSource().isIn(SpellPowerTags.DamageType.ALL))
         {
             var cap = MobDifficulty.get(entity);
             if (cap.isEmpty()) return false;
 
-            AdaptingTrait.Data data = cap.get().getOrCreateData(LHTraits.ADAPTIVE.getId(), AdaptingTrait.Data::new);
             Optional<String> firstToken = data.memory.stream().filter(string -> string.startsWith(ADAPTIVE_CACHE)).findFirst();
             if (firstToken.isEmpty()) return false;
 

@@ -14,6 +14,7 @@ import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Util;
 import net.spell_power.api.SpellSchool;
+import net.spell_power.api.SpellSchools;
 
 import java.util.Locale;
 
@@ -41,9 +42,10 @@ public enum SDTexts
     TEXT$END_STAGE$LOCK("You need to use %s to unlock the End Stage to enter the End!", "你需要使用%s解锁终末阶段才能进入末地！"),
     TEXT$END_STAGE$BOOK_EVERYTHING("You need to use %s to unlock the End Stage to use Book of Omniscience!", "你需要使用%s解锁终末阶段才能使用全知之书！"),
     TEXT$PROGRESS_ROLLBACK("Progress has been rolled back!", "进度已回退！"),
-    TEXT$INTERVAL_SPELL_TRAIT("Every %s seconds, cast spell [%s] on target.", "每隔%s秒，对目标施放法术 [%s]"),
-    TEXT$SPELL_TRAIT$ACTION("%s is casting [%s]", "%s 正在施法 [%s]"),
     TEXT$SPELL_TRAIT$POWER("Monsters gain spell power equal to %s%% Hostility level", "怪物获得相当于%s%%恶意等级的法术强度"),
+    TEXT$SPELL_TRAIT$INTERVAL("Every %s seconds, cast spell on target", "每隔%s秒，对目标施放法术"),
+    TEXT$SPELL_TRAIT$DESCRIPTION("Spell Description: %s", "法术描述：%s"),
+    TEXT$SPELL_TRAIT$ACTION("%s is casting [%s]", "%s 正在施法 [%s]"),
     TEXT$QUEST$COMPLETE("Quest completed!", "任务完成！"),
     TEXT$QUEST$COMPLETED("The quest has been completed", "该任务已完成"),
     TEXT$QUEST$ALL_COMPLETED("All quests have been completed", "所有任务已完成"),
@@ -275,6 +277,7 @@ public enum SDTexts
         addLootBagTranslation();
         addEventAwardTranslation();
         addTagTranslation();
+        addDeathMessageTranslation();
         SDLocateRecipes.addTranslations();
         SpellDimension.EN_TEXTS.addEntityType(AllEntities.LOCATE_PORTAL, "Locate Portal");
         SpellDimension.ZH_TEXTS.addEntityType(AllEntities.LOCATE_PORTAL, "定位传送门");
@@ -344,5 +347,25 @@ public enum SDTexts
         SpellDimension.ZH_TEXTS.addText(QuestTag.getTagTranslationKey(AllTags.BEGINNING), "起点");
         SpellDimension.ZH_TEXTS.addText(QuestTag.getTagTranslationKey(AllTags.END), "终点");
         SpellDimension.ZH_TEXTS.addText(QuestTag.getTagTranslationKey(AllTags.CHALLENGE), "挑战");
+    }
+
+    private static void addDeathMessageTranslation(SpellSchool school, String en, String zh)
+    {
+        String deathMsg = "death.attack." + school.id.getPath();
+        String deathMsgPlayer = "death.attack." + school.id.getPath() + ".player";
+        SpellDimension.EN_TEXTS.addText(deathMsg, "%s was killed by " + en);
+        SpellDimension.EN_TEXTS.addText(deathMsgPlayer, "%s was killed by %s's " + en);
+        SpellDimension.ZH_TEXTS.addText(deathMsg, "%s被" + zh + "杀死了");
+        SpellDimension.ZH_TEXTS.addText(deathMsgPlayer, "%s被%s的" + zh + "杀死了");
+    }
+
+    private static void addDeathMessageTranslation()
+    {
+        addDeathMessageTranslation(SpellSchools.ARCANE, "arcane spell", "奥秘法术");
+        addDeathMessageTranslation(SpellSchools.FIRE, "fire spell", "火焰法术");
+        addDeathMessageTranslation(SpellSchools.FROST, "frost spell", "寒冰法术");
+        addDeathMessageTranslation(SpellSchools.HEALING, "healing spell", "治愈法术");
+        addDeathMessageTranslation(SpellSchools.LIGHTNING, "lightning spell", "闪电法术");
+        addDeathMessageTranslation(SpellSchools.SOUL, "soul spell", "灵魂法术");
     }
 }

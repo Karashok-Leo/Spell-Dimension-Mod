@@ -8,6 +8,7 @@ import karashokleo.spell_dimension.init.AllMiscInit;
 import karashokleo.spell_dimension.util.ImpactUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
@@ -51,7 +52,7 @@ public class IntervalSpellTrait extends SpellTrait
             {
                 target.sendMessage(SDTexts.TEXT$SPELL_TRAIT$ACTION.get(
                         mob.getName(),
-                        this.getName()
+                        this.getName().setStyle(Style.EMPTY.withColor(getColor()))
                 ));
             }
             ImpactUtil.performSpell(world, mob, spellId, List.of(target), SpellCast.Action.RELEASE, 1.0F);
@@ -64,11 +65,11 @@ public class IntervalSpellTrait extends SpellTrait
     public void addDetail(List<Text> list)
     {
         list.add(
-                Text.translatable(
-                        getDescKey(),
+                SDTexts.TEXT$SPELL_TRAIT$INTERVAL.get(
                         mapLevel(lv -> Text.literal(interval.applyAsInt(lv) / 20d + "").formatted(Formatting.AQUA))
                 ).formatted(Formatting.GRAY)
         );
+        super.addDetail(list);
     }
 
     @SerialClass

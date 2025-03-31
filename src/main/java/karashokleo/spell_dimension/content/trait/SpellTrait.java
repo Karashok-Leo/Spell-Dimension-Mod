@@ -92,7 +92,7 @@ public class SpellTrait extends MobTrait
     @Override
     public void addDetail(List<Text> list)
     {
-        list.add(SDTexts.TEXT$SPELL_TRAIT$POWER.get(Math.round(powerFactor * 100)));
-        super.addDetail(list);
+        list.add(SDTexts.TEXT$SPELL_TRAIT$POWER.get(Math.round(powerFactor * 100)).formatted(Formatting.GRAY));
+        list.add(SDTexts.TEXT$SPELL_TRAIT$DESCRIPTION.get(Text.translatable(getDescKey())).formatted(Formatting.GRAY));
     }
 }

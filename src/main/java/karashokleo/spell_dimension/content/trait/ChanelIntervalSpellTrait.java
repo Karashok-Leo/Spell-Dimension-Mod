@@ -142,11 +142,11 @@ public class ChanelIntervalSpellTrait extends SpellTrait
     public void addDetail(List<Text> list)
     {
         list.add(
-                Text.translatable(
-                        getDescKey(),
+                SDTexts.TEXT$SPELL_TRAIT$INTERVAL.get(
                         mapLevel(lv -> Text.literal(interval.applyAsInt(lv) / 20d + "").formatted(Formatting.AQUA))
                 ).formatted(Formatting.GRAY)
         );
+        super.addDetail(list);
     }
 
     @SerialClass

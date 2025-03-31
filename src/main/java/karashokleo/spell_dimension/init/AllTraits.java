@@ -1,5 +1,6 @@
 package karashokleo.spell_dimension.init;
 
+import com.lion.graveyard.init.TGEntities;
 import karashokleo.l2hostility.L2Hostility;
 import karashokleo.l2hostility.content.item.traits.TraitSymbol;
 import karashokleo.l2hostility.content.trait.MobTraitBuilder;
@@ -257,14 +258,15 @@ public class AllTraits
                         "black_hole",
                         new SpellTrait(AllSpells.BLACK_HOLE, 1f),
                         0, 1, 1, 0)
-                .addENDesc("Fireballs spawns a black hole in place when they explode.")
-                .addZHDesc("发射的火球爆炸时在原地形成一个黑洞")
+//                .addENDesc("Fireballs spawns a black hole in place when they explode.")
+//                .addZHDesc("发射的火球爆炸时在原地形成一个黑洞")
                 .addWhitelist(EntityType.ENDER_DRAGON)
                 .register();
         INCARCERATE = Entry.of(
                         "incarcerate",
                         new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.INCARCERATE, 0.2f),
                         0, 1, 1, 0)
+                .addWhitelist(TGEntities.LICH.get())
                 .register();
     }
 
