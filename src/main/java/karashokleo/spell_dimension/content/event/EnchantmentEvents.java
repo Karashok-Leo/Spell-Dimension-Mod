@@ -2,6 +2,7 @@ package karashokleo.spell_dimension.content.event;
 
 import io.github.fabricators_of_create.porting_lib.core.event.BaseEvent;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.MobEffectEvent;
+import karashokleo.l2hostility.api.event.ModifyDispellImmuneFactorCallback;
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.l2hostility.init.LHTags;
 import karashokleo.leobrary.damage.api.modify.DamageModifier;
@@ -17,10 +18,12 @@ import net.fabricmc.fabric.api.item.v1.ModifyItemAttributeModifiersCallback;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.registry.tag.DamageTypeTags;
+import net.minecraft.util.math.MathHelper;
 import net.spell_power.api.SpellPower;
 import net.spell_power.api.SpellSchool;
 import net.spell_power.api.enchantment.EnchantmentRestriction;
@@ -43,7 +46,7 @@ public class EnchantmentEvents
             }
         });
 
-        // Breastplate immunity
+        // Breastplate Immunity
         MobEffectEvent.APPLICABLE.register(event ->
         {
             if (TrinketCompat.getTrinketItems(event.getEntity(),
@@ -54,7 +57,7 @@ public class EnchantmentEvents
                 event.setResult(BaseEvent.Result.DENY);
         });
 
-        // Breastplate immunity
+        // Breastplate Immunity
         AllEnchantments.EFFECT_IMMUNITY.forEach(enchantment ->
         {
             EnchantmentRestriction.permit(enchantment, stack -> stack.isIn(AllTags.BREASTPLATE_SLOT));
@@ -68,7 +71,19 @@ public class EnchantmentEvents
             map.forEach((enchantment, context) -> enchantment.onSpellImpact(world, caster, context, targets, spellInfo));
         });
 
-        // Spell resistance
+        // Spell Tearing
+        ModifyDispellImmuneFactorCallback.EVENT.register((difficulty, entity, level, source, amount, factor) ->
+        {
+            if (source.getAttacker() instanceof LivingEntity living)
+            {
+                int tearingLv = EnchantmentHelper.getEquipmentLevel(AllEnchantments.SPELL_TEARING, living);
+                float f = MathHelper.clamp(tearingLv * 0.2f, 0f, 1f);
+                return factor * (1 - f);
+            }
+            return factor;
+        });
+
+        // Spell Resistance
         DamagePhase.ARMOR.registerModifier(0, damageAccess ->
         {
             if (!(damageAccess.getEntity() instanceof PlayerEntity player))
@@ -89,7 +104,7 @@ public class EnchantmentEvents
             damageAccess.addModifier(originalDamage -> Math.max(0, originalDamage - damageReduction));
         });
 
-        // Spell leech
+        // Spell Leech
         DamagePhase.APPLY.registerModifier(0, damageAccess ->
         {
             if (!damageAccess.getSource().isIn(LHTags.MAGIC))

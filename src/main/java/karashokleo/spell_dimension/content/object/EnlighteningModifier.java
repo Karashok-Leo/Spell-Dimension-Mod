@@ -75,7 +75,7 @@ public record EnlighteningModifier(
     public void applyToComponent(PlayerEntity player)
     {
         List<EnlighteningModifier> modifiers = EnlighteningComponent.get(player).getModifiers();
-        Predicate<EnlighteningModifier> predicate = modifier -> modifier.attribute == this.attribute && modifier.uuid == this.uuid;
+        Predicate<EnlighteningModifier> predicate = modifier -> modifier.attribute == this.attribute && modifier.uuid.equals(this.uuid);
         Optional<EnlighteningModifier> oldModifier = modifiers.stream().filter(predicate).findAny();
         double newAmount = oldModifier.map(modifier -> getNewAmount(modifier.amount())).orElse(amount);
         modifiers.removeIf(predicate);
