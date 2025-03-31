@@ -216,7 +216,48 @@ public class SDEnchantmentRecipes
 
         // SpellDimension Enchantments
         {
-            // Spell Curse, Spell Haste
+            // Spell Curse
+            {
+                EIRecipeUtil.set(
+                        builder -> builder
+                                .withTableIngredient(LHEnchantments.CURSE_BLADE, 1)
+                                .withPedestalItem(1, Items.FERMENTED_SPIDER_EYE)
+                                .withPedestalItem(1, Items.SUGAR)
+                                .withPedestalItem(1, ComplementItems.CURSED_DROPLET)
+                                .withPedestalItem(1,
+                                        Ingredient.fromTag(AllTags.ESSENCE.get(0))),
+                        AllEnchantments.SPELL_CURSE,
+                        3,
+                        exporter,
+                        SpellDimension.modLoc("enchantment/spell_curse/3")
+                );
+                EIRecipeUtil.add(
+                        builder -> builder
+                                .withPedestalItem(1, ComplementItems.CURSED_DROPLET)
+                                .withPedestalItem(1, Items.FERMENTED_SPIDER_EYE)
+                                .withPedestalItem(1, Items.SUGAR)
+                                .withPedestalItem(1,
+                                        Ingredient.fromTag(AllTags.ESSENCE.get(1))),
+                        AllEnchantments.SPELL_CURSE,
+                        4,
+                        exporter,
+                        SpellDimension.modLoc("enchantment/spell_curse/4")
+                );
+                EIRecipeUtil.add(
+                        builder -> builder
+                                .withPedestalItem(2, ComplementItems.CURSED_DROPLET)
+                                .withPedestalItem(1, Items.FERMENTED_SPIDER_EYE)
+                                .withPedestalItem(1, Items.SUGAR)
+                                .withPedestalItem(2,
+                                        Ingredient.fromTag(AllTags.ESSENCE.get(1))),
+                        AllEnchantments.SPELL_CURSE,
+                        5,
+                        exporter,
+                        SpellDimension.modLoc("enchantment/spell_curse/5")
+                );
+            }
+
+            // Spell Haste
             for (int i = 0; i < 5; i++)
             {
                 int level = i + 1;
@@ -226,19 +267,6 @@ public class SDEnchantmentRecipes
 
                 if (i == 0)
                 {
-                    EIRecipeUtil.set(
-                            builder -> builder
-                                    .withTableIngredient(LHEnchantments.CURSE_BLADE, level)
-                                    .withPedestalItem(1, Items.FERMENTED_SPIDER_EYE)
-                                    .withPedestalItem(1, Items.SUGAR)
-                                    .withPedestalItem(baseIngredient, ComplementItems.CURSED_DROPLET)
-                                    .withPedestalItem(essenceIngredient,
-                                            Ingredient.fromTag(AllTags.ESSENCE.get(essenceGrade))),
-                            AllEnchantments.SPELL_CURSE,
-                            level,
-                            exporter,
-                            SpellDimension.modLoc("enchantment/spell_curse/" + level)
-                    );
                     EIRecipeUtil.set(
                             builder -> builder
                                     .withTableIngredient(Enchantments_SpellPowerMechanics.HASTE, level)
@@ -253,18 +281,6 @@ public class SDEnchantmentRecipes
                     );
                 } else
                 {
-                    EIRecipeUtil.add(
-                            builder -> builder
-                                    .withPedestalItem(baseIngredient, ComplementItems.CURSED_DROPLET)
-                                    .withPedestalItem(1, Items.FERMENTED_SPIDER_EYE)
-                                    .withPedestalItem(1, Items.SUGAR)
-                                    .withPedestalItem(essenceIngredient,
-                                            Ingredient.fromTag(AllTags.ESSENCE.get(essenceGrade))),
-                            AllEnchantments.SPELL_CURSE,
-                            level,
-                            exporter,
-                            SpellDimension.modLoc("enchantment/spell_curse/" + level)
-                    );
                     EIRecipeUtil.add(
                             builder -> builder
                                     .withPedestalItem(2, MiscItems.CHAOS.ingot())

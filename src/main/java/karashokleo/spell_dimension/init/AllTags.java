@@ -281,8 +281,7 @@ public class AllTags
                         EntityInit.NECROMANCER,
                         EntityInit.DESERT_RHINO,
                         EntityInit.SHAMAN,
-                        EntityInit.ENDERWARTHOG,
-                        EntityInit.VOID_FRAGMENT
+                        EntityInit.ENDERWARTHOG
                 );
         SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(SW_MONSTER)
                 .addOptional(

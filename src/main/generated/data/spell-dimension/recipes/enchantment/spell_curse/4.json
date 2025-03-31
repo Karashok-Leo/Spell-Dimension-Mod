@@ -7,22 +7,13 @@
       "item": "l2hostility:cursed_droplet"
     },
     {
-      "item": "l2hostility:cursed_droplet"
-    },
-    {
       "item": "minecraft:fermented_spider_eye"
     },
     {
       "item": "minecraft:sugar"
     },
     {
-      "tag": "spell-dimension:essence/2"
-    },
-    {
-      "tag": "spell-dimension:essence/2"
-    },
-    {
-      "tag": "spell-dimension:essence/2"
+      "tag": "spell-dimension:essence/1"
     }
   ],
   "input": {

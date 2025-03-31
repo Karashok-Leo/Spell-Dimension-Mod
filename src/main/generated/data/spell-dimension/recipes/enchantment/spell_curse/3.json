@@ -4,27 +4,21 @@
   "force": false,
   "ingredients": [
     {
-      "item": "l2hostility:cursed_droplet"
-    },
-    {
-      "item": "l2hostility:cursed_droplet"
-    },
-    {
       "item": "minecraft:fermented_spider_eye"
     },
     {
       "item": "minecraft:sugar"
     },
     {
-      "tag": "spell-dimension:essence/1"
+      "item": "l2hostility:cursed_droplet"
     },
     {
-      "tag": "spell-dimension:essence/1"
+      "tag": "spell-dimension:essence/0"
     }
   ],
   "input": {
-    "enchantment": "spell-dimension:spell_curse",
-    "min_level": 2
+    "enchantment": "l2hostility:cursed_blade",
+    "min_level": 1
   },
   "level": 3
 }
