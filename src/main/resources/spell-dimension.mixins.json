@@ -11,7 +11,6 @@
     "modded.CurseOfPrideMixin",
     "modded.CycloneEntityMixin",
     "modded.DifficultyEventsMixin",
-    "modded.DispellTraitMixin",
     "modded.LootingCharmMixin",
     "modded.LootModifierFixer",
     "modded.MobEntityMixin",
