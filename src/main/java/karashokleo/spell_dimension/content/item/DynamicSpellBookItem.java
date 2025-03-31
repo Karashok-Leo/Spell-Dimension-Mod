@@ -46,6 +46,7 @@ import java.util.stream.Stream;
 public class DynamicSpellBookItem extends SpellBookTrinketItem
 {
     public static final int[] REQUIREMENT_SPELL_POWER_PER_GRADE = {80, 160, 320};
+    public static final double MODIFIER_PER_GRADE = 0.1;
     public static final Identifier DYNAMIC_POOL = SpellDimension.modLoc("dynamic");
     public static final Map<SpellSchool, Identifier> POOLS = Map.of(
             SpellSchools.ARCANE, SpellDimension.modLoc("arcane"),
@@ -235,7 +236,7 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
     public Multimap<EntityAttribute, EntityAttributeModifier> getModifiers(ItemStack stack, SlotReference slot, LivingEntity entity, UUID uuid)
     {
         Multimap<EntityAttribute, EntityAttributeModifier> modifiers = super.getModifiers(stack, slot, entity, uuid);
-        modifiers.put(this.school.attribute, new EntityAttributeModifier(uuid, "SpellBookModifier", (this.grade + 1) * 0.2, EntityAttributeModifier.Operation.MULTIPLY_TOTAL));
+        modifiers.put(this.school.attribute, new EntityAttributeModifier(uuid, "SpellBookModifier", (this.grade + 1) * MODIFIER_PER_GRADE, EntityAttributeModifier.Operation.MULTIPLY_TOTAL));
         return modifiers;
     }
 

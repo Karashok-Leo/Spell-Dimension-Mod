@@ -8,15 +8,14 @@ import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.l2hostility.content.feature.EntityFeature;
 import karashokleo.l2hostility.content.item.TrinketItems;
 import karashokleo.l2hostility.init.LHTags;
+import karashokleo.leobrary.damage.api.modify.DamageAccess;
 import karashokleo.leobrary.damage.api.modify.DamagePhase;
+import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.item.DynamicSpellBookItem;
 import karashokleo.spell_dimension.content.item.SpellScrollItem;
 import karashokleo.spell_dimension.content.misc.ISpawnerExtension;
 import karashokleo.spell_dimension.content.network.C2SSelectQuest;
-import karashokleo.spell_dimension.init.AllItems;
-import karashokleo.spell_dimension.init.AllPackets;
-import karashokleo.spell_dimension.init.AllTags;
-import karashokleo.spell_dimension.init.AllWorldGen;
+import karashokleo.spell_dimension.init.*;
 import karashokleo.spell_dimension.util.SchoolUtil;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
@@ -24,21 +23,86 @@ import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.MobSpawnerBlockEntity;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
+import net.minecraft.world.GameRules;
 import net.spell_engine.api.spell.SpellContainer;
 import net.spell_engine.internals.SpellContainerHelper;
 import net.spell_power.api.SpellDamageSource;
 import net.trique.mythicupgrades.MythicUpgradesDamageTypes;
 
+import java.util.Optional;
+import java.util.function.Consumer;
+
 public class MiscEvents
 {
+    private record DamageTracker(DamagePhase phase) implements Consumer<DamageAccess>
+    {
+        @Override
+        public void accept(DamageAccess access)
+        {
+            if (!(access.getEntity() instanceof PlayerEntity player))
+                return;
+            GameRules gameRules = player.getWorld().getGameRules();
+
+            boolean enable = gameRules.getBoolean(AllMiscInit.ENABLE_DAMAGE_TRACKER);
+            if (!enable) return;
+
+            boolean immune = gameRules.getBoolean(AllMiscInit.IMMUNE_TRACKED_DAMAGE);
+            if (immune && phase == DamagePhase.APPLY)
+            {
+                access.addModifier(originalDamage -> 1);
+            }
+
+            int threshold = gameRules.getInt(AllMiscInit.DAMAGE_TRACKER_THRESHOLD);
+            float damage = access.getOriginalDamage();
+            if (damage <= player.getMaxHealth() * threshold / 100)
+                return;
+            // info
+            Text playerName = player.getName();
+            Text attackerName = Optional.ofNullable(access.getAttacker()).map(Entity::getName).orElse(Text.literal("None"));
+            String damageType = access.getDamageType().msgId();
+            // log
+            if (phase == DamagePhase.SHIELD)
+            {
+                SpellDimension.LOGGER.info("--Spell Dimension Damage Tracker--");
+                SpellDimension.LOGGER.info("Player: {}", playerName.getString());
+                SpellDimension.LOGGER.info("Attacker: {}", attackerName.getString());
+                SpellDimension.LOGGER.info("Damage Type: {}", damageType);
+                SpellDimension.LOGGER.info("Damage Amount: ");
+
+                Thread.dumpStack();
+            }
+            SpellDimension.LOGGER.info("- {} phase: {}", phase.name(), damage);
+            // send message
+            boolean notify = gameRules.getBoolean(AllMiscInit.NOTIFY_DAMAGE_TRACKER);
+            if (!notify) return;
+            if (phase == DamagePhase.SHIELD)
+            {
+                player.sendMessage(Text.literal("--Spell Dimension Damage Tracker--").formatted(Formatting.DARK_RED));
+                player.sendMessage(Text.literal("Player: ").append(playerName).formatted(Formatting.RED));
+                player.sendMessage(Text.literal("Attacker: ").append(attackerName).formatted(Formatting.RED));
+                player.sendMessage(Text.literal("Damage Type: ").append(damageType).formatted(Formatting.RED));
+                player.sendMessage(Text.literal("Damage Amount: ").formatted(Formatting.RED));
+            }
+            player.sendMessage(Text.literal("- %s phase: %f".formatted(phase.name(), damage)).formatted(Formatting.RED));
+        }
+    }
+
     public static void init()
     {
+        // Damage Tracker
+        for (DamagePhase phase : DamagePhase.values())
+            phase.registerModifier(9999, new DamageTracker(phase));
+
         // Fix dynamic spell book nbt copy
         InfusionCompleteCallback.EVENT.register((world, pos, output, inventory, recipe) ->
         {
@@ -51,7 +115,7 @@ public class MiscEvents
         });
 
         // Spell Prism
-        DamagePhase.ARMOR.registerModifier(0, access ->
+        DamagePhase.SHIELD.registerModifier(0, access ->
         {
             if (!access.getSource().isIn(LHTags.MAGIC))
                 return;
