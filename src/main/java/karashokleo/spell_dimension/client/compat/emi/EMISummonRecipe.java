@@ -2,12 +2,12 @@ package karashokleo.spell_dimension.client.compat.emi;
 
 import dev.emi.emi.api.recipe.EmiRecipe;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
-import dev.emi.emi.api.render.EmiTexture;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
+import karashokleo.l2hostility.compat.shared.LivingEntityWrapper;
 import karashokleo.spell_dimension.SpellDimension;
-import karashokleo.spell_dimension.client.compat.EntityWrapper;
+import karashokleo.spell_dimension.client.compat.SummonedEntityWrapperFactory;
 import karashokleo.spell_dimension.content.recipe.summon.SummonRecipe;
 import karashokleo.spell_dimension.init.AllItems;
 import net.minecraft.item.Items;
@@ -16,14 +16,14 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public record EMISummonRecipe(EmiIngredient input, EntityWrapper wrapper) implements EmiRecipe
+public record EMISummonRecipe(EmiIngredient input, LivingEntityWrapper wrapper) implements EmiRecipe
 {
     public static final EmiStack WORKSTATION = EmiStack.of(Items.SPAWNER);
     public static final EmiStack SPELL_SCROLL = EmiStack.of(AllItems.SPELL_SCROLL.getStack(SpellDimension.modLoc("summon")));
 
     public EMISummonRecipe(SummonRecipe recipe)
     {
-        this(EmiIngredient.of(recipe.ingredient()), EntityWrapper.of(recipe.entityType(), recipe.count()));
+        this(EmiIngredient.of(recipe.ingredient()), SummonedEntityWrapperFactory.of(recipe.entityType(), recipe.count()));
     }
 
     @Override

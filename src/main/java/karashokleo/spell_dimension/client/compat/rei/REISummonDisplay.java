@@ -1,6 +1,7 @@
 package karashokleo.spell_dimension.client.compat.rei;
 
-import karashokleo.spell_dimension.client.compat.EntityWrapper;
+import karashokleo.l2hostility.compat.shared.LivingEntityWrapper;
+import karashokleo.spell_dimension.client.compat.SummonedEntityWrapperFactory;
 import karashokleo.spell_dimension.content.recipe.summon.SummonRecipe;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.Display;
@@ -9,11 +10,11 @@ import me.shedaniel.rei.api.common.util.EntryIngredients;
 
 import java.util.List;
 
-public record REISummonDisplay(EntryIngredient input, EntityWrapper wrapper) implements Display
+public record REISummonDisplay(EntryIngredient input, LivingEntityWrapper wrapper) implements Display
 {
     public REISummonDisplay(SummonRecipe recipe)
     {
-        this(EntryIngredients.ofIngredient(recipe.ingredient()), EntityWrapper.of(recipe.entityType(), recipe.count()));
+        this(EntryIngredients.ofIngredient(recipe.ingredient()), SummonedEntityWrapperFactory.of(recipe.entityType(), recipe.count()));
     }
 
     @Override
