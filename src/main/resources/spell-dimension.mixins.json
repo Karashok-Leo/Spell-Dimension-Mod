@@ -35,6 +35,7 @@
     "vanilla.EnchantmentHelperMixin",
     "vanilla.EnchantRandomlyLootFunctionMixin",
     "vanilla.EndPortalBlockMixin",
+    "vanilla.ItemStackMixin",
     "vanilla.LivingEntityMixin",
     "vanilla.MobSpawnerLogicMixin",
     "vanilla.PlayerInventoryAccessor",

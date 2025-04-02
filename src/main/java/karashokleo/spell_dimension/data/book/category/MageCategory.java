@@ -7,7 +7,7 @@ import com.klikli_dev.modonomicon.api.datagen.book.BookCategoryModel;
 import com.klikli_dev.modonomicon.api.datagen.book.BookEntryModel;
 import karashokleo.spell_dimension.data.book.entry.mage.*;
 import karashokleo.spell_dimension.util.BookGenUtil;
-import net.wizards.item.Weapons;
+import net.wizards.item.Armors;
 
 public class MageCategory extends CategoryProvider
 {
@@ -80,7 +80,7 @@ public class MageCategory extends CategoryProvider
         this.lang("zh_cn").add(context.categoryName(), "魔法师之路");
         return BookCategoryModel
                 .create(this.modLoc(context.categoryId()), context.categoryName())
-                .withIcon(Weapons.arcaneWand.item())
+                .withIcon(Armors.arcaneRobeSet.head)
                 .withBackground(BookGenUtil.id("textures/background/1.png"));
     }
 }

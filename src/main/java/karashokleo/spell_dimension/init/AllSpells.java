@@ -181,6 +181,7 @@ public class AllSpells
         SpellProjectileHitBlockCallback.EVENT.register(BreakSpell::handle);
 
         SpellImpactEvents.BEFORE.register(ArcaneBarrierSpell::handle);
+        SpellImpactEvents.BEFORE.register(IcicleSpell::handle);
         SpellImpactEvents.BEFORE.register(NucleusSpell::handle);
         SpellImpactEvents.BEFORE.register(ExorcismSpell::handle);
         SpellImpactEvents.BEFORE.register(RandomEffectSpell::handleBlessing);

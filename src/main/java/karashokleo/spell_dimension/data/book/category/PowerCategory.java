@@ -6,8 +6,8 @@ import com.klikli_dev.modonomicon.api.datagen.CategoryProvider;
 import com.klikli_dev.modonomicon.api.datagen.book.BookCategoryModel;
 import com.klikli_dev.modonomicon.api.datagen.book.BookEntryModel;
 import karashokleo.spell_dimension.data.book.entry.power.*;
-import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.util.BookGenUtil;
+import net.wizards.item.Weapons;
 
 public class PowerCategory extends CategoryProvider
 {
@@ -64,7 +64,7 @@ public class PowerCategory extends CategoryProvider
         this.lang("zh_cn").add(context.categoryName(), "主宰");
         return BookCategoryModel
                 .create(this.modLoc(context.categoryId()), context.categoryName())
-                .withIcon(AllItems.REJUVENATING_BLOSSOM)
+                .withIcon(Weapons.arcaneWand.item())
                 .withBackground(BookGenUtil.id("textures/background/3.png"));
     }
 }

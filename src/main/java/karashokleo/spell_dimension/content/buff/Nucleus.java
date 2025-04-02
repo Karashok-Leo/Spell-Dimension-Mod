@@ -2,10 +2,12 @@ package karashokleo.spell_dimension.content.buff;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.api.buff.Buff;
 import karashokleo.spell_dimension.api.buff.BuffType;
 import karashokleo.spell_dimension.config.SpellConfig;
+import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.util.AttributeUtil;
 import karashokleo.spell_dimension.util.DamageUtil;
 import karashokleo.spell_dimension.util.ImpactUtil;
@@ -36,7 +38,8 @@ public class Nucleus implements Buff
 
     public static final UUID uuid = UUID.fromString("977AE476-9F10-5499-4B5D-09B296214773");
     private static final String MODIFIER_KEY = "IceNucleus";
-    private static final Identifier MINI_ICICLE = SpellDimension.modLoc("mini_icicle");
+    private static SpellInfo MINI_ICICLE;
+    private static SpellInfo ICICLE;
     public static final double MULTIPLIER = -0.75D;
     public static final int TOTAL_DURATION = 80;
 
@@ -50,6 +53,32 @@ public class Nucleus implements Buff
     public Nucleus()
     {
         this(TOTAL_DURATION);
+    }
+
+    private static SpellInfo getOrCreateSpellInfo(LivingEntity caster)
+    {
+        boolean era = TrinketCompat.hasItemInTrinket(caster, AllItems.GLACIAL_NUCLEAR_ERA);
+        if (era)
+        {
+            if (ICICLE == null)
+            {
+                Identifier spellId = SpellDimension.modLoc("mini_icicle");
+                Spell spell = SpellRegistry.getSpell(spellId);
+                assert spell != null;
+                ICICLE = new SpellInfo(spell, spellId);
+            }
+            return ICICLE;
+        } else
+        {
+            if (MINI_ICICLE == null)
+            {
+                Identifier spellId = SpellDimension.modLoc("icicle");
+                Spell spell = SpellRegistry.getSpell(spellId);
+                assert spell != null;
+                MINI_ICICLE = new SpellInfo(spell, spellId);
+            }
+            return MINI_ICICLE;
+        }
     }
 
     @Override
@@ -90,8 +119,7 @@ public class Nucleus implements Buff
         if (caster == null) return;
         SpellPower.Result power = SpellPower.getSpellPower(SpellSchools.FROST, caster);
         int amplifier = Math.min((int) (power.baseValue()) / 24 + 1, 3);
-        Spell spell = SpellRegistry.getSpell(MINI_ICICLE);
-        if (spell == null) return;
+        SpellInfo icicleInfo = getOrCreateSpellInfo(caster);
 
         //Damage
         float damage = (float) DamageUtil.calculateDamage(caster, SpellSchools.FROST, SpellConfig.NUCLEUS_FACTOR, amplifier);
@@ -101,13 +129,12 @@ public class Nucleus implements Buff
         float height = source.getHeight();
         float range = Math.max(3 + amplifier, height * (1.6F + amplifier * 0.4F));
 
-        SpellInfo spellInfo = new SpellInfo(spell, MINI_ICICLE);
-        SpellHelper.ImpactContext context = ImpactUtil.createContext(caster, spell);
+        SpellHelper.ImpactContext context = ImpactUtil.createContext(caster, icicleInfo.spell());
 
         int step = 72 / (amplifier + 1);
         for (int i = 0; i < 360; i += step)
             for (int j = 0; j < 360; j += step)
-                ImpactUtil.shootProjectile(source.getWorld(), caster, source.getPos().add(0, height / 2, 0), ImpactUtil.fromEulerAngle(i, j, 0), range, spellInfo, context);
+                ImpactUtil.shootProjectile(source.getWorld(), caster, source.getPos().add(0, height / 2, 0), ImpactUtil.fromEulerAngle(i, j, 0), range, icicleInfo, context);
 
         source.getWorld().playSound(null, source.getBlockPos(), SoundEvents.BLOCK_GLASS_BREAK, source.getSoundCategory(), 1.0F, 1.0F);
     }

@@ -17,6 +17,7 @@ public class AllStatusEffects
     public static ForceLandingEffect FORCE_LANDING;
     public static SpellPowerEffect SPELL_POWER;
     public static DivineAuraEffect DIVINE_AURA;
+    public static NirvanaEffect NIRVANA;
     //    public static final PhaseEffect ASTRAL_TRIP = new PhaseEffect();
 
     public static void register()
@@ -68,6 +69,10 @@ public class AllStatusEffects
                 .addZH("神圣光环")
                 .addENDesc(DivineAuraEffect.getDesc(true))
                 .addZHDesc(DivineAuraEffect.getDesc(false))
+                .register();
+        NIRVANA = new Entry<>("nirvana", new NirvanaEffect())
+                .addEN()
+                .addZH("涅槃")
                 .register();
 
         Synchronized.configure(PHASE, true);

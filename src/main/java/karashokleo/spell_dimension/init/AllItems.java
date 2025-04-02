@@ -1,8 +1,8 @@
 package karashokleo.spell_dimension.init;
 
 import com.google.common.collect.ArrayListMultimap;
-import dev.emi.trinkets.api.TrinketItem;
 import karashokleo.l2hostility.content.item.traits.TraitSymbol;
+import karashokleo.l2hostility.content.item.trinket.core.SingleEpicTrinketItem;
 import karashokleo.l2hostility.init.LHMiscs;
 import karashokleo.l2hostility.init.LHTags;
 import karashokleo.leobrary.datagen.builder.ItemBuilder;
@@ -47,22 +47,35 @@ public class AllItems
     public static DisenchantedEssenceItem DISENCHANTED_ESSENCE;
     public static MendingEssenceItem MENDING_ESSENCE;
     public static QuestScrollItem QUEST_SCROLL;
+    public static SpawnerSoulItem SPAWNER_SOUL;
+    public static BrokenItem BROKEN_ITEM;
+
+    // Stage Items
     public static Item ABYSS_GUARD;
     public static Item ACCURSED_BLACKSTONE;
     public static Item CELESTIAL_DEBRIS;
     public static EndStageItem CELESTIAL_LUMINARY;
-    public static SpawnerSoulItem SPAWNER_SOUL;
+
+    // Endgame Trinkets
+    public static SingleEpicTrinketItem ARMOR_OF_CONVERGENCE;
+    public static ArcaneThroneItem ARCANE_THRONE;
+    public static NirvanaStarfallItem NIRVANA_STARFALL;
+    public static SingleEpicTrinketItem GLACIAL_NUCLEAR_ERA;
+    public static FrostbiteDomeItem FROSTBITE_DOME;
     public static HeartSpellSteelItem HEART_STEEL;
     public static RejuvenatingBlossomItem REJUVENATING_BLOSSOM;
-    public static TrinketItem ARMOR_OF_CONVERGENCE;
-    public static SpellContainerItem SPELL_CONTAINER;
-    public static MagicMirrorItem MAGIC_MIRROR;
-    public static MagicMirrorItem BROKEN_MAGIC_MIRROR;
+
+    // Breastplates
     public static AtomicBreastplateItem ATOMIC_BREASTPLATE;
     public static EnchantedBreastplateItem ENCHANTED_BREASTPLATE;
     public static FlexBreastplateItem FLEX_BREASTPLATE;
     public static FlickerBreastplateItem FLICKER_BREASTPLATE;
     public static OblivionBreastplateItem OBLIVION_BREASTPLATE;
+
+    // Misc Items
+    public static SpellContainerItem SPELL_CONTAINER;
+    public static MagicMirrorItem MAGIC_MIRROR;
+    public static MagicMirrorItem BROKEN_MAGIC_MIRROR;
     public static BottleOfNightmare BOTTLE_NIGHTMARE;
     public static BottleOfSoulBinding BOTTLE_SOUL_BINDING;
     public static SpellPrismItem SPELL_PRISM;
@@ -115,6 +128,19 @@ public class AllItems
                 .addZH("任务卷轴")
                 .addModel()
                 .register();
+        SPAWNER_SOUL = Entry.of("spawner_soul", new SpawnerSoulItem())
+                .addEN()
+                .addZH("笼中魄")
+                .addModel()
+                .register();
+        BROKEN_ITEM = Entry.of("spawner_soul", new BrokenItem())
+                .addEN()
+                .addZH("笼中魄")
+                .addTag(LHTags.NO_SEAL)
+                .addModel(Models.HANDHELD)
+                .register();
+
+        // Stage Items
         ABYSS_GUARD = Entry.of("abyss_guard", new NetherStarItem(new FabricItemSettings().fireproof().maxCount(1).rarity(Rarity.EPIC)))
                 .addEN()
                 .addZH("深渊守护")
@@ -135,19 +161,47 @@ public class AllItems
                 .addZH("无尽星辉")
                 .addModel()
                 .register();
-        SPAWNER_SOUL = Entry.of("spawner_soul", new SpawnerSoulItem())
+
+        // Endgame Trinkets
+        ARMOR_OF_CONVERGENCE = Entry.of(
+                        "armor_of_convergence",
+                        new SingleEpicTrinketItem()
+                )
                 .addEN()
-                .addZH("笼中魄")
+                .addZH("汇聚甲胄")
+                .addTag(AllTags.BACK, AllTags.CAPE)
                 .addModel()
                 .register();
-
+        ARCANE_THRONE = Entry.of("arcane_throne", new ArcaneThroneItem())
+                .addEN()
+                .addZH("秘术王座")
+                .addTag(LHTags.CURSE_SLOT)
+                .addModel()
+                .register();
+        NIRVANA_STARFALL = Entry.of("nirvana_starfall", new NirvanaStarfallItem())
+                .addEN()
+                .addZH("涅槃星陨")
+                .addTag(AllTags.BACK)
+                .addModel()
+                .register();
+        GLACIAL_NUCLEAR_ERA = Entry.of("glacial_nuclear_era", new SingleEpicTrinketItem())
+                .addEN()
+                .addZH("冰核世纪")
+                .addTag(AllTags.BACK)
+                .addModel()
+                .register();
+        FROSTBITE_DOME = Entry.of("frostbite_dome", new FrostbiteDomeItem())
+                .addEN()
+                .addZH("冰点穹狱")
+                .addTag(AllTags.BACK)
+                .addModel()
+                .register();
         HEART_STEEL = Entry.of("heart_spell_steel", new HeartSpellSteelItem())
                 .addEN()
                 .addZH("心之魔钢")
                 .addTag(LHTags.CHARM_SLOT)
                 .addModel()
                 .register();
-
         REJUVENATING_BLOSSOM = Entry.of("rejuvenating_blossom", new RejuvenatingBlossomItem())
                 .addEN()
                 .addZH("复苏绽放")
@@ -155,38 +209,7 @@ public class AllItems
                 .addModel()
                 .register();
 
-        ARMOR_OF_CONVERGENCE = Entry.of(
-                        "armor_of_convergence",
-                        new TrinketItem(
-                                new FabricItemSettings()
-                                        .fireproof()
-                                        .maxCount(1)
-                                        .rarity(Rarity.EPIC)
-                        )
-                )
-                .addEN()
-                .addZH("汇聚甲胄")
-                .addTag(AllTags.BACK, AllTags.CAPE)
-                .addModel()
-                .register();
-
-        SPELL_CONTAINER = Entry.of("spell_container", new SpellContainerItem())
-                .addEN()
-                .addZH("法术容器")
-                .addModel()
-                .register();
-
-        MAGIC_MIRROR = Entry.of("magic_mirror", new MagicMirrorItem(false))
-                .addEN()
-                .addZH("魔镜")
-                .addModel()
-                .register();
-        BROKEN_MAGIC_MIRROR = Entry.of("broken_magic_mirror", new MagicMirrorItem(true))
-                .addEN()
-                .addZH("破碎魔镜")
-                .addModel()
-                .register();
-
+        // Breastplates
         ATOMIC_BREASTPLATE = Entry.of("atomic_breastplate", new AtomicBreastplateItem())
                 .addEN()
                 .addZH("原子护心镜")
@@ -215,6 +238,23 @@ public class AllItems
                 .addEN()
                 .addZH("湮灭护心镜")
                 .addTag(AllTags.BREASTPLATE_SLOT)
+                .addModel()
+                .register();
+
+        // Misc Items
+        SPELL_CONTAINER = Entry.of("spell_container", new SpellContainerItem())
+                .addEN()
+                .addZH("法术容器")
+                .addModel()
+                .register();
+        MAGIC_MIRROR = Entry.of("magic_mirror", new MagicMirrorItem(false))
+                .addEN()
+                .addZH("魔镜")
+                .addModel()
+                .register();
+        BROKEN_MAGIC_MIRROR = Entry.of("broken_magic_mirror", new MagicMirrorItem(true))
+                .addEN()
+                .addZH("破碎魔镜")
                 .addModel()
                 .register();
         BOTTLE_NIGHTMARE = Entry.of(
