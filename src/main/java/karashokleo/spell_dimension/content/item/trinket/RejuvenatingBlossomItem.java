@@ -1,48 +1,47 @@
 package karashokleo.spell_dimension.content.item.trinket;
 
-import dev.emi.trinkets.api.TrinketItem;
+import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDamageEvent;
+import karashokleo.l2hostility.compat.trinket.TrinketCompat;
+import karashokleo.l2hostility.content.item.trinket.core.DamageListenerTrinket;
+import karashokleo.l2hostility.content.item.trinket.core.SingleEpicTrinketItem;
 import karashokleo.l2hostility.util.EffectHelper;
 import karashokleo.spell_dimension.data.SDTexts;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.Rarity;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashSet;
 import java.util.List;
 
-public class RejuvenatingBlossomItem extends TrinketItem
+public class RejuvenatingBlossomItem extends SingleEpicTrinketItem implements DamageListenerTrinket
 {
     public RejuvenatingBlossomItem()
     {
-        super(
-                new FabricItemSettings()
-                        .fireproof()
-                        .maxCount(1)
-                        .rarity(Rarity.EPIC)
-        );
+        super();
     }
 
-    public void rejuvenate(LivingEntity entity, int duration)
+    @Override
+    public void onDamaged(ItemStack stack, LivingEntity entity, LivingDamageEvent event)
     {
+        int count = TrinketCompat.getTrinketItems(entity, e -> e.isOf(this)).size();
+        int amount = (int) event.getAmount() * count;
         StatusEffectInstance instance = entity.getStatusEffect(StatusEffects.REGENERATION);
-        if ((instance == null ? 0 : instance.getDuration()) < duration)
+        if (instance != null && instance.getDuration() < amount)
         {
-            var effects = new HashSet<>(entity.getActiveStatusEffects().keySet());
-            for (StatusEffect effect : effects)
-                if (effect.getCategory() == StatusEffectCategory.HARMFUL)
-                    entity.removeStatusEffect(effect);
+            entity.getActiveStatusEffects()
+                    .keySet()
+                    .stream()
+                    .filter(effect -> effect.getCategory() == StatusEffectCategory.HARMFUL)
+                    .forEach(entity::removeStatusEffect);
+            event.setAmount(event.getAmount() / 2);
         }
-        EffectHelper.forceAddEffectWithEvent(entity, new StatusEffectInstance(StatusEffects.REGENERATION, duration, 9, false, false), entity);
+        EffectHelper.forceAddEffectWithEvent(entity, new StatusEffectInstance(StatusEffects.REGENERATION, amount, 9, false, false), entity);
     }
 
     @Override

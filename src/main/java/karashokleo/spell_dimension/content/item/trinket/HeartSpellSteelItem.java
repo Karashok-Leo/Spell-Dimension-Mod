@@ -2,65 +2,65 @@ package karashokleo.spell_dimension.content.item.trinket;
 
 import com.google.common.collect.Multimap;
 import dev.emi.trinkets.api.SlotReference;
-import dev.emi.trinkets.api.TrinketItem;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
-import karashokleo.l2hostility.init.LHTags;
+import karashokleo.l2hostility.content.item.trinket.core.DamageListenerTrinket;
+import karashokleo.l2hostility.content.item.trinket.core.SingleEpicTrinketItem;
 import karashokleo.spell_dimension.data.SDTexts;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.player.ItemCooldownManager;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.Rarity;
 import net.minecraft.world.World;
+import net.spell_power.api.SpellSchools;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.UUID;
 
-public class HeartSpellSteelItem extends TrinketItem
+public class HeartSpellSteelItem extends SingleEpicTrinketItem implements DamageListenerTrinket
 {
     private static final String KEY = "Accumulated";
     private static final String MODIFIER_NAME = "HeartSpellSteel";
-    private static final int MIN_DISTANCE = 32;
-    private static final int MIN_MOB_LEVEL = 100;
+    private static final int MAX_DISTANCE = 4;
+    private static final int MIN_MOB_LEVEL = 999;
     private static final double ACCUMULATE_RATE = 0.01;
+    public static final int COOLDOWN = 100;
 
     public HeartSpellSteelItem()
     {
-        super(
-                new FabricItemSettings()
-                        .fireproof()
-                        .maxCount(1)
-                        .rarity(Rarity.EPIC)
-        );
+        super();
     }
 
-    public void accumulate(ItemStack stack, LivingEntity attacker, LivingEntity target, DamageSource source, float damage)
+    @Override
+    public void onKilled(ItemStack stack, LivingEntity entity, LivingEntity killed, DamageSource source)
     {
-        if (source.isIn(LHTags.MAGIC) &&
-            damage >= target.getMaxHealth() &&
-            attacker.distanceTo(target) >= MIN_DISTANCE)
-        {
-            MobDifficulty.get(target).ifPresent(diff ->
-            {
-                if (diff.getLevel() >= MIN_MOB_LEVEL)
-                {
-                    NbtCompound nbt = stack.getOrCreateNbt();
-                    double added = nbt.getDouble(KEY) + damage * ACCUMULATE_RATE;
-                    nbt.putDouble(KEY, added);
+        if (!source.isOf(SpellSchools.HEALING.damageType))
+            return;
+        if (entity.distanceTo(killed) >= MAX_DISTANCE)
+            return;
+        if (MobDifficulty.get(killed).map(MobDifficulty::getLevel).orElse(0) <= MIN_MOB_LEVEL)
+            return;
+        if (!(entity instanceof PlayerEntity player))
+            return;
+        ItemCooldownManager manager = player.getItemCooldownManager();
+        if (!manager.isCoolingDown(this))
+            return;
+        manager.set(this, COOLDOWN);
 
-                    attacker.getWorld().playSound(null, attacker.getX(), attacker.getY(), attacker.getZ(), SoundEvents.ENTITY_PLAYER_ATTACK_CRIT, attacker.getSoundCategory(), 1.0f, 1.0f);
-                }
-            });
-        }
+        NbtCompound nbt = stack.getOrCreateNbt();
+        double added = nbt.getDouble(KEY) + killed.getMaxHealth() * ACCUMULATE_RATE;
+        nbt.putDouble(KEY, added);
+
+        entity.getWorld().playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.ENTITY_PLAYER_ATTACK_CRIT, entity.getSoundCategory(), 1.0f, 1.0f);
     }
 
     @Override
@@ -84,9 +84,10 @@ public class HeartSpellSteelItem extends TrinketItem
     {
         tooltip.add(
                 SDTexts.TOOLTIP$HEART_SPELL_STEEL$USAGE.get(
-                        MIN_DISTANCE,
+                        MAX_DISTANCE,
                         MIN_MOB_LEVEL,
-                        "%.1f%%".formatted(ACCUMULATE_RATE * 100)
+                        "%.1f%%".formatted(ACCUMULATE_RATE * 100),
+                        COOLDOWN / 20
                 ).formatted(Formatting.DARK_PURPLE)
         );
         tooltip.add(

@@ -1,9 +1,10 @@
 package karashokleo.spell_dimension.content.item.trinket;
 
-import dev.emi.trinkets.api.TrinketItem;
+import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDamageEvent;
+import karashokleo.l2hostility.content.item.trinket.core.DamageListenerTrinket;
+import karashokleo.l2hostility.content.item.trinket.core.SingleEpicTrinketItem;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.util.SchoolUtil;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
@@ -11,14 +12,13 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.Rarity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class FlexBreastplateItem extends TrinketItem
+public class FlexBreastplateItem extends SingleEpicTrinketItem implements DamageListenerTrinket
 {
     public static final float SPELL_POWER_RATIO = 0.1F;
     public static final float ARMOR_RATIO = 0.4F;
@@ -27,12 +27,7 @@ public class FlexBreastplateItem extends TrinketItem
 
     public FlexBreastplateItem()
     {
-        super(
-                new FabricItemSettings()
-                        .maxCount(1)
-                        .fireproof()
-                        .rarity(Rarity.EPIC)
-        );
+        super();
     }
 
     public float getDamageFactor(LivingEntity entity)
@@ -44,6 +39,13 @@ public class FlexBreastplateItem extends TrinketItem
         double armorToughness = armorToughnessIns == null ? 0 : armorToughnessIns.getValue();
         double total = spellPower * SPELL_POWER_RATIO + armor * ARMOR_RATIO + armorToughness * ARMOR_TOUGHNESS_RATIO;
         return MathHelper.clamp(40 / (float) total, 1.0F - MAX_REDUCTION_RATIO, 1.0F);
+    }
+
+    @Override
+    public void onDamaged(ItemStack stack, LivingEntity entity, LivingDamageEvent event)
+    {
+        float damageFactor = getDamageFactor(entity);
+        event.setAmount(event.getAmount() * damageFactor);
     }
 
     @Override

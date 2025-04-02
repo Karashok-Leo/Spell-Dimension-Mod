@@ -195,6 +195,7 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
         entity.playSound(SpellBindingScreenHandler.soundEvent, 0.8F, 0.8F + entity.getWorld().getRandom().nextFloat() * 0.4F);
     }
 
+    // use book to click scroll
     @Override
     public boolean onStackClicked(ItemStack holding, Slot slot, ClickType clickType, PlayerEntity player)
     {
@@ -210,6 +211,7 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
         return true;
     }
 
+    // use scroll to click book
     @Override
     public boolean onClicked(ItemStack clicking, ItemStack holding, Slot slot, ClickType clickType, PlayerEntity player, StackReference cursorStackReference)
     {

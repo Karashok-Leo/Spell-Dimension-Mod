@@ -1,29 +1,25 @@
 package karashokleo.spell_dimension.content.item.trinket;
 
-import dev.emi.trinkets.api.TrinketItem;
+import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEvent;
+import karashokleo.l2hostility.content.item.trinket.core.DamageListenerTrinket;
+import karashokleo.l2hostility.content.item.trinket.core.SingleEpicTrinketItem;
 import karashokleo.spell_dimension.data.SDTexts;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import karashokleo.spell_dimension.init.AllItems;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.Rarity;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class FlickerBreastplateItem extends TrinketItem
+public class FlickerBreastplateItem extends SingleEpicTrinketItem implements DamageListenerTrinket
 {
     public FlickerBreastplateItem()
     {
-        super(
-                new FabricItemSettings()
-                        .maxCount(1)
-                        .fireproof()
-                        .rarity(Rarity.EPIC)
-        );
+        super();
     }
 
     public boolean willFlicker(LivingEntity entity, LivingEntity attacker)
@@ -33,6 +29,14 @@ public class FlickerBreastplateItem extends TrinketItem
         double flickerRatio = attackerSpeed / entitySpeed;
         if (!entity.isOnGround()) flickerRatio /= 2;
         return entity.getRandom().nextDouble() > flickerRatio;
+    }
+
+    @Override
+    public void onAttacked(ItemStack stack, LivingEntity entity, LivingAttackEvent event)
+    {
+        if (!(event.getSource().getAttacker() instanceof LivingEntity attacker)) return;
+        if (AllItems.FLICKER_BREASTPLATE.willFlicker(entity, attacker))
+            event.setCanceled(true);
     }
 
     @Override

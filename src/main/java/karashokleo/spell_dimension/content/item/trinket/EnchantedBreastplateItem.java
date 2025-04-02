@@ -2,10 +2,9 @@ package karashokleo.spell_dimension.content.item.trinket;
 
 import com.google.common.collect.Multimap;
 import dev.emi.trinkets.api.SlotReference;
-import dev.emi.trinkets.api.TrinketItem;
+import karashokleo.l2hostility.content.item.trinket.core.SingleEpicTrinketItem;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.util.SchoolUtil;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
@@ -15,14 +14,13 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.Rarity;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.UUID;
 
-public class EnchantedBreastplateItem extends TrinketItem
+public class EnchantedBreastplateItem extends SingleEpicTrinketItem
 {
     public static final float MAX_HEALTH_RATIO = 0.1F;
     public static final float ARMOR_RATIO = 0.2F;
@@ -30,12 +28,7 @@ public class EnchantedBreastplateItem extends TrinketItem
 
     public EnchantedBreastplateItem()
     {
-        super(
-                new FabricItemSettings()
-                        .maxCount(1)
-                        .fireproof()
-                        .rarity(Rarity.EPIC)
-        );
+        super();
     }
 
     @Override

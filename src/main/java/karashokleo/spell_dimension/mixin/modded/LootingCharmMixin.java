@@ -3,7 +3,7 @@ package karashokleo.spell_dimension.mixin.modded;
 import com.google.common.collect.Multimap;
 import dev.emi.trinkets.api.SlotAttributes;
 import dev.emi.trinkets.api.SlotReference;
-import karashokleo.l2hostility.content.item.trinket.core.BaseTrinketItem;
+import karashokleo.l2hostility.content.item.trinket.core.SingleEpicTrinketItem;
 import karashokleo.l2hostility.content.item.trinket.misc.LootingCharm;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import java.util.UUID;
 
 @Mixin(LootingCharm.class)
-public abstract class LootingCharmMixin extends BaseTrinketItem
+public abstract class LootingCharmMixin extends SingleEpicTrinketItem
 {
     public LootingCharmMixin(Settings settings)
     {

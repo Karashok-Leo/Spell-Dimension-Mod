@@ -1,24 +1,25 @@
 package karashokleo.spell_dimension.content.item.trinket;
 
 import dev.emi.trinkets.api.SlotReference;
-import dev.emi.trinkets.api.TrinketItem;
+import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDamageEvent;
+import karashokleo.l2hostility.content.item.trinket.core.DamageListenerTrinket;
+import karashokleo.l2hostility.content.item.trinket.core.SingleEpicTrinketItem;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllDamageTypes;
+import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.util.SchoolUtil;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.Rarity;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class OblivionBreastplateItem extends TrinketItem
+public class OblivionBreastplateItem extends SingleEpicTrinketItem implements DamageListenerTrinket
 {
     public static final float THRESHOLD_RATIO = 0.5F;
     public static final float OBLIVION_RATIO = 0.1F;
@@ -28,12 +29,29 @@ public class OblivionBreastplateItem extends TrinketItem
 
     public OblivionBreastplateItem()
     {
-        super(
-                new FabricItemSettings()
-                        .maxCount(1)
-                        .fireproof()
-                        .rarity(Rarity.EPIC)
-        );
+        super();
+    }
+
+    @Override
+    public void onDamaged(ItemStack stack, LivingEntity entity, LivingDamageEvent event)
+    {
+        if (event.getSource().isOf(AllDamageTypes.OBLIVION_BREASTPLATE))
+            return;
+
+        float originalDamage = event.getAmount();
+        float oblivionAmount = getOblivionAmount(stack);
+        if (oblivionAmount == 0)
+            return;
+
+        if (originalDamage > oblivionAmount)
+        {
+            event.setAmount(originalDamage - oblivionAmount);
+            AllItems.OBLIVION_BREASTPLATE.increaseOblivionAmount(stack, -oblivionAmount);
+        } else
+        {
+            event.setCanceled(true);
+            AllItems.OBLIVION_BREASTPLATE.increaseOblivionAmount(stack, -originalDamage);
+        }
     }
 
     @Override
