@@ -218,7 +218,7 @@ public class MiscEvents
             if (!world.isClient() &&
                 player.getStackInHand(hand).isOf(AllItems.DEBUG_STAFF))
             {
-                SchoolUtil.getEntitySchool(player).stream().findFirst().ifPresent(school ->
+                SchoolUtil.getLivingSchools(player).stream().findFirst().ifPresent(school ->
                         entity.damage(SpellDamageSource.player(school, player), 999999));
             }
             return ActionResult.PASS;

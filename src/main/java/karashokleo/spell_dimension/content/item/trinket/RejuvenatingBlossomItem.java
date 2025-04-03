@@ -5,6 +5,7 @@ import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.l2hostility.content.item.trinket.core.DamageListenerTrinket;
 import karashokleo.l2hostility.content.item.trinket.core.SingleEpicTrinketItem;
 import karashokleo.l2hostility.util.EffectHelper;
+import karashokleo.leobrary.effect.api.util.EffectUtil;
 import karashokleo.spell_dimension.data.SDTexts;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
@@ -34,10 +35,7 @@ public class RejuvenatingBlossomItem extends SingleEpicTrinketItem implements Da
         StatusEffectInstance instance = entity.getStatusEffect(StatusEffects.REGENERATION);
         if (instance != null && instance.getDuration() < amount)
         {
-            entity.getActiveStatusEffects()
-                    .keySet()
-                    .stream()
-                    .filter(effect -> effect.getCategory() == StatusEffectCategory.HARMFUL)
+            EffectUtil.streamEffects(entity, StatusEffectCategory.HARMFUL)
                     .forEach(entity::removeStatusEffect);
             event.setAmount(event.getAmount() / 2);
         }

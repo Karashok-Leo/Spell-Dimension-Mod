@@ -1,9 +1,14 @@
 package karashokleo.spell_dimension.content.item.trinket;
 
 import dev.emi.trinkets.api.SlotReference;
-import karashokleo.l2hostility.content.item.trinket.core.SingleEpicTrinketItem;
+import karashokleo.l2hostility.content.component.mob.MobDifficulty;
+import karashokleo.l2hostility.content.component.player.PlayerDifficulty;
+import karashokleo.l2hostility.content.item.trinket.core.CurseTrinketItem;
+import karashokleo.l2hostility.init.LHTexts;
 import karashokleo.l2hostility.util.EffectHelper;
+import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllStatusEffects;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,11 +16,18 @@ import net.minecraft.inventory.StackReference;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.slot.Slot;
+import net.minecraft.text.Text;
 import net.minecraft.util.ClickType;
+import net.minecraft.util.Formatting;
+import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
-public class ArcaneThroneItem extends SingleEpicTrinketItem
+import java.util.List;
+
+public class ArcaneThroneItem extends CurseTrinketItem
 {
     private static final String ENABLE_KEY = "Enable";
+    public static final int LOOT_FACTOR = 3;
 
     public ArcaneThroneItem()
     {
@@ -46,5 +58,28 @@ public class ArcaneThroneItem extends SingleEpicTrinketItem
         boolean enable = nbt.getBoolean(ENABLE_KEY);
         nbt.putBoolean(ENABLE_KEY, !enable);
         return true;
+    }
+
+    @Override
+    public double getLootFactor(ItemStack stack, PlayerDifficulty player, MobDifficulty mob)
+    {
+        return LOOT_FACTOR;
+    }
+
+    @Override
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
+    {
+        tooltip.add(LHTexts.ITEM_CHARM_GREED.get(LOOT_FACTOR).formatted(Formatting.GOLD));
+        tooltip.add(SDTexts.TOOLTIP$ARCANE_THRONE$1.get());
+        tooltip.add(SDTexts.TOOLTIP$ARCANE_THRONE$2.get());
+        boolean enable = stack.getOrCreateNbt().getBoolean(ENABLE_KEY);
+        if (enable)
+        {
+            tooltip.add(SDTexts.TOOLTIP$ARCANE_THRONE$ON.get().formatted(Formatting.GREEN));
+        } else
+        {
+            tooltip.add(SDTexts.TOOLTIP$ARCANE_THRONE$OFF.get().formatted(Formatting.RED));
+        }
+        super.appendTooltip(stack, world, tooltip, context);
     }
 }

@@ -41,13 +41,11 @@ public class AllItems
     public static List<SpecifiedLootBagItem> RANDOM_BOOK = new ArrayList<>();
 
     public static SpellScrollItem SPELL_SCROLL;
-    public static Item DEBUG_STAFF;
     public static EnlighteningEssenceItem ENLIGHTENING_ESSENCE;
     public static EnchantedEssenceItem ENCHANTED_ESSENCE;
     public static DisenchantedEssenceItem DISENCHANTED_ESSENCE;
     public static MendingEssenceItem MENDING_ESSENCE;
     public static QuestScrollItem QUEST_SCROLL;
-    public static SpawnerSoulItem SPAWNER_SOUL;
     public static BrokenItem BROKEN_ITEM;
 
     // Stage Items
@@ -57,10 +55,10 @@ public class AllItems
     public static EndStageItem CELESTIAL_LUMINARY;
 
     // Endgame Trinkets
-    public static SingleEpicTrinketItem ARMOR_OF_CONVERGENCE;
+    public static ArmorOfConvergenceItem ARMOR_OF_CONVERGENCE;
     public static ArcaneThroneItem ARCANE_THRONE;
     public static NirvanaStarfallItem NIRVANA_STARFALL;
-    public static SingleEpicTrinketItem GLACIAL_NUCLEAR_ERA;
+    public static GlacialNuclearEraItem GLACIAL_NUCLEAR_ERA;
     public static FrostbiteDomeItem FROSTBITE_DOME;
     public static HeartSpellSteelItem HEART_STEEL;
     public static RejuvenatingBlossomItem REJUVENATING_BLOSSOM;
@@ -73,6 +71,8 @@ public class AllItems
     public static OblivionBreastplateItem OBLIVION_BREASTPLATE;
 
     // Misc Items
+    public static Item DEBUG_STAFF;
+    public static SpawnerSoulItem SPAWNER_SOUL;
     public static SpellContainerItem SPELL_CONTAINER;
     public static MagicMirrorItem MAGIC_MIRROR;
     public static MagicMirrorItem BROKEN_MAGIC_MIRROR;
@@ -102,11 +102,6 @@ public class AllItems
         SPELL_SCROLL = Entry.of("spell_scroll", new SpellScrollItem())
                 .addModel()
                 .register();
-        DEBUG_STAFF = Entry.of("debug_staff", new Item(new FabricItemSettings().maxCount(1)))
-                .addEN()
-                .addZH("调试法杖")
-                .addModel()
-                .register();
         ENLIGHTENING_ESSENCE = Entry.of("enlightening_essence", new EnlighteningEssenceItem())
                 .addModel()
                 .register();
@@ -116,11 +111,13 @@ public class AllItems
         DISENCHANTED_ESSENCE = Entry.of("disenchanted_essence", new DisenchantedEssenceItem())
                 .addEN()
                 .addZH("祛魔精华")
+                .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
         MENDING_ESSENCE = Entry.of("mending_essence", new MendingEssenceItem())
                 .addEN()
                 .addZH("修复精华")
+                .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
         QUEST_SCROLL = Entry.of("quest_scroll", new QuestScrollItem())
@@ -128,15 +125,11 @@ public class AllItems
                 .addZH("任务卷轴")
                 .addModel()
                 .register();
-        SPAWNER_SOUL = Entry.of("spawner_soul", new SpawnerSoulItem())
-                .addEN()
-                .addZH("笼中魄")
-                .addModel()
-                .register();
         BROKEN_ITEM = Entry.of("spawner_soul", new BrokenItem())
                 .addEN()
                 .addZH("笼中魄")
                 .addTag(LHTags.NO_SEAL)
+                .setTab(AllGroups.MISC)
                 .addModel(Models.HANDHELD)
                 .register();
 
@@ -144,68 +137,79 @@ public class AllItems
         ABYSS_GUARD = Entry.of("abyss_guard", new NetherStarItem(new FabricItemSettings().fireproof().maxCount(1).rarity(Rarity.EPIC)))
                 .addEN()
                 .addZH("深渊守护")
+                .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
         ACCURSED_BLACKSTONE = Entry.of("accursed_blackstone", new NetherStarItem(new FabricItemSettings().fireproof().maxCount(16).rarity(Rarity.EPIC)))
                 .addEN()
                 .addZH("朽咒黑石")
+                .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
         CELESTIAL_DEBRIS = Entry.of("celestial_debris", new Item(new FabricItemSettings().fireproof().rarity(Rarity.EPIC)))
                 .addEN()
                 .addZH("日月星碎")
+                .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
         CELESTIAL_LUMINARY = Entry.of("celestial_luminary", new EndStageItem())
                 .addEN()
                 .addZH("无尽星辉")
+                .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
 
         // Endgame Trinkets
         ARMOR_OF_CONVERGENCE = Entry.of(
                         "armor_of_convergence",
-                        new SingleEpicTrinketItem()
+                        new ArmorOfConvergenceItem()
                 )
                 .addEN()
                 .addZH("汇聚甲胄")
                 .addTag(AllTags.BACK, AllTags.CAPE)
+                .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
         ARCANE_THRONE = Entry.of("arcane_throne", new ArcaneThroneItem())
                 .addEN()
                 .addZH("秘术王座")
                 .addTag(LHTags.CURSE_SLOT)
+                .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
         NIRVANA_STARFALL = Entry.of("nirvana_starfall", new NirvanaStarfallItem())
                 .addEN()
                 .addZH("涅槃星陨")
                 .addTag(AllTags.BACK)
+                .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
-        GLACIAL_NUCLEAR_ERA = Entry.of("glacial_nuclear_era", new SingleEpicTrinketItem())
+        GLACIAL_NUCLEAR_ERA = Entry.of("glacial_nuclear_era", new GlacialNuclearEraItem())
                 .addEN()
                 .addZH("冰核世纪")
                 .addTag(AllTags.BACK)
+                .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
         FROSTBITE_DOME = Entry.of("frostbite_dome", new FrostbiteDomeItem())
                 .addEN()
                 .addZH("冰点穹狱")
                 .addTag(AllTags.BACK)
+                .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
         HEART_STEEL = Entry.of("heart_spell_steel", new HeartSpellSteelItem())
                 .addEN()
                 .addZH("心之魔钢")
                 .addTag(LHTags.CHARM_SLOT)
+                .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
         REJUVENATING_BLOSSOM = Entry.of("rejuvenating_blossom", new RejuvenatingBlossomItem())
                 .addEN()
                 .addZH("复苏绽放")
                 .addTag(LHTags.CHARM_SLOT)
+                .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
 
@@ -214,47 +218,67 @@ public class AllItems
                 .addEN()
                 .addZH("原子护心镜")
                 .addTag(AllTags.BREASTPLATE_SLOT)
+                .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
         ENCHANTED_BREASTPLATE = Entry.of("enchanted_breastplate", new EnchantedBreastplateItem())
                 .addEN()
                 .addZH("束魔护心镜")
                 .addTag(AllTags.BREASTPLATE_SLOT)
+                .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
         FLEX_BREASTPLATE = Entry.of("flex_breastplate", new FlexBreastplateItem())
                 .addEN()
                 .addZH("曲御护心镜")
                 .addTag(AllTags.BREASTPLATE_SLOT)
+                .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
         FLICKER_BREASTPLATE = Entry.of("flicker_breastplate", new FlickerBreastplateItem())
                 .addEN()
                 .addZH("闪曳护心镜")
                 .addTag(AllTags.BREASTPLATE_SLOT)
+                .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
         OBLIVION_BREASTPLATE = Entry.of("oblivion_breastplate", new OblivionBreastplateItem())
                 .addEN()
                 .addZH("湮灭护心镜")
                 .addTag(AllTags.BREASTPLATE_SLOT)
+                .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
 
         // Misc Items
+        DEBUG_STAFF = Entry.of("debug_staff", new Item(new FabricItemSettings().maxCount(1)))
+                .addEN()
+                .addZH("调试法杖")
+                .setTab(AllGroups.MISC)
+                .addModel()
+                .register();
+        SPAWNER_SOUL = Entry.of("spawner_soul", new SpawnerSoulItem())
+                .addEN()
+                .addZH("笼中魄")
+                .setTab(AllGroups.MISC)
+                .addModel()
+                .register();
         SPELL_CONTAINER = Entry.of("spell_container", new SpellContainerItem())
                 .addEN()
                 .addZH("法术容器")
+                .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
         MAGIC_MIRROR = Entry.of("magic_mirror", new MagicMirrorItem(false))
                 .addEN()
                 .addZH("魔镜")
+                .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
         BROKEN_MAGIC_MIRROR = Entry.of("broken_magic_mirror", new MagicMirrorItem(true))
                 .addEN()
                 .addZH("破碎魔镜")
+                .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
         BOTTLE_NIGHTMARE = Entry.of(
@@ -266,9 +290,10 @@ public class AllItems
                                         .recipeRemainder(Items.GLASS_BOTTLE)
                         )
                 )
-                .addModel()
                 .addEN()
                 .addZH("梦魇之瓶")
+                .setTab(AllGroups.MISC)
+                .addModel()
                 .register();
         BOTTLE_SOUL_BINDING = Entry.of(
                         "bottle_of_soul_binding",
@@ -279,18 +304,21 @@ public class AllItems
                                         .recipeRemainder(Items.GLASS_BOTTLE)
                         )
                 )
-                .addModel()
                 .addEN()
                 .addZH("灵魂羁绊之瓶")
+                .setTab(AllGroups.MISC)
+                .addModel()
                 .register();
         SPELL_PRISM = Entry.of("spell_prism", new SpellPrismItem())
                 .addEN()
                 .addZH("法术棱镜")
+                .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
         CURED_APPLE = Entry.of("cursed_apple", new CursedAppleItem())
                 .addEN()
                 .addZH("诅咒禁果")
+                .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
         MEDAL = Entry.of("medal", new MedalItem())

@@ -73,6 +73,8 @@ public class AllStatusEffects
         NIRVANA = new Entry<>("nirvana", new NirvanaEffect())
                 .addEN()
                 .addZH("涅槃")
+                .addENDesc(NirvanaEffect.getDesc(true))
+                .addZHDesc(NirvanaEffect.getDesc(false))
                 .register();
 
         Synchronized.configure(PHASE, true);

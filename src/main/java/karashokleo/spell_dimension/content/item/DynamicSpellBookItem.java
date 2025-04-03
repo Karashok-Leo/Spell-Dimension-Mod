@@ -92,10 +92,10 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
     @Override
     public Text getName(ItemStack stack)
     {
-        return SDTexts.getGradeText(this.grade)
-                .append(SDTexts.getSchoolText(this.school))
-                .append(SDTexts.TEXT$SPELL_BOOK.get())
-                .setStyle(Style.EMPTY.withColor(this.school.color));
+        return SDTexts.TEXT$SPELL_BOOK.get(
+                SDTexts.getGradeText(this.grade),
+                SDTexts.getSchoolText(this.school)
+        ).setStyle(Style.EMPTY.withColor(this.school.color));
     }
 
     @Override

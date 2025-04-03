@@ -59,7 +59,7 @@ public class EssenceEntry extends BaseEntryProvider
                 .builder()
                 .withTitle(context.pageTitle())
                 .withText(context.pageText())
-                .withItem(BookGenUtil.getIngredient(AllStacks.BASE_ESSENCE_STACKS))
+                .withItem(BookGenUtil.getIngredient(AllStacks.getBaseEssences()))
                 .build();
 
         context.page("loot");

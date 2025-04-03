@@ -1,109 +1,71 @@
 package karashokleo.spell_dimension.init;
 
+import karashokleo.leobrary.datagen.builder.ItemGroupBuilder;
 import karashokleo.loot_bag.internal.item.LootBagItemRegistry;
 import karashokleo.spell_dimension.SpellDimension;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.text.Text;
+import net.minecraft.item.ItemStack;
+
+import java.util.Collection;
+import java.util.List;
 
 public class AllGroups
 {
-    public static final RegistryKey<ItemGroup> BOOKS_GROUP_KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), SpellDimension.modLoc("group_books"));
-    public static final RegistryKey<ItemGroup> SPELL_SCROLLS_GROUP_KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), SpellDimension.modLoc("group_spell_scrolls"));
-    public static final RegistryKey<ItemGroup> QUEST_SCROLLS_GROUP_KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), SpellDimension.modLoc("group_quest_scrolls"));
-    public static final RegistryKey<ItemGroup> ELES_GROUP_KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), SpellDimension.modLoc("group_eles"));
-    public static final RegistryKey<ItemGroup> ECES_GROUP_KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), SpellDimension.modLoc("group_eces"));
-    public static final RegistryKey<ItemGroup> MISC_GROUP_KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), SpellDimension.modLoc("group_misc"));
+    public static final ItemGroupBuilder SPELL_BOOKS = GroupEntry.of("spell_books");
+    public static final ItemGroupBuilder SPELL_SCROLLS = GroupEntry.of("spell_scrolls");
+    public static final ItemGroupBuilder QUEST_SCROLLS = GroupEntry.of("quest_scrolls");
+    public static final ItemGroupBuilder ENCHANTED_ESSENCES = GroupEntry.of("enchanted_essences");
+    public static final ItemGroupBuilder ENLIGHTENING_ESSENCES = GroupEntry.of("enlightening_essences");
+    public static final ItemGroupBuilder MISC = GroupEntry.of("misc");
 
     public static void register()
     {
-        Registry.register(Registries.ITEM_GROUP, BOOKS_GROUP_KEY,
-                FabricItemGroup
-                        .builder()
-                        .icon(() -> AllStacks.SPELL_BOOK_STACKS.get(0))
-                        .displayName(Text.translatable(BOOKS_GROUP_KEY.getValue().toTranslationKey("itemGroup")))
-                        .entries((displayContext, entries) -> entries.addAll(AllStacks.SPELL_BOOK_STACKS))
-                        .build()
-        );
+        List<ItemStack> spellBooks = AllStacks.getSpellBooks();
+        ItemStack firstSpellBook = spellBooks.get(0);
+        SPELL_BOOKS.addAll(spellBooks)
+                .setIcon(() -> firstSpellBook)
+                .addEN("Spell Dimension: Spell Books")
+                .addZH("咒次元：法术书")
+                .register();
 
-        Registry.register(Registries.ITEM_GROUP, SPELL_SCROLLS_GROUP_KEY,
-                FabricItemGroup
-                        .builder()
-                        .icon(() -> AllStacks.getScrolls().get(0))
-                        .displayName(Text.translatable(SPELL_SCROLLS_GROUP_KEY.getValue().toTranslationKey("itemGroup")))
-                        .entries((displayContext, entries) -> entries.addAll(AllStacks.getScrolls()))
-                        .build()
-        );
+        List<ItemStack> spellScrolls = AllStacks.getSpellScrolls();
+        ItemStack firstSpellScroll = spellScrolls.get(0);
+        SPELL_SCROLLS.addAll(spellScrolls)
+                .setIcon(() -> firstSpellScroll)
+                .addEN("Spell Dimension: Spell Scrolls")
+                .addZH("咒次元：法术卷轴")
+                .register();
 
-        Registry.register(Registries.ITEM_GROUP, QUEST_SCROLLS_GROUP_KEY,
-                FabricItemGroup
-                        .builder()
-                        .icon(() -> AllStacks.QUEST_SCROLL_STACKS.get(0))
-                        .displayName(Text.translatable(QUEST_SCROLLS_GROUP_KEY.getValue().toTranslationKey("itemGroup")))
-                        .entries((displayContext, entries) -> entries.addAll(AllStacks.QUEST_SCROLL_STACKS))
-                        .build()
-        );
+        List<ItemStack> questScrolls = AllStacks.getQuestScrolls();
+        ItemStack firstQuestScroll = questScrolls.get(0);
+        QUEST_SCROLLS.addAll(questScrolls)
+                .setIcon(() -> firstQuestScroll)
+                .addEN("Spell Dimension: Quest Scrolls")
+                .addZH("咒次元：任务卷轴")
+                .register();
 
-        Registry.register(Registries.ITEM_GROUP, ELES_GROUP_KEY,
-                FabricItemGroup
-                        .builder()
-                        .icon(() -> AllStacks.ELES_STACKS.get(0))
-                        .displayName(Text.translatable(ELES_GROUP_KEY.getValue().toTranslationKey("itemGroup")))
-                        .entries((displayContext, entries) -> entries.addAll(AllStacks.ELES_STACKS))
-                        .build()
-        );
+        List<ItemStack> enchantedEssences = AllStacks.getEnchantedEssences();
+        ItemStack firstEnchantedEssence = enchantedEssences.get(0);
+        ENCHANTED_ESSENCES.addAll(enchantedEssences)
+                .setIcon(() -> firstEnchantedEssence)
+                .addEN("Spell Dimension: Enchanted Essences")
+                .addZH("咒次元：束魔精华")
+                .register();
 
-        Registry.register(Registries.ITEM_GROUP, ECES_GROUP_KEY,
-                FabricItemGroup
-                        .builder()
-                        .icon(() -> AllStacks.ECES_STACKS.get(0))
-                        .displayName(Text.translatable(ECES_GROUP_KEY.getValue().toTranslationKey("itemGroup")))
-                        .entries((displayContext, entries) -> entries.addAll(AllStacks.ECES_STACKS))
-                        .build()
-        );
+        List<ItemStack> enlighteningEssences = AllStacks.getEnlighteningEssences();
+        ItemStack firstEnlighteningEssence = enlighteningEssences.get(0);
+        ENLIGHTENING_ESSENCES.addAll(enlighteningEssences)
+                .setIcon(() -> firstEnlighteningEssence)
+                .addEN("Spell Dimension: Enlightening Essences")
+                .addZH("咒次元：源启精华")
+                .register();
 
-        Registry.register(Registries.ITEM_GROUP, MISC_GROUP_KEY,
-                FabricItemGroup
-                        .builder()
-                        .icon(() -> AllStacks.BASE_ESSENCE_STACKS.get(0))
-                        .displayName(Text.translatable(MISC_GROUP_KEY.getValue().toTranslationKey("itemGroup")))
-                        .entries((displayContext, entries) ->
-                        {
-                            entries.addAll(AllStacks.BASE_ESSENCE_STACKS);
-                            entries.add(AllItems.DISENCHANTED_ESSENCE);
-                            entries.add(AllItems.MENDING_ESSENCE);
-                            entries.add(AllItems.DEBUG_STAFF);
-                            entries.add(AllItems.ABYSS_GUARD);
-                            entries.add(AllItems.ACCURSED_BLACKSTONE);
-                            entries.add(AllItems.CELESTIAL_DEBRIS);
-                            entries.add(AllItems.CELESTIAL_LUMINARY);
-                            entries.add(AllBlocks.SPELL_INFUSION_PEDESTAL.item());
-                            entries.add(AllBlocks.CONSCIOUSNESS_BASE.item());
-                            entries.add(AllBlocks.CONSCIOUSNESS_CORE.item());
-                            entries.add(AllBlocks.PROTECTIVE_COVER.item());
-                            entries.add(AllItems.HEART_STEEL);
-                            entries.add(AllItems.REJUVENATING_BLOSSOM);
-                            entries.add(AllItems.ARMOR_OF_CONVERGENCE);
-                            entries.add(AllItems.SPELL_CONTAINER);
-                            entries.add(AllItems.SPAWNER_SOUL);
-                            entries.add(AllItems.MAGIC_MIRROR);
-                            entries.add(AllItems.BROKEN_MAGIC_MIRROR);
-                            entries.add(AllItems.ATOMIC_BREASTPLATE);
-                            entries.add(AllItems.ENCHANTED_BREASTPLATE);
-                            entries.add(AllItems.FLEX_BREASTPLATE);
-                            entries.add(AllItems.FLICKER_BREASTPLATE);
-                            entries.add(AllItems.OBLIVION_BREASTPLATE);
-                            entries.add(AllItems.BOTTLE_NIGHTMARE);
-                            entries.add(AllItems.BOTTLE_SOUL_BINDING);
-                            entries.add(AllItems.SPELL_PRISM);
-                            entries.add(AllItems.CURED_APPLE);
-                        })
-                        .build()
-        );
+        List<ItemStack> baseEssences = AllStacks.getBaseEssences();
+        MISC.addAll(baseEssences)
+                .setIcon(() -> AllItems.MAGIC_MIRROR.getDefaultStack())
+                .addEN("Spell Dimension: Miscellaneous")
+                .addZH("咒次元：杂项")
+                .register();
 
         ItemGroupEvents.modifyEntriesEvent(LootBagItemRegistry.ITEM_GROUP_KEY).register(entries ->
         {
@@ -111,5 +73,30 @@ public class AllGroups
             AllItems.RANDOM_GEAR.forEach(entries::add);
             AllItems.RANDOM_BOOK.forEach(entries::add);
         });
+    }
+
+    private static class GroupEntry extends ItemGroupBuilder
+    {
+        public GroupEntry(String name)
+        {
+            super(name);
+        }
+
+        public static GroupEntry of(String name)
+        {
+            return new GroupEntry(name);
+        }
+
+        public GroupEntry addAll(Collection<ItemStack> stacks)
+        {
+            entries.addAll(stacks);
+            return this;
+        }
+
+        @Override
+        public String getNameSpace()
+        {
+            return SpellDimension.MOD_ID;
+        }
     }
 }

@@ -2,12 +2,12 @@ package karashokleo.spell_dimension.data;
 
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.api.quest.QuestTag;
+import karashokleo.spell_dimension.content.effect.NirvanaEffect;
 import karashokleo.spell_dimension.content.object.EventAward;
 import karashokleo.spell_dimension.data.generic.recipe.SDLocateRecipes;
 import karashokleo.spell_dimension.data.loot_bag.SDBags;
 import karashokleo.spell_dimension.data.loot_bag.SDContents;
 import karashokleo.spell_dimension.init.AllEntities;
-import karashokleo.spell_dimension.init.AllGroups;
 import karashokleo.spell_dimension.init.AllTags;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.text.MutableText;
@@ -24,9 +24,9 @@ public enum SDTexts
      * Text
      */
     TEXT$MAGE("Mage", "法师"),
-    TEXT$SPELL_BOOK("Spell Book", "法术书"),
+    TEXT$SPELL_BOOK("%s %s Spell Book", "%s%s法术书"),
     TEXT$SPELL_SCROLL("Spell Scroll", "法术卷轴"),
-    TEXT$ESSENCE("Essence", "精华"),
+    TEXT$ESSENCE("%s %s Essence", "%s%s精华"),
     TEXT$ESSENCE$BASE("Base Essence", "基础精华"),
     TEXT$ESSENCE$ENCHANTED("Enchanted Essence", "束魔精华"),
     TEXT$ESSENCE$ENLIGHTENING("Enlightening Essence", "源启精华"),
@@ -46,15 +46,24 @@ public enum SDTexts
     TEXT$SPELL_TRAIT$INTERVAL("Every %s seconds, cast spell on target", "每隔%s秒，对目标施放法术"),
     TEXT$SPELL_TRAIT$DESCRIPTION("Spell Description: %s", "法术描述：%s"),
     TEXT$SPELL_TRAIT$ACTION("%s is casting [%s]", "%s 正在施法 [%s]"),
+
+    /**
+     * Quest
+     */
     TEXT$QUEST$COMPLETE("Quest completed!", "任务完成！"),
     TEXT$QUEST$COMPLETED("The quest has been completed", "该任务已完成"),
     TEXT$QUEST$ALL_COMPLETED("All quests have been completed", "所有任务已完成"),
     TEXT$QUEST$REQUIREMENT("Quest requirements not met!", "任务要求未达成！"),
     TEXT$QUEST$DEPENDENCIES("Prerequisite quests not completed!", "前置任务未完成！"),
     TEXT$QUEST$SPELL_POWER("Increase any Spell Power to %s", "将任意法术强度提升至%s"),
+
     TEXT$BANNED_SPELL("You cannot cast this spell in your current dimension!", "你不能在当前维度施放该法术！"),
     TEXT$INVALID_KEY_ITEM("Invalid Key Item!", "无效的索引物品！"),
     TEXT$SPELL_INFUSION("Spell Infusion", "魔力灌注"),
+
+    /**
+     * Consciousness Core
+     */
     TEXT$CONSCIOUSNESS_CORE$LEVEL("Active Level: %s", "激活等级：%s"),
     TEXT$CONSCIOUSNESS_CORE$LEVEL_FACTOR("Difficulty Factor: %s", "难度系数：%s"),
     TEXT$CONSCIOUSNESS_CORE$AWARD("Award: %s", "奖励：%s"),
@@ -65,19 +74,30 @@ public enum SDTexts
     TEXT$EVENT$WAITING("Wave %s/%s is about to start - Countdown: %s seconds", "第%s/%s波即将开始 - 倒计时：%s秒"),
     TEXT$EVENT$FINISH$SUCCESS("Invasion End - Successful", "入侵结束 - 成功"),
     TEXT$EVENT$FINISH$FAIL("Invasion End - Failed", "入侵结束 - 失败"),
+
     TEXT$DIFFICULTY$BAN_ITEM("You're in Hardcore mode and can no longer use this item.", "你处于硬核模式，不再能够使用该物品"),
     TEXT$RANDOM_LOOT_NAME("? %s ?", "? %s ?"),
     TEXT$LOCATING("Locating: %s", "正在定位：%s"),
+
+    /**
+     * Game Over
+     */
     TEXT$GAME_OVER$HEAD("To players:", "致玩家:"),
     TEXT$GAME_OVER$THANKS("Congrats on the pass, and thank you very much for traveling this far. Spell Dimension was my first modpack and by far my most heartfelt offering to the MC community.", "恭喜你通关啦！非常感谢你游玩至此。《咒次元》是我的第一个整合包，也是目前为止我献给MC社区的最用心的作品。"),
     TEXT$GAME_OVER$MAKING("I have put a lot of time and effort into this modpack since I started working on it. From developing exclusive mods for this pack, customizing loot tables, and optimizing performance, to fixing bugs and balancing difficulty, I've encountered countless challenges. Luckily and finally, I've finished it.", "自着手制作这个整合包以来，我投入了无数的时间和精力。从开发专属模组、定制战利品表、优化游戏性能，到修复各种Bug、平衡游戏难度，我遇到了一个又一个挑战。幸运的是，最终我完成了它。"),
     TEXT$GAME_OVER$PASSION("During the making process, I gradually found my old passion for Minecraft. I think I've found something - that I truly love, which seems to be a luxury for most people. I hope you too can find what you love and stick with it.", "在制作过程中，我逐渐找回了自己从前对Minecraft的热情。我想我找到了某些东西——某些我真正热爱的东西，这似乎对大多数人来说是一种奢侈。希望你也能找到你的热爱并为之坚持下去。"),
     TEXT$GAME_OVER$FEEDBACK("If you have any suggestions, please give me feedback, I would appreciate it.", "如果你有任何建议，请反馈给我，我将感激不尽。"),
     TEXT$GAME_OVER$WISH("Lastly, I wish you a happy life. Have fun playing!", "最后，祝你生活愉快。玩的开心！"),
+
+    /**
+     * Guide book
+     */
     TEXT$MAGE_BOOK$1("An Introductory Grimoire Even a Three-Year-Old Can Understand", "三岁小孩也能看懂的入门魔法书"),
     TEXT$MAGE_BOOK$2("When you're in a quandary, turn to it~", "当你遇到窘境时，不妨翻开看看吧~"),
+
     TEXT$SOUL_BIND("You feel the connection between your soul and your body becoming stronger...", "你感觉灵魂与身体的联系变得紧密..."),
     TEXT$SOUL_UNBIND("You feel the connection between your soul and your body becoming tenuous...", "你感到灵魂与身体的联系变得脆弱..."),
+
     TEXT$TRADER$OLDEN("Mysterious Olden", "神秘老登"),
 
     /**
@@ -89,19 +109,19 @@ public enum SDTexts
     /**
      * Spell School
      */
-    SCHOOL$ARCANE("Arcane ", "奥秘"),
-    SCHOOL$FIRE("Fire ", "火焰"),
-    SCHOOL$FROST("Frost ", "寒冰"),
-    SCHOOL$HEALING("Healing ", "治愈"),
-    SCHOOL$LIGHTNING("Lightning ", "闪电"),
-    SCHOOL$SOUL("Soul ", "灵魂"),
+    SCHOOL$ARCANE("Arcane", "奥秘"),
+    SCHOOL$FIRE("Fire", "火焰"),
+    SCHOOL$FROST("Frost", "寒冰"),
+    SCHOOL$HEALING("Healing", "治愈"),
+    SCHOOL$LIGHTNING("Lightning", "闪电"),
+    SCHOOL$SOUL("Soul", "灵魂"),
 
     /**
      * Grade
      */
-    GRADE$0("Primary ", "初级"),
-    GRADE$1("Intermediate ", "中级"),
-    GRADE$2("Advanced ", "高级"),
+    GRADE$0("Primary", "初级"),
+    GRADE$1("Intermediate", "中级"),
+    GRADE$2("Advanced", "高级"),
 
     /**
      * Equipment Slot
@@ -153,28 +173,56 @@ public enum SDTexts
     TOOLTIP$TOOK_SECONDS("Took %s second(s)", "耗时%s秒"),
     TOOLTIP$SUMMON_ENTITY("Entity Type: %s", "实体类型：%s"),
     TOOLTIP$SUMMON_REMAIN("Remain: %s", "剩余：%s"),
+
+    /**
+     * Magic Mirror
+     */
+    TOOLTIP$MAGIC_MIRROR$USAGE("Use to teleport to the Ocean of Consciousness", "使用后传送至识之海"),
+    TOOLTIP$MAGIC_MIRROR$WARNING("Warning: After entering the Ocean of Consciousness, your game will be much more difficult, please refer to Magic Guidance for more details.", "警告：进入识之海后，你的游戏难度将大幅提升，详情请查阅《魔力接引》"),
+    TOOLTIP$MAGIC_MIRROR$BROKEN("This item is a consumable", "该物品为消耗品"),
+
+    /**
+     * Trinkets
+     */
+    TOOLTIP$ARMOR_OF_CONVERGENCE("Casting [Converge] spell in place while rolling.", "翻滚时在原地施放 [汇聚] 法术"),
+    TOOLTIP$ARCANE_THRONE$1("Provides permanent Phase effect.", "提供永久相位"),
+    TOOLTIP$ARCANE_THRONE$2("Use the mouse cursor to right-click on the item to switch the Phase.","使用鼠标指针右键该物品以开关"),
+    TOOLTIP$ARCANE_THRONE$ON("Enabled","已开启"),
+    TOOLTIP$ARCANE_THRONE$OFF("Disabled","已关闭"),
+    TOOLTIP$NIRVANA_STARFALL$DEFRAUDING_REAPER("- [Defrauding Reaper] If you are near death and your fire spell power is above %s, you are spared from death once at the cost of gaining a %s second Nirvana effect and removing all harmful effects.","- [欺诈死神] 濒临死亡且自身火焰法术强度高于%s时，以获得%s秒涅槃效果为代价免死一次，并清除身上所有负面效果"),
+    TOOLTIP$NIRVANA_STARFALL$NIRVANA_REBIRTH("- [Nirvana Rebirth] %s".formatted(NirvanaEffect.getDesc(true)),"- [涅槃重生] %s".formatted(NirvanaEffect.getDesc(false))),
+    TOOLTIP$GLACIAL_NUCLEAR_ERA$1("When your [Icy Nucleus] explodes, cast [Icicle] on the surrounding area.","你施放的 [冰核] 爆炸时向周围施放 [冰刺]"),
+    TOOLTIP$GLACIAL_NUCLEAR_ERA$2("On a hit from your [Icicle], cast [Icy Nucleus] on the target.","你施放的 [冰刺] 命中时向目标施放 [冰核]"),
+    TOOLTIP$FROSTBITE_DOME$1("- Apply a Incarceration effect for %s seconds when dealing frost spell damage.","- 造成寒冰法术伤害时施加禁锢效果，持续%s秒"),
+    TOOLTIP$FROSTBITE_DOME$2("- If the target already has a Incarceration effect, remove Incarceration and deals more damage, depending on the duration of Incarceration.","- 如果目标已有禁锢效果，则移除禁锢，并造成更多伤害，额外伤害取决于禁锢的时长"),
     TOOLTIP$HEART_SPELL_STEEL$USAGE("When killing a mob with a level higher than %s using healing spell damage within %s blocks, gain a max health boost equal to %s of this damage, with a cooldown of %s seconds.", "在%s格范围内使用治愈魔法伤害击杀等级高于%s的生物时，可获得相当于此次伤害%s的生命上限提升，冷却%s秒"),
     TOOLTIP$HEART_SPELL_STEEL$ACCUMULATED("Max health obtained: %s", "已获得的最大生命值：%s"),
     TOOLTIP$REJUVENATING_BLOSSOM$USAGE_2("- When injured, gain a regeneration effect that restores health equivalent to the amount of damage received * the count of this item equipped.", "- 受伤时获得生命恢复效果，该效果将恢复的生命值等同于受到的伤害值 * 装备的该物品数量"),
     TOOLTIP$REJUVENATING_BLOSSOM$USAGE_1("- When injured, if the amount of health that your existing regeneration effect will recover is less than the damage dealt * the count of this item equipped, then remove all harmful effects from you and halves this damage.", "- 受伤时，如果你还未恢复的生命值低于受到伤害 * 装备的该物品数量，则移除你身上所有负面效果并减半此次伤害"),
-    TOOLTIP$MAGIC_MIRROR$USAGE("Use to teleport to the Ocean of Consciousness", "使用后传送至识之海"),
-    TOOLTIP$MAGIC_MIRROR$WARNING("Warning: After entering the Ocean of Consciousness, your game will be much more difficult, please refer to Magic Guidance for more details.", "警告：进入识之海后，你的游戏难度将大幅提升，详情请查阅《魔力接引》"),
-    TOOLTIP$MAGIC_MIRROR$BROKEN("This item is a consumable", "该物品为消耗品"),
+
+    /**
+     * Breastplates
+     */
     TOOLTIP$ATOMIC_BREASTPLATE_PROGRESS(" - Current progress: %s", "当前进度：%s"),
     TOOLTIP$ATOMIC_BREASTPLATE_UPGRADEABLE(" - Upgradeable: Right click on this item with %s to upgrade it to the corresponding enhanced breastplate", " - 可升级：使用%s右键该物品即可升级为对应强化护心镜"),
     TOOLTIP$ATOMIC_TO_ENCHANTED("After dealing a total of %s magic damage, upgrade to Enchanted Breastplate", "总共造成%s点魔法伤害后升级为束魔护心镜"),
     TOOLTIP$ATOMIC_TO_FLEX("After suffering a total of %s damage, upgrade to Flex Breastplate", "总共承受%s点伤害后升级为曲御护心镜"),
     TOOLTIP$ATOMIC_TO_FLICKER("After rolling a total of %s times, upgrade to Flicker Breastplate", "总共翻滚%s次后升级为闪曳护心镜"),
     TOOLTIP$ATOMIC_TO_OBLIVION("After restoring with a total of %s health, upgrade to Oblivion Breastplate", "总共恢复%s点生命值后升级为湮灭护心镜"),
-    TOOLTIP$ENCHANTED_BREASTPLATE("For every 1 spell power, your max health increases by %s, armor increases by %s, and armor toughness increases by %s", "每拥有1点法术强度，最大生命值增加%s，护甲增加%s，护甲韧性增加%s"),
+    TOOLTIP$ENCHANTED_BREASTPLATE("For every 1 spell power, your armor increases by %s, and armor toughness increases by %s", "每拥有1点法术强度，护甲增加%s，护甲韧性增加%s"),
     TOOLTIP$FLEX_BREASTPLATE("Gain a certain damage reduction ratio, which depends on the %s of your spell power, %s of armor, and %s of armor toughness, up to %s", "获得一定免伤比例，该比例取决于你的法术强度的%s，护甲值的%s和护甲韧性的%s，最高%s"),
     TOOLTIP$FLEX_BREASTPLATE$DAMAGE_FACTOR("Current damage reduction ratio: %s", "当前免伤比例：%s"),
     TOOLTIP$FLICKER_BREASTPLATE("Gain a certain probability of dodging enemy attacks, which depends on the ratio of your speed to the enemy's speed and doubles when in the air", "获得一定闪避敌人攻击的概率，该概率取决于你与敌人的速度之比，且在空中时翻倍"),
     TOOLTIP$OBLIVION_BREASTPLATE_1("When your health is higher than %s of your max health, the Oblivion Breastplate will absorb %s of your health every second and convert it into Oblivion Amount.", "当你的生命值高于你的最大生命值的%s时，湮灭护心镜将每秒汲取你%s的生命值，并将其转化为湮灭值"),
     TOOLTIP$OBLIVION_BREASTPLATE_2("The max Oblivion Amount is %s of your spell power. When you are injured, it will try to consume Oblivion Amount to resist this damage", "湮灭值最大为你的法术强度的%s，当你受伤时将优先消耗湮灭值抵挡此次伤害"),
     TOOLTIP$OBLIVION_BREASTPLATE_3("Current Oblivion Amount: %s", "当前湮灭值：%s"),
+
+
     TOOLTIP$CURSE_PRIDE_1("Both damage dealt and damage taken are increased by %s%% per difficulty level", "根据玩家难度，造成伤害与受到伤害每级提升%s%%"),
     TOOLTIP$CURSE_PRIDE_2("Current damage increment: +%s%%", "当前增伤：+%s%%"),
+    TOOLTIP$SECONDARY_SCHOOL_ITEM$1("- Gain %s spell power equal to %s%% of your major school's spell power", "- 获得相当于主修学派法术强度%2$s%%的%s法术强度"),
+    TOOLTIP$SECONDARY_SCHOOL_ITEM$2("- Spell Scrolls of %s school can be used", "- 可以使用%s法术学派的卷轴"),
+    TOOLTIP$SECONDARY_SCHOOL_ITEM$3("- %s%% chance to get %s Spell School's Enchanted Essence and Enlightening Essence", "- 有%s%%的几率获得%s法术学派的束魔精华和源启精华"),
     TOOLTIP$DIFFICULTY_TIER$CURRENT("Current Difficulty Tier: %s", "当前难度层级：%s"),
     TOOLTIP$DIFFICULTY_TIER$DESC("- %s", "- %s"),
     TOOLTIP$DIFFICULTY_TIER$ENTER("Difficulty Tier - %s", "难度层级 - %s"),
@@ -273,7 +321,6 @@ public enum SDTexts
             SpellDimension.EN_TEXTS.addText(value.getKey(), value.getEn());
             SpellDimension.ZH_TEXTS.addText(value.getKey(), value.getZh());
         }
-        addGroupTranslation();
         addLootBagTranslation();
         addEventAwardTranslation();
         addTagTranslation();
@@ -289,23 +336,6 @@ public enum SDTexts
         SpellDimension.ZH_TEXTS.addText("trinkets.slot.chest.breastplate", "护心镜");
         SpellDimension.EN_TEXTS.addText("trinkets.slot.chest.breastplate", "Breastplate");
         SpellDimension.ZH_TEXTS.addText("trinkets.slot.chest.breastplate", "护心镜");
-    }
-
-    private static void addGroupTranslation()
-    {
-        SpellDimension.EN_TEXTS.addText(AllGroups.BOOKS_GROUP_KEY.getValue().toTranslationKey("itemGroup"), "Spell Dimension: Spell Books");
-        SpellDimension.EN_TEXTS.addText(AllGroups.SPELL_SCROLLS_GROUP_KEY.getValue().toTranslationKey("itemGroup"), "Spell Dimension: Spell Scrolls");
-        SpellDimension.EN_TEXTS.addText(AllGroups.QUEST_SCROLLS_GROUP_KEY.getValue().toTranslationKey("itemGroup"), "Spell Dimension: Quest Scrolls");
-        SpellDimension.EN_TEXTS.addText(AllGroups.ELES_GROUP_KEY.getValue().toTranslationKey("itemGroup"), "Spell Dimension: Enlightening Essences");
-        SpellDimension.EN_TEXTS.addText(AllGroups.ECES_GROUP_KEY.getValue().toTranslationKey("itemGroup"), "Spell Dimension: Enchanted Essences");
-        SpellDimension.EN_TEXTS.addText(AllGroups.MISC_GROUP_KEY.getValue().toTranslationKey("itemGroup"), "Spell Dimension: Misc");
-
-        SpellDimension.ZH_TEXTS.addText(AllGroups.BOOKS_GROUP_KEY.getValue().toTranslationKey("itemGroup"), "咒次元：法术书");
-        SpellDimension.ZH_TEXTS.addText(AllGroups.SPELL_SCROLLS_GROUP_KEY.getValue().toTranslationKey("itemGroup"), "咒次元：法术卷轴");
-        SpellDimension.ZH_TEXTS.addText(AllGroups.QUEST_SCROLLS_GROUP_KEY.getValue().toTranslationKey("itemGroup"), "咒次元：任务卷轴");
-        SpellDimension.ZH_TEXTS.addText(AllGroups.ELES_GROUP_KEY.getValue().toTranslationKey("itemGroup"), "咒次元：束魔精华");
-        SpellDimension.ZH_TEXTS.addText(AllGroups.ECES_GROUP_KEY.getValue().toTranslationKey("itemGroup"), "咒次元：附魔精华");
-        SpellDimension.ZH_TEXTS.addText(AllGroups.MISC_GROUP_KEY.getValue().toTranslationKey("itemGroup"), "咒次元：杂项");
     }
 
     private static void addLootBagTranslation()

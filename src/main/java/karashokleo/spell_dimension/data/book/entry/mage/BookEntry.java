@@ -98,7 +98,7 @@ public class BookEntry extends BaseEntryProvider
         BookSpotlightPageModel next = BookSpotlightPageModel
                 .builder()
                 .withText(context.pageText())
-                .withItem(BookGenUtil.getIngredient(AllStacks.SPELL_BOOK_STACKS))
+                .withItem(BookGenUtil.getIngredient(AllStacks.getSpellBooks()))
                 .build();
 
         return List.of(prev, next);

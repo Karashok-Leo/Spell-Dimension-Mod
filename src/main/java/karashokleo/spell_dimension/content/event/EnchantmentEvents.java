@@ -97,7 +97,7 @@ public class EnchantmentEvents
                 totalLevel += EnchantmentHelper.getLevel(AllEnchantments.SPELL_RESISTANCE, stack);
 
             double totalSpellPower = 0;
-            for (SpellSchool school : SchoolUtil.getEntitySchool(player))
+            for (SpellSchool school : SchoolUtil.getLivingSchools(player))
                 totalSpellPower += SpellPower.getSpellPower(school, player).baseValue();
 
             float damageReduction = (float) (totalLevel * 0.01 * totalSpellPower);
@@ -115,7 +115,7 @@ public class EnchantmentEvents
             int totalLevel = EnchantmentHelper.getLevel(AllEnchantments.SPELL_LEECH, player.getMainHandStack());
 
             double totalSpellPower = 0;
-            for (SpellSchool school : SchoolUtil.getEntitySchool(player))
+            for (SpellSchool school : SchoolUtil.getLivingSchools(player))
                 totalSpellPower += SpellPower.getSpellPower(school, player).baseValue();
 
             float damageLeech = (float) (totalLevel * 0.01 * totalSpellPower);

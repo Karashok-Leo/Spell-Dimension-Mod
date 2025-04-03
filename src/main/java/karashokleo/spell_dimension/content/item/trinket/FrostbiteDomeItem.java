@@ -5,10 +5,17 @@ import karashokleo.l2hostility.content.item.trinket.core.DamageListenerTrinket;
 import karashokleo.l2hostility.content.item.trinket.core.SingleEpicTrinketItem;
 import karashokleo.l2hostility.init.LHEffects;
 import karashokleo.l2hostility.util.EffectHelper;
+import karashokleo.spell_dimension.data.SDTexts;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.item.ItemStack;
+import net.minecraft.text.Text;
+import net.minecraft.world.World;
 import net.spell_power.api.SpellSchools;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class FrostbiteDomeItem extends SingleEpicTrinketItem implements DamageListenerTrinket
 {
@@ -40,5 +47,13 @@ public class FrostbiteDomeItem extends SingleEpicTrinketItem implements DamageLi
             int duration = effect.getDuration();
             event.setAmount(event.getAmount() * (1 + duration * DAMAGE_FACTOR));
         }
+    }
+
+    @Override
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
+    {
+        tooltip.add(SDTexts.TOOLTIP$FROSTBITE_DOME$1.get(STONE_CAGE_DURATION / 20));
+        tooltip.add(SDTexts.TOOLTIP$FROSTBITE_DOME$2.get());
+        super.appendTooltip(stack, world, tooltip, context);
     }
 }

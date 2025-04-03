@@ -13,9 +13,17 @@ public class NirvanaEffect extends StatusEffect
     public static final int FIRE_TICKS = 40;
     private static final String UUID = "f2b0c3a4-1d5e-4f8b-9c7d-6a2e5f3b8c1d";
 
+    public static String getDesc(boolean en)
+    {
+        return (en ?
+                "Fire spell power and max health reduced to %s%% of original and stays on fire." :
+                "火焰法术强度和最大生命值降低至原来的%s%%，并持续着火")
+                .formatted(NIRVANA_FACTOR * 100);
+    }
+
     public NirvanaEffect()
     {
-        super(StatusEffectCategory.BENEFICIAL, 0xFF0000);
+        super(StatusEffectCategory.NEUTRAL, 0xFF0000);
         addAttributeModifier(
                 EntityAttributes.GENERIC_MAX_HEALTH,
                 UUID,

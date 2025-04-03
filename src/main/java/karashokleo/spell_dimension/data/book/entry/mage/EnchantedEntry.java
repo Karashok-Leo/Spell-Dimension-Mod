@@ -65,7 +65,7 @@ public class EnchantedEntry extends BaseEntryProvider
                 .builder()
                 .withTitle(context.pageTitle())
                 .withText(context.pageText())
-                .withItem(BookGenUtil.getNbtIngredient(AllStacks.ECES_STACKS))
+                .withItem(BookGenUtil.getNbtIngredient(AllStacks.getEnchantedEssences()))
                 .build();
 
         context.page("next");
@@ -105,7 +105,7 @@ public class EnchantedEntry extends BaseEntryProvider
     @Override
     protected BookIconModel entryIcon()
     {
-        return BookIconModel.create(AllStacks.ECES_STACKS.get(0));
+        return BookIconModel.create(AllStacks.getEnchantedEssences().get(0));
     }
 
     @Override

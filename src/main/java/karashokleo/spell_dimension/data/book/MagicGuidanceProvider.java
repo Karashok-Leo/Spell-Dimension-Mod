@@ -33,7 +33,7 @@ public class MagicGuidanceProvider extends BookProvider
         return BookModel
                 .create(BOOK_ID, context.bookName())
                 .withModel(ItemRegistry.MODONOMICON_PURPLE.getId())
-                .withCreativeTab(AllGroups.MISC_GROUP_KEY.getValue())
+                .withCreativeTab(AllGroups.MISC.getId())
                 .withGenerateBookItem(true)
                 .withCategories(
                         new MageCategory(this).generate(),

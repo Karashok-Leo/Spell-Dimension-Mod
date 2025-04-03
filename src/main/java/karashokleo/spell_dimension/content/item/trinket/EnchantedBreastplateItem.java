@@ -10,7 +10,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -22,7 +21,6 @@ import java.util.UUID;
 
 public class EnchantedBreastplateItem extends SingleEpicTrinketItem
 {
-    public static final float MAX_HEALTH_RATIO = 0.1F;
     public static final float ARMOR_RATIO = 0.2F;
     public static final float ARMOR_TOUGHNESS_RATIO = 0.05F;
 
@@ -35,21 +33,9 @@ public class EnchantedBreastplateItem extends SingleEpicTrinketItem
     public Multimap<EntityAttribute, EntityAttributeModifier> getModifiers(ItemStack stack, SlotReference slot, LivingEntity entity, UUID uuid)
     {
         Multimap<EntityAttribute, EntityAttributeModifier> modifiers = super.getModifiers(stack, slot, entity, uuid);
-        double maxHealth = 0;
-        double armor = 0;
-        double armorToughness = 0;
-        if (entity instanceof PlayerEntity player)
-        {
-            double spellPower = SchoolUtil.getEntitySpellPower(player);
-            maxHealth = spellPower * MAX_HEALTH_RATIO;
-            armor = spellPower * ARMOR_RATIO;
-            armorToughness = spellPower * ARMOR_TOUGHNESS_RATIO;
-        }
-        if (maxHealth != 0)
-            modifiers.put(
-                    EntityAttributes.GENERIC_MAX_HEALTH,
-                    new EntityAttributeModifier(uuid, "Enchanted Breastplate Max Health", maxHealth, EntityAttributeModifier.Operation.ADDITION)
-            );
+        double spellPower = SchoolUtil.getEntitySpellPower(entity);
+        double armor = spellPower * ARMOR_RATIO;
+        double armorToughness = spellPower * ARMOR_TOUGHNESS_RATIO;
         if (armor != 0)
             modifiers.put(
                     EntityAttributes.GENERIC_ARMOR,
@@ -67,6 +53,6 @@ public class EnchantedBreastplateItem extends SingleEpicTrinketItem
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
         super.appendTooltip(stack, world, tooltip, context);
-        tooltip.add(SDTexts.TOOLTIP$ENCHANTED_BREASTPLATE.get(MAX_HEALTH_RATIO, ARMOR_RATIO, ARMOR_TOUGHNESS_RATIO).formatted(Formatting.DARK_PURPLE));
+        tooltip.add(SDTexts.TOOLTIP$ENCHANTED_BREASTPLATE.get(ARMOR_RATIO, ARMOR_TOUGHNESS_RATIO).formatted(Formatting.DARK_PURPLE));
     }
 }

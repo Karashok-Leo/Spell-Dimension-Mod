@@ -64,7 +64,7 @@ public class EnlighteningEntry extends BaseEntryProvider
                 .builder()
                 .withTitle(context.pageTitle())
                 .withText(context.pageText())
-                .withItem(BookGenUtil.getNbtIngredient(AllStacks.ELES_STACKS))
+                .withItem(BookGenUtil.getNbtIngredient(AllStacks.getEnlighteningEssences()))
                 .build();
 
         context.page("next");
@@ -90,7 +90,7 @@ public class EnlighteningEntry extends BaseEntryProvider
     @Override
     protected BookIconModel entryIcon()
     {
-        return BookIconModel.create(AllStacks.ELES_STACKS.get(0));
+        return BookIconModel.create(AllStacks.getEnlighteningEssences().get(0));
     }
 
     @Override
