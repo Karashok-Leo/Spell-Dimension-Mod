@@ -73,7 +73,8 @@ public abstract class SpellHelperMixin
         if (player.getAbilities().creativeMode) return;
         if (spell.school == AllSpells.GENERIC) return;
         if (!itemStack.isOf(AllItems.SPELL_SCROLL)) return;
-        if (SchoolUtil.getEntitySchool(player).contains(spell.school)) return;
+        if (SchoolUtil.getLivingSchools(player).contains(spell.school)) return;
+        if (SchoolUtil.getLivingSecondarySchools(player).contains(spell.school)) return;
         player.sendMessage(SDTexts.TEXT$SKILLED_SCHOOL.get(), true);
         cir.setReturnValue(SpellCast.Attempt.none());
     }

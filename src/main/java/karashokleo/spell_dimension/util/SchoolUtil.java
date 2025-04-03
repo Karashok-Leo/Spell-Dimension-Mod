@@ -1,5 +1,7 @@
 package karashokleo.spell_dimension.util;
 
+import karashokleo.l2hostility.compat.trinket.TrinketCompat;
+import karashokleo.spell_dimension.content.item.trinket.SecondarySchoolItem;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.damage.DamageSource;
@@ -24,21 +26,29 @@ public class SchoolUtil
             SpellSchools.SOUL
     );
 
-    public static List<SpellSchool> getEntitySchool(LivingEntity player)
+    public static List<SpellSchool> getLivingSchools(LivingEntity entity)
     {
         Map<SpellSchool, Double> map = SCHOOLS.stream().collect(Collectors.toMap(
                 school -> school,
-                school -> SpellPower.getSpellPower(school, player).baseValue()
+                school -> SpellPower.getSpellPower(school, entity).baseValue()
         ));
         Double max = Collections.max(map.values());
         return SCHOOLS.stream().filter(school -> map.get(school).equals(max)).toList();
     }
 
-    public static double getEntitySpellPower(LivingEntity player)
+    public static List<SpellSchool> getLivingSecondarySchools(LivingEntity entity)
     {
-        List<SpellSchool> schools = SchoolUtil.getEntitySchool(player);
+        return TrinketCompat.getTrinketItems(entity, e -> e.getItem() instanceof SecondarySchoolItem)
+                .stream()
+                .map(e -> ((SecondarySchoolItem) e.getItem()).school)
+                .toList();
+    }
+
+    public static double getEntitySpellPower(LivingEntity entity)
+    {
+        List<SpellSchool> schools = SchoolUtil.getLivingSchools(entity);
         if (!schools.isEmpty())
-            return SpellPower.getSpellPower(schools.get(0), player).baseValue();
+            return SpellPower.getSpellPower(schools.get(0), entity).baseValue();
         return 0;
     }
 

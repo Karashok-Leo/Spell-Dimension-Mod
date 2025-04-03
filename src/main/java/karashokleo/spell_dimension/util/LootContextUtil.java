@@ -1,6 +1,7 @@
 package karashokleo.spell_dimension.util;
 
 import karashokleo.spell_dimension.config.AttributeModifier;
+import karashokleo.spell_dimension.content.item.trinket.SecondarySchoolItem;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.loot.context.LootContext;
@@ -39,17 +40,22 @@ public class LootContextUtil
 
     public static AttributeModifier getContextModifier(Random random, LootContext context)
     {
-        SpellSchool school = getContextSchool(context);
+        List<SpellSchool> schools = null;
         PlayerEntity player = getContextPlayer(context);
-        List<SpellSchool> schools = school == null ?
-                (player == null ?
-                        SchoolUtil.SCHOOLS :
-                        SchoolUtil.getEntitySchool(player)):
-                List.of(school);
-//        PlayerEntity player = getContextPlayer(context);
-//        List<SpellSchool> schools = player == null ?
-//                SchoolUtil.SCHOOLS :
-//                SchoolUtil.getPlayerSchool(player);
+        if (random.nextFloat() < SecondarySchoolItem.SECONDARY_SCHOOL_RATIO)
+        {
+            schools = SchoolUtil.getLivingSecondarySchools(player);
+        }
+        if (schools == null || schools.isEmpty())
+        {
+            SpellSchool school = getContextSchool(context);
+            List<SpellSchool> primarySchools = SchoolUtil.getLivingSchools(player);
+            schools = school == null ?
+                    (player == null ?
+                            SchoolUtil.SCHOOLS :
+                            primarySchools) :
+                    List.of(school);
+        }
         return AttributeModifier.getRandom(random, schools);
     }
 }

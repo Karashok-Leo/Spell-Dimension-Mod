@@ -23,6 +23,5 @@ public class AllRecipes
         Registry.register(Registries.RECIPE_SERIALIZER, SpellDimension.modLoc("locate_biome"), LocateBiomeRecipeSerializer.INSTANCE);
         Registry.register(Registries.RECIPE_SERIALIZER, SpellDimension.modLoc("summon"), SummonRecipeSerializer.INSTANCE);
         Registry.register(Registries.RECIPE_SERIALIZER, SpellDimension.modLoc("spell_infusion"), SpellInfusionRecipeSerializer.INSTANCE);
-
     }
 }
