@@ -2,7 +2,6 @@ package karashokleo.spell_dimension.init;
 
 import com.google.common.collect.ArrayListMultimap;
 import karashokleo.l2hostility.content.item.traits.TraitSymbol;
-import karashokleo.l2hostility.content.item.trinket.core.SingleEpicTrinketItem;
 import karashokleo.l2hostility.init.LHMiscs;
 import karashokleo.l2hostility.init.LHTags;
 import karashokleo.leobrary.datagen.builder.ItemBuilder;
@@ -125,11 +124,10 @@ public class AllItems
                 .addZH("任务卷轴")
                 .addModel()
                 .register();
-        BROKEN_ITEM = Entry.of("spawner_soul", new BrokenItem())
+        BROKEN_ITEM = Entry.of("broken_item", new BrokenItem())
                 .addEN()
-                .addZH("笼中魄")
+                .addZH("损坏的物品")
                 .addTag(LHTags.NO_SEAL)
-                .setTab(AllGroups.MISC)
                 .addModel(Models.HANDHELD)
                 .register();
 
@@ -339,6 +337,7 @@ public class AllItems
                         AllTags.ESSENCE.get(grade),
                         TagUtil.itemTag(new Identifier(RunesMod.ID, "rune_crafting/reagent/" + school.id.getPath() + "_small"))
                 )
+                .setTab(AllGroups.MISC)
                 .register();
     }
 

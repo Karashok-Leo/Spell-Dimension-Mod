@@ -174,6 +174,8 @@ public class AllSpells
         SpellProjectileHitBlockCallback.EVENT.register(BlackHoleSpell::handle);
         SpellProjectileOutOfRangeCallback.EVENT.register(BlackHoleSpell::handle);
 
+        SpellProjectileHitEntityCallback.EVENT.register(IcicleSpell::handle);
+
         SpellProjectileHitBlockCallback.EVENT.register(LightSpell::handle);
         SpellProjectileHitBlockCallback.EVENT.register(LocateSpell::handle);
         SpellProjectileHitBlockCallback.EVENT.register(SummonSpell::handle);
@@ -181,7 +183,6 @@ public class AllSpells
         SpellProjectileHitBlockCallback.EVENT.register(BreakSpell::handle);
 
         SpellImpactEvents.BEFORE.register(ArcaneBarrierSpell::handle);
-        SpellImpactEvents.BEFORE.register(IcicleSpell::handle);
         SpellImpactEvents.BEFORE.register(NucleusSpell::handle);
         SpellImpactEvents.BEFORE.register(ExorcismSpell::handle);
         SpellImpactEvents.BEFORE.register(RandomEffectSpell::handleBlessing);

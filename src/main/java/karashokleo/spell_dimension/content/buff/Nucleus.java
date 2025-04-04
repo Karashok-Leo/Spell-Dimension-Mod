@@ -7,6 +7,7 @@ import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.api.buff.Buff;
 import karashokleo.spell_dimension.api.buff.BuffType;
 import karashokleo.spell_dimension.config.SpellConfig;
+import karashokleo.spell_dimension.content.item.trinket.GlacialNuclearEraItem;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.util.AttributeUtil;
 import karashokleo.spell_dimension.util.DamageUtil;
@@ -58,11 +59,11 @@ public class Nucleus implements Buff
     private static SpellInfo getOrCreateSpellInfo(LivingEntity caster)
     {
         boolean era = TrinketCompat.hasItemInTrinket(caster, AllItems.GLACIAL_NUCLEAR_ERA);
-        if (era)
+        if (era && caster.getRandom().nextFloat() < GlacialNuclearEraItem.CHANCE)
         {
             if (ICICLE == null)
             {
-                Identifier spellId = SpellDimension.modLoc("mini_icicle");
+                Identifier spellId = SpellDimension.modLoc("icicle");
                 Spell spell = SpellRegistry.getSpell(spellId);
                 assert spell != null;
                 ICICLE = new SpellInfo(spell, spellId);
@@ -72,7 +73,7 @@ public class Nucleus implements Buff
         {
             if (MINI_ICICLE == null)
             {
-                Identifier spellId = SpellDimension.modLoc("icicle");
+                Identifier spellId = SpellDimension.modLoc("mini_icicle");
                 Spell spell = SpellRegistry.getSpell(spellId);
                 assert spell != null;
                 MINI_ICICLE = new SpellInfo(spell, spellId);

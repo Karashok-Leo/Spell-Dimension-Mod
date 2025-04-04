@@ -11,12 +11,12 @@ import java.util.List;
 
 public class AllGroups
 {
-    public static final ItemGroupBuilder SPELL_BOOKS = GroupEntry.of("spell_books");
-    public static final ItemGroupBuilder SPELL_SCROLLS = GroupEntry.of("spell_scrolls");
-    public static final ItemGroupBuilder QUEST_SCROLLS = GroupEntry.of("quest_scrolls");
-    public static final ItemGroupBuilder ENCHANTED_ESSENCES = GroupEntry.of("enchanted_essences");
-    public static final ItemGroupBuilder ENLIGHTENING_ESSENCES = GroupEntry.of("enlightening_essences");
-    public static final ItemGroupBuilder MISC = GroupEntry.of("misc");
+    public static final ItemGroupBuilder SPELL_BOOKS = GroupEntry.of("sd_spell_books");
+    public static final ItemGroupBuilder SPELL_SCROLLS = GroupEntry.of("sd_spell_scrolls");
+    public static final ItemGroupBuilder QUEST_SCROLLS = GroupEntry.of("sd_quest_scrolls");
+    public static final ItemGroupBuilder ENCHANTED_ESSENCES = GroupEntry.of("sd_enchanted_essences");
+    public static final ItemGroupBuilder ENLIGHTENING_ESSENCES = GroupEntry.of("sd_enlightening_essences");
+    public static final ItemGroupBuilder MISC = GroupEntry.of("sd_misc");
 
     public static void register()
     {
@@ -28,10 +28,7 @@ public class AllGroups
                 .addZH("咒次元：法术书")
                 .register();
 
-        List<ItemStack> spellScrolls = AllStacks.getSpellScrolls();
-        ItemStack firstSpellScroll = spellScrolls.get(0);
-        SPELL_SCROLLS.addAll(spellScrolls)
-                .setIcon(() -> firstSpellScroll)
+        SPELL_SCROLLS.setIcon(() -> AllItems.SPELL_SCROLL.getStack(AllSpells.ARCANE_BEAM))
                 .addEN("Spell Dimension: Spell Scrolls")
                 .addZH("咒次元：法术卷轴")
                 .register();
@@ -60,9 +57,7 @@ public class AllGroups
                 .addZH("咒次元：源启精华")
                 .register();
 
-        List<ItemStack> baseEssences = AllStacks.getBaseEssences();
-        MISC.addAll(baseEssences)
-                .setIcon(() -> AllItems.MAGIC_MIRROR.getDefaultStack())
+        MISC.setIcon(() -> AllItems.MAGIC_MIRROR.getDefaultStack())
                 .addEN("Spell Dimension: Miscellaneous")
                 .addZH("咒次元：杂项")
                 .register();
@@ -73,6 +68,8 @@ public class AllGroups
             AllItems.RANDOM_GEAR.forEach(entries::add);
             AllItems.RANDOM_BOOK.forEach(entries::add);
         });
+
+        ItemGroupEvents.modifyEntriesEvent(SPELL_SCROLLS.registryKey).register(entries -> entries.addAll(AllStacks.getSpellScrolls()));
     }
 
     private static class GroupEntry extends ItemGroupBuilder
