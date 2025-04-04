@@ -6,7 +6,7 @@
   "background_width": 512,
   "entry_textures": "modonomicon:textures/gui/entry_textures.png",
   "icon": {
-    "item": "spell-dimension:rejuvenating_blossom"
+    "item": "wizards:wand_arcane"
   },
   "name": "book.spell-dimension-book.magic_guidance.power.name",
   "show_category_button": true,

@@ -62,16 +62,16 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
         AllBlocks.register();
         AllEntities.register();
         AllWorldGen.register();
-        AllGroups.register();
+        AllQuests.register();
         AllLoots.register();
         AllBuffs.register();
-        AllQuests.register();
         AllTraits.register();
         AllEnchantments.register();
         AllStatusEffects.register();
         AllRecipes.register();
         AllDamageTypes.register();
         AllSpells.register();
+        AllGroups.register();
         AllMiscInit.register();
 
         AllPackets.init();
