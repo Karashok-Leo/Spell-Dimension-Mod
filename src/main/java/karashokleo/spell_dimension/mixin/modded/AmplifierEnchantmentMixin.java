@@ -32,7 +32,9 @@ public abstract class AmplifierEnchantmentMixin
         cir.setReturnValue(
                 cir.getReturnValue() ||
                 stack.isIn(AllTags.ARMOR) ||
-                stack.isIn(AllTags.MELEE_WEAPONS)
+                stack.isIn(AllTags.MELEE_WEAPONS) ||
+                stack.isIn(AllTags.MAGIC) ||
+                stack.isIn(AllTags.MAGIC_WEAPON)
         );
     }
 }
