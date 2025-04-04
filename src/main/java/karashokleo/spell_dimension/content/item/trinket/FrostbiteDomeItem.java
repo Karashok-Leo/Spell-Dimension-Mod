@@ -11,6 +11,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 import net.spell_power.api.SpellSchools;
 import org.jetbrains.annotations.Nullable;
@@ -19,7 +20,7 @@ import java.util.List;
 
 public class FrostbiteDomeItem extends SingleEpicTrinketItem implements DamageListenerTrinket
 {
-    public static final int STONE_CAGE_DURATION = 60;
+    public static final int STONE_CAGE_DURATION = 100;
     public static final float DAMAGE_FACTOR = 0.01F;
 
     public FrostbiteDomeItem()
@@ -52,8 +53,8 @@ public class FrostbiteDomeItem extends SingleEpicTrinketItem implements DamageLi
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
-        tooltip.add(SDTexts.TOOLTIP$FROSTBITE_DOME$1.get(STONE_CAGE_DURATION / 20));
-        tooltip.add(SDTexts.TOOLTIP$FROSTBITE_DOME$2.get());
+        tooltip.add(SDTexts.TOOLTIP$FROSTBITE_DOME$1.get(STONE_CAGE_DURATION / 20).formatted(Formatting.BLUE));
+        tooltip.add(SDTexts.TOOLTIP$FROSTBITE_DOME$2.get().formatted(Formatting.BLUE));
         super.appendTooltip(stack, world, tooltip, context);
     }
 }

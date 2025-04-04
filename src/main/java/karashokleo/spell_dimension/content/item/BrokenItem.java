@@ -1,8 +1,7 @@
 package karashokleo.spell_dimension.content.item;
 
-import karashokleo.l2hostility.content.item.MiscItems;
 import karashokleo.l2hostility.init.LHEnchantments;
-import karashokleo.l2hostility.init.LHTexts;
+import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.util.SoundUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -45,12 +44,6 @@ public class BrokenItem extends Item
 
     public ItemStack saveItem(ItemStack stack, int requireMending)
     {
-        if (stack.isOf(MiscItems.SEAL))
-        {
-            NbtCompound nbt = stack.getOrCreateNbt();
-            nbt.putInt(REQUIRE_MENDING_KEY, Math.max(nbt.getInt(REQUIRE_MENDING_KEY), requireMending));
-            return stack;
-        }
         ItemStack ans = getDefaultStack();
         NbtCompound nbt = ans.getOrCreateNbt();
         nbt.putInt(REQUIRE_MENDING_KEY, requireMending);
@@ -89,7 +82,8 @@ public class BrokenItem extends Item
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
-        tooltip.add(LHTexts.TOOLTIP_SEAL_DATA.get().formatted(Formatting.GRAY));
-        tooltip.add(ItemStack.fromNbt(stack.getOrCreateNbt().getCompound(SAVE_ITEM_KEY)).getName());
+        NbtCompound nbt = stack.getOrCreateNbt();
+        tooltip.add(SDTexts.TOOLTIP$BROKEN_ITEM.get(nbt.getInt(REQUIRE_MENDING_KEY)).formatted(Formatting.GRAY));
+        tooltip.add(ItemStack.fromNbt(nbt.getCompound(SAVE_ITEM_KEY)).getName());
     }
 }

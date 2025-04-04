@@ -18,7 +18,7 @@ public class NirvanaEffect extends StatusEffect
         return (en ?
                 "Fire spell power and max health reduced to %s%% of original and stays on fire." :
                 "火焰法术强度和最大生命值降低至原来的%s%%，并持续着火")
-                .formatted(NIRVANA_FACTOR * 100);
+                .formatted(Math.round(NIRVANA_FACTOR * 100));
     }
 
     public NirvanaEffect()

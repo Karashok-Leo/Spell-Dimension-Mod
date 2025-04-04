@@ -41,7 +41,7 @@ public class HeartSpellSteelItem extends SingleEpicTrinketItem implements Damage
     }
 
     @Override
-    public void onKilled(ItemStack stack, LivingEntity entity, LivingEntity killed, DamageSource source)
+    public void afterKilling(ItemStack stack, LivingEntity entity, LivingEntity killed, DamageSource source)
     {
         if (!source.isOf(SpellSchools.HEALING.damageType))
             return;

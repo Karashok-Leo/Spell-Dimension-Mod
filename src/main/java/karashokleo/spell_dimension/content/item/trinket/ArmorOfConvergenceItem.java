@@ -21,7 +21,7 @@ public class ArmorOfConvergenceItem extends SingleEpicTrinketItem
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
-        tooltip.add(SDTexts.TOOLTIP$ARMOR_OF_CONVERGENCE.get().formatted(Formatting.LIGHT_PURPLE));
+        tooltip.add(SDTexts.TOOLTIP$ARMOR_OF_CONVERGENCE.get().formatted(Formatting.DARK_PURPLE));
         super.appendTooltip(stack, world, tooltip, context);
     }
 }

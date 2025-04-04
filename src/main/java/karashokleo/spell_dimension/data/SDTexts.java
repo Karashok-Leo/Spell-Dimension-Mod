@@ -184,18 +184,18 @@ public enum SDTexts
     /**
      * Trinkets
      */
-    TOOLTIP$ARMOR_OF_CONVERGENCE("Casting [Converge] spell in place while rolling.", "翻滚时在原地施放 [汇聚] 法术"),
-    TOOLTIP$ARCANE_THRONE$1("Provides permanent Phase effect.", "提供永久相位"),
+    TOOLTIP$ARMOR_OF_CONVERGENCE("- Casting [Converge] spell in place while rolling.", "- 翻滚时在原地施放 [汇聚] 法术"),
+    TOOLTIP$ARCANE_THRONE$1("- Provides permanent Phase effect.", "- 提供永久相位"),
     TOOLTIP$ARCANE_THRONE$2("Use the mouse cursor to right-click on the item to switch the Phase.","使用鼠标指针右键该物品以开关"),
     TOOLTIP$ARCANE_THRONE$ON("Enabled","已开启"),
     TOOLTIP$ARCANE_THRONE$OFF("Disabled","已关闭"),
     TOOLTIP$NIRVANA_STARFALL$DEFRAUDING_REAPER("- [Defrauding Reaper] If you are near death and your fire spell power is above %s, you are spared from death once at the cost of gaining a %s second Nirvana effect and removing all harmful effects.","- [欺诈死神] 濒临死亡且自身火焰法术强度高于%s时，以获得%s秒涅槃效果为代价免死一次，并清除身上所有负面效果"),
     TOOLTIP$NIRVANA_STARFALL$NIRVANA_REBIRTH("- [Nirvana Rebirth] %s".formatted(NirvanaEffect.getDesc(true)),"- [涅槃重生] %s".formatted(NirvanaEffect.getDesc(false))),
-    TOOLTIP$GLACIAL_NUCLEAR_ERA$1("When your [Icy Nucleus] explodes, cast [Icicle] on the surrounding area.","你施放的 [冰核] 爆炸时向周围施放 [冰刺]"),
-    TOOLTIP$GLACIAL_NUCLEAR_ERA$2("On a hit from your [Icicle], cast [Icy Nucleus] on the target.","你施放的 [冰刺] 命中时向目标施放 [冰核]"),
+    TOOLTIP$GLACIAL_NUCLEAR_ERA$1("- Your cast [Icy Nucleus] explosion has a %s%% chance to cast [Icicle] on the surrounding area.","- 你施放的 [冰核] 爆炸时有%s%%的概率向周围施放 [冰刺]"),
+    TOOLTIP$GLACIAL_NUCLEAR_ERA$2("- Your cast [Icicle] has a %s%% chance to cast [Icy Nucleus] on the target upon hitting.","- 你施放的 [冰刺] 命中时有%s%%的概率向目标施放 [冰核]"),
     TOOLTIP$FROSTBITE_DOME$1("- Apply a Incarceration effect for %s seconds when dealing frost spell damage.","- 造成寒冰法术伤害时施加禁锢效果，持续%s秒"),
     TOOLTIP$FROSTBITE_DOME$2("- If the target already has a Incarceration effect, remove Incarceration and deals more damage, depending on the duration of Incarceration.","- 如果目标已有禁锢效果，则移除禁锢，并造成更多伤害，额外伤害取决于禁锢的时长"),
-    TOOLTIP$HEART_SPELL_STEEL$USAGE("When killing a mob with a level higher than %s using healing spell damage within %s blocks, gain a max health boost equal to %s of this damage, with a cooldown of %s seconds.", "在%s格范围内使用治愈魔法伤害击杀等级高于%s的生物时，可获得相当于此次伤害%s的生命上限提升，冷却%s秒"),
+    TOOLTIP$HEART_SPELL_STEEL$USAGE("- When killing a mob with a level higher than %s using healing spell damage within %s blocks, gain a max health boost equal to %s of target's max health, with a cooldown of %s seconds.", "- 在%s格范围内使用治愈魔法伤害击杀等级高于%s的生物时，可获得相当于目标最大生命值%s的生命上限提升，冷却%s秒"),
     TOOLTIP$HEART_SPELL_STEEL$ACCUMULATED("Max health obtained: %s", "已获得的最大生命值：%s"),
     TOOLTIP$REJUVENATING_BLOSSOM$USAGE_2("- When injured, gain a regeneration effect that restores health equivalent to the amount of damage received * the count of this item equipped.", "- 受伤时获得生命恢复效果，该效果将恢复的生命值等同于受到的伤害值 * 装备的该物品数量"),
     TOOLTIP$REJUVENATING_BLOSSOM$USAGE_1("- When injured, if the amount of health that your existing regeneration effect will recover is less than the damage dealt * the count of this item equipped, then remove all harmful effects from you and halves this damage.", "- 受伤时，如果你还未恢复的生命值低于受到伤害 * 装备的该物品数量，则移除你身上所有负面效果并减半此次伤害"),
@@ -223,6 +223,10 @@ public enum SDTexts
     TOOLTIP$SECONDARY_SCHOOL_ITEM$1("- Gain %s spell power equal to %s%% of your major school's spell power", "- 获得相当于主修学派法术强度%2$s%%的%s法术强度"),
     TOOLTIP$SECONDARY_SCHOOL_ITEM$2("- Spell Scrolls of %s school can be used", "- 可以使用%s法术学派的卷轴"),
     TOOLTIP$SECONDARY_SCHOOL_ITEM$3("- %s%% chance to get %s Spell School's Enchanted Essence and Enlightening Essence", "- 有%s%%的几率获得%s法术学派的束魔精华和源启精华"),
+
+    /**
+     * Difficulty Tier
+     */
     TOOLTIP$DIFFICULTY_TIER$CURRENT("Current Difficulty Tier: %s", "当前难度层级：%s"),
     TOOLTIP$DIFFICULTY_TIER$DESC("- %s", "- %s"),
     TOOLTIP$DIFFICULTY_TIER$ENTER("Difficulty Tier - %s", "难度层级 - %s"),
@@ -237,6 +241,8 @@ public enum SDTexts
     TOOLTIP$BOTTLE_NIGHTMARE("Enter [%s] mode after use, cannot be undone", "使用后进入 [%s] 模式，不可撤销"),
     TOOLTIP$BOTTLE_SOUL_BINDING("After using it, you will no longer lose the item when you die", "使用后，死亡不再丢失物品"),
     TOOLTIP$BOTTLE_SOUL_BINDING$WARNING("By default, items other than trinkets dropped by a player upon death are retained in the Gravestone. However, for some unknown reason, it is still possible, albeit highly unlikely, for items in the gravestone to disappear. If you are completely intolerant of the possibility of losing everything you own, drink this potion.", "默认情况下，玩家死亡时掉落的除饰品外的其他物品将被保留在墓碑中。但由于某些不明原因，墓碑中的物品仍有可能不翼而飞，尽管这种可能性微乎其微。如果你完全无法容忍失去所有身家的可能性，请喝下这瓶药水。"),
+
+    TOOLTIP$BROKEN_ITEM("Use %s Mending Essences to repair it to the original item:", "使用%s个修复精华将其修复为原物品："),
     TOOLTIP$SHIFT_RESET("Shift + Right-click to reset the progress", "Shift + 右键重置进度"),
     TOOLTIP$SPELL_PRISM("Consuming durability to make your spell damage bypass magical protection.", "消耗耐久使你的法术伤害可以穿透魔法防御"),
     TOOLTIP$SPELL_PRISM_ADVANCED("Maybe enhance the effects of certain spells?", "或许可以增强某些法术的效果？"),

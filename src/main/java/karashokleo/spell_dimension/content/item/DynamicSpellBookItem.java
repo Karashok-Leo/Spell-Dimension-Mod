@@ -131,7 +131,7 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
             SpellInfo spellInfo = scrollItem.getSpellInfo(scroll);
             if (spellInfo == null)
             {
-                player.sendMessage(SDTexts.TOOLTIP$INVALID.get());
+                player.sendMessage(SDTexts.TOOLTIP$INVALID.get().formatted(Formatting.RED));
                 return;
             }
             SpellSchool school = spellInfo.spell().school;
@@ -148,7 +148,7 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
             SpellBinding.State.ApplyState state = SpellBinding.State.of(spellInfo.id(), stack, 0, 0, 0).state;
             switch (state)
             {
-                case INVALID -> player.sendMessage(SDTexts.TOOLTIP$INVALID.get());
+                case INVALID -> player.sendMessage(SDTexts.TOOLTIP$INVALID.get().formatted(Formatting.RED));
                 case ALREADY_APPLIED ->
                         player.sendMessage(Text.translatable("gui.spell_engine.spell_binding.already_bound"));
                 case NO_MORE_SLOT ->
@@ -172,7 +172,7 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
         if (container == null || !container.isValid())
         {
             if (player.getWorld().isClient())
-                player.sendMessage(SDTexts.TOOLTIP$INVALID.get());
+                player.sendMessage(SDTexts.TOOLTIP$INVALID.get().formatted(Formatting.RED));
             return Optional.empty();
         }
         int size = container.spell_ids.size();

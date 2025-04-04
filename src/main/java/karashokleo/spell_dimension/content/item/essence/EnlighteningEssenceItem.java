@@ -96,7 +96,7 @@ public class EnlighteningEssenceItem extends RightPressEssenceItem
         EnlighteningModifier enlighteningModifier = getModifier(stack);
         if (enlighteningModifier == null)
         {
-            tooltip.add(SDTexts.TOOLTIP$INVALID.get());
+            tooltip.add(SDTexts.TOOLTIP$INVALID.get().formatted(Formatting.RED));
             return;
         }
         tooltip.add(SDTexts.TOOLTIP$MODIFIER.get().formatted(Formatting.GRAY));

@@ -9,6 +9,7 @@ import net.minecraft.screen.ScreenTexts;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.text.Text;
 import net.minecraft.util.ClickType;
+import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -47,8 +48,8 @@ public abstract class StackClickEssenceItem extends SpellEssenceItem
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
         super.appendTooltip(stack, world, tooltip, context);
-        tooltip.add(SDTexts.TOOLTIP$USE$CLICK.get());
+        tooltip.add(SDTexts.TOOLTIP$USE$CLICK.get().formatted(Formatting.GRAY));
         tooltip.add(ScreenTexts.EMPTY);
-        tooltip.add(SDTexts.TOOLTIP$EFFECT.get());
+        tooltip.add(SDTexts.TOOLTIP$EFFECT.get().formatted(Formatting.GRAY));
     }
 }

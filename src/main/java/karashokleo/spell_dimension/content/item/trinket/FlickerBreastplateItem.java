@@ -42,7 +42,7 @@ public class FlickerBreastplateItem extends SingleEpicTrinketItem implements Dam
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
-        super.appendTooltip(stack, world, tooltip, context);
         tooltip.add(SDTexts.TOOLTIP$FLICKER_BREASTPLATE.get().formatted(Formatting.GOLD));
+        super.appendTooltip(stack, world, tooltip, context);
     }
 }

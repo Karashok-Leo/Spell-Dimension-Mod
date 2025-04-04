@@ -113,7 +113,7 @@ public class EnchantedEssenceItem extends StackClickEssenceItem
         EnchantedModifier enchantedModifier = getModifier(stack);
         if (enchantedModifier == null)
         {
-            tooltip.add(SDTexts.TOOLTIP$INVALID.get());
+            tooltip.add(SDTexts.TOOLTIP$INVALID.get().formatted(Formatting.RED));
             return;
         }
         tooltip.add(SDTexts.getSlotText(enchantedModifier.slot()).formatted(Formatting.GRAY));

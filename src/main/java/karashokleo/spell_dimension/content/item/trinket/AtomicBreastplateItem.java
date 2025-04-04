@@ -94,9 +94,9 @@ public class AtomicBreastplateItem extends SingleEpicTrinketItem implements Dama
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
-        super.appendTooltip(stack, world, tooltip, context);
         for (Upgrade upgrade : Upgrade.values())
             upgrade.appendTooltip(tooltip, stack);
+        super.appendTooltip(stack, world, tooltip, context);
     }
 
     public enum Upgrade

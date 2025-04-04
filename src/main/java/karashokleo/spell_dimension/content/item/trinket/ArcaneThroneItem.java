@@ -40,6 +40,9 @@ public class ArcaneThroneItem extends CurseTrinketItem
         if (entity.age % 20 != 0)
             return;
 
+        if (!stack.getOrCreateNbt().getBoolean(ENABLE_KEY))
+            return;
+
         EffectHelper.forceAddEffectWithEvent(
                 entity,
                 new StatusEffectInstance(AllStatusEffects.PHASE, 40, 0),
@@ -69,9 +72,9 @@ public class ArcaneThroneItem extends CurseTrinketItem
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
-        tooltip.add(LHTexts.ITEM_CHARM_GREED.get(LOOT_FACTOR).formatted(Formatting.GOLD));
-        tooltip.add(SDTexts.TOOLTIP$ARCANE_THRONE$1.get());
-        tooltip.add(SDTexts.TOOLTIP$ARCANE_THRONE$2.get());
+        tooltip.add(Text.literal("- ").append(LHTexts.ITEM_CHARM_GREED.get(LOOT_FACTOR)).formatted(Formatting.GOLD));
+        tooltip.add(SDTexts.TOOLTIP$ARCANE_THRONE$1.get().formatted(Formatting.LIGHT_PURPLE));
+        tooltip.add(SDTexts.TOOLTIP$ARCANE_THRONE$2.get().formatted(Formatting.GRAY));
         boolean enable = stack.getOrCreateNbt().getBoolean(ENABLE_KEY);
         if (enable)
         {

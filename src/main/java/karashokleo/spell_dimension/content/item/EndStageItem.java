@@ -60,7 +60,7 @@ public class EndStageItem extends Item
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
         super.appendTooltip(stack, world, tooltip, context);
-        tooltip.add(SDTexts.TOOLTIP$END_STAGE.get());
+        tooltip.add(SDTexts.TOOLTIP$END_STAGE.get().formatted(Formatting.GRAY));
         if (context.isCreative())
             tooltip.add(SDTexts.TOOLTIP$SHIFT_RESET.get().formatted(Formatting.GRAY));
     }

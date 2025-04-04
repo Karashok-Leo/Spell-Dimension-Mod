@@ -52,7 +52,7 @@ public class EnchantedBreastplateItem extends SingleEpicTrinketItem
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
-        super.appendTooltip(stack, world, tooltip, context);
         tooltip.add(SDTexts.TOOLTIP$ENCHANTED_BREASTPLATE.get(ARMOR_RATIO, ARMOR_TOUGHNESS_RATIO).formatted(Formatting.DARK_PURPLE));
+        super.appendTooltip(stack, world, tooltip, context);
     }
 }

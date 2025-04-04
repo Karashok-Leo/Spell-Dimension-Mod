@@ -118,6 +118,8 @@ public class OblivionBreastplateItem extends SingleEpicTrinketItem implements Da
         tooltip.add(SDTexts.TOOLTIP$OBLIVION_BREASTPLATE_2.get(
                 "%d%%".formatted((int) (MAX_SPELL_POWER_RATIO * 100))
         ).formatted(Formatting.DARK_GRAY));
-        tooltip.add(SDTexts.TOOLTIP$OBLIVION_BREASTPLATE_3.get(getOblivionAmount(stack)).formatted(Formatting.AQUA));
+        tooltip.add(SDTexts.TOOLTIP$OBLIVION_BREASTPLATE_3.get(
+                "%.2f".formatted(getOblivionAmount(stack))
+        ).formatted(Formatting.AQUA));
     }
 }

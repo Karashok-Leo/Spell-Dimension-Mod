@@ -8,6 +8,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -41,6 +42,6 @@ public class MendingEssenceItem extends StackClickEssenceItem
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
         super.appendTooltip(stack, world, tooltip, context);
-        tooltip.add(SDTexts.TOOLTIP$MENDING.get());
+        tooltip.add(SDTexts.TOOLTIP$MENDING.get().formatted(Formatting.GRAY));
     }
 }
