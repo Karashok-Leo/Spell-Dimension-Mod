@@ -61,5 +61,6 @@ public abstract class CurseOfPrideMixin extends CurseTrinketItem
         int trait = (int) Math.round(100 * (1 / LHConfig.common().items.curse.prideTraitFactor - 1));
         tooltip.add(SDTexts.TOOLTIP$CURSE_PRIDE_1.get(damage).formatted(Formatting.GOLD));
         tooltip.add(LHTexts.ITEM_CHARM_TRAIT_CHEAP.get(trait).formatted(Formatting.RED));
+        super.appendTooltip(stack, world, tooltip, context);
     }
 }

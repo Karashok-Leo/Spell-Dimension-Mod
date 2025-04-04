@@ -25,7 +25,7 @@ public abstract class ItemStackMixin
             method = "damage(ILnet/minecraft/entity/LivingEntity;Ljava/util/function/Consumer;)V",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/entity/player/PlayerEntity;incrementStat(Lnet/minecraft/stat/Stat;)V"
+                    target = "Lnet/minecraft/item/ItemStack;decrement(I)V"
             )
     )
     public <T extends LivingEntity> void inject_damage_safeguard(int amount, T entity, Consumer<T> breakCallback, CallbackInfo ci)
