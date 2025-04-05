@@ -7,11 +7,14 @@ import com.klikli_dev.modonomicon.api.datagen.book.page.BookImagePageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookSpotlightPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
+import karashokleo.enchantment_infusion.api.recipe.EnchantmentIngredient;
 import karashokleo.enchantment_infusion.init.EIItems;
 import karashokleo.spell_dimension.data.book.entry.BaseEntryProvider;
 import karashokleo.spell_dimension.util.BookGenUtil;
+import net.fabricmc.fabric.api.recipe.v1.ingredient.DefaultCustomIngredients;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
+import net.spell_power.api.enchantment.Enchantments_SpellPower;
 
 import java.util.List;
 
@@ -118,7 +121,49 @@ public class EnchantEntry extends BaseEntryProvider
                 .withItem(Ingredient.ofItems(Items.GRINDSTONE))
                 .build();
 
-        return List.of(infuse, image, pos, disenchant);
+        context.page("restriction");
+        this.lang().add(context.pageTitle(), "Enchantment Restriction");
+        this.lang().add(context.pageText(),
+                """
+                        You can check applicable items and conflicting enchantments for specific enchantment in EMI (press U on the enchanted book).
+                        """
+        );
+        this.lang("zh_cn").add(context.pageTitle(), "附魔限制");
+        this.lang("zh_cn").add(context.pageText(),
+                """
+                        你可以在EMI中查看魔咒的可应用物品和冲突魔咒（对附魔书按下U）。
+                        """
+        );
+
+        BookSpotlightPageModel restriction = BookSpotlightPageModel
+                .builder()
+                .withTitle(context.pageTitle())
+                .withText(context.pageText())
+                .withItem(DefaultCustomIngredients.any(
+                        EnchantmentIngredient.of(Enchantments_SpellPower.SUNFIRE, 5),
+                        EnchantmentIngredient.of(Enchantments_SpellPower.SOULFROST, 5),
+                        EnchantmentIngredient.of(Enchantments_SpellPower.ENERGIZE, 5)
+                ))
+                .build();
+
+        context.page("amplify");
+        this.lang().add(context.pageText(),
+                """
+                        In addition, enchantments that increase spell power (such as Sunfire, Soulfrost, and Energize) also require the item to carry the corresponding school of spell power, otherwise it cannot be enchanted.
+                        """
+        );
+        this.lang("zh_cn").add(context.pageText(),
+                """
+                        除此之外，增加法术强度的魔咒（如：阳炎、灵冻、蓄能）还要求物品携带对应学派的法术强度，否则无法附魔。
+                        """
+        );
+
+        BookTextPageModel amplify = BookTextPageModel
+                .builder()
+                .withText(context.pageText())
+                .build();
+
+        return List.of(infuse, image, pos, disenchant, restriction, amplify);
     }
 
     @Override

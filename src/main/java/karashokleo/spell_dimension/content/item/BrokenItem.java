@@ -66,15 +66,17 @@ public class BrokenItem extends Item
         SoundUtil.playSound(player, SoundUtil.ANVIL);
         NbtCompound nbt = stack.getOrCreateNbt();
         int requireMending = nbt.getInt(REQUIRE_MENDING_KEY);
-        if (requireMending <= 1)
+        if (requireMending > 0)
+        {
+            requireMending--;
+            nbt.putInt(REQUIRE_MENDING_KEY, requireMending);
+        }
+        if (requireMending <= 0)
         {
             ItemStack itemStack = ItemStack.fromNbt(nbt.getCompound(SAVE_ITEM_KEY));
             itemStack.setDamage(0);
             slot.setStack(itemStack);
             stack.decrement(1);
-        } else
-        {
-            nbt.putInt(REQUIRE_MENDING_KEY, requireMending - 1);
         }
         return true;
     }

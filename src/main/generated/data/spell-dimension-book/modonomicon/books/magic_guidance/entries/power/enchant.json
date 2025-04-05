@@ -61,6 +61,46 @@
       },
       "text": "book.spell-dimension-book.magic_guidance.power.enchant.disenchant.text",
       "title": "book.spell-dimension-book.magic_guidance.power.enchant.disenchant.title"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "item": {
+        "fabric:type": "fabric:any",
+        "ingredients": [
+          {
+            "fabric:type": "enchantment_infusion:enchantment",
+            "enchantment": "spell_power:sunfire",
+            "min_level": 5
+          },
+          {
+            "fabric:type": "enchantment_infusion:enchantment",
+            "enchantment": "spell_power:soulfrost",
+            "min_level": 5
+          },
+          {
+            "fabric:type": "enchantment_infusion:enchantment",
+            "enchantment": "spell_power:energize",
+            "min_level": 5
+          }
+        ]
+      },
+      "text": "book.spell-dimension-book.magic_guidance.power.enchant.restriction.text",
+      "title": "book.spell-dimension-book.magic_guidance.power.enchant.restriction.title"
+    },
+    {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "show_title_separator": true,
+      "text": "book.spell-dimension-book.magic_guidance.power.enchant.amplify.text",
+      "title": "",
+      "use_markdown_in_title": false
     }
   ],
   "show_when_any_parent_unlocked": false,

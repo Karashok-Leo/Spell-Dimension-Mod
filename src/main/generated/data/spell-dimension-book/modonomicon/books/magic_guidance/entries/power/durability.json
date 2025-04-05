@@ -16,6 +16,18 @@
         "type": "modonomicon:none"
       },
       "item": {
+        "item": "spell-dimension:broken_item"
+      },
+      "text": "book.spell-dimension-book.magic_guidance.power.durability.broken.text",
+      "title": "book.spell-dimension-book.magic_guidance.power.durability.broken.title"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "item": {
         "fabric:type": "enchantment_infusion:enchantment",
         "enchantment": "l2hostility:hardened",
         "min_level": 1

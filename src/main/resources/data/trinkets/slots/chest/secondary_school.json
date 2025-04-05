@@ -1,5 +1,5 @@
 {
-  "icon": "spell-dimension:slot/breastplate",
+  "icon": "spell-dimension:slot/secondary_school",
   "order": 666,
   "validator_predicates": [
     "trinkets:tag"

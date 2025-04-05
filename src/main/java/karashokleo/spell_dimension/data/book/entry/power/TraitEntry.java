@@ -134,7 +134,23 @@ public class TraitEntry extends BaseEntryProvider
                 .withText(context.pageText())
                 .build();
 
-        return List.of(trait, trait1, trait2, trait3);
+        context.page("trait4");
+        this.lang().add(context.pageText(),
+                """
+                        Arena: You can place or break blocks in arena with **Remote Manipulation** spell or **Remote Destruction** spell.
+                        """
+        );
+        this.lang("zh_cn").add(context.pageText(),
+                """
+                        领域压制: 你可以使用**远端操控**法术或者**远端瓦解**法术在领域内破坏或放置方块。
+                        """
+        );
+        BookTextPageModel trait4 = BookTextPageModel
+                .builder()
+                .withText(context.pageText())
+                .build();
+
+        return List.of(trait, trait1, trait2, trait3, trait4);
     }
 
     @Override

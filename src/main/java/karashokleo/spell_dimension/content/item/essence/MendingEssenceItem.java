@@ -25,10 +25,9 @@ public class MendingEssenceItem extends StackClickEssenceItem
     protected boolean applyEffect(ItemStack essence, ItemStack target, PlayerEntity player)
     {
         NbtCompound nbt = target.getNbt();
-        if (nbt == null)
-        {
-            return false;
-        } else
+        if (nbt != null &&
+            (target.isDamageable() ||
+             target.getRepairCost() > 0))
         {
             if (nbt.contains("Damage"))
                 target.setDamage(0);
@@ -36,6 +35,7 @@ public class MendingEssenceItem extends StackClickEssenceItem
                 target.setRepairCost(0);
             return true;
         }
+        return false;
     }
 
     @Override

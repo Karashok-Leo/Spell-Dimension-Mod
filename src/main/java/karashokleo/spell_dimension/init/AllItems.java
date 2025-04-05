@@ -24,6 +24,7 @@ import net.runes.RunesMod;
 import net.spell_engine.api.item.trinket.SpellBooks;
 import net.spell_engine.internals.SpellRegistry;
 import net.spell_power.api.SpellSchool;
+import net.spell_power.api.SpellSchools;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +58,7 @@ public class AllItems
     public static ArmorOfConvergenceItem ARMOR_OF_CONVERGENCE;
     public static ArcaneThroneItem ARCANE_THRONE;
     public static NirvanaStarfallItem NIRVANA_STARFALL;
+    public static SoulfireMaskItem SOULFIRE_MASK;
     public static GlacialNuclearEraItem GLACIAL_NUCLEAR_ERA;
     public static FrostbiteDomeItem FROSTBITE_DOME;
     public static HeartSpellSteelItem HEART_STEEL;
@@ -68,6 +70,12 @@ public class AllItems
     public static FlexBreastplateItem FLEX_BREASTPLATE;
     public static FlickerBreastplateItem FLICKER_BREASTPLATE;
     public static OblivionBreastplateItem OBLIVION_BREASTPLATE;
+
+    // Secondary School Items
+    public static SecondarySchoolItem RIDDLE_BOOK;
+    public static SecondarySchoolItem BLISS_FLAME;
+    public static SecondarySchoolItem ICE_CUBE;
+    public static SecondarySchoolItem FATE_STONE;
 
     // Misc Items
     public static Item DEBUG_STAFF;
@@ -182,6 +190,13 @@ public class AllItems
                 .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
+        SOULFIRE_MASK = Entry.of("soulfire_mask", new SoulfireMaskItem())
+                .addEN()
+                .addZH("燃魂假面")
+                .addTag(AllTags.FACE)
+                .setTab(AllGroups.MISC)
+                .addModel()
+                .register();
         GLACIAL_NUCLEAR_ERA = Entry.of("glacial_nuclear_era", new GlacialNuclearEraItem())
                 .addEN()
                 .addZH("冰核世纪")
@@ -244,6 +259,36 @@ public class AllItems
                 .addEN()
                 .addZH("湮灭护心镜")
                 .addTag(AllTags.BREASTPLATE_SLOT)
+                .setTab(AllGroups.MISC)
+                .addModel()
+                .register();
+
+        // Secondary School Items
+        RIDDLE_BOOK = Entry.of("riddle_book", new SecondarySchoolItem(SpellSchools.ARCANE))
+                .addEN()
+                .addZH("谜语书")
+                .addTag(AllTags.SECONDARY_SCHOOL_SLOT)
+                .setTab(AllGroups.MISC)
+                .addModel()
+                .register();
+        BLISS_FLAME = Entry.of("bliss_flame", new SecondarySchoolItem(SpellSchools.FIRE))
+                .addEN()
+                .addZH("极乐火")
+                .addTag(AllTags.SECONDARY_SCHOOL_SLOT)
+                .setTab(AllGroups.MISC)
+                .addModel()
+                .register();
+        ICE_CUBE = Entry.of("ice_cube", new SecondarySchoolItem(SpellSchools.FROST))
+                .addEN()
+                .addZH("冰立方")
+                .addTag(AllTags.SECONDARY_SCHOOL_SLOT)
+                .setTab(AllGroups.MISC)
+                .addModel()
+                .register();
+        FATE_STONE = Entry.of("fate_stone", new SecondarySchoolItem(SpellSchools.HEALING))
+                .addEN()
+                .addZH("命理石")
+                .addTag(AllTags.SECONDARY_SCHOOL_SLOT)
                 .setTab(AllGroups.MISC)
                 .addModel()
                 .register();

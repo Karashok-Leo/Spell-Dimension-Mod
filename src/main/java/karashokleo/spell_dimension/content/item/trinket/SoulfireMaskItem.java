@@ -11,9 +11,9 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.item.ItemStack;
 import net.spell_power.api.SpellSchools;
 
-public class FireItem extends SingleEpicTrinketItem implements DamageListenerTrinket
+public class SoulfireMaskItem extends SingleEpicTrinketItem implements DamageListenerTrinket
 {
-    public FireItem()
+    public SoulfireMaskItem()
     {
     }
 

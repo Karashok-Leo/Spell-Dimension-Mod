@@ -12,6 +12,7 @@ import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.MutableText;
+import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.world.World;
 import net.spell_power.api.SpellSchool;
@@ -52,20 +53,35 @@ public class SecondarySchoolItem extends SingleEpicTrinketItem
     }
 
     @Override
+    public Text getName()
+    {
+        return Text.translatable(this.getTranslationKey())
+                .setStyle(Style.EMPTY.withColor(school.color));
+    }
+
+    @Override
+    public Text getName(ItemStack stack)
+    {
+        return Text.translatable(this.getTranslationKey(stack))
+                .setStyle(Style.EMPTY.withColor(school.color));
+    }
+
+    @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
         MutableText schoolText = SDTexts.getSchoolText(school);
+        Style style = Style.EMPTY.withColor(school.color);
         tooltip.add(SDTexts.TOOLTIP$SECONDARY_SCHOOL_ITEM$1.get(
                 schoolText,
                 SECONDARY_SCHOOL_RATIO * 100
-        ));
+        ).setStyle(style));
         tooltip.add(SDTexts.TOOLTIP$SECONDARY_SCHOOL_ITEM$2.get(
                 schoolText
-        ));
+        ).setStyle(style));
         tooltip.add(SDTexts.TOOLTIP$SECONDARY_SCHOOL_ITEM$3.get(
                 SECONDARY_SCHOOL_RATIO * 100,
                 schoolText
-        ));
+        ).setStyle(style));
         super.appendTooltip(stack, world, tooltip, context);
     }
 }

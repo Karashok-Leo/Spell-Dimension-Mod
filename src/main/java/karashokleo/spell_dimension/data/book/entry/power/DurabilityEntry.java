@@ -8,7 +8,9 @@ import com.klikli_dev.modonomicon.api.datagen.book.page.BookSpotlightPageModel;
 import karashokleo.enchantment_infusion.api.recipe.EnchantmentIngredient;
 import karashokleo.l2hostility.init.LHEnchantments;
 import karashokleo.spell_dimension.data.book.entry.BaseEntryProvider;
+import karashokleo.spell_dimension.init.AllItems;
 import net.minecraft.item.Items;
+import net.minecraft.recipe.Ingredient;
 
 import java.util.List;
 
@@ -46,6 +48,27 @@ public class DurabilityEntry extends BaseEntryProvider
     @Override
     protected List<BookPageModel> pages(BookContextHelper context)
     {
+        context.page("broken");
+        this.lang().add(context.pageTitle(), "Broken");
+        this.lang().add(context.pageText(),
+                """
+                        Thanks to your magical blessing, when your armor is broken, it doesn't just shatter away, but becomes a **Broken Item**. You can repair it completely with a certain amount of **Repair Essence**.
+                        """
+        );
+        this.lang("zh_cn").add(context.pageTitle(), "损坏");
+        this.lang("zh_cn").add(context.pageText(),
+                """
+                        得益于你的魔力庇佑，当你的盔甲损坏时，不会直接破碎掉，而是会变成一个**损坏的物品**。你可以用一定数量的**修复精华**来完全修复它。
+                        """
+        );
+
+        BookSpotlightPageModel broken = BookSpotlightPageModel
+                .builder()
+                .withTitle(context.pageTitle())
+                .withText(context.pageText())
+                .withItem(Ingredient.ofItems(AllItems.BROKEN_ITEM))
+                .build();
+
         context.page("hardened");
         this.lang().add(context.pageTitle(), "Hardened");
         this.lang().add(context.pageText(),
@@ -115,7 +138,7 @@ public class DurabilityEntry extends BaseEntryProvider
                 .withItem(EnchantmentIngredient.of(LHEnchantments.SAFEGUARD, LHEnchantments.SAFEGUARD.getMaxLevel()))
                 .build();
 
-        return List.of(hardened, durable, safeguard);
+        return List.of(broken, hardened, durable, safeguard);
     }
 
     @Override

@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "spell-dimension:riddle_book",
+    "spell-dimension:bliss_flame",
+    "spell-dimension:ice_cube",
+    "spell-dimension:fate_stone"
+  ]
+}

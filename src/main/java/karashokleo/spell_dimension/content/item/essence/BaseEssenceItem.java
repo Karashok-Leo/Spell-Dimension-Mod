@@ -24,7 +24,10 @@ public class BaseEssenceItem extends Item implements ColorProvider
     @Override
     public Text getName()
     {
-        return this.getName(this.getDefaultStack());
+        return SDTexts.TEXT$ESSENCE.get(
+                SDTexts.getGradeText(this.grade),
+                SDTexts.getSchoolText(this.school)
+        ).setStyle(Style.EMPTY.withColor(this.school.color));
     }
 
     @Override

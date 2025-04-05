@@ -32,8 +32,6 @@ import java.util.stream.Stream;
 
 public class AllTags
 {
-    public static final TagKey<Item> BREASTPLATE_SLOT = TagUtil.itemTag(new Identifier("trinkets", "chest/breastplate"));
-
     public static final List<TagKey<Item>> ESSENCE = List.of(
             TagUtil.itemTag("essence/0"),
             TagUtil.itemTag("essence/1"),
@@ -75,8 +73,11 @@ public class AllTags
 
     public static final TagKey<Block> LOCATE_TARGET = TagUtil.blockTag("locate_target");
 
+    public static final TagKey<Item> FACE = TagUtil.itemTag(new Identifier("trinkets", "head/face"));
     public static final TagKey<Item> BACK = TagUtil.itemTag(new Identifier("trinkets", "chest/back"));
     public static final TagKey<Item> CAPE = TagUtil.itemTag(new Identifier("trinkets", "chest/cape"));
+    public static final TagKey<Item> BREASTPLATE_SLOT = TagUtil.itemTag(new Identifier("trinkets", "chest/breastplate"));
+    public static final TagKey<Item> SECONDARY_SCHOOL_SLOT = TagUtil.itemTag(new Identifier("trinkets", "chest/secondary_school"));
 
     public static final TagKey<Item> HOSTILITY_CURSE = TagUtil.itemTag("hostility_curse");
     public static final TagKey<Item> HOSTILITY_RING = TagUtil.itemTag("hostility_ring");
