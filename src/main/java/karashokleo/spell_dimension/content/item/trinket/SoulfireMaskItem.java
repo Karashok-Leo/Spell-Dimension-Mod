@@ -1,46 +1,63 @@
 package karashokleo.spell_dimension.content.item.trinket;
 
-import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
-import karashokleo.l2hostility.content.item.trinket.core.DamageListenerTrinket;
+import dev.emi.trinkets.api.SlotReference;
 import karashokleo.l2hostility.content.item.trinket.core.SingleEpicTrinketItem;
 import karashokleo.l2hostility.init.LHEffects;
-import karashokleo.l2hostility.util.EffectHelper;
-import karashokleo.spell_dimension.init.AllStatusEffects;
+import karashokleo.l2hostility.util.raytrace.RayTraceUtil;
+import karashokleo.leobrary.effect.api.util.EffectUtil;
+import karashokleo.spell_dimension.data.SDTexts;
+import karashokleo.spell_dimension.util.ImpactUtil;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
+import net.minecraft.world.World;
+import net.spell_power.api.SpellPower;
 import net.spell_power.api.SpellSchools;
+import org.jetbrains.annotations.Nullable;
 
-public class SoulfireMaskItem extends SingleEpicTrinketItem implements DamageListenerTrinket
+import java.util.List;
+
+public class SoulfireMaskItem extends SingleEpicTrinketItem
 {
+    public static final int INTERNAL = 20;
+    public static final int SPELL_POWER_BONUS = 200;
+    public static final int DURATION = 40;
+    public static final int RANGE = 16;
+
     public SoulfireMaskItem()
     {
     }
 
     @Override
-    public void onHurting(ItemStack stack, LivingEntity entity, LivingHurtEvent event)
+    public void tick(ItemStack stack, SlotReference slot, LivingEntity entity)
     {
-        if (!event.getSource().isOf(SpellSchools.FIRE.damageType))
+        if (!(entity instanceof PlayerEntity player))
             return;
-        int fireTicks = entity.getFireTicks();
-        if (fireTicks <= 0)
+        if (entity.getWorld().isClient())
+        {
+            RayTraceUtil.clientUpdateTarget(player, RANGE);
             return;
-        LivingEntity target = event.getEntity();
-        StatusEffectInstance effect = target.getStatusEffect(AllStatusEffects.NIRVANA);
-        if (effect == null)
-        {
-            EffectHelper.forceAddEffectWithEvent(
-                    target,
-                    new StatusEffectInstance(LHEffects.FLAME, fireTicks),
-                    entity
-            );
-        } else
-        {
-            EffectHelper.forceAddEffectWithEvent(
-                    target,
-                    new StatusEffectInstance(LHEffects.FLAME, effect.getDuration(), effect.getAmplifier()),
-                    entity
-            );
         }
+        if (entity.age % INTERNAL == 0)
+            return;
+        LivingEntity target = RayTraceUtil.serverGetTarget(player);
+        if (target == null)
+            return;
+        if (ImpactUtil.isAlly(player, target))
+            return;
+        int amplifier = (int) (SpellPower.getSpellPower(SpellSchools.FIRE, player).baseValue() / SPELL_POWER_BONUS);
+        EffectUtil.forceAddEffect(target, new StatusEffectInstance(LHEffects.FLAME, DURATION, amplifier), entity);
+    }
+
+    @Override
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
+    {
+        tooltip.add(SDTexts.TOOLTIP$SOULFIRE_MASK$1.get(INTERNAL / 20, RANGE).formatted(Formatting.RED));
+        tooltip.add(SDTexts.TOOLTIP$SOULFIRE_MASK$2.get(SPELL_POWER_BONUS).formatted(Formatting.RED));
+        super.appendTooltip(stack, world, tooltip, context);
     }
 }

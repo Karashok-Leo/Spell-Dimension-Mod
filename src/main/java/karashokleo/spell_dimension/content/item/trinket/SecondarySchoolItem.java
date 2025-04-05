@@ -71,17 +71,10 @@ public class SecondarySchoolItem extends SingleEpicTrinketItem
     {
         MutableText schoolText = SDTexts.getSchoolText(school);
         Style style = Style.EMPTY.withColor(school.color);
-        tooltip.add(SDTexts.TOOLTIP$SECONDARY_SCHOOL_ITEM$1.get(
-                schoolText,
-                SECONDARY_SCHOOL_RATIO * 100
-        ).setStyle(style));
-        tooltip.add(SDTexts.TOOLTIP$SECONDARY_SCHOOL_ITEM$2.get(
-                schoolText
-        ).setStyle(style));
-        tooltip.add(SDTexts.TOOLTIP$SECONDARY_SCHOOL_ITEM$3.get(
-                SECONDARY_SCHOOL_RATIO * 100,
-                schoolText
-        ).setStyle(style));
+        int ratio = Math.round(SECONDARY_SCHOOL_RATIO * 100);
+        tooltip.add(SDTexts.TOOLTIP$SECONDARY_SCHOOL_ITEM$1.get(schoolText, ratio).setStyle(style));
+        tooltip.add(SDTexts.TOOLTIP$SECONDARY_SCHOOL_ITEM$2.get(schoolText).setStyle(style));
+        tooltip.add(SDTexts.TOOLTIP$SECONDARY_SCHOOL_ITEM$3.get(ratio, schoolText).setStyle(style));
         super.appendTooltip(stack, world, tooltip, context);
     }
 }

@@ -679,6 +679,8 @@
   "tooltip.spell-dimension.secondary_school_item.2": "- Spell Scrolls of %s school can be used",
   "tooltip.spell-dimension.secondary_school_item.3": "- %s%% chance to get %s Spell School's Enchanted Essence and Enlightening Essence",
   "tooltip.spell-dimension.shift_reset": "Shift + Right-click to reset the progress",
+  "tooltip.spell-dimension.soulfire_mask.1": "- Every %ss, apply Soul Burning effect to enemies within %s blocks of your sight.",
+  "tooltip.spell-dimension.soulfire_mask.2": "- For every %s fire spell power, Soul Burning effect level increases by 1.",
   "tooltip.spell-dimension.spell_prism": "Consuming durability to make your spell damage bypass magical protection.",
   "tooltip.spell-dimension.spell_prism_advanced": "Maybe enhance the effects of certain spells?",
   "tooltip.spell-dimension.summon_entity": "Entity Type: %s",
@@ -691,5 +693,6 @@
   "trait.spell-dimension.airborne.desc": "Every %s seconds, the next attack will knock the target into the air",
   "trait.spell-dimension.leech": "Leech",
   "trait.spell-dimension.leech.desc": "%s of damage dealt will heal itself",
-  "trinkets.slot.chest.breastplate": "Breastplate"
+  "trinkets.slot.chest.breastplate": "Breastplate",
+  "trinkets.slot.chest.secondary_school": "Secondary School"
 }

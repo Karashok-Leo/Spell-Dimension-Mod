@@ -191,6 +191,8 @@ public enum SDTexts
     TOOLTIP$ARCANE_THRONE$OFF("Disabled","已关闭"),
     TOOLTIP$NIRVANA_STARFALL$DEFRAUDING_REAPER("- [Defrauding Reaper] If you are near death and your fire spell power is above %s, you are spared from death once at the cost of gaining a %s second Nirvana effect and removing all harmful effects.","- [欺诈死神] 濒临死亡且自身火焰法术强度高于%s时，以获得%s秒涅槃效果为代价免死一次，并清除身上所有负面效果"),
     TOOLTIP$NIRVANA_STARFALL$NIRVANA_REBIRTH("- [Nirvana Rebirth] %s".formatted(NirvanaEffect.getDesc(true)),"- [涅槃重生] %s".formatted(NirvanaEffect.getDesc(false))),
+    TOOLTIP$SOULFIRE_MASK$1("- Every %ss, apply Soul Burning effect to enemies within %s blocks of your sight.","- 每隔%s秒，向目视的%s格以内的敌人施加魂火效果"),
+    TOOLTIP$SOULFIRE_MASK$2("- For every %s fire spell power, Soul Burning effect level increases by 1.","- 每有%s点火焰法术强度，魂火效果等级增加1级"),
     TOOLTIP$GLACIAL_NUCLEAR_ERA$1("- Your cast [Icy Nucleus] explosion has a %s%% chance to cast [Icicle] on the surrounding area.","- 你施放的 [冰核] 爆炸时有%s%%的概率向周围施放 [冰刺]"),
     TOOLTIP$GLACIAL_NUCLEAR_ERA$2("- Your cast [Icicle] has a %s%% chance to cast [Icy Nucleus] on the target upon hitting.","- 你施放的 [冰刺] 命中时有%s%%的概率向目标施放 [冰核]"),
     TOOLTIP$FROSTBITE_DOME$1("- Apply a Incarceration effect for %s seconds when dealing frost spell damage.","- 造成寒冰法术伤害时施加禁锢效果，持续%s秒"),
