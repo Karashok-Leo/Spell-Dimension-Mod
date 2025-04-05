@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "client.RollManagerInvoker",
+    "modded.AbrahadabraMixin",
     "modded.AdaptingTraitMixin",
     "modded.AmplifierEnchantmentMixin",
     "modded.ASBTooltipMixin",

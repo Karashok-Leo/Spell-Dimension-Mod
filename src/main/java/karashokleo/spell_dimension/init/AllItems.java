@@ -87,6 +87,7 @@ public class AllItems
     public static BottleOfSoulBinding BOTTLE_SOUL_BINDING;
     public static SpellPrismItem SPELL_PRISM;
     public static CursedAppleItem CURED_APPLE;
+    public static MirageReflectorItem MIRAGE_REFLECTOR;
     public static MedalItem MEDAL;
 
     public static void register()
@@ -172,56 +173,56 @@ public class AllItems
                 )
                 .addEN()
                 .addZH("汇聚甲胄")
-                .addTag(AllTags.BACK, AllTags.CAPE)
+                .addTag(AllTags.BACK, AllTags.CAPE, AllTags.ENDGAME_TRINKETS)
                 .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
         ARCANE_THRONE = Entry.of("arcane_throne", new ArcaneThroneItem())
                 .addEN()
                 .addZH("秘术王座")
-                .addTag(LHTags.CURSE_SLOT)
+                .addTag(LHTags.CURSE_SLOT, AllTags.ENDGAME_TRINKETS)
                 .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
         NIRVANA_STARFALL = Entry.of("nirvana_starfall", new NirvanaStarfallItem())
                 .addEN()
                 .addZH("涅槃星陨")
-                .addTag(AllTags.BACK)
+                .addTag(AllTags.BACK, AllTags.ENDGAME_TRINKETS)
                 .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
         SOULFIRE_MASK = Entry.of("soulfire_mask", new SoulfireMaskItem())
                 .addEN()
                 .addZH("燃魂假面")
-                .addTag(AllTags.FACE)
+                .addTag(AllTags.FACE, AllTags.ENDGAME_TRINKETS)
                 .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
         GLACIAL_NUCLEAR_ERA = Entry.of("glacial_nuclear_era", new GlacialNuclearEraItem())
                 .addEN()
                 .addZH("冰核世纪")
-                .addTag(AllTags.BACK)
+                .addTag(AllTags.BACK, AllTags.ENDGAME_TRINKETS)
                 .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
         FROSTBITE_DOME = Entry.of("frostbite_dome", new FrostbiteDomeItem())
                 .addEN()
                 .addZH("冰点穹狱")
-                .addTag(AllTags.BACK)
+                .addTag(AllTags.BACK, AllTags.ENDGAME_TRINKETS)
                 .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
         HEART_STEEL = Entry.of("heart_spell_steel", new HeartSpellSteelItem())
                 .addEN()
                 .addZH("心之魔钢")
-                .addTag(LHTags.CHARM_SLOT)
+                .addTag(LHTags.CHARM_SLOT, AllTags.ENDGAME_TRINKETS)
                 .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
         REJUVENATING_BLOSSOM = Entry.of("rejuvenating_blossom", new RejuvenatingBlossomItem())
                 .addEN()
                 .addZH("复苏绽放")
-                .addTag(LHTags.CHARM_SLOT)
+                .addTag(LHTags.CHARM_SLOT, AllTags.ENDGAME_TRINKETS)
                 .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
@@ -361,6 +362,13 @@ public class AllItems
         CURED_APPLE = Entry.of("cursed_apple", new CursedAppleItem())
                 .addEN()
                 .addZH("诅咒禁果")
+                .setTab(AllGroups.MISC)
+                .addModel()
+                .register();
+        MIRAGE_REFLECTOR = Entry.of("mirage_reflector", new MirageReflectorItem())
+                .addEN()
+                .addZH("逆转璇玑")
+                .addTag(LHTags.CURSE_SLOT, LHTags.NO_SEAL)
                 .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
