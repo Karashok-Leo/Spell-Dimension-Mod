@@ -3,6 +3,7 @@ package karashokleo.spell_dimension.content.trait;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import karashokleo.l2hostility.content.component.mob.CapStorageData;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
+import karashokleo.l2hostility.content.item.trinket.core.ReflectTrinket;
 import karashokleo.spell_dimension.api.BeamProvider;
 import karashokleo.spell_dimension.content.network.S2CBeam;
 import karashokleo.spell_dimension.data.SDTexts;
@@ -88,7 +89,10 @@ public class ChanelIntervalSpellTrait extends SpellTrait
     public void startCasting(MobEntity mob, Data data)
     {
         LivingEntity target = mob.getTarget();
-        if (target == null || target.isDead()) return;
+        if (target == null || target.isDead())
+            return;
+        if (ReflectTrinket.canReflect(target, this))
+            return;
 
         if (target.getWorld().getGameRules().get(AllMiscInit.NOTIFY_SPELL_TRAIT_CASTING).get())
         {

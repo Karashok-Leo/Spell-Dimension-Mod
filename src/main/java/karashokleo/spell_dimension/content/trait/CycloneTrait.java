@@ -7,6 +7,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.util.Identifier;
 import net.spell_engine.internals.SpellHelper;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.IntUnaryOperator;
 
@@ -21,16 +22,14 @@ public class CycloneTrait extends IntervalSpellTrait
     }
 
     @Override
-    public void action(MobEntity mob, int level, Data data)
+    public void action(MobEntity mob, int level, Data data, LivingEntity target)
     {
-        spawnCyclone(mob);
+        spawnCyclone(mob, target);
         data.tickCount = 0;
     }
 
-    protected void spawnCyclone(MobEntity owner)
+    protected void spawnCyclone(MobEntity owner, LivingEntity target)
     {
-        LivingEntity target = owner.getTarget();
-        if (target == null) return;
         SpellHelper.ImpactContext context = ImpactUtil.createContext(owner, this.getSpell());
         CycloneEntity cyclone = new CycloneEntity(Spellblades.CYCLONEENTITY, target.getWorld());
         cyclone.setColor(color);

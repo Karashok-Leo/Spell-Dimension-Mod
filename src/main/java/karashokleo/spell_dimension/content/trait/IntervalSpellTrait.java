@@ -3,6 +3,8 @@ package karashokleo.spell_dimension.content.trait;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import karashokleo.l2hostility.content.component.mob.CapStorageData;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
+import karashokleo.l2hostility.content.item.trinket.core.ReflectTrinket;
+import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllMiscInit;
 import karashokleo.spell_dimension.util.ImpactUtil;
@@ -33,7 +35,7 @@ public class IntervalSpellTrait extends SpellTrait
     {
         var data = getData(difficulty);
         if (data.tickCount++ < interval.applyAsInt(level)) return;
-        action(difficulty.owner, level, data);
+        tryAction(difficulty.owner, level, data);
     }
 
     public Data getData(MobDifficulty diff)
@@ -41,24 +43,39 @@ public class IntervalSpellTrait extends SpellTrait
         return diff.getOrCreateData(getId(), Data::new);
     }
 
-    public void action(MobEntity mob, int level, Data data)
+    public void tryAction(MobEntity mob, int level, Data data)
     {
         LivingEntity target = mob.getTarget();
-        if (target != null && target.isAlive())
+        if (target == null || !target.isAlive())
         {
-            World world = mob.getWorld();
-
-            if (world.getGameRules().get(AllMiscInit.NOTIFY_SPELL_TRAIT_CASTING).get())
-            {
-                target.sendMessage(SDTexts.TEXT$SPELL_TRAIT$ACTION.get(
-                        mob.getName(),
-                        this.getName().setStyle(Style.EMPTY.withColor(getColor()))
-                ));
-            }
-            ImpactUtil.performSpell(world, mob, spellId, List.of(target), SpellCast.Action.RELEASE, 1.0F);
-
-            data.tickCount = 0;
+            return;
         }
+        int radius = LHConfig.common().items.reflectTrinketRadius;
+        if (ReflectTrinket.canReflect(target, this))
+            target.getWorld().getEntitiesByClass(
+                            LivingEntity.class,
+                            target.getBoundingBox().expand(radius),
+                            e -> e.distanceTo(mob) < radius &&
+                                 !ReflectTrinket.canReflect(e, this)
+                    )
+                    .forEach(le -> this.action(mob, level, data, le));
+        else this.action(mob, level, data, target);
+    }
+
+    public void action(MobEntity mob, int level, Data data, LivingEntity target)
+    {
+        World world = mob.getWorld();
+
+        if (world.getGameRules().get(AllMiscInit.NOTIFY_SPELL_TRAIT_CASTING).get())
+        {
+            target.sendMessage(SDTexts.TEXT$SPELL_TRAIT$ACTION.get(
+                    mob.getName(),
+                    this.getName().setStyle(Style.EMPTY.withColor(getColor()))
+            ));
+        }
+        ImpactUtil.performSpell(world, mob, spellId, List.of(target), SpellCast.Action.RELEASE, 1.0F);
+
+        data.tickCount = 0;
     }
 
     @Override
