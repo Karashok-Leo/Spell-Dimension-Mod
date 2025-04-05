@@ -7,6 +7,7 @@ import karashokleo.l2hostility.init.LHTags;
 import karashokleo.spell_dimension.content.quest.base.SimpleItemQuest;
 import karashokleo.spell_dimension.content.quest.base.SimpleTagIngredientQuest;
 import karashokleo.spell_dimension.data.loot_bag.SDBags;
+import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllTags;
 
 public class HostilityQuests
@@ -27,6 +28,7 @@ public class HostilityQuests
     public static SimpleItemQuest ABYSSAL_THORN;
     public static SimpleItemQuest ABRAHADABRA;
     public static SimpleItemQuest NIDHOGGUR;
+    public static SimpleItemQuest MIRAGE_REFLECTOR;
 
     public static void register()
     {
@@ -229,6 +231,18 @@ public class HostilityQuests
                 .addZhFeedback("以黑龙为名，暗金竖瞳中掩映着令无数猎魔者癫狂的秘辛。但要小心，过度的贪婪必然招致灾难。")
                 .addTag(AllTags.BRANCH)
                 .addDependencies(ETERNIUM_INGOT, TRAIT_ITEM)
+                .register();
+        MIRAGE_REFLECTOR = QuestBuilder.of(
+                        "mirage_reflector",
+                        new SimpleItemQuest(
+                                () -> AllItems.MIRAGE_REFLECTOR,
+                                SDBags.JEWELRY_NECKLACES::getStack
+                        )
+                )
+                .addEnFeedback("The past and the future mingle in the folds, and the border between reality and illusion blurs like melted wax. All the forces that seek to harm you will eventually become their own gravediggers in a reversal of karma. You are invincible.")
+                .addZhFeedback("过去与未来在褶皱中交融，现实与幻象的边界如融化的蜡般模糊。所有企图伤害你的力量，终将在逆转的因果中成为自己的掘墓人。你无敌了。")
+                .addTag(AllTags.MAIN, AllTags.CHALLENGE)
+                .addDependencies(ABRAHADABRA)
                 .register();
     }
 }

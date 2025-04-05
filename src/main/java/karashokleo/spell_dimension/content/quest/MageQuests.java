@@ -18,6 +18,7 @@ public class MageQuests
     public static SimpleTagIngredientQuest SPELL_BOOK_0;
     public static SimpleTagIngredientQuest SPELL_BOOK_1;
     public static SimpleTagIngredientQuest SPELL_BOOK_2;
+    public static SimpleTagIngredientQuest ENDGAME_TRINKETS;
     public static SpellPowerQuest SPELL_POWER_0;
     public static SpellPowerQuest SPELL_POWER_1;
     public static SpellPowerQuest SPELL_POWER_2;
@@ -117,6 +118,20 @@ public class MageQuests
                 .toEntry("mage/book")
                 .addTag(AllTags.MAIN)
                 .addDependencies(SPELL_BOOK_1)
+                .register();
+        ENDGAME_TRINKETS = QuestBuilder.of(
+                        "endgame_trinkets",
+                        new SimpleTagIngredientQuest(
+                                AllTags.ENDGAME_TRINKETS,
+                                SDBags.JEWELRY_NECKLACES::getStack
+                        )
+                )
+                .addEnDesc("Craft trinkets that carry special spell effects")
+                .addZhDesc("合成携带法术特效的饰品")
+                .addEnFeedback("The spell chanted softly, shimmering and misty, revealing deep and unknowable magical potential.")
+                .addZhFeedback("咒语轻吟，微光闪烁，迷雾环绕，透露出深邃而不可知的魔力潜能。")
+                .addTag(AllTags.MAIN)
+                .addDependencies(SPELL_BOOK_2)
                 .register();
         SPELL_POWER_0 = QuestBuilder.of(
                         "spell_power_0",
