@@ -11,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.biome.Biome;
 
 public class TagUtil
 {
@@ -67,5 +68,15 @@ public class TagUtil
     public static TagKey<Quest> questTag(String path)
     {
         return QuestTag.of(SpellDimension.modLoc(path));
+    }
+
+    public static TagKey<Biome> biomeTag(Identifier id)
+    {
+        return TagKey.of(RegistryKeys.BIOME, id);
+    }
+
+    public static TagKey<Biome> biomeTag(String path)
+    {
+        return biomeTag(SpellDimension.modLoc(path));
     }
 }

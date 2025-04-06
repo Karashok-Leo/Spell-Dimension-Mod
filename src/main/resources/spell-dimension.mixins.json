@@ -10,6 +10,7 @@
     "modded.ASBTooltipMixin",
     "modded.BookEverythingMixin",
     "modded.CurseOfPrideMixin",
+    "modded.CurseOfWrathMixin",
     "modded.CycloneEntityMixin",
     "modded.DifficultyEventsMixin",
     "modded.LootingCharmMixin",

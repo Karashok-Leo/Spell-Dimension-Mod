@@ -1,0 +1,25 @@
+{
+  "type": "enchantment_infusion:simple_infusion",
+  "copy_nbt": false,
+  "ingredients": [
+    {
+      "item": "l2hostility:force_field"
+    },
+    {
+      "item": "l2hostility:eternium_ingot"
+    },
+    {
+      "item": "l2hostility:hostility_essence"
+    },
+    {
+      "item": "adventurez:source_stone"
+    }
+  ],
+  "input": {
+    "item": "l2hostility:abrahadabra"
+  },
+  "output": {
+    "Count": 1,
+    "id": "spell-dimension:mirage_reflector"
+  }
+}

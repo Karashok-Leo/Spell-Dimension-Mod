@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "spell-dimension:arcane_throne"
+    "spell-dimension:arcane_throne",
+    "spell-dimension:mirage_reflector"
   ]
 }

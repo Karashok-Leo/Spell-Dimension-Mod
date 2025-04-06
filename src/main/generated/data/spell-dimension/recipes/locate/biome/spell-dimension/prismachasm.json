@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:locate_biome",
+  "biomeTag": "spell-dimension:prismachasm",
+  "ingredient": {
+    "item": "spell-dimension:spell_prism"
+  },
+  "world": "minecraft:overworld"
+}

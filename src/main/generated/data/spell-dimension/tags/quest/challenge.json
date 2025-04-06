@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "spell-dimension:mirage_reflector",
     "spell-dimension:doge",
     "spell-dimension:froge",
     "spell-dimension:health_3",

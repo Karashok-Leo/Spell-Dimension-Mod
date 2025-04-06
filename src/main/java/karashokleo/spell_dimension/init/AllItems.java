@@ -173,7 +173,7 @@ public class AllItems
                 )
                 .addEN()
                 .addZH("汇聚甲胄")
-                .addTag(AllTags.BACK, AllTags.CAPE, AllTags.ENDGAME_TRINKETS)
+                .addTag(AllTags.BACK, AllTags.ENDGAME_TRINKETS)
                 .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
@@ -187,7 +187,7 @@ public class AllItems
         NIRVANA_STARFALL = Entry.of("nirvana_starfall", new NirvanaStarfallItem())
                 .addEN()
                 .addZH("涅槃星陨")
-                .addTag(AllTags.BACK, AllTags.ENDGAME_TRINKETS)
+                .addTag(AllTags.BELT, AllTags.ENDGAME_TRINKETS)
                 .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
@@ -201,21 +201,21 @@ public class AllItems
         GLACIAL_NUCLEAR_ERA = Entry.of("glacial_nuclear_era", new GlacialNuclearEraItem())
                 .addEN()
                 .addZH("冰核世纪")
-                .addTag(AllTags.BACK, AllTags.ENDGAME_TRINKETS)
+                .addTag(AllTags.NECKLACE, AllTags.ENDGAME_TRINKETS)
                 .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
         FROSTBITE_DOME = Entry.of("frostbite_dome", new FrostbiteDomeItem())
                 .addEN()
                 .addZH("冰点穹狱")
-                .addTag(AllTags.BACK, AllTags.ENDGAME_TRINKETS)
+                .addTag(AllTags.GLOVE, AllTags.ENDGAME_TRINKETS)
                 .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
         HEART_STEEL = Entry.of("heart_spell_steel", new HeartSpellSteelItem())
                 .addEN()
                 .addZH("心之魔钢")
-                .addTag(LHTags.CHARM_SLOT, AllTags.ENDGAME_TRINKETS)
+                .addTag(AllTags.CAPE, AllTags.ENDGAME_TRINKETS)
                 .setTab(AllGroups.MISC)
                 .addModel()
                 .register();

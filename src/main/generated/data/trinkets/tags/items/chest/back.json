@@ -1,9 +1,6 @@
 {
   "replace": false,
   "values": [
-    "spell-dimension:armor_of_convergence",
-    "spell-dimension:nirvana_starfall",
-    "spell-dimension:glacial_nuclear_era",
-    "spell-dimension:frostbite_dome"
+    "spell-dimension:armor_of_convergence"
   ]
 }

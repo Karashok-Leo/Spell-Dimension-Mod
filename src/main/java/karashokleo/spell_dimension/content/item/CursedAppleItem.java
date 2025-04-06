@@ -1,8 +1,10 @@
 package karashokleo.spell_dimension.content.item;
 
 import dev.emi.trinkets.api.TrinketsApi;
+import karashokleo.l2hostility.init.LHMiscs;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.data.SDTexts;
+import karashokleo.spell_dimension.util.AttributeUtil;
 import karashokleo.spell_dimension.util.UuidUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.advancement.criterion.Criteria;
@@ -75,6 +77,8 @@ public class CursedAppleItem extends Item
 
         inventory.addPersistentModifier(new EntityAttributeModifier(CURSED_APPLE_BONUS_UUID, "Cursed Apple Bonus", 7, EntityAttributeModifier.Operation.ADDITION));
 
+        AttributeUtil.addModifier(user, LHMiscs.ADD_LEVEL, CURSED_APPLE_BONUS_UUID, "Cursed Apple Bonus", 200, EntityAttributeModifier.Operation.ADDITION);
+
         world.playSound(null, user.getX(), user.getY(), user.getZ(), user.getEatSound(stack), SoundCategory.NEUTRAL, 1.0F, 1.0F + (world.random.nextFloat() - world.random.nextFloat()) * 0.4F);
         user.damage(user.getDamageSources().magic(), user.getHealth() + user.getAbsorptionAmount() - 2);
         user.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 20 * 30, 9));
@@ -100,6 +104,8 @@ public class CursedAppleItem extends Item
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
-        tooltip.add(SDTexts.TOOLTIP$CURSED_APPLE.get().formatted(Formatting.DARK_PURPLE));
+        tooltip.add(SDTexts.TOOLTIP$CURSED_APPLE$CONSUMED.get().formatted(Formatting.DARK_PURPLE));
+        tooltip.add(SDTexts.TOOLTIP$CURSED_APPLE$1.get().formatted(Formatting.DARK_PURPLE));
+        tooltip.add(SDTexts.TOOLTIP$CURSED_APPLE$2.get().formatted(Formatting.DARK_PURPLE));
     }
 }

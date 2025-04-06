@@ -117,7 +117,8 @@ public interface Quest
     @Nullable
     default ItemStack getIcon()
     {
-        if (this.getTooltipData() instanceof QuestItemTooltipData data)
+        if (this.getTooltipData() instanceof QuestItemTooltipData data &&
+            !data.stacks().isEmpty())
             return data.stacks().get(0);
         return null;
     }

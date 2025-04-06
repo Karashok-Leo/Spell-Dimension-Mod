@@ -5,6 +5,7 @@ import com.klikli_dev.modonomicon.api.datagen.CategoryProvider;
 import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookSpotlightPageModel;
+import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
 import karashokleo.spell_dimension.data.book.entry.BaseEntryProvider;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllTags;
@@ -46,34 +47,44 @@ public class SecondaryEntry extends BaseEntryProvider
     @Override
     protected List<BookPageModel> pages(BookContextHelper context)
     {
-        context.page("secondary");
+        context.page("prev");
         this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
                 """
                         Once you are proficient in a single spell school, you may choose to study a secondary school. To do so, you will need to craft specific magical items that will serve as the basis for your school of study.
-                        \\
-                        \\
-                        Search **#trinkets:chest/secondary_school** for the corresponding items.
                         """
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
                 """
                         当你精通了单一法术学派后，可以选择研习一个副学派。为此你需要制作一些特定的魔法物品，以此作为学派的研习基础。
-                        \\
-                        \\
-                        搜索**#trinkets:chest/secondary_school**可查看对应的物品。
                         """
         );
 
-        BookSpotlightPageModel secondary = BookSpotlightPageModel
+        BookSpotlightPageModel prev = BookSpotlightPageModel
                 .builder()
                 .withTitle(context.pageTitle())
                 .withText(context.pageText())
                 .withItem(Ingredient.fromTag(AllTags.SECONDARY_SCHOOL_SLOT))
                 .build();
 
-        return List.of(secondary);
+        context.page("next");
+        this.lang().add(context.pageText(),
+                """
+                        Search **#trinkets:chest/secondary_school** for the corresponding items.
+                        """
+        );
+        this.lang("zh_cn").add(context.pageText(),
+                """
+                        搜索**#trinkets:chest/secondary_school**可查看对应的物品。
+                        """
+        );
+        BookTextPageModel next = BookTextPageModel
+                .builder()
+                .withText(context.pageText())
+                .build();
+
+        return List.of(prev, next);
     }
 
     @Override

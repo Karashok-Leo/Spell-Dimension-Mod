@@ -27,11 +27,6 @@ import java.util.UUID;
 @Mixin(CurseOfPride.class)
 public abstract class CurseOfPrideMixin extends CurseTrinketItem
 {
-    private CurseOfPrideMixin(Settings settings)
-    {
-        super(settings);
-    }
-
     @Override
     public void onHurt(ItemStack stack, LivingEntity entity, LivingHurtEvent event)
     {

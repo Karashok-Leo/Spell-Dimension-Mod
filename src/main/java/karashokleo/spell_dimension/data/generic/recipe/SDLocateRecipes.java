@@ -9,6 +9,8 @@ import karashokleo.leobrary.datagen.util.StringUtil;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.recipe.locate.LocateBiomeRecipeJsonProvider;
 import karashokleo.spell_dimension.content.recipe.locate.LocateStructureRecipeJsonProvider;
+import karashokleo.spell_dimension.init.AllItems;
+import karashokleo.spell_dimension.init.AllTags;
 import net.fabricmc.fabric.api.tag.convention.v1.ConventionalBiomeTags;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.item.Item;
@@ -190,6 +192,7 @@ public class SDLocateRecipes
         addBiome(exporter, ConventionalBiomeTags.PLAINS, World.OVERWORLD, Items.GRASS_BLOCK);
         addBiome(exporter, BiomeTags.ANCIENT_CITY_HAS_STRUCTURE, World.OVERWORLD, Items.CANDLE);
         addBiome(exporter, ConventionalBiomeTags.NETHER_FORESTS, World.NETHER, Items.RED_MUSHROOM);
+        addBiome(exporter, AllTags.PRISMACHASM, World.OVERWORLD, AllItems.SPELL_PRISM);
     }
 
     public static void addTranslations()
@@ -276,6 +279,7 @@ public class SDLocateRecipes
         addBiomeTranslations(ConventionalBiomeTags.PLAINS, "平原");
         addBiomeTranslations(BiomeTags.ANCIENT_CITY_HAS_STRUCTURE, "存在远古城市的群系");
         addBiomeTranslations(ConventionalBiomeTags.NETHER_FORESTS, "下界森林");
+        addBiomeTranslations(AllTags.PRISMACHASM, "彩虹水晶洞穴");
     }
 
     public static void addStructure(Consumer<RecipeJsonProvider> exporter, RegistryKey<Structure> structure, RegistryKey<World> worldKey, Item item)

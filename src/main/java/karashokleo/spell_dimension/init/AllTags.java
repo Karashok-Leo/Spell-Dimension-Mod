@@ -22,6 +22,7 @@ import net.minecraft.registry.tag.EntityTypeTags;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.biome.Biome;
 import net.runes.api.RuneItems;
 import net.spell_engine.internals.SpellInfinityEnchantment;
 import net.trique.mythicupgrades.MythicUpgradesDamageTypes;
@@ -75,8 +76,11 @@ public class AllTags
     public static final TagKey<Block> LOCATE_TARGET = TagUtil.blockTag("locate_target");
 
     public static final TagKey<Item> FACE = TagUtil.itemTag(new Identifier("trinkets", "head/face"));
+    public static final TagKey<Item> GLOVE = TagUtil.itemTag(new Identifier("trinkets", "hand/glove"));
+    public static final TagKey<Item> NECKLACE = TagUtil.itemTag(new Identifier("trinkets", "chest/necklace"));
     public static final TagKey<Item> BACK = TagUtil.itemTag(new Identifier("trinkets", "chest/back"));
     public static final TagKey<Item> CAPE = TagUtil.itemTag(new Identifier("trinkets", "chest/cape"));
+    public static final TagKey<Item> BELT = TagUtil.itemTag(new Identifier("trinkets", "legs/belt"));
     public static final TagKey<Item> BREASTPLATE_SLOT = TagUtil.itemTag(new Identifier("trinkets", "chest/breastplate"));
     public static final TagKey<Item> SECONDARY_SCHOOL_SLOT = TagUtil.itemTag(new Identifier("trinkets", "chest/secondary_school"));
 
@@ -103,6 +107,8 @@ public class AllTags
     public static final TagKey<Quest> BEGINNING = TagUtil.questTag("beginning");
     public static final TagKey<Quest> END = TagUtil.questTag("end");
     public static final TagKey<Quest> CHALLENGE = TagUtil.questTag("challenge");
+
+    public static final TagKey<Biome> PRISMACHASM = TagUtil.biomeTag("prismachasm");
 
     public static void register()
     {
@@ -340,5 +346,8 @@ public class AllTags
 
         SpellDimension.DAMAGE_TYPE_TAGS.getOrCreateContainer(LHTags.MAGIC)
                 .addOptional(MythicUpgradesDamageTypes.DEFLECTING_DAMAGE_TYPE);
+
+        SpellDimension.BIOME_TAGS.getOrCreateContainer(PRISMACHASM)
+                .addOptional(new Identifier("regions_unexplored:prismachasm"));
     }
 }

@@ -12,6 +12,7 @@ import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllStacks;
 import karashokleo.spell_dimension.init.AllTags;
+import net.adventurez.init.ItemInit;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -120,5 +121,15 @@ public class SDSimpleInfusionRecipes
                 .withPedestalItem(1, ThingsItems.AGGLOMERATION)
                 .copyNbt(false)
                 .offerTo(exporter, SpellDimension.modLoc("cursed_apple"), AllItems.CURED_APPLE.getDefaultStack());
+
+        // Mirage Reflector
+        new SimpleInfusionRecipeBuilder()
+                .withTableIngredient(Ingredient.ofItems(TrinketItems.ABRAHADABRA))
+                .withPedestalItem(1, ComplementItems.FORCE_FIELD)
+                .withPedestalItem(1, ComplementItems.ETERNIUM.ingot())
+                .withPedestalItem(1, MiscItems.HOSTILITY_ESSENCE)
+                .withPedestalItem(1, ItemInit.SOURCE_STONE)
+                .copyNbt(false)
+                .offerTo(exporter, SpellDimension.modLoc("mirage_reflector"), AllItems.MIRAGE_REFLECTOR.getDefaultStack());
     }
 }

@@ -52,14 +52,19 @@ public class IntervalSpellTrait extends SpellTrait
         }
         int radius = LHConfig.common().items.reflectTrinketRadius;
         if (ReflectTrinket.canReflect(target, this))
-            target.getWorld().getEntitiesByClass(
-                            LivingEntity.class,
-                            target.getBoundingBox().expand(radius),
-                            e -> e.distanceTo(mob) < radius &&
-                                 !ReflectTrinket.canReflect(e, this)
-                    )
-                    .forEach(le -> this.action(mob, level, data, le));
-        else this.action(mob, level, data, target);
+        {
+            List<LivingEntity> targets = target.getWorld().getEntitiesByClass(
+                    LivingEntity.class,
+                    target.getBoundingBox().expand(radius),
+                    e -> e != mob &&
+                         e.distanceTo(mob) < radius &&
+                         !ReflectTrinket.canReflect(e, this)
+            );
+            if (!targets.isEmpty())
+            {
+                this.action(mob, level, data, targets.get(0));
+            }
+        } else this.action(mob, level, data, target);
     }
 
     public void action(MobEntity mob, int level, Data data, LivingEntity target)

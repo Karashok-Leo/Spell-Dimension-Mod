@@ -6,23 +6,24 @@
     "type": "modonomicon:entry_read",
     "entry_id": "spell-dimension-book:mage/bind"
   },
-  "description": "book.spell-dimension-book.magic_guidance.mage.power.description",
+  "description": "book.spell-dimension-book.magic_guidance.mage.secondary.description",
   "hide_while_locked": false,
   "icon": {
-    "item": "wizards:wizard_robe_head"
+    "item": "spell-dimension:riddle_book"
   },
-  "name": "book.spell-dimension-book.magic_guidance.mage.power.name",
+  "name": "book.spell-dimension-book.magic_guidance.mage.secondary.name",
   "pages": [
     {
-      "type": "modonomicon:text",
+      "type": "modonomicon:spotlight",
       "anchor": "",
       "condition": {
         "type": "modonomicon:none"
       },
-      "show_title_separator": true,
-      "text": "book.spell-dimension-book.magic_guidance.mage.power.prev.text",
-      "title": "book.spell-dimension-book.magic_guidance.mage.power.prev.title",
-      "use_markdown_in_title": false
+      "item": {
+        "tag": "trinkets:chest/secondary_school"
+      },
+      "text": "book.spell-dimension-book.magic_guidance.mage.secondary.prev.text",
+      "title": "book.spell-dimension-book.magic_guidance.mage.secondary.prev.title"
     },
     {
       "type": "modonomicon:text",
@@ -31,7 +32,7 @@
         "type": "modonomicon:none"
       },
       "show_title_separator": true,
-      "text": "book.spell-dimension-book.magic_guidance.mage.power.next.text",
+      "text": "book.spell-dimension-book.magic_guidance.mage.secondary.next.text",
       "title": "",
       "use_markdown_in_title": false
     }
@@ -45,6 +46,6 @@
     }
   ],
   "show_when_any_parent_unlocked": false,
-  "x": -2,
+  "x": 2,
   "y": 4
 }

@@ -18,13 +18,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 
-@Mixin(value = Abrahadabra.class, remap = false)
+@Mixin(Abrahadabra.class)
 public abstract class AbrahadabraMixin
 {
     @Inject(
             method = "canReflect",
             at = @At("HEAD"),
-            cancellable = true
+            cancellable = true,
+            remap = false
     )
     private void inject_canReflect(MobTrait trait, CallbackInfoReturnable<Boolean> cir)
     {
