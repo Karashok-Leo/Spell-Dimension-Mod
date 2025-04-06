@@ -26,8 +26,10 @@ public class SchoolUtil
             SpellSchools.SOUL
     );
 
-    public static List<SpellSchool> getLivingSchools(LivingEntity entity)
+    public static List<SpellSchool> getLivingSchools(@Nullable LivingEntity entity)
     {
+        if (entity == null)
+            return SCHOOLS;
         Map<SpellSchool, Double> map = SCHOOLS.stream().collect(Collectors.toMap(
                 school -> school,
                 school -> SpellPower.getSpellPower(school, entity).baseValue()
@@ -36,8 +38,10 @@ public class SchoolUtil
         return SCHOOLS.stream().filter(school -> map.get(school).equals(max)).toList();
     }
 
-    public static List<SpellSchool> getLivingSecondarySchools(LivingEntity entity)
+    public static List<SpellSchool> getLivingSecondarySchools(@Nullable LivingEntity entity)
     {
+        if (entity == null)
+            return List.of();
         return TrinketCompat.getTrinketItems(entity, e -> e.getItem() instanceof SecondarySchoolItem)
                 .stream()
                 .map(e -> ((SecondarySchoolItem) e.getItem()).school)

@@ -9,7 +9,6 @@ import karashokleo.leobrary.datagen.util.StringUtil;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.recipe.locate.LocateBiomeRecipeJsonProvider;
 import karashokleo.spell_dimension.content.recipe.locate.LocateStructureRecipeJsonProvider;
-import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllTags;
 import net.fabricmc.fabric.api.tag.convention.v1.ConventionalBiomeTags;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
@@ -26,6 +25,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.structure.Structure;
 import net.minecraft.world.gen.structure.StructureKeys;
 import net.runes.api.RuneItems;
+import nourl.mythicmetals.item.MythicItems;
 
 import java.util.function.Consumer;
 
@@ -192,7 +192,7 @@ public class SDLocateRecipes
         addBiome(exporter, ConventionalBiomeTags.PLAINS, World.OVERWORLD, Items.GRASS_BLOCK);
         addBiome(exporter, BiomeTags.ANCIENT_CITY_HAS_STRUCTURE, World.OVERWORLD, Items.CANDLE);
         addBiome(exporter, ConventionalBiomeTags.NETHER_FORESTS, World.NETHER, Items.RED_MUSHROOM);
-        addBiome(exporter, AllTags.PRISMACHASM, World.OVERWORLD, AllItems.SPELL_PRISM);
+        addBiome(exporter, AllTags.PRISMACHASM, World.OVERWORLD, MythicItems.Mats.UNOBTAINIUM);
     }
 
     public static void addTranslations()

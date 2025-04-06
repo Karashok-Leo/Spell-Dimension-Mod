@@ -109,6 +109,7 @@ public class AllBlocks
             Identifier base = Models.CUBE_ALL.upload(CONSCIOUSNESS_BASE.block(), TextureMap.all(SpellDimension.modLoc("block/consciousness_base")), generator.modelCollector);
             Identifier base_turned = Models.CUBE_ALL.upload(CONSCIOUSNESS_BASE.block(), "_turned", TextureMap.all(SpellDimension.modLoc("block/consciousness_base_turned")), generator.modelCollector);
             generator.blockStateCollector.accept(VariantsBlockStateSupplier.create(CONSCIOUSNESS_BASE.block()).coordinate(BlockStateModelGenerator.createBooleanModelMap(ConsciousnessBaseBlock.TURNED, base_turned, base)));
+            generator.registerParentedItemModel(CONSCIOUSNESS_BASE.item(), base_turned);
         });
     }
 

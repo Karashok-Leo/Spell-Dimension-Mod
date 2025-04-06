@@ -25,7 +25,7 @@ public class HostilityQuests
     public static SimpleItemQuest DIVINITY_LIGHT;
     public static SimpleItemQuest ETERNIUM_INGOT;
     public static SimpleItemQuest RESTORATION;
-    public static SimpleItemQuest ABYSSAL_THORN;
+    public static SimpleItemQuest ABYSSAL_THRONE;
     public static SimpleItemQuest ABRAHADABRA;
     public static SimpleItemQuest NIDHOGGUR;
     public static SimpleItemQuest MIRAGE_REFLECTOR;
@@ -196,10 +196,10 @@ public class HostilityQuests
                 .addTag(AllTags.BRANCH)
                 .addDependencies(ETERNIUM_INGOT, TRAIT_ITEM)
                 .register();
-        ABYSSAL_THORN = QuestBuilder.of(
-                        "abyssal_thorn",
+        ABYSSAL_THRONE = QuestBuilder.of(
+                        "abyssal_throne",
                         new SimpleItemQuest(
-                                () -> TrinketItems.ABYSSAL_THORN,
+                                () -> TrinketItems.ABYSSAL_THRONE,
                                 SDBags.JEWELRY_NECKLACES::getStack
                         )
                 )

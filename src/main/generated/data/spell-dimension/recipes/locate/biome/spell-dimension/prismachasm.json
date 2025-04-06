@@ -2,7 +2,7 @@
   "type": "spell-dimension:locate_biome",
   "biomeTag": "spell-dimension:prismachasm",
   "ingredient": {
-    "item": "spell-dimension:spell_prism"
+    "item": "mythicmetals:unobtainium"
   },
   "world": "minecraft:overworld"
 }

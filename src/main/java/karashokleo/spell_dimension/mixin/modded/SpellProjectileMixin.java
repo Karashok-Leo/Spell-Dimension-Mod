@@ -8,7 +8,6 @@ import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.spell_engine.entity.SpellProjectile;
 import org.spongepowered.asm.mixin.Mixin;
@@ -22,9 +21,6 @@ public abstract class SpellProjectileMixin extends ProjectileEntity
 {
     @Shadow
     private Identifier spellId;
-
-    @Shadow
-    public Vec3d previousVelocity;
 
     private SpellProjectileMixin(EntityType<? extends ProjectileEntity> entityType, World world)
     {
@@ -64,7 +60,7 @@ public abstract class SpellProjectileMixin extends ProjectileEntity
     private void inject_tick_Killed(CallbackInfo ci)
     {
         if (this.getWorld().isClient()) return;
-        if (this.previousVelocity.lengthSquared() > 0.001) return;
+        if (this.getVelocity().lengthSquared() > 0.001) return;
         this.kill();
         ci.cancel();
     }
