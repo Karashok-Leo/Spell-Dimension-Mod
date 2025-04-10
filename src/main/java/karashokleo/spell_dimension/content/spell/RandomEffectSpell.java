@@ -42,7 +42,9 @@ public class RandomEffectSpell
                     new StatusEffectInstance(
                             RandomUtil.randomFromList(random, effects),
                             DURATION * 20,
-                            random.nextInt(MAX_AMPLIFIER)
+                            random.nextInt(MAX_AMPLIFIER),
+                            false,
+                            false
                     )
             );
         }

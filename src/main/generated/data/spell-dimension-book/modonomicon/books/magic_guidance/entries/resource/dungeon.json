@@ -27,6 +27,17 @@
         "type": "modonomicon:none"
       },
       "show_title_separator": true,
+      "text": "book.spell-dimension-book.magic_guidance.resource.dungeon.next.text",
+      "title": "",
+      "use_markdown_in_title": false
+    },
+    {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "show_title_separator": true,
       "text": "book.spell-dimension-book.magic_guidance.resource.dungeon.entries.text",
       "title": "",
       "use_markdown_in_title": false

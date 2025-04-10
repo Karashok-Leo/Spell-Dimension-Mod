@@ -47,7 +47,7 @@ public class NirvanaStarfallItem extends SingleEpicTrinketItem implements Damage
         StatusEffectInstance effect = entity.getStatusEffect(AllStatusEffects.NIRVANA);
         int level = effect == null ? 0 : effect.getAmplifier() + 1;
 
-        EffectHelper.forceAddEffectWithEvent(entity, new StatusEffectInstance(AllStatusEffects.NIRVANA, DURATION, level), entity);
+        EffectHelper.forceAddEffectWithEvent(entity, new StatusEffectInstance(AllStatusEffects.NIRVANA, DURATION, level, false, false), entity);
 
         if (entity instanceof ServerPlayerEntity player)
         {

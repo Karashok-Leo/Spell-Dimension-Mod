@@ -52,9 +52,6 @@ public class DungeonEntry extends BaseEntryProvider
                         \\
                         \\
                         You can use the Locate spell to find the dungeon entrance.
-                        \\
-                        \\
-                        Defeat the boss in the last room or enter the command **/dungeon leave** to leave the dungeon.
                         """
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
@@ -64,14 +61,33 @@ public class DungeonEntry extends BaseEntryProvider
                         \\
                         \\
                         你可以通过定位法术寻找地牢入口。
-                        \\
-                        \\
-                        击败最后一个房间中的Boss或者输入命令**/dungeon leave**即可离开地牢。
                         """
         );
         BookTextPageModel text = BookTextPageModel
                 .builder()
                 .withTitle(context.pageTitle())
+                .withText(context.pageText())
+                .build();
+
+        context.page("next");
+        this.lang().add(context.pageText(),
+                """
+                        If you don't know what items are needed to enter the dungeon, try right clicking on the dungeon portal.
+                        \\
+                        \\
+                        Defeat the boss in the last room or enter the command **/dungeon leave** to leave the dungeon.
+                        """
+        );
+        this.lang("zh_cn").add(context.pageText(),
+                """
+                        如果你不知道进入地牢需要什么物品，尝试右键地牢传送门。
+                        \\
+                        \\
+                        击败最后一个房间中的Boss或者输入命令**/dungeon leave**即可离开地牢。
+                        """
+        );
+        BookTextPageModel next = BookTextPageModel
+                .builder()
                 .withText(context.pageText())
                 .build();
 
@@ -103,7 +119,7 @@ public class DungeonEntry extends BaseEntryProvider
                 .withText(context.pageText())
                 .build();
 
-        return List.of(text, entries);
+        return List.of(text, next, entries);
     }
 
     @Override

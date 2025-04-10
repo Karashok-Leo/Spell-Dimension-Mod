@@ -32,7 +32,7 @@ public abstract class VoidShadeEntityMixin extends FlyingEntity
         VoidShadowEntity shadow = list.get(0);
         float shadowMaxHealth = shadow.getMaxHealth();
         if (shadow.getHealth() < shadowMaxHealth * 0.5f) return;
-        float damage = Math.min(shadowMaxHealth * 0.01f, this.getMaxHealth());
+        float damage = Math.min(shadowMaxHealth * 0.05f, this.getMaxHealth());
         shadow.damage(living.getDamageSources().indirectMagic(this, living), damage);
     }
 }

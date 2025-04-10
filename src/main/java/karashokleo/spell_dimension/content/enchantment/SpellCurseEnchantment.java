@@ -34,7 +34,7 @@ public class SpellCurseEnchantment extends SpellImpactEnchantment
             if (entity instanceof LivingEntity living)
             {
                 if (ImpactUtil.isAlly(caster, living)) continue;
-                EffectHelper.forceAddEffectWithEvent(living, new StatusEffectInstance(LHEffects.CURSE, 20 * (context.totalLevel() + 1), context.totalLevel() - 1), caster);
+                EffectHelper.forceAddEffectWithEvent(living, new StatusEffectInstance(LHEffects.CURSE, 20 * (context.totalLevel() + 1), context.totalLevel() - 1, false, false), caster);
             }
     }
 

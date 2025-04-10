@@ -56,7 +56,7 @@
         "type": "STATUS_EFFECT",
         "status_effect": {
           "effect_id": "l2hostility:curse",
-          "amplifier": 0,
+          "amplifier": 4,
           "duration": 2,
           "show_particles": false
         }

@@ -145,8 +145,8 @@ public enum SpellTexts
     DIVINE_CURSE_BLAST(
             "Divine Curse Blast",
             "神咒轰击",
-            "Detonate an area around the target, dealing {damage} damage and applying a Curse effect.",
-            "引爆目标周围一片区域，造成{damage}点伤害并施加诅咒效果。"
+            "Detonate an area around the target, dealing {damage} damage and applying a Curse V effect.",
+            "引爆目标周围一片区域，造成{damage}点伤害并施加诅咒V效果。"
     ),
     SPELL_POWER(
             "Empowering Presence",

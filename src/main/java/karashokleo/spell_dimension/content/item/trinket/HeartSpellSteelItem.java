@@ -30,7 +30,7 @@ public class HeartSpellSteelItem extends SingleEpicTrinketItem implements Damage
 {
     private static final String KEY = "Accumulated";
     private static final String MODIFIER_NAME = "HeartSpellSteel";
-    private static final int MAX_DISTANCE = 4;
+    private static final int MAX_DISTANCE = 6;
     private static final int MIN_MOB_LEVEL = 999;
     private static final double ACCUMULATE_RATE = 0.01;
     public static final int COOLDOWN = 100;
@@ -52,7 +52,7 @@ public class HeartSpellSteelItem extends SingleEpicTrinketItem implements Damage
         if (!(entity instanceof PlayerEntity player))
             return;
         ItemCooldownManager manager = player.getItemCooldownManager();
-        if (!manager.isCoolingDown(this))
+        if (manager.isCoolingDown(this))
             return;
         manager.set(this, COOLDOWN);
 

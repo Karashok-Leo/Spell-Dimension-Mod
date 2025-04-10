@@ -50,7 +50,7 @@ public class SoulfireMaskItem extends SingleEpicTrinketItem
         if (ImpactUtil.isAlly(player, target))
             return;
         int amplifier = (int) (SpellPower.getSpellPower(SpellSchools.FIRE, player).baseValue() / SPELL_POWER_BONUS);
-        EffectUtil.forceAddEffect(target, new StatusEffectInstance(LHEffects.FLAME, DURATION, amplifier), entity);
+        EffectUtil.forceAddEffect(target, new StatusEffectInstance(LHEffects.FLAME, DURATION, amplifier, false, false), entity);
     }
 
     @Override

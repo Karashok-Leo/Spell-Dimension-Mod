@@ -61,7 +61,7 @@ public class AllItems
     public static SoulfireMaskItem SOULFIRE_MASK;
     public static GlacialNuclearEraItem GLACIAL_NUCLEAR_ERA;
     public static FrostbiteDomeItem FROSTBITE_DOME;
-    public static HeartSpellSteelItem HEART_STEEL;
+    public static HeartSpellSteelItem HEART_SPELL_STEEL;
     public static RejuvenatingBlossomItem REJUVENATING_BLOSSOM;
 
     // Breastplates
@@ -212,7 +212,7 @@ public class AllItems
                 .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
-        HEART_STEEL = Entry.of("heart_spell_steel", new HeartSpellSteelItem())
+        HEART_SPELL_STEEL = Entry.of("heart_spell_steel", new HeartSpellSteelItem())
                 .addEN()
                 .addZH("心之魔钢")
                 .addTag(AllTags.CAPE, AllTags.ENDGAME_TRINKETS)

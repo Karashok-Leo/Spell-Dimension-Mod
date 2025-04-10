@@ -77,12 +77,12 @@ public class VoidShadowEntry extends BaseEntryProvider
         context.page("behavior");
         this.lang().add(context.pageText(),
                 """
-                        When Void Shadow has at least half its health, you can deal damage to its body by killing the Servants He summons. Each hit deals damage equal to the Servant's max health, but not more than 1%% of Void Shadow's max health.
+                        When Void Shadow has at least half its health, you can deal damage to its body by killing the Servants He summons. Each hit deals damage equal to the Servant's max health, but not more than 5%% of Void Shadow's max health.
                         """
         );
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        当虚空之影至少有一半生命值时，你可以通过击杀祂召唤的侍从对其本体造成伤害。每次击杀造成的伤害等于侍从的最大生命值，但不会超过虚空之影的最大生命值的1%%。
+                        当虚空之影至少有一半生命值时，你可以通过击杀祂召唤的侍从对其本体造成伤害。每次击杀造成的伤害等于侍从的最大生命值，但不会超过虚空之影的最大生命值的5%%。
                         """
         );
         BookTextPageModel behavior = BookTextPageModel
