@@ -78,6 +78,7 @@ public enum SDTexts
     TEXT$DIFFICULTY$BAN_ITEM("You're in Hardcore mode and can no longer use this item.", "你处于硬核模式，不再能够使用该物品"),
     TEXT$RANDOM_LOOT_NAME("? %s ?", "? %s ?"),
     TEXT$LOCATING("Locating: %s", "正在定位：%s"),
+    TEXT$SUMMON$DISALLOW("%s can only be summoned with spell at its spawn location!", "只有在%s的生成地点才能使用魔力召唤它！"),
 
     /**
      * Game Over

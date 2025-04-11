@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:summon",
+  "count": 1,
+  "entity_type": "adventurez:void_shadow",
+  "ingredient": {
+    "item": "bosses_of_mass_destruction:obsidian_heart"
+  }
+}

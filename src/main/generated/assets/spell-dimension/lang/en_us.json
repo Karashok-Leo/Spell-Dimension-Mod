@@ -605,6 +605,7 @@
   "text.spell-dimension.spell_trait.description": "Spell Description: %s",
   "text.spell-dimension.spell_trait.interval": "Every %s seconds, cast spell on target",
   "text.spell-dimension.spell_trait.power": "Monsters gain spell power equal to %s%% Hostility level",
+  "text.spell-dimension.summon.disallow": "%s can only be summoned with spell at its spawn location!",
   "text.spell-dimension.trader.olden": "Mysterious Olden",
   "tooltip.spell-dimension.abrahadabra": "Cannot defend against spell traits.",
   "tooltip.spell-dimension.arcane_throne.1": "- Provides permanent Phase effect.",

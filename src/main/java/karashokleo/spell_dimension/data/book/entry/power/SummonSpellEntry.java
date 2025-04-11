@@ -5,6 +5,7 @@ import com.klikli_dev.modonomicon.api.datagen.CategoryProvider;
 import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookSpotlightPageModel;
+import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
 import karashokleo.spell_dimension.data.book.entry.BaseEntryProvider;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllSpells;
@@ -73,7 +74,29 @@ public class SummonSpellEntry extends BaseEntryProvider
                 .withItem(BookGenUtil.getNbtIngredient(AllItems.SPELL_SCROLL.getStack(AllSpells.SUMMON)))
                 .build();
 
-        return List.of(spell);
+        context.page("boss");
+        this.lang().add(context.pageText(),
+                """
+                        Some bosses can also be summoned using summon spell, but it must be in the place where they would have been.
+                        \\
+                        \\
+                         For example, Stalker must be summoned in the **Otherside** (Deeper Darker Dimension).
+                        """
+        );
+        this.lang("zh_cn").add(context.pageText(),
+                """
+                        有些Boss也可以使用召唤法术进行召唤，但必须位于他们本来所在的场所。
+                        \\
+                        \\
+                        比如追猎者必须在**幽冥异界**（深暗维度）才能召唤。
+                        """
+        );
+        BookTextPageModel boss = BookTextPageModel
+                .builder()
+                .withText(context.pageText())
+                .build();
+
+        return List.of(spell, boss);
     }
 
     @Override

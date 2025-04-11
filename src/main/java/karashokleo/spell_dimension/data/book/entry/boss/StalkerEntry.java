@@ -55,10 +55,10 @@ public class StalkerEntry extends BaseEntryProvider
                         Level: %d+
                         \\
                         \\
-                        May spawn when the player breaks an **Ancient Vase** in the **Deeper Darker**.
+                        May spawn when the player breaks an **Ancient Vase** in the **Otherside** (Deeper Darker Dimension).
                         \\
                         \\
-                        *Ancient Vase: Generated in the Ancient Temple in the Deeper Darker.*
+                        *Ancient Vase: Generated in the Ancient Temple in the Otherside.*
                         """.formatted(TextConstants.BOSS_LEVELS[1])
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
@@ -67,10 +67,10 @@ public class StalkerEntry extends BaseEntryProvider
                         等级: %d+
                         \\
                         \\
-                        玩家在**深暗维度**打破**远古花瓶**时有概率生成。
+                        玩家在**幽冥异界**（深暗维度）打破**远古花瓶**时有概率生成。
                         \\
                         \\
-                        *远古花瓶: 生成于深暗维度的远古神庙。*
+                        *远古花瓶: 生成于幽冥异界的远古神庙。*
                         """.formatted(TextConstants.BOSS_LEVELS[1])
         );
 

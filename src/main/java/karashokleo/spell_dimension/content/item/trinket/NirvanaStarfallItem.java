@@ -2,6 +2,8 @@ package karashokleo.spell_dimension.content.item.trinket;
 
 import karashokleo.l2hostility.content.item.trinket.core.DamageListenerTrinket;
 import karashokleo.l2hostility.content.item.trinket.core.SingleEpicTrinketItem;
+import karashokleo.l2hostility.content.network.S2CUndying;
+import karashokleo.l2hostility.init.LHNetworking;
 import karashokleo.l2hostility.util.EffectHelper;
 import karashokleo.leobrary.effect.api.util.EffectUtil;
 import karashokleo.spell_dimension.content.network.S2CFloatingItem;
@@ -16,6 +18,7 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
@@ -49,13 +52,17 @@ public class NirvanaStarfallItem extends SingleEpicTrinketItem implements Damage
 
         EffectHelper.forceAddEffectWithEvent(entity, new StatusEffectInstance(AllStatusEffects.NIRVANA, DURATION, level, false, false), entity);
 
+        S2CUndying packet = new S2CUndying(entity);
+        LHNetworking.toTracking(entity, packet);
         if (entity instanceof ServerPlayerEntity player)
         {
+            LHNetworking.toClientPlayer(player, packet);
             S2CFloatingItem floatingItem = new S2CFloatingItem(stack.copy());
             AllPackets.toClientPlayer(player, floatingItem);
         }
 
         entity.setHealth(entity.getMaxHealth());
+        entity.getWorld().playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.ITEM_TOTEM_USE, entity.getSoundCategory(), 1.0F, 1.0F);
         EffectUtil.streamEffects(entity, StatusEffectCategory.HARMFUL)
                 .toList()
                 .forEach(entity::removeStatusEffect);

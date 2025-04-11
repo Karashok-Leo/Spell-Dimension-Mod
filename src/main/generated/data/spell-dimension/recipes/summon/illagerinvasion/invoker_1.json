@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:summon",
+  "count": 1,
+  "entity_type": "illagerinvasion:invoker",
+  "ingredient": {
+    "item": "illagerinvasion:hallowed_gem"
+  }
+}

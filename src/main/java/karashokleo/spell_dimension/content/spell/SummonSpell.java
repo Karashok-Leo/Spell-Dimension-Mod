@@ -1,26 +1,33 @@
 package karashokleo.spell_dimension.content.spell;
 
+import com.kyanite.deeperdarker.content.DDEntities;
 import karashokleo.spell_dimension.content.misc.ISpawnerExtension;
 import karashokleo.spell_dimension.content.object.SummonEntry;
 import karashokleo.spell_dimension.content.recipe.summon.SummonRecipe;
+import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.util.ParticleUtil;
 import karashokleo.spell_dimension.util.RandomUtil;
+import net.adventurez.init.EntityInit;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.MobSpawnerBlockEntity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
+import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import net.spell_engine.entity.SpellProjectile;
 
+import java.util.HashMap;
 import java.util.Optional;
 
 public class SummonSpell
@@ -65,6 +72,7 @@ public class SummonSpell
 
         Optional<SummonEntry> optional = getSummonEntry(world, player);
         if (optional.isEmpty()) return;
+        if (!allowSummon(mobSpawnerBlockEntity, optional.get(), player)) return;
         setSummonData(mobSpawnerBlockEntity, optional.get(), world.getRandom());
 
         mobSpawnerBlockEntity.markDirty();
@@ -89,5 +97,28 @@ public class SummonSpell
     {
         spawnerBlockEntity.setEntityType(summonEntry.entityType(), random);
         ((ISpawnerExtension) spawnerBlockEntity.getLogic()).setRemain(summonEntry.count());
+    }
+
+    private static final HashMap<EntityType<?>, Identifier> WORLD_RESTRICTIONS = new HashMap<>();
+
+    static
+    {
+        WORLD_RESTRICTIONS.put(EntityInit.VOID_SHADOW, new Identifier("voidz:void"));
+        WORLD_RESTRICTIONS.put(DDEntities.STALKER, new Identifier("deeperdarker:otherside"));
+    }
+
+    private static boolean allowSummon(MobSpawnerBlockEntity spawnerBlockEntity, SummonEntry summonEntry, PlayerEntity player)
+    {
+        World world = spawnerBlockEntity.getWorld();
+        if (world == null) return false;
+        Identifier worldId = world.getRegistryKey().getValue();
+        EntityType<?> entityType = summonEntry.entityType();
+        Identifier requireId = WORLD_RESTRICTIONS.get(entityType);
+        if (requireId != null && !worldId.equals(requireId))
+        {
+            player.sendMessage(SDTexts.TEXT$SUMMON$DISALLOW.get(entityType.getName()).formatted(Formatting.RED), false);
+            return false;
+        }
+        return true;
     }
 }

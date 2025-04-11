@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:summon",
+  "count": 20,
+  "entity_type": "adventurez:piglin_beast",
+  "ingredient": {
+    "item": "l2hostility:piglin_rune"
+  }
+}

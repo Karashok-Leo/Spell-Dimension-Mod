@@ -1,0 +1,8 @@
+{
+  "type": "spell-dimension:summon",
+  "count": 1,
+  "entity_type": "aquamirae:captain_cornelia",
+  "ingredient": {
+    "item": "minecraft:heart_of_the_sea"
+  }
+}

@@ -605,6 +605,7 @@
   "text.spell-dimension.spell_trait.description": "法术描述：%s",
   "text.spell-dimension.spell_trait.interval": "每隔%s秒，对目标施放法术",
   "text.spell-dimension.spell_trait.power": "怪物获得相当于%s%%恶意等级的法术强度",
+  "text.spell-dimension.summon.disallow": "只有在%s的生成地点才能使用魔力召唤它！",
   "text.spell-dimension.trader.olden": "神秘老登",
   "tooltip.spell-dimension.abrahadabra": "无法抵御法术词条",
   "tooltip.spell-dimension.arcane_throne.1": "- 提供永久相位",
