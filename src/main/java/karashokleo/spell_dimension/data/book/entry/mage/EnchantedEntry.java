@@ -74,7 +74,7 @@ public class EnchantedEntry extends BaseEntryProvider
                         Primary, Intermediate, and Advanced Base Essences can be crafted into Enchanted Essences with a threshold of %d, %d, and %d respectively. The max threshold of Enchanted Essence that can be obtained from the loot depends on your difficulty level.
                         \\
                         \\
-                        At the Normal difficulty tier, Enchanted Essences can be merged into an Enchanted Essence with a higher threshold.
+                        At the Normal difficulty tier, Enchanted Essences can be merged into one with a higher threshold.
                         """.formatted(
                         EnchantedEssenceItem.CRAFT_THRESHOLD[0],
                         EnchantedEssenceItem.CRAFT_THRESHOLD[1],

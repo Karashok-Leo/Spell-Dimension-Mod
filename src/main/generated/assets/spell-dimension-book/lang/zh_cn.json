@@ -283,7 +283,7 @@
   "book.spell-dimension-book.magic_guidance.resource.storage.separate.text": "如果将大量此类物品接入存储系统，容易造成严重卡顿，对服务器产生性能影响。因此，推荐将这些物品存入独立的箱子中。\n",
   "book.spell-dimension-book.magic_guidance.resource.storage.storage.text": "在你的箱子旁放置**存储连接器**与**存储终端**或者**合成终端**，之后你便可以通过终端统一管理所有箱子里的物品。\n",
   "book.spell-dimension-book.magic_guidance.resource.storage.storage.title": "汤姆的简易存储",
-  "book.spell-dimension-book.magic_guidance.resource.storage.wireless.text": "建造一个4级以上的**信标**，或将你的存储系统安置在足够高的**意识枢纽**旁边，使用**高级无线终端**Shift+右键绑定到终端上，并使用**区块加载器**加载区块，即可实现跨维度远距离访问你的存储系统。\n",
+  "book.spell-dimension-book.magic_guidance.resource.storage.wireless.text": "建造一个4级以上的**信标**，或将你的存储系统安置在足够高的**意识枢纽**旁边，使用**高级无线终端**绑定到终端上，并使用**区块加载器**加载区块，即可实现跨维度远距离访问你的存储系统。\n",
   "book.spell-dimension-book.magic_guidance.resource.storage.wireless.title": "无线存储",
   "book.spell-dimension-book.magic_guidance.resource.trader.description": "他真的很喜欢吃苹果",
   "book.spell-dimension-book.magic_guidance.resource.trader.name": "商人",
