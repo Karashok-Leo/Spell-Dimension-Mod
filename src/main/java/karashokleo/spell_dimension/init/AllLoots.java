@@ -3,6 +3,7 @@ package karashokleo.spell_dimension.init;
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.item.trinket.misc.LootingCharm;
+import karashokleo.l2hostility.content.logic.DifficultyLevel;
 import karashokleo.l2hostility.init.LHTraits;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
@@ -14,6 +15,7 @@ import karashokleo.spell_dimension.content.object.EventAward;
 import karashokleo.spell_dimension.content.object.ScrollType;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.condition.KilledByPlayerLootCondition;
@@ -75,25 +77,31 @@ public class AllLoots
             SpellSchool school = spellInfo.spell().school;
             for (Entity target : targets)
             {
+                if (!(target instanceof LivingEntity living)) continue;
                 if (EssenceLootConfig.BASE_CONFIG.blacklist().contains(target.getType()))
                     continue;
+
+                boolean doDrop = (living instanceof PlayerEntity);
 
                 var op = MobDifficulty.get(target);
                 if (op.isPresent())
                 {
                     MobDifficulty difficulty = op.get();
-                    if (difficulty.noDrop) continue;
-                    if (difficulty.hasTrait(LHTraits.UNDYING)) continue;
-                    if (difficulty.hasTrait(LHTraits.DISPELL)) continue;
-                    if (difficulty.hasTrait(LHTraits.ADAPTIVE)) continue;
+                    doDrop = !difficulty.noDrop &&
+                             !difficulty.hasTrait(LHTraits.UNDYING) &&
+                             !difficulty.hasTrait(LHTraits.DISPELL) &&
+                             !difficulty.hasTrait(LHTraits.ADAPTIVE);
+                }
 
+                if (doDrop)
+                {
                     // Determine the loot charm level
                     int lootCharmLevel = TrinketCompat.getTrinketItems(caster, e -> e.getItem() instanceof LootingCharm).size();
 
                     float dropChance = EssenceLootConfig.BASE_CONFIG.dropChance() + lootCharmLevel * 0.1F;
                     if (caster.getRandom().nextFloat() > dropChance) continue;
 
-                    int grade = EssenceLootConfig.BASE_CONFIG.getRandomGrade(caster.getRandom(), difficulty.getLevel());
+                    int grade = EssenceLootConfig.BASE_CONFIG.getRandomGrade(caster.getRandom(), DifficultyLevel.ofAny(living));
 
                     target.dropItem(AllItems.BASE_ESSENCES.get(school).get(grade));
                 }

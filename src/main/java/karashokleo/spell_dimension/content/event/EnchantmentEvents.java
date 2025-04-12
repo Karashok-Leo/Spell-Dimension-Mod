@@ -5,7 +5,6 @@ import io.github.fabricators_of_create.porting_lib.entity.events.living.MobEffec
 import karashokleo.l2hostility.api.event.ModifyDispellImmuneFactorCallback;
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.l2hostility.init.LHTags;
-import karashokleo.leobrary.damage.api.modify.DamageModifier;
 import karashokleo.leobrary.damage.api.modify.DamagePhase;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
 import karashokleo.spell_dimension.content.enchantment.EffectImmunityEnchantment;
@@ -119,10 +118,8 @@ public class EnchantmentEvents
                 totalSpellPower += SpellPower.getSpellPower(school, player).baseValue();
 
             float damageLeech = (float) (totalLevel * 0.01 * totalSpellPower);
-            // Cap the leech amount to the original damage
-            damageLeech = Math.min(damageAccess.getOriginalDamage(), damageLeech);
             player.heal(damageLeech);
-            damageAccess.addModifier(DamageModifier.add(-damageLeech));
+            damageAccess.addModifier(originalDamage -> Math.max(0, originalDamage - damageLeech * 5));
         });
     }
 

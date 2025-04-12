@@ -86,6 +86,8 @@ public interface Quest
     default Text getTitle(World world)
     {
         String titleKey = this.getTitleKey();
+        // cannot call this method in server side!!!
+        // because I18n does not exist in server side
         if (!I18n.hasTranslation(titleKey)) return null;
         return Text.translatable(titleKey);
     }
@@ -104,7 +106,6 @@ public interface Quest
     default Text getFeedback(World world)
     {
         String feedbackKey = this.getFeedbackKey();
-        if (!I18n.hasTranslation(feedbackKey)) return null;
         return Text.translatable(feedbackKey).formatted(Formatting.LIGHT_PURPLE);
     }
 
