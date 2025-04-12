@@ -74,7 +74,7 @@ public class StorageEntry extends BaseEntryProvider
         this.lang().add(context.pageTitle(), "Wireless Storage");
         this.lang().add(context.pageText(),
                 """
-                        Build a level 4+ **Beacon**, or place your storage system next to a high enough **Consciousness Pivot**, bind to the terminal using the **Advanced Wireless Terminal** (Shift + Right-click), and use **Chunk Loader** to load surrounding chunks to enable inter-dimensional remote access to your storage system.
+                        Build a level 4+ **Beacon**, or place your storage next to a high enough **Consciousness Pivot**, bind your **Advanced Wireless Terminal** (Shift + Right-click) to the terminal, and use **Chunk Loader** to load surrounding chunks to enable inter-dimensional remote access to your storage.
                         """
         );
         this.lang("zh_cn").add(context.pageTitle(), "无线存储");

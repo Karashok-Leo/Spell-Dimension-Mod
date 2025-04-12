@@ -30,9 +30,6 @@
           "item": "wizards:frost_spell_book"
         },
         {
-          "item": "paladins:paladin_spell_book"
-        },
-        {
           "item": "paladins:priest_spell_book"
         }
       ],
@@ -102,7 +99,7 @@
         }
       ],
       "text": "book.spell-dimension-book.magic_guidance.mage.book.next.text",
-      "title": ""
+      "title": "book.spell-dimension-book.magic_guidance.mage.book.next.title"
     }
   ],
   "parents": [

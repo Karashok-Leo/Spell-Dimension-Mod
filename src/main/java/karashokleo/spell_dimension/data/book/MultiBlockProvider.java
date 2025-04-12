@@ -1,6 +1,7 @@
 package karashokleo.spell_dimension.data.book;
 
 import com.klikli_dev.modonomicon.api.datagen.MultiblockProvider;
+import karashokleo.enchantment_infusion.init.EIBlocks;
 import karashokleo.spell_dimension.util.BookGenUtil;
 import net.adventurez.init.BlockInit;
 import net.minecraft.block.Blocks;
@@ -66,6 +67,22 @@ public class MultiBlockProvider extends MultiblockProvider
                         .block('0', () -> Blocks.POLISHED_BLACKSTONE)
                         .block('B', () -> Blocks.POLISHED_BLACKSTONE)
                         .block('A', () -> BlockInit.CHISELED_POLISHED_BLACKSTONE_HOLDER)
+        );
+
+        add(
+                modLoc("enchantment_infusion"),
+                new DenseMultiblockBuilder()
+                        .layer(
+                                "   P   ",
+                                " P   P ",
+                                "       ",
+                                "P  0  P",
+                                "       ",
+                                " P   P ",
+                                "   P   "
+                        )
+                        .block('0', () -> EIBlocks.INFUSION_TABLE)
+                        .block('P', () -> EIBlocks.INFUSION_PEDESTAL)
         );
     }
 }

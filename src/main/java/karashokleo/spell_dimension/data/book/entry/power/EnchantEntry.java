@@ -3,14 +3,13 @@ package karashokleo.spell_dimension.data.book.entry.power;
 import com.klikli_dev.modonomicon.api.datagen.BookContextHelper;
 import com.klikli_dev.modonomicon.api.datagen.CategoryProvider;
 import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
-import com.klikli_dev.modonomicon.api.datagen.book.page.BookImagePageModel;
+import com.klikli_dev.modonomicon.api.datagen.book.page.BookMultiblockPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookSpotlightPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
 import karashokleo.enchantment_infusion.api.recipe.EnchantmentIngredient;
 import karashokleo.enchantment_infusion.init.EIItems;
 import karashokleo.spell_dimension.data.book.entry.BaseEntryProvider;
-import karashokleo.spell_dimension.util.BookGenUtil;
 import net.fabricmc.fabric.api.recipe.v1.ingredient.DefaultCustomIngredients;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
@@ -77,10 +76,9 @@ public class EnchantEntry extends BaseEntryProvider
         this.lang().add(context.pageTitle(), "Positioning of table and pedestals");
         this.lang("zh_cn").add(context.pageTitle(), "附魔灌注台与基座的位置");
 
-        BookImagePageModel image = BookImagePageModel
+        BookMultiblockPageModel multiblock = BookMultiblockPageModel
                 .builder()
-                .withTitle(context.pageTitle())
-                .withImages(BookGenUtil.id("textures/infusion.png"))
+                .withMultiblockId("spell-dimension-book:enchantment_infusion")
                 .build();
 
         context.page("pos");
@@ -163,7 +161,7 @@ public class EnchantEntry extends BaseEntryProvider
                 .withText(context.pageText())
                 .build();
 
-        return List.of(infuse, image, pos, disenchant, restriction, amplify);
+        return List.of(infuse, multiblock, pos, disenchant, restriction, amplify);
     }
 
     @Override

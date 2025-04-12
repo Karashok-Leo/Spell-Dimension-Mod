@@ -1,0 +1,45 @@
+{
+  "type": "modonomicon:dense",
+  "mapping": {
+    "*": {
+      "type": "modonomicon:display",
+      "display": "minecraft:basalt"
+    },
+    "+": {
+      "type": "modonomicon:display",
+      "display": "minecraft:stone"
+    },
+    "0": {
+      "type": "modonomicon:block",
+      "block": "enchantment_infusion:enchantment_infusion_table"
+    },
+    "P": {
+      "type": "modonomicon:block",
+      "block": "enchantment_infusion:enchantment_infusion_pedestal"
+    }
+  },
+  "pattern": [
+    [
+      "_________",
+      "____P____",
+      "__P___P__",
+      "_________",
+      "_P__0__P_",
+      "_________",
+      "__P___P__",
+      "____P____",
+      "_________"
+    ],
+    [
+      "*+*+*+*+*",
+      "+*+*+*+*+",
+      "*+*+*+*+*",
+      "+*+*+*+*+",
+      "*+*+*+*+*",
+      "+*+*+*+*+",
+      "*+*+*+*+*",
+      "+*+*+*+*+",
+      "*+*+*+*+*"
+    ]
+  ]
+}

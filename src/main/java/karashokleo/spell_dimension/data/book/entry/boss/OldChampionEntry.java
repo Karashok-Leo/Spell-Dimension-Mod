@@ -59,9 +59,8 @@ public class OldChampionEntry extends BaseEntryProvider
                         \\
                         Spawns inside the **Champion's Grave**(soulsweapons:champions_grave).
                         \\
-                        This structure can be located in the Overworld using the Moonstone Compass.
                         \\
-                        Old Champion's Remains is attuned to damage from the same weapon (main hand item).
+                        This structure can be located in the Overworld using the Moonstone Compass.
                         """.formatted(TextConstants.BOSS_LEVELS[0])
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
@@ -72,9 +71,8 @@ public class OldChampionEntry extends BaseEntryProvider
                         \\
                         生成于**古英雄的坟墓**(soulsweapons:champions_grave)内。
                         \\
-                        可用月石罗盘在主世界寻找该结构。
                         \\
-                        古英雄的遗骸对同一武器（主手物品）的伤害有适应性。
+                        可用月石罗盘在主世界寻找该结构。
                         """.formatted(TextConstants.BOSS_LEVELS[0])
         );
 
@@ -91,7 +89,11 @@ public class OldChampionEntry extends BaseEntryProvider
                         Or use Draugr on the Old Moon Altar to summon.
                         \\
                         \\
+                        Old Champion's Remains can adapt himself to damage from the same weapon (main hand item).
+                        \\
+                        \\
                         Spawns **Frenzied Shade** upon death.
+                        \\
                         \\
                         Frenzied Shade can phase through walls and inflicts various debuffs such as blindness and wither on attack.
                         """
@@ -101,7 +103,11 @@ public class OldChampionEntry extends BaseEntryProvider
                         或者对破旧的月光祭坛使用德拉古尔召唤。
                         \\
                         \\
+                        古英雄的遗骸对同一武器（主手物品）的伤害有适应性。
+                        \\
+                        \\
                         死后生成**暗夜之影**。
+                        \\
                         \\
                         暗夜之影可以穿墙，攻击时会使目标获得失明、凋零等多种负面效果。
                         """

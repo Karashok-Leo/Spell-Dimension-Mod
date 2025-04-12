@@ -27,17 +27,15 @@
       "title": "book.spell-dimension-book.magic_guidance.power.enchant.infuse.title"
     },
     {
-      "type": "modonomicon:image",
+      "type": "modonomicon:multiblock",
       "anchor": "",
-      "border": true,
       "condition": {
         "type": "modonomicon:none"
       },
-      "images": [
-        "spell-dimension-book:textures/infusion.png"
-      ],
-      "text": "",
-      "title": "book.spell-dimension-book.magic_guidance.power.enchant.image.title"
+      "multiblock_id": "spell-dimension-book:enchantment_infusion",
+      "multiblock_name": "",
+      "show_visualize_button": true,
+      "text": ""
     },
     {
       "type": "modonomicon:text",
