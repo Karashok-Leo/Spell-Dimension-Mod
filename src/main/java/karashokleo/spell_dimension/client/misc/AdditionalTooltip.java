@@ -78,7 +78,7 @@ public class AdditionalTooltip
         var player = MinecraftClient.getInstance().player;
         if (player == null) return;
         lines.add(SDTexts.TOOLTIP$FLEX_BREASTPLATE$DAMAGE_FACTOR.get(
-                "%.1f%%".formatted((1 - AllItems.FLEX_BREASTPLATE.getDamageFactor(player)) * 100)
+                "%.1f%%".formatted(AllItems.FLEX_BREASTPLATE.getDamageReduction(player) * 100)
         ).formatted(Formatting.RED));
     }
 

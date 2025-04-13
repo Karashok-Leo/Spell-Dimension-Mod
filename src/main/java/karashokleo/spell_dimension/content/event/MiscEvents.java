@@ -115,9 +115,19 @@ public class MiscEvents
                 return true;
             int baseValue = 400;
             if (type == EntityType.ELDER_GUARDIAN)
+            {
                 baseValue = 300;
-            else if (Registries.ENTITY_TYPE.getId(type).equals(new Identifier("soulsweapons:night_shade")))
-                baseValue = 60;
+            } else
+            {
+                Identifier typeId = Registries.ENTITY_TYPE.getId(type);
+                if (typeId.equals(new Identifier("soulsweapons:night_shade")))
+                {
+                    baseValue = 60;
+                } else if (typeId.getNamespace().equals("mutantmonsters"))
+                {
+                    baseValue = 200;
+                }
+            }
             EntityAttributeInstance attributeInstance = living.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
             if (attributeInstance == null)
                 return true;

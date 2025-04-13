@@ -42,10 +42,10 @@ public class BreakSpell
                 Item blockItem = world.getBlockState(blockPos).getBlock().asItem();
                 Block.dropStack(world, blockPos, blockItem.getDefaultStack());
                 world.breakBlock(blockPos, false, owner);
+                return;
             }
-        } else
-        {
-            world.breakBlock(blockPos, true, owner);
         }
+
+        world.breakBlock(blockPos, true, owner);
     }
 }

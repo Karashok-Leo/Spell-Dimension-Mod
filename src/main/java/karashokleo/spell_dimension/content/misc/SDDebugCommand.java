@@ -1,6 +1,5 @@
 package karashokleo.spell_dimension.content.misc;
 
-import com.google.common.collect.ImmutableList;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import karashokleo.spell_dimension.mixin.modded.SpellRegistryAccessor;
@@ -8,21 +7,15 @@ import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.minecraft.command.argument.EntityArgumentType;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.Text;
 import net.spell_engine.SpellEngineMod;
 import net.spell_engine.internals.SpellRegistry;
 import net.spell_engine.network.Packets;
 import net.spell_engine.utils.WeaponCompatibility;
-
-import java.util.Collection;
 
 public class SDDebugCommand
 {
@@ -33,51 +26,11 @@ public class SDDebugCommand
             dispatcher.register(
                     CommandManager
                             .literal("spell_dimension")
-                            .then(sendDeath())
                             .then(fixFakeDeath())
                             .then(reloadSpells())
             );
 
         });
-    }
-
-    private static LiteralArgumentBuilder<ServerCommandSource> sendDeath()
-    {
-        return CommandManager
-                .literal("send_stats")
-                .executes(
-                        context ->
-                                sendStats(
-                                        context.getSource(),
-                                        ImmutableList.of(context.getSource().getEntityOrThrow())
-                                )
-                )
-                .then(
-                        CommandManager
-                                .argument(
-                                        "targets",
-                                        EntityArgumentType.entities()
-                                )
-                                .executes(
-                                        context -> sendStats(
-                                                context.getSource(),
-                                                EntityArgumentType.getEntities(context, "targets")
-                                        )
-                                )
-                );
-    }
-
-    private static int sendStats(ServerCommandSource source, Collection<? extends Entity> targets)
-    {
-        for (Entity target : targets)
-        {
-            if (target instanceof LivingEntity living)
-            {
-                source.sendFeedback(() -> Text.literal("Health: " + living.getHealth()), false);
-                source.sendFeedback(() -> Text.literal("Already died? " + living.isDead()), false);
-            }
-        }
-        return Command.SINGLE_SUCCESS;
     }
 
     private static LiteralArgumentBuilder<ServerCommandSource> fixFakeDeath()

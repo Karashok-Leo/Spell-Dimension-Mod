@@ -1,8 +1,7 @@
 package karashokleo.spell_dimension.content.event;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.ServerPlayerCreationCallback;
-import karashokleo.l2hostility.content.component.mob.MobDifficulty;
-import karashokleo.l2hostility.content.component.player.PlayerDifficulty;
+import karashokleo.l2hostility.content.logic.DifficultyLevel;
 import karashokleo.spell_dimension.api.ApplyFoodEffectsCallback;
 import karashokleo.spell_dimension.content.object.EnlighteningModifier;
 import karashokleo.spell_dimension.init.AllTags;
@@ -39,11 +38,9 @@ public class PlayerHealthEvents
     private static void onKill(ServerWorld world, Entity entity, LivingEntity killedEntity)
     {
         if (!(entity instanceof PlayerEntity player)) return;
-        float playerMaxHealth = player.getMaxHealth();
-        if (playerMaxHealth >= HEALTH_THRESHOLD) return;
-        if (playerMaxHealth > killedEntity.getMaxHealth()) return;
-        int playerLevel = PlayerDifficulty.get(player).getLevel().getLevel();
-        int killedLevel = MobDifficulty.get(killedEntity).map(MobDifficulty::getLevel).orElse(0);
+        if (player.getMaxHealth() >= HEALTH_THRESHOLD) return;
+        int playerLevel = DifficultyLevel.ofAny(player);
+        int killedLevel = DifficultyLevel.ofAny(killedEntity);
         if (playerLevel >= killedLevel) return;
         addHeart(player);
     }

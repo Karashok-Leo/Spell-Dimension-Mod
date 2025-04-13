@@ -50,7 +50,9 @@ public record EnlighteningModifier(
     public double getNewAmount(double oldAmount)
     {
         // Do special modification while Operation == MULTIPLY_TOTAL
-        return operation == EntityAttributeModifier.Operation.MULTIPLY_TOTAL ? ((1 + amount) * (1 + oldAmount) - 1) : (amount + oldAmount);
+        return operation == EntityAttributeModifier.Operation.MULTIPLY_TOTAL ?
+                ((1 + amount) * (1 + oldAmount) - 1) :
+                (amount + oldAmount);
     }
 
     public boolean applyToEntityOrPlayer(LivingEntity entity)
@@ -107,7 +109,7 @@ public record EnlighteningModifier(
     public boolean overWriteNbt(NbtCompound oldModifier)
     {
         if (AttributeUtil.getAttributeId(attribute).equals(oldModifier.getString(ATTRIBUTE_KEY)) &&
-                uuid.equals(oldModifier.getUuid(UUID_KEY)))
+            uuid.equals(oldModifier.getUuid(UUID_KEY)))
         {
             oldModifier.putDouble(AMOUNT_KEY, getNewAmount(oldModifier.getDouble(AMOUNT_KEY)));
             return true;

@@ -3,6 +3,8 @@ package karashokleo.spell_dimension.content.network;
 import dev.xkmc.l2serial.serialization.SerialClass;
 import karashokleo.l2hostility.content.network.S2CEntity;
 import karashokleo.spell_dimension.api.BeamProvider;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
@@ -59,6 +61,7 @@ public class S2CBeam extends S2CEntity
         }
     }
 
+    @Environment(EnvType.CLIENT)
     @Override
     public void handle(ClientPlayerEntity player)
     {

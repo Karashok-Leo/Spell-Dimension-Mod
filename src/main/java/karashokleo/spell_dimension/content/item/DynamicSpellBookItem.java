@@ -203,7 +203,11 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
         ItemStack clicking = slot.getStack();
         if (clicking.isEmpty())
         {
-            this.removeSpell(holding, player).ifPresent(slot::insertStack);
+            this.removeSpell(holding, player).ifPresent(stack ->
+            {
+                ItemStack remain = slot.insertStack(stack);
+                player.getInventory().offerOrDrop(remain);
+            });
         } else
         {
             tryAddScroll(holding, clicking, player);
@@ -219,7 +223,12 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
         {
             if (holding.isEmpty())
             {
-                removeSpell(clicking, player).ifPresent(cursorStackReference::set);
+                removeSpell(clicking, player).ifPresent(stack ->
+                {
+                    // if failed to insert, drop the scroll
+                    if (!cursorStackReference.set(stack))
+                        player.getInventory().offerOrDrop(stack);
+                });
             } else
             {
                 tryAddScroll(clicking, holding, player);

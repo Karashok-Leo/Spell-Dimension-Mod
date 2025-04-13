@@ -19,13 +19,13 @@ public class UuidUtil
     {
         for (Operation operation : Operation.values())
         {
-            forSelf.put(operation, getUUIDFromOperation(operation));
+            forSelf.put(operation, getUUIDFromString("Self-" + operation.name()));
         }
         for (EquipmentSlot slot : EquipmentSlot.values())
         {
             HashMap<Operation, UUID> map = new HashMap<>();
             for (Operation operation : Operation.values())
-                map.put(operation, getUUIDFromSlotAndOperation(slot, operation));
+                map.put(operation, getUUIDFromString("Equipment-" + slot.name() + "-" + operation.name()));
             forEquipment.put(slot, map);
         }
     }
@@ -47,15 +47,5 @@ public class UuidUtil
         long l0 = r.nextLong();
         long l1 = r.nextLong();
         return new UUID(l0, l1);
-    }
-
-    public static UUID getUUIDFromSlotAndOperation(EquipmentSlot slot, EntityAttributeModifier.Operation operation)
-    {
-        return getUUIDFromString(slot.name() + "-" + operation.name());
-    }
-
-    public static UUID getUUIDFromOperation(EntityAttributeModifier.Operation operation)
-    {
-        return getUUIDFromString(operation.name());
     }
 }
