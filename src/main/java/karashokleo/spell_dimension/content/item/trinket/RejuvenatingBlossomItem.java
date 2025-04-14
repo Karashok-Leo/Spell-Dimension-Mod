@@ -1,7 +1,6 @@
 package karashokleo.spell_dimension.content.item.trinket;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDamageEvent;
-import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.l2hostility.content.item.trinket.core.DamageListenerTrinket;
 import karashokleo.l2hostility.content.item.trinket.core.SingleEpicTrinketItem;
 import karashokleo.l2hostility.util.EffectHelper;
@@ -30,8 +29,7 @@ public class RejuvenatingBlossomItem extends SingleEpicTrinketItem implements Da
     @Override
     public void onDamaged(ItemStack stack, LivingEntity entity, LivingDamageEvent event)
     {
-        int count = TrinketCompat.getTrinketItems(entity, e -> e.isOf(this)).size();
-        int amount = (int) event.getAmount() * count;
+        int amount = (int) event.getAmount();
         StatusEffectInstance instance = entity.getStatusEffect(StatusEffects.REGENERATION);
         if (instance != null && instance.getDuration() < amount)
         {
