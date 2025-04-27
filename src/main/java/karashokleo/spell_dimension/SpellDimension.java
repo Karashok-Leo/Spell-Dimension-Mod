@@ -37,6 +37,7 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageType;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.registry.RegistryBuilder;
@@ -133,6 +134,7 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
     public static final TagGenerator<Fluid> FLUID_TAGS = new TagGenerator<>(RegistryKeys.FLUID);
     public static final TagGenerator<DamageType> DAMAGE_TYPE_TAGS = new TagGenerator<>(RegistryKeys.DAMAGE_TYPE);
     public static final TagGenerator<Enchantment> ENCHANTMENT_TAGS = new TagGenerator<>(RegistryKeys.ENCHANTMENT);
+    public static final TagGenerator<StatusEffect> EFFECT_TAGS = new TagGenerator<>(RegistryKeys.STATUS_EFFECT);
     public static final TagGenerator<Quest> QUEST_TAGS = new TagGenerator<>(QuestRegistry.QUEST_REGISTRY_KEY);
     public static final TagGenerator<Biome> BIOME_TAGS = new TagGenerator<>(RegistryKeys.BIOME);
 

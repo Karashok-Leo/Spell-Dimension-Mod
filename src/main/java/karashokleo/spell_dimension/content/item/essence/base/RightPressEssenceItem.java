@@ -41,7 +41,7 @@ public abstract class RightPressEssenceItem extends SpellEssenceItem
     protected void success(ItemStack essence, PlayerEntity player)
     {
         super.success(essence, player);
-        SoundUtil.playSound(player, SoundUtil.SPELL);
+        SoundUtil.playSound(player, SoundUtil.LEVEL_UP);
     }
 
     @Override

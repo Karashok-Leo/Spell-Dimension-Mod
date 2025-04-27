@@ -179,5 +179,4 @@ public class QuestScreen extends Screen
 
         matrices.pop();
     }
-
 }

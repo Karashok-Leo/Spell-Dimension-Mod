@@ -19,6 +19,7 @@ public class SoundUtil
 {
     public static final Sound ANVIL = new Sound("block.anvil.use");
     public static final Sound SPELL = new Sound("spell_engine:bind_spell");
+    public static final Sound LEVEL_UP = new Sound("entity.player.levelup");
 
     private static final Map<SpellSchool, Sound> map = Map.of(
             SpellSchools.ARCANE, new Sound("spell_engine:generic_arcane_release"),

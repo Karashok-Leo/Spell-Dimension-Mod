@@ -78,7 +78,7 @@ public class EnchantedEssenceItem extends StackClickEssenceItem
     protected boolean applyEffect(ItemStack essence, ItemStack target, PlayerEntity player)
     {
         if (target.isOf(this) &&
-            GameStageComponent.isNormalMode(player))
+            GameStageComponent.getDifficulty(player) == GameStageComponent.NIGHTMARE)
             return mergeEnchantedEssences(essence, target);
         EnchantedModifier enchantedModifier = getModifier(essence);
         if (enchantedModifier == null) return false;

@@ -1,5 +1,6 @@
 package karashokleo.spell_dimension.init;
 
+import karashokleo.l2hostility.init.LHTags;
 import karashokleo.leobrary.datagen.builder.StatusEffectBuilder;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.buff.BlazingMark;
@@ -27,6 +28,7 @@ public class AllStatusEffects
                 .addZH("相位")
                 .addENDesc("Can fly freely and pass through blocks")
                 .addZHDesc("自由飞行并且可以穿过方块")
+                .addTag(LHTags.CLEANSE_BLACKLIST)
                 .register();
         IGNITE = new Entry<>("ignite", new IgniteEffect())
                 .addEN()
@@ -39,6 +41,7 @@ public class AllStatusEffects
                 .addZH("霜环")
                 .addENDesc(FrostAuraEffect.getDesc(true))
                 .addZHDesc(FrostAuraEffect.getDesc(false))
+                .addTag(LHTags.CLEANSE_BLACKLIST)
                 .register();
         FROSTED = new Entry<>("frosted", new FrostedEffect())
                 .addEN()
@@ -69,12 +72,14 @@ public class AllStatusEffects
                 .addZH("神圣光环")
                 .addENDesc(DivineAuraEffect.getDesc(true))
                 .addZHDesc(DivineAuraEffect.getDesc(false))
+                .addTag(LHTags.CLEANSE_BLACKLIST)
                 .register();
         NIRVANA = new Entry<>("nirvana", new NirvanaEffect())
                 .addEN()
                 .addZH("涅槃")
                 .addENDesc(NirvanaEffect.getDesc(true))
                 .addZHDesc(NirvanaEffect.getDesc(false))
+                .addTag(LHTags.CLEANSE_BLACKLIST)
                 .register();
 
         Synchronized.configure(PHASE, true);
