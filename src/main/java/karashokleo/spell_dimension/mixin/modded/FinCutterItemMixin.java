@@ -14,7 +14,8 @@ public abstract class FinCutterItemMixin
                     value = "INVOKE",
                     target = "Lcom/obscuria/obscureapi/common/classes/ability/Ability$Builder;mod(I)Lcom/obscuria/obscureapi/common/classes/ability/Ability$Builder;",
                     ordinal = 0
-            )
+            ),
+            remap = false
     )
     private static int modify_0(int amount)
     {
@@ -27,7 +28,8 @@ public abstract class FinCutterItemMixin
                     value = "INVOKE",
                     target = "Lcom/obscuria/obscureapi/common/classes/ability/Ability$Builder;mod(I)Lcom/obscuria/obscureapi/common/classes/ability/Ability$Builder;",
                     ordinal = 1
-            )
+            ),
+            remap = false
     )
     private static int modify_1(int amount)
     {

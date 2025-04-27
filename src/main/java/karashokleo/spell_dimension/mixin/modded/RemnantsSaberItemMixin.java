@@ -13,7 +13,8 @@ public abstract class RemnantsSaberItemMixin
             at = @At(
                     value = "INVOKE",
                     target = "Lcom/obscuria/obscureapi/common/classes/ability/Ability$Builder;mod(I)Lcom/obscuria/obscureapi/common/classes/ability/Ability$Builder;"
-            )
+            ),
+            remap = false
     )
     private static int modify(int amount)
     {
