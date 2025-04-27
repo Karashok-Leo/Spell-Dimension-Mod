@@ -122,5 +122,4 @@ public class EnchantmentEvents
             damageAccess.addModifier(originalDamage -> Math.max(0, originalDamage - damageLeech * 5));
         });
     }
-
 }
