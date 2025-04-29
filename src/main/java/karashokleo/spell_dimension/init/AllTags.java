@@ -1,6 +1,7 @@
 package karashokleo.spell_dimension.init;
 
 import com.kyanite.deeperdarker.content.DDEntities;
+import com.spellbladenext.Spellblades;
 import karashokleo.l2hostility.L2Hostility;
 import karashokleo.l2hostility.content.item.TrinketItems;
 import karashokleo.l2hostility.init.LHEnchantments;
@@ -201,7 +202,11 @@ public class AllTags
                 );
 
         SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(LHTags.WHITELIST)
-                .add(EntityInit.THE_EYE);
+                .add(
+                        EntityInit.THE_EYE,
+                        Spellblades.ARCHMAGUS,
+                        Spellblades.REAVER
+                );
 
         SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(ZOMBIES)
                 .add(

@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "adventurez:the_eye",
+    "spellbladenext:magus",
+    "spellbladenext:magister",
     "#spell-dimension:advz_monster",
     "#spell-dimension:sw_monster"
   ]

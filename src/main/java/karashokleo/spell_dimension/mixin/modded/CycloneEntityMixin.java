@@ -103,26 +103,6 @@ public abstract class CycloneEntityMixin extends Entity implements Ownable
                                 )
                 );
             }
-
-            // spell impacts
-            if (this.age % 10 == 0 &&
-                this.context != null)
-            {
-                List<LivingEntity> targets = this.getWorld()
-                        .getEntitiesByClass(
-                                LivingEntity.class,
-                                this.getBoundingBox(),
-                                e -> this.target == e ||
-                                     TargetHelper.actionAllowed(TargetHelper.TargetingMode.AREA, TargetHelper.Intent.HARMFUL, livingOwner, e)
-
-                        );
-                Identifier spellId = new Identifier(Spellblades.MOD_ID, "bladestorm");
-                SpellInfo spell = new SpellInfo(SpellRegistry.getSpell(spellId), spellId);
-                for (var livingTarget : targets)
-                {
-                    SpellHelper.performImpacts(livingTarget.getWorld(), livingOwner, livingTarget, this, spell, this.context, false);
-                }
-            }
         } else
         {
             // follow owner
@@ -139,6 +119,27 @@ public abstract class CycloneEntityMixin extends Entity implements Ownable
                 {
                     this.discard();
                 }
+            }
+        }
+
+        // spell impacts
+        if (!isClient &&
+            this.age % 10 == 0 &&
+            this.context != null)
+        {
+            List<LivingEntity> targets = this.getWorld()
+                    .getEntitiesByClass(
+                            LivingEntity.class,
+                            this.getBoundingBox(),
+                            e -> this.target == e ||
+                                 TargetHelper.actionAllowed(TargetHelper.TargetingMode.AREA, TargetHelper.Intent.HARMFUL, livingOwner, e)
+
+                    );
+            Identifier spellId = new Identifier(Spellblades.MOD_ID, "bladestorm");
+            SpellInfo spell = new SpellInfo(SpellRegistry.getSpell(spellId), spellId);
+            for (var livingTarget : targets)
+            {
+                SpellHelper.performImpacts(livingTarget.getWorld(), livingOwner, livingTarget, this, spell, this.context, false);
             }
         }
     }
