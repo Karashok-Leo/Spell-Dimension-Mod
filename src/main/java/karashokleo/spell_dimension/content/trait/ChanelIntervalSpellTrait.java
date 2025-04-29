@@ -7,7 +7,6 @@ import karashokleo.l2hostility.content.item.trinket.core.ReflectTrinket;
 import karashokleo.spell_dimension.api.BeamProvider;
 import karashokleo.spell_dimension.content.network.S2CBeam;
 import karashokleo.spell_dimension.data.SDTexts;
-import karashokleo.spell_dimension.init.AllMiscInit;
 import karashokleo.spell_dimension.init.AllPackets;
 import karashokleo.spell_dimension.util.ImpactUtil;
 import net.minecraft.entity.LivingEntity;
@@ -47,8 +46,21 @@ public class ChanelIntervalSpellTrait extends SpellTrait
             continueCasting(difficulty.owner, level, data);
             return;
         }
-        if (data.tickCount++ < interval.applyAsInt(level)) return;
-        startCasting(difficulty.owner, data);
+        data.tickCount++;
+        int interval = this.interval.applyAsInt(level);
+        if (data.tickCount >= interval)
+        {
+            startCasting(difficulty.owner, data);
+        } else if (data.tickCount + getCastDuration() == interval)
+        {
+            tryNotifyTarget(difficulty.owner);
+        }
+    }
+
+    @Override
+    public int getCastDuration()
+    {
+        return 20;
     }
 
     public Data getData(MobDifficulty diff)
@@ -93,14 +105,6 @@ public class ChanelIntervalSpellTrait extends SpellTrait
             return;
         if (ReflectTrinket.canReflect(target, this))
             return;
-
-        if (target.getWorld().getGameRules().get(AllMiscInit.NOTIFY_SPELL_TRAIT_CASTING).get())
-        {
-            target.sendMessage(SDTexts.TEXT$SPELL_TRAIT$ACTION.get(
-                    mob.getName(),
-                    this.getName()
-            ));
-        }
 
         SpellCast.Duration details = SpellHelper.getCastTimeDetails(mob, this.getSpell());
 

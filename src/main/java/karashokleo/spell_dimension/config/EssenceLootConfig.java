@@ -15,9 +15,9 @@ public class EssenceLootConfig
             0.80F, 0.96F
     );
 
-    public static final int EC_WEIGHT = 8;
-    public static final int EL_WEIGHT = 4;
-    public static final int MD_WEIGHT = 3;
+    public static final int EC_WEIGHT = 7;
+    public static final int EL_WEIGHT = 1;
+    public static final int MD_WEIGHT = 2;
 
     public static final LootPool CHEST_POOL = new LootPool(1, 3, 180);
     public static final LootPool ENTITY_POOL = new LootPool(0, 2, 270);

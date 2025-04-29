@@ -6,15 +6,12 @@ import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.item.trinket.core.ReflectTrinket;
 import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.spell_dimension.data.SDTexts;
-import karashokleo.spell_dimension.init.AllMiscInit;
 import karashokleo.spell_dimension.util.ImpactUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
-import net.minecraft.world.World;
 import net.spell_engine.internals.casting.SpellCast;
 
 import java.util.List;
@@ -34,8 +31,15 @@ public class IntervalSpellTrait extends SpellTrait
     public void serverTick(MobDifficulty difficulty, LivingEntity e, int level)
     {
         var data = getData(difficulty);
-        if (data.tickCount++ < interval.applyAsInt(level)) return;
-        tryAction(difficulty.owner, level, data);
+        data.tickCount++;
+        int interval = this.interval.applyAsInt(level);
+        if (data.tickCount >= interval)
+        {
+            tryAction(difficulty.owner, level, data);
+        } else if (data.tickCount + getCastDuration() == interval)
+        {
+            tryNotifyTarget(difficulty.owner);
+        }
     }
 
     public Data getData(MobDifficulty diff)
@@ -69,17 +73,7 @@ public class IntervalSpellTrait extends SpellTrait
 
     public void action(MobEntity mob, int level, Data data, LivingEntity target)
     {
-        World world = mob.getWorld();
-
-        if (world.getGameRules().get(AllMiscInit.NOTIFY_SPELL_TRAIT_CASTING).get())
-        {
-            target.sendMessage(SDTexts.TEXT$SPELL_TRAIT$ACTION.get(
-                    mob.getName(),
-                    this.getName().setStyle(Style.EMPTY.withColor(getColor()))
-            ));
-        }
-        ImpactUtil.performSpell(world, mob, spellId, List.of(target), SpellCast.Action.RELEASE, 1.0F);
-
+        ImpactUtil.performSpell(mob.getWorld(), mob, spellId, List.of(target), SpellCast.Action.RELEASE, 1.0F);
         data.tickCount = 0;
     }
 

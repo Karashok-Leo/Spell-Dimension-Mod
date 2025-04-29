@@ -127,7 +127,7 @@ public class AtomicBreastplateItem extends SingleEpicTrinketItem implements Dama
         ),
         OBLIVION(
                 AllItems.OBLIVION_BREASTPLATE::getDefaultStack,
-                () -> Registries.ITEM.get(new Identifier("simplyswords:runic_tablet")),
+                () -> Registries.ITEM.get(new Identifier("bosses_of_mass_destruction:brimstone_nectar")),
                 "OblivionProgress",
                 1000,
                 Formatting.AQUA,

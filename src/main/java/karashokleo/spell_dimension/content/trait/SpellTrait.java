@@ -3,10 +3,13 @@ package karashokleo.spell_dimension.content.trait;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
 import karashokleo.spell_dimension.data.SDTexts;
+import karashokleo.spell_dimension.init.AllMiscInit;
 import karashokleo.spell_dimension.util.UuidUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
@@ -67,6 +70,30 @@ public class SpellTrait extends MobTrait
             spell = SpellRegistry.getSpell(spellId);
         }
         return spell;
+    }
+
+    public int getCastDuration()
+    {
+        return Math.round(this.getSpell().cast.duration * 20);
+    }
+
+    public void tryNotifyTarget(MobEntity mob)
+    {
+        if (!mob.getWorld().getGameRules().get(AllMiscInit.NOTIFY_SPELL_TRAIT_CASTING).get())
+        {
+            return;
+        }
+        LivingEntity target = mob.getTarget();
+        if (target == null)
+        {
+            return;
+        }
+        // TODO: notify close players???
+//        mob.getWorld().getPlayers()
+        target.sendMessage(SDTexts.TEXT$SPELL_TRAIT$ACTION.get(
+                mob.getName(),
+                this.getName().setStyle(Style.EMPTY.withColor(getColor()))
+        ));
     }
 
     @Override
