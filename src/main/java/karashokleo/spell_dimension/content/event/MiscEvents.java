@@ -1,6 +1,5 @@
 package karashokleo.spell_dimension.content.event;
 
-import io.github.fabricators_of_create.porting_lib.entity.events.EntityEvents;
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEvent;
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingEntityEvents;
 import io.github.fabricators_of_create.porting_lib.entity.events.PlayerInteractionEvents;
@@ -25,16 +24,15 @@ import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.MobSpawnerBlockEntity;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.EntityAttributeInstance;
-import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.registry.Registries;
 import net.minecraft.text.Text;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Formatting;
+import net.minecraft.util.Hand;
+import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.GameRules;
 import net.spell_engine.api.spell.SpellContainer;
 import net.spell_engine.internals.SpellContainerHelper;
@@ -61,7 +59,8 @@ public class MiscEvents
             boolean immune = gameRules.getBoolean(AllMiscInit.IMMUNE_TRACKED_DAMAGE);
             if (immune && phase == DamagePhase.APPLY)
             {
-                access.addModifier(originalDamage -> 1);
+                // set to 0 or 0.1 ?
+                access.addModifier(originalDamage -> 0);
             }
 
             int threshold = gameRules.getInt(AllMiscInit.DAMAGE_TRACKER_THRESHOLD);
@@ -104,36 +103,6 @@ public class MiscEvents
         // Damage Tracker
         for (DamagePhase phase : DamagePhase.values())
             phase.registerModifier(9999, new DamageTracker(phase));
-
-        // Unify boss max health
-        EntityEvents.ON_JOIN_WORLD.register((entity, world, b) ->
-        {
-            if (!(entity instanceof LivingEntity living))
-                return true;
-            EntityType<?> type = living.getType();
-            if (!type.isIn(LHTags.SEMIBOSS))
-                return true;
-            int baseValue = 400;
-            if (type == EntityType.ELDER_GUARDIAN)
-            {
-                baseValue = 300;
-            } else
-            {
-                Identifier typeId = Registries.ENTITY_TYPE.getId(type);
-                if (typeId.equals(new Identifier("soulsweapons:night_shade")))
-                {
-                    baseValue = 60;
-                } else if (typeId.getNamespace().equals("mutantmonsters"))
-                {
-                    baseValue = 200;
-                }
-            }
-            EntityAttributeInstance attributeInstance = living.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
-            if (attributeInstance == null)
-                return true;
-            attributeInstance.setBaseValue(baseValue);
-            return true;
-        });
 
         // Fix dynamic spell book nbt copy
         InfusionCompleteCallback.EVENT.register((world, pos, output, inventory, recipe) ->

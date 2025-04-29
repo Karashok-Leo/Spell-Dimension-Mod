@@ -1,6 +1,7 @@
 package karashokleo.spell_dimension.content.event;
 
 import com.obscuria.aquamirae.registry.AquamiraeItems;
+import io.github.fabricators_of_create.porting_lib.entity.events.EntityEvents;
 import io.github.fabricators_of_create.porting_lib.entity.events.PlayerTickEvents;
 import karashokleo.l2hostility.content.item.ConsumableItems;
 import karashokleo.l2hostility.data.config.WeaponConfig;
@@ -17,8 +18,11 @@ import karashokleo.spell_dimension.util.TagUtil;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.Item;
@@ -32,11 +36,69 @@ import net.minecraft.util.TypedActionResult;
 import net.spell_power.api.SpellPower;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class DifficultyEvents
 {
+    private static final HashMap<String, Integer> BOSS_HEALTH_SET = new HashMap<>();
+
+    static
+    {
+        int[] healths = {200, 400, 500, 600, 700, 800};
+
+        BOSS_HEALTH_SET.put("mutantmonsters:mutant_zombie", healths[0]);
+        BOSS_HEALTH_SET.put("mutantmonsters:mutant_skeleton", healths[0]);
+        BOSS_HEALTH_SET.put("mutantmonsters:mutant_creeper", healths[0]);
+        BOSS_HEALTH_SET.put("mutantmonsters:mutant_enderman", healths[0]);
+
+        BOSS_HEALTH_SET.put("soulsweapons:accursed_lord_boss", healths[1]);
+        BOSS_HEALTH_SET.put("soulsweapons:draugr_boss", healths[1]);
+        BOSS_HEALTH_SET.put("soulsweapons:night_shade", 60);
+        BOSS_HEALTH_SET.put("illagerinvasion:invoker", healths[1]);
+        BOSS_HEALTH_SET.put("minecraft:wither", healths[1]);
+        BOSS_HEALTH_SET.put("minecraft:warden", healths[1]);
+        BOSS_HEALTH_SET.put("minecraft:elder_guardian", 300);
+
+        BOSS_HEALTH_SET.put("deeperdarker:stalker", healths[2]);
+        BOSS_HEALTH_SET.put("adventurez:blackstone_golem", healths[2]);
+        BOSS_HEALTH_SET.put("aquamirae:captain_cornelia", healths[2]);
+        BOSS_HEALTH_SET.put("soulsweapons:chaos_monarch", healths[2]);
+        BOSS_HEALTH_SET.put("soulsweapons:moonknight", healths[2]);
+        BOSS_HEALTH_SET.put("soulsweapons:returning_knight", healths[2]);
+
+        BOSS_HEALTH_SET.put("graveyard:lich", healths[3]);
+        BOSS_HEALTH_SET.put("bosses_of_mass_destruction:lich", healths[3]);
+        BOSS_HEALTH_SET.put("bosses_of_mass_destruction:gauntlet", healths[3]);
+        BOSS_HEALTH_SET.put("bosses_of_mass_destruction:void_blossom", healths[3]);
+
+        BOSS_HEALTH_SET.put("soulsweapons:day_stalker", healths[4]);
+        BOSS_HEALTH_SET.put("soulsweapons:night_prowler", healths[4]);
+        BOSS_HEALTH_SET.put("minecraft:ender_dragon", healths[4]);
+        BOSS_HEALTH_SET.put("adventurez:the_eye", healths[4]);
+
+        BOSS_HEALTH_SET.put("bosses_of_mass_destruction:obsidilith", healths[5]);
+        BOSS_HEALTH_SET.put("adventurez:void_shadow", healths[5]);
+        BOSS_HEALTH_SET.put("spellbladenext:magus", healths[5]);
+    }
+
     public static void init()
     {
+        // Unify boss max health
+        EntityEvents.ON_JOIN_WORLD.register((entity, world, b) ->
+        {
+            if (!(entity instanceof LivingEntity living))
+                return true;
+            EntityType<?> type = living.getType();
+            if (!type.isIn(LHTags.SEMIBOSS))
+                return true;
+            EntityAttributeInstance attributeInstance = living.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
+            if (attributeInstance == null)
+                return true;
+            String id = Registries.ENTITY_TYPE.getId(type).toString();
+            attributeInstance.setBaseValue(BOSS_HEALTH_SET.getOrDefault(id, 400));
+            return true;
+        });
+
         // 逝不过一
         ServerEntityCombatEvents.AFTER_KILLED_OTHER_ENTITY.register((world, entity, killedEntity) ->
         {
