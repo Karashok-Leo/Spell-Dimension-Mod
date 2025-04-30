@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "spell-dimension:celestial_luminary"
+    },
+    "F": {
+      "item": "l2hostility:soul_flame"
+    },
+    "M": {
+      "item": "l2hostility:sun_membrane"
+    },
+    "R": {
+      "item": "spell-dimension:random_legendary_material"
+    }
+  },
+  "pattern": [
+    "FMF",
+    "RCR",
+    "FMF"
+  ],
+  "result": {
+    "item": "spell-dimension:illusion_container"
+  },
+  "show_notification": true
+}

@@ -87,6 +87,9 @@ public class ObsidlithEntry extends BaseEntryProvider
                         \\
                         \\
                         Obsidlith summons Obsidian Runes during transformation, and stays **invulnerable** while the runes are not destroyed.
+                        \\
+                        \\
+                        You can use spell **Remote Destruction** to destroy runes.
                         """
         );
         this.lang("zh_cn").add(context.pageText(),
@@ -95,6 +98,9 @@ public class ObsidlithEntry extends BaseEntryProvider
                         \\
                         \\
                         黑曜巨石柱转换阶段时会召唤黑曜石符文，符文未被破坏时处于**无敌**状态。
+                        \\
+                        \\
+                        你可以使用法术**远端瓦解**来摧毁符文。
                         """
         );
 

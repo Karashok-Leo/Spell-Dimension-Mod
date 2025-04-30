@@ -3,6 +3,7 @@ package karashokleo.spell_dimension.data;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.api.quest.QuestTag;
 import karashokleo.spell_dimension.content.effect.NirvanaEffect;
+import karashokleo.spell_dimension.content.item.upgrade.IllusionUpgradeTab;
 import karashokleo.spell_dimension.content.object.EventAward;
 import karashokleo.spell_dimension.data.generic.recipe.SDLocateRecipes;
 import karashokleo.spell_dimension.data.loot_bag.SDBags;
@@ -75,7 +76,7 @@ public enum SDTexts
     TEXT$EVENT$FINISH$SUCCESS("Invasion End - Successful", "入侵结束 - 成功"),
     TEXT$EVENT$FINISH$FAIL("Invasion End - Failed", "入侵结束 - 失败"),
 
-    TEXT$DIFFICULTY$BAN_ITEM("You're in Hardcore mode and can no longer use this item.", "你处于硬核模式，不再能够使用该物品"),
+    TEXT$DIFFICULTY$BAN("This item/action is only allowed on the %s difficulty tier", "该物品/操作仅限%s难度层级下允许使用"),
     TEXT$RANDOM_LOOT_NAME("? %s ?", "? %s ?"),
     TEXT$LOCATING("Locating: %s", "正在定位：%s"),
     TEXT$SUMMON$DISALLOW("%s can only be summoned with spell at its spawn location!", "只有在%s的生成地点才能使用魔力召唤它！"),
@@ -183,6 +184,15 @@ public enum SDTexts
     TOOLTIP$MAGIC_MIRROR$BROKEN("This item is a consumable", "该物品为消耗品"),
 
     /**
+     * Spell Container & Reforge Container
+     */
+    TOOLTIP$CONTAINER$CONVERTED("Converted:", "已转化："),
+    TOOLTIP$CONTAINER$CONVERTED$VALUE("- %s (+%s/%s) * %s", "- %s (+%s/%s) * %s"),
+    TOOLTIP$CONTAINER$RETRIEVE("Main hand holding, right-click to retrieve all finished products", "主手持有右键取出所有成品"),
+    TOOLTIP$CONTAINER$REFORGE("Attempt to void items and their enchantments, converting them into materials of the same rarity and the Book of Omniscience", "尝试销毁物品及其附魔，转化为同等级材料和全知之书"),
+    TOOLTIP$CONTAINER$REFORGE_UPGRADE("Attempt to pick up and void convertible items and their enchantments, converting them into materials of the same rarity and the Book of Omniscience", "尝试拾取并销毁可转化的物品及其附魔，转化为同等级材料和全知之书"),
+
+    /**
      * Trinkets
      */
     TOOLTIP$ARMOR_OF_CONVERGENCE("- Casting [Converge] spell in place while rolling.", "- 翻滚时在原地施放 [汇聚] 法术"),
@@ -239,9 +249,10 @@ public enum SDTexts
     TOOLTIP$DIFFICULTY_TIER$HARDCORE$3("Doubles the hostility damage bonus", "恶意伤害加成翻倍"),
     TOOLTIP$DIFFICULTY_TIER$HARDCORE$4("High tier spell scrolls cannot be put into low tier spell books", "高级法术卷轴不能放入低级法术书"),
     TOOLTIP$DIFFICULTY_TIER$HARDCORE$5("Enchanted Essence threshold from loot gets lowered", "从战利品中获取的束魔精华阈值降低"),
-    TOOLTIP$DIFFICULTY_TIER$HARDCORE$6("Enchanted Essences cannot be merged", "束魔精华无法合并"),
-    TOOLTIP$DIFFICULTY_TIER$HARDCORE$7("Unable to use Bottle of Sanity and Hostility Orb", "无法使用恶意净化药水和恶意吸收宝珠"),
-    TOOLTIP$DIFFICULTY_TIER$NIGHTMARE("Add 0.5 Extra Difficulty for each 1 Spell Power you have", "每拥有1点法术强度，增加0.5额外难度"),
+    TOOLTIP$DIFFICULTY_TIER$HARDCORE$6("Unable to use Bottle of Sanity and Hostility Orb", "无法使用恶意净化药水和恶意吸收宝珠"),
+    TOOLTIP$DIFFICULTY_TIER$NIGHTMARE$1("Add 0.5 Extra Difficulty for each 1 Spell Power you have", "每拥有1点法术强度，增加0.5额外难度"),
+    TOOLTIP$DIFFICULTY_TIER$NIGHTMARE$2("Enchanted Essences can be merged", "束魔精华可以合并"),
+    TOOLTIP$DIFFICULTY_TIER$NIGHTMARE$3("Allow the use of Nightmare tier restricted items", "可以使用梦魇层级限定物品"),
     TOOLTIP$BOTTLE_NIGHTMARE("Enter [%s] mode after use, cannot be undone", "使用后进入 [%s] 模式，不可撤销"),
     TOOLTIP$BOTTLE_SOUL_BINDING("After using it, you will no longer lose the item when you die", "使用后，死亡不再丢失物品"),
     TOOLTIP$BOTTLE_SOUL_BINDING$WARNING("By default, items other than trinkets dropped by a player upon death are retained in the Gravestone. However, for some unknown reason, it is still possible, albeit highly unlikely, for items in the gravestone to disappear. If you are completely intolerant of the possibility of losing everything you own, drink this potion.", "默认情况下，玩家死亡时掉落的除饰品外的其他物品将被保留在墓碑中。但由于某些不明原因，墓碑中的物品仍有可能不翼而飞，尽管这种可能性微乎其微。如果你完全无法容忍失去所有身家的可能性，请喝下这瓶药水。"),
@@ -349,6 +360,10 @@ public enum SDTexts
         SpellDimension.ZH_TEXTS.addText("trinkets.slot.chest.breastplate", "护心镜");
         SpellDimension.EN_TEXTS.addText("trinkets.slot.chest.secondary_school", "Secondary School");
         SpellDimension.ZH_TEXTS.addText("trinkets.slot.chest.secondary_school", "副学派");
+        SpellDimension.EN_TEXTS.addText(IllusionUpgradeTab.KEY, "Illusion");
+        SpellDimension.ZH_TEXTS.addText(IllusionUpgradeTab.KEY, "幻化");
+        SpellDimension.EN_TEXTS.addText(IllusionUpgradeTab.KEY + ".tooltip", "Illusion Settings");
+        SpellDimension.ZH_TEXTS.addText(IllusionUpgradeTab.KEY + ".tooltip", "幻化设置");
     }
 
     private static void addLootBagTranslation()

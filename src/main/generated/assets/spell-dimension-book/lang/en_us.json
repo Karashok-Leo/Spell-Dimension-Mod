@@ -60,7 +60,7 @@
   "book.spell-dimension-book.magic_guidance.boss.obsidilith.boss.title": "Obsidlith",
   "book.spell-dimension-book.magic_guidance.boss.obsidilith.description": "Last Stand",
   "book.spell-dimension-book.magic_guidance.boss.obsidilith.name": "Obsidlith",
-  "book.spell-dimension-book.magic_guidance.boss.obsidilith.next.text": "Use Ender Eye on the Obsidian Altar to summon.\n\\\n\\\nObsidlith summons Obsidian Runes during transformation, and stays **invulnerable** while the runes are not destroyed.\n",
+  "book.spell-dimension-book.magic_guidance.boss.obsidilith.next.text": "Use Ender Eye on the Obsidian Altar to summon.\n\\\n\\\nObsidlith summons Obsidian Runes during transformation, and stays **invulnerable** while the runes are not destroyed.\n\\\n\\\nYou can use spell **Remote Destruction** to destroy runes.\n",
   "book.spell-dimension-book.magic_guidance.boss.old_champion.boss.text": "Level: 80+\n\\\n\\\nSpawns inside the **Champion's Grave**(soulsweapons:champions_grave).\n\\\n\\\nThis structure can be located in the Overworld using the Moonstone Compass.\n",
   "book.spell-dimension-book.magic_guidance.boss.old_champion.boss.title": "Old Champion's Remains",
   "book.spell-dimension-book.magic_guidance.boss.old_champion.description": "The deceased would not sleep",

@@ -16,13 +16,16 @@ import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.data.book.MagicGuidanceProvider;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllSpells;
+import karashokleo.spell_dimension.init.AllTags;
 import karashokleo.spell_dimension.util.SchoolUtil;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.event.Event;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableTextContent;
@@ -49,6 +52,7 @@ public class AdditionalTooltip
         ItemTooltipCallback.EVENT.register(AdditionalTooltip::appendModonomicon);
         ItemTooltipCallback.EVENT.register(AdditionalTooltip::appendSpellScroll);
         ItemTooltipCallback.EVENT.register(AdditionalTooltip::appendBottleNightmare);
+        ItemTooltipCallback.EVENT.register(AdditionalTooltip::appendDifficultyTierRestriction);
     }
 
     private static void removeDynamicBookBindingTip(ItemStack stack, TooltipContext context, List<Text> lines)
@@ -179,5 +183,17 @@ public class AdditionalTooltip
                             Text.translatable("tooltip.spell-dimension.difficulty_tier.nightmare." + i)
                     ).formatted(Formatting.DARK_PURPLE)
             );
+    }
+
+    private static void appendDifficultyTierRestriction(ItemStack stack, TooltipContext context, List<Text> lines)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            TagKey<Item> tagKey = AllTags.DIFFICULTY_ALLOW.get(i);
+            if (stack.isIn(tagKey))
+            {
+                lines.add(SDTexts.TEXT$DIFFICULTY$BAN.get(SDTexts.getDifficultyTierText(i)).formatted(Formatting.RED));
+            }
+        }
     }
 }

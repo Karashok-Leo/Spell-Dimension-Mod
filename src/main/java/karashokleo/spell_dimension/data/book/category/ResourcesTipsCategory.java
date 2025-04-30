@@ -27,7 +27,7 @@ public class ResourcesTipsCategory extends CategoryProvider
                 "_______",
                 "d_e_f_g",
                 "_______",
-                "_h_i_j_",
+                "h_i_j_k",
         };
     }
 

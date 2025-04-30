@@ -42,13 +42,19 @@ public record EnchantedModifier(
         this.modifier = modifier;
     }
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public static boolean canApply(ItemStack stack, EquipmentSlot slot)
     {
         Item item = stack.getItem();
+        EquipmentSlot.Type slotType = slot.getType();
         if (item instanceof Equipment equipment)
-            return slot == equipment.getSlotType();
-        else
-            return slot == EquipmentSlot.MAINHAND;
+        {
+            EquipmentSlot equipped = equipment.getSlotType();
+            return slot == equipped ||
+                   (slotType == EquipmentSlot.Type.HAND &&
+                    slotType == equipped.getType());
+        }
+        return slotType == EquipmentSlot.Type.HAND;
     }
 
     public boolean apply(ItemStack stack)

@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_celestial_luminary": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "spell-dimension:celestial_luminary"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "spell-dimension:illusion_container"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_celestial_luminary",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "spell-dimension:illusion_container"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -17,6 +17,7 @@ import karashokleo.spell_dimension.client.screen.GameOverOverlay;
 import karashokleo.spell_dimension.client.screen.QuestOverlay;
 import karashokleo.spell_dimension.client.screen.SpellPowerTab;
 import karashokleo.spell_dimension.content.item.essence.base.ColorProvider;
+import karashokleo.spell_dimension.content.item.upgrade.IllusionUpgradeTab;
 import karashokleo.spell_dimension.content.misc.INoClip;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.*;
@@ -33,6 +34,7 @@ import net.minecraft.client.render.entity.EmptyEntityRenderer;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
+import net.p3pp3rf1y.sophisticatedcore.client.gui.UpgradeGuiManager;
 import net.spell_engine.api.effect.CustomModelStatusEffect;
 import net.spell_engine.api.effect.CustomParticleStatusEffect;
 import net.spell_engine.api.render.CustomModels;
@@ -121,5 +123,7 @@ public class SpellDimensionClient implements ClientModInitializer
 
         AllPackets.initClient();
         ClientAirHopHandler.register();
+
+        UpgradeGuiManager.registerTab(AllItems.REFORGE_TYPE, IllusionUpgradeTab::new);
     }
 }

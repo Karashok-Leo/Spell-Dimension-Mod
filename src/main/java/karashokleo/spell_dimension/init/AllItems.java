@@ -10,6 +10,9 @@ import karashokleo.spell_dimension.content.item.*;
 import karashokleo.spell_dimension.content.item.essence.*;
 import karashokleo.spell_dimension.content.item.essence.base.ColorProvider;
 import karashokleo.spell_dimension.content.item.trinket.*;
+import karashokleo.spell_dimension.content.item.upgrade.IllusionUpgradeContainer;
+import karashokleo.spell_dimension.content.item.upgrade.IllusionUpgradeItem;
+import karashokleo.spell_dimension.content.item.upgrade.IllusionUpgradeWrapper;
 import karashokleo.spell_dimension.content.object.Tier;
 import karashokleo.spell_dimension.util.SchoolUtil;
 import karashokleo.spell_dimension.util.TagUtil;
@@ -20,6 +23,9 @@ import net.minecraft.item.Items;
 import net.minecraft.item.NetherStarItem;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
+import net.p3pp3rf1y.sophisticatedbackpacks.init.ModItems;
+import net.p3pp3rf1y.sophisticatedcore.common.gui.UpgradeContainerRegistry;
+import net.p3pp3rf1y.sophisticatedcore.common.gui.UpgradeContainerType;
 import net.runes.RunesMod;
 import net.spell_engine.api.item.trinket.SpellBooks;
 import net.spell_engine.internals.SpellRegistry;
@@ -47,6 +53,9 @@ public class AllItems
     public static MendingEssenceItem MENDING_ESSENCE;
     public static QuestScrollItem QUEST_SCROLL;
     public static BrokenItem BROKEN_ITEM;
+    public static IllusionContainerItem ILLUSION_CONTAINER;
+    public static IllusionUpgradeItem ILLUSION_UPGRADE;
+    public static final UpgradeContainerType<IllusionUpgradeWrapper, IllusionUpgradeContainer> REFORGE_TYPE = new UpgradeContainerType<>(IllusionUpgradeContainer::new);
 
     // Stage Items
     public static Item ABYSS_GUARD;
@@ -139,6 +148,20 @@ public class AllItems
                 .addTag(LHTags.NO_SEAL)
                 .addModel(Models.HANDHELD)
                 .register();
+        ILLUSION_CONTAINER = Entry.of("illusion_container", new IllusionContainerItem())
+                .addEN()
+                .addZH("幻化容器")
+                .setTab(AllGroups.MISC)
+                .addModel()
+                .register();
+        ILLUSION_UPGRADE = Entry.of("illusion_upgrade", new IllusionUpgradeItem())
+                .addEN()
+                .addZH("幻化升级")
+                .setTab(AllGroups.MISC)
+                .addTag(ModItems.BACKPACK_UPGRADE_TAG)
+                .addModel()
+                .register();
+        UpgradeContainerRegistry.register(ILLUSION_UPGRADE, REFORGE_TYPE);
 
         // Stage Items
         ABYSS_GUARD = Entry.of("abyss_guard", new NetherStarItem(new FabricItemSettings().fireproof().maxCount(1).rarity(Rarity.EPIC)))

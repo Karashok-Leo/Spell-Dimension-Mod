@@ -102,6 +102,13 @@ dependencies {
     modImplementation "io.github.fabricators_of_create.Porting-Lib:entity:${project.port_lib_version}"
     modImplementation "io.github.fabricators_of_create.Porting-Lib:loot:${project.port_lib_version}"
 
+    modImplementation "io.github.fabricators_of_create.Porting-Lib:transfer:${project.port_lib_version}"
+    modImplementation "io.github.fabricators_of_create.Porting-Lib:model_loader:${project.port_lib_version}"
+    modImplementation "io.github.fabricators_of_create.Porting-Lib:tool_actions:${project.port_lib_version}"
+    modImplementation "io.github.fabricators_of_create.Porting-Lib:networking:${project.port_lib_version}"
+    modImplementation "io.github.fabricators_of_create.Porting-Lib:extensions:${project.port_lib_version}"
+    modApi('teamreborn:energy:3.0.0')
+
     modImplementation "maven.modrinth:open-parties-and-claims:${project.opac_version}"
 
 //	modImplementation "curse.maven:puffish-skills-835091:${project.puffer_fish_skills_version}"
@@ -153,6 +160,8 @@ dependencies {
     modImplementation "curse.maven:things-fabric-456151:4921204"
     modImplementation "curse.maven:dragonloot-424480:4656260"
     modImplementation "curse.maven:endremastered-fabric-515523:4972591"
+    modImplementation "curse.maven:sophisticated-core-unofficial-fabric-port-979317:6448771"
+    modImplementation "curse.maven:sophisticated-backpacks-unofficial-fabric-port-979322:6448770"
 
     // Compat
     modCompileOnly "dev.emi:emi-fabric:${project.emi_version}:api"

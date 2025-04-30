@@ -163,6 +163,33 @@ public class SDRecipeProvider extends FabricRecipeProvider
                         FabricRecipeProvider.conditionsFromItem(AllItems.CELESTIAL_DEBRIS)
                 )
                 .offerTo(exporter);
+
+        //
+        ShapedRecipeJsonBuilder
+                .create(RecipeCategory.MISC, AllItems.ILLUSION_CONTAINER)
+                .pattern("FMF")
+                .pattern("RCR")
+                .pattern("FMF")
+                .input('C', AllItems.CELESTIAL_LUMINARY)
+                .input('R', AllItems.RANDOM_MATERIAL.get(4))
+                .input('F', ComplementItems.SOUL_FLAME)
+                .input('M', ComplementItems.SUN_MEMBRANE)
+                .criterion(
+                        FabricRecipeProvider.hasItem(AllItems.CELESTIAL_LUMINARY),
+                        FabricRecipeProvider.conditionsFromItem(AllItems.CELESTIAL_LUMINARY)
+                )
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder
+                .create(RecipeCategory.MISC, AllItems.ILLUSION_UPGRADE)
+                .pattern(" D ")
+                .pattern("DDD")
+                .pattern(" D ")
+                .input('D', AllItems.CELESTIAL_DEBRIS)
+                .criterion(
+                        FabricRecipeProvider.hasItem(AllItems.ILLUSION_CONTAINER),
+                        FabricRecipeProvider.conditionsFromItem(AllItems.ILLUSION_CONTAINER)
+                )
+                .offerTo(exporter);
     }
 
     private static void addBaseEssenceRecipe(Consumer<RecipeJsonProvider> exporter)
