@@ -35,10 +35,10 @@
     "phase.EntityPredicatesMixin",
     "phase.LivingEntityMixin",
     "phase.PlayerEntityMixin",
+    "vanilla.AnvilScreenHandlerMixin",
     "vanilla.DragonFireballEntityMixin",
     "vanilla.EnchantBookFactoryMixin",
     "vanilla.EnchantmentHelperMixin",
-    "vanilla.AnvilScreenHandlerMixin",
     "vanilla.EnchantRandomlyLootFunctionMixin",
     "vanilla.EndPortalBlockMixin",
     "vanilla.ItemStackMixin",
@@ -47,7 +47,8 @@
     "vanilla.PlayerInventoryAccessor",
     "vanilla.PlayerKeepInventoryMixin",
     "vanilla.ServerPlayerEntityMixin",
-    "vanilla.SlimeEntityMixin"
+    "vanilla.SlimeEntityMixin",
+    "vanilla.StrafePlayerPhaseMixin"
   ],
   "injectors": {
     "defaultRequire": 1,

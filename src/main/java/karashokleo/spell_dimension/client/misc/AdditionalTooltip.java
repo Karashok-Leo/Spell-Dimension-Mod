@@ -158,7 +158,7 @@ public class AdditionalTooltip
                         .append(":")
                         .formatted(Formatting.DARK_RED)
         );
-        for (int i = 1; i <= 7; i++)
+        for (int i = 1; i <= 6; i++)
             lines.add(
                     SDTexts.TOOLTIP$DIFFICULTY_TIER$DESC.get(
                             Text.translatable("tooltip.spell-dimension.difficulty_tier.hardcore." + i)
@@ -173,10 +173,11 @@ public class AdditionalTooltip
                         .append(":")
                         .formatted(Formatting.DARK_PURPLE)
         );
-        lines.add(
-                SDTexts.TOOLTIP$DIFFICULTY_TIER$DESC.get(
-                        SDTexts.TOOLTIP$DIFFICULTY_TIER$NIGHTMARE.get()
-                ).formatted(Formatting.DARK_PURPLE)
-        );
+        for (int i = 1; i <= 3; i++)
+            lines.add(
+                    SDTexts.TOOLTIP$DIFFICULTY_TIER$DESC.get(
+                            Text.translatable("tooltip.spell-dimension.difficulty_tier.nightmare." + i)
+                    ).formatted(Formatting.DARK_PURPLE)
+            );
     }
 }

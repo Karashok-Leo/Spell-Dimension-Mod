@@ -23,9 +23,14 @@
     {
       "item": "l2hostility:curse_of_wrath"
     },
-    {
-      "item": "things:agglomeration"
-    }
+    [
+      {
+        "item": "things:agglomeration"
+      },
+      {
+        "item": "things:empty_agglomeration"
+      }
+    ]
   ],
   "input": {
     "item": "minecraft:enchanted_golden_apple"

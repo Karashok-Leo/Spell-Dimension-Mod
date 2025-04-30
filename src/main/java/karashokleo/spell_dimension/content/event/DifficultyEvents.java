@@ -3,7 +3,6 @@ package karashokleo.spell_dimension.content.event;
 import com.obscuria.aquamirae.registry.AquamiraeItems;
 import io.github.fabricators_of_create.porting_lib.entity.events.EntityEvents;
 import io.github.fabricators_of_create.porting_lib.entity.events.PlayerTickEvents;
-import karashokleo.l2hostility.content.item.ConsumableItems;
 import karashokleo.l2hostility.data.config.WeaponConfig;
 import karashokleo.l2hostility.init.LHData;
 import karashokleo.l2hostility.init.LHMiscs;
@@ -12,11 +11,13 @@ import karashokleo.spell_dimension.content.component.GameStageComponent;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.data.loot_bag.TextConstants;
 import karashokleo.spell_dimension.init.AllItems;
+import karashokleo.spell_dimension.init.AllTags;
 import karashokleo.spell_dimension.util.AttributeUtil;
 import karashokleo.spell_dimension.util.SchoolUtil;
 import karashokleo.spell_dimension.util.TagUtil;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -32,6 +33,8 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.resource.LifecycledResourceManager;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.TypedActionResult;
 import net.spell_power.api.SpellPower;
 
@@ -110,17 +113,37 @@ public class DifficultyEvents
             living.setHealth(living.getMaxHealth());
         });
 
-        // Ban items in hard mode
+        // Ban items in specific difficulty tier
         UseItemCallback.EVENT.register((player, world, hand) ->
         {
             ItemStack stack = player.getStackInHand(hand);
-            if (GameStageComponent.isNormalMode(player))
-                return TypedActionResult.pass(stack);
-            if (!stack.isOf(ConsumableItems.HOSTILITY_ORB) &&
-                !stack.isOf(ConsumableItems.BOTTLE_SANITY))
-                return TypedActionResult.pass(stack);
-            player.sendMessage(SDTexts.TEXT$DIFFICULTY$BAN_ITEM.get(), true);
-            return TypedActionResult.fail(stack);
+            for (int i = 0; i < 3; i++)
+            {
+                TagKey<Item> tagKey = AllTags.DIFFICULTY_ALLOW.get(i);
+                if (stack.isIn(tagKey) &&
+                    GameStageComponent.getDifficulty(player) != i)
+                {
+                    player.sendMessage(SDTexts.TEXT$DIFFICULTY$BAN.get(SDTexts.getDifficultyTierText(i)).formatted(Formatting.RED));
+                    return TypedActionResult.fail(stack);
+                }
+            }
+            return TypedActionResult.pass(stack);
+        });
+
+        UseBlockCallback.EVENT.register((player, world, hand, hitResult) ->
+        {
+            ItemStack stack = player.getStackInHand(hand);
+            for (int i = 0; i < 3; i++)
+            {
+                TagKey<Item> tagKey = AllTags.DIFFICULTY_ALLOW.get(i);
+                if (stack.isIn(tagKey) &&
+                    GameStageComponent.getDifficulty(player) != i)
+                {
+                    player.sendMessage(SDTexts.TEXT$DIFFICULTY$BAN.get(SDTexts.getDifficultyTierText(i)).formatted(Formatting.RED));
+                    return ActionResult.FAIL;
+                }
+            }
+            return ActionResult.PASS;
         });
 
         // 深渊守护（远古守卫者）锁船长阶段

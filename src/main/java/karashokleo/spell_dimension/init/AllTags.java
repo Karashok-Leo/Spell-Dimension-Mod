@@ -3,6 +3,7 @@ package karashokleo.spell_dimension.init;
 import com.kyanite.deeperdarker.content.DDEntities;
 import com.spellbladenext.Spellblades;
 import karashokleo.l2hostility.L2Hostility;
+import karashokleo.l2hostility.content.item.ConsumableItems;
 import karashokleo.l2hostility.content.item.TrinketItems;
 import karashokleo.l2hostility.init.LHEnchantments;
 import karashokleo.l2hostility.init.LHTags;
@@ -46,6 +47,20 @@ public class AllTags
             TagUtil.itemTag("book/2")
     );
     public static final TagKey<Item> BOOK_ALL = TagUtil.itemTag("book/all");
+
+    public static final List<TagKey<Item>> DIFFICULTY_ALLOW = List.of(
+            TagUtil.itemTag("difficulty_allow/0"),
+            TagUtil.itemTag("difficulty_allow/1"),
+            TagUtil.itemTag("difficulty_allow/2")
+    );
+
+    public static final List<TagKey<Item>> GEARS = List.of(
+            TagUtil.itemTag("common/gear"),
+            TagUtil.itemTag("uncommon/gear"),
+            TagUtil.itemTag("rare/gear"),
+            TagUtil.itemTag("epic/gear"),
+            TagUtil.itemTag("legendary/gear")
+    );
 
     public static final TagKey<Item> RUNE = TagUtil.itemTag("rune");
     public static final TagKey<Item> HEART_FOOD = TagUtil.itemTag("heart_food");
@@ -174,6 +189,16 @@ public class AllTags
         TagGenerator.Container<Item> bookAllContainer = SpellDimension.ITEM_TAGS.getOrCreateContainer(BOOK_ALL);
         for (TagKey<Item> key : BOOK)
             bookAllContainer.addTag(key);
+
+        SpellDimension.ITEM_TAGS.getOrCreateContainer(DIFFICULTY_ALLOW.get(0))
+                .add(
+                        ConsumableItems.HOSTILITY_ORB,
+                        ConsumableItems.BOTTLE_SANITY
+                );
+        SpellDimension.ITEM_TAGS.getOrCreateContainer(DIFFICULTY_ALLOW.get(2))
+                .addOptional(
+                        new Identifier("kibe:cursed_seeds")
+                );
 
         SpellDimension.ITEM_TAGS.getOrCreateContainer(DUNGEON_BANNED)
                 .add(MythicTools.LEGENDARY_BANGLUM.getPickaxe())

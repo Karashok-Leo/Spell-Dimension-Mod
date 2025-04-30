@@ -7,6 +7,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.EndPortalBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -28,7 +29,7 @@ public abstract class EndPortalBlockMixin
         if (entity instanceof PlayerEntity player &&
             !GameStageComponent.canEnterEnd(player))
         {
-            player.sendMessage(SDTexts.TEXT$END_STAGE$LOCK.get(AllItems.CELESTIAL_LUMINARY.getName()), true);
+            player.sendMessage(SDTexts.TEXT$END_STAGE$LOCK.get(AllItems.CELESTIAL_LUMINARY.getName()).formatted(Formatting.RED), true);
             ci.cancel();
         }
     }

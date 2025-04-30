@@ -118,7 +118,7 @@ public class SDSimpleInfusionRecipes
                 .withPedestalItem(1, TrinketItems.CURSE_PRIDE)
                 .withPedestalItem(1, TrinketItems.CURSE_SLOTH)
                 .withPedestalItem(1, TrinketItems.CURSE_WRATH)
-                .withPedestalItem(1, ThingsItems.AGGLOMERATION)
+                .withPedestalItem(1, Ingredient.ofItems(ThingsItems.AGGLOMERATION, ThingsItems.EMPTY_AGGLOMERATION))
                 .copyNbt(false)
                 .offerTo(exporter, SpellDimension.modLoc("cursed_apple"), AllItems.CURED_APPLE.getDefaultStack());
 
