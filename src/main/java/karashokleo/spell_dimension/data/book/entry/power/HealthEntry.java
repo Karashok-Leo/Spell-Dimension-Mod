@@ -70,12 +70,12 @@ public class HealthEntry extends BaseEntryProvider
         context.page("food");
         this.lang().add(context.pageText(),
                 """
-                        However, you can always gain extra max health by eating specific foods (e.g. Enchanted Golden Apples), you can search #spell-dimension:heart_food to see all available foods.
+                        However, you can always gain extra max health by eating specific foods (e.g. Enchanted Golden Apples), you can search **#spell-dimension:heart_food** to see all available foods.
                         """
         );
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        但你始终可以通过食用特定食物(比如附魔金苹果)来获得额外的最大生命值，你可以搜索#spell-dimension:heart_food查看所有可用的食物。
+                        但你始终可以通过食用特定食物(比如附魔金苹果)来获得额外的最大生命值，你可以搜索**#spell-dimension:heart_food**查看所有可用的食物。
                         """
         );
         BookSpotlightPageModel food = BookSpotlightPageModel

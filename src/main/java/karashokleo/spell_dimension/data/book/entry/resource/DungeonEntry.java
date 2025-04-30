@@ -100,7 +100,7 @@ public class DungeonEntry extends BaseEntryProvider
                         Dark Dungeon: Large amounts of Enchanted Essence and Enlightening Essence.
                         \\
                         \\
-                        Desert Dungeon: Work in progress...
+                        Desert Dungeon: Large amounts of Equipments.
                         """
         );
         this.lang("zh_cn").add(context.pageText(),
@@ -111,7 +111,7 @@ public class DungeonEntry extends BaseEntryProvider
                         暗黑地牢: 大量束魔精华和源启精华。
                         \\
                         \\
-                        沙漠地牢: 尚未完成...
+                        沙漠地牢: 大量装备。
                         """
         );
         BookTextPageModel entries = BookTextPageModel

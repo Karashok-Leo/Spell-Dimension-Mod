@@ -20,6 +20,7 @@
     "modded.MobEntityMixin",
     "modded.PlayerDifficultyMixin",
     "modded.RemnantsSaberItemMixin",
+    "modded.RingOfDivinityMixin",
     "modded.SpellHelperInvoker",
     "modded.SpellHelperMixin",
     "modded.SpellInfinityEnchantmentMixin",

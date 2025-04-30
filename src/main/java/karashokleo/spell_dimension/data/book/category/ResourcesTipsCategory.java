@@ -23,11 +23,11 @@ public class ResourcesTipsCategory extends CategoryProvider
     protected String[] generateEntryMap()
     {
         return new String[]{
-                "_a_b_c_",
+                "a_b_c_d",
                 "_______",
-                "d_e_f_g",
+                "e_f_g_h",
                 "_______",
-                "h_i_j_k",
+                "i_j_k_l",
         };
     }
 
@@ -44,6 +44,7 @@ public class ResourcesTipsCategory extends CategoryProvider
         BookEntryModel key = new KeyEntry(this).generate('h');
         BookEntryModel storage = new StorageEntry(this).generate('i');
         BookEntryModel dummy = new DummyEntry(this).generate('j');
+        BookEntryModel illusion = new IllusionEntry(this).generate('k');
 
         this.add(alloy);
         this.add(trader);
@@ -55,6 +56,7 @@ public class ResourcesTipsCategory extends CategoryProvider
         this.add(key);
         this.add(storage);
         this.add(dummy);
+        this.add(illusion);
     }
 
     @Override

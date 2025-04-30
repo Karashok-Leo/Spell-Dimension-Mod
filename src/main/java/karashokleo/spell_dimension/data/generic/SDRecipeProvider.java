@@ -23,6 +23,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
+import net.p3pp3rf1y.sophisticatedbackpacks.init.ModItems;
 import net.spell_power.api.SpellSchool;
 
 import java.util.function.Consumer;
@@ -164,32 +165,35 @@ public class SDRecipeProvider extends FabricRecipeProvider
                 )
                 .offerTo(exporter);
 
-        //
+        // Illusion Container
         ShapedRecipeJsonBuilder
                 .create(RecipeCategory.MISC, AllItems.ILLUSION_CONTAINER)
-                .pattern("FMF")
+                .pattern("MSM")
                 .pattern("RCR")
-                .pattern("FMF")
+                .pattern("MSM")
                 .input('C', AllItems.CELESTIAL_LUMINARY)
                 .input('R', AllItems.RANDOM_MATERIAL.get(4))
-                .input('F', ComplementItems.SOUL_FLAME)
                 .input('M', ComplementItems.SUN_MEMBRANE)
+                .input('S', AllItems.SPAWNER_SOUL)
                 .criterion(
                         FabricRecipeProvider.hasItem(AllItems.CELESTIAL_LUMINARY),
                         FabricRecipeProvider.conditionsFromItem(AllItems.CELESTIAL_LUMINARY)
                 )
                 .offerTo(exporter);
-        ShapedRecipeJsonBuilder
-                .create(RecipeCategory.MISC, AllItems.ILLUSION_UPGRADE)
-                .pattern(" D ")
-                .pattern("DDD")
-                .pattern(" D ")
-                .input('D', AllItems.CELESTIAL_DEBRIS)
+        // Illusion Upgrade
+        SmithingTransformRecipeJsonBuilder
+                .create(
+                        Ingredient.EMPTY,
+                        Ingredient.ofItems(AllItems.ILLUSION_CONTAINER),
+                        Ingredient.ofItems(ModItems.ADVANCED_PICKUP_UPGRADE),
+                        RecipeCategory.MISC,
+                        AllItems.ILLUSION_UPGRADE
+                )
                 .criterion(
                         FabricRecipeProvider.hasItem(AllItems.ILLUSION_CONTAINER),
                         FabricRecipeProvider.conditionsFromItem(AllItems.ILLUSION_CONTAINER)
                 )
-                .offerTo(exporter);
+                .offerTo(exporter, SpellDimension.modLoc("illusion_upgrade"));
     }
 
     private static void addBaseEssenceRecipe(Consumer<RecipeJsonProvider> exporter)

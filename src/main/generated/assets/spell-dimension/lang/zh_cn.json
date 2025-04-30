@@ -696,6 +696,7 @@
   "tooltip.spell-dimension.quest.view_current": "右键浏览当前所有任务",
   "tooltip.spell-dimension.rejuvenating_blossom.usage_1": "- 受伤时，如果你还未恢复的生命值低于受到伤害，则移除你身上所有负面效果并减半此次伤害",
   "tooltip.spell-dimension.rejuvenating_blossom.usage_2": "- 受伤时获得生命恢复效果，该效果将恢复的生命值等同于受到的伤害值",
+  "tooltip.spell-dimension.ring_divinity": "获得持续的净化效果，受到的魔法伤害减半，且不超过自身最大血量的80%",
   "tooltip.spell-dimension.secondary_school_item.1": "- 获得相当于主修学派法术强度%2$s%%的%s法术强度",
   "tooltip.spell-dimension.secondary_school_item.2": "- 可以使用%s法术学派的卷轴",
   "tooltip.spell-dimension.secondary_school_item.3": "- 有%s%%的几率获得%s法术学派的束魔精华和源启精华",

@@ -5,20 +5,20 @@
     "C": {
       "item": "spell-dimension:celestial_luminary"
     },
-    "F": {
-      "item": "l2hostility:soul_flame"
-    },
     "M": {
       "item": "l2hostility:sun_membrane"
     },
     "R": {
       "item": "spell-dimension:random_legendary_material"
+    },
+    "S": {
+      "item": "spell-dimension:spawner_soul"
     }
   },
   "pattern": [
-    "FMF",
+    "MSM",
     "RCR",
-    "FMF"
+    "MSM"
   ],
   "result": {
     "item": "spell-dimension:illusion_container"

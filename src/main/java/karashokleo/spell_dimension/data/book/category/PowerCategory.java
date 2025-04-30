@@ -20,11 +20,11 @@ public class PowerCategory extends CategoryProvider
     protected String[] generateEntryMap()
     {
         return new String[]{
-                "_a_b_c_",
+                "a_b_c_d",
                 "_______",
-                "d_e_f_g",
+                "e_f_g_h",
                 "_______",
-                "h_i_j_k",
+                "i_j_k_l",
         };
     }
 
@@ -42,6 +42,7 @@ public class PowerCategory extends CategoryProvider
         BookEntryModel summon = new SummonSpellEntry(this).generate('i');
         BookEntryModel rarity = new RarityEntry(this).generate('j');
         BookEntryModel durability = new DurabilityEntry(this).generate('k');
+        BookEntryModel endgame_trinket = new EndgameTrinketEntry(this).generate('l');
 
         this.add(health);
         this.add(hostility);
@@ -54,6 +55,7 @@ public class PowerCategory extends CategoryProvider
         this.add(summon);
         this.add(rarity);
         this.add(durability);
+        this.add(endgame_trinket);
     }
 
     @Override

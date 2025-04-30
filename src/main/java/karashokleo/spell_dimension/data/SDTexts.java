@@ -234,6 +234,7 @@ public enum SDTexts
     TOOLTIP$CURSE_PRIDE_1("Both damage dealt and damage taken are increased by %s%% per difficulty level", "根据玩家难度，造成伤害与受到伤害每级提升%s%%"),
     TOOLTIP$CURSE_PRIDE_2("Current damage increment: +%s%%", "当前增伤：+%s%%"),
     TOOLTIP$CURSE_WRATH("Increase damage dealt and damage received by %s%% per difficulty level difference when facing mobs with higher level than you.", "面对等级比自己高的怪物时每级等级差造成伤害与受到伤害均提升%s%%"),
+    TOOLTIP$RING_DIVINITY("Gets permanent Cleanse effect. Reduce magic damage by half, and not exceed 80% of your max health", "获得持续的净化效果，受到的魔法伤害减半，且不超过自身最大血量的80%"),
     TOOLTIP$SECONDARY_SCHOOL_ITEM$1("- Gain %s spell power equal to %s%% of your major school's spell power", "- 获得相当于主修学派法术强度%2$s%%的%s法术强度"),
     TOOLTIP$SECONDARY_SCHOOL_ITEM$2("- Spell Scrolls of %s school can be used", "- 可以使用%s法术学派的卷轴"),
     TOOLTIP$SECONDARY_SCHOOL_ITEM$3("- %s%% chance to get %s Spell School's Enchanted Essence and Enlightening Essence", "- 有%s%%的几率获得%s法术学派的束魔精华和源启精华"),

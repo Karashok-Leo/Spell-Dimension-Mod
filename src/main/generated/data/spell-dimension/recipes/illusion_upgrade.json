@@ -1,18 +1,13 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "D": {
-      "item": "spell-dimension:celestial_debris"
-    }
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "sophisticatedbackpacks:advanced_pickup_upgrade"
   },
-  "pattern": [
-    " D ",
-    "DDD",
-    " D "
-  ],
+  "base": {
+    "item": "spell-dimension:illusion_container"
+  },
   "result": {
     "item": "spell-dimension:illusion_upgrade"
   },
-  "show_notification": true
+  "template": []
 }

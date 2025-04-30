@@ -56,14 +56,14 @@ public abstract class RightPressEssenceItem extends SpellEssenceItem
     public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks)
     {
         if (!world.isClient()) return;
-        if (remainingUseTicks % 8 != 0) return;
+        if (remainingUseTicks % 4 != 0) return;
         ParticleUtil.ringParticle(user, remainingUseTicks, 16, ParticleTypes.END_ROD);
     }
 
     @Override
     public int getMaxUseTime(ItemStack stack)
     {
-        return 32;
+        return 16;
     }
 
     @Override
