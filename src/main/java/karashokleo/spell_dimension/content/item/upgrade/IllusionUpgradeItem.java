@@ -69,7 +69,7 @@ public class IllusionUpgradeItem extends UpgradeItemBase<IllusionUpgradeWrapper>
     @Override
     public void appendTooltip(@NotNull ItemStack stack, World worldIn, @NotNull List<Text> tooltip, @NotNull TooltipContext flagIn)
     {
-        tooltip.add(SDTexts.TOOLTIP$CONTAINER$REFORGE_UPGRADE.get().formatted(Formatting.GRAY));
+        tooltip.add(SDTexts.TOOLTIP$CONTAINER$ILLUSION_UPGRADE.get().formatted(Formatting.GRAY));
         IllusionContainer.appendTooltip(stack, tooltip);
     }
 }

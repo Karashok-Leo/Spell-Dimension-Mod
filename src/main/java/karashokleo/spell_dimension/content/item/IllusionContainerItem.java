@@ -64,7 +64,7 @@ public class IllusionContainerItem extends Item
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
         tooltip.add(SDTexts.TOOLTIP$USE$CLICK.get().formatted(Formatting.GRAY));
-        tooltip.add(SDTexts.TOOLTIP$CONTAINER$REFORGE.get().formatted(Formatting.GRAY));
+        tooltip.add(SDTexts.TOOLTIP$CONTAINER$ILLUSION.get().formatted(Formatting.GRAY));
         IllusionContainer.appendTooltip(stack, tooltip);
     }
 }

@@ -84,7 +84,7 @@ public class EnchantedEssenceItem extends StackClickEssenceItem
                 return mergeEnchantedEssences(essence, target);
             } else
             {
-                player.sendMessage(SDTexts.TEXT$DIFFICULTY$BAN.get(SDTexts.DIFFICULTY_TIER$2.get().formatted(Formatting.RED)));
+                player.sendMessage(SDTexts.TEXT$DIFFICULTY$BAN.get(SDTexts.DIFFICULTY_TIER$2.get()).formatted(Formatting.RED));
                 return false;
             }
         }
