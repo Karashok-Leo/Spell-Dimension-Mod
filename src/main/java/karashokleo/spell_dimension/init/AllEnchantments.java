@@ -28,6 +28,8 @@ public class AllEnchantments
     public static SpellBladePowerEnchantment SPELL_BLADE_ENERGIZE;
     public static SpellBladeHasteEnchantment SPELL_BLADE_HASTE;
 
+    public static DashResistanceEnchantment DASH_RESISTANCE;
+
     public static TraitEffectImmunityEnchantment WEAKNESS_IMMUNITY;
     public static TraitEffectImmunityEnchantment SLOWNESS_IMMUNITY;
     public static TraitEffectImmunityEnchantment POISON_IMMUNITY;
@@ -125,6 +127,14 @@ public class AllEnchantments
                 .addZH("咒剑-急速")
                 .addENDesc("Increased Spell Haste based on attack speed bonus.")
                 .addZHDesc("根据攻击速度加成增加法术施放速度。")
+                .addTag(AllTags.LOOTABLE)
+                .register();
+
+        DASH_RESISTANCE = new Entry<>("dash_resistance", new DashResistanceEnchantment())
+                .addEN("Dash Resistance")
+                .addZH("冲刺抗性")
+                .addENDesc("Gain resistance effect when rolling.")
+                .addZHDesc("翻滚时获得抗性效果。")
                 .addTag(AllTags.LOOTABLE)
                 .register();
 

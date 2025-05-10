@@ -13,6 +13,7 @@ import karashokleo.spell_dimension.content.enchantment.SpellImpactEnchantment;
 import karashokleo.spell_dimension.init.AllEnchantments;
 import karashokleo.spell_dimension.init.AllTags;
 import karashokleo.spell_dimension.util.SchoolUtil;
+import net.combatroll.api.event.ServerSideRollEvents;
 import net.fabricmc.fabric.api.item.v1.ModifyItemAttributeModifiersCallback;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -121,5 +122,7 @@ public class EnchantmentEvents
             player.heal(damageLeech);
             damageAccess.addModifier(originalDamage -> Math.max(0, originalDamage - damageLeech * 5));
         });
+
+        ServerSideRollEvents.PLAYER_START_ROLLING.register(AllEnchantments.DASH_RESISTANCE::onDash);
     }
 }
