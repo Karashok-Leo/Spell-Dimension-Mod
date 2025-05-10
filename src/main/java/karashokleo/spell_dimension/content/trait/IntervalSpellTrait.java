@@ -21,9 +21,9 @@ public class IntervalSpellTrait extends SpellTrait
 {
     protected final IntUnaryOperator interval;
 
-    public IntervalSpellTrait(IntUnaryOperator interval, Identifier spellId, float powerFactor)
+    public IntervalSpellTrait(IntUnaryOperator interval, Identifier spellId, IntUnaryOperator power)
     {
-        super(spellId, powerFactor);
+        super(spellId, power);
         this.interval = interval;
     }
 

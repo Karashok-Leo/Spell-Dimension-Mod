@@ -9,6 +9,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -21,19 +22,20 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.function.IntUnaryOperator;
 
 public class SpellTrait extends MobTrait
 {
     protected final Identifier spellId;
     @Nullable
     protected Spell spell;
-    protected final float powerFactor;
+    protected final IntUnaryOperator power;
 
-    public SpellTrait(Identifier spellId, float powerFactor)
+    public SpellTrait(Identifier spellId, IntUnaryOperator power)
     {
         super(Formatting.LIGHT_PURPLE);
         this.spellId = spellId;
-        this.powerFactor = powerFactor;
+        this.power = power;
     }
 
     @Override
@@ -43,18 +45,15 @@ public class SpellTrait extends MobTrait
     }
 
     @Override
-    public void postInit(MobDifficulty difficulty, LivingEntity mob, int lv)
+    public void initialize(MobDifficulty difficulty, LivingEntity mob, int level)
     {
-        var diff = MobDifficulty.get(mob);
-        if (diff.isEmpty()) return;
-        int mobLevel = diff.get().getLevel();
         SpellSchool school = this.getSpell().school;
         EntityAttributeInstance attributeInstance = mob.getAttributeInstance(school.attribute);
         if (attributeInstance == null) return;
         String spellIdString = this.getSpellId().toString();
         UUID uuid = UuidUtil.getUUIDFromString(spellIdString);
         attributeInstance.removeModifier(uuid);
-        EntityAttributeModifier modifier = new EntityAttributeModifier(uuid, "Spell Trait Bonus - %s".formatted(spellIdString), mobLevel * powerFactor, EntityAttributeModifier.Operation.ADDITION);
+        EntityAttributeModifier modifier = new EntityAttributeModifier(uuid, "Spell Trait Bonus - %s".formatted(spellIdString), power.applyAsInt(level), EntityAttributeModifier.Operation.ADDITION);
         attributeInstance.addPersistentModifier(modifier);
     }
 
@@ -88,12 +87,21 @@ public class SpellTrait extends MobTrait
         {
             return;
         }
-        // TODO: notify close players???
-//        mob.getWorld().getPlayers()
         target.sendMessage(SDTexts.TEXT$SPELL_TRAIT$ACTION.get(
                 mob.getName(),
                 this.getName().setStyle(Style.EMPTY.withColor(getColor()))
         ));
+        // TODO: notify close players???
+        // TODO: get mob tracking range???
+        int range = 32;
+        PlayerEntity closestPlayer = mob.getWorld().getClosestPlayer(mob, range);
+        if (closestPlayer != null && closestPlayer != target)
+        {
+            target.sendMessage(SDTexts.TEXT$SPELL_TRAIT$ACTION.get(
+                    mob.getName(),
+                    this.getName().setStyle(Style.EMPTY.withColor(getColor()))
+            ));
+        }
     }
 
     @Override
@@ -119,7 +127,11 @@ public class SpellTrait extends MobTrait
     @Override
     public void addDetail(List<Text> list)
     {
-        list.add(SDTexts.TEXT$SPELL_TRAIT$POWER.get(Math.round(powerFactor * 100)).formatted(Formatting.GRAY));
+        list.add(
+                SDTexts.TEXT$SPELL_TRAIT$POWER.get(
+                        mapLevel(lv -> Text.literal(power.applyAsInt(lv) + "").setStyle(Style.EMPTY.withColor(getColor())))
+                ).formatted(Formatting.GRAY)
+        );
         list.add(SDTexts.TEXT$SPELL_TRAIT$DESCRIPTION.get(Text.translatable(getDescKey())).formatted(Formatting.GRAY));
     }
 }

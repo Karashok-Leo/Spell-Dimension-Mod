@@ -7,7 +7,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.util.Identifier;
 import net.spell_engine.internals.SpellHelper;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.function.IntUnaryOperator;
 
@@ -15,9 +14,9 @@ public class CycloneTrait extends IntervalSpellTrait
 {
     protected final int color;
 
-    public CycloneTrait(IntUnaryOperator interval, Identifier spellId, float powerFactor, int color)
+    public CycloneTrait(IntUnaryOperator interval, Identifier spellId, IntUnaryOperator power, int color)
     {
-        super(interval, spellId, powerFactor);
+        super(interval, spellId, power);
         this.color = color;
     }
 

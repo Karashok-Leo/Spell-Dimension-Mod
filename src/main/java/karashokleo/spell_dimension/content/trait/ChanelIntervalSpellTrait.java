@@ -30,9 +30,9 @@ public class ChanelIntervalSpellTrait extends SpellTrait
     protected final IntUnaryOperator interval;
     protected final IntUnaryOperator cooldown;
 
-    public ChanelIntervalSpellTrait(IntUnaryOperator interval, IntUnaryOperator cooldown, Identifier spellId, float powerFactor)
+    public ChanelIntervalSpellTrait(IntUnaryOperator interval, IntUnaryOperator cooldown, Identifier spellId, IntUnaryOperator power)
     {
-        super(spellId, powerFactor);
+        super(spellId, power);
         this.interval = interval;
         this.cooldown = cooldown;
     }
