@@ -43,7 +43,7 @@ public abstract class RingOfDivinityMixin extends SingleEpicTrinketItem implemen
         {
             float amount = event.getAmount();
             amount *= 0.5F;
-            amount = Math.min(amount, entity.getMaxHealth() * 0.8F);
+            amount = Math.min(amount, entity.getMaxHealth() * 0.5F);
             event.setAmount(amount);
         }
     }
