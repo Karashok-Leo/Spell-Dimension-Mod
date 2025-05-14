@@ -159,6 +159,9 @@ public class AllSpells
     public static final Identifier HASTE_ADVANCED = builderWithName("haste_advanced").withScrollType(ScrollType.EVENT_AWARD).withTier(2).build();
     public static final Identifier SPEED_ADVANCED = builderWithName("speed_advanced").withScrollType(ScrollType.EVENT_AWARD).withTier(2).build();
 
+    // Lightning
+    public static final Identifier CHAIN_LIGHTNING = fromCrafting("chain_lightning").build();
+
     public static void register()
     {
         SpellSchools.register(GENERIC);
@@ -190,6 +193,7 @@ public class AllSpells
         SpellImpactEvents.BEFORE.register(FrostBlinkSpell::handle);
         SpellImpactEvents.BEFORE.register(FireOfRetributionSpell::handle);
         SpellImpactEvents.BEFORE.register(HeavenlyJusticeSpell::handle);
+        SpellImpactEvents.BEFORE.register(ChainLightningSpell::handle);
     }
 
     public static Set<Identifier> getAll()

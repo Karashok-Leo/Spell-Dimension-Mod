@@ -1,0 +1,46 @@
+{
+  "school": "LIGHTNING",
+  "range": 10.0,
+  "cast": {
+    "duration": 5,
+    "animation": "spell_engine:two_handed_channeling",
+    "sound": {
+      "id": "wizards:fire_breath_casting",
+      "randomness": 0
+    },
+    "start_sound": {
+      "id": "wizards:fire_breath_start"
+    },
+    "particles": [
+    ],
+    "channel_ticks": 4
+  },
+  "release": {
+    "target": {
+      "type": "AREA",
+      "area": {
+        "distance_dropoff": "SQUARED",
+        "angle_degrees": 40
+      }
+    },
+    "sound": {
+      "id": "wizards:fire_breath_release"
+    }
+  },
+  "impact": [
+    {
+      "action": {
+        "type": "DAMAGE",
+        "damage": {
+          "knockback": 0,
+          "spell_power_coefficient": 0
+        }
+      }
+    }
+  ],
+  "cost": {
+    "exhaust": 0.4,
+    "cooldown_duration": 2,
+    "cooldown_proportional": true
+  }
+}
