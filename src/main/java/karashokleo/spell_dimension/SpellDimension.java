@@ -74,6 +74,7 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
         AllDamageTypes.register();
         AllSpells.register();
         AllGroups.register();
+        AllParticles.register();
         AllMiscInit.register();
 
         AllPackets.init();

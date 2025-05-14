@@ -80,6 +80,7 @@ public class SpellDimensionClient implements ClientModInitializer
         EntityRendererRegistry.register(AllEntities.LOCATE_PORTAL, LocatePortalRenderer::new);
         EntityRendererRegistry.register(AllEntities.CONSCIOUSNESS_EVENT, EmptyEntityRenderer::new);
         EntityRendererRegistry.register(AllEntities.BLACK_HOLE, BlackHoleRenderer::new);
+        EntityRendererRegistry.register(AllEntities.CHAIN_LIGHTNING, EmptyEntityRenderer::new);
 
         TooltipComponentCallback.EVENT.register(data ->
         {
@@ -125,5 +126,7 @@ public class SpellDimensionClient implements ClientModInitializer
         ClientAirHopHandler.register();
 
         UpgradeGuiManager.registerTab(AllItems.REFORGE_TYPE, IllusionUpgradeTab::new);
+
+        AllParticles.registerClient();
     }
 }
