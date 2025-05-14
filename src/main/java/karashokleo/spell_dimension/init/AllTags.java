@@ -48,10 +48,16 @@ public class AllTags
     );
     public static final TagKey<Item> BOOK_ALL = TagUtil.itemTag("book/all");
 
-    public static final List<TagKey<Item>> DIFFICULTY_ALLOW = List.of(
-            TagUtil.itemTag("difficulty_allow/0"),
-            TagUtil.itemTag("difficulty_allow/1"),
-            TagUtil.itemTag("difficulty_allow/2")
+    public static final List<TagKey<Item>> DIFFICULTY_ALLOW_USE_ITEM = List.of(
+            TagUtil.itemTag("difficulty_allow/use_item/0"),
+            TagUtil.itemTag("difficulty_allow/use_item/1"),
+            TagUtil.itemTag("difficulty_allow/use_item/2")
+    );
+    // TODO: items with this tag cannot be passed to onUse method of blocks, how to fix?
+    public static final List<TagKey<Item>> DIFFICULTY_ALLOW_USE_BLOCK = List.of(
+            TagUtil.itemTag("difficulty_allow/use_block/0"),
+            TagUtil.itemTag("difficulty_allow/use_block/1"),
+            TagUtil.itemTag("difficulty_allow/use_block/2")
     );
 
     public static final List<TagKey<Item>> GEARS = List.of(
@@ -190,12 +196,12 @@ public class AllTags
         for (TagKey<Item> key : BOOK)
             bookAllContainer.addTag(key);
 
-        SpellDimension.ITEM_TAGS.getOrCreateContainer(DIFFICULTY_ALLOW.get(0))
+        SpellDimension.ITEM_TAGS.getOrCreateContainer(DIFFICULTY_ALLOW_USE_ITEM.get(0))
                 .add(
                         ConsumableItems.HOSTILITY_ORB,
                         ConsumableItems.BOTTLE_SANITY
                 );
-        SpellDimension.ITEM_TAGS.getOrCreateContainer(DIFFICULTY_ALLOW.get(2))
+        SpellDimension.ITEM_TAGS.getOrCreateContainer(DIFFICULTY_ALLOW_USE_BLOCK.get(2))
                 .addOptional(
                         new Identifier("kibe:cursed_seeds")
                 );

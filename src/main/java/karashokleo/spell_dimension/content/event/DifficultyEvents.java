@@ -119,7 +119,7 @@ public class DifficultyEvents
             ItemStack stack = player.getStackInHand(hand);
             for (int i = 0; i < 3; i++)
             {
-                TagKey<Item> tagKey = AllTags.DIFFICULTY_ALLOW.get(i);
+                TagKey<Item> tagKey = AllTags.DIFFICULTY_ALLOW_USE_ITEM.get(i);
                 if (stack.isIn(tagKey) &&
                     GameStageComponent.getDifficulty(player) != i)
                 {
@@ -135,7 +135,7 @@ public class DifficultyEvents
             ItemStack stack = player.getStackInHand(hand);
             for (int i = 0; i < 3; i++)
             {
-                TagKey<Item> tagKey = AllTags.DIFFICULTY_ALLOW.get(i);
+                TagKey<Item> tagKey = AllTags.DIFFICULTY_ALLOW_USE_BLOCK.get(i);
                 if (stack.isIn(tagKey) &&
                     GameStageComponent.getDifficulty(player) != i)
                 {

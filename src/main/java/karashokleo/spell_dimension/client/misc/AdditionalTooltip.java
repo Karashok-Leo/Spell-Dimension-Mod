@@ -23,9 +23,7 @@ import net.fabricmc.fabric.api.event.Event;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.registry.tag.TagKey;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableTextContent;
@@ -189,8 +187,8 @@ public class AdditionalTooltip
     {
         for (int i = 0; i < 3; i++)
         {
-            TagKey<Item> tagKey = AllTags.DIFFICULTY_ALLOW.get(i);
-            if (stack.isIn(tagKey))
+            if (stack.isIn(AllTags.DIFFICULTY_ALLOW_USE_ITEM.get(i)) ||
+                stack.isIn(AllTags.DIFFICULTY_ALLOW_USE_BLOCK.get(i)))
             {
                 lines.add(SDTexts.TEXT$DIFFICULTY$BAN.get(SDTexts.getDifficultyTierText(i)).formatted(Formatting.RED));
             }

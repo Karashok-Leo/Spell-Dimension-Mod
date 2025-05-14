@@ -133,8 +133,8 @@ public class AllEnchantments
         DASH_RESISTANCE = new Entry<>("dash_resistance", new DashResistanceEnchantment())
                 .addEN("Dash Resistance")
                 .addZH("冲刺抗性")
-                .addENDesc("Gain resistance effect when rolling.")
-                .addZHDesc("翻滚时获得抗性效果。")
+                .addENDesc("Gain a brief resistance effect when rolling.")
+                .addZHDesc("翻滚时获得短暂的抗性提升效果。")
                 .addTag(AllTags.LOOTABLE)
                 .register();
 

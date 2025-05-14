@@ -165,6 +165,8 @@
   "enchantment.spell-dimension.blindness_immunity.desc": "你对失明效果免疫。",
   "enchantment.spell-dimension.cursed_immunity": "诅咒免疫",
   "enchantment.spell-dimension.cursed_immunity.desc": "你对诅咒效果免疫。",
+  "enchantment.spell-dimension.dash_resistance": "冲刺抗性",
+  "enchantment.spell-dimension.dash_resistance.desc": "翻滚时获得短暂的抗性提升效果。",
   "enchantment.spell-dimension.freezing_immunity": "寒流免疫",
   "enchantment.spell-dimension.freezing_immunity.desc": "你对寒流效果免疫。",
   "enchantment.spell-dimension.levitation_immunity": "飘浮免疫",
