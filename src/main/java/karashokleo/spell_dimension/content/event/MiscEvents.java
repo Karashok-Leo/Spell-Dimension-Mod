@@ -17,6 +17,9 @@ import karashokleo.spell_dimension.content.misc.ISpawnerExtension;
 import karashokleo.spell_dimension.content.network.C2SSelectQuest;
 import karashokleo.spell_dimension.init.*;
 import karashokleo.spell_dimension.util.SchoolUtil;
+import net.adventurez.entity.VoidShadeEntity;
+import net.adventurez.entity.VoidShadowEntity;
+import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
@@ -28,17 +31,20 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.GameRules;
+import net.minecraft.world.World;
 import net.spell_engine.api.spell.SpellContainer;
 import net.spell_engine.internals.SpellContainerHelper;
 import net.spell_power.api.SpellDamageSource;
 import net.trique.mythicupgrades.MythicUpgradesDamageTypes;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 
@@ -201,6 +207,28 @@ public class MiscEvents
                         entity.damage(SpellDamageSource.player(school, player), 999999));
             }
             return ActionResult.PASS;
+        });
+
+        // 虚空之影伤害
+        ServerLivingEntityEvents.ALLOW_DEATH.register((entity, damageSource, damageAmount) ->
+        {
+            if (!(entity instanceof VoidShadeEntity))
+                return true;
+            if (!(damageSource.getAttacker() instanceof LivingEntity living))
+                return true;
+            World world = entity.getWorld();
+            if (world.isClient())
+                return true;
+            List<VoidShadowEntity> list = world.getEntitiesByClass(VoidShadowEntity.class, entity.getBoundingBox().expand(128), EntityPredicates.EXCEPT_SPECTATOR);
+            if (list.isEmpty())
+                return true;
+            VoidShadowEntity shadow = list.get(0);
+            float shadowMaxHealth = shadow.getMaxHealth();
+            if (shadow.getHealth() < shadowMaxHealth * 0.5f)
+                return true;
+            float damage = Math.min(shadowMaxHealth * 0.05f, damageAmount);
+            shadow.damage(living.getDamageSources().indirectMagic(entity, living), damage);
+            return true;
         });
     }
 }

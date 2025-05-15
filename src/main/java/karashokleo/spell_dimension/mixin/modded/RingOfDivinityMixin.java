@@ -18,12 +18,18 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.Unique;
 
 import java.util.List;
 
 @Mixin(RingOfDivinity.class)
 public abstract class RingOfDivinityMixin extends SingleEpicTrinketItem implements DamageListenerTrinket
 {
+    @Unique
+    private static final float DAMAGE_REDUCTION = 0.5F;
+    @Unique
+    private static final float MAX_DAMAGE_RATIO = 0.5F;
+
     /**
      * @author Karashok-Leo
      * @reason mechanics overwrite
@@ -42,8 +48,8 @@ public abstract class RingOfDivinityMixin extends SingleEpicTrinketItem implemen
             source.isIn(LHTags.MAGIC))
         {
             float amount = event.getAmount();
-            amount *= 0.5F;
-            amount = Math.min(amount, entity.getMaxHealth() * 0.5F);
+            amount *= (1 - DAMAGE_REDUCTION);
+            amount = Math.min(amount, entity.getMaxHealth() * MAX_DAMAGE_RATIO);
             event.setAmount(amount);
         }
     }
@@ -55,7 +61,10 @@ public abstract class RingOfDivinityMixin extends SingleEpicTrinketItem implemen
     @Overwrite
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
-        tooltip.add(SDTexts.TOOLTIP$RING_DIVINITY.get().formatted(Formatting.GOLD));
+        tooltip.add(SDTexts.TOOLTIP$RING_DIVINITY.get(
+                Math.round(DAMAGE_REDUCTION * 100),
+                Math.round(MAX_DAMAGE_RATIO * 100)
+        ).formatted(Formatting.GOLD));
         super.appendTooltip(stack, world, tooltip, context);
     }
 }

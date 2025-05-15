@@ -84,7 +84,7 @@
   "book.spell-dimension-book.magic_guidance.boss.void_blossom.boss.title": "Void Blossom",
   "book.spell-dimension-book.magic_guidance.boss.void_blossom.description": "Blooming in the abyss...",
   "book.spell-dimension-book.magic_guidance.boss.void_blossom.name": "Void Blossom",
-  "book.spell-dimension-book.magic_guidance.boss.void_shadow.behavior.text": "When Void Shadow has at least half its health, you can deal damage to its body by killing the Servants He summons. Each hit deals damage equal to the Servant's max health, but not more than 5%% of Void Shadow's max health.\n",
+  "book.spell-dimension-book.magic_guidance.boss.void_shadow.behavior.text": "You can't place or break blocks in the void shadow realm, but you can do so with **Remote Manipulation** and **Remote Destruction** spells.\n\\\n\\\nWhen Void Shadow has at least half its health, you can deal damage to its body by killing the Servants He summons. Damage dealt per hit will not exceed 5%% of Void Shadow's max health.\n",
   "book.spell-dimension-book.magic_guidance.boss.void_shadow.boss.text": "Level: 880+\n\\\n\\\nDefeat the Eye to spawn a floating island, enter the void shadow realm through the portal on it.\n",
   "book.spell-dimension-book.magic_guidance.boss.void_shadow.boss.title": "Void Shadow",
   "book.spell-dimension-book.magic_guidance.boss.void_shadow.description": "Dark magic on the prowl...",

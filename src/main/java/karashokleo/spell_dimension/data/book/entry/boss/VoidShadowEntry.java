@@ -77,12 +77,18 @@ public class VoidShadowEntry extends BaseEntryProvider
         context.page("behavior");
         this.lang().add(context.pageText(),
                 """
-                        When Void Shadow has at least half its health, you can deal damage to its body by killing the Servants He summons. Each hit deals damage equal to the Servant's max health, but not more than 5%% of Void Shadow's max health.
+                        You can't place or break blocks in the void shadow realm, but you can do so with **Remote Manipulation** and **Remote Destruction** spells.
+                        \\
+                        \\
+                        When Void Shadow has at least half its health, you can deal damage to its body by killing the Servants He summons. Damage dealt per hit will not exceed 5%% of Void Shadow's max health.
                         """
         );
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        当虚空之影至少有一半生命值时，你可以通过击杀祂召唤的侍从对其本体造成伤害。每次击杀造成的伤害等于侍从的最大生命值，但不会超过虚空之影的最大生命值的5%%。
+                        在虚空之影的领域里你无法放置或破坏方块，但你可以使用**远端操控**和**远端瓦解**法术来挣脱这一束缚。
+                        \\
+                        \\
+                        当虚空之影至少有一半生命值时，你可以通过击杀祂召唤的侍从对其本体造成伤害。每次击杀造成的伤害不会超过虚空之影的最大生命值的5%%。
                         """
         );
         BookTextPageModel behavior = BookTextPageModel

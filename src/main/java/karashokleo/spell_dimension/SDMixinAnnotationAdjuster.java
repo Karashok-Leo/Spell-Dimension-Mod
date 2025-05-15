@@ -18,6 +18,7 @@ public class SDMixinAnnotationAdjuster implements MixinAnnotationAdjuster
             annotationNode.is(WrapMethod.class)
         )
         {
+            System.out.println("Mixin " + mixinClassName + " cancelled");
             return null;
         }
         if (mixinClassName.equals("io.ix0rai.rainglow.mixin.SlimeEntityMixin") &&
@@ -28,6 +29,7 @@ public class SDMixinAnnotationAdjuster implements MixinAnnotationAdjuster
                     .equals("tick")
         )
         {
+            System.out.println("Mixin " + mixinClassName + " cancelled");
             return null;
         }
         return annotationNode;

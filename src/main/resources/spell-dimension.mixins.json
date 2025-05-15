@@ -30,7 +30,6 @@
     "modded.TargetHelperMixin",
     "modded.TerribleSwordItemMixin",
     "modded.TrinketInventoryMixin",
-    "modded.VoidShadeEntityMixin",
     "modded.VoidShadowEntityMixin",
     "modded.WraithEntityMixin",
     "phase.EntityPredicatesMixin",

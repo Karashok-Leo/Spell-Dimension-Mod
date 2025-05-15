@@ -43,8 +43,8 @@ public enum SDTexts
     TEXT$END_STAGE$LOCK("You need to use %s to unlock the End Stage to enter the End!", "你需要使用%s解锁终末阶段才能进入末地！"),
     TEXT$END_STAGE$BOOK_EVERYTHING("You need to use %s to unlock the End Stage to use Book of Omniscience!", "你需要使用%s解锁终末阶段才能使用全知之书！"),
     TEXT$PROGRESS_ROLLBACK("Progress has been rolled back!", "进度已回退！"),
-    TEXT$SPELL_TRAIT$POWER("Monsters gain spell power equal to %s%% Hostility level", "怪物获得相当于%s%%恶意等级的法术强度"),
-    TEXT$SPELL_TRAIT$INTERVAL("Every %s seconds, cast spell on target", "每隔%s秒，对目标施放法术"),
+    TEXT$SPELL_TRAIT$POWER("Monsters gain %s spell power of the corresponding spell school.", "怪物获得%s点对应学派的法术强度"),
+    TEXT$SPELL_TRAIT$INTERVAL("Every %s seconds, cast spell on target.", "每隔%s秒，对目标施放法术"),
     TEXT$SPELL_TRAIT$DESCRIPTION("Spell Description: %s", "法术描述：%s"),
     TEXT$SPELL_TRAIT$ACTION("%s is casting [%s]", "%s 正在施法 [%s]"),
 
@@ -100,6 +100,7 @@ public enum SDTexts
     TEXT$SOUL_BIND("You feel the connection between your soul and your body becoming stronger...", "你感觉灵魂与身体的联系变得紧密..."),
     TEXT$SOUL_UNBIND("You feel the connection between your soul and your body becoming tenuous...", "你感到灵魂与身体的联系变得脆弱..."),
 
+    // ATI Structures translations
     TEXT$TRADER$OLDEN("Mysterious Olden", "神秘老登"),
 
     /**
@@ -234,7 +235,7 @@ public enum SDTexts
     TOOLTIP$CURSE_PRIDE_1("Both damage dealt and damage taken are increased by %s%% per difficulty level", "根据玩家难度，造成伤害与受到伤害每级提升%s%%"),
     TOOLTIP$CURSE_PRIDE_2("Current damage increment: +%s%%", "当前增伤：+%s%%"),
     TOOLTIP$CURSE_WRATH("Increase damage dealt and damage received by %s%% per difficulty level difference when facing mobs with higher level than you.", "面对等级比自己高的怪物时每级等级差造成伤害与受到伤害均提升%s%%"),
-    TOOLTIP$RING_DIVINITY("Gets permanent Cleanse effect. Reduce magic damage by half, and not exceed 80% of your max health", "获得持续的净化效果，受到的魔法伤害减半，且不超过自身最大血量的80%"),
+    TOOLTIP$RING_DIVINITY("Gets permanent Cleanse effect. Reduce magic damage taken by %s%%, and not exceed %s%% of your max health", "获得持续的净化效果，受到的魔法伤害减少%s%%，且不超过自身最大血量的%s%%"),
     TOOLTIP$SECONDARY_SCHOOL_ITEM$1("- Gain %s spell power equal to %s%% of your major school's spell power", "- 获得相当于主修学派法术强度%2$s%%的%s法术强度"),
     TOOLTIP$SECONDARY_SCHOOL_ITEM$2("- Spell Scrolls of %s school can be used", "- 可以使用%s法术学派的卷轴"),
     TOOLTIP$SECONDARY_SCHOOL_ITEM$3("- %s%% chance to get %s Spell School's Enchanted Essence and Enlightening Essence", "- 有%s%%的几率获得%s法术学派的束魔精华和源启精华"),
