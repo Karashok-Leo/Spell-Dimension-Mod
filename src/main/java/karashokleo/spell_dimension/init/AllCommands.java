@@ -1,12 +1,15 @@
-package karashokleo.spell_dimension.content.misc;
+package karashokleo.spell_dimension.init;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import com.mojang.brigadier.context.CommandContext;
+import karashokleo.spell_dimension.content.object.EnchantedModifier;
 import karashokleo.spell_dimension.mixin.modded.SpellRegistryAccessor;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.CommandManager;
@@ -17,7 +20,7 @@ import net.spell_engine.internals.SpellRegistry;
 import net.spell_engine.network.Packets;
 import net.spell_engine.utils.WeaponCompatibility;
 
-public class SDDebugCommand
+public class AllCommands
 {
     public static void init()
     {
@@ -28,8 +31,8 @@ public class SDDebugCommand
                             .literal("spell_dimension")
                             .then(fixFakeDeath())
                             .then(reloadSpells())
+                            .then(convertModifiers())
             );
-
         });
     }
 
@@ -37,16 +40,7 @@ public class SDDebugCommand
     {
         return CommandManager
                 .literal("fix_fake_death")
-                .executes(context ->
-                {
-                    ServerPlayerEntity player = context.getSource().getPlayer();
-                    if (player != null)
-                    {
-                        player.setHealth(0);
-                        player.onDeath(player.getDamageSources().genericKill());
-                    }
-                    return Command.SINGLE_SUCCESS;
-                });
+                .executes(AllCommands::executeFixFakeDeath);
     }
 
     private static LiteralArgumentBuilder<ServerCommandSource> reloadSpells()
@@ -54,11 +48,30 @@ public class SDDebugCommand
         return CommandManager
                 .literal("reload_spells")
                 .requires(source -> source.hasPermissionLevel(2))
-                .executes(context -> executeReload(context.getSource().getServer()));
+                .executes(AllCommands::executeReload);
     }
 
-    private static int executeReload(MinecraftServer server)
+    private static LiteralArgumentBuilder<ServerCommandSource> convertModifiers()
     {
+        return CommandManager
+                .literal("convert_modifiers")
+                .executes(AllCommands::executeConvertModifiers);
+    }
+
+    private static int executeFixFakeDeath(CommandContext<ServerCommandSource> context)
+    {
+        ServerPlayerEntity player = context.getSource().getPlayer();
+        if (player != null)
+        {
+            player.setHealth(0);
+            player.onDeath(player.getDamageSources().genericKill());
+        }
+        return Command.SINGLE_SUCCESS;
+    }
+
+    private static int executeReload(CommandContext<ServerCommandSource> context)
+    {
+        MinecraftServer server = context.getSource().getServer();
         SpellRegistry.loadSpells(server.getResourceManager());
         SpellRegistry.loadPools(server.getResourceManager());
         SpellRegistry.loadContainers(server.getResourceManager());
@@ -71,6 +84,17 @@ public class SDDebugCommand
             PacketSender sender = ServerPlayNetworking.getSender(player);
             sender.sendPacket(Packets.SpellRegistrySync.ID, SpellRegistry.encoded);
             sender.sendPacket(Packets.ConfigSync.ID, configSerialized);
+        }
+        return Command.SINGLE_SUCCESS;
+    }
+
+    private static int executeConvertModifiers(CommandContext<ServerCommandSource> context)
+    {
+        ServerPlayerEntity player = context.getSource().getPlayer();
+        if (player != null)
+        {
+            ItemStack stack = player.getMainHandStack();
+            EnchantedModifier.tryConvert(stack);
         }
         return Command.SINGLE_SUCCESS;
     }

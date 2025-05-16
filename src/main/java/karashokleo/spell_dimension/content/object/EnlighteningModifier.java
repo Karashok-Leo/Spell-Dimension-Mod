@@ -21,7 +21,8 @@ import java.util.function.Predicate;
 
 public record EnlighteningModifier(
         EntityAttribute attribute,
-        UUID uuid, double amount,
+        UUID uuid,
+        double amount,
         EntityAttributeModifier.Operation operation
 )
 {
@@ -106,7 +107,7 @@ public record EnlighteningModifier(
         return compound;
     }
 
-    public boolean overWriteNbt(NbtCompound oldModifier)
+    public boolean tryOverWriteNbt(NbtCompound oldModifier)
     {
         if (AttributeUtil.getAttributeId(attribute).equals(oldModifier.getString(ATTRIBUTE_KEY)) &&
             uuid.equals(oldModifier.getUuid(UUID_KEY)))
