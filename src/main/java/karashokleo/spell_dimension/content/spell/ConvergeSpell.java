@@ -63,7 +63,7 @@ public class ConvergeSpell
         int amplifier = Math.min((int) (power.baseValue()) / 24 + 1, 3);
         ParticleHelper.sendBatches(tracked, PARTICLE);
         SoundHelper.playSoundEvent(tracked.getWorld(), tracked, SoundEvents.ENTITY_GENERIC_EXPLODE);
-        float damage = (float) DamageUtil.calculateDamage(caster, SpellSchools.ARCANE, SpellConfig.CONVERGE_FACTOR, amplifier);
+        float damage = (float) DamageUtil.calculateDamage(caster, SpellSchools.ARCANE, SpellConfig.CONVERGE_FACTOR);
         List<LivingEntity> targets = ImpactUtil.getLivingsInRange(
                 tracked,
                 3 + amplifier * 0.8F,

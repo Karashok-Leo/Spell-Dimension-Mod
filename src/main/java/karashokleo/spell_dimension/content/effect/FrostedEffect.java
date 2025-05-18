@@ -32,7 +32,7 @@ public class FrostedEffect extends StatusEffect
     public void applyUpdateEffect(LivingEntity entity, int amplifier)
     {
         LivingEntity attacker = entity.getLastAttacker();
-        float damage = attacker == null ? 2F : (float) DamageUtil.calculateDamage(attacker, SpellSchools.FROST, SpellConfig.FROSTED_FACTOR, amplifier);
+        float damage = attacker == null ? 2F : (float) DamageUtil.calculateDamage(attacker, SpellSchools.FROST, SpellConfig.FROSTED_FACTOR);
         DamageUtil.spellDamage(entity, SpellSchools.FROST, attacker, damage, false);
         if (entity.canFreeze())
         {

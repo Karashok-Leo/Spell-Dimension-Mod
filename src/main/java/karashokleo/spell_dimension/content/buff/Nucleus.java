@@ -123,7 +123,7 @@ public class Nucleus implements Buff
         SpellInfo icicleInfo = getOrCreateSpellInfo(caster);
 
         //Damage
-        float damage = (float) DamageUtil.calculateDamage(caster, SpellSchools.FROST, SpellConfig.NUCLEUS_FACTOR, amplifier);
+        float damage = (float) DamageUtil.calculateDamage(caster, SpellSchools.FROST, SpellConfig.NUCLEUS_FACTOR);
         DamageUtil.spellDamage(source, SpellSchools.FROST, caster, damage, false);
 
         //Adjust amplifier

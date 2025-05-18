@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class DamageUtil
 {
-    public static double calculateDamage(LivingEntity caster, SpellSchool school, float damageFactor, double exponent)
+    public static double calculateDamage(LivingEntity caster, SpellSchool school, float damageFactor)
     {
         return SpellPower.getSpellPower(school, caster).randomValue() * damageFactor;
     }
