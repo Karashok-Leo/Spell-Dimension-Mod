@@ -160,7 +160,17 @@ public class AllSpells
     public static final Identifier SPEED_ADVANCED = builderWithName("speed_advanced").withScrollType(ScrollType.EVENT_AWARD).withTier(2).build();
 
     // Lightning
+    // Tier 1
     public static final Identifier CHAIN_LIGHTNING = fromCrafting("chain_lightning").build();
+    // Tier 2
+    public static final Identifier SURGE = fromCrafting("surge").build();
+    public static final Identifier STEADY_CURRENT = fromCrafting("steady_current").build();
+    public static final Identifier FISSION = fromCrafting("fission").build();
+    public static final Identifier RESONANCE = fromCrafting("resonance").build();
+    public static final Identifier BREAKDOWN = fromCrafting("breakdown").build();
+    // Tier 3
+    public static final Identifier ARCLIGHT = fromCrafting("arclight").build();
+    public static final Identifier CONSTANT_CURRENT = fromCrafting("constant_current").build();
 
     public static void register()
     {

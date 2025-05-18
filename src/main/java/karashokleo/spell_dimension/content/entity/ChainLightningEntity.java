@@ -1,5 +1,6 @@
 package karashokleo.spell_dimension.content.entity;
 
+import karashokleo.spell_dimension.config.SpellConfig;
 import karashokleo.spell_dimension.content.particle.ZapParticleOption;
 import karashokleo.spell_dimension.init.AllEntities;
 import karashokleo.spell_dimension.util.DamageUtil;
@@ -23,13 +24,11 @@ import java.util.Comparator;
  */
 public class ChainLightningEntity extends ProjectileEntity
 {
-    public int lifespan = 100;
-    public int maxChains = 3;
-    public int maxChainStep = 3;
-    public float range = 3f;
-    public float maxRange = 5f;
-    public boolean canPenetrate = false;
-    private int chains;
+    public int power;
+    public int lifespan;
+    public int chainStep;
+    public float range;
+    public boolean canPenetrate;
     private LivingEntity initialTarget;
     private final ArrayList<LivingEntity> alreadyChained = new ArrayList<>();
     private final ArrayList<LivingEntity> lastChained = new ArrayList<>();
@@ -47,6 +46,12 @@ public class ChainLightningEntity extends ProjectileEntity
         super(entityType, world);
         this.setNoGravity(true);
         this.noClip = true;
+        // default settings
+        this.power = SpellConfig.CHAIN_LIGHTNING_CONFIG.power();
+        this.lifespan = SpellConfig.CHAIN_LIGHTNING_CONFIG.lifespan();
+        this.chainStep = SpellConfig.CHAIN_LIGHTNING_CONFIG.chainStep();
+        this.range = SpellConfig.CHAIN_LIGHTNING_CONFIG.range();
+        this.canPenetrate = false;
     }
 
     @SuppressWarnings("ForLoopReplaceableByForEach")
@@ -87,15 +92,11 @@ public class ChainLightningEntity extends ProjectileEntity
                     for (Entity target : targets)
                     {
                         // break loop if chains this time has reached maxChainStep
-                        if (chainStep >= maxChainStep) break;
-                        // break loop if total chains has reached maxChains
-                        if (chains >= maxChains) break;
+                        if (chainStep >= this.chainStep) break;
                         // skip non living
                         if (!(target instanceof LivingEntity living)) continue;
                         // skip if out of range of last chained
                         if (target.squaredDistanceTo(chained) > range * range) continue;
-                        // skip if out of range of the lightning
-                        if (target.squaredDistanceTo(this) > maxRange * maxRange) continue;
                         // skip if blocked and cannot penetrate
                         if (!canPenetrate && isBlocked(world, chained.getEyePos(), target.getEyePos())) continue;
 
@@ -113,16 +114,16 @@ public class ChainLightningEntity extends ProjectileEntity
 
     protected void chainTarget(ServerWorld world, LivingEntity target, Entity from)
     {
-        chains++;
         lastChained.add(target);
 
-        world.spawnParticles(new ZapParticleOption(from.getId(), target.getId(), 1), from.getX(), from.getY(), from.getZ(), 1, 0, 0, 0, 0);
+        world.spawnParticles(new ZapParticleOption(from.getId(), target.getId(), power), from.getX(), from.getY(), from.getZ(), 1, 0, 0, 0, 0);
 //                            victim.playSound(SoundRegistry.CHAIN_LIGHTNING_CHAIN.get(), 2, 1);
 //        MagicManager.spawnParticles(level, ParticleHelper.ELECTRICITY, victim.getX(), victim.getY() + victim.getBbHeight() / 2, victim.getZ(), 10, victim.getBbWidth() / 3, victim.getBbHeight() / 3, victim.getBbWidth() / 3, 0.1, false);
 
         if (getOwner() instanceof LivingEntity owner)
         {
-            DamageUtil.spellDamage(target, SpellSchools.LIGHTNING, owner, 1, true);
+            float damage = (float) DamageUtil.calculateDamage(owner, SpellSchools.LIGHTNING, power * SpellConfig.CHAIN_LIGHTNING_CONFIG.damageFactor());
+            DamageUtil.spellDamage(target, SpellSchools.LIGHTNING, owner, damage, true);
         }
     }
 

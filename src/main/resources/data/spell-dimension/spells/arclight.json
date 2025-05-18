@@ -1,0 +1,15 @@
+{
+  "school": "LIGHTNING",
+  "range": 0,
+  "cast": {
+  },
+  "release": {
+    "target": {
+      "type": "SELF"
+    }
+  },
+  "impact": [
+  ],
+  "cost": {
+  }
+}
