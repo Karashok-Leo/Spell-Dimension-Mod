@@ -163,6 +163,7 @@ public class AllSpells
     // Tier 1
     public static final Identifier CHAIN_LIGHTNING = fromCrafting("chain_lightning").build();
     // Tier 2
+    public static final Identifier BALL_LIGHTNING = fromCrafting("ball_lightning").build();
     public static final Identifier SURGE = fromCrafting("surge").build();
     public static final Identifier STEADY_CURRENT = fromCrafting("steady_current").build();
     public static final Identifier FISSION = fromCrafting("fission").build();
@@ -204,6 +205,7 @@ public class AllSpells
         SpellImpactEvents.BEFORE.register(FireOfRetributionSpell::handle);
         SpellImpactEvents.BEFORE.register(HeavenlyJusticeSpell::handle);
         SpellImpactEvents.BEFORE.register(ChainLightningSpell::handle);
+        SpellImpactEvents.BEFORE.register(BallLightningSpell::handle);
     }
 
     public static Set<Identifier> getAll()

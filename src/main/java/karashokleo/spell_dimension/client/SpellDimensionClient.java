@@ -24,10 +24,7 @@ import karashokleo.spell_dimension.init.*;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityFeatureRendererRegistrationCallback;
-import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
+import net.fabricmc.fabric.api.client.rendering.v1.*;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.client.render.entity.EmptyEntityRenderer;
@@ -81,6 +78,9 @@ public class SpellDimensionClient implements ClientModInitializer
         EntityRendererRegistry.register(AllEntities.CONSCIOUSNESS_EVENT, EmptyEntityRenderer::new);
         EntityRendererRegistry.register(AllEntities.BLACK_HOLE, BlackHoleRenderer::new);
         EntityRendererRegistry.register(AllEntities.CHAIN_LIGHTNING, EmptyEntityRenderer::new);
+        EntityRendererRegistry.register(AllEntities.BALL_LIGHTNING, BallLightningRenderer::new);
+
+        EntityModelLayerRegistry.registerModelLayer(BallLightningRenderer.MODEL_LAYER_LOCATION, BallLightningRenderer::createBodyLayer);
 
         TooltipComponentCallback.EVENT.register(data ->
         {

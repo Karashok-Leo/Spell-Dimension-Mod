@@ -59,6 +59,7 @@ public class ChainLightningEntity extends ProjectileEntity
     public void tick()
     {
         super.tick();
+        if (this.getWorld().isClient()) return;
 
         // discard if lifespan is over
         if (age > lifespan)
@@ -123,7 +124,7 @@ public class ChainLightningEntity extends ProjectileEntity
         if (getOwner() instanceof LivingEntity owner)
         {
             float damage = (float) DamageUtil.calculateDamage(owner, SpellSchools.LIGHTNING, power * SpellConfig.CHAIN_LIGHTNING_CONFIG.damageFactor());
-            DamageUtil.spellDamage(target, SpellSchools.LIGHTNING, owner, damage, true);
+            DamageUtil.spellDamage(target, SpellSchools.LIGHTNING, owner, damage, false);
         }
     }
 

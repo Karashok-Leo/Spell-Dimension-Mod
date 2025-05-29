@@ -1,10 +1,7 @@
 package karashokleo.spell_dimension.init;
 
 import karashokleo.spell_dimension.SpellDimension;
-import karashokleo.spell_dimension.content.entity.BlackHoleEntity;
-import karashokleo.spell_dimension.content.entity.ChainLightningEntity;
-import karashokleo.spell_dimension.content.entity.ConsciousnessEventEntity;
-import karashokleo.spell_dimension.content.entity.LocatePortalEntity;
+import karashokleo.spell_dimension.content.entity.*;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
@@ -18,6 +15,7 @@ public class AllEntities
     public static EntityType<ConsciousnessEventEntity> CONSCIOUSNESS_EVENT;
     public static EntityType<BlackHoleEntity> BLACK_HOLE;
     public static EntityType<ChainLightningEntity> CHAIN_LIGHTNING;
+    public static EntityType<BallLightningEntity> BALL_LIGHTNING;
 
     public static void register()
     {
@@ -43,11 +41,19 @@ public class AllEntities
                 .spawnGroup(SpawnGroup.MISC)
                 .dimensions(EntityDimensions.fixed(1, 1))
                 .fireImmune()
-                .trackRangeChunks(8)
+                .trackRangeChunks(4)
+                .build();
+        BALL_LIGHTNING = FabricEntityTypeBuilder.<BallLightningEntity>create()
+                .entityFactory(BallLightningEntity::new)
+                .spawnGroup(SpawnGroup.MISC)
+                .dimensions(EntityDimensions.fixed(1, 1))
+                .fireImmune()
+                .trackRangeChunks(4)
                 .build();
         Registry.register(Registries.ENTITY_TYPE, SpellDimension.modLoc("locate_portal"), LOCATE_PORTAL);
         Registry.register(Registries.ENTITY_TYPE, SpellDimension.modLoc("consciousness_event"), CONSCIOUSNESS_EVENT);
         Registry.register(Registries.ENTITY_TYPE, SpellDimension.modLoc("black_hole"), BLACK_HOLE);
         Registry.register(Registries.ENTITY_TYPE, SpellDimension.modLoc("chain_lightning"), CHAIN_LIGHTNING);
+        Registry.register(Registries.ENTITY_TYPE, SpellDimension.modLoc("ball_lightning"), BALL_LIGHTNING);
     }
 }

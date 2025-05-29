@@ -17,10 +17,9 @@
   },
   "release": {
     "target": {
-      "type": "AREA",
-      "area": {
-        "distance_dropoff": "SQUARED",
-        "angle_degrees": 40
+      "type": "CURSOR",
+      "cursor": {
+        "use_caster_as_fallback": false
       }
     },
     "sound": {
