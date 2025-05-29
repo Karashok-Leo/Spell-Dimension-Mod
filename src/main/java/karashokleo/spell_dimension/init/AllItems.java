@@ -89,7 +89,7 @@ public class AllItems
     // Misc Items
     public static Item DEBUG_STAFF;
     public static SpawnerSoulItem SPAWNER_SOUL;
-    public static SpellContainerItem SPELL_CONTAINER;
+    public static ProtectiveSpellContainerItem SPELL_CONTAINER;
     public static MagicMirrorItem MAGIC_MIRROR;
     public static MagicMirrorItem BROKEN_MAGIC_MIRROR;
     public static BottleOfNightmare BOTTLE_NIGHTMARE;
@@ -330,9 +330,10 @@ public class AllItems
                 .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
-        SPELL_CONTAINER = Entry.of("spell_container", new SpellContainerItem())
+        SPELL_CONTAINER = Entry.of("spell_container", new ProtectiveSpellContainerItem())
                 .addEN()
                 .addZH("法术容器")
+                .addTag(AllTags.BACK)
                 .setTab(AllGroups.MISC)
                 .addModel()
                 .register();

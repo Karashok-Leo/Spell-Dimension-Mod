@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "spell-dimension:armor_of_convergence"
+    "spell-dimension:armor_of_convergence",
+    "spell-dimension:spell_container"
   ]
 }

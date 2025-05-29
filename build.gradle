@@ -163,6 +163,8 @@ dependencies {
     modImplementation "curse.maven:sophisticated-core-unofficial-fabric-port-979317:6448771"
     modImplementation "curse.maven:sophisticated-backpacks-unofficial-fabric-port-979322:6448770"
 
+    modRuntimeOnly "curse.maven:yeetusexperimentus-635427:4680831"
+
     // Compat
     modCompileOnly "dev.emi:emi-fabric:${project.emi_version}:api"
     modLocalRuntime "dev.emi:emi-fabric:${project.emi_version}"

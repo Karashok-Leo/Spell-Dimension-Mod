@@ -35,6 +35,7 @@ import net.p3pp3rf1y.sophisticatedcore.client.gui.UpgradeGuiManager;
 import net.spell_engine.api.effect.CustomModelStatusEffect;
 import net.spell_engine.api.effect.CustomParticleStatusEffect;
 import net.spell_engine.api.render.CustomModels;
+import net.spell_engine.api.render.StunParticleSpawner;
 import net.wizards.item.Armors;
 
 import java.util.List;
@@ -121,6 +122,7 @@ public class SpellDimensionClient implements ClientModInitializer
         CustomParticleStatusEffect.register(AllStatusEffects.FROSTED, new FrostedParticleSpawner());
         CustomParticleStatusEffect.register(AllStatusEffects.DIVINE_AURA, new DivineAuraParticleSpawner());
         CustomModelStatusEffect.register(AllStatusEffects.FROSTED, new FrostedEffectRenderer());
+        CustomParticleStatusEffect.register(AllStatusEffects.STUN, new StunParticleSpawner());
 
         AllPackets.initClient();
         ClientAirHopHandler.register();

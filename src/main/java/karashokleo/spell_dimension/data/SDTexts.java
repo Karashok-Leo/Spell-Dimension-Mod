@@ -187,11 +187,13 @@ public enum SDTexts
     /**
      * Spell Container & Illusion Container
      */
+    TOOLTIP$CONTAINER$SPELL("Attempt to void spell traits, converting them to damage reduction amount for the corresponding spell school.", "尝试销毁法术词条，转化为对应法术学派的减伤数额"),
+    TOOLTIP$CONTAINER$DAMAGE_REDUCTION("[%s] damage reduction amount: %s", "[%s] 减伤数额：%s"),
     TOOLTIP$CONTAINER$CONVERTED("Converted:", "已转化："),
     TOOLTIP$CONTAINER$CONVERTED$VALUE("- %s (+%s/%s) * %s", "- %s (+%s/%s) * %s"),
     TOOLTIP$CONTAINER$RETRIEVE("Main hand holding, right-click to retrieve all finished products", "主手持有右键取出所有成品"),
-    TOOLTIP$CONTAINER$ILLUSION("Attempt to void items and their enchantments, converting them into materials of the same rarity and the Book of Omniscience", "尝试销毁物品及其附魔，转化为同等级材料和全知之书"),
-    TOOLTIP$CONTAINER$ILLUSION_UPGRADE("Attempt to pick up and void convertible items and their enchantments, converting them into materials of the same rarity and the Book of Omniscience", "尝试拾取并销毁可转化的物品及其附魔，转化为同等级材料和全知之书"),
+    TOOLTIP$CONTAINER$ILLUSION("Attempt to void items and their enchantments, converting them into materials of the same rarity and the Book of Omniscience.", "尝试销毁物品及其附魔，转化为同等级材料和全知之书"),
+    TOOLTIP$CONTAINER$ILLUSION_UPGRADE("Attempt to pick up and void convertible items and their enchantments, converting them into materials of the same rarity and the Book of Omniscience.", "尝试拾取并销毁可转化的物品及其附魔，转化为同等级材料和全知之书"),
 
     /**
      * Trinkets
@@ -226,7 +228,8 @@ public enum SDTexts
     TOOLTIP$ENCHANTED_BREASTPLATE("For every 1 spell power, your armor increases by %s, and armor toughness increases by %s", "每拥有1点法术强度，护甲增加%s，护甲韧性增加%s"),
     TOOLTIP$FLEX_BREASTPLATE("Gain a certain damage reduction ratio, which depends on the %s of your spell power, %s of armor, and %s of armor toughness, up to %s", "获得一定免伤比例，该比例取决于你的法术强度的%s，护甲值的%s和护甲韧性的%s，最高%s"),
     TOOLTIP$FLEX_BREASTPLATE$DAMAGE_FACTOR("Current damage reduction ratio: %s", "当前免伤比例：%s"),
-    TOOLTIP$FLICKER_BREASTPLATE("Gain a certain probability of dodging enemy attacks, which depends on the ratio of your speed to the enemy's speed and doubles when in the air", "获得一定闪避敌人攻击的概率，该概率取决于你与敌人的速度之比，且在空中时翻倍"),
+    TOOLTIP$FLICKER_BREASTPLATE("Initially gains %s%% dodge chance, reduced by %s%% for every 1 level of enchantment on your equipments, down to %s%% minimum", "初始获得%s%%闪避率，装备每有1级附魔降低%s%%，最低降至%s%%"),
+    TOOLTIP$FLICKER_BREASTPLATE$DODGE_CHANCE("Current dodge chance: %s", "当前闪避率：%s"),
     TOOLTIP$OBLIVION_BREASTPLATE_1("When your health is higher than %s of your max health, the Oblivion Breastplate will absorb %s of your health every second and convert it into Oblivion Amount.", "当你的生命值高于你的最大生命值的%s时，湮灭护心镜将每秒汲取你%s的生命值，并将其转化为湮灭值"),
     TOOLTIP$OBLIVION_BREASTPLATE_2("The max Oblivion Amount is %s of your spell power. When you are injured, it will try to consume Oblivion Amount to resist this damage", "湮灭值最大为你的法术强度的%s，当你受伤时将优先消耗湮灭值抵挡此次伤害"),
     TOOLTIP$OBLIVION_BREASTPLATE_3("Current Oblivion Amount: %s", "当前湮灭值：%s"),

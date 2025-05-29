@@ -46,6 +46,7 @@ public class AdditionalTooltip
         ItemTooltipCallback.EVENT.register(FINAL, AdditionalTooltip::removeDynamicBookBindingTip);
         ItemTooltipCallback.EVENT.register(AdditionalTooltip::appendQuestScroll);
         ItemTooltipCallback.EVENT.register(AdditionalTooltip::appendFlexBreastplate);
+        ItemTooltipCallback.EVENT.register(AdditionalTooltip::appendFlickerBreastplate);
         ItemTooltipCallback.EVENT.register(AdditionalTooltip::modifyCursePride);
         ItemTooltipCallback.EVENT.register(AdditionalTooltip::appendModonomicon);
         ItemTooltipCallback.EVENT.register(AdditionalTooltip::appendSpellScroll);
@@ -81,6 +82,16 @@ public class AdditionalTooltip
         if (player == null) return;
         lines.add(SDTexts.TOOLTIP$FLEX_BREASTPLATE$DAMAGE_FACTOR.get(
                 "%.1f%%".formatted(AllItems.FLEX_BREASTPLATE.getDamageReduction(player) * 100)
+        ).formatted(Formatting.RED));
+    }
+
+    private static void appendFlickerBreastplate(ItemStack stack, TooltipContext context, List<Text> lines)
+    {
+        if (!stack.isOf(AllItems.FLICKER_BREASTPLATE)) return;
+        var player = MinecraftClient.getInstance().player;
+        if (player == null) return;
+        lines.add(SDTexts.TOOLTIP$FLICKER_BREASTPLATE$DODGE_CHANCE.get(
+                "%.0f%%".formatted(AllItems.FLICKER_BREASTPLATE.getDodgeChance(player) * 100)
         ).formatted(Formatting.RED));
     }
 

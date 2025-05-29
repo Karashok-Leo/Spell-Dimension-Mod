@@ -38,6 +38,11 @@ public class SpellTrait extends MobTrait
         this.power = power;
     }
 
+    public int getPower(int level)
+    {
+        return power.applyAsInt(level);
+    }
+
     @Override
     public boolean compatibleWith(MobTrait trait, int lv)
     {
@@ -53,7 +58,7 @@ public class SpellTrait extends MobTrait
         String spellIdString = this.getSpellId().toString();
         UUID uuid = UuidUtil.getUUIDFromString(spellIdString);
         attributeInstance.removeModifier(uuid);
-        EntityAttributeModifier modifier = new EntityAttributeModifier(uuid, "Spell Trait Bonus - %s".formatted(spellIdString), power.applyAsInt(level), EntityAttributeModifier.Operation.ADDITION);
+        EntityAttributeModifier modifier = new EntityAttributeModifier(uuid, "Spell Trait Bonus - %s".formatted(spellIdString), getPower(level), EntityAttributeModifier.Operation.ADDITION);
         attributeInstance.addPersistentModifier(modifier);
     }
 
@@ -129,7 +134,7 @@ public class SpellTrait extends MobTrait
     {
         list.add(
                 SDTexts.TEXT$SPELL_TRAIT$POWER.get(
-                        mapLevel(lv -> Text.literal(power.applyAsInt(lv) + "").setStyle(Style.EMPTY.withColor(getColor())))
+                        mapLevel(lv -> Text.literal(getPower(lv) + "").setStyle(Style.EMPTY.withColor(getColor())))
                 ).formatted(Formatting.GRAY)
         );
         list.add(SDTexts.TEXT$SPELL_TRAIT$DESCRIPTION.get(Text.translatable(getDescKey())).formatted(Formatting.GRAY));
