@@ -161,6 +161,8 @@
   "effect.spell-dimension.phase.desc": "自由飞行并且可以穿过方块",
   "effect.spell-dimension.spell_power": "魔力增强",
   "effect.spell-dimension.spell_power.desc": "每级增加10%法术强度",
+  "effect.spell-dimension.stun": "眩晕",
+  "effect.spell-dimension.stun.desc": "无法进行任何行动",
   "enchantment.spell-dimension.blindness_immunity": "失明免疫",
   "enchantment.spell-dimension.blindness_immunity.desc": "你对失明效果免疫。",
   "enchantment.spell-dimension.cursed_immunity": "诅咒免疫",

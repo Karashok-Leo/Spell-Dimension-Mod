@@ -161,6 +161,8 @@
   "effect.spell-dimension.phase.desc": "Can fly freely and pass through blocks",
   "effect.spell-dimension.spell_power": "Empowering Presence",
   "effect.spell-dimension.spell_power.desc": "Increases spell power by 10% per level",
+  "effect.spell-dimension.stun": "Stun",
+  "effect.spell-dimension.stun.desc": "Cannot perform any actions",
   "enchantment.spell-dimension.blindness_immunity": "Blindness Immunity",
   "enchantment.spell-dimension.blindness_immunity.desc": "You are immune to the Blindness effect.",
   "enchantment.spell-dimension.cursed_immunity": "Cursed Immunity",

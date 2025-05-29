@@ -6,19 +6,23 @@ import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.buff.BlazingMark;
 import karashokleo.spell_dimension.content.effect.*;
 import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffectCategory;
+import net.spell_engine.api.effect.ActionImpairing;
+import net.spell_engine.api.effect.EntityActionsAllowed;
 import net.spell_engine.api.effect.Synchronized;
 
 public class AllStatusEffects
 {
     public static PhaseEffect PHASE;
-    public static IgniteEffect IGNITE;
+    public static CustomStatusEffect IGNITE;
     public static FrostAuraEffect FROST_AURA;
     public static FrostedEffect FROSTED;
-    public static AirHopEffect AIR_HOP;
+    public static CustomStatusEffect AIR_HOP;
     public static ForceLandingEffect FORCE_LANDING;
     public static SpellPowerEffect SPELL_POWER;
     public static DivineAuraEffect DIVINE_AURA;
     public static NirvanaEffect NIRVANA;
+    public static CustomStatusEffect STUN;
     //    public static final PhaseEffect ASTRAL_TRIP = new PhaseEffect();
 
     public static void register()
@@ -30,7 +34,7 @@ public class AllStatusEffects
                 .addZHDesc("自由飞行并且可以穿过方块")
                 .addTag(LHTags.CLEANSE_BLACKLIST)
                 .register();
-        IGNITE = new Entry<>("ignite", new IgniteEffect())
+        IGNITE = new Entry<>("ignite", new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, 0xFF0000))
                 .addEN()
                 .addZH("引火")
                 .addENDesc(BlazingMark.getDesc(true))
@@ -49,7 +53,7 @@ public class AllStatusEffects
                 .addENDesc(FrostedEffect.getDesc(true))
                 .addZHDesc(FrostedEffect.getDesc(false))
                 .register();
-        AIR_HOP = new Entry<>("air_hop", new AirHopEffect())
+        AIR_HOP = new Entry<>("air_hop", new CustomStatusEffect(StatusEffectCategory.BENEFICIAL, 0x00FF00))
                 .addEN()
                 .addZH("空中跳跃")
                 .addENDesc("Jump in the air")
@@ -81,11 +85,17 @@ public class AllStatusEffects
                 .addZHDesc(NirvanaEffect.getDesc(false))
                 .addTag(LHTags.CLEANSE_BLACKLIST)
                 .register();
+        STUN = new Entry<>("stun", new CustomStatusEffect(StatusEffectCategory.HARMFUL, 0x0000FF))
+                .addEN()
+                .addZH("眩晕")
+                .addENDesc("Cannot perform any actions")
+                .addZHDesc("无法进行任何行动")
+                .register();
 
         Synchronized.configure(PHASE, true);
         Synchronized.configure(FROSTED, true);
         Synchronized.configure(DIVINE_AURA, true);
-//        ActionImpairing.configure(ASTRAL_TRIP_EFFECT, EntityActionsAllowed.STUN);
+        ActionImpairing.configure(STUN, EntityActionsAllowed.STUN);
     }
 
     public static class Entry<T extends StatusEffect> extends StatusEffectBuilder<T>
