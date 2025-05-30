@@ -4,6 +4,7 @@ import karashokleo.leobrary.datagen.builder.ItemGroupBuilder;
 import karashokleo.loot_bag.internal.item.LootBagItemRegistry;
 import karashokleo.spell_dimension.SpellDimension;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import java.util.Collection;
@@ -14,8 +15,10 @@ public class AllGroups
     public static final ItemGroupBuilder SPELL_BOOKS = GroupEntry.of("sd_spell_books");
     public static final ItemGroupBuilder SPELL_SCROLLS = GroupEntry.of("sd_spell_scrolls");
     public static final ItemGroupBuilder QUEST_SCROLLS = GroupEntry.of("sd_quest_scrolls");
+    public static final ItemGroupBuilder BASE_ESSENCES = GroupEntry.of("sd_base_essences");
     public static final ItemGroupBuilder ENCHANTED_ESSENCES = GroupEntry.of("sd_enchanted_essences");
     public static final ItemGroupBuilder ENLIGHTENING_ESSENCES = GroupEntry.of("sd_enlightening_essences");
+    public static final ItemGroupBuilder EQUIPMENTS = GroupEntry.of("sd_equipments");
     public static final ItemGroupBuilder MISC = GroupEntry.of("sd_misc");
 
     public static void register()
@@ -41,6 +44,14 @@ public class AllGroups
                 .addZH("咒次元：任务卷轴")
                 .register();
 
+        List<ItemStack> baseEssences = AllItems.BASE_ESSENCES.values().stream().map(Item::getDefaultStack).toList();
+        ItemStack firstBaseEssence = baseEssences.get(0);
+        BASE_ESSENCES.addAll(baseEssences)
+                .setIcon(() -> firstBaseEssence)
+                .addEN("Spell Dimension: Base Essences")
+                .addZH("咒次元：基础精华")
+                .register();
+
         List<ItemStack> enchantedEssences = AllStacks.getEnchantedEssences();
         ItemStack firstEnchantedEssence = enchantedEssences.get(0);
         ENCHANTED_ESSENCES.addAll(enchantedEssences)
@@ -55,6 +66,11 @@ public class AllGroups
                 .setIcon(() -> firstEnlighteningEssence)
                 .addEN("Spell Dimension: Enlightening Essences")
                 .addZH("咒次元：源启精华")
+                .register();
+
+        MISC.setIcon(() -> AllItems.MAGIC_MIRROR.getDefaultStack())
+                .addEN("Spell Dimension: Equipments")
+                .addZH("咒次元：装备")
                 .register();
 
         MISC.setIcon(() -> AllItems.MAGIC_MIRROR.getDefaultStack())

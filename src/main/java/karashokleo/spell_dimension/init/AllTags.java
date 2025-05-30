@@ -28,6 +28,7 @@ import net.minecraft.world.biome.Biome;
 import net.runes.api.RuneItems;
 import net.spell_engine.internals.SpellInfinityEnchantment;
 import net.trique.mythicupgrades.MythicUpgradesDamageTypes;
+import net.wizards.WizardsMod;
 import nourl.mythicmetals.item.tools.MythicTools;
 
 import java.util.List;
@@ -97,10 +98,8 @@ public class AllTags
 
     public static final TagKey<Block> LOCATE_TARGET = TagUtil.blockTag("locate_target");
 
-    public static final TagKey<Item> FACE = TagUtil.itemTag(new Identifier("trinkets", "head/face"));
     public static final TagKey<Item> GLOVE = TagUtil.itemTag(new Identifier("trinkets", "hand/glove"));
     public static final TagKey<Item> NECKLACE = TagUtil.itemTag(new Identifier("trinkets", "chest/necklace"));
-    public static final TagKey<Item> BACK = TagUtil.itemTag(new Identifier("trinkets", "chest/back"));
     public static final TagKey<Item> CAPE = TagUtil.itemTag(new Identifier("trinkets", "chest/cape"));
     public static final TagKey<Item> BELT = TagUtil.itemTag(new Identifier("trinkets", "legs/belt"));
     public static final TagKey<Item> BREASTPLATE_SLOT = TagUtil.itemTag(new Identifier("trinkets", "chest/breastplate"));
@@ -108,6 +107,17 @@ public class AllTags
 
     public static final TagKey<Item> HOSTILITY_CURSE = TagUtil.itemTag("hostility_curse");
     public static final TagKey<Item> HOSTILITY_RING = TagUtil.itemTag("hostility_ring");
+
+    // Wizards
+    public static final TagKey<Item> WANDS = TagUtil.itemTag(new Identifier(WizardsMod.ID, "wands"));
+    public static final TagKey<Item> STAVES = TagUtil.itemTag(new Identifier(WizardsMod.ID, "staves"));
+    public static final TagKey<Item> WIZARD_ROBES = TagUtil.itemTag(new Identifier(WizardsMod.ID, "wizard_robes"));
+    public static final TagKey<Item> WIZARD_RUNES = TagUtil.itemTag(new Identifier(WizardsMod.ID, "wizard_runes"));
+    // RPG Series
+    public static final TagKey<Item> TIER_2_WEAPONS = TagUtil.itemTag(new Identifier("rpg_series:tier_2_weapons"));
+    public static final TagKey<Item> TIER_2_ARMORS = TagUtil.itemTag(new Identifier("rpg_series:tier_2_armors"));
+    public static final TagKey<Item> TIER_3_WEAPONS = TagUtil.itemTag(new Identifier("rpg_series:tier_3_weapons"));
+    public static final TagKey<Item> TIER_3_ARMORS = TagUtil.itemTag(new Identifier("rpg_series:tier_3_armors"));
 
     public static final TagKey<EntityType<?>> ZOMBIES = TagUtil.entityTypeTag(new Identifier("zombies"));
     public static final TagKey<EntityType<?>> SKELETONS = EntityTypeTags.SKELETONS;

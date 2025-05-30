@@ -12,7 +12,6 @@ import karashokleo.spell_dimension.content.component.BuffComponentImpl;
 import karashokleo.spell_dimension.content.component.EnlighteningComponent;
 import karashokleo.spell_dimension.content.component.GameStageComponent;
 import karashokleo.spell_dimension.content.component.QuestComponent;
-import karashokleo.spell_dimension.init.AllCommands;
 import karashokleo.spell_dimension.content.object.EnchantedModifier;
 import karashokleo.spell_dimension.content.object.EnlighteningModifier;
 import karashokleo.spell_dimension.data.SDTexts;
@@ -61,6 +60,7 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
     public void onInitialize()
     {
         AllItems.register();
+        AllEquipments.register();
         AllBlocks.register();
         AllEntities.register();
         AllWorldGen.register();
