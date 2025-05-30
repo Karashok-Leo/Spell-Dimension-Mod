@@ -1,4 +1,4 @@
-package karashokleo.spell_dimension.content.item.trinket;
+package karashokleo.spell_dimension.content.item.trinket.endgame;
 
 import dev.emi.trinkets.api.SlotReference;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;

@@ -4,7 +4,7 @@ import dev.emi.trinkets.api.TrinketEnums;
 import dev.emi.trinkets.api.event.TrinketDropCallback;
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.leobrary.effect.api.event.LivingHealCallback;
-import karashokleo.spell_dimension.content.item.trinket.AtomicBreastplateItem;
+import karashokleo.spell_dimension.content.item.trinket.breastplate.AtomicBreastplateItem;
 import karashokleo.spell_dimension.content.spell.ConvergeSpell;
 import karashokleo.spell_dimension.init.AllItems;
 import net.combatroll.api.event.ServerSideRollEvents;

@@ -1,4 +1,4 @@
-package karashokleo.spell_dimension.content.item.trinket;
+package karashokleo.spell_dimension.content.item.trinket.endgame;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
 import karashokleo.l2hostility.content.item.trinket.core.DamageListenerTrinket;

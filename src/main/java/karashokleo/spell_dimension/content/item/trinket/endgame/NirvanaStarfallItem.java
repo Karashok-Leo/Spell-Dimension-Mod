@@ -1,4 +1,4 @@
-package karashokleo.spell_dimension.content.item.trinket;
+package karashokleo.spell_dimension.content.item.trinket.endgame;
 
 import karashokleo.l2hostility.content.item.trinket.core.DamageListenerTrinket;
 import karashokleo.l2hostility.content.item.trinket.core.SingleEpicTrinketItem;

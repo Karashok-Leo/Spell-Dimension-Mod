@@ -9,7 +9,11 @@ import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.item.*;
 import karashokleo.spell_dimension.content.item.essence.*;
 import karashokleo.spell_dimension.content.item.essence.base.ColorProvider;
-import karashokleo.spell_dimension.content.item.trinket.*;
+import karashokleo.spell_dimension.content.item.trinket.MirageReflectorItem;
+import karashokleo.spell_dimension.content.item.trinket.ProtectiveSpellContainerItem;
+import karashokleo.spell_dimension.content.item.trinket.SecondarySchoolItem;
+import karashokleo.spell_dimension.content.item.trinket.breastplate.*;
+import karashokleo.spell_dimension.content.item.trinket.endgame.*;
 import karashokleo.spell_dimension.content.item.upgrade.IllusionUpgradeContainer;
 import karashokleo.spell_dimension.content.item.upgrade.IllusionUpgradeItem;
 import karashokleo.spell_dimension.content.item.upgrade.IllusionUpgradeWrapper;
@@ -72,6 +76,9 @@ public class AllItems
     public static FrostbiteDomeItem FROSTBITE_DOME;
     public static HeartSpellSteelItem HEART_SPELL_STEEL;
     public static RejuvenatingBlossomItem REJUVENATING_BLOSSOM;
+    public static MacroElectronItem MACRO_ELECTRON;
+    public static RebirthSigilItem REBIRTH_SIGIL;
+    public static MeritRegisterItem MERIT_REGISTER;
 
     // Breastplates
     public static AtomicBreastplateItem ATOMIC_BREASTPLATE;
@@ -85,6 +92,8 @@ public class AllItems
     public static SecondarySchoolItem BLISS_FLAME;
     public static SecondarySchoolItem ICE_CUBE;
     public static SecondarySchoolItem FATE_STONE;
+    public static SecondarySchoolItem SUPERCONDUCTOR;
+    public static SecondarySchoolItem EQUINOX_FLOWER;
 
     // Misc Items
     public static Item DEBUG_STAFF;
@@ -196,7 +205,7 @@ public class AllItems
                 )
                 .addEN()
                 .addZH("汇聚甲胄")
-                .addTag(AllTags.BACK, AllTags.ENDGAME_TRINKETS)
+                .addTag(LHTags.BACK_SLOT, AllTags.ENDGAME_TRINKETS)
                 .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
@@ -217,7 +226,7 @@ public class AllItems
         SOULFIRE_MASK = Entry.of("soulfire_mask", new SoulfireMaskItem())
                 .addEN()
                 .addZH("燃魂假面")
-                .addTag(AllTags.FACE, AllTags.ENDGAME_TRINKETS)
+                .addTag(LHTags.FACE_SLOT, AllTags.ENDGAME_TRINKETS)
                 .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
@@ -246,6 +255,27 @@ public class AllItems
                 .addEN()
                 .addZH("复苏绽放")
                 .addTag(LHTags.CHARM_SLOT, AllTags.ENDGAME_TRINKETS)
+                .setTab(AllGroups.MISC)
+                .addModel()
+                .register();
+        MACRO_ELECTRON = Entry.of("macro_electron", new MacroElectronItem())
+                .addEN()
+                .addZH("宏电子")
+                .addTag(LHTags.HAND_SLOT, AllTags.ENDGAME_TRINKETS)
+                .setTab(AllGroups.MISC)
+                .addModel()
+                .register();
+        REBIRTH_SIGIL = Entry.of("rebirth_sigil", new RebirthSigilItem())
+                .addEN()
+                .addZH("往生印")
+                .addTag(LHTags.BACK_SLOT, AllTags.ENDGAME_TRINKETS)
+                .setTab(AllGroups.MISC)
+                .addModel()
+                .register();
+        MERIT_REGISTER = Entry.of("merit_register", new MeritRegisterItem())
+                .addEN()
+                .addZH("功德簿")
+                .addTag(LHTags.CURSE_SLOT, AllTags.ENDGAME_TRINKETS)
                 .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
@@ -316,6 +346,20 @@ public class AllItems
                 .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
+        SUPERCONDUCTOR = Entry.of("superconductor", new SecondarySchoolItem(SpellSchools.LIGHTNING))
+                .addEN()
+                .addZH("超导体")
+                .addTag(AllTags.SECONDARY_SCHOOL_SLOT)
+                .setTab(AllGroups.MISC)
+                .addModel()
+                .register();
+        EQUINOX_FLOWER = Entry.of("equinox_flower", new SecondarySchoolItem(SpellSchools.SOUL))
+                .addEN()
+                .addZH("彼岸花")
+                .addTag(AllTags.SECONDARY_SCHOOL_SLOT)
+                .setTab(AllGroups.MISC)
+                .addModel()
+                .register();
 
         // Misc Items
         DEBUG_STAFF = Entry.of("debug_staff", new Item(new FabricItemSettings().maxCount(1)))
@@ -333,7 +377,7 @@ public class AllItems
         SPELL_CONTAINER = Entry.of("spell_container", new ProtectiveSpellContainerItem())
                 .addEN()
                 .addZH("法术容器")
-                .addTag(AllTags.BACK)
+                .addTag(AllTags.BELT)
                 .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
@@ -414,7 +458,6 @@ public class AllItems
                         AllTags.ESSENCE.get(grade),
                         TagUtil.itemTag(new Identifier(RunesMod.ID, "rune_crafting/reagent/" + school.id.getPath() + "_small"))
                 )
-                .setTab(AllGroups.MISC)
                 .register();
     }
 

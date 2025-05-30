@@ -1,4 +1,4 @@
-package karashokleo.spell_dimension.content.item.trinket;
+package karashokleo.spell_dimension.content.item.trinket.breastplate;
 
 import dev.emi.trinkets.api.SlotReference;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDamageEvent;

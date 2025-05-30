@@ -7,7 +7,7 @@ import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.api.buff.Buff;
 import karashokleo.spell_dimension.api.buff.BuffType;
 import karashokleo.spell_dimension.config.SpellConfig;
-import karashokleo.spell_dimension.content.item.trinket.GlacialNuclearEraItem;
+import karashokleo.spell_dimension.content.item.trinket.endgame.GlacialNuclearEraItem;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.util.AttributeUtil;
 import karashokleo.spell_dimension.util.DamageUtil;

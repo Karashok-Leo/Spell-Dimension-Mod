@@ -3,7 +3,7 @@ package karashokleo.spell_dimension.content.spell;
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.spell_dimension.api.buff.Buff;
 import karashokleo.spell_dimension.content.buff.Nucleus;
-import karashokleo.spell_dimension.content.item.trinket.GlacialNuclearEraItem;
+import karashokleo.spell_dimension.content.item.trinket.endgame.GlacialNuclearEraItem;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllSpells;
 import net.minecraft.entity.Entity;

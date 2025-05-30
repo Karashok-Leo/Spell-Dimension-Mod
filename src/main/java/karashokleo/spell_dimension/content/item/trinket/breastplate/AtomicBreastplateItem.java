@@ -1,4 +1,4 @@
-package karashokleo.spell_dimension.content.item.trinket;
+package karashokleo.spell_dimension.content.item.trinket.breastplate;
 
 import com.google.common.collect.Multimap;
 import dev.emi.trinkets.api.SlotReference;

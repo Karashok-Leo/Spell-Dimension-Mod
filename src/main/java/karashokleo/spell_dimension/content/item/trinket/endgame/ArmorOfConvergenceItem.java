@@ -1,4 +1,4 @@
-package karashokleo.spell_dimension.content.item.trinket;
+package karashokleo.spell_dimension.content.item.trinket.endgame;
 
 import karashokleo.l2hostility.content.item.trinket.core.SingleEpicTrinketItem;
 import karashokleo.spell_dimension.data.SDTexts;
@@ -11,11 +11,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class GlacialNuclearEraItem extends SingleEpicTrinketItem
+public class ArmorOfConvergenceItem extends SingleEpicTrinketItem
 {
-    public static final float CHANCE = 0.12F;
-
-    public GlacialNuclearEraItem()
+    public ArmorOfConvergenceItem()
     {
         super();
     }
@@ -23,8 +21,7 @@ public class GlacialNuclearEraItem extends SingleEpicTrinketItem
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
-        tooltip.add(SDTexts.TOOLTIP$GLACIAL_NUCLEAR_ERA$1.get(Math.round(CHANCE * 100)).formatted(Formatting.AQUA));
-        tooltip.add(SDTexts.TOOLTIP$GLACIAL_NUCLEAR_ERA$2.get(Math.round(CHANCE * 100)).formatted(Formatting.DARK_AQUA));
+        tooltip.add(SDTexts.TOOLTIP$ARMOR_OF_CONVERGENCE.get().formatted(Formatting.DARK_PURPLE));
         super.appendTooltip(stack, world, tooltip, context);
     }
 }
