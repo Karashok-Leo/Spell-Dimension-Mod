@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "spell-dimension:frostbite_dome"
+    "spell-dimension:frostbite_dome",
+    "spell-dimension:macro_electron"
   ]
 }

@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "spell-dimension:nirvana_starfall"
+    "spell-dimension:nirvana_starfall",
+    "spell-dimension:spell_container"
   ]
 }

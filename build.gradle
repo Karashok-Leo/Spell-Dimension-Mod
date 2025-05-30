@@ -164,6 +164,7 @@ dependencies {
     modImplementation "curse.maven:sophisticated-backpacks-unofficial-fabric-port-979322:6448770"
 
     modRuntimeOnly "curse.maven:yeetusexperimentus-635427:4680831"
+    modRuntimeOnly "curse.maven:better-combat-by-daedelus-639842:5625715"
 
     // Compat
     modCompileOnly "dev.emi:emi-fabric:${project.emi_version}:api"

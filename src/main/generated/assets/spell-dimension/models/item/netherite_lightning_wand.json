@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "spell-dimension:item/netherite_lightning_wand"
+  }
+}
