@@ -41,7 +41,7 @@
         "particle_id": "spell_engine:electric_arc_a",
         "shape": "PIPE",
         "origin": "FEET",
-        "count": 10.0,
+        "count": 50.0,
         "min_speed": 0.06,
         "max_speed": 0.12
       },
@@ -49,7 +49,7 @@
         "particle_id": "spell_engine:electric_arc_b",
         "shape": "PIPE",
         "origin": "FEET",
-        "count": 10.0,
+        "count": 50.0,
         "min_speed": 0.06,
         "max_speed": 0.12
       }

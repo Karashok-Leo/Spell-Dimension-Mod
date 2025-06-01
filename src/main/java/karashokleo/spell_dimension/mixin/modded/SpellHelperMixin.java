@@ -55,7 +55,8 @@ public abstract class SpellHelperMixin
     )
     private static void inject_performSpell_before(World world, PlayerEntity player, Identifier spellId, List<Entity> targets, SpellCast.Action action, float progress, CallbackInfo ci, @Local SpellInfo spellInfo)
     {
-        SpellImpactEvents.BEFORE.invoker().beforeImpact(world, player, targets, spellInfo);
+        SpellImpactEvents.PRE.invoker().invoke(world, player, targets, spellInfo);
+        SpellImpactEvents.POST.invoker().invoke(world, player, targets, spellInfo);
     }
 
     @Inject(

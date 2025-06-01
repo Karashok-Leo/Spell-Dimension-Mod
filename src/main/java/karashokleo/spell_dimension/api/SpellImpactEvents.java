@@ -11,14 +11,20 @@ import java.util.List;
 
 public interface SpellImpactEvents
 {
-    Event<Before> BEFORE = EventFactory.createArrayBacked(Before.class, (listeners) -> ((world, caster, targets, spellInfo) ->
+    Event<Callback> PRE = EventFactory.createArrayBacked(Callback.class, (listeners) -> ((world, caster, targets, spellInfo) ->
     {
-        for (Before listener : listeners)
-            listener.beforeImpact(world, caster, targets, spellInfo);
+        for (Callback listener : listeners)
+            listener.invoke(world, caster, targets, spellInfo);
     }));
 
-    interface Before
+    Event<Callback> POST = EventFactory.createArrayBacked(Callback.class, (listeners) -> ((world, caster, targets, spellInfo) ->
     {
-        void beforeImpact(World world, LivingEntity caster, List<Entity> targets, SpellInfo spellInfo);
+        for (Callback listener : listeners)
+            listener.invoke(world, caster, targets, spellInfo);
+    }));
+
+    interface Callback
+    {
+        void invoke(World world, LivingEntity caster, List<Entity> targets, SpellInfo spellInfo);
     }
 }

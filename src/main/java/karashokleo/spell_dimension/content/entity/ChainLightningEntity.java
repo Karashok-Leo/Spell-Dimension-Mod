@@ -166,7 +166,7 @@ public class ChainLightningEntity extends ProjectileEntity
         if (getOwner() instanceof LivingEntity caster)
         {
             SpellInfo spellInfo = new SpellInfo(SpellRegistry.getSpell(AllSpells.CHAIN_LIGHTNING), AllSpells.CHAIN_LIGHTNING);
-            SpellImpactEvents.BEFORE.invoker().beforeImpact(world, caster, List.of(target), spellInfo);
+            SpellImpactEvents.POST.invoker().invoke(world, caster, List.of(target), spellInfo);
 
             float damage = (float) DamageUtil.calculateDamage(caster, SpellSchools.LIGHTNING, power * SpellConfig.CHAIN_LIGHTNING_CONFIG.damageFactor());
             DamageUtil.spellDamage(target, SpellSchools.LIGHTNING, caster, damage, false);

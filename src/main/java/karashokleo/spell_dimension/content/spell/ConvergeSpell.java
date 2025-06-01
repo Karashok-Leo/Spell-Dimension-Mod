@@ -72,7 +72,7 @@ public class ConvergeSpell
         if (targets.isEmpty()) return;
 
         SpellInfo spellInfo = new SpellInfo(SpellRegistry.getSpell(AllSpells.CONVERGE), AllSpells.CONVERGE);
-        SpellImpactEvents.BEFORE.invoker().beforeImpact(caster.getWorld(), caster, new ArrayList<>(targets), spellInfo);
+        SpellImpactEvents.POST.invoker().invoke(caster.getWorld(), caster, new ArrayList<>(targets), spellInfo);
 
         for (LivingEntity target : targets)
         {

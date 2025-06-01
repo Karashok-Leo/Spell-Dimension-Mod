@@ -65,7 +65,7 @@ public class EnchantmentEvents
         });
 
         // Spell impact enchantment
-        SpellImpactEvents.BEFORE.register((world, caster, targets, spellInfo) ->
+        SpellImpactEvents.POST.register((world, caster, targets, spellInfo) ->
         {
             Map<SpellImpactEnchantment, SpellImpactEnchantment.Context> map = SpellImpactEnchantment.getContexts(caster);
             map.forEach((enchantment, context) -> enchantment.onSpellImpact(world, caster, context, targets, spellInfo));

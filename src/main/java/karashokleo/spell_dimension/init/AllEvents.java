@@ -31,7 +31,7 @@ public class AllEvents
 
     private static void initAdaptiveCompat()
     {
-        SpellImpactEvents.BEFORE.register((world, caster, targets, spellInfo) ->
+        SpellImpactEvents.POST.register((world, caster, targets, spellInfo) ->
         {
             for (Entity target : targets)
             {

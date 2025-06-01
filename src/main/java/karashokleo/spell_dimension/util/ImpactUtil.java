@@ -48,7 +48,10 @@ public class ImpactUtil
         SpellInfo spellInfo = new SpellInfo(spell, spellId);
         Spell.Release.Target targeting = spell.release.target;
         boolean released = action == SpellCast.Action.RELEASE;
-        SpellImpactEvents.BEFORE.invoker().beforeImpact(world, caster, targets, spellInfo);
+
+        SpellImpactEvents.PRE.invoker().invoke(world, caster, targets, spellInfo);
+        SpellImpactEvents.POST.invoker().invoke(world, caster, targets, spellInfo);
+
         SpellHelper.ImpactContext context = createContext(caster, spell);
         if (spell.release.custom_impact)
         {

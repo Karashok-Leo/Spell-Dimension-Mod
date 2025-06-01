@@ -71,7 +71,7 @@ public class AllLoots
 
     private static void injectBaseEssenceLoot()
     {
-        SpellImpactEvents.BEFORE.register((world, caster, targets, spellInfo) ->
+        SpellImpactEvents.POST.register((world, caster, targets, spellInfo) ->
         {
             if (!(caster instanceof PlayerEntity)) return;
             SpellSchool school = spellInfo.spell().school;

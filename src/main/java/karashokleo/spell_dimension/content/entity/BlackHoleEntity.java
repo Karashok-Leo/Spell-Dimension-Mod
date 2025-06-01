@@ -205,7 +205,7 @@ public class BlackHoleEntity extends Entity implements Ownable
         List<Entity> targets = entityDistanceMap.keySet().stream().toList();
         if (caster != null)
         {
-            SpellImpactEvents.BEFORE.invoker().beforeImpact(this.getWorld(), caster, targets, this.getSpellInfo());
+            SpellImpactEvents.POST.invoker().invoke(this.getWorld(), caster, targets, this.getSpellInfo());
         }
         for (var entry : entityDistanceMap.entrySet())
         {

@@ -201,7 +201,7 @@ public class AllSpells
         SpellProjectileHitBlockCallback.EVENT.register(PlaceSpell::handle);
         SpellProjectileHitBlockCallback.EVENT.register(BreakSpell::handle);
 
-        SpellImpactEvents.BEFORE.register(AllSpells::handleImpact);
+        SpellImpactEvents.PRE.register(AllSpells::handleImpact);
 
         registerImpactHandler(ARCANE_BARRIER, ArcaneBarrierSpell::handle);
         registerImpactHandler(ICY_NUCLEUS, NucleusSpell::handle);
@@ -217,19 +217,19 @@ public class AllSpells
         registerImpactHandler(RAILGUN, RailgunSpell::handle);
     }
 
-    private static final Map<Identifier, SpellImpactEvents.Before> IMPACT_HANDLERS = new HashMap<>();
+    private static final Map<Identifier, SpellImpactEvents.Callback> IMPACT_HANDLERS = new HashMap<>();
 
     private static void handleImpact(World world, LivingEntity caster, List<Entity> targets, SpellInfo spellInfo)
     {
-        SpellImpactEvents.Before handler = IMPACT_HANDLERS.get(spellInfo.id());
+        SpellImpactEvents.Callback handler = IMPACT_HANDLERS.get(spellInfo.id());
         if (handler == null)
         {
             return;
         }
-        handler.beforeImpact(world, caster, targets, spellInfo);
+        handler.invoke(world, caster, targets, spellInfo);
     }
 
-    public static void registerImpactHandler(Identifier spellId, SpellImpactEvents.Before handler)
+    public static void registerImpactHandler(Identifier spellId, SpellImpactEvents.Callback handler)
     {
         IMPACT_HANDLERS.put(spellId, handler);
     }
