@@ -1,7 +1,6 @@
 package karashokleo.spell_dimension.content.spell;
 
 import karashokleo.spell_dimension.SpellDimension;
-import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.util.ImpactUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -20,7 +19,7 @@ public class FrostBlinkSpell
 
     public static void handle(World world, LivingEntity caster, List<Entity> targets, SpellInfo spellInfo)
     {
-        if (!spellInfo.id().equals(AllSpells.FROST_BLINK) || world.isClient()) return;
+        if (world.isClient()) return;
 
         Spell spell = SpellRegistry.getSpell(MINI_ICICLE);
 

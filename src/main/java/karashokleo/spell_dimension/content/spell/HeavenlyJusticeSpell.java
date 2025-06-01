@@ -1,7 +1,6 @@
 package karashokleo.spell_dimension.content.spell;
 
 import karashokleo.enchantment_infusion.content.block.entity.EnchantmentInfusionTableTile;
-import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.util.DamageUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -17,7 +16,7 @@ public class HeavenlyJusticeSpell
 {
     public static void handle(World world, LivingEntity caster, List<Entity> targets, SpellInfo spellInfo)
     {
-        if (!spellInfo.id().equals(AllSpells.HEAVENLY_JUSTICE) || world.isClient()) return;
+        if (world.isClient()) return;
         int multiplier = getEffects(caster, StatusEffectCategory.BENEFICIAL);
         SpellPower.Result spellPower = SpellPower.getSpellPower(SpellSchools.HEALING, caster);
         for (Entity target : targets)

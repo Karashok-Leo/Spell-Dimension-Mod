@@ -2,7 +2,6 @@ package karashokleo.spell_dimension.content.spell;
 
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.init.LHTags;
-import karashokleo.spell_dimension.init.AllSpells;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageTypes;
@@ -16,7 +15,6 @@ public class ExorcismSpell
 {
     public static void handle(World world, LivingEntity caster, List<Entity> targets, SpellInfo spellInfo)
     {
-        if (!spellInfo.id().equals(AllSpells.EXORCISM)) return;
         Optional<Entity> target = targets.stream().findFirst();
         if (target.isEmpty()) return;
         if (!(target.get() instanceof LivingEntity livingEntity)) return;

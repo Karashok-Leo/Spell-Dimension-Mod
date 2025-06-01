@@ -1,6 +1,5 @@
 package karashokleo.spell_dimension.content.spell;
 
-import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.util.RandomUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -21,13 +20,11 @@ public class RandomEffectSpell
 
     public static void handleBlessing(World world, LivingEntity caster, List<Entity> targets, SpellInfo spellInfo)
     {
-        if (!spellInfo.id().equals(AllSpells.BLESSING)) return;
         handle(world, caster, targets, spellInfo, StatusEffectCategory.BENEFICIAL);
     }
 
     public static void handleMisfortune(World world, LivingEntity caster, List<Entity> targets, SpellInfo spellInfo)
     {
-        if (!spellInfo.id().equals(AllSpells.MISFORTUNE)) return;
         handle(world, caster, targets, spellInfo, StatusEffectCategory.HARMFUL);
     }
 
