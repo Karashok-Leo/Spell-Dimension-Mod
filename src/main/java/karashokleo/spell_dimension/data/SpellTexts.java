@@ -7,6 +7,7 @@ import karashokleo.spell_dimension.content.buff.Nucleus;
 import karashokleo.spell_dimension.content.effect.DivineAuraEffect;
 import karashokleo.spell_dimension.content.effect.FrostAuraEffect;
 import karashokleo.spell_dimension.content.effect.FrostedEffect;
+import karashokleo.spell_dimension.content.effect.QuantumFieldEffect;
 import karashokleo.spell_dimension.content.entity.BlackHoleEntity;
 import karashokleo.spell_dimension.content.spell.RandomEffectSpell;
 import net.minecraft.text.MutableText;
@@ -151,8 +152,8 @@ public enum SpellTexts
     SPELL_POWER(
             "Empowering Presence",
             "魔力增强",
-            "Apply Empowering Presence {effect_amplifier} effect to target or oneself for {effect_duration} seconds. Empowering Presence: Increases spell power by 10% per level.",
-            "目标或施法者获得魔力增强{effect_amplifier}效果，持续{effect_duration}秒。魔力增强：每级增加10%法术强度。"
+            "Apply Empowering Presence {effect_amplifier} effect to target or oneself for {effect_duration} seconds. Empowering Presence: Increases spell power by 10%% per level.",
+            "目标或施法者获得魔力增强{effect_amplifier}效果，持续{effect_duration}秒。魔力增强：每级增加10%%法术强度。"
     ),
     SPELL_POWER_ADVANCED(
             "Advanced Empowering Presence",
@@ -319,6 +320,36 @@ public enum SpellTexts
             "恒流",
             "[Passive] Chain Lightning duration ×%d".formatted(SpellConfig.CHAIN_LIGHTNING_PASSIVE_CONFIG.constantCurrentLifespan()),
             "[被动] 连锁闪电存续时间 ×%d".formatted(SpellConfig.CHAIN_LIGHTNING_PASSIVE_CONFIG.constantCurrentLifespan())
+    ),
+    BALL_LIGHTNING(
+            "Ball Lightning",
+            "球状闪电",
+            "Fire a ball lightning that lasts for %d seconds, touching enemies for damage and bouncing off of touching blocks.".formatted(SpellConfig.BALL_LIGHTNING_CONFIG.lifespan() / 20),
+            "发射一个球状闪电，触碰敌人造成伤害，触碰方块反弹，存续时间%d秒。".formatted(SpellConfig.BALL_LIGHTNING_CONFIG.lifespan() / 20)
+    ),
+    CLOSED_LOOP(
+            "Closed Loop",
+            "闭环",
+            "[Passive] When ball lightning bounces, its lifespan increases by %d seconds".formatted(SpellConfig.BALL_LIGHTNING_CONFIG.lifespanIncrement() / 20),
+            "[被动] 球状闪电反弹时，存续时间增加%d秒".formatted(SpellConfig.BALL_LIGHTNING_CONFIG.lifespanIncrement() / 20)
+    ),
+    THUNDERBOLT(
+            "Thunderbolt",
+            "霹雳",
+            "Summon thunderbolts on surrounding enemies, dealing {damage} damage and applying a stun for {effect_duration} seconds.",
+            "对周围敌人降下落雷，造成{damage}点伤害并施加眩晕，持续{effect_duration}秒。"
+    ),
+    QUANTUM_FIELD(
+            "Quantum Field",
+            "量子场",
+            "Apply Quantum Field effect to oneself for {effect_duration} seconds. Quantum Field: %s".formatted(QuantumFieldEffect.getDesc(true)),
+            "施法者获得量子场效果，持续{effect_duration}秒。量子场：%s".formatted(QuantumFieldEffect.getDesc(false))
+    ),
+    RAILGUN(
+            "Railgun",
+            "超电磁炮",
+            "When you hit a coin in the drop, fire the Railgun.",
+            "击中掉落中的硬币时，发射超电磁炮。"
     ),
     LIGHTMOON(
             "Light Moon",

@@ -8,7 +8,6 @@ import net.minecraft.world.World;
 import net.spell_engine.api.spell.SpellInfo;
 
 import java.util.List;
-import java.util.Optional;
 
 public class BallLightningSpell
 {

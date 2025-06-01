@@ -10,6 +10,7 @@ public class SpellConfig
     public static final BlazingMarkConfig BLAZING_MARK_CONFIG = new BlazingMarkConfig(200, 100, 0.5f, 0.5F);
     public static final ChainLightningConfig CHAIN_LIGHTNING_CONFIG = new ChainLightningConfig(0.2F, 1, 20, 1, 3F);
     public static final ChainLightningPassiveConfig CHAIN_LIGHTNING_PASSIVE_CONFIG = new ChainLightningPassiveConfig(1, 2, 2, 4, 2, 3);
+    public static final BallLightningConfig BALL_LIGHTNING_CONFIG = new BallLightningConfig(0.8F, 200, 100);
 
     public record BlazingMarkConfig(
             int totalDuration,
@@ -37,6 +38,14 @@ public class SpellConfig
             int constantCurrentLifespan,
             int fissionChainStep,
             int resonanceRange
+    )
+    {
+    }
+
+    public record BallLightningConfig(
+            float damageFactor,
+            int lifespan,
+            int lifespanIncrement
     )
     {
     }

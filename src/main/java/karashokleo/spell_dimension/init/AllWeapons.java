@@ -13,7 +13,7 @@ import net.wizards.WizardsMod;
 
 import java.util.Optional;
 
-public class AllEquipments
+public class AllWeapons
 {
     private static final float WAND_ATTACK_DAMAGE = 2.0F;
     private static final float WAND_ATTACK_SPEED = -2.4F;
@@ -49,7 +49,7 @@ public class AllEquipments
                         )
                 )
                 .addEN()
-                .addZH("闪电魔杖")
+                .addZH("雷电魔杖")
                 .addTag(AllTags.WANDS)
                 .addModel(Models.HANDHELD)
                 .setTab(AllGroups.EQUIPMENTS)
@@ -66,7 +66,7 @@ public class AllEquipments
                         )
                 )
                 .addEN()
-                .addZH("下界合金闪电魔杖")
+                .addZH("下界合金雷电魔杖")
                 .addTag(AllTags.WANDS)
                 .addModel(Models.HANDHELD)
                 .setTab(AllGroups.EQUIPMENTS)
@@ -83,7 +83,7 @@ public class AllEquipments
                         )
                 )
                 .addEN()
-                .addZH("闪电权杖")
+                .addZH("雷电权杖")
                 .addTag(AllTags.STAVES, AllTags.TIER_2_WEAPONS)
                 .addModel(MEDIUM_STAFF_MODEL)
                 .setTab(AllGroups.EQUIPMENTS)
@@ -100,7 +100,7 @@ public class AllEquipments
                         )
                 )
                 .addEN()
-                .addZH("下界合金闪电权杖")
+                .addZH("下界合金雷电权杖")
                 .addTag(AllTags.STAVES, AllTags.TIER_3_WEAPONS)
                 .addModel(MEDIUM_STAFF_MODEL)
                 .setTab(AllGroups.EQUIPMENTS)

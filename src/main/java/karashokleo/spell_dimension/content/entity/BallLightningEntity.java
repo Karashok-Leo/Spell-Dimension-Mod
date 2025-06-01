@@ -1,37 +1,87 @@
 package karashokleo.spell_dimension.content.entity;
 
+import karashokleo.spell_dimension.config.SpellConfig;
 import karashokleo.spell_dimension.init.AllEntities;
+import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.util.DamageUtil;
 import karashokleo.spell_dimension.util.ImpactUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.spell_engine.api.spell.ParticleBatch;
+import net.spell_engine.api.spell.SpellContainer;
+import net.spell_engine.internals.SpellContainerHelper;
+import net.spell_engine.particle.ParticleHelper;
 import net.spell_power.api.SpellSchools;
+
+import java.util.List;
 
 public class BallLightningEntity extends ProjectileEntity
 {
-    public int lifespan;
-    private int bounces = 0;
+    public static final ParticleBatch[] AMBIENT = {
+            new ParticleBatch(
+                    "spell_engine:electric_arc_a",
+                    ParticleBatch.Shape.SPHERE,
+                    ParticleBatch.Origin.CENTER,
+                    null,
+                    0,
+                    0,
+                    0.2f,
+                    0.06F,
+                    0.12F,
+                    0,
+                    0,
+                    0,
+                    false
+            ),
+            new ParticleBatch(
+                    "spell_engine:electric_arc_b",
+                    ParticleBatch.Shape.SPHERE,
+                    ParticleBatch.Origin.CENTER,
+                    null,
+                    0,
+                    0,
+                    0.2f,
+                    0.06F,
+                    0.12F,
+                    0,
+                    0,
+                    0,
+                    false
+            ),
+    };
+
+    private int lifespan;
 
     public BallLightningEntity(World world, Entity owner)
     {
         this(AllEntities.BALL_LIGHTNING, world);
         this.setOwner(owner);
-        this.lifespan = 200;
     }
 
     public BallLightningEntity(EntityType<? extends ProjectileEntity> entityType, World world)
     {
         super(entityType, world);
         this.setNoGravity(true);
+        this.lifespan = SpellConfig.BALL_LIGHTNING_CONFIG.lifespan();
+    }
+
+    private void applyPassives(List<String> spells)
+    {
+        if (spells.contains(AllSpells.CLOSED_LOOP.toString()))
+        {
+            this.lifespan += SpellConfig.BALL_LIGHTNING_CONFIG.lifespanIncrement();
+        }
     }
 
     @Override
@@ -47,10 +97,13 @@ public class BallLightningEntity extends ProjectileEntity
             case NORTH, SOUTH -> this.setVelocity(velocity.multiply(1, 1, -1));
         }
 
-        bounces++;
-        if (bounces >= 20)
+        if (getOwner() instanceof PlayerEntity player)
         {
-            discard();
+            SpellContainer spellContainer = SpellContainerHelper.getEquipped(player.getMainHandStack(), player);
+            if (spellContainer != null)
+            {
+                applyPassives(spellContainer.spell_ids);
+            }
         }
     }
 
@@ -67,8 +120,11 @@ public class BallLightningEntity extends ProjectileEntity
         if (entityHitResult.getEntity() instanceof LivingEntity target &&
             getOwner() instanceof LivingEntity owner)
         {
-            float damage = (float) DamageUtil.calculateDamage(owner, SpellSchools.LIGHTNING, 0.2f);
+            float damage = (float) DamageUtil.calculateDamage(owner, SpellSchools.LIGHTNING, SpellConfig.BALL_LIGHTNING_CONFIG.damageFactor());
             DamageUtil.spellDamage(target, SpellSchools.LIGHTNING, owner, damage, false);
+
+            ParticleHelper.sendBatches(target, ChainLightningEntity.HIT_PARTICLES);
+            // TODO: play sounds
         }
     }
 
@@ -76,6 +132,9 @@ public class BallLightningEntity extends ProjectileEntity
     public void tick()
     {
         super.tick();
+
+        lifespan--;
+
         setPosition(getPos().add(getVelocity()));
         ProjectileUtil.setRotationFromVelocity(this, 1);
 
@@ -87,14 +146,14 @@ public class BallLightningEntity extends ProjectileEntity
 
         if (this.getWorld().isClient())
         {
+            ParticleHelper.play(this.getWorld(), this, AMBIENT);
             return;
         }
 
         // discard if lifespan is over
-        if (age > lifespan)
+        if (lifespan < 0)
         {
             discard();
-            return;
         }
     }
 
@@ -125,5 +184,19 @@ public class BallLightningEntity extends ProjectileEntity
     public boolean isOnFire()
     {
         return false;
+    }
+
+    @Override
+    protected void writeCustomDataToNbt(NbtCompound nbt)
+    {
+        super.writeCustomDataToNbt(nbt);
+        nbt.putInt("Lifespan", lifespan);
+    }
+
+    @Override
+    protected void readCustomDataFromNbt(NbtCompound nbt)
+    {
+        super.readCustomDataFromNbt(nbt);
+        lifespan = nbt.getInt("Lifespan");
     }
 }

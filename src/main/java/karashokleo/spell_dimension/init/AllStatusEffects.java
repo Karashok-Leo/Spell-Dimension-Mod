@@ -23,6 +23,7 @@ public class AllStatusEffects
     public static DivineAuraEffect DIVINE_AURA;
     public static NirvanaEffect NIRVANA;
     public static CustomStatusEffect STUN;
+    public static QuantumFieldEffect QUANTUM_FIELD;
     //    public static final PhaseEffect ASTRAL_TRIP = new PhaseEffect();
 
     public static void register()
@@ -91,10 +92,17 @@ public class AllStatusEffects
                 .addENDesc("Cannot perform any actions")
                 .addZHDesc("无法进行任何行动")
                 .register();
+        QUANTUM_FIELD = new Entry<>("quantum_field", new QuantumFieldEffect())
+                .addEN()
+                .addZH("量子场")
+                .addENDesc(QuantumFieldEffect.getDesc(true))
+                .addZHDesc(QuantumFieldEffect.getDesc(false))
+                .register();
 
         Synchronized.configure(PHASE, true);
         Synchronized.configure(FROSTED, true);
         Synchronized.configure(DIVINE_AURA, true);
+        Synchronized.configure(STUN, true);
         ActionImpairing.configure(STUN, EntityActionsAllowed.STUN);
     }
 

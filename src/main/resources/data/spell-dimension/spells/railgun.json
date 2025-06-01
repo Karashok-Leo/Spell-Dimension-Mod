@@ -1,0 +1,50 @@
+{
+  "school": "LIGHTNING",
+  "range": 8,
+  "cast": {
+    "duration": 0,
+    "animation": "spell_engine:one_handed_area_charge",
+    "sound": {
+      "id": "spell_engine:generic_lightning_casting",
+      "randomness": 0
+    },
+    "particles": [
+      {
+        "particle_id": "spell_engine:electric_arc_a",
+        "shape": "PIPE",
+        "origin": "FEET",
+        "count": 1.0,
+        "min_speed": 0.06,
+        "max_speed": 0.12
+      },
+      {
+        "particle_id": "spell_engine:electric_arc_b",
+        "shape": "PIPE",
+        "origin": "FEET",
+        "count": 1.0,
+        "min_speed": 0.06,
+        "max_speed": 0.12
+      }
+    ]
+  },
+  "release": {
+    "target": {
+      "type": "SELF"
+    }
+  },
+  "impact": [
+    {
+      "action": {
+        "type": "DAMAGE",
+        "damage": {
+          "spell_power_coefficient": 0,
+          "knockback": 0
+        }
+      }
+    }
+  ],
+  "cost": {
+    "cooldown_duration": 3,
+    "exhaust": 0.5
+  }
+}

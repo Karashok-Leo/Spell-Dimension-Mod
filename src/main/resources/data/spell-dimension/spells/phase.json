@@ -1,9 +1,9 @@
 {
   "school": "ARCANE",
-  "range": 16,
+  "range": 0,
   "cast": {
     "duration": 3.2,
-    "animation": "spell_engine:one_handed_projectile_charge",
+    "animation": "spell_engine:one_handed_healing_charge",
     "sound": {
       "id": "spell_engine:generic_arcane_casting",
       "randomness": 0

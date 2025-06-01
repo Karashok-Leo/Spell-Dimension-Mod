@@ -1,0 +1,111 @@
+{
+  "school": "LIGHTNING",
+  "range": 8,
+  "cast": {
+    "duration": 0.6,
+    "animation": "spell_engine:one_handed_area_charge",
+    "sound": {
+      "id": "spell_engine:generic_lightning_casting",
+      "randomness": 0
+    },
+    "particles": [
+      {
+        "particle_id": "spell_engine:electric_arc_a",
+        "shape": "PIPE",
+        "origin": "FEET",
+        "count": 1.0,
+        "min_speed": 0.06,
+        "max_speed": 0.12
+      },
+      {
+        "particle_id": "spell_engine:electric_arc_b",
+        "shape": "PIPE",
+        "origin": "FEET",
+        "count": 1.0,
+        "min_speed": 0.06,
+        "max_speed": 0.12
+      }
+    ]
+  },
+  "release": {
+    "target": {
+      "type": "AREA",
+      "area": {
+        "horizontal_range_multiplier": 1.2,
+        "vertical_range_multiplier": 1.2,
+        "angle_degrees": 360
+      }
+    },
+    "particles": [
+      {
+        "particle_id": "spell_engine:electric_arc_a",
+        "shape": "PIPE",
+        "origin": "FEET",
+        "count": 10.0,
+        "min_speed": 0.06,
+        "max_speed": 0.12
+      },
+      {
+        "particle_id": "spell_engine:electric_arc_b",
+        "shape": "PIPE",
+        "origin": "FEET",
+        "count": 10.0,
+        "min_speed": 0.06,
+        "max_speed": 0.12
+      }
+    ],
+    "animation": "spell_engine:one_handed_area_release",
+    "sound": {
+      "id": "minecraft:entity.generic.explode",
+      "volume": 2.0
+    }
+  },
+  "impact": [
+    {
+      "action": {
+        "type": "DAMAGE",
+        "damage": {
+          "spell_power_coefficient": 1,
+          "knockback": 0
+        }
+      },
+      "particles": [
+        {
+          "particle_id": "spell_engine:electric_arc_a",
+          "shape": "PIPE",
+          "origin": "FEET",
+          "count": 2.0,
+          "min_speed": 0.06,
+          "max_speed": 0.12
+        },
+        {
+          "particle_id": "spell_engine:electric_arc_b",
+          "shape": "PIPE",
+          "origin": "FEET",
+          "count": 2.0,
+          "min_speed": 0.06,
+          "max_speed": 0.12
+        }
+      ],
+      "sound": {
+        "id": "spell_engine:generic_lightning_release"
+      }
+    },
+    {
+      "action": {
+        "type": "STATUS_EFFECT",
+        "status_effect": {
+          "effect_id": "spell-dimension:stun",
+          "duration": 3,
+          "apply_mode": "SET",
+          "amplifier": 0,
+          "show_particles": false
+        }
+      }
+    }
+  ],
+  "cost": {
+    "cooldown_duration": 3,
+    "exhaust": 0.5
+  }
+}

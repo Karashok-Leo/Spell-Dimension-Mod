@@ -76,6 +76,7 @@ public class AllItems
     public static FrostbiteDomeItem FROSTBITE_DOME;
     public static HeartSpellSteelItem HEART_SPELL_STEEL;
     public static RejuvenatingBlossomItem REJUVENATING_BLOSSOM;
+    public static SuperconductorItem SUPERCONDUCTOR;
     public static MacroElectronItem MACRO_ELECTRON;
     public static RebirthSigilItem REBIRTH_SIGIL;
     public static MeritRegisterItem MERIT_REGISTER;
@@ -92,7 +93,7 @@ public class AllItems
     public static SecondarySchoolItem BLISS_FLAME;
     public static SecondarySchoolItem ICE_CUBE;
     public static SecondarySchoolItem FATE_STONE;
-    public static SecondarySchoolItem SUPERCONDUCTOR;
+    public static SecondarySchoolItem ELECTRIC_SPARK;
     public static SecondarySchoolItem EQUINOX_FLOWER;
 
     // Misc Items
@@ -258,6 +259,13 @@ public class AllItems
                 .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
+        SUPERCONDUCTOR = Entry.of("superconductor", new SuperconductorItem())
+                .addEN()
+                .addZH("超导体")
+                .addTag(AllTags.BELT, AllTags.ENDGAME_TRINKETS)
+                .setTab(AllGroups.MISC)
+                .addModel()
+                .register();
         MACRO_ELECTRON = Entry.of("macro_electron", new MacroElectronItem())
                 .addEN()
                 .addZH("宏电子")
@@ -346,9 +354,9 @@ public class AllItems
                 .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
-        SUPERCONDUCTOR = Entry.of("superconductor", new SecondarySchoolItem(SpellSchools.LIGHTNING))
+        ELECTRIC_SPARK = Entry.of("electric_spark", new SecondarySchoolItem(SpellSchools.LIGHTNING))
                 .addEN()
-                .addZH("超导体")
+                .addZH("电火花")
                 .addTag(AllTags.SECONDARY_SCHOOL_SLOT)
                 .setTab(AllGroups.MISC)
                 .addModel()

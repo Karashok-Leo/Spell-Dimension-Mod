@@ -60,7 +60,8 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
     public void onInitialize()
     {
         AllItems.register();
-        AllEquipments.register();
+        AllWeapons.register();
+        AllArmors.register();
         AllBlocks.register();
         AllEntities.register();
         AllWorldGen.register();

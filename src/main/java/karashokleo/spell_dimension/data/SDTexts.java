@@ -116,7 +116,7 @@ public enum SDTexts
     SCHOOL$FIRE("Fire", "火焰"),
     SCHOOL$FROST("Frost", "寒冰"),
     SCHOOL$HEALING("Healing", "治愈"),
-    SCHOOL$LIGHTNING("Lightning", "闪电"),
+    SCHOOL$LIGHTNING("Lightning", "雷电"),
     SCHOOL$SOUL("Soul", "灵魂"),
 
     /**
@@ -215,6 +215,7 @@ public enum SDTexts
     TOOLTIP$HEART_SPELL_STEEL$ACCUMULATED("Max health obtained: %s", "已获得的最大生命值：%s"),
     TOOLTIP$REJUVENATING_BLOSSOM$USAGE_2("- When injured, gain a regeneration effect that restores health equivalent to the amount of damage received.", "- 受伤时获得生命恢复效果，该效果将恢复的生命值等同于受到的伤害值"),
     TOOLTIP$REJUVENATING_BLOSSOM$USAGE_1("- When injured, if the amount of health that your existing regeneration effect will recover is less than the damage dealt, then remove all harmful effects from you and halves this damage.", "- 受伤时，如果你还未恢复的生命值低于受到伤害，则移除你身上所有负面效果并减半此次伤害"),
+    TOOLTIP$SUPERCONDUCTOR("Apply a stun when dealing lightning spell damage, increasing the duration by 0.1 seconds per 100 spell power.", "造成雷电法术伤害时施加眩晕，每100点法术强度增加0.1秒持续时间"),
 
     /**
      * Breastplates

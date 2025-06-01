@@ -68,7 +68,7 @@ public class AllGroups
                 .addZH("咒次元：源启精华")
                 .register();
 
-        EQUIPMENTS.setIcon(() -> AllItems.MAGIC_MIRROR.getDefaultStack())
+        EQUIPMENTS.setIcon(() -> AllWeapons.LIGHTNING_WAND.getDefaultStack())
                 .addEN("Spell Dimension: Equipments")
                 .addZH("咒次元：装备")
                 .register();

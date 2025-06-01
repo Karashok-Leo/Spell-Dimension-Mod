@@ -10,17 +10,18 @@ import karashokleo.spell_dimension.content.buff.BlazingMark;
 import karashokleo.spell_dimension.content.object.ScrollType;
 import karashokleo.spell_dimension.content.spell.*;
 import karashokleo.spell_dimension.data.SDTexts;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.text.MutableText;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.World;
+import net.spell_engine.api.spell.SpellInfo;
 import net.spell_power.api.SpellSchool;
 import net.spell_power.api.SpellSchools;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -169,9 +170,13 @@ public class AllSpells
     public static final Identifier FISSION = fromCrafting("fission").build();
     public static final Identifier RESONANCE = fromCrafting("resonance").build();
     public static final Identifier BREAKDOWN = fromCrafting("breakdown").build();
+    public static final Identifier THUNDERBOLT = fromCrafting("thunderbolt").build();
+    public static final Identifier QUANTUM_FIELD = fromCrafting("quantum_field").build();
     // Tier 3
     public static final Identifier ARCLIGHT = fromCrafting("arclight").build();
     public static final Identifier CONSTANT_CURRENT = fromCrafting("constant_current").build();
+    public static final Identifier CLOSED_LOOP = fromCrafting("closed_loop").build();
+    public static final Identifier RAILGUN = fromCrafting("railgun").build();
 
     public static void register()
     {
@@ -196,16 +201,37 @@ public class AllSpells
         SpellProjectileHitBlockCallback.EVENT.register(PlaceSpell::handle);
         SpellProjectileHitBlockCallback.EVENT.register(BreakSpell::handle);
 
-        SpellImpactEvents.BEFORE.register(ArcaneBarrierSpell::handle);
-        SpellImpactEvents.BEFORE.register(NucleusSpell::handle);
-        SpellImpactEvents.BEFORE.register(ExorcismSpell::handle);
-        SpellImpactEvents.BEFORE.register(RandomEffectSpell::handleBlessing);
-        SpellImpactEvents.BEFORE.register(RandomEffectSpell::handleMisfortune);
-        SpellImpactEvents.BEFORE.register(FrostBlinkSpell::handle);
-        SpellImpactEvents.BEFORE.register(FireOfRetributionSpell::handle);
-        SpellImpactEvents.BEFORE.register(HeavenlyJusticeSpell::handle);
-        SpellImpactEvents.BEFORE.register(ChainLightningSpell::handle);
-        SpellImpactEvents.BEFORE.register(BallLightningSpell::handle);
+        SpellImpactEvents.BEFORE.register(AllSpells::handleImpact);
+
+        registerImpactHandler(ARCANE_BARRIER, ArcaneBarrierSpell::handle);
+        registerImpactHandler(ICY_NUCLEUS, NucleusSpell::handle);
+        registerImpactHandler(EXORCISM, ExorcismSpell::handle);
+        registerImpactHandler(BLESSING, RandomEffectSpell::handleBlessing);
+        registerImpactHandler(MISFORTUNE, RandomEffectSpell::handleMisfortune);
+        registerImpactHandler(FROST_BLINK, FrostBlinkSpell::handle);
+        registerImpactHandler(FIRE_OF_RETRIBUTION, FireOfRetributionSpell::handle);
+        registerImpactHandler(HEAVENLY_JUSTICE, HeavenlyJusticeSpell::handle);
+        registerImpactHandler(CHAIN_LIGHTNING, ChainLightningSpell::handle);
+        registerImpactHandler(BALL_LIGHTNING, BallLightningSpell::handle);
+        registerImpactHandler(THUNDERBOLT, ThunderboltSpell::handle);
+        registerImpactHandler(RAILGUN, RailgunSpell::handle);
+    }
+
+    private static final Map<Identifier, SpellImpactEvents.Before> IMPACT_HANDLERS = new HashMap<>();
+
+    private static void handleImpact(World world, LivingEntity caster, List<Entity> targets, SpellInfo spellInfo)
+    {
+        SpellImpactEvents.Before handler = IMPACT_HANDLERS.get(spellInfo.id());
+        if (handler == null)
+        {
+            return;
+        }
+        handler.beforeImpact(world, caster, targets, spellInfo);
+    }
+
+    public static void registerImpactHandler(Identifier spellId, SpellImpactEvents.Before handler)
+    {
+        IMPACT_HANDLERS.put(spellId, handler);
     }
 
     public static Set<Identifier> getAll()

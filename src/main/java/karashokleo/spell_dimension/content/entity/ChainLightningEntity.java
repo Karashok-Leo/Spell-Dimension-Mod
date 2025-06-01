@@ -14,6 +14,8 @@ import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
+import net.spell_engine.api.spell.ParticleBatch;
+import net.spell_engine.particle.ParticleHelper;
 import net.spell_power.api.SpellSchools;
 
 import java.util.ArrayList;
@@ -24,6 +26,39 @@ import java.util.Comparator;
  */
 public class ChainLightningEntity extends ProjectileEntity
 {
+    public static final ParticleBatch[] HIT_PARTICLES = {
+            new ParticleBatch(
+                    "spell_engine:electric_arc_a",
+                    ParticleBatch.Shape.PIPE,
+                    ParticleBatch.Origin.FEET,
+                    null,
+                    0,
+                    0,
+                    1,
+                    0.06F,
+                    0.12F,
+                    0,
+                    0,
+                    0,
+                    false
+            ),
+            new ParticleBatch(
+                    "spell_engine:electric_arc_b",
+                    ParticleBatch.Shape.PIPE,
+                    ParticleBatch.Origin.FEET,
+                    null,
+                    0,
+                    0,
+                    1,
+                    0.06F,
+                    0.12F,
+                    0,
+                    0,
+                    0,
+                    false
+            ),
+    };
+
     public int power;
     public int lifespan;
     public int chainStep;
@@ -118,8 +153,10 @@ public class ChainLightningEntity extends ProjectileEntity
         lastChained.add(target);
 
         world.spawnParticles(new ZapParticleOption(from.getId(), target.getId(), power), from.getX(), from.getY(), from.getZ(), 1, 0, 0, 0, 0);
-//                            victim.playSound(SoundRegistry.CHAIN_LIGHTNING_CHAIN.get(), 2, 1);
-//        MagicManager.spawnParticles(level, ParticleHelper.ELECTRICITY, victim.getX(), victim.getY() + victim.getBbHeight() / 2, victim.getZ(), 10, victim.getBbWidth() / 3, victim.getBbHeight() / 3, victim.getBbWidth() / 3, 0.1, false);
+
+        ParticleHelper.sendBatches(target, HIT_PARTICLES);
+
+        // TODO: play sounds
 
         if (getOwner() instanceof LivingEntity owner)
         {
