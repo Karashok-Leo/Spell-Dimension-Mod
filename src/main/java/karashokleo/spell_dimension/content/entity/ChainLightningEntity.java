@@ -1,8 +1,10 @@
 package karashokleo.spell_dimension.content.entity;
 
+import karashokleo.spell_dimension.api.SpellImpactEvents;
 import karashokleo.spell_dimension.config.SpellConfig;
 import karashokleo.spell_dimension.content.particle.ZapParticleOption;
 import karashokleo.spell_dimension.init.AllEntities;
+import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.util.DamageUtil;
 import karashokleo.spell_dimension.util.ImpactUtil;
 import net.minecraft.entity.Entity;
@@ -15,11 +17,14 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 import net.spell_engine.api.spell.ParticleBatch;
+import net.spell_engine.api.spell.SpellInfo;
+import net.spell_engine.internals.SpellRegistry;
 import net.spell_engine.particle.ParticleHelper;
 import net.spell_power.api.SpellSchools;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 /**
  * Learned from <a href="https://github.com/iron431/irons-spells-n-spellbooks/blob/1.20.1/src/main/java/io/redspace/ironsspellbooks/entity/spells/ChainLightning.java">...</a>
@@ -158,10 +163,13 @@ public class ChainLightningEntity extends ProjectileEntity
 
         // TODO: play sounds
 
-        if (getOwner() instanceof LivingEntity owner)
+        if (getOwner() instanceof LivingEntity caster)
         {
-            float damage = (float) DamageUtil.calculateDamage(owner, SpellSchools.LIGHTNING, power * SpellConfig.CHAIN_LIGHTNING_CONFIG.damageFactor());
-            DamageUtil.spellDamage(target, SpellSchools.LIGHTNING, owner, damage, false);
+            SpellInfo spellInfo = new SpellInfo(SpellRegistry.getSpell(AllSpells.CHAIN_LIGHTNING), AllSpells.CHAIN_LIGHTNING);
+            SpellImpactEvents.BEFORE.invoker().beforeImpact(world, caster, List.of(target), spellInfo);
+
+            float damage = (float) DamageUtil.calculateDamage(caster, SpellSchools.LIGHTNING, power * SpellConfig.CHAIN_LIGHTNING_CONFIG.damageFactor());
+            DamageUtil.spellDamage(target, SpellSchools.LIGHTNING, caster, damage, false);
         }
     }
 

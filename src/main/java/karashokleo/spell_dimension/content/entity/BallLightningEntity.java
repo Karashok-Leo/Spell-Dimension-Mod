@@ -1,5 +1,6 @@
 package karashokleo.spell_dimension.content.entity;
 
+import karashokleo.spell_dimension.api.SpellImpactEvents;
 import karashokleo.spell_dimension.config.SpellConfig;
 import karashokleo.spell_dimension.init.AllEntities;
 import karashokleo.spell_dimension.init.AllSpells;
@@ -20,7 +21,9 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.spell_engine.api.spell.ParticleBatch;
 import net.spell_engine.api.spell.SpellContainer;
+import net.spell_engine.api.spell.SpellInfo;
 import net.spell_engine.internals.SpellContainerHelper;
+import net.spell_engine.internals.SpellRegistry;
 import net.spell_engine.particle.ParticleHelper;
 import net.spell_power.api.SpellSchools;
 
@@ -112,16 +115,20 @@ public class BallLightningEntity extends ProjectileEntity
     {
         super.onEntityHit(entityHitResult);
 
-        if (this.getWorld().isClient())
+        World world = this.getWorld();
+        if (world.isClient())
         {
             return;
         }
 
         if (entityHitResult.getEntity() instanceof LivingEntity target &&
-            getOwner() instanceof LivingEntity owner)
+            getOwner() instanceof LivingEntity caster)
         {
-            float damage = (float) DamageUtil.calculateDamage(owner, SpellSchools.LIGHTNING, SpellConfig.BALL_LIGHTNING_CONFIG.damageFactor());
-            DamageUtil.spellDamage(target, SpellSchools.LIGHTNING, owner, damage, false);
+            SpellInfo spellInfo = new SpellInfo(SpellRegistry.getSpell(AllSpells.BALL_LIGHTNING), AllSpells.BALL_LIGHTNING);
+            SpellImpactEvents.BEFORE.invoker().beforeImpact(world, caster, List.of(target), spellInfo);
+
+            float damage = (float) DamageUtil.calculateDamage(caster, SpellSchools.LIGHTNING, SpellConfig.BALL_LIGHTNING_CONFIG.damageFactor());
+            DamageUtil.spellDamage(target, SpellSchools.LIGHTNING, caster, damage, false);
 
             ParticleHelper.sendBatches(target, ChainLightningEntity.HIT_PARTICLES);
             // TODO: play sounds

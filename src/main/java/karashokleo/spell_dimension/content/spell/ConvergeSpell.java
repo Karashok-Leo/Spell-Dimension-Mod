@@ -70,8 +70,10 @@ public class ConvergeSpell
                 target -> !ImpactUtil.isAlly(caster, target)
         );
         if (targets.isEmpty()) return;
+
         SpellInfo spellInfo = new SpellInfo(SpellRegistry.getSpell(AllSpells.CONVERGE), AllSpells.CONVERGE);
         SpellImpactEvents.BEFORE.invoker().beforeImpact(caster.getWorld(), caster, new ArrayList<>(targets), spellInfo);
+
         for (LivingEntity target : targets)
         {
             Vec3d movement = pos.subtract(target.getPos()).multiply(0.12 + amplifier * 0.03);

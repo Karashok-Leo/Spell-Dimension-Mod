@@ -1,7 +1,6 @@
 package karashokleo.spell_dimension.content.spell;
 
 import karashokleo.spell_dimension.content.block.ProtectiveCoverBlock;
-import karashokleo.spell_dimension.init.AllSpells;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.world.World;
@@ -15,7 +14,6 @@ public class ArcaneBarrierSpell
 
     public static void handle(World world, LivingEntity caster, List<Entity> targets, SpellInfo spellInfo)
     {
-        if (!spellInfo.id().equals(AllSpells.ARCANE_BARRIER)) return;
         ProtectiveCoverBlock.placeAsCube(caster.getWorld(), caster.getBlockPos(), RADIUS, 20 * 15);
     }
 }
