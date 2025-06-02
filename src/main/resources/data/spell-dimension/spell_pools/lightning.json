@@ -1,0 +1,8 @@
+{
+  "spell_ids": [
+    "spell-dimension:surge",
+    "spell-dimension:steady_current",
+    "spell-dimension:fission"
+  ],
+  "creatable_as_spellbook": false
+}

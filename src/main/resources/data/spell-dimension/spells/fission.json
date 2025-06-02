@@ -1,6 +1,9 @@
 {
   "school": "LIGHTNING",
   "range": 0,
+  "learn": {
+    "tier": 2
+  },
   "cast": {
   },
   "release": {

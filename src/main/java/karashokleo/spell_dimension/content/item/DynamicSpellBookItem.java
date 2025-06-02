@@ -53,7 +53,7 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
             SpellSchools.FIRE, SpellDimension.modLoc("fire"),
             SpellSchools.FROST, SpellDimension.modLoc("frost"),
             SpellSchools.HEALING, SpellDimension.modLoc("healing"),
-            SpellSchools.LIGHTNING, DYNAMIC_POOL,
+            SpellSchools.LIGHTNING, SpellDimension.modLoc("lightning"),
             SpellSchools.SOUL, DYNAMIC_POOL
     );
 
