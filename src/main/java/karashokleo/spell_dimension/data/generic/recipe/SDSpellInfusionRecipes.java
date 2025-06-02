@@ -61,10 +61,6 @@ public class SDSpellInfusionRecipes
 
     public static void add(Consumer<RecipeJsonProvider> exporter)
     {
-        /// pending:
-        /// "bosses_of_mass_destruction:blazing_eye"
-        /// MythicBlocks.PLATINUM.getStorageBlock().asItem()
-
         add(exporter, Items.COMPASS, AllSpells.LOCATE, AllSpells.GENERIC);
         add(exporter, AllItems.SPAWNER_SOUL, AllSpells.SUMMON, AllSpells.GENERIC);
         add(exporter, ModRegistry.ENDERSOUL_HAND_ITEM.get(), AllSpells.PLACE, AllSpells.GENERIC);
@@ -138,5 +134,15 @@ public class SDSpellInfusionRecipes
         add(exporter, LHTraits.CURSED.asItem(), AllSpells.MISFORTUNE, SpellSchools.HEALING);
         add(exporter, ComplementItems.RESONANT_FEATHER, AllSpells.HEAVENLY_JUSTICE, SpellSchools.HEALING);
         add(exporter, BlockInit.PIGLIN_FLAG.asItem(), AllSpells.BATTLE_BANNER, SpellSchools.HEALING);
+
+        add(exporter, "fwaystones:local_void", AllSpells.BALL_LIGHTNING, SpellSchools.LIGHTNING);
+        add(exporter, MythicBlocks.MYTHRIL.getStorageBlock().asItem(), AllSpells.RESONANCE, SpellSchools.LIGHTNING);
+        add(exporter, MythicBlocks.MORKITE.getStorageBlock().asItem(), AllSpells.BREAKDOWN, SpellSchools.LIGHTNING);
+        add(exporter, MythicBlocks.PLATINUM.getStorageBlock().asItem(), AllSpells.THUNDERBOLT, SpellSchools.LIGHTNING);
+        add(exporter, MythicItems.Mats.UNOBTAINIUM, AllSpells.QUANTUM_FIELD, SpellSchools.LIGHTNING);
+        add(exporter, MythicBlocks.CARMOT_NUKE_CORE.asItem(), AllSpells.ARCLIGHT, SpellSchools.LIGHTNING);
+        add(exporter, MythicBlocks.QUADRILLUM_NUKE_CORE.asItem(), AllSpells.CONSTANT_CURRENT, SpellSchools.LIGHTNING);
+        add(exporter, ComplementItems.VOID_EYE, AllSpells.CLOSED_LOOP, SpellSchools.LIGHTNING);
+        add(exporter, "bosses_of_mass_destruction:obsidilith_rune", AllSpells.RAILGUN, SpellSchools.LIGHTNING);
     }
 }

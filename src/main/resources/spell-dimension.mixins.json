@@ -56,12 +56,12 @@
   },
   "client": [
     "client.DrawContextMixin",
+    "client.ElectricSparkFactoryMixin",
     "client.phase.ClientPlayerEntityMixin",
     "client.phase.ClientPlayerInteractionManagerMixin",
     "client.phase.EntityRenderDispatcherMixin",
     "client.phase.InGameOverlayRendererMixin",
     "client.phase.WorldRendererMixin",
-    "client.ElectricSparkFactoryMixin",
     "vanilla.ParticleManagerMixin"
   ]
 }
