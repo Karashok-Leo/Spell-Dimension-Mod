@@ -5,6 +5,7 @@ import io.github.fabricators_of_create.porting_lib.entity.events.LivingEntityEve
 import io.github.fabricators_of_create.porting_lib.entity.events.PlayerInteractionEvents;
 import karashokleo.enchantment_infusion.api.event.InfusionCompleteCallback;
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
+import karashokleo.l2hostility.content.event.GenericEvents;
 import karashokleo.l2hostility.content.feature.EntityFeature;
 import karashokleo.l2hostility.content.item.TrinketItems;
 import karashokleo.l2hostility.init.LHTags;
@@ -28,10 +29,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.entity.MobSpawnerBlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.predicate.entity.EntityPredicates;
+import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
@@ -42,6 +45,7 @@ import net.minecraft.world.World;
 import net.spell_engine.api.spell.SpellContainer;
 import net.spell_engine.internals.SpellContainerHelper;
 import net.spell_power.api.SpellDamageSource;
+import net.spell_power.api.SpellSchools;
 import net.trique.mythicupgrades.MythicUpgradesDamageTypes;
 
 import java.util.List;
@@ -229,6 +233,34 @@ public class MiscEvents
             float damage = Math.min(shadowMaxHealth * 0.05f, damageAmount);
             shadow.damage(living.getDamageSources().indirectMagic(entity, living), damage);
             return true;
+        });
+
+        // Quantum Field
+        DamagePhase.SHIELD.registerModifier(0, access ->
+        {
+            if (access.getSource().isIn(DamageTypeTags.BYPASSES_INVULNERABILITY))
+            {
+                return;
+            }
+            LivingEntity entity = access.getEntity();
+            if (!entity.hasStatusEffect(AllStatusEffects.QUANTUM_FIELD))
+            {
+                return;
+            }
+            if (!(access.getSource().getAttacker() instanceof LivingEntity attacker))
+            {
+                return;
+            }
+
+            float distance = entity.distanceTo(attacker);
+            float ratio = AllStatusEffects.QUANTUM_FIELD.getReflectRatio(distance);
+
+            access.addModifier(originalDamage -> originalDamage * ratio);
+            float reflect = access.getOriginalDamage() * (1 - ratio);
+            if (reflect <= 0) return;
+
+            DamageSource damageSource = SpellDamageSource.create(SpellSchools.LIGHTNING, attacker);
+            GenericEvents.schedule(() -> attacker.damage(damageSource, reflect));
         });
     }
 }

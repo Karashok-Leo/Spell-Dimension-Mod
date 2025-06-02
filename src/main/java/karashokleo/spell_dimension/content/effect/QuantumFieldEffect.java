@@ -16,4 +16,18 @@ public class QuantumFieldEffect extends StatusEffect
     {
         super(StatusEffectCategory.BENEFICIAL, 0xb5f0ff);
     }
+
+    public float getReflectRatio(float distance)
+    {
+        float e = (float) Math.E;
+        float v = e - distance;
+        v = Math.abs(v);
+        v /= e;
+        v += 0.2f;
+        if (v > 1.0f)
+        {
+            v = 1.0f;
+        }
+        return v;
+    }
 }
