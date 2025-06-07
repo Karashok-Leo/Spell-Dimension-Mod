@@ -103,6 +103,8 @@ public class AllStatusEffects
         Synchronized.configure(FROSTED, true);
         Synchronized.configure(DIVINE_AURA, true);
         Synchronized.configure(STUN, true);
+        Synchronized.configure(QUANTUM_FIELD, true);
+
         ActionImpairing.configure(STUN, EntityActionsAllowed.STUN);
     }
 

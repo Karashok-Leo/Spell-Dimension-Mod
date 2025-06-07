@@ -12,6 +12,7 @@ import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Identifier;
+import net.spell_engine.api.effect.Synchronized;
 
 public class QuantumFieldRenderer<T extends LivingEntity, M extends EntityModel<T>> extends FeatureRenderer<T, M>
 {
@@ -43,7 +44,16 @@ public class QuantumFieldRenderer<T extends LivingEntity, M extends EntityModel<
 
     protected boolean shouldRender(T entity)
     {
-        return entity.hasStatusEffect(AllStatusEffects.QUANTUM_FIELD);
+        // client side cannot get effects
+//        return entity.hasStatusEffect(AllStatusEffects.QUANTUM_FIELD);
+        for (var entry : Synchronized.effectsOf(entity))
+        {
+            if (entry.effect() == AllStatusEffects.QUANTUM_FIELD)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     protected float getEnergySwirlX(float partialAge)

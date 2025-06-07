@@ -40,6 +40,7 @@ public class AllSpells
     public static final Identifier FIRE_SCORCH = fromPrimary("wizards:fire_scorch");
     public static final Identifier FROST_SHARD = fromPrimary("wizards:frost_shard");
     public static final Identifier HEAL = fromPrimary("paladins:heal");
+    public static final Identifier CHAIN_LIGHTNING = fromPrimary(SpellDimension.modLoc("chain_lightning"));
 
     /**
      * Binding spells
@@ -63,6 +64,11 @@ public class AllSpells
     public static final Identifier FLASH_HEAL = fromBinding("paladins:flash_heal");
     public static final Identifier HOLY_SHOCK = fromBinding("paladins:holy_shock");
     public static final Identifier DIVINE_PROTECTION = fromBinding("paladins:divine_protection");
+
+    // Lightning
+    public static final Identifier SURGE = fromBinding(SpellDimension.modLoc("surge"));
+    public static final Identifier STEADY_CURRENT = fromBinding(SpellDimension.modLoc("steady_current"));
+    public static final Identifier FISSION = fromBinding(SpellDimension.modLoc("fission"));
 
     /**
      * Infusion spells
@@ -162,21 +168,17 @@ public class AllSpells
 
     // Lightning
     // Tier 1
-    public static final Identifier CHAIN_LIGHTNING = fromCrafting("chain_lightning").build();
-    // Tier 2
     public static final Identifier BALL_LIGHTNING = fromCrafting("ball_lightning").build();
-    public static final Identifier SURGE = fromCrafting("surge").build();
-    public static final Identifier STEADY_CURRENT = fromCrafting("steady_current").build();
-    public static final Identifier FISSION = fromCrafting("fission").build();
     public static final Identifier RESONANCE = fromCrafting("resonance").build();
     public static final Identifier BREAKDOWN = fromCrafting("breakdown").build();
     public static final Identifier THUNDERBOLT = fromCrafting("thunderbolt").build();
-    public static final Identifier QUANTUM_FIELD = fromCrafting("quantum_field").build();
+    // Tier 2
+    public static final Identifier QUANTUM_FIELD = fromCrafting("quantum_field").withTier(1).build();
+    public static final Identifier ARCLIGHT = fromCrafting("arclight").withTier(1).build();
+    public static final Identifier CONSTANT_CURRENT = fromCrafting("constant_current").withTier(1).build();
+    public static final Identifier CLOSED_LOOP = fromCrafting("closed_loop").withTier(1).build();
     // Tier 3
-    public static final Identifier ARCLIGHT = fromCrafting("arclight").build();
-    public static final Identifier CONSTANT_CURRENT = fromCrafting("constant_current").build();
-    public static final Identifier CLOSED_LOOP = fromCrafting("closed_loop").build();
-    public static final Identifier RAILGUN = fromCrafting("railgun").build();
+    public static final Identifier RAILGUN = fromCrafting("railgun").withTier(2).build();
 
     public static void register()
     {
@@ -267,16 +269,26 @@ public class AllSpells
         return new Entry(SpellDimension.modLoc(name));
     }
 
+    private static Identifier fromPrimary(Identifier id)
+    {
+        return new Entry(id).withScrollType(ScrollType.PRIMARY).build();
+    }
+
     // other namespace
     private static Identifier fromPrimary(String id)
     {
-        return new Entry(new Identifier(id)).withScrollType(ScrollType.PRIMARY).build();
+        return fromPrimary(new Identifier(id));
+    }
+
+    private static Identifier fromBinding(Identifier id)
+    {
+        return new Entry(id).withScrollType(ScrollType.BINDING).build();
     }
 
     // other namespace
     private static Identifier fromBinding(String id)
     {
-        return new Entry(new Identifier(id)).withScrollType(ScrollType.BINDING).build();
+        return fromBinding(new Identifier(id));
     }
 
     // local namespace

@@ -162,6 +162,7 @@ dependencies {
     modImplementation "curse.maven:endremastered-fabric-515523:4972591"
     modImplementation "curse.maven:sophisticated-core-unofficial-fabric-port-979317:6448771"
     modImplementation "curse.maven:sophisticated-backpacks-unofficial-fabric-port-979322:6448770"
+    modImplementation "curse.maven:fabric-waystones-410902:6300601"
 
     modRuntimeOnly "curse.maven:yeetusexperimentus-635427:4680831"
     modRuntimeOnly "curse.maven:better-combat-by-daedelus-639842:5625715"

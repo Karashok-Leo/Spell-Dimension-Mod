@@ -8,9 +8,11 @@ import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.l2hostility.content.event.GenericEvents;
 import karashokleo.l2hostility.content.feature.EntityFeature;
 import karashokleo.l2hostility.content.item.TrinketItems;
+import karashokleo.l2hostility.content.logic.ReflectState;
 import karashokleo.l2hostility.init.LHTags;
 import karashokleo.leobrary.damage.api.modify.DamageAccess;
 import karashokleo.leobrary.damage.api.modify.DamagePhase;
+import karashokleo.leobrary.damage.api.state.DamageStateProvider;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.item.DynamicSpellBookItem;
 import karashokleo.spell_dimension.content.item.SpellScrollItem;
@@ -238,7 +240,12 @@ public class MiscEvents
         // Quantum Field
         DamagePhase.SHIELD.registerModifier(0, access ->
         {
-            if (access.getSource().isIn(DamageTypeTags.BYPASSES_INVULNERABILITY))
+            DamageSource source = access.getSource();
+            if (source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY))
+            {
+                return;
+            }
+            if (((DamageStateProvider) source).hasState(ReflectState.PREDICATE))
             {
                 return;
             }
@@ -247,7 +254,7 @@ public class MiscEvents
             {
                 return;
             }
-            if (!(access.getSource().getAttacker() instanceof LivingEntity attacker))
+            if (!(source.getAttacker() instanceof LivingEntity attacker))
             {
                 return;
             }
@@ -260,6 +267,7 @@ public class MiscEvents
             if (reflect <= 0) return;
 
             DamageSource damageSource = SpellDamageSource.create(SpellSchools.LIGHTNING, attacker);
+            ((DamageStateProvider) damageSource).addState(new ReflectState());
             GenericEvents.schedule(() -> attacker.damage(damageSource, reflect));
         });
     }
