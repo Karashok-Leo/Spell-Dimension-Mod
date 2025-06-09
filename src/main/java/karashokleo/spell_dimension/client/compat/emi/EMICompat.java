@@ -26,10 +26,8 @@ public class EMICompat implements EmiPlugin
     public void register(EmiRegistry registry)
     {
         // see VanillaPlugin
-        registry.setDefaultComparison(
-                AllItems.SPELL_SCROLL,
-                Comparison.compareData(stack -> AllItems.SPELL_SCROLL.getSpellInfo(stack.getItemStack()))
-        );
+        registry.setDefaultComparison(AllItems.SPELL_SCROLL, Comparison.compareNbt());
+        registry.setDefaultComparison(AllItems.ENCHANTED_ESSENCE, Comparison.compareNbt());
 
         registry.addCategory(LOCATE_CATEGORY);
         registry.addCategory(SUMMON_CATEGORY);

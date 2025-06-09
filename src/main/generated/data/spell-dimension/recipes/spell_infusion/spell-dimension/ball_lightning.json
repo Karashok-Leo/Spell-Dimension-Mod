@@ -1,0 +1,15 @@
+{
+  "type": "spell-dimension:spell_infusion",
+  "ingredients": [
+    {
+      "item": "fwaystones:local_void"
+    },
+    {
+      "item": "spell-dimension:essence_lightning_0"
+    }
+  ],
+  "input": {
+    "item": "minecraft:paper"
+  },
+  "spell_id": "spell-dimension:ball_lightning"
+}

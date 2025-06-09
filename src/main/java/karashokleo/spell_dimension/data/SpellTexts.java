@@ -348,8 +348,8 @@ public enum SpellTexts
     RAILGUN(
             "Railgun",
             "超电磁炮",
-            "When you hit a coin in the drop, fire the Railgun.",
-            "击中掉落中的硬币时，发射超电磁炮。"
+            "When you hit a lightning rune in the air, fire the Railgun.",
+            "击中空中的雷电符文时，发射超电磁炮。"
     ),
     LIGHTMOON(
             "Light Moon",

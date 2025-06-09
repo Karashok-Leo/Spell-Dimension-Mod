@@ -41,5 +41,6 @@ public class REICompat implements REIClientPlugin
     {
         // see DefaultPlugin
         registry.registerNbt(AllItems.SPELL_SCROLL);
+        registry.registerNbt(AllItems.ENCHANTED_ESSENCE);
     }
 }
