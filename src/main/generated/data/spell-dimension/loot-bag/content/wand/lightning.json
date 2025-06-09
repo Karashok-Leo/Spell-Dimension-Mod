@@ -1,11 +1,11 @@
 {
   "type": "loot-bag:item",
   "icon": {
-    "texture": "wizards:textures/item/wand_arcane.png"
+    "texture": "spell-dimension:textures/item/lightning_wand.png"
   },
   "item": {
     "Count": 1,
-    "id": "wizards:wand_arcane",
+    "id": "spell-dimension:lightning_wand",
     "tag": {
       "Damage": 0
     }

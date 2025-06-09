@@ -363,6 +363,13 @@ public enum SDTexts
         SpellDimension.ZH_TEXTS.addEntityType(AllEntities.CONSCIOUSNESS_EVENT, "意识入侵事件");
         SpellDimension.EN_TEXTS.addEntityType(AllEntities.BLACK_HOLE, "Black Hole");
         SpellDimension.ZH_TEXTS.addEntityType(AllEntities.BLACK_HOLE, "黑洞");
+        SpellDimension.EN_TEXTS.addEntityType(AllEntities.CHAIN_LIGHTNING, "Chain Lightning");
+        SpellDimension.EN_TEXTS.addEntityType(AllEntities.CHAIN_LIGHTNING, "连锁闪电");
+        SpellDimension.EN_TEXTS.addEntityType(AllEntities.BALL_LIGHTNING, "Ball Lightning");
+        SpellDimension.ZH_TEXTS.addEntityType(AllEntities.BALL_LIGHTNING, "球状闪电");
+        SpellDimension.EN_TEXTS.addEntityType(AllEntities.RAILGUN, "Railgun");
+        SpellDimension.ZH_TEXTS.addEntityType(AllEntities.RAILGUN, "超电磁炮");
+
         SpellDimension.EN_TEXTS.addText("trinkets.slot.chest.breastplate", "Breastplate");
         SpellDimension.ZH_TEXTS.addText("trinkets.slot.chest.breastplate", "护心镜");
         SpellDimension.EN_TEXTS.addText("trinkets.slot.chest.secondary_school", "Secondary School");

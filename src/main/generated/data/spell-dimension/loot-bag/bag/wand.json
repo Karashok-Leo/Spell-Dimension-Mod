@@ -8,6 +8,7 @@
     "spell-dimension:wand/arcane",
     "spell-dimension:wand/fire",
     "spell-dimension:wand/frost",
-    "spell-dimension:wand/healing"
+    "spell-dimension:wand/healing",
+    "spell-dimension:wand/lightning"
   ]
 }

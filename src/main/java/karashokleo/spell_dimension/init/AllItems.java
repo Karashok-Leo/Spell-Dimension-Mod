@@ -19,7 +19,6 @@ import karashokleo.spell_dimension.content.item.upgrade.IllusionUpgradeItem;
 import karashokleo.spell_dimension.content.item.upgrade.IllusionUpgradeWrapper;
 import karashokleo.spell_dimension.content.object.Tier;
 import karashokleo.spell_dimension.util.SchoolUtil;
-import karashokleo.spell_dimension.util.TagUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.data.client.Models;
 import net.minecraft.item.Item;
@@ -30,7 +29,6 @@ import net.minecraft.util.Rarity;
 import net.p3pp3rf1y.sophisticatedbackpacks.init.ModItems;
 import net.p3pp3rf1y.sophisticatedcore.common.gui.UpgradeContainerRegistry;
 import net.p3pp3rf1y.sophisticatedcore.common.gui.UpgradeContainerType;
-import net.runes.RunesMod;
 import net.spell_engine.api.item.trinket.SpellBooks;
 import net.spell_engine.internals.SpellRegistry;
 import net.spell_power.api.SpellSchool;
@@ -465,7 +463,7 @@ public class AllItems
                 .addModel("base_essence_" + grade)
                 .addTag(
                         AllTags.ESSENCE.get(grade),
-                        TagUtil.itemTag(new Identifier(RunesMod.ID, "rune_crafting/reagent/" + school.id.getPath() + "_small"))
+                        AllTags.getRuneTag(school, "_small")
                 )
                 .register();
     }

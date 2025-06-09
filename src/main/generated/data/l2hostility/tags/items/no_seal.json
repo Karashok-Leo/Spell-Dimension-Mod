@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "spell-dimension:broken_item",
-    "spell-dimension:mirage_reflector"
+    "spell-dimension:mirage_reflector",
+    "spell-dimension:broken_item"
   ]
 }

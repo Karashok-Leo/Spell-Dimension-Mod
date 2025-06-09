@@ -150,7 +150,8 @@ public enum SDBags
                     SDContents.ROBE_ARCANE,
                     SDContents.ROBE_FIRE,
                     SDContents.ROBE_FROST,
-                    SDContents.ROBE_HEALING
+                    SDContents.ROBE_HEALING,
+                    SDContents.ROBE_LIGHTNING
             ),
             Rarity.COMMON,
             10040013,
@@ -163,7 +164,8 @@ public enum SDBags
                     SDContents.WAND_ARCANE,
                     SDContents.WAND_FIRE,
                     SDContents.WAND_FROST,
-                    SDContents.WAND_HEALING
+                    SDContents.WAND_HEALING,
+                    SDContents.WAND_LIGHTNING
             ),
             Rarity.COMMON,
             10040013,
@@ -176,7 +178,8 @@ public enum SDBags
                     SDContents.RUNE_ARCANE,
                     SDContents.RUNE_FIRE,
                     SDContents.RUNE_FROST,
-                    SDContents.RUNE_HEALING
+                    SDContents.RUNE_HEALING,
+                    SDContents.RUNE_LIGHTNING
             ),
             Rarity.COMMON,
             10040013,

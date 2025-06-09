@@ -76,21 +76,25 @@ public class AllArmors
                 .addEN()
                 .addZH("雷电")
                 .material(LIGHTNING_MATERIAL)
+                .addTag(AllTags.TIER_2_ARMORS)
                 .register();
         NETHERITE_LIGHTNING_ROBE = new RobeBuilder("netherite_lightning")
                 .addEN("Netherite Lightning")
                 .addZH("下界合金雷电")
                 .material(NETHERITE_LIGHTNING_MATERIAL)
+                .addTag(AllTags.TIER_3_ARMORS)
                 .register();
 //        SOUL_ROBE = new RobeBuilder("soul")
 //                .addEN()
 //                .addZH("灵魂")
 //                .material(SOUL_MATERIAL)
+//                .addTag(AllTags.TIER_2_ARMORS)
 //                .register();
 //        NETHERITE_SOUL_ROBE = new RobeBuilder("netherite_soul")
 //                .addEN("Netherite Soul")
 //                .addZH("下界合金灵魂")
 //                .material(NETHERITE_SOUL_MATERIAL)
+//                .addTag(AllTags.TIER_3_ARMORS)
 //                .register();
     }
 }

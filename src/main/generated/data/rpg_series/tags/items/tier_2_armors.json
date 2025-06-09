@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "spell-dimension:lightning_robe_head",
+    "spell-dimension:lightning_robe_chest",
+    "spell-dimension:lightning_robe_legs",
+    "spell-dimension:lightning_robe_feet"
+  ]
+}

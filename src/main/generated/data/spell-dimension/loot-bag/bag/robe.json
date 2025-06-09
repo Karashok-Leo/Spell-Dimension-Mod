@@ -9,6 +9,7 @@
     "spell-dimension:robe/arcane",
     "spell-dimension:robe/fire",
     "spell-dimension:robe/frost",
-    "spell-dimension:robe/healing"
+    "spell-dimension:robe/healing",
+    "spell-dimension:robe/lightning"
   ]
 }

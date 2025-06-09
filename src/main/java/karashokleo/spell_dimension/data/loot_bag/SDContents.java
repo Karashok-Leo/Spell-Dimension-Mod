@@ -5,6 +5,7 @@ import karashokleo.loot_bag.api.common.content.ContentEntry;
 import karashokleo.loot_bag.api.common.content.ItemContent;
 import karashokleo.loot_bag.api.common.content.LootTableContent;
 import karashokleo.spell_dimension.SpellDimension;
+import karashokleo.spell_dimension.init.AllWeapons;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.runes.api.RuneItems;
@@ -167,6 +168,13 @@ public enum SDContents
             "Includes full set of healing robe",
             "包含全套治愈法袍"
     ),
+    ROBE_LIGHTNING(
+            "spell-dimension:textures/item/lightning_robe_head.png",
+            "Lightning Robe",
+            "雷电法袍",
+            "Includes full set of lightning robe",
+            "包含全套雷电法袍"
+    ),
     WAND_ARCANE(
             Weapons.arcaneWand.item().getDefaultStack(),
             Weapons.arcaneWand.id(),
@@ -192,8 +200,8 @@ public enum SDContents
             "神圣魔杖"
     ),
     WAND_LIGHTNING(
-            Weapons.arcaneWand.item().getDefaultStack(),
-            Weapons.arcaneWand.id(),
+            AllWeapons.LIGHTNING_WAND.getDefaultStack(),
+            SpellDimension.modLoc("lightning_wand"),
             "Lightning Wand",
             "雷电魔杖"
     ),

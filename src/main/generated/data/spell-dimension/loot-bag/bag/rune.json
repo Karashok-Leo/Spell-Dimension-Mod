@@ -8,6 +8,7 @@
     "spell-dimension:rune/arcane",
     "spell-dimension:rune/fire",
     "spell-dimension:rune/frost",
-    "spell-dimension:rune/healing"
+    "spell-dimension:rune/healing",
+    "spell-dimension:rune/lightning"
   ]
 }

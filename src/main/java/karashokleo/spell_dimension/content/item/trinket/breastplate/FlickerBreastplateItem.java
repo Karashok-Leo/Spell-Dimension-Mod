@@ -18,7 +18,7 @@ import java.util.List;
 
 public class FlickerBreastplateItem extends SingleEpicTrinketItem implements DamageListenerTrinket
 {
-    private static final float INITIAL_DODGE_CHANCE = 0.7f;
+    private static final float INITIAL_DODGE_CHANCE = 0.8f;
     private static final float DODGE_CHANCE_DECREMENT = 0.02f;
     private static final float MIN_DODGE_CHANCE = 0.1f;
 

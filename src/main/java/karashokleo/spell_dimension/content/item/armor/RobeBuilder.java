@@ -7,8 +7,10 @@ import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllTags;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
+import net.minecraft.registry.tag.TagKey;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.function.BiFunction;
 
@@ -28,6 +30,8 @@ public class RobeBuilder
 
     @Nullable
     protected ConfiguredArmorMaterial material;
+
+    protected ArrayList<TagKey<Item>> tags = new ArrayList<>();
 
     public RobeBuilder(String name)
     {
@@ -64,6 +68,12 @@ public class RobeBuilder
         return this;
     }
 
+    public RobeBuilder addTag(TagKey<Item> key)
+    {
+        this.tags.add(key);
+        return this;
+    }
+
     public RobeBuilder material(ConfiguredArmorMaterial material)
     {
         this.material = material;
@@ -81,13 +91,18 @@ public class RobeBuilder
 
         for (ArmorItem.Type type : ArmorItem.Type.values())
         {
-            ArmorItem item = itemBuilder.apply(
+            ItemBuilder<ArmorItem> builder = itemBuilder.apply(
                             name + suffixID.get(type),
                             new ConfiguredArmorItem(material, type)
                     )
                     .addEN(nameEN + suffixEN.get(type))
                     .addZH(nameZH + suffixZH.get(type))
-                    .addTag(AllTags.WIZARD_ROBES)
+                    .addTag(AllTags.WIZARD_ROBES);
+            for (TagKey<Item> tag : tags)
+            {
+                builder.addTag(tag);
+            }
+            ArmorItem item = builder
                     .addModel()
                     .setTab(AllGroups.EQUIPMENTS)
                     .register();

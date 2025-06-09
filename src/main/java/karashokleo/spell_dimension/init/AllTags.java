@@ -25,10 +25,14 @@ import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.Biome;
+import net.runes.RunesMod;
 import net.runes.api.RuneItems;
 import net.spell_engine.internals.SpellInfinityEnchantment;
+import net.spell_power.api.SpellSchool;
+import net.spell_power.api.SpellSchools;
 import net.trique.mythicupgrades.MythicUpgradesDamageTypes;
 import net.wizards.WizardsMod;
+import nourl.mythicmetals.item.MythicItems;
 import nourl.mythicmetals.item.tools.MythicTools;
 
 import java.util.List;
@@ -142,10 +146,19 @@ public class AllTags
 
     public static final TagKey<Biome> PRISMACHASM = TagUtil.biomeTag("prismachasm");
 
+    public static TagKey<Item> getRuneTag(SpellSchool school, String suffix)
+    {
+        return TagUtil.itemTag(new Identifier(RunesMod.ID, "rune_crafting/reagent/" + school.id.getPath() + suffix));
+    }
+
     public static void register()
     {
         RuneItems.entries.stream().map(RuneItems.Entry::id)
-                .forEach(id -> SpellDimension.ITEM_TAGS.getOrCreateContainer(RUNE).add(id));
+                .forEach(id ->
+                {
+                    SpellDimension.ITEM_TAGS.getOrCreateContainer(RUNE).add(id);
+                    SpellDimension.ITEM_TAGS.getOrCreateContainer(WIZARD_RUNES).add(id);
+                });
 
         SpellDimension.ITEM_TAGS.getOrCreateContainer(HEART_FOOD)
                 .add(Items.ENCHANTED_GOLDEN_APPLE)
@@ -219,6 +232,11 @@ public class AllTags
         SpellDimension.ITEM_TAGS.getOrCreateContainer(DUNGEON_BANNED)
                 .add(MythicTools.LEGENDARY_BANGLUM.getPickaxe())
                 .addOptionalTag(new Identifier("constructionwand:wands"));
+
+        SpellDimension.ITEM_TAGS.getOrCreateContainer(getRuneTag(SpellSchools.LIGHTNING, "_small"))
+                .add(MythicItems.Copper.COPPER.getNugget());
+        SpellDimension.ITEM_TAGS.getOrCreateContainer(getRuneTag(SpellSchools.LIGHTNING, "_medium"))
+                .add(Items.COPPER_INGOT);
 
         SpellDimension.BLOCK_TAGS.getOrCreateContainer(LOCATE_TARGET)
                 .add(
