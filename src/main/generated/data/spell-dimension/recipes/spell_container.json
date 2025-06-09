@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "deeperdarker:resonarium_plate"
+    },
+    "E": {
+      "tag": "spell-dimension:essence/2"
+    },
+    "M": {
+      "item": "l2hostility:miracle_powder"
+    }
+  },
+  "pattern": [
+    "DMD",
+    "MEM",
+    "DMD"
+  ],
+  "result": {
+    "item": "spell-dimension:spell_container"
+  },
+  "show_notification": true
+}

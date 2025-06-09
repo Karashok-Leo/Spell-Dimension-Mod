@@ -1,30 +1,35 @@
 package karashokleo.spell_dimension.data.generic;
 
+import com.kyanite.deeperdarker.content.DDItems;
 import karashokleo.fusion_smithing.item.FusionSmithingTemplateItem;
 import karashokleo.l2hostility.content.item.ComplementItems;
 import karashokleo.l2hostility.content.item.ConsumableItems;
+import karashokleo.l2hostility.content.item.MiscItems;
 import karashokleo.spell_dimension.SpellDimension;
+import karashokleo.spell_dimension.content.item.armor.ArmorSet;
 import karashokleo.spell_dimension.content.item.essence.EnchantedEssenceItem;
 import karashokleo.spell_dimension.content.object.Tier;
 import karashokleo.spell_dimension.content.recipe.essence.EnchantedEssenceRecipeJsonProvider;
 import karashokleo.spell_dimension.data.generic.recipe.*;
+import karashokleo.spell_dimension.init.AllArmors;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllTags;
+import karashokleo.spell_dimension.init.AllWeapons;
 import karashokleo.spell_dimension.util.SchoolUtil;
 import net.adventurez.init.ItemInit;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.minecraft.data.server.recipe.RecipeJsonProvider;
-import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
-import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
-import net.minecraft.data.server.recipe.SmithingTransformRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.*;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
+import net.minecraft.registry.tag.ItemTags;
 import net.p3pp3rf1y.sophisticatedbackpacks.init.ModItems;
 import net.spell_power.api.SpellSchool;
+import nourl.mythicmetals.item.MythicItems;
 
 import java.util.function.Consumer;
 
@@ -41,6 +46,8 @@ public class SDRecipeProvider extends FabricRecipeProvider
         addMiscItemRecipe(exporter);
         addBaseEssenceRecipe(exporter);
         addEnchantedEssenceRecipe(exporter);
+        addWeaponRecipes(exporter);
+        addArmorRecipes(exporter, AllArmors.LIGHTNING_ROBE, AllArmors.NETHERITE_LIGHTNING_ROBE, Items.LIGHTNING_ROD);
         SDEnchantmentRecipes.add(exporter);
         SDLocateRecipes.add(exporter);
         SDSummonRecipes.add(exporter);
@@ -194,6 +201,20 @@ public class SDRecipeProvider extends FabricRecipeProvider
                         FabricRecipeProvider.conditionsFromItem(AllItems.ILLUSION_CONTAINER)
                 )
                 .offerTo(exporter, SpellDimension.modLoc("illusion_upgrade"));
+        // Protective Spell Container
+        ShapedRecipeJsonBuilder
+                .create(RecipeCategory.MISC, AllItems.SPELL_CONTAINER)
+                .pattern("DMD")
+                .pattern("MEM")
+                .pattern("DMD")
+                .input('E', AllTags.ESSENCE.get(2))
+                .input('M', MiscItems.MIRACLE_POWDER)
+                .input('D', DDItems.RESONARIUM_PLATE)
+                .criterion(
+                        FabricRecipeProvider.hasItem(MiscItems.MIRACLE_POWDER),
+                        FabricRecipeProvider.conditionsFromItem(MiscItems.MIRACLE_POWDER)
+                )
+                .offerTo(exporter);
     }
 
     private static void addBaseEssenceRecipe(Consumer<RecipeJsonProvider> exporter)
@@ -239,5 +260,121 @@ public class SDRecipeProvider extends FabricRecipeProvider
                                     school
                             )
                     );
+    }
+
+    private static void addWeaponRecipes(Consumer<RecipeJsonProvider> exporter)
+    {
+        ShapedRecipeJsonBuilder
+                .create(RecipeCategory.MISC, AllWeapons.LIGHTNING_WAND)
+                .pattern(" A")
+                .pattern("G ")
+                .input('A', MythicItems.Mats.MORKITE)
+                .input('G', Items.COPPER_INGOT)
+                .criterion(FabricRecipeProvider.hasItem(Items.COPPER_INGOT), FabricRecipeProvider.conditionsFromItem(Items.COPPER_INGOT))
+                .criterion(FabricRecipeProvider.hasItem(AllWeapons.LIGHTNING_WAND), FabricRecipeProvider.conditionsFromItem(AllWeapons.LIGHTNING_WAND))
+                .offerTo(exporter);
+        RecipeProvider.offerNetheriteUpgradeRecipe(
+                exporter,
+                AllWeapons.LIGHTNING_WAND,
+                RecipeCategory.MISC,
+                AllWeapons.NETHERITE_LIGHTNING_WAND
+        );
+        ShapedRecipeJsonBuilder
+                .create(RecipeCategory.MISC, AllWeapons.LIGHTNING_STAFF)
+                .pattern(" RP")
+                .pattern(" SL")
+                .pattern("G  ")
+                .input('P', MythicItems.Mats.STARRITE)
+                .input('R', Items.REDSTONE_BLOCK)
+                .input('L', Items.LAPIS_BLOCK)
+                .input('S', Items.STICK)
+                .input('G', Items.COPPER_INGOT)
+                .criterion(FabricRecipeProvider.hasItem(Items.COPPER_INGOT), FabricRecipeProvider.conditionsFromItem(Items.COPPER_INGOT))
+                .criterion(FabricRecipeProvider.hasItem(AllWeapons.LIGHTNING_STAFF), FabricRecipeProvider.conditionsFromItem(AllWeapons.LIGHTNING_STAFF))
+                .offerTo(exporter);
+        RecipeProvider.offerNetheriteUpgradeRecipe(
+                exporter,
+                AllWeapons.LIGHTNING_STAFF,
+                RecipeCategory.MISC,
+                AllWeapons.NETHERITE_LIGHTNING_STAFF
+        );
+    }
+
+    private static void addArmorRecipes(Consumer<RecipeJsonProvider> exporter, ArmorSet baseSet, ArmorSet netheriteSet, Item ingredient)
+    {
+        Ingredient wool = Ingredient.fromTag(ItemTags.WOOL);
+        ArmorItem baseHelmet = baseSet.helmet();
+        ArmorItem baseChestplate = baseSet.chestplate();
+        ArmorItem baseLeggings = baseSet.leggings();
+        ArmorItem baseBoots = baseSet.boots();
+        ArmorItem netheriteHelmet = netheriteSet.helmet();
+        ArmorItem netheriteChestplate = netheriteSet.chestplate();
+        ArmorItem netheriteLeggings = netheriteSet.leggings();
+        ArmorItem netheriteBoots = netheriteSet.boots();
+        // base set
+        ShapedRecipeJsonBuilder
+                .create(RecipeCategory.MISC, baseHelmet)
+                .pattern("  W")
+                .pattern(" W ")
+                .pattern("WLW")
+                .input('W', wool)
+                .input('L', ingredient)
+                .criterion(FabricRecipeProvider.hasItem(ingredient), FabricRecipeProvider.conditionsFromItem(ingredient))
+                .criterion(FabricRecipeProvider.hasItem(baseHelmet), FabricRecipeProvider.conditionsFromItem(baseHelmet))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder
+                .create(RecipeCategory.MISC, baseChestplate)
+                .pattern("L L")
+                .pattern("WLW")
+                .pattern("WWW")
+                .input('W', wool)
+                .input('L', ingredient)
+                .criterion(FabricRecipeProvider.hasItem(ingredient), FabricRecipeProvider.conditionsFromItem(ingredient))
+                .criterion(FabricRecipeProvider.hasItem(baseChestplate), FabricRecipeProvider.conditionsFromItem(baseChestplate))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder
+                .create(RecipeCategory.MISC, baseLeggings)
+                .pattern("LLL")
+                .pattern("W W")
+                .pattern("W W")
+                .input('W', wool)
+                .input('L', ingredient)
+                .criterion(FabricRecipeProvider.hasItem(ingredient), FabricRecipeProvider.conditionsFromItem(ingredient))
+                .criterion(FabricRecipeProvider.hasItem(baseLeggings), FabricRecipeProvider.conditionsFromItem(baseLeggings))
+                .offerTo(exporter);
+        ShapedRecipeJsonBuilder
+                .create(RecipeCategory.MISC, baseBoots)
+                .pattern("L L")
+                .pattern("W W")
+                .input('W', wool)
+                .input('L', ingredient)
+                .criterion(FabricRecipeProvider.hasItem(ingredient), FabricRecipeProvider.conditionsFromItem(ingredient))
+                .criterion(FabricRecipeProvider.hasItem(baseBoots), FabricRecipeProvider.conditionsFromItem(baseBoots))
+                .offerTo(exporter);
+        // netherite set
+        RecipeProvider.offerNetheriteUpgradeRecipe(
+                exporter,
+                baseHelmet,
+                RecipeCategory.MISC,
+                netheriteHelmet
+        );
+        RecipeProvider.offerNetheriteUpgradeRecipe(
+                exporter,
+                baseChestplate,
+                RecipeCategory.MISC,
+                netheriteChestplate
+        );
+        RecipeProvider.offerNetheriteUpgradeRecipe(
+                exporter,
+                baseLeggings,
+                RecipeCategory.MISC,
+                netheriteLeggings
+        );
+        RecipeProvider.offerNetheriteUpgradeRecipe(
+                exporter,
+                baseBoots,
+                RecipeCategory.MISC,
+                netheriteBoots
+        );
     }
 }

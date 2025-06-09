@@ -9,10 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
-import net.minecraft.util.ClickType;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -26,6 +23,7 @@ public class IllusionContainerItem extends Item
                 new FabricItemSettings()
                         .fireproof()
                         .maxCount(1)
+                        .rarity(Rarity.EPIC)
         );
     }
 

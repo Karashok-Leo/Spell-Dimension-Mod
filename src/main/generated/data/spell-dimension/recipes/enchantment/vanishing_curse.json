@@ -1,0 +1,20 @@
+{
+  "type": "enchantment_infusion:enchantment_infusion",
+  "enchantment": "minecraft:vanishing_curse",
+  "force": false,
+  "ingredients": [
+    {
+      "item": "minecraft:lava_bucket"
+    },
+    {
+      "item": "minecraft:cactus"
+    },
+    {
+      "item": "minecraft:ender_eye"
+    },
+    {
+      "tag": "minecraft:noteblock_top_instruments"
+    }
+  ],
+  "level": 1
+}

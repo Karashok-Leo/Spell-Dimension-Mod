@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "L": {
+      "item": "minecraft:lightning_rod"
+    },
+    "W": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "pattern": [
+    "  W",
+    " W ",
+    "WLW"
+  ],
+  "result": {
+    "item": "spell-dimension:lightning_robe_head"
+  },
+  "show_notification": true
+}

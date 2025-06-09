@@ -76,6 +76,7 @@ public class SDSimpleInfusionRecipes
         add(exporter, Items.LEATHER_BOOTS, ComplementItems.POSEIDITE.ingot(), ModItems.FLIPPERS.get().getDefaultStack());
         add(exporter, Items.LEATHER_BOOTS, Items.GRASS_BLOCK, ModItems.ROOTED_BOOTS.get().getDefaultStack());
         add(exporter, Items.LEATHER, Items.BLAZE_POWDER, ModItems.FIRE_GAUNTLET.get().getDefaultStack());
+        add(exporter, Items.REDSTONE_BLOCK, MythicItems.STORMYX.getIngot(), ModItems.SHOCK_PENDANT.get().getDefaultStack());
 
         ItemStack stormyxShell = MythicItems.Mats.STORMYX_SHELL.getDefaultStack();
         new SimpleInfusionRecipeBuilder()

@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "l2hostility:eternal",
+    "l2hostility:projectile_reject",
+    "l2hostility:fire_reject",
+    "l2hostility:environment_reject",
+    "l2hostility:explosion_reject",
+    "l2hostility:magic_reject",
+    "l2hostility:invincible",
+    "l2hostility:owner_protection"
+  ]
+}

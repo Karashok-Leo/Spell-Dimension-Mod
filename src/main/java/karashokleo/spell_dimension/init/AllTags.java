@@ -389,6 +389,18 @@ public class AllTags
                 .add(DDEntities.STALKER)
                 .addTag(SCULK);
 
+        SpellDimension.ENCHANTMENT_TAGS.getOrCreateContainer(LHTags.NO_DISPELL)
+                .add(
+                        LHEnchantments.ETERNAL,
+                        LHEnchantments.ENCH_PROJECTILE,
+                        LHEnchantments.ENCH_FIRE,
+                        LHEnchantments.ENCH_ENVIRONMENT,
+                        LHEnchantments.ENCH_EXPLOSION,
+                        LHEnchantments.ENCH_MAGIC,
+                        LHEnchantments.ENCH_INVINCIBLE,
+                        LHEnchantments.ENCH_MATES
+                );
+
         SpellDimension.ENCHANTMENT_TAGS.getOrCreateContainer(LOOTABLE)
                 .add(
                         LHEnchantments.SHULKER_ARMOR,

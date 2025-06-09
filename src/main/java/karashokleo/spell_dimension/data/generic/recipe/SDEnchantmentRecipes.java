@@ -21,6 +21,7 @@ import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.enchantment.Enchantments_SpellEngine;
 import net.spell_power.api.SpellSchools;
@@ -539,6 +540,21 @@ public class SDEnchantmentRecipes
                     1,
                     exporter,
                     SpellDimension.modLoc("enchantment/spell_blade/haste")
+            );
+        }
+
+        // Vanilla
+        {
+            EIRecipeUtil.set(
+                    builder -> builder
+                            .withPedestalItem(1, Items.LAVA_BUCKET)
+                            .withPedestalItem(1, Items.CACTUS)
+                            .withPedestalItem(1, Items.ENDER_EYE)
+                            .withPedestalItem(1, Ingredient.fromTag(ItemTags.NOTEBLOCK_TOP_INSTRUMENTS)),
+                    Enchantments.VANISHING_CURSE,
+                    1,
+                    exporter,
+                    SpellDimension.modLoc("enchantment/vanishing_curse")
             );
         }
     }
