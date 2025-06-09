@@ -46,7 +46,8 @@ public class ProtectiveSpellContainerItem extends SpellContainerItem implements 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
-        tooltip.add(SDTexts.TOOLTIP$CONTAINER$SPELL.get().formatted(Formatting.AQUA));
+        tooltip.add(SDTexts.TOOLTIP$USE$CLICK.get().formatted(Formatting.GRAY));
+        tooltip.add(SDTexts.TOOLTIP$CONTAINER$SPELL.get().formatted(Formatting.GRAY));
         for (SpellSchool school : SchoolUtil.SCHOOLS)
         {
             int amount = getSchoolAmount(stack, school);

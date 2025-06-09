@@ -217,7 +217,7 @@ public class SDLocateRecipes
         addStructureTranslations(ILLUSIONER_TOWER, "幻术师高塔");
         addStructureTranslations(ILLAGER_FORT, "灾厄堡垒");
         addStructureTranslations(LABYRINTH, "地下迷宫");
-        addStructureTranslations(ANCIENT_TEMPLE, "远古神殿");
+        addStructureTranslations(ANCIENT_TEMPLE, "远古神庙");
         addStructureTranslations(GRAVE_RUINS, "死者遗迹");
         addStructureTranslations(LICH_PRISON, "巫妖之狱");
         addStructureTranslations(DESERT_TEMPLE, "沙漠神殿");

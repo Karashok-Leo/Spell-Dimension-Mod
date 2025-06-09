@@ -121,7 +121,13 @@ public class ConsciousnessCoreRenderer implements BlockEntityRenderer<Consciousn
 
     private static void renderBeamVertex(Matrix4f positionMatrix, Matrix3f normalMatrix, VertexConsumer vertices, float red, float green, float blue, float alpha, float y, float x, float z, float u, float v)
     {
-        vertices.vertex(positionMatrix, x, y, z).color(red, green, blue, alpha).texture(u, v).overlay(OverlayTexture.DEFAULT_UV).light(15728880).normal(normalMatrix, 0.0F, 1.0F, 0.0F).next();
+        vertices.vertex(positionMatrix, x, y, z)
+                .color(red, green, blue, alpha)
+                .texture(u, v)
+                .overlay(OverlayTexture.DEFAULT_UV)
+                .light(15728880)
+                .normal(normalMatrix, 0.0F, 1.0F, 0.0F)
+                .next();
     }
 
     public boolean rendersOutsideBoundingBox(ConsciousnessCoreTile ConsciousnessCoreTile)

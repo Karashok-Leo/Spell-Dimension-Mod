@@ -50,22 +50,10 @@ public class AllItems
     public static List<SpecifiedLootBagItem> RANDOM_GEAR = new ArrayList<>();
     public static List<SpecifiedLootBagItem> RANDOM_BOOK = new ArrayList<>();
 
-    public static SpellScrollItem SPELL_SCROLL;
-    public static EnlighteningEssenceItem ENLIGHTENING_ESSENCE;
-    public static EnchantedEssenceItem ENCHANTED_ESSENCE;
-    public static DisenchantedEssenceItem DISENCHANTED_ESSENCE;
-    public static MendingEssenceItem MENDING_ESSENCE;
     public static QuestScrollItem QUEST_SCROLL;
-    public static BrokenItem BROKEN_ITEM;
-    public static IllusionContainerItem ILLUSION_CONTAINER;
-    public static IllusionUpgradeItem ILLUSION_UPGRADE;
-    public static final UpgradeContainerType<IllusionUpgradeWrapper, IllusionUpgradeContainer> REFORGE_TYPE = new UpgradeContainerType<>(IllusionUpgradeContainer::new);
-
-    // Stage Items
-    public static Item ABYSS_GUARD;
-    public static Item ACCURSED_BLACKSTONE;
-    public static Item CELESTIAL_DEBRIS;
-    public static EndStageItem CELESTIAL_LUMINARY;
+    public static SpellScrollItem SPELL_SCROLL;
+    public static EnchantedEssenceItem ENCHANTED_ESSENCE;
+    public static EnlighteningEssenceItem ENLIGHTENING_ESSENCE;
 
     // Endgame Trinkets
     public static ArmorOfConvergenceItem ARMOR_OF_CONVERGENCE;
@@ -80,6 +68,13 @@ public class AllItems
     public static MacroElectronItem MACRO_ELECTRON;
     public static RebirthSigilItem REBIRTH_SIGIL;
     public static MeritRegisterItem MERIT_REGISTER;
+
+    public static ProtectiveSpellContainerItem SPELL_CONTAINER;
+    public static IllusionContainerItem ILLUSION_CONTAINER;
+    public static IllusionUpgradeItem ILLUSION_UPGRADE;
+    public static final UpgradeContainerType<IllusionUpgradeWrapper, IllusionUpgradeContainer> REFORGE_TYPE = new UpgradeContainerType<>(IllusionUpgradeContainer::new);
+    public static SpellPrismItem SPELL_PRISM;
+    public static MirageReflectorItem MIRAGE_REFLECTOR;
 
     // Breastplates
     public static AtomicBreastplateItem ATOMIC_BREASTPLATE;
@@ -96,17 +91,23 @@ public class AllItems
     public static SecondarySchoolItem ELECTRIC_SPARK;
     public static SecondarySchoolItem EQUINOX_FLOWER;
 
+    // Stage Items
+    public static Item ABYSS_GUARD;
+    public static Item ACCURSED_BLACKSTONE;
+    public static Item CELESTIAL_DEBRIS;
+    public static EndStageItem CELESTIAL_LUMINARY;
+
     // Misc Items
     public static Item DEBUG_STAFF;
+    public static DisenchantedEssenceItem DISENCHANTED_ESSENCE;
+    public static MendingEssenceItem MENDING_ESSENCE;
+    public static BrokenItem BROKEN_ITEM;
     public static SpawnerSoulItem SPAWNER_SOUL;
-    public static ProtectiveSpellContainerItem SPELL_CONTAINER;
     public static MagicMirrorItem MAGIC_MIRROR;
     public static MagicMirrorItem BROKEN_MAGIC_MIRROR;
     public static BottleOfNightmare BOTTLE_NIGHTMARE;
     public static BottleOfSoulBinding BOTTLE_SOUL_BINDING;
-    public static SpellPrismItem SPELL_PRISM;
     public static CursedAppleItem CURED_APPLE;
-    public static MirageReflectorItem MIRAGE_REFLECTOR;
     public static MedalItem MEDAL;
 
     public static void register()
@@ -126,52 +127,224 @@ public class AllItems
             RANDOM_BOOK.add(registerRandomLoot(tier, "book"));
         }
 
-        SPELL_SCROLL = Entry.of("spell_scroll", new SpellScrollItem())
-                .addModel()
-                .register();
-        ENLIGHTENING_ESSENCE = Entry.of("enlightening_essence", new EnlighteningEssenceItem())
-                .addModel()
-                .register();
-        ENCHANTED_ESSENCE = Entry.of("enchanted_essence", new EnchantedEssenceItem())
-                .addModel()
-                .register();
-        DISENCHANTED_ESSENCE = Entry.of("disenchanted_essence", new DisenchantedEssenceItem())
-                .addEN()
-                .addZH("祛魔精华")
-                .setTab(AllGroups.MISC)
-                .addModel()
-                .register();
-        MENDING_ESSENCE = Entry.of("mending_essence", new MendingEssenceItem())
-                .addEN()
-                .addZH("修复精华")
-                .setTab(AllGroups.MISC)
-                .addModel()
-                .register();
         QUEST_SCROLL = Entry.of("quest_scroll", new QuestScrollItem())
                 .addEN()
                 .addZH("任务卷轴")
                 .addModel()
                 .register();
-        BROKEN_ITEM = Entry.of("broken_item", new BrokenItem())
+        SPELL_SCROLL = Entry.of("spell_scroll", new SpellScrollItem())
+                .addModel()
+                .register();
+        ENCHANTED_ESSENCE = Entry.of("enchanted_essence", new EnchantedEssenceItem())
+                .addModel()
+                .register();
+        ENLIGHTENING_ESSENCE = Entry.of("enlightening_essence", new EnlighteningEssenceItem())
+                .addModel()
+                .register();
+
+        // Endgame Trinkets
+        ARMOR_OF_CONVERGENCE = Entry.of(
+                        "armor_of_convergence",
+                        new ArmorOfConvergenceItem()
+                )
                 .addEN()
-                .addZH("损坏的物品")
-                .addTag(LHTags.NO_SEAL)
-                .addModel(Models.HANDHELD)
+                .addZH("汇聚甲胄")
+                .addTag(LHTags.BACK_SLOT, AllTags.ENDGAME_TRINKETS)
+                .setTab(AllGroups.EQUIPMENTS)
+                .addModel()
+                .register();
+        ARCANE_THRONE = Entry.of("arcane_throne", new ArcaneThroneItem())
+                .addEN()
+                .addZH("秘术王座")
+                .addTag(LHTags.CURSE_SLOT, AllTags.ENDGAME_TRINKETS)
+                .setTab(AllGroups.EQUIPMENTS)
+                .addModel()
+                .register();
+        NIRVANA_STARFALL = Entry.of("nirvana_starfall", new NirvanaStarfallItem())
+                .addEN()
+                .addZH("涅槃星陨")
+                .addTag(AllTags.BELT, AllTags.ENDGAME_TRINKETS)
+                .setTab(AllGroups.EQUIPMENTS)
+                .addModel()
+                .register();
+        SOULFIRE_MASK = Entry.of("soulfire_mask", new SoulfireMaskItem())
+                .addEN()
+                .addZH("燃魂假面")
+                .addTag(LHTags.FACE_SLOT, AllTags.ENDGAME_TRINKETS)
+                .setTab(AllGroups.EQUIPMENTS)
+                .addModel()
+                .register();
+        GLACIAL_NUCLEAR_ERA = Entry.of("glacial_nuclear_era", new GlacialNuclearEraItem())
+                .addEN()
+                .addZH("冰核世纪")
+                .addTag(AllTags.NECKLACE, AllTags.ENDGAME_TRINKETS)
+                .setTab(AllGroups.EQUIPMENTS)
+                .addModel()
+                .register();
+        FROSTBITE_DOME = Entry.of("frostbite_dome", new FrostbiteDomeItem())
+                .addEN()
+                .addZH("冰点穹狱")
+                .addTag(AllTags.GLOVE, AllTags.ENDGAME_TRINKETS)
+                .setTab(AllGroups.EQUIPMENTS)
+                .addModel()
+                .register();
+        HEART_SPELL_STEEL = Entry.of("heart_spell_steel", new HeartSpellSteelItem())
+                .addEN()
+                .addZH("心之魔钢")
+                .addTag(AllTags.CAPE, AllTags.ENDGAME_TRINKETS)
+                .setTab(AllGroups.EQUIPMENTS)
+                .addModel()
+                .register();
+        REJUVENATING_BLOSSOM = Entry.of("rejuvenating_blossom", new RejuvenatingBlossomItem())
+                .addEN()
+                .addZH("复苏绽放")
+                .addTag(LHTags.CHARM_SLOT, AllTags.ENDGAME_TRINKETS)
+                .setTab(AllGroups.EQUIPMENTS)
+                .addModel()
+                .register();
+        SUPERCONDUCTOR = Entry.of("superconductor", new SuperconductorItem())
+                .addEN()
+                .addZH("超导体")
+                .addTag(AllTags.BELT, AllTags.ENDGAME_TRINKETS)
+                .setTab(AllGroups.EQUIPMENTS)
+                .addModel()
+                .register();
+        MACRO_ELECTRON = Entry.of("macro_electron", new MacroElectronItem())
+                .addEN()
+                .addZH("宏电子")
+                .addTag(LHTags.HAND_SLOT, AllTags.ENDGAME_TRINKETS)
+                .setTab(AllGroups.EQUIPMENTS)
+                .register();
+        REBIRTH_SIGIL = Entry.of("rebirth_sigil", new RebirthSigilItem())
+                .addEN()
+                .addZH("往生印")
+                .addTag(LHTags.BACK_SLOT, AllTags.ENDGAME_TRINKETS)
+//                .setTab(AllGroups.EQUIPMENTS)
+                .addModel()
+                .register();
+        MERIT_REGISTER = Entry.of("merit_register", new MeritRegisterItem())
+                .addEN()
+                .addZH("功德簿")
+                .addTag(LHTags.CURSE_SLOT, AllTags.ENDGAME_TRINKETS)
+//                .setTab(AllGroups.EQUIPMENTS)
+                .addModel()
+                .register();
+
+        SPELL_CONTAINER = Entry.of("spell_container", new ProtectiveSpellContainerItem())
+                .addEN()
+                .addZH("法术容器")
+                .addTag(AllTags.BELT)
+                .setTab(AllGroups.EQUIPMENTS)
+                .addModel()
                 .register();
         ILLUSION_CONTAINER = Entry.of("illusion_container", new IllusionContainerItem())
                 .addEN()
                 .addZH("幻化容器")
-                .setTab(AllGroups.MISC)
+                .setTab(AllGroups.EQUIPMENTS)
                 .addModel()
                 .register();
         ILLUSION_UPGRADE = Entry.of("illusion_upgrade", new IllusionUpgradeItem())
                 .addEN()
                 .addZH("幻化升级")
-                .setTab(AllGroups.MISC)
+                .setTab(AllGroups.EQUIPMENTS)
                 .addTag(ModItems.BACKPACK_UPGRADE_TAG)
                 .addModel()
                 .register();
         UpgradeContainerRegistry.register(ILLUSION_UPGRADE, REFORGE_TYPE);
+        SPELL_PRISM = Entry.of("spell_prism", new SpellPrismItem())
+                .addEN()
+                .addZH("法术棱镜")
+                .setTab(AllGroups.EQUIPMENTS)
+                .addModel()
+                .register();
+        MIRAGE_REFLECTOR = Entry.of("mirage_reflector", new MirageReflectorItem())
+                .addEN()
+                .addZH("逆转璇玑")
+                .addTag(LHTags.CURSE_SLOT, LHTags.NO_SEAL)
+                .setTab(AllGroups.EQUIPMENTS)
+                .addModel()
+                .register();
+
+        // Breastplates
+        ATOMIC_BREASTPLATE = Entry.of("atomic_breastplate", new AtomicBreastplateItem())
+                .addEN()
+                .addZH("原子护心镜")
+                .addTag(AllTags.BREASTPLATE_SLOT)
+                .setTab(AllGroups.EQUIPMENTS)
+                .addModel()
+                .register();
+        ENCHANTED_BREASTPLATE = Entry.of("enchanted_breastplate", new EnchantedBreastplateItem())
+                .addEN()
+                .addZH("束魔护心镜")
+                .addTag(AllTags.BREASTPLATE_SLOT)
+                .setTab(AllGroups.EQUIPMENTS)
+                .addModel()
+                .register();
+        FLEX_BREASTPLATE = Entry.of("flex_breastplate", new FlexBreastplateItem())
+                .addEN()
+                .addZH("曲御护心镜")
+                .addTag(AllTags.BREASTPLATE_SLOT)
+                .setTab(AllGroups.EQUIPMENTS)
+                .addModel()
+                .register();
+        FLICKER_BREASTPLATE = Entry.of("flicker_breastplate", new FlickerBreastplateItem())
+                .addEN()
+                .addZH("闪曳护心镜")
+                .addTag(AllTags.BREASTPLATE_SLOT)
+                .setTab(AllGroups.EQUIPMENTS)
+                .addModel()
+                .register();
+        OBLIVION_BREASTPLATE = Entry.of("oblivion_breastplate", new OblivionBreastplateItem())
+                .addEN()
+                .addZH("湮灭护心镜")
+                .addTag(AllTags.BREASTPLATE_SLOT)
+                .setTab(AllGroups.EQUIPMENTS)
+                .addModel()
+                .register();
+
+        // Secondary School Items
+        RIDDLE_BOOK = Entry.of("riddle_book", new SecondarySchoolItem(SpellSchools.ARCANE))
+                .addEN()
+                .addZH("谜语书")
+                .addTag(AllTags.SECONDARY_SCHOOL_SLOT)
+                .setTab(AllGroups.EQUIPMENTS)
+                .addModel()
+                .register();
+        BLISS_FLAME = Entry.of("bliss_flame", new SecondarySchoolItem(SpellSchools.FIRE))
+                .addEN()
+                .addZH("极乐火")
+                .addTag(AllTags.SECONDARY_SCHOOL_SLOT)
+                .setTab(AllGroups.EQUIPMENTS)
+                .addModel()
+                .register();
+        ICE_CUBE = Entry.of("ice_cube", new SecondarySchoolItem(SpellSchools.FROST))
+                .addEN()
+                .addZH("冰立方")
+                .addTag(AllTags.SECONDARY_SCHOOL_SLOT)
+                .setTab(AllGroups.EQUIPMENTS)
+                .addModel()
+                .register();
+        FATE_STONE = Entry.of("fate_stone", new SecondarySchoolItem(SpellSchools.HEALING))
+                .addEN()
+                .addZH("命理石")
+                .addTag(AllTags.SECONDARY_SCHOOL_SLOT)
+                .setTab(AllGroups.EQUIPMENTS)
+                .addModel()
+                .register();
+        ELECTRIC_SPARK = Entry.of("electric_spark", new SecondarySchoolItem(SpellSchools.LIGHTNING))
+                .addEN()
+                .addZH("电火花")
+                .addTag(AllTags.SECONDARY_SCHOOL_SLOT)
+                .setTab(AllGroups.EQUIPMENTS)
+                .addModel()
+                .register();
+        EQUINOX_FLOWER = Entry.of("equinox_flower", new SecondarySchoolItem(SpellSchools.SOUL))
+                .addEN()
+                .addZH("彼岸花")
+                .addTag(AllTags.SECONDARY_SCHOOL_SLOT)
+//                .setTab(AllGroups.EQUIPMENTS)
+                .addModel()
+                .register();
 
         // Stage Items
         ABYSS_GUARD = Entry.of("abyss_guard", new NetherStarItem(new FabricItemSettings().fireproof().maxCount(1).rarity(Rarity.EPIC)))
@@ -199,176 +372,6 @@ public class AllItems
                 .addModel()
                 .register();
 
-        // Endgame Trinkets
-        ARMOR_OF_CONVERGENCE = Entry.of(
-                        "armor_of_convergence",
-                        new ArmorOfConvergenceItem()
-                )
-                .addEN()
-                .addZH("汇聚甲胄")
-                .addTag(LHTags.BACK_SLOT, AllTags.ENDGAME_TRINKETS)
-                .setTab(AllGroups.MISC)
-                .addModel()
-                .register();
-        ARCANE_THRONE = Entry.of("arcane_throne", new ArcaneThroneItem())
-                .addEN()
-                .addZH("秘术王座")
-                .addTag(LHTags.CURSE_SLOT, AllTags.ENDGAME_TRINKETS)
-                .setTab(AllGroups.MISC)
-                .addModel()
-                .register();
-        NIRVANA_STARFALL = Entry.of("nirvana_starfall", new NirvanaStarfallItem())
-                .addEN()
-                .addZH("涅槃星陨")
-                .addTag(AllTags.BELT, AllTags.ENDGAME_TRINKETS)
-                .setTab(AllGroups.MISC)
-                .addModel()
-                .register();
-        SOULFIRE_MASK = Entry.of("soulfire_mask", new SoulfireMaskItem())
-                .addEN()
-                .addZH("燃魂假面")
-                .addTag(LHTags.FACE_SLOT, AllTags.ENDGAME_TRINKETS)
-                .setTab(AllGroups.MISC)
-                .addModel()
-                .register();
-        GLACIAL_NUCLEAR_ERA = Entry.of("glacial_nuclear_era", new GlacialNuclearEraItem())
-                .addEN()
-                .addZH("冰核世纪")
-                .addTag(AllTags.NECKLACE, AllTags.ENDGAME_TRINKETS)
-                .setTab(AllGroups.MISC)
-                .addModel()
-                .register();
-        FROSTBITE_DOME = Entry.of("frostbite_dome", new FrostbiteDomeItem())
-                .addEN()
-                .addZH("冰点穹狱")
-                .addTag(AllTags.GLOVE, AllTags.ENDGAME_TRINKETS)
-                .setTab(AllGroups.MISC)
-                .addModel()
-                .register();
-        HEART_SPELL_STEEL = Entry.of("heart_spell_steel", new HeartSpellSteelItem())
-                .addEN()
-                .addZH("心之魔钢")
-                .addTag(AllTags.CAPE, AllTags.ENDGAME_TRINKETS)
-                .setTab(AllGroups.MISC)
-                .addModel()
-                .register();
-        REJUVENATING_BLOSSOM = Entry.of("rejuvenating_blossom", new RejuvenatingBlossomItem())
-                .addEN()
-                .addZH("复苏绽放")
-                .addTag(LHTags.CHARM_SLOT, AllTags.ENDGAME_TRINKETS)
-                .setTab(AllGroups.MISC)
-                .addModel()
-                .register();
-        SUPERCONDUCTOR = Entry.of("superconductor", new SuperconductorItem())
-                .addEN()
-                .addZH("超导体")
-                .addTag(AllTags.BELT, AllTags.ENDGAME_TRINKETS)
-                .setTab(AllGroups.MISC)
-                .addModel()
-                .register();
-        MACRO_ELECTRON = Entry.of("macro_electron", new MacroElectronItem())
-                .addEN()
-                .addZH("宏电子")
-                .addTag(LHTags.HAND_SLOT, AllTags.ENDGAME_TRINKETS)
-                .setTab(AllGroups.MISC)
-                .addModel()
-                .register();
-        REBIRTH_SIGIL = Entry.of("rebirth_sigil", new RebirthSigilItem())
-                .addEN()
-                .addZH("往生印")
-                .addTag(LHTags.BACK_SLOT, AllTags.ENDGAME_TRINKETS)
-                .setTab(AllGroups.MISC)
-                .addModel()
-                .register();
-        MERIT_REGISTER = Entry.of("merit_register", new MeritRegisterItem())
-                .addEN()
-                .addZH("功德簿")
-                .addTag(LHTags.CURSE_SLOT, AllTags.ENDGAME_TRINKETS)
-                .setTab(AllGroups.MISC)
-                .addModel()
-                .register();
-
-        // Breastplates
-        ATOMIC_BREASTPLATE = Entry.of("atomic_breastplate", new AtomicBreastplateItem())
-                .addEN()
-                .addZH("原子护心镜")
-                .addTag(AllTags.BREASTPLATE_SLOT)
-                .setTab(AllGroups.MISC)
-                .addModel()
-                .register();
-        ENCHANTED_BREASTPLATE = Entry.of("enchanted_breastplate", new EnchantedBreastplateItem())
-                .addEN()
-                .addZH("束魔护心镜")
-                .addTag(AllTags.BREASTPLATE_SLOT)
-                .setTab(AllGroups.MISC)
-                .addModel()
-                .register();
-        FLEX_BREASTPLATE = Entry.of("flex_breastplate", new FlexBreastplateItem())
-                .addEN()
-                .addZH("曲御护心镜")
-                .addTag(AllTags.BREASTPLATE_SLOT)
-                .setTab(AllGroups.MISC)
-                .addModel()
-                .register();
-        FLICKER_BREASTPLATE = Entry.of("flicker_breastplate", new FlickerBreastplateItem())
-                .addEN()
-                .addZH("闪曳护心镜")
-                .addTag(AllTags.BREASTPLATE_SLOT)
-                .setTab(AllGroups.MISC)
-                .addModel()
-                .register();
-        OBLIVION_BREASTPLATE = Entry.of("oblivion_breastplate", new OblivionBreastplateItem())
-                .addEN()
-                .addZH("湮灭护心镜")
-                .addTag(AllTags.BREASTPLATE_SLOT)
-                .setTab(AllGroups.MISC)
-                .addModel()
-                .register();
-
-        // Secondary School Items
-        RIDDLE_BOOK = Entry.of("riddle_book", new SecondarySchoolItem(SpellSchools.ARCANE))
-                .addEN()
-                .addZH("谜语书")
-                .addTag(AllTags.SECONDARY_SCHOOL_SLOT)
-                .setTab(AllGroups.MISC)
-                .addModel()
-                .register();
-        BLISS_FLAME = Entry.of("bliss_flame", new SecondarySchoolItem(SpellSchools.FIRE))
-                .addEN()
-                .addZH("极乐火")
-                .addTag(AllTags.SECONDARY_SCHOOL_SLOT)
-                .setTab(AllGroups.MISC)
-                .addModel()
-                .register();
-        ICE_CUBE = Entry.of("ice_cube", new SecondarySchoolItem(SpellSchools.FROST))
-                .addEN()
-                .addZH("冰立方")
-                .addTag(AllTags.SECONDARY_SCHOOL_SLOT)
-                .setTab(AllGroups.MISC)
-                .addModel()
-                .register();
-        FATE_STONE = Entry.of("fate_stone", new SecondarySchoolItem(SpellSchools.HEALING))
-                .addEN()
-                .addZH("命理石")
-                .addTag(AllTags.SECONDARY_SCHOOL_SLOT)
-                .setTab(AllGroups.MISC)
-                .addModel()
-                .register();
-        ELECTRIC_SPARK = Entry.of("electric_spark", new SecondarySchoolItem(SpellSchools.LIGHTNING))
-                .addEN()
-                .addZH("电火花")
-                .addTag(AllTags.SECONDARY_SCHOOL_SLOT)
-                .setTab(AllGroups.MISC)
-                .addModel()
-                .register();
-        EQUINOX_FLOWER = Entry.of("equinox_flower", new SecondarySchoolItem(SpellSchools.SOUL))
-                .addEN()
-                .addZH("彼岸花")
-                .addTag(AllTags.SECONDARY_SCHOOL_SLOT)
-                .setTab(AllGroups.MISC)
-                .addModel()
-                .register();
-
         // Misc Items
         DEBUG_STAFF = Entry.of("debug_staff", new Item(new FabricItemSettings().maxCount(1)))
                 .addEN()
@@ -376,16 +379,27 @@ public class AllItems
                 .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
-        SPAWNER_SOUL = Entry.of("spawner_soul", new SpawnerSoulItem())
+        DISENCHANTED_ESSENCE = Entry.of("disenchanted_essence", new DisenchantedEssenceItem())
                 .addEN()
-                .addZH("笼中魄")
+                .addZH("祛魔精华")
                 .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
-        SPELL_CONTAINER = Entry.of("spell_container", new ProtectiveSpellContainerItem())
+        MENDING_ESSENCE = Entry.of("mending_essence", new MendingEssenceItem())
                 .addEN()
-                .addZH("法术容器")
-                .addTag(AllTags.BELT)
+                .addZH("修复精华")
+                .setTab(AllGroups.MISC)
+                .addModel()
+                .register();
+        BROKEN_ITEM = Entry.of("broken_item", new BrokenItem())
+                .addEN()
+                .addZH("损坏的物品")
+                .addTag(LHTags.NO_SEAL)
+                .addModel(Models.HANDHELD)
+                .register();
+        SPAWNER_SOUL = Entry.of("spawner_soul", new SpawnerSoulItem())
+                .addEN()
+                .addZH("笼中魄")
                 .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
@@ -429,22 +443,9 @@ public class AllItems
                 .setTab(AllGroups.MISC)
                 .addModel()
                 .register();
-        SPELL_PRISM = Entry.of("spell_prism", new SpellPrismItem())
-                .addEN()
-                .addZH("法术棱镜")
-                .setTab(AllGroups.MISC)
-                .addModel()
-                .register();
         CURED_APPLE = Entry.of("cursed_apple", new CursedAppleItem())
                 .addEN()
                 .addZH("诅咒禁果")
-                .setTab(AllGroups.MISC)
-                .addModel()
-                .register();
-        MIRAGE_REFLECTOR = Entry.of("mirage_reflector", new MirageReflectorItem())
-                .addEN()
-                .addZH("逆转璇玑")
-                .addTag(LHTags.CURSE_SLOT, LHTags.NO_SEAL)
                 .setTab(AllGroups.MISC)
                 .addModel()
                 .register();

@@ -80,6 +80,9 @@ public class SpellDimensionClient implements ClientModInitializer
         EntityRendererRegistry.register(AllEntities.BLACK_HOLE, BlackHoleRenderer::new);
         EntityRendererRegistry.register(AllEntities.CHAIN_LIGHTNING, EmptyEntityRenderer::new);
         EntityRendererRegistry.register(AllEntities.BALL_LIGHTNING, BallLightningRenderer::new);
+        EntityRendererRegistry.register(AllEntities.RAILGUN, RailgunRenderer::new);
+
+        BuiltinItemRendererRegistry.INSTANCE.register(AllItems.MACRO_ELECTRON, new MacroElectronRenderer());
 
         EntityModelLayerRegistry.registerModelLayer(BallLightningRenderer.MODEL_LAYER_LOCATION, BallLightningRenderer::createBodyLayer);
 
@@ -105,6 +108,7 @@ public class SpellDimensionClient implements ClientModInitializer
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, entityRenderer, registrationHelper, context) ->
         {
             registrationHelper.register(new NucleusRenderer<>(entityRenderer));
+            registrationHelper.register(new QuantumFieldRenderer<>(entityRenderer));
             if (entityRenderer instanceof MobEntityRenderer<?, ?> mobEntityRenderer)
             {
                 registrationHelper.register(new MobBeamRenderer<>(mobEntityRenderer));

@@ -1,6 +1,8 @@
 package karashokleo.spell_dimension.content.spell;
 
+import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.spell_dimension.content.entity.BallLightningEntity;
+import karashokleo.spell_dimension.init.AllItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.world.World;
@@ -17,7 +19,11 @@ public class BallLightningSpell
 //        if (!(target.get() instanceof LivingEntity living)) return;
 
         BallLightningEntity ballLightning = new BallLightningEntity(world, caster);
-        ballLightning.setPosition(caster.getPos().add(0, caster.getStandingEyeHeight() - ballLightning.getBoundingBox().getYLength() * .5f, 0));
+        if (TrinketCompat.hasItemInTrinket(caster, AllItems.MACRO_ELECTRON))
+        {
+            ballLightning.macro = true;
+        }
+        ballLightning.setPosition(caster.getPos().add(0, caster.getStandingEyeHeight() - ballLightning.getBoundingBox().getYLength() * 0.5f, 0));
         ballLightning.setVelocity(caster.getRotationVector().multiply(0.6f));
         world.spawnEntity(ballLightning);
     }

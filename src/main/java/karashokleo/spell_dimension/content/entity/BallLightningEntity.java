@@ -6,17 +6,21 @@ import karashokleo.spell_dimension.init.AllEntities;
 import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.util.DamageUtil;
 import karashokleo.spell_dimension.util.ImpactUtil;
+import karashokleo.spell_dimension.util.RandomUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
+import net.minecraft.inventory.Inventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.spell_engine.api.spell.ParticleBatch;
@@ -27,6 +31,7 @@ import net.spell_engine.internals.SpellRegistry;
 import net.spell_engine.particle.ParticleHelper;
 import net.spell_power.api.SpellSchools;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BallLightningEntity extends ProjectileEntity
@@ -64,6 +69,7 @@ public class BallLightningEntity extends ProjectileEntity
             ),
     };
 
+    public boolean macro = false;
     private int lifespan;
 
     public BallLightningEntity(World world, Entity owner)
@@ -92,6 +98,37 @@ public class BallLightningEntity extends ProjectileEntity
     {
         super.onBlockHit(blockHitResult);
 
+        if (macro)
+        {
+            World world = this.getWorld();
+            BlockPos blockPos = blockHitResult.getBlockPos();
+
+            ArrayList<Runnable> possibles = new ArrayList<>();
+            possibles.add(() -> world.breakBlock(blockPos, false));
+            if (world.getBlockEntity(blockPos) instanceof Inventory inventory)
+            {
+                int size = inventory.size();
+                for (int i = 0; i < size; i++)
+                {
+                    ItemStack stack = inventory.getStack(i);
+                    if (stack.isEmpty())
+                    {
+                        continue;
+                    }
+                    int finalI = i;
+                    possibles.add(() ->
+                    {
+                        inventory.removeStack(finalI);
+                        inventory.markDirty();
+                    });
+                }
+            }
+            Runnable runnable = RandomUtil.randomFromList(this.random, possibles);
+            runnable.run();
+            this.discard();
+            return;
+        }
+
         Vec3d velocity = this.getVelocity();
         switch (blockHitResult.getSide())
         {
@@ -100,7 +137,7 @@ public class BallLightningEntity extends ProjectileEntity
             case NORTH, SOUTH -> this.setVelocity(velocity.multiply(1, 1, -1));
         }
 
-        if (getOwner() instanceof PlayerEntity player)
+        if (this.getOwner() instanceof PlayerEntity player)
         {
             SpellContainer spellContainer = SpellContainerHelper.getEquipped(player.getMainHandStack(), player);
             if (spellContainer != null)
@@ -121,7 +158,27 @@ public class BallLightningEntity extends ProjectileEntity
             return;
         }
 
-        if (entityHitResult.getEntity() instanceof LivingEntity target &&
+        Entity entity = entityHitResult.getEntity();
+
+        if (macro && !(entity instanceof PlayerEntity))
+        {
+            ArrayList<Runnable> possibles = new ArrayList<>();
+            possibles.add(entity::discard);
+            for (ItemStack stack : entity.getItemsEquipped())
+            {
+                if (stack.isEmpty())
+                {
+                    continue;
+                }
+                possibles.add(() -> stack.setCount(0));
+            }
+            Runnable runnable = RandomUtil.randomFromList(this.random, possibles);
+            runnable.run();
+            this.discard();
+            return;
+        }
+
+        if (entity instanceof LivingEntity target &&
             getOwner() instanceof LivingEntity caster)
         {
             SpellInfo spellInfo = new SpellInfo(SpellRegistry.getSpell(AllSpells.BALL_LIGHTNING), AllSpells.BALL_LIGHTNING);
