@@ -48,13 +48,13 @@ public class SchoolEntry extends BaseEntryProvider
         this.lang().add(context.pageTitle(), "Spell School");
         this.lang().add(context.pageText(),
                 """
-                        There are six schools in the magic system, namely Arcane, Fire, Frost, Healing, Lightning, and Soul. The last two of these are only mastered by a very small number of people, as it is almost impossible to find information related to them.
+                        There are six schools in the magic system, namely Arcane, Fire, Frost, Healing, Lightning, and Soul. Of these, the Soul school is only mastered by a very small number of people, as it is almost impossible to find information related to it.
                         """
         );
         this.lang("zh_cn").add(context.pageTitle(), "魔法学派");
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        魔法体系中共有六大学派，分别为奥秘、火焰、寒冰、治愈、雷电、灵魂。其中最后两种只被极少数人掌握，因为几乎无法找到与其有关的资料。
+                        魔法体系中共有六大学派，分别为奥秘、火焰、寒冰、治愈、雷电、灵魂。其中灵魂学派只被极少数人掌握，因为几乎无法找到与其有关的资料。
                         """
         );
 

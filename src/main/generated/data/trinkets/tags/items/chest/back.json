@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "spell-dimension:armor_of_convergence",
-    "spell-dimension:rebirth_sigil"
+    "spell-dimension:armor_of_convergence"
   ]
 }

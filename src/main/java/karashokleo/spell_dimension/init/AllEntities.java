@@ -16,6 +16,7 @@ public class AllEntities
     public static EntityType<BlackHoleEntity> BLACK_HOLE;
     public static EntityType<ChainLightningEntity> CHAIN_LIGHTNING;
     public static EntityType<BallLightningEntity> BALL_LIGHTNING;
+    public static EntityType<RailgunEntity> RAILGUN;
 
     public static void register()
     {
@@ -50,10 +51,18 @@ public class AllEntities
                 .fireImmune()
                 .trackRangeChunks(4)
                 .build();
+        RAILGUN = FabricEntityTypeBuilder.<RailgunEntity>create()
+                .entityFactory(RailgunEntity::new)
+                .spawnGroup(SpawnGroup.MISC)
+                .dimensions(EntityDimensions.fixed(0.5f, 0.5f))
+                .fireImmune()
+                .trackRangeChunks(4)
+                .build();
         Registry.register(Registries.ENTITY_TYPE, SpellDimension.modLoc("locate_portal"), LOCATE_PORTAL);
         Registry.register(Registries.ENTITY_TYPE, SpellDimension.modLoc("consciousness_event"), CONSCIOUSNESS_EVENT);
         Registry.register(Registries.ENTITY_TYPE, SpellDimension.modLoc("black_hole"), BLACK_HOLE);
         Registry.register(Registries.ENTITY_TYPE, SpellDimension.modLoc("chain_lightning"), CHAIN_LIGHTNING);
         Registry.register(Registries.ENTITY_TYPE, SpellDimension.modLoc("ball_lightning"), BALL_LIGHTNING);
+        Registry.register(Registries.ENTITY_TYPE, SpellDimension.modLoc("railgun"), RAILGUN);
     }
 }

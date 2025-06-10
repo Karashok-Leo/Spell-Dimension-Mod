@@ -138,11 +138,17 @@ public class TraitEntry extends BaseEntryProvider
         this.lang().add(context.pageText(),
                 """
                         Arena: You can place or break blocks in arena with **Remote Manipulation** spell or **Remote Destruction** spell.
+                        \\
+                        \\
+                        Spell Trait: You can use **Ring of Divinity** or **Spell Container** to reduce enemy spell damage against you, and later in the game, you can become completely immune to enemy spell damage with the **Magic Immune** enchantment.
                         """
         );
         this.lang("zh_cn").add(context.pageText(),
                 """
                         领域压制: 你可以使用**远端操控**法术或者**远端瓦解**法术在领域内破坏或放置方块。
+                        \\
+                        \\
+                        法术词条: 你可以使用**圣光守护之戒**或者**法术容器**来降低敌人对你的法术伤害，在游戏后期，你可以通过**魔法免疫**来完全免疫敌人的法术伤害。
                         """
         );
         BookTextPageModel trait4 = BookTextPageModel

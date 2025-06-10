@@ -216,14 +216,14 @@ public class AllItems
         REBIRTH_SIGIL = Entry.of("rebirth_sigil", new RebirthSigilItem())
                 .addEN()
                 .addZH("往生印")
-                .addTag(LHTags.BACK_SLOT, AllTags.ENDGAME_TRINKETS)
+//                .addTag(LHTags.BACK_SLOT, AllTags.ENDGAME_TRINKETS)
 //                .setTab(AllGroups.EQUIPMENTS)
                 .addModel()
                 .register();
         MERIT_REGISTER = Entry.of("merit_register", new MeritRegisterItem())
                 .addEN()
                 .addZH("功德簿")
-                .addTag(LHTags.CURSE_SLOT, AllTags.ENDGAME_TRINKETS)
+//                .addTag(LHTags.CURSE_SLOT, AllTags.ENDGAME_TRINKETS)
 //                .setTab(AllGroups.EQUIPMENTS)
                 .addModel()
                 .register();
@@ -339,7 +339,7 @@ public class AllItems
         EQUINOX_FLOWER = Entry.of("equinox_flower", new SecondarySchoolItem(SpellSchools.SOUL))
                 .addEN()
                 .addZH("彼岸花")
-                .addTag(AllTags.SECONDARY_SCHOOL_SLOT)
+//                .addTag(AllTags.SECONDARY_SCHOOL_SLOT)
 //                .setTab(AllGroups.EQUIPMENTS)
                 .addModel()
                 .register();

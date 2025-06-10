@@ -26,8 +26,8 @@ public enum SpellTexts
     LOCATE(
             "Spell Locate",
             "魔力定位",
-            "Launch a spell, if it touches a lodestone, it will consume the item in your off-hand as a key item to find the corresponding structure or biome. If found, it will shatter the lodestone with a probability of 30%% to summon a portal to the corresponding structure or biome. Press U on Lodestone to view all recipes.",
-            "发射一道咒语，若其触碰到磁石，则会以消耗你副手的物品作为索引物，寻找相应的结构或群系。若找到，则有30%%的概率击碎磁石，召唤出一个通往对应结构或群系的传送门。对磁石按U可以查看所有配方。"
+            "Launch a spell, if it touches a lodestone, it will consume the item in your off-hand as a key item to find the corresponding structure or biome. If found, it will shatter the lodestone with a probability of 30%% to summon a portal to the corresponding structure or biome. Press U on Lodestone to view all recipes. Or search for the structure name in EMI/REI to find it.",
+            "发射一道咒语，若其触碰到磁石，则会以消耗你副手的物品作为索引物品，寻找相应的结构或群系。若找到，则有30%%的概率击碎磁石，召唤出一个通往对应结构或群系的传送门。对磁石按U可以查看所有配方。或者在EMI/REI中搜索结构名称进行查找。"
     ),
     SUMMON(
             "Spell Summon",
