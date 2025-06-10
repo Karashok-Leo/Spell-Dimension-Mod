@@ -6,17 +6,15 @@ import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
 import karashokleo.spell_dimension.SpellDimension;
+import karashokleo.spell_dimension.client.compat.LocationStack;
 import karashokleo.spell_dimension.content.recipe.locate.LocateRecipe;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllTags;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public record EMILocateRecipe(EmiIngredient input, Text spot, Text tooltip) implements EmiRecipe
+public record EMILocateRecipe(EmiIngredient input, LocationEmiStack location) implements EmiRecipe
 {
     public static final EmiIngredient WORKSTATION = EmiIngredient.of(AllTags.LOCATE_TARGET);
     public static final EmiStack SPELL_SCROLL = EmiStack.of(AllItems.SPELL_SCROLL.getStack(SpellDimension.modLoc("locate")));
@@ -25,8 +23,7 @@ public record EMILocateRecipe(EmiIngredient input, Text spot, Text tooltip) impl
     {
         this(
                 EmiIngredient.of(recipe.getIngredient()),
-                recipe.getTargetName(),
-                recipe.getWorldName().append(" - ").append(Text.of(recipe.getTargetId().toString()))
+                new LocationEmiStack(LocationStack.fromRecipe(recipe))
         );
     }
 
@@ -43,9 +40,9 @@ public record EMILocateRecipe(EmiIngredient input, Text spot, Text tooltip) impl
     }
 
     @Override
-    public @Nullable Identifier getId()
+    public Identifier getId()
     {
-        return null;
+        return location.getId();
     }
 
     @Override
@@ -57,39 +54,37 @@ public record EMILocateRecipe(EmiIngredient input, Text spot, Text tooltip) impl
     @Override
     public List<EmiStack> getOutputs()
     {
-        return List.of();
+        return List.of(location);
     }
 
     @Override
     public int getDisplayWidth()
     {
-        return 200;
+        return 84;
     }
 
     @Override
     public int getDisplayHeight()
     {
-        return 38;
+        return 26;
     }
 
     @Override
     public void addWidgets(WidgetHolder widgets)
     {
-        int centerX = widgets.getWidth() / 2;
+        int centerX = widgets.getWidth() / 2 + 1;
+        int centerY = 4;
 
-        widgets.addSlot(SPELL_SCROLL, centerX - 9 - 20, 4)
+        widgets.addSlot(input, centerX - 20 * 2, centerY);
+
+        widgets.addSlot(SPELL_SCROLL, centerX - 20, centerY)
                 .catalyst(true)
                 .drawBack(false);
 
-        widgets.addSlot(input, centerX - 9, 4);
-
-        widgets.addSlot(WORKSTATION, centerX - 9 + 20, 4)
+        widgets.addSlot(WORKSTATION, centerX, centerY)
                 .catalyst(true)
                 .drawBack(false);
 
-        int width = MinecraftClient.getInstance().textRenderer.getWidth(spot);
-        widgets.addText(spot, centerX - width / 2, 26, -1, true);
-
-        widgets.addTooltipText(List.of(tooltip), 0, 0, getDisplayWidth(), getDisplayHeight());
+        widgets.addSlot(location, centerX + 20, centerY);
     }
 }

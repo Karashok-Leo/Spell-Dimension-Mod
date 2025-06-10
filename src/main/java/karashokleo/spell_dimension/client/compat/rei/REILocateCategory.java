@@ -8,7 +8,9 @@ import karashokleo.spell_dimension.init.AllTags;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.gui.Renderer;
-import me.shedaniel.rei.api.client.gui.widgets.*;
+import me.shedaniel.rei.api.client.gui.widgets.Slot;
+import me.shedaniel.rei.api.client.gui.widgets.Widget;
+import me.shedaniel.rei.api.client.gui.widgets.Widgets;
 import me.shedaniel.rei.api.client.registry.display.DisplayCategory;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
@@ -26,37 +28,38 @@ public class REILocateCategory implements DisplayCategory<REILocateDisplay>
     @Override
     public List<Widget> setupDisplay(REILocateDisplay display, Rectangle bounds)
     {
-        Point startPoint = new Point(bounds.getCenterX(), bounds.getCenterY());
+        Point startPoint = new Point(bounds.getCenterX() + 2, bounds.getCenterY() - 9);
         List<Widget> widgets = Lists.newArrayList();
         widgets.add(Widgets.createRecipeBase(bounds));
-        Slot scroll = Widgets.createSlot(new Point(startPoint.x - 8 - 20, startPoint.y - 18)).entries(SPELL_SCROLL).noInteractable().disableBackground();
-        Slot input = Widgets.createSlot(new Point(startPoint.x - 8, startPoint.y - 18)).entries(display.input()).markInput();
-        Slot station = Widgets.createSlot(new Point(startPoint.x - 8 + 20, startPoint.y - 18)).entries(WORKSTATION).noInteractable().disableBackground();
-        Label destination = Widgets.createLabel(new Point(startPoint.x, startPoint.y + 6), display.spot()).shadow();
-        widgets.add(scroll);
+        Slot input = Widgets.createSlot(
+                new Point(startPoint.x - 20 * 2, startPoint.y)
+        ).entries(display.input()).markInput();
+        Slot scroll = Widgets.createSlot(
+                new Point(startPoint.x - 20, startPoint.y)
+        ).entries(SPELL_SCROLL).noInteractable().disableBackground();
+        Slot station = Widgets.createSlot(
+                new Point(startPoint.x, startPoint.y)
+        ).entries(WORKSTATION).noInteractable().disableBackground();
+        Slot location = Widgets.createSlot(
+                new Point(startPoint.x + 20, startPoint.y)
+        ).entry(display.location()).markOutput();
         widgets.add(input);
+        widgets.add(scroll);
         widgets.add(station);
-        widgets.add(destination);
-        widgets.add(Widgets.createTooltip(point ->
-                bounds.contains(point) &&
-                !(input.getBounds().contains(point) ||
-                  scroll.getBounds().contains(point) ||
-                  station.getBounds().contains(point) ||
-                  destination.getBounds().contains(point)) ?
-                        Tooltip.create(point, display.tooltip()) : null));
+        widgets.add(location);
         return widgets;
     }
 
     @Override
     public int getDisplayWidth(REILocateDisplay display)
     {
-        return 180;
+        return 100;
     }
 
     @Override
     public int getDisplayHeight()
     {
-        return 54;
+        return 36;
     }
 
     @Override

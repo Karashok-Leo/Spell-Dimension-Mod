@@ -12,7 +12,6 @@ import net.minecraft.registry.entry.RegistryEntryList;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.structure.Structure;
@@ -30,11 +29,9 @@ public class LocateStructureRecipe extends LocateRecipe
     }
 
     @Override
-    public MutableText getTargetName()
+    public LocationType getLocationType()
     {
-        return Text.translatable(
-                structure.toTranslationKey("structure").replace('/', '.')
-        ).formatted(Formatting.BOLD);
+        return LocationType.STRUCTURE;
     }
 
     @Override

@@ -11,7 +11,6 @@ import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
@@ -29,11 +28,9 @@ public class LocateBiomeRecipe extends LocateRecipe
     }
 
     @Override
-    public MutableText getTargetName()
+    public LocationType getLocationType()
     {
-        return Text.translatable(
-                biomeTag.toTranslationKey("biome").replace('/', '.')
-        ).formatted(Formatting.BOLD);
+        return LocationType.BIOME;
     }
 
     @Override

@@ -10,7 +10,6 @@ import net.minecraft.recipe.RecipeType;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.MutableText;
-import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -83,14 +82,17 @@ public abstract class LocateRecipe implements Recipe<PlayerInventory>
         return ingredient;
     }
 
-    public MutableText getWorldName()
+    public Identifier getWorldId()
     {
-        return Text.translatable(
-                world.toTranslationKey("travelerstitles")
-        );
+        return world;
     }
 
-    public abstract MutableText getTargetName();
+    public MutableText getTargetName()
+    {
+        return this.getLocationType().getName(this.getTargetId());
+    }
+
+    public abstract LocationType getLocationType();
 
     public abstract Identifier getTargetId();
 

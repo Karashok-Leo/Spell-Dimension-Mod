@@ -34,9 +34,15 @@ public class EMICompat implements EmiPlugin
 
         RecipeManager recipeManager = registry.getRecipeManager();
         for (LocateRecipe locateRecipe : recipeManager.listAllOfType(LocateRecipe.TYPE))
-            registry.addRecipe(new EMILocateRecipe(locateRecipe));
+        {
+            EMILocateRecipe recipe = new EMILocateRecipe(locateRecipe);
+            registry.addRecipe(recipe);
+            registry.addEmiStack(recipe.location());
+        }
         for (SummonRecipe summonRecipe : recipeManager.listAllOfType(SummonRecipe.TYPE))
+        {
             registry.addRecipe(new EMISummonRecipe(summonRecipe));
+        }
 
         registry.addWorkstation(LOCATE_CATEGORY, EMILocateRecipe.WORKSTATION);
         registry.addWorkstation(LOCATE_CATEGORY, EMILocateRecipe.SPELL_SCROLL);
