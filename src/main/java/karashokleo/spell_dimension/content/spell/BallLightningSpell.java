@@ -24,7 +24,7 @@ public class BallLightningSpell
             ballLightning.macro = true;
         }
         ballLightning.setPosition(caster.getPos().add(0, caster.getStandingEyeHeight() - ballLightning.getBoundingBox().getYLength() * 0.5f, 0));
-        ballLightning.setVelocity(caster.getRotationVector().multiply(0.6f));
+        ballLightning.setVelocity(caster.getRotationVector().multiply(0.7f));
         world.spawnEntity(ballLightning);
     }
 }

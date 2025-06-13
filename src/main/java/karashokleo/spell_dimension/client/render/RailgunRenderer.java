@@ -19,7 +19,7 @@ public class RailgunRenderer<T extends RailgunEntity> extends EntityRenderer<T>
 {
     public static final Identifier TEXTURE = SpellDimension.modLoc("textures/entity/railgun.png");
     private static final float TEXTURE_WIDTH = 256;
-    private static final float TEXTURE_HEIGHT = 32;
+    private static final float TEXTURE_HEIGHT = 64;
 
     public RailgunRenderer(EntityRendererFactory.Context ctx)
     {
@@ -40,7 +40,7 @@ public class RailgunRenderer<T extends RailgunEntity> extends EntityRenderer<T>
             return;
         }
 
-        int frame = (entity.age - entity.firedAge) % 6;
+        int frame = (entity.age - entity.firedAge) % 20;
 
         VertexConsumer buffer = vertexConsumers.getBuffer(getGlowingEffect(getTexture(entity)));
 
@@ -63,7 +63,6 @@ public class RailgunRenderer<T extends RailgunEntity> extends EntityRenderer<T>
                 .build(false);
         return RenderLayer.of("glow_effect", VertexFormats.POSITION_COLOR_TEXTURE_OVERLAY_LIGHT_NORMAL, VertexFormat.DrawMode.QUADS, 256, true, true, parameters);
     }
-
 
     //渲染四边形平面
     protected void renderFlatQuad(int frame, MatrixStack matrices, VertexConsumer vertexConsumer, int light, float size)

@@ -20,7 +20,7 @@ public class BallLightningRenderer extends EntityRenderer<BallLightningEntity>
             SpellDimension.modLoc("textures/entity/ball_lightning/ball_lightning_1.png"),
             SpellDimension.modLoc("textures/entity/ball_lightning/ball_lightning_2.png"),
             SpellDimension.modLoc("textures/entity/ball_lightning/ball_lightning_3.png"),
-            SpellDimension.modLoc("textures/entity/ball_lightning/ball_lightning_4.png")
+//            SpellDimension.modLoc("textures/entity/ball_lightning/ball_lightning_4.png")
     };
 
     private final ModelPart orb;

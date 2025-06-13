@@ -53,7 +53,7 @@ public class CraftQuests
                 .addEnFeedback("A forge controller made with stronger and more magically compatible materials, with which you can start crafting some truly magic-related items.")
                 .addZhFeedback("使用更加坚固和魔法兼容性更好的材料制作的冶炼炉控制器，使用它你可以开始制作一些真正与魔法相关的物品了。")
                 .toEntry("resource/alloy")
-                .addTag(AllTags.MAIN)
+                .addTag(AllTags.MAIN, AllTags.SKIPPABLE)
                 .addDependencies(FORGE_0)
                 .register();
         FORGE_2 = QuestBuilder.of(

@@ -12,6 +12,7 @@ import karashokleo.spell_dimension.content.network.S2CTitle;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllPackets;
+import karashokleo.spell_dimension.init.AllTags;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.client.item.TooltipData;
@@ -106,13 +107,17 @@ public class QuestScrollItem extends Item
                     {
                         player.sendMessage(SDTexts.TEXT$PROGRESS_ROLLBACK.get(), true);
                         QuestUsage.removeQuestsCompleted(player, quest);
-                    } else player.sendMessage(SDTexts.TEXT$QUEST$COMPLETED.get(), true);
+                    } else
+                    {
+                        player.sendMessage(SDTexts.TEXT$QUEST$COMPLETED.get(), true);
+                    }
                 }
                 // Do reward
                 else if (QuestUsage.allDependenciesCompleted(player, quest))
                 {
                     // Requirements met or creative mode
-                    if (quest.completeTasks(player) || creativeMode)
+                    if (quest.completeTasks(player) ||
+                        creativeMode)
                     {
                         quest.reward(player);
                         QuestUsage.addQuestsCompleted(player, quest);
@@ -133,11 +138,25 @@ public class QuestScrollItem extends Item
 //                        if (!creativeMode) stack.decrement(1);
                         AllItems.QUEST_SCROLL.setQuest(stack, null);
                     }
+                    // Skip branch quest
+                    else if (quest.isIn(AllTags.BRANCH))
+                    {
+                        QuestUsage.addQuestsCompleted(player, quest);
+                        player.sendMessage(SDTexts.TEXT$QUEST$SKIP.get(), true);
+                        world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENTITY_PLAYER_LEVELUP, player.getSoundCategory(), 1.0F, 1.0F);
+                        AllItems.QUEST_SCROLL.setQuest(stack, null);
+                    }
                     // Requirements not met
-                    else player.sendMessage(SDTexts.TEXT$QUEST$REQUIREMENT.get(), true);
+                    else
+                    {
+                        player.sendMessage(SDTexts.TEXT$QUEST$REQUIREMENT.get(), true);
+                    }
                 }
                 // Dependencies not completed
-                else player.sendMessage(SDTexts.TEXT$QUEST$DEPENDENCIES.get(), true);
+                else
+                {
+                    player.sendMessage(SDTexts.TEXT$QUEST$DEPENDENCIES.get(), true);
+                }
             }
             // Empty quest
             else
@@ -177,11 +196,7 @@ public class QuestScrollItem extends Item
         Optional<Quest> quest = this.getQuest(stack);
         if (quest.isPresent())
         {
-            quest.get().appendTooltip(world, tooltip);
-            tooltip.add(SDTexts.TOOLTIP$QUEST$COMPLETE.get().formatted(Formatting.GOLD));
-            tooltip.add(SDTexts.TOOLTIP$QUEST$RESELECT.get().formatted(Formatting.DARK_GREEN));
-            if (QuestToEntryConfig.hasEntry(quest.get()))
-                tooltip.add(SDTexts.TOOLTIP$QUEST$OPEN_ENTRY.get().formatted(Formatting.DARK_AQUA));
+            QuestUsage.appendQuestOperationTooltip(tooltip, world, quest.get());
         } else
         {
             tooltip.add(SDTexts.TOOLTIP$QUEST$VIEW_CURRENT.get());

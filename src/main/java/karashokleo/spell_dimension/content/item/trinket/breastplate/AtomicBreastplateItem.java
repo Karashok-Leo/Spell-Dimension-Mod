@@ -121,7 +121,7 @@ public class AtomicBreastplateItem extends SingleEpicTrinketItem implements Dama
                 AllItems.FLICKER_BREASTPLATE::getDefaultStack,
                 () -> ComplementItems.CAPTURED_WIND,
                 "FlickerProgress",
-                300,
+                100,
                 Formatting.GOLD,
                 SDTexts.TOOLTIP$ATOMIC_TO_FLICKER
         ),

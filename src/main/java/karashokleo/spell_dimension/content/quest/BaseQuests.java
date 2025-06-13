@@ -44,7 +44,7 @@ public class BaseQuests
                 .addEnFeedback("The rich magical environment and the inability to use magic directly in your physical body is driving you crazy, and it looks like you'll have to cast spells through these spell books. Good thing you have enough knowledge. You will need stronger mediums in the future.")
                 .addZhFeedback("富裕的魔力环境和无法直接使用魔力的体质让你抓狂，看来你只能通过这些法术书来施法了。好在你有足够的知识。未来你会需要更强的媒介。")
                 .toEntry("mage/bind")
-                .addTag(AllTags.MAIN)
+                .addTag(AllTags.MAIN, AllTags.SKIPPABLE)
                 .addDependencies(FIRST_DAY)
                 .register();
         KILL_TRAIT = QuestBuilder.of("kill_trait", new SimpleAdvancementQuest(

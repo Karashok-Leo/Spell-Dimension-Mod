@@ -52,6 +52,7 @@ public enum SDTexts
      * Quest
      */
     TEXT$QUEST$COMPLETE("Quest completed!", "任务完成！"),
+    TEXT$QUEST$SKIP("Quest skipped!", "已跳过该任务！"),
     TEXT$QUEST$COMPLETED("The quest has been completed", "该任务已完成"),
     TEXT$QUEST$ALL_COMPLETED("All quests have been completed", "所有任务已完成"),
     TEXT$QUEST$REQUIREMENT("Quest requirements not met!", "任务要求未达成！"),
@@ -162,7 +163,8 @@ public enum SDTexts
     TOOLTIP$BRACKETS("[%s]", "[%s]"),
     TOOLTIP$QUEST$TASK("Task:", "任务目标:"),
     TOOLTIP$QUEST$REWARD("Reward:", "任务奖励:"),
-    TOOLTIP$QUEST$COMPLETE("Right-click to submit", "右键提交任务"),
+    TOOLTIP$QUEST$SUBMIT("Right-click to submit", "右键提交任务"),
+    TOOLTIP$QUEST$SUBMIT_OR_SKIP("Right-click to submit or skip", "右键提交或跳过任务"),
     TOOLTIP$QUEST$OPEN_ENTRY("Shift + Right-click to open the related guide page", "Shift + 右键打开相关指引页面"),
     TOOLTIP$QUEST$OBTAIN_CURRENT("Right-click to obtain all current quests", "右键获取当前所有任务"),
     TOOLTIP$QUEST$VIEW_CURRENT("Right-click to view all current quests", "右键浏览当前所有任务"),
@@ -414,11 +416,13 @@ public enum SDTexts
         SpellDimension.EN_TEXTS.addText(QuestTag.getTagTranslationKey(AllTags.BEGINNING), "Beginning");
         SpellDimension.EN_TEXTS.addText(QuestTag.getTagTranslationKey(AllTags.END), "End");
         SpellDimension.EN_TEXTS.addText(QuestTag.getTagTranslationKey(AllTags.CHALLENGE), "Challenge");
+        SpellDimension.EN_TEXTS.addText(QuestTag.getTagTranslationKey(AllTags.SKIPPABLE), "Skippable");
         SpellDimension.ZH_TEXTS.addText(QuestTag.getTagTranslationKey(AllTags.MAIN), "主线");
         SpellDimension.ZH_TEXTS.addText(QuestTag.getTagTranslationKey(AllTags.BRANCH), "支线");
         SpellDimension.ZH_TEXTS.addText(QuestTag.getTagTranslationKey(AllTags.BEGINNING), "起点");
         SpellDimension.ZH_TEXTS.addText(QuestTag.getTagTranslationKey(AllTags.END), "终点");
         SpellDimension.ZH_TEXTS.addText(QuestTag.getTagTranslationKey(AllTags.CHALLENGE), "挑战");
+        SpellDimension.ZH_TEXTS.addText(QuestTag.getTagTranslationKey(AllTags.SKIPPABLE), "可跳过");
     }
 
     private static void addDeathMessageTranslation(SpellSchool school, String en, String zh)

@@ -143,6 +143,7 @@ public class AllTags
     public static final TagKey<Quest> BEGINNING = TagUtil.questTag("beginning");
     public static final TagKey<Quest> END = TagUtil.questTag("end");
     public static final TagKey<Quest> CHALLENGE = TagUtil.questTag("challenge");
+    public static final TagKey<Quest> SKIPPABLE = TagUtil.questTag("skippable");
 
     public static final TagKey<Biome> PRISMACHASM = TagUtil.biomeTag("prismachasm");
 

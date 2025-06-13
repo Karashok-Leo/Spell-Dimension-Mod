@@ -27,5 +27,6 @@ public class AllQuests
         QuestTag.configure(AllTags.BEGINNING, 66, Formatting.LIGHT_PURPLE);
         QuestTag.configure(AllTags.END, 66, Formatting.YELLOW);
         QuestTag.configure(AllTags.CHALLENGE, 66, Formatting.RED);
+        QuestTag.configure(AllTags.SKIPPABLE, 666, Formatting.GREEN);
     }
 }

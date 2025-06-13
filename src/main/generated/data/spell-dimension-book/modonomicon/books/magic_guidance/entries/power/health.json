@@ -5,7 +5,7 @@
   "description": "book.spell-dimension-book.magic_guidance.power.health.description",
   "hide_while_locked": false,
   "icon": {
-    "item": "minecraft:enchanted_golden_apple"
+    "item": "artifacts:crystal_heart"
   },
   "name": "book.spell-dimension-book.magic_guidance.power.health.name",
   "pages": [
@@ -21,16 +21,15 @@
       "use_markdown_in_title": false
     },
     {
-      "type": "modonomicon:spotlight",
+      "type": "modonomicon:text",
       "anchor": "",
       "condition": {
         "type": "modonomicon:none"
       },
-      "item": {
-        "tag": "spell-dimension:heart_food"
-      },
+      "show_title_separator": true,
       "text": "book.spell-dimension-book.magic_guidance.power.health.food.text",
-      "title": ""
+      "title": "",
+      "use_markdown_in_title": false
     },
     {
       "type": "modonomicon:text",

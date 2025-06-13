@@ -1,12 +1,19 @@
 package karashokleo.spell_dimension.api.quest;
 
+import karashokleo.spell_dimension.config.QuestToEntryConfig;
 import karashokleo.spell_dimension.content.component.QuestComponent;
+import karashokleo.spell_dimension.data.SDTexts;
+import karashokleo.spell_dimension.init.AllTags;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.World;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -82,5 +89,22 @@ public interface QuestUsage
     static Set<RegistryEntry<Quest>> getDependents(Quest quest)
     {
         return QuestRegistry.QUEST_GRAPH.successors(entry(quest));
+    }
+
+    static void appendQuestOperationTooltip(List<Text> tooltip, World world, Quest quest)
+    {
+        quest.appendTooltip(world, tooltip);
+        if (quest.isIn(AllTags.BRANCH))
+        {
+            tooltip.add(SDTexts.TOOLTIP$QUEST$SUBMIT_OR_SKIP.get().formatted(Formatting.GOLD));
+        } else
+        {
+            tooltip.add(SDTexts.TOOLTIP$QUEST$SUBMIT.get().formatted(Formatting.GOLD));
+        }
+        tooltip.add(SDTexts.TOOLTIP$QUEST$RESELECT.get().formatted(Formatting.DARK_GREEN));
+        if (QuestToEntryConfig.hasEntry(quest))
+        {
+            tooltip.add(SDTexts.TOOLTIP$QUEST$OPEN_ENTRY.get().formatted(Formatting.DARK_AQUA));
+        }
     }
 }
