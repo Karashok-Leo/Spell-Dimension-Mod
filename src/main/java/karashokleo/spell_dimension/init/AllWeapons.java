@@ -50,7 +50,11 @@ public class AllWeapons
                 )
                 .addEN()
                 .addZH("雷电魔杖")
-                .addTag(AllTags.WANDS)
+                .addTag(
+                        AllTags.WANDS,
+                        AllTags.MAGIC,
+                        AllTags.MAGIC_WEAPON
+                )
                 .addModel(Models.HANDHELD)
                 .setTab(AllGroups.EQUIPMENTS)
                 .register();
@@ -67,7 +71,11 @@ public class AllWeapons
                 )
                 .addEN()
                 .addZH("下界合金雷电魔杖")
-                .addTag(AllTags.WANDS)
+                .addTag(
+                        AllTags.WANDS,
+                        AllTags.MAGIC,
+                        AllTags.MAGIC_WEAPON
+                )
                 .addModel(Models.HANDHELD)
                 .setTab(AllGroups.EQUIPMENTS)
                 .register();
@@ -84,7 +92,12 @@ public class AllWeapons
                 )
                 .addEN()
                 .addZH("雷电权杖")
-                .addTag(AllTags.STAVES, AllTags.TIER_2_WEAPONS)
+                .addTag(
+                        AllTags.STAVES,
+                        AllTags.TIER_2_WEAPONS,
+                        AllTags.MAGIC,
+                        AllTags.MAGIC_WEAPON
+                )
                 .addModel(MEDIUM_STAFF_MODEL)
                 .setTab(AllGroups.EQUIPMENTS)
                 .register();
@@ -101,7 +114,12 @@ public class AllWeapons
                 )
                 .addEN()
                 .addZH("下界合金雷电权杖")
-                .addTag(AllTags.STAVES, AllTags.TIER_3_WEAPONS)
+                .addTag(
+                        AllTags.STAVES,
+                        AllTags.TIER_3_WEAPONS,
+                        AllTags.MAGIC,
+                        AllTags.MAGIC_WEAPON
+                )
                 .addModel(MEDIUM_STAFF_MODEL)
                 .setTab(AllGroups.EQUIPMENTS)
                 .register();
@@ -118,7 +136,11 @@ public class AllWeapons
 //                )
 //                .addEN()
 //                .addZH("灵魂魔杖")
-//                .addTag(AllTags.WANDS)
+//                .addTag(
+//                        AllTags.WANDS,
+//                        AllTags.MAGIC,
+//                        AllTags.MAGIC_WEAPON
+//                )
 //                .addModel(Models.HANDHELD)
 //                .setTab(AllGroups.EQUIPMENTS)
 //                .register();
@@ -135,7 +157,11 @@ public class AllWeapons
 //                )
 //                .addEN()
 //                .addZH("下界合金灵魂魔杖")
-//                .addTag(AllTags.WANDS)
+//                .addTag(
+//                        AllTags.WANDS,
+//                        AllTags.MAGIC,
+//                        AllTags.MAGIC_WEAPON
+//                )
 //                .addModel(Models.HANDHELD)
 //                .setTab(AllGroups.EQUIPMENTS)
 //                .register();
@@ -152,7 +178,12 @@ public class AllWeapons
 //                )
 //                .addEN()
 //                .addZH("灵魂权杖")
-//                .addTag(AllTags.STAVES, AllTags.TIER_2_WEAPONS)
+//                .addTag(
+//                        AllTags.STAVES,
+//                        AllTags.TIER_2_WEAPONS,
+//                        AllTags.MAGIC,
+//                        AllTags.MAGIC_WEAPON
+//                )
 //                .addModel(MEDIUM_STAFF_MODEL)
 //                .setTab(AllGroups.EQUIPMENTS)
 //                .register();
@@ -169,7 +200,12 @@ public class AllWeapons
 //                )
 //                .addEN()
 //                .addZH("下界合金灵魂权杖")
-//                .addTag(AllTags.STAVES, AllTags.TIER_3_WEAPONS)
+//                .addTag(
+//                        AllTags.STAVES,
+//                        AllTags.TIER_3_WEAPONS,
+//                        AllTags.MAGIC,
+//                        AllTags.MAGIC_WEAPON
+//                )
 //                .addModel(MEDIUM_STAFF_MODEL)
 //                .setTab(AllGroups.EQUIPMENTS)
 //                .register();

@@ -11,6 +11,7 @@ import net.minecraft.registry.tag.TagKey;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.function.BiFunction;
 
@@ -68,9 +69,10 @@ public class RobeBuilder
         return this;
     }
 
-    public RobeBuilder addTag(TagKey<Item> key)
+    @SafeVarargs
+    public final RobeBuilder addTag(TagKey<Item>... keys)
     {
-        this.tags.add(key);
+        this.tags.addAll(Arrays.asList(keys));
         return this;
     }
 

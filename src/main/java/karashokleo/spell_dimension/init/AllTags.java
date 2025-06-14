@@ -77,10 +77,12 @@ public class AllTags
     public static final TagKey<Item> HEART_FOOD = TagUtil.itemTag("heart_food");
     public static final TagKey<Item> ENDGAME_TRINKETS = TagUtil.itemTag("endgame_trinkets");
 
+    // Equipment Standard
     public static final TagKey<Item> ARMOR = TagUtil.itemTag(new Identifier("equipment_standard:armor"));
     public static final TagKey<Item> MELEE_WEAPONS = TagUtil.itemTag(new Identifier("equipment_standard:melee_weapons"));
     public static final TagKey<Item> MAGIC = TagUtil.itemTag(new Identifier("equipment_standard:magic"));
     public static final TagKey<Item> MAGIC_WEAPON = TagUtil.itemTag(new Identifier("equipment_standard:magic/weapons"));
+    public static final TagKey<Item> MAGIC_ARMOR = TagUtil.itemTag(new Identifier("equipment_standard:magic/armor"));
 
     public static final TagKey<Item> DUNGEON_BANNED = TagUtil.itemTag("dungeon_banned");
 
