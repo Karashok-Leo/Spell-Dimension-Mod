@@ -1,6 +1,7 @@
 package karashokleo.spell_dimension.content.quest;
 
 import karashokleo.enchantment_infusion.init.EIItems;
+import karashokleo.l2hostility.content.item.TrinketItems;
 import karashokleo.spell_dimension.content.quest.base.SimpleItemQuest;
 import karashokleo.spell_dimension.content.quest.base.SimpleTagIngredientQuest;
 import karashokleo.spell_dimension.data.loot_bag.SDBags;
@@ -19,6 +20,10 @@ public class CraftQuests
     public static SimpleItemQuest RANDOM_MATERIAL_0;
     public static SimpleItemQuest RANDOM_MATERIAL_1;
     public static SimpleItemQuest RANDOM_MATERIAL_2;
+    public static SimpleItemQuest LOOT_CHARM_1;
+    public static SimpleItemQuest LOOT_CHARM_2;
+    public static SimpleItemQuest LOOT_CHARM_3;
+    public static SimpleItemQuest LOOT_CHARM_4;
     public static SimpleItemQuest DOGE;
     public static SimpleItemQuest FROGE;
     public static SimpleItemQuest ENCHANTMENT_INFUSION;
@@ -38,7 +43,7 @@ public class CraftQuests
                 .addEnFeedback("Even in the age of magic, the simple alloy forge has not been completely forgotten, and you should be thankful that you still remember some of the physics and can build it using simple machinations.")
                 .addZhFeedback("即使身处魔法时代，简单的冶炼炉也没有完全被忘记，你应该庆幸自己仍记得部分物理知识，使用简单的机巧就能把它打造出来。")
                 .toEntry("resource/alloy")
-                .addTag(AllTags.MAIN)
+                .addTag(AllTags.MAIN, AllTags.SKIPPABLE)
                 .addDependencies(BaseQuests.HOSTILITY_ORB)
                 .register();
         FORGE_1 = QuestBuilder.of(
@@ -53,7 +58,7 @@ public class CraftQuests
                 .addEnFeedback("A forge controller made with stronger and more magically compatible materials, with which you can start crafting some truly magic-related items.")
                 .addZhFeedback("使用更加坚固和魔法兼容性更好的材料制作的冶炼炉控制器，使用它你可以开始制作一些真正与魔法相关的物品了。")
                 .toEntry("resource/alloy")
-                .addTag(AllTags.MAIN, AllTags.SKIPPABLE)
+                .addTag(AllTags.MAIN)
                 .addDependencies(FORGE_0)
                 .register();
         FORGE_2 = QuestBuilder.of(
@@ -106,6 +111,58 @@ public class CraftQuests
                 .addZhFeedback("你只能使用最高级的冶炼炉来获得它。从中只能获得少量的材料，这已经是你的极限了。")
                 .addTag(AllTags.BRANCH)
                 .addDependencies(FORGE_2)
+                .register();
+        LOOT_CHARM_1 = QuestBuilder.of(
+                        "loot_charm_0",
+                        new SimpleItemQuest(
+                                () -> TrinketItems.LOOT_1,
+                                SDBags.ARTIFACT::getStack
+                        )
+                )
+                .addEnFeedback("A mundane Charm of Looting looks to be of rough quality.")
+                .addZhFeedback("较为平凡的抢夺宝珠，看上去品质粗糙。")
+                .toEntry("resource/loot_charm")
+                .addTag(AllTags.MAIN)
+                .addDependencies(BaseQuests.HOSTILITY_ORB)
+                .register();
+        LOOT_CHARM_2 = QuestBuilder.of(
+                        "loot_charm_1",
+                        new SimpleItemQuest(
+                                () -> TrinketItems.LOOT_2,
+                                SDBags.JEWELRY_RINGS::getStack
+                        )
+                )
+                .addEnFeedback("A fair quality Charm of Looting with a faint magical sheen glistening on its surface.")
+                .addZhFeedback("品质尚可的抢夺宝珠，表面闪烁着微弱的魔法光泽。")
+                .toEntry("resource/loot_charm")
+                .addTag(AllTags.MAIN)
+                .addDependencies(LOOT_CHARM_1)
+                .register();
+        LOOT_CHARM_3 = QuestBuilder.of(
+                        "loot_charm_2",
+                        new SimpleItemQuest(
+                                () -> TrinketItems.LOOT_3,
+                                SDBags.JEWELRY_NECKLACES::getStack
+                        )
+                )
+                .addEnFeedback("The high quality Charm of Looting, the swirl of energy swirled more than once, emitting chaotic and intense fluctuations.")
+                .addZhFeedback("高等品质的抢夺宝珠，能量漩涡旋转不止，散发着混乱而强烈的波动。")
+                .toEntry("resource/loot_charm")
+                .addTag(AllTags.MAIN)
+                .addDependencies(LOOT_CHARM_2)
+                .register();
+        LOOT_CHARM_4 = QuestBuilder.of(
+                        "loot_charm_3",
+                        new SimpleItemQuest(
+                                () -> TrinketItems.LOOT_4,
+                                SDBags.ARING::getStack
+                        )
+                )
+                .addEnFeedback("The top-notch Charm of Looting exuded a brilliant and mysterious light, containing incredible miraculous power.")
+                .addZhFeedback("顶级的抢夺宝珠，散发出璀璨而神秘的光芒，蕴含着不可思议的奇迹之力。")
+                .toEntry("resource/loot_charm")
+                .addTag(AllTags.MAIN)
+                .addDependencies(LOOT_CHARM_3)
                 .register();
         DOGE = QuestBuilder.of(
                         "doge",

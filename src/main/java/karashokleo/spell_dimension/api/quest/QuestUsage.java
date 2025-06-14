@@ -94,7 +94,7 @@ public interface QuestUsage
     static void appendQuestOperationTooltip(List<Text> tooltip, World world, Quest quest)
     {
         quest.appendTooltip(world, tooltip);
-        if (quest.isIn(AllTags.BRANCH))
+        if (quest.isIn(AllTags.SKIPPABLE))
         {
             tooltip.add(SDTexts.TOOLTIP$QUEST$SUBMIT_OR_SKIP.get().formatted(Formatting.GOLD));
         } else

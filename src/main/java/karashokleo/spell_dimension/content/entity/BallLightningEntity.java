@@ -182,7 +182,7 @@ public class BallLightningEntity extends ProjectileEntity
             getOwner() instanceof LivingEntity caster)
         {
             SpellInfo spellInfo = new SpellInfo(SpellRegistry.getSpell(AllSpells.BALL_LIGHTNING), AllSpells.BALL_LIGHTNING);
-            SpellImpactEvents.PRE.invoker().invoke(world, caster, List.of(target), spellInfo);
+            SpellImpactEvents.POST.invoker().invoke(world, caster, List.of(target), spellInfo);
 
             float damage = (float) DamageUtil.calculateDamage(caster, SpellSchools.LIGHTNING, SpellConfig.BALL_LIGHTNING_CONFIG.damageFactor());
             DamageUtil.spellDamage(target, SpellSchools.LIGHTNING, caster, damage, false);

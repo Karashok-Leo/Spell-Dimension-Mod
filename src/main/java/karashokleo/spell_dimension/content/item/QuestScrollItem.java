@@ -138,8 +138,8 @@ public class QuestScrollItem extends Item
 //                        if (!creativeMode) stack.decrement(1);
                         AllItems.QUEST_SCROLL.setQuest(stack, null);
                     }
-                    // Skip branch quest
-                    else if (quest.isIn(AllTags.BRANCH))
+                    // Skippable quest
+                    else if (quest.isIn(AllTags.SKIPPABLE))
                     {
                         QuestUsage.addQuestsCompleted(player, quest);
                         player.sendMessage(SDTexts.TEXT$QUEST$SKIP.get(), true);
