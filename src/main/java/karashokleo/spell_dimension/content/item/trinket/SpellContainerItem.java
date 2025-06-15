@@ -30,7 +30,7 @@ public class SpellContainerItem extends SingleEpicTrinketItem
 
     protected void storage(ItemStack stack, SpellTrait trait, int count)
     {
-        changeAmount(stack, trait.getSpell().school, count * trait.getPower(1));
+        changeAmount(stack, trait.getSpell().school, count * trait.getPower(trait.getMaxLevel()));
     }
 
     protected int getSchoolAmount(ItemStack stack, SpellSchool school)

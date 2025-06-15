@@ -26,9 +26,9 @@ import java.util.List;
 public abstract class RingOfDivinityMixin extends SingleEpicTrinketItem implements DamageListenerTrinket
 {
     @Unique
-    private static final float DAMAGE_REDUCTION = 0.5F;
+    private static final float DAMAGE_REDUCTION = 0.6F;
     @Unique
-    private static final float MAX_DAMAGE_RATIO = 0.5F;
+    private static final float MAX_DAMAGE_RATIO = 0.4F;
 
     /**
      * @author Karashok-Leo
