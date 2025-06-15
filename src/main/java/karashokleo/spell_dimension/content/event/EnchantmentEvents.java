@@ -26,7 +26,6 @@ import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.util.math.MathHelper;
 import net.spell_power.api.SpellPower;
 import net.spell_power.api.SpellSchool;
-import net.spell_power.api.enchantment.EnchantmentRestriction;
 
 import java.util.Map;
 
@@ -55,13 +54,6 @@ public class EnchantmentEvents
                             enchantment -> enchantment instanceof EffectImmunityEnchantment immunity &&
                                            immunity.test(event.getEffectInstance()))))
                 event.setResult(BaseEvent.Result.DENY);
-        });
-
-        // Breastplate Immunity
-        AllEnchantments.EFFECT_IMMUNITY.forEach(enchantment ->
-        {
-            EnchantmentRestriction.permit(enchantment, stack -> stack.isIn(AllTags.BREASTPLATE_SLOT));
-            EnchantmentRestriction.prohibit(enchantment, stack -> !stack.isIn(AllTags.BREASTPLATE_SLOT));
         });
 
         // Spell impact enchantment

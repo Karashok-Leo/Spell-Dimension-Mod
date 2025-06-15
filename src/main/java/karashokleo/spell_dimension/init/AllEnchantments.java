@@ -22,6 +22,7 @@ public class AllEnchantments
     public static SpellResistanceEnchantment SPELL_RESISTANCE;
     public static SpellMendingEnchantment SPELL_MENDING;
     public static SpellTearingEnchantment SPELL_TEARING;
+    public static AntiAdaptionEnchantment ANTI_ADAPTION;
 
     public static SpellBladePowerEnchantment SPELL_BLADE_SUNFIRE;
     public static SpellBladePowerEnchantment SPELL_BLADE_SOULFROST;
@@ -99,6 +100,14 @@ public class AllEnchantments
                 .addENDesc("Your spells can penetrate the target's Dispell trait. Restores 20% of the original damage per level.")
                 .addZH("法术穿透")
                 .addZHDesc("你的法术可以穿透目标的破魔词条。每级恢复原有伤害的20%。")
+                .addTag(AllTags.LOOTABLE)
+                .register();
+        ANTI_ADAPTION = new Entry<>("anti_adaption", new AntiAdaptionEnchantment())
+                .addEN("Anti-Adaption")
+                .addENDesc("Monsters with adaptive traits have trouble adapting to your spells.")
+                .addZH("反适应")
+                .addZHDesc("拥有适应词条的怪物难以适应你的法术。")
+                .addTag(AllTags.LOOTABLE)
                 .register();
 
         SPELL_BLADE_SUNFIRE = new Entry<>("spell_blade_sunfire", new SpellBladePowerEnchantment(SpellSchools.ARCANE, SpellSchools.FIRE))
@@ -220,10 +229,24 @@ public class AllEnchantments
         EFFECT_IMMUNITY.add(CURSED_IMMUNITY);
 
         EnchantmentRestriction.Condition condition = stack -> stack.isIn(AllTags.MAGIC_WEAPON);
+
         EnchantmentRestriction.permit(SPELL_CURSE, condition);
+        EnchantmentRestriction.permit(SPELL_DASH, condition);
         EnchantmentRestriction.permit(SPELL_LEECH, condition);
         EnchantmentRestriction.permit(SPELL_TEARING, condition);
-        EnchantmentRestriction.permit(SPELL_DASH, condition);
+        EnchantmentRestriction.permit(ANTI_ADAPTION, condition);
+
+        EnchantmentRestriction.permit(
+                SPELL_HASTE,
+                stack -> stack.isIn(AllTags.MELEE_WEAPONS) || stack.isIn(AllTags.ARMOR)
+        );
+
+        // Breastplate Immunity
+        for (TraitEffectImmunityEnchantment enchantment : AllEnchantments.EFFECT_IMMUNITY)
+        {
+            EnchantmentRestriction.permit(enchantment, stack -> stack.isIn(AllTags.BREASTPLATE_SLOT));
+            EnchantmentRestriction.prohibit(enchantment, stack -> !stack.isIn(AllTags.BREASTPLATE_SLOT));
+        }
     }
 
     public static class Entry<T extends Enchantment> extends EnchantmentBuilder<T>

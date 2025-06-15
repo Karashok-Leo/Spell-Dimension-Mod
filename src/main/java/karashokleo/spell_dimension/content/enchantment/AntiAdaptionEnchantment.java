@@ -5,11 +5,11 @@ import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.util.Formatting;
 
-public class SpellTearingEnchantment extends UnobtainableEnchantment
+public class AntiAdaptionEnchantment extends UnobtainableEnchantment
 {
-    public SpellTearingEnchantment()
+    public AntiAdaptionEnchantment()
     {
-        super(Rarity.UNCOMMON, EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
+        super(Rarity.RARE, EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
     }
 
     @Override
@@ -27,6 +27,6 @@ public class SpellTearingEnchantment extends UnobtainableEnchantment
     @Override
     public Formatting getColor()
     {
-        return Formatting.BLUE;
+        return Formatting.DARK_GREEN;
     }
 }

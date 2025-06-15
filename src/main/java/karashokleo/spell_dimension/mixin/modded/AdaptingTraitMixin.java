@@ -4,7 +4,7 @@ import com.llamalad7.mixinextras.sugar.Local;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.trait.common.AdaptingTrait;
-import karashokleo.spell_dimension.init.AllEvents;
+import karashokleo.spell_dimension.content.event.AdaptiveCompat;
 import net.minecraft.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -24,7 +24,7 @@ public abstract class AdaptingTraitMixin
     )
     private void inject_onHurt(MobDifficulty difficulty, LivingEntity entity, int level, LivingHurtEvent event, CallbackInfo ci, @Local AdaptingTrait.Data data)
     {
-        if (AllEvents.adaptSpell(level, entity, event, data))
+        if (AdaptiveCompat.adaptSpell(level, entity, event, data))
             ci.cancel();
     }
 }
