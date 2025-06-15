@@ -308,8 +308,12 @@ public class ConsciousnessCoreTile extends BlockEntity
                 .add(LootContextParameters.ORIGIN, pos.toCenterPos())
                 .build(LootContextTypes.CHEST);
         LootTable lootTable = world.getServer().getLootManager().getLootTable(award.lootTable);
-        var stacks = lootTable.generateLoot(lootContextParameterSet);
-        stacks.forEach(stack -> Block.dropStack(world, pos, stack));
+        double v = levelFactor * 10;
+        for (int i = 0; i < v; i++)
+        {
+            var stacks = lootTable.generateLoot(lootContextParameterSet);
+            stacks.forEach(stack -> Block.dropStack(world, pos, stack));
+        }
     }
 
     public void onUse(PlayerEntity player, Hand hand)

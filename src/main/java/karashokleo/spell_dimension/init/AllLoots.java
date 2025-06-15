@@ -132,7 +132,7 @@ public class AllLoots
 
     private static void addSpellScrollLootPool(LootPool.Builder builder, Set<Identifier> pool)
     {
-        builder.rolls(UniformLootNumberProvider.create(1, 3));
+        builder.rolls(UniformLootNumberProvider.create(1, 2));
         for (Identifier spellId : pool)
             builder.with(SpellScrollEntry.builder(spellId));
     }
