@@ -1,0 +1,27 @@
+{
+  "type": "enchantment_infusion:enchantment_infusion",
+  "enchantment": "spell-dimension:anti_adaption",
+  "force": false,
+  "ingredients": [
+    {
+      "item": "minecraft:scute"
+    },
+    {
+      "tag": "equipment_standard:magic/weapons"
+    },
+    {
+      "tag": "equipment_standard:magic/weapons"
+    },
+    {
+      "tag": "spell-dimension:essence/1"
+    },
+    {
+      "tag": "spell-dimension:essence/1"
+    }
+  ],
+  "input": {
+    "enchantment": "spell-dimension:anti_adaption",
+    "min_level": 2
+  },
+  "level": 3
+}

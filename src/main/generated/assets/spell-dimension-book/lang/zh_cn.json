@@ -236,7 +236,7 @@
   "book.spell-dimension-book.magic_guidance.power.trait.trait.title": "怪物词条",
   "book.spell-dimension-book.magic_guidance.power.trait.trait1.text": "排斥/吸引: **绝缘**附魔可以缓解目标对你的排斥/吸引效果。\n\\\n\\\n再生/不死: 对怪物施加诅咒效果可以阻止它们回血。这可以通过**法术诅咒**附魔来实现。\n",
   "book.spell-dimension-book.magic_guidance.power.trait.trait2.text": "虚弱/流沙/剧毒/凋零/致盲/扭曲/升空/业火/寒流/诅咒: **圣光守护之戒**或**诅咒扭曲之戒**可以让你免疫几乎所有的负面效果。但作为替代，你也可以使用护心镜的**专属附魔**来免疫特定的负面效果。\n",
-  "book.spell-dimension-book.magic_guidance.power.trait.trait3.text": "适应: 除了使用各种负面效果，你还可以通过切换法术来刷新怪物的适应性。每种法术都相当于一种伤害类型。或者使用法术棱镜或破咒遗骨来穿透适应的保护。\n\\\n\\\n破魔: **法术穿透**附魔、法术棱镜、破咒遗骨都可以使法术伤害穿透破魔的保护。\n",
+  "book.spell-dimension-book.magic_guidance.power.trait.trait3.text": "适应: 除了使用各种负面效果，你还可以通过**切换**法术来刷新怪物的适应性。每种法术都相当于一种伤害类型。**反适应**附魔可以使法术更难以被适应，或者使用**法术棱镜**或**破咒遗骨**来穿透适应的保护。\n\\\n\\\n破魔: **法术穿透**附魔、**法术棱镜**、**破咒遗骨**都可以使法术伤害穿透破魔的保护。\n",
   "book.spell-dimension-book.magic_guidance.power.trait.trait4.text": "领域压制: 你可以使用**远端操控**法术或者**远端瓦解**法术在领域内破坏或放置方块。\n\\\n\\\n法术词条: 你可以使用**圣光守护之戒**或者**法术容器**来降低敌人对你的法术伤害，在游戏后期，你可以通过**魔法免疫**来完全免疫敌人的法术伤害。\n",
   "book.spell-dimension-book.magic_guidance.resource.alloy.alloy.text": "合金冶炼是提高矿石产量的简单方法。但更重要的是，它可以让你合成一些特殊的物品。\n",
   "book.spell-dimension-book.magic_guidance.resource.alloy.alloy.title": "合金冶炼",

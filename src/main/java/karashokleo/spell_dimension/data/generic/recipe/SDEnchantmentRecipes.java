@@ -14,6 +14,7 @@ import karashokleo.spell_dimension.init.AllEnchantments;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllTags;
 import karashokleo.spell_dimension.util.SchoolUtil;
+import karashokleo.spell_dimension.util.TagUtil;
 import net.aleganza.plentyofarmors.item.ModItems;
 import net.combatroll.api.Enchantments_CombatRoll;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
@@ -296,6 +297,82 @@ public class SDEnchantmentRecipes
                 }
             }
 
+            // Spell Tearing
+            for (int i = 0; i < 5; i++)
+            {
+                int level = i + 1;
+                int baseIngredient = baseIngredientArray[i];
+                int essenceIngredient = essenceIngredientArray[i];
+                int essenceGrade = essenceGradeArray[i];
+
+                Ingredient weaponIngredient = i < 3 ?
+                        Ingredient.fromTag(TagUtil.itemTag("common/weapon")) :
+                        Ingredient.fromTag(TagUtil.itemTag("uncommon/weapon"));
+
+                if (i == 0)
+                {
+                    EIRecipeUtil.set(
+                            builder -> builder
+                                    .withPedestalItem(baseIngredient, weaponIngredient)
+                                    .withPedestalItem(essenceIngredient,
+                                            Ingredient.fromTag(AllTags.ESSENCE.get(essenceGrade))),
+                            AllEnchantments.SPELL_TEARING,
+                            level,
+                            exporter,
+                            SpellDimension.modLoc("enchantment/spell_tearing/" + level)
+                    );
+                } else
+                {
+                    EIRecipeUtil.add(
+                            builder -> builder
+                                    .withPedestalItem(baseIngredient, weaponIngredient)
+                                    .withPedestalItem(essenceIngredient,
+                                            Ingredient.fromTag(AllTags.ESSENCE.get(essenceGrade))),
+                            AllEnchantments.SPELL_TEARING,
+                            level,
+                            exporter,
+                            SpellDimension.modLoc("enchantment/spell_tearing/" + level)
+                    );
+                }
+            }
+
+            // Anti-Adaption
+            for (int i = 0; i < 5; i++)
+            {
+                int level = i + 1;
+                int baseIngredient = baseIngredientArray[i];
+                int essenceIngredient = essenceIngredientArray[i];
+                int essenceGrade = essenceGradeArray[i];
+
+                if (i == 0)
+                {
+                    EIRecipeUtil.set(
+                            builder -> builder
+                                    .withPedestalItem(1, Items.SCUTE)
+                                    .withPedestalItem(baseIngredient, Ingredient.fromTag(AllTags.MAGIC_WEAPON))
+                                    .withPedestalItem(essenceIngredient,
+                                            Ingredient.fromTag(AllTags.ESSENCE.get(essenceGrade))),
+                            AllEnchantments.ANTI_ADAPTION,
+                            level,
+                            exporter,
+                            SpellDimension.modLoc("enchantment/anti_adaption/" + level)
+                    );
+                } else
+                {
+                    EIRecipeUtil.add(
+                            builder -> builder
+                                    .withPedestalItem(1, Items.SCUTE)
+                                    .withPedestalItem(baseIngredient, Ingredient.fromTag(AllTags.MAGIC_WEAPON))
+                                    .withPedestalItem(essenceIngredient,
+                                            Ingredient.fromTag(AllTags.ESSENCE.get(essenceGrade))),
+                            AllEnchantments.ANTI_ADAPTION,
+                            level,
+                            exporter,
+                            SpellDimension.modLoc("enchantment/anti_adaption/" + level)
+                    );
+                }
+            }
+
             // Stress Response
             for (int i = 0; i < 3; i++)
             {
@@ -404,19 +481,6 @@ public class SDEnchantmentRecipes
                         SpellDimension.modLoc("enchantment/spell_resistance/" + level)
                 );
             }
-
-            // Spell Tearing
-            EIRecipeUtil.set(
-                    builder -> builder
-                            .withTableIngredient(Enchantments_SpellPowerMechanics.MAGIC_PROTECTION, 1)
-                            .withPedestalItem(1, MiscItems.WITCH_DROPLET)
-                            .withPedestalItem(2, ComplementItems.CURSED_DROPLET)
-                            .withPedestalItem(3, ComplementItems.EXPLOSION_SHARD),
-                    AllEnchantments.SPELL_TEARING,
-                    1,
-                    exporter,
-                    SpellDimension.modLoc("enchantment/spell_tearing")
-            );
 
             // Hardened
             EIRecipeUtil.set(

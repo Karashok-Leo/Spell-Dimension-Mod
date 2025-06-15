@@ -1,0 +1,30 @@
+{
+  "type": "enchantment_infusion:enchantment_infusion",
+  "enchantment": "spell-dimension:spell_tearing",
+  "force": false,
+  "ingredients": [
+    {
+      "tag": "spell-dimension:uncommon/weapon"
+    },
+    {
+      "tag": "spell-dimension:uncommon/weapon"
+    },
+    {
+      "tag": "spell-dimension:uncommon/weapon"
+    },
+    {
+      "tag": "spell-dimension:essence/2"
+    },
+    {
+      "tag": "spell-dimension:essence/2"
+    },
+    {
+      "tag": "spell-dimension:essence/2"
+    }
+  ],
+  "input": {
+    "enchantment": "spell-dimension:spell_tearing",
+    "min_level": 4
+  },
+  "level": 5
+}

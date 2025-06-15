@@ -1,28 +1,24 @@
 {
-  "type": "enchantment_infusion:simple_infusion",
-  "copy_nbt": false,
-  "ingredients": [
-    {
-      "item": "l2hostility:soul_flame"
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "E": {
+      "tag": "spell-dimension:essence/0"
     },
-    {
-      "item": "l2hostility:hard_ice"
+    "G": {
+      "item": "minecraft:glass_pane"
     },
-    {
-      "item": "l2hostility:cursed_droplet"
-    },
-    {
-      "item": "l2hostility:witch_droplet"
+    "M": {
+      "tag": "spell-dimension:common/material"
     }
-  ],
-  "input": {
-    "item": "minecraft:glass_pane"
   },
-  "output": {
-    "Count": 1,
-    "id": "spell-dimension:spell_prism",
-    "tag": {
-      "Damage": 0
-    }
-  }
+  "pattern": [
+    "EME",
+    "MGM",
+    "EME"
+  ],
+  "result": {
+    "item": "spell-dimension:spell_prism"
+  },
+  "show_notification": true
 }

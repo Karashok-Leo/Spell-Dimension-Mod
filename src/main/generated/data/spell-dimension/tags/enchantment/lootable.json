@@ -8,6 +8,8 @@
     "spell-dimension:spell_leech",
     "spell-dimension:spell_resistance",
     "spell-dimension:spell_mending",
+    "spell-dimension:spell_tearing",
+    "spell-dimension:anti_adaption",
     "spell-dimension:spell_blade_sunfire",
     "spell-dimension:spell_blade_soulfrost",
     "spell-dimension:spell_blade_energize",

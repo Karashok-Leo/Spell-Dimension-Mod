@@ -1,0 +1,14 @@
+{
+  "type": "enchantment_infusion:enchantment_infusion",
+  "enchantment": "spell-dimension:spell_tearing",
+  "force": false,
+  "ingredients": [
+    {
+      "tag": "spell-dimension:common/weapon"
+    },
+    {
+      "tag": "spell-dimension:essence/0"
+    }
+  ],
+  "level": 1
+}

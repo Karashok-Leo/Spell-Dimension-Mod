@@ -16,6 +16,7 @@ import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllTags;
 import karashokleo.spell_dimension.init.AllWeapons;
 import karashokleo.spell_dimension.util.SchoolUtil;
+import karashokleo.spell_dimension.util.TagUtil;
 import net.adventurez.init.ItemInit;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
@@ -213,6 +214,21 @@ public class SDRecipeProvider extends FabricRecipeProvider
                 .criterion(
                         FabricRecipeProvider.hasItem(MiscItems.MIRACLE_POWDER),
                         FabricRecipeProvider.conditionsFromItem(MiscItems.MIRACLE_POWDER)
+                )
+                .offerTo(exporter);
+
+        // Spell Prism
+        ShapedRecipeJsonBuilder
+                .create(RecipeCategory.MISC, AllItems.SPELL_PRISM)
+                .pattern("EME")
+                .pattern("MGM")
+                .pattern("EME")
+                .input('E', AllTags.ESSENCE.get(0))
+                .input('M', Ingredient.fromTag(TagUtil.itemTag("common/material")))
+                .input('G', Items.GLASS_PANE)
+                .criterion(
+                        FabricRecipeProvider.hasItem(Items.GLASS_PANE),
+                        FabricRecipeProvider.conditionsFromItem(Items.GLASS_PANE)
                 )
                 .offerTo(exporter);
     }

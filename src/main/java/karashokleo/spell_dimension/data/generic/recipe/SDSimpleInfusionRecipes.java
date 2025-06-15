@@ -99,16 +99,6 @@ public class SDSimpleInfusionRecipes
                 .copyNbt(false)
                 .offerTo(exporter, getRecipeId(aquariumPearl), aquariumPearl);
 
-        // Spell Prism
-        new SimpleInfusionRecipeBuilder()
-                .withTableIngredient(Ingredient.ofItems(Items.GLASS_PANE))
-                .withPedestalItem(1, ComplementItems.SOUL_FLAME)
-                .withPedestalItem(1, ComplementItems.HARD_ICE)
-                .withPedestalItem(1, ComplementItems.CURSED_DROPLET)
-                .withPedestalItem(1, MiscItems.WITCH_DROPLET)
-                .copyNbt(false)
-                .offerTo(exporter, SpellDimension.modLoc("spell_prism"), AllItems.SPELL_PRISM.getDefaultStack());
-
         // Cursed Apple
         new SimpleInfusionRecipeBuilder()
                 .withTableIngredient(Ingredient.ofItems(Items.ENCHANTED_GOLDEN_APPLE))

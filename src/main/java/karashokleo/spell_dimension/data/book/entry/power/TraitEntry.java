@@ -115,18 +115,18 @@ public class TraitEntry extends BaseEntryProvider
         context.page("trait3");
         this.lang().add(context.pageText(),
                 """
-                        Adaptive: In addition to using various negative effects, you can refresh a monster's adaptation by switching spells. Each spell is equivalent to a damage type. Or use Spell Prism or Imagine Breaker to penetrate the protection.
+                        Adaptive: Refresh a monster's adaptation by **switching** spells. Each spell is equivalent to a damage type. **Anti-Adaptation** enchantment can make spells harder to adapt to, or use **Spell Prism** or **Imagine Breaker** to penetrate the protection.
                         \\
                         \\
-                        Dispell: **Spell Tearing** enchantment, Spell Prism and Imagine Breaker all allow spell damage to penetrate the protection of Dispell.
+                        Dispell: **Spell Tearing** enchantment, **Spell Prism** and **Imagine Breaker** all allow spell damage to penetrate the protection of Dispell.
                         """
         );
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        适应: 除了使用各种负面效果，你还可以通过切换法术来刷新怪物的适应性。每种法术都相当于一种伤害类型。或者使用法术棱镜或破咒遗骨来穿透适应的保护。
+                        适应: 除了使用各种负面效果，你还可以通过**切换**法术来刷新怪物的适应性。每种法术都相当于一种伤害类型。**反适应**附魔可以使法术更难以被适应，或者使用**法术棱镜**或**破咒遗骨**来穿透适应的保护。
                         \\
                         \\
-                        破魔: **法术穿透**附魔、法术棱镜、破咒遗骨都可以使法术伤害穿透破魔的保护。
+                        破魔: **法术穿透**附魔、**法术棱镜**、**破咒遗骨**都可以使法术伤害穿透破魔的保护。
                         """
         );
         BookTextPageModel trait3 = BookTextPageModel
