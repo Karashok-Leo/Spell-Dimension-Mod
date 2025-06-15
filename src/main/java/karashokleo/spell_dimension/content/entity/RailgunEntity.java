@@ -1,5 +1,6 @@
 package karashokleo.spell_dimension.content.entity;
 
+import karashokleo.spell_dimension.config.SpellConfig;
 import karashokleo.spell_dimension.init.AllEntities;
 import karashokleo.spell_dimension.util.DamageUtil;
 import net.minecraft.entity.Entity;
@@ -57,10 +58,10 @@ public class RailgunEntity extends ProjectileEntity
         {
             return;
         }
-//        if (itemEntity.isOnGround())
-//        {
-//            return;
-//        }
+        if (itemEntity.isOnGround())
+        {
+            return;
+        }
         ItemStack itemStack = itemEntity.getStack();
         if (itemStack.isEmpty())
         {
@@ -83,7 +84,7 @@ public class RailgunEntity extends ProjectileEntity
         this.fired = true;
         this.firedAge = this.age;
 
-        this.endPos = this.getPos().add(this.getVelocity().normalize().multiply(32));
+        this.endPos = this.getPos().add(this.getVelocity().normalize().multiply(SpellConfig.RAILGUN_CONFIG.length()));
 
         World world = getWorld();
         if (world.isClient())
@@ -96,7 +97,7 @@ public class RailgunEntity extends ProjectileEntity
         {
             BlockPos minPos = BlockPos.ofFloored(this.getPos());
             BlockPos maxPos = BlockPos.ofFloored(this.endPos);
-            BlockBox blockBox = BlockBox.create(minPos, maxPos).expand(2);
+            BlockBox blockBox = BlockBox.create(minPos, maxPos).expand(SpellConfig.RAILGUN_CONFIG.radius());
             BlockPos.stream(blockBox).forEach(pos ->
             {
                 Vec3d line = this.endPos.subtract(this.getPos());
@@ -118,7 +119,7 @@ public class RailgunEntity extends ProjectileEntity
             List<LivingEntity> hit = getHitEntities(world, this.getPos(), this.endPos);
             for (LivingEntity target : hit)
             {
-                double damage = DamageUtil.calculateDamage(caster, SpellSchools.LIGHTNING, 10);
+                double damage = DamageUtil.calculateDamage(caster, SpellSchools.LIGHTNING, SpellConfig.RAILGUN_CONFIG.damageFactor());
                 DamageUtil.spellDamage(target, SpellSchools.LIGHTNING, caster, (float) damage, true);
             }
         }
@@ -137,7 +138,7 @@ public class RailgunEntity extends ProjectileEntity
             {
                 continue;
             }
-            float pad = entity.getTargetingMargin() + 0.5F;
+            float pad = entity.getTargetingMargin() + SpellConfig.RAILGUN_CONFIG.radius() / 2F;
             Box aabb = entity.getBoundingBox().expand(pad, pad, pad);
             if (aabb.contains(from) ||
                 aabb.raycast(from, to).isPresent())

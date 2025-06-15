@@ -18,8 +18,8 @@ import org.joml.Quaternionf;
 public class RailgunRenderer<T extends RailgunEntity> extends EntityRenderer<T>
 {
     public static final Identifier TEXTURE = SpellDimension.modLoc("textures/entity/railgun.png");
-    private static final float TEXTURE_WIDTH = 256;
-    private static final float TEXTURE_HEIGHT = 64;
+    private static final float TEXTURE_WIDTH = 80;
+    private static final float TEXTURE_HEIGHT = 84;
 
     public RailgunRenderer(EntityRendererFactory.Context ctx)
     {
@@ -64,33 +64,54 @@ public class RailgunRenderer<T extends RailgunEntity> extends EntityRenderer<T>
         return RenderLayer.of("glow_effect", VertexFormats.POSITION_COLOR_TEXTURE_OVERLAY_LIGHT_NORMAL, VertexFormat.DrawMode.QUADS, 256, true, true, parameters);
     }
 
-    //渲染四边形平面
-    protected void renderFlatQuad(int frame, MatrixStack matrices, VertexConsumer vertexConsumer, int light, float size)
+    protected void drawQuad(int frame, MatrixStack matrices, VertexConsumer vertexConsumer, int light)
     {
-        float minU = 0 + 16F / TEXTURE_WIDTH * frame;
-        float minV = 0;
+        // 0 ~ 4
+        int tX = frame % 5;
+        // 0 ~ 3
+        int tY = frame / 5;
+        float minU = 0 + 16F / TEXTURE_WIDTH * tX;
+        float minV = 0 + 16F / TEXTURE_HEIGHT * tY;
         float maxU = minU + 16F / TEXTURE_WIDTH;
         float maxV = minV + 16F / TEXTURE_HEIGHT;
+        // quad size
+        final float SIZE = 2f;
         MatrixStack.Entry entry = matrices.peek();
         Matrix4f positionMatrix = entry.getPositionMatrix();
         Matrix3f normalMatrix = entry.getNormalMatrix();
-        drawVertex(positionMatrix, normalMatrix, vertexConsumer, -size, -size, minU, minV, light);
-        drawVertex(positionMatrix, normalMatrix, vertexConsumer, -size, size, minU, maxV, light);
-        drawVertex(positionMatrix, normalMatrix, vertexConsumer, size, size, maxU, maxV, light);
-        drawVertex(positionMatrix, normalMatrix, vertexConsumer, size, -size, maxU, minV, light);
+        drawVertex(positionMatrix, normalMatrix, vertexConsumer, -SIZE, -SIZE, minU, minV, light);
+        drawVertex(positionMatrix, normalMatrix, vertexConsumer, -SIZE, SIZE, minU, maxV, light);
+        drawVertex(positionMatrix, normalMatrix, vertexConsumer, SIZE, SIZE, maxU, maxV, light);
+        drawVertex(positionMatrix, normalMatrix, vertexConsumer, SIZE, -SIZE, maxU, minV, light);
     }
 
-    //渲染激光起始位置
+    protected void drawBeam(float length, int frame, MatrixStack matrices, VertexConsumer vertexConsumer, int light)
+    {
+        float minU = 0;
+        float minV = 64 / TEXTURE_HEIGHT + 1 / TEXTURE_HEIGHT * frame;
+        float maxU = minU + 18 / TEXTURE_WIDTH;
+        float maxV = minV + 1 / TEXTURE_HEIGHT;
+        MatrixStack.Entry entry = matrices.peek();
+        Matrix4f positionMatrix = entry.getPositionMatrix();
+        Matrix3f normalMatrix = entry.getNormalMatrix();
+        float offset = 0;
+        // beam radius
+        final float SIZE = 1.f;
+        drawVertex(positionMatrix, normalMatrix, vertexConsumer, -SIZE, offset, minU, minV, light);
+        drawVertex(positionMatrix, normalMatrix, vertexConsumer, -SIZE, length, minU, maxV, light);
+        drawVertex(positionMatrix, normalMatrix, vertexConsumer, SIZE, length, maxU, maxV, light);
+        drawVertex(positionMatrix, normalMatrix, vertexConsumer, SIZE, offset, maxU, minV, light);
+    }
+
     protected void renderStart(T entity, int frame, MatrixStack matrices, VertexConsumer vertexConsumer, int light)
     {
         matrices.push();
         Quaternionf quaternionf = this.dispatcher.getRotation();
         matrices.multiply(quaternionf);
-        renderFlatQuad(frame, matrices, vertexConsumer, light, 2f);
+        drawQuad(frame, matrices, vertexConsumer, light);
         matrices.pop();
     }
 
-    //渲染激光后半部分
     protected void renderEnd(T entity, int frame, MatrixStack matrices, VertexConsumer vertexConsumer, int light)
     {
         matrices.push();
@@ -98,11 +119,10 @@ public class RailgunRenderer<T extends RailgunEntity> extends EntityRenderer<T>
         matrices.translate(subtract.getX(), subtract.getY(), subtract.getZ());
         Quaternionf quaternionf = this.dispatcher.getRotation();
         matrices.multiply(quaternionf);
-        renderFlatQuad(frame, matrices, vertexConsumer, light, 2f);
+        drawQuad(frame, matrices, vertexConsumer, light);
         matrices.pop();
     }
 
-    //渲染光束
     protected void renderBeam(T entity, int frame, MatrixStack matrices, VertexConsumer vertexConsumer, int light)
     {
         Vec3d velocity = entity.getVelocity();
@@ -112,56 +132,32 @@ public class RailgunRenderer<T extends RailgunEntity> extends EntityRenderer<T>
         float length = (float) entity.endPos.distanceTo(entity.getPos());
 
         matrices.push();
-        //旋转角度
+
         matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(-90));
         matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(yaw));
         matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(90 - pitch));
 
-        //绘制一根射线
         matrices.push();
         matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(MinecraftClient.getInstance().gameRenderer.getCamera().getPitch() + 90F));
         drawBeam(length, frame, matrices, vertexConsumer, light);
         matrices.pop();
 
-        //绘制一根射线
         matrices.push();
         matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(-MinecraftClient.getInstance().gameRenderer.getCamera().getPitch() - 90F));
         drawBeam(length, frame, matrices, vertexConsumer, light);
         matrices.pop();
 
-        //绘制一根射线
         matrices.push();
         matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(-MinecraftClient.getInstance().gameRenderer.getCamera().getPitch() + 180F));
         drawBeam(length, frame, matrices, vertexConsumer, light);
         matrices.pop();
 
-        //绘制一根射线
         matrices.push();
-        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(-MinecraftClient.getInstance().gameRenderer.getCamera().getPitch() - 180F));
+        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(MinecraftClient.getInstance().gameRenderer.getCamera().getPitch() - 180F));
         drawBeam(length, frame, matrices, vertexConsumer, light);
         matrices.pop();
 
         matrices.pop();
-    }
-
-    //绘制光束
-    protected void drawBeam(float length, int frame, MatrixStack matrices, VertexConsumer vertexConsumer, int light)
-    {
-        float minU = 0;
-        //通过控制帧数,来渲染二维UV的最高位置
-        float minV = 16 / TEXTURE_HEIGHT + 1 / TEXTURE_HEIGHT * frame;
-        float maxU = minU + 20 / TEXTURE_WIDTH;
-        float maxV = minV + 1 / TEXTURE_HEIGHT;
-        MatrixStack.Entry entry = matrices.peek();
-        Matrix4f positionMatrix = entry.getPositionMatrix();
-        Matrix3f normalMatrix = entry.getNormalMatrix();
-        float offset = 0;
-        // beam radius
-        float SIZE = 0.9f;
-        drawVertex(positionMatrix, normalMatrix, vertexConsumer, -SIZE, offset, minU, minV, light);
-        drawVertex(positionMatrix, normalMatrix, vertexConsumer, -SIZE, length, minU, maxV, light);
-        drawVertex(positionMatrix, normalMatrix, vertexConsumer, SIZE, length, maxU, maxV, light);
-        drawVertex(positionMatrix, normalMatrix, vertexConsumer, SIZE, offset, maxU, minV, light);
     }
 
     protected void drawVertex(Matrix4f positionMatrix, Matrix3f normalMatrix, VertexConsumer vertexConsumer, float x, float y, float u, float v, int light)

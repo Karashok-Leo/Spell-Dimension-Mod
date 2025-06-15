@@ -47,8 +47,9 @@ public class DifficultyEvents
 
     static
     {
-        int[] healths = {200, 400, 500, 600, 700, 800};
+        int[] healths = {200, 400, 450, 500, 550, 600};
 
+        BOSS_HEALTH_SET.put("minecraft:ravager", healths[0]);
         BOSS_HEALTH_SET.put("mutantmonsters:mutant_zombie", healths[0]);
         BOSS_HEALTH_SET.put("mutantmonsters:mutant_skeleton", healths[0]);
         BOSS_HEALTH_SET.put("mutantmonsters:mutant_creeper", healths[0]);

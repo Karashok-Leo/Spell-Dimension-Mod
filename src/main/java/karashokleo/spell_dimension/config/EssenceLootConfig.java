@@ -19,8 +19,8 @@ public class EssenceLootConfig
     public static final int EL_WEIGHT = 1;
     public static final int MD_WEIGHT = 2;
 
-    public static final LootPool CHEST_POOL = new LootPool(1, 3, 180);
-    public static final LootPool ENTITY_POOL = new LootPool(0, 2, 270);
+    public static final LootPool CHEST_POOL = new LootPool(1, 3, 120);
+    public static final LootPool ENTITY_POOL = new LootPool(0, 2, 210);
 
     public record BaseConfig(
             List<EntityType<?>> blacklist,
