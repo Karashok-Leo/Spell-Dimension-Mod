@@ -31,11 +31,18 @@ public class SpellCurseEnchantment extends SpellImpactEnchantment
     public void onSpellImpact(World world, LivingEntity caster, Context context, List<Entity> targets, SpellInfo spellInfo)
     {
         for (Entity entity : targets)
-            if (entity instanceof LivingEntity living)
+        {
+            LivingEntity living = ImpactUtil.castToLiving(entity);
+            if (living == null)
             {
-                if (ImpactUtil.isAlly(caster, living)) continue;
-                EffectHelper.forceAddEffectWithEvent(living, new StatusEffectInstance(LHEffects.CURSE, 20 * (context.totalLevel() + 1), context.totalLevel() - 1, false, false), caster);
+                continue;
             }
+            if (ImpactUtil.isAlly(caster, living))
+            {
+                continue;
+            }
+            EffectHelper.forceAddEffectWithEvent(living, new StatusEffectInstance(LHEffects.CURSE, 20 * (context.totalLevel() + 1), context.totalLevel() - 1, false, false), caster);
+        }
     }
 
     @Override

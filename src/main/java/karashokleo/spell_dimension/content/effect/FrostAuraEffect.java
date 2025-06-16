@@ -4,6 +4,7 @@ import karashokleo.l2hostility.util.EffectHelper;
 import karashokleo.spell_dimension.init.AllStatusEffects;
 import karashokleo.spell_dimension.util.ImpactUtil;
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
@@ -13,6 +14,8 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 public class FrostAuraEffect extends StatusEffect
 {
@@ -37,12 +40,24 @@ public class FrostAuraEffect extends StatusEffect
     {
         auraParticles(entity, amplifier);
         World world = entity.getWorld();
-        if (world.getTime() % 20 == 0)
-            world.getOtherEntities(entity, entity.getBoundingBox().expand(3 + amplifier, 2 + amplifier, 3 + amplifier), EntityPredicates.VALID_LIVING_ENTITY).forEach(e ->
+        if (world.getTime() % 20 != 0)
+        {
+            return;
+        }
+        List<Entity> entities = world.getOtherEntities(entity, entity.getBoundingBox().expand(3 + amplifier, 2 + amplifier, 3 + amplifier), EntityPredicates.VALID_LIVING_ENTITY);
+        for (Entity e : entities)
+        {
+            LivingEntity target = ImpactUtil.castToLiving(e);
+            if (target == null)
             {
-                if (e instanceof LivingEntity target && !ImpactUtil.isAlly(entity, target))
-                    EffectHelper.forceAddEffectWithEvent(target, new StatusEffectInstance(AllStatusEffects.FROSTED, 100, amplifier, false, false), entity);
-            });
+                continue;
+            }
+            if (ImpactUtil.isAlly(entity, target))
+            {
+                continue;
+            }
+            EffectHelper.forceAddEffectWithEvent(target, new StatusEffectInstance(AllStatusEffects.FROSTED, 100, amplifier, false, false), entity);
+        }
     }
 
     @Override

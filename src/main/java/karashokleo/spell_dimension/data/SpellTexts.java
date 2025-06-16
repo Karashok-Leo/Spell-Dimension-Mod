@@ -230,7 +230,7 @@ public enum SpellTexts
     EXORCISM(
             "Exorcism",
             "驱邪",
-            "Reduce the target's levelFactor to half of the original, and reacquire the traits, while the caster takes damage equal to the target's original levelFactor. No effect on bosses.",
+            "Reduce the target's level to half of the original, and reacquire the traits, while the caster takes damage equal to the target's original levelFactor. No effect on bosses.",
             "使目标等级降至原来的一半，并且重新获取词条，同时施法者受到相当于目标原有等级的伤害。对Boss无效。"
     ),
     BLESSING(

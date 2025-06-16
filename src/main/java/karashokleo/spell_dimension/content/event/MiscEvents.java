@@ -254,6 +254,7 @@ public class MiscEvents
             {
                 return;
             }
+
             if (!(source.getAttacker() instanceof LivingEntity attacker))
             {
                 return;

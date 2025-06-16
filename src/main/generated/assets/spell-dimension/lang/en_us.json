@@ -459,7 +459,7 @@
   "spell.spell-dimension.divine_aura.name": "Divine Aura",
   "spell.spell-dimension.divine_curse_blast.description": "Detonate an area around the target, dealing {damage} damage and applying a Curse V effect.",
   "spell.spell-dimension.divine_curse_blast.name": "Divine Curse Blast",
-  "spell.spell-dimension.exorcism.description": "Reduce the target's levelFactor to half of the original, and reacquire the traits, while the caster takes damage equal to the target's original levelFactor. No effect on bosses.",
+  "spell.spell-dimension.exorcism.description": "Reduce the target's level to half of the original, and reacquire the traits, while the caster takes damage equal to the target's original levelFactor. No effect on bosses.",
   "spell.spell-dimension.exorcism.name": "Exorcism",
   "spell.spell-dimension.featherlight.description": "Gain a short-lived Speed and Slow-Falling effect",
   "spell.spell-dimension.featherlight.name": "Featherlight",

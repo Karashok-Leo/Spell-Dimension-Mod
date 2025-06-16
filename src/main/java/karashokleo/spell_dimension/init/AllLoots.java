@@ -13,6 +13,7 @@ import karashokleo.spell_dimension.content.loot.entry.RandomEnlighteningEssenceE
 import karashokleo.spell_dimension.content.loot.entry.SpellScrollEntry;
 import karashokleo.spell_dimension.content.object.EventAward;
 import karashokleo.spell_dimension.content.object.ScrollType;
+import karashokleo.spell_dimension.util.ImpactUtil;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -77,7 +78,11 @@ public class AllLoots
             SpellSchool school = spellInfo.spell().school;
             for (Entity target : targets)
             {
-                if (!(target instanceof LivingEntity living)) continue;
+                LivingEntity living = ImpactUtil.castToLiving(target);
+                if (living == null)
+                {
+                    continue;
+                }
                 if (EssenceLootConfig.BASE_CONFIG.blacklist().contains(target.getType()))
                     continue;
 

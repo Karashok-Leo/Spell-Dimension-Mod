@@ -186,7 +186,8 @@ public class ChainLightningEntity extends ProjectileEntity
     @Override
     protected boolean canHit(Entity target)
     {
-        return target instanceof LivingEntity living &&
+        LivingEntity living = ImpactUtil.castToLiving(target);
+        return living != null &&
                getOwner() instanceof LivingEntity owner &&
                !ImpactUtil.isAlly(living, owner) &&
                notZappedYet(living);

@@ -3,6 +3,7 @@ package karashokleo.spell_dimension.content.spell;
 import karashokleo.spell_dimension.config.SpellConfig;
 import karashokleo.spell_dimension.content.entity.ChainLightningEntity;
 import karashokleo.spell_dimension.init.AllSpells;
+import karashokleo.spell_dimension.util.ImpactUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -19,9 +20,19 @@ public class ChainLightningSpell
     public static void handle(World world, LivingEntity caster, List<Entity> targets, SpellInfo spellInfo)
     {
         Optional<Entity> target = targets.stream().findFirst();
-        if (target.isEmpty()) return;
-        if (!(target.get() instanceof LivingEntity living)) return;
-        if (!living.isAttackable()) return;
+        if (target.isEmpty())
+        {
+            return;
+        }
+        LivingEntity living = ImpactUtil.castToLiving(target.get());
+        if (living == null)
+        {
+            return;
+        }
+        if (!living.isAttackable())
+        {
+            return;
+        }
 
         ChainLightningEntity chainLightning = new ChainLightningEntity(world, caster, living);
         if (caster instanceof PlayerEntity player)

@@ -6,6 +6,7 @@ import karashokleo.spell_dimension.content.buff.Nucleus;
 import karashokleo.spell_dimension.content.item.trinket.endgame.GlacialNuclearEraItem;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllSpells;
+import karashokleo.spell_dimension.util.ImpactUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Identifier;
@@ -25,23 +26,38 @@ public class IcicleSpell
         if (owner == null ||
             owner.isRemoved() ||
             (!(owner instanceof LivingEntity caster)))
+        {
             return;
+        }
 
         if (caster.getRandom().nextFloat() > GlacialNuclearEraItem.CHANCE)
+        {
             return;
+        }
 
         if (!TrinketCompat.hasItemInTrinket(caster, AllItems.GLACIAL_NUCLEAR_ERA))
+        {
             return;
+        }
 
         if (!(hitResult instanceof EntityHitResult result))
+        {
             return;
-        if (!(result.getEntity() instanceof LivingEntity living))
+        }
+        LivingEntity living = ImpactUtil.castToLiving(result.getEntity());
+        if (living == null)
+        {
             return;
+        }
         if (!living.isAttackable())
+        {
             return;
+        }
         Optional<Nucleus> nucleus = Buff.get(living, Nucleus.TYPE);
         if (nucleus.isPresent())
+        {
             return;
+        }
         Buff.apply(living, Nucleus.TYPE, new Nucleus(), caster);
     }
 }

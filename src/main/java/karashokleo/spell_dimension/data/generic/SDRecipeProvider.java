@@ -224,7 +224,7 @@ public class SDRecipeProvider extends FabricRecipeProvider
                 .pattern("MGM")
                 .pattern("EME")
                 .input('E', AllTags.ESSENCE.get(0))
-                .input('M', Ingredient.fromTag(TagUtil.itemTag("common/material")))
+                .input('M', Ingredient.fromTag(TagUtil.itemTag("uncommon/material")))
                 .input('G', Items.GLASS_PANE)
                 .criterion(
                         FabricRecipeProvider.hasItem(Items.GLASS_PANE),

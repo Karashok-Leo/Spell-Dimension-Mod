@@ -217,8 +217,12 @@ public class BlackHoleEntity extends Entity implements Ownable
             entity.addVelocity(d.x, d.y, d.z);
             entity.fallDistance = 0.0f;
 
-            if (entity instanceof LivingEntity target)
-                DamageUtil.spellDamage(target, SpellSchools.ARCANE, caster, damage, false);
+            LivingEntity target = ImpactUtil.castToLiving(entity);
+            if (target == null)
+            {
+                continue;
+            }
+            DamageUtil.spellDamage(target, SpellSchools.ARCANE, caster, damage, false);
         }
 
         if (this.age > LIFESPAN)

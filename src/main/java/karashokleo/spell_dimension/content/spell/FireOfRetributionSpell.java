@@ -5,6 +5,7 @@ import karashokleo.l2hostility.content.item.misc.wand.TraitAdderWand;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
 import karashokleo.l2hostility.init.LHTags;
 import karashokleo.spell_dimension.util.DamageUtil;
+import karashokleo.spell_dimension.util.ImpactUtil;
 import karashokleo.spell_dimension.util.RandomUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -20,18 +21,38 @@ public class FireOfRetributionSpell
 {
     public static void handle(World world, LivingEntity caster, List<Entity> targets, SpellInfo spellInfo)
     {
-        if (world.isClient()) return;
+        if (world.isClient())
+        {
+            return;
+        }
         for (Entity entity : targets)
         {
-            if (!(entity instanceof LivingEntity target)) continue;
-            if (target.getType().isIn(LHTags.SEMIBOSS)) continue;
+            LivingEntity target = ImpactUtil.castToLiving(entity);
+            if (target == null)
+            {
+                continue;
+            }
+            if (target.getType().isIn(LHTags.SEMIBOSS))
+            {
+                continue;
+            }
 
-            if (target.age % 20 != 0) continue;
+            if (target.getRandom().nextInt(4) != 0)
+            {
+                continue;
+            }
+
             var opt = MobDifficulty.get(target);
-            if (opt.isEmpty()) return;
+            if (opt.isEmpty())
+            {
+                return;
+            }
             var cap = opt.get();
             Set<MobTrait> traitSet = cap.traits.keySet();
-            if (traitSet.isEmpty()) return;
+            if (traitSet.isEmpty())
+            {
+                return;
+            }
             MobTrait trait = RandomUtil.randomFromSet(target.getRandom(), traitSet);
             Integer ans = cap.traits.compute(trait, TraitAdderWand::decrease);
             int val = ans == null ? 0 : ans;

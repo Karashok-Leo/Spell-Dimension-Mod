@@ -9,6 +9,7 @@ import karashokleo.spell_dimension.api.buff.BuffType;
 import karashokleo.spell_dimension.config.SpellConfig;
 import karashokleo.spell_dimension.init.AllStatusEffects;
 import karashokleo.spell_dimension.util.DamageUtil;
+import karashokleo.spell_dimension.util.ImpactUtil;
 import karashokleo.spell_dimension.util.ParticleUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
@@ -114,17 +115,21 @@ public class BlazingMark implements Buff
     {
         LivingEntity entity = event.getEntity();
         DamageSource source = event.getSource();
-        if (source.getAttacker() != null &&
-            source.getAttacker() instanceof LivingEntity attacker)
+        LivingEntity attacker = ImpactUtil.castToLiving(source.getAttacker());
+        if (attacker == null)
         {
-            StatusEffectInstance instance = attacker.getStatusEffect(AllStatusEffects.IGNITE);
-            if (instance == null) return;
-            Buff.get(entity, TYPE).ifPresentOrElse(blazingMark ->
-            {
-                if (blazingMark.getDuration() > SpellConfig.BLAZING_MARK_CONFIG.triggerDuration())
-                    blazingMark.accumulateDamage(attacker, event.getAmount());
-            }, () -> Buff.apply(entity, TYPE, new BlazingMark(), attacker));
+            return;
         }
+        StatusEffectInstance instance = attacker.getStatusEffect(AllStatusEffects.IGNITE);
+        if (instance == null)
+        {
+            return;
+        }
+        Buff.get(entity, TYPE).ifPresentOrElse(blazingMark ->
+        {
+            if (blazingMark.getDuration() > SpellConfig.BLAZING_MARK_CONFIG.triggerDuration())
+                blazingMark.accumulateDamage(attacker, event.getAmount());
+        }, () -> Buff.apply(entity, TYPE, new BlazingMark(), attacker));
     }
 
     public void accumulateDamage(LivingEntity caster, float amount)

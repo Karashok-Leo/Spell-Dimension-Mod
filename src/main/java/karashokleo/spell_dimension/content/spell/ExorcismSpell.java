@@ -2,6 +2,7 @@ package karashokleo.spell_dimension.content.spell;
 
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.init.LHTags;
+import karashokleo.spell_dimension.util.ImpactUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageTypes;
@@ -17,15 +18,19 @@ public class ExorcismSpell
     {
         Optional<Entity> target = targets.stream().findFirst();
         if (target.isEmpty()) return;
-        if (!(target.get() instanceof LivingEntity livingEntity)) return;
-        if (!livingEntity.isAttackable()) return;
-        if (livingEntity.getType().isIn(LHTags.SEMIBOSS)) return;
-        Optional<MobDifficulty> optional = MobDifficulty.get(livingEntity);
+        LivingEntity living = ImpactUtil.castToLiving(target.get());
+        if (living == null)
+        {
+            return;
+        }
+        if (!living.isAttackable()) return;
+        if (living.getType().isIn(LHTags.SEMIBOSS)) return;
+        Optional<MobDifficulty> optional = MobDifficulty.get(living);
         if (optional.isEmpty()) return;
         MobDifficulty difficulty = optional.get();
         int level = difficulty.getLevel();
         if (level <= 0) return;
-        caster.damage(livingEntity.getDamageSources().create(DamageTypes.INDIRECT_MAGIC, livingEntity), level);
+        caster.damage(living.getDamageSources().create(DamageTypes.INDIRECT_MAGIC, living), level);
         difficulty.reInit(level / 2, false);
     }
 }

@@ -1,6 +1,7 @@
 package karashokleo.spell_dimension.content.spell;
 
 import karashokleo.enchantment_infusion.content.block.entity.EnchantmentInfusionTableTile;
+import karashokleo.spell_dimension.util.ImpactUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.world.World;
@@ -14,7 +15,8 @@ public class ThunderboltSpell
     {
         for (Entity target : targets)
         {
-            if (!(target instanceof LivingEntity living))
+            LivingEntity living = ImpactUtil.castToLiving(target);
+            if (living == null)
             {
                 continue;
             }

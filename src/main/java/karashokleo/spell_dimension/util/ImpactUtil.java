@@ -7,6 +7,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.Ownable;
 import net.minecraft.entity.Tameable;
+import net.minecraft.entity.boss.dragon.EnderDragonPart;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
@@ -27,6 +28,7 @@ import net.spell_engine.internals.casting.SpellCast;
 import net.spell_engine.particle.ParticleHelper;
 import net.spell_engine.utils.SoundHelper;
 import net.spell_power.api.SpellPower;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
@@ -120,6 +122,19 @@ public class ImpactUtil
                 CombatEvents.SPELL_CAST.invoke((listener) -> listener.onSpellCast(args));
             }
         }
+    }
+
+    @Nullable
+    public static LivingEntity castToLiving(Entity entity)
+    {
+        if (entity instanceof LivingEntity living)
+        {
+            return living;
+        } else if (entity instanceof EnderDragonPart part)
+        {
+            return part.owner;
+        }
+        return null;
     }
 
     public static boolean isAlly(LivingEntity origin, LivingEntity target)

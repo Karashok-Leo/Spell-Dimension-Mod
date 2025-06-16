@@ -2,6 +2,7 @@ package karashokleo.spell_dimension.content.spell;
 
 import karashokleo.enchantment_infusion.content.block.entity.EnchantmentInfusionTableTile;
 import karashokleo.spell_dimension.util.DamageUtil;
+import karashokleo.spell_dimension.util.ImpactUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectCategory;
@@ -21,7 +22,11 @@ public class HeavenlyJusticeSpell
         SpellPower.Result spellPower = SpellPower.getSpellPower(SpellSchools.HEALING, caster);
         for (Entity target : targets)
         {
-            if (!(target instanceof LivingEntity living)) continue;
+            LivingEntity living = ImpactUtil.castToLiving(target);
+            if (living == null)
+            {
+                continue;
+            }
             int effects = getEffects(living, StatusEffectCategory.HARMFUL);
             float damage = (float) (spellPower.randomValue() * (multiplier + effects));
             DamageUtil.spellDamage(living, SpellSchools.HEALING, caster, damage, false);

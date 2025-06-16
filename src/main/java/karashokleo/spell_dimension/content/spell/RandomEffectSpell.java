@@ -1,5 +1,7 @@
 package karashokleo.spell_dimension.content.spell;
 
+import karashokleo.l2hostility.util.EffectHelper;
+import karashokleo.spell_dimension.util.ImpactUtil;
 import karashokleo.spell_dimension.util.RandomUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -34,15 +36,21 @@ public class RandomEffectSpell
         List<StatusEffect> effects = Registries.STATUS_EFFECT.stream().filter(effect -> effect.getCategory() == category).toList();
         for (Entity target : targets)
         {
-            if (!(target instanceof LivingEntity living)) continue;
-            living.addStatusEffect(
+            LivingEntity living = ImpactUtil.castToLiving(target);
+            if (living == null)
+            {
+                continue;
+            }
+            EffectHelper.forceAddEffectWithEvent(
+                    living,
                     new StatusEffectInstance(
                             RandomUtil.randomFromList(random, effects),
                             DURATION * 20,
                             random.nextInt(MAX_AMPLIFIER),
                             false,
                             false
-                    )
+                    ),
+                    caster
             );
         }
     }

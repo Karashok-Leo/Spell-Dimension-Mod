@@ -178,7 +178,8 @@ public class BallLightningEntity extends ProjectileEntity
             return;
         }
 
-        if (entity instanceof LivingEntity target &&
+        LivingEntity target = ImpactUtil.castToLiving(entity);
+        if (target != null &&
             getOwner() instanceof LivingEntity caster)
         {
             SpellInfo spellInfo = new SpellInfo(SpellRegistry.getSpell(AllSpells.BALL_LIGHTNING), AllSpells.BALL_LIGHTNING);
@@ -234,7 +235,8 @@ public class BallLightningEntity extends ProjectileEntity
     @Override
     protected boolean canHit(Entity target)
     {
-        return target instanceof LivingEntity living &&
+        LivingEntity living = ImpactUtil.castToLiving(target);
+        return living != null &&
                getOwner() instanceof LivingEntity owner &&
                !ImpactUtil.isAlly(living, owner);
     }

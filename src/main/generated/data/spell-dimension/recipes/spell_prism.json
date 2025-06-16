@@ -9,7 +9,7 @@
       "item": "minecraft:glass_pane"
     },
     "M": {
-      "tag": "spell-dimension:common/material"
+      "tag": "spell-dimension:uncommon/material"
     }
   },
   "pattern": [
