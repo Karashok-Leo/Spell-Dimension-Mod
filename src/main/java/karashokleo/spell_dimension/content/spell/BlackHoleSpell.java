@@ -5,10 +5,12 @@ import karashokleo.spell_dimension.init.AllSpells;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.Ownable;
+import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
+import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -17,6 +19,8 @@ import net.spell_engine.entity.SpellProjectile;
 import net.spell_power.api.SpellPower;
 import net.spell_power.api.SpellSchools;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 import static karashokleo.spell_dimension.content.entity.BlackHoleEntity.MAX_RADIUS;
 import static karashokleo.spell_dimension.content.entity.BlackHoleEntity.MIN_RADIUS;
@@ -55,6 +59,40 @@ public class BlackHoleSpell
         Vec3d center = hitResult == null ?
                 entity.getPos() :
                 adjustCenterPosition(hitResult, radius / 4);
+
+        spawn(serverWorld, caster, center, radius);
+    }
+
+    public static void onEnderDragonCast(ProjectileEntity fireball, HitResult hitResult)
+    {
+        Entity owner = fireball.getOwner();
+        if (owner == null ||
+            owner.isRemoved() ||
+            (!(owner instanceof LivingEntity caster)))
+        {
+            return;
+        }
+        if (!(fireball.getWorld() instanceof ServerWorld serverWorld))
+        {
+            return;
+        }
+
+        float radius = 6;
+
+        Vec3d center = adjustCenterPosition(hitResult, radius / 4);
+
+        List<BlackHoleEntity> entities = serverWorld.getEntitiesByClass(
+                BlackHoleEntity.class,
+                new Box(
+                        center.add(radius, radius, radius),
+                        center.subtract(radius, radius, radius)
+                ),
+                entity -> true
+        );
+        if (!entities.isEmpty())
+        {
+            return;
+        }
 
         spawn(serverWorld, caster, center, radius);
     }
