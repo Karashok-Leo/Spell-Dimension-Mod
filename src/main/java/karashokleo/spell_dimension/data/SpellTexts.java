@@ -267,23 +267,17 @@ public enum SpellTexts
             "Chain Lightning",
             "连锁闪电",
             "Discharges a chain of lightning with a default damage multiplier of %d%%%%, a duration of %d seconds, a number of %d per chain, and a chain range of %.1f blocks.".formatted(
-                    Math.round(SpellConfig.CHAIN_LIGHTNING_CONFIG.power() * SpellConfig.CHAIN_LIGHTNING_CONFIG.damageFactor() * 100),
+                    Math.round(SpellConfig.CHAIN_LIGHTNING_CONFIG.damageFactor() * 100),
                     SpellConfig.CHAIN_LIGHTNING_CONFIG.lifespan() / 20,
                     SpellConfig.CHAIN_LIGHTNING_CONFIG.chainStep(),
                     SpellConfig.CHAIN_LIGHTNING_CONFIG.range()
             ),
             "释放连锁闪电，默认伤害倍率%d%%%%，存续时长%d秒，每次连锁数量为%d，连锁范围%.1f格。".formatted(
-                    Math.round(SpellConfig.CHAIN_LIGHTNING_CONFIG.power() * SpellConfig.CHAIN_LIGHTNING_CONFIG.damageFactor() * 100),
+                    Math.round(SpellConfig.CHAIN_LIGHTNING_CONFIG.damageFactor() * 100),
                     SpellConfig.CHAIN_LIGHTNING_CONFIG.lifespan() / 20,
                     SpellConfig.CHAIN_LIGHTNING_CONFIG.chainStep(),
                     SpellConfig.CHAIN_LIGHTNING_CONFIG.range()
             )
-    ),
-    SURGE(
-            "Surge",
-            "涌动",
-            "[Passive] Chain Lightning damage multiplier +%d%%%%".formatted(Math.round(SpellConfig.CHAIN_LIGHTNING_PASSIVE_CONFIG.surgePower() * SpellConfig.CHAIN_LIGHTNING_CONFIG.damageFactor() * 100)),
-            "[被动] 连锁闪电伤害倍率 +%d%%%%".formatted(Math.round(SpellConfig.CHAIN_LIGHTNING_PASSIVE_CONFIG.surgePower() * SpellConfig.CHAIN_LIGHTNING_CONFIG.damageFactor() * 100))
     ),
     STEADY_CURRENT(
             "Steady Current",
@@ -309,11 +303,17 @@ public enum SpellTexts
             "[Passive] Chain Lightning can penetrate blocks",
             "[被动] 连锁闪电可以穿透方块"
     ),
+    SURGE(
+            "Surge",
+            "涌动",
+            "[Passive] Chain Lightning/Ball Lightning damage multiplier ×%d".formatted(SpellConfig.POWER_PASSIVE_CONFIG.surge()),
+            "[被动] 连锁闪电/球状闪电伤害倍率 ×%d".formatted(SpellConfig.POWER_PASSIVE_CONFIG.surge())
+    ),
     ARCLIGHT(
             "Arclight",
             "弧光",
-            "[Passive] Chain Lightning damage multiplier +%d%%%%".formatted(Math.round(SpellConfig.CHAIN_LIGHTNING_PASSIVE_CONFIG.arclightPower() * SpellConfig.CHAIN_LIGHTNING_CONFIG.damageFactor() * 100)),
-            "[被动] 连锁闪电伤害倍率 +%d%%%%".formatted(Math.round(SpellConfig.CHAIN_LIGHTNING_PASSIVE_CONFIG.arclightPower() * SpellConfig.CHAIN_LIGHTNING_CONFIG.damageFactor() * 100))
+            "[Passive] Chain Lightning/Ball Lightning damage multiplier ×%d".formatted(SpellConfig.POWER_PASSIVE_CONFIG.arclight()),
+            "[被动] 连锁闪电/球状闪电伤害倍率 ×%d".formatted(SpellConfig.POWER_PASSIVE_CONFIG.arclight())
     ),
     CONSTANT_CURRENT(
             "Constant Current",

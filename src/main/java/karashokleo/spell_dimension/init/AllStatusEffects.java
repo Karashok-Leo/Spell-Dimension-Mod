@@ -97,6 +97,7 @@ public class AllStatusEffects
                 .addZH("量子场")
                 .addENDesc(QuantumFieldEffect.getDesc(true))
                 .addZHDesc(QuantumFieldEffect.getDesc(false))
+                .addTag(LHTags.CLEANSE_BLACKLIST)
                 .register();
 
         Synchronized.configure(PHASE, true);

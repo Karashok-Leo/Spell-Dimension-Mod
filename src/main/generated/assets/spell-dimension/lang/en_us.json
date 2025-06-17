@@ -423,7 +423,7 @@
   "slot.spell-dimension.offhand": "Slot: Off Hand",
   "spell.spell-dimension.arcane_barrier.description": "Generate an arcane barrier around oneself.",
   "spell.spell-dimension.arcane_barrier.name": "Arcane Barrier",
-  "spell.spell-dimension.arclight.description": "[Passive] Chain Lightning damage multiplier +40%%",
+  "spell.spell-dimension.arclight.description": "[Passive] Chain Lightning/Ball Lightning damage multiplier ×2",
   "spell.spell-dimension.arclight.name": "Arclight",
   "spell.spell-dimension.ball_lightning.description": "Fire a ball lightning that lasts for 10 seconds, touching enemies for damage and bouncing off of touching blocks.",
   "spell.spell-dimension.ball_lightning.name": "Ball Lightning",
@@ -541,7 +541,7 @@
   "spell.spell-dimension.steady_current.name": "Steady Current",
   "spell.spell-dimension.summon.description": "Launch a spell, if it touches a spawner, it will use the item in your off-hand as a key item to replace the mob in the spawner. Press U on Spawner to view all recipes.",
   "spell.spell-dimension.summon.name": "Spell Summon",
-  "spell.spell-dimension.surge.description": "[Passive] Chain Lightning damage multiplier +20%%",
+  "spell.spell-dimension.surge.description": "[Passive] Chain Lightning/Ball Lightning damage multiplier ×2",
   "spell.spell-dimension.surge.name": "Surge",
   "spell.spell-dimension.thunderbolt.description": "Summon thunderbolts on surrounding enemies, dealing {damage} damage and applying a stun for {effect_duration} seconds.",
   "spell.spell-dimension.thunderbolt.name": "Thunderbolt",
@@ -787,5 +787,6 @@
   "trait.spell-dimension.leech": "Leech",
   "trait.spell-dimension.leech.desc": "%s of damage dealt will heal itself",
   "trinkets.slot.chest.breastplate": "Breastplate",
-  "trinkets.slot.chest.secondary_school": "Secondary School"
+  "trinkets.slot.chest.secondary_school": "Secondary School",
+  "trinkets.slot.legs.spell_container": "Spell Container"
 }

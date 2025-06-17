@@ -10,6 +10,8 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.item.ItemStack;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
@@ -19,6 +21,7 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.runes.api.RuneItems;
+import net.spell_power.api.SpellPower;
 import net.spell_power.api.SpellSchools;
 
 import java.util.ArrayList;
@@ -92,6 +95,9 @@ public class RailgunEntity extends ProjectileEntity
             return;
         }
 
+        // play sound
+        world.playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.ENTITY_DRAGON_FIREBALL_EXPLODE, SoundCategory.PLAYERS, 2.0F, 1.0F);
+
         // break blocks
         // spawnExplosionParticles();
         {
@@ -119,8 +125,8 @@ public class RailgunEntity extends ProjectileEntity
             List<LivingEntity> hit = getHitEntities(world, this.getPos(), this.endPos);
             for (LivingEntity target : hit)
             {
-                double damage = DamageUtil.calculateDamage(caster, SpellSchools.LIGHTNING, SpellConfig.RAILGUN_CONFIG.damageFactor());
-                DamageUtil.spellDamage(target, SpellSchools.LIGHTNING, caster, (float) damage, true);
+                double power = SpellPower.getSpellPower(SpellSchools.LIGHTNING, caster).randomValue();
+                DamageUtil.spellDamage(target, SpellSchools.LIGHTNING, caster, (float) (power * power), true);
             }
         }
     }

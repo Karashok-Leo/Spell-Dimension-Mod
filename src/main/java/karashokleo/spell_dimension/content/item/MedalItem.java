@@ -41,6 +41,12 @@ public class MedalItem extends Item
     }
 
     @Override
+    public boolean isFood()
+    {
+        return true;
+    }
+
+    @Override
     public int getMaxUseTime(ItemStack stack)
     {
         return 20;

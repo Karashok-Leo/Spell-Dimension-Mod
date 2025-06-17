@@ -8,8 +8,9 @@ public class SpellConfig
     public static final float FROSTED_FACTOR = 0.4F;
     public static final float DIVINE_AURA_FACTOR = 0.4F;
     public static final BlazingMarkConfig BLAZING_MARK_CONFIG = new BlazingMarkConfig(200, 100, 0.5f, 0.5F);
-    public static final ChainLightningConfig CHAIN_LIGHTNING_CONFIG = new ChainLightningConfig(0.2F, 1, 20, 1, 3F);
-    public static final ChainLightningPassiveConfig CHAIN_LIGHTNING_PASSIVE_CONFIG = new ChainLightningPassiveConfig(1, 2, 2, 4, 2, 3);
+    public static final ChainLightningConfig CHAIN_LIGHTNING_CONFIG = new ChainLightningConfig(0.2F, 20, 1, 3F);
+    public static final PowerPassiveConfig POWER_PASSIVE_CONFIG = new PowerPassiveConfig(2, 2);
+    public static final ChainLightningPassiveConfig CHAIN_LIGHTNING_PASSIVE_CONFIG = new ChainLightningPassiveConfig(2, 4, 2, 3);
     public static final BallLightningConfig BALL_LIGHTNING_CONFIG = new BallLightningConfig(0.8F, 200, 100);
     public static final RailgunConfig RAILGUN_CONFIG = new RailgunConfig(32, 2, 10F);
 
@@ -24,7 +25,6 @@ public class SpellConfig
 
     public record ChainLightningConfig(
             float damageFactor,
-            int power,
             int lifespan,
             int chainStep,
             float range
@@ -32,9 +32,14 @@ public class SpellConfig
     {
     }
 
+    public record PowerPassiveConfig(
+            int surge,
+            int arclight
+    )
+    {
+    }
+
     public record ChainLightningPassiveConfig(
-            int surgePower,
-            int arclightPower,
             int steadyCurrentLifespan,
             int constantCurrentLifespan,
             int fissionChainStep,

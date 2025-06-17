@@ -50,11 +50,11 @@ public class ChainLightningSpell
     {
         if (spells.contains(AllSpells.SURGE.toString()))
         {
-            chainLightning.power += SpellConfig.CHAIN_LIGHTNING_PASSIVE_CONFIG.surgePower();
+            chainLightning.power *= SpellConfig.POWER_PASSIVE_CONFIG.surge();
         }
         if (spells.contains(AllSpells.ARCLIGHT.toString()))
         {
-            chainLightning.power += SpellConfig.CHAIN_LIGHTNING_PASSIVE_CONFIG.arclightPower();
+            chainLightning.power *= SpellConfig.POWER_PASSIVE_CONFIG.arclight();
         }
         if (spells.contains(AllSpells.STEADY_CURRENT.toString()))
         {

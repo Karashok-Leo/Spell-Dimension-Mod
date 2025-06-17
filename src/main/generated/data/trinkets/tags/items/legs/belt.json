@@ -2,7 +2,6 @@
   "replace": false,
   "values": [
     "spell-dimension:nirvana_starfall",
-    "spell-dimension:superconductor",
-    "spell-dimension:spell_container"
+    "spell-dimension:superconductor"
   ]
 }

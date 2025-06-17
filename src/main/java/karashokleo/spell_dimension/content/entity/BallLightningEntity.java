@@ -69,7 +69,8 @@ public class BallLightningEntity extends ProjectileEntity
             ),
     };
 
-    public boolean macro = false;
+    public boolean macro;
+    public int power;
     private int lifespan;
 
     public BallLightningEntity(World world, Entity owner)
@@ -82,6 +83,8 @@ public class BallLightningEntity extends ProjectileEntity
     {
         super(entityType, world);
         this.setNoGravity(true);
+        this.macro = false;
+        this.power = 1;
         this.lifespan = SpellConfig.BALL_LIGHTNING_CONFIG.lifespan();
     }
 
@@ -185,7 +188,7 @@ public class BallLightningEntity extends ProjectileEntity
             SpellInfo spellInfo = new SpellInfo(SpellRegistry.getSpell(AllSpells.BALL_LIGHTNING), AllSpells.BALL_LIGHTNING);
             SpellImpactEvents.POST.invoker().invoke(world, caster, List.of(target), spellInfo);
 
-            float damage = (float) DamageUtil.calculateDamage(caster, SpellSchools.LIGHTNING, SpellConfig.BALL_LIGHTNING_CONFIG.damageFactor());
+            float damage = (float) DamageUtil.calculateDamage(caster, SpellSchools.LIGHTNING, this.power * SpellConfig.BALL_LIGHTNING_CONFIG.damageFactor());
             DamageUtil.spellDamage(target, SpellSchools.LIGHTNING, caster, damage, false);
 
             ParticleHelper.sendBatches(target, ChainLightningEntity.HIT_PARTICLES);
@@ -256,6 +259,8 @@ public class BallLightningEntity extends ProjectileEntity
     protected void writeCustomDataToNbt(NbtCompound nbt)
     {
         super.writeCustomDataToNbt(nbt);
+        nbt.putBoolean("Macro", macro);
+        nbt.putInt("Power", power);
         nbt.putInt("Lifespan", lifespan);
     }
 
@@ -263,6 +268,8 @@ public class BallLightningEntity extends ProjectileEntity
     protected void readCustomDataFromNbt(NbtCompound nbt)
     {
         super.readCustomDataFromNbt(nbt);
+        macro = nbt.getBoolean("Macro");
+        power = nbt.getInt("Power");
         lifespan = nbt.getInt("Lifespan");
     }
 }

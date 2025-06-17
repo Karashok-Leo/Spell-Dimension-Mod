@@ -87,7 +87,7 @@ public class ChainLightningEntity extends ProjectileEntity
         this.setNoGravity(true);
         this.noClip = true;
         // default settings
-        this.power = SpellConfig.CHAIN_LIGHTNING_CONFIG.power();
+        this.power = 1;
         this.lifespan = SpellConfig.CHAIN_LIGHTNING_CONFIG.lifespan();
         this.chainStep = SpellConfig.CHAIN_LIGHTNING_CONFIG.chainStep();
         this.range = SpellConfig.CHAIN_LIGHTNING_CONFIG.range();
