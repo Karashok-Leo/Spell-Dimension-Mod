@@ -4,9 +4,10 @@ import karashokleo.spell_dimension.init.AllItems;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ArmorItem;
+import net.minecraft.item.Equipment;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ToolItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -32,10 +33,16 @@ public abstract class ItemStackMixin
     {
         if (!(entity instanceof PlayerEntity player))
             return;
-        if (!(this.getItem() instanceof ArmorItem armorItem))
-            return;
-        ItemStack broken = AllItems.BROKEN_ITEM.saveItem((ItemStack) (Object) this);
-        EquipmentSlot slotType = armorItem.getSlotType();
-        player.equipStack(slotType, broken);
+        Item item = this.getItem();
+        if (item instanceof Equipment equipment)
+        {
+            ItemStack broken = AllItems.BROKEN_ITEM.saveItem((ItemStack) (Object) this);
+            EquipmentSlot slotType = equipment.getSlotType();
+            player.equipStack(slotType, broken);
+        } else if (item instanceof ToolItem)
+        {
+            ItemStack broken = AllItems.BROKEN_ITEM.saveItem((ItemStack) (Object) this);
+            player.getInventory().offerOrDrop(broken);
+        }
     }
 }

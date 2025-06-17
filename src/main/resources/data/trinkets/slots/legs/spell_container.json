@@ -1,0 +1,7 @@
+{
+  "icon": "spell-dimension:slot/spell_container",
+  "order": 666,
+  "validator_predicates": [
+    "trinkets:tag"
+  ]
+}

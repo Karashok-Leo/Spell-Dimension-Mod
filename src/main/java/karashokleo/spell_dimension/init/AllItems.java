@@ -182,7 +182,7 @@ public class AllItems
         FROSTBITE_DOME = Entry.of("frostbite_dome", new FrostbiteDomeItem())
                 .addEN()
                 .addZH("冰点穹狱")
-                .addTag(AllTags.GLOVE, AllTags.ENDGAME_TRINKETS)
+                .addTag(LHTags.HAND_SLOT, LHTags.OFF_HAND_SLOT, AllTags.ENDGAME_TRINKETS)
                 .setTab(AllGroups.EQUIPMENTS)
                 .addModel()
                 .register();
@@ -210,7 +210,7 @@ public class AllItems
         MACRO_ELECTRON = Entry.of("macro_electron", new MacroElectronItem())
                 .addEN()
                 .addZH("宏电子")
-                .addTag(LHTags.HAND_SLOT, AllTags.ENDGAME_TRINKETS)
+                .addTag(LHTags.HAND_SLOT, LHTags.OFF_HAND_SLOT, AllTags.ENDGAME_TRINKETS)
                 .setTab(AllGroups.EQUIPMENTS)
                 .register();
         REBIRTH_SIGIL = Entry.of("rebirth_sigil", new RebirthSigilItem())
@@ -231,7 +231,7 @@ public class AllItems
         SPELL_CONTAINER = Entry.of("spell_container", new ProtectiveSpellContainerItem())
                 .addEN()
                 .addZH("法术容器")
-                .addTag(AllTags.BELT)
+                .addTag(AllTags.SPELL_CONTAINER)
                 .setTab(AllGroups.EQUIPMENTS)
                 .addModel()
                 .register();

@@ -104,12 +104,12 @@ public class AllTags
 
     public static final TagKey<Block> LOCATE_TARGET = TagUtil.blockTag("locate_target");
 
-    public static final TagKey<Item> GLOVE = TagUtil.itemTag(new Identifier("trinkets", "hand/glove"));
     public static final TagKey<Item> NECKLACE = TagUtil.itemTag(new Identifier("trinkets", "chest/necklace"));
     public static final TagKey<Item> CAPE = TagUtil.itemTag(new Identifier("trinkets", "chest/cape"));
     public static final TagKey<Item> BELT = TagUtil.itemTag(new Identifier("trinkets", "legs/belt"));
     public static final TagKey<Item> BREASTPLATE_SLOT = TagUtil.itemTag(new Identifier("trinkets", "chest/breastplate"));
     public static final TagKey<Item> SECONDARY_SCHOOL_SLOT = TagUtil.itemTag(new Identifier("trinkets", "chest/secondary_school"));
+    public static final TagKey<Item> SPELL_CONTAINER = TagUtil.itemTag(new Identifier("trinkets", "legs/spell_container"));
 
     public static final TagKey<Item> HOSTILITY_CURSE = TagUtil.itemTag("hostility_curse");
     public static final TagKey<Item> HOSTILITY_RING = TagUtil.itemTag("hostility_ring");

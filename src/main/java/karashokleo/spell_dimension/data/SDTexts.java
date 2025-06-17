@@ -376,6 +376,8 @@ public enum SDTexts
         SpellDimension.ZH_TEXTS.addText("trinkets.slot.chest.breastplate", "护心镜");
         SpellDimension.EN_TEXTS.addText("trinkets.slot.chest.secondary_school", "Secondary School");
         SpellDimension.ZH_TEXTS.addText("trinkets.slot.chest.secondary_school", "副学派");
+        SpellDimension.EN_TEXTS.addText("trinkets.slot.legs.spell_container", "Spell Container");
+        SpellDimension.ZH_TEXTS.addText("trinkets.slot.legs.spell_container", "法术容器");
         SpellDimension.EN_TEXTS.addText(IllusionUpgradeTab.KEY, "Illusion");
         SpellDimension.ZH_TEXTS.addText(IllusionUpgradeTab.KEY, "幻化");
         SpellDimension.EN_TEXTS.addText(IllusionUpgradeTab.KEY + ".tooltip", "Illusion Settings");

@@ -44,7 +44,6 @@ public abstract class RingOfDivinityMixin extends SingleEpicTrinketItem implemen
     {
         DamageSource source = event.getSource();
         if (!source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY) &&
-            !source.isIn(DamageTypeTags.BYPASSES_EFFECTS) &&
             source.isIn(LHTags.MAGIC))
         {
             float amount = event.getAmount();
