@@ -6,7 +6,6 @@ import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookEntityPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookSpotlightPageModel;
-import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
 import karashokleo.spell_dimension.data.book.entry.BaseEntryProvider;
 import karashokleo.spell_dimension.data.loot_bag.TextConstants;
 import karashokleo.spell_dimension.util.BookGenUtil;
@@ -57,7 +56,7 @@ public class WitherEntry extends BaseEntryProvider
                         Level: %d+
                         \\
                         \\
-                        Wither now has an additional charge skill. During the charge, the Wither will destroy the blocks it touches.
+                        Drops **Shard of Uncertainty** upon defeating Wither.
                         """.formatted(TextConstants.BOSS_LEVELS[0])
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
@@ -66,7 +65,7 @@ public class WitherEntry extends BaseEntryProvider
                         等级: %d+
                         \\
                         \\
-                        凋灵现在额外拥有一个冲撞技能，冲撞过程中，凋灵会破坏它碰到的方块。
+                        击败凋灵后掉落**不确定性的残片**。
                         """.formatted(TextConstants.BOSS_LEVELS[0])
         );
 
@@ -77,28 +76,12 @@ public class WitherEntry extends BaseEntryProvider
                 .withItem(Ingredient.ofItems(BookGenUtil.getItem(new Identifier("soulsweapons:shard_of_uncertainty"))))
                 .build();
 
-        context.page("next");
-        this.lang().add(context.pageText(),
-                """
-                        Drops **Shard of Uncertainty** upon defeating Wither.
-                        """
-        );
-        this.lang("zh_cn").add(context.pageText(),
-                """
-                        击败凋灵后掉落**不确定性的残片**。
-                        """
-        );
-
-        BookTextPageModel next = BookTextPageModel
-                .builder()
-                .withText(context.pageText())
-                .build();
         BookEntityPageModel entity = BookEntityPageModel
                 .builder()
                 .withEntityId("minecraft:wither")
                 .build();
 
-        return List.of(boss, next, entity);
+        return List.of(boss, entity);
     }
 
     @Override

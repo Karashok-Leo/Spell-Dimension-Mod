@@ -9,6 +9,7 @@ import karashokleo.spell_dimension.util.ImpactUtil;
 import karashokleo.spell_dimension.util.RandomUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
@@ -167,13 +168,17 @@ public class BallLightningEntity extends ProjectileEntity
         {
             ArrayList<Runnable> possibles = new ArrayList<>();
             possibles.add(entity::discard);
-            for (ItemStack stack : entity.getItemsEquipped())
+            if (entity instanceof LivingEntity living)
             {
-                if (stack.isEmpty())
+                for (EquipmentSlot slot : EquipmentSlot.values())
                 {
-                    continue;
+                    ItemStack stack = living.getEquippedStack(slot);
+                    if (stack.isEmpty())
+                    {
+                        continue;
+                    }
+                    possibles.add(() -> living.equipStack(slot, ItemStack.EMPTY));
                 }
-                possibles.add(() -> stack.setCount(0));
             }
             Runnable runnable = RandomUtil.randomFromList(this.random, possibles);
             runnable.run();

@@ -29,6 +29,10 @@ public class SuperconductorItem extends SingleEpicTrinketItem implements DamageL
     @Override
     public void onHurting(ItemStack stack, LivingEntity entity, LivingHurtEvent event)
     {
+        if (!event.getSource().isOf(SpellSchools.LIGHTNING.damageType))
+        {
+            return;
+        }
         double baseValue = SpellPower.getSpellPower(SpellSchools.LIGHTNING, entity).baseValue();
         int level = (int) (baseValue / 100);
         if (level <= 0)

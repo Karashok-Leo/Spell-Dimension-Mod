@@ -130,6 +130,7 @@ public class MageQuests
                 .addZhDesc("合成携带法术特效的饰品")
                 .addEnFeedback("The spell chanted softly, shimmering and misty, revealing deep and unknowable magical potential.")
                 .addZhFeedback("咒语轻吟，微光闪烁，迷雾环绕，透露出深邃而不可知的魔力潜能。")
+                .toEntry("power/endgame_trinket")
                 .addTag(AllTags.MAIN)
                 .addDependencies(SPELL_BOOK_2)
                 .register();

@@ -8,6 +8,16 @@
     "l2hostility:explosion_reject",
     "l2hostility:magic_reject",
     "l2hostility:invincible",
-    "l2hostility:owner_protection"
+    "l2hostility:owner_protection",
+    "spell-dimension:weakness_immunity",
+    "spell-dimension:slowness_immunity",
+    "spell-dimension:poison_immunity",
+    "spell-dimension:wither_immunity",
+    "spell-dimension:blindness_immunity",
+    "spell-dimension:nausea_immunity",
+    "spell-dimension:levitation_immunity",
+    "spell-dimension:soul_burner_immunity",
+    "spell-dimension:freezing_immunity",
+    "spell-dimension:cursed_immunity"
   ]
 }

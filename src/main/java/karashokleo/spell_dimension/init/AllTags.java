@@ -10,6 +10,7 @@ import karashokleo.l2hostility.init.LHTags;
 import karashokleo.leobrary.datagen.generator.TagGenerator;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.api.quest.Quest;
+import karashokleo.spell_dimension.content.enchantment.TraitEffectImmunityEnchantment;
 import karashokleo.spell_dimension.util.TagUtil;
 import net.adventurez.init.EntityInit;
 import net.minecraft.block.Block;
@@ -392,17 +393,21 @@ public class AllTags
                 .add(DDEntities.STALKER)
                 .addTag(SCULK);
 
-        SpellDimension.ENCHANTMENT_TAGS.getOrCreateContainer(LHTags.NO_DISPELL)
-                .add(
-                        LHEnchantments.ETERNAL,
-                        LHEnchantments.ENCH_PROJECTILE,
-                        LHEnchantments.ENCH_FIRE,
-                        LHEnchantments.ENCH_ENVIRONMENT,
-                        LHEnchantments.ENCH_EXPLOSION,
-                        LHEnchantments.ENCH_MAGIC,
-                        LHEnchantments.ENCH_INVINCIBLE,
-                        LHEnchantments.ENCH_MATES
-                );
+        TagGenerator.Container<Enchantment> noDispellContainer = SpellDimension.ENCHANTMENT_TAGS.getOrCreateContainer(LHTags.NO_DISPELL);
+        noDispellContainer.add(
+                LHEnchantments.ETERNAL,
+                LHEnchantments.ENCH_PROJECTILE,
+                LHEnchantments.ENCH_FIRE,
+                LHEnchantments.ENCH_ENVIRONMENT,
+                LHEnchantments.ENCH_EXPLOSION,
+                LHEnchantments.ENCH_MAGIC,
+                LHEnchantments.ENCH_INVINCIBLE,
+                LHEnchantments.ENCH_MATES
+        );
+        for (TraitEffectImmunityEnchantment enchantment : AllEnchantments.EFFECT_IMMUNITY)
+        {
+            noDispellContainer.add(enchantment);
+        }
 
         SpellDimension.ENCHANTMENT_TAGS.getOrCreateContainer(LOOTABLE)
                 .add(
