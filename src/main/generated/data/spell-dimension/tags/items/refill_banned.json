@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:totem_of_undying",
+    "artifacts:chorus_totem",
+    {
+      "id": "#fwaystones:void_totem",
+      "required": false
+    }
+  ]
+}

@@ -59,6 +59,7 @@ public enum SDTexts
     TEXT$QUEST$DEPENDENCIES("Prerequisite quests not completed!", "前置任务未完成！"),
     TEXT$QUEST$SPELL_POWER("Increase any Spell Power to %s", "将任意法术强度提升至%s"),
 
+    TEXT$REFILL_BANNED("You cannot use the Refill Upgrade to automatically refill this item!", "你不能使用补货升级自动补货该物品！"),
     TEXT$BANNED_SPELL("You cannot cast this spell in your current dimension!", "你不能在当前维度施放该法术！"),
     TEXT$INVALID_KEY_ITEM("Invalid Key Item!", "无效的索引物品！"),
     TEXT$SPELL_INFUSION("Spell Infusion", "魔力灌注"),

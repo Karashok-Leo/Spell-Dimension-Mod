@@ -662,6 +662,7 @@
   "text.spell-dimension.quest.skip": "已跳过该任务！",
   "text.spell-dimension.quest.spell_power": "将任意法术强度提升至%s",
   "text.spell-dimension.random_loot_name": "? %s ?",
+  "text.spell-dimension.refill_banned": "你不能使用补货升级自动补货该物品！",
   "text.spell-dimension.skilled_school": "这不是你擅长的法术学派!",
   "text.spell-dimension.soul_bind": "你感觉灵魂与身体的联系变得紧密...",
   "text.spell-dimension.soul_unbind": "你感到灵魂与身体的联系变得脆弱...",

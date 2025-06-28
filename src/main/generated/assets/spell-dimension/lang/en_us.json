@@ -663,6 +663,7 @@
   "text.spell-dimension.quest.skip": "Quest skipped!",
   "text.spell-dimension.quest.spell_power": "Increase any Spell Power to %s",
   "text.spell-dimension.random_loot_name": "? %s ?",
+  "text.spell-dimension.refill_banned": "You cannot use the Refill Upgrade to automatically refill this item!",
   "text.spell-dimension.skilled_school": "This is not the spell school you are skilled in!",
   "text.spell-dimension.soul_bind": "You feel the connection between your soul and your body becoming stronger...",
   "text.spell-dimension.soul_unbind": "You feel the connection between your soul and your body becoming tenuous...",
