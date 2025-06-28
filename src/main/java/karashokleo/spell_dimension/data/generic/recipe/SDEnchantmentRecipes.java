@@ -100,7 +100,7 @@ public class SDEnchantmentRecipes
                 );
 
                 // Energize 1,2,3,4,5
-                EIRecipeUtil.set(
+                EIRecipeUtil.add(
                         builder -> builder
                                 .withPedestalItem(baseIngredient,
                                         Ingredient.ofItems(

@@ -36,5 +36,9 @@
       }
     ]
   ],
+  "input": {
+    "enchantment": "spell_power:energize",
+    "min_level": 2
+  },
   "level": 3
 }
