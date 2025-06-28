@@ -77,6 +77,13 @@ public class AllTraits
     public static IntervalSpellTrait MISFORTUNE;
     public static IntervalSpellTrait HEAVENLY_JUSTICE;
 
+    // Lightning Tier 1
+    public static ChanelIntervalSpellTrait CHAIN_LIGHTNING;
+    public static IntervalSpellTrait BALL_LIGHTNING;
+    public static IntervalSpellTrait THUNDERBOLT;
+    // Lightning Tier 2
+    public static IntervalSpellTrait QUANTUM_FIELD;
+
     // Boss
     public static SpellTrait BLACK_HOLE;
     public static IntervalSpellTrait INCARCERATE;
@@ -120,7 +127,7 @@ public class AllTraits
                 .register();
         ARCANE_BLAST = Entry.of(
                         "arcane_blast",
-                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.ARCANE_BLAST, lv -> 20 + lv * 20),
+                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.ARCANE_BLAST, lv -> 10 + lv * 10),
                         200, 30, 3, 300)
                 .register();
         ARCANE_BLINK = Entry.of(
