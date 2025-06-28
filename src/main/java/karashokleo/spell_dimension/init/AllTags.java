@@ -1,5 +1,6 @@
 package karashokleo.spell_dimension.init;
 
+import artifacts.registry.ModItems;
 import com.kyanite.deeperdarker.content.DDEntities;
 import com.spellbladenext.Spellblades;
 import karashokleo.l2hostility.L2Hostility;
@@ -65,6 +66,11 @@ public class AllTags
             TagUtil.itemTag("difficulty_allow/use_block/1"),
             TagUtil.itemTag("difficulty_allow/use_block/2")
     );
+    public static final List<TagKey<Item>> DIFFICULTY_ALLOW_USE_TRINKET = List.of(
+            TagUtil.itemTag("difficulty_allow/use_trinket/0"),
+            TagUtil.itemTag("difficulty_allow/use_trinket/1"),
+            TagUtil.itemTag("difficulty_allow/use_trinket/2")
+    );
 
     public static final List<TagKey<Item>> GEARS = List.of(
             TagUtil.itemTag("common/gear"),
@@ -86,6 +92,7 @@ public class AllTags
     public static final TagKey<Item> MAGIC_ARMOR = TagUtil.itemTag(new Identifier("equipment_standard:magic/armor"));
 
     public static final TagKey<Item> DUNGEON_BANNED = TagUtil.itemTag("dungeon_banned");
+    public static final TagKey<Item> REFILL_BANNED = TagUtil.itemTag("refill_banned");
 
     public static final List<TagKey<Item>> SPELL_POWER_ENCHANTMENT_TAGS = Stream.of(
             "enchant_spell_power_generic",
@@ -232,10 +239,20 @@ public class AllTags
                 .addOptional(
                         new Identifier("kibe:cursed_seeds")
                 );
+        SpellDimension.ITEM_TAGS.getOrCreateContainer(DIFFICULTY_ALLOW_USE_TRINKET.get(2))
+                .add(
+                        TrinketItems.CURSE_PRIDE,
+                        TrinketItems.CURSE_WRATH
+                );
 
         SpellDimension.ITEM_TAGS.getOrCreateContainer(DUNGEON_BANNED)
                 .add(MythicTools.LEGENDARY_BANGLUM.getPickaxe())
                 .addOptionalTag(new Identifier("constructionwand:wands"));
+
+        SpellDimension.ITEM_TAGS.getOrCreateContainer(REFILL_BANNED)
+                .add(Items.TOTEM_OF_UNDYING)
+                .add(ModItems.CHORUS_TOTEM.get())
+                .addOptionalTag(new Identifier("fwaystones:void_totem"));
 
         SpellDimension.ITEM_TAGS.getOrCreateContainer(getRuneTag(SpellSchools.LIGHTNING, "_small"))
                 .add(MythicItems.Copper.COPPER.getNugget());

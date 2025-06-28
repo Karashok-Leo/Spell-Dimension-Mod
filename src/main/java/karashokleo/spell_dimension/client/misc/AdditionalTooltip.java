@@ -199,7 +199,8 @@ public class AdditionalTooltip
         for (int i = 0; i < 3; i++)
         {
             if (stack.isIn(AllTags.DIFFICULTY_ALLOW_USE_ITEM.get(i)) ||
-                stack.isIn(AllTags.DIFFICULTY_ALLOW_USE_BLOCK.get(i)))
+                stack.isIn(AllTags.DIFFICULTY_ALLOW_USE_BLOCK.get(i)) ||
+                stack.isIn(AllTags.DIFFICULTY_ALLOW_USE_TRINKET.get(i)))
             {
                 lines.add(SDTexts.TEXT$DIFFICULTY$BAN.get(SDTexts.getDifficultyTierText(i)).formatted(Formatting.RED));
             }
