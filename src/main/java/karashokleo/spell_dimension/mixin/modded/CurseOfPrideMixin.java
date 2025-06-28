@@ -9,6 +9,7 @@ import karashokleo.l2hostility.content.logic.DifficultyLevel;
 import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHTexts;
 import karashokleo.spell_dimension.data.SDTexts;
+import karashokleo.spell_dimension.init.AllDamageTypes;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
@@ -30,6 +31,10 @@ public abstract class CurseOfPrideMixin extends CurseTrinketItem
     @Override
     public void onHurt(ItemStack stack, LivingEntity entity, LivingHurtEvent event)
     {
+        if (event.getSource().isOf(AllDamageTypes.OBLIVION_BREASTPLATE))
+        {
+            return;
+        }
         int level = DifficultyLevel.ofAny(entity);
         double rate = LHConfig.common().items.curse.prideDamageBonus;
         event.setAmount(event.getAmount() * (float) (1 + level * rate));

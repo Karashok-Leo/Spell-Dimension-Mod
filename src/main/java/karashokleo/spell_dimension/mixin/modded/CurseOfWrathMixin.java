@@ -6,6 +6,7 @@ import karashokleo.l2hostility.content.item.trinket.curse.CurseOfWrath;
 import karashokleo.l2hostility.content.logic.DifficultyLevel;
 import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.spell_dimension.data.SDTexts;
+import karashokleo.spell_dimension.init.AllDamageTypes;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
@@ -35,8 +36,14 @@ public abstract class CurseOfWrathMixin extends CurseTrinketItem
     @Override
     public void onHurt(ItemStack stack, LivingEntity entity, LivingHurtEvent event)
     {
-        if (!(event.getSource().getAttacker() instanceof LivingEntity attacker))
+        if (event.getSource().isOf(AllDamageTypes.OBLIVION_BREASTPLATE))
+        {
             return;
+        }
+        if (!(event.getSource().getAttacker() instanceof LivingEntity attacker))
+        {
+            return;
+        }
         int level = DifficultyLevel.ofAny(attacker) - DifficultyLevel.ofAny(entity);
         if (level > 0)
         {
