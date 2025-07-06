@@ -5,11 +5,10 @@ import dev.emi.trinkets.api.SlotReference;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
 import karashokleo.l2hostility.content.item.trinket.core.CurseTrinketItem;
 import karashokleo.l2hostility.content.item.trinket.curse.CurseOfPride;
-import karashokleo.l2hostility.content.logic.DifficultyLevel;
 import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.l2hostility.init.LHTexts;
+import karashokleo.spell_dimension.content.event.TrinketEvents;
 import karashokleo.spell_dimension.data.SDTexts;
-import karashokleo.spell_dimension.init.AllDamageTypes;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
@@ -29,15 +28,9 @@ import java.util.UUID;
 public abstract class CurseOfPrideMixin extends CurseTrinketItem
 {
     @Override
-    public void onHurt(ItemStack stack, LivingEntity entity, LivingHurtEvent event)
+    public void onHurting(ItemStack stack, LivingEntity entity, LivingHurtEvent event)
     {
-        if (event.getSource().isOf(AllDamageTypes.OBLIVION_BREASTPLATE))
-        {
-            return;
-        }
-        int level = DifficultyLevel.ofAny(entity);
-        double rate = LHConfig.common().items.curse.prideDamageBonus;
-        event.setAmount(event.getAmount() * (float) (1 + level * rate));
+        super.onHurting(stack, entity, event);
     }
 
     /**
@@ -57,7 +50,7 @@ public abstract class CurseOfPrideMixin extends CurseTrinketItem
     @Overwrite
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
-        int damage = (int) Math.round(100 * LHConfig.common().items.curse.prideDamageBonus);
+        int damage = (int) Math.round(100 * TrinketEvents.PRIDE_BONUS);
         int trait = (int) Math.round(100 * (1 / LHConfig.common().items.curse.prideTraitFactor - 1));
         tooltip.add(SDTexts.TOOLTIP$CURSE_PRIDE_1.get(damage).formatted(Formatting.GOLD));
         tooltip.add(LHTexts.ITEM_CHARM_TRAIT_CHEAP.get(trait).formatted(Formatting.RED));

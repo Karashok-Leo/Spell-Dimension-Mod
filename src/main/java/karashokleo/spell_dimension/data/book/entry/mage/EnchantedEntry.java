@@ -74,7 +74,7 @@ public class EnchantedEntry extends BaseEntryProvider
                         Primary, Intermediate, and Advanced Base Essences can be crafted into Enchanted Essences with a threshold of %d, %d, and %d respectively. The max threshold of Enchanted Essence that can be obtained from the loot depends on your difficulty level.
                         \\
                         \\
-                        At the Normal difficulty tier, Enchanted Essences can be merged into one with a higher threshold.
+                        At the Nightmare difficulty tier, Enchanted Essences can be merged into one with a higher threshold.
                         """.formatted(
                         EnchantedEssenceItem.CRAFT_THRESHOLD[0],
                         EnchantedEssenceItem.CRAFT_THRESHOLD[1],
@@ -86,7 +86,7 @@ public class EnchantedEntry extends BaseEntryProvider
                         初级、中级、高级的基础精华分别可以合成阈值为%d、%d、%d的束魔精华。战利品中能获取到的束魔精华的阈值上限取决于你的恶意难度等级。
                         \\
                         \\
-                        在普通难度层级下，你可以手动合并束魔精华以获得更高阈值的束魔精华。
+                        在梦魇难度层级下，你可以手动合并束魔精华以获得更高阈值的束魔精华。
                         """.formatted(
                         EnchantedEssenceItem.CRAFT_THRESHOLD[0],
                         EnchantedEssenceItem.CRAFT_THRESHOLD[1],

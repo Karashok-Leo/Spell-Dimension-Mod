@@ -5,11 +5,11 @@ import com.klikli_dev.modonomicon.item.ModonomiconItem;
 import karashokleo.l2hostility.client.L2HostilityClient;
 import karashokleo.l2hostility.content.item.TrinketItems;
 import karashokleo.l2hostility.content.logic.DifficultyLevel;
-import karashokleo.l2hostility.init.LHConfig;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.api.quest.Quest;
 import karashokleo.spell_dimension.api.quest.QuestUsage;
 import karashokleo.spell_dimension.content.component.GameStageComponent;
+import karashokleo.spell_dimension.content.event.TrinketEvents;
 import karashokleo.spell_dimension.content.item.DynamicSpellBookItem;
 import karashokleo.spell_dimension.content.object.EnchantedModifier;
 import karashokleo.spell_dimension.data.SDTexts;
@@ -101,9 +101,8 @@ public class AdditionalTooltip
         var player = MinecraftClient.getInstance().player;
         if (player == null) return;
         int level = DifficultyLevel.ofAny(player);
-        double rate = LHConfig.common().items.curse.prideDamageBonus;
         lines.add(SDTexts.TOOLTIP$CURSE_PRIDE_2.get(
-                "%.1f%%".formatted((level * rate) * 100)
+                "%.1f%%".formatted((level * TrinketEvents.PRIDE_BONUS) * 100)
         ).formatted(Formatting.AQUA));
     }
 

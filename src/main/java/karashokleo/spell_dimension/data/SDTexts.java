@@ -240,8 +240,8 @@ public enum SDTexts
     TOOLTIP$OBLIVION_BREASTPLATE_3("Current Oblivion Amount: %s", "当前湮灭值：%s"),
 
     TOOLTIP$MIRAGE_REFLECTOR("Damage taken will not exceed %s%% of max health", "- 受到的伤害不会超过最大生命值的%s%%"),
-    TOOLTIP$CURSE_PRIDE_1("Both damage dealt and damage taken are increased by %s%% per difficulty level", "根据玩家难度，造成伤害与受到伤害每级提升%s%%"),
-    TOOLTIP$CURSE_PRIDE_2("Current damage increment: +%s%%", "当前增伤：+%s%%"),
+    TOOLTIP$CURSE_PRIDE_1("All school spell power are increased by %s%% per difficulty level", "根据玩家难度，所有学派法术强度每级提升%s%%"),
+    TOOLTIP$CURSE_PRIDE_2("Current spell power increment: +s%", "当前增幅：+s%"),
     TOOLTIP$CURSE_WRATH("Increase damage dealt and damage received by %s%% per difficulty level difference when facing mobs with higher level than you.", "面对等级比自己高的怪物时每级等级差造成伤害与受到伤害均提升%s%%"),
     TOOLTIP$RING_DIVINITY("Gets permanent Cleanse effect. Reduce magic damage taken by %s%%, and not exceed %s%% of your max health", "获得持续的净化效果，受到的魔法伤害减少%s%%，且不超过自身最大血量的%s%%"),
     TOOLTIP$SECONDARY_SCHOOL_ITEM$1("- Gain %s spell power equal to %s%% of your major school's spell power", "- 获得相当于主修学派法术强度%2$s%%的%s法术强度"),
