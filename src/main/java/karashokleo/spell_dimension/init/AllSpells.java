@@ -28,6 +28,7 @@ import java.util.stream.Collectors;
 public class AllSpells
 {
     private static final Set<Identifier> ALL = new HashSet<>();
+    private static final Set<Identifier> PASSIVE = new HashSet<>();
     private static final HashMap<Identifier, ScrollType> SPELL_TO_SCROLL_TYPE = new HashMap<>();
     private static final HashMap<Identifier, Integer> SPELL_TO_TIER = new HashMap<>();
 
@@ -66,9 +67,9 @@ public class AllSpells
     public static final Identifier DIVINE_PROTECTION = fromBinding("paladins:divine_protection");
 
     // Lightning
-    public static final Identifier SURGE = fromBinding(SpellDimension.modLoc("surge"));
-    public static final Identifier STEADY_CURRENT = fromBinding(SpellDimension.modLoc("steady_current"));
-    public static final Identifier FISSION = fromBinding(SpellDimension.modLoc("fission"));
+    public static final Identifier SURGE = fromBindingPassive(SpellDimension.modLoc("surge"));
+    public static final Identifier STEADY_CURRENT = fromBindingPassive(SpellDimension.modLoc("steady_current"));
+    public static final Identifier FISSION = fromBindingPassive(SpellDimension.modLoc("fission"));
 
     /**
      * Infusion spells
@@ -169,14 +170,14 @@ public class AllSpells
     // Lightning
     // Tier 1
     public static final Identifier BALL_LIGHTNING = fromCrafting("ball_lightning").build();
-    public static final Identifier RESONANCE = fromCrafting("resonance").build();
-    public static final Identifier BREAKDOWN = fromCrafting("breakdown").build();
+    public static final Identifier RESONANCE = fromCrafting("resonance").setPassive().build();
+    public static final Identifier BREAKDOWN = fromCrafting("breakdown").setPassive().build();
     public static final Identifier THUNDERBOLT = fromCrafting("thunderbolt").build();
     // Tier 2
     public static final Identifier QUANTUM_FIELD = fromCrafting("quantum_field").withTier(1).build();
-    public static final Identifier ARCLIGHT = fromCrafting("arclight").withTier(1).build();
-    public static final Identifier CONSTANT_CURRENT = fromCrafting("constant_current").withTier(1).build();
-    public static final Identifier CLOSED_LOOP = fromCrafting("closed_loop").withTier(1).build();
+    public static final Identifier ARCLIGHT = fromCrafting("arclight").setPassive().withTier(1).build();
+    public static final Identifier CONSTANT_CURRENT = fromCrafting("constant_current").setPassive().withTier(1).build();
+    public static final Identifier CLOSED_LOOP = fromCrafting("closed_loop").setPassive().withTier(1).build();
     // Tier 3
     public static final Identifier RAILGUN = fromCrafting("railgun").withTier(2).build();
 
@@ -241,6 +242,11 @@ public class AllSpells
         return ALL;
     }
 
+    public static boolean isPassive(Identifier spellId)
+    {
+        return PASSIVE.contains(spellId);
+    }
+
     public static Set<Identifier> getSpells(Predicate<ScrollType> predicate)
     {
         return SPELL_TO_SCROLL_TYPE.entrySet()
@@ -285,6 +291,11 @@ public class AllSpells
         return new Entry(id).withScrollType(ScrollType.BINDING).build();
     }
 
+    private static Identifier fromBindingPassive(Identifier id)
+    {
+        return new Entry(id).withScrollType(ScrollType.BINDING).setPassive().build();
+    }
+
     // other namespace
     private static Identifier fromBinding(String id)
     {
@@ -314,6 +325,12 @@ public class AllSpells
         public Entry(Identifier id)
         {
             this.id = id;
+        }
+
+        public Entry setPassive()
+        {
+            PASSIVE.add(id);
+            return this;
         }
 
         public Entry withTier(int tier)

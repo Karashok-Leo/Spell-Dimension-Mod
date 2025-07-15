@@ -148,22 +148,23 @@ public enum SDTexts
     /**
      * Tooltip
      */
-    TOOLTIP$INVALID("Invalid Nbt Data!", "无效的Nbt数据!"),
+    TOOLTIP$INVALID("Invalid Nbt Data!", "无效的Nbt数据！"),
     TOOLTIP$DYNAMIC_BOOK$USAGE_1("Can be used as a container for spell scrolls", "可作为法术卷轴的容器"),
-    TOOLTIP$DYNAMIC_BOOK$USAGE_2("Usage: In the inventory, right-click on the book with a spell scroll to put it in, or right-click on an empty slot with the book to take the scroll out.", "用法：物品栏中用法术卷轴右键该物品将其放入，或使用该物品右键空槽位将卷轴取出."),
-    TOOLTIP$USE$CLICK("Usage: Right-click on other item with this item in the inventory.", "用法：物品栏中用该物品右键其他物品."),
-    TOOLTIP$USE$PRESS("Usage: Main hand holding, press the right button.", "用法：主手持有时，长按右键."),
+    TOOLTIP$DYNAMIC_BOOK$USAGE_2("Usage: In the inventory, right-click on the book with a spell scroll to put it in, or right-click on an empty slot with the book to take the scroll out.", "用法：物品栏中用法术卷轴右键该物品将其放入，或使用该物品右键空槽位将卷轴取出。"),
+    TOOLTIP$USE$CLICK("Usage: Right-click on other item with this item in the inventory.", "用法：物品栏中用该物品右键其他物品。"),
+    TOOLTIP$USE$PRESS("Usage: Main hand holding, press the right button.", "用法：主手持有时，长按右键。"),
     TOOLTIP$BOOK_REQUIREMENT("Must have at least %s %s to equip", "需要拥有至少%s的%s才能装备"),
-    TOOLTIP$EFFECT("Effect:", "效果:"),
-    TOOLTIP$LEVEL("Enchanted Level: %s", "束魔等级：%s"),
+    TOOLTIP$EFFECT("Effect:", "效果："),
+    TOOLTIP$ENCHANTED_LEVEL("Enchanted Level: %s", "束魔等级：%s"),
+    TOOLTIP$STORED_ENCHANTED_LEVEL("Stored Enchanted Level: %s", "已存储束魔等级：%s"),
     TOOLTIP$THRESHOLD("Threshold: %s", "阈值：%s"),
-    TOOLTIP$MODIFIER("Modifier:", "属性修饰语:"),
-    TOOLTIP$DISENCHANT("Remove attribute modifiers from the item.", "从物品上移除所有通过束魔精华获得的属性修饰符."),
-    TOOLTIP$MENDING("Completely repair the item and eliminate the repair cost of the item.", "完全修复物品，并且清除物品的修复惩罚."),
-    TOOLTIP$END_STAGE("Use to unlock the End stage.", "使用后解锁终末阶段."),
+    TOOLTIP$MODIFIER("Modifier:", "属性修饰语："),
+    TOOLTIP$DISENCHANT("Remove all attribute modifiers gained through Enchanted Essences from the item, save them in this essence, or overwrite all saved modifiers onto the item.", "从物品上移除所有通过束魔精华获得的属性修饰符，保存在此精华中，或者将已保存的所有束魔属性覆盖到物品上。"),
+    TOOLTIP$MENDING("Completely repair the item and eliminate the repair cost of the item.", "完全修复物品，并且清除物品的修复惩罚。"),
+    TOOLTIP$END_STAGE("Use to unlock the End stage.", "使用后解锁终末阶段。"),
     TOOLTIP$BRACKETS("[%s]", "[%s]"),
-    TOOLTIP$QUEST$TASK("Task:", "任务目标:"),
-    TOOLTIP$QUEST$REWARD("Reward:", "任务奖励:"),
+    TOOLTIP$QUEST$TASK("Task:", "任务目标："),
+    TOOLTIP$QUEST$REWARD("Reward:", "任务奖励："),
     TOOLTIP$QUEST$SUBMIT("Right-click to submit", "右键提交任务"),
     TOOLTIP$QUEST$SUBMIT_OR_SKIP("Right-click to submit or skip", "右键提交或跳过任务"),
     TOOLTIP$QUEST$OPEN_ENTRY("Shift + Right-click to open the related guide page", "Shift + 右键打开相关指引页面"),
@@ -241,7 +242,7 @@ public enum SDTexts
 
     TOOLTIP$MIRAGE_REFLECTOR("Damage taken will not exceed %s%% of max health", "- 受到的伤害不会超过最大生命值的%s%%"),
     TOOLTIP$CURSE_PRIDE_1("All school spell power are increased by %s%% per difficulty level", "根据玩家难度，所有学派法术强度每级提升%s%%"),
-    TOOLTIP$CURSE_PRIDE_2("Current spell power increment: +s%", "当前增幅：+s%"),
+    TOOLTIP$CURSE_PRIDE_2("Current spell power increment: +%s", "当前增幅：+%s"),
     TOOLTIP$CURSE_WRATH("Increase damage dealt and damage received by %s%% per difficulty level difference when facing mobs with higher level than you.", "面对等级比自己高的怪物时每级等级差造成伤害与受到伤害均提升%s%%"),
     TOOLTIP$RING_DIVINITY("Gets permanent Cleanse effect. Reduce magic damage taken by %s%%, and not exceed %s%% of your max health", "获得持续的净化效果，受到的魔法伤害减少%s%%，且不超过自身最大血量的%s%%"),
     TOOLTIP$SECONDARY_SCHOOL_ITEM$1("- Gain %s spell power equal to %s%% of your major school's spell power", "- 获得相当于主修学派法术强度%2$s%%的%s法术强度"),
@@ -379,10 +380,10 @@ public enum SDTexts
         SpellDimension.ZH_TEXTS.addText("trinkets.slot.chest.secondary_school", "副学派");
         SpellDimension.EN_TEXTS.addText("trinkets.slot.legs.spell_container", "Spell Container");
         SpellDimension.ZH_TEXTS.addText("trinkets.slot.legs.spell_container", "法术容器");
-        SpellDimension.EN_TEXTS.addText(IllusionUpgradeTab.KEY, "Illusion");
-        SpellDimension.ZH_TEXTS.addText(IllusionUpgradeTab.KEY, "幻化");
-        SpellDimension.EN_TEXTS.addText(IllusionUpgradeTab.KEY + ".tooltip", "Illusion Settings");
-        SpellDimension.ZH_TEXTS.addText(IllusionUpgradeTab.KEY + ".tooltip", "幻化设置");
+        SpellDimension.EN_TEXTS.addText(IllusionUpgradeTab.NAME_KEY, "Illusion");
+        SpellDimension.ZH_TEXTS.addText(IllusionUpgradeTab.NAME_KEY, "幻化");
+        SpellDimension.EN_TEXTS.addText(IllusionUpgradeTab.TOOLTIP_KEY, "Illusion Settings");
+        SpellDimension.ZH_TEXTS.addText(IllusionUpgradeTab.TOOLTIP_KEY, "幻化设置");
     }
 
     private static void addLootBagTranslation()

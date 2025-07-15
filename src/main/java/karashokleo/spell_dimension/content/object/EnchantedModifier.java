@@ -44,6 +44,12 @@ public record EnchantedModifier(
     }
 
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
+    public static boolean has(ItemStack stack)
+    {
+        return stack.getSubNbt(ENCHANTED_MODIFIER_KEY) != null;
+    }
+
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public static boolean canApply(ItemStack stack, EquipmentSlot slot)
     {
         if (stack.getItem() instanceof Equipment equipment)
@@ -101,16 +107,26 @@ public record EnchantedModifier(
         return true;
     }
 
-    public static boolean remove(ItemStack stack)
+    public static void overwrite(ItemStack stack, NbtCompound modifiers)
     {
-        if (stack.isEmpty()) return false;
+        stack.getOrCreateNbt().put(ENCHANTED_MODIFIER_KEY, modifiers);
+    }
+
+    @Nullable
+    public static NbtCompound remove(ItemStack stack)
+    {
+        if (stack.isEmpty())
+        {
+            return null;
+        }
         NbtCompound nbt = stack.getNbt();
         if (nbt != null && nbt.contains(ENCHANTED_MODIFIER_KEY))
         {
+            NbtCompound ans = nbt.getCompound(ENCHANTED_MODIFIER_KEY);
             nbt.remove(ENCHANTED_MODIFIER_KEY);
-            return true;
+            return ans;
         }
-        return false;
+        return null;
     }
 
     public static void modifyItemAttributeModifiers(ItemStack stack, EquipmentSlot slot, Multimap<EntityAttribute, EntityAttributeModifier> modifiers)
@@ -194,7 +210,7 @@ public record EnchantedModifier(
         NbtCompound extraModifiers = nbt.getCompound(ENCHANTED_MODIFIER_KEY);
         if (!extraModifiers.contains(LEVEL_KEY)) return;
         lines.add(ScreenTexts.EMPTY);
-        lines.add(SDTexts.TOOLTIP$LEVEL.get(extraModifiers.getInt(LEVEL_KEY)).formatted(Formatting.BOLD));
+        lines.add(SDTexts.TOOLTIP$ENCHANTED_LEVEL.get(extraModifiers.getInt(LEVEL_KEY)).formatted(Formatting.BOLD));
         lines.add(ScreenTexts.EMPTY);
     }
 
