@@ -17,7 +17,7 @@ import net.spell_power.api.SpellSchool;
 
 public class TrinketEvents
 {
-    public static final double PRIDE_BONUS = 0.03F;
+    public static final double PRIDE_BONUS = 0.02F;
 
     public static void init()
     {

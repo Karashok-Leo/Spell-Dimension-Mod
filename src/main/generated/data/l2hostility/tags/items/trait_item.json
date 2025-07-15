@@ -31,6 +31,10 @@
     "spell-dimension:blessing",
     "spell-dimension:misfortune",
     "spell-dimension:heavenly_justice",
+    "spell-dimension:chain_lightning",
+    "spell-dimension:ball_lightning",
+    "spell-dimension:thunderbolt",
+    "spell-dimension:quantum_field",
     "spell-dimension:black_hole",
     "spell-dimension:incarcerate"
   ]

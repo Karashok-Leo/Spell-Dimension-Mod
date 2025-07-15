@@ -261,6 +261,27 @@ public class AllTraits
                         300, 20, 3, 600)
                 .register();
 
+        CHAIN_LIGHTNING = Entry.of(
+                        "chain_lightning",
+                        new ChanelIntervalSpellTrait(lv -> 300 - 40 * lv, lv -> 10, AllSpells.CHAIN_LIGHTNING, lv -> 20 + lv * 20),
+                        200, 30, 3, 300)
+                .register();
+        BALL_LIGHTNING = Entry.of(
+                        "ball_lightning",
+                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.BALL_LIGHTNING, lv -> 20 + lv * 20),
+                        200, 30, 3, 300)
+                .register();
+        THUNDERBOLT = Entry.of(
+                        "thunderbolt",
+                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.THUNDERBOLT, lv -> 20 + lv * 20),
+                        200, 30, 3, 300)
+                .register();
+        QUANTUM_FIELD = Entry.of(
+                        "quantum_field",
+                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.QUANTUM_FIELD, lv -> 20 + lv * 20),
+                        300, 20, 3, 600)
+                .register();
+
         BLACK_HOLE = Entry.of(
                         "black_hole",
                         new SpellTrait(AllSpells.BLACK_HOLE, lv -> 80),
