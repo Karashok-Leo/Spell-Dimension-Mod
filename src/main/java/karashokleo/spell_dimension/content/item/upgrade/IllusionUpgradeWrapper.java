@@ -1,6 +1,7 @@
 package karashokleo.spell_dimension.content.item.upgrade;
 
 import karashokleo.spell_dimension.content.item.IllusionContainer;
+import karashokleo.spell_dimension.content.object.EnchantedModifier;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
 import net.minecraft.item.ItemStack;
@@ -30,7 +31,8 @@ public class IllusionUpgradeWrapper extends UpgradeWrapperBase<IllusionUpgradeWr
     @Override
     public ItemStack pickup(@NotNull World world, @NotNull ItemStack stack, @NotNull TransactionContext ctx)
     {
-        if (this.filterLogic.matchesFilter(stack))
+        if (this.filterLogic.matchesFilter(stack) &&
+            !EnchantedModifier.has(stack))
         {
             int materialTier = IllusionContainer.getMaterialTier(stack);
             int enchantmentPoints = IllusionContainer.getEnchantmentPoints(stack);
