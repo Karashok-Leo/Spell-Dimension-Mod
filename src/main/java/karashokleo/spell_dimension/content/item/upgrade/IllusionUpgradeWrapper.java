@@ -31,15 +31,17 @@ public class IllusionUpgradeWrapper extends UpgradeWrapperBase<IllusionUpgradeWr
     @Override
     public ItemStack pickup(@NotNull World world, @NotNull ItemStack stack, @NotNull TransactionContext ctx)
     {
-        if (this.filterLogic.matchesFilter(stack) &&
-            !EnchantedModifier.has(stack))
+        if (this.filterLogic.matchesFilter(stack))
         {
-            int materialTier = IllusionContainer.getMaterialTier(stack);
-            int enchantmentPoints = IllusionContainer.getEnchantmentPoints(stack);
-            if (materialTier >= 0 || enchantmentPoints > 0)
+            if (!EnchantedModifier.has(stack))
             {
-                IllusionContainer.convert(upgrade, materialTier, enchantmentPoints);
-                stack.setCount(0);
+                int materialTier = IllusionContainer.getMaterialTier(stack);
+                int enchantmentPoints = IllusionContainer.getEnchantmentPoints(stack);
+                if (materialTier >= 0 || enchantmentPoints > 0)
+                {
+                    IllusionContainer.convert(upgrade, materialTier, enchantmentPoints);
+                    stack.setCount(0);
+                }
             }
 
             ItemVariant resource = ItemVariant.of(stack);
