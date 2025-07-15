@@ -34,6 +34,19 @@ import java.util.List;
 @Mixin(SpellHelper.class)
 public abstract class SpellHelperMixin
 {
+    @Inject(
+            method = "attemptCasting(Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/item/ItemStack;Lnet/minecraft/util/Identifier;Z)Lnet/spell_engine/internals/casting/SpellCast$Attempt;",
+            at = @At("HEAD"),
+            cancellable = true
+    )
+    private static void inject_attemptCasting(PlayerEntity player, ItemStack itemStack, Identifier spellId, boolean checkAmmo, CallbackInfoReturnable<SpellCast.Attempt> cir)
+    {
+        if (AllSpells.isPassive(spellId))
+        {
+            cir.setReturnValue(SpellCast.Attempt.none());
+        }
+    }
+
     // fix context position being null
     @ModifyArg(
             method = "directImpact",
