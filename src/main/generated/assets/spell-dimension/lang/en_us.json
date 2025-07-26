@@ -543,6 +543,8 @@
   "spell.spell-dimension.spell_power_advanced.name": "Advanced Empowering Presence",
   "spell.spell-dimension.steady_current.description": "[Passive] Chain Lightning duration ×2",
   "spell.spell-dimension.steady_current.name": "Steady Current",
+  "spell.spell-dimension.stormflash.description": "[Passive] When Chain Lightning strikes an empty space, dash forward",
+  "spell.spell-dimension.stormflash.name": "Stormflash",
   "spell.spell-dimension.summon.description": "Launch a spell, if it touches a spawner, it will use the item in your off-hand as a key item to replace the mob in the spawner. Press U on Spawner to view all recipes.",
   "spell.spell-dimension.summon.name": "Spell Summon",
   "spell.spell-dimension.surge.description": "[Passive] Chain Lightning/Ball Lightning damage multiplier ×2",

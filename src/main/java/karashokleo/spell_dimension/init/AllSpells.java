@@ -176,10 +176,11 @@ public class AllSpells
     // Tier 2
     public static final Identifier QUANTUM_FIELD = fromCrafting("quantum_field").withTier(1).build();
     public static final Identifier ARCLIGHT = fromCrafting("arclight").setPassive().withTier(1).build();
-    public static final Identifier ELECTROCUTION = fromCrafting("electrocution").setPassive().withTier(1).build();
     //    public static final Identifier VOLTWEB_EXPANSION = fromCrafting("voltweb_expansion").setPassive().withTier(1).build();
     public static final Identifier CONSTANT_CURRENT = fromCrafting("constant_current").setPassive().withTier(1).build();
     public static final Identifier CLOSED_LOOP = fromCrafting("closed_loop").setPassive().withTier(1).build();
+    public static final Identifier ELECTROCUTION = fromCrafting("electrocution").setPassive().withTier(1).build();
+    public static final Identifier STORMFLASH = fromCrafting("stormflash").setPassive().withTier(1).build();
     // Tier 3
     public static final Identifier RAILGUN = fromCrafting("railgun").withTier(2).build();
     public static final Identifier ELECTRIC_BONDAGE = fromCrafting("electric_bondage").withTier(2).setPassive().build();

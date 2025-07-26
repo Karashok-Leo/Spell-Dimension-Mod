@@ -542,6 +542,8 @@
   "spell.spell-dimension.spell_power_advanced.name": "高级魔力增强",
   "spell.spell-dimension.steady_current.description": "[被动] 连锁闪电存续时间 ×2",
   "spell.spell-dimension.steady_current.name": "稳流",
+  "spell.spell-dimension.stormflash.description": "[被动] 空放连锁闪电时，向前冲刺",
+  "spell.spell-dimension.stormflash.name": "风驰电掣",
   "spell.spell-dimension.summon.description": "发射一道咒语，若其触碰到刷怪笼，则会以你副手的物品为索引物，替换刷怪笼中的生物。对刷怪笼按U可以查看所有配方。",
   "spell.spell-dimension.summon.name": "魔力召唤",
   "spell.spell-dimension.surge.description": "[被动] 连锁闪电/球状闪电伤害倍率 ×2",

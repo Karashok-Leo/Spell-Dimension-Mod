@@ -315,20 +315,6 @@ public enum SpellTexts
             "[Passive] Chain Lightning/Ball Lightning damage multiplier ×%d".formatted(SpellConfig.POWER_PASSIVE_CONFIG.arclight()),
             "[被动] 连锁闪电/球状闪电伤害倍率 ×%d".formatted(SpellConfig.POWER_PASSIVE_CONFIG.arclight())
     ),
-    ELECTROCUTION(
-            "Electrocution",
-            "电刑",
-            "[Passive] The %drd lightning spell damage dealt to the same enemy within %.1f seconds is increased by an additional %d%%%%".formatted(
-                    SpellConfig.ELECTROCUTION_CONFIG.maxStacks(),
-                    SpellConfig.ELECTROCUTION_CONFIG.maxDuration() / 20F,
-                    (int) ((SpellConfig.ELECTROCUTION_CONFIG.damageFactor() - 1) * 100)
-            ),
-            "[被动] 在%.1f秒内对同一个敌人造成的第%d次雷电法术伤害额外增加%d%%%%".formatted(
-                    SpellConfig.ELECTROCUTION_CONFIG.maxDuration() / 20F,
-                    SpellConfig.ELECTROCUTION_CONFIG.maxStacks(),
-                    (int) ((SpellConfig.ELECTROCUTION_CONFIG.damageFactor() - 1) * 100)
-            )
-    ),
     CONSTANT_CURRENT(
             "Constant Current",
             "恒流",
@@ -346,6 +332,26 @@ public enum SpellTexts
             "闭环",
             "[Passive] When ball lightning bounces, its lifespan increases by %d seconds".formatted(SpellConfig.BALL_LIGHTNING_CONFIG.lifespanIncrement() / 20),
             "[被动] 球状闪电反弹时，存续时间增加%d秒".formatted(SpellConfig.BALL_LIGHTNING_CONFIG.lifespanIncrement() / 20)
+    ),
+    ELECTROCUTION(
+            "Electrocution",
+            "电刑",
+            "[Passive] The %drd lightning spell damage dealt to the same enemy within %.1f seconds is increased by an additional %d%%%%".formatted(
+                    SpellConfig.ELECTROCUTION_CONFIG.maxStacks(),
+                    SpellConfig.ELECTROCUTION_CONFIG.maxDuration() / 20F,
+                    (int) ((SpellConfig.ELECTROCUTION_CONFIG.damageFactor() - 1) * 100)
+            ),
+            "[被动] 在%.1f秒内对同一个敌人造成的第%d次雷电法术伤害额外增加%d%%%%".formatted(
+                    SpellConfig.ELECTROCUTION_CONFIG.maxDuration() / 20F,
+                    SpellConfig.ELECTROCUTION_CONFIG.maxStacks(),
+                    (int) ((SpellConfig.ELECTROCUTION_CONFIG.damageFactor() - 1) * 100)
+            )
+    ),
+    STORMFLASH(
+            "Stormflash",
+            "风驰电掣",
+            "[Passive] When Chain Lightning strikes an empty space, dash forward",
+            "[被动] 空放连锁闪电时，向前冲刺"
     ),
     THUNDERBOLT(
             "Thunderbolt",

@@ -114,7 +114,7 @@
   "book.spell-dimension-book.magic_guidance.mage.cast.name": "施法",
   "book.spell-dimension-book.magic_guidance.mage.cast.pool.text": "魔法师能够施展哪些法术取决于他们的法术池。魔法师的法术池由他们手持的物品和装备的法术书决定。\n",
   "book.spell-dimension-book.magic_guidance.mage.disenchant.description": "“悔恨之泪”",
-  "book.spell-dimension-book.magic_guidance.mage.disenchant.disenchant.text": "祛魔精华能够消除束魔精华注入在一件物品上的所有魔力。获取祛魔精华的唯一途径是从哥布林商人手中购买。\n",
+  "book.spell-dimension-book.magic_guidance.mage.disenchant.disenchant.text": "祛魔精华能够将束魔精华注入在一件物品上的所有魔力转移至另一件物品上。获取祛魔精华的途径是合成或从哥布林商人手中购买。\n",
   "book.spell-dimension-book.magic_guidance.mage.disenchant.disenchant.title": "祛魔精华",
   "book.spell-dimension-book.magic_guidance.mage.disenchant.name": "祛魔精华",
   "book.spell-dimension-book.magic_guidance.mage.enchant.description": "为你的装备注入魔力",

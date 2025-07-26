@@ -8,7 +8,6 @@ import net.minecraft.client.particle.*;
 import net.minecraft.client.render.*;
 import net.minecraft.client.texture.TextureManager;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
@@ -23,8 +22,8 @@ import java.util.Arrays;
 public class ZapParticle extends SpriteBillboardParticle
 {
     private final Random random;
-    private final Entity fromEntity;
-    private final Entity toEntity;
+    private final PositionProvider fromPos;
+    private final PositionProvider toPos;
     private final long timestamp;
     private final int strands;
     private final float segmentLength;
@@ -41,8 +40,8 @@ public class ZapParticle extends SpriteBillboardParticle
         this.scale = 1f;
         this.maxAge = world.getRandom().nextBetween(4, 8);
         this.random = Random.create();
-        this.fromEntity = world.getEntityById(options.fromEntity());
-        this.toEntity = world.getEntityById(options.toEntity());
+        this.fromPos = PositionProvider.get(options.from(), world);
+        this.toPos = PositionProvider.get(options.to(), world);
         this.timestamp = System.currentTimeMillis();
         this.strands = options.strands();
         this.segmentLength = 3f;
@@ -80,21 +79,17 @@ public class ZapParticle extends SpriteBillboardParticle
         this.alpha = 1;
     }
 
-    private static Vec3d getPos(Entity entity, float tickDelta, Camera camera)
-    {
-        Vec3d prevPos = new Vec3d(entity.prevX, entity.prevY, entity.prevZ);
-        return prevPos.lerp(entity.getPos(), tickDelta)
-                .add(0, entity.getHeight() / 2, 0)
-                .subtract(camera.getPos());
-    }
-
     @Override
     public void buildGeometry(VertexConsumer vertexConsumer, Camera camera, float tickDelta)
     {
-        if (this.fromEntity == null || this.toEntity == null) return;
+        if (this.fromPos == null || this.toPos == null) return;
 
-        Vec3d from = getPos(this.fromEntity, tickDelta, camera);
-        Vec3d to = getPos(this.toEntity, tickDelta, camera);
+        Vec3d from = this.fromPos
+                .getRenderPosition(tickDelta)
+                .subtract(camera.getPos());
+        Vec3d to = this.toPos
+                .getRenderPosition(tickDelta)
+                .subtract(camera.getPos());
         Vec3d distance = to.subtract(from);
 
         int segments = random.nextBetween(1, 2) + (int) (distance.length() / segmentLength);
