@@ -351,6 +351,12 @@ public enum SpellTexts
             "When you hit a lightning rune in the air, fire the Railgun. Deals damage and destroys all blocks touched.",
             "击中空中的雷电符文时，发射超电磁炮。造成伤害并摧毁一切方块。"
     ),
+    ELECTRIC_BONDAGE(
+            "Electric Bondage",
+            "电缚",
+            "[Passive] Apply a stun when dealing lightning spell damage, increasing the duration by 0.1 seconds per 100 spell power",
+            "[被动] 造成雷电法术伤害时施加眩晕，每100点法术强度增加0.1秒持续时间"
+    ),
     LIGHTMOON(
             "Light Moon",
             "浅月",

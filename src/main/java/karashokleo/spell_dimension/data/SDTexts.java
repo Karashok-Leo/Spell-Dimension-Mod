@@ -197,7 +197,7 @@ public enum SDTexts
     TOOLTIP$CONTAINER$CONVERTED$VALUE("- %s (+%s/%s) * %s", "- %s (+%s/%s) * %s"),
     TOOLTIP$CONTAINER$RETRIEVE("Main hand holding, right-click to retrieve all finished products", "主手持有右键取出所有成品"),
     TOOLTIP$CONTAINER$ILLUSION("Attempt to void items and their enchantments, converting them into materials of the same rarity and the Book of Omniscience.", "尝试销毁物品及其附魔，转化为同等级材料和全知之书"),
-    TOOLTIP$CONTAINER$ILLUSION_UPGRADE("Attempt to pick up and void convertible items and their enchantments, converting them into materials of the same rarity and the Book of Omniscience.", "尝试拾取并销毁可转化的物品及其附魔，转化为同等级材料和全知之书"),
+    TOOLTIP$CONTAINER$ILLUSION_UPGRADE("Attempt to pick up and void convertible items (without amplified by Enchanted Essences) and their enchantments, converting them into materials of the same rarity and the Book of Omniscience.", "尝试拾取并销毁可转化的（未被束魔精华强化过的）物品及其附魔，转化为同等级材料和全知之书"),
 
     /**
      * Trinkets

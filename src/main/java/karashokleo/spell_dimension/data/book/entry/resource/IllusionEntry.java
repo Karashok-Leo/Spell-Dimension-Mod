@@ -69,12 +69,12 @@ public class IllusionEntry extends BaseEntryProvider
         context.page("next");
         this.lang().add(context.pageText(),
                 """
-                        Illusion Upgrade is similar to Pickup Upgrade, but it can automatically convert picked up items.
+                        Illusion Upgrade is similar to Pickup Upgrade, but it can automatically convert picked up items. For safety reasons, Illusion Upgrade will not convert items that have been amplified by Enchanted Essences.
                         """
         );
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        幻化升级类似于背包的拾取升级，但是可以自动转化拾取的物品。
+                        幻化升级类似于背包的拾取升级，但是可以自动转化拾取的物品。为了安全起见，幻化升级不会转化被束魔精华强化过的物品。
                         """
         );
         BookTextPageModel next = BookTextPageModel
