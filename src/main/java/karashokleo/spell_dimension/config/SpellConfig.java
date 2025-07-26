@@ -13,6 +13,7 @@ public class SpellConfig
     public static final ChainLightningPassiveConfig CHAIN_LIGHTNING_PASSIVE_CONFIG = new ChainLightningPassiveConfig(2, 4, 2, 3);
     public static final BallLightningConfig BALL_LIGHTNING_CONFIG = new BallLightningConfig(0.8F, 200, 100);
     public static final RailgunConfig RAILGUN_CONFIG = new RailgunConfig(32, 2, 10F);
+    public static final ElectrocutionConfig ELECTROCUTION_CONFIG = new ElectrocutionConfig(20, 3, 1.5F);
 
     public record BlazingMarkConfig(
             int totalDuration,
@@ -59,6 +60,14 @@ public class SpellConfig
     public record RailgunConfig(
             int length,
             int radius,
+            float damageFactor
+    )
+    {
+    }
+
+    public record ElectrocutionConfig(
+            int maxDuration,
+            int maxStacks,
             float damageFactor
     )
     {

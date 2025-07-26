@@ -260,7 +260,7 @@
   "book.spell-dimension-book.magic_guidance.resource.dungeon.text.title": "Dungeon Trial",
   "book.spell-dimension-book.magic_guidance.resource.illusion.description": "Remain essentially the same despite all apparent changes",
   "book.spell-dimension-book.magic_guidance.resource.illusion.name": "Illusionary Transformation",
-  "book.spell-dimension-book.magic_guidance.resource.illusion.next.text": "Illusion Upgrade is similar to Pickup Upgrade, but it can automatically convert picked up items.\n",
+  "book.spell-dimension-book.magic_guidance.resource.illusion.next.text": "Illusion Upgrade is similar to Pickup Upgrade, but it can automatically convert picked up items. For safety reasons, Illusion Upgrade will not convert items that have been amplified by Enchanted Essences.\n",
   "book.spell-dimension-book.magic_guidance.resource.illusion.prev.text": "Illusion Containers can devour equipment (such as items under the tag #spell-dimension:epic/gear) and all enchanted items, and transform them into random materials of the same tier or the Book of Omniscience. This is also the only way to obtain the Book of Omniscience.\n",
   "book.spell-dimension-book.magic_guidance.resource.illusion.prev.title": "Illusionary Transformation",
   "book.spell-dimension-book.magic_guidance.resource.key.description": "Some keys you need to know",

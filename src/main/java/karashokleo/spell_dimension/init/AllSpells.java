@@ -177,7 +177,7 @@ public class AllSpells
     public static final Identifier QUANTUM_FIELD = fromCrafting("quantum_field").withTier(1).build();
     public static final Identifier ARCLIGHT = fromCrafting("arclight").setPassive().withTier(1).build();
     public static final Identifier ELECTROCUTION = fromCrafting("electrocution").setPassive().withTier(1).build();
-    public static final Identifier VOLTWEB_EXPANSION = fromCrafting("voltweb_expansion").setPassive().withTier(1).build();
+    //    public static final Identifier VOLTWEB_EXPANSION = fromCrafting("voltweb_expansion").setPassive().withTier(1).build();
     public static final Identifier CONSTANT_CURRENT = fromCrafting("constant_current").setPassive().withTier(1).build();
     public static final Identifier CLOSED_LOOP = fromCrafting("closed_loop").setPassive().withTier(1).build();
     // Tier 3
@@ -190,6 +190,7 @@ public class AllSpells
 
         LivingDamageEvent.DAMAGE.register(BlazingMark::mark);
         LivingDamageEvent.DAMAGE.register(ElectricBondageSpell::onDamage);
+        LivingDamageEvent.DAMAGE.register(ElectrocutionSpell::onDamage);
 
         SpellProjectileHitEntityCallback.EVENT.register(ShiftSpell::handle);
 

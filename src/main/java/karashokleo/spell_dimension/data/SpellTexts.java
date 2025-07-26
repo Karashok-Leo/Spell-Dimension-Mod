@@ -315,6 +315,20 @@ public enum SpellTexts
             "[Passive] Chain Lightning/Ball Lightning damage multiplier ×%d".formatted(SpellConfig.POWER_PASSIVE_CONFIG.arclight()),
             "[被动] 连锁闪电/球状闪电伤害倍率 ×%d".formatted(SpellConfig.POWER_PASSIVE_CONFIG.arclight())
     ),
+    ELECTROCUTION(
+            "Electrocution",
+            "电刑",
+            "[Passive] The %drd lightning spell damage dealt to the same enemy within %.1f seconds is increased by an additional %d%%%%".formatted(
+                    SpellConfig.ELECTROCUTION_CONFIG.maxStacks(),
+                    SpellConfig.ELECTROCUTION_CONFIG.maxDuration() / 20F,
+                    (int) ((SpellConfig.ELECTROCUTION_CONFIG.damageFactor() - 1) * 100)
+            ),
+            "[被动] 在%.1f秒内对同一个敌人造成的第%d次雷电法术伤害额外增加%d%%%%".formatted(
+                    SpellConfig.ELECTROCUTION_CONFIG.maxDuration() / 20F,
+                    SpellConfig.ELECTROCUTION_CONFIG.maxStacks(),
+                    (int) ((SpellConfig.ELECTROCUTION_CONFIG.damageFactor() - 1) * 100)
+            )
+    ),
     CONSTANT_CURRENT(
             "Constant Current",
             "恒流",

@@ -260,7 +260,7 @@
   "book.spell-dimension-book.magic_guidance.resource.dungeon.text.title": "地牢试炼",
   "book.spell-dimension-book.magic_guidance.resource.illusion.description": "万变不离其宗",
   "book.spell-dimension-book.magic_guidance.resource.illusion.name": "幻化",
-  "book.spell-dimension-book.magic_guidance.resource.illusion.next.text": "幻化升级类似于背包的拾取升级，但是可以自动转化拾取的物品。\n",
+  "book.spell-dimension-book.magic_guidance.resource.illusion.next.text": "幻化升级类似于背包的拾取升级，但是可以自动转化拾取的物品。为了安全起见，幻化升级不会转化被束魔精华强化过的物品。\n",
   "book.spell-dimension-book.magic_guidance.resource.illusion.prev.text": "幻化容器可以吞噬大量装备（如标签#spell-dimension:epic/gear下的物品）以及一切带有附魔的物品，并将它们转化为同阶级的随机材料或者全知之书。这也是全知之书的唯一获取途径。\n",
   "book.spell-dimension-book.magic_guidance.resource.illusion.prev.title": "幻化",
   "book.spell-dimension-book.magic_guidance.resource.key.description": "一些你需要知道的键位",
