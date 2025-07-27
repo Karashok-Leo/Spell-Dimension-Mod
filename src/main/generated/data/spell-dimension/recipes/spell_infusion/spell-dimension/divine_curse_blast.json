@@ -2,10 +2,10 @@
   "type": "spell-dimension:spell_infusion",
   "ingredients": [
     {
-      "item": "l2hostility:totemic_gold_ingot"
+      "item": "spell-dimension:essence_healing_0"
     },
     {
-      "item": "spell-dimension:essence_healing_0"
+      "item": "l2hostility:totemic_gold_ingot"
     }
   ],
   "input": {

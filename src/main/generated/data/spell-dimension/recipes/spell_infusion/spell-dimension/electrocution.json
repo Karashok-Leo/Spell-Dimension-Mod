@@ -2,14 +2,14 @@
   "type": "spell-dimension:spell_infusion",
   "ingredients": [
     {
-      "item": "spell-dimension:essence_healing_1"
+      "item": "spell-dimension:essence_lightning_1"
     },
     {
-      "item": "l2hostility:cursed"
+      "item": "l2hostility:guardian_eye"
     }
   ],
   "input": {
     "item": "minecraft:paper"
   },
-  "spell_id": "spell-dimension:misfortune"
+  "spell_id": "spell-dimension:electrocution"
 }

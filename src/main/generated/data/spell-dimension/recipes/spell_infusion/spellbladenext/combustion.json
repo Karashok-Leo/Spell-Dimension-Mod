@@ -2,10 +2,10 @@
   "type": "spell-dimension:spell_infusion",
   "ingredients": [
     {
-      "item": "soulsweapons:crimson_obsidian"
+      "item": "spell-dimension:essence_fire_1"
     },
     {
-      "item": "spell-dimension:essence_fire_1"
+      "item": "soulsweapons:crimson_obsidian"
     }
   ],
   "input": {

@@ -2,10 +2,10 @@
   "type": "spell-dimension:spell_infusion",
   "ingredients": [
     {
-      "item": "aquamirae:poisoned_chakra"
+      "item": "spell-dimension:essence_frost_2"
     },
     {
-      "item": "spell-dimension:essence_frost_2"
+      "item": "aquamirae:poisoned_chakra"
     }
   ],
   "input": {

@@ -2,10 +2,10 @@
   "type": "spell-dimension:spell_infusion",
   "ingredients": [
     {
-      "item": "mutantmonsters:creeper_shard"
+      "tag": "spell-dimension:essence/all"
     },
     {
-      "tag": "spell-dimension:essence/all"
+      "item": "mutantmonsters:creeper_shard"
     }
   ],
   "input": {

@@ -1,0 +1,21 @@
+{
+  "type": "spell-dimension:spell_infusion",
+  "ingredients": [
+    {
+      "item": "spell-dimension:essence_lightning_2"
+    },
+    {
+      "item": "l2hostility:eternal_witch_charge"
+    },
+    {
+      "item": "l2hostility:blackstone_core"
+    },
+    {
+      "item": "l2hostility:sculkium_block"
+    }
+  ],
+  "input": {
+    "item": "minecraft:paper"
+  },
+  "spell_id": "spell-dimension:electric_bondage"
+}

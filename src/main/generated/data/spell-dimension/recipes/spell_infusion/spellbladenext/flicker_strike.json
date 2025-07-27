@@ -2,10 +2,10 @@
   "type": "spell-dimension:spell_infusion",
   "ingredients": [
     {
-      "item": "mythicupgrades:ruby_block"
+      "item": "spell-dimension:essence_fire_2"
     },
     {
-      "item": "spell-dimension:essence_fire_2"
+      "item": "mythicupgrades:ruby_block"
     }
   ],
   "input": {

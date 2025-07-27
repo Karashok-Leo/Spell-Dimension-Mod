@@ -2,10 +2,10 @@
   "type": "spell-dimension:spell_infusion",
   "ingredients": [
     {
-      "item": "soulsweapons:essence_of_luminescence"
+      "item": "spell-dimension:essence_healing_0"
     },
     {
-      "item": "spell-dimension:essence_healing_0"
+      "item": "soulsweapons:essence_of_luminescence"
     }
   ],
   "input": {

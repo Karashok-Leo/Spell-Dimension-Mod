@@ -2,14 +2,14 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
+    "A": {
+      "item": "mythicmetals:morkite"
+    },
     "G": {
       "item": "minecraft:copper_ingot"
     },
     "L": {
       "item": "minecraft:lapis_block"
-    },
-    "P": {
-      "item": "mythicmetals:starrite"
     },
     "R": {
       "item": "minecraft:redstone_block"
@@ -19,7 +19,7 @@
     }
   },
   "pattern": [
-    " RP",
+    " RA",
     " SL",
     "G  "
   ],

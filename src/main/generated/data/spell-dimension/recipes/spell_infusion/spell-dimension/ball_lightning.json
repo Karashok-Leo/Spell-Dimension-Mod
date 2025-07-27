@@ -2,10 +2,10 @@
   "type": "spell-dimension:spell_infusion",
   "ingredients": [
     {
-      "item": "fwaystones:local_void"
+      "item": "spell-dimension:essence_lightning_0"
     },
     {
-      "item": "spell-dimension:essence_lightning_0"
+      "item": "fwaystones:local_void"
     }
   ],
   "input": {

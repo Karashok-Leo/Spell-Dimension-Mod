@@ -5,11 +5,14 @@
       "item": "spell-dimension:essence_lightning_1"
     },
     {
-      "item": "l2hostility:void_eye"
+      "item": "l2hostility:storm_core"
+    },
+    {
+      "item": "mythicmetals:stormyx_block"
     }
   ],
   "input": {
     "item": "minecraft:paper"
   },
-  "spell_id": "spell-dimension:closed_loop"
+  "spell_id": "spell-dimension:stormflash"
 }

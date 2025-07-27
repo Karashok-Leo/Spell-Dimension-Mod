@@ -76,6 +76,24 @@ public class SDRecipeProvider extends FabricRecipeProvider
                 )
                 .offerTo(exporter);
 
+        // Disenchanted Essence
+        ShapedRecipeJsonBuilder
+                .create(RecipeCategory.MISC, AllItems.DISENCHANTED_ESSENCE)
+                .pattern(" E ")
+                .pattern("ESE")
+                .pattern(" E ")
+                .input('S', AllItems.CELESTIAL_DEBRIS)
+                .input('E', AllItems.ENCHANTED_ESSENCE)
+                .criterion(
+                        FabricRecipeProvider.hasItem(AllItems.CELESTIAL_DEBRIS),
+                        FabricRecipeProvider.conditionsFromItem(AllItems.CELESTIAL_DEBRIS)
+                )
+                .criterion(
+                        FabricRecipeProvider.hasItem(AllItems.ENCHANTED_ESSENCE),
+                        FabricRecipeProvider.conditionsFromItem(AllItems.ENCHANTED_ESSENCE)
+                )
+                .offerTo(exporter);
+
         // Empty Quest Scroll
         ShapelessRecipeJsonBuilder
                 .create(RecipeCategory.MISC, AllItems.QUEST_SCROLL)
@@ -297,10 +315,10 @@ public class SDRecipeProvider extends FabricRecipeProvider
         );
         ShapedRecipeJsonBuilder
                 .create(RecipeCategory.MISC, AllWeapons.LIGHTNING_STAFF)
-                .pattern(" RP")
+                .pattern(" RA")
                 .pattern(" SL")
                 .pattern("G  ")
-                .input('P', MythicItems.Mats.STARRITE)
+                .input('A', MythicItems.Mats.MORKITE)
                 .input('R', Items.REDSTONE_BLOCK)
                 .input('L', Items.LAPIS_BLOCK)
                 .input('S', Items.STICK)

@@ -2,10 +2,10 @@
   "type": "spell-dimension:spell_infusion",
   "ingredients": [
     {
-      "item": "l2hostility:soul_burner"
+      "item": "spell-dimension:essence_fire_2"
     },
     {
-      "item": "spell-dimension:essence_fire_2"
+      "item": "l2hostility:soul_burner"
     }
   ],
   "input": {

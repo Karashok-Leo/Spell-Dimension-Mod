@@ -2,10 +2,10 @@
   "type": "spell-dimension:spell_infusion",
   "ingredients": [
     {
-      "item": "spellbladenext:fire_orb"
+      "item": "spell-dimension:essence_fire_2"
     },
     {
-      "item": "spell-dimension:essence_fire_2"
+      "item": "spellbladenext:fire_orb"
     }
   ],
   "input": {

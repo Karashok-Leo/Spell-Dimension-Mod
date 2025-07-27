@@ -2,10 +2,10 @@
   "type": "spell-dimension:spell_infusion",
   "ingredients": [
     {
-      "item": "mythicmetals:aquarium_pearl"
+      "item": "spell-dimension:essence_frost_2"
     },
     {
-      "item": "spell-dimension:essence_frost_2"
+      "item": "mythicmetals:aquarium_pearl"
     }
   ],
   "input": {

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "E": {
+      "item": "spell-dimension:enchanted_essence"
+    },
+    "S": {
+      "item": "spell-dimension:celestial_debris"
+    }
+  },
+  "pattern": [
+    " E ",
+    "ESE",
+    " E "
+  ],
+  "result": {
+    "item": "spell-dimension:disenchanted_essence"
+  },
+  "show_notification": true
+}

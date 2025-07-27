@@ -2,10 +2,10 @@
   "type": "spell-dimension:spell_infusion",
   "ingredients": [
     {
-      "item": "mythicmetals:palladium_block"
+      "item": "spell-dimension:essence_fire_1"
     },
     {
-      "item": "spell-dimension:essence_fire_1"
+      "item": "mythicmetals:palladium_block"
     }
   ],
   "input": {

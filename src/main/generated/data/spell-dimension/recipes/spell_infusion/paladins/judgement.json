@@ -2,10 +2,10 @@
   "type": "spell-dimension:spell_infusion",
   "ingredients": [
     {
-      "item": "mythicupgrades:jade_block"
+      "item": "spell-dimension:essence_healing_0"
     },
     {
-      "item": "spell-dimension:essence_healing_0"
+      "item": "mythicupgrades:jade_block"
     }
   ],
   "input": {

@@ -2,10 +2,10 @@
   "type": "spell-dimension:spell_infusion",
   "ingredients": [
     {
-      "item": "things:hades_crystal"
+      "item": "spell-dimension:essence_fire_2"
     },
     {
-      "item": "spell-dimension:essence_fire_2"
+      "item": "things:hades_crystal"
     }
   ],
   "input": {

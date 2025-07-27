@@ -2,10 +2,10 @@
   "type": "spell-dimension:spell_infusion",
   "ingredients": [
     {
-      "item": "l2hostility:killer_aura"
+      "item": "spell-dimension:essence_healing_2"
     },
     {
-      "item": "spell-dimension:essence_healing_2"
+      "item": "l2hostility:killer_aura"
     }
   ],
   "input": {

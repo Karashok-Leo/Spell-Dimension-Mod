@@ -35,12 +35,12 @@ import java.util.function.Consumer;
 
 public class SDSpellInfusionRecipes
 {
-    public static void add(Consumer<RecipeJsonProvider> exporter, String addition, Identifier spellId, SpellSchool school)
+    public static void add(Consumer<RecipeJsonProvider> exporter, Identifier spellId, SpellSchool school, String addition)
     {
-        add(exporter, Registries.ITEM.get(new Identifier(addition)), spellId, school);
+        add(exporter, spellId, school, Registries.ITEM.get(new Identifier(addition)));
     }
 
-    public static void add(Consumer<RecipeJsonProvider> exporter, Item addition, Identifier spellId, SpellSchool school)
+    public static void add(Consumer<RecipeJsonProvider> exporter, Identifier spellId, SpellSchool school, Item... addition)
     {
         Ingredient ingredient;
         if (school == AllSpells.GENERIC)
@@ -52,97 +52,103 @@ public class SDSpellInfusionRecipes
             ingredient = Ingredient.ofItems(essence);
         }
         Identifier recipeId = SpellDimension.modLoc("spell_infusion/%s/%s".formatted(spellId.getNamespace(), spellId.getPath()));
-        new SpellInfusionRecipeBuilder()
+        SpellInfusionRecipeBuilder builder = new SpellInfusionRecipeBuilder()
                 .withTableIngredient(Ingredient.ofItems(Items.PAPER))
-                .withPedestalItem(1, addition)
-                .withPedestalItem(1, ingredient)
-                .offerTo(exporter, recipeId, spellId);
+                .withPedestalItem(1, ingredient);
+        for (Item item : addition)
+        {
+            builder.withPedestalItem(1, item);
+        }
+        builder.offerTo(exporter, recipeId, spellId);
     }
 
     public static void add(Consumer<RecipeJsonProvider> exporter)
     {
-        add(exporter, Items.COMPASS, AllSpells.LOCATE, AllSpells.GENERIC);
-        add(exporter, AllItems.SPAWNER_SOUL, AllSpells.SUMMON, AllSpells.GENERIC);
-        add(exporter, ModRegistry.ENDERSOUL_HAND_ITEM.get(), AllSpells.PLACE, AllSpells.GENERIC);
-        add(exporter, ModRegistry.CREEPER_SHARD_ITEM.get(), AllSpells.BREAK, AllSpells.GENERIC);
-        add(exporter, Items.GLOWSTONE, AllSpells.LIGHT, AllSpells.GENERIC);
-        add(exporter, ModItems.HARDENED_PHANTOM_MEMBRANE, AllSpells.MOON_SWIM, AllSpells.GENERIC);
+        add(exporter, AllSpells.LOCATE, AllSpells.GENERIC, Items.COMPASS);
+        add(exporter, AllSpells.SUMMON, AllSpells.GENERIC, AllItems.SPAWNER_SOUL);
+        add(exporter, AllSpells.PLACE, AllSpells.GENERIC, ModRegistry.ENDERSOUL_HAND_ITEM.get());
+        add(exporter, AllSpells.BREAK, AllSpells.GENERIC, ModRegistry.CREEPER_SHARD_ITEM.get());
+        add(exporter, AllSpells.LIGHT, AllSpells.GENERIC, Items.GLOWSTONE);
+        add(exporter, AllSpells.MOON_SWIM, AllSpells.GENERIC, ModItems.HARDENED_PHANTOM_MEMBRANE);
 
-        add(exporter, DDItems.REINFORCED_ECHO_SHARD, AllSpells.PHASE, SpellSchools.ARCANE);
-        add(exporter, fuzs.illagerinvasion.init.ModRegistry.PRIMAL_ESSENCE_ITEM.get(), AllSpells.CONVERGE, SpellSchools.ARCANE);
-        add(exporter, ComplementItems.WARDEN_BONE_SHARD, AllSpells.ELDRITCH_BLAST, SpellSchools.ARCANE);
-        add(exporter, ModItems.HEART_OF_THE_END, AllSpells.SHIFT, SpellSchools.ARCANE);
-        add(exporter, LHTraits.GRAVITY.asItem(), AllSpells.FORCE_LANDING, SpellSchools.ARCANE);
-        add(exporter, Items.GLASS, AllSpells.ARCANE_BARRIER, SpellSchools.ARCANE);
-        add(exporter, ComplementItems.BLACKSTONE_CORE, AllSpells.INCARCERATE, SpellSchools.ARCANE);
-        add(exporter, Items.DRAGON_EGG, AllSpells.BLACK_HOLE, SpellSchools.ARCANE);
-        add(exporter, DDItems.SOUL_CRYSTAL, AllSpells.FINAL_STRIKE, SpellSchools.ARCANE);
-        add(exporter, MythicBlocks.KYBER.getStorageBlock().asItem(), AllSpells.ARCANE_BEAM, SpellSchools.ARCANE);
-        add(exporter, MUBlocks.AMETRINE_BLOCK.asItem(), AllSpells.ARCANE_FLOURISH, SpellSchools.ARCANE);
-        add(exporter, MythicBlocks.STAR_PLATINUM.getStorageBlock().asItem(), AllSpells.ARCANE_FLICKER, SpellSchools.ARCANE);
-        add(exporter, com.spellbladenext.items.Items.arcane_orb.item(), AllSpells.ARCANE_OVERDRIVE, SpellSchools.ARCANE);
-        add(exporter, MythicItems.Mats.STORMYX_SHELL, AllSpells.ECHO_STORM, SpellSchools.ARCANE);
-        add(exporter, MythicTools.STORMYX_SHIELD, AllSpells.MAELSTROM, SpellSchools.ARCANE);
-        add(exporter, com.spellbladenext.items.Items.crystal_cutlass.item(), AllSpells.AMETHYST_SLASH, SpellSchools.ARCANE);
+        add(exporter, AllSpells.PHASE, SpellSchools.ARCANE, DDItems.REINFORCED_ECHO_SHARD);
+        add(exporter, AllSpells.CONVERGE, SpellSchools.ARCANE, fuzs.illagerinvasion.init.ModRegistry.PRIMAL_ESSENCE_ITEM.get());
+        add(exporter, AllSpells.ELDRITCH_BLAST, SpellSchools.ARCANE, ComplementItems.WARDEN_BONE_SHARD);
+        add(exporter, AllSpells.SHIFT, SpellSchools.ARCANE, ModItems.HEART_OF_THE_END);
+        add(exporter, AllSpells.FORCE_LANDING, SpellSchools.ARCANE, LHTraits.GRAVITY.asItem());
+        add(exporter, AllSpells.ARCANE_BARRIER, SpellSchools.ARCANE, Items.GLASS);
+        add(exporter, AllSpells.INCARCERATE, SpellSchools.ARCANE, ComplementItems.BLACKSTONE_CORE);
+        add(exporter, AllSpells.BLACK_HOLE, SpellSchools.ARCANE, Items.DRAGON_EGG);
+        add(exporter, AllSpells.FINAL_STRIKE, SpellSchools.ARCANE, DDItems.SOUL_CRYSTAL);
+        add(exporter, AllSpells.ARCANE_BEAM, SpellSchools.ARCANE, MythicBlocks.KYBER.getStorageBlock().asItem());
+        add(exporter, AllSpells.ARCANE_FLOURISH, SpellSchools.ARCANE, MUBlocks.AMETRINE_BLOCK.asItem());
+        add(exporter, AllSpells.ARCANE_FLICKER, SpellSchools.ARCANE, MythicBlocks.STAR_PLATINUM.getStorageBlock().asItem());
+        add(exporter, AllSpells.ARCANE_OVERDRIVE, SpellSchools.ARCANE, com.spellbladenext.items.Items.arcane_orb.item());
+        add(exporter, AllSpells.ECHO_STORM, SpellSchools.ARCANE, MythicItems.Mats.STORMYX_SHELL);
+        add(exporter, AllSpells.MAELSTROM, SpellSchools.ARCANE, MythicTools.STORMYX_SHIELD);
+        add(exporter, AllSpells.AMETHYST_SLASH, SpellSchools.ARCANE, com.spellbladenext.items.Items.crystal_cutlass.item());
 
-        add(exporter, MUBlocks.TOPAZ_BLOCK.asItem(), AllSpells.FIRE_BREATH, SpellSchools.FIRE);
-        add(exporter, ComplementItems.EXPLOSION_SHARD, AllSpells.BLAST, SpellSchools.FIRE);
-        add(exporter, ItemInit.BLACKSTONE_GOLEM_HEART, AllSpells.IGNITE, SpellSchools.FIRE);
-        add(exporter, LHTraits.SOUL_BURNER.asItem(), AllSpells.FIRE_OF_RETRIBUTION, SpellSchools.FIRE);
-        add(exporter, MythicBlocks.PALLADIUM.getStorageBlock().asItem(), AllSpells.FIRE_FLOURISH, SpellSchools.FIRE);
-        add(exporter, com.spellbladenext.items.Items.fire_orb.item(), AllSpells.FLAME_OVERDRIVE, SpellSchools.FIRE);
-        add(exporter, MUBlocks.RUBY_BLOCK.asItem(), AllSpells.FLICKER_STRIKE, SpellSchools.FIRE);
-        add(exporter, com.spellbladenext.items.Items.flaming_falchion.item(), AllSpells.FLAME_SLASH, SpellSchools.FIRE);
-        add(exporter, MythicBlocks.QUADRILLUM.getStorageBlock().asItem(), AllSpells.OVER_BLAZE, SpellSchools.FIRE);
-        add(exporter, "soulsweapons:crimson_ingot", AllSpells.PHOENIX_DIVE, SpellSchools.FIRE);
-        add(exporter, "soulsweapons:crimson_obsidian", AllSpells.PHOENIX_CURSE, SpellSchools.FIRE);
-        add(exporter, ThingsItems.HADES_CRYSTAL, AllSpells.INFERNO, SpellSchools.FIRE);
-        add(exporter, net.dragonloot.init.ItemInit.DRAGON_SCALE_ITEM, AllSpells.DRAGON_SLAM, SpellSchools.FIRE);
-        add(exporter, MythicItems.Mats.CARMOT_STONE, AllSpells.WILDFIRE, SpellSchools.FIRE);
+        add(exporter, AllSpells.FIRE_BREATH, SpellSchools.FIRE, MUBlocks.TOPAZ_BLOCK.asItem());
+        add(exporter, AllSpells.BLAST, SpellSchools.FIRE, ComplementItems.EXPLOSION_SHARD);
+        add(exporter, AllSpells.IGNITE, SpellSchools.FIRE, ItemInit.BLACKSTONE_GOLEM_HEART);
+        add(exporter, AllSpells.FIRE_OF_RETRIBUTION, SpellSchools.FIRE, LHTraits.SOUL_BURNER.asItem());
+        add(exporter, AllSpells.FIRE_FLOURISH, SpellSchools.FIRE, MythicBlocks.PALLADIUM.getStorageBlock().asItem());
+        add(exporter, AllSpells.FLAME_OVERDRIVE, SpellSchools.FIRE, com.spellbladenext.items.Items.fire_orb.item());
+        add(exporter, AllSpells.FLICKER_STRIKE, SpellSchools.FIRE, MUBlocks.RUBY_BLOCK.asItem());
+        add(exporter, AllSpells.FLAME_SLASH, SpellSchools.FIRE, com.spellbladenext.items.Items.flaming_falchion.item());
+        add(exporter, AllSpells.OVER_BLAZE, SpellSchools.FIRE, MythicBlocks.QUADRILLUM.getStorageBlock().asItem());
+        add(exporter, AllSpells.PHOENIX_DIVE, SpellSchools.FIRE, "soulsweapons:crimson_ingot");
+        add(exporter, AllSpells.PHOENIX_CURSE, SpellSchools.FIRE, "soulsweapons:crimson_obsidian");
+        add(exporter, AllSpells.INFERNO, SpellSchools.FIRE, ThingsItems.HADES_CRYSTAL);
+        add(exporter, AllSpells.DRAGON_SLAM, SpellSchools.FIRE, net.dragonloot.init.ItemInit.DRAGON_SCALE_ITEM);
+        add(exporter, AllSpells.WILDFIRE, SpellSchools.FIRE, MythicItems.Mats.CARMOT_STONE);
 
-        add(exporter, MythicBlocks.SILVER.getStorageBlock().asItem(), AllSpells.FROST_BLIZZARD, SpellSchools.FROST);
-        add(exporter, MythicBlocks.AQUARIUM.getStorageBlock().asItem(), AllSpells.ICY_NUCLEUS, SpellSchools.FROST);
-        add(exporter, AquamiraeItems.MAZE_ROSE, AllSpells.FROST_AURA, SpellSchools.FROST);
-        add(exporter, AllItems.ABYSS_GUARD, AllSpells.ICICLE, SpellSchools.FROST);
-        add(exporter, AquamiraeItems.DEAD_SEA_SCROLL, AllSpells.FROST_BLINK, SpellSchools.FROST);
-        add(exporter, AquamiraeItems.SHIP_GRAVEYARD_ECHO, AllSpells.FROZEN, SpellSchools.FROST);
-        add(exporter, MUBlocks.AQUAMARINE_BLOCK.asItem(), AllSpells.FROST_FLOURISH, SpellSchools.FROST);
-        add(exporter, com.spellbladenext.items.Items.frost_orb.item(), AllSpells.FROST_OVERDRIVE, SpellSchools.FROST);
-        add(exporter, MythicBlocks.RUNITE.getStorageBlock().asItem(), AllSpells.FROST_LOTUS, SpellSchools.FROST);
-        add(exporter, LHTraits.FREEZING.asItem(), AllSpells.DEATH_CHILL, SpellSchools.FROST);
-        add(exporter, com.spellbladenext.items.Items.glacial_gladius.item(), AllSpells.FROST_SLASH, SpellSchools.FROST);
-        add(exporter, AquamiraeItems.POISONED_CHAKRA, AllSpells.MASSACRE, SpellSchools.FROST);
-        add(exporter, MythicItems.Mats.AQUARIUM_PEARL, AllSpells.RIPTIDE, SpellSchools.FROST);
-        add(exporter, ERItems.COLD_EYE, AllSpells.COLD_BUFF, SpellSchools.FROST);
-        add(exporter, AquamiraeItems.ABYSSAL_AMETHYST, AllSpells.TEMPEST, SpellSchools.FROST);
+        add(exporter, AllSpells.FROST_BLIZZARD, SpellSchools.FROST, MythicBlocks.SILVER.getStorageBlock().asItem());
+        add(exporter, AllSpells.ICY_NUCLEUS, SpellSchools.FROST, MythicBlocks.AQUARIUM.getStorageBlock().asItem());
+        add(exporter, AllSpells.FROST_AURA, SpellSchools.FROST, AquamiraeItems.MAZE_ROSE);
+        add(exporter, AllSpells.ICICLE, SpellSchools.FROST, AllItems.ABYSS_GUARD);
+        add(exporter, AllSpells.FROST_BLINK, SpellSchools.FROST, AquamiraeItems.DEAD_SEA_SCROLL);
+        add(exporter, AllSpells.FROZEN, SpellSchools.FROST, AquamiraeItems.SHIP_GRAVEYARD_ECHO);
+        add(exporter, AllSpells.FROST_FLOURISH, SpellSchools.FROST, MUBlocks.AQUAMARINE_BLOCK.asItem());
+        add(exporter, AllSpells.FROST_OVERDRIVE, SpellSchools.FROST, com.spellbladenext.items.Items.frost_orb.item());
+        add(exporter, AllSpells.FROST_LOTUS, SpellSchools.FROST, MythicBlocks.RUNITE.getStorageBlock().asItem());
+        add(exporter, AllSpells.DEATH_CHILL, SpellSchools.FROST, LHTraits.FREEZING.asItem());
+        add(exporter, AllSpells.FROST_SLASH, SpellSchools.FROST, com.spellbladenext.items.Items.glacial_gladius.item());
+        add(exporter, AllSpells.MASSACRE, SpellSchools.FROST, AquamiraeItems.POISONED_CHAKRA);
+        add(exporter, AllSpells.RIPTIDE, SpellSchools.FROST, MythicItems.Mats.AQUARIUM_PEARL);
+        add(exporter, AllSpells.COLD_BUFF, SpellSchools.FROST, ERItems.COLD_EYE);
+        add(exporter, AllSpells.TEMPEST, SpellSchools.FROST, AquamiraeItems.ABYSSAL_AMETHYST);
 
-        add(exporter, ComplementItems.TOTEMIC_GOLD.ingot(), AllSpells.DIVINE_CURSE_BLAST, SpellSchools.HEALING);
-        add(exporter, "bosses_of_mass_destruction:ancient_anima", AllSpells.HOLY_BEAM, SpellSchools.HEALING);
-        add(exporter, "soulsweapons:arkenstone", AllSpells.CIRCLE_OF_HEALING, SpellSchools.HEALING);
-        add(exporter, TGItems.DARK_IRON_BLOCK.get(), AllSpells.BARRIER, SpellSchools.HEALING);
-        add(exporter, MUBlocks.JADE_BLOCK.asItem(), AllSpells.JUDGEMENT, SpellSchools.HEALING);
-        add(exporter, ComplementItems.LIFE_ESSENCE, AllSpells.CLEANSE, SpellSchools.HEALING);
-        add(exporter, LHTraits.DISPELL.asItem(), AllSpells.EXORCISM, SpellSchools.HEALING);
-        add(exporter, MiscItems.CHAOS.blockSet().item(), AllSpells.CRITICAL_HIT, SpellSchools.HEALING);
-        add(exporter, "soulsweapons:essence_of_luminescence", AllSpells.SPELL_POWER, SpellSchools.HEALING);
-        add(exporter, "soulsweapons:essence_of_eventide", AllSpells.RESIST, SpellSchools.HEALING);
-        add(exporter, "bosses_of_mass_destruction:void_thorn", AllSpells.REGEN, SpellSchools.HEALING);
-        add(exporter, "soulsweapons:moonstone_block", AllSpells.HASTE, SpellSchools.HEALING);
-        add(exporter, LHTraits.SPEEDY.asItem(), AllSpells.SPEED, SpellSchools.HEALING);
-        add(exporter, LHTraits.KILLER_AURA.asItem(), AllSpells.DIVINE_AURA, SpellSchools.HEALING);
-        add(exporter, ConsumableItems.BOTTLE_SANITY, AllSpells.BLESSING, SpellSchools.HEALING);
-        add(exporter, LHTraits.CURSED.asItem(), AllSpells.MISFORTUNE, SpellSchools.HEALING);
-        add(exporter, ComplementItems.RESONANT_FEATHER, AllSpells.HEAVENLY_JUSTICE, SpellSchools.HEALING);
-        add(exporter, BlockInit.PIGLIN_FLAG.asItem(), AllSpells.BATTLE_BANNER, SpellSchools.HEALING);
+        add(exporter, AllSpells.DIVINE_CURSE_BLAST, SpellSchools.HEALING, ComplementItems.TOTEMIC_GOLD.ingot());
+        add(exporter, AllSpells.HOLY_BEAM, SpellSchools.HEALING, "bosses_of_mass_destruction:ancient_anima");
+        add(exporter, AllSpells.CIRCLE_OF_HEALING, SpellSchools.HEALING, "soulsweapons:arkenstone");
+        add(exporter, AllSpells.BARRIER, SpellSchools.HEALING, TGItems.DARK_IRON_BLOCK.get());
+        add(exporter, AllSpells.JUDGEMENT, SpellSchools.HEALING, MUBlocks.JADE_BLOCK.asItem());
+        add(exporter, AllSpells.CLEANSE, SpellSchools.HEALING, ComplementItems.LIFE_ESSENCE);
+        add(exporter, AllSpells.EXORCISM, SpellSchools.HEALING, LHTraits.DISPELL.asItem());
+        add(exporter, AllSpells.CRITICAL_HIT, SpellSchools.HEALING, MiscItems.CHAOS.blockSet().item());
+        add(exporter, AllSpells.SPELL_POWER, SpellSchools.HEALING, "soulsweapons:essence_of_luminescence");
+        add(exporter, AllSpells.RESIST, SpellSchools.HEALING, "soulsweapons:essence_of_eventide");
+        add(exporter, AllSpells.REGEN, SpellSchools.HEALING, "bosses_of_mass_destruction:void_thorn");
+        add(exporter, AllSpells.HASTE, SpellSchools.HEALING, "soulsweapons:moonstone_block");
+        add(exporter, AllSpells.SPEED, SpellSchools.HEALING, LHTraits.SPEEDY.asItem());
+        add(exporter, AllSpells.DIVINE_AURA, SpellSchools.HEALING, LHTraits.KILLER_AURA.asItem());
+        add(exporter, AllSpells.BLESSING, SpellSchools.HEALING, ConsumableItems.BOTTLE_SANITY);
+        add(exporter, AllSpells.MISFORTUNE, SpellSchools.HEALING, LHTraits.CURSED.asItem());
+        add(exporter, AllSpells.HEAVENLY_JUSTICE, SpellSchools.HEALING, ComplementItems.RESONANT_FEATHER);
+        add(exporter, AllSpells.BATTLE_BANNER, SpellSchools.HEALING, BlockInit.PIGLIN_FLAG.asItem());
 
-        add(exporter, "fwaystones:local_void", AllSpells.BALL_LIGHTNING, SpellSchools.LIGHTNING);
-        add(exporter, MythicBlocks.MYTHRIL.getStorageBlock().asItem(), AllSpells.RESONANCE, SpellSchools.LIGHTNING);
-        add(exporter, MythicBlocks.MORKITE.getStorageBlock().asItem(), AllSpells.BREAKDOWN, SpellSchools.LIGHTNING);
-        add(exporter, MythicBlocks.PLATINUM.getStorageBlock().asItem(), AllSpells.THUNDERBOLT, SpellSchools.LIGHTNING);
-        add(exporter, MythicItems.Mats.UNOBTAINIUM, AllSpells.QUANTUM_FIELD, SpellSchools.LIGHTNING);
-        add(exporter, MythicBlocks.CARMOT_NUKE_CORE.asItem(), AllSpells.ARCLIGHT, SpellSchools.LIGHTNING);
-        add(exporter, MythicBlocks.QUADRILLUM_NUKE_CORE.asItem(), AllSpells.CONSTANT_CURRENT, SpellSchools.LIGHTNING);
-        add(exporter, ComplementItems.VOID_EYE, AllSpells.CLOSED_LOOP, SpellSchools.LIGHTNING);
-        add(exporter, "bosses_of_mass_destruction:obsidilith_rune", AllSpells.RAILGUN, SpellSchools.LIGHTNING);
+        add(exporter, AllSpells.BALL_LIGHTNING, SpellSchools.LIGHTNING, "fwaystones:local_void");
+        add(exporter, AllSpells.RESONANCE, SpellSchools.LIGHTNING, MythicBlocks.MYTHRIL.getStorageBlock().asItem());
+        add(exporter, AllSpells.BREAKDOWN, SpellSchools.LIGHTNING, MythicBlocks.MORKITE.getStorageBlock().asItem());
+        add(exporter, AllSpells.THUNDERBOLT, SpellSchools.LIGHTNING, MythicBlocks.PLATINUM.getStorageBlock().asItem());
+        add(exporter, AllSpells.QUANTUM_FIELD, SpellSchools.LIGHTNING, MythicItems.Mats.UNOBTAINIUM);
+        add(exporter, AllSpells.ARCLIGHT, SpellSchools.LIGHTNING, MythicBlocks.CARMOT_NUKE_CORE.asItem());
+        add(exporter, AllSpells.CONSTANT_CURRENT, SpellSchools.LIGHTNING, MythicBlocks.QUADRILLUM_NUKE_CORE.asItem());
+        add(exporter, AllSpells.CLOSED_LOOP, SpellSchools.LIGHTNING, ComplementItems.VOID_EYE);
+        add(exporter, AllSpells.ELECTROCUTION, SpellSchools.LIGHTNING, ComplementItems.GUARDIAN_EYE);
+        add(exporter, AllSpells.STORMFLASH, SpellSchools.LIGHTNING, ComplementItems.STORM_CORE, MythicBlocks.STORMYX.getStorageBlock().asItem());
+        add(exporter, AllSpells.RAILGUN, SpellSchools.LIGHTNING, "bosses_of_mass_destruction:obsidilith_rune");
+        add(exporter, AllSpells.ELECTRIC_BONDAGE, SpellSchools.LIGHTNING, ConsumableItems.ETERNAL_WITCH_CHARGE, ComplementItems.BLACKSTONE_CORE, ComplementItems.SCULKIUM.blockSet().item());
     }
 }

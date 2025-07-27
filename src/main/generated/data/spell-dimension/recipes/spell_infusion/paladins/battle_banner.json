@@ -2,10 +2,10 @@
   "type": "spell-dimension:spell_infusion",
   "ingredients": [
     {
-      "item": "adventurez:piglin_flag"
+      "item": "spell-dimension:essence_healing_1"
     },
     {
-      "item": "spell-dimension:essence_healing_1"
+      "item": "adventurez:piglin_flag"
     }
   ],
   "input": {

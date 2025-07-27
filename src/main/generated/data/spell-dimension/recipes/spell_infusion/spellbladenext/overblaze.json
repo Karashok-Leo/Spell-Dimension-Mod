@@ -2,10 +2,10 @@
   "type": "spell-dimension:spell_infusion",
   "ingredients": [
     {
-      "item": "mythicmetals:quadrillum_block"
+      "item": "spell-dimension:essence_fire_0"
     },
     {
-      "item": "spell-dimension:essence_fire_0"
+      "item": "mythicmetals:quadrillum_block"
     }
   ],
   "input": {

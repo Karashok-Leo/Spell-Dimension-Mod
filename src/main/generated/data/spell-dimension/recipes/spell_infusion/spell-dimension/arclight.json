@@ -2,10 +2,10 @@
   "type": "spell-dimension:spell_infusion",
   "ingredients": [
     {
-      "item": "mythicmetals:carmot_nuke_core"
+      "item": "spell-dimension:essence_lightning_1"
     },
     {
-      "item": "spell-dimension:essence_lightning_1"
+      "item": "mythicmetals:carmot_nuke_core"
     }
   ],
   "input": {
