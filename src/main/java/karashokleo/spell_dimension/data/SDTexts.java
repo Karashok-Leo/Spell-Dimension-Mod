@@ -391,15 +391,18 @@ public enum SDTexts
     {
         for (SDContents ins : SDContents.values())
         {
-            SpellDimension.EN_TEXTS.addText(ins.entry.nameKey(), ins.nameEn);
-            SpellDimension.EN_TEXTS.addText(ins.entry.descKey(), ins.descEn);
-            SpellDimension.ZH_TEXTS.addText(ins.entry.nameKey(), ins.nameZh);
-            SpellDimension.ZH_TEXTS.addText(ins.entry.descKey(), ins.descZh);
+            String nameKey = ins.id.toTranslationKey("content");
+            String descKey = nameKey + ".desc";
+            SpellDimension.EN_TEXTS.addText(nameKey, ins.nameEn);
+            SpellDimension.EN_TEXTS.addText(descKey, ins.descEn);
+            SpellDimension.ZH_TEXTS.addText(nameKey, ins.nameZh);
+            SpellDimension.ZH_TEXTS.addText(descKey, ins.descZh);
         }
         for (SDBags ins : SDBags.values())
         {
-            SpellDimension.EN_TEXTS.addText(ins.entry.nameKey(), ins.nameEn);
-            SpellDimension.ZH_TEXTS.addText(ins.entry.nameKey(), ins.nameZh);
+            String nameKey = ins.id.toTranslationKey("bag");
+            SpellDimension.EN_TEXTS.addText(nameKey, ins.nameEn);
+            SpellDimension.ZH_TEXTS.addText(nameKey, ins.nameZh);
         }
     }
 

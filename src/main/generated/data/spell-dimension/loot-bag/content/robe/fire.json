@@ -1,7 +1,14 @@
 {
   "type": "loot-bag:loot_table",
   "icon": {
-    "texture": "wizards:textures/item/fire_robe_head.png"
+    "type": "loot-bag:item",
+    "item": {
+      "Count": 1,
+      "id": "wizards:fire_robe_head",
+      "tag": {
+        "Damage": 0
+      }
+    }
   },
   "id": "spell-dimension:pool/robe/fire"
 }

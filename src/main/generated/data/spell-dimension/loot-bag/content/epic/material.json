@@ -1,7 +1,8 @@
 {
   "type": "loot-bag:loot_table",
   "icon": {
-    "texture": "mythicmetals:textures/item/adamantite_ingot.png"
+    "type": "loot-bag:item",
+    "item": "mythicmetals:adamantite_ingot"
   },
   "id": "spell-dimension:pool/epic/material"
 }

@@ -1,7 +1,14 @@
 {
   "type": "loot-bag:item",
   "icon": {
-    "texture": "wizards:textures/item/wand_fire.png"
+    "type": "loot-bag:item",
+    "item": {
+      "Count": 1,
+      "id": "wizards:wand_fire",
+      "tag": {
+        "Damage": 0
+      }
+    }
   },
   "item": {
     "Count": 1,

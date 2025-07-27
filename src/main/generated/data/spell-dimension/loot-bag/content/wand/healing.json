@@ -1,7 +1,14 @@
 {
   "type": "loot-bag:item",
   "icon": {
-    "texture": "paladins:textures/item/holy_wand.png"
+    "type": "loot-bag:item",
+    "item": {
+      "Count": 1,
+      "id": "paladins:holy_wand",
+      "tag": {
+        "Damage": 0
+      }
+    }
   },
   "item": {
     "Count": 1,

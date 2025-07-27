@@ -1,7 +1,14 @@
 {
   "type": "loot-bag:item",
   "icon": {
-    "texture": "spell-dimension:textures/item/lightning_wand.png"
+    "type": "loot-bag:item",
+    "item": {
+      "Count": 1,
+      "id": "spell-dimension:lightning_wand",
+      "tag": {
+        "Damage": 0
+      }
+    }
   },
   "item": {
     "Count": 1,

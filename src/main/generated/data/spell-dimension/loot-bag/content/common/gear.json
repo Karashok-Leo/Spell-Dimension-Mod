@@ -1,7 +1,14 @@
 {
   "type": "loot-bag:loot_table",
   "icon": {
-    "texture": "minecraft:textures/item/iron_sword.png"
+    "type": "loot-bag:item",
+    "item": {
+      "Count": 1,
+      "id": "minecraft:iron_sword",
+      "tag": {
+        "Damage": 0
+      }
+    }
   },
   "id": "spell-dimension:pool/common/gear"
 }

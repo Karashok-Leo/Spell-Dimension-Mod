@@ -1,7 +1,14 @@
 {
   "type": "loot-bag:loot_table",
   "icon": {
-    "texture": "mythicupgrades:textures/item/sapphire_sword.png"
+    "type": "loot-bag:item",
+    "item": {
+      "Count": 1,
+      "id": "mythicupgrades:sapphire_sword",
+      "tag": {
+        "Damage": 0
+      }
+    }
   },
   "id": "spell-dimension:pool/rare/gear"
 }

@@ -7,12 +7,12 @@ import karashokleo.loot_bag.api.common.bag.SingleBag;
 import karashokleo.loot_bag.internal.item.LootBagItemRegistry;
 import karashokleo.spell_dimension.SpellDimension;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtString;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.function.Supplier;
 
 public enum SDBags
 {
@@ -189,17 +189,15 @@ public enum SDBags
     ),
     ;
     public final Identifier id;
-    public final Bag bag;
-    public final BagEntry entry;
+    public final Supplier<BagEntry> factory;
     public final String nameEn;
     public final String nameZh;
 
-    SDBags(Bag bag, String nameEn, String nameZh)
+    SDBags(Supplier<Bag> bag, String nameEn, String nameZh)
     {
         String path = this.name().toLowerCase(Locale.ROOT).replace('_', '/');
         this.id = SpellDimension.modLoc(path);
-        this.bag = bag;
-        this.entry = new BagEntry(this.id, this.bag);
+        this.factory = () -> new BagEntry(this.id, bag.get());
         this.nameEn = nameEn;
         this.nameZh = nameZh;
     }
@@ -207,7 +205,7 @@ public enum SDBags
     SDBags(SDContents contents, Rarity rarity, int bodyColor, int stringColor, String nameEn, String nameZh)
     {
         this(
-                new SingleBag(contents.entry, rarity, new Bag.Color(bodyColor, stringColor)),
+                () -> new SingleBag(contents.factory.get(), rarity, new Bag.Color(bodyColor, stringColor)),
                 nameEn,
                 nameZh
         );
@@ -216,7 +214,7 @@ public enum SDBags
     SDBags(SDContents contents, Rarity rarity, int bodyColor, int stringColor)
     {
         this(
-                new SingleBag(contents.entry, rarity, new Bag.Color(bodyColor, stringColor)),
+                () -> new SingleBag(contents.factory.get(), rarity, new Bag.Color(bodyColor, stringColor)),
                 contents.nameEn + " Loot Bag",
                 contents.nameZh + "战利品袋"
         );
@@ -225,7 +223,7 @@ public enum SDBags
     SDBags(List<SDContents> contents, Rarity rarity, int bodyColor, int stringColor, String nameEn, String nameZh)
     {
         this(
-                new OptionalBag(contents.stream().map(ins -> ins.entry).toList(), rarity, new Bag.Color(bodyColor, stringColor)),
+                () -> new OptionalBag(contents.stream().map(ins -> ins.factory.get()).toList(), rarity, new Bag.Color(bodyColor, stringColor)),
                 nameEn,
                 nameZh
         );
@@ -233,8 +231,6 @@ public enum SDBags
 
     public ItemStack getStack()
     {
-        ItemStack stack = LootBagItemRegistry.LOOT_BAG.getDefaultStack();
-        stack.setSubNbt("BagId", NbtString.of(id.toString()));
-        return stack;
+        return LootBagItemRegistry.LOOT_BAG.getStack(id);
     }
 }

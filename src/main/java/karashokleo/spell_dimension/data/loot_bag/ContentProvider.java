@@ -1,7 +1,8 @@
 package karashokleo.spell_dimension.data.loot_bag;
 
 import karashokleo.loot_bag.api.common.content.Content;
-import karashokleo.loot_bag.api.provider.AbstractContentProvider;
+import karashokleo.loot_bag.api.common.content.ContentEntry;
+import karashokleo.loot_bag.api.data.AbstractContentProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.util.Identifier;
 
@@ -18,7 +19,10 @@ public class ContentProvider extends AbstractContentProvider
     protected void configure(BiConsumer<Identifier, Content> provider)
     {
         for (SDContents ins : SDContents.values())
-            provider.accept(ins.id, ins.content);
+        {
+            ContentEntry entry = ins.factory.get();
+            provider.accept(entry.id(), entry.content());
+        }
     }
 
     @Override

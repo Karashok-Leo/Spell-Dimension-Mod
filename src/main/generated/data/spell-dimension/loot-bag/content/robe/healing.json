@@ -1,7 +1,14 @@
 {
   "type": "loot-bag:loot_table",
   "icon": {
-    "texture": "paladins:textures/item/priest_robe_head.png"
+    "type": "loot-bag:item",
+    "item": {
+      "Count": 1,
+      "id": "paladins:priest_robe_head",
+      "tag": {
+        "Damage": 0
+      }
+    }
   },
   "id": "spell-dimension:pool/robe/healing"
 }

@@ -1,7 +1,14 @@
 {
   "type": "loot-bag:loot_table",
   "icon": {
-    "texture": "wizards:textures/item/wand_arcane.png"
+    "type": "loot-bag:item",
+    "item": {
+      "Count": 1,
+      "id": "wizards:wand_arcane",
+      "tag": {
+        "Damage": 0
+      }
+    }
   },
   "id": "spell-dimension:pool/start"
 }

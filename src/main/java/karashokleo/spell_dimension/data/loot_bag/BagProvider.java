@@ -1,7 +1,8 @@
 package karashokleo.spell_dimension.data.loot_bag;
 
 import karashokleo.loot_bag.api.common.bag.Bag;
-import karashokleo.loot_bag.api.provider.AbstractBagProvider;
+import karashokleo.loot_bag.api.common.bag.BagEntry;
+import karashokleo.loot_bag.api.data.AbstractBagProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.util.Identifier;
 
@@ -17,8 +18,11 @@ public class BagProvider extends AbstractBagProvider
     @Override
     protected void configure(BiConsumer<Identifier, Bag> provider)
     {
-        for (SDBags entry : SDBags.values())
-            provider.accept(entry.id, entry.bag);
+        for (SDBags ins : SDBags.values())
+        {
+            BagEntry entry = ins.factory.get();
+            provider.accept(entry.id(), entry.bag());
+        }
     }
 
     @Override

@@ -1,7 +1,11 @@
 {
   "type": "loot-bag:item",
   "icon": {
-    "texture": "runes:textures/item/arcane_stone.png"
+    "type": "loot-bag:item",
+    "item": {
+      "Count": 64,
+      "id": "runes:arcane_stone"
+    }
   },
   "item": {
     "Count": 64,
