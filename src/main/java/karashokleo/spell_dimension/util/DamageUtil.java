@@ -16,9 +16,13 @@ public class DamageUtil
 
     public static void spellDamage(LivingEntity entity, SpellSchool school, @Nullable LivingEntity attacker, float amount, boolean impact)
     {
-        if (attacker == null) entity.damage(entity.getDamageSources().magic(), amount);
-        else if (impact) entity.damage(SpellDamageSource.create(school, attacker), amount);
-        else
+        if (attacker == null)
+        {
+            entity.damage(entity.getDamageSources().magic(), amount);
+        } else if (impact)
+        {
+            entity.damage(SpellDamageSource.create(school, attacker), amount);
+        } else
         {
             ((ConfigurableKnockback) entity).pushKnockbackMultiplier_SpellEngine(0);
             entity.damage(SpellDamageSource.create(school, attacker), amount);

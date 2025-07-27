@@ -350,8 +350,8 @@ public enum SpellTexts
     STORMFLASH(
             "Stormflash",
             "风驰电掣",
-            "[Passive] When Chain Lightning strikes an empty space, dash forward",
-            "[被动] 空放连锁闪电时，向前冲刺"
+            "[Passive] When Chain Lightning strikes an empty space, dash forward. The intensity of the dash depends on the damage multiplier.",
+            "[被动] 空放连锁闪电时，向前冲刺。冲刺力度取决于连锁闪电的伤害倍率。"
     ),
     THUNDERBOLT(
             "Thunderbolt",

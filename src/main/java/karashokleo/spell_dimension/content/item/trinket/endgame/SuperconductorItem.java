@@ -1,14 +1,16 @@
 package karashokleo.spell_dimension.content.item.trinket.endgame;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHurtEvent;
+import karashokleo.l2hostility.content.event.GenericEvents;
 import karashokleo.l2hostility.content.item.trinket.core.DamageListenerTrinket;
 import karashokleo.l2hostility.content.item.trinket.core.SingleEpicTrinketItem;
-import karashokleo.l2hostility.util.EffectHelper;
+import karashokleo.leobrary.damage.api.state.DamageStateProvider;
+import karashokleo.spell_dimension.content.object.ChainLightningDamageState;
+import karashokleo.spell_dimension.content.spell.ChainLightningSpell;
 import karashokleo.spell_dimension.data.SDTexts;
-import karashokleo.spell_dimension.init.AllStatusEffects;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -18,9 +20,12 @@ import net.spell_power.api.SpellSchools;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.function.BooleanSupplier;
 
 public class SuperconductorItem extends SingleEpicTrinketItem implements DamageListenerTrinket
 {
+    public static final int DURATION_FACTOR = 500;
+
     public SuperconductorItem()
     {
         super();
@@ -29,28 +34,50 @@ public class SuperconductorItem extends SingleEpicTrinketItem implements DamageL
     @Override
     public void onHurting(ItemStack stack, LivingEntity entity, LivingHurtEvent event)
     {
-        if (!event.getSource().isOf(SpellSchools.LIGHTNING.damageType))
+        DamageSource source = event.getSource();
+        if (!source.isOf(SpellSchools.LIGHTNING.damageType))
         {
             return;
         }
-        double baseValue = SpellPower.getSpellPower(SpellSchools.LIGHTNING, entity).baseValue();
-        int level = (int) (baseValue / 100);
-        if (level <= 0)
+        if (event.getAmount() <= 0)
         {
             return;
         }
-        int ticks = 2 * level;
-        EffectHelper.forceAddEffectWithEvent(
-                event.getEntity(),
-                new StatusEffectInstance(AllStatusEffects.STUN, ticks, 0, false, false),
-                entity
-        );
+        if (((DamageStateProvider) source).hasState(ChainLightningDamageState.PREDICATE))
+        {
+            return;
+        }
+        double power = SpellPower.getSpellPower(SpellSchools.LIGHTNING, entity).baseValue();
+        int duration = 1 + (int) power / DURATION_FACTOR;
+        Task task = new Task(() -> ChainLightningSpell.spawn(entity.getWorld(), entity, event.getEntity()), duration);
+        GenericEvents.schedulePersistent(task);
+    }
+
+    private static class Task implements BooleanSupplier
+    {
+        private final Runnable task;
+        private int duration;
+
+        private Task(Runnable task, int duration)
+        {
+            this.task = task;
+            this.duration = duration;
+        }
+
+        @Override
+        public boolean getAsBoolean()
+        {
+            task.run();
+            duration--;
+            return duration <= 0;
+        }
     }
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
-        tooltip.add(SDTexts.TOOLTIP$SUPERCONDUCTOR.get().formatted(Formatting.AQUA));
+        tooltip.add(SDTexts.TOOLTIP$SUPERCONDUCTOR$1.get(DURATION_FACTOR).formatted(Formatting.AQUA));
+        tooltip.add(SDTexts.TOOLTIP$SUPERCONDUCTOR$2.get().formatted(Formatting.YELLOW));
         super.appendTooltip(stack, world, tooltip, context);
     }
 }

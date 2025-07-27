@@ -217,9 +217,10 @@ public enum SDTexts
     TOOLTIP$FROSTBITE_DOME$2("- If the target already has a Incarceration effect, remove Incarceration and deals more damage, depending on the duration of Incarceration.", "- 如果目标已有禁锢效果，则移除禁锢，并造成更多伤害，额外伤害取决于禁锢的时长"),
     TOOLTIP$HEART_SPELL_STEEL$USAGE("- When killing a mob with a level higher than %s using healing spell damage within %s blocks, gain a max health boost equal to %s of target's max health, with a cooldown of %s seconds.", "- 在%s格范围内使用治愈魔法伤害击杀等级高于%s的生物时，可获得相当于目标最大生命值%s的生命上限提升，冷却%s秒"),
     TOOLTIP$HEART_SPELL_STEEL$ACCUMULATED("Max health obtained: %s", "已获得的最大生命值：%s"),
-    TOOLTIP$REJUVENATING_BLOSSOM$USAGE_2("- When injured, gain a regeneration effect that restores health equivalent to the amount of damage received.", "- 受伤时获得生命恢复效果，该效果将恢复的生命值等同于受到的伤害值"),
-    TOOLTIP$REJUVENATING_BLOSSOM$USAGE_1("- When injured, if the amount of health that your existing regeneration effect will recover is less than the damage dealt, then remove all harmful effects from you and halves this damage.", "- 受伤时，如果你还未恢复的生命值低于受到伤害，则移除你身上所有负面效果并减半此次伤害"),
-    TOOLTIP$SUPERCONDUCTOR("Apply a stun when dealing lightning spell damage, increasing the duration by 0.1 seconds per 100 spell power.", "造成雷电法术伤害时施加眩晕，每100点法术强度增加0.1秒持续时间"),
+    TOOLTIP$REJUVENATING_BLOSSOM$1("- When injured, if the amount of health that your existing regeneration effect will recover is less than the damage dealt, then remove all harmful effects from you and halves this damage.", "- 受伤时，如果你还未恢复的生命值低于受到伤害，则移除你身上所有负面效果并减半此次伤害"),
+    TOOLTIP$REJUVENATING_BLOSSOM$2("- When injured, gain a regeneration effect that restores health equivalent to the amount of damage received.", "- 受伤时获得生命恢复效果，该效果将恢复的生命值等同于受到的伤害值"),
+    TOOLTIP$SUPERCONDUCTOR$1("- When dealing lightning spell damage ([Chain Lightning] damage excluded), cast [Chain Lightning], increasing the duration by 0.05 seconds per %d spell power.", "- 非 [连锁闪电] 造成雷电法术伤害时，施放 [连锁闪电]，每%d点法术强度增加0.05秒持续时间"),
+    TOOLTIP$SUPERCONDUCTOR$2("- Damage caused by [Chain Lightning] bypass damage cooldown.", "- [连锁闪电] 造成的伤害无视伤害冷却"),
     TOOLTIP$MACRO_ELECTRON("The ball lightning you cast will randomly select and destroy the target, without dropping any loot.", "你施放的球状闪电将随机选取并摧毁目标，但不会掉落战利品。"),
 
     /**

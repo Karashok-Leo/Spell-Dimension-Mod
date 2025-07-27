@@ -21,6 +21,20 @@ import java.util.Optional;
 
 public class ChainLightningSpell
 {
+    public static void spawn(World world, LivingEntity caster, LivingEntity living)
+    {
+        ChainLightningEntity chainLightning = new ChainLightningEntity(world, caster, living);
+        if (caster instanceof PlayerEntity player)
+        {
+            SpellContainer spellContainer = SpellContainerHelper.getEquipped(player.getMainHandStack(), player);
+            if (spellContainer != null)
+            {
+                applyPassives(spellContainer.spell_ids, chainLightning);
+            }
+        }
+        world.spawnEntity(chainLightning);
+    }
+
     public static void handle(World world, LivingEntity caster, List<Entity> targets, SpellInfo spellInfo)
     {
         Optional<Entity> target = targets.stream().findFirst();
@@ -38,17 +52,7 @@ public class ChainLightningSpell
         {
             return;
         }
-
-        ChainLightningEntity chainLightning = new ChainLightningEntity(world, caster, living);
-        if (caster instanceof PlayerEntity player)
-        {
-            SpellContainer spellContainer = SpellContainerHelper.getEquipped(player.getMainHandStack(), player);
-            if (spellContainer != null)
-            {
-                applyPassives(spellContainer.spell_ids, chainLightning);
-            }
-        }
-        world.spawnEntity(chainLightning);
+        spawn(world, caster, living);
     }
 
     private static void emptyCast(World world, LivingEntity caster)

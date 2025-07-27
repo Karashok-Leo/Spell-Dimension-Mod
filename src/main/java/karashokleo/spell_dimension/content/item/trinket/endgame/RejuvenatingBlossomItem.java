@@ -44,7 +44,7 @@ public class RejuvenatingBlossomItem extends SingleEpicTrinketItem implements Da
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
-        tooltip.add(SDTexts.TOOLTIP$REJUVENATING_BLOSSOM$USAGE_1.get().formatted(Formatting.YELLOW));
-        tooltip.add(SDTexts.TOOLTIP$REJUVENATING_BLOSSOM$USAGE_2.get().formatted(Formatting.GREEN));
+        tooltip.add(SDTexts.TOOLTIP$REJUVENATING_BLOSSOM$1.get().formatted(Formatting.YELLOW));
+        tooltip.add(SDTexts.TOOLTIP$REJUVENATING_BLOSSOM$2.get().formatted(Formatting.GREEN));
     }
 }

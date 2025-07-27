@@ -1,15 +1,20 @@
 package karashokleo.spell_dimension.content.entity;
 
+import karashokleo.l2hostility.compat.trinket.TrinketCompat;
+import karashokleo.leobrary.damage.api.state.DefaultDamageStateProvider;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
 import karashokleo.spell_dimension.config.SpellConfig;
+import karashokleo.spell_dimension.content.object.ChainLightningDamageState;
 import karashokleo.spell_dimension.content.particle.ZapParticleOption;
 import karashokleo.spell_dimension.init.AllEntities;
+import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.util.DamageUtil;
 import karashokleo.spell_dimension.util.ImpactUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.hit.HitResult;
@@ -18,8 +23,10 @@ import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 import net.spell_engine.api.spell.ParticleBatch;
 import net.spell_engine.api.spell.SpellInfo;
+import net.spell_engine.entity.ConfigurableKnockback;
 import net.spell_engine.internals.SpellRegistry;
 import net.spell_engine.particle.ParticleHelper;
+import net.spell_power.api.SpellDamageSource;
 import net.spell_power.api.SpellSchools;
 
 import java.util.ArrayList;
@@ -167,10 +174,22 @@ public class ChainLightningEntity extends ProjectileEntity
         {
             SpellInfo spellInfo = new SpellInfo(SpellRegistry.getSpell(AllSpells.CHAIN_LIGHTNING), AllSpells.CHAIN_LIGHTNING);
             SpellImpactEvents.POST.invoker().invoke(world, caster, List.of(target), spellInfo);
-
-            float damage = (float) DamageUtil.calculateDamage(caster, SpellSchools.LIGHTNING, power * SpellConfig.CHAIN_LIGHTNING_CONFIG.damageFactor());
-            DamageUtil.spellDamage(target, SpellSchools.LIGHTNING, caster, damage, false);
+            applyDamage(caster, target);
         }
+    }
+
+    protected void applyDamage(LivingEntity caster, LivingEntity target)
+    {
+        float damage = (float) DamageUtil.calculateDamage(caster, SpellSchools.LIGHTNING, power * SpellConfig.CHAIN_LIGHTNING_CONFIG.damageFactor());
+        DamageSource source = SpellDamageSource.create(SpellSchools.LIGHTNING, caster);
+        if (TrinketCompat.hasItemInTrinket(caster, AllItems.SUPERCONDUCTOR))
+        {
+            ((DefaultDamageStateProvider) source).addState(new ChainLightningDamageState());
+            ((DefaultDamageStateProvider) source).setBypassCooldown();
+        }
+        ((ConfigurableKnockback) target).pushKnockbackMultiplier_SpellEngine(0);
+        target.damage(source, damage);
+        ((ConfigurableKnockback) target).popKnockbackMultiplier_SpellEngine();
     }
 
     protected boolean isBlocked(World level, Vec3d start, Vec3d end)
