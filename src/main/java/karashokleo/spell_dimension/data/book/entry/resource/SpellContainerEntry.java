@@ -5,16 +5,15 @@ import com.klikli_dev.modonomicon.api.datagen.CategoryProvider;
 import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookSpotlightPageModel;
-import karashokleo.l2hostility.content.item.TrinketItems;
 import karashokleo.spell_dimension.data.book.entry.BaseEntryProvider;
-import karashokleo.spell_dimension.util.BookGenUtil;
-import net.minecraft.item.Item;
+import karashokleo.spell_dimension.init.AllItems;
+import net.minecraft.recipe.Ingredient;
 
 import java.util.List;
 
-public class CurseEntry extends BaseEntryProvider
+public class SpellContainerEntry extends BaseEntryProvider
 {
-    public CurseEntry(CategoryProvider parent)
+    public SpellContainerEntry(CategoryProvider parent)
     {
         super(parent);
     }
@@ -22,79 +21,69 @@ public class CurseEntry extends BaseEntryProvider
     @Override
     protected String nameEN()
     {
-        return "Curse";
+        return "Spell Container";
     }
 
     @Override
     protected String nameZH()
     {
-        return "诅咒";
+        return "法术容器";
     }
 
     @Override
     protected String descEN()
     {
-        return "\"...but at what cost?\"";
+        return "Put to good use";
     }
 
     @Override
     protected String descZH()
     {
-        return "“但代价是什么呢？”";
+        return "化为己用";
     }
 
     @Override
     protected List<BookPageModel> pages(BookContextHelper context)
     {
-        context.page("curse");
+        context.page("spell_container");
         this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
                 """
-                        Wearing a curse can get you some special resources, but it will bring some negative effects.
+                        When your hostility level reaches a certain point, monsters have a chance to carry powerful spell traits.
                         \\
                         \\
-                        For example, the **Curse of Envy** will give you a chance to drop mob traits when you kill an enemy, but it will raise your hostility level.
+                        At this point, wearing a **spell container** is the best choice to defend against spell damage from traits.
                         """
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
                 """
-                        佩戴诅咒可以获取一些特殊的资源，但会带来一些负面影响。
+                        当你的恶意难度等级提高到一定程度时，怪物有概率携带强力的法术词条。
                         \\
                         \\
-                        比如，**嫉妒诅咒**会让你在击杀敌人时有概率掉落词条，但会提高你的恶意等级。
+                        此时，佩戴**法术容器**是抵御来自词条的法术伤害的最佳选择。
                         """
         );
 
-        List<Item> curses = List.of(
-                TrinketItems.CURSE_ENVY,
-                TrinketItems.CURSE_PRIDE,
-                TrinketItems.CURSE_GLUTTONY,
-                TrinketItems.CURSE_GREED,
-                TrinketItems.CURSE_LUST,
-                TrinketItems.CURSE_SLOTH,
-                TrinketItems.CURSE_WRATH
-        );
-
-        BookSpotlightPageModel curse = BookSpotlightPageModel
+        BookSpotlightPageModel spell_container = BookSpotlightPageModel
                 .builder()
                 .withTitle(context.pageTitle())
                 .withText(context.pageText())
-                .withItem(BookGenUtil.getIngredient(curses.stream().map(Item::getDefaultStack)))
+                .withItem(Ingredient.ofItems(AllItems.SPELL_CONTAINER))
                 .build();
 
-        return List.of(curse);
+        return List.of(spell_container);
     }
 
     @Override
     protected BookIconModel entryIcon()
     {
-        return BookIconModel.create(TrinketItems.CURSE_ENVY);
+        return BookIconModel.create(AllItems.SPELL_CONTAINER);
     }
 
     @Override
     protected String entryId()
     {
-        return "curse";
+        return "spell_container";
     }
 }

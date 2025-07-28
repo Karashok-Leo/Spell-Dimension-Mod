@@ -6,9 +6,6 @@ import com.klikli_dev.modonomicon.api.datagen.CategoryProvider;
 import com.klikli_dev.modonomicon.api.datagen.book.BookCategoryModel;
 import com.klikli_dev.modonomicon.api.datagen.book.BookEntryModel;
 import karashokleo.spell_dimension.data.book.entry.resource.*;
-import karashokleo.spell_dimension.data.book.entry.resource.DummyEntry;
-import karashokleo.spell_dimension.data.book.entry.resource.KeyEntry;
-import karashokleo.spell_dimension.data.book.entry.resource.StorageEntry;
 import karashokleo.spell_dimension.util.BookGenUtil;
 import net.minecraft.item.Items;
 
@@ -45,6 +42,7 @@ public class ResourcesTipsCategory extends CategoryProvider
         BookEntryModel storage = new StorageEntry(this).generate('i');
         BookEntryModel dummy = new DummyEntry(this).generate('j');
         BookEntryModel illusion = new IllusionEntry(this).generate('k');
+        BookEntryModel spell_container = new SpellContainerEntry(this).generate('l');
 
         this.add(alloy);
         this.add(trader);
@@ -57,6 +55,7 @@ public class ResourcesTipsCategory extends CategoryProvider
         this.add(storage);
         this.add(dummy);
         this.add(illusion);
+        this.add(spell_container);
     }
 
     @Override
