@@ -14,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 import net.spell_power.api.SpellSchool;
 import org.jetbrains.annotations.Nullable;
@@ -72,6 +73,7 @@ public class SecondarySchoolItem extends SingleEpicTrinketItem
         MutableText schoolText = SDTexts.getSchoolText(school);
         Style style = Style.EMPTY.withColor(school.color);
         int ratio = Math.round(SECONDARY_SCHOOL_RATIO * 100);
+        tooltip.add(SDTexts.TOOLTIP$SECONDARY_SCHOOL_ITEM$0.get(schoolText, schoolText).setStyle(style).formatted(Formatting.BOLD));
         tooltip.add(SDTexts.TOOLTIP$SECONDARY_SCHOOL_ITEM$1.get(schoolText, ratio).setStyle(style));
         tooltip.add(SDTexts.TOOLTIP$SECONDARY_SCHOOL_ITEM$2.get(schoolText).setStyle(style));
         tooltip.add(SDTexts.TOOLTIP$SECONDARY_SCHOOL_ITEM$3.get(ratio, schoolText).setStyle(style));

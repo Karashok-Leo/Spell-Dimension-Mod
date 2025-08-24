@@ -27,6 +27,7 @@ import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
+import net.fabricmc.fabric.api.tag.convention.v1.ConventionalBlockTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.MobSpawnerBlockEntity;
 import net.minecraft.entity.Entity;
@@ -37,6 +38,7 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.registry.tag.DamageTypeTags;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
@@ -270,6 +272,19 @@ public class MiscEvents
             DamageSource damageSource = SpellDamageSource.create(SpellSchools.LIGHTNING, attacker);
             ((DamageStateProvider) damageSource).addState(new ReflectState());
             GenericEvents.schedule(() -> attacker.damage(damageSource, reflect));
+        });
+
+        PlayerBlockBreakEvents.AFTER.register((world, player, pos, state, blockEntity) ->
+        {
+            if (!state.isIn(ConventionalBlockTags.ORES))
+            {
+                return;
+            }
+            player.incrementStat(AllStats.MINED_ORES);
+            if (player instanceof ServerPlayerEntity serverPlayer)
+            {
+                AllCriterions.MINING.trigger(serverPlayer);
+            }
         });
     }
 }

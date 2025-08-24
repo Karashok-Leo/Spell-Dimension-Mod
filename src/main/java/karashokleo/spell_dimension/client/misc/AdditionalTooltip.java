@@ -52,6 +52,7 @@ public class AdditionalTooltip
         ItemTooltipCallback.EVENT.register(AdditionalTooltip::appendSpellScroll);
         ItemTooltipCallback.EVENT.register(AdditionalTooltip::appendBottleNightmare);
         ItemTooltipCallback.EVENT.register(AdditionalTooltip::appendDifficultyTierRestriction);
+        ItemTooltipCallback.EVENT.register(AdditionalTooltip::appendZhuziMinerHelmet);
     }
 
     private static void removeDynamicBookBindingTip(ItemStack stack, TooltipContext context, List<Text> lines)
@@ -202,6 +203,24 @@ public class AdditionalTooltip
                 stack.isIn(AllTags.DIFFICULTY_ALLOW_USE_TRINKET.get(i)))
             {
                 lines.add(SDTexts.TEXT$DIFFICULTY$BAN.get(SDTexts.getDifficultyTierText(i)).formatted(Formatting.RED));
+            }
+        }
+    }
+
+    private static void appendZhuziMinerHelmet(ItemStack stack, TooltipContext context, List<Text> tooltip)
+    {
+        if (!stack.isOf(AllItems.ZHUZI_MINER_HELMET))
+        {
+            return;
+        }
+
+        var player = MinecraftClient.getInstance().player;
+        if (player != null)
+        {
+            int bonus = AllItems.ZHUZI_MINER_HELMET.getFortuneBonus(player);
+            if (bonus > 0)
+            {
+                tooltip.add(SDTexts.TOOLTIP$ZHUZI_MINER_HELMET$0.get(bonus).formatted(Formatting.YELLOW));
             }
         }
     }

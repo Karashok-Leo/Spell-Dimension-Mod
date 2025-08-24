@@ -1,0 +1,37 @@
+{
+  "parent": "spell-dimension:spell_dimension/root",
+  "criteria": {
+    "0": {
+      "conditions": {
+        "count": 10
+      },
+      "trigger": "spell-dimension:mining"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.spell-dimension.miner.description"
+    },
+    "frame": "challenge",
+    "hidden": true,
+    "icon": {
+      "item": "spell-dimension:zhuzi_miner_helmet"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.spell-dimension.miner.title"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ],
+  "rewards": {
+    "loot": [
+      "spell-dimension:pool/miner_helmet"
+    ]
+  },
+  "sends_telemetry_event": true
+}

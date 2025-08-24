@@ -9,6 +9,7 @@ import karashokleo.spell_dimension.data.generic.recipe.SDLocateRecipes;
 import karashokleo.spell_dimension.data.loot_bag.SDBags;
 import karashokleo.spell_dimension.data.loot_bag.SDContents;
 import karashokleo.spell_dimension.init.AllEntities;
+import karashokleo.spell_dimension.init.AllStats;
 import karashokleo.spell_dimension.init.AllTags;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.text.MutableText;
@@ -108,8 +109,12 @@ public enum SDTexts
     /**
      * Advancements
      */
+    ADVANCEMENT$ROOT$TITLE("Welcome to Spell Dimension!", "欢迎来到咒次元！"),
+    ADVANCEMENT$ROOT$DESCRIPTION("Have a good time!", "玩得愉快！"),
     ADVANCEMENT$MEDAL$TITLE("I knocked my tooth...", "磕到牙了..."),
     ADVANCEMENT$MEDAL$DESCRIPTION("Try nibbling on a Medal", "尝试啃一口勋章"),
+    ADVANCEMENT$MINER$TITLE("Miner’s hands, miner’s spirit", "挖矿人，挖矿魂"),
+    ADVANCEMENT$MINER$DESCRIPTION("Cumulatively mined 64 stacks of ores", "累计挖掘64组矿石"),
 
     /**
      * Spell School
@@ -246,9 +251,14 @@ public enum SDTexts
     TOOLTIP$CURSE_PRIDE_2("Current spell power increment: +%s", "当前增幅：+%s"),
     TOOLTIP$CURSE_WRATH("Increase damage dealt and damage received by %s%% per difficulty level difference when facing mobs with higher level than you.", "面对等级比自己高的怪物时每级等级差造成伤害与受到伤害均提升%s%%"),
     TOOLTIP$RING_DIVINITY("Gets permanent Cleanse effect. Reduce magic damage taken by %s%%, and not exceed %s%% of your max health", "获得持续的净化效果，受到的魔法伤害减少%s%%，且不超过自身最大血量的%s%%"),
+    TOOLTIP$SECONDARY_SCHOOL_ITEM$0("- %s Secondary School Item: must be majoring in a school other than %s to wear", "- %s系副学派物品：需主修学派不是%s才能佩戴"),
     TOOLTIP$SECONDARY_SCHOOL_ITEM$1("- Gain %s spell power equal to %s%% of your major school's spell power", "- 获得相当于主修学派法术强度%2$s%%的%s法术强度"),
     TOOLTIP$SECONDARY_SCHOOL_ITEM$2("- Spell Scrolls of %s school can be used", "- 可以使用%s法术学派的卷轴"),
     TOOLTIP$SECONDARY_SCHOOL_ITEM$3("- %s%% chance to get %s Spell School's Enchanted Essence and Enlightening Essence", "- 有%s%%的几率获得%s法术学派的束魔精华和源启精华"),
+    TOOLTIP$CONTRIBUTOR_ITEM("        ——Special item for contributor @%s", "        ——贡献者物品 @%s"),
+    TOOLTIP$ZHUZI_MINER_HELMET$0("Current: +%s Fortune", "当前效果：+%s 时运"),
+    TOOLTIP$ZHUZI_MINER_HELMET$1("+1 Fortune for every %s primary school spell power", "每%s点主学派法强 +1 时运"),
+    TOOLTIP$ZHUZI_MINER_HELMET$2("Can't beat the monsters? That's okay. Come mining with me!", "打不过怪吗？没关系，和我去挖矿吧！"),
 
     /**
      * Difficulty Tier
@@ -361,6 +371,7 @@ public enum SDTexts
         addEventAwardTranslation();
         addTagTranslation();
         addDeathMessageTranslation();
+        addStatsTranslation();
         SDLocateRecipes.addTranslations();
         SpellDimension.EN_TEXTS.addEntityType(AllEntities.LOCATE_PORTAL, "Locate Portal");
         SpellDimension.ZH_TEXTS.addEntityType(AllEntities.LOCATE_PORTAL, "定位传送门");
@@ -451,5 +462,12 @@ public enum SDTexts
         addDeathMessageTranslation(SpellSchools.HEALING, "healing spell", "治愈法术");
         addDeathMessageTranslation(SpellSchools.LIGHTNING, "lightning spell", "闪电法术");
         addDeathMessageTranslation(SpellSchools.SOUL, "soul spell", "灵魂法术");
+    }
+
+    private static void addStatsTranslation()
+    {
+        String translationKey = AllStats.MINED_ORES.toTranslationKey("stat");
+        SpellDimension.EN_TEXTS.addText(translationKey, "Quantity of ore mined");
+        SpellDimension.EN_TEXTS.addText(translationKey, "开采的矿石数量");
     }
 }

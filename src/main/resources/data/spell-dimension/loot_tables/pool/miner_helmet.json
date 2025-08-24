@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:advancement_reward",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "spell-dimension:zhuzi_miner_helmet"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

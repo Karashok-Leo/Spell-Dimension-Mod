@@ -12,6 +12,7 @@ import karashokleo.spell_dimension.content.item.essence.base.ColorProvider;
 import karashokleo.spell_dimension.content.item.trinket.MirageReflectorItem;
 import karashokleo.spell_dimension.content.item.trinket.ProtectiveSpellContainerItem;
 import karashokleo.spell_dimension.content.item.trinket.SecondarySchoolItem;
+import karashokleo.spell_dimension.content.item.trinket.ZhuziMinerHelmet;
 import karashokleo.spell_dimension.content.item.trinket.breastplate.*;
 import karashokleo.spell_dimension.content.item.trinket.endgame.*;
 import karashokleo.spell_dimension.content.item.upgrade.IllusionUpgradeContainer;
@@ -108,6 +109,8 @@ public class AllItems
     public static CursedAppleItem CURED_APPLE;
     public static MedalItem MEDAL;
 
+    public static ZhuziMinerHelmet ZHUZI_MINER_HELMET;
+
     public static void register()
     {
         for (SpellSchool school : SchoolUtil.SCHOOLS)
@@ -161,7 +164,7 @@ public class AllItems
         NIRVANA_STARFALL = Entry.of("nirvana_starfall", new NirvanaStarfallItem())
                 .addEN()
                 .addZH("涅槃星陨")
-                .addTag(AllTags.BELT, AllTags.ENDGAME_TRINKETS)
+                .addTag(AllTags.BELT_SLOT, AllTags.ENDGAME_TRINKETS)
                 .setTab(AllGroups.EQUIPMENTS)
                 .addModel()
                 .register();
@@ -175,7 +178,7 @@ public class AllItems
         GLACIAL_NUCLEAR_ERA = Entry.of("glacial_nuclear_era", new GlacialNuclearEraItem())
                 .addEN()
                 .addZH("冰核世纪")
-                .addTag(AllTags.NECKLACE, AllTags.ENDGAME_TRINKETS)
+                .addTag(AllTags.NECKLACE_SLOT, AllTags.ENDGAME_TRINKETS)
                 .setTab(AllGroups.EQUIPMENTS)
                 .addModel()
                 .register();
@@ -189,7 +192,7 @@ public class AllItems
         HEART_SPELL_STEEL = Entry.of("heart_spell_steel", new HeartSpellSteelItem())
                 .addEN()
                 .addZH("心之魔钢")
-                .addTag(AllTags.CAPE, AllTags.ENDGAME_TRINKETS)
+                .addTag(AllTags.CAPE_SLOT, AllTags.ENDGAME_TRINKETS)
                 .setTab(AllGroups.EQUIPMENTS)
                 .addModel()
                 .register();
@@ -203,7 +206,7 @@ public class AllItems
         SUPERCONDUCTOR = Entry.of("superconductor", new SuperconductorItem())
                 .addEN()
                 .addZH("超导体")
-                .addTag(AllTags.BELT, AllTags.ENDGAME_TRINKETS)
+                .addTag(AllTags.BELT_SLOT, AllTags.ENDGAME_TRINKETS)
                 .setTab(AllGroups.EQUIPMENTS)
                 .addModel()
                 .register();
@@ -231,7 +234,7 @@ public class AllItems
         SPELL_CONTAINER = Entry.of("spell_container", new ProtectiveSpellContainerItem())
                 .addEN()
                 .addZH("法术容器")
-                .addTag(AllTags.SPELL_CONTAINER)
+                .addTag(AllTags.SPELL_CONTAINER_SLOT)
                 .setTab(AllGroups.EQUIPMENTS)
                 .addModel()
                 .register();
@@ -450,6 +453,14 @@ public class AllItems
         MEDAL = Entry.of("medal", new MedalItem())
                 .addEN()
                 .addZH("勋章")
+                .addModel()
+                .register();
+
+        ZHUZI_MINER_HELMET = Entry.of("zhuzi_miner_helmet", new ZhuziMinerHelmet())
+                .addEN("Zhuzi's Miner Helmet")
+                .addZH("Zhuzi的矿工头盔")
+                .addTag(AllTags.HAT_SLOT)
+                .setTab(AllGroups.EQUIPMENTS)
                 .addModel()
                 .register();
     }

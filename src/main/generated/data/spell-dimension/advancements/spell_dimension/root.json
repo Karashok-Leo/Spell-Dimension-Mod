@@ -1,0 +1,35 @@
+{
+  "criteria": {
+    "0": {
+      "conditions": {},
+      "trigger": "minecraft:tick"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "spell-dimension:textures/block/protective_cover.png",
+    "description": {
+      "translate": "advancement.spell-dimension.root.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "spell-dimension:magic_mirror"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.spell-dimension.root.title"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ],
+  "rewards": {
+    "loot": [
+      "spell-dimension:pool/starter_kit"
+    ]
+  },
+  "sends_telemetry_event": true
+}

@@ -39,6 +39,7 @@
     "phase.LivingEntityMixin",
     "phase.PlayerEntityMixin",
     "vanilla.AnvilScreenHandlerMixin",
+    "vanilla.ApplyBonusLootFunctionMixin",
     "vanilla.DragonFireballEntityMixin",
     "vanilla.EnchantBookFactoryMixin",
     "vanilla.EnchantmentHelperMixin",

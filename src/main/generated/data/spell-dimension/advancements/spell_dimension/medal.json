@@ -1,4 +1,5 @@
 {
+  "parent": "spell-dimension:spell_dimension/root",
   "criteria": {
     "0": {
       "conditions": {
@@ -13,7 +14,6 @@
   },
   "display": {
     "announce_to_chat": true,
-    "background": "spell-dimension:textures/block/protective_cover.png",
     "description": {
       "translate": "advancement.spell-dimension.medal.description"
     },
