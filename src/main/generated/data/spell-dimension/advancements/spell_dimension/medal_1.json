@@ -3,19 +3,21 @@
   "criteria": {
     "0": {
       "conditions": {
-        "item": {
-          "items": [
-            "spell-dimension:medal"
-          ]
-        }
+        "items": [
+          {
+            "items": [
+              "spell-dimension:medal"
+            ]
+          }
+        ]
       },
-      "trigger": "minecraft:consume_item"
+      "trigger": "minecraft:inventory_changed"
     }
   },
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancement.spell-dimension.medal.description"
+      "translate": "advancement.spell-dimension.medal_1.description"
     },
     "frame": "challenge",
     "hidden": true,
@@ -24,7 +26,7 @@
     },
     "show_toast": true,
     "title": {
-      "translate": "advancement.spell-dimension.medal.title"
+      "translate": "advancement.spell-dimension.medal_1.title"
     }
   },
   "requirements": [

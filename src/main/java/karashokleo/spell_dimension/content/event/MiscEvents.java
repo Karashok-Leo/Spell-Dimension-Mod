@@ -283,7 +283,7 @@ public class MiscEvents
             player.incrementStat(AllStats.MINED_ORES);
             if (player instanceof ServerPlayerEntity serverPlayer)
             {
-                AllCriterions.MINING.trigger(serverPlayer);
+                AllCriterions.MINED_ORES.trigger(serverPlayer);
             }
         });
     }

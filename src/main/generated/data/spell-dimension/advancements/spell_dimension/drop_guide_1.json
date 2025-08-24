@@ -1,0 +1,34 @@
+{
+  "parent": "spell-dimension:spell_dimension/root",
+  "criteria": {
+    "0": {
+      "conditions": {
+        "count": 1,
+        "item": "modonomicon:modonomicon"
+      },
+      "trigger": "spell-dimension:dropped_items"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.spell-dimension.drop_guide_1.description"
+    },
+    "frame": "task",
+    "hidden": true,
+    "icon": {
+      "item": "modonomicon:modonomicon",
+      "nbt": "{\"modonomicon:book_id\":\"spell-dimension-book:magic_guidance\"}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.spell-dimension.drop_guide_1.title"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

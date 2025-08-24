@@ -3,9 +3,9 @@
   "criteria": {
     "0": {
       "conditions": {
-        "count": 10
+        "count": 4096
       },
-      "trigger": "spell-dimension:mining"
+      "trigger": "spell-dimension:mined_ores"
     }
   },
   "display": {

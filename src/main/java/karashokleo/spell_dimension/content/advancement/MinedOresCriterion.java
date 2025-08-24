@@ -12,16 +12,16 @@ import net.minecraft.stat.Stat;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.Identifier;
 
-public class MiningCriterion extends BaseCriterion<MiningCriterion.Condition, MiningCriterion>
+public class MinedOresCriterion extends BaseCriterion<MinedOresCriterion.Condition, MinedOresCriterion>
 {
-    public MiningCriterion(Identifier id)
+    public MinedOresCriterion(Identifier id)
     {
         super(id, Condition::new, Condition.class);
     }
 
     public static Condition condition(int count)
     {
-        var ans = new Condition(AllCriterions.MINING.getId(), LootContextPredicate.EMPTY);
+        var ans = new Condition(AllCriterions.MINED_ORES.getId(), LootContextPredicate.EMPTY);
         ans.count = count;
         return ans;
     }
@@ -35,7 +35,7 @@ public class MiningCriterion extends BaseCriterion<MiningCriterion.Condition, Mi
     }
 
     @SerialClass
-    public static class Condition extends BaseCriterionConditions<MiningCriterion.Condition, MiningCriterion>
+    public static class Condition extends BaseCriterionConditions<MinedOresCriterion.Condition, MinedOresCriterion>
     {
         @SerialClass.SerialField
         public int count;

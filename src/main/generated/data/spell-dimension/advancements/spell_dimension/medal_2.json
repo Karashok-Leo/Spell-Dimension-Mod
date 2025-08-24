@@ -1,0 +1,36 @@
+{
+  "parent": "spell-dimension:spell_dimension/medal_1",
+  "criteria": {
+    "0": {
+      "conditions": {
+        "item": {
+          "items": [
+            "spell-dimension:medal"
+          ]
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.spell-dimension.medal_2.description"
+    },
+    "frame": "task",
+    "hidden": true,
+    "icon": {
+      "item": "spell-dimension:medal"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.spell-dimension.medal_2.title"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -111,10 +111,16 @@ public enum SDTexts
      */
     ADVANCEMENT$ROOT$TITLE("Welcome to Spell Dimension!", "欢迎来到咒次元！"),
     ADVANCEMENT$ROOT$DESCRIPTION("Have a good time!", "玩得愉快！"),
-    ADVANCEMENT$MEDAL$TITLE("I knocked my tooth...", "磕到牙了..."),
-    ADVANCEMENT$MEDAL$DESCRIPTION("Try nibbling on a Medal", "尝试啃一口勋章"),
+    ADVANCEMENT$MEDAL_1$TITLE("GG", "GG"),
+    ADVANCEMENT$MEDAL_1$DESCRIPTION("Pass the game and get the medal", "通关游戏并获得勋章"),
+    ADVANCEMENT$MEDAL_2$TITLE("I knocked my tooth...", "磕到牙了..."),
+    ADVANCEMENT$MEDAL_2$DESCRIPTION("Try nibbling on a Medal", "尝试啃一口勋章"),
     ADVANCEMENT$MINER$TITLE("Miner’s hands, miner’s spirit", "挖矿人，挖矿魂"),
     ADVANCEMENT$MINER$DESCRIPTION("Cumulatively mined 64 stacks of ores", "累计挖掘64组矿石"),
+    ADVANCEMENT$DROP_GUIDE_1$TITLE("Are you serious?", "你认真的？"),
+    ADVANCEMENT$DROP_GUIDE_1$DESCRIPTION("Discard Magic Guidance", "丢弃《魔力接引》"),
+    ADVANCEMENT$DROP_GUIDE_2$TITLE("You'll regret this", "你会后悔的"),
+    ADVANCEMENT$DROP_GUIDE_2$DESCRIPTION("Discard Magic Guidance AGAIN", "再一次丢弃《魔力接引》"),
 
     /**
      * Spell School
