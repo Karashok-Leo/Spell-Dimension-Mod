@@ -56,8 +56,8 @@ public class SpawnerSoulItem extends Item
     {
         this.getSummonEntry(stack).ifPresent(entry ->
         {
-            tooltip.add(SDTexts.TOOLTIP$SUMMON_ENTITY.get(entry.entityType().getName()).formatted(Formatting.DARK_AQUA));
-            tooltip.add(SDTexts.TOOLTIP$SUMMON_REMAIN.get(entry.count()).formatted(Formatting.DARK_AQUA));
+            tooltip.add(SDTexts.TOOLTIP$SOUL_TYPE.get(entry.entityType().getName()).formatted(Formatting.DARK_AQUA));
+            tooltip.add(SDTexts.TOOLTIP$REMAINING_NUMBER.get(entry.count()).formatted(Formatting.DARK_AQUA));
         });
     }
 }

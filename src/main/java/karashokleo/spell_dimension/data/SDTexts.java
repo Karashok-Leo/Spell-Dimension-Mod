@@ -189,8 +189,10 @@ public enum SDTexts
     TOOLTIP$QUEST$TAG_ITEM("Search %s for the required item", "搜索 %s 以查询对应物品"),
     TOOLTIP$NOT_CONSUMED("Will not be consumed", "不消耗"),
     TOOLTIP$TOOK_SECONDS("Took %s second(s)", "耗时%s秒"),
-    TOOLTIP$SUMMON_ENTITY("Entity Type: %s", "实体类型：%s"),
-    TOOLTIP$SUMMON_REMAIN("Remain: %s", "剩余：%s"),
+    TOOLTIP$CONTAINER_EMPTY("[Empty]", "[空]"),
+    TOOLTIP$SOUL_TYPE("Soul type: %s", "灵魂类型：%s"),
+    TOOLTIP$REMAINING_NUMBER("Remaining number: %s", "剩余数量：%s"),
+    TOOLTIP$REMAINING_HEALTH("Remaining health: %s", "剩余生命值：%s"),
 
     /**
      * Magic Mirror

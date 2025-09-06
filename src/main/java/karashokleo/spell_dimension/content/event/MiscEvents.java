@@ -274,6 +274,7 @@ public class MiscEvents
             GenericEvents.schedule(() -> attacker.damage(damageSource, reflect));
         });
 
+        // Criterion for mined ores
         PlayerBlockBreakEvents.AFTER.register((world, player, pos, state, blockEntity) ->
         {
             if (!state.isIn(ConventionalBlockTags.ORES))
@@ -285,6 +286,21 @@ public class MiscEvents
             {
                 AllCriterions.MINED_ORES.trigger(serverPlayer);
             }
+        });
+
+        // Soul Container
+        ServerLivingEntityEvents.ALLOW_DEATH.register((entity, damageSource, damageAmount) ->
+        {
+            if (!(damageSource.getAttacker() instanceof PlayerEntity player))
+            {
+                return true;
+            }
+            ItemStack stack = player.getOffHandStack();
+            if (!stack.isOf(AllItems.SOUL_CONTAINER))
+            {
+                return true;
+            }
+            return !AllItems.SOUL_CONTAINER.tryCaptureEntity(stack, player, entity);
         });
     }
 }

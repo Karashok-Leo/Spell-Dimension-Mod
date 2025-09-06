@@ -68,6 +68,7 @@ public class AllItems
     public static RebirthSigilItem REBIRTH_SIGIL;
     public static MeritRegisterItem MERIT_REGISTER;
 
+    public static SoulContainer SOUL_CONTAINER;
     public static ProtectiveSpellContainerItem SPELL_CONTAINER;
     public static IllusionContainerItem ILLUSION_CONTAINER;
     public static IllusionUpgradeItem ILLUSION_UPGRADE;
@@ -109,6 +110,7 @@ public class AllItems
     public static CursedAppleItem CURED_APPLE;
     public static MedalItem MEDAL;
 
+    // Contributor Items
     public static ZhuziMinerHelmet ZHUZI_MINER_HELMET;
 
     public static void register()
@@ -231,6 +233,12 @@ public class AllItems
                 .addModel()
                 .register();
 
+        SOUL_CONTAINER = Entry.of("soul_container", new SoulContainer())
+                .addEN()
+                .addZH("灵魂容器")
+                .setTab(AllGroups.EQUIPMENTS)
+                .addModel()
+                .register();
         SPELL_CONTAINER = Entry.of("spell_container", new ProtectiveSpellContainerItem())
                 .addEN()
                 .addZH("法术容器")
@@ -456,6 +464,7 @@ public class AllItems
                 .addModel()
                 .register();
 
+        // Contributor Items
         ZHUZI_MINER_HELMET = Entry.of("zhuzi_miner_helmet", new ZhuziMinerHelmet())
                 .addEN("Zhuzi's Miner Helmet")
                 .addZH("Zhuzi的矿工头盔")

@@ -8,10 +8,7 @@ import karashokleo.leobrary.datagen.generator.*;
 import karashokleo.leobrary.datagen.generator.init.GeneratorStorage;
 import karashokleo.spell_dimension.api.quest.Quest;
 import karashokleo.spell_dimension.api.quest.QuestRegistry;
-import karashokleo.spell_dimension.content.component.BuffComponentImpl;
-import karashokleo.spell_dimension.content.component.EnlighteningComponent;
-import karashokleo.spell_dimension.content.component.GameStageComponent;
-import karashokleo.spell_dimension.content.component.QuestComponent;
+import karashokleo.spell_dimension.content.component.*;
 import karashokleo.spell_dimension.content.object.EnchantedModifier;
 import karashokleo.spell_dimension.content.object.EnlighteningModifier;
 import karashokleo.spell_dimension.data.SDTexts;
@@ -126,6 +123,7 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
         registry.registerForPlayers(AllComponents.GAME_STAGE, player -> new GameStageComponent(), RespawnCopyStrategy.ALWAYS_COPY);
         registry.registerForPlayers(AllComponents.QUEST, player -> new QuestComponent(), RespawnCopyStrategy.ALWAYS_COPY);
         registry.registerFor(LivingEntity.class, AllComponents.BUFF, BuffComponentImpl::new);
+        registry.registerFor(LivingEntity.class, AllComponents.SOUL_CONTROLLER, living -> new SoulControllerComponent());
     }
 
     public static final LanguageGenerator EN_TEXTS = new LanguageGenerator("en_us");

@@ -76,7 +76,8 @@
       "spell-dimension:enlightening",
       "spell-dimension:game_stage",
       "spell-dimension:buff",
-      "spell-dimension:quest"
+      "spell-dimension:quest",
+      "spell-dimension:soul_controller"
     ]
   }
 }
