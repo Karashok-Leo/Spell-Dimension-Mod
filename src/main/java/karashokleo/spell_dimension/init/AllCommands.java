@@ -15,6 +15,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.Text;
 import net.spell_engine.SpellEngineMod;
 import net.spell_engine.internals.SpellRegistry;
 import net.spell_engine.network.Packets;
@@ -29,11 +30,19 @@ public class AllCommands
             dispatcher.register(
                     CommandManager
                             .literal("spell_dimension")
+                            .then(printHandStack())
                             .then(fixFakeDeath())
                             .then(reloadSpells())
                             .then(convertModifiers())
             );
         });
+    }
+
+    private static LiteralArgumentBuilder<ServerCommandSource> printHandStack()
+    {
+        return CommandManager
+                .literal("hand")
+                .executes(AllCommands::executePrintHandStack);
     }
 
     private static LiteralArgumentBuilder<ServerCommandSource> fixFakeDeath()
@@ -56,6 +65,20 @@ public class AllCommands
         return CommandManager
                 .literal("convert_modifiers")
                 .executes(AllCommands::executeConvertModifiers);
+    }
+
+    private static int executePrintHandStack(CommandContext<ServerCommandSource> context)
+    {
+        ServerPlayerEntity player = context.getSource().getPlayer();
+        if (player != null)
+        {
+            var nbt = player.getMainHandStack().getNbt();
+            if (nbt != null)
+            {
+                context.getSource().sendMessage(Text.literal(nbt.toString()));
+            }
+        }
+        return Command.SINGLE_SUCCESS;
     }
 
     private static int executeFixFakeDeath(CommandContext<ServerCommandSource> context)
