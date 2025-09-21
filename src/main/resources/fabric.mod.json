@@ -77,7 +77,8 @@
       "spell-dimension:game_stage",
       "spell-dimension:buff",
       "spell-dimension:quest",
-      "spell-dimension:soul_controller"
+      "spell-dimension:soul_controller",
+      "spell-dimension:soul_minion"
     ]
   }
 }

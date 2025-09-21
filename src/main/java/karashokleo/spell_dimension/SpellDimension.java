@@ -34,6 +34,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageType;
 import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.registry.RegistryBuilder;
@@ -123,7 +124,8 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
         registry.registerForPlayers(AllComponents.GAME_STAGE, player -> new GameStageComponent(), RespawnCopyStrategy.ALWAYS_COPY);
         registry.registerForPlayers(AllComponents.QUEST, player -> new QuestComponent(), RespawnCopyStrategy.ALWAYS_COPY);
         registry.registerFor(LivingEntity.class, AllComponents.BUFF, BuffComponentImpl::new);
-        registry.registerFor(LivingEntity.class, AllComponents.SOUL_CONTROLLER, living -> new SoulControllerComponent());
+        registry.registerFor(MobEntity.class, AllComponents.SOUL_CONTROLLER, living -> new SoulControllerComponent());
+        registry.registerForPlayers(AllComponents.SOUL_MINION, player -> new SoulMinionComponent(), RespawnCopyStrategy.LOSSLESS_ONLY);
     }
 
     public static final LanguageGenerator EN_TEXTS = new LanguageGenerator("en_us");

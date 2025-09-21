@@ -45,7 +45,6 @@
     "vanilla.EnchantmentHelperMixin",
     "vanilla.EnchantRandomlyLootFunctionMixin",
     "vanilla.EndPortalBlockMixin",
-    "vanilla.EntityMixin",
     "vanilla.ItemStackMixin",
     "vanilla.LivingEntityMixin",
     "vanilla.MobEntityMixin",
@@ -62,13 +61,18 @@
     "maxShiftBy": 5
   },
   "client": [
+    "client.ClientPlayerEntityMixin",
     "client.DrawContextMixin",
     "client.ElectricSparkFactoryMixin",
+    "client.WorldRendererMixin",
     "client.phase.ClientPlayerEntityMixin",
     "client.phase.ClientPlayerInteractionManagerMixin",
     "client.phase.EntityRenderDispatcherMixin",
     "client.phase.InGameOverlayRendererMixin",
     "client.phase.WorldRendererMixin",
     "vanilla.ParticleManagerMixin"
-  ]
+  ],
+  "mixinextras": {
+    "minVersion": "0.5.0"
+  }
 }

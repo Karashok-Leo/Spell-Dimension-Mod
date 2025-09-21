@@ -17,6 +17,7 @@ import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.item.DynamicSpellBookItem;
 import karashokleo.spell_dimension.content.item.SpellScrollItem;
 import karashokleo.spell_dimension.content.misc.ISpawnerExtension;
+import karashokleo.spell_dimension.content.misc.SoulControl;
 import karashokleo.spell_dimension.content.network.C2SSelectQuest;
 import karashokleo.spell_dimension.init.*;
 import karashokleo.spell_dimension.util.SchoolUtil;
@@ -33,6 +34,7 @@ import net.minecraft.block.entity.MobSpawnerBlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
@@ -64,11 +66,16 @@ public class MiscEvents
         public void accept(DamageAccess access)
         {
             if (!(access.getEntity() instanceof PlayerEntity player))
+            {
                 return;
+            }
             GameRules gameRules = player.getWorld().getGameRules();
 
             boolean enable = gameRules.getBoolean(AllMiscInit.ENABLE_DAMAGE_TRACKER);
-            if (!enable) return;
+            if (!enable)
+            {
+                return;
+            }
 
             boolean immune = gameRules.getBoolean(AllMiscInit.IMMUNE_TRACKED_DAMAGE);
             if (immune && phase == DamagePhase.APPLY)
@@ -80,7 +87,9 @@ public class MiscEvents
             int threshold = gameRules.getInt(AllMiscInit.DAMAGE_TRACKER_THRESHOLD);
             float damage = access.getOriginalDamage();
             if (damage <= player.getMaxHealth() * threshold / 100)
+            {
                 return;
+            }
             // info
             Text playerName = player.getName();
             Text attackerName = Optional.ofNullable(access.getAttacker()).map(Entity::getName).orElse(Text.literal("None"));
@@ -99,7 +108,10 @@ public class MiscEvents
             SpellDimension.LOGGER.info("- {} phase: {}", phase.name(), damage);
             // send message
             boolean notify = gameRules.getBoolean(AllMiscInit.NOTIFY_DAMAGE_TRACKER);
-            if (!notify) return;
+            if (!notify)
+            {
+                return;
+            }
             if (phase == DamagePhase.SHIELD)
             {
                 player.sendMessage(Text.literal("--Spell Dimension Damage Tracker--").formatted(Formatting.DARK_RED));
@@ -116,13 +128,17 @@ public class MiscEvents
     {
         // Damage Tracker
         for (DamagePhase phase : DamagePhase.values())
+        {
             phase.registerModifier(9999, new DamageTracker(phase));
+        }
 
         // Fix dynamic spell book nbt copy
         InfusionCompleteCallback.EVENT.register((world, pos, output, inventory, recipe) ->
         {
             if (!(output.getItem() instanceof DynamicSpellBookItem bookItem))
+            {
                 return;
+            }
             SpellContainer container = SpellContainerHelper.containerFromItemStack(output).copy();
             SpellContainer modifiedContainer = container.copy();
             modifiedContainer.max_spell_count = bookItem.getMaxSpellCount();
@@ -133,12 +149,18 @@ public class MiscEvents
         DamagePhase.SHIELD.registerModifier(0, access ->
         {
             if (!access.getSource().isIn(LHTags.MAGIC))
+            {
                 return;
+            }
             if (!(access.getAttacker() instanceof LivingEntity attacker))
+            {
                 return;
+            }
             ItemStack stack = attacker.getOffHandStack();
             if (!(stack.isOf(AllItems.SPELL_PRISM)))
+            {
                 return;
+            }
             stack.damage(1, attacker, e -> e.sendToolBreakStatus(Hand.OFF_HAND));
             access.getSource().setBypassMagic();
         });
@@ -147,8 +169,14 @@ public class MiscEvents
         LivingEntityEvents.LivingTickEvent.TICK.register(event ->
         {
             LivingEntity entity = event.getEntity();
-            if (entity.age % 10 != 0) return;
-            if (!Float.isNaN(entity.getHealth())) return;
+            if (entity.age % 10 != 0)
+            {
+                return;
+            }
+            if (!Float.isNaN(entity.getHealth()))
+            {
+                return;
+            }
             entity.setHealth(0);
             System.out.printf("Fixed NaN health for %s, why is this happening?", entity);
         });
@@ -159,7 +187,9 @@ public class MiscEvents
             ItemStack stack = player.getStackInHand(hand);
             if (stack.isIn(AllTags.DUNGEON_BANNED) &&
                 AllWorldGen.disableInWorld(world))
+            {
                 return TypedActionResult.fail(stack);
+            }
             return TypedActionResult.pass(stack);
         });
 
@@ -167,41 +197,55 @@ public class MiscEvents
         PlayerInteractionEvents.LEFT_CLICK_EMPTY.register(event ->
         {
             if (event.getItemStack().isOf(AllItems.QUEST_SCROLL))
+            {
                 AllPackets.toServer(new C2SSelectQuest(null, event.getHand()));
+            }
         });
 
         // Deflection
         LivingAttackEvent.ATTACK.register(event ->
         {
             if (!event.getSource().isOf(MythicUpgradesDamageTypes.DEFLECTING_DAMAGE_TYPE))
+            {
                 return;
+            }
             LivingEntity entity = event.getEntity();
             if (EntityFeature.MAGIC_REJECT.test(entity) ||
                 TrinketCompat.hasItemInTrinket(entity, TrinketItems.RING_DIVINITY))
+            {
                 event.setCanceled(true);
+            }
         });
         DamagePhase.SHIELD.registerModifier(0, access ->
         {
             if (!access.getSource().isOf(MythicUpgradesDamageTypes.DEFLECTING_DAMAGE_TYPE))
+            {
                 return;
+            }
             float maxDamage = access.getEntity().getMaxHealth();
             access.addModifier(originalDamage -> Math.min(originalDamage, maxDamage));
         });
 
         // cancel offhand block placement interaction while holding spell scroll
         UseBlockCallback.EVENT.register((player, world, hand, hitResult) ->
-                (world.isClient() &&
-                 hand == Hand.OFF_HAND &&
-                 player.getOffHandStack().getItem() instanceof BlockItem &&
-                 player.getMainHandStack().getItem() instanceof SpellScrollItem) ? ActionResult.FAIL : ActionResult.PASS);
+            (world.isClient() &&
+                hand == Hand.OFF_HAND &&
+                player.getOffHandStack().getItem() instanceof BlockItem &&
+                player.getMainHandStack().getItem() instanceof SpellScrollItem) ? ActionResult.FAIL : ActionResult.PASS);
 
         // Spawner Soul
         PlayerBlockBreakEvents.AFTER.register((world, player, pos, state, blockEntity) ->
         {
             // 刷怪笼掉落
-            if (!(blockEntity instanceof MobSpawnerBlockEntity spawner)) return;
+            if (!(blockEntity instanceof MobSpawnerBlockEntity spawner))
+            {
+                return;
+            }
             ItemStack spawnerSoulStack = AllItems.SPAWNER_SOUL.getStack((ISpawnerExtension) spawner.getLogic());
-            if (spawnerSoulStack.isEmpty()) return;
+            if (spawnerSoulStack.isEmpty())
+            {
+                return;
+            }
             Block.dropStack(world, pos, spawnerSoulStack);
         });
 
@@ -212,7 +256,7 @@ public class MiscEvents
                 player.getStackInHand(hand).isOf(AllItems.DEBUG_STAFF))
             {
                 SchoolUtil.getLivingSchools(player).stream().findFirst().ifPresent(school ->
-                        entity.damage(SpellDamageSource.player(school, player), 999999));
+                    entity.damage(SpellDamageSource.player(school, player), 999999));
             }
             return ActionResult.PASS;
         });
@@ -221,19 +265,29 @@ public class MiscEvents
         ServerLivingEntityEvents.ALLOW_DEATH.register((entity, damageSource, damageAmount) ->
         {
             if (!(entity instanceof VoidShadeEntity))
+            {
                 return true;
+            }
             if (!(damageSource.getAttacker() instanceof LivingEntity living))
+            {
                 return true;
+            }
             World world = entity.getWorld();
             if (world.isClient())
+            {
                 return true;
+            }
             List<VoidShadowEntity> list = world.getEntitiesByClass(VoidShadowEntity.class, entity.getBoundingBox().expand(128), EntityPredicates.EXCEPT_SPECTATOR);
             if (list.isEmpty())
+            {
                 return true;
+            }
             VoidShadowEntity shadow = list.get(0);
             float shadowMaxHealth = shadow.getMaxHealth();
             if (shadow.getHealth() < shadowMaxHealth * 0.5f)
+            {
                 return true;
+            }
             float damage = Math.min(shadowMaxHealth * 0.05f, damageAmount);
             shadow.damage(living.getDamageSources().indirectMagic(entity, living), damage);
             return true;
@@ -267,7 +321,10 @@ public class MiscEvents
 
             access.addModifier(originalDamage -> originalDamage * ratio);
             float reflect = access.getOriginalDamage() * (1 - ratio);
-            if (reflect <= 0) return;
+            if (reflect <= 0)
+            {
+                return;
+            }
 
             DamageSource damageSource = SpellDamageSource.create(SpellSchools.LIGHTNING, attacker);
             ((DamageStateProvider) damageSource).addState(new ReflectState());
@@ -291,6 +348,10 @@ public class MiscEvents
         // Soul Container
         ServerLivingEntityEvents.ALLOW_DEATH.register((entity, damageSource, damageAmount) ->
         {
+            if (!(entity instanceof MobEntity mob))
+            {
+                return true;
+            }
             if (!(damageSource.getAttacker() instanceof PlayerEntity player))
             {
                 return true;
@@ -300,7 +361,38 @@ public class MiscEvents
             {
                 return true;
             }
-            return !AllItems.SOUL_CONTAINER.tryCaptureEntity(stack, player, entity);
+            return !AllItems.SOUL_CONTAINER.tryCaptureEntity(stack, player, mob);
+        });
+
+        PlayerInteractionEvents.INTERACT_ENTITY_GENERAL.register((player, entity, hand) ->
+        {
+            if (hand == Hand.OFF_HAND)
+            {
+                return ActionResult.PASS;
+            }
+            if (!(player instanceof ServerPlayerEntity serverPlayer))
+            {
+                return ActionResult.PASS;
+            }
+            if (!(entity instanceof MobEntity mob))
+            {
+                return ActionResult.PASS;
+            }
+            if (!serverPlayer.isSneaking())
+            {
+                return ActionResult.PASS;
+            }
+            var component = SoulControl.getSoulController(mob);
+            if (component == null)
+            {
+                return ActionResult.PASS;
+            }
+            if (component.getOwner(serverPlayer.getServerWorld()) != serverPlayer)
+            {
+                return ActionResult.PASS;
+            }
+            SoulControl.setControllingMinion(serverPlayer, mob);
+            return ActionResult.SUCCESS;
         });
     }
 }

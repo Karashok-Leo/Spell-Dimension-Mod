@@ -1,40 +1,40 @@
 package karashokleo.spell_dimension.mixin.vanilla;
 
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import karashokleo.spell_dimension.init.AllComponents;
-import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.entity.ai.goal.GoalSelector;
+import karashokleo.spell_dimension.content.component.SoulControllerComponent;
+import karashokleo.spell_dimension.content.misc.SoulControl;
+import karashokleo.spell_dimension.content.object.SoulInput;
 import net.minecraft.entity.mob.MobEntity;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+/**
+ * 对受控实体应用控制玩家的输入
+ */
 @Mixin(MobEntity.class)
 public abstract class MobEntityMixin
 {
-    @Shadow
-    @Final
-    public GoalSelector goalSelector;
-
-    @WrapOperation(
-            method = "tick",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/entity/mob/MobEntity;updateGoalControls()V"
-            )
+    @Inject(
+        method = "tickNewAi",
+        at = @At("HEAD"),
+        cancellable = true
     )
-    private void wrap_updateGoalControls(MobEntity instance, Operation<Void> original)
+    private void inject_tickNewAi(CallbackInfo ci)
     {
-        if (AllComponents.SOUL_CONTROLLER.get(instance).getOwner(instance.getWorld()) == null)
+        MobEntity mob = (MobEntity) (Object) this;
+        SoulControllerComponent component = SoulControl.getSoulController(mob);
+        if (component == null)
         {
-            original.call(instance);
-        } else
-        {
-            this.goalSelector.setControlEnabled(Goal.Control.MOVE, false);
-            this.goalSelector.setControlEnabled(Goal.Control.JUMP, false);
-            this.goalSelector.setControlEnabled(Goal.Control.LOOK, false);
+            return;
         }
+        SoulInput input = component.getInput();
+        if (!input.controlling)
+        {
+            return;
+        }
+        input.applyRotation(mob, 2);
+        input.applyMovement(mob);
+        ci.cancel();
     }
 }

@@ -26,11 +26,13 @@ public class AllPackets
                 S2CSpellDash.class,
                 S2COpenQuestScreen.class,
                 S2CBeam.class,
-                C2SSelectQuest.class
+                C2SSelectQuest.class,
+                C2SSoulControl.class
         );
 
         HANDLER.configureC2S(
-                C2SSelectQuest.class
+                C2SSelectQuest.class,
+                C2SSoulControl.class
         );
     }
 

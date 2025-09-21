@@ -1,15 +1,16 @@
 package karashokleo.spell_dimension.content.item;
 
+import karashokleo.spell_dimension.content.component.SoulControllerComponent;
+import karashokleo.spell_dimension.content.misc.SoulControl;
 import karashokleo.spell_dimension.data.SDTexts;
-import karashokleo.spell_dimension.init.AllComponents;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -45,35 +46,46 @@ public class SoulContainer extends Item
     public SoulContainer()
     {
         super(
-                new FabricItemSettings()
-                        .fireproof()
-                        .maxCount(1)
+            new FabricItemSettings()
+                .fireproof()
+                .maxCount(1)
         );
     }
 
-    public boolean tryCaptureEntity(ItemStack stack, PlayerEntity player, LivingEntity entity)
+    public boolean tryCaptureEntity(ItemStack stack, PlayerEntity player, MobEntity mob)
     {
-        NbtCompound nbt = stack.getSubNbt(ENTITY_KEY);
-        if (nbt == null || nbt.isEmpty())
+        if (player.getWorld().isClient())
         {
-            String typeId = entity.getSavedEntityId();
-            if (typeId == null)
-            {
-                return false;
-            }
-            // do something before saving
-            entity.setHealth(entity.getMaxHealth());
-            AllComponents.SOUL_CONTROLLER.get(entity).setOwner(player);
-            AllComponents.SOUL_CONTROLLER.sync(entity);
-            // do saving
-            var entityNbt = new NbtCompound();
-            entityNbt.putString("id", typeId);
-            entity.writeNbt(entityNbt);
-            stack.setSubNbt(ENTITY_KEY, entityNbt);
-            entity.discard();
-            return true;
+            throw new IllegalStateException("tryCaptureEntity should be called on server side only");
         }
-        return false;
+
+        NbtCompound nbt = stack.getSubNbt(ENTITY_KEY);
+        if (nbt != null && !nbt.isEmpty())
+        {
+            return false;
+        }
+
+        String typeId = mob.getSavedEntityId();
+        if (typeId == null)
+        {
+            return false;
+        }
+
+        // do something before saving
+        mob.setHealth(mob.getMaxHealth());
+        mob.setVelocity(Vec3d.ZERO);
+        SoulControllerComponent component = SoulControl.getSoulController(mob);
+        if (component != null)
+        {
+            component.setOwner(player);
+        }
+        // do saving
+        var entityNbt = new NbtCompound();
+        entityNbt.putString("id", typeId);
+        mob.writeNbt(entityNbt);
+        stack.setSubNbt(ENTITY_KEY, entityNbt);
+        mob.discard();
+        return true;
     }
 
     protected boolean trySpawnEntity(ItemStack stack, ServerWorld world, BlockPos pos, PlayerEntity user, boolean alignPosition, boolean invertY)
@@ -89,13 +101,13 @@ public class SoulContainer extends Item
             return false;
         }
         Entity spawned = entityType.get().spawn(
-                world,
-                null,
-                null,
-                pos,
-                SpawnReason.EVENT,
-                alignPosition,
-                invertY
+            world,
+            null,
+            null,
+            pos,
+            SpawnReason.EVENT,
+            alignPosition,
+            invertY
         );
         if (spawned == null)
         {
