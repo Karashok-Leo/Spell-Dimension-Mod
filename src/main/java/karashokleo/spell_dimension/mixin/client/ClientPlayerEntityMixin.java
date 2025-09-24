@@ -2,7 +2,7 @@ package karashokleo.spell_dimension.mixin.client;
 
 import com.mojang.authlib.GameProfile;
 import karashokleo.spell_dimension.client.misc.SoulControlHandler;
-import karashokleo.spell_dimension.content.component.SoulMinionComponent;
+import karashokleo.spell_dimension.content.component.SoulControllerComponent;
 import karashokleo.spell_dimension.content.misc.SoulControl;
 import net.minecraft.client.input.Input;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -53,7 +53,7 @@ public abstract class ClientPlayerEntityMixin extends PlayerEntity
     public void changeLookDirection(double cursorDeltaX, double cursorDeltaY)
     {
         var player = (ClientPlayerEntity) (Object) this;
-        SoulMinionComponent minionComponent = SoulControl.getSoulMinion(player);
+        SoulControllerComponent minionComponent = SoulControl.getSoulMinion(player);
         if (minionComponent.isControlling())
         {
             pendingCursorDeltaX = (float) cursorDeltaX;

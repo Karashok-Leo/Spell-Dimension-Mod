@@ -1,94 +1,140 @@
 package karashokleo.spell_dimension.content.component;
 
-import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
+import dev.onyxstudios.cca.api.v3.component.tick.ServerTickingComponent;
+import karashokleo.spell_dimension.content.object.SoulInput;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ChunkTicketType;
+import net.minecraft.server.world.ServerChunkManager;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.Unit;
+import net.minecraft.util.math.ChunkPos;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
-public class SoulMinionComponent implements AutoSyncedComponent
+public class SoulMinionComponent implements ServerTickingComponent
 {
-    private static final String MINION_KEY = "Minion";
-    @Nullable
-    private MobEntity minion;
-    @Nullable
-    private UUID minionUuid;
-    /**
-     * used in client-side only
-     */
-    private boolean controlling = false;
+    private static final String OWNER_KEY = "Owner";
+//    private static final String INPUT_KEY = "Input";
 
-    public boolean isControlling()
+    private final MobEntity mob;
+    @Nullable
+    private PlayerEntity owner;
+    @Nullable
+    private UUID ownerUuid;
+    private final SoulInput input = new SoulInput();
+
+    private static final int CHUNK_LOAD_RADIUS = 3;
+    private static final int CHUNK_LOAD_TICKS = 80;
+    private static final ChunkTicketType<Unit> TICKET_TYPE = ChunkTicketType.create("soul_minion", (a, b) -> 0, CHUNK_LOAD_TICKS);
+
+    public SoulMinionComponent(MobEntity mob)
     {
-        return controlling;
+        this.mob = mob;
     }
 
     @Nullable
-    public MobEntity getMinion(ServerWorld world)
+    public PlayerEntity getOwner()
     {
-        if (minion == null &&
-            world.getEntity(minionUuid) instanceof MobEntity mob)
-        {
-            minion = mob;
-        }
-        if (minion == null ||
-            minion.isDead() ||
-            minion.isRemoved())
+        if (!(mob.getWorld() instanceof ServerWorld world))
         {
             return null;
         }
-        return minion;
+        if (owner == null &&
+            world.getEntity(ownerUuid) instanceof PlayerEntity player)
+        {
+            owner = player;
+        }
+        if (owner == null ||
+            owner.isDead() ||
+            owner.isRemoved())
+        {
+            return null;
+        }
+        return owner;
     }
 
-    public void setMinion(@Nullable MobEntity minion)
+    public void setOwner(PlayerEntity owner)
     {
-        if (minion == null ||
-            minion.isDead() ||
-            minion.isRemoved())
+        if (owner == null ||
+            owner.isDead() ||
+            owner.isRemoved())
         {
-            this.minion = null;
-            this.minionUuid = null;
-            this.controlling = false;
+            this.owner = null;
+            this.ownerUuid = null;
+            this.setControlling(false);
         } else
         {
-            this.minion = minion;
-            this.minionUuid = minion.getUuid();
-            this.controlling = true;
+            this.owner = owner;
+            this.ownerUuid = owner.getUuid();
+            this.setControlling(true);
+        }
+    }
+
+    public SoulInput getInput()
+    {
+        return input;
+    }
+
+    public void setInput(SoulInput input)
+    {
+        this.input.copyFrom(input);
+    }
+
+    public void setControlling(boolean controlling)
+    {
+        this.input.controlling = controlling;
+        if (!controlling)
+        {
+            this.input.clear();
         }
     }
 
     @Override
     public void readFromNbt(@NotNull NbtCompound tag)
     {
-        if (tag.get(MINION_KEY) != null)
+        if (tag.get(OWNER_KEY) != null)
         {
-            minionUuid = tag.getUuid(MINION_KEY);
+            ownerUuid = tag.getUuid(OWNER_KEY);
         }
+//        input = SoulInput.fromNbt(tag.getCompound(INPUT_KEY));
     }
 
     @Override
     public void writeToNbt(@NotNull NbtCompound tag)
     {
-        if (minionUuid != null)
+        if (ownerUuid != null)
         {
-            tag.putUuid(MINION_KEY, minionUuid);
+            tag.putUuid(OWNER_KEY, ownerUuid);
         }
+//        tag.put(INPUT_KEY, input.toNbt());
     }
 
     @Override
-    public void applySyncPacket(PacketByteBuf buf)
+    public void serverTick()
     {
-        controlling = buf.readBoolean();
-    }
+        if (!(mob.getWorld() instanceof ServerWorld world))
+        {
+            return;
+        }
 
-    @Override
-    public void writeSyncPacket(PacketByteBuf buf, ServerPlayerEntity recipient)
-    {
-        buf.writeBoolean(controlling);
+        if (mob.age % CHUNK_LOAD_TICKS != 0)
+        {
+            return;
+        }
+
+        ChunkPos centerChunkPos = mob.getChunkPos();
+        ServerChunkManager chunkManager = world.getChunkManager();
+        for (int i = -CHUNK_LOAD_RADIUS; i <= CHUNK_LOAD_RADIUS; i++)
+        {
+            for (int j = -CHUNK_LOAD_RADIUS; j <= CHUNK_LOAD_RADIUS; j++)
+            {
+                var chunkPos = new ChunkPos(centerChunkPos.x + i, centerChunkPos.z + j);
+                chunkManager.addTicket(TICKET_TYPE, chunkPos, 2, Unit.INSTANCE);
+            }
+        }
     }
 }

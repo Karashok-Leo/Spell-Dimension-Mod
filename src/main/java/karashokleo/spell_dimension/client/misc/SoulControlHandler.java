@@ -1,6 +1,6 @@
 package karashokleo.spell_dimension.client.misc;
 
-import karashokleo.spell_dimension.content.component.SoulMinionComponent;
+import karashokleo.spell_dimension.content.component.SoulControllerComponent;
 import karashokleo.spell_dimension.content.misc.SoulControl;
 import karashokleo.spell_dimension.content.network.C2SSoulControl;
 import karashokleo.spell_dimension.content.object.SoulInput;
@@ -15,7 +15,7 @@ public class SoulControlHandler
 {
     public static void consumePlayerMoveInput(ClientPlayerEntity player, Input input, float cursorDeltaX, float cursorDeltaY)
     {
-        SoulMinionComponent minionComponent = SoulControl.getSoulMinion(player);
+        SoulControllerComponent minionComponent = SoulControl.getSoulMinion(player);
         if (!minionComponent.isControlling())
         {
             return;

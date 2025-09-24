@@ -2,7 +2,7 @@ package karashokleo.spell_dimension.content.network;
 
 import dev.xkmc.l2serial.network.SerialPacketC2S;
 import dev.xkmc.l2serial.serialization.SerialClass;
-import karashokleo.spell_dimension.content.component.SoulControllerComponent;
+import karashokleo.spell_dimension.content.component.SoulMinionComponent;
 import karashokleo.spell_dimension.content.misc.SoulControl;
 import karashokleo.spell_dimension.content.object.SoulInput;
 import net.minecraft.entity.mob.MobEntity;
@@ -15,7 +15,7 @@ public record C2SSoulControl(SoulInput input) implements SerialPacketC2S
     @Override
     public void handle(ServerPlayerEntity player)
     {
-        MobEntity minion = SoulControl.getSoulMinion(player).getMinion(player.getServerWorld());
+        MobEntity minion = SoulControl.getSoulMinion(player).getMinion();
         if (minion == null ||
             minion.isDead() ||
             minion.isRemoved())
@@ -41,7 +41,7 @@ public record C2SSoulControl(SoulInput input) implements SerialPacketC2S
 //        mob.prevYaw = mob.getYaw();
 //        mob.setPitch(player.getPitch());
 //        mob.prevPitch = mob.getPitch();
-        SoulControllerComponent component = SoulControl.getSoulController(mob);
+        SoulMinionComponent component = SoulControl.getSoulController(mob);
         if (component == null)
         {
             return;

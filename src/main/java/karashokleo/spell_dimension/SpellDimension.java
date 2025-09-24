@@ -124,8 +124,8 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
         registry.registerForPlayers(AllComponents.GAME_STAGE, player -> new GameStageComponent(), RespawnCopyStrategy.ALWAYS_COPY);
         registry.registerForPlayers(AllComponents.QUEST, player -> new QuestComponent(), RespawnCopyStrategy.ALWAYS_COPY);
         registry.registerFor(LivingEntity.class, AllComponents.BUFF, BuffComponentImpl::new);
-        registry.registerFor(MobEntity.class, AllComponents.SOUL_CONTROLLER, living -> new SoulControllerComponent());
-        registry.registerForPlayers(AllComponents.SOUL_MINION, player -> new SoulMinionComponent(), RespawnCopyStrategy.LOSSLESS_ONLY);
+        registry.registerFor(MobEntity.class, AllComponents.SOUL_MINION, SoulMinionComponent::new);
+        registry.registerForPlayers(AllComponents.SOUL_CONTROLLER, SoulControllerComponent::new, RespawnCopyStrategy.LOSSLESS_ONLY);
     }
 
     public static final LanguageGenerator EN_TEXTS = new LanguageGenerator("en_us");

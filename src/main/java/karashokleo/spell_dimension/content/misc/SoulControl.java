@@ -1,14 +1,13 @@
 package karashokleo.spell_dimension.content.misc;
 
-import karashokleo.spell_dimension.content.component.SoulControllerComponent;
 import karashokleo.spell_dimension.content.component.SoulMinionComponent;
+import karashokleo.spell_dimension.content.component.SoulControllerComponent;
 import karashokleo.spell_dimension.init.AllComponents;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.packet.s2c.play.SetCameraEntityS2CPacket;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -17,30 +16,29 @@ import org.jetbrains.annotations.Nullable;
 public interface SoulControl
 {
     @Nullable
-    static SoulControllerComponent getSoulController(MobEntity entity)
+    static SoulMinionComponent getSoulController(MobEntity entity)
     {
         if (entity.getWorld().isClient())
         {
             return null;
         }
-        return AllComponents.SOUL_CONTROLLER.get(entity);
+        return AllComponents.SOUL_MINION.get(entity);
     }
 
-    static SoulMinionComponent getSoulMinion(PlayerEntity player)
+    static SoulControllerComponent getSoulMinion(PlayerEntity player)
     {
-        return AllComponents.SOUL_MINION.get(player);
+        return AllComponents.SOUL_CONTROLLER.get(player);
     }
 
     static void setControllingMinion(ServerPlayerEntity player, @Nullable MobEntity minion)
     {
-        ServerWorld world = player.getServerWorld();
-        SoulMinionComponent minionComponent = getSoulMinion(player);
+        SoulControllerComponent minionComponent = getSoulMinion(player);
         if (minion == null)
         {
-            MobEntity controllingMinion = minionComponent.getMinion(world);
+            MobEntity controllingMinion = minionComponent.getMinion();
             if (controllingMinion != null)
             {
-                SoulControllerComponent component = getSoulController(controllingMinion);
+                SoulMinionComponent component = getSoulController(controllingMinion);
                 if (component != null)
                 {
                     component.setControlling(false);
@@ -48,15 +46,15 @@ public interface SoulControl
             }
             minionComponent.setMinion(null);
             player.networkHandler.sendPacket(new SetCameraEntityS2CPacket(player));
-            AllComponents.SOUL_MINION.sync(player);
+            AllComponents.SOUL_CONTROLLER.sync(player);
             return;
         }
-        SoulControllerComponent controllerComponent = getSoulController(minion);
+        SoulMinionComponent controllerComponent = getSoulController(minion);
         if (controllerComponent == null)
         {
             return;
         }
-        LivingEntity soulOwner = controllerComponent.getOwner(world);
+        LivingEntity soulOwner = controllerComponent.getOwner();
         if (soulOwner != player)
         {
             return;
@@ -66,6 +64,6 @@ public interface SoulControl
         controllerComponent.setControlling(true);
         minionComponent.setMinion(minion);
         player.networkHandler.sendPacket(new SetCameraEntityS2CPacket(minion));
-        AllComponents.SOUL_MINION.sync(player);
+        AllComponents.SOUL_CONTROLLER.sync(player);
     }
 }

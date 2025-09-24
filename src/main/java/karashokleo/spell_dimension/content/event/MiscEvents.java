@@ -387,7 +387,7 @@ public class MiscEvents
             {
                 return ActionResult.PASS;
             }
-            if (component.getOwner(serverPlayer.getServerWorld()) != serverPlayer)
+            if (component.getOwner() != serverPlayer)
             {
                 return ActionResult.PASS;
             }

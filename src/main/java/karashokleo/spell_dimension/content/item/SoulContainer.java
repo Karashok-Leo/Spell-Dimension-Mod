@@ -1,6 +1,6 @@
 package karashokleo.spell_dimension.content.item;
 
-import karashokleo.spell_dimension.content.component.SoulControllerComponent;
+import karashokleo.spell_dimension.content.component.SoulMinionComponent;
 import karashokleo.spell_dimension.content.misc.SoulControl;
 import karashokleo.spell_dimension.data.SDTexts;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -72,9 +72,11 @@ public class SoulContainer extends Item
         }
 
         // do something before saving
+        // fully heal
         mob.setHealth(mob.getMaxHealth());
+        // reset velocity
         mob.setVelocity(Vec3d.ZERO);
-        SoulControllerComponent component = SoulControl.getSoulController(mob);
+        SoulMinionComponent component = SoulControl.getSoulController(mob);
         if (component != null)
         {
             component.setOwner(player);

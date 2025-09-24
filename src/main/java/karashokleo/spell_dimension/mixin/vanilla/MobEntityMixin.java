@@ -1,6 +1,6 @@
 package karashokleo.spell_dimension.mixin.vanilla;
 
-import karashokleo.spell_dimension.content.component.SoulControllerComponent;
+import karashokleo.spell_dimension.content.component.SoulMinionComponent;
 import karashokleo.spell_dimension.content.misc.SoulControl;
 import karashokleo.spell_dimension.content.object.SoulInput;
 import net.minecraft.entity.mob.MobEntity;
@@ -23,7 +23,7 @@ public abstract class MobEntityMixin
     private void inject_tickNewAi(CallbackInfo ci)
     {
         MobEntity mob = (MobEntity) (Object) this;
-        SoulControllerComponent component = SoulControl.getSoulController(mob);
+        SoulMinionComponent component = SoulControl.getSoulController(mob);
         if (component == null)
         {
             return;

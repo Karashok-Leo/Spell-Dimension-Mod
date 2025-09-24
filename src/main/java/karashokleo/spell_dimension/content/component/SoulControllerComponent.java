@@ -1,95 +1,106 @@
 package karashokleo.spell_dimension.content.component;
 
-import dev.onyxstudios.cca.api.v3.component.Component;
-import karashokleo.spell_dimension.content.object.SoulInput;
+import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
-public class SoulControllerComponent implements Component
+public class SoulControllerComponent implements AutoSyncedComponent
 {
-    private static final String OWNER_KEY = "Owner";
-    private static final String INPUT_KEY = "Input";
+    private static final String MINION_KEY = "Minion";
+
+    private final PlayerEntity player;
     @Nullable
-    private PlayerEntity owner;
+    private MobEntity minion;
     @Nullable
-    private UUID ownerUuid;
-    private final SoulInput input = new SoulInput();
+    private UUID minionUuid;
+    /**
+     * used in client-side only
+     */
+    private boolean controlling = false;
+
+    public SoulControllerComponent(PlayerEntity player)
+    {
+        this.player = player;
+    }
+
+    public boolean isControlling()
+    {
+        return controlling;
+    }
 
     @Nullable
-    public PlayerEntity getOwner(ServerWorld world)
+    public MobEntity getMinion()
     {
-        if (owner == null &&
-            world.getEntity(ownerUuid) instanceof PlayerEntity player)
-        {
-            owner = player;
-        }
-        if (owner == null ||
-            owner.isDead() ||
-            owner.isRemoved())
+        if (!(player.getWorld() instanceof ServerWorld world))
         {
             return null;
         }
-        return owner;
+        if (minion == null &&
+            world.getEntity(minionUuid) instanceof MobEntity mob)
+        {
+            minion = mob;
+        }
+        if (minion == null ||
+            minion.isDead() ||
+            minion.isRemoved())
+        {
+            return null;
+        }
+        return minion;
     }
 
-    public void setOwner(PlayerEntity owner)
+    public void setMinion(@Nullable MobEntity minion)
     {
-        if (owner == null ||
-            owner.isDead() ||
-            owner.isRemoved())
+        if (minion == null ||
+            minion.isDead() ||
+            minion.isRemoved())
         {
-            this.owner = null;
-            this.ownerUuid = null;
-            this.setControlling(false);
+            this.minion = null;
+            this.minionUuid = null;
+            this.controlling = false;
         } else
         {
-            this.owner = owner;
-            this.ownerUuid = owner.getUuid();
-            this.setControlling(true);
-        }
-    }
-
-    public SoulInput getInput()
-    {
-        return input;
-    }
-
-    public void setInput(SoulInput input)
-    {
-        this.input.copyFrom(input);
-    }
-
-    public void setControlling(boolean controlling)
-    {
-        this.input.controlling = controlling;
-        if (!controlling)
-        {
-            this.input.clear();
+            this.minion = minion;
+            this.minionUuid = minion.getUuid();
+            this.controlling = true;
         }
     }
 
     @Override
     public void readFromNbt(@NotNull NbtCompound tag)
     {
-        if (tag.get(OWNER_KEY) != null)
+        if (tag.get(MINION_KEY) != null)
         {
-            ownerUuid = tag.getUuid(OWNER_KEY);
+            minionUuid = tag.getUuid(MINION_KEY);
         }
-//        input = SoulInput.fromNbt(tag.getCompound(INPUT_KEY));
     }
 
     @Override
     public void writeToNbt(@NotNull NbtCompound tag)
     {
-        if (ownerUuid != null)
+        if (minionUuid != null)
         {
-            tag.putUuid(OWNER_KEY, ownerUuid);
+            tag.putUuid(MINION_KEY, minionUuid);
         }
-//        tag.put(INPUT_KEY, input.toNbt());
+    }
+
+    @Override
+    public void applySyncPacket(PacketByteBuf buf)
+    {
+        controlling = buf.readBoolean();
+    }
+
+    @Override
+    public void writeSyncPacket(PacketByteBuf buf, ServerPlayerEntity recipient)
+    {
+        buf.writeBoolean(controlling);
     }
 }
