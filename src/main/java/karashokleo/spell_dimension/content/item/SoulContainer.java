@@ -72,11 +72,13 @@ public class SoulContainer extends Item
         }
 
         // do something before saving
+        // prevent despawn
+        mob.setPersistent();
         // fully heal
         mob.setHealth(mob.getMaxHealth());
         // reset velocity
         mob.setVelocity(Vec3d.ZERO);
-        SoulMinionComponent component = SoulControl.getSoulController(mob);
+        SoulMinionComponent component = SoulControl.getSoulMinion(mob);
         if (component != null)
         {
             component.setOwner(player);

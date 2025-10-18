@@ -15,7 +15,7 @@ public class SoulControlHandler
 {
     public static void consumePlayerMoveInput(ClientPlayerEntity player, Input input, float cursorDeltaX, float cursorDeltaY)
     {
-        SoulControllerComponent minionComponent = SoulControl.getSoulMinion(player);
+        SoulControllerComponent minionComponent = SoulControl.getSoulController(player);
         if (!minionComponent.isControlling())
         {
             return;

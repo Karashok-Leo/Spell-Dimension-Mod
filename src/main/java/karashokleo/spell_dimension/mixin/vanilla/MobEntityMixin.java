@@ -23,7 +23,7 @@ public abstract class MobEntityMixin
     private void inject_tickNewAi(CallbackInfo ci)
     {
         MobEntity mob = (MobEntity) (Object) this;
-        SoulMinionComponent component = SoulControl.getSoulController(mob);
+        SoulMinionComponent component = SoulControl.getSoulMinion(mob);
         if (component == null)
         {
             return;

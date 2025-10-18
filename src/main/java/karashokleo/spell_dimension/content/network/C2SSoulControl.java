@@ -15,7 +15,7 @@ public record C2SSoulControl(SoulInput input) implements SerialPacketC2S
     @Override
     public void handle(ServerPlayerEntity player)
     {
-        MobEntity minion = SoulControl.getSoulMinion(player).getMinion();
+        MobEntity minion = SoulControl.getSoulController(player).getMinion();
         if (minion == null ||
             minion.isDead() ||
             minion.isRemoved())
@@ -41,7 +41,7 @@ public record C2SSoulControl(SoulInput input) implements SerialPacketC2S
 //        mob.prevYaw = mob.getYaw();
 //        mob.setPitch(player.getPitch());
 //        mob.prevPitch = mob.getPitch();
-        SoulMinionComponent component = SoulControl.getSoulController(mob);
+        SoulMinionComponent component = SoulControl.getSoulMinion(mob);
         if (component == null)
         {
             return;

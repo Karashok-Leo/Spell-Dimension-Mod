@@ -382,7 +382,7 @@ public class MiscEvents
             {
                 return ActionResult.PASS;
             }
-            var component = SoulControl.getSoulController(mob);
+            var component = SoulControl.getSoulMinion(mob);
             if (component == null)
             {
                 return ActionResult.PASS;

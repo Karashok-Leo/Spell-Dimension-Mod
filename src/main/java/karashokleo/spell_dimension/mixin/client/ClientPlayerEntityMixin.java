@@ -53,7 +53,7 @@ public abstract class ClientPlayerEntityMixin extends PlayerEntity
     public void changeLookDirection(double cursorDeltaX, double cursorDeltaY)
     {
         var player = (ClientPlayerEntity) (Object) this;
-        SoulControllerComponent minionComponent = SoulControl.getSoulMinion(player);
+        SoulControllerComponent minionComponent = SoulControl.getSoulController(player);
         if (minionComponent.isControlling())
         {
             pendingCursorDeltaX = (float) cursorDeltaX;

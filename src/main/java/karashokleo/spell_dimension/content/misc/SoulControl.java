@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 public interface SoulControl
 {
     @Nullable
-    static SoulMinionComponent getSoulController(MobEntity entity)
+    static SoulMinionComponent getSoulMinion(MobEntity entity)
     {
         if (entity.getWorld().isClient())
         {
@@ -25,20 +25,20 @@ public interface SoulControl
         return AllComponents.SOUL_MINION.get(entity);
     }
 
-    static SoulControllerComponent getSoulMinion(PlayerEntity player)
+    static SoulControllerComponent getSoulController(PlayerEntity player)
     {
         return AllComponents.SOUL_CONTROLLER.get(player);
     }
 
     static void setControllingMinion(ServerPlayerEntity player, @Nullable MobEntity minion)
     {
-        SoulControllerComponent minionComponent = getSoulMinion(player);
+        SoulControllerComponent minionComponent = getSoulController(player);
         if (minion == null)
         {
             MobEntity controllingMinion = minionComponent.getMinion();
             if (controllingMinion != null)
             {
-                SoulMinionComponent component = getSoulController(controllingMinion);
+                SoulMinionComponent component = getSoulMinion(controllingMinion);
                 if (component != null)
                 {
                     component.setControlling(false);
@@ -49,7 +49,7 @@ public interface SoulControl
             AllComponents.SOUL_CONTROLLER.sync(player);
             return;
         }
-        SoulMinionComponent controllerComponent = getSoulController(minion);
+        SoulMinionComponent controllerComponent = getSoulMinion(minion);
         if (controllerComponent == null)
         {
             return;

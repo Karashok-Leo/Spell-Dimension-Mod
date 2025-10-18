@@ -71,10 +71,10 @@ public class SoulInput
     {
         float deltaX = cursorDeltaY * multiplier;
         float deltaY = cursorDeltaX * multiplier;
-        entity.setYaw(entity.getYaw() + deltaY);
+        entity.setHeadYaw(entity.getHeadYaw() + deltaY);
         // bodyYaw should be updated by mob itself
 //        entity.setBodyYaw(entity.getBodyYaw() + deltaY);
-        entity.setHeadYaw(entity.getHeadYaw() + deltaY);
+        entity.setYaw(MathHelper.lerp(0.25f, entity.getYaw(), entity.getHeadYaw()));
         entity.setPitch(MathHelper.clamp(entity.getPitch() + deltaX, -90.0F, 90.0F));
         entity.prevYaw += deltaY;
         entity.prevPitch = MathHelper.clamp(entity.prevPitch + deltaX, -90.0F, 90.0F);
