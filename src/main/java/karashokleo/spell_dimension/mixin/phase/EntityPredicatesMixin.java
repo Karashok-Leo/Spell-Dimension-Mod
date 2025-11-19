@@ -1,6 +1,6 @@
 package karashokleo.spell_dimension.mixin.phase;
 
-import karashokleo.spell_dimension.content.misc.INoClip;
+import karashokleo.spell_dimension.content.misc.NoClip;
 import net.minecraft.entity.Entity;
 import net.minecraft.predicate.entity.EntityPredicates;
 import org.spongepowered.asm.mixin.Mixin;
@@ -25,7 +25,7 @@ public abstract class EntityPredicatesMixin
     private static void onValidLivingEntity(Entity entity, CallbackInfoReturnable<Boolean> cir)
     {
         if (cir.getReturnValueZ())
-            if (INoClip.noClip(entity))
+            if (NoClip.noClip(entity))
                 cir.setReturnValue(false);
     }
 
@@ -33,7 +33,7 @@ public abstract class EntityPredicatesMixin
     private static void onExceptSpectator(Entity entity, CallbackInfoReturnable<Boolean> cir)
     {
         if (cir.getReturnValueZ())
-            if (INoClip.noClip(entity))
+            if (NoClip.noClip(entity))
                 cir.setReturnValue(false);
     }
 
@@ -43,6 +43,6 @@ public abstract class EntityPredicatesMixin
     @Inject(method = "canBePushedBy", at = @At("HEAD"), cancellable = true)
     private static void onCanBePushedBy(Entity entity, CallbackInfoReturnable<Predicate<Entity>> cir)
     {
-        if (INoClip.noClip(entity)) cir.setReturnValue(e -> false);
+        if (NoClip.noClip(entity)) cir.setReturnValue(e -> false);
     }
 }

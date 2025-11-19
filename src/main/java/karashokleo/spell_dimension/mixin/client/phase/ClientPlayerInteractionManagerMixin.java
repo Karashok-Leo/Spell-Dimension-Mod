@@ -1,6 +1,6 @@
 package karashokleo.spell_dimension.mixin.client.phase;
 
-import karashokleo.spell_dimension.content.misc.INoClip;
+import karashokleo.spell_dimension.content.misc.NoClip;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerInteractionManager;
 import org.spongepowered.asm.mixin.Final;
@@ -25,7 +25,7 @@ public abstract class ClientPlayerInteractionManagerMixin
     private void lockedFlying(CallbackInfoReturnable<Boolean> cir)
     {
         if (client.player == null) return;
-        if (INoClip.noClip(client.player))
+        if (NoClip.noClip(client.player))
             cir.setReturnValue(true);
     }
 }

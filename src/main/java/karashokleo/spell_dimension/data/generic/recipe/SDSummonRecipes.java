@@ -8,7 +8,7 @@ import fuzs.mutantmonsters.init.ModRegistry;
 import karashokleo.l2hostility.content.item.ComplementItems;
 import karashokleo.l2hostility.content.item.MiscItems;
 import karashokleo.spell_dimension.SpellDimension;
-import karashokleo.spell_dimension.content.misc.ISpawnerExtension;
+import karashokleo.spell_dimension.content.misc.SpawnerExtension;
 import karashokleo.spell_dimension.content.recipe.summon.SummonRecipeJsonProvider;
 import net.adventurez.init.EntityInit;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
@@ -50,7 +50,7 @@ public class SDSummonRecipes
 
     public static void add(Consumer<RecipeJsonProvider> exporter, Item item, EntityType<? extends LivingEntity> entityType)
     {
-        add(exporter, item, entityType, ISpawnerExtension.DEFAULT_REMAIN);
+        add(exporter, item, entityType, SpawnerExtension.DEFAULT_REMAIN);
     }
 
     public static void add(Consumer<RecipeJsonProvider> exporter)

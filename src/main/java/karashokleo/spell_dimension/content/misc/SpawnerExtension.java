@@ -6,7 +6,7 @@ import net.minecraft.util.math.BlockPos;
 
 import java.util.function.BiConsumer;
 
-public interface ISpawnerExtension
+public interface SpawnerExtension
 {
     String KEY_REMAIN = "Remain";
 

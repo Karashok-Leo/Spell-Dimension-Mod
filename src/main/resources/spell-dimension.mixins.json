@@ -45,6 +45,7 @@
     "vanilla.EnchantmentHelperMixin",
     "vanilla.EnchantRandomlyLootFunctionMixin",
     "vanilla.EndPortalBlockMixin",
+    "vanilla.EntityTrackerMixin",
     "vanilla.ItemStackMixin",
     "vanilla.LivingEntityMixin",
     "vanilla.MobEntityMixin",
@@ -54,7 +55,8 @@
     "vanilla.PlayerKeepInventoryMixin",
     "vanilla.ServerPlayerEntityMixin",
     "vanilla.SlimeEntityMixin",
-    "vanilla.StrafePlayerPhaseMixin"
+    "vanilla.StrafePlayerPhaseMixin",
+    "vanilla.ThreadedAnvilChunkStorageMixin"
   ],
   "injectors": {
     "defaultRequire": 1,

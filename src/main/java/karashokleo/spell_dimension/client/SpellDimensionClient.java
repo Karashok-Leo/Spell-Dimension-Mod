@@ -18,7 +18,7 @@ import karashokleo.spell_dimension.client.screen.QuestOverlay;
 import karashokleo.spell_dimension.client.screen.SpellPowerTab;
 import karashokleo.spell_dimension.content.item.essence.base.ColorProvider;
 import karashokleo.spell_dimension.content.item.upgrade.IllusionUpgradeTab;
-import karashokleo.spell_dimension.content.misc.INoClip;
+import karashokleo.spell_dimension.content.misc.NoClip;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.*;
 import net.fabricmc.api.ClientModInitializer;
@@ -97,7 +97,7 @@ public class SpellDimensionClient implements ClientModInitializer
         GuiOverlayRegistry.registerLayer(7, new ConsciousCoreOverlay());
         GuiOverlayRegistry.registerLayer(3, new GameOverOverlay());
 
-        TextureOverlayRegistry.register(PHASE_LAYER, 0.5F, (client, player, context, tickDelta) -> INoClip.noClip(player));
+        TextureOverlayRegistry.register(PHASE_LAYER, 0.5F, (client, player, context, tickDelta) -> NoClip.noClip(player));
 
         TAB_SPELL_POWER = TabRegistry.GROUP.registerTab(3600, SpellPowerTab::new,
                 () -> Armors.wizardRobeSet.head, SDTexts.TEXT$SPELL_POWER_INFO.get());

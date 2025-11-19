@@ -1,6 +1,6 @@
 package karashokleo.spell_dimension.content.item;
 
-import karashokleo.spell_dimension.content.misc.ISpawnerExtension;
+import karashokleo.spell_dimension.content.misc.SpawnerExtension;
 import karashokleo.spell_dimension.content.object.SummonEntry;
 import karashokleo.spell_dimension.data.SDTexts;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -26,7 +26,7 @@ public class SpawnerSoulItem extends Item
         super(new FabricItemSettings().maxCount(1));
     }
 
-    public ItemStack getStack(ISpawnerExtension spawnerExtension)
+    public ItemStack getStack(SpawnerExtension spawnerExtension)
     {
         int remain = spawnerExtension.getRemain();
         NbtCompound entityNbt = spawnerExtension.getEntityNbt();
@@ -34,7 +34,7 @@ public class SpawnerSoulItem extends Item
         if (remain <= 0 || optional.isEmpty()) return ItemStack.EMPTY;
         ItemStack stack = this.getDefaultStack();
         NbtCompound nbt = stack.getOrCreateNbt();
-        nbt.putInt(ISpawnerExtension.KEY_REMAIN, remain);
+        nbt.putInt(SpawnerExtension.KEY_REMAIN, remain);
         nbt.put(ENTITY_KEY, entityNbt);
         return stack;
     }
@@ -47,7 +47,7 @@ public class SpawnerSoulItem extends Item
         if (entityNbt.isEmpty()) return Optional.empty();
         Optional<EntityType<?>> optional = EntityType.fromNbt(entityNbt);
         if (optional.isEmpty()) return Optional.empty();
-        int remain = nbt.getInt(ISpawnerExtension.KEY_REMAIN);
+        int remain = nbt.getInt(SpawnerExtension.KEY_REMAIN);
         return Optional.of(new SummonEntry(optional.get(), remain));
     }
 

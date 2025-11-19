@@ -1,7 +1,7 @@
 package karashokleo.spell_dimension.mixin.client.phase;
 
 import com.mojang.authlib.GameProfile;
-import karashokleo.spell_dimension.content.misc.INoClip;
+import karashokleo.spell_dimension.content.misc.NoClip;
 import net.minecraft.client.input.Input;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -45,7 +45,7 @@ public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
     )
     private void onUpdateWaterSubmersionState(CallbackInfoReturnable<Boolean> cir)
     {
-        if (INoClip.noClip(this))
+        if (NoClip.noClip(this))
             cir.setReturnValue(this.isSubmergedInWater);
     }
 
@@ -63,7 +63,7 @@ public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
     )
     private void preventStopSprinting(CallbackInfo ci)
     {
-        if (INoClip.noClip(this) && this.input.hasForwardMovement())
+        if (NoClip.noClip(this) && this.input.hasForwardMovement())
             this.setSprinting(true);
     }
 
@@ -81,6 +81,6 @@ public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
     )
     private int fixUnderwaterVision(int perTick)
     {
-        return INoClip.noClip(this) ? perTick + (this.isSpectator() ? 0 : 10 - 1) : perTick;
+        return NoClip.noClip(this) ? perTick + (this.isSpectator() ? 0 : 10 - 1) : perTick;
     }
 }

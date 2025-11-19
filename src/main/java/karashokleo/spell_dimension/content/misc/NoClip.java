@@ -3,13 +3,13 @@ package karashokleo.spell_dimension.content.misc;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 
-public interface INoClip
+public interface NoClip
 {
     boolean isNoClip();
 
     static boolean noClip(LivingEntity entity)
     {
-        return ((INoClip) entity).isNoClip();
+        return ((NoClip) entity).isNoClip();
     }
 
     static boolean noClip(Entity entity)

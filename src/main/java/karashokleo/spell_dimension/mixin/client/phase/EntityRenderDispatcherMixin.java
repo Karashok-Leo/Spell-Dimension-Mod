@@ -1,6 +1,6 @@
 package karashokleo.spell_dimension.mixin.client.phase;
 
-import karashokleo.spell_dimension.content.misc.INoClip;
+import karashokleo.spell_dimension.content.misc.NoClip;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.util.math.MatrixStack;
@@ -24,6 +24,6 @@ public abstract class EntityRenderDispatcherMixin
     @Inject(method = "renderShadow", at = @At("HEAD"), cancellable = true)
     private static void onRenderShadow(MatrixStack matrices, VertexConsumerProvider vertices, Entity entity, float opacity, float tickDelta, WorldView world, float radius, CallbackInfo ci)
     {
-        if (INoClip.noClip(entity)) ci.cancel();
+        if (NoClip.noClip(entity)) ci.cancel();
     }
 }

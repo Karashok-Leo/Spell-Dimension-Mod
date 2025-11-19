@@ -39,6 +39,7 @@
       "karashokleo.spell_dimension.SDMixinAnnotationAdjuster"
     ]
   },
+  "accessWidener" : "spell-dimension.accesswidener",
   "mixins": [
     "spell-dimension.mixins.json"
   ],

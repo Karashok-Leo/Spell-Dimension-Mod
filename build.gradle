@@ -34,6 +34,7 @@ repositories {
 }
 
 loom {
+    accessWidenerPath = file("src/main/resources/spell-dimension.accesswidener")
 }
 
 sourceSets {
@@ -99,6 +100,7 @@ dependencies {
     modImplementation "karashokleo.l2hostility:L2Hostility:${project.l2hostility_version}"
     modImplementation "karashokleo.enchantment_infusion:enchantment_infusion:${project.enchantment_infusion_version}"
     modImplementation "karashokleo.fusion_smithing:Fusion-Smithing:${project.fusion_smithing_version}"
+    modImplementation "io.github.fabricators_of_create.Porting-Lib:chunk_loading:${project.port_lib_version}"
     modImplementation "io.github.fabricators_of_create.Porting-Lib:entity:${project.port_lib_version}"
     modImplementation "io.github.fabricators_of_create.Porting-Lib:loot:${project.port_lib_version}"
 
@@ -115,6 +117,7 @@ dependencies {
 //	modImplementation "curse.maven:lootr-fabric-615106:${project.lootr_version}"
 //    modImplementation "curse.maven:dusk-468908:${project.dusk_version}"
 
+//    include modImplementation ("com.github.iPortalTeam.ImmersivePortalsMod:imm_ptl_core:v3.3.9-mc1.20.1")
 
     // Book Datagen
     modImplementation("com.klikli_dev:modonomicon-${project.minecraft_version}-fabric:${project.modonomicon_version}") {

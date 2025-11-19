@@ -1,6 +1,6 @@
 package karashokleo.spell_dimension.mixin.client.phase;
 
-import karashokleo.spell_dimension.content.misc.INoClip;
+import karashokleo.spell_dimension.content.misc.NoClip;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.WorldRenderer;
 import org.spongepowered.asm.mixin.Mixin;
@@ -27,6 +27,6 @@ public abstract class WorldRendererMixin
     )
     private boolean onRenderReplaceSpectator(boolean isSpectator)
     {
-        return isSpectator || INoClip.noClip(MinecraftClient.getInstance().player);
+        return isSpectator || NoClip.noClip(MinecraftClient.getInstance().player);
     }
 }

@@ -1,7 +1,7 @@
 package karashokleo.spell_dimension.mixin.vanilla;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import karashokleo.spell_dimension.content.misc.ISpawnerExtension;
+import karashokleo.spell_dimension.content.misc.SpawnerExtension;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(MobSpawnerLogic.class)
-public abstract class MobSpawnerLogicMixin implements ISpawnerExtension
+public abstract class MobSpawnerLogicMixin implements SpawnerExtension
 {
     @Shadow
     @Nullable

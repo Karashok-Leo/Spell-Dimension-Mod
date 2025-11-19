@@ -1,6 +1,6 @@
 package karashokleo.spell_dimension.mixin.client.phase;
 
-import karashokleo.spell_dimension.content.misc.INoClip;
+import karashokleo.spell_dimension.content.misc.NoClip;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.InGameOverlayRenderer;
 import net.minecraft.client.util.math.MatrixStack;
@@ -23,7 +23,7 @@ public abstract class InGameOverlayRendererMixin
     @Inject(method = "renderOverlays", at = @At("HEAD"), cancellable = true)
     private static void onRenderOverlays(MinecraftClient client, MatrixStack matrices, CallbackInfo ci)
     {
-        if (INoClip.noClip(client.player))
+        if (NoClip.noClip(client.player))
             ci.cancel();
     }
 }

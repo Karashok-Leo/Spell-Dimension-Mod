@@ -16,7 +16,7 @@ import karashokleo.leobrary.damage.api.state.DamageStateProvider;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.item.DynamicSpellBookItem;
 import karashokleo.spell_dimension.content.item.SpellScrollItem;
-import karashokleo.spell_dimension.content.misc.ISpawnerExtension;
+import karashokleo.spell_dimension.content.misc.SpawnerExtension;
 import karashokleo.spell_dimension.content.misc.SoulControl;
 import karashokleo.spell_dimension.content.network.C2SSelectQuest;
 import karashokleo.spell_dimension.init.*;
@@ -241,7 +241,7 @@ public class MiscEvents
             {
                 return;
             }
-            ItemStack spawnerSoulStack = AllItems.SPAWNER_SOUL.getStack((ISpawnerExtension) spawner.getLogic());
+            ItemStack spawnerSoulStack = AllItems.SPAWNER_SOUL.getStack((SpawnerExtension) spawner.getLogic());
             if (spawnerSoulStack.isEmpty())
             {
                 return;

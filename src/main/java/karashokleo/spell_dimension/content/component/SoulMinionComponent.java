@@ -1,15 +1,13 @@
 package karashokleo.spell_dimension.content.component;
 
 import dev.onyxstudios.cca.api.v3.component.tick.ServerTickingComponent;
+import karashokleo.spell_dimension.content.misc.ThreadedAnvilChunkStorageExtension;
 import karashokleo.spell_dimension.content.object.SoulInput;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.server.world.ChunkTicketType;
-import net.minecraft.server.world.ServerChunkManager;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.Unit;
-import net.minecraft.util.math.ChunkPos;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -26,10 +24,6 @@ public class SoulMinionComponent implements ServerTickingComponent
     @Nullable
     private UUID ownerUuid;
     private final SoulInput input = new SoulInput();
-
-    private static final int CHUNK_LOAD_RADIUS = 3;
-    private static final int CHUNK_LOAD_TICKS = 80;
-    private static final ChunkTicketType<Unit> TICKET_TYPE = ChunkTicketType.create("soul_minion", (a, b) -> 0, CHUNK_LOAD_TICKS);
 
     public SoulMinionComponent(MobEntity mob)
     {
@@ -116,25 +110,17 @@ public class SoulMinionComponent implements ServerTickingComponent
     @Override
     public void serverTick()
     {
-        if (!(mob.getWorld() instanceof ServerWorld world))
+        if (!input.controlling)
         {
             return;
         }
 
-        if (mob.age % CHUNK_LOAD_TICKS != 0)
+        if (!(getOwner() instanceof ServerPlayerEntity player))
         {
             return;
         }
 
-        ChunkPos centerChunkPos = mob.getChunkPos();
-        ServerChunkManager chunkManager = world.getChunkManager();
-        for (int i = -CHUNK_LOAD_RADIUS; i <= CHUNK_LOAD_RADIUS; i++)
-        {
-            for (int j = -CHUNK_LOAD_RADIUS; j <= CHUNK_LOAD_RADIUS; j++)
-            {
-                var chunkPos = new ChunkPos(centerChunkPos.x + i, centerChunkPos.z + j);
-                chunkManager.addTicket(TICKET_TYPE, chunkPos, 2, Unit.INSTANCE);
-            }
-        }
+        var extension = (ThreadedAnvilChunkStorageExtension) (player.getServerWorld().getChunkManager().threadedAnvilChunkStorage);
+        extension.updatePositionOfControlledEntity(player, mob);
     }
 }

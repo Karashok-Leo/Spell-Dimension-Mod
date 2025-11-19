@@ -1,6 +1,6 @@
 package karashokleo.spell_dimension.mixin.phase;
 
-import karashokleo.spell_dimension.content.misc.INoClip;
+import karashokleo.spell_dimension.content.misc.NoClip;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityPose;
@@ -8,7 +8,6 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
-import net.spell_power.api.SpellSchools;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -46,7 +45,7 @@ public abstract class PlayerEntityMixin extends LivingEntity
     )
     private void onTickAfterNoClip(CallbackInfo ci)
     {
-        if (INoClip.noClip(this))
+        if (NoClip.noClip(this))
         {
             this.noClip = true;
             this.fallDistance = 0;
@@ -60,7 +59,7 @@ public abstract class PlayerEntityMixin extends LivingEntity
     @Inject(method = "updatePose", at = @At("HEAD"), cancellable = true)
     private void onUpdatePose(CallbackInfo ci)
     {
-        if (INoClip.noClip(this))
+        if (NoClip.noClip(this))
         {
             this.setPose(EntityPose.STANDING);
             ci.cancel();
@@ -82,7 +81,7 @@ public abstract class PlayerEntityMixin extends LivingEntity
     )
     private void onGetBlockBreakingSpeed(BlockState block, CallbackInfoReturnable<Float> cir, float speed)
     {
-        if (INoClip.noClip(this)) cir.setReturnValue(speed);
+        if (NoClip.noClip(this)) cir.setReturnValue(speed);
     }
 
     /**
@@ -91,7 +90,7 @@ public abstract class PlayerEntityMixin extends LivingEntity
     @Inject(method = "collideWithEntity", at = @At("HEAD"), cancellable = true)
     private void onCollideWithEntity(Entity entity, CallbackInfo ci)
     {
-        if (INoClip.noClip(this)) ci.cancel();
+        if (NoClip.noClip(this)) ci.cancel();
     }
 
     /**
@@ -100,6 +99,6 @@ public abstract class PlayerEntityMixin extends LivingEntity
     @Inject(method = "onSwimmingStart", at = @At("HEAD"), cancellable = true)
     private void onOnSwimmingStart(CallbackInfo ci)
     {
-        if (INoClip.noClip(this)) ci.cancel();
+        if (NoClip.noClip(this)) ci.cancel();
     }
 }

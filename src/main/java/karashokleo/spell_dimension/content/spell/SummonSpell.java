@@ -1,7 +1,7 @@
 package karashokleo.spell_dimension.content.spell;
 
 import com.kyanite.deeperdarker.content.DDEntities;
-import karashokleo.spell_dimension.content.misc.ISpawnerExtension;
+import karashokleo.spell_dimension.content.misc.SpawnerExtension;
 import karashokleo.spell_dimension.content.object.SummonEntry;
 import karashokleo.spell_dimension.content.recipe.summon.SummonRecipe;
 import karashokleo.spell_dimension.data.SDTexts;
@@ -96,7 +96,7 @@ public class SummonSpell
     private static void setSummonData(MobSpawnerBlockEntity spawnerBlockEntity, SummonEntry summonEntry, Random random)
     {
         spawnerBlockEntity.setEntityType(summonEntry.entityType(), random);
-        ((ISpawnerExtension) spawnerBlockEntity.getLogic()).setRemain(summonEntry.count());
+        ((SpawnerExtension) spawnerBlockEntity.getLogic()).setRemain(summonEntry.count());
     }
 
     private static final HashMap<EntityType<?>, Identifier> WORLD_RESTRICTIONS = new HashMap<>();

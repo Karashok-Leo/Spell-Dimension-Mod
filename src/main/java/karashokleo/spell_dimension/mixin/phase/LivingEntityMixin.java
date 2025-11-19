@@ -1,6 +1,6 @@
 package karashokleo.spell_dimension.mixin.phase;
 
-import karashokleo.spell_dimension.content.misc.INoClip;
+import karashokleo.spell_dimension.content.misc.NoClip;
 import karashokleo.spell_dimension.init.AllStatusEffects;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.Entity;
@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntity.class)
-public abstract class LivingEntityMixin extends Entity implements INoClip
+public abstract class LivingEntityMixin extends Entity implements NoClip
 {
     private LivingEntityMixin(EntityType<?> type, World world)
     {
