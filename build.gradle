@@ -20,6 +20,7 @@ repositories {
     maven { url "https://maven.blamejared.com/" }
     maven { url "https://api.modrinth.com/maven" }
     maven { url "https://mvn.devos.one/releases/" }
+    maven { url "https://maven.tocraft.dev/public" }
     maven { url 'https://maven.azuredoom.com/mods' }
     maven { url "https://maven.willbl.dev/releases" }
     maven { url "https://maven.terraformersmc.com/" }
@@ -34,7 +35,6 @@ repositories {
 }
 
 loom {
-    accessWidenerPath = file("src/main/resources/spell-dimension.accesswidener")
 }
 
 sourceSets {
@@ -113,11 +113,12 @@ dependencies {
 
     modImplementation "maven.modrinth:open-parties-and-claims:${project.opac_version}"
 
+    modImplementation "dev.tocraft:craftedcore-fabric:1.20.1-5.8"
+    modImplementation "dev.tocraft:walkers-fabric:1.20.1-5.7"
+
 //	modImplementation "curse.maven:puffish-skills-835091:${project.puffer_fish_skills_version}"
 //	modImplementation "curse.maven:lootr-fabric-615106:${project.lootr_version}"
 //    modImplementation "curse.maven:dusk-468908:${project.dusk_version}"
-
-//    include modImplementation ("com.github.iPortalTeam.ImmersivePortalsMod:imm_ptl_core:v3.3.9-mc1.20.1")
 
     // Book Datagen
     modImplementation("com.klikli_dev:modonomicon-${project.minecraft_version}-fabric:${project.modonomicon_version}") {

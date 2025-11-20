@@ -1,8 +1,6 @@
 package karashokleo.spell_dimension.content.component;
 
 import dev.onyxstudios.cca.api.v3.component.tick.ServerTickingComponent;
-import karashokleo.spell_dimension.content.misc.ThreadedAnvilChunkStorageExtension;
-import karashokleo.spell_dimension.content.object.SoulInput;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -16,14 +14,13 @@ import java.util.UUID;
 public class SoulMinionComponent implements ServerTickingComponent
 {
     private static final String OWNER_KEY = "Owner";
-//    private static final String INPUT_KEY = "Input";
 
     private final MobEntity mob;
     @Nullable
     private PlayerEntity owner;
     @Nullable
     private UUID ownerUuid;
-    private final SoulInput input = new SoulInput();
+    private boolean controlling = false;
 
     public SoulMinionComponent(MobEntity mob)
     {
@@ -59,32 +56,21 @@ public class SoulMinionComponent implements ServerTickingComponent
         {
             this.owner = null;
             this.ownerUuid = null;
-            this.setControlling(false);
         } else
         {
             this.owner = owner;
             this.ownerUuid = owner.getUuid();
-            this.setControlling(true);
         }
-    }
-
-    public SoulInput getInput()
-    {
-        return input;
-    }
-
-    public void setInput(SoulInput input)
-    {
-        this.input.copyFrom(input);
     }
 
     public void setControlling(boolean controlling)
     {
-        this.input.controlling = controlling;
-        if (!controlling)
-        {
-            this.input.clear();
-        }
+        this.controlling = controlling;
+    }
+
+    public boolean isControlling()
+    {
+        return controlling;
     }
 
     @Override
@@ -94,7 +80,6 @@ public class SoulMinionComponent implements ServerTickingComponent
         {
             ownerUuid = tag.getUuid(OWNER_KEY);
         }
-//        input = SoulInput.fromNbt(tag.getCompound(INPUT_KEY));
     }
 
     @Override
@@ -104,23 +89,14 @@ public class SoulMinionComponent implements ServerTickingComponent
         {
             tag.putUuid(OWNER_KEY, ownerUuid);
         }
-//        tag.put(INPUT_KEY, input.toNbt());
     }
 
     @Override
     public void serverTick()
     {
-        if (!input.controlling)
-        {
-            return;
-        }
-
         if (!(getOwner() instanceof ServerPlayerEntity player))
         {
             return;
         }
-
-        var extension = (ThreadedAnvilChunkStorageExtension) (player.getServerWorld().getChunkManager().threadedAnvilChunkStorage);
-        extension.updatePositionOfControlledEntity(player, mob);
     }
 }

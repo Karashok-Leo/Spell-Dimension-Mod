@@ -23,6 +23,7 @@ import karashokleo.spell_dimension.data.generic.SDTraitConfigProvider;
 import karashokleo.spell_dimension.data.loot_bag.BagProvider;
 import karashokleo.spell_dimension.data.loot_bag.ContentProvider;
 import karashokleo.spell_dimension.init.*;
+import karashokleo.spell_dimension.util.WalkerUtil;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
@@ -81,6 +82,7 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
         AllPackets.init();
         EnchantedModifier.init();
         EnlighteningModifier.init();
+        WalkerUtil.init();
         AllEvents.init();
         AllCommands.init();
     }

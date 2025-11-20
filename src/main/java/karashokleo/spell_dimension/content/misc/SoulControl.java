@@ -1,14 +1,17 @@
 package karashokleo.spell_dimension.content.misc;
 
-import karashokleo.spell_dimension.content.component.SoulMinionComponent;
 import karashokleo.spell_dimension.content.component.SoulControllerComponent;
+import karashokleo.spell_dimension.content.component.SoulMinionComponent;
 import karashokleo.spell_dimension.init.AllComponents;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.network.packet.s2c.play.SetCameraEntityS2CPacket;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.Nullable;
+import tocraft.walkers.api.PlayerShape;
 
 /**
  * server-side only
@@ -32,10 +35,12 @@ public interface SoulControl
 
     static void setControllingMinion(ServerPlayerEntity player, @Nullable MobEntity minion)
     {
-        SoulControllerComponent minionComponent = getSoulController(player);
+        SoulControllerComponent controllerComponent = getSoulController(player);
+
+        // release control
         if (minion == null)
         {
-            MobEntity controllingMinion = minionComponent.getMinion();
+            MobEntity controllingMinion = controllerComponent.getMinion();
             if (controllingMinion != null)
             {
                 SoulMinionComponent component = getSoulMinion(controllingMinion);
@@ -44,26 +49,32 @@ public interface SoulControl
                     component.setControlling(false);
                 }
             }
-            minionComponent.setMinion(null);
-            player.networkHandler.sendPacket(new SetCameraEntityS2CPacket(player));
+            controllerComponent.setMinion(null);
             AllComponents.SOUL_CONTROLLER.sync(player);
+
+            PlayerShape.updateShapes(player, null);
             return;
         }
-        SoulMinionComponent controllerComponent = getSoulMinion(minion);
-        if (controllerComponent == null)
+
+        // take control
+        SoulMinionComponent minionComponent = getSoulMinion(minion);
+        if (minionComponent == null)
         {
             return;
         }
-        LivingEntity soulOwner = controllerComponent.getOwner();
+        LivingEntity soulOwner = minionComponent.getOwner();
         if (soulOwner != player)
         {
             return;
         }
         // cancel attacking state to avoid some issues: zombie's hands' angle
         minion.setAttacking(false);
-        controllerComponent.setControlling(true);
-        minionComponent.setMinion(minion);
-        player.networkHandler.sendPacket(new SetCameraEntityS2CPacket(minion));
+        minionComponent.setControlling(true);
+        controllerComponent.setMinion(minion);
         AllComponents.SOUL_CONTROLLER.sync(player);
+
+        player.teleport(((ServerWorld) minion.getWorld()), minion.getX(), minion.getY(), minion.getZ(), minion.getYaw(), minion.getPitch());
+        PlayerShape.updateShapes(player, minion);
+        minion.discard();
     }
 }

@@ -2,55 +2,42 @@ package karashokleo.spell_dimension.client.misc;
 
 import karashokleo.spell_dimension.content.component.SoulControllerComponent;
 import karashokleo.spell_dimension.content.misc.SoulControl;
-import karashokleo.spell_dimension.content.network.C2SSoulControl;
-import karashokleo.spell_dimension.content.object.SoulInput;
+import karashokleo.spell_dimension.content.network.C2SReleaseControl;
 import karashokleo.spell_dimension.init.AllPackets;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.input.Input;
-import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import org.lwjgl.glfw.GLFW;
 
 public class SoulControlHandler
 {
-    public static void consumePlayerMoveInput(ClientPlayerEntity player, Input input, float cursorDeltaX, float cursorDeltaY)
+    private static KeyBinding KEY_RELEASE_CONTROL;
+
+    public static void register()
     {
-        SoulControllerComponent minionComponent = SoulControl.getSoulController(player);
-        if (!minionComponent.isControlling())
+        KEY_RELEASE_CONTROL = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+            "key.examplemod.spook",
+            InputUtil.Type.KEYSYM,
+            GLFW.GLFW_KEY_V,
+            "category.examplemod.test"
+        ));
+
+        ClientTickEvents.END_CLIENT_TICK.register(client ->
         {
-            return;
-        }
-        var cancel = InputUtil.isKeyPressed(MinecraftClient.getInstance().getWindow().getHandle(), GLFW.GLFW_KEY_V);
-        // Send input to server to control the minion.
-        input.tick(false, 1);
-        var packet = createPacketFromInput(input, cursorDeltaX, cursorDeltaY, !cancel);
-        AllPackets.toServer(packet);
-        // Clear input to prevent moving the player.
-        clearMoveInput(input);
-    }
+            if (!KEY_RELEASE_CONTROL.isPressed())
+            {
+                return;
+            }
 
-    public static C2SSoulControl createPacketFromInput(Input input, float cursorDeltaX, float cursorDeltaY, boolean controlling)
-    {
-        SoulInput soulInput = new SoulInput();
-        soulInput.cursorDeltaX = cursorDeltaX;
-        soulInput.cursorDeltaY = cursorDeltaY;
-        soulInput.forward = input.movementForward;
-        soulInput.sideways = input.movementSideways;
-        soulInput.jumping = input.jumping;
-        soulInput.sneaking = input.sneaking;
-        soulInput.controlling = controlling;
-        return new C2SSoulControl(soulInput);
-    }
+            SoulControllerComponent controllerComponent = SoulControl.getSoulController(MinecraftClient.getInstance().player);
+            if (!controllerComponent.isControlling())
+            {
+                return;
+            }
 
-    public static void clearMoveInput(Input input)
-    {
-        input.movementSideways = 0;
-        input.movementForward = 0;
-        input.pressingForward = false;
-        input.pressingBack = false;
-        input.pressingLeft = false;
-        input.pressingRight = false;
-        input.jumping = false;
-        input.sneaking = false;
+            AllPackets.toServer(new C2SReleaseControl());
+        });
     }
 }

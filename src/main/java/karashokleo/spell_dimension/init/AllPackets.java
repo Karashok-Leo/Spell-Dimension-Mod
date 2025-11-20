@@ -21,29 +21,29 @@ public class AllPackets
     public static void init()
     {
         HANDLER.configure(
-                S2CTitle.class,
-                S2CFloatingItem.class,
-                S2CSpellDash.class,
-                S2COpenQuestScreen.class,
-                S2CBeam.class,
-                C2SSelectQuest.class,
-                C2SSoulControl.class
+            S2CTitle.class,
+            S2CFloatingItem.class,
+            S2CSpellDash.class,
+            S2COpenQuestScreen.class,
+            S2CBeam.class,
+            C2SSelectQuest.class,
+            C2SReleaseControl.class
         );
 
         HANDLER.configureC2S(
-                C2SSelectQuest.class,
-                C2SSoulControl.class
+            C2SSelectQuest.class,
+            C2SReleaseControl.class
         );
     }
 
     public static void initClient()
     {
         HANDLER.configureS2C(
-                S2CTitle.class,
-                S2CFloatingItem.class,
-                S2CSpellDash.class,
-                S2COpenQuestScreen.class,
-                S2CBeam.class
+            S2CTitle.class,
+            S2CFloatingItem.class,
+            S2CSpellDash.class,
+            S2COpenQuestScreen.class,
+            S2CBeam.class
         );
     }
 
@@ -70,7 +70,9 @@ public class AllPackets
     public static <T extends SimplePacketBase> void toTracking(WorldChunk chunk, T packet)
     {
         if (chunk.getWorld() instanceof ServerWorld world)
+        {
             PlayerLookup.tracking(world, chunk.getPos()).forEach(player -> ServerPlayNetworking.send(player, HANDLER.getPacket(packet)));
+        }
     }
 
     public static <T extends SimplePacketBase> void toServer(T packet)

@@ -9,6 +9,7 @@ import karashokleo.leobrary.gui.api.TextureOverlayRegistry;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.client.misc.AdditionalTooltip;
 import karashokleo.spell_dimension.client.misc.ClientAirHopHandler;
+import karashokleo.spell_dimension.client.misc.SoulControlHandler;
 import karashokleo.spell_dimension.client.quest.QuestItemTooltipComponent;
 import karashokleo.spell_dimension.client.quest.QuestItemTooltipData;
 import karashokleo.spell_dimension.client.render.*;
@@ -135,5 +136,7 @@ public class SpellDimensionClient implements ClientModInitializer
         UpgradeGuiManager.registerTab(AllItems.REFORGE_TYPE, IllusionUpgradeTab::new);
 
         AllParticles.registerClient();
+
+        SoulControlHandler.register();
     }
 }

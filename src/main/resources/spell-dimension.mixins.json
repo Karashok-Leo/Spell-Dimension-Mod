@@ -45,28 +45,23 @@
     "vanilla.EnchantmentHelperMixin",
     "vanilla.EnchantRandomlyLootFunctionMixin",
     "vanilla.EndPortalBlockMixin",
-    "vanilla.EntityTrackerMixin",
     "vanilla.ItemStackMixin",
     "vanilla.LivingEntityMixin",
-    "vanilla.MobEntityMixin",
     "vanilla.MobSpawnerLogicMixin",
     "vanilla.PlayerAdvancementTrackerMixin",
     "vanilla.PlayerInventoryAccessor",
     "vanilla.PlayerKeepInventoryMixin",
     "vanilla.ServerPlayerEntityMixin",
     "vanilla.SlimeEntityMixin",
-    "vanilla.StrafePlayerPhaseMixin",
-    "vanilla.ThreadedAnvilChunkStorageMixin"
+    "vanilla.StrafePlayerPhaseMixin"
   ],
   "injectors": {
     "defaultRequire": 1,
     "maxShiftBy": 5
   },
   "client": [
-    "client.ClientPlayerEntityMixin",
     "client.DrawContextMixin",
     "client.ElectricSparkFactoryMixin",
-    "client.WorldRendererMixin",
     "client.phase.ClientPlayerEntityMixin",
     "client.phase.ClientPlayerInteractionManagerMixin",
     "client.phase.EntityRenderDispatcherMixin",
