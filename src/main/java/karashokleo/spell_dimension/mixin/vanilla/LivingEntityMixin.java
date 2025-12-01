@@ -2,6 +2,7 @@ package karashokleo.spell_dimension.mixin.vanilla;
 
 import karashokleo.spell_dimension.api.ApplyFoodEffectsCallback;
 import karashokleo.spell_dimension.content.block.fluid.ConsciousnessFluid;
+import karashokleo.spell_dimension.content.misc.SoulControl;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.item.ItemStack;
@@ -35,5 +36,20 @@ public abstract class LivingEntityMixin
         {
             info.setReturnValue(true);
         }
+    }
+
+    @Inject(
+        method = "canTarget(Lnet/minecraft/entity/LivingEntity;)Z",
+        at = @At("HEAD"),
+        cancellable = true
+    )
+    private void inject_canTarget(LivingEntity target, CallbackInfoReturnable<Boolean> cir)
+    {
+        if (!SoulControl.isSoulMinion(target, (LivingEntity) (Object) this))
+        {
+            return;
+        }
+
+        cir.setReturnValue(false);
     }
 }

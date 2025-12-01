@@ -17,7 +17,6 @@ import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.item.DynamicSpellBookItem;
 import karashokleo.spell_dimension.content.item.SpellScrollItem;
 import karashokleo.spell_dimension.content.misc.SpawnerExtension;
-import karashokleo.spell_dimension.content.misc.SoulControl;
 import karashokleo.spell_dimension.content.network.C2SSelectQuest;
 import karashokleo.spell_dimension.init.*;
 import karashokleo.spell_dimension.util.SchoolUtil;
@@ -34,7 +33,6 @@ import net.minecraft.block.entity.MobSpawnerBlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
@@ -343,56 +341,6 @@ public class MiscEvents
             {
                 AllCriterions.MINED_ORES.trigger(serverPlayer);
             }
-        });
-
-        // Soul Container
-        ServerLivingEntityEvents.ALLOW_DEATH.register((entity, damageSource, damageAmount) ->
-        {
-            if (!(entity instanceof MobEntity mob))
-            {
-                return true;
-            }
-            if (!(damageSource.getAttacker() instanceof PlayerEntity player))
-            {
-                return true;
-            }
-            ItemStack stack = player.getOffHandStack();
-            if (!stack.isOf(AllItems.SOUL_CONTAINER))
-            {
-                return true;
-            }
-            return !AllItems.SOUL_CONTAINER.tryCaptureEntity(stack, player, mob);
-        });
-
-        PlayerInteractionEvents.INTERACT_ENTITY_GENERAL.register((player, entity, hand) ->
-        {
-            if (hand == Hand.OFF_HAND)
-            {
-                return ActionResult.PASS;
-            }
-            if (!(player instanceof ServerPlayerEntity serverPlayer))
-            {
-                return ActionResult.PASS;
-            }
-            if (!(entity instanceof MobEntity mob))
-            {
-                return ActionResult.PASS;
-            }
-            if (!serverPlayer.isSneaking())
-            {
-                return ActionResult.PASS;
-            }
-            var component = SoulControl.getSoulMinion(mob);
-            if (component == null)
-            {
-                return ActionResult.PASS;
-            }
-            if (component.getOwner() != serverPlayer)
-            {
-                return ActionResult.PASS;
-            }
-            SoulControl.setControllingMinion(serverPlayer, mob);
-            return ActionResult.SUCCESS;
         });
     }
 }

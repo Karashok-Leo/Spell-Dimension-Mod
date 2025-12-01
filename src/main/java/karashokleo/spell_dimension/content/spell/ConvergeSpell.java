@@ -5,6 +5,7 @@ import karashokleo.spell_dimension.config.SpellConfig;
 import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.util.DamageUtil;
 import karashokleo.spell_dimension.util.ImpactUtil;
+import karashokleo.spell_dimension.util.RelationUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.sound.SoundEvents;
@@ -67,7 +68,7 @@ public class ConvergeSpell
         List<LivingEntity> targets = ImpactUtil.getLivingsInRange(
                 tracked,
                 3 + amplifier * 0.8F,
-                target -> !ImpactUtil.isAlly(caster, target)
+                target -> !RelationUtil.isAlly(caster, target)
         );
         if (targets.isEmpty()) return;
 

@@ -15,6 +15,7 @@ public class AllEvents
         LightSpell.init();
         ConsciousOceanEvents.init();
         SpellImpactEvents.POST.register(AdaptiveCompat::postSpellImpact);
+        SoulControlEvents.init();
         MiscEvents.init();
     }
 }

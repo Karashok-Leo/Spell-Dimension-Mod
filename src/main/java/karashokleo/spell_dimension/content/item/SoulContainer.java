@@ -7,9 +7,7 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -29,14 +27,12 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 public class SoulContainer extends Item
@@ -65,61 +61,34 @@ public class SoulContainer extends Item
             return false;
         }
 
-        String typeId = mob.getSavedEntityId();
-        if (typeId == null)
-        {
-            return false;
-        }
-
-        // do something before saving
-        // prevent despawn
-        mob.setPersistent();
         // fully heal
         mob.setHealth(mob.getMaxHealth());
-        // reset velocity
-        mob.setVelocity(Vec3d.ZERO);
+        // set owner
         SoulMinionComponent component = SoulControl.getSoulMinion(mob);
         if (component != null)
         {
             component.setOwner(player);
         }
         // do saving
-        var entityNbt = new NbtCompound();
-        entityNbt.putString("id", typeId);
-        mob.writeNbt(entityNbt);
+        var entityNbt = SoulControl.saveMinionData(mob);
         stack.setSubNbt(ENTITY_KEY, entityNbt);
         mob.discard();
         return true;
     }
 
-    protected boolean trySpawnEntity(ItemStack stack, ServerWorld world, BlockPos pos, PlayerEntity user, boolean alignPosition, boolean invertY)
+    protected boolean trySpawnEntity(ItemStack stack, ServerWorld world, BlockPos pos, PlayerEntity user)
     {
         NbtCompound nbt = stack.getSubNbt(ENTITY_KEY);
         if (nbt == null || nbt.isEmpty())
         {
             return false;
         }
-        Optional<EntityType<?>> entityType = EntityType.fromNbt(nbt);
-        if (entityType.isEmpty())
-        {
-            return false;
-        }
-        Entity spawned = entityType.get().spawn(
-            world,
-            null,
-            null,
-            pos,
-            SpawnReason.EVENT,
-            alignPosition,
-            invertY
-        );
-        if (spawned == null)
-        {
-            return false;
-        }
-        Vec3d spawnedPos = spawned.getPos();
-        spawned.readNbt(nbt);
-        spawned.setPosition(spawnedPos);
+
+        MobEntity mob = SoulControl.loadMinionFromData(nbt, world);
+        // TODO: pos
+        mob.setPosition(pos.toCenterPos());
+        world.spawnEntity(mob);
+
         stack.removeSubNbt(ENTITY_KEY);
         user.incrementStat(Stats.USED.getOrCreateStat(this));
         world.emitGameEvent(user, GameEvent.ENTITY_PLACE, pos);
@@ -148,7 +117,7 @@ public class SoulContainer extends Item
             offsetPos = blockPos.offset(direction);
         }
 
-        if (trySpawnEntity(itemStack, serverWorld, offsetPos, context.getPlayer(), true, !Objects.equals(blockPos, offsetPos) && direction == Direction.UP))
+        if (trySpawnEntity(itemStack, serverWorld, offsetPos, context.getPlayer()))
         {
             return ActionResult.CONSUME;
         }
@@ -178,7 +147,7 @@ public class SoulContainer extends Item
         }
         if (world.canPlayerModifyAt(user, blockPos) &&
             user.canPlaceOn(blockPos, hitResult.getSide(), itemStack) &&
-            trySpawnEntity(itemStack, serverWorld, blockPos, user, false, false))
+            trySpawnEntity(itemStack, serverWorld, blockPos, user))
         {
             return TypedActionResult.consume(itemStack);
         }

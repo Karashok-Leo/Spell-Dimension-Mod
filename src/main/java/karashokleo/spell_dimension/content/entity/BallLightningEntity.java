@@ -6,6 +6,7 @@ import karashokleo.spell_dimension.init.AllEntities;
 import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.util.DamageUtil;
 import karashokleo.spell_dimension.util.ImpactUtil;
+import karashokleo.spell_dimension.util.RelationUtil;
 import karashokleo.spell_dimension.util.RandomUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -246,7 +247,7 @@ public class BallLightningEntity extends ProjectileEntity
         LivingEntity living = ImpactUtil.castToLiving(target);
         return living != null &&
                getOwner() instanceof LivingEntity owner &&
-               !ImpactUtil.isAlly(living, owner);
+               !RelationUtil.isAlly(living, owner);
     }
 
     @Override

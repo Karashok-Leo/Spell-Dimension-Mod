@@ -1,6 +1,6 @@
 package karashokleo.spell_dimension.mixin.modded;
 
-import karashokleo.spell_dimension.util.PartyUtil;
+import karashokleo.spell_dimension.util.RelationUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
@@ -14,14 +14,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class TargetHelperMixin
 {
     @Inject(
-            method = "getRelation",
-            at = @At("HEAD"),
-            cancellable = true
+        method = "getRelation",
+        at = @At("HEAD"),
+        cancellable = true
     )
     private static void inject_getRelation(LivingEntity attacker, Entity target, CallbackInfoReturnable<TargetHelper.Relation> cir)
     {
         if (target instanceof LivingEntity living &&
-            PartyUtil.isPartner(attacker, living))
+            (RelationUtil.isOwner(attacker, living) ||
+                RelationUtil.isPartner(attacker, living)))
         {
             cir.setReturnValue(TargetHelper.Relation.FRIENDLY);
         }
@@ -29,9 +30,9 @@ public abstract class TargetHelperMixin
         {
             LivingEntity actualTarget = mob.getTarget();
             cir.setReturnValue(
-                    actualTarget == target ?
-                            TargetHelper.Relation.HOSTILE :
-                            TargetHelper.Relation.SEMI_FRIENDLY
+                actualTarget == target ?
+                    TargetHelper.Relation.HOSTILE :
+                    TargetHelper.Relation.SEMI_FRIENDLY
             );
         }
     }

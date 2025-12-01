@@ -11,6 +11,7 @@ import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.util.DamageUtil;
 import karashokleo.spell_dimension.util.ImpactUtil;
+import karashokleo.spell_dimension.util.RelationUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -208,7 +209,7 @@ public class ChainLightningEntity extends ProjectileEntity
         LivingEntity living = ImpactUtil.castToLiving(target);
         return living != null &&
                getOwner() instanceof LivingEntity owner &&
-               !ImpactUtil.isAlly(living, owner) &&
+               !RelationUtil.isAlly(living, owner) &&
                notZappedYet(living);
     }
 

@@ -1,7 +1,7 @@
 package karashokleo.spell_dimension.content.component;
 
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
-import net.minecraft.entity.mob.MobEntity;
+import karashokleo.spell_dimension.content.entity.FakePlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
@@ -14,13 +14,19 @@ import java.util.UUID;
 
 public class SoulControllerComponent implements AutoSyncedComponent
 {
-    private static final String MINION_KEY = "Minion";
+    private static final String CONTROLLING_MINION_KEY = "ControllingMinionData";
+    private static final String FAKE_PLAYER_SELF_KEY = "FakePlayerSelf";
 
     private final PlayerEntity player;
+
     @Nullable
-    private MobEntity minion;
+    private NbtCompound controllingMinionData;
+
     @Nullable
-    private UUID minionUuid;
+    private FakePlayerEntity fakePlayerSelf;
+    @Nullable
+    private UUID fakePlayerSelfUuid;
+
     /**
      * used in client-side only
      */
@@ -33,62 +39,78 @@ public class SoulControllerComponent implements AutoSyncedComponent
 
     public boolean isControlling()
     {
+        if (!player.getWorld().isClient())
+        {
+            controlling = getControllingMinionData() != null && fakePlayerSelfUuid != null;
+        }
+
         return controlling;
     }
 
     @Nullable
-    public MobEntity getMinion()
+    public NbtCompound getControllingMinionData()
+    {
+        return controllingMinionData;
+    }
+
+    public void setControllingMinionData(@Nullable NbtCompound controllingMinionData)
+    {
+        this.controllingMinionData = controllingMinionData;
+    }
+
+    @Nullable
+    public FakePlayerEntity getFakePlayerSelf()
     {
         if (!(player.getWorld() instanceof ServerWorld world))
         {
             return null;
         }
-        if (minion == null &&
-            world.getEntity(minionUuid) instanceof MobEntity mob)
+        if (fakePlayerSelf == null &&
+            world.getEntity(fakePlayerSelfUuid) instanceof FakePlayerEntity fakePlayer)
         {
-            minion = mob;
+            fakePlayerSelf = fakePlayer;
         }
-        if (minion == null ||
-            minion.isDead() ||
-            minion.isRemoved())
-        {
-            return null;
-        }
-        return minion;
+        return fakePlayerSelf;
     }
 
-    public void setMinion(@Nullable MobEntity minion)
+    public void setFakePlayerSelf(@Nullable FakePlayerEntity fakePlayerSelf)
     {
-        if (minion == null ||
-            minion.isDead() ||
-            minion.isRemoved())
+        if (fakePlayerSelf == null ||
+            fakePlayerSelf.isDead() ||
+            fakePlayerSelf.isRemoved())
         {
-            this.minion = null;
-            this.minionUuid = null;
-            this.controlling = false;
+            this.fakePlayerSelf = null;
+            this.fakePlayerSelfUuid = null;
         } else
         {
-            this.minion = minion;
-            this.minionUuid = minion.getUuid();
-            this.controlling = true;
+            this.fakePlayerSelf = fakePlayerSelf;
+            this.fakePlayerSelfUuid = fakePlayerSelf.getUuid();
         }
     }
 
     @Override
     public void readFromNbt(@NotNull NbtCompound tag)
     {
-        if (tag.get(MINION_KEY) != null)
+        if (tag.contains(CONTROLLING_MINION_KEY, NbtCompound.COMPOUND_TYPE))
         {
-            minionUuid = tag.getUuid(MINION_KEY);
+            controllingMinionData = tag.getCompound(CONTROLLING_MINION_KEY);
+        }
+        if (tag.containsUuid(FAKE_PLAYER_SELF_KEY))
+        {
+            fakePlayerSelfUuid = tag.getUuid(FAKE_PLAYER_SELF_KEY);
         }
     }
 
     @Override
     public void writeToNbt(@NotNull NbtCompound tag)
     {
-        if (minionUuid != null)
+        if (controllingMinionData != null)
         {
-            tag.putUuid(MINION_KEY, minionUuid);
+            tag.put(CONTROLLING_MINION_KEY, controllingMinionData);
+        }
+        if (fakePlayerSelfUuid != null)
+        {
+            tag.putUuid(FAKE_PLAYER_SELF_KEY, fakePlayerSelfUuid);
         }
     }
 
@@ -101,6 +123,6 @@ public class SoulControllerComponent implements AutoSyncedComponent
     @Override
     public void writeSyncPacket(PacketByteBuf buf, ServerPlayerEntity recipient)
     {
-        buf.writeBoolean(controlling);
+        buf.writeBoolean(isControlling());
     }
 }

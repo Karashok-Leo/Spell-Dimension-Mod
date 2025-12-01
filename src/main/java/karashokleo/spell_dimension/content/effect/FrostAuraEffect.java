@@ -3,6 +3,7 @@ package karashokleo.spell_dimension.content.effect;
 import karashokleo.l2hostility.util.EffectHelper;
 import karashokleo.spell_dimension.init.AllStatusEffects;
 import karashokleo.spell_dimension.util.ImpactUtil;
+import karashokleo.spell_dimension.util.RelationUtil;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -52,7 +53,7 @@ public class FrostAuraEffect extends StatusEffect
             {
                 continue;
             }
-            if (ImpactUtil.isAlly(entity, target))
+            if (RelationUtil.isAlly(entity, target))
             {
                 continue;
             }

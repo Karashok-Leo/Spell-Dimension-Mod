@@ -44,6 +44,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.Biome;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tocraft.walkers.integrations.Integrations;
 
 public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, EntityComponentInitializer, GeneratorStorage
 {
@@ -82,9 +83,9 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
         AllPackets.init();
         EnchantedModifier.init();
         EnlighteningModifier.init();
-        WalkerUtil.init();
         AllEvents.init();
         AllCommands.init();
+        Integrations.register(MOD_ID, WalkerUtil::new);
     }
 
     @Override

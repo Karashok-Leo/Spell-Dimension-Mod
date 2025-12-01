@@ -5,8 +5,6 @@ import karashokleo.spell_dimension.api.SpellImpactEvents;
 import karashokleo.spell_dimension.mixin.modded.SpellHelperInvoker;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.Ownable;
-import net.minecraft.entity.Tameable;
 import net.minecraft.entity.boss.dragon.EnderDragonPart;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -135,15 +133,6 @@ public class ImpactUtil
             return part.owner;
         }
         return null;
-    }
-
-    public static boolean isAlly(LivingEntity origin, LivingEntity target)
-    {
-        return origin == target ||
-               origin.isTeammate(target) ||
-               (target instanceof Tameable tameable && tameable.getOwner() == origin) ||
-               (target instanceof Ownable ownable && ownable.getOwner() == origin) ||
-               PartyUtil.isPartner(origin, target);
     }
 
     public static Vec3d fromEulerAngle(float pitch, float yaw, float roll)

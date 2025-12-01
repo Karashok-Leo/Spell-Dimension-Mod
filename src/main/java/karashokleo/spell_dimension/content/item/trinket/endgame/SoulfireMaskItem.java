@@ -6,7 +6,7 @@ import karashokleo.l2hostility.init.LHEffects;
 import karashokleo.l2hostility.util.raytrace.RayTraceUtil;
 import karashokleo.leobrary.effect.api.util.EffectUtil;
 import karashokleo.spell_dimension.data.SDTexts;
-import karashokleo.spell_dimension.util.ImpactUtil;
+import karashokleo.spell_dimension.util.RelationUtil;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -47,7 +47,7 @@ public class SoulfireMaskItem extends SingleEpicTrinketItem
         LivingEntity target = RayTraceUtil.serverGetTarget(player);
         if (target == null)
             return;
-        if (ImpactUtil.isAlly(player, target))
+        if (RelationUtil.isAlly(player, target))
             return;
         int amplifier = (int) (SpellPower.getSpellPower(SpellSchools.FIRE, player).baseValue() / SPELL_POWER_BONUS);
         EffectUtil.forceAddEffect(target, new StatusEffectInstance(LHEffects.FLAME, DURATION, amplifier, false, false), entity);

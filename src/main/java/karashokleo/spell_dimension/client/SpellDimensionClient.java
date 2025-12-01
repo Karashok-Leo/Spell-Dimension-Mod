@@ -82,6 +82,7 @@ public class SpellDimensionClient implements ClientModInitializer
         EntityRendererRegistry.register(AllEntities.CHAIN_LIGHTNING, EmptyEntityRenderer::new);
         EntityRendererRegistry.register(AllEntities.BALL_LIGHTNING, BallLightningRenderer::new);
         EntityRendererRegistry.register(AllEntities.RAILGUN, RailgunRenderer::new);
+        EntityRendererRegistry.register(AllEntities.FAKE_PLAYER, FakePlayerRenderer::new);
 
         BuiltinItemRendererRegistry.INSTANCE.register(AllItems.MACRO_ELECTRON, new MacroElectronRenderer());
 

@@ -3,6 +3,7 @@ package karashokleo.spell_dimension.content.enchantment;
 import karashokleo.l2hostility.init.LHEffects;
 import karashokleo.l2hostility.util.EffectHelper;
 import karashokleo.spell_dimension.util.ImpactUtil;
+import karashokleo.spell_dimension.util.RelationUtil;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
@@ -37,7 +38,7 @@ public class SpellCurseEnchantment extends SpellImpactEnchantment
             {
                 continue;
             }
-            if (ImpactUtil.isAlly(caster, living))
+            if (RelationUtil.isAlly(caster, living))
             {
                 continue;
             }

@@ -6,6 +6,7 @@ import karashokleo.spell_dimension.init.AllEntities;
 import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.util.DamageUtil;
 import karashokleo.spell_dimension.util.ImpactUtil;
+import karashokleo.spell_dimension.util.RelationUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -165,7 +166,7 @@ public class BlackHoleEntity extends Entity implements Ownable
                 entity -> entity == caster ||
                           (entity instanceof LivingEntity living &&
                            caster != null &&
-                           ImpactUtil.isAlly(caster, living))
+                           RelationUtil.isAlly(caster, living))
         );
         Map<Entity, Float> entityDistanceMap = new HashMap<>();
         for (Entity entity : trackingEntities)

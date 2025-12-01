@@ -2,7 +2,7 @@ package karashokleo.spell_dimension.content.effect;
 
 import karashokleo.spell_dimension.config.SpellConfig;
 import karashokleo.spell_dimension.util.DamageUtil;
-import karashokleo.spell_dimension.util.ImpactUtil;
+import karashokleo.spell_dimension.util.RelationUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
@@ -50,7 +50,7 @@ public class DivineAuraEffect extends StatusEffect
         for (LivingEntity target : entities)
         {
             if (target.distanceTo(entity) > radius) continue;
-            if (ImpactUtil.isAlly(entity, target))
+            if (RelationUtil.isAlly(entity, target))
             {
                 target.addStatusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 20, amplifier, false, false));
             } else

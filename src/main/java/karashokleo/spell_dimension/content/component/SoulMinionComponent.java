@@ -1,17 +1,16 @@
 package karashokleo.spell_dimension.content.component;
 
-import dev.onyxstudios.cca.api.v3.component.tick.ServerTickingComponent;
+import dev.onyxstudios.cca.api.v3.component.Component;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
-public class SoulMinionComponent implements ServerTickingComponent
+public class SoulMinionComponent implements Component
 {
     private static final String OWNER_KEY = "Owner";
 
@@ -20,7 +19,6 @@ public class SoulMinionComponent implements ServerTickingComponent
     private PlayerEntity owner;
     @Nullable
     private UUID ownerUuid;
-    private boolean controlling = false;
 
     public SoulMinionComponent(MobEntity mob)
     {
@@ -34,16 +32,17 @@ public class SoulMinionComponent implements ServerTickingComponent
         {
             return null;
         }
-        if (owner == null &&
-            world.getEntity(ownerUuid) instanceof PlayerEntity player)
+        if (owner != null)
         {
-            owner = player;
+            if (owner.isDead() ||
+                owner.isRemoved())
+            {
+                owner = null;
+            }
         }
-        if (owner == null ||
-            owner.isDead() ||
-            owner.isRemoved())
+        if (owner == null)
         {
-            return null;
+            owner = world.getPlayerByUuid(ownerUuid);
         }
         return owner;
     }
@@ -63,16 +62,6 @@ public class SoulMinionComponent implements ServerTickingComponent
         }
     }
 
-    public void setControlling(boolean controlling)
-    {
-        this.controlling = controlling;
-    }
-
-    public boolean isControlling()
-    {
-        return controlling;
-    }
-
     @Override
     public void readFromNbt(@NotNull NbtCompound tag)
     {
@@ -88,15 +77,6 @@ public class SoulMinionComponent implements ServerTickingComponent
         if (ownerUuid != null)
         {
             tag.putUuid(OWNER_KEY, ownerUuid);
-        }
-    }
-
-    @Override
-    public void serverTick()
-    {
-        if (!(getOwner() instanceof ServerPlayerEntity player))
-        {
-            return;
         }
     }
 }

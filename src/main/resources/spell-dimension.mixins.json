@@ -38,6 +38,7 @@
     "phase.EntityPredicatesMixin",
     "phase.LivingEntityMixin",
     "phase.PlayerEntityMixin",
+    "vanilla.ActiveTargetGoalMixin",
     "vanilla.AnvilScreenHandlerMixin",
     "vanilla.ApplyBonusLootFunctionMixin",
     "vanilla.DragonFireballEntityMixin",
@@ -53,7 +54,8 @@
     "vanilla.PlayerKeepInventoryMixin",
     "vanilla.ServerPlayerEntityMixin",
     "vanilla.SlimeEntityMixin",
-    "vanilla.StrafePlayerPhaseMixin"
+    "vanilla.StrafePlayerPhaseMixin",
+    "vanilla.TrackTargetGoalMixin"
   ],
   "injectors": {
     "defaultRequire": 1,
