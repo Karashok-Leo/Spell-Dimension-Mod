@@ -129,7 +129,7 @@ public class ChainLightningEntity extends ProjectileEntity
             }
 
             // if initial target not zapped yet
-            if (notZappedYet(initialTarget))
+            if (canHit(initialTarget))
             {
                 chainTarget(world, initialTarget, owner);
             } else
