@@ -20,9 +20,7 @@ public abstract class TargetHelperMixin
     )
     private static void inject_getRelation(LivingEntity attacker, Entity target, CallbackInfoReturnable<TargetHelper.Relation> cir)
     {
-        if (target instanceof LivingEntity living &&
-            (RelationUtil.isOwner(attacker, living) ||
-                RelationUtil.isPartner(attacker, living)))
+        if (RelationUtil.isAlly(attacker, target))
         {
             cir.setReturnValue(TargetHelper.Relation.FRIENDLY);
         }

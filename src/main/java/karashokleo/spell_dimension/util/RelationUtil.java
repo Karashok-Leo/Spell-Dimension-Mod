@@ -1,11 +1,13 @@
 package karashokleo.spell_dimension.util;
 
 import karashokleo.spell_dimension.content.misc.SoulControl;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.Ownable;
 import net.minecraft.entity.Tameable;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
+import org.jetbrains.annotations.Nullable;
 import xaero.pac.common.server.api.OpenPACServerAPI;
 import xaero.pac.common.server.parties.party.api.IPartyManagerAPI;
 import xaero.pac.common.server.parties.party.api.IServerPartyAPI;
@@ -15,28 +17,19 @@ public class RelationUtil
     /**
      * @return true if entity2 is allied to entity1
      */
-    public static boolean isAlly(LivingEntity entity1, LivingEntity entity2)
+    public static boolean isAlly(Entity entity1, Entity entity2)
     {
-        return entity1 == entity2 ||
-            entity1.isTeammate(entity2) ||
-            isOwner(entity1, entity2) ||
-            isPartner(entity1, entity2);
-    }
-
-    /**
-     * @return true if entity1 is the owner of entity2
-     */
-    public static boolean isOwner(LivingEntity entity1, LivingEntity entity2)
-    {
-        return SoulControl.isSoulMinion(entity1, entity2) ||
-            (entity2 instanceof Tameable tameable && tameable.getOwner() == entity1) ||
-            (entity2 instanceof Ownable ownable && ownable.getOwner() == entity1);
+        Entity superior1 = getUltimateSuperiorEntity(entity1);
+        Entity superior2 = getUltimateSuperiorEntity(entity2);
+        return superior1 == superior2 ||
+            superior1.isTeammate(superior2) ||
+            isPartner(superior1, superior2);
     }
 
     /**
      * @return true if entity1 and entity2 are players in the same party or allied parties in OPAC
      */
-    public static boolean isPartner(LivingEntity entity1, LivingEntity entity2)
+    public static boolean isPartner(Entity entity1, Entity entity2)
     {
         if (!(entity1 instanceof ServerPlayerEntity sp1))
         {
@@ -63,5 +56,46 @@ public class RelationUtil
             return false;
         }
         return party1.isAlly(party2.getId());
+    }
+
+    public static Entity getUltimateSuperiorEntity(Entity entity)
+    {
+        Entity ans = entity;
+        while (ans != null)
+        {
+            Entity superior = getSuperiorEntity(ans);
+            if (superior == null)
+            {
+                break;
+            }
+            ans = superior;
+        }
+        return ans;
+    }
+
+    @Nullable
+    public static Entity getSuperiorEntity(Entity entity)
+    {
+        Entity owner = null;
+        if (entity instanceof Tameable tameable)
+        {
+            owner = tameable.getOwner();
+        }
+
+        if (owner == null && entity instanceof Ownable ownable)
+        {
+            owner = ownable.getOwner();
+        }
+
+        if (owner == null && entity instanceof MobEntity mob)
+        {
+            var minionComponent = SoulControl.getSoulMinion(mob);
+            if (minionComponent != null)
+            {
+                owner = minionComponent.getOwner();
+            }
+        }
+
+        return owner;
     }
 }

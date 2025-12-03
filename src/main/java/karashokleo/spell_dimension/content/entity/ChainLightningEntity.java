@@ -40,36 +40,36 @@ import java.util.List;
 public class ChainLightningEntity extends ProjectileEntity
 {
     public static final ParticleBatch[] HIT_PARTICLES = {
-            new ParticleBatch(
-                    "spell_engine:electric_arc_a",
-                    ParticleBatch.Shape.PIPE,
-                    ParticleBatch.Origin.FEET,
-                    null,
-                    0,
-                    0,
-                    1,
-                    0.06F,
-                    0.12F,
-                    0,
-                    0,
-                    0,
-                    false
-            ),
-            new ParticleBatch(
-                    "spell_engine:electric_arc_b",
-                    ParticleBatch.Shape.PIPE,
-                    ParticleBatch.Origin.FEET,
-                    null,
-                    0,
-                    0,
-                    1,
-                    0.06F,
-                    0.12F,
-                    0,
-                    0,
-                    0,
-                    false
-            ),
+        new ParticleBatch(
+            "spell_engine:electric_arc_a",
+            ParticleBatch.Shape.PIPE,
+            ParticleBatch.Origin.FEET,
+            null,
+            0,
+            0,
+            1,
+            0.06F,
+            0.12F,
+            0,
+            0,
+            0,
+            false
+        ),
+        new ParticleBatch(
+            "spell_engine:electric_arc_b",
+            ParticleBatch.Shape.PIPE,
+            ParticleBatch.Origin.FEET,
+            null,
+            0,
+            0,
+            1,
+            0.06F,
+            0.12F,
+            0,
+            0,
+            0,
+            false
+        ),
     };
 
     public int power;
@@ -107,7 +107,10 @@ public class ChainLightningEntity extends ProjectileEntity
     public void tick()
     {
         super.tick();
-        if (this.getWorld().isClient()) return;
+        if (this.getWorld().isClient())
+        {
+            return;
+        }
 
         // discard if lifespan is over
         if (age > lifespan)
@@ -120,7 +123,10 @@ public class ChainLightningEntity extends ProjectileEntity
         if ((age - 1) % 6 == 0 && this.getWorld() instanceof ServerWorld world)
         {
             Entity owner = getOwner();
-            if (owner == null) return;
+            if (owner == null)
+            {
+                return;
+            }
 
             // if initial target not zapped yet
             if (notZappedYet(initialTarget))
@@ -141,13 +147,25 @@ public class ChainLightningEntity extends ProjectileEntity
                     for (Entity target : targets)
                     {
                         // break loop if chains this time has reached maxChainStep
-                        if (chainStep >= this.chainStep) break;
+                        if (chainStep >= this.chainStep)
+                        {
+                            break;
+                        }
                         // skip non living
-                        if (!(target instanceof LivingEntity living)) continue;
+                        if (!(target instanceof LivingEntity living))
+                        {
+                            continue;
+                        }
                         // skip if out of range of last chained
-                        if (target.squaredDistanceTo(chained) > range * range) continue;
+                        if (target.squaredDistanceTo(chained) > range * range)
+                        {
+                            continue;
+                        }
                         // skip if blocked and cannot penetrate
-                        if (!canPenetrate && isBlocked(world, chained.getEyePos(), target.getEyePos())) continue;
+                        if (!canPenetrate && isBlocked(world, chained.getEyePos(), target.getEyePos()))
+                        {
+                            continue;
+                        }
 
                         chainStep++;
                         chainTarget(world, living, chained);
@@ -208,9 +226,8 @@ public class ChainLightningEntity extends ProjectileEntity
     {
         LivingEntity living = ImpactUtil.castToLiving(target);
         return living != null &&
-               getOwner() instanceof LivingEntity owner &&
-               !RelationUtil.isAlly(living, owner) &&
-               notZappedYet(living);
+            !RelationUtil.isAlly(this, living) &&
+            notZappedYet(living);
     }
 
     @Override

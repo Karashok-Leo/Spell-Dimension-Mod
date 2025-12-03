@@ -6,8 +6,8 @@ import karashokleo.spell_dimension.init.AllEntities;
 import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.util.DamageUtil;
 import karashokleo.spell_dimension.util.ImpactUtil;
-import karashokleo.spell_dimension.util.RelationUtil;
 import karashokleo.spell_dimension.util.RandomUtil;
+import karashokleo.spell_dimension.util.RelationUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
@@ -39,36 +39,36 @@ import java.util.List;
 public class BallLightningEntity extends ProjectileEntity
 {
     public static final ParticleBatch[] AMBIENT = {
-            new ParticleBatch(
-                    "spell_engine:electric_arc_a",
-                    ParticleBatch.Shape.SPHERE,
-                    ParticleBatch.Origin.CENTER,
-                    null,
-                    0,
-                    0,
-                    0.2f,
-                    0.06F,
-                    0.12F,
-                    0,
-                    0,
-                    0,
-                    false
-            ),
-            new ParticleBatch(
-                    "spell_engine:electric_arc_b",
-                    ParticleBatch.Shape.SPHERE,
-                    ParticleBatch.Origin.CENTER,
-                    null,
-                    0,
-                    0,
-                    0.2f,
-                    0.06F,
-                    0.12F,
-                    0,
-                    0,
-                    0,
-                    false
-            ),
+        new ParticleBatch(
+            "spell_engine:electric_arc_a",
+            ParticleBatch.Shape.SPHERE,
+            ParticleBatch.Origin.CENTER,
+            null,
+            0,
+            0,
+            0.2f,
+            0.06F,
+            0.12F,
+            0,
+            0,
+            0,
+            false
+        ),
+        new ParticleBatch(
+            "spell_engine:electric_arc_b",
+            ParticleBatch.Shape.SPHERE,
+            ParticleBatch.Origin.CENTER,
+            null,
+            0,
+            0,
+            0.2f,
+            0.06F,
+            0.12F,
+            0,
+            0,
+            0,
+            false
+        ),
     };
 
     public boolean macro;
@@ -245,9 +245,7 @@ public class BallLightningEntity extends ProjectileEntity
     protected boolean canHit(Entity target)
     {
         LivingEntity living = ImpactUtil.castToLiving(target);
-        return living != null &&
-               getOwner() instanceof LivingEntity owner &&
-               !RelationUtil.isAlly(living, owner);
+        return living != null && !RelationUtil.isAlly(this, living);
     }
 
     @Override
