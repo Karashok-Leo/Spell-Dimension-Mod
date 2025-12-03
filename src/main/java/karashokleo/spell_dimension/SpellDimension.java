@@ -23,7 +23,6 @@ import karashokleo.spell_dimension.data.generic.SDTraitConfigProvider;
 import karashokleo.spell_dimension.data.loot_bag.BagProvider;
 import karashokleo.spell_dimension.data.loot_bag.ContentProvider;
 import karashokleo.spell_dimension.init.*;
-import karashokleo.spell_dimension.util.WalkerUtil;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
@@ -44,7 +43,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.Biome;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import tocraft.walkers.integrations.Integrations;
 
 public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, EntityComponentInitializer, GeneratorStorage
 {
@@ -85,7 +83,7 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
         EnlighteningModifier.init();
         AllEvents.init();
         AllCommands.init();
-        Integrations.register(MOD_ID, WalkerUtil::new);
+        WalkerIntegration.init();
     }
 
     @Override

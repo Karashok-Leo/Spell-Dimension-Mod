@@ -61,6 +61,10 @@ public class SoulControllerComponent implements AutoSyncedComponent
     @Nullable
     public FakePlayerEntity getFakePlayerSelf()
     {
+        if (fakePlayerSelf == null)
+        {
+            return null;
+        }
         if (!(player.getWorld() instanceof ServerWorld world))
         {
             return null;

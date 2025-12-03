@@ -28,6 +28,10 @@ public class SoulMinionComponent implements Component
     @Nullable
     public PlayerEntity getOwner()
     {
+        if (ownerUuid == null)
+        {
+            return null;
+        }
         if (!(mob.getWorld() instanceof ServerWorld world))
         {
             return null;

@@ -114,7 +114,7 @@ dependencies {
     modImplementation "maven.modrinth:open-parties-and-claims:${project.opac_version}"
 
     modImplementation "dev.tocraft:craftedcore-fabric:1.20.1-5.8"
-    modImplementation "dev.tocraft:walkers-fabric:1.20.1-5.7"
+    modImplementation "dev.tocraft:walkers-fabric:1.20.1-5.8.0"
 
 //	modImplementation "curse.maven:puffish-skills-835091:${project.puffer_fish_skills_version}"
 //	modImplementation "curse.maven:lootr-fabric-615106:${project.lootr_version}"
