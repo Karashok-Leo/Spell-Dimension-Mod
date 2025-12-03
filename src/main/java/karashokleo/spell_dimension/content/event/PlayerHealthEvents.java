@@ -93,7 +93,7 @@ public class PlayerHealthEvents
         {
             return;
         }
-        if (display.shouldAnnounceToChat())
+        if (!display.shouldAnnounceToChat())
         {
             return;
         }
