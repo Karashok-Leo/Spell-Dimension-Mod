@@ -7,7 +7,6 @@ import karashokleo.spell_dimension.init.AllComponents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.AttributeContainer;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -26,13 +25,8 @@ import java.util.Optional;
  */
 public interface SoulControl
 {
-    @Nullable
     static SoulMinionComponent getSoulMinion(MobEntity entity)
     {
-        if (entity.getWorld().isClient())
-        {
-            return null;
-        }
         return AllComponents.SOUL_MINION.get(entity);
     }
 
@@ -49,13 +43,8 @@ public interface SoulControl
      */
     static boolean isSoulMinion(@Nullable Entity entity1, @Nullable Entity entity2)
     {
-        if (entity2 instanceof MobEntity mob)
-        {
-            var minionComponent = SoulControl.getSoulMinion(mob);
-            return minionComponent != null &&
-                minionComponent.getOwner() == entity1;
-        }
-        return false;
+        return entity2 instanceof MobEntity mob &&
+            SoulControl.getSoulMinion(mob).getOwner() == entity1;
     }
 
     static void setControllingMinion(ServerPlayerEntity player, @Nullable MobEntity minion)
@@ -65,13 +54,7 @@ public interface SoulControl
         if (minion != null)
         {
             // check ownership
-            SoulMinionComponent minionComponent = getSoulMinion(minion);
-            if (minionComponent == null)
-            {
-                return;
-            }
-            LivingEntity soulOwner = minionComponent.getOwner();
-            if (soulOwner != player)
+            if (!isSoulMinion(player, minion))
             {
                 return;
             }
@@ -144,6 +127,7 @@ public interface SoulControl
 
         // do something before saving
         minion.setPersistent();
+        minion.setGlowing(true);
         minion.setVelocity(Vec3d.ZERO);
         // do saving
         var entityNbt = new NbtCompound();

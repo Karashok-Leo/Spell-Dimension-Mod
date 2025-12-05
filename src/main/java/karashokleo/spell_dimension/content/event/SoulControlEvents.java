@@ -59,12 +59,7 @@ public class SoulControlEvents
             {
                 return ActionResult.PASS;
             }
-            var component = SoulControl.getSoulMinion(mob);
-            if (component == null)
-            {
-                return ActionResult.PASS;
-            }
-            if (component.getOwner() != serverPlayer)
+            if (!SoulControl.isSoulMinion(serverPlayer, mob))
             {
                 return ActionResult.PASS;
             }

@@ -3,6 +3,7 @@ package karashokleo.spell_dimension.content.item;
 import karashokleo.spell_dimension.content.component.SoulMinionComponent;
 import karashokleo.spell_dimension.content.misc.SoulControl;
 import karashokleo.spell_dimension.data.SDTexts;
+import karashokleo.spell_dimension.init.AllComponents;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FluidBlock;
@@ -65,10 +66,7 @@ public class SoulContainer extends Item
         mob.setHealth(mob.getMaxHealth());
         // set owner
         SoulMinionComponent component = SoulControl.getSoulMinion(mob);
-        if (component != null)
-        {
-            component.setOwner(player);
-        }
+        component.setOwner(player);
         // do saving
         var entityNbt = SoulControl.saveMinionData(mob);
         stack.setSubNbt(ENTITY_KEY, entityNbt);

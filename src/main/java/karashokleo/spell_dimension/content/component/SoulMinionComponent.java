@@ -1,16 +1,15 @@
 package karashokleo.spell_dimension.content.component;
 
-import dev.onyxstudios.cca.api.v3.component.Component;
+import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.server.world.ServerWorld;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
-public class SoulMinionComponent implements Component
+public class SoulMinionComponent implements AutoSyncedComponent
 {
     private static final String OWNER_KEY = "Owner";
 
@@ -25,14 +24,15 @@ public class SoulMinionComponent implements Component
         this.mob = mob;
     }
 
+    public boolean hasOwner()
+    {
+        return ownerUuid != null;
+    }
+
     @Nullable
     public PlayerEntity getOwner()
     {
         if (ownerUuid == null)
-        {
-            return null;
-        }
-        if (!(mob.getWorld() instanceof ServerWorld world))
         {
             return null;
         }
@@ -46,7 +46,7 @@ public class SoulMinionComponent implements Component
         }
         if (owner == null)
         {
-            owner = world.getPlayerByUuid(ownerUuid);
+            owner = mob.getWorld().getPlayerByUuid(ownerUuid);
         }
         return owner;
     }

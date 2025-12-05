@@ -46,6 +46,7 @@
     "vanilla.EnchantmentHelperMixin",
     "vanilla.EnchantRandomlyLootFunctionMixin",
     "vanilla.EndPortalBlockMixin",
+    "vanilla.EntityMixin",
     "vanilla.ItemStackMixin",
     "vanilla.LivingEntityMixin",
     "vanilla.MobSpawnerLogicMixin",

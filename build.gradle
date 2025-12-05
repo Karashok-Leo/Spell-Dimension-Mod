@@ -50,8 +50,11 @@ sourceSets {
 fabricApi {
     configureDataGeneration()
 }
+
 // Specify the modid to avoid generating dependencies' data
 runDatagen.jvmArgs("-Dfabric-api.datagen.modid=spell-dimension")
+
+//runClient.jvmArgs("-Dmixin.debug.export=true")
 
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
