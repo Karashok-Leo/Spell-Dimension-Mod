@@ -7,6 +7,7 @@ import karashokleo.spell_dimension.init.AllComponents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.AttributeContainer;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -66,14 +67,14 @@ public interface SoulControl
                 // respawn minion
                 NbtCompound minionData = controllerComponent.getControllingMinionData();
                 MobEntity loadedMinion = loadMinionFromData(minionData, serverWorld);
-                updatePosAndRot(loadedMinion, player);
+                updatePosRotHealth(loadedMinion, player);
                 serverWorld.spawnEntity(loadedMinion);
             } else
             {
                 // spawn fake player
                 FakePlayerEntity fakePlayer = new FakePlayerEntity(player);
                 copyPlayerProperties(player, fakePlayer);
-                updatePosAndRot(fakePlayer, player);
+                updatePosRotHealth(fakePlayer, player);
                 player.getWorld().spawnEntity(fakePlayer);
 
                 controllerComponent.setFakePlayerSelf(fakePlayer);
@@ -81,7 +82,7 @@ public interface SoulControl
 
             // update player shape & position
             PlayerShape.updateShapes(player, minion);
-            updatePosAndRot(player, minion);
+            updatePosRotHealth(player, minion);
 
             // save minion nbt data
             NbtCompound savedMinionData = saveMinionData(minion);
@@ -98,14 +99,14 @@ public interface SoulControl
             // respawn minion
             NbtCompound minionData = controllerComponent.getControllingMinionData();
             MobEntity loadedMinion = loadMinionFromData(minionData, serverWorld);
-            updatePosAndRot(loadedMinion, player);
+            updatePosRotHealth(loadedMinion, player);
             serverWorld.spawnEntity(loadedMinion);
 
             FakePlayerEntity self = controllerComponent.getFakePlayerSelf();
             assert self != null;
             // update player shape & position
             PlayerShape.updateShapes(player, null);
-            updatePosAndRot(player, self);
+            updatePosRotHealth(player, self);
 
             // discard fake player
             self.discard();
@@ -127,7 +128,6 @@ public interface SoulControl
 
         // do something before saving
         minion.setPersistent();
-        minion.setGlowing(true);
         minion.setVelocity(Vec3d.ZERO);
         // do saving
         var entityNbt = new NbtCompound();
@@ -152,7 +152,7 @@ public interface SoulControl
         return mob;
     }
 
-    static void updatePosAndRot(Entity target, Entity entity)
+    static void updatePosRotHealth(LivingEntity target, LivingEntity entity)
     {
         if (target.getWorld().isClient())
         {
@@ -169,31 +169,14 @@ public interface SoulControl
             entity.getYaw(),
             entity.getPitch()
         );
-//        if (target instanceof ServerPlayerEntity player)
-//        {
-//            player.teleport(
-//                ((ServerWorld) entity.getWorld()),
-//                entity.getX(),
-//                entity.getY(),
-//                entity.getZ(),
-//                entity.getYaw(),
-//                entity.getPitch()
-//            );
-//        } else
-//        {
-//            target.refreshPositionAndAngles(
-//                entity.getX(),
-//                entity.getY(),
-//                entity.getZ(),
-//                entity.getYaw(),
-//                entity.getPitch()
-//            );
-//        }
+
+        // update health proportionally
+        float proportion = entity.getHealth() / entity.getMaxHealth();
+        target.setHealth(target.getMaxHealth() * proportion);
     }
 
     static void copyPlayerProperties(PlayerEntity player, FakePlayerEntity fakePlayer)
     {
-        // TODO: update player health
         AttributeContainer attributes = player.getAttributes();
         fakePlayer.getAttributes().readNbt(attributes.toNbt());
 

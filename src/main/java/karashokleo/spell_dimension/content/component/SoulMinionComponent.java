@@ -51,7 +51,7 @@ public class SoulMinionComponent implements AutoSyncedComponent
         return owner;
     }
 
-    public void setOwner(PlayerEntity owner)
+    public void setOwner(@Nullable PlayerEntity owner)
     {
         if (owner == null ||
             owner.isDead() ||
@@ -64,6 +64,7 @@ public class SoulMinionComponent implements AutoSyncedComponent
             this.owner = owner;
             this.ownerUuid = owner.getUuid();
         }
+        mob.setGlowing(hasOwner());
     }
 
     @Override

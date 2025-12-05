@@ -40,7 +40,7 @@ public class SoulControlEvents
             return !AllItems.SOUL_CONTAINER.tryCaptureEntity(stack, player, mob);
         });
 
-        // control minion interaction
+        // start soul control
         PlayerInteractionEvents.INTERACT_ENTITY_GENERAL.register((player, entity, hand) ->
         {
             if (hand == Hand.OFF_HAND)
@@ -67,6 +67,7 @@ public class SoulControlEvents
             return ActionResult.SUCCESS;
         });
 
+        // player death stops soul control
         ServerLivingEntityEvents.ALLOW_DEATH.register((entity, damageSource, damageAmount) ->
         {
             if (!(entity instanceof ServerPlayerEntity player))
@@ -84,6 +85,7 @@ public class SoulControlEvents
             return false;
         });
 
+        // prevent minion attack owner
         LivingAttackEvent.ATTACK.register(event ->
         {
             if (!SoulControl.isSoulMinion(event.getEntity(), event.getSource().getAttacker()))
@@ -93,6 +95,7 @@ public class SoulControlEvents
             event.setCanceled(true);
         });
 
+        // fake player self damage feedback
         DamagePhase.APPLY.registerModifier(9999, access ->
         {
             if (!(access.getEntity() instanceof FakePlayerEntity fakePlayer))
