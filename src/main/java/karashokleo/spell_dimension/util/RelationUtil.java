@@ -90,10 +90,7 @@ public class RelationUtil
         if (owner == null && entity instanceof MobEntity mob)
         {
             var minionComponent = SoulControl.getSoulMinion(mob);
-            if (minionComponent != null)
-            {
-                owner = minionComponent.getOwner();
-            }
+            owner = minionComponent.getOwner();
         }
 
         return owner;

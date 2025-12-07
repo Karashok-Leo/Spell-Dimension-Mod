@@ -6,9 +6,10 @@ import karashokleo.spell_dimension.content.entity.FakePlayerEntity;
 import karashokleo.spell_dimension.init.AllComponents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.AttributeContainer;
+import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.attribute.EntityAttributeInstance;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -42,6 +43,7 @@ public interface SoulControl
      *
      * @return true if entity2 is a soul minion owned by entity1
      */
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     static boolean isSoulMinion(@Nullable Entity entity1, @Nullable Entity entity2)
     {
         return entity2 instanceof MobEntity mob &&
@@ -182,12 +184,29 @@ public interface SoulControl
 
     static void copyPlayerProperties(PlayerEntity player, FakePlayerEntity fakePlayer)
     {
-        AttributeContainer attributes = player.getAttributes();
-        fakePlayer.getAttributes().readNbt(attributes.toNbt());
+        var attributes = new EntityAttribute[]{
+            EntityAttributes.GENERIC_MAX_HEALTH,
+            EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE,
+            EntityAttributes.GENERIC_MOVEMENT_SPEED,
+            EntityAttributes.GENERIC_ARMOR,
+            EntityAttributes.GENERIC_ARMOR_TOUGHNESS
+        };
 
-        for (EquipmentSlot slot : EquipmentSlot.values())
+        for (EntityAttribute attribute : attributes)
         {
-            fakePlayer.equipStack(slot, player.getEquippedStack(slot).copy());
+            EntityAttributeInstance origin = player.getAttributeInstance(attribute);
+            EntityAttributeInstance fake = fakePlayer.getAttributeInstance(attribute);
+            assert origin != null;
+            assert fake != null;
+            fake.setFrom(origin);
         }
+
+//        AttributeContainer attributes = player.getAttributes();
+//        fakePlayer.getAttributes().readNbt(attributes.toNbt());
+
+//        for (EquipmentSlot slot : EquipmentSlot.values())
+//        {
+//            fakePlayer.equipStack(slot, player.getEquippedStack(slot).copy());
+//        }
     }
 }
