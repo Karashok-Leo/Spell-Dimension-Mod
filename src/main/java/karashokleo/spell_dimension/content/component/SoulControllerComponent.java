@@ -1,7 +1,9 @@
 package karashokleo.spell_dimension.content.component;
 
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
+import dev.onyxstudios.cca.api.v3.component.tick.ServerTickingComponent;
 import karashokleo.spell_dimension.content.entity.FakePlayerEntity;
+import karashokleo.spell_dimension.content.misc.SoulControl;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
@@ -12,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
-public class SoulControllerComponent implements AutoSyncedComponent
+public class SoulControllerComponent implements AutoSyncedComponent, ServerTickingComponent
 {
     private static final String CONTROLLING_MINION_KEY = "ControllingMinionData";
     private static final String FAKE_PLAYER_SELF_KEY = "FakePlayerSelf";
@@ -61,7 +63,7 @@ public class SoulControllerComponent implements AutoSyncedComponent
     @Nullable
     public FakePlayerEntity getFakePlayerSelf()
     {
-        if (fakePlayerSelf == null)
+        if (fakePlayerSelfUuid == null)
         {
             return null;
         }
@@ -89,6 +91,34 @@ public class SoulControllerComponent implements AutoSyncedComponent
         {
             this.fakePlayerSelf = fakePlayerSelf;
             this.fakePlayerSelfUuid = fakePlayerSelf.getUuid();
+        }
+    }
+
+    @Override
+    public void serverTick()
+    {
+        if (player.age % 20 != 0)
+        {
+            return;
+        }
+
+        if (!isControlling())
+        {
+            return;
+        }
+
+        FakePlayerEntity self = getFakePlayerSelf();
+        if (self == null)
+        {
+            player.damage(player.getDamageSources().outOfWorld(), Float.MAX_VALUE);
+            // ensure death
+            player.setHealth(0);
+            return;
+        }
+
+        if (self.isDead() || self.isRemoved())
+        {
+            SoulControl.onSelfBodyDeath((ServerPlayerEntity) player);
         }
     }
 

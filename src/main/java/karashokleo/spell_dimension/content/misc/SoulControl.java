@@ -48,9 +48,17 @@ public interface SoulControl
             SoulControl.getSoulMinion(mob).getOwner() == entity1;
     }
 
+    static void onSelfBodyDeath(ServerPlayerEntity player)
+    {
+        SoulControl.setControllingMinion(player, null);
+        // keep max(2, 1% max_health) health
+        player.setHealth(Math.max(2.0f, player.getMaxHealth() * 0.01f));
+    }
+
     static void setControllingMinion(ServerPlayerEntity player, @Nullable MobEntity minion)
     {
         SoulControllerComponent controllerComponent = getSoulController(player);
+        ServerWorld world = player.getServerWorld();
 
         if (minion != null)
         {
@@ -62,20 +70,18 @@ public interface SoulControl
 
             if (controllerComponent.isControlling())
             {
-                ServerWorld serverWorld = player.getServerWorld();
-
                 // respawn minion
                 NbtCompound minionData = controllerComponent.getControllingMinionData();
-                MobEntity loadedMinion = loadMinionFromData(minionData, serverWorld);
+                MobEntity loadedMinion = loadMinionFromData(minionData, world);
                 updatePosRotHealth(loadedMinion, player);
-                serverWorld.spawnEntity(loadedMinion);
+                world.spawnEntity(loadedMinion);
             } else
             {
                 // spawn fake player
                 FakePlayerEntity fakePlayer = new FakePlayerEntity(player);
                 copyPlayerProperties(player, fakePlayer);
                 updatePosRotHealth(fakePlayer, player);
-                player.getWorld().spawnEntity(fakePlayer);
+                world.spawnEntity(fakePlayer);
 
                 controllerComponent.setFakePlayerSelf(fakePlayer);
             }
@@ -94,13 +100,12 @@ public interface SoulControl
 
         } else if (controllerComponent.isControlling())
         {
-            ServerWorld serverWorld = player.getServerWorld();
-
             // respawn minion
             NbtCompound minionData = controllerComponent.getControllingMinionData();
-            MobEntity loadedMinion = loadMinionFromData(minionData, serverWorld);
+            MobEntity loadedMinion = loadMinionFromData(minionData, world);
+
             updatePosRotHealth(loadedMinion, player);
-            serverWorld.spawnEntity(loadedMinion);
+            world.spawnEntity(loadedMinion);
 
             FakePlayerEntity self = controllerComponent.getFakePlayerSelf();
             assert self != null;
@@ -154,7 +159,7 @@ public interface SoulControl
 
     static void updatePosRotHealth(LivingEntity target, LivingEntity entity)
     {
-        if (target.getWorld().isClient())
+        if (entity.getWorld().isClient())
         {
             return;
         }

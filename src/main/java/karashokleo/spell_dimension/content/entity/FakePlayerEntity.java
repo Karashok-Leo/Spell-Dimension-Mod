@@ -88,10 +88,7 @@ public class FakePlayerEntity extends LivingEntity
             return;
         }
 
-        // release control
-        SoulControl.setControllingMinion(player, null);
-        // keep max(2, 1% max_health) health
-        player.setHealth(Math.max(2.0f, player.getMaxHealth() * 0.01f));
+        SoulControl.onSelfBodyDeath(player);
     }
 
     @Override
