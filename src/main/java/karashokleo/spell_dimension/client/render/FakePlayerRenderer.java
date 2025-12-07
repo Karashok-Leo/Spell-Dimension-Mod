@@ -8,10 +8,17 @@ import net.minecraft.client.render.entity.feature.*;
 import net.minecraft.client.render.entity.model.ArmorEntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
+import net.minecraft.client.util.DefaultSkinHelper;
 import net.minecraft.util.Identifier;
+
+import java.util.HashMap;
+import java.util.UUID;
 
 public class FakePlayerRenderer extends LivingEntityRenderer<FakePlayerEntity, PlayerEntityModel<FakePlayerEntity>>
 {
+    private static final HashMap<UUID, Identifier> SKIN_CACHE = new HashMap<>();
+    private static final Identifier STEVE_TEXTURE = new Identifier("textures/entity/player/wide/steve.png");
+
     public FakePlayerRenderer(EntityRendererFactory.Context ctx)
     {
         this(ctx, false);
@@ -40,7 +47,32 @@ public class FakePlayerRenderer extends LivingEntityRenderer<FakePlayerEntity, P
     @Override
     public Identifier getTexture(FakePlayerEntity entity)
     {
-        // TODO: fix
-        return MinecraftClient.getInstance().getNetworkHandler().getPlayerListEntry(entity.getPlayerUUID()).getSkinTexture();
+        UUID uuid = entity.getPlayerUUID();
+
+        if (uuid == null)
+        {
+            return STEVE_TEXTURE;
+        }
+
+        if (SKIN_CACHE.containsKey(uuid))
+        {
+            return SKIN_CACHE.get(uuid);
+        }
+
+        var networkHandler = MinecraftClient.getInstance().getNetworkHandler();
+        if (networkHandler != null)
+        {
+            var info = networkHandler.getPlayerListEntry(uuid);
+            if (info != null)
+            {
+                Identifier skin = info.getSkinTexture();
+                SKIN_CACHE.put(uuid, skin);
+                return skin;
+            }
+        }
+
+        Identifier skin = DefaultSkinHelper.getTexture(uuid);
+        SKIN_CACHE.put(uuid, skin);
+        return skin;
     }
 }
