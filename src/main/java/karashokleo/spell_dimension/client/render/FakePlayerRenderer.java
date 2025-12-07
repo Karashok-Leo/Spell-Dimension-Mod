@@ -2,6 +2,7 @@ package karashokleo.spell_dimension.client.render;
 
 import karashokleo.spell_dimension.content.entity.FakePlayerEntity;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
 import net.minecraft.client.render.entity.feature.*;
@@ -9,6 +10,7 @@ import net.minecraft.client.render.entity.model.ArmorEntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.util.DefaultSkinHelper;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
 import java.util.HashMap;
@@ -19,6 +21,19 @@ public class FakePlayerRenderer extends LivingEntityRenderer<FakePlayerEntity, P
     private static final HashMap<UUID, Identifier> SKIN_CACHE = new HashMap<>();
     private static final Identifier STEVE_TEXTURE = new Identifier("textures/entity/player/wide/steve.png");
 
+    private static PlayerEntityModel<FakePlayerEntity> getModel(EntityRendererFactory.Context ctx, boolean slim)
+    {
+        return new PlayerEntityModel<>(ctx.getPart(slim ? EntityModelLayers.PLAYER_SLIM : EntityModelLayers.PLAYER), slim)
+        {
+            @Override
+            public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha)
+            {
+                alpha = Math.min(alpha, 0.5f);
+                super.render(matrices, vertices, light, overlay, red, green, blue, alpha);
+            }
+        };
+    }
+
     public FakePlayerRenderer(EntityRendererFactory.Context ctx)
     {
         this(ctx, false);
@@ -26,7 +41,7 @@ public class FakePlayerRenderer extends LivingEntityRenderer<FakePlayerEntity, P
 
     public FakePlayerRenderer(EntityRendererFactory.Context ctx, boolean slim)
     {
-        super(ctx, new PlayerEntityModel<>(ctx.getPart(slim ? EntityModelLayers.PLAYER_SLIM : EntityModelLayers.PLAYER), slim), 0.5F);
+        super(ctx, getModel(ctx, slim), 0.5F);
         this.addFeature(new ArmorFeatureRenderer<>(
             this,
             new ArmorEntityModel<>(ctx.getPart(slim ?
