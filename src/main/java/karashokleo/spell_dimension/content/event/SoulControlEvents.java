@@ -6,13 +6,15 @@ import karashokleo.leobrary.damage.api.modify.DamagePhase;
 import karashokleo.spell_dimension.content.component.SoulControllerComponent;
 import karashokleo.spell_dimension.content.entity.FakePlayerEntity;
 import karashokleo.spell_dimension.content.misc.SoulControl;
+import karashokleo.spell_dimension.content.network.S2CBloodOverlay;
+import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllItems;
+import karashokleo.spell_dimension.init.AllPackets;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
@@ -114,7 +116,9 @@ public class SoulControlEvents
                 return;
             }
 
-            player.sendMessage(Text.literal("You are receiving damage!!!").formatted(Formatting.RED));
+            player.sendMessage(SDTexts.TEXT$SOUL_CONTROL$DAMAGE.get("%.1f".formatted(finalDamage)).formatted(Formatting.RED, Formatting.BOLD));
+
+            AllPackets.toClientPlayer(player, new S2CBloodOverlay());
         });
     }
 }

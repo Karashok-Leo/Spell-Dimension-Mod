@@ -44,6 +44,7 @@ import java.util.List;
 public class SpellDimensionClient implements ClientModInitializer
 {
     public static final Identifier PHASE_LAYER = SpellDimension.modLoc("textures/spell_effect/phase.png");
+    public static final Identifier DAMAGE_LAYER = SpellDimension.modLoc("textures/spell_effect/damage.png");
     public static final Identifier CONVERGE_MODEL = SpellDimension.modLoc("spell_projectile/converge");
     public static final Identifier FROSTED_MODEL = SpellDimension.modLoc("spell_effect/frosted");
     public static final Identifier ICICLE_MODEL = SpellDimension.modLoc("spell_projectile/icicle");
@@ -60,20 +61,20 @@ public class SpellDimensionClient implements ClientModInitializer
         BlockEntityRendererFactories.register(AllBlocks.CONSCIOUSNESS_CORE_TILE, ConsciousnessCoreRenderer::new);
 
         FluidRenderHandlerRegistry.INSTANCE.register(
-                AllBlocks.STILL_CONSCIOUSNESS,
-                AllBlocks.FLOWING_CONSCIOUSNESS,
-                new ConsciousnessFluidRenderHandler()
+            AllBlocks.STILL_CONSCIOUSNESS,
+            AllBlocks.FLOWING_CONSCIOUSNESS,
+            new ConsciousnessFluidRenderHandler()
         );
 
         BlockRenderLayerMap.INSTANCE.putBlocks(
-                RenderLayer.getTranslucent(),
-                AllBlocks.PROTECTIVE_COVER.block(),
-                AllBlocks.CONSCIOUSNESS_CORE.block()
+            RenderLayer.getTranslucent(),
+            AllBlocks.PROTECTIVE_COVER.block(),
+            AllBlocks.CONSCIOUSNESS_CORE.block()
         );
         BlockRenderLayerMap.INSTANCE.putFluids(
-                RenderLayer.getTranslucent(),
-                AllBlocks.STILL_CONSCIOUSNESS,
-                AllBlocks.FLOWING_CONSCIOUSNESS
+            RenderLayer.getTranslucent(),
+            AllBlocks.STILL_CONSCIOUSNESS,
+            AllBlocks.FLOWING_CONSCIOUSNESS
         );
 
         EntityRendererRegistry.register(AllEntities.LOCATE_PORTAL, LocatePortalRenderer::new);
@@ -91,7 +92,9 @@ public class SpellDimensionClient implements ClientModInitializer
         TooltipComponentCallback.EVENT.register(data ->
         {
             if (data instanceof QuestItemTooltipData questData)
+            {
                 return new QuestItemTooltipComponent(questData);
+            }
             return null;
         });
 
@@ -99,13 +102,15 @@ public class SpellDimensionClient implements ClientModInitializer
         GuiOverlayRegistry.registerLayer(7, new ConsciousCoreOverlay());
         GuiOverlayRegistry.registerLayer(3, new GameOverOverlay());
 
-        TextureOverlayRegistry.register(PHASE_LAYER, 0.5F, (client, player, context, tickDelta) -> NoClip.noClip(player));
+        TextureOverlayRegistry.register(PHASE_LAYER, (client, player, context, tickDelta) -> NoClip.noClip(player) ? 0.5f : -1);
+        TextureOverlayRegistry.register(DAMAGE_LAYER, DamageBloodOverlay::getOpacity);
 
-        TAB_SPELL_POWER = TabRegistry.GROUP.registerTab(3600, SpellPowerTab::new,
-                () -> Armors.wizardRobeSet.head, SDTexts.TEXT$SPELL_POWER_INFO.get());
+        TAB_SPELL_POWER = TabRegistry.GROUP.registerTab(3600, SpellPowerTab::new, () -> Armors.wizardRobeSet.head, SDTexts.TEXT$SPELL_POWER_INFO.get());
 
         for (Item item : AllItems.COLOR_PROVIDERS)
+        {
             ColorProviderRegistry.ITEM.register((stack, tintIndex) -> (stack.getItem() instanceof ColorProvider c) ? c.getColor(stack) : 0xffffff, item);
+        }
 
         LivingEntityFeatureRendererRegistrationCallback.EVENT.register((entityType, entityRenderer, registrationHelper, context) ->
         {
@@ -118,10 +123,10 @@ public class SpellDimensionClient implements ClientModInitializer
         });
 
         CustomModels.registerModelIds(List.of(
-                FROSTED_MODEL,
-                ICICLE_MODEL,
-                CONVERGE_MODEL,
-                GENERIC_MODEL
+            FROSTED_MODEL,
+            ICICLE_MODEL,
+            CONVERGE_MODEL,
+            GENERIC_MODEL
         ));
 
         CustomParticleStatusEffect.register(AllStatusEffects.PHASE, new PhaseParticleSpawner());

@@ -26,6 +26,7 @@ public class AllPackets
             S2CSpellDash.class,
             S2COpenQuestScreen.class,
             S2CBeam.class,
+            S2CBloodOverlay.class,
             C2SSelectQuest.class,
             C2SReleaseControl.class
         );
@@ -43,7 +44,8 @@ public class AllPackets
             S2CFloatingItem.class,
             S2CSpellDash.class,
             S2COpenQuestScreen.class,
-            S2CBeam.class
+            S2CBeam.class,
+            S2CBloodOverlay.class
         );
     }
 
