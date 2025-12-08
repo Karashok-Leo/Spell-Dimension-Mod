@@ -4,6 +4,9 @@ import karashokleo.spell_dimension.content.component.SoulControllerComponent;
 import karashokleo.spell_dimension.content.component.SoulMinionComponent;
 import karashokleo.spell_dimension.content.entity.FakePlayerEntity;
 import karashokleo.spell_dimension.init.AllComponents;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -208,5 +211,14 @@ public interface SoulControl
 //        {
 //            fakePlayer.equipStack(slot, player.getEquippedStack(slot).copy());
 //        }
+    }
+
+    @Environment(EnvType.CLIENT)
+    static int getOutlineColor(SoulMinionComponent minionComponent)
+    {
+        // SpellSchools.SOUL.color
+        return minionComponent.getOwner() == MinecraftClient.getInstance().player ?
+            0x2dd4da :
+            0x078b8f;
     }
 }

@@ -2,7 +2,6 @@ package karashokleo.spell_dimension.mixin.vanilla;
 
 import karashokleo.spell_dimension.content.component.SoulMinionComponent;
 import karashokleo.spell_dimension.content.misc.SoulControl;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.mob.MobEntity;
 import org.spongepowered.asm.mixin.Mixin;
@@ -25,17 +24,17 @@ public abstract class EntityMixin
             return;
         }
 
+        if (!mob.getWorld().isClient())
+        {
+            return;
+        }
+
         SoulMinionComponent minionComponent = SoulControl.getSoulMinion(mob);
         if (!minionComponent.hasOwner())
         {
             return;
         }
 
-//        cir.setReturnValue(SpellSchools.SOUL.color);
-        cir.setReturnValue(
-            minionComponent.getOwner() == MinecraftClient.getInstance().player ?
-                0x2dd4da :
-                0x078b8f
-        );
+        cir.setReturnValue(SoulControl.getOutlineColor(minionComponent));
     }
 }
