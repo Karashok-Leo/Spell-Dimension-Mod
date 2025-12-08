@@ -5,6 +5,10 @@
     "spell-dimension:netherite_lightning_wand",
     "spell-dimension:lightning_staff",
     "spell-dimension:netherite_lightning_staff",
+    "spell-dimension:soul_wand",
+    "spell-dimension:netherite_soul_wand",
+    "spell-dimension:soul_staff",
+    "spell-dimension:netherite_soul_staff",
     "spell-dimension:lightning_robe_head",
     "spell-dimension:lightning_robe_chest",
     "spell-dimension:lightning_robe_legs",
@@ -12,6 +16,14 @@
     "spell-dimension:netherite_lightning_robe_head",
     "spell-dimension:netherite_lightning_robe_chest",
     "spell-dimension:netherite_lightning_robe_legs",
-    "spell-dimension:netherite_lightning_robe_feet"
+    "spell-dimension:netherite_lightning_robe_feet",
+    "spell-dimension:soul_robe_head",
+    "spell-dimension:soul_robe_chest",
+    "spell-dimension:soul_robe_legs",
+    "spell-dimension:soul_robe_feet",
+    "spell-dimension:netherite_soul_robe_head",
+    "spell-dimension:netherite_soul_robe_chest",
+    "spell-dimension:netherite_soul_robe_legs",
+    "spell-dimension:netherite_soul_robe_feet"
   ]
 }

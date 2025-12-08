@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "spell-dimension:netherite_lightning_staff"
+    "spell-dimension:netherite_lightning_staff",
+    "spell-dimension:netherite_soul_staff"
   ]
 }

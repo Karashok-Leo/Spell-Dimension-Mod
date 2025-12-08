@@ -1,0 +1,6 @@
+{
+  "parent": "wizards:item/medium_staff",
+  "textures": {
+    "layer0": "spell-dimension:item/netherite_soul_staff"
+  }
+}

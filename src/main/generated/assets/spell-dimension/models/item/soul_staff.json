@@ -1,0 +1,6 @@
+{
+  "parent": "wizards:item/medium_staff",
+  "textures": {
+    "layer0": "spell-dimension:item/soul_staff"
+  }
+}

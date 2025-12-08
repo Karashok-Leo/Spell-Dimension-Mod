@@ -30,10 +30,10 @@ public class AllWeapons
     public static StaffItem NETHERITE_LIGHTNING_WAND;
     public static StaffItem LIGHTNING_STAFF;
     public static StaffItem NETHERITE_LIGHTNING_STAFF;
-//    public static StaffItem SOUL_WAND;
-//    public static StaffItem NETHERITE_SOUL_WAND;
-//    public static StaffItem SOUL_STAFF;
-//    public static StaffItem NETHERITE_SOUL_STAFF;
+    public static StaffItem SOUL_WAND;
+    public static StaffItem NETHERITE_SOUL_WAND;
+    public static StaffItem SOUL_STAFF;
+    public static StaffItem NETHERITE_SOUL_STAFF;
 
     public static void register()
     {
@@ -123,91 +123,91 @@ public class AllWeapons
                 .addModel(MEDIUM_STAFF_MODEL)
                 .setTab(AllGroups.EQUIPMENTS)
                 .register();
-//        SOUL_WAND = AllItems.Entry.of(
-//                        "soul_wand",
-//                        new ConfiguredStaffItem(
-//                                ToolMaterials.IRON,
-//                                Items.IRON_INGOT,
-//                                WAND_ATTACK_DAMAGE,
-//                                WAND_ATTACK_SPEED,
-//                                SpellSchools.SOUL,
-//                                WAND_SPELL_POWER
-//                        )
-//                )
-//                .addEN()
-//                .addZH("灵魂魔杖")
-//                .addTag(
-//                        AllTags.WANDS,
-//                        AllTags.MAGIC,
-//                        AllTags.MAGIC_WEAPON
-//                )
-//                .addModel(Models.HANDHELD)
-//                .setTab(AllGroups.EQUIPMENTS)
-//                .register();
-//        NETHERITE_SOUL_WAND = AllItems.Entry.of(
-//                        "netherite_soul_wand",
-//                        new ConfiguredStaffItem(
-//                                ToolMaterials.NETHERITE,
-//                                Items.NETHERITE_INGOT,
-//                                WAND_ATTACK_DAMAGE,
-//                                WAND_ATTACK_SPEED,
-//                                SpellSchools.SOUL,
-//                                NETHERITE_WAND_SPELL_POWER
-//                        )
-//                )
-//                .addEN()
-//                .addZH("下界合金灵魂魔杖")
-//                .addTag(
-//                        AllTags.WANDS,
-//                        AllTags.MAGIC,
-//                        AllTags.MAGIC_WEAPON
-//                )
-//                .addModel(Models.HANDHELD)
-//                .setTab(AllGroups.EQUIPMENTS)
-//                .register();
-//        SOUL_STAFF = AllItems.Entry.of(
-//                        "soul_staff",
-//                        new ConfiguredStaffItem(
-//                                ToolMaterials.IRON,
-//                                Items.IRON_INGOT,
-//                                STAFF_ATTACK_DAMAGE,
-//                                STAFF_ATTACK_SPEED,
-//                                SpellSchools.SOUL,
-//                                STAFF_SPELL_POWER
-//                        )
-//                )
-//                .addEN()
-//                .addZH("灵魂权杖")
-//                .addTag(
-//                        AllTags.STAVES,
-//                        AllTags.TIER_2_WEAPONS,
-//                        AllTags.MAGIC,
-//                        AllTags.MAGIC_WEAPON
-//                )
-//                .addModel(MEDIUM_STAFF_MODEL)
-//                .setTab(AllGroups.EQUIPMENTS)
-//                .register();
-//        NETHERITE_SOUL_STAFF = AllItems.Entry.of(
-//                        "netherite_soul_staff",
-//                        new ConfiguredStaffItem(
-//                                ToolMaterials.NETHERITE,
-//                                Items.NETHERITE_INGOT,
-//                                STAFF_ATTACK_DAMAGE,
-//                                STAFF_ATTACK_SPEED,
-//                                SpellSchools.SOUL,
-//                                NETHERITE_STAFF_SPELL_POWER
-//                        )
-//                )
-//                .addEN()
-//                .addZH("下界合金灵魂权杖")
-//                .addTag(
-//                        AllTags.STAVES,
-//                        AllTags.TIER_3_WEAPONS,
-//                        AllTags.MAGIC,
-//                        AllTags.MAGIC_WEAPON
-//                )
-//                .addModel(MEDIUM_STAFF_MODEL)
-//                .setTab(AllGroups.EQUIPMENTS)
-//                .register();
+        SOUL_WAND = AllItems.Entry.of(
+                        "soul_wand",
+                        new ConfiguredStaffItem(
+                                ToolMaterials.IRON,
+                                Items.IRON_INGOT,
+                                WAND_ATTACK_DAMAGE,
+                                WAND_ATTACK_SPEED,
+                                SpellSchools.SOUL,
+                                WAND_SPELL_POWER
+                        )
+                )
+                .addEN()
+                .addZH("灵魂魔杖")
+                .addTag(
+                        AllTags.WANDS,
+                        AllTags.MAGIC,
+                        AllTags.MAGIC_WEAPON
+                )
+                .addModel(Models.HANDHELD)
+                .setTab(AllGroups.EQUIPMENTS)
+                .register();
+        NETHERITE_SOUL_WAND = AllItems.Entry.of(
+                        "netherite_soul_wand",
+                        new ConfiguredStaffItem(
+                                ToolMaterials.NETHERITE,
+                                Items.NETHERITE_INGOT,
+                                WAND_ATTACK_DAMAGE,
+                                WAND_ATTACK_SPEED,
+                                SpellSchools.SOUL,
+                                NETHERITE_WAND_SPELL_POWER
+                        )
+                )
+                .addEN()
+                .addZH("下界合金灵魂魔杖")
+                .addTag(
+                        AllTags.WANDS,
+                        AllTags.MAGIC,
+                        AllTags.MAGIC_WEAPON
+                )
+                .addModel(Models.HANDHELD)
+                .setTab(AllGroups.EQUIPMENTS)
+                .register();
+        SOUL_STAFF = AllItems.Entry.of(
+                        "soul_staff",
+                        new ConfiguredStaffItem(
+                                ToolMaterials.IRON,
+                                Items.IRON_INGOT,
+                                STAFF_ATTACK_DAMAGE,
+                                STAFF_ATTACK_SPEED,
+                                SpellSchools.SOUL,
+                                STAFF_SPELL_POWER
+                        )
+                )
+                .addEN()
+                .addZH("灵魂权杖")
+                .addTag(
+                        AllTags.STAVES,
+                        AllTags.TIER_2_WEAPONS,
+                        AllTags.MAGIC,
+                        AllTags.MAGIC_WEAPON
+                )
+                .addModel(MEDIUM_STAFF_MODEL)
+                .setTab(AllGroups.EQUIPMENTS)
+                .register();
+        NETHERITE_SOUL_STAFF = AllItems.Entry.of(
+                        "netherite_soul_staff",
+                        new ConfiguredStaffItem(
+                                ToolMaterials.NETHERITE,
+                                Items.NETHERITE_INGOT,
+                                STAFF_ATTACK_DAMAGE,
+                                STAFF_ATTACK_SPEED,
+                                SpellSchools.SOUL,
+                                NETHERITE_STAFF_SPELL_POWER
+                        )
+                )
+                .addEN()
+                .addZH("下界合金灵魂权杖")
+                .addTag(
+                        AllTags.STAVES,
+                        AllTags.TIER_3_WEAPONS,
+                        AllTags.MAGIC,
+                        AllTags.MAGIC_WEAPON
+                )
+                .addModel(MEDIUM_STAFF_MODEL)
+                .setTab(AllGroups.EQUIPMENTS)
+                .register();
     }
 }

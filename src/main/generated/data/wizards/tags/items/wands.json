@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "spell-dimension:lightning_wand",
-    "spell-dimension:netherite_lightning_wand"
+    "spell-dimension:netherite_lightning_wand",
+    "spell-dimension:soul_wand",
+    "spell-dimension:netherite_soul_wand"
   ]
 }

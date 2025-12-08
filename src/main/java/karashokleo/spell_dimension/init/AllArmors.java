@@ -67,8 +67,8 @@ public class AllArmors
 
     public static ArmorSet LIGHTNING_ROBE;
     public static ArmorSet NETHERITE_LIGHTNING_ROBE;
-//    public static ArmorSet SOUL_ROBE;
-//    public static ArmorSet NETHERITE_SOUL_ROBE;
+    public static ArmorSet SOUL_ROBE;
+    public static ArmorSet NETHERITE_SOUL_ROBE;
 
     public static void register()
     {
@@ -92,25 +92,25 @@ public class AllArmors
                         AllTags.MAGIC_ARMOR
                 )
                 .register();
-//        SOUL_ROBE = new RobeBuilder("soul")
-//                .addEN()
-//                .addZH("灵魂")
-//                .material(SOUL_MATERIAL)
-//                .addTag(
-//                        AllTags.TIER_2_ARMORS,
-//                        AllTags.MAGIC,
-//                        AllTags.MAGIC_ARMOR
-//                )
-//                .register();
-//        NETHERITE_SOUL_ROBE = new RobeBuilder("netherite_soul")
-//                .addEN("Netherite Soul")
-//                .addZH("下界合金灵魂")
-//                .material(NETHERITE_SOUL_MATERIAL)
-//                .addTag(
-//                        AllTags.TIER_3_ARMORS,
-//                        AllTags.MAGIC,
-//                        AllTags.MAGIC_ARMOR
-//                )
-//                .register();
+        SOUL_ROBE = new RobeBuilder("soul")
+                .addEN()
+                .addZH("灵魂")
+                .material(SOUL_MATERIAL)
+                .addTag(
+                        AllTags.TIER_2_ARMORS,
+                        AllTags.MAGIC,
+                        AllTags.MAGIC_ARMOR
+                )
+                .register();
+        NETHERITE_SOUL_ROBE = new RobeBuilder("netherite_soul")
+                .addEN("Netherite Soul")
+                .addZH("下界合金灵魂")
+                .material(NETHERITE_SOUL_MATERIAL)
+                .addTag(
+                        AllTags.TIER_3_ARMORS,
+                        AllTags.MAGIC,
+                        AllTags.MAGIC_ARMOR
+                )
+                .register();
     }
 }
