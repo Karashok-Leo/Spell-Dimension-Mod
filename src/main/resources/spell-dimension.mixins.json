@@ -49,6 +49,7 @@
     "vanilla.EntityMixin",
     "vanilla.ItemStackMixin",
     "vanilla.LivingEntityMixin",
+    "vanilla.MobEntityMixin",
     "vanilla.MobSpawnerLogicMixin",
     "vanilla.PlayerAdvancementTrackerMixin",
     "vanilla.PlayerInventoryAccessor",
