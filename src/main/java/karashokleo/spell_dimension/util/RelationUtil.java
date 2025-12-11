@@ -1,5 +1,6 @@
 package karashokleo.spell_dimension.util;
 
+import karashokleo.spell_dimension.content.entity.FakePlayerEntity;
 import karashokleo.spell_dimension.content.misc.SoulControl;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.Ownable;
@@ -91,6 +92,11 @@ public class RelationUtil
         {
             var minionComponent = SoulControl.getSoulMinion(mob);
             owner = minionComponent.getOwner();
+        }
+
+        if (owner == null && entity instanceof FakePlayerEntity fakePlayer)
+        {
+            owner = fakePlayer.getPlayer();
         }
 
         return owner;
