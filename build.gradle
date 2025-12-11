@@ -91,6 +91,8 @@ dependencies {
     modImplementation "mod.azure.azurelibarmor:azurelibarmor-fabric-1.20.1:${project.azurelib_armor_version}"
     modImplementation "dev.kosmx.player-anim:player-animation-lib-fabric:${project.player_animator_version}"
 
+    modImplementation "curse.maven:jade-324717:${project.jade_version}"
+
     modImplementation "dev.xkmc.l2serial:L2Serial:${project.l2serial_version}"
     modImplementation "dev.xkmc.l2tabs:L2Tabs:${project.l2tabs_version}"
     modImplementation "karashokleo.leobrary:data:${project.leobrary_version}"

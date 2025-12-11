@@ -720,6 +720,7 @@
   "text.spell-dimension.skilled_school": "This is not the spell school you are skilled in!",
   "text.spell-dimension.soul_bind": "You feel the connection between your soul and your body becoming stronger...",
   "text.spell-dimension.soul_control.damage": "Your body is taking %s damage!",
+  "text.spell-dimension.soul_minion_info": "%s's Soul Minion",
   "text.spell-dimension.soul_unbind": "You feel the connection between your soul and your body becoming tenuous...",
   "text.spell-dimension.spell_book": "%s %s Spell Book",
   "text.spell-dimension.spell_infusion": "Spell Infusion",

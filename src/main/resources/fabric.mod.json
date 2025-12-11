@@ -35,6 +35,9 @@
     "rei_client": [
       "karashokleo.spell_dimension.client.compat.rei.REICompat"
     ],
+    "jade": [
+      "karashokleo.spell_dimension.content.integration.JadeIntegration"
+    ],
     "mixinsquared-adjuster": [
       "karashokleo.spell_dimension.SDMixinAnnotationAdjuster"
     ]

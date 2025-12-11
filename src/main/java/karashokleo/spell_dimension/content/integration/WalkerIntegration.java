@@ -1,4 +1,4 @@
-package karashokleo.spell_dimension.init;
+package karashokleo.spell_dimension.content.integration;
 
 import karashokleo.spell_dimension.SpellDimension;
 import tocraft.walkers.Walkers;

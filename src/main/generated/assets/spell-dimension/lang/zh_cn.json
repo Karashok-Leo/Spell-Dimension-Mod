@@ -718,6 +718,7 @@
   "text.spell-dimension.skilled_school": "这不是你擅长的法术学派!",
   "text.spell-dimension.soul_bind": "你感觉灵魂与身体的联系变得紧密...",
   "text.spell-dimension.soul_control.damage": "你的本体正受到%s点伤害！",
+  "text.spell-dimension.soul_minion_info": "%s 的灵仆",
   "text.spell-dimension.soul_unbind": "你感到灵魂与身体的联系变得脆弱...",
   "text.spell-dimension.spell_book": "%s%s法术书",
   "text.spell-dimension.spell_infusion": "魔力灌注",
