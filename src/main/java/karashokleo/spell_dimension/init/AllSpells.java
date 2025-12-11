@@ -42,6 +42,7 @@ public class AllSpells
     public static final Identifier FROST_SHARD = fromPrimary("wizards:frost_shard");
     public static final Identifier HEAL = fromPrimary("paladins:heal");
     public static final Identifier CHAIN_LIGHTNING = fromPrimary(SpellDimension.modLoc("chain_lightning"));
+    public static final Identifier SOUL_SLASH = fromPrimary(SpellDimension.modLoc("soul_slash"));
 
     /**
      * Binding spells
@@ -70,6 +71,10 @@ public class AllSpells
     public static final Identifier SURGE = fromBindingPassive(SpellDimension.modLoc("surge"));
     public static final Identifier STEADY_CURRENT = fromBindingPassive(SpellDimension.modLoc("steady_current"));
     public static final Identifier FISSION = fromBindingPassive(SpellDimension.modLoc("fission"));
+
+    // Soul
+    public static final Identifier POSSESS = fromBinding(SpellDimension.modLoc("possess"));
+    public static final Identifier RECALL = fromBinding(SpellDimension.modLoc("recall"));
 
     /**
      * Infusion spells
@@ -184,6 +189,19 @@ public class AllSpells
     // Tier 3
     public static final Identifier RAILGUN = fromCrafting("railgun").withTier(2).build();
     public static final Identifier ELECTRIC_BONDAGE = fromCrafting("electric_bondage").withTier(2).setPassive().build();
+
+    // Soul
+    // Tier 1
+    public static final Identifier SOUL_SWAP = fromCrafting("soul_swap").withTier(0).build();
+    public static final Identifier SOUL_STEP = fromCrafting("soul_step").withTier(0).build();
+    public static final Identifier SOUL_MARK = fromCrafting("soul_mark").withTier(0).build();
+    // Tier 2
+    public static final Identifier SOUL_DUET = fromCrafting("soul_duet").withTier(1).setPassive().build();
+    public static final Identifier SOUL_NET = fromCrafting("soul_net").withTier(1).setPassive().build();
+    public static final Identifier SOUL_ECHO = fromCrafting("soul_echo").withTier(1).build();
+    public static final Identifier SOUL_BURST = fromCrafting("soul_burst").withTier(1).build();
+    public static final Identifier ETHEREAL_EVASION = fromCrafting("ethereal_evasion").withTier(1).build();
+    // Tier 3
 
     public static void register()
     {
