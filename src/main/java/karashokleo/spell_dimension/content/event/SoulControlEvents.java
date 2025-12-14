@@ -8,12 +8,9 @@ import karashokleo.spell_dimension.content.entity.FakePlayerEntity;
 import karashokleo.spell_dimension.content.misc.SoulControl;
 import karashokleo.spell_dimension.content.network.S2CBloodOverlay;
 import karashokleo.spell_dimension.data.SDTexts;
-import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllPackets;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
@@ -23,47 +20,29 @@ public class SoulControlEvents
 {
     public static void init()
     {
-        // Soul Container capture mob
-        ServerLivingEntityEvents.ALLOW_DEATH.register((entity, damageSource, damageAmount) ->
-        {
-            if (!(entity instanceof MobEntity mob))
-            {
-                return true;
-            }
-            if (!(damageSource.getAttacker() instanceof PlayerEntity player))
-            {
-                return true;
-            }
-            ItemStack stack = player.getOffHandStack();
-            if (!stack.isOf(AllItems.SOUL_CONTAINER))
-            {
-                return true;
-            }
-            return !AllItems.SOUL_CONTAINER.tryCaptureEntity(stack, player, mob);
-        });
-
         // start soul control
+        // WARNING: return null to run default behavior!!!
         PlayerInteractionEvents.INTERACT_ENTITY_GENERAL.register((player, entity, hand) ->
         {
             if (hand == Hand.OFF_HAND)
             {
-                return ActionResult.PASS;
+                return null;
             }
             if (!(player instanceof ServerPlayerEntity serverPlayer))
             {
-                return ActionResult.PASS;
+                return null;
             }
             if (!(entity instanceof MobEntity mob))
             {
-                return ActionResult.PASS;
+                return null;
             }
             if (!serverPlayer.isSneaking())
             {
-                return ActionResult.PASS;
+                return null;
             }
             if (!SoulControl.isSoulMinion(serverPlayer, mob))
             {
-                return ActionResult.PASS;
+                return null;
             }
             SoulControl.setControllingMinion(serverPlayer, mob);
             return ActionResult.SUCCESS;
