@@ -225,13 +225,16 @@ public interface SoulControl
 
     static float getCaptureProbability(LivingEntity entity)
     {
-        float healthRatio = entity.getHealth() / entity.getMaxHealth();
-        if (healthRatio <= 0.0f || healthRatio >= 0.1f)
+        float health = entity.getHealth();
+        float maxHealth = entity.getMaxHealth();
+        float threshold = maxHealth * 0.1f;
+        threshold = Math.max(threshold, 4f);
+        if (health <= 0 || health >= threshold)
         {
-            return 0f;
+            return 0;
         } else
         {
-            return 1 - healthRatio / 0.1f;
+            return 1 - health / threshold;
         }
     }
 }
