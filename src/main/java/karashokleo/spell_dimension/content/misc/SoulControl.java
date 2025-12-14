@@ -163,7 +163,7 @@ public interface SoulControl
         return mob;
     }
 
-    static void updatePosRotHealth(LivingEntity target, LivingEntity entity)
+    private static void updatePosRotHealth(LivingEntity target, LivingEntity entity)
     {
         if (entity.getWorld().isClient())
         {
