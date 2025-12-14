@@ -242,6 +242,8 @@ public class AllSpells
         registerImpactHandler(BALL_LIGHTNING, BallLightningSpell::handle);
         registerImpactHandler(THUNDERBOLT, ThunderboltSpell::handle);
         registerImpactHandler(RAILGUN, RailgunSpell::handle);
+        registerImpactHandler(POSSESS, PossessSpell::handle);
+        registerImpactHandler(RECALL, RecallSpell::handle);
     }
 
     private static final Map<Identifier, SpellImpactEvents.Callback> IMPACT_HANDLERS = new HashMap<>();

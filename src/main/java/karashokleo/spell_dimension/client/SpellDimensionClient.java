@@ -9,7 +9,6 @@ import karashokleo.leobrary.gui.api.TextureOverlayRegistry;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.client.misc.AdditionalTooltip;
 import karashokleo.spell_dimension.client.misc.ClientAirHopHandler;
-import karashokleo.spell_dimension.client.misc.SoulControlHandler;
 import karashokleo.spell_dimension.client.quest.QuestItemTooltipComponent;
 import karashokleo.spell_dimension.client.quest.QuestItemTooltipData;
 import karashokleo.spell_dimension.client.render.*;
@@ -49,6 +48,7 @@ public class SpellDimensionClient implements ClientModInitializer
     public static final Identifier FROSTED_MODEL = SpellDimension.modLoc("spell_effect/frosted");
     public static final Identifier ICICLE_MODEL = SpellDimension.modLoc("spell_projectile/icicle");
     public static final Identifier GENERIC_MODEL = SpellDimension.modLoc("spell_projectile/generic");
+    public static final Identifier SOUL_SLASH_MODEL = SpellDimension.modLoc("spell_projectile/soul_slash");
 
     public static TabToken<InvTabData, SpellPowerTab> TAB_SPELL_POWER;
 
@@ -126,7 +126,8 @@ public class SpellDimensionClient implements ClientModInitializer
             FROSTED_MODEL,
             ICICLE_MODEL,
             CONVERGE_MODEL,
-            GENERIC_MODEL
+            GENERIC_MODEL,
+            SOUL_SLASH_MODEL
         ));
 
         CustomParticleStatusEffect.register(AllStatusEffects.PHASE, new PhaseParticleSpawner());
@@ -143,6 +144,6 @@ public class SpellDimensionClient implements ClientModInitializer
 
         AllParticles.registerClient();
 
-        SoulControlHandler.register();
+//        SoulControlHandler.register();
     }
 }

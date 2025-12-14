@@ -17,6 +17,7 @@ public class SoulControlHandler
 
     public static void register()
     {
+        // TODO
         KEY_RELEASE_CONTROL = KeyBindingHelper.registerKeyBinding(new KeyBinding(
             "key.examplemod.spook",
             InputUtil.Type.KEYSYM,
