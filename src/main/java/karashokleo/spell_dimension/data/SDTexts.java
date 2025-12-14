@@ -84,7 +84,7 @@ public enum SDTexts
     TEXT$LOCATING("Locating: %s", "正在定位：%s"),
     TEXT$SUMMON$DISALLOW("%s can only be summoned with spell at its spawn location!", "只有在%s的生成地点才能使用魔力召唤它！"),
 
-    TEXT$SOUL_MINION_INFO("%s's Soul Minion","%s 的灵仆"),
+    TEXT$SOUL_MINION_INFO("%s's Soul Minion", "%s 的灵仆"),
     TEXT$SOUL_CONTROL$DAMAGE("Your body is taking %s damage!", "你的本体正受到%s点伤害！"),
 
     /**
@@ -192,10 +192,20 @@ public enum SDTexts
     TOOLTIP$QUEST$TAG_ITEM("Search %s for the required item", "搜索 %s 以查询对应物品"),
     TOOLTIP$NOT_CONSUMED("Will not be consumed", "不消耗"),
     TOOLTIP$TOOK_SECONDS("Took %s second(s)", "耗时%s秒"),
-    TOOLTIP$CONTAINER_EMPTY("[Empty]", "[空]"),
     TOOLTIP$SOUL_TYPE("Soul type: %s", "灵魂类型：%s"),
     TOOLTIP$REMAINING_NUMBER("Remaining number: %s", "剩余数量：%s"),
-    TOOLTIP$REMAINING_HEALTH("Remaining health: %s", "剩余生命值：%s"),
+    TOOLTIP$CONTAINER_EMPTY("[Empty]", "[空]"),
+    TOOLTIP$SOUL_MINION$NAME("Name: %s", "名称：%s"),
+    TOOLTIP$SOUL_MINION$TYPE("Type: %s", "类型：%s"),
+    TOOLTIP$SOUL_MINION$LEVEL("Level: %s", "等级：%s"),
+    TOOLTIP$SOUL_MINION$HEALTH("Health: %s", "生命值：%s"),
+    TOOLTIP$SOUL_MINION$CAPTURE_PROBABILITY("Capture probability: %s", "捕捉概率：%s"),
+    TOOLTIP$SOUL_CONTAINER$STORED("Stored:", "已存储："),
+    TOOLTIP$SOUL_CONTAINER$LAST_STORED("Last stored:", "上次存储："),
+    TOOLTIP$SOUL_CONTAINER$USAGE_1("Right-click on mobs with health below 10% to attempt capturing their souls, converting them into soul minions and storing them in containers. The lower the target's health, the higher the success rate.", "右键点击生命值低于10%的生物时可尝试捕捉其灵魂，转化为灵仆并存储在容器中，目标生命值越低成功率越高。"),
+    TOOLTIP$SOUL_CONTAINER$USAGE_2("Right-click the block to release the stored soul minion.", "右键点击方块可释放存储的灵仆。"),
+    TOOLTIP$SOUL_CONTAINER$USAGE_3("Right-click the block to attempt recalling the last summoned soul minion.", "右键点击方块可尝试将上次释放的灵仆召回。"),
+    TOOLTIP$SOUL_CONTAINER$WARNING("The target is dead, lost, or not present in this dimension.", "目标已死亡，遗失，或不在此维度中。"),
 
     /**
      * Magic Mirror
@@ -322,10 +332,13 @@ public enum SDTexts
     SDTexts(String en, String zh)
     {
         String[] split = this.name().split("\\$", 2);
-        if (split.length != 2) throw new RuntimeException("SDTexts: Incorrect name!");
+        if (split.length != 2)
+        {
+            throw new RuntimeException("SDTexts: Incorrect name!");
+        }
         this.key = Util.createTranslationKey(
-                split[0].toLowerCase(Locale.ROOT),
-                SpellDimension.modLoc(split[1].replace('$', '.').toLowerCase(Locale.ROOT))
+            split[0].toLowerCase(Locale.ROOT),
+            SpellDimension.modLoc(split[1].replace('$', '.').toLowerCase(Locale.ROOT))
         );
         this.en = en;
         this.zh = zh;

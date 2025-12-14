@@ -20,6 +20,7 @@ import net.minecraft.network.packet.s2c.play.PositionFlag;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import tocraft.walkers.api.PlayerShape;
 
@@ -146,7 +147,7 @@ public interface SoulControl
         return entityNbt;
     }
 
-    static MobEntity loadMinionFromData(NbtCompound data, ServerWorld world)
+    static MobEntity loadMinionFromData(NbtCompound data, World world)
     {
         Optional<EntityType<?>> entityType = EntityType.fromNbt(data);
         if (entityType.isEmpty())
@@ -220,5 +221,17 @@ public interface SoulControl
         return minionComponent.getOwner() == MinecraftClient.getInstance().player ?
             0x2dd4da :
             0x078b8f;
+    }
+
+    static float getCaptureProbability(LivingEntity entity)
+    {
+        float healthRatio = entity.getHealth() / entity.getMaxHealth();
+        if (healthRatio <= 0.0f || healthRatio >= 0.1f)
+        {
+            return 0f;
+        } else
+        {
+            return 1 - healthRatio / 0.1f;
+        }
     }
 }
