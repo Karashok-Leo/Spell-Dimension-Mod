@@ -1,0 +1,30 @@
+{
+  "school": "SOUL",
+  "range": 0,
+  "release": {
+    "target": {
+      "type": "SELF"
+    },
+    "animation": "spell_engine:one_handed_area_release",
+    "sound": {
+      "id": "spell_engine:generic_soul_release",
+      "randomness": 0
+    },
+    "particles": [
+      {
+        "particle_id": "minecraft:soul",
+        "shape": "PIPE",
+        "origin": "FEET",
+        "count": 20.0,
+        "min_speed": 0.04,
+        "max_speed": 0.12
+      }
+    ]
+  },
+  "impact": [
+  ],
+  "cost": {
+    "exhaust": 0,
+    "cooldown_duration": 3
+  }
+}

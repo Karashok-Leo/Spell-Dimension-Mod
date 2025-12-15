@@ -244,6 +244,8 @@ public class AllSpells
         registerImpactHandler(RAILGUN, RailgunSpell::handle);
         registerImpactHandler(POSSESS, PossessSpell::handle);
         registerImpactHandler(RECALL, RecallSpell::handle);
+        registerImpactHandler(SOUL_SWAP, SoulSwapSpell::handle);
+        registerImpactHandler(SOUL_STEP, SoulStepSpell::handle);
     }
 
     private static final Map<Identifier, SpellImpactEvents.Callback> IMPACT_HANDLERS = new HashMap<>();
