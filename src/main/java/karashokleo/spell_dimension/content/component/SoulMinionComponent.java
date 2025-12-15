@@ -51,6 +51,14 @@ public class SoulMinionComponent implements AutoSyncedComponent
         return owner;
     }
 
+    /**
+     * after the change in ownership, mob must be despawned and respawned to get controlled by owner player
+     *
+     * @param owner owner player entity, or null to clear owner
+     * @see SoulControllerComponent#onMinionAdded(MobEntity)
+     * @see SoulControllerComponent#onMinionRemoved(MobEntity)
+     * @see SoulControllerComponent#getActiveMinions()
+     */
     public void setOwner(@Nullable PlayerEntity owner)
     {
         if (owner == null ||

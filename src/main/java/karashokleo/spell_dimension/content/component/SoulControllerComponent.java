@@ -4,6 +4,7 @@ import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import dev.onyxstudios.cca.api.v3.component.tick.ServerTickingComponent;
 import karashokleo.spell_dimension.content.entity.FakePlayerEntity;
 import karashokleo.spell_dimension.content.misc.SoulControl;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
@@ -12,7 +13,7 @@ import net.minecraft.server.world.ServerWorld;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.UUID;
+import java.util.*;
 
 public class SoulControllerComponent implements AutoSyncedComponent, ServerTickingComponent
 {
@@ -20,6 +21,7 @@ public class SoulControllerComponent implements AutoSyncedComponent, ServerTicki
     private static final String FAKE_PLAYER_SELF_KEY = "FakePlayerSelf";
 
     private final PlayerEntity player;
+    private final HashSet<UUID> activeMinions;
 
     @Nullable
     private NbtCompound controllingMinionData;
@@ -37,6 +39,36 @@ public class SoulControllerComponent implements AutoSyncedComponent, ServerTicki
     public SoulControllerComponent(PlayerEntity player)
     {
         this.player = player;
+        this.activeMinions = new HashSet<>();
+    }
+
+    public void onMinionAdded(MobEntity minion)
+    {
+        activeMinions.add(minion.getUuid());
+    }
+
+    public void onMinionRemoved(MobEntity minion)
+    {
+        activeMinions.remove(minion.getUuid());
+    }
+
+    public List<MobEntity> getActiveMinions()
+    {
+        if (!(player.getWorld() instanceof ServerWorld world) ||
+            activeMinions.isEmpty())
+        {
+            return Collections.emptyList();
+        }
+
+        List<MobEntity> result = new ArrayList<>(activeMinions.size());
+        for (UUID uuid : activeMinions)
+        {
+            if (world.getEntity(uuid) instanceof MobEntity mob)
+            {
+                result.add(mob);
+            }
+        }
+        return result;
     }
 
     public boolean isControlling()

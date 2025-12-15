@@ -1,6 +1,7 @@
 package karashokleo.spell_dimension.content.event;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEvent;
+import io.github.fabricators_of_create.porting_lib.entity.events.LivingEntityEvents;
 import karashokleo.leobrary.damage.api.modify.DamagePhase;
 import karashokleo.spell_dimension.content.component.SoulControllerComponent;
 import karashokleo.spell_dimension.content.component.SoulMinionComponent;
@@ -108,6 +109,54 @@ public class SoulControlEvents
             AllPackets.toClientPlayer(player, new S2CBloodOverlay());
         });
 
+        // default return true
+        // minion added
+        LivingEntityEvents.ON_JOIN_WORLD.register((entity, world, loadedFromDisk) ->
+        {
+            if (world.isClient())
+            {
+                return true;
+            }
 
+            if (!(entity instanceof MobEntity mob))
+            {
+                return true;
+            }
+
+            SoulMinionComponent minionComponent = SoulControl.getSoulMinion(mob);
+            PlayerEntity owner = minionComponent.getOwner();
+            if (owner == null)
+            {
+                return true;
+            }
+
+            SoulControllerComponent controllerComponent = SoulControl.getSoulController(owner);
+            controllerComponent.onMinionAdded(mob);
+            return true;
+        });
+
+        // minion removed
+        LivingEntityEvents.ON_REMOVE.register((entity, reason) ->
+        {
+            if (entity.getWorld().isClient())
+            {
+                return;
+            }
+
+            if (!(entity instanceof MobEntity mob))
+            {
+                return;
+            }
+
+            SoulMinionComponent minionComponent = SoulControl.getSoulMinion(mob);
+            PlayerEntity owner = minionComponent.getOwner();
+            if (owner == null)
+            {
+                return;
+            }
+
+            SoulControllerComponent controllerComponent = SoulControl.getSoulController(owner);
+            controllerComponent.onMinionRemoved(mob);
+        });
     }
 }
