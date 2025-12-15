@@ -19,9 +19,12 @@ public class SoulMinionComponent implements AutoSyncedComponent
     @Nullable
     private UUID ownerUuid;
 
+    public byte soulNetFlag;
+
     public SoulMinionComponent(MobEntity mob)
     {
         this.mob = mob;
+        this.soulNetFlag = 0;
     }
 
     public boolean hasOwner()

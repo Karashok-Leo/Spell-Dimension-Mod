@@ -3,11 +3,14 @@ package karashokleo.spell_dimension.content.event;
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEvent;
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingEntityEvents;
 import karashokleo.leobrary.damage.api.modify.DamagePhase;
+import karashokleo.leobrary.damage.api.state.DamageStateProvider;
+import karashokleo.leobrary.effect.api.event.LivingHealCallback;
 import karashokleo.spell_dimension.content.component.SoulControllerComponent;
 import karashokleo.spell_dimension.content.component.SoulMinionComponent;
 import karashokleo.spell_dimension.content.entity.FakePlayerEntity;
 import karashokleo.spell_dimension.content.misc.SoulControl;
 import karashokleo.spell_dimension.content.network.S2CBloodOverlay;
+import karashokleo.spell_dimension.content.object.SoulNetDamageState;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllPackets;
 import karashokleo.spell_dimension.init.AllSpells;
@@ -15,6 +18,7 @@ import karashokleo.spell_dimension.init.AllStatusEffects;
 import karashokleo.spell_dimension.util.DamageUtil;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -23,7 +27,9 @@ import net.spell_engine.api.spell.SpellContainer;
 import net.spell_engine.internals.SpellContainerHelper;
 import net.spell_power.api.SpellSchools;
 
-public class SoulControlEvents
+import java.util.List;
+
+public class SoulMinionEvents
 {
     public static void init()
     {
@@ -75,7 +81,8 @@ public class SoulControlEvents
 
             // passive
             SpellContainer spellContainer = SpellContainerHelper.getEquipped(owner.getMainHandStack(), owner);
-            if (spellContainer != null && spellContainer.spell_ids.contains(AllSpells.SOUL_DUET.toString()))
+            if (spellContainer != null &&
+                spellContainer.spell_ids.contains(AllSpells.SOUL_DUET.toString()))
             {
                 factor *= 2;
             }
@@ -105,6 +112,7 @@ public class SoulControlEvents
                 return;
             }
 
+            // this is safe because DamageAccess#getModifiedDamage is not called in DamageAccess#addModifier
             float finalDamage = access.getModifiedDamage(access.getOriginalDamage());
             if (finalDamage <= 0.0f)
             {
@@ -164,6 +172,96 @@ public class SoulControlEvents
 
             SoulControllerComponent controllerComponent = SoulControl.getSoulController(owner);
             controllerComponent.onMinionRemoved(mob);
+        });
+
+        // Soul Net - damage
+        LivingAttackEvent.ATTACK.register(event ->
+        {
+            if (!(event.getEntity() instanceof MobEntity mob))
+            {
+                return;
+            }
+
+            SoulMinionComponent minionComponent = SoulControl.getSoulMinion(mob);
+            PlayerEntity owner = minionComponent.getOwner();
+            if (owner == null)
+            {
+                return;
+            }
+
+            // passive
+            SpellContainer spellContainer = SpellContainerHelper.getEquipped(owner.getMainHandStack(), owner);
+            if (spellContainer == null ||
+                !spellContainer.spell_ids.contains(AllSpells.SOUL_NET.toString()))
+            {
+                return;
+            }
+
+            DamageSource source = event.getSource();
+            if (((DamageStateProvider) source).hasState(SoulNetDamageState.PREDICATE))
+            {
+                return;
+            }
+            ((DamageStateProvider) source).addState(new SoulNetDamageState());
+
+            SoulControllerComponent controllerComponent = SoulControl.getSoulController(owner);
+            List<MobEntity> activeMinions = controllerComponent.getActiveMinions();
+
+            // split damage
+            float amount = event.getAmount() / activeMinions.size();
+            for (MobEntity minion : activeMinions)
+            {
+                minion.damage(source, amount);
+            }
+
+            event.setCanceled(true);
+        });
+
+        // Soul Net - heal
+        LivingHealCallback.EVENT.register(event ->
+        {
+            if (!(event.getEntity() instanceof MobEntity mob))
+            {
+                return true;
+            }
+
+            SoulMinionComponent minionComponent = SoulControl.getSoulMinion(mob);
+            PlayerEntity owner = minionComponent.getOwner();
+            if (owner == null)
+            {
+                return true;
+            }
+
+            // passive
+            SpellContainer spellContainer = SpellContainerHelper.getEquipped(owner.getMainHandStack(), owner);
+            if (spellContainer == null ||
+                !spellContainer.spell_ids.contains(AllSpells.SOUL_NET.toString()))
+            {
+                return true;
+            }
+
+            if (minionComponent.soulNetFlag > 0)
+            {
+                return true;
+            }
+
+            // prevent recursion
+            minionComponent.soulNetFlag++;
+
+            SoulControllerComponent controllerComponent = SoulControl.getSoulController(owner);
+            List<MobEntity> activeMinions = controllerComponent.getActiveMinions();
+
+            // split heal
+            float amount = event.getAmount() / activeMinions.size();
+            for (MobEntity minion : activeMinions)
+            {
+                minion.heal(amount);
+            }
+
+            minionComponent.soulNetFlag--;
+
+            event.setAmount(0);
+            return true;
         });
     }
 }
