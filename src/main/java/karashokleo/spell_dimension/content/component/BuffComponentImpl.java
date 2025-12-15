@@ -73,6 +73,10 @@ public record BuffComponentImpl(
     public void serverTick()
     {
         AllComponents.BUFF.sync(this.owner);
+        if (this.buffMap.isEmpty())
+        {
+            return;
+        }
         var snapshot = List.copyOf(this.buffMap.values());
         for (BuffEntry<?> entry : snapshot)
         {
