@@ -3,14 +3,23 @@ package karashokleo.spell_dimension.content.event;
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEvent;
 import karashokleo.leobrary.damage.api.modify.DamagePhase;
 import karashokleo.spell_dimension.content.component.SoulControllerComponent;
+import karashokleo.spell_dimension.content.component.SoulMinionComponent;
 import karashokleo.spell_dimension.content.entity.FakePlayerEntity;
 import karashokleo.spell_dimension.content.misc.SoulControl;
 import karashokleo.spell_dimension.content.network.S2CBloodOverlay;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllPackets;
+import karashokleo.spell_dimension.init.AllSpells;
+import karashokleo.spell_dimension.util.DamageUtil;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Formatting;
+import net.spell_engine.api.spell.SpellContainer;
+import net.spell_engine.internals.SpellContainerHelper;
+import net.spell_power.api.SpellSchools;
 
 public class SoulControlEvents
 {
@@ -35,13 +44,44 @@ public class SoulControlEvents
         });
 
         // prevent minion attack owner
+        // extra soul magic damage
         LivingAttackEvent.ATTACK.register(event ->
         {
-            if (!SoulControl.isSoulMinion(event.getEntity(), event.getSource().getAttacker()))
+            if (!(event.getSource().getAttacker() instanceof MobEntity mob))
             {
                 return;
             }
-            event.setCanceled(true);
+
+            SoulMinionComponent minionComponent = SoulControl.getSoulMinion(mob);
+            PlayerEntity owner = minionComponent.getOwner();
+
+            LivingEntity living = event.getEntity();
+            // prevent attack owner
+            if (living == owner)
+            {
+                event.setCanceled(true);
+                return;
+            }
+
+            if (owner == null)
+            {
+                return;
+            }
+
+            // extra soul magic damage
+            float factor = 0.15f;
+
+            // passive
+            SpellContainer spellContainer = SpellContainerHelper.getEquipped(owner.getMainHandStack(), owner);
+            if (spellContainer != null && spellContainer.spell_ids.contains(AllSpells.SOUL_DUET.toString()))
+            {
+                factor *= 2;
+            }
+
+            float amount = (float) DamageUtil.calculateDamage(owner, SpellSchools.SOUL, factor);
+            // at least 1 damage
+            amount = Math.max(1.0f, amount);
+            DamageUtil.spellDamage(living, SpellSchools.SOUL, owner, amount, false);
         });
 
         // fake player self damage feedback
@@ -67,5 +107,7 @@ public class SoulControlEvents
 
             AllPackets.toClientPlayer(player, new S2CBloodOverlay());
         });
+
+
     }
 }
