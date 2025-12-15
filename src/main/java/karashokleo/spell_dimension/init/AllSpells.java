@@ -246,6 +246,7 @@ public class AllSpells
         registerImpactHandler(RECALL, RecallSpell::handle);
         registerImpactHandler(SOUL_SWAP, SoulSwapSpell::handle);
         registerImpactHandler(SOUL_STEP, SoulStepSpell::handle);
+        registerImpactHandler(SOUL_MARK, SoulMarkSpell::handle);
     }
 
     private static final Map<Identifier, SpellImpactEvents.Callback> IMPACT_HANDLERS = new HashMap<>();

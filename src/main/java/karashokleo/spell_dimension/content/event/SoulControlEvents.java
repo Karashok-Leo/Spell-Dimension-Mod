@@ -11,6 +11,7 @@ import karashokleo.spell_dimension.content.network.S2CBloodOverlay;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllPackets;
 import karashokleo.spell_dimension.init.AllSpells;
+import karashokleo.spell_dimension.init.AllStatusEffects;
 import karashokleo.spell_dimension.util.DamageUtil;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.minecraft.entity.LivingEntity;
@@ -77,6 +78,12 @@ public class SoulControlEvents
             if (spellContainer != null && spellContainer.spell_ids.contains(AllSpells.SOUL_DUET.toString()))
             {
                 factor *= 2;
+            }
+
+            // soul mark
+            if (living.hasStatusEffect(AllStatusEffects.SOUL_MARK))
+            {
+                factor *= 2f;
             }
 
             float amount = (float) DamageUtil.calculateDamage(owner, SpellSchools.SOUL, factor);
