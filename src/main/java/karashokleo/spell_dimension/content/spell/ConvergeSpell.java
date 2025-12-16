@@ -27,25 +27,27 @@ import java.util.List;
 public class ConvergeSpell
 {
     private static final ParticleBatch[] PARTICLE = {new ParticleBatch(
-            "minecraft:explosion_emitter",
-            ParticleBatch.Shape.SPHERE,
-            ParticleBatch.Origin.CENTER,
-            null,
-            0,
-            0,
-            1,
-            0.25F,
-            0.5F,
-            0,
-            0,
-            0,
-            false
+        "minecraft:explosion_emitter",
+        ParticleBatch.Shape.SPHERE,
+        ParticleBatch.Origin.CENTER,
+        null,
+        0,
+        0,
+        1,
+        0.25F,
+        0.5F,
+        0,
+        0,
+        0,
+        false
     )};
 
     public static void handle(SpellProjectile projectile, Identifier spellId, HitResult hitResult)
     {
         if (spellId.equals(AllSpells.CONVERGE))
+        {
             convergeImpact(projectile);
+        }
     }
 
     public static void convergeImpact(SpellProjectile projectile)
@@ -54,7 +56,9 @@ public class ConvergeSpell
         if (owner == null ||
             owner.isRemoved() ||
             (!(owner instanceof LivingEntity caster)))
+        {
             return;
+        }
         convergeImpact(caster, projectile, projectile.getPos());
     }
 
@@ -66,11 +70,14 @@ public class ConvergeSpell
         SoundHelper.playSoundEvent(tracked.getWorld(), tracked, SoundEvents.ENTITY_GENERIC_EXPLODE);
         float damage = (float) DamageUtil.calculateDamage(caster, SpellSchools.ARCANE, SpellConfig.CONVERGE_FACTOR);
         List<LivingEntity> targets = ImpactUtil.getLivingsInRange(
-                tracked,
-                3 + amplifier * 0.8F,
-                target -> !RelationUtil.isAlly(caster, target)
+            tracked,
+            3 + amplifier * 0.8F,
+            target -> !RelationUtil.isAlly(caster, target)
         );
-        if (targets.isEmpty()) return;
+        if (targets.isEmpty())
+        {
+            return;
+        }
 
         SpellInfo spellInfo = new SpellInfo(SpellRegistry.getSpell(AllSpells.CONVERGE), AllSpells.CONVERGE);
         SpellImpactEvents.POST.invoker().invoke(caster.getWorld(), caster, new ArrayList<>(targets), spellInfo);

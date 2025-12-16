@@ -31,7 +31,10 @@ public class SpawnerSoulItem extends Item
         int remain = spawnerExtension.getRemain();
         NbtCompound entityNbt = spawnerExtension.getEntityNbt();
         Optional<EntityType<?>> optional = EntityType.fromNbt(entityNbt);
-        if (remain <= 0 || optional.isEmpty()) return ItemStack.EMPTY;
+        if (remain <= 0 || optional.isEmpty())
+        {
+            return ItemStack.EMPTY;
+        }
         ItemStack stack = this.getDefaultStack();
         NbtCompound nbt = stack.getOrCreateNbt();
         nbt.putInt(SpawnerExtension.KEY_REMAIN, remain);
@@ -42,11 +45,20 @@ public class SpawnerSoulItem extends Item
     public Optional<SummonEntry> getSummonEntry(ItemStack stack)
     {
         NbtCompound nbt = stack.getNbt();
-        if (nbt == null) return Optional.empty();
+        if (nbt == null)
+        {
+            return Optional.empty();
+        }
         NbtCompound entityNbt = nbt.getCompound(ENTITY_KEY);
-        if (entityNbt.isEmpty()) return Optional.empty();
+        if (entityNbt.isEmpty())
+        {
+            return Optional.empty();
+        }
         Optional<EntityType<?>> optional = EntityType.fromNbt(entityNbt);
-        if (optional.isEmpty()) return Optional.empty();
+        if (optional.isEmpty())
+        {
+            return Optional.empty();
+        }
         int remain = nbt.getInt(SpawnerExtension.KEY_REMAIN);
         return Optional.of(new SummonEntry(optional.get(), remain));
     }

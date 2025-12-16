@@ -20,15 +20,15 @@ public class MageCategory extends CategoryProvider
     protected String[] generateEntryMap()
     {
         return new String[]{
-                "__d___m__",
-                "c_______l",
-                "____e____",
-                "_________",
-                "u___a___h",
-                "_________",
-                "____n____",
-                "k_______r",
-                "__s___o__",
+            "__d___m__",
+            "c_______l",
+            "____e____",
+            "_________",
+            "u___a___h",
+            "_________",
+            "____n____",
+            "k_______r",
+            "__s___o__",
         };
     }
 
@@ -82,8 +82,8 @@ public class MageCategory extends CategoryProvider
         this.lang().add(context.categoryName(), "Path of the Mage");
         this.lang("zh_cn").add(context.categoryName(), "魔法师之路");
         return BookCategoryModel
-                .create(this.modLoc(context.categoryId()), context.categoryName())
-                .withIcon(Armors.arcaneRobeSet.head)
-                .withBackground(BookGenUtil.id("textures/background/1.png"));
+            .create(this.modLoc(context.categoryId()), context.categoryName())
+            .withIcon(Armors.arcaneRobeSet.head)
+            .withBackground(BookGenUtil.id("textures/background/1.png"));
     }
 }

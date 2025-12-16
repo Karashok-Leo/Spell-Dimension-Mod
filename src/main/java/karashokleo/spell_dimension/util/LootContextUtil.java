@@ -19,9 +19,13 @@ public class LootContextUtil
     {
         PlayerEntity player = null;
         if (context.get(LootContextParameters.THIS_ENTITY) instanceof PlayerEntity thisEntity)
+        {
             player = thisEntity;
+        }
         if (context.get(LootContextParameters.KILLER_ENTITY) instanceof PlayerEntity killerEntity)
+        {
             player = killerEntity;
+        }
         return player;
     }
 
@@ -51,10 +55,10 @@ public class LootContextUtil
             SpellSchool school = getContextSchool(context);
             List<SpellSchool> primarySchools = SchoolUtil.getLivingSchools(player);
             schools = school == null ?
-                    (player == null ?
-                            SchoolUtil.SCHOOLS :
-                            primarySchools) :
-                    List.of(school);
+                (player == null ?
+                    SchoolUtil.SCHOOLS :
+                    primarySchools) :
+                List.of(school);
         }
         return AttributeModifier.getRandom(random, schools);
     }

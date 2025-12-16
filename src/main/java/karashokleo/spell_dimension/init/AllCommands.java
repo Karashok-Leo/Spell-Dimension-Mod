@@ -28,12 +28,12 @@ public class AllCommands
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) ->
         {
             dispatcher.register(
-                    CommandManager
-                            .literal("spell_dimension")
-                            .then(printHandStack())
-                            .then(fixFakeDeath())
-                            .then(reloadSpells())
-                            .then(convertModifiers())
+                CommandManager
+                    .literal("spell_dimension")
+                    .then(printHandStack())
+                    .then(fixFakeDeath())
+                    .then(reloadSpells())
+                    .then(convertModifiers())
             );
         });
     }
@@ -41,30 +41,30 @@ public class AllCommands
     private static LiteralArgumentBuilder<ServerCommandSource> printHandStack()
     {
         return CommandManager
-                .literal("hand")
-                .executes(AllCommands::executePrintHandStack);
+            .literal("hand")
+            .executes(AllCommands::executePrintHandStack);
     }
 
     private static LiteralArgumentBuilder<ServerCommandSource> fixFakeDeath()
     {
         return CommandManager
-                .literal("fix_fake_death")
-                .executes(AllCommands::executeFixFakeDeath);
+            .literal("fix_fake_death")
+            .executes(AllCommands::executeFixFakeDeath);
     }
 
     private static LiteralArgumentBuilder<ServerCommandSource> reloadSpells()
     {
         return CommandManager
-                .literal("reload_spells")
-                .requires(source -> source.hasPermissionLevel(2))
-                .executes(AllCommands::executeReload);
+            .literal("reload_spells")
+            .requires(source -> source.hasPermissionLevel(2))
+            .executes(AllCommands::executeReload);
     }
 
     private static LiteralArgumentBuilder<ServerCommandSource> convertModifiers()
     {
         return CommandManager
-                .literal("convert_modifiers")
-                .executes(AllCommands::executeConvertModifiers);
+            .literal("convert_modifiers")
+            .executes(AllCommands::executeConvertModifiers);
     }
 
     private static int executePrintHandStack(CommandContext<ServerCommandSource> context)

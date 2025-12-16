@@ -49,12 +49,12 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
     public static final double MODIFIER_PER_GRADE = 0.1;
     public static final Identifier DYNAMIC_POOL = SpellDimension.modLoc("dynamic");
     public static final Map<SpellSchool, Identifier> POOLS = Map.of(
-            SpellSchools.ARCANE, SpellDimension.modLoc("arcane"),
-            SpellSchools.FIRE, SpellDimension.modLoc("fire"),
-            SpellSchools.FROST, SpellDimension.modLoc("frost"),
-            SpellSchools.HEALING, SpellDimension.modLoc("healing"),
-            SpellSchools.LIGHTNING, SpellDimension.modLoc("lightning"),
-            SpellSchools.SOUL, DYNAMIC_POOL
+        SpellSchools.ARCANE, SpellDimension.modLoc("arcane"),
+        SpellSchools.FIRE, SpellDimension.modLoc("fire"),
+        SpellSchools.FROST, SpellDimension.modLoc("frost"),
+        SpellSchools.HEALING, SpellDimension.modLoc("healing"),
+        SpellSchools.LIGHTNING, SpellDimension.modLoc("lightning"),
+        SpellSchools.SOUL, DYNAMIC_POOL
     );
 
     private final SpellSchool school;
@@ -70,7 +70,7 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
     public boolean canContainSpell(PlayerEntity player, Identifier spellId)
     {
         return GameStageComponent.isNormalMode(player) ||
-               this.grade >= AllSpells.getSpellTier(spellId);
+            this.grade >= AllSpells.getSpellTier(spellId);
     }
 
     public int getMaxSpellCount()
@@ -93,8 +93,8 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
     public Text getName(ItemStack stack)
     {
         return SDTexts.TEXT$SPELL_BOOK.get(
-                SDTexts.getGradeText(this.grade),
-                SDTexts.getSchoolText(this.school)
+            SDTexts.getGradeText(this.grade),
+            SDTexts.getSchoolText(this.school)
         ).setStyle(Style.EMPTY.withColor(this.school.color));
     }
 
@@ -103,10 +103,10 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
     {
         super.appendTooltip(stack, world, tooltip, context);
         tooltip.add(
-                SDTexts.TOOLTIP$BOOK_REQUIREMENT.get(
-                        this.getRequirementSpellPower(),
-                        Text.translatable("attribute.name.spell_power." + school.id.getPath())
-                ).setStyle(Style.EMPTY.withColor(this.school.color))
+            SDTexts.TOOLTIP$BOOK_REQUIREMENT.get(
+                this.getRequirementSpellPower(),
+                Text.translatable("attribute.name.spell_power." + school.id.getPath())
+            ).setStyle(Style.EMPTY.withColor(this.school.color))
         );
         tooltip.add(SDTexts.TOOLTIP$DYNAMIC_BOOK$USAGE_1.get().formatted(Formatting.BOLD));
         tooltip.add(SDTexts.TOOLTIP$DYNAMIC_BOOK$USAGE_2.get());
@@ -116,7 +116,7 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
     public boolean canEquip(ItemStack stack, SlotReference slot, LivingEntity entity)
     {
         return SpellPower.getSpellPower(this.school, entity).baseValue() >=
-               this.getRequirementSpellPower();
+            this.getRequirementSpellPower();
     }
 
     public int getRequirementSpellPower()
@@ -149,10 +149,8 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
             switch (state)
             {
                 case INVALID -> player.sendMessage(SDTexts.TOOLTIP$INVALID.get().formatted(Formatting.RED));
-                case ALREADY_APPLIED ->
-                        player.sendMessage(Text.translatable("gui.spell_engine.spell_binding.already_bound"));
-                case NO_MORE_SLOT ->
-                        player.sendMessage(Text.translatable("gui.spell_engine.spell_binding.no_more_slots"));
+                case ALREADY_APPLIED -> player.sendMessage(Text.translatable("gui.spell_engine.spell_binding.already_bound"));
+                case NO_MORE_SLOT -> player.sendMessage(Text.translatable("gui.spell_engine.spell_binding.no_more_slots"));
                 case APPLICABLE ->
                 {
                     // Must copy the container to avoid modifying the original
@@ -172,14 +170,18 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
         if (container == null || !container.isValid())
         {
             if (player.getWorld().isClient())
+            {
                 player.sendMessage(SDTexts.TOOLTIP$INVALID.get().formatted(Formatting.RED));
+            }
             return Optional.empty();
         }
         int size = container.spell_ids.size();
         if (size < 1)
         {
             if (player.getWorld().isClient())
+            {
                 player.sendMessage(SDTexts.TEXT$BLANK_BOOK.get());
+            }
             return Optional.empty();
         }
         String spellId = container.spell_ids.get(size - 1);
@@ -199,7 +201,10 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
     @Override
     public boolean onStackClicked(ItemStack holding, Slot slot, ClickType clickType, PlayerEntity player)
     {
-        if (clickType != ClickType.RIGHT) return false;
+        if (clickType != ClickType.RIGHT)
+        {
+            return false;
+        }
         ItemStack clicking = slot.getStack();
         if (clicking.isEmpty())
         {
@@ -227,14 +232,19 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
                 {
                     // if failed to insert, drop the scroll
                     if (!cursorStackReference.set(stack))
+                    {
                         player.getInventory().offerOrDrop(stack);
+                    }
                 });
             } else
             {
                 tryAddScroll(clicking, holding, player);
             }
             return true;
-        } else return false;
+        } else
+        {
+            return false;
+        }
     }
 
     @Override
@@ -254,7 +264,10 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
     public Stream<ItemStack> getAllScrolls(ItemStack stack)
     {
         SpellContainer container = SpellContainerHelper.containerFromItemStack(stack);
-        if (container == null || !container.isValid()) return Stream.empty();
+        if (container == null || !container.isValid())
+        {
+            return Stream.empty();
+        }
         return container.spell_ids.stream().map(s -> AllItems.SPELL_SCROLL.getStack(new Identifier(s)));
     }
 }

@@ -6,10 +6,10 @@ import net.minecraft.item.ArmorItem;
 import java.util.Objects;
 
 public record ArmorSet(
-        ArmorItem helmet,
-        ArmorItem chestplate,
-        ArmorItem leggings,
-        ArmorItem boots
+    ArmorItem helmet,
+    ArmorItem chestplate,
+    ArmorItem leggings,
+    ArmorItem boots
 )
 {
     @Override

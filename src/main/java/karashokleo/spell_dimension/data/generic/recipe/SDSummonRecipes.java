@@ -27,12 +27,12 @@ public class SDSummonRecipes
     public static void add(Consumer<RecipeJsonProvider> exporter, Identifier recipeId, Ingredient ingredient, EntityType<? extends LivingEntity> entityType, int count)
     {
         exporter.accept(
-                new SummonRecipeJsonProvider(
-                        recipeId,
-                        ingredient,
-                        entityType,
-                        count
-                )
+            new SummonRecipeJsonProvider(
+                recipeId,
+                ingredient,
+                entityType,
+                count
+            )
         );
     }
 

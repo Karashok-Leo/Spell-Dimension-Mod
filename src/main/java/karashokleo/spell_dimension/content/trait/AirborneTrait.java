@@ -29,7 +29,10 @@ public class AirborneTrait extends CooldownTrait
     @Override
     public void action(int level, Data data, MobEntity mob, LivingEntity target)
     {
-        if (ReflectTrinket.canReflect(target, this)) return;
+        if (ReflectTrinket.canReflect(target, this))
+        {
+            return;
+        }
         double knockBackStrength = strength.applyAsInt(level);
         knockBackStrength *= 1.0 - target.getAttributeValue(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE);
         Vec3d vec3d = target.getPos().subtract(mob.getPos()).normalize().multiply(knockBackStrength);

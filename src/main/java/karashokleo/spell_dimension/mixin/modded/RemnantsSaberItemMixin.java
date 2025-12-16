@@ -9,12 +9,12 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 public abstract class RemnantsSaberItemMixin
 {
     @ModifyArg(
-            method = "<clinit>",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lcom/obscuria/obscureapi/common/classes/ability/Ability$Builder;mod(I)Lcom/obscuria/obscureapi/common/classes/ability/Ability$Builder;"
-            ),
-            remap = false
+        method = "<clinit>",
+        at = @At(
+            value = "INVOKE",
+            target = "Lcom/obscuria/obscureapi/common/classes/ability/Ability$Builder;mod(I)Lcom/obscuria/obscureapi/common/classes/ability/Ability$Builder;"
+        ),
+        remap = false
     )
     private static int modify(int amount)
     {

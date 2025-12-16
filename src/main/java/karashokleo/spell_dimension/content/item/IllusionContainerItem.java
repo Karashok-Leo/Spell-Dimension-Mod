@@ -20,10 +20,10 @@ public class IllusionContainerItem extends Item
     public IllusionContainerItem()
     {
         super(
-                new FabricItemSettings()
-                        .fireproof()
-                        .maxCount(1)
-                        .rarity(Rarity.EPIC)
+            new FabricItemSettings()
+                .fireproof()
+                .maxCount(1)
+                .rarity(Rarity.EPIC)
         );
     }
 

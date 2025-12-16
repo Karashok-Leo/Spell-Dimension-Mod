@@ -38,15 +38,19 @@ public class ArcaneThroneItem extends CurseTrinketItem
     public void tick(ItemStack stack, SlotReference slot, LivingEntity entity)
     {
         if (entity.age % 20 != 0)
+        {
             return;
+        }
 
         if (!stack.getOrCreateNbt().getBoolean(ENABLE_KEY))
+        {
             return;
+        }
 
         EffectHelper.forceAddEffectWithEvent(
-                entity,
-                new StatusEffectInstance(AllStatusEffects.PHASE, 40, 0, false, false),
-                entity
+            entity,
+            new StatusEffectInstance(AllStatusEffects.PHASE, 40, 0, false, false),
+            entity
         );
     }
 
@@ -54,9 +58,13 @@ public class ArcaneThroneItem extends CurseTrinketItem
     public boolean onClicked(ItemStack stack, ItemStack otherStack, Slot slot, ClickType clickType, PlayerEntity player, StackReference cursorStackReference)
     {
         if (clickType == ClickType.LEFT)
+        {
             return false;
+        }
         if (!slot.canTakePartial(player))
+        {
             return false;
+        }
         NbtCompound nbt = stack.getOrCreateNbt();
         boolean enable = nbt.getBoolean(ENABLE_KEY);
         nbt.putBoolean(ENABLE_KEY, !enable);

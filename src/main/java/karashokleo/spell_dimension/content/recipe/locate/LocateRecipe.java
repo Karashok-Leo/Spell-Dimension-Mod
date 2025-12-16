@@ -44,7 +44,7 @@ public abstract class LocateRecipe implements Recipe<PlayerInventory>
     public boolean matches(PlayerInventory inventory, World world)
     {
         return world.getRegistryKey().getValue().equals(this.world) &&
-               ingredient.test(inventory.offHand.get(0));
+            ingredient.test(inventory.offHand.get(0));
     }
 
     @Override

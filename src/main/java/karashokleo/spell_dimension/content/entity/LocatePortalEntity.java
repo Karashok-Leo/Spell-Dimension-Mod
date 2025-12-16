@@ -56,13 +56,18 @@ public class LocatePortalEntity extends Entity
         super.tick();
         int activeTime = this.getActiveTime();
         if (activeTime > this.lifespan)
+        {
             this.remove(RemovalReason.DISCARDED);
+        }
         if (!this.getWorld().isClient() && activeTime > 0)
         {
             List<Entity> entities = this.getWorld().getOtherEntities(this, this.getBoundingBox().expand(1, 2, 1));
             entities.forEach(entity ->
             {
-                if (entity.hasPortalCooldown()) return;
+                if (entity.hasPortalCooldown())
+                {
+                    return;
+                }
                 TeleportUtil.teleportPlayer(entity, this.getDestination());
                 entity.teleport(this.getDestination().getX(), this.getDestination().getY(), this.getDestination().getZ());
                 entity.setPortalCooldown(PORTAL_COOLDOWN);

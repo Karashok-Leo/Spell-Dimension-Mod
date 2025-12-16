@@ -64,9 +64,9 @@ public class ZapParticle extends SpriteBillboardParticle
     private Vector3f randomVector3f(float scale)
     {
         return new Vector3f(
-                (2f * random.nextFloat() - 1f),
-                (2f * random.nextFloat() - 1f),
-                (2f * random.nextFloat() - 1f)
+            (2f * random.nextFloat() - 1f),
+            (2f * random.nextFloat() - 1f),
+            (2f * random.nextFloat() - 1f)
         ).mul(scale);
     }
 
@@ -82,14 +82,17 @@ public class ZapParticle extends SpriteBillboardParticle
     @Override
     public void buildGeometry(VertexConsumer vertexConsumer, Camera camera, float tickDelta)
     {
-        if (this.fromPos == null || this.toPos == null) return;
+        if (this.fromPos == null || this.toPos == null)
+        {
+            return;
+        }
 
         Vec3d from = this.fromPos
-                .getRenderPosition(tickDelta)
-                .subtract(camera.getPos());
+            .getRenderPosition(tickDelta)
+            .subtract(camera.getPos());
         Vec3d to = this.toPos
-                .getRenderPosition(tickDelta)
-                .subtract(camera.getPos());
+            .getRenderPosition(tickDelta)
+            .subtract(camera.getPos());
         Vec3d distance = to.subtract(from);
 
         int segments = random.nextBetween(1, 2) + (int) (distance.length() / segmentLength);
@@ -101,8 +104,8 @@ public class ZapParticle extends SpriteBillboardParticle
         for (int i = 0; i < segments + 1; i++)
         {
             points[i] = new Vector3f(step)
-                    .mul(i)
-                    .add(start);
+                .mul(i)
+                .add(start);
         }
 
         for (int e = 0; e < strands; e++)
@@ -153,28 +156,28 @@ public class ZapParticle extends SpriteBillboardParticle
         float dz = radius * MathHelper.sin(yaw);
 
         Vector3f[] left = new Vector3f[]{
-                new Vector3f(start).add(-dx, -radius, -dz),
-                new Vector3f(start).add(-dx, radius, -dz),
-                new Vector3f(end).add(-dx, radius, -dz),
-                new Vector3f(end).add(-dx, -radius, -dz),
+            new Vector3f(start).add(-dx, -radius, -dz),
+            new Vector3f(start).add(-dx, radius, -dz),
+            new Vector3f(end).add(-dx, radius, -dz),
+            new Vector3f(end).add(-dx, -radius, -dz),
         };
         Vector3f[] right = new Vector3f[]{
-                new Vector3f(end).add(dx, -radius, dz),
-                new Vector3f(end).add(dx, radius, dz),
-                new Vector3f(start).add(dx, radius, dz),
-                new Vector3f(start).add(dx, -radius, dz),
+            new Vector3f(end).add(dx, -radius, dz),
+            new Vector3f(end).add(dx, radius, dz),
+            new Vector3f(start).add(dx, radius, dz),
+            new Vector3f(start).add(dx, -radius, dz),
         };
         Vector3f[] top = new Vector3f[]{
-                new Vector3f(start).add(dx, -radius, dz),
-                new Vector3f(start).add(-dx, -radius, -dz),
-                new Vector3f(end).add(-dx, -radius, -dz),
-                new Vector3f(end).add(dx, -radius, dz),
+            new Vector3f(start).add(dx, -radius, dz),
+            new Vector3f(start).add(-dx, -radius, -dz),
+            new Vector3f(end).add(-dx, -radius, -dz),
+            new Vector3f(end).add(dx, -radius, dz),
         };
         Vector3f[] bottom = new Vector3f[]{
-                new Vector3f(end).add(dx, radius, dz),
-                new Vector3f(end).add(-dx, radius, -dz),
-                new Vector3f(start).add(-dx, radius, -dz),
-                new Vector3f(start).add(dx, radius, dz),
+            new Vector3f(end).add(dx, radius, dz),
+            new Vector3f(end).add(-dx, radius, -dz),
+            new Vector3f(start).add(-dx, radius, -dz),
+            new Vector3f(start).add(dx, radius, dz),
         };
 
         // make 4 surfaces of the tube
@@ -196,10 +199,10 @@ public class ZapParticle extends SpriteBillboardParticle
     private void makeVertex(VertexConsumer vertexConsumer, Vector3f point, float u, float v, int brightness)
     {
         vertexConsumer.vertex(point.x(), point.y(), point.z())
-                .texture(u, v)
-                .color(this.red, this.green, this.blue, this.alpha)
-                .light(brightness)
-                .next();
+            .texture(u, v)
+            .color(this.red, this.green, this.blue, this.alpha)
+            .light(brightness)
+            .next();
     }
 
     @NotNull
@@ -209,7 +212,7 @@ public class ZapParticle extends SpriteBillboardParticle
         return PARTICLE_EMISSIVE;
     }
 
-    public static ParticleTextureSheet PARTICLE_EMISSIVE = new ParticleTextureSheet()
+    public static final ParticleTextureSheet PARTICLE_EMISSIVE = new ParticleTextureSheet()
     {
         @Override
         public void begin(BufferBuilder builder, TextureManager textureManager)

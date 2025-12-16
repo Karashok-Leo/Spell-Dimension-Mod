@@ -12,7 +12,6 @@ import karashokleo.l2hostility.content.trait.common.ReflectTrait;
 import karashokleo.l2hostility.init.LHTags;
 import karashokleo.leobrary.damage.api.modify.DamageAccess;
 import karashokleo.leobrary.damage.api.modify.DamagePhase;
-import karashokleo.leobrary.damage.api.state.DamageStateProvider;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.item.DynamicSpellBookItem;
 import karashokleo.spell_dimension.content.item.SpellScrollItem;

@@ -44,7 +44,10 @@ public class ImpactUtil
     {
         Spell spell = SpellRegistry.getSpell(spellId);
         ItemStack itemStack = caster.getMainHandStack();
-        if (spell == null) return;
+        if (spell == null)
+        {
+            return;
+        }
         SpellInfo spellInfo = new SpellInfo(spell, spellId);
         Spell.Release.Target targeting = spell.release.target;
         boolean released = action == SpellCast.Action.RELEASE;
@@ -155,7 +158,10 @@ public class ImpactUtil
 
     private static void shootProjectile(World world, LivingEntity caster, Vec3d position, Vec3d direction, float range, SpellInfo spellInfo, SpellHelper.ImpactContext context, int sequenceIndex)
     {
-        if (world.isClient()) return;
+        if (world.isClient())
+        {
+            return;
+        }
 
         var spell = spellInfo.spell();
         var data = spell.release.target.projectile;
@@ -163,12 +169,14 @@ public class ImpactUtil
         var mutablePerks = projectileData.perks.copy();
         var mutableLaunchProperties = data.launch_properties.copy();
         var projectile = new SpellProjectile(world, caster,
-                position.getX(), position.getY(), position.getZ(),
-                SpellProjectile.Behaviour.FLY, spellInfo.id(), null, context, mutablePerks);
+            position.getX(), position.getY(), position.getZ(),
+            SpellProjectile.Behaviour.FLY, spellInfo.id(), null, context, mutablePerks);
 
         if (SpellEvents.PROJECTILE_SHOOT.isListened())
+        {
             SpellEvents.PROJECTILE_SHOOT.invoke((listener) -> listener.onProjectileLaunch(
-                    new SpellEvents.ProjectileLaunchEvent(projectile, mutableLaunchProperties, caster, null, spellInfo, context, sequenceIndex)));
+                new SpellEvents.ProjectileLaunchEvent(projectile, mutableLaunchProperties, caster, null, spellInfo, context, sequenceIndex)));
+        }
 
         projectile.setVelocity(direction.x, direction.y, direction.z, mutableLaunchProperties.velocity, projectileData.divergence);
         projectile.range = range > 0 ? range : spell.range;
@@ -176,6 +184,7 @@ public class ImpactUtil
         world.spawnEntity(projectile);
 
         if (sequenceIndex == 0 && mutableLaunchProperties.extra_launch_count > 0)
+        {
             for (int i = 0; i < mutableLaunchProperties.extra_launch_count; i++)
             {
                 var ticks = (i + 1) * mutableLaunchProperties.extra_launch_delay;
@@ -183,10 +192,13 @@ public class ImpactUtil
                 ((WorldScheduler) world).schedule(ticks, () ->
                 {
                     if (caster == null || !caster.isAlive())
+                    {
                         return;
+                    }
                     shootProjectile(world, caster, position, direction, range, spellInfo, context, nextSequenceIndex);
                 });
             }
+        }
     }
 
     public static List<LivingEntity> getLivingsInRange(Entity origin, double range, Predicate<LivingEntity> predicate)

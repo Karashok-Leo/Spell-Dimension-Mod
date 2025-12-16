@@ -24,6 +24,9 @@ public abstract class EntityRenderDispatcherMixin
     @Inject(method = "renderShadow", at = @At("HEAD"), cancellable = true)
     private static void onRenderShadow(MatrixStack matrices, VertexConsumerProvider vertices, Entity entity, float opacity, float tickDelta, WorldView world, float radius, CallbackInfo ci)
     {
-        if (NoClip.noClip(entity)) ci.cancel();
+        if (NoClip.noClip(entity))
+        {
+            ci.cancel();
+        }
     }
 }

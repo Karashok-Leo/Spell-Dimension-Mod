@@ -18,14 +18,20 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class BookEverythingMixin
 {
     @Inject(
-            method = "use",
-            at = @At("HEAD"),
-            cancellable = true
+        method = "use",
+        at = @At("HEAD"),
+        cancellable = true
     )
     private void inject_use(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir)
     {
-        if (world.isClient()) return;
-        if (GameStageComponent.canEnterEnd(user)) return;
+        if (world.isClient())
+        {
+            return;
+        }
+        if (GameStageComponent.canEnterEnd(user))
+        {
+            return;
+        }
         user.sendMessage(SDTexts.TEXT$END_STAGE$BOOK_EVERYTHING.get(AllItems.CELESTIAL_LUMINARY.getName()), true);
         cir.setReturnValue(TypedActionResult.fail(user.getStackInHand(hand)));
     }

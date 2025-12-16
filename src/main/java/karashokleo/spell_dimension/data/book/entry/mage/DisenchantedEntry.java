@@ -48,23 +48,23 @@ public class DisenchantedEntry extends BaseEntryProvider
         context.page("disenchant");
         this.lang().add(context.pageTitle(), "Disenchanted Essence");
         this.lang().add(context.pageText(),
+            """
+                Disenchanted Essence can transfer all the magic infused into an item by Enchanted Essences to another item. It can be obtained through crafting or purchased from a Goblin Trader.
                 """
-                        Disenchanted Essence can transfer all the magic infused into an item by Enchanted Essences to another item. It can be obtained through crafting or purchased from a Goblin Trader.
-                        """
         );
         this.lang("zh_cn").add(context.pageTitle(), "祛魔精华");
         this.lang("zh_cn").add(context.pageText(),
+            """
+                祛魔精华能够将束魔精华注入在一件物品上的所有魔力转移至另一件物品上。获取祛魔精华的途径是合成或从哥布林商人手中购买。
                 """
-                        祛魔精华能够将束魔精华注入在一件物品上的所有魔力转移至另一件物品上。获取祛魔精华的途径是合成或从哥布林商人手中购买。
-                        """
         );
 
         BookSpotlightPageModel disenchant = BookSpotlightPageModel
-                .builder()
-                .withTitle(context.pageTitle())
-                .withText(context.pageText())
-                .withItem(Ingredient.ofItems(AllItems.DISENCHANTED_ESSENCE))
-                .build();
+            .builder()
+            .withTitle(context.pageTitle())
+            .withText(context.pageText())
+            .withItem(Ingredient.ofItems(AllItems.DISENCHANTED_ESSENCE))
+            .build();
 
         return List.of(disenchant);
     }

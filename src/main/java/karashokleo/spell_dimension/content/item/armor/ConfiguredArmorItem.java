@@ -23,8 +23,8 @@ public class ConfiguredArmorItem extends WizardArmor
     });
 
     public ConfiguredArmorItem(
-            ConfiguredArmorMaterial material,
-            Type type
+        ConfiguredArmorMaterial material,
+        Type type
     )
     {
         super(material, type, new FabricItemSettings());

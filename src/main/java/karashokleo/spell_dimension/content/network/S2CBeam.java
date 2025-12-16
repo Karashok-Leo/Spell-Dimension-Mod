@@ -46,7 +46,9 @@ public class S2CBeam extends S2CEntity
         {
             var target = beamTarget >= 0 ? world.getEntityById(beamTarget) : null;
             if (target instanceof LivingEntity targetEntity)
+            {
                 beamProvider.setBeamTarget(targetEntity);
+            }
             var spell = SpellRegistry.getSpell(spellId);
             if (spell != null &&
                 spell.release != null &&

@@ -18,12 +18,12 @@ public class ParticleUtil
     public static final ParticleEffect CRIT = ParticleTypes.CRIT;
 
     private static final Map<SpellSchool, ParticleEffect> map = Map.of(
-            SpellSchools.ARCANE, Particles.arcane_spell.particleType,
-            SpellSchools.FIRE, ParticleTypes.FLAME,
-            SpellSchools.FROST, Particles.snowflake.particleType,
-            SpellSchools.HEALING, Particles.healing_ascend.particleType,
-            SpellSchools.LIGHTNING, ParticleTypes.SMOKE,
-            SpellSchools.SOUL, ParticleTypes.SOUL_FIRE_FLAME
+        SpellSchools.ARCANE, Particles.arcane_spell.particleType,
+        SpellSchools.FIRE, ParticleTypes.FLAME,
+        SpellSchools.FROST, Particles.snowflake.particleType,
+        SpellSchools.HEALING, Particles.healing_ascend.particleType,
+        SpellSchools.LIGHTNING, ParticleTypes.SMOKE,
+        SpellSchools.SOUL, ParticleTypes.SOUL_FIRE_FLAME
     );
 
     public static ParticleEffect getDustParticle(int color)
@@ -61,15 +61,15 @@ public class ParticleUtil
     public static void sparkParticleEmit(ServerWorld world, Vec3d pos, int count)
     {
         world.spawnParticles(
-                ParticleTypes.END_ROD,
-                pos.getX(),
-                pos.getY(),
-                pos.getZ(),
-                count,
-                0.01,
-                0.01,
-                0.01,
-                0.06
+            ParticleTypes.END_ROD,
+            pos.getX(),
+            pos.getY(),
+            pos.getZ(),
+            count,
+            0.01,
+            0.01,
+            0.01,
+            0.06
         );
     }
 }

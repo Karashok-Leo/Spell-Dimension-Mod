@@ -36,12 +36,16 @@ public class OblivionBreastplateItem extends SingleEpicTrinketItem implements Da
     public void onDamaged(ItemStack stack, LivingEntity entity, LivingDamageEvent event)
     {
         if (event.getSource().isOf(AllDamageTypes.OBLIVION_BREASTPLATE))
+        {
             return;
+        }
 
         float originalDamage = event.getAmount();
         float oblivionAmount = getOblivionAmount(stack);
         if (oblivionAmount == 0)
+        {
             return;
+        }
 
         if (originalDamage > oblivionAmount)
         {
@@ -59,18 +63,30 @@ public class OblivionBreastplateItem extends SingleEpicTrinketItem implements Da
     {
         super.tick(stack, slot, entity);
         // Check client side and interval
-        if (entity.getWorld().isClient()) return;
-        if (entity.age % 20 != 0) return;
+        if (entity.getWorld().isClient())
+        {
+            return;
+        }
+        if (entity.age % 20 != 0)
+        {
+            return;
+        }
         // Refresh max oblivion amount
         double spellPower = SchoolUtil.getEntitySpellPower(entity);
         float maxOblivionAmount = (float) (spellPower * MAX_SPELL_POWER_RATIO);
         stack.getOrCreateNbt().putFloat(MAX_AMOUNT_KEY, maxOblivionAmount);
         // Check health threshold
         float maxHealth = entity.getMaxHealth();
-        if (entity.getHealth() < maxHealth * THRESHOLD_RATIO) return;
+        if (entity.getHealth() < maxHealth * THRESHOLD_RATIO)
+        {
+            return;
+        }
         // Check if oblivion amount reaches the maximum
         double oblivionAmount = getOblivionAmount(stack);
-        if (oblivionAmount >= maxOblivionAmount) return;
+        if (oblivionAmount >= maxOblivionAmount)
+        {
+            return;
+        }
         // Apply oblivion damage
         DamageSource source = entity.getDamageSources().create(AllDamageTypes.OBLIVION_BREASTPLATE, entity);
         float amount = maxHealth * OBLIVION_RATIO;
@@ -112,14 +128,14 @@ public class OblivionBreastplateItem extends SingleEpicTrinketItem implements Da
     {
         super.appendTooltip(stack, world, tooltip, context);
         tooltip.add(SDTexts.TOOLTIP$OBLIVION_BREASTPLATE_1.get(
-                "%d%%".formatted((int) (THRESHOLD_RATIO * 100)),
-                "%d%%".formatted((int) (OBLIVION_RATIO * 100))
+            "%d%%".formatted((int) (THRESHOLD_RATIO * 100)),
+            "%d%%".formatted((int) (OBLIVION_RATIO * 100))
         ).formatted(Formatting.GRAY));
         tooltip.add(SDTexts.TOOLTIP$OBLIVION_BREASTPLATE_2.get(
-                "%d%%".formatted((int) (MAX_SPELL_POWER_RATIO * 100))
+            "%d%%".formatted((int) (MAX_SPELL_POWER_RATIO * 100))
         ).formatted(Formatting.DARK_GRAY));
         tooltip.add(SDTexts.TOOLTIP$OBLIVION_BREASTPLATE_3.get(
-                "%.2f".formatted(getOblivionAmount(stack))
+            "%.2f".formatted(getOblivionAmount(stack))
         ).formatted(Formatting.AQUA));
     }
 }

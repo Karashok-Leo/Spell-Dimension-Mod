@@ -13,9 +13,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class PlayerKeepInventoryMixin
 {
     @Inject(
-            method = "drop",
-            at = @At("HEAD"),
-            cancellable = true
+        method = "drop",
+        at = @At("HEAD"),
+        cancellable = true
     )
     private void inject_drop(DamageSource source, CallbackInfo ci)
     {

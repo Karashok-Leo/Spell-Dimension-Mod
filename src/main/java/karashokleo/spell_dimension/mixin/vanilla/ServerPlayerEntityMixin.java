@@ -17,11 +17,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class ServerPlayerEntityMixin
 {
     @ModifyExpressionValue(
-            method = "copyFrom",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/world/GameRules;getBoolean(Lnet/minecraft/world/GameRules$Key;)Z"
-            )
+        method = "copyFrom",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/world/GameRules;getBoolean(Lnet/minecraft/world/GameRules$Key;)Z"
+        )
     )
     private boolean inject_copyFrom(boolean original, @Local(ordinal = 1, argsOnly = true) ServerPlayerEntity oldPlayer)
     {
@@ -30,8 +30,8 @@ public abstract class ServerPlayerEntityMixin
     }
 
     @Inject(
-            method = "dropItem",
-            at = @At("RETURN")
+        method = "dropItem",
+        at = @At("RETURN")
     )
     private void inject_dropItem(ItemStack stack, boolean throwRandomly, boolean retainOwnership, CallbackInfoReturnable<ItemEntity> cir)
     {

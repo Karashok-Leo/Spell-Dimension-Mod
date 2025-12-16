@@ -29,16 +29,19 @@ public class BrokenItem extends Item
     public BrokenItem()
     {
         super(
-                new FabricItemSettings()
-                        .fireproof()
-                        .maxCount(1)
+            new FabricItemSettings()
+                .fireproof()
+                .maxCount(1)
         );
     }
 
     public ItemStack saveItem(ItemStack stack)
     {
         int requireMending = stack.getMaxDamage() / 100 + 1;
-        if (requireMending <= 0) requireMending = 1;
+        if (requireMending <= 0)
+        {
+            requireMending = 1;
+        }
         return saveItem(stack, requireMending);
     }
 
@@ -49,7 +52,9 @@ public class BrokenItem extends Item
         nbt.putInt(REQUIRE_MENDING_KEY, requireMending);
         nbt.put(SAVE_ITEM_KEY, stack.writeNbt(new NbtCompound()));
         if (EnchantmentHelper.getLevel(LHEnchantments.VANISH, stack) > 0)
+        {
             ans.addEnchantment(LHEnchantments.VANISH, 1);
+        }
         return ans;
     }
 
@@ -57,11 +62,17 @@ public class BrokenItem extends Item
     public boolean onClicked(ItemStack stack, ItemStack otherStack, Slot slot, ClickType clickType, PlayerEntity player, StackReference cursorStackReference)
     {
         if (clickType == ClickType.LEFT)
+        {
             return false;
+        }
         if (!slot.canTakePartial(player))
+        {
             return false;
+        }
         if (!otherStack.isOf(AllItems.MENDING_ESSENCE))
+        {
             return false;
+        }
         otherStack.decrement(1);
         SoundUtil.playSound(player, SoundUtil.ANVIL);
         NbtCompound nbt = stack.getOrCreateNbt();

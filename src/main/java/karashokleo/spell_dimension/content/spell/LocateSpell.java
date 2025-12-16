@@ -28,11 +28,23 @@ public class LocateSpell
 
     public static void handle(SpellProjectile projectile, Identifier spellId, BlockHitResult hitResult)
     {
-        if (!spellId.equals(AllSpells.LOCATE)) return;
-        if (!(projectile.getWorld() instanceof ServerWorld world)) return;
-        if (!(projectile.getOwner() instanceof PlayerEntity player)) return;
+        if (!spellId.equals(AllSpells.LOCATE))
+        {
+            return;
+        }
+        if (!(projectile.getWorld() instanceof ServerWorld world))
+        {
+            return;
+        }
+        if (!(projectile.getOwner() instanceof PlayerEntity player))
+        {
+            return;
+        }
         BlockPos castPos = hitResult.getBlockPos();
-        if (!isLocateTargetBlock(world, castPos)) return;
+        if (!isLocateTargetBlock(world, castPos))
+        {
+            return;
+        }
 
         ItemStack offHandStack = player.getOffHandStack();
         LocateRecipe locateRecipe;
@@ -41,13 +53,13 @@ public class LocateSpell
         if (offHandStack.isOf(AllItems.SPELL_PRISM))
         {
             locateRecipe = RandomUtil.randomFromList(
-                    player.getRandom(),
-                    world.getRecipeManager().listAllOfType(LocateRecipe.TYPE)
+                player.getRandom(),
+                world.getRecipeManager().listAllOfType(LocateRecipe.TYPE)
             );
         } else
         {
             Optional<LocateRecipe> recipe = world.getRecipeManager()
-                    .getFirstMatch(LocateRecipe.TYPE, player.getInventory(), world);
+                .getFirstMatch(LocateRecipe.TYPE, player.getInventory(), world);
 
             if (recipe.isEmpty())
             {
@@ -59,15 +71,21 @@ public class LocateSpell
         }
 
         Optional<BlockPos> located = locateRecipe.locate(world, castPos, player);
-        if (located.isEmpty()) return;
+        if (located.isEmpty())
+        {
+            return;
+        }
 
         BlockPos locatedPos = located.get();
         FutureTask.submit(
-                TeleportUtil.getTeleportPosFuture(world, locatedPos),
-                optional -> spawnLocatePortal(world, optional.orElse(locatedPos), castPos)
+            TeleportUtil.getTeleportPosFuture(world, locatedPos),
+            optional -> spawnLocatePortal(world, optional.orElse(locatedPos), castPos)
         );
 
-        if (player.getAbilities().creativeMode) return;
+        if (player.getAbilities().creativeMode)
+        {
+            return;
+        }
 
         if (offHandStack.isOf(AllItems.SPELL_PRISM))
         {
@@ -76,7 +94,9 @@ public class LocateSpell
         {
             offHandStack.decrement(1);
             if (player.getRandom().nextFloat() < BREAK_CHANCE)
+            {
                 world.breakBlock(castPos, false);
+            }
         }
     }
 

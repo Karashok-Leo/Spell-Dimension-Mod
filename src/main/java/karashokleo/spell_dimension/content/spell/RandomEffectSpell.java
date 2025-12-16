@@ -42,15 +42,15 @@ public class RandomEffectSpell
                 continue;
             }
             EffectHelper.forceAddEffectWithEvent(
-                    living,
-                    new StatusEffectInstance(
-                            RandomUtil.randomFromList(random, effects),
-                            DURATION * 20,
-                            random.nextInt(MAX_AMPLIFIER),
-                            false,
-                            false
-                    ),
-                    caster
+                living,
+                new StatusEffectInstance(
+                    RandomUtil.randomFromList(random, effects),
+                    DURATION * 20,
+                    random.nextInt(MAX_AMPLIFIER),
+                    false,
+                    false
+                ),
+                caster
             );
         }
     }

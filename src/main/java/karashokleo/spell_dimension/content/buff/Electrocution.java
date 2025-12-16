@@ -12,10 +12,10 @@ import org.jetbrains.annotations.Nullable;
 public class Electrocution implements Buff
 {
     public static final Codec<Electrocution> CODEC = RecordCodecBuilder.create(
-            ins -> ins.group(
-                    Codecs.NONNEGATIVE_INT.fieldOf("duration").forGetter(Electrocution::getDuration),
-                    Codecs.POSITIVE_INT.fieldOf("stacks").forGetter(Electrocution::getStacks)
-            ).apply(ins, Electrocution::new)
+        ins -> ins.group(
+            Codecs.NONNEGATIVE_INT.fieldOf("duration").forGetter(Electrocution::getDuration),
+            Codecs.POSITIVE_INT.fieldOf("stacks").forGetter(Electrocution::getStacks)
+        ).apply(ins, Electrocution::new)
     );
     public static final BuffType<Electrocution> TYPE = new BuffType<>(CODEC, true);
 
@@ -46,7 +46,7 @@ public class Electrocution implements Buff
 
     public void incrementStacks()
     {
-        this.stacks ++;
+        this.stacks++;
     }
 
     public boolean shouldExecute()

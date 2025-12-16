@@ -18,7 +18,10 @@ public record S2COpenQuestScreen(Hand hand) implements SerialPacketS2C
     public void handle(ClientPlayerEntity player)
     {
         var client = MinecraftClient.getInstance();
-        if (client == null) return;
+        if (client == null)
+        {
+            return;
+        }
         client.setScreen(new QuestScreen(hand, QuestUsage.getCurrentQuests(player)));
     }
 }

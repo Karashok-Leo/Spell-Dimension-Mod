@@ -23,16 +23,18 @@ public abstract class ItemStackMixin
     public abstract Item getItem();
 
     @Inject(
-            method = "damage(ILnet/minecraft/entity/LivingEntity;Ljava/util/function/Consumer;)V",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/item/ItemStack;decrement(I)V"
-            )
+        method = "damage(ILnet/minecraft/entity/LivingEntity;Ljava/util/function/Consumer;)V",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/item/ItemStack;decrement(I)V"
+        )
     )
     public <T extends LivingEntity> void inject_damage_safeguard(int amount, T entity, Consumer<T> breakCallback, CallbackInfo ci)
     {
         if (!(entity instanceof PlayerEntity player))
+        {
             return;
+        }
         Item item = this.getItem();
         if (item instanceof Equipment equipment)
         {

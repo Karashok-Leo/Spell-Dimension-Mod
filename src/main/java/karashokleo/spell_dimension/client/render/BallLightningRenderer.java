@@ -16,10 +16,10 @@ public class BallLightningRenderer extends EntityRenderer<BallLightningEntity>
 {
     public static final EntityModelLayer MODEL_LAYER_LOCATION = new EntityModelLayer(SpellDimension.modLoc("ball_lightning"), "main");
     private static final Identifier[] SWIRL_TEXTURES = {
-            SpellDimension.modLoc("textures/entity/ball_lightning/ball_lightning_0.png"),
-            SpellDimension.modLoc("textures/entity/ball_lightning/ball_lightning_1.png"),
-            SpellDimension.modLoc("textures/entity/ball_lightning/ball_lightning_2.png"),
-            SpellDimension.modLoc("textures/entity/ball_lightning/ball_lightning_3.png"),
+        SpellDimension.modLoc("textures/entity/ball_lightning/ball_lightning_0.png"),
+        SpellDimension.modLoc("textures/entity/ball_lightning/ball_lightning_1.png"),
+        SpellDimension.modLoc("textures/entity/ball_lightning/ball_lightning_2.png"),
+        SpellDimension.modLoc("textures/entity/ball_lightning/ball_lightning_3.png"),
 //            SpellDimension.modLoc("textures/entity/ball_lightning/ball_lightning_4.png")
     };
 

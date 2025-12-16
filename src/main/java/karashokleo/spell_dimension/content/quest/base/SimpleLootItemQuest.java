@@ -17,9 +17,9 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public record SimpleLootItemQuest(
-        List<Supplier<EntityType<?>>> entities,
-        List<Supplier<ItemConvertible>> tasks,
-        Supplier<ItemStack> reward
+    List<Supplier<EntityType<?>>> entities,
+    List<Supplier<ItemConvertible>> tasks,
+    Supplier<ItemStack> reward
 ) implements ItemTaskQuest, ItemRewardQuest
 {
     public SimpleLootItemQuest(Supplier<EntityType<?>> entity, Supplier<ItemConvertible> task, Supplier<ItemStack> reward)
@@ -55,12 +55,16 @@ public record SimpleLootItemQuest(
         List<? extends EntityType<?>> entities = this.entities.stream().map(Supplier::get).toList();
         MutableText entity = this.entities.isEmpty() ? Text.empty() : Text.empty().append(entities.get(0).getName());
         for (int i = 1; i < this.entities.size(); i++)
+        {
             entity.append(SDTexts.TOOLTIP$QUEST$AND.get()).append(entities.get(i).getName());
+        }
 
         List<Item> tasks = getTaskItems().stream().map(ItemConvertible::asItem).toList();
         MutableText task = tasks.isEmpty() ? Text.empty() : Text.empty().append(tasks.get(0).getName());
         for (int i = 1; i < tasks.size(); i++)
+        {
             task.append(SDTexts.TOOLTIP$QUEST$AND.get()).append(tasks.get(i).getName());
+        }
 
         desc.add(SDTexts.TOOLTIP$QUEST$LOOT_ITEM.get(entity, task));
     }

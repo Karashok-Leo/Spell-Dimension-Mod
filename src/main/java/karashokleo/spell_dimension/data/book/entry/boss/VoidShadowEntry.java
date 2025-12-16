@@ -51,82 +51,82 @@ public class VoidShadowEntry extends BaseEntryProvider
         context.page("boss");
         this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
-                """
-                        Level: %d+
-                        \\
-                        \\
-                        Defeat the Eye to spawn a floating island, enter the void shadow realm through the portal on it.
-                        """.formatted(TextConstants.BOSS_LEVELS[4])
+            """
+                Level: %d+
+                \\
+                \\
+                Defeat the Eye to spawn a floating island, enter the void shadow realm through the portal on it.
+                """.formatted(TextConstants.BOSS_LEVELS[4])
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
-                """
-                        等级: %d+
-                        \\
-                        \\
-                        击败眼球后将生成一个浮岛，通过其上的传送门可进入虚空之影的领域。
-                        """.formatted(TextConstants.BOSS_LEVELS[4])
+            """
+                等级: %d+
+                \\
+                \\
+                击败眼球后将生成一个浮岛，通过其上的传送门可进入虚空之影的领域。
+                """.formatted(TextConstants.BOSS_LEVELS[4])
         );
         BookSpotlightPageModel boss = BookSpotlightPageModel
-                .builder()
-                .withTitle(context.pageTitle())
-                .withText(context.pageText())
-                .withItem(Ingredient.ofItems(ItemInit.SOURCE_STONE))
-                .build();
+            .builder()
+            .withTitle(context.pageTitle())
+            .withText(context.pageText())
+            .withItem(Ingredient.ofItems(ItemInit.SOURCE_STONE))
+            .build();
 
         context.page("behavior");
         this.lang().add(context.pageText(),
+            """
+                You can't place or break blocks in the void shadow realm, but you can do so with **Remote Manipulation** and **Remote Destruction** spells.
+                \\
+                \\
+                When Void Shadow has at least half its health, you can deal damage to its body by killing the Servants He summons. Damage dealt per hit will not exceed 5%% of Void Shadow's max health.
                 """
-                        You can't place or break blocks in the void shadow realm, but you can do so with **Remote Manipulation** and **Remote Destruction** spells.
-                        \\
-                        \\
-                        When Void Shadow has at least half its health, you can deal damage to its body by killing the Servants He summons. Damage dealt per hit will not exceed 5%% of Void Shadow's max health.
-                        """
         );
         this.lang("zh_cn").add(context.pageText(),
+            """
+                在虚空之影的领域里你无法放置或破坏方块，但你可以使用**远端操控**和**远端瓦解**法术来挣脱这一束缚。
+                \\
+                \\
+                当虚空之影至少有一半生命值时，你可以通过击杀祂召唤的侍从对其本体造成伤害。每次击杀造成的伤害不会超过虚空之影的最大生命值的5%%。
                 """
-                        在虚空之影的领域里你无法放置或破坏方块，但你可以使用**远端操控**和**远端瓦解**法术来挣脱这一束缚。
-                        \\
-                        \\
-                        当虚空之影至少有一半生命值时，你可以通过击杀祂召唤的侍从对其本体造成伤害。每次击杀造成的伤害不会超过虚空之影的最大生命值的5%%。
-                        """
         );
         BookTextPageModel behavior = BookTextPageModel
-                .builder()
-                .withText(context.pageText())
-                .build();
+            .builder()
+            .withText(context.pageText())
+            .build();
 
         context.page("state");
         this.lang().add(context.pageText(),
+            """
+                When Void Shadow has less than half of its health left, He will enter a berserk state. At this point, if you destroy all the Void Fragments on the platform, he will stop rotating around the platform and come to the center to duel with you.
                 """
-                        When Void Shadow has less than half of its health left, He will enter a berserk state. At this point, if you destroy all the Void Fragments on the platform, he will stop rotating around the platform and come to the center to duel with you.
-                        """
         );
         this.lang("zh_cn").add(context.pageText(),
+            """
+                当虚空之影只剩下不到一半生命值时，祂将进入狂暴状态。此时如果你摧毁了平台上的所有虚空碎片，祂将停止围绕平台旋转，并来到平台中心与你决战。
                 """
-                        当虚空之影只剩下不到一半生命值时，祂将进入狂暴状态。此时如果你摧毁了平台上的所有虚空碎片，祂将停止围绕平台旋转，并来到平台中心与你决战。
-                        """
         );
         BookTextPageModel state = BookTextPageModel
-                .builder()
-                .withText(context.pageText())
-                .build();
+            .builder()
+            .withText(context.pageText())
+            .build();
 
         BookEntityPageModel shadow = BookEntityPageModel
-                .builder()
-                .withOffset(0.4f)
-                .withEntityId("adventurez:void_shadow")
-                .build();
+            .builder()
+            .withOffset(0.4f)
+            .withEntityId("adventurez:void_shadow")
+            .build();
         BookEntityPageModel shade = BookEntityPageModel
-                .builder()
-                .withOffset(0.3f)
-                .withEntityId("adventurez:void_shade")
-                .build();
+            .builder()
+            .withOffset(0.3f)
+            .withEntityId("adventurez:void_shade")
+            .build();
         BookEntityPageModel fragment = BookEntityPageModel
-                .builder()
-                .withOffset(0.4f)
-                .withEntityId("adventurez:void_fragment")
-                .build();
+            .builder()
+            .withOffset(0.4f)
+            .withEntityId("adventurez:void_fragment")
+            .build();
 
         return List.of(boss, behavior, state, shadow, shade, fragment);
     }

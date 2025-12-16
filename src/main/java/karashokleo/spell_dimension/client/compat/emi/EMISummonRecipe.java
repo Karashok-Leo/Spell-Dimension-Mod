@@ -74,18 +74,18 @@ public record EMISummonRecipe(EmiIngredient input, LivingEntityWrapper wrapper) 
         int centerX = widgets.getWidth() / 2;
 
         widgets.addSlot(SPELL_SCROLL, centerX - 9 - 20, 4)
-                .catalyst(true)
-                .drawBack(false);
+            .catalyst(true)
+            .drawBack(false);
 
         widgets.addSlot(input, centerX - 9, 4);
 
         widgets.addSlot(WORKSTATION, centerX - 9 + 20, 4)
-                .catalyst(true)
-                .drawBack(false);
+            .catalyst(true)
+            .drawBack(false);
 
         widgets.addDrawable(
-                0, 0, 40, 40,
-                (draw, mouseX, mouseY, delta) -> wrapper.render(draw, centerX, 84, mouseX, mouseY)
+            0, 0, 40, 40,
+            (draw, mouseX, mouseY, delta) -> wrapper.render(draw, centerX, 84, mouseX, mouseY)
         );
     }
 }

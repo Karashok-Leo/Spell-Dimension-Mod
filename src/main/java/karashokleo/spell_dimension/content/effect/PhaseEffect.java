@@ -23,10 +23,15 @@ public class PhaseEffect extends StatusEffect
     public void onApplied(LivingEntity entity, AttributeContainer attributes, int amplifier)
     {
         super.onApplied(entity, attributes, amplifier);
-        if (entity.getWorld().isClient()) return;
+        if (entity.getWorld().isClient())
+        {
+            return;
+        }
         entity.noClip = true;
         if (entity instanceof PlayerEntity player)
+        {
             setFly(player, true);
+        }
     }
 
     @Override
@@ -38,10 +43,15 @@ public class PhaseEffect extends StatusEffect
     public void onRemoved(LivingEntity entity, AttributeContainer attributes, int amplifier)
     {
         super.onRemoved(entity, attributes, amplifier);
-        if (entity.getWorld().isClient()) return;
+        if (entity.getWorld().isClient())
+        {
+            return;
+        }
         entity.noClip = false;
         if (entity instanceof PlayerEntity player)
+        {
             setFly(player, false);
+        }
     }
 
     public static void setFly(PlayerEntity player, boolean canFly)

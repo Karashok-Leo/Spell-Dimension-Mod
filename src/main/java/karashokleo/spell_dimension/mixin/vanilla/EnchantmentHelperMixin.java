@@ -16,15 +16,15 @@ import org.spongepowered.asm.mixin.injection.At;
 public abstract class EnchantmentHelperMixin
 {
     @WrapOperation(
-            method = "getPossibleEntries",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/enchantment/Enchantment;isAvailableForRandomSelection()Z"
-            )
+        method = "getPossibleEntries",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/enchantment/Enchantment;isAvailableForRandomSelection()Z"
+        )
     )
     private static boolean inject_getPossibleEntries(Enchantment instance, Operation<Boolean> original)
     {
         return original.call(instance) ||
-               Registries.ENCHANTMENT.getEntry(instance).isIn(AllTags.ENCHANTABLE);
+            Registries.ENCHANTMENT.getEntry(instance).isIn(AllTags.ENCHANTABLE);
     }
 }

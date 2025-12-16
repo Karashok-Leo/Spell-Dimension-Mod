@@ -47,7 +47,10 @@ public record QuestItemTooltipComponent(DefaultedList<ItemStack> stacks) impleme
         {
             for (int column = 0; column < columns; column++)
             {
-                if (index >= this.stacks.size()) continue;
+                if (index >= this.stacks.size())
+                {
+                    continue;
+                }
                 int slotX = x + column * SLOT_SIZE + 2;
                 int slotY = y + row * SLOT_SIZE + 2;
                 ItemStack itemStack = this.stacks.get(index);
@@ -64,31 +67,31 @@ public record QuestItemTooltipComponent(DefaultedList<ItemStack> stacks) impleme
         for (int i = 0; i < columns; i++)
         {
             context.drawTexture(
-                    TEXTURE,
-                    x + 1 + i * SLOT_SIZE, y, 0,
-                    0, 20, 18, 1,
-                    TEXTURE_SIZE, TEXTURE_SIZE
+                TEXTURE,
+                x + 1 + i * SLOT_SIZE, y, 0,
+                0, 20, 18, 1,
+                TEXTURE_SIZE, TEXTURE_SIZE
             );
             context.drawTexture(
-                    TEXTURE,
-                    x + 1 + i * SLOT_SIZE, y + rows * SLOT_SIZE + 1, 0,
-                    0, 60, 18, 1,
-                    TEXTURE_SIZE, TEXTURE_SIZE
+                TEXTURE,
+                x + 1 + i * SLOT_SIZE, y + rows * SLOT_SIZE + 1, 0,
+                0, 60, 18, 1,
+                TEXTURE_SIZE, TEXTURE_SIZE
             );
         }
         for (int i = 0; i < rows; i++)
         {
             context.drawTexture(
-                    TEXTURE,
-                    x, y + i * SLOT_SIZE + 1, 0,
-                    0, 18, 1, 18,
-                    TEXTURE_SIZE, TEXTURE_SIZE
+                TEXTURE,
+                x, y + i * SLOT_SIZE + 1, 0,
+                0, 18, 1, 18,
+                TEXTURE_SIZE, TEXTURE_SIZE
             );
             context.drawTexture(
-                    TEXTURE,
-                    x + columns * SLOT_SIZE + 1, y + i * SLOT_SIZE + 1, 0,
-                    0, 18, 1, 18,
-                    TEXTURE_SIZE, TEXTURE_SIZE
+                TEXTURE,
+                x + columns * SLOT_SIZE + 1, y + i * SLOT_SIZE + 1, 0,
+                0, 18, 1, 18,
+                TEXTURE_SIZE, TEXTURE_SIZE
             );
         }
     }

@@ -39,7 +39,10 @@ public class SpellPowerScreen extends BaseTextScreen
     {
         super.render(g, mx, my, ptick);
         ClientPlayerEntity player = MinecraftClient.getInstance().player;
-        if (player == null) return;
+        if (player == null)
+        {
+            return;
+        }
         int x = this.leftPos + 8;
         int y = this.topPos + 6;
         SpellSchool focus = null;
@@ -48,19 +51,23 @@ public class SpellPowerScreen extends BaseTextScreen
             Text text = getSpellPowerInfo(school, player);
             g.drawText(textRenderer, text, x, y, 0, false);
             if (mx > x && mx < x + textRenderer.getWidth(text) && my > y && my < y + 10)
+            {
                 focus = school;
+            }
             y += 10;
         }
         if (focus != null)
+        {
             g.drawTooltip(textRenderer, getMechanicInfo(focus, player), mx, my);
+        }
     }
 
     private static Text getSpellPowerInfo(SpellSchool school, PlayerEntity player)
     {
         SpellPower.Result result = SpellPower.getSpellPower(school, player);
         return new SpellPowerEntry(
-                school.attribute,
-                "%.1f".formatted(result.baseValue())
+            school.attribute,
+            "%.1f".formatted(result.baseValue())
         ).getText().setStyle(Style.EMPTY.withColor(school.color));
     }
 
@@ -68,18 +75,18 @@ public class SpellPowerScreen extends BaseTextScreen
     {
         SpellPower.Result result = SpellPower.getSpellPower(school, player);
         return List.of(
-                new SpellPowerEntry(
-                        SpellPowerMechanics.CRITICAL_CHANCE.attribute,
-                        "%.1f%%".formatted(result.criticalChance() * 100)
-                ).getText(),
-                new SpellPowerEntry(
-                        SpellPowerMechanics.CRITICAL_DAMAGE.attribute,
-                        "× %.1f%%".formatted(result.criticalDamage() * 100)
-                ).getText(),
-                new SpellPowerEntry(
-                        SpellPowerMechanics.HASTE.attribute,
-                        "+ %.1f%%".formatted((SpellPower.getHaste(player, school) - 1) * 100)
-                ).getText()
+            new SpellPowerEntry(
+                SpellPowerMechanics.CRITICAL_CHANCE.attribute,
+                "%.1f%%".formatted(result.criticalChance() * 100)
+            ).getText(),
+            new SpellPowerEntry(
+                SpellPowerMechanics.CRITICAL_DAMAGE.attribute,
+                "× %.1f%%".formatted(result.criticalDamage() * 100)
+            ).getText(),
+            new SpellPowerEntry(
+                SpellPowerMechanics.HASTE.attribute,
+                "+ %.1f%%".formatted((SpellPower.getHaste(player, school) - 1) * 100)
+            ).getText()
         );
     }
 
@@ -88,8 +95,8 @@ public class SpellPowerScreen extends BaseTextScreen
         MutableText getText()
         {
             return Text.translatable(attribute.getTranslationKey())
-                    .append(" : ")
-                    .append(value);
+                .append(" : ")
+                .append(value);
         }
     }
 }

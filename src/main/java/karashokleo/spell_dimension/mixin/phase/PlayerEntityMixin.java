@@ -36,12 +36,12 @@ public abstract class PlayerEntityMixin extends LivingEntity
      * Updates the player's clipping value based on our custom parameters.
      */
     @Inject(
-            method = "tick",
-            at = @At(
-                    value = "FIELD",
-                    target = "Lnet/minecraft/entity/player/PlayerEntity;noClip:Z",
-                    shift = At.Shift.AFTER
-            )
+        method = "tick",
+        at = @At(
+            value = "FIELD",
+            target = "Lnet/minecraft/entity/player/PlayerEntity;noClip:Z",
+            shift = At.Shift.AFTER
+        )
     )
     private void onTickAfterNoClip(CallbackInfo ci)
     {
@@ -70,18 +70,21 @@ public abstract class PlayerEntityMixin extends LivingEntity
      * Ignores ground checks for block breaking speed when clipping.
      */
     @Inject(
-            method = "getBlockBreakingSpeed",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/entity/player/PlayerEntity;isSubmergedIn(Lnet/minecraft/registry/tag/TagKey;)Z",
-                    shift = At.Shift.BEFORE
-            ),
-            locals = LocalCapture.CAPTURE_FAILHARD,
-            cancellable = true
+        method = "getBlockBreakingSpeed",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/entity/player/PlayerEntity;isSubmergedIn(Lnet/minecraft/registry/tag/TagKey;)Z",
+            shift = At.Shift.BEFORE
+        ),
+        locals = LocalCapture.CAPTURE_FAILHARD,
+        cancellable = true
     )
     private void onGetBlockBreakingSpeed(BlockState block, CallbackInfoReturnable<Float> cir, float speed)
     {
-        if (NoClip.noClip(this)) cir.setReturnValue(speed);
+        if (NoClip.noClip(this))
+        {
+            cir.setReturnValue(speed);
+        }
     }
 
     /**
@@ -90,7 +93,10 @@ public abstract class PlayerEntityMixin extends LivingEntity
     @Inject(method = "collideWithEntity", at = @At("HEAD"), cancellable = true)
     private void onCollideWithEntity(Entity entity, CallbackInfo ci)
     {
-        if (NoClip.noClip(this)) ci.cancel();
+        if (NoClip.noClip(this))
+        {
+            ci.cancel();
+        }
     }
 
     /**
@@ -99,6 +105,9 @@ public abstract class PlayerEntityMixin extends LivingEntity
     @Inject(method = "onSwimmingStart", at = @At("HEAD"), cancellable = true)
     private void onOnSwimmingStart(CallbackInfo ci)
     {
-        if (NoClip.noClip(this)) ci.cancel();
+        if (NoClip.noClip(this))
+        {
+            ci.cancel();
+        }
     }
 }

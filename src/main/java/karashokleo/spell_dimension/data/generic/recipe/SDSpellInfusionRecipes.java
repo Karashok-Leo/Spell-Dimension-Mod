@@ -53,8 +53,8 @@ public class SDSpellInfusionRecipes
         }
         Identifier recipeId = SpellDimension.modLoc("spell_infusion/%s/%s".formatted(spellId.getNamespace(), spellId.getPath()));
         SpellInfusionRecipeBuilder builder = new SpellInfusionRecipeBuilder()
-                .withTableIngredient(Ingredient.ofItems(Items.PAPER))
-                .withPedestalItem(1, ingredient);
+            .withTableIngredient(Ingredient.ofItems(Items.PAPER))
+            .withPedestalItem(1, ingredient);
         for (Item item : addition)
         {
             builder.withPedestalItem(1, item);

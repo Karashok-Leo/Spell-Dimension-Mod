@@ -49,7 +49,9 @@ public class QuestScreen extends Screen
     public boolean mouseClicked(double mouseX, double mouseY, int button)
     {
         if (this.current == null || button != GLFW.GLFW_MOUSE_BUTTON_LEFT)
+        {
             return super.mouseClicked(mouseX, mouseY, button);
+        }
         Identifier questId = QuestRegistry.QUEST_REGISTRY.getId(this.current);
         AllPackets.toServer(new C2SSelectQuest(questId, this.hand));
         this.close();
@@ -63,7 +65,7 @@ public class QuestScreen extends Screen
         {
             return true;
         } else if (this.client != null &&
-                   this.client.options.inventoryKey.matchesKey(keyCode, scanCode))
+            this.client.options.inventoryKey.matchesKey(keyCode, scanCode))
         {
             this.close();
             return true;
@@ -83,9 +85,15 @@ public class QuestScreen extends Screen
     public void render(DrawContext context, int mouseX, int mouseY, float delta)
     {
         var client = this.client;
-        if (client == null) return;
+        if (client == null)
+        {
+            return;
+        }
         var player = client.player;
-        if (player == null) return;
+        if (player == null)
+        {
+            return;
+        }
 
         super.render(context, mouseX, mouseY, delta);
 
@@ -99,11 +107,11 @@ public class QuestScreen extends Screen
         var padding = 4;
 
         context.fill(
-                startX - padding,
-                startY - padding,
-                startX + iconSize * w + padding,
-                startY + iconSize * h + padding,
-                0x66000000
+            startX - padding,
+            startY - padding,
+            startX + iconSize * w + padding,
+            startY + iconSize * h + padding,
+            0x66000000
         );
 
         this.current = null;
@@ -126,7 +134,9 @@ public class QuestScreen extends Screen
 
             ItemStack icon = quest.getIcon();
             if (icon == null)
+            {
                 icon = AllItems.QUEST_SCROLL.getDefaultStack();
+            }
             drawItem(context, client.getItemRenderer(), player, client.world, icon, stackX, stackY, scale);
 
             index++;
@@ -142,7 +152,10 @@ public class QuestScreen extends Screen
 
     private void drawItem(DrawContext context, ItemRenderer itemRenderer, @Nullable LivingEntity entity, @Nullable World world, ItemStack stack, int x, int y, float scale)
     {
-        if (stack.isEmpty()) return;
+        if (stack.isEmpty())
+        {
+            return;
+        }
 
         BakedModel bakedModel = itemRenderer.getModel(stack, world, entity, 0);
         MatrixStack matrices = context.getMatrices();

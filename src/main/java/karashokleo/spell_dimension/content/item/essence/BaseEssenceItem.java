@@ -25,8 +25,8 @@ public class BaseEssenceItem extends Item implements ColorProvider
     public Text getName()
     {
         return SDTexts.TEXT$ESSENCE.get(
-                SDTexts.getGradeText(this.grade),
-                SDTexts.getSchoolText(this.school)
+            SDTexts.getGradeText(this.grade),
+            SDTexts.getSchoolText(this.school)
         ).setStyle(Style.EMPTY.withColor(this.school.color));
     }
 
@@ -34,8 +34,8 @@ public class BaseEssenceItem extends Item implements ColorProvider
     public Text getName(ItemStack stack)
     {
         return SDTexts.TEXT$ESSENCE.get(
-                SDTexts.getGradeText(this.grade),
-                SDTexts.getSchoolText(this.school)
+            SDTexts.getGradeText(this.grade),
+            SDTexts.getSchoolText(this.school)
         ).setStyle(Style.EMPTY.withColor(this.getColor(stack)));
     }
 

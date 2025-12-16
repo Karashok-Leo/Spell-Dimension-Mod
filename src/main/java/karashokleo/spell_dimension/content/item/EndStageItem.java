@@ -62,6 +62,8 @@ public class EndStageItem extends Item
         super.appendTooltip(stack, world, tooltip, context);
         tooltip.add(SDTexts.TOOLTIP$END_STAGE.get().formatted(Formatting.GRAY));
         if (context.isCreative())
+        {
             tooltip.add(SDTexts.TOOLTIP$SHIFT_RESET.get().formatted(Formatting.GRAY));
+        }
     }
 }

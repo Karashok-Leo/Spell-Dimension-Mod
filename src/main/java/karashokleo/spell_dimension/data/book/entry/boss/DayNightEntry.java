@@ -52,44 +52,44 @@ public class DayNightEntry extends BaseEntryProvider
         context.page("boss");
         this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
-                """
-                        Level: %d+
-                        \\
-                        \\
-                        Use Chaos Orb to summon.
-                        \\
-                        \\
-                        Drops **Celestial Debris** upon defeating the Day Stalker and Night Prowler.
-                        """.formatted(TextConstants.BOSS_LEVELS[3])
+            """
+                Level: %d+
+                \\
+                \\
+                Use Chaos Orb to summon.
+                \\
+                \\
+                Drops **Celestial Debris** upon defeating the Day Stalker and Night Prowler.
+                """.formatted(TextConstants.BOSS_LEVELS[3])
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
-                """
-                        等级: %d+
-                        \\
-                        \\
-                        使用混沌宝珠召唤。
-                        \\
-                        \\
-                        击败昼从者和夜伏者后掉落**日月星碎**。
-                        """.formatted(TextConstants.BOSS_LEVELS[3])
+            """
+                等级: %d+
+                \\
+                \\
+                使用混沌宝珠召唤。
+                \\
+                \\
+                击败昼从者和夜伏者后掉落**日月星碎**。
+                """.formatted(TextConstants.BOSS_LEVELS[3])
         );
 
         BookSpotlightPageModel boss = BookSpotlightPageModel
-                .builder()
-                .withTitle(context.pageTitle())
-                .withText(context.pageText())
-                .withItem(Ingredient.ofItems(AllItems.CELESTIAL_DEBRIS))
-                .build();
+            .builder()
+            .withTitle(context.pageTitle())
+            .withText(context.pageText())
+            .withItem(Ingredient.ofItems(AllItems.CELESTIAL_DEBRIS))
+            .build();
 
         BookEntityPageModel day = BookEntityPageModel
-                .builder()
-                .withEntityId("soulsweapons:day_stalker")
-                .build();
+            .builder()
+            .withEntityId("soulsweapons:day_stalker")
+            .build();
         BookEntityPageModel night = BookEntityPageModel
-                .builder()
-                .withEntityId("soulsweapons:night_prowler")
-                .build();
+            .builder()
+            .withEntityId("soulsweapons:night_prowler")
+            .build();
 
         return List.of(boss, day, night);
     }

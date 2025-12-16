@@ -33,15 +33,24 @@ public class StressResponseEnchantment extends UnobtainableEnchantment
     @Override
     public void onUserDamaged(LivingEntity user, Entity attacker, int level)
     {
-        if (!(user instanceof PlayerEntity player)) return;
+        if (!(user instanceof PlayerEntity player))
+        {
+            return;
+        }
         SpellContainer equipped = SpellContainerHelper.getEquipped(player.getMainHandStack(), player);
-        if (equipped == null) return;
+        if (equipped == null)
+        {
+            return;
+        }
         List<Identifier> spellIds = equipped.spell_ids.stream().map(Identifier::new).toList();
         SpellCooldownManager manager = ((SpellCasterEntity) player).getCooldownManager();
         for (Identifier spellId : spellIds)
         {
             float progress = manager.getCooldownProgress(spellId, 0);
-            if (progress < level * MULTIPLIER) manager.set(spellId, 0);
+            if (progress < level * MULTIPLIER)
+            {
+                manager.set(spellId, 0);
+            }
         }
     }
 

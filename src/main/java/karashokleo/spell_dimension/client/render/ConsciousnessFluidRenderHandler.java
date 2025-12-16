@@ -13,12 +13,12 @@ public class ConsciousnessFluidRenderHandler extends SimpleFluidRenderHandler
     private static final int DEFAULT_COLOR = 0xFFFFFF;
     private static final int STEP = 64;
     private static final int[] COLORS = {
-            0xFF0000,
-            0xFFFF00,
-            0x00FF00,
-            0x00FFFF,
-            0x0000FF,
-            0xFF00FF,
+        0xFF0000,
+        0xFFFF00,
+        0x00FF00,
+        0x00FFFF,
+        0x0000FF,
+        0xFF00FF,
     };
 
     public ConsciousnessFluidRenderHandler()
@@ -29,7 +29,10 @@ public class ConsciousnessFluidRenderHandler extends SimpleFluidRenderHandler
     @Override
     public int getFluidColor(@Nullable BlockRenderView view, @Nullable BlockPos pos, FluidState state)
     {
-        if (pos == null) return DEFAULT_COLOR;
+        if (pos == null)
+        {
+            return DEFAULT_COLOR;
+        }
         return getColor(pos);
 //        return getColorGradient(pos);
     }
@@ -52,15 +55,24 @@ public class ConsciousnessFluidRenderHandler extends SimpleFluidRenderHandler
     private static int getColorGradient(BlockPos pos)
     {
         int red = pos.getX() * 32 + pos.getY() * 16;
-        if ((red & 256) != 0) red = 255 - (red & 255);
+        if ((red & 256) != 0)
+        {
+            red = 255 - (red & 255);
+        }
         red &= 255;
 
         int blue = pos.getY() * 32 + pos.getZ() * 16;
-        if ((blue & 256) != 0) blue = 255 - (blue & 255);
+        if ((blue & 256) != 0)
+        {
+            blue = 255 - (blue & 255);
+        }
         blue ^= 255;
 
         int green = pos.getX() * 16 + pos.getZ() * 32;
-        if ((green & 256) != 0) green = 255 - (green & 255);
+        if ((green & 256) != 0)
+        {
+            green = 255 - (green & 255);
+        }
         green &= 255;
 
         return red << 16 | blue << 8 | green;

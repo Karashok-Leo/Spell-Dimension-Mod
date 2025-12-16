@@ -51,56 +51,56 @@ public class RarityEntry extends BaseEntryProvider
         context.page("rarity");
         this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
+            """
+                All materials and gear are divided into different rarities, from lowest to highest they are **Common**, **Uncommon**, **Rare**, **Epic** and **Legendary**.
+                \\
+                \\
+                Searching for specific keywords (starting with **#**) will show the corresponding items. For example:
                 """
-                        All materials and gear are divided into different rarities, from lowest to highest they are **Common**, **Uncommon**, **Rare**, **Epic** and **Legendary**.
-                        \\
-                        \\
-                        Searching for specific keywords (starting with **#**) will show the corresponding items. For example:
-                        """
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
+            """
+                所有材料和装备被分为不同的稀有度，从低到高分别是**普通**(common)、**不凡**(uncommon)、**稀有**(rare)、**史诗**(epic)和**传奇**(legendary)。
+                \\
+                \\
+                搜索特定的关键词(以**#**起始)可查看对应的物品。如:
                 """
-                        所有材料和装备被分为不同的稀有度，从低到高分别是**普通**(common)、**不凡**(uncommon)、**稀有**(rare)、**史诗**(epic)和**传奇**(legendary)。
-                        \\
-                        \\
-                        搜索特定的关键词(以**#**起始)可查看对应的物品。如:
-                        """
         );
         List<Item> items = new ArrayList<>();
         items.addAll(AllItems.RANDOM_MATERIAL);
         items.addAll(AllItems.RANDOM_GEAR);
         items.addAll(AllItems.RANDOM_BOOK);
         BookSpotlightPageModel rarity = BookSpotlightPageModel
-                .builder()
-                .withTitle(context.pageTitle())
-                .withText(context.pageText())
-                .withItem(BookGenUtil.getIngredient(items.stream().map(Item::getDefaultStack)))
-                .build();
+            .builder()
+            .withTitle(context.pageTitle())
+            .withText(context.pageText())
+            .withItem(BookGenUtil.getIngredient(items.stream().map(Item::getDefaultStack)))
+            .build();
 
         context.page("text");
         this.lang().add(context.pageText(),
+            """
+                **#common/gear**: All common gears
+                **#uncommon/material**: All uncommon materials
+                **#rare/gear**: All rare gears
+                **#epic/armor**: All epic armors
+                **#legendary/weapon**: All legendary weapons
                 """
-                        **#common/gear**: All common gears
-                        **#uncommon/material**: All uncommon materials
-                        **#rare/gear**: All rare gears
-                        **#epic/armor**: All epic armors
-                        **#legendary/weapon**: All legendary weapons
-                        """
         );
         this.lang("zh_cn").add(context.pageText(),
+            """
+                **#common/gear**: 所有普通装备
+                **#uncommon/material**: 所有不凡材料
+                **#rare/gear**: 所有稀有装备
+                **#epic/armor**: 所有史诗盔甲
+                **#legendary/weapon**: 所有传奇武器
                 """
-                        **#common/gear**: 所有普通装备
-                        **#uncommon/material**: 所有不凡材料
-                        **#rare/gear**: 所有稀有装备
-                        **#epic/armor**: 所有史诗盔甲
-                        **#legendary/weapon**: 所有传奇武器
-                        """
         );
         BookTextPageModel text = BookTextPageModel
-                .builder()
-                .withText(context.pageText())
-                .build();
+            .builder()
+            .withText(context.pageText())
+            .build();
 
         return List.of(rarity, text);
     }

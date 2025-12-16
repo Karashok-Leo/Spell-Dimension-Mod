@@ -21,9 +21,9 @@ public abstract class TerribleSwordItemMixin extends SwordItem
     }
 
     @Inject(
-            method = "getAttributeModifiers",
-            at = @At("HEAD"),
-            cancellable = true
+        method = "getAttributeModifiers",
+        at = @At("HEAD"),
+        cancellable = true
     )
     private void inject_getAttributeModifiers(EquipmentSlot slot, CallbackInfoReturnable<Multimap<EntityAttribute, EntityAttributeModifier>> cir)
     {

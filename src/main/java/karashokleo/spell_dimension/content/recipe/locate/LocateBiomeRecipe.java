@@ -46,11 +46,11 @@ public class LocateBiomeRecipe extends LocateRecipe
         player.sendMessage(SDTexts.TEXT$LOCATING.get(targetName), false);
 
         Pair<BlockPos, RegistryEntry<Biome>> pair = world.locateBiome(
-                e -> e.isIn(TagKey.of(RegistryKeys.BIOME, biomeTag)),
-                pos,
-                6400,
-                32,
-                64
+            e -> e.isIn(TagKey.of(RegistryKeys.BIOME, biomeTag)),
+            pos,
+            6400,
+            32,
+            64
         );
 
         if (pair == null)

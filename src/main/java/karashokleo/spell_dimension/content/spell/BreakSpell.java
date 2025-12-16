@@ -21,10 +21,19 @@ public class BreakSpell
 {
     public static void handle(SpellProjectile projectile, Identifier spellId, BlockHitResult hitResult)
     {
-        if (!spellId.equals(AllSpells.BREAK)) return;
-        if (!(projectile.getWorld() instanceof ServerWorld world)) return;
+        if (!spellId.equals(AllSpells.BREAK))
+        {
+            return;
+        }
+        if (!(projectile.getWorld() instanceof ServerWorld world))
+        {
+            return;
+        }
         Entity owner = projectile.getOwner();
-        if (owner == null) return;
+        if (owner == null)
+        {
+            return;
+        }
         if (AllWorldGen.disableInWorld(world))
         {
             owner.sendMessage(SDTexts.TEXT$BANNED_SPELL.get().formatted(Formatting.RED));

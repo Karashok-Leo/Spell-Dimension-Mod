@@ -28,99 +28,99 @@ public class SDAdvancementProvider extends FabricAdvancementProvider
     public void generateAdvancement(Consumer<Advancement> consumer)
     {
         Advancement root = Advancement.Builder.create()
-                .display(
-                        AllItems.MAGIC_MIRROR.getDefaultStack(),
-                        SDTexts.ADVANCEMENT$ROOT$TITLE.get(),
-                        SDTexts.ADVANCEMENT$ROOT$DESCRIPTION.get(),
-                        SpellDimension.modLoc("textures/block/protective_cover.png"),
-                        AdvancementFrame.TASK,
-                        true,
-                        true,
-                        false
-                )
-                .criterion("0", TickCriterion.Conditions.createTick())
-                .rewards(
-                        AdvancementRewards.Builder.loot(SpellDimension.modLoc("pool/starter_kit"))
-                )
-                .build(SpellDimension.modLoc("spell_dimension/root"));
+            .display(
+                AllItems.MAGIC_MIRROR.getDefaultStack(),
+                SDTexts.ADVANCEMENT$ROOT$TITLE.get(),
+                SDTexts.ADVANCEMENT$ROOT$DESCRIPTION.get(),
+                SpellDimension.modLoc("textures/block/protective_cover.png"),
+                AdvancementFrame.TASK,
+                true,
+                true,
+                false
+            )
+            .criterion("0", TickCriterion.Conditions.createTick())
+            .rewards(
+                AdvancementRewards.Builder.loot(SpellDimension.modLoc("pool/starter_kit"))
+            )
+            .build(SpellDimension.modLoc("spell_dimension/root"));
 
         Advancement medal_1 = Advancement.Builder.create()
-                .parent(root)
-                .display(
-                        AllItems.MEDAL.getDefaultStack(),
-                        SDTexts.ADVANCEMENT$MEDAL_1$TITLE.get(),
-                        SDTexts.ADVANCEMENT$MEDAL_1$DESCRIPTION.get(),
-                        null,
-                        AdvancementFrame.CHALLENGE,
-                        true,
-                        true,
-                        true
-                )
-                .criterion("0", InventoryChangedCriterion.Conditions.items(AllItems.MEDAL))
-                .build(SpellDimension.modLoc("spell_dimension/medal_1"));
+            .parent(root)
+            .display(
+                AllItems.MEDAL.getDefaultStack(),
+                SDTexts.ADVANCEMENT$MEDAL_1$TITLE.get(),
+                SDTexts.ADVANCEMENT$MEDAL_1$DESCRIPTION.get(),
+                null,
+                AdvancementFrame.CHALLENGE,
+                true,
+                true,
+                true
+            )
+            .criterion("0", InventoryChangedCriterion.Conditions.items(AllItems.MEDAL))
+            .build(SpellDimension.modLoc("spell_dimension/medal_1"));
 
         Advancement medal_2 = Advancement.Builder.create()
-                .parent(medal_1)
-                .display(
-                        AllItems.MEDAL.getDefaultStack(),
-                        SDTexts.ADVANCEMENT$MEDAL_2$TITLE.get(),
-                        SDTexts.ADVANCEMENT$MEDAL_2$DESCRIPTION.get(),
-                        null,
-                        AdvancementFrame.TASK,
-                        true,
-                        true,
-                        true
-                )
-                .criterion("0", ConsumeItemCriterion.Conditions.item(AllItems.MEDAL))
-                .build(SpellDimension.modLoc("spell_dimension/medal_2"));
+            .parent(medal_1)
+            .display(
+                AllItems.MEDAL.getDefaultStack(),
+                SDTexts.ADVANCEMENT$MEDAL_2$TITLE.get(),
+                SDTexts.ADVANCEMENT$MEDAL_2$DESCRIPTION.get(),
+                null,
+                AdvancementFrame.TASK,
+                true,
+                true,
+                true
+            )
+            .criterion("0", ConsumeItemCriterion.Conditions.item(AllItems.MEDAL))
+            .build(SpellDimension.modLoc("spell_dimension/medal_2"));
 
         Advancement miner = Advancement.Builder.create()
-                .parent(root)
-                .display(
-                        AllItems.ZHUZI_MINER_HELMET.getDefaultStack(),
-                        SDTexts.ADVANCEMENT$MINER$TITLE.get(),
-                        SDTexts.ADVANCEMENT$MINER$DESCRIPTION.get(),
-                        null,
-                        AdvancementFrame.CHALLENGE,
-                        true,
-                        true,
-                        true
-                )
-                .criterion("0", MinedOresCriterion.condition(64 * 64))
-                .rewards(
-                        AdvancementRewards.Builder.loot(SpellDimension.modLoc("pool/miner_helmet"))
-                )
-                .build(SpellDimension.modLoc("spell_dimension/miner"));
+            .parent(root)
+            .display(
+                AllItems.ZHUZI_MINER_HELMET.getDefaultStack(),
+                SDTexts.ADVANCEMENT$MINER$TITLE.get(),
+                SDTexts.ADVANCEMENT$MINER$DESCRIPTION.get(),
+                null,
+                AdvancementFrame.CHALLENGE,
+                true,
+                true,
+                true
+            )
+            .criterion("0", MinedOresCriterion.condition(64 * 64))
+            .rewards(
+                AdvancementRewards.Builder.loot(SpellDimension.modLoc("pool/miner_helmet"))
+            )
+            .build(SpellDimension.modLoc("spell_dimension/miner"));
 
         Advancement drop_guide_1 = Advancement.Builder.create()
-                .parent(root)
-                .display(
-                        AllStacks.GUIDE_BOOK,
-                        SDTexts.ADVANCEMENT$DROP_GUIDE_1$TITLE.get(),
-                        SDTexts.ADVANCEMENT$DROP_GUIDE_1$DESCRIPTION.get(),
-                        null,
-                        AdvancementFrame.TASK,
-                        true,
-                        true,
-                        true
-                )
-                .criterion("0", DroppedItemsCriterion.condition(AllStacks.GUIDE_BOOK.getItem(), 1))
-                .build(SpellDimension.modLoc("spell_dimension/drop_guide_1"));
+            .parent(root)
+            .display(
+                AllStacks.GUIDE_BOOK,
+                SDTexts.ADVANCEMENT$DROP_GUIDE_1$TITLE.get(),
+                SDTexts.ADVANCEMENT$DROP_GUIDE_1$DESCRIPTION.get(),
+                null,
+                AdvancementFrame.TASK,
+                true,
+                true,
+                true
+            )
+            .criterion("0", DroppedItemsCriterion.condition(AllStacks.GUIDE_BOOK.getItem(), 1))
+            .build(SpellDimension.modLoc("spell_dimension/drop_guide_1"));
 
         Advancement drop_guide_2 = Advancement.Builder.create()
-                .parent(drop_guide_1)
-                .display(
-                        AllStacks.GUIDE_BOOK,
-                        SDTexts.ADVANCEMENT$DROP_GUIDE_2$TITLE.get(),
-                        SDTexts.ADVANCEMENT$DROP_GUIDE_2$DESCRIPTION.get(),
-                        null,
-                        AdvancementFrame.TASK,
-                        true,
-                        true,
-                        true
-                )
-                .criterion("0", DroppedItemsCriterion.condition(AllStacks.GUIDE_BOOK.getItem(), 2))
-                .build(SpellDimension.modLoc("spell_dimension/drop_guide_2"));
+            .parent(drop_guide_1)
+            .display(
+                AllStacks.GUIDE_BOOK,
+                SDTexts.ADVANCEMENT$DROP_GUIDE_2$TITLE.get(),
+                SDTexts.ADVANCEMENT$DROP_GUIDE_2$DESCRIPTION.get(),
+                null,
+                AdvancementFrame.TASK,
+                true,
+                true,
+                true
+            )
+            .criterion("0", DroppedItemsCriterion.condition(AllStacks.GUIDE_BOOK.getItem(), 2))
+            .build(SpellDimension.modLoc("spell_dimension/drop_guide_2"));
 
         consumer.accept(root);
         consumer.accept(medal_1);

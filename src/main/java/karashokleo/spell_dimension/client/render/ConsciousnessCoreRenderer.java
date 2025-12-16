@@ -122,12 +122,12 @@ public class ConsciousnessCoreRenderer implements BlockEntityRenderer<Consciousn
     private static void renderBeamVertex(Matrix4f positionMatrix, Matrix3f normalMatrix, VertexConsumer vertices, float red, float green, float blue, float alpha, float y, float x, float z, float u, float v)
     {
         vertices.vertex(positionMatrix, x, y, z)
-                .color(red, green, blue, alpha)
-                .texture(u, v)
-                .overlay(OverlayTexture.DEFAULT_UV)
-                .light(15728880)
-                .normal(normalMatrix, 0.0F, 1.0F, 0.0F)
-                .next();
+            .color(red, green, blue, alpha)
+            .texture(u, v)
+            .overlay(OverlayTexture.DEFAULT_UV)
+            .light(15728880)
+            .normal(normalMatrix, 0.0F, 1.0F, 0.0F)
+            .next();
     }
 
     public boolean rendersOutsideBoundingBox(ConsciousnessCoreTile ConsciousnessCoreTile)
@@ -143,8 +143,8 @@ public class ConsciousnessCoreRenderer implements BlockEntityRenderer<Consciousn
     public boolean isInRenderDistance(ConsciousnessCoreTile ConsciousnessCoreTile, Vec3d vec3d)
     {
         return Vec3d.ofCenter(ConsciousnessCoreTile.getPos())
-                .multiply(1.0, 0.0, 1.0)
-                .isInRange(vec3d.multiply(1.0, 0.0, 1.0), this.getRenderDistance());
+            .multiply(1.0, 0.0, 1.0)
+            .isInRange(vec3d.multiply(1.0, 0.0, 1.0), this.getRenderDistance());
     }
 
     private void renderCore(ConsciousnessCoreTile entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light)
@@ -184,7 +184,10 @@ public class ConsciousnessCoreRenderer implements BlockEntityRenderer<Consciousn
     {
         renderCore(entity, tickDelta, matrices, vertexConsumers, light);
         World world = entity.getWorld();
-        if (world == null || entity.getState() != ConsciousnessCoreTile.CoreState.ACTIVATED) return;
+        if (world == null || entity.getState() != ConsciousnessCoreTile.CoreState.ACTIVATED)
+        {
+            return;
+        }
         renderBeam(entity, tickDelta, matrices, vertexConsumers, world);
     }
 }

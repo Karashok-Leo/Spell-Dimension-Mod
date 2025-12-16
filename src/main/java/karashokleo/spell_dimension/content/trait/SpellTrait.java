@@ -54,7 +54,10 @@ public class SpellTrait extends MobTrait
     {
         SpellSchool school = this.getSpell().school;
         EntityAttributeInstance attributeInstance = mob.getAttributeInstance(school.attribute);
-        if (attributeInstance == null) return;
+        if (attributeInstance == null)
+        {
+            return;
+        }
         String spellIdString = this.getSpellId().toString();
         UUID uuid = UuidUtil.getUUIDFromString(spellIdString);
         attributeInstance.removeModifier(uuid);
@@ -93,8 +96,8 @@ public class SpellTrait extends MobTrait
             return;
         }
         target.sendMessage(SDTexts.TEXT$SPELL_TRAIT$ACTION.get(
-                mob.getName(),
-                this.getName().setStyle(Style.EMPTY.withColor(getColor()))
+            mob.getName(),
+            this.getName().setStyle(Style.EMPTY.withColor(getColor()))
         ));
         // TODO: notify close players???
         // TODO: get mob tracking range???
@@ -103,8 +106,8 @@ public class SpellTrait extends MobTrait
         if (closestPlayer != null && closestPlayer != target)
         {
             target.sendMessage(SDTexts.TEXT$SPELL_TRAIT$ACTION.get(
-                    mob.getName(),
-                    this.getName().setStyle(Style.EMPTY.withColor(getColor()))
+                mob.getName(),
+                this.getName().setStyle(Style.EMPTY.withColor(getColor()))
             ));
         }
     }
@@ -119,7 +122,9 @@ public class SpellTrait extends MobTrait
     public @NotNull String getNameKey()
     {
         if (desc == null)
+        {
             desc = spellId.toTranslationKey("spell", "name");
+        }
         return desc;
     }
 
@@ -133,9 +138,9 @@ public class SpellTrait extends MobTrait
     public void addDetail(List<Text> list)
     {
         list.add(
-                SDTexts.TEXT$SPELL_TRAIT$POWER.get(
-                        mapLevel(lv -> Text.literal(getPower(lv) + "").setStyle(Style.EMPTY.withColor(getColor())))
-                ).formatted(Formatting.GRAY)
+            SDTexts.TEXT$SPELL_TRAIT$POWER.get(
+                mapLevel(lv -> Text.literal(getPower(lv) + "").setStyle(Style.EMPTY.withColor(getColor())))
+            ).formatted(Formatting.GRAY)
         );
         list.add(SDTexts.TEXT$SPELL_TRAIT$DESCRIPTION.get(Text.translatable(getDescKey())).formatted(Formatting.GRAY));
     }

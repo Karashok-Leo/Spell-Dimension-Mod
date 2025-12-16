@@ -36,29 +36,41 @@ public abstract class VoidShadowEntityMixin extends FlyingEntity
     }
 
     @Inject(
-            method = "mobTick",
-            at = @At("TAIL")
+        method = "mobTick",
+        at = @At("TAIL")
     )
     private void inject_mobTick(CallbackInfo ci)
     {
-        if (this.age % 20 != 0) return;
-        if (!this.getWorld().getRegistryKey().equals(DimensionInit.VOID_WORLD)) return;
+        if (this.age % 20 != 0)
+        {
+            return;
+        }
+        if (!this.getWorld().getRegistryKey().equals(DimensionInit.VOID_WORLD))
+        {
+            return;
+        }
         if (!this.hasVoidMiddleCoordinates())
+        {
             this.setVoidMiddle(0, 100, 0);
+        }
         if (this.getBlockPos().getManhattanDistance(this.getVoidMiddle()) > 200)
+        {
             this.teleport(this.getVoidMiddle().getX(), this.getVoidMiddle().getY(), this.getVoidMiddle().getZ());
+        }
     }
 
     @WrapOperation(
-            method = "damage",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/entity/LivingEntity;takeKnockback(DDD)V"
-            )
+        method = "damage",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/entity/LivingEntity;takeKnockback(DDD)V"
+        )
     )
     private void inject_damage(LivingEntity instance, double strength, double x, double z, Operation<Void> original, @Local(argsOnly = true) DamageSource source)
     {
         if (!(source.getSource() instanceof VoidShadeEntity))
+        {
             original.call(instance, strength, x, z);
+        }
     }
 }

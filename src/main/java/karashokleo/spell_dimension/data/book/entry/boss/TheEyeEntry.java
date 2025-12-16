@@ -51,37 +51,37 @@ public class TheEyeEntry extends BaseEntryProvider
         context.page("boss");
         this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
-                """
-                        Level: %d+
-                        \\
-                        \\
-                        Use 25 obsidian, 9 crying obsidian, 8 end rods and 1 **dragon egg** to build the altar in **The End**, wait a moment to summon.
-                        """.formatted(TextConstants.BOSS_LEVELS[3])
+            """
+                Level: %d+
+                \\
+                \\
+                Use 25 obsidian, 9 crying obsidian, 8 end rods and 1 **dragon egg** to build the altar in **The End**, wait a moment to summon.
+                """.formatted(TextConstants.BOSS_LEVELS[3])
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
-                """
-                        等级: %d+
-                        \\
-                        \\
-                        使用25块黑曜石，9块哭泣的黑曜石、8根末地烛和1个**龙蛋**在**末地**搭建祭坛，等待片刻后即可召唤。
-                        """.formatted(TextConstants.BOSS_LEVELS[3])
+            """
+                等级: %d+
+                \\
+                \\
+                使用25块黑曜石，9块哭泣的黑曜石、8根末地烛和1个**龙蛋**在**末地**搭建祭坛，等待片刻后即可召唤。
+                """.formatted(TextConstants.BOSS_LEVELS[3])
         );
 
         BookSpotlightPageModel boss = BookSpotlightPageModel
-                .builder()
-                .withTitle(context.pageTitle())
-                .withText(context.pageText())
-                .withItem(Ingredient.ofItems(Items.ENDER_EYE))
-                .build();
+            .builder()
+            .withTitle(context.pageTitle())
+            .withText(context.pageText())
+            .withItem(Ingredient.ofItems(Items.ENDER_EYE))
+            .build();
         BookMultiblockPageModel alter = BookMultiblockPageModel
-                .builder()
-                .withMultiblockId("spell-dimension-book:ender_eye_altar")
-                .build();
+            .builder()
+            .withMultiblockId("spell-dimension-book:ender_eye_altar")
+            .build();
         BookEntityPageModel entity = BookEntityPageModel
-                .builder()
-                .withEntityId("adventurez:the_eye")
-                .build();
+            .builder()
+            .withEntityId("adventurez:the_eye")
+            .build();
 
         return List.of(boss, alter, entity);
     }

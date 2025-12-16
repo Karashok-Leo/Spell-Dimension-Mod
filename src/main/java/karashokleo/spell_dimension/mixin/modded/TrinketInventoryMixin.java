@@ -24,7 +24,10 @@ public abstract class TrinketInventoryMixin
     public ItemStack getStack(int slot)
     {
         this.update();
-        if (slot >= this.stacks.size()) return ItemStack.EMPTY;
+        if (slot >= this.stacks.size())
+        {
+            return ItemStack.EMPTY;
+        }
         return this.stacks.get(slot);
     }
 
@@ -36,7 +39,10 @@ public abstract class TrinketInventoryMixin
     public void setStack(int slot, ItemStack stack)
     {
         this.update();
-        if (slot >= this.stacks.size()) return;
+        if (slot >= this.stacks.size())
+        {
+            return;
+        }
         this.stacks.set(slot, stack);
     }
 }

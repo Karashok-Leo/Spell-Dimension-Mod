@@ -34,10 +34,10 @@ public class CursedAppleItem extends Item
     public CursedAppleItem()
     {
         super(
-                new FabricItemSettings()
-                        .maxCount(1)
-                        .rarity(Rarity.EPIC)
-                        .fireproof()
+            new FabricItemSettings()
+                .maxCount(1)
+                .rarity(Rarity.EPIC)
+                .fireproof()
         );
     }
 
@@ -65,15 +65,23 @@ public class CursedAppleItem extends Item
     {
         var optional = TrinketsApi.getTrinketComponent(user);
         if (optional.isEmpty())
+        {
             return stack;
+        }
         var group = optional.get().getInventory().get("chest");
         if (group == null)
+        {
             return stack;
+        }
         var inventory = group.get("hostility_curse");
         if (inventory == null)
+        {
             return stack;
+        }
         if (inventory.getModifiers().containsKey(CURSED_APPLE_BONUS_UUID))
+        {
             return stack;
+        }
 
         inventory.addPersistentModifier(new EntityAttributeModifier(CURSED_APPLE_BONUS_UUID, "Cursed Apple Bonus", 7, EntityAttributeModifier.Operation.ADDITION));
 
@@ -84,7 +92,9 @@ public class CursedAppleItem extends Item
         user.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 20 * 30, 9, false, false));
         user.emitGameEvent(GameEvent.EAT);
         if (user instanceof ServerPlayerEntity player)
+        {
             Criteria.CONSUME_ITEM.trigger(player, stack);
+        }
         stack.decrement(1);
         return stack;
     }

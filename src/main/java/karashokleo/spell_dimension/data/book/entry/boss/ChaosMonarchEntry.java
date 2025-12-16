@@ -51,33 +51,33 @@ public class ChaosMonarchEntry extends BaseEntryProvider
         context.page("boss");
         this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
-                """
-                        Level: %d+
-                        \\
-                        \\
-                        Use the Shard of Uncertainty on the Blackstone Pedestal to summon.
-                        """.formatted(TextConstants.BOSS_LEVELS[1])
+            """
+                Level: %d+
+                \\
+                \\
+                Use the Shard of Uncertainty on the Blackstone Pedestal to summon.
+                """.formatted(TextConstants.BOSS_LEVELS[1])
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
-                """
-                        等级: %d+
-                        \\
-                        \\
-                        对黑石基座使用不确定性的残片召唤。
-                        """.formatted(TextConstants.BOSS_LEVELS[1])
+            """
+                等级: %d+
+                \\
+                \\
+                对黑石基座使用不确定性的残片召唤。
+                """.formatted(TextConstants.BOSS_LEVELS[1])
         );
 
         BookSpotlightPageModel boss = BookSpotlightPageModel
-                .builder()
-                .withTitle(context.pageTitle())
-                .withText(context.pageText())
-                .withItem(Ingredient.ofItems(BookGenUtil.getItem(new Identifier("soulsweapons:chaos_crown"))))
-                .build();
+            .builder()
+            .withTitle(context.pageTitle())
+            .withText(context.pageText())
+            .withItem(Ingredient.ofItems(BookGenUtil.getItem(new Identifier("soulsweapons:chaos_crown"))))
+            .build();
         BookEntityPageModel entity = BookEntityPageModel
-                .builder()
-                .withEntityId("soulsweapons:chaos_monarch")
-                .build();
+            .builder()
+            .withEntityId("soulsweapons:chaos_monarch")
+            .build();
 
         return List.of(boss, entity);
     }

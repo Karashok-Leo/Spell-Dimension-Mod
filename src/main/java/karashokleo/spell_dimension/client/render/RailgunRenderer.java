@@ -53,14 +53,14 @@ public class RailgunRenderer<T extends RailgunEntity> extends EntityRenderer<T>
     {
         RenderPhase.Texture shard = new RenderPhase.Texture(textureId, false, false);
         RenderLayer.MultiPhaseParameters parameters = RenderLayer.MultiPhaseParameters
-                .builder()
-                .texture(shard)
-                .program(RenderLayer.BEACON_BEAM_PROGRAM)
-                .transparency(RenderPhase.TRANSLUCENT_TRANSPARENCY)
-                .cull(RenderPhase.DISABLE_CULLING)
-                .overlay(RenderPhase.ENABLE_OVERLAY_COLOR)
-                .writeMaskState(RenderPhase.COLOR_MASK)
-                .build(false);
+            .builder()
+            .texture(shard)
+            .program(RenderLayer.BEACON_BEAM_PROGRAM)
+            .transparency(RenderPhase.TRANSLUCENT_TRANSPARENCY)
+            .cull(RenderPhase.DISABLE_CULLING)
+            .overlay(RenderPhase.ENABLE_OVERLAY_COLOR)
+            .writeMaskState(RenderPhase.COLOR_MASK)
+            .build(false);
         return RenderLayer.of("glow_effect", VertexFormats.POSITION_COLOR_TEXTURE_OVERLAY_LIGHT_NORMAL, VertexFormat.DrawMode.QUADS, 256, true, true, parameters);
     }
 
@@ -163,11 +163,11 @@ public class RailgunRenderer<T extends RailgunEntity> extends EntityRenderer<T>
     protected void drawVertex(Matrix4f positionMatrix, Matrix3f normalMatrix, VertexConsumer vertexConsumer, float x, float y, float u, float v, int light)
     {
         vertexConsumer.vertex(positionMatrix, x, y, 0F)
-                .color(1F, 1F, 1F, 1F)
-                .texture(u, v)
-                .overlay(OverlayTexture.DEFAULT_UV)
-                .light(light)
-                .normal(normalMatrix, 0F, 1F, 0F)
-                .next();
+            .color(1F, 1F, 1F, 1F)
+            .texture(u, v)
+            .overlay(OverlayTexture.DEFAULT_UV)
+            .light(light)
+            .normal(normalMatrix, 0F, 1F, 0F)
+            .next();
     }
 }

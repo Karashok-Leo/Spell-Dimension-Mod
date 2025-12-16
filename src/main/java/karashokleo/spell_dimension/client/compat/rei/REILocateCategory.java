@@ -32,16 +32,16 @@ public class REILocateCategory implements DisplayCategory<REILocateDisplay>
         List<Widget> widgets = Lists.newArrayList();
         widgets.add(Widgets.createRecipeBase(bounds));
         Slot input = Widgets.createSlot(
-                new Point(startPoint.x - 20 * 2, startPoint.y)
+            new Point(startPoint.x - 20 * 2, startPoint.y)
         ).entries(display.input()).markInput();
         Slot scroll = Widgets.createSlot(
-                new Point(startPoint.x - 20, startPoint.y)
+            new Point(startPoint.x - 20, startPoint.y)
         ).entries(SPELL_SCROLL).noInteractable().disableBackground();
         Slot station = Widgets.createSlot(
-                new Point(startPoint.x, startPoint.y)
+            new Point(startPoint.x, startPoint.y)
         ).entries(WORKSTATION).noInteractable().disableBackground();
         Slot location = Widgets.createSlot(
-                new Point(startPoint.x + 20, startPoint.y)
+            new Point(startPoint.x + 20, startPoint.y)
         ).entry(display.location()).markOutput();
         widgets.add(input);
         widgets.add(scroll);
@@ -77,7 +77,10 @@ public class REILocateCategory implements DisplayCategory<REILocateDisplay>
     @Override
     public Renderer getIcon()
     {
-        if (WORKSTATION.isEmpty()) return EntryStack.empty();
+        if (WORKSTATION.isEmpty())
+        {
+            return EntryStack.empty();
+        }
         return WORKSTATION.get(0);
     }
 }

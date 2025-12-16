@@ -21,7 +21,10 @@ public class QuestToEntryConfig
     public static void openEntry(Quest quest)
     {
         Identifier entryId = QUEST_TO_ENTRY.get(quest);
-        if (entryId == null) return;
+        if (entryId == null)
+        {
+            return;
+        }
         BookGuiManager.get().openEntry(MagicGuidanceProvider.BOOK_ID, entryId, 0);
     }
 

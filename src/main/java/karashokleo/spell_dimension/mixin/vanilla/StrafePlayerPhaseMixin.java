@@ -23,20 +23,20 @@ public abstract class StrafePlayerPhaseMixin extends AbstractPhase
     }
 
     @Inject(
-            method = "serverTick",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/world/World;spawnEntity(Lnet/minecraft/entity/Entity;)Z"
-            )
+        method = "serverTick",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/world/World;spawnEntity(Lnet/minecraft/entity/Entity;)Z"
+        )
     )
     private void injected_serverTick(
-            CallbackInfo ci,
-            @Local(ordinal = 3) double x,
-            @Local(ordinal = 4) double y,
-            @Local(ordinal = 5) double z,
-            @Local(ordinal = 6) double directionX,
-            @Local(ordinal = 7) double directionY,
-            @Local(ordinal = 8) double directionZ
+        CallbackInfo ci,
+        @Local(ordinal = 3) double x,
+        @Local(ordinal = 4) double y,
+        @Local(ordinal = 5) double z,
+        @Local(ordinal = 6) double directionX,
+        @Local(ordinal = 7) double directionY,
+        @Local(ordinal = 8) double directionZ
     )
     {
         AllTraits.BLACK_HOLE.tryNotifyTarget(this.dragon);
@@ -44,9 +44,9 @@ public abstract class StrafePlayerPhaseMixin extends AbstractPhase
         for (int i = 0; i < 8; i++)
         {
             Vec3d direction = RandomUtil.perturbDirection(
-                    new Vec3d(directionX, directionY, directionZ),
-                    0.4,
-                    this.dragon.getRandom()
+                new Vec3d(directionX, directionY, directionZ),
+                0.4,
+                this.dragon.getRandom()
             );
             DragonFireballEntity dragonFireballEntity = new DragonFireballEntity(world, this.dragon, direction.x, direction.y, direction.z);
             dragonFireballEntity.refreshPositionAndAngles(x, y, z, 0.0F, 0.0F);

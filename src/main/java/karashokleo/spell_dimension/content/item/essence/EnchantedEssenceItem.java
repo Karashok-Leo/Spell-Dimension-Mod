@@ -89,27 +89,47 @@ public class EnchantedEssenceItem extends StackClickEssenceItem
             }
         }
         EnchantedModifier enchantedModifier = getModifier(essence);
-        if (enchantedModifier == null) return false;
-        else return enchantedModifier.apply(target);
+        if (enchantedModifier == null)
+        {
+            return false;
+        } else
+        {
+            return enchantedModifier.apply(target);
+        }
     }
 
     private boolean mergeEnchantedEssences(ItemStack essence, ItemStack target)
     {
         // stack count could be more than 1 if sophisticated backpack is installed
-        if (essence.getCount() > 1) return false;
-        if (target.getCount() > 1) return false;
+        if (essence.getCount() > 1)
+        {
+            return false;
+        }
+        if (target.getCount() > 1)
+        {
+            return false;
+        }
 
         EnchantedModifier modifier = getModifier(essence);
         EnchantedModifier targetModifier = getModifier(target);
-        if (modifier == null || targetModifier == null) return false;
+        if (modifier == null || targetModifier == null)
+        {
+            return false;
+        }
         // do not check slot
 //        if (modifier.slot() != targetModifier.slot()) return false;
-        if (modifier.modifier().attribute() != targetModifier.modifier().attribute()) return false;
-        if (modifier.modifier().operation() != targetModifier.modifier().operation()) return false;
+        if (modifier.modifier().attribute() != targetModifier.modifier().attribute())
+        {
+            return false;
+        }
+        if (modifier.modifier().operation() != targetModifier.modifier().operation())
+        {
+            return false;
+        }
         new EnchantedModifier(
-                modifier.threshold() + targetModifier.threshold(),
-                targetModifier.slot(),
-                targetModifier.modifier()
+            modifier.threshold() + targetModifier.threshold(),
+            targetModifier.slot(),
+            targetModifier.modifier()
         ).toNbt(target.getOrCreateSubNbt(ENCHANTED_MODIFIERS));
         return true;
     }

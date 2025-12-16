@@ -13,21 +13,21 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public record SimpleAdvancementQuest(
-        Identifier advancementId,
-        Supplier<ItemStack> reward,
-        String titleKey,
-        String descKey,
-        String iconKey
+    Identifier advancementId,
+    Supplier<ItemStack> reward,
+    String titleKey,
+    String descKey,
+    String iconKey
 ) implements AdvancementQuest, ItemRewardQuest
 {
     public SimpleAdvancementQuest(Identifier advancementId, Supplier<ItemStack> reward, String translationKey, String iconKey)
     {
         this(
-                advancementId,
-                reward,
-                translationKey + ".title",
-                translationKey + ".description",
-                iconKey
+            advancementId,
+            reward,
+            translationKey + ".title",
+            translationKey + ".description",
+            iconKey
         );
     }
 

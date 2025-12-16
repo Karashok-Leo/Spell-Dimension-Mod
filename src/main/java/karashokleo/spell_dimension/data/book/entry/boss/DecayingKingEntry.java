@@ -53,62 +53,62 @@ public class DecayingKingEntry extends BaseEntryProvider
         context.page("boss");
         this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
-                """
-                        Level: %d+
-                        \\
-                        \\
-                        Spawns inside the **Decaying Kingdom**(soulsweapons:decaying_kingdom).
-                        \\
-                        This structure can be located in the Nether using the Moonstone Compass.
-                        """.formatted(TextConstants.BOSS_LEVELS[0])
+            """
+                Level: %d+
+                \\
+                \\
+                Spawns inside the **Decaying Kingdom**(soulsweapons:decaying_kingdom).
+                \\
+                This structure can be located in the Nether using the Moonstone Compass.
+                """.formatted(TextConstants.BOSS_LEVELS[0])
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
-                """
-                        等级: %d+
-                        \\
-                        \\
-                        生成于**腐朽王国**(soulsweapons:decaying_kingdom)内。
-                        \\
-                        可用月石罗盘在下界寻找该结构。
-                        """.formatted(TextConstants.BOSS_LEVELS[0])
+            """
+                等级: %d+
+                \\
+                \\
+                生成于**腐朽王国**(soulsweapons:decaying_kingdom)内。
+                \\
+                可用月石罗盘在下界寻找该结构。
+                """.formatted(TextConstants.BOSS_LEVELS[0])
         );
 
         BookSpotlightPageModel boss = BookSpotlightPageModel
-                .builder()
-                .withTitle(context.pageTitle())
-                .withText(context.pageText())
-                .withItem(Ingredient.ofItems(AllItems.ACCURSED_BLACKSTONE))
-                .build();
+            .builder()
+            .withTitle(context.pageTitle())
+            .withText(context.pageText())
+            .withItem(Ingredient.ofItems(AllItems.ACCURSED_BLACKSTONE))
+            .build();
 
         context.page("next");
         this.lang().add(context.pageText(),
+            """
+                Or use Withered Demon Heart on the Blackstone Pedestal to summon.
+                \\
+                \\
+                Drops **Accursed Blackstone** upon defeating the Decaying King.
                 """
-                        Or use Withered Demon Heart on the Blackstone Pedestal to summon.
-                        \\
-                        \\
-                        Drops **Accursed Blackstone** upon defeating the Decaying King.
-                        """
         );
         this.lang("zh_cn").add(context.pageText(),
+            """
+                或者对黑石基座使用凋零恶魔之心召唤。
+                \\
+                \\
+                击败腐朽之王后掉落**朽咒黑石**。
                 """
-                        或者对黑石基座使用凋零恶魔之心召唤。
-                        \\
-                        \\
-                        击败腐朽之王后掉落**朽咒黑石**。
-                        """
         );
 
         BookTextPageModel next = BookTextPageModel
-                .builder()
-                .withText(context.pageText())
-                .build();
+            .builder()
+            .withText(context.pageText())
+            .build();
         BookEntityPageModel entity = BookEntityPageModel
-                .builder()
-                .withEntityId("soulsweapons:accursed_lord_boss")
-                .withScale(0.8F)
-                .withOffset(0.15F)
-                .build();
+            .builder()
+            .withEntityId("soulsweapons:accursed_lord_boss")
+            .withScale(0.8F)
+            .withOffset(0.15F)
+            .build();
 
         return List.of(boss, next, entity);
     }

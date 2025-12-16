@@ -37,7 +37,10 @@ public class MirageReflectorItem extends CurseTrinketItem implements ReflectTrin
     {
         float amount = event.getAmount();
         float maxDamage = entity.getMaxHealth() * MAX_DAMAGE_RATIO;
-        if (amount <= maxDamage) return;
+        if (amount <= maxDamage)
+        {
+            return;
+        }
         event.setAmount(maxDamage);
     }
 

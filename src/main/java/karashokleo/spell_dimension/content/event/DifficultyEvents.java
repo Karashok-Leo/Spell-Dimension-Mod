@@ -91,13 +91,19 @@ public class DifficultyEvents
         EntityEvents.ON_JOIN_WORLD.register((entity, world, b) ->
         {
             if (!(entity instanceof LivingEntity living))
+            {
                 return true;
+            }
             EntityType<?> type = living.getType();
             if (!type.isIn(LHTags.SEMIBOSS))
+            {
                 return true;
+            }
             EntityAttributeInstance attributeInstance = living.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
             if (attributeInstance == null)
+            {
                 return true;
+            }
             String id = Registries.ENTITY_TYPE.getId(type).toString();
             attributeInstance.setBaseValue(BOSS_HEALTH_SET.getOrDefault(id, 400));
             return true;
@@ -106,11 +112,23 @@ public class DifficultyEvents
         // 逝不过一
         ServerEntityCombatEvents.AFTER_KILLED_OTHER_ENTITY.register((world, entity, killedEntity) ->
         {
-            if (!entity.getType().isIn(LHTags.SEMIBOSS)) return;
-            if (!(killedEntity instanceof PlayerEntity)) return;
-            if (!(entity instanceof LivingEntity living)) return;
+            if (!entity.getType().isIn(LHTags.SEMIBOSS))
+            {
+                return;
+            }
+            if (!(killedEntity instanceof PlayerEntity))
+            {
+                return;
+            }
+            if (!(entity instanceof LivingEntity living))
+            {
+                return;
+            }
             // if other players are in the range
-            if (!world.getPlayers(player -> player.isAlive() && player.isInRange(entity, 32)).isEmpty()) return;
+            if (!world.getPlayers(player -> player.isAlive() && player.isInRange(entity, 32)).isEmpty())
+            {
+                return;
+            }
             living.setHealth(living.getMaxHealth());
         });
 
@@ -165,17 +183,26 @@ public class DifficultyEvents
         // Extra Difficulty bonus of Nightmare
         PlayerTickEvents.END.register(player ->
         {
-            if (player.getWorld().isClient()) return;
-            if (player.age % 40 != 0) return;
+            if (player.getWorld().isClient())
+            {
+                return;
+            }
+            if (player.age % 40 != 0)
+            {
+                return;
+            }
             // first remove the old modifier
             AttributeUtil.removeModifier(player, LHMiscs.ADD_LEVEL, GameStageComponent.NIGHTMARE_DIFFICULTY_BONUS);
-            if (GameStageComponent.getDifficulty(player) < GameStageComponent.NIGHTMARE) return;
+            if (GameStageComponent.getDifficulty(player) < GameStageComponent.NIGHTMARE)
+            {
+                return;
+            }
             // then add the new modifier
             // get the sum of all spell power
             double sum = SchoolUtil.SCHOOLS
-                    .stream()
-                    .mapToDouble(school -> SpellPower.getSpellPower(school, player).baseValue())
-                    .sum();
+                .stream()
+                .mapToDouble(school -> SpellPower.getSpellPower(school, player).baseValue())
+                .sum();
             AttributeUtil.addModifier(player, LHMiscs.ADD_LEVEL, GameStageComponent.NIGHTMARE_DIFFICULTY_BONUS, "Nightmare Difficulty Bonus", sum * 0.5, EntityAttributeModifier.Operation.ADDITION);
         });
 
@@ -220,36 +247,36 @@ public class DifficultyEvents
     private static void putArmors(TagKey<Item> armorTag, int level, WeaponConfig config)
     {
         Registries.ITEM.getEntryList(armorTag)
-                .map(entries ->
-                        new WeaponConfig.ItemConfig(
-                                entries.stream()
-                                        .map(e -> e.value().getDefaultStack())
-                                        .collect(
-                                                ArrayList<ItemStack>::new,
-                                                ArrayList<ItemStack>::add,
-                                                ArrayList::addAll
-                                        ),
-                                level, 240 - level
-                        )
+            .map(entries ->
+                new WeaponConfig.ItemConfig(
+                    entries.stream()
+                        .map(e -> e.value().getDefaultStack())
+                        .collect(
+                            ArrayList<ItemStack>::new,
+                            ArrayList<ItemStack>::add,
+                            ArrayList::addAll
+                        ),
+                    level, 240 - level
                 )
-                .ifPresent(config.armors::add);
+            )
+            .ifPresent(config.armors::add);
     }
 
     private static void putWeapons(TagKey<Item> weaponTag, int level, WeaponConfig config)
     {
         Registries.ITEM.getEntryList(weaponTag)
-                .map(entries ->
-                        new WeaponConfig.ItemConfig(
-                                entries.stream()
-                                        .map(e -> e.value().getDefaultStack())
-                                        .collect(
-                                                ArrayList<ItemStack>::new,
-                                                ArrayList<ItemStack>::add,
-                                                ArrayList::addAll
-                                        ),
-                                level, 240 - level
-                        )
+            .map(entries ->
+                new WeaponConfig.ItemConfig(
+                    entries.stream()
+                        .map(e -> e.value().getDefaultStack())
+                        .collect(
+                            ArrayList<ItemStack>::new,
+                            ArrayList<ItemStack>::add,
+                            ArrayList::addAll
+                        ),
+                    level, 240 - level
                 )
-                .ifPresent(config.melee_weapons::add);
+            )
+            .ifPresent(config.melee_weapons::add);
     }
 }

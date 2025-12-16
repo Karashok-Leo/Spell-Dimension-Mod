@@ -19,13 +19,18 @@ public class FrostBlinkSpell
 
     public static void handle(World world, LivingEntity caster, List<Entity> targets, SpellInfo spellInfo)
     {
-        if (world.isClient()) return;
+        if (world.isClient())
+        {
+            return;
+        }
 
         Spell spell = SpellRegistry.getSpell(MINI_ICICLE);
 
         SpellHelper.ImpactContext context = ImpactUtil.createContext(caster, spell);
 
         for (int i = 0; i < 360; i += 18)
+        {
             ImpactUtil.shootProjectile(world, caster, caster.getPos().add(0, caster.getHeight() / 2, 0), ImpactUtil.fromEulerAngle(0, i, 0), 0, new SpellInfo(spell, MINI_ICICLE), context);
+        }
     }
 }

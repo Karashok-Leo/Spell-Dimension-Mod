@@ -25,16 +25,24 @@ public abstract class EntityPredicatesMixin
     private static void onValidLivingEntity(Entity entity, CallbackInfoReturnable<Boolean> cir)
     {
         if (cir.getReturnValueZ())
+        {
             if (NoClip.noClip(entity))
+            {
                 cir.setReturnValue(false);
+            }
+        }
     }
 
     @Inject(method = "method_24517", at = @At("TAIL"), cancellable = true, remap = false)
     private static void onExceptSpectator(Entity entity, CallbackInfoReturnable<Boolean> cir)
     {
         if (cir.getReturnValueZ())
+        {
             if (NoClip.noClip(entity))
+            {
                 cir.setReturnValue(false);
+            }
+        }
     }
 
     /**
@@ -43,6 +51,9 @@ public abstract class EntityPredicatesMixin
     @Inject(method = "canBePushedBy", at = @At("HEAD"), cancellable = true)
     private static void onCanBePushedBy(Entity entity, CallbackInfoReturnable<Predicate<Entity>> cir)
     {
-        if (NoClip.noClip(entity)) cir.setReturnValue(e -> false);
+        if (NoClip.noClip(entity))
+        {
+            cir.setReturnValue(e -> false);
+        }
     }
 }

@@ -48,23 +48,23 @@ public class RuneEntry extends BaseEntryProvider
         context.page("rune");
         this.lang().add(context.pageTitle(), "Rune");
         this.lang().add(context.pageText(),
+            """
+                Casting certain spells requires runes. You can craft runes directly in your hand, or craft a rune altar to make more runes with the same ingredients.
                 """
-                        Casting certain spells requires runes. You can craft runes directly in your hand, or craft a rune altar to make more runes with the same ingredients.
-                        """
         );
         this.lang("zh_cn").add(context.pageTitle(), "符文");
         this.lang("zh_cn").add(context.pageText(),
+            """
+                施放某些法术需要消耗符文。你可以直接在手中合成符文，或是制作一个符文祭坛以相同的原料制作更多的符文。
                 """
-                        施放某些法术需要消耗符文。你可以直接在手中合成符文，或是制作一个符文祭坛以相同的原料制作更多的符文。
-                        """
         );
 
         BookSpotlightPageModel rune = BookSpotlightPageModel
-                .builder()
-                .withTitle(context.pageTitle())
-                .withText(context.pageText())
-                .withItem(BookGenUtil.getIngredient(RuneItems.entries.stream().map(entry -> entry.item().getDefaultStack())))
-                .build();
+            .builder()
+            .withTitle(context.pageTitle())
+            .withText(context.pageText())
+            .withItem(BookGenUtil.getIngredient(RuneItems.entries.stream().map(entry -> entry.item().getDefaultStack())))
+            .build();
 
         return List.of(rune);
     }

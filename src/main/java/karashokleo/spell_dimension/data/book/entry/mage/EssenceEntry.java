@@ -56,19 +56,19 @@ public class EssenceEntry extends BaseEntryProvider
         this.lang("zh_cn").add(context.pageText(), "也许你已经注意到，法术命中时有概率掉落一些魔法精华。它们是魔法师成长路上的重要材料，可以用来合成一些魔法物品，比如法术书、符文和束魔精华。");
 
         BookSpotlightPageModel base = BookSpotlightPageModel
-                .builder()
-                .withTitle(context.pageTitle())
-                .withText(context.pageText())
-                .withItem(BookGenUtil.getIngredient(AllStacks.getBaseEssences()))
-                .build();
+            .builder()
+            .withTitle(context.pageTitle())
+            .withText(context.pageText())
+            .withItem(BookGenUtil.getIngredient(AllStacks.getBaseEssences()))
+            .build();
 
         context.page("loot");
         this.lang().add(context.pageText(), "The drop chance of base essence is %.1f%%%%. The advanced looting charm you wear can increase this chance. When the hostility level of the spell target is greater than %d, there is a %.1f%%%% probability of dropping intermediate essence. When the level of the spell target is greater than %d, there is a %.1f%%%% probability of dropping advanced essence.".formatted(EssenceLootConfig.BASE_CONFIG.dropChance() * 100, EssenceLootConfig.BASE_CONFIG.intermediateLevel(), EssenceLootConfig.BASE_CONFIG.intermediateChance() * 100, EssenceLootConfig.BASE_CONFIG.advancedLevel(), EssenceLootConfig.BASE_CONFIG.advancedChance() * 100));
         this.lang("zh_cn").add(context.pageText(), "基础精华的掉落概率是%.1f%%%%，你佩戴的高级掠夺宝珠可以放大此概率。当法术目标的等级大于%d时，有%.1f%%%%的概率掉落中级精华，当法术目标的等级大于%d时，有%.1f%%%%的概率掉落高级精华。".formatted(EssenceLootConfig.BASE_CONFIG.dropChance() * 100, EssenceLootConfig.BASE_CONFIG.intermediateLevel(), EssenceLootConfig.BASE_CONFIG.intermediateChance() * 100, EssenceLootConfig.BASE_CONFIG.advancedLevel(), EssenceLootConfig.BASE_CONFIG.advancedChance() * 100));
         BookTextPageModel loot = BookTextPageModel
-                .builder()
-                .withText(context.pageText())
-                .build();
+            .builder()
+            .withText(context.pageText())
+            .build();
 
         return List.of(base, loot);
     }

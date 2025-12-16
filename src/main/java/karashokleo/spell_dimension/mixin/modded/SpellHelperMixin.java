@@ -35,9 +35,9 @@ import java.util.List;
 public abstract class SpellHelperMixin
 {
     @Inject(
-            method = "attemptCasting(Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/item/ItemStack;Lnet/minecraft/util/Identifier;Z)Lnet/spell_engine/internals/casting/SpellCast$Attempt;",
-            at = @At("HEAD"),
-            cancellable = true
+        method = "attemptCasting(Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/item/ItemStack;Lnet/minecraft/util/Identifier;Z)Lnet/spell_engine/internals/casting/SpellCast$Attempt;",
+        at = @At("HEAD"),
+        cancellable = true
     )
     private static void inject_attemptCasting(PlayerEntity player, ItemStack itemStack, Identifier spellId, boolean checkAmmo, CallbackInfoReturnable<SpellCast.Attempt> cir)
     {
@@ -49,10 +49,10 @@ public abstract class SpellHelperMixin
 
     // fix context position being null
     @ModifyArg(
-            method = "directImpact",
-            at = @At(value = "INVOKE", target = "Lnet/spell_engine/internals/SpellHelper;performImpacts(Lnet/minecraft/world/World;Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/entity/Entity;Lnet/minecraft/entity/Entity;Lnet/spell_engine/api/spell/SpellInfo;Lnet/spell_engine/internals/SpellHelper$ImpactContext;)Z"
-            ),
-            index = 5
+        method = "directImpact",
+        at = @At(value = "INVOKE", target = "Lnet/spell_engine/internals/SpellHelper;performImpacts(Lnet/minecraft/world/World;Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/entity/Entity;Lnet/minecraft/entity/Entity;Lnet/spell_engine/api/spell/SpellInfo;Lnet/spell_engine/internals/SpellHelper$ImpactContext;)Z"
+        ),
+        index = 5
     )
     private static SpellHelper.ImpactContext inject_directImpact(SpellHelper.ImpactContext context, @Local(argsOnly = true) Entity target)
     {
@@ -60,11 +60,11 @@ public abstract class SpellHelperMixin
     }
 
     @Inject(
-            method = "performSpell",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/spell_engine/internals/SpellHelper$ImpactContext;<init>(FFLnet/minecraft/util/math/Vec3d;Lnet/spell_power/api/SpellPower$Result;Lnet/spell_engine/utils/TargetHelper$TargetingMode;)V"
-            )
+        method = "performSpell",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/spell_engine/internals/SpellHelper$ImpactContext;<init>(FFLnet/minecraft/util/math/Vec3d;Lnet/spell_power/api/SpellPower$Result;Lnet/spell_engine/utils/TargetHelper$TargetingMode;)V"
+        )
     )
     private static void inject_performSpell_before(World world, PlayerEntity player, Identifier spellId, List<Entity> targets, SpellCast.Action action, float progress, CallbackInfo ci, @Local SpellInfo spellInfo)
     {
@@ -73,39 +73,56 @@ public abstract class SpellHelperMixin
     }
 
     @Inject(
-            method = "attemptCasting(Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/item/ItemStack;Lnet/minecraft/util/Identifier;Z)Lnet/spell_engine/internals/casting/SpellCast$Attempt;",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/spell_engine/internals/SpellRegistry;getSpell(Lnet/minecraft/util/Identifier;)Lnet/spell_engine/api/spell/Spell;",
-                    shift = At.Shift.BY,
-                    by = 2
-            ),
-            cancellable = true
+        method = "attemptCasting(Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/item/ItemStack;Lnet/minecraft/util/Identifier;Z)Lnet/spell_engine/internals/casting/SpellCast$Attempt;",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/spell_engine/internals/SpellRegistry;getSpell(Lnet/minecraft/util/Identifier;)Lnet/spell_engine/api/spell/Spell;",
+            shift = At.Shift.BY,
+            by = 2
+        ),
+        cancellable = true
     )
     private static void inject_attemptCasting(PlayerEntity player, ItemStack itemStack, Identifier spellId, boolean checkAmmo, CallbackInfoReturnable<SpellCast.Attempt> cir, @Local Spell spell)
     {
-        if (player.getAbilities().creativeMode) return;
-        if (spell.school == AllSpells.GENERIC) return;
-        if (!itemStack.isOf(AllItems.SPELL_SCROLL)) return;
-        if (SchoolUtil.getLivingSchools(player).contains(spell.school)) return;
-        if (SchoolUtil.getLivingSecondarySchools(player).contains(spell.school)) return;
+        if (player.getAbilities().creativeMode)
+        {
+            return;
+        }
+        if (spell.school == AllSpells.GENERIC)
+        {
+            return;
+        }
+        if (!itemStack.isOf(AllItems.SPELL_SCROLL))
+        {
+            return;
+        }
+        if (SchoolUtil.getLivingSchools(player).contains(spell.school))
+        {
+            return;
+        }
+        if (SchoolUtil.getLivingSecondarySchools(player).contains(spell.school))
+        {
+            return;
+        }
         player.sendMessage(SDTexts.TEXT$SKILLED_SCHOOL.get(), true);
         cir.setReturnValue(SpellCast.Attempt.none());
     }
 
     @Redirect(
-            method = "performImpact",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/entity/LivingEntity;addStatusEffect(Lnet/minecraft/entity/effect/StatusEffectInstance;Lnet/minecraft/entity/Entity;)Z"
-            )
+        method = "performImpact",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/entity/LivingEntity;addStatusEffect(Lnet/minecraft/entity/effect/StatusEffectInstance;Lnet/minecraft/entity/Entity;)Z"
+        )
     )
     private static boolean inject_performImpact(LivingEntity target, StatusEffectInstance effect, Entity caster)
     {
         MobEffectEvent.Applicable event = new MobEffectEvent.Applicable(target, effect);
         event.sendEvent();
-        if (event.getResult() == MobEffectEvent.Result.DENY) return false;
-        else
+        if (event.getResult() == MobEffectEvent.Result.DENY)
+        {
+            return false;
+        } else
         {
             EffectHelper.forceAddEffectWithEvent(target, effect, caster);
             return true;
@@ -113,11 +130,11 @@ public abstract class SpellHelperMixin
     }
 
     @Redirect(
-            method = "intent",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/entity/effect/StatusEffect;isBeneficial()Z"
-            )
+        method = "intent",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/entity/effect/StatusEffect;isBeneficial()Z"
+        )
     )
     private static boolean wrap_intent(StatusEffect instance)
     {

@@ -23,7 +23,10 @@ public class SpellDashEnchantment extends SpellImpactEnchantment
     @Override
     public void onSpellImpact(World world, LivingEntity caster, Context context, List<Entity> targets, SpellInfo spellInfo)
     {
-        if (!(caster instanceof ServerPlayerEntity player)) return;
+        if (!(caster instanceof ServerPlayerEntity player))
+        {
+            return;
+        }
         S2CSpellDash spellDash = new S2CSpellDash();
         AllPackets.toClientPlayer(player, spellDash);
     }

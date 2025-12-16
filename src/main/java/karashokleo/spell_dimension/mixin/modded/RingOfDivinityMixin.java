@@ -61,8 +61,8 @@ public abstract class RingOfDivinityMixin extends SingleEpicTrinketItem implemen
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
         tooltip.add(SDTexts.TOOLTIP$RING_DIVINITY.get(
-                Math.round(DAMAGE_REDUCTION * 100),
-                Math.round(MAX_DAMAGE_RATIO * 100)
+            Math.round(DAMAGE_REDUCTION * 100),
+            Math.round(MAX_DAMAGE_RATIO * 100)
         ).formatted(Formatting.GOLD));
         super.appendTooltip(stack, world, tooltip, context);
     }

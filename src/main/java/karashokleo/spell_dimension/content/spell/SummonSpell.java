@@ -38,20 +38,25 @@ public class SummonSpell
 
         // if spawner soul, summon the entity in the soul
         if (stack.isOf(AllItems.SPAWNER_SOUL))
+        {
             return AllItems.SPAWNER_SOUL.getSummonEntry(stack);
+        }
 
         SummonRecipe summonRecipe;
         // if spell prism, summon a random entity
         if (stack.isOf(AllItems.SPELL_PRISM))
         {
             summonRecipe = RandomUtil.randomFromList(
-                    player.getRandom(),
-                    world.getRecipeManager().listAllOfType(SummonRecipe.TYPE)
+                player.getRandom(),
+                world.getRecipeManager().listAllOfType(SummonRecipe.TYPE)
             );
         } else
         {
             Optional<SummonRecipe> optional = world.getRecipeManager().getFirstMatch(SummonRecipe.TYPE, player.getInventory(), world);
-            if (optional.isEmpty()) return Optional.empty();
+            if (optional.isEmpty())
+            {
+                return Optional.empty();
+            }
 
             summonRecipe = optional.get();
         }
@@ -61,18 +66,36 @@ public class SummonSpell
 
     public static void handle(SpellProjectile projectile, Identifier spellId, BlockHitResult hitResult)
     {
-        if (!spellId.equals(AllSpells.SUMMON)) return;
-        if (!(projectile.getWorld() instanceof ServerWorld world)) return;
-        if (!(projectile.getOwner() instanceof PlayerEntity player)) return;
+        if (!spellId.equals(AllSpells.SUMMON))
+        {
+            return;
+        }
+        if (!(projectile.getWorld() instanceof ServerWorld world))
+        {
+            return;
+        }
+        if (!(projectile.getOwner() instanceof PlayerEntity player))
+        {
+            return;
+        }
         BlockPos blockPos = hitResult.getBlockPos();
         BlockState blockState = world.getBlockState(blockPos);
 
         if (!blockState.isOf(Blocks.SPAWNER) ||
-            !(world.getBlockEntity(blockPos) instanceof MobSpawnerBlockEntity mobSpawnerBlockEntity)) return;
+            !(world.getBlockEntity(blockPos) instanceof MobSpawnerBlockEntity mobSpawnerBlockEntity))
+        {
+            return;
+        }
 
         Optional<SummonEntry> optional = getSummonEntry(world, player);
-        if (optional.isEmpty()) return;
-        if (!allowSummon(mobSpawnerBlockEntity, optional.get(), player)) return;
+        if (optional.isEmpty())
+        {
+            return;
+        }
+        if (!allowSummon(mobSpawnerBlockEntity, optional.get(), player))
+        {
+            return;
+        }
         setSummonData(mobSpawnerBlockEntity, optional.get(), world.getRandom());
 
         mobSpawnerBlockEntity.markDirty();
@@ -81,7 +104,10 @@ public class SummonSpell
 
         ParticleUtil.sparkParticleEmit(world, mobSpawnerBlockEntity.getPos().toCenterPos(), 24);
 
-        if (player.getAbilities().creativeMode) return;
+        if (player.getAbilities().creativeMode)
+        {
+            return;
+        }
 
         ItemStack offHandStack = player.getOffHandStack();
         if (offHandStack.isOf(AllItems.SPAWNER_SOUL))
@@ -110,7 +136,10 @@ public class SummonSpell
     private static boolean allowSummon(MobSpawnerBlockEntity spawnerBlockEntity, SummonEntry summonEntry, PlayerEntity player)
     {
         World world = spawnerBlockEntity.getWorld();
-        if (world == null) return false;
+        if (world == null)
+        {
+            return false;
+        }
         Identifier worldId = world.getRegistryKey().getValue();
         EntityType<?> entityType = summonEntry.entityType();
         Identifier requireId = WORLD_RESTRICTIONS.get(entityType);

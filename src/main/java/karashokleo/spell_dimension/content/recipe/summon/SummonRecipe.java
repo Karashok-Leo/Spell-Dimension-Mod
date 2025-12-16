@@ -13,10 +13,10 @@ import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 
 public record SummonRecipe(
-        Identifier id,
-        Ingredient ingredient,
-        EntityType<?> entityType,
-        int count
+    Identifier id,
+    Ingredient ingredient,
+    EntityType<?> entityType,
+    int count
 ) implements Recipe<PlayerInventory>
 {
     public static final String NAME = "summon";

@@ -49,40 +49,40 @@ public class EnlighteningEntry extends BaseEntryProvider
         context.page("prev");
         this.lang().add(context.pageTitle(), "Enlightening Essence");
         this.lang().add(context.pageText(),
+            """
+                Enlightening Essence is similar to Enchanted Essence, except that while Enchanted Essence works on items, Enlightening Essence works on the mage himself and is not limited by a threshold.
                 """
-                        Enlightening Essence is similar to Enchanted Essence, except that while Enchanted Essence works on items, Enlightening Essence works on the mage himself and is not limited by a threshold.
-                        """
         );
         this.lang("zh_cn").add(context.pageTitle(), "源启精华");
         this.lang("zh_cn").add(context.pageText(),
+            """
+                源启精华与束魔精华类似，不同的是束魔精华作用于物品，而源启精华作用于魔法师自身，且不受限于阈值。
                 """
-                        源启精华与束魔精华类似，不同的是束魔精华作用于物品，而源启精华作用于魔法师自身，且不受限于阈值。
-                        """
         );
 
         BookSpotlightPageModel prev = BookSpotlightPageModel
-                .builder()
-                .withTitle(context.pageTitle())
-                .withText(context.pageText())
-                .withItem(BookGenUtil.getNbtIngredient(AllStacks.getEnlighteningEssences()))
-                .build();
+            .builder()
+            .withTitle(context.pageTitle())
+            .withText(context.pageText())
+            .withItem(BookGenUtil.getNbtIngredient(AllStacks.getEnlighteningEssences()))
+            .build();
 
         context.page("next");
         this.lang().add(context.pageText(),
+            """
+                Enlightening Essence cannot be crafted and can only be obtained from loot.
                 """
-                        Enlightening Essence cannot be crafted and can only be obtained from loot.
-                        """
         );
         this.lang("zh_cn").add(context.pageText(),
+            """
+                源启精华不能合成，只能从战利品中获取。
                 """
-                        源启精华不能合成，只能从战利品中获取。
-                        """
         );
 
         BookTextPageModel next = BookTextPageModel
-                .builder()
-                .withText(context.pageText())
-                .build();
+            .builder()
+            .withText(context.pageText())
+            .build();
 
         return List.of(prev, next);
     }

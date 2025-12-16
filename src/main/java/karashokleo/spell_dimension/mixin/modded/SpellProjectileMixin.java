@@ -40,12 +40,12 @@ public abstract class SpellProjectileMixin extends ProjectileEntity
     }
 
     @Inject(
-            method = "tick",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/spell_engine/entity/SpellProjectile;kill()V",
-                    ordinal = 1
-            )
+        method = "tick",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/spell_engine/entity/SpellProjectile;kill()V",
+            ordinal = 1
+        )
     )
     private void inject_tick_flyKilled(CallbackInfo ci)
     {
@@ -53,25 +53,31 @@ public abstract class SpellProjectileMixin extends ProjectileEntity
     }
 
     @Inject(
-            method = "tick",
-            at = @At("HEAD"),
-            cancellable = true
+        method = "tick",
+        at = @At("HEAD"),
+        cancellable = true
     )
     private void inject_tick_Killed(CallbackInfo ci)
     {
-        if (this.getWorld().isClient()) return;
-        if (this.getVelocity().lengthSquared() > 0.001) return;
+        if (this.getWorld().isClient())
+        {
+            return;
+        }
+        if (this.getVelocity().lengthSquared() > 0.001)
+        {
+            return;
+        }
         this.kill();
         ci.cancel();
     }
 
     @Inject(
-            method = "tick",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/spell_engine/entity/SpellProjectile;kill()V",
-                    ordinal = 2
-            )
+        method = "tick",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/spell_engine/entity/SpellProjectile;kill()V",
+            ordinal = 2
+        )
     )
     private void inject_tick_fallKilled(CallbackInfo ci)
     {
@@ -79,12 +85,12 @@ public abstract class SpellProjectileMixin extends ProjectileEntity
     }
 
     @Inject(
-            method = "tick",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/spell_engine/entity/SpellProjectile;kill()V",
-                    ordinal = 4
-            )
+        method = "tick",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/spell_engine/entity/SpellProjectile;kill()V",
+            ordinal = 4
+        )
     )
     private void inject_tick_defaultKilled(CallbackInfo ci)
     {

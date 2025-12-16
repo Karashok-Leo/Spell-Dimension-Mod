@@ -32,8 +32,15 @@ public abstract class RightPressEssenceItem extends SpellEssenceItem
     {
         boolean bl = applyEffect(stack, user);
         if (user instanceof PlayerEntity player)
-            if (bl) success(stack, player);
-            else fail(stack, player);
+        {
+            if (bl)
+            {
+                success(stack, player);
+            } else
+            {
+                fail(stack, player);
+            }
+        }
         return stack;
     }
 
@@ -55,8 +62,14 @@ public abstract class RightPressEssenceItem extends SpellEssenceItem
     @Override
     public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks)
     {
-        if (!world.isClient()) return;
-        if (remainingUseTicks % 4 != 0) return;
+        if (!world.isClient())
+        {
+            return;
+        }
+        if (remainingUseTicks % 4 != 0)
+        {
+            return;
+        }
         ParticleUtil.ringParticle(user, remainingUseTicks, 16, ParticleTypes.END_ROD);
     }
 

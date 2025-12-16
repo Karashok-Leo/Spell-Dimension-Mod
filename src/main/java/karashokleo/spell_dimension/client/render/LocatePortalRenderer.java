@@ -37,10 +37,16 @@ public class LocatePortalRenderer extends EntityRenderer<LocatePortalEntity>
     public void render(LocatePortalEntity entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light)
     {
         int activeTime = entity.getActiveTime();
-        if (activeTime < 0) return;
+        if (activeTime < 0)
+        {
+            return;
+        }
 
         ClientPlayerEntity player = L2HostilityClient.getClientPlayer();
-        if (player == null) return;
+        if (player == null)
+        {
+            return;
+        }
 
         matrices.push();
         Vec3d playerV = player.getCameraPosVec(tickDelta);
@@ -74,36 +80,36 @@ public class LocatePortalRenderer extends EntityRenderer<LocatePortalEntity>
         Matrix4f matrix4f = matrices.peek().getPositionMatrix();
         builder.vertex(matrix4f, -1, -1, 0)
 //                .color(r, g, b, 255)
-                .color(255, 255, 255, 255)
-                .texture(1, v1)
-                .overlay(OverlayTexture.DEFAULT_UV)
-                .light(light)
-                .normal(matrices.peek().getNormalMatrix(), 0, 1, 0)
-                .next();
+            .color(255, 255, 255, 255)
+            .texture(1, v1)
+            .overlay(OverlayTexture.DEFAULT_UV)
+            .light(light)
+            .normal(matrices.peek().getNormalMatrix(), 0, 1, 0)
+            .next();
         builder.vertex(matrix4f, -1, 1, 0)
 //                .color(r, g, b, 255)
-                .color(255, 255, 255, 255)
-                .texture(1, v2)
-                .overlay(OverlayTexture.DEFAULT_UV)
-                .light(light)
-                .normal(matrices.peek().getNormalMatrix(), 0, 1, 0)
-                .next();
+            .color(255, 255, 255, 255)
+            .texture(1, v2)
+            .overlay(OverlayTexture.DEFAULT_UV)
+            .light(light)
+            .normal(matrices.peek().getNormalMatrix(), 0, 1, 0)
+            .next();
         builder.vertex(matrix4f, 1, 1, 0)
 //                .color(r, g, b, 255)
-                .color(255, 255, 255, 255)
-                .texture(0, v2)
-                .overlay(OverlayTexture.DEFAULT_UV)
-                .light(light)
-                .normal(matrices.peek().getNormalMatrix(), 0, 1, 0)
-                .next();
+            .color(255, 255, 255, 255)
+            .texture(0, v2)
+            .overlay(OverlayTexture.DEFAULT_UV)
+            .light(light)
+            .normal(matrices.peek().getNormalMatrix(), 0, 1, 0)
+            .next();
         builder.vertex(matrix4f, 1, -1, 0)
 //                .color(r, g, b, 255)
-                .color(255, 255, 255, 255)
-                .texture(0, v1)
-                .overlay(OverlayTexture.DEFAULT_UV)
-                .light(light)
-                .normal(matrices.peek().getNormalMatrix(), 0, 1, 0)
-                .next();
+            .color(255, 255, 255, 255)
+            .texture(0, v1)
+            .overlay(OverlayTexture.DEFAULT_UV)
+            .light(light)
+            .normal(matrices.peek().getNormalMatrix(), 0, 1, 0)
+            .next();
 
         matrices.pop();
     }

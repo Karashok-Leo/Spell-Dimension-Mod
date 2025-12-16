@@ -23,11 +23,11 @@ public abstract class ApplyBonusLootFunctionMixin
     Enchantment enchantment;
 
     @ModifyExpressionValue(
-            method = "process",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/enchantment/EnchantmentHelper;getLevel(Lnet/minecraft/enchantment/Enchantment;Lnet/minecraft/item/ItemStack;)I"
-            )
+        method = "process",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/enchantment/EnchantmentHelper;getLevel(Lnet/minecraft/enchantment/Enchantment;Lnet/minecraft/item/ItemStack;)I"
+        )
     )
     private int inject_getEnchantmentLevel(int level, ItemStack stack, LootContext context)
     {

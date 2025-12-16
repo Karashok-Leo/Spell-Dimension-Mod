@@ -17,7 +17,10 @@ public class HeavenlyJusticeSpell
 {
     public static void handle(World world, LivingEntity caster, List<Entity> targets, SpellInfo spellInfo)
     {
-        if (world.isClient()) return;
+        if (world.isClient())
+        {
+            return;
+        }
         int multiplier = getEffects(caster, StatusEffectCategory.BENEFICIAL);
         SpellPower.Result spellPower = SpellPower.getSpellPower(SpellSchools.HEALING, caster);
         for (Entity target : targets)

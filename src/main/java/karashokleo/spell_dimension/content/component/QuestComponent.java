@@ -51,8 +51,13 @@ public record QuestComponent(Set<RegistryEntry<Quest>> completed) implements Aut
         for (NbtElement element : list)
         {
             var optional = QuestRegistry.ENTRY_CODEC.decode(NbtOps.INSTANCE, element).result();
-            if (optional.isPresent()) this.completed.add(optional.get().getFirst());
-            else System.out.println("Unknown quest entry: " + element);
+            if (optional.isPresent())
+            {
+                this.completed.add(optional.get().getFirst());
+            } else
+            {
+                System.out.println("Unknown quest entry: " + element);
+            }
         }
     }
 
@@ -63,8 +68,13 @@ public record QuestComponent(Set<RegistryEntry<Quest>> completed) implements Aut
         for (RegistryEntry<Quest> entry : this.completed)
         {
             Optional<NbtElement> optional = QuestRegistry.ENTRY_CODEC.encodeStart(NbtOps.INSTANCE, entry).result();
-            if (optional.isPresent()) list.add(optional.get());
-            else System.out.println("Unknown quest entry: " + entry);
+            if (optional.isPresent())
+            {
+                list.add(optional.get());
+            } else
+            {
+                System.out.println("Unknown quest entry: " + entry);
+            }
         }
         tag.put(KEY, list);
     }

@@ -38,10 +38,13 @@ public class SecondarySchoolItem extends SingleEpicTrinketItem
     {
         Multimap<EntityAttribute, EntityAttributeModifier> modifiers = super.getModifiers(stack, slot, entity, uuid);
         double spellPower = SchoolUtil.getEntitySpellPower(entity);
-        if (spellPower == 0) return modifiers;
+        if (spellPower == 0)
+        {
+            return modifiers;
+        }
         modifiers.put(
-                school.attribute,
-                new EntityAttributeModifier(uuid, "Secondary School Bonus", spellPower * SECONDARY_SCHOOL_RATIO, EntityAttributeModifier.Operation.ADDITION)
+            school.attribute,
+            new EntityAttributeModifier(uuid, "Secondary School Bonus", spellPower * SECONDARY_SCHOOL_RATIO, EntityAttributeModifier.Operation.ADDITION)
         );
         return modifiers;
     }
@@ -50,21 +53,21 @@ public class SecondarySchoolItem extends SingleEpicTrinketItem
     public boolean canEquip(ItemStack stack, SlotReference slot, LivingEntity entity)
     {
         return !SchoolUtil.getLivingSchools(entity).contains(school) &&
-               TrinketCompat.getTrinketItems(entity, e -> e.getItem() instanceof SecondarySchoolItem).isEmpty();
+            TrinketCompat.getTrinketItems(entity, e -> e.getItem() instanceof SecondarySchoolItem).isEmpty();
     }
 
     @Override
     public Text getName()
     {
         return Text.translatable(this.getTranslationKey())
-                .setStyle(Style.EMPTY.withColor(school.color));
+            .setStyle(Style.EMPTY.withColor(school.color));
     }
 
     @Override
     public Text getName(ItemStack stack)
     {
         return Text.translatable(this.getTranslationKey(stack))
-                .setStyle(Style.EMPTY.withColor(school.color));
+            .setStyle(Style.EMPTY.withColor(school.color));
     }
 
     @Override

@@ -29,50 +29,50 @@ public class BlazingMark implements Buff
     public static String getDesc(boolean en)
     {
         return (en ?
-                "Your attack will leave a mark on the enemy, and some of the damage you inflict during this period will damage the enemy again in %.1f  seconds." :
-                "你的攻击会在敌人身上留下一个印记, 期间你造成的部分伤害将会在%.1f秒后再次打击敌人, 并使其虚弱.")
-                .formatted(BlazingMark.getTriggerTime());
+            "Your attack will leave a mark on the enemy, and some of the damage you inflict during this period will damage the enemy again in %.1f  seconds." :
+            "你的攻击会在敌人身上留下一个印记, 期间你造成的部分伤害将会在%.1f秒后再次打击敌人, 并使其虚弱.")
+            .formatted(BlazingMark.getTriggerTime());
     }
 
     public static final Codec<BlazingMark> CODEC = RecordCodecBuilder.create(
-            ins -> ins.group(
-                    Codecs.NONNEGATIVE_INT.fieldOf("duration").forGetter(BlazingMark::getDuration),
-                    Codec.FLOAT.fieldOf("damage").forGetter(BlazingMark::getDamage)
-            ).apply(ins, BlazingMark::new)
+        ins -> ins.group(
+            Codecs.NONNEGATIVE_INT.fieldOf("duration").forGetter(BlazingMark::getDuration),
+            Codec.FLOAT.fieldOf("damage").forGetter(BlazingMark::getDamage)
+        ).apply(ins, BlazingMark::new)
     );
     public static final BuffType<BlazingMark> TYPE = new BuffType<>(CODEC, false);
 
     private static final ParticleBatch[] PARTICLES = {
-            new ParticleBatch(
-                    "minecraft:flame",
-                    ParticleBatch.Shape.SPHERE,
-                    ParticleBatch.Origin.CENTER,
-                    null,
-                    0,
-                    0,
-                    72,
-                    0.3F,
-                    0.6F,
-                    0,
-                    0,
-                    0,
-                    false
-            ),
-            new ParticleBatch(
-                    "minecraft:smoke",
-                    ParticleBatch.Shape.SPHERE,
-                    ParticleBatch.Origin.CENTER,
-                    null,
-                    0,
-                    0,
-                    48,
-                    0.3F,
-                    0.6F,
-                    0,
-                    0,
-                    0,
-                    false
-            )
+        new ParticleBatch(
+            "minecraft:flame",
+            ParticleBatch.Shape.SPHERE,
+            ParticleBatch.Origin.CENTER,
+            null,
+            0,
+            0,
+            72,
+            0.3F,
+            0.6F,
+            0,
+            0,
+            0,
+            false
+        ),
+        new ParticleBatch(
+            "minecraft:smoke",
+            ParticleBatch.Shape.SPHERE,
+            ParticleBatch.Origin.CENTER,
+            null,
+            0,
+            0,
+            48,
+            0.3F,
+            0.6F,
+            0,
+            0,
+            0,
+            false
+        )
     };
 
     private int duration;
@@ -87,8 +87,8 @@ public class BlazingMark implements Buff
     public BlazingMark()
     {
         this(
-                SpellConfig.BLAZING_MARK_CONFIG.totalDuration(),
-                0
+            SpellConfig.BLAZING_MARK_CONFIG.totalDuration(),
+            0
         );
     }
 
@@ -102,11 +102,15 @@ public class BlazingMark implements Buff
         }
         --duration;
         if (duration == SpellConfig.BLAZING_MARK_CONFIG.triggerDuration())
+        {
             trigger(entity, source, damage);
+        }
         if (duration % 20 == 0)
         {
             if (duration == 0 || entity.isSubmergedInWater())
+            {
                 Buff.remove(entity, TYPE);
+            }
             particle(entity);
         }
     }
@@ -128,7 +132,9 @@ public class BlazingMark implements Buff
         Buff.get(entity, TYPE).ifPresentOrElse(blazingMark ->
         {
             if (blazingMark.getDuration() > SpellConfig.BLAZING_MARK_CONFIG.triggerDuration())
+            {
                 blazingMark.accumulateDamage(attacker, event.getAmount());
+            }
         }, () -> Buff.apply(entity, TYPE, new BlazingMark(), attacker));
     }
 
@@ -149,24 +155,26 @@ public class BlazingMark implements Buff
     {
         float f = Math.min(owner.getWidth(), owner.getHeight()) * 0.5F;
         int color = duration >= SpellConfig.BLAZING_MARK_CONFIG.triggerDuration() ?
-                0xffff00 - 0x100 * (int) (0xff * damage / SpellConfig.BLAZING_MARK_CONFIG.maxDamageRatio()) :
-                0x888888;
+            0xffff00 - 0x100 * (int) (0xff * damage / SpellConfig.BLAZING_MARK_CONFIG.maxDamageRatio()) :
+            0x888888;
         Vec3d pos = owner.getPos()
-                .add(0, owner.getHeight() + f, 0).addRandom(owner.getRandom(), 0.5F)
-                .addRandom(owner.getRandom(), 0.5F);
+            .add(0, owner.getHeight() + f, 0).addRandom(owner.getRandom(), 0.5F)
+            .addRandom(owner.getRandom(), 0.5F);
         int count = (int) (f * 100);
         if (owner.getWorld() instanceof ServerWorld world)
+        {
             world.spawnParticles(
-                    ParticleUtil.getDustParticle(color),
-                    pos.x,
-                    pos.y,
-                    pos.z,
-                    count,
-                    0D,
-                    0D,
-                    0D,
-                    0D
+                ParticleUtil.getDustParticle(color),
+                pos.x,
+                pos.y,
+                pos.z,
+                count,
+                0D,
+                0D,
+                0D,
+                0D
             );
+        }
     }
 
     public static float getTriggerTime()

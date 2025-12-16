@@ -14,13 +14,17 @@ public interface SpellImpactEvents
     Event<Callback> PRE = EventFactory.createArrayBacked(Callback.class, (listeners) -> ((world, caster, targets, spellInfo) ->
     {
         for (Callback listener : listeners)
+        {
             listener.invoke(world, caster, targets, spellInfo);
+        }
     }));
 
     Event<Callback> POST = EventFactory.createArrayBacked(Callback.class, (listeners) -> ((world, caster, targets, spellInfo) ->
     {
         for (Callback listener : listeners)
+        {
             listener.invoke(world, caster, targets, spellInfo);
+        }
     }));
 
     interface Callback

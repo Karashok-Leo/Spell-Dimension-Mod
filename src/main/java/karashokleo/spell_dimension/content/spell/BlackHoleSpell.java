@@ -34,7 +34,10 @@ public class BlackHoleSpell
 
     public static void handle(SpellProjectile projectile, Identifier spellId, @Nullable HitResult hitResult)
     {
-        if (!spellId.equals(AllSpells.BLACK_HOLE)) return;
+        if (!spellId.equals(AllSpells.BLACK_HOLE))
+        {
+            return;
+        }
         handle(projectile, hitResult);
     }
 
@@ -50,15 +53,19 @@ public class BlackHoleSpell
         if (owner == null ||
             owner.isRemoved() ||
             (!(owner instanceof LivingEntity caster)))
+        {
             return;
+        }
         if (!(entity.getWorld() instanceof ServerWorld serverWorld))
+        {
             return;
+        }
 
         float radius = getRadius(caster);
 
         Vec3d center = hitResult == null ?
-                entity.getPos() :
-                adjustCenterPosition(hitResult, radius / 4);
+            entity.getPos() :
+            adjustCenterPosition(hitResult, radius / 4);
 
         spawn(serverWorld, caster, center, radius);
     }
@@ -82,12 +89,12 @@ public class BlackHoleSpell
         Vec3d center = adjustCenterPosition(hitResult, radius / 4);
 
         List<BlackHoleEntity> entities = serverWorld.getEntitiesByClass(
-                BlackHoleEntity.class,
-                new Box(
-                        center.add(radius, radius, radius),
-                        center.subtract(radius, radius, radius)
-                ),
-                entity -> true
+            BlackHoleEntity.class,
+            new Box(
+                center.add(radius, radius, radius),
+                center.subtract(radius, radius, radius)
+            ),
+            entity -> true
         );
         if (!entities.isEmpty())
         {

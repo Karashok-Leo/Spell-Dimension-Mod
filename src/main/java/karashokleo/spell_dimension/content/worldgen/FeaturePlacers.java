@@ -33,7 +33,10 @@ public final class FeaturePlacers
 
     public static void placeProvidedBlock(TestableWorld world, BiConsumer<BlockPos, BlockState> worldPlacer, BiFunction<TestableWorld, BlockPos, Boolean> predicate, BlockPos pos, BlockStateProvider config, Random random)
     {
-        if (predicate.apply(world, pos)) worldPlacer.accept(pos, config.get(random, pos));
+        if (predicate.apply(world, pos))
+        {
+            worldPlacer.accept(pos, config.get(random, pos));
+        }
     }
 
     // Version without the `verticalBias` unlike above
@@ -46,7 +49,10 @@ public final class FeaturePlacers
 
         for (int y = 0; y <= yRadius; y++)
         {
-            if (y > yRadius) continue;
+            if (y > yRadius)
+            {
+                continue;
+            }
 
             FeaturePlacers.placeProvidedBlock(world, placer, predicate, centerPos.add(0, y, 0), config, random);
             FeaturePlacers.placeProvidedBlock(world, placer, predicate, centerPos.add(0, -y, 0), config, random);
@@ -56,7 +62,10 @@ public final class FeaturePlacers
         {
             for (int z = 1; z <= xzRadius; z++)
             {
-                if (x * x + z * z > xzRadiusSquared) continue;
+                if (x * x + z * z > xzRadiusSquared)
+                {
+                    continue;
+                }
 
                 FeaturePlacers.placeProvidedBlock(world, placer, predicate, centerPos.add(x, 0, z), config, random);
                 FeaturePlacers.placeProvidedBlock(world, placer, predicate, centerPos.add(-x, 0, -z), config, random);
@@ -92,7 +101,10 @@ public final class FeaturePlacers
         {
             placer.accept(pos, config.get(random, pos));
             return true;
-        } else return false;
+        } else
+        {
+            return false;
+        }
     }
 
     public static boolean placeIfValidRootPos(TestableWorld world, BiConsumer<BlockPos, BlockState> placer, Random random, BlockPos pos, BlockStateProvider config)
@@ -101,31 +113,38 @@ public final class FeaturePlacers
         {
             placer.accept(pos, config.get(random, pos));
             return true;
-        } else return false;
+        } else
+        {
+            return false;
+        }
     }
 
     public static void traceRoot(
-            TestableWorld worldReader,
-            BiConsumer<BlockPos, BlockState> worldPlacer,
-            Random random,
-            BlockStateProvider dirtRoot,
-            Iterable<BlockPos> posTracer
+        TestableWorld worldReader,
+        BiConsumer<BlockPos, BlockState> worldPlacer,
+        Random random,
+        BlockStateProvider dirtRoot,
+        Iterable<BlockPos> posTracer
     )
     {
         // Trace block positions and stop tracing too far into open air
         for (BlockPos rootPos : posTracer)
-            // If the block/position cannot be replaced or is detached from ground-mass, stop
+        // If the block/position cannot be replaced or is detached from ground-mass, stop
+        {
             if (!FeaturePlacers.placeIfValidRootPos(worldReader, worldPlacer, random, rootPos, dirtRoot))
+            {
                 return;
+            }
+        }
     }
 
     public static void traceExposedRoot(
-            TestableWorld worldReader,
-            BiConsumer<BlockPos, BlockState> worldPlacer,
-            Random random,
-            BlockStateProvider exposedRoot,
-            BlockStateProvider dirtRoot,
-            Iterable<BlockPos> posTracer
+        TestableWorld worldReader,
+        BiConsumer<BlockPos, BlockState> worldPlacer,
+        Random random,
+        BlockStateProvider exposedRoot,
+        BlockStateProvider dirtRoot,
+        Iterable<BlockPos> posTracer
     )
     {
         // Trace block positions and alternate the root tracing once "underground"
@@ -136,7 +155,9 @@ public final class FeaturePlacers
             {
                 // Retry placement at position as underground root. If successful, continue the tracing as regular root
                 if (FeaturePlacers.placeIfValidRootPos(worldReader, worldPlacer, random, exposedPos, dirtRoot))
+                {
                     traceRoot(worldReader, worldPlacer, random, dirtRoot, posTracer);
+                }
                 // Now the outer loop can end. Goodbye!
                 return;
             } else
@@ -144,7 +165,9 @@ public final class FeaturePlacers
                 // Not underground
                 // Check if the position is not replaceable
                 if (!worldReader.testBlockState(exposedPos, FeatureLogic::worldGenReplaceable))
+                {
                     return; // Root must stop
+                }
 
                 // Good to go!
                 worldPlacer.accept(exposedPos, exposedRoot.get(random, exposedPos));

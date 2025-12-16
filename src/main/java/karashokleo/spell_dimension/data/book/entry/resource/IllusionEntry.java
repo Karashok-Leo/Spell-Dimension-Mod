@@ -49,38 +49,38 @@ public class IllusionEntry extends BaseEntryProvider
         context.page("prev");
         this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
+            """
+                Illusion Containers can devour equipment (such as items under the tag #spell-dimension:epic/gear) and all enchanted items, and transform them into random materials of the same tier or the Book of Omniscience. This is also the only way to obtain the Book of Omniscience.
                 """
-                        Illusion Containers can devour equipment (such as items under the tag #spell-dimension:epic/gear) and all enchanted items, and transform them into random materials of the same tier or the Book of Omniscience. This is also the only way to obtain the Book of Omniscience.
-                        """
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
+            """
+                幻化容器可以吞噬大量装备（如标签#spell-dimension:epic/gear下的物品）以及一切带有附魔的物品，并将它们转化为同阶级的随机材料或者全知之书。这也是全知之书的唯一获取途径。
                 """
-                        幻化容器可以吞噬大量装备（如标签#spell-dimension:epic/gear下的物品）以及一切带有附魔的物品，并将它们转化为同阶级的随机材料或者全知之书。这也是全知之书的唯一获取途径。
-                        """
         );
         BookSpotlightPageModel prev = BookSpotlightPageModel
-                .builder()
-                .withTitle(context.pageTitle())
-                .withText(context.pageText())
-                .withItem(Ingredient.ofItems(AllItems.ILLUSION_CONTAINER, AllItems.ILLUSION_UPGRADE))
-                .build();
+            .builder()
+            .withTitle(context.pageTitle())
+            .withText(context.pageText())
+            .withItem(Ingredient.ofItems(AllItems.ILLUSION_CONTAINER, AllItems.ILLUSION_UPGRADE))
+            .build();
 
         context.page("next");
         this.lang().add(context.pageText(),
+            """
+                Illusion Upgrade is similar to Pickup Upgrade, but it can automatically convert picked up items. For safety reasons, Illusion Upgrade will not convert items that have been amplified by Enchanted Essences.
                 """
-                        Illusion Upgrade is similar to Pickup Upgrade, but it can automatically convert picked up items. For safety reasons, Illusion Upgrade will not convert items that have been amplified by Enchanted Essences.
-                        """
         );
         this.lang("zh_cn").add(context.pageText(),
+            """
+                幻化升级类似于背包的拾取升级，但是可以自动转化拾取的物品。为了安全起见，幻化升级不会转化被束魔精华强化过的物品。
                 """
-                        幻化升级类似于背包的拾取升级，但是可以自动转化拾取的物品。为了安全起见，幻化升级不会转化被束魔精华强化过的物品。
-                        """
         );
         BookTextPageModel next = BookTextPageModel
-                .builder()
-                .withText(context.pageText())
-                .build();
+            .builder()
+            .withText(context.pageText())
+            .build();
 
         return List.of(prev, next);
     }

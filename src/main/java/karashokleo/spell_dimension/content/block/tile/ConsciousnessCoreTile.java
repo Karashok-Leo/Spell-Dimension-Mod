@@ -116,16 +116,20 @@ public class ConsciousnessCoreTile extends BlockEntity
         {
             Random random = world.getRandom();
             tile.init(
-                    random.nextDouble(),
-                    RandomUtil.randomEnum(random, EventAward.class)
+                random.nextDouble(),
+                RandomUtil.randomEnum(random, EventAward.class)
             );
             dirty = true;
         }
 
         if (tile.state == CoreState.ACTIVATED)
+        {
             tile.tickActivated(world);
+        }
         if (dirty)
+        {
             tile.markDirty();
+        }
     }
 
     private void tickActivated(World world)
@@ -147,7 +151,10 @@ public class ConsciousnessCoreTile extends BlockEntity
                 currentPos = pos;
                 beamSegmentsTemp = Lists.newArrayList();
                 minY = currentPos.getY() - 1;
-            } else currentPos = new BlockPos(posX, minY + 1, posZ);
+            } else
+            {
+                currentPos = new BlockPos(posX, minY + 1, posZ);
+            }
 
             BeamSegment beamSegment = beamSegmentsTemp.isEmpty() ? null : beamSegmentsTemp.get(beamSegmentsTemp.size() - 1);
             int topY = world.getTopY(Heightmap.Type.WORLD_SURFACE, posX, posZ);
@@ -161,7 +168,9 @@ public class ConsciousnessCoreTile extends BlockEntity
                 float[] colors = {1.0F, 1.0F, 1.0F};
 
                 if (block instanceof Stainable stainable)
+                {
                     colors = stainable.getColor().getColorComponents();
+                }
 
                 if (beamSegmentsTemp.size() <= 1)
                 {
@@ -170,13 +179,14 @@ public class ConsciousnessCoreTile extends BlockEntity
                 } else if (beamSegment != null)
                 {
                     if (Arrays.equals(colors, beamSegment.color))
+                    {
                         beamSegment.increaseHeight();
-                    else
+                    } else
                     {
                         beamSegment = new BeamSegment(new float[]{
-                                (beamSegment.color[0] + colors[0]) / 2.0F,
-                                (beamSegment.color[1] + colors[1]) / 2.0F,
-                                (beamSegment.color[2] + colors[2]) / 2.0F
+                            (beamSegment.color[0] + colors[0]) / 2.0F,
+                            (beamSegment.color[1] + colors[1]) / 2.0F,
+                            (beamSegment.color[2] + colors[2]) / 2.0F
                         });
                         beamSegmentsTemp.add(beamSegment);
                     }
@@ -192,13 +202,18 @@ public class ConsciousnessCoreTile extends BlockEntity
                 beamSegments = beamSegmentsTemp;
             }
         } else if (world instanceof ServerWorld serverWorld)
+        {
             tryTeleport(serverWorld);
+        }
     }
 
     private void tryTeleport(ServerWorld world)
     {
         ServerWorld destinationWorld = world.getServer().getWorld(this.destinationWorld);
-        if (destinationWorld == null || this.destinationPos == null) return;
+        if (destinationWorld == null || this.destinationPos == null)
+        {
+            return;
+        }
 
         List<ServerPlayerEntity> players = List.copyOf(world.getPlayers());
         Box box = new Box(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, world.getTopY(), pos.getZ() + 1);
@@ -216,7 +231,10 @@ public class ConsciousnessCoreTile extends BlockEntity
                     TeleportUtil.teleportPlayerChangeDimension(player, destinationWorld, destinationPos);
                     this.playerTicks.remove(playerUuid);
                 }
-            } else this.playerTicks.remove(playerUuid);
+            } else
+            {
+                this.playerTicks.remove(playerUuid);
+            }
         }
     }
 
@@ -253,13 +271,18 @@ public class ConsciousnessCoreTile extends BlockEntity
             BlockPos logPos = pos.down();
             BlockState logState = serverWorld.getBlockState(logPos);
             if (logState.getBlock() instanceof ConsciousnessBaseBlock logBlock)
+            {
                 logBlock.tryTurnSelf(logState, serverWorld, logPos);
+            }
         }
     }
 
     public void selfDestruct()
     {
-        if (world == null) return;
+        if (world == null)
+        {
+            return;
+        }
         world.breakBlock(this.pos, false);
         world.createExplosion(null, this.pos.getX(), this.pos.getY(), this.pos.getZ(), 1.0F, false, World.ExplosionSourceType.BLOCK);
     }
@@ -277,11 +300,11 @@ public class ConsciousnessCoreTile extends BlockEntity
         ServerWorld destinationWorld = serverWorld.getServer().getOverworld();
         this.destinationWorld = destinationWorld.getRegistryKey();
         FutureTask.submit(
-                TeleportUtil.getChangeWorldPosFuture(serverWorld, destinationWorld, this.pos),
-                optional -> optional.ifPresentOrElse(
-                        this::setDestinationPos,
-                        this::selfDestruct
-                )
+            TeleportUtil.getChangeWorldPosFuture(serverWorld, destinationWorld, this.pos),
+            optional -> optional.ifPresentOrElse(
+                this::setDestinationPos,
+                this::selfDestruct
+            )
         );
 
         this.markDirty();
@@ -295,7 +318,9 @@ public class ConsciousnessCoreTile extends BlockEntity
     public void tryActivate(ServerWorld world, boolean success)
     {
         if (success)
+        {
             reward(world);
+        }
         this.state = CoreState.ACTIVATED;
         this.markDirty();
         world.updateListeners(pos, getCachedState(), getCachedState(), Block.NOTIFY_ALL);
@@ -303,10 +328,13 @@ public class ConsciousnessCoreTile extends BlockEntity
 
     private void reward(ServerWorld world)
     {
-        if (this.award == null) return;
+        if (this.award == null)
+        {
+            return;
+        }
         LootContextParameterSet lootContextParameterSet = new LootContextParameterSet.Builder(world)
-                .add(LootContextParameters.ORIGIN, pos.toCenterPos())
-                .build(LootContextTypes.CHEST);
+            .add(LootContextParameters.ORIGIN, pos.toCenterPos())
+            .build(LootContextTypes.CHEST);
         LootTable lootTable = world.getServer().getLootManager().getLootTable(award.lootTable);
         double v = levelFactor * 10;
         for (int i = 0; i < v; i++)
@@ -318,11 +346,16 @@ public class ConsciousnessCoreTile extends BlockEntity
 
     public void onUse(PlayerEntity player, Hand hand)
     {
-        if (!testStack(player.getStackInHand(hand))) return;
+        if (!testStack(player.getStackInHand(hand)))
+        {
+            return;
+        }
         if (this.world instanceof ServerWorld serverWorld &&
             player instanceof ServerPlayerEntity serverPlayer &&
             state == CoreState.INACTIVE)
+        {
             tryTrigger(serverWorld, serverPlayer);
+        }
     }
 
     @Nullable
@@ -345,13 +378,21 @@ public class ConsciousnessCoreTile extends BlockEntity
         nbt.putString(STATE_KEY, this.state.name());
         nbt.putDouble(LEVEL_FACTOR_KEY, this.levelFactor);
         if (this.award != null)
+        {
             nbt.putString(AWARD_KEY, this.award.name());
+        }
         if (this.level != null)
+        {
             nbt.putInt(LEVEL_KEY, this.level);
+        }
         if (this.destinationWorld != null)
+        {
             nbt.putString(DESTINATION_WORLD_KEY, this.destinationWorld.getValue().toString());
+        }
         if (this.destinationPos != null)
+        {
             nbt.putLong(DESTINATION_POS_KEY, this.destinationPos.asLong());
+        }
     }
 
     @Override
@@ -361,13 +402,21 @@ public class ConsciousnessCoreTile extends BlockEntity
         this.state = CoreState.valueOf(nbt.getString(STATE_KEY));
         this.levelFactor = nbt.getDouble(LEVEL_FACTOR_KEY);
         if (nbt.contains(AWARD_KEY))
+        {
             this.award = EventAward.valueOf(nbt.getString(AWARD_KEY));
+        }
         if (nbt.contains(LEVEL_KEY))
+        {
             this.level = nbt.getInt(LEVEL_KEY);
+        }
         if (nbt.contains(DESTINATION_WORLD_KEY))
+        {
             this.destinationWorld = RegistryKey.of(RegistryKeys.WORLD, new Identifier(nbt.getString(DESTINATION_WORLD_KEY)));
+        }
         if (nbt.contains(DESTINATION_POS_KEY))
+        {
             this.destinationPos = BlockPos.fromLong(nbt.getLong(DESTINATION_POS_KEY));
+        }
     }
 
     /**

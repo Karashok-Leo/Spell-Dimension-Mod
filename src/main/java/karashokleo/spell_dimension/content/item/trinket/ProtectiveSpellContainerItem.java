@@ -54,8 +54,8 @@ public class ProtectiveSpellContainerItem extends SpellContainerItem implements 
             if (amount > 0)
             {
                 tooltip.add(SDTexts.TOOLTIP$CONTAINER$DAMAGE_REDUCTION.get(
-                        SDTexts.getSchoolText(school),
-                        amount
+                    SDTexts.getSchoolText(school),
+                    amount
                 ).setStyle(Style.EMPTY.withColor(school.color)));
             }
         }

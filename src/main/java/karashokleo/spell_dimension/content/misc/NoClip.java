@@ -15,7 +15,11 @@ public interface NoClip
     static boolean noClip(Entity entity)
     {
         if (entity instanceof LivingEntity livingEntity)
+        {
             return noClip(livingEntity);
-        else return false;
+        } else
+        {
+            return false;
+        }
     }
 }

@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public record HealthQuest(
-        float health,
-        Supplier<ItemStack> reward
+    float health,
+    Supplier<ItemStack> reward
 ) implements ItemRewardQuest
 {
     @Override
@@ -31,9 +31,9 @@ public record HealthQuest(
     public Text getDescriptionText()
     {
         return Text.translatable(
-                this.getTranslationKey("description"),
-                Text.translatable(EntityAttributes.GENERIC_MAX_HEALTH.getTranslationKey()),
-                this.health
+            this.getTranslationKey("description"),
+            Text.translatable(EntityAttributes.GENERIC_MAX_HEALTH.getTranslationKey()),
+            this.health
         );
     }
 

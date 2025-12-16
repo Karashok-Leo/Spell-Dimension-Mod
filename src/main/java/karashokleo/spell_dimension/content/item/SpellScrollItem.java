@@ -33,7 +33,10 @@ public class SpellScrollItem extends Item implements ColorProvider
     public int getColor(ItemStack stack)
     {
         SpellInfo spellInfo = this.getSpellInfo(stack);
-        if (spellInfo != null) return spellInfo.spell().school.color;
+        if (spellInfo != null)
+        {
+            return spellInfo.spell().school.color;
+        }
         return ColorProvider.super.getColor(stack);
     }
 
@@ -57,7 +60,10 @@ public class SpellScrollItem extends Item implements ColorProvider
         {
             Identifier id = new Identifier(container.spell_ids.get(0));
             Spell spell = SpellRegistry.getSpell(id);
-            if (spell != null) return new SpellInfo(spell, id);
+            if (spell != null)
+            {
+                return new SpellInfo(spell, id);
+            }
         }
         return null;
     }
@@ -75,20 +81,25 @@ public class SpellScrollItem extends Item implements ColorProvider
     {
         super.appendTooltip(stack, world, tooltip, context);
         SpellInfo spellInfo = this.getSpellInfo(stack);
-        if (spellInfo == null) return;
+        if (spellInfo == null)
+        {
+            return;
+        }
         Identifier id = spellInfo.id();
         Spell spell = spellInfo.spell();
         // name
         tooltip.add(Text.translatable(
-                SpellTooltip.spellTranslationKey(id)
+            SpellTooltip.spellTranslationKey(id)
         ).setStyle(Style.EMPTY.withColor(spell.school.color)).formatted(Formatting.BOLD));
 
         // obtain
         tooltip.add(SDTexts.SCROLL$OBTAIN.get(
-                AllSpells.getSpellObtainText(id)
+            AllSpells.getSpellObtainText(id)
         ).formatted(Formatting.GRAY));
         // id
         if (context.isAdvanced())
+        {
             tooltip.add(Text.literal("spell id: " + id).formatted(Formatting.DARK_GRAY));
+        }
     }
 }

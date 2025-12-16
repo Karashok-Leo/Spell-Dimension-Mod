@@ -26,57 +26,57 @@ public class AllGroups
         List<ItemStack> spellBooks = AllStacks.getSpellBooks();
         ItemStack firstSpellBook = spellBooks.get(0);
         SPELL_BOOKS.addAll(spellBooks)
-                .setIcon(() -> firstSpellBook)
-                .addEN("Spell Dimension: Spell Books")
-                .addZH("咒次元：法术书")
-                .register();
+            .setIcon(() -> firstSpellBook)
+            .addEN("Spell Dimension: Spell Books")
+            .addZH("咒次元：法术书")
+            .register();
 
         SPELL_SCROLLS.setIcon(() -> AllItems.SPELL_SCROLL.getStack(AllSpells.ARCANE_BEAM))
-                .addEN("Spell Dimension: Spell Scrolls")
-                .addZH("咒次元：法术卷轴")
-                .register();
+            .addEN("Spell Dimension: Spell Scrolls")
+            .addZH("咒次元：法术卷轴")
+            .register();
 
         List<ItemStack> questScrolls = AllStacks.getQuestScrolls();
         ItemStack firstQuestScroll = questScrolls.get(0);
         QUEST_SCROLLS.addAll(questScrolls)
-                .setIcon(() -> firstQuestScroll)
-                .addEN("Spell Dimension: Quest Scrolls")
-                .addZH("咒次元：任务卷轴")
-                .register();
+            .setIcon(() -> firstQuestScroll)
+            .addEN("Spell Dimension: Quest Scrolls")
+            .addZH("咒次元：任务卷轴")
+            .register();
 
         List<ItemStack> baseEssences = AllItems.BASE_ESSENCES.values().stream().map(Item::getDefaultStack).toList();
         ItemStack firstBaseEssence = baseEssences.get(0);
         BASE_ESSENCES.addAll(baseEssences)
-                .setIcon(() -> firstBaseEssence)
-                .addEN("Spell Dimension: Base Essences")
-                .addZH("咒次元：基础精华")
-                .register();
+            .setIcon(() -> firstBaseEssence)
+            .addEN("Spell Dimension: Base Essences")
+            .addZH("咒次元：基础精华")
+            .register();
 
         List<ItemStack> enchantedEssences = AllStacks.getEnchantedEssences();
         ItemStack firstEnchantedEssence = enchantedEssences.get(0);
         ENCHANTED_ESSENCES.addAll(enchantedEssences)
-                .setIcon(() -> firstEnchantedEssence)
-                .addEN("Spell Dimension: Enchanted Essences")
-                .addZH("咒次元：束魔精华")
-                .register();
+            .setIcon(() -> firstEnchantedEssence)
+            .addEN("Spell Dimension: Enchanted Essences")
+            .addZH("咒次元：束魔精华")
+            .register();
 
         List<ItemStack> enlighteningEssences = AllStacks.getEnlighteningEssences();
         ItemStack firstEnlighteningEssence = enlighteningEssences.get(0);
         ENLIGHTENING_ESSENCES.addAll(enlighteningEssences)
-                .setIcon(() -> firstEnlighteningEssence)
-                .addEN("Spell Dimension: Enlightening Essences")
-                .addZH("咒次元：源启精华")
-                .register();
+            .setIcon(() -> firstEnlighteningEssence)
+            .addEN("Spell Dimension: Enlightening Essences")
+            .addZH("咒次元：源启精华")
+            .register();
 
         EQUIPMENTS.setIcon(() -> AllWeapons.LIGHTNING_WAND.getDefaultStack())
-                .addEN("Spell Dimension: Equipments")
-                .addZH("咒次元：装备")
-                .register();
+            .addEN("Spell Dimension: Equipments")
+            .addZH("咒次元：装备")
+            .register();
 
         MISC.setIcon(() -> AllItems.MAGIC_MIRROR.getDefaultStack())
-                .addEN("Spell Dimension: Miscellaneous")
-                .addZH("咒次元：杂项")
-                .register();
+            .addEN("Spell Dimension: Miscellaneous")
+            .addZH("咒次元：杂项")
+            .register();
 
         ItemGroupEvents.modifyEntriesEvent(LootBagItemRegistry.ITEM_GROUP_KEY).register(entries ->
         {

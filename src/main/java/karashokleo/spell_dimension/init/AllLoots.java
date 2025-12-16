@@ -74,7 +74,10 @@ public class AllLoots
     {
         SpellImpactEvents.POST.register((world, caster, targets, spellInfo) ->
         {
-            if (!(caster instanceof PlayerEntity)) return;
+            if (!(caster instanceof PlayerEntity))
+            {
+                return;
+            }
             SpellSchool school = spellInfo.spell().school;
             for (Entity target : targets)
             {
@@ -84,7 +87,9 @@ public class AllLoots
                     continue;
                 }
                 if (EssenceLootConfig.BASE_CONFIG.blacklist().contains(target.getType()))
+                {
                     continue;
+                }
 
                 boolean doDrop = (living instanceof PlayerEntity);
 
@@ -93,9 +98,9 @@ public class AllLoots
                 {
                     MobDifficulty difficulty = op.get();
                     doDrop = !difficulty.noDrop &&
-                             !difficulty.hasTrait(LHTraits.UNDYING) &&
-                             !difficulty.hasTrait(LHTraits.DISPELL) &&
-                             !difficulty.hasTrait(LHTraits.ADAPTIVE);
+                        !difficulty.hasTrait(LHTraits.UNDYING) &&
+                        !difficulty.hasTrait(LHTraits.DISPELL) &&
+                        !difficulty.hasTrait(LHTraits.ADAPTIVE);
                 }
 
                 if (doDrop)
@@ -104,7 +109,10 @@ public class AllLoots
                     int lootCharmLevel = TrinketCompat.getTrinketItems(caster, e -> e.getItem() instanceof LootingCharm).size();
 
                     float dropChance = EssenceLootConfig.BASE_CONFIG.dropChance() + lootCharmLevel * 0.1F;
-                    if (caster.getRandom().nextFloat() > dropChance) continue;
+                    if (caster.getRandom().nextFloat() > dropChance)
+                    {
+                        continue;
+                    }
 
                     int grade = EssenceLootConfig.BASE_CONFIG.getRandomGrade(caster.getRandom(), DifficultyLevel.ofAny(living));
 
@@ -118,12 +126,14 @@ public class AllLoots
     {
         builder.rolls(UniformLootNumberProvider.create(pool.minRolls(), pool.maxRolls()));
         LeafEntry.Builder<?> emptyEntry = EmptyEntry
-                .builder()
-                .weight(pool.emptyWeight());
+            .builder()
+            .weight(pool.emptyWeight());
         builder.with(emptyEntry);
 
         if (playerKill)
+        {
             builder.conditionally(KilledByPlayerLootCondition.builder().build());
+        }
 
         // EnchantedEssence
         builder.with(RandomEnchantedEssenceEntry.builder().weight(EssenceLootConfig.EC_WEIGHT));
@@ -139,6 +149,8 @@ public class AllLoots
     {
         builder.rolls(UniformLootNumberProvider.create(1, 2));
         for (Identifier spellId : pool)
+        {
             builder.with(SpellScrollEntry.builder(spellId));
+        }
     }
 }

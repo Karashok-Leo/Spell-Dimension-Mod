@@ -49,28 +49,28 @@ public class EndgameTrinketEntry extends BaseEntryProvider
         context.page("text");
         this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
+            """
+                After defeating more powerful bosses, you can craft some special trinkets with unique spell effects.
+                \\
+                \\
+                Search **#spell-dimension:endgame_trinkets** to see all relative items.
                 """
-                        After defeating more powerful bosses, you can craft some special trinkets with unique spell effects.
-                        \\
-                        \\
-                        Search **#spell-dimension:endgame_trinkets** to see all relative items.
-                        """
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
+            """
+                在击败了更为强大的Boss之后，你可以制作一些特殊饰品，它们具有一些独特的法术特效。
+                \\
+                \\
+                搜索**#spell-dimension:endgame_trinkets**以查看所有相关物品。
                 """
-                        在击败了更为强大的Boss之后，你可以制作一些特殊饰品，它们具有一些独特的法术特效。
-                        \\
-                        \\
-                        搜索**#spell-dimension:endgame_trinkets**以查看所有相关物品。
-                        """
         );
         BookSpotlightPageModel text = BookSpotlightPageModel
-                .builder()
-                .withTitle(context.pageTitle())
-                .withText(context.pageText())
-                .withItem(Ingredient.fromTag(AllTags.ENDGAME_TRINKETS))
-                .build();
+            .builder()
+            .withTitle(context.pageTitle())
+            .withText(context.pageText())
+            .withItem(Ingredient.fromTag(AllTags.ENDGAME_TRINKETS))
+            .build();
         return List.of(text);
     }
 

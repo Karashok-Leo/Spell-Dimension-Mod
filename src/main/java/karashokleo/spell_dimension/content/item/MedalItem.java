@@ -23,10 +23,10 @@ public class MedalItem extends Item
     public MedalItem()
     {
         super(
-                new FabricItemSettings()
-                        .maxCount(1)
-                        .rarity(Rarity.EPIC)
-                        .fireproof()
+            new FabricItemSettings()
+                .maxCount(1)
+                .rarity(Rarity.EPIC)
+                .fireproof()
         );
     }
 
@@ -56,7 +56,9 @@ public class MedalItem extends Item
         user.damage(user.getDamageSources().magic(), 1);
         user.emitGameEvent(GameEvent.EAT);
         if (user instanceof ServerPlayerEntity player)
+        {
             Criteria.CONSUME_ITEM.trigger(player, stack);
+        }
         return stack;
     }
 

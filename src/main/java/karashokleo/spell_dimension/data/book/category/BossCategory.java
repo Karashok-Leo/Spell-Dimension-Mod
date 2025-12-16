@@ -22,15 +22,15 @@ public class BossCategory extends CategoryProvider
     protected String[] generateEntryMap()
     {
         return new String[]{
-                "a_b_c_d_e_f",
-                "___________",
-                "g_h_i_j_k_l",
-                "___________",
-                "__m_n_o_p__",
-                "___________",
-                "_____q_____",
-                "___________",
-                "__r_s_t_u__"
+            "a_b_c_d_e_f",
+            "___________",
+            "g_h_i_j_k_l",
+            "___________",
+            "__m_n_o_p__",
+            "___________",
+            "_____q_____",
+            "___________",
+            "__r_s_t_u__"
         };
     }
 
@@ -89,8 +89,8 @@ public class BossCategory extends CategoryProvider
         this.lang().add(context.categoryName(), "Conquer by All Means");
         this.lang("zh_cn").add(context.categoryName(), "尽数征服");
         return BookCategoryModel
-                .create(this.modLoc(context.categoryId()), context.categoryName())
-                .withIcon(Items.NETHER_STAR)
-                .withBackground(BookGenUtil.id("textures/background/2.png"));
+            .create(this.modLoc(context.categoryId()), context.categoryName())
+            .withIcon(Items.NETHER_STAR)
+            .withBackground(BookGenUtil.id("textures/background/2.png"));
     }
 }

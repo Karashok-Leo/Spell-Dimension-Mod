@@ -27,9 +27,9 @@ public interface ItemTaskQuest extends IngredientTaskQuest
         {
             Item item = c.asItem();
             desc.add(
-                    Text.empty()
-                            .append(item.getName())
-                            .formatted(item.getRarity(item.getDefaultStack()).formatting)
+                Text.empty()
+                    .append(item.getName())
+                    .formatted(item.getRarity(item.getDefaultStack()).formatting)
             );
         }
     }

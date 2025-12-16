@@ -34,8 +34,8 @@ public class RejuvenatingBlossomItem extends SingleEpicTrinketItem implements Da
         if (instance != null && instance.getDuration() < amount)
         {
             EffectUtil.streamEffects(entity, StatusEffectCategory.HARMFUL)
-                    .toList()
-                    .forEach(entity::removeStatusEffect);
+                .toList()
+                .forEach(entity::removeStatusEffect);
             event.setAmount(event.getAmount() / 2);
         }
         EffectHelper.forceAddEffectWithEvent(entity, new StatusEffectInstance(StatusEffects.REGENERATION, amount, 9, false, false), entity);

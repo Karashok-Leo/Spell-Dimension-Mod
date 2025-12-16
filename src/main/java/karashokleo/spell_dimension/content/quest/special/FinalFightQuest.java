@@ -13,9 +13,9 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public record FinalFightQuest(
-        Supplier<EntityType<?>> entity,
-        Supplier<ItemConvertible> task,
-        Supplier<ItemStack> reward
+    Supplier<EntityType<?>> entity,
+    Supplier<ItemConvertible> task,
+    Supplier<ItemStack> reward
 ) implements ItemTaskQuest, ItemRewardQuest
 {
     @Override

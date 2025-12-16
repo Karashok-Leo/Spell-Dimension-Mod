@@ -51,37 +51,37 @@ public class BlackStoneGolemEntry extends BaseEntryProvider
         context.page("boss");
         this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
-                """
-                        Level: %d+
-                        \\
-                        \\
-                        Use 4 chiseled polished blackstone holders and 81 polished blackstones to build the altar in **The Nether**, place the gilded blackstone shards on the altar to summon.
-                        """.formatted(TextConstants.BOSS_LEVELS[1])
+            """
+                Level: %d+
+                \\
+                \\
+                Use 4 chiseled polished blackstone holders and 81 polished blackstones to build the altar in **The Nether**, place the gilded blackstone shards on the altar to summon.
+                """.formatted(TextConstants.BOSS_LEVELS[1])
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
-                """
-                        等级: %d+
-                        \\
-                        \\
-                        使用4块錾制黑石基座，81块磨制黑石在**下界**搭建祭坛，在祭坛上放置镶金黑石碎片即可召唤。
-                        """.formatted(TextConstants.BOSS_LEVELS[1])
+            """
+                等级: %d+
+                \\
+                \\
+                使用4块錾制黑石基座，81块磨制黑石在**下界**搭建祭坛，在祭坛上放置镶金黑石碎片即可召唤。
+                """.formatted(TextConstants.BOSS_LEVELS[1])
         );
 
         BookSpotlightPageModel boss = BookSpotlightPageModel
-                .builder()
-                .withTitle(context.pageTitle())
-                .withText(context.pageText())
-                .withItem(Ingredient.ofItems(ItemInit.BLACKSTONE_GOLEM_HEART))
-                .build();
+            .builder()
+            .withTitle(context.pageTitle())
+            .withText(context.pageText())
+            .withItem(Ingredient.ofItems(ItemInit.BLACKSTONE_GOLEM_HEART))
+            .build();
         BookMultiblockPageModel alter = BookMultiblockPageModel
-                .builder()
-                .withMultiblockId("spell-dimension-book:blackstone_altar")
-                .build();
+            .builder()
+            .withMultiblockId("spell-dimension-book:blackstone_altar")
+            .build();
         BookEntityPageModel entity = BookEntityPageModel
-                .builder()
-                .withEntityId("adventurez:blackstone_golem")
-                .build();
+            .builder()
+            .withEntityId("adventurez:blackstone_golem")
+            .build();
 
         return List.of(boss, alter, entity);
     }

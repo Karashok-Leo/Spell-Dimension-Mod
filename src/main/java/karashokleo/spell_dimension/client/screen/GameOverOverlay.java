@@ -18,12 +18,12 @@ import java.util.List;
 public class GameOverOverlay extends SideBar<SideBar.IntSignature> implements IGuiOverlay
 {
     public static final List<Text> TEXTS = List.of(
-            SDTexts.TEXT$GAME_OVER$HEAD.get().formatted(Formatting.AQUA),
-            SDTexts.TEXT$GAME_OVER$THANKS.get().formatted(Formatting.YELLOW),
-            SDTexts.TEXT$GAME_OVER$MAKING.get().formatted(Formatting.LIGHT_PURPLE),
-            SDTexts.TEXT$GAME_OVER$PASSION.get().formatted(Formatting.GREEN),
-            SDTexts.TEXT$GAME_OVER$FEEDBACK.get().formatted(Formatting.DARK_AQUA),
-            SDTexts.TEXT$GAME_OVER$WISH.get().formatted(Formatting.GOLD)
+        SDTexts.TEXT$GAME_OVER$HEAD.get().formatted(Formatting.AQUA),
+        SDTexts.TEXT$GAME_OVER$THANKS.get().formatted(Formatting.YELLOW),
+        SDTexts.TEXT$GAME_OVER$MAKING.get().formatted(Formatting.LIGHT_PURPLE),
+        SDTexts.TEXT$GAME_OVER$PASSION.get().formatted(Formatting.GREEN),
+        SDTexts.TEXT$GAME_OVER$FEEDBACK.get().formatted(Formatting.DARK_AQUA),
+        SDTexts.TEXT$GAME_OVER$WISH.get().formatted(Formatting.GOLD)
     );
 
     public GameOverOverlay()
@@ -46,9 +46,15 @@ public class GameOverOverlay extends SideBar<SideBar.IntSignature> implements IG
     @Override
     public boolean isScreenOn()
     {
-        if (L2HostilityClient.getClient().currentScreen != null) return false;
+        if (L2HostilityClient.getClient().currentScreen != null)
+        {
+            return false;
+        }
         ClientPlayerEntity player = L2HostilityClient.getClientPlayer();
-        if (player == null) return false;
+        if (player == null)
+        {
+            return false;
+        }
         return player.getMainHandStack().isOf(AllItems.MEDAL);
     }
 
@@ -62,8 +68,11 @@ public class GameOverOverlay extends SideBar<SideBar.IntSignature> implements IG
     @Override
     public void render(InGameHud gui, DrawContext context, float tickDelta, int scaledWidth, int scaledHeight)
     {
-        if (!ease(gui.getTicks() + tickDelta)) return;
+        if (!ease(gui.getTicks() + tickDelta))
+        {
+            return;
+        }
         new TextBox(context, 1, 1, scaledWidth / 2 + getXOffset(scaledWidth), scaledHeight / 2 + getYOffset(scaledHeight), scaledWidth / 2)
-                .renderLongText(MinecraftClient.getInstance().textRenderer, TEXTS);
+            .renderLongText(MinecraftClient.getInstance().textRenderer, TEXTS);
     }
 }

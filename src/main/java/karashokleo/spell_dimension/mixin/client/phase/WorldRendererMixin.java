@@ -18,12 +18,12 @@ public abstract class WorldRendererMixin
      * Modifies an argument of setupTerrain to make the world render as if the player is in spectator when clipping.
      */
     @ModifyArg(
-            method = "render",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/client/render/WorldRenderer;setupTerrain(Lnet/minecraft/client/render/Camera;Lnet/minecraft/client/render/Frustum;ZZ)V"
-            ),
-            index = 3
+        method = "render",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/render/WorldRenderer;setupTerrain(Lnet/minecraft/client/render/Camera;Lnet/minecraft/client/render/Frustum;ZZ)V"
+        ),
+        index = 3
     )
     private boolean onRenderReplaceSpectator(boolean isSpectator)
     {

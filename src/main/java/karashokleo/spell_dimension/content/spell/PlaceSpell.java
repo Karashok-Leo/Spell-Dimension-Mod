@@ -16,16 +16,25 @@ public class PlaceSpell
 {
     public static void handle(SpellProjectile projectile, Identifier spellId, BlockHitResult hitResult)
     {
-        if (!spellId.equals(AllSpells.PLACE)) return;
-        if (!(projectile.getWorld() instanceof ServerWorld world)) return;
-        if (!(projectile.getOwner() instanceof PlayerEntity player)) return;
+        if (!spellId.equals(AllSpells.PLACE))
+        {
+            return;
+        }
+        if (!(projectile.getWorld() instanceof ServerWorld world))
+        {
+            return;
+        }
+        if (!(projectile.getOwner() instanceof PlayerEntity player))
+        {
+            return;
+        }
         if (AllWorldGen.disableInWorld(world))
         {
             player.sendMessage(SDTexts.TEXT$BANNED_SPELL.get().formatted(Formatting.RED));
             return;
         }
         player.getOffHandStack().useOnBlock(
-                new ItemUsageContext(player, Hand.OFF_HAND, hitResult)
+            new ItemUsageContext(player, Hand.OFF_HAND, hitResult)
         );
     }
 }

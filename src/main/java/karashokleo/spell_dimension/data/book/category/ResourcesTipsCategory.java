@@ -20,11 +20,11 @@ public class ResourcesTipsCategory extends CategoryProvider
     protected String[] generateEntryMap()
     {
         return new String[]{
-                "a_b_c_d",
-                "_______",
-                "e_f_g_h",
-                "_______",
-                "i_j_k_l",
+            "a_b_c_d",
+            "_______",
+            "e_f_g_h",
+            "_______",
+            "i_j_k_l",
         };
     }
 
@@ -65,8 +65,8 @@ public class ResourcesTipsCategory extends CategoryProvider
         this.lang().add(context.categoryName(), "Resources & Tips");
         this.lang("zh_cn").add(context.categoryName(), "资源 & 提示");
         return BookCategoryModel
-                .create(this.modLoc(context.categoryId()), context.categoryName())
-                .withIcon(Items.DIAMOND)
-                .withBackground(BookGenUtil.id("textures/background/4.png"));
+            .create(this.modLoc(context.categoryId()), context.categoryName())
+            .withIcon(Items.DIAMOND)
+            .withBackground(BookGenUtil.id("textures/background/4.png"));
     }
 }

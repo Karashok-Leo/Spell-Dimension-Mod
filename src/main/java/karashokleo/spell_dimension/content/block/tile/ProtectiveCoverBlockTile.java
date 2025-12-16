@@ -27,7 +27,10 @@ public class ProtectiveCoverBlockTile extends BlockEntity
     {
         this.life = life;
         this.markDirty();
-        if (world == null) return;
+        if (world == null)
+        {
+            return;
+        }
         this.world.updateListeners(pos, getCachedState(), getCachedState(), Block.NOTIFY_ALL);
     }
 
@@ -61,7 +64,10 @@ public class ProtectiveCoverBlockTile extends BlockEntity
     public static void tick(World world, BlockPos pos, BlockState state, ProtectiveCoverBlockTile tile)
     {
         tile.life--;
-        if (tile.life > 0) return;
+        if (tile.life > 0)
+        {
+            return;
+        }
         ProtectiveCoverBlock.breakNonPersistent(world, pos);
     }
 }

@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class  SpellImpactEnchantment extends UnobtainableEnchantment
+public abstract class SpellImpactEnchantment extends UnobtainableEnchantment
 {
     public SpellImpactEnchantment(Rarity weight, EnchantmentTarget target, EquipmentSlot[] slotTypes)
     {
@@ -31,6 +31,7 @@ public abstract class  SpellImpactEnchantment extends UnobtainableEnchantment
     {
         Map<SpellImpactEnchantment, Context> map = new HashMap<>();
         for (ItemStack e : TrinketCompat.getItems(caster, e -> true))
+        {
             EnchantmentHelper.get(e).forEach((enchantment, level) ->
             {
                 if (enchantment instanceof SpellImpactEnchantment impactEnchantment)
@@ -52,6 +53,7 @@ public abstract class  SpellImpactEnchantment extends UnobtainableEnchantment
                     });
                 }
             });
+        }
         return map;
     }
 

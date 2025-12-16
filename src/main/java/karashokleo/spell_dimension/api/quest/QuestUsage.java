@@ -23,13 +23,17 @@ public interface QuestUsage
     static void addQuestsCompleted(ServerPlayerEntity player, Quest... quests)
     {
         for (Quest quest : quests)
+        {
             QuestComponent.addCompleted(player, entry(quest));
+        }
     }
 
     static void removeQuestsCompleted(ServerPlayerEntity player, Quest... quests)
     {
         for (Quest quest : quests)
+        {
             QuestComponent.removeCompleted(player, entry(quest));
+        }
     }
 
     static boolean isQuestCompleted(PlayerEntity player, Quest quest)
@@ -47,9 +51,12 @@ public interface QuestUsage
         return QuestRegistry.QUEST_REGISTRY.streamEntries().filter(entry ->
         {
             if (QuestComponent.isCompleted(player, entry))
+            {
                 return false;
-            else
+            } else
+            {
                 return allDependenciesCompleted(player, entry.value());
+            }
         }).collect(Collectors.toSet());
     }
 
@@ -57,7 +64,9 @@ public interface QuestUsage
     {
         Identifier id = QuestRegistry.QUEST_REGISTRY.getId(quest);
         if (id == null)
+        {
             throw new UnsupportedOperationException("Unregistered quest: " + quest);
+        }
         return entry(id);
     }
 

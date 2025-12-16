@@ -23,21 +23,21 @@ public class AllStacks
     public static List<ItemStack> getBaseEssences()
     {
         return AllItems.BASE_ESSENCES
-                .values()
-                .stream()
-                .sorted(Comparator.comparing(Registries.ITEM::getId))
-                .map(Item::getDefaultStack)
-                .toList();
+            .values()
+            .stream()
+            .sorted(Comparator.comparing(Registries.ITEM::getId))
+            .map(Item::getDefaultStack)
+            .toList();
     }
 
     public static List<ItemStack> getSpellBooks()
     {
         return AllItems.SPELL_BOOKS
-                .values()
-                .stream()
-                .sorted(Comparator.comparing(Registries.ITEM::getId))
-                .map(Item::getDefaultStack)
-                .toList();
+            .values()
+            .stream()
+            .sorted(Comparator.comparing(Registries.ITEM::getId))
+            .map(Item::getDefaultStack)
+            .toList();
     }
 
     public static List<ItemStack> getEnchantedEssences()
@@ -45,15 +45,21 @@ public class AllStacks
         List<ItemStack> stacks = new ArrayList<>();
         List<AttributeModifier> allModifiers = AttributeModifier.getAll();
         for (AttributeModifier modifier : allModifiers)
+        {
             for (EquipmentSlot slot : EquipmentSlot.values())
+            {
                 for (int i = 0; i < 3; i++)
+                {
                     stacks.add(AllItems.ENCHANTED_ESSENCE.getStack(
-                            new EnchantedModifier(
-                                    (i + 1) * 10,
-                                    slot,
-                                    modifier.toELM(slot)
-                            )
+                        new EnchantedModifier(
+                            (i + 1) * 10,
+                            slot,
+                            modifier.toELM(slot)
+                        )
                     ));
+                }
+            }
+        }
         return stacks;
     }
 
@@ -67,14 +73,14 @@ public class AllStacks
     {
         //        Stream<Identifier> stream = SpellRegistry.all().keySet().stream();
         return AllSpells.getAll()
-                .stream()
-                .map(AllItems.SPELL_SCROLL::getStack)
-                .sorted(Comparator.comparing(stack ->
-                {
-                    SpellInfo spellInfo = AllItems.SPELL_SCROLL.getSpellInfo(stack);
-                    return spellInfo == null ? "" : spellInfo.spell().school.id.toString();
-                }))
-                .toList();
+            .stream()
+            .map(AllItems.SPELL_SCROLL::getStack)
+            .sorted(Comparator.comparing(stack ->
+            {
+                SpellInfo spellInfo = AllItems.SPELL_SCROLL.getSpellInfo(stack);
+                return spellInfo == null ? "" : spellInfo.spell().school.id.toString();
+            }))
+            .toList();
     }
 
     public static List<ItemStack> getQuestScrolls()

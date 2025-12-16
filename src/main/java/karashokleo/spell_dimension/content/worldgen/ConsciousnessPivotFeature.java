@@ -32,31 +32,41 @@ public class ConsciousnessPivotFeature extends Feature<DefaultFeatureConfig>
         {
             int radius = maxHeight - height;
             for (int x = -radius; x <= radius; x++)
+            {
                 for (int z = -radius; z <= radius; z++)
+                {
                     if (x * x + z * z <= radius * radius)
                     {
                         BlockPos pos = origin.add(x, height, z);
                         if (worldAccess.getBlockState(pos).isReplaceable())
+                        {
                             set.add(pos);
-                        else return false;
+                        } else
+                        {
+                            return false;
+                        }
                     }
+                }
+            }
         }
         BlockPos corePos = origin.add(0, maxHeight, 0);
         worldAccess.setBlockState(
-                corePos,
-                AllBlocks.CONSCIOUSNESS_CORE.block().getDefaultState(),
-                3
+            corePos,
+            AllBlocks.CONSCIOUSNESS_CORE.block().getDefaultState(),
+            3
         );
         if (worldAccess.getBlockEntity(corePos) instanceof ConsciousnessCoreTile tile)
         {
             tile.init(levelFactor, RandomUtil.randomEnum(context.getRandom(), EventAward.class));
         }
         for (BlockPos pos : set)
+        {
             worldAccess.setBlockState(
-                    pos,
-                    AllBlocks.CONSCIOUSNESS_BASE.block().getDefaultState(),
-                    3
+                pos,
+                AllBlocks.CONSCIOUSNESS_BASE.block().getDefaultState(),
+                3
             );
+        }
         return true;
     }
 }

@@ -31,11 +31,11 @@ public abstract class MobSpawnerLogicMixin implements SpawnerExtension
     private NoRemainAction noRemainAction = NoRemainAction.BREAK;
 
     @Inject(
-            method = "serverTick",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/server/world/ServerWorld;syncWorldEvent(ILnet/minecraft/util/math/BlockPos;I)V"
-            )
+        method = "serverTick",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/server/world/ServerWorld;syncWorldEvent(ILnet/minecraft/util/math/BlockPos;I)V"
+        )
     )
     private void updateRemain_inject_serverTick(ServerWorld world, BlockPos pos, CallbackInfo ci)
     {
@@ -43,8 +43,8 @@ public abstract class MobSpawnerLogicMixin implements SpawnerExtension
     }
 
     @ModifyExpressionValue(
-            method = "serverTick",
-            at = @At(value = "INVOKE", target = "Ljava/util/Optional;isEmpty()Z")
+        method = "serverTick",
+        at = @At(value = "INVOKE", target = "Ljava/util/Optional;isEmpty()Z")
     )
     private boolean cancelSpawn_inject_serverTick(boolean original)
     {
@@ -52,18 +52,20 @@ public abstract class MobSpawnerLogicMixin implements SpawnerExtension
     }
 
     @Inject(
-            method = "serverTick",
-            at = @At("HEAD")
+        method = "serverTick",
+        at = @At("HEAD")
     )
     private void noRemainAction_inject_serverTick(ServerWorld world, BlockPos pos, CallbackInfo ci)
     {
         if (this.noRemain())
+        {
             this.getNoRemainAction().action(world, pos);
+        }
     }
 
     @Inject(
-            method = "readNbt",
-            at = @At("HEAD")
+        method = "readNbt",
+        at = @At("HEAD")
     )
     private void inject_readNbt(World world, BlockPos pos, NbtCompound nbt, CallbackInfo ci)
     {
@@ -71,8 +73,8 @@ public abstract class MobSpawnerLogicMixin implements SpawnerExtension
     }
 
     @Inject(
-            method = "writeNbt",
-            at = @At("HEAD")
+        method = "writeNbt",
+        at = @At("HEAD")
     )
     private void inject_writeNbt(NbtCompound nbt, CallbackInfoReturnable<NbtCompound> cir)
     {
@@ -82,7 +84,10 @@ public abstract class MobSpawnerLogicMixin implements SpawnerExtension
     @Override
     public NbtCompound getEntityNbt()
     {
-        if (this.spawnEntry == null) return new NbtCompound();
+        if (this.spawnEntry == null)
+        {
+            return new NbtCompound();
+        }
         return this.spawnEntry.getNbt();
     }
 

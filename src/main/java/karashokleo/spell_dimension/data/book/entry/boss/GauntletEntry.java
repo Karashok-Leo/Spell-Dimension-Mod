@@ -52,55 +52,55 @@ public class GauntletEntry extends BaseEntryProvider
         context.page("boss");
         this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
-                """
-                        Level: %d+
-                        \\
-                        \\
-                        Spawns inside the **Gauntlet Arena**(bosses_of_mass_destruction:gauntlet_arena).
-                        \\
-                        This structure can be located in the Nether using the Locate Spell.
-                        """.formatted(TextConstants.BOSS_LEVELS[2])
+            """
+                Level: %d+
+                \\
+                \\
+                Spawns inside the **Gauntlet Arena**(bosses_of_mass_destruction:gauntlet_arena).
+                \\
+                This structure can be located in the Nether using the Locate Spell.
+                """.formatted(TextConstants.BOSS_LEVELS[2])
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
-                """
-                        等级: %d+
-                        \\
-                        \\
-                        生成于**下界铁掌竞技场**(bosses_of_mass_destruction:gauntlet_arena)内。
-                        \\
-                        可通过定位法术在下界中定位到此结构。
-                        """.formatted(TextConstants.BOSS_LEVELS[2])
+            """
+                等级: %d+
+                \\
+                \\
+                生成于**下界铁掌竞技场**(bosses_of_mass_destruction:gauntlet_arena)内。
+                \\
+                可通过定位法术在下界中定位到此结构。
+                """.formatted(TextConstants.BOSS_LEVELS[2])
         );
 
         BookSpotlightPageModel boss = BookSpotlightPageModel
-                .builder()
-                .withTitle(context.pageTitle())
-                .withText(context.pageText())
-                .withItem(Ingredient.ofItems(BookGenUtil.getItem(new Identifier("bosses_of_mass_destruction:blazing_eye"))))
-                .build();
+            .builder()
+            .withTitle(context.pageTitle())
+            .withText(context.pageText())
+            .withItem(Ingredient.ofItems(BookGenUtil.getItem(new Identifier("bosses_of_mass_destruction:blazing_eye"))))
+            .build();
 
         context.page("next");
         this.lang().add(context.pageText(),
+            """
+                Spawns after the Ancient Carved Blackstone in the center of Gauntlet Arena gets destroyed.
                 """
-                        Spawns after the Ancient Carved Blackstone in the center of Gauntlet Arena gets destroyed.
-                        """
         );
         this.lang("zh_cn").add(context.pageText(),
+            """
+                破坏竞技场中心的远古雕纹黑石后生成。
                 """
-                        破坏竞技场中心的远古雕纹黑石后生成。
-                        """
         );
 
         BookTextPageModel next = BookTextPageModel
-                .builder()
-                .withText(context.pageText())
-                .build();
+            .builder()
+            .withText(context.pageText())
+            .build();
 
         BookEntityPageModel entity = BookEntityPageModel
-                .builder()
-                .withEntityId("bosses_of_mass_destruction:gauntlet")
-                .build();
+            .builder()
+            .withEntityId("bosses_of_mass_destruction:gauntlet")
+            .build();
 
         return List.of(boss, next, entity);
     }

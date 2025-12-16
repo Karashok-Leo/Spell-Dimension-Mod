@@ -51,50 +51,50 @@ public class SummonSpellEntry extends BaseEntryProvider
         context.page("spell");
         this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
+            """
+                When the off-hand holds a specific catalyst, cast the summon spell on a **Spawner** to summon some special mobs.
+                \\
+                \\
+                You can press U on the Spawner to see the specific recipe.
                 """
-                        When the off-hand holds a specific catalyst, cast the summon spell on a **Spawner** to summon some special mobs.
-                        \\
-                        \\
-                        You can press U on the Spawner to see the specific recipe.
-                        """
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
+            """
+                副手持有特定催化剂时对**刷怪笼**施放召唤法术可以召唤一些特殊的生物。
+                \\
+                \\
+                你可以对刷怪笼按下U键查看具体配方。
                 """
-                        副手持有特定催化剂时对**刷怪笼**施放召唤法术可以召唤一些特殊的生物。
-                        \\
-                        \\
-                        你可以对刷怪笼按下U键查看具体配方。
-                        """
         );
         BookSpotlightPageModel spell = BookSpotlightPageModel
-                .builder()
-                .withTitle(context.pageTitle())
-                .withText(context.pageText())
-                .withItem(BookGenUtil.getNbtIngredient(AllItems.SPELL_SCROLL.getStack(AllSpells.SUMMON)))
-                .build();
+            .builder()
+            .withTitle(context.pageTitle())
+            .withText(context.pageText())
+            .withItem(BookGenUtil.getNbtIngredient(AllItems.SPELL_SCROLL.getStack(AllSpells.SUMMON)))
+            .build();
 
         context.page("boss");
         this.lang().add(context.pageText(),
+            """
+                Some bosses can also be summoned using summon spell, but it must be in the place where they would have been.
+                \\
+                \\
+                 For example, Stalker must be summoned in the **Otherside** (Deeper Darker Dimension).
                 """
-                        Some bosses can also be summoned using summon spell, but it must be in the place where they would have been.
-                        \\
-                        \\
-                         For example, Stalker must be summoned in the **Otherside** (Deeper Darker Dimension).
-                        """
         );
         this.lang("zh_cn").add(context.pageText(),
+            """
+                有些Boss也可以使用召唤法术进行召唤，但必须位于他们本来所在的场所。
+                \\
+                \\
+                比如追猎者必须在**幽冥异界**（深暗维度）才能召唤。
                 """
-                        有些Boss也可以使用召唤法术进行召唤，但必须位于他们本来所在的场所。
-                        \\
-                        \\
-                        比如追猎者必须在**幽冥异界**（深暗维度）才能召唤。
-                        """
         );
         BookTextPageModel boss = BookTextPageModel
-                .builder()
-                .withText(context.pageText())
-                .build();
+            .builder()
+            .withText(context.pageText())
+            .build();
 
         return List.of(spell, boss);
     }

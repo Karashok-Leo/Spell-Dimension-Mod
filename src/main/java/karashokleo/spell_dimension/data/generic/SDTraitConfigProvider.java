@@ -33,6 +33,8 @@ public class SDTraitConfigProvider extends AbstractDataProvider
     public void addAll()
     {
         for (Map.Entry<MobTrait, TraitConfig.Config> entry : configs.entrySet())
+        {
             add(entry.getKey().getNonNullId(), entry.getValue());
+        }
     }
 }

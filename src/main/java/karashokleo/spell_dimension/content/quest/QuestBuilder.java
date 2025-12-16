@@ -32,7 +32,9 @@ public class QuestBuilder<Q extends Quest> extends NamedEntryBuilder<Q> implemen
     public static void buildRelations()
     {
         for (Pair<Quest, Quest> relation : RELATIONS)
+        {
             QuestUsage.configure(relation.getLeft(), relation.getRight());
+        }
         RELATIONS.clear();
     }
 
@@ -53,14 +55,18 @@ public class QuestBuilder<Q extends Quest> extends NamedEntryBuilder<Q> implemen
     {
         TagGenerator<Quest> tagGenerator = getTagGenerator(QuestRegistry.QUEST_REGISTRY_KEY);
         for (TagKey<Quest> key : keys)
+        {
             tagGenerator.getOrCreateContainer(key).add(getId());
+        }
         return this;
     }
 
     public QuestBuilder<Q> addDependencies(Quest... dependencies)
     {
         for (Quest quest : dependencies)
+        {
             RELATIONS.add(new Pair<>(quest, content));
+        }
         return this;
     }
 

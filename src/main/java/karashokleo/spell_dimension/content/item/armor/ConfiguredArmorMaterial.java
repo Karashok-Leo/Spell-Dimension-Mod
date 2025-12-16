@@ -17,17 +17,17 @@ public class ConfiguredArmorMaterial extends Armor.CustomMaterial
     protected final float haste;
 
     public ConfiguredArmorMaterial(
-            String name,
-            int durabilityMultiplier,
-            int enchantability,
-            Supplier<Ingredient> repairIngredientSupplier,
-            int helmetArmor,
-            int chestplateArmor,
-            int leggingsArmor,
-            int bootsArmor,
-            SpellSchool school,
-            float spellPower,
-            float haste
+        String name,
+        int durabilityMultiplier,
+        int enchantability,
+        Supplier<Ingredient> repairIngredientSupplier,
+        int helmetArmor,
+        int chestplateArmor,
+        int leggingsArmor,
+        int bootsArmor,
+        SpellSchool school,
+        float spellPower,
+        float haste
     )
     {
         super(name, durabilityMultiplier, enchantability, WizardArmor.equipSound, repairIngredientSupplier);

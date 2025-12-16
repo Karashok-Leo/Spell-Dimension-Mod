@@ -48,21 +48,30 @@ public abstract class LivingEntityMixin extends Entity implements NoClip
     @Override
     public PistonBehavior getPistonBehavior()
     {
-        if (this.isNoClip()) return PistonBehavior.IGNORE;
-        else return super.getPistonBehavior();
+        if (this.isNoClip())
+        {
+            return PistonBehavior.IGNORE;
+        } else
+        {
+            return super.getPistonBehavior();
+        }
     }
 
     @Inject(method = "canHit", at = @At("HEAD"), cancellable = true)
     private void onCanHit(CallbackInfoReturnable<Boolean> cir)
     {
         if (this.isNoClip())
+        {
             cir.setReturnValue(false);
+        }
     }
 
     @Inject(method = "isPushable", at = @At("HEAD"), cancellable = true)
     private void onIsPushable(CallbackInfoReturnable<Boolean> cir)
     {
         if (this.isNoClip())
+        {
             cir.setReturnValue(false);
+        }
     }
 }

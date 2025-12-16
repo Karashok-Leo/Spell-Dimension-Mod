@@ -52,56 +52,56 @@ public class ElderGuardianEntry extends BaseEntryProvider
         context.page("boss");
         this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
-                """
-                        Level: %d+
-                        \\
-                        \\
-                        Spawns inside the **Ocean Monument**(betteroceanmonuments:ocean_monument).
-                        \\
-                        This structure can be located in the Overworld using the Locate Spell.
-                        """.formatted(TextConstants.BOSS_LEVELS[0])
+            """
+                Level: %d+
+                \\
+                \\
+                Spawns inside the **Ocean Monument**(betteroceanmonuments:ocean_monument).
+                \\
+                This structure can be located in the Overworld using the Locate Spell.
+                """.formatted(TextConstants.BOSS_LEVELS[0])
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
-                """
-                        等级: %d+
-                        \\
-                        \\
-                        生成于**海底神殿**(betteroceanmonuments:ocean_monument)内。
-                        \\
-                        可通过定位法术在主世界中定位到此结构。
-                        """.formatted(TextConstants.BOSS_LEVELS[0])
+            """
+                等级: %d+
+                \\
+                \\
+                生成于**海底神殿**(betteroceanmonuments:ocean_monument)内。
+                \\
+                可通过定位法术在主世界中定位到此结构。
+                """.formatted(TextConstants.BOSS_LEVELS[0])
         );
 
         BookSpotlightPageModel boss = BookSpotlightPageModel
-                .builder()
-                .withTitle(context.pageTitle())
-                .withText(context.pageText())
-                .withItem(Ingredient.ofItems(AllItems.ABYSS_GUARD))
-                .build();
+            .builder()
+            .withTitle(context.pageTitle())
+            .withText(context.pageText())
+            .withItem(Ingredient.ofItems(AllItems.ABYSS_GUARD))
+            .build();
 
         context.page("next");
         this.lang().add(context.pageText(),
+            """
+                Drops **Abyss Guard** upon defeating Elder Guardian.
                 """
-                        Drops **Abyss Guard** upon defeating Elder Guardian.
-                        """
         );
         this.lang("zh_cn").add(context.pageText(),
+            """
+                击败远古守卫者后掉落**深渊守护**。
                 """
-                        击败远古守卫者后掉落**深渊守护**。
-                        """
         );
 
         BookTextPageModel next = BookTextPageModel
-                .builder()
-                .withText(context.pageText())
-                .build();
+            .builder()
+            .withText(context.pageText())
+            .build();
 
         BookEntityPageModel entity = BookEntityPageModel
-                .builder()
-                .withEntityId("minecraft:elder_guardian")
-                .withScale(0.3F)
-                .build();
+            .builder()
+            .withEntityId("minecraft:elder_guardian")
+            .withScale(0.3F)
+            .build();
 
         return List.of(boss, next, entity);
     }

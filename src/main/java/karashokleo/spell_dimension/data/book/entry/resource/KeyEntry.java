@@ -47,79 +47,79 @@ public class KeyEntry extends BaseEntryProvider
         context.page("prev");
         this.lang().add(context.pageTitle(), "Key Binds");
         this.lang().add(context.pageText(),
+            """
+                \\
+                ` (~): Chain Mining
+                \\
+                \\
+                R: Combat Roll
+                \\
+                \\
+                B: Open Backpack
+                \\
+                \\
+                G: Open Ender Bag
+                \\
+                \\
+                C: Zoom In
                 """
-                        \\
-                        ` (~): Chain Mining
-                        \\
-                        \\
-                        R: Combat Roll
-                        \\
-                        \\
-                        B: Open Backpack
-                        \\
-                        \\
-                        G: Open Ender Bag
-                        \\
-                        \\
-                        C: Zoom In
-                        """
         );
         this.lang("zh_cn").add(context.pageTitle(), "键位绑定");
         this.lang("zh_cn").add(context.pageText(),
+            """
+                \\
+                ` (~): 连锁采集
+                \\
+                \\
+                R: 翻滚
+                \\
+                \\
+                B: 打开背包
+                \\
+                \\
+                G: 打开末影袋
+                \\
+                \\
+                C: 放大镜头
                 """
-                        \\
-                        ` (~): 连锁采集
-                        \\
-                        \\
-                        R: 翻滚
-                        \\
-                        \\
-                        B: 打开背包
-                        \\
-                        \\
-                        G: 打开末影袋
-                        \\
-                        \\
-                        C: 放大镜头
-                        """
         );
 
         BookTextPageModel prev = BookTextPageModel
-                .builder()
-                .withTitle(context.pageTitle())
-                .withText(context.pageText())
-                .build();
+            .builder()
+            .withTitle(context.pageTitle())
+            .withText(context.pageText())
+            .build();
 
         context.page("next");
         this.lang().add(context.pageText(),
+            """
+                \\
+                J: Turn on/off auto step-up
+                \\
+                \\
+                Middle Button / Double-click: Sort Inventory
+                \\
+                \\
+                Left Shift + W: Wall-Jumping
                 """
-                        \\
-                        J: Turn on/off auto step-up
-                        \\
-                        \\
-                        Middle Button / Double-click: Sort Inventory
-                        \\
-                        \\
-                        Left Shift + W: Wall-Jumping
-                        """
         );
         this.lang("zh_cn").add(context.pageText(),
+            """
+                \\
+                J: 开启/关闭自动上坡
+                \\
+                \\
+                鼠标中键 / 双击: 整理物品栏
+                \\
+                \\
+                左Shift + W: 攀墙跳
                 """
-                        \\
-                        J: 开启/关闭自动上坡
-                        \\
-                        \\
-                        鼠标中键 / 双击: 整理物品栏
-                        \\
-                        \\
-                        左Shift + W: 攀墙跳
-                        """
         );
 
         BookTextPageModel next = BookTextPageModel
-                .builder()
-                .withText(context.pageText())
-                .build();
+            .builder()
+            .withText(context.pageText())
+            .build();
 
         return List.of(prev, next);
     }

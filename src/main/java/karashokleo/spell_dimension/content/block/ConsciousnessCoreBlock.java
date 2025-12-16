@@ -24,16 +24,16 @@ public class ConsciousnessCoreBlock extends BlockWithEntity
     public ConsciousnessCoreBlock()
     {
         super(
-                FabricBlockSettings.create()
-                        .mapColor(MapColor.DIAMOND_BLUE)
-                        .instrument(Instrument.HAT)
-                        .sounds(BlockSoundGroup.GLASS)
-                        .strength(-1.0F, 3600000.0F)
-                        .luminance(state -> 15)
-                        .nonOpaque()
-                        .dropsNothing()
-                        .solidBlock(Blocks::never)
-                        .allowsSpawning(Blocks::never)
+            FabricBlockSettings.create()
+                .mapColor(MapColor.DIAMOND_BLUE)
+                .instrument(Instrument.HAT)
+                .sounds(BlockSoundGroup.GLASS)
+                .strength(-1.0F, 3600000.0F)
+                .luminance(state -> 15)
+                .nonOpaque()
+                .dropsNothing()
+                .solidBlock(Blocks::never)
+                .allowsSpawning(Blocks::never)
         );
     }
 
@@ -46,7 +46,9 @@ public class ConsciousnessCoreBlock extends BlockWithEntity
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit)
     {
         if (world.getBlockEntity(pos) instanceof ConsciousnessCoreTile tile)
+        {
             tile.onUse(player, hand);
+        }
         return ActionResult.CONSUME;
     }
 

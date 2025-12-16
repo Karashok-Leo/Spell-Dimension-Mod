@@ -19,11 +19,11 @@ import java.util.List;
 public abstract class EnchantBookFactoryMixin
 {
     @ModifyVariable(
-            method = "create",
-            at = @At(
-                    value = "STORE",
-                    ordinal = 0
-            )
+        method = "create",
+        at = @At(
+            value = "STORE",
+            ordinal = 0
+        )
     )
     private List<Enchantment> inject_create(List<Enchantment> original)
     {

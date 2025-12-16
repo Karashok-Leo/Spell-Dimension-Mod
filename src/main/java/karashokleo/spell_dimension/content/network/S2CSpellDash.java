@@ -16,6 +16,8 @@ public record S2CSpellDash() implements SerialPacketS2C
     public void handle(ClientPlayerEntity player)
     {
         if (player instanceof RollingEntity rolling)
+        {
             ((RollManagerInvoker) rolling.getRollManager()).invokeRechargeRoll(player);
+        }
     }
 }

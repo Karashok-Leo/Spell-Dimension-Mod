@@ -16,10 +16,10 @@ public class SpellPowerEffect extends StatusEffect
         for (SpellSchool school : SchoolUtil.SCHOOLS)
         {
             this.addAttributeModifier(
-                    school.attribute,
-                    UuidUtil.getUUIDFromString(SpellDimension.MOD_ID + ":" + school.id.toString()).toString(),
-                    0.1D,
-                    EntityAttributeModifier.Operation.MULTIPLY_TOTAL
+                school.attribute,
+                UuidUtil.getUUIDFromString(SpellDimension.MOD_ID + ":" + school.id.toString()).toString(),
+                0.1D,
+                EntityAttributeModifier.Operation.MULTIPLY_TOTAL
             );
         }
     }

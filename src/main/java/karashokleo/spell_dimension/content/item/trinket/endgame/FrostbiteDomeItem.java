@@ -32,15 +32,17 @@ public class FrostbiteDomeItem extends SingleEpicTrinketItem implements DamageLi
     public void onHurting(ItemStack stack, LivingEntity entity, LivingHurtEvent event)
     {
         if (!event.getSource().isOf(SpellSchools.FROST.damageType))
+        {
             return;
+        }
         LivingEntity target = event.getEntity();
         StatusEffectInstance effect = target.getStatusEffect(LHEffects.STONE_CAGE);
         if (effect == null)
         {
             EffectHelper.forceAddEffectWithEvent(
-                    target,
-                    new StatusEffectInstance(LHEffects.STONE_CAGE, STONE_CAGE_DURATION, 0, false, false),
-                    entity
+                target,
+                new StatusEffectInstance(LHEffects.STONE_CAGE, STONE_CAGE_DURATION, 0, false, false),
+                entity
             );
         } else
         {

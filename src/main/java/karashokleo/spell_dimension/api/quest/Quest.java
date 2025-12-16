@@ -27,8 +27,8 @@ public interface Quest
     default String getTranslationKey(String suffix)
     {
         return Objects.requireNonNull(
-                QuestRegistry.QUEST_REGISTRY.getId(this),
-                "Unregistered quest!"
+            QuestRegistry.QUEST_REGISTRY.getId(this),
+            "Unregistered quest!"
         ).toTranslationKey("quest", suffix);
     }
 
@@ -76,10 +76,10 @@ public interface Quest
     default Text getTagsText(World world)
     {
         return streamTags()
-                .sorted(Comparator.comparingInt(QuestTag::getTagPriority))
-                .map(QuestTag::getTagText)
-                .reduce((a, b) -> a.append(" ").append(b))
-                .orElse(null);
+            .sorted(Comparator.comparingInt(QuestTag::getTagPriority))
+            .map(QuestTag::getTagText)
+            .reduce((a, b) -> a.append(" ").append(b))
+            .orElse(null);
     }
 
     @Nullable
@@ -88,7 +88,10 @@ public interface Quest
         String titleKey = this.getTitleKey();
         // cannot call this method in server side!!!
         // because I18n does not exist in server side
-        if (!I18n.hasTranslation(titleKey)) return null;
+        if (!I18n.hasTranslation(titleKey))
+        {
+            return null;
+        }
         return Text.translatable(titleKey);
     }
 
@@ -120,16 +123,24 @@ public interface Quest
     {
         if (this.getTooltipData() instanceof QuestItemTooltipData data &&
             !data.stacks().isEmpty())
+        {
             return data.stacks().get(0);
+        }
         return null;
     }
 
     default void appendTooltip(@Nullable World world, List<Text> tooltip)
     {
         Text tagsText = this.getTagsText(world);
-        if (tagsText != null) tooltip.add(tagsText);
+        if (tagsText != null)
+        {
+            tooltip.add(tagsText);
+        }
         Text title = this.getTitle(world);
-        if (title != null) tooltip.add(title);
+        if (title != null)
+        {
+            tooltip.add(title);
+        }
         tooltip.addAll(this.getDescriptions(world));
     }
 

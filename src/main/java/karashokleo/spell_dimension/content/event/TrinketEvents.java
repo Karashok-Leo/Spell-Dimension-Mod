@@ -25,7 +25,7 @@ public class TrinketEvents
         TrinketDropCallback.EVENT.register((rule, stack, ref, entity) ->
         {
             return entity instanceof PlayerEntity ?
-                    TrinketEnums.DropRule.KEEP : rule;
+                TrinketEnums.DropRule.KEEP : rule;
 //            if (entity instanceof PlayerEntity player &&
 //                GameStageComponent.keepInventory(player))
 //            {
@@ -47,31 +47,35 @@ public class TrinketEvents
         ServerSideRollEvents.PLAYER_START_ROLLING.register((player, vec3d) ->
         {
             for (ItemStack stack : TrinketCompat.getTrinketItems(player, stack -> stack.isOf(AllItems.ATOMIC_BREASTPLATE)))
+            {
                 AtomicBreastplateItem.Upgrade.FLICKER.addProgress(stack, 1);
+            }
         });
 
         // To Oblivion Breastplate
         LivingHealCallback.EVENT.register(event ->
         {
             for (ItemStack stack : TrinketCompat.getTrinketItems(event.getEntity(), stack -> stack.isOf(AllItems.ATOMIC_BREASTPLATE)))
+            {
                 AtomicBreastplateItem.Upgrade.OBLIVION.addProgress(stack, event.getAmount());
+            }
             return true;
         });
 
         for (SpellSchool school : SchoolUtil.SCHOOLS)
         {
             school.addSource(
-                    SpellSchool.Trait.POWER,
-                    SpellSchool.Apply.MULTIPLY,
-                    args ->
+                SpellSchool.Trait.POWER,
+                SpellSchool.Apply.MULTIPLY,
+                args ->
+                {
+                    if (TrinketCompat.hasItemInTrinket(args.entity(), TrinketItems.CURSE_PRIDE))
                     {
-                        if (TrinketCompat.hasItemInTrinket(args.entity(), TrinketItems.CURSE_PRIDE))
-                        {
-                            int level = DifficultyLevel.ofAny(args.entity());
-                            return level * PRIDE_BONUS;
-                        }
-                        return 0D;
+                        int level = DifficultyLevel.ofAny(args.entity());
+                        return level * PRIDE_BONUS;
                     }
+                    return 0D;
+                }
 
             );
         }

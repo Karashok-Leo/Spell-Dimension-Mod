@@ -40,8 +40,8 @@ public class QuestScrollItem extends Item
 {
     private static final String KEY = "Quest";
     public static final Text SPACING_LINE = Text.literal("?????????????????????????????????????????????????????")
-            .formatted(Formatting.DARK_PURPLE)
-            .formatted(Formatting.OBFUSCATED);
+        .formatted(Formatting.DARK_PURPLE)
+        .formatted(Formatting.OBFUSCATED);
 
     public QuestScrollItem()
     {
@@ -68,7 +68,10 @@ public class QuestScrollItem extends Item
     public Optional<Identifier> getQuestId(ItemStack stack)
     {
         NbtCompound nbt = stack.getNbt();
-        if (nbt == null) return Optional.empty();
+        if (nbt == null)
+        {
+            return Optional.empty();
+        }
         return Identifier.validate(nbt.getString(KEY)).result();
     }
 
@@ -79,8 +82,13 @@ public class QuestScrollItem extends Item
 
     public void setQuest(ItemStack stack, @Nullable Identifier questId)
     {
-        if (questId == null) stack.getOrCreateNbt().remove(KEY);
-        else stack.getOrCreateNbt().putString(KEY, questId.toString());
+        if (questId == null)
+        {
+            stack.getOrCreateNbt().remove(KEY);
+        } else
+        {
+            stack.getOrCreateNbt().putString(KEY, questId.toString());
+        }
     }
 
     @Override
@@ -92,7 +100,7 @@ public class QuestScrollItem extends Item
             Optional<Quest> optional = this.getQuest(stack);
             optional.ifPresent(QuestToEntryConfig::openEntry);
         } else if (user instanceof ServerPlayerEntity player &&
-                   !player.isSneaking())
+            !player.isSneaking())
         {
             Optional<Quest> optional = this.getQuest(stack);
             // Valid quest
@@ -183,10 +191,10 @@ public class QuestScrollItem extends Item
     private void giveDependentQuests(ServerPlayerEntity player, Quest quest)
     {
         QuestUsage.getDependents(quest)
-                .stream()
-                .filter(q1 -> QuestUsage.getDependencies(q1.value()).stream().allMatch(q2 -> QuestComponent.isCompleted(player, q2)))
-                .map(this::getStack)
-                .forEach(itemStack -> player.getInventory().offerOrDrop(itemStack));
+            .stream()
+            .filter(q1 -> QuestUsage.getDependencies(q1.value()).stream().allMatch(q2 -> QuestComponent.isCompleted(player, q2)))
+            .map(this::getStack)
+            .forEach(itemStack -> player.getInventory().offerOrDrop(itemStack));
     }
 
     @Override

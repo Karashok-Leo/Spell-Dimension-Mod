@@ -52,10 +52,10 @@ public class FlexBreastplateItem extends SingleEpicTrinketItem implements Damage
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
         tooltip.add(SDTexts.TOOLTIP$FLEX_BREASTPLATE.get(
-                "%.2f%%".formatted(SPELL_POWER_RATIO * 100),
-                "%.2f%%".formatted(ARMOR_RATIO * 100),
-                "%.2f%%".formatted(ARMOR_TOUGHNESS_RATIO * 100),
-                "%.1f%%".formatted(MAX_REDUCTION_RATIO * 100)
+            "%.2f%%".formatted(SPELL_POWER_RATIO * 100),
+            "%.2f%%".formatted(ARMOR_RATIO * 100),
+            "%.2f%%".formatted(ARMOR_TOUGHNESS_RATIO * 100),
+            "%.1f%%".formatted(MAX_REDUCTION_RATIO * 100)
         ).formatted(Formatting.DARK_RED));
         super.appendTooltip(stack, world, tooltip, context);
     }

@@ -11,7 +11,9 @@ public interface SpellProjectileHitEntityCallback
     Event<SpellProjectileHitEntityCallback> EVENT = EventFactory.createArrayBacked(SpellProjectileHitEntityCallback.class, (listeners) -> ((projectile, spellId, hitResult) ->
     {
         for (SpellProjectileHitEntityCallback listener : listeners)
+        {
             listener.onHitEntity(projectile, spellId, hitResult);
+        }
     }));
 
     void onHitEntity(SpellProjectile projectile, Identifier spellId, EntityHitResult hitResult);

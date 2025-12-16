@@ -26,33 +26,33 @@ public abstract class StorageTerminalBlockEntityMixin extends BlockEntity
     }
 
     @Inject(
-            method = "updateServer",
-            at = @At(
-                    value = "FIELD",
-                    target = "Lcom/tom/storagemod/tile/StorageTerminalBlockEntity;beaconLevel:I",
-                    opcode = Opcodes.PUTFIELD,
-                    shift = At.Shift.AFTER,
-                    by = 1
-            )
+        method = "updateServer",
+        at = @At(
+            value = "FIELD",
+            target = "Lcom/tom/storagemod/tile/StorageTerminalBlockEntity;beaconLevel:I",
+            opcode = Opcodes.PUTFIELD,
+            shift = At.Shift.AFTER,
+            by = 1
+        )
     )
     private void inject_beaconLevel_putField(CallbackInfo ci)
     {
         int coreLv = BlockPos
-                .stream(new Box(this.pos).expand(8.0))
-                .mapToInt(
-                        (blockPos) ->
+            .stream(new Box(this.pos).expand(8.0))
+            .mapToInt(
+                (blockPos) ->
+                {
+                    if (this.world != null)
+                    {
+                        var optional = this.world.getBlockEntity(blockPos, AllBlocks.CONSCIOUSNESS_CORE_TILE);
+                        if (optional.isPresent())
                         {
-                            if (this.world != null)
-                            {
-                                var optional = this.world.getBlockEntity(blockPos, AllBlocks.CONSCIOUSNESS_CORE_TILE);
-                                if (optional.isPresent())
-                                {
-                                    return (int) (optional.get().getLevelFactor() / 0.1) + 1;
-                                }
-                            }
-                            return 0;
+                            return (int) (optional.get().getLevelFactor() / 0.1) + 1;
                         }
-                ).max().orElse(0);
+                    }
+                    return 0;
+                }
+            ).max().orElse(0);
         this.beaconLevel = Math.max(this.beaconLevel, coreLv);
     }
 }

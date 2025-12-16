@@ -56,59 +56,59 @@ public class AlloyEntry extends BaseEntryProvider
         context.page("alloy");
         this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
+            """
+                Alloy Forging serves as an easy way to increase ore yield. But more importantly, it allows you to craft some special items.
                 """
-                        Alloy Forging serves as an easy way to increase ore yield. But more importantly, it allows you to craft some special items.
-                        """
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
+            """
+                合金冶炼是提高矿石产量的简单方法。但更重要的是，它可以让你合成一些特殊的物品。
                 """
-                        合金冶炼是提高矿石产量的简单方法。但更重要的是，它可以让你合成一些特殊的物品。
-                        """
         );
         BookSpotlightPageModel alloy = BookSpotlightPageModel
-                .builder()
-                .withTitle(context.pageTitle())
-                .withText(context.pageText())
-                .withItem(
-                        BookGenUtil.getIngredient(
-                                controllerStacks()
-                        )
+            .builder()
+            .withTitle(context.pageTitle())
+            .withText(context.pageText())
+            .withItem(
+                BookGenUtil.getIngredient(
+                    controllerStacks()
                 )
-                .build();
+            )
+            .build();
 
         context.page("build");
         this.lang().add(context.pageText(),
+            """
+                To construct a forge, simply follow the convenient guide shown in the picture using any combination of blocks that forge type supports.
+                \\
+                \\
+                Note: Different blocks in the picture other than the controller represent blocks that can be interchanged.
                 """
-                        To construct a forge, simply follow the convenient guide shown in the picture using any combination of blocks that forge type supports.
-                        \\
-                        \\
-                        Note: Different blocks in the picture other than the controller represent blocks that can be interchanged.
-                        """
         );
         this.lang("zh_cn").add(context.pageText(),
+            """
+                要建造一个锻造炉，只需按照图中所示的指南，使用冶炼炉类型所支持的任何方块组合即可。
+                \\
+                \\
+                注: 图中的除控制器外的不同方块表示可以互相替换。
                 """
-                        要建造一个锻造炉，只需按照图中所示的指南，使用冶炼炉类型所支持的任何方块组合即可。
-                        \\
-                        \\
-                        注: 图中的除控制器外的不同方块表示可以互相替换。
-                        """
         );
         BookTextPageModel build = BookTextPageModel
-                .builder()
-                .withText(context.pageText())
-                .build();
+            .builder()
+            .withText(context.pageText())
+            .build();
 
         Identifier id = BookGenUtil.id("textures/alloy_forge/");
 
         BookImagePageModel image = BookImagePageModel
-                .builder()
-                .withImages(
-                        id.withSuffixedPath("1.png"),
-                        id.withSuffixedPath("2.png"),
-                        id.withSuffixedPath("3.png")
-                )
-                .build();
+            .builder()
+            .withImages(
+                id.withSuffixedPath("1.png"),
+                id.withSuffixedPath("2.png"),
+                id.withSuffixedPath("3.png")
+            )
+            .build();
 
         return List.of(alloy, build, image);
     }
@@ -116,10 +116,10 @@ public class AlloyEntry extends BaseEntryProvider
     private static @NotNull Stream<ItemStack> controllerStacks()
     {
         return ForgeRegistry
-                .controllerBlocksView()
-                .stream()
-                .sorted(Comparator.comparing(Registries.BLOCK::getId))
-                .map(block -> block.asItem().getDefaultStack());
+            .controllerBlocksView()
+            .stream()
+            .sorted(Comparator.comparing(Registries.BLOCK::getId))
+            .map(block -> block.asItem().getDefaultStack());
     }
 
     @Override

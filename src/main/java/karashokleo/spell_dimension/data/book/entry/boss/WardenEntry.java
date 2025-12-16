@@ -52,40 +52,40 @@ public class WardenEntry extends BaseEntryProvider
         context.page("boss");
         this.lang().add(context.pageTitle(), "Warden");
         this.lang().add(context.pageText(),
-                """
-                        Level: %d+
-                        \\
-                        \\
-                        When **Sculk Sensor** is activated at least 4 times, Warden burrows out of the ground.
-                        \\
-                        \\
-                        Drops **Heart of the Deep** upon defeating Warden.
-                        """.formatted(TextConstants.BOSS_LEVELS[0])
+            """
+                Level: %d+
+                \\
+                \\
+                When **Sculk Sensor** is activated at least 4 times, Warden burrows out of the ground.
+                \\
+                \\
+                Drops **Heart of the Deep** upon defeating Warden.
+                """.formatted(TextConstants.BOSS_LEVELS[0])
         );
         this.lang("zh_cn").add(context.pageTitle(), "监守者");
         this.lang("zh_cn").add(context.pageText(),
-                """
-                        等级: %d+
-                        \\
-                        \\
-                        当**幽匿尖啸体**被激活至少4次时，监守者会从地面钻出。
-                        \\
-                        \\
-                        击败监守者后掉落**深渊之心**。
-                        """.formatted(TextConstants.BOSS_LEVELS[0])
+            """
+                等级: %d+
+                \\
+                \\
+                当**幽匿尖啸体**被激活至少4次时，监守者会从地面钻出。
+                \\
+                \\
+                击败监守者后掉落**深渊之心**。
+                """.formatted(TextConstants.BOSS_LEVELS[0])
         );
 
         BookSpotlightPageModel boss = BookSpotlightPageModel
-                .builder()
-                .withTitle(context.pageTitle())
-                .withText(context.pageText())
-                .withItem(Ingredient.ofItems(Items.SCULK_SHRIEKER))
-                .build();
+            .builder()
+            .withTitle(context.pageTitle())
+            .withText(context.pageText())
+            .withItem(Ingredient.ofItems(Items.SCULK_SHRIEKER))
+            .build();
 
         BookEntityPageModel entity = BookEntityPageModel
-                .builder()
-                .withEntityId("minecraft:warden")
-                .build();
+            .builder()
+            .withEntityId("minecraft:warden")
+            .build();
 
         return List.of(boss, entity);
     }

@@ -28,9 +28,9 @@ public class LocationStack
     public static LocationStack fromRecipe(LocateRecipe recipe)
     {
         return new LocationStack(
-                recipe.getLocationType(),
-                recipe.getTargetId(),
-                recipe.getWorldId()
+            recipe.getLocationType(),
+            recipe.getTargetId(),
+            recipe.getWorldId()
         );
     }
 
@@ -41,7 +41,7 @@ public class LocationStack
         this.world = world;
         this.name = type.getName(id);
         MutableText worldName = Text.translatable(
-                world.toTranslationKey("travelerstitles")
+            world.toTranslationKey("travelerstitles")
         ).formatted(Formatting.GRAY);
         MutableText idString = Text.literal(type.toString(id)).formatted(Formatting.DARK_GRAY);
         this.tooltip = List.of(name, worldName, idString);
@@ -80,10 +80,13 @@ public class LocationStack
     @Override
     public boolean equals(Object o)
     {
-        if (!(o instanceof LocationStack that)) return false;
+        if (!(o instanceof LocationStack that))
+        {
+            return false;
+        }
         return type == that.type &&
-               id.equals(that.id) &&
-               world.equals(that.world);
+            id.equals(that.id) &&
+            world.equals(that.world);
     }
 
     @Override

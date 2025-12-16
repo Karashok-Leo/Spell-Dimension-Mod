@@ -31,16 +31,16 @@ public class MagicGuidanceProvider extends BookProvider
         this.lang().add(context.bookName(), "Magic Guidance");
         this.lang("zh_cn").add(context.bookName(), "魔力接引");
         return BookModel
-                .create(BOOK_ID, context.bookName())
-                .withModel(ItemRegistry.MODONOMICON_PURPLE.getId())
-                .withCreativeTab(AllGroups.MISC.getId())
-                .withGenerateBookItem(true)
-                .withCategories(
-                        new MageCategory(this).generate(),
-                        new PowerCategory(this).generate(),
-                        new ResourcesTipsCategory(this).generate(),
-                        new BossCategory(this).generate()
-                );
+            .create(BOOK_ID, context.bookName())
+            .withModel(ItemRegistry.MODONOMICON_PURPLE.getId())
+            .withCreativeTab(AllGroups.MISC.getId())
+            .withGenerateBookItem(true)
+            .withCategories(
+                new MageCategory(this).generate(),
+                new PowerCategory(this).generate(),
+                new ResourcesTipsCategory(this).generate(),
+                new BossCategory(this).generate()
+            );
     }
 
     @Override

@@ -47,27 +47,27 @@ public class ArmorSetEntry extends BaseEntryProvider
         context.page("text");
         this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
+            """
+                Wearing certain sets of armor will grant you special set bonuses.
+                \\
+                \\
+                Search **set** to see all available set bonuses.
                 """
-                        Wearing certain sets of armor will grant you special set bonuses.
-                        \\
-                        \\
-                        Search **set** to see all available set bonuses.
-                        """
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
+            """
+                穿戴一些装备可以获得特殊套装效果。
+                \\
+                \\
+                搜索**套装**（或拼音）以查看所有可用的套装效果。
                 """
-                        穿戴一些装备可以获得特殊套装效果。
-                        \\
-                        \\
-                        搜索**套装**（或拼音）以查看所有可用的套装效果。
-                        """
         );
         BookTextPageModel text = BookTextPageModel
-                .builder()
-                .withTitle(context.pageTitle())
-                .withText(context.pageText())
-                .build();
+            .builder()
+            .withTitle(context.pageTitle())
+            .withText(context.pageText())
+            .build();
 
         return List.of(text);
     }

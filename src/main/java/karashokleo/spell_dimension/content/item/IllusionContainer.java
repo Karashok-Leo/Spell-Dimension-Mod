@@ -18,11 +18,11 @@ public interface IllusionContainer
     int GEAR_CONSUME = 8;
     int ENCHANTMENT_CONSUME = 2048;
     String[] MATERIAL_KEYS = new String[]{
-            "CommonMaterial",
-            "UncommonMaterial",
-            "RareMaterial",
-            "EpicMaterial",
-            "LegendaryMaterial"
+        "CommonMaterial",
+        "UncommonMaterial",
+        "RareMaterial",
+        "EpicMaterial",
+        "LegendaryMaterial"
     };
     String ENCHANTMENT_KEY = "EnchantmentPoints";
 
@@ -41,11 +41,11 @@ public interface IllusionContainer
     static int getEnchantmentPoints(ItemStack stack)
     {
         return EnchantmentHelper.get(stack)
-                       .values()
-                       .stream()
-                       .mapToInt(lv -> 1 << lv)
-                       .sum()
-               * stack.getCount();
+            .values()
+            .stream()
+            .mapToInt(lv -> 1 << lv)
+            .sum()
+            * stack.getCount();
     }
 
     static void convert(ItemStack stack, int materialTier, int enchantmentPoints)
@@ -88,18 +88,18 @@ public interface IllusionContainer
         {
             int materialValue = nbt.getInt(MATERIAL_KEYS[i]);
             tooltip.add(SDTexts.TOOLTIP$CONTAINER$CONVERTED$VALUE.get(
-                    materialValue / GEAR_CONSUME,
-                    materialValue % GEAR_CONSUME,
-                    GEAR_CONSUME,
-                    AllItems.RANDOM_MATERIAL.get(i).getName()
+                materialValue / GEAR_CONSUME,
+                materialValue % GEAR_CONSUME,
+                GEAR_CONSUME,
+                AllItems.RANDOM_MATERIAL.get(i).getName()
             ).formatted(Formatting.DARK_AQUA));
         }
         int enchantmentValue = nbt.getInt(ENCHANTMENT_KEY);
         tooltip.add(SDTexts.TOOLTIP$CONTAINER$CONVERTED$VALUE.get(
-                enchantmentValue / ENCHANTMENT_CONSUME,
-                enchantmentValue % ENCHANTMENT_CONSUME,
-                ENCHANTMENT_CONSUME,
-                ConsumableItems.BOOK_OMNISCIENCE.getName()
+            enchantmentValue / ENCHANTMENT_CONSUME,
+            enchantmentValue % ENCHANTMENT_CONSUME,
+            ENCHANTMENT_CONSUME,
+            ConsumableItems.BOOK_OMNISCIENCE.getName()
         ).formatted(Formatting.DARK_PURPLE));
     }
 }

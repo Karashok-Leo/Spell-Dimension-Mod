@@ -63,9 +63,9 @@ public class FlickerBreastplateItem extends SingleEpicTrinketItem implements Dam
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
         tooltip.add(SDTexts.TOOLTIP$FLICKER_BREASTPLATE.get(
-                Math.round(INITIAL_DODGE_CHANCE * 100),
-                Math.round(DODGE_CHANCE_DECREMENT * 100),
-                Math.round(MIN_DODGE_CHANCE * 100)
+            Math.round(INITIAL_DODGE_CHANCE * 100),
+            Math.round(DODGE_CHANCE_DECREMENT * 100),
+            Math.round(MIN_DODGE_CHANCE * 100)
         ).formatted(Formatting.GOLD));
         super.appendTooltip(stack, world, tooltip, context);
     }

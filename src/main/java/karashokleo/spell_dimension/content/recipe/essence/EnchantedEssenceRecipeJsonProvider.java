@@ -9,11 +9,11 @@ import net.spell_power.api.SpellSchool;
 import org.jetbrains.annotations.Nullable;
 
 public record EnchantedEssenceRecipeJsonProvider(
-        Identifier recipeId,
-        int grade,
-        int threshold,
-        EquipmentSlot slot,
-        SpellSchool school
+    Identifier recipeId,
+    int grade,
+    int threshold,
+    EquipmentSlot slot,
+    SpellSchool school
 ) implements RecipeJsonProvider
 {
     @Override

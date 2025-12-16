@@ -20,7 +20,10 @@ public class DashResistanceEnchantment extends UnobtainableEnchantment
     public void onDash(PlayerEntity player, Vec3d vec3d)
     {
         int level = EnchantmentHelper.getEquipmentLevel(this, player);
-        if (level <= 0) return;
+        if (level <= 0)
+        {
+            return;
+        }
         level = Math.min(level, getMaxLevel());
         player.addStatusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 20, level - 1));
     }

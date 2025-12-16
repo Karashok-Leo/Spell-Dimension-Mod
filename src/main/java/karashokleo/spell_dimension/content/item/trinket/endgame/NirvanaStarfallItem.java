@@ -42,10 +42,14 @@ public class NirvanaStarfallItem extends SingleEpicTrinketItem implements Damage
     public boolean allowDeath(ItemStack stack, LivingEntity entity, DamageSource source, float amount)
     {
         if (source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY))
+        {
             return true;
+        }
 
         if (SpellPower.getSpellPower(SpellSchools.FIRE, entity).baseValue() < SPELL_POWER_THRESHOLD)
+        {
             return true;
+        }
 
         StatusEffectInstance effect = entity.getStatusEffect(AllStatusEffects.NIRVANA);
         int level = effect == null ? 0 : effect.getAmplifier() + 1;
@@ -64,8 +68,8 @@ public class NirvanaStarfallItem extends SingleEpicTrinketItem implements Damage
         entity.setHealth(entity.getMaxHealth());
         entity.getWorld().playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.ITEM_TOTEM_USE, entity.getSoundCategory(), 1.0F, 1.0F);
         EffectUtil.streamEffects(entity, StatusEffectCategory.HARMFUL)
-                .toList()
-                .forEach(entity::removeStatusEffect);
+            .toList()
+            .forEach(entity::removeStatusEffect);
 
         return false;
     }
@@ -74,8 +78,8 @@ public class NirvanaStarfallItem extends SingleEpicTrinketItem implements Damage
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
         tooltip.add(SDTexts.TOOLTIP$NIRVANA_STARFALL$DEFRAUDING_REAPER.get(
-                SPELL_POWER_THRESHOLD,
-                DURATION / 20
+            SPELL_POWER_THRESHOLD,
+            DURATION / 20
         ).formatted(Formatting.DARK_RED));
         tooltip.add(SDTexts.TOOLTIP$NIRVANA_STARFALL$NIRVANA_REBIRTH.get().formatted(Formatting.DARK_RED));
         super.appendTooltip(stack, world, tooltip, context);

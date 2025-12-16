@@ -81,7 +81,7 @@ public class ChanelIntervalSpellTrait extends SpellTrait
             World world = mob.getWorld();
 
             float progress = data.castLength <= 0 ?
-                    1.0f : (float) (Math.max(world.getTime() - data.startedAt, 0)) / data.castLength;
+                1.0f : (float) (Math.max(world.getTime() - data.startedAt, 0)) / data.castLength;
 
             ImpactUtil.performSpell(world, mob, spellId, List.of(target), SpellCast.Action.CHANNEL, progress);
 
@@ -102,9 +102,13 @@ public class ChanelIntervalSpellTrait extends SpellTrait
     {
         LivingEntity target = mob.getTarget();
         if (target == null || target.isDead())
+        {
             return;
+        }
         if (ReflectTrinket.canReflect(target, this))
+        {
             return;
+        }
 
         SpellCast.Duration details = SpellHelper.getCastTimeDetails(mob, this.getSpell());
 
@@ -128,7 +132,10 @@ public class ChanelIntervalSpellTrait extends SpellTrait
 
     protected void updateBeam(MobEntity entity, boolean beaming, @Nullable LivingEntity target)
     {
-        if (!(entity instanceof BeamProvider beamProvider)) return;
+        if (!(entity instanceof BeamProvider beamProvider))
+        {
+            return;
+        }
         if (beaming && beamProvider.getBeam() == null)
         {
             var spell = SpellRegistry.getSpell(spellId);
@@ -150,9 +157,9 @@ public class ChanelIntervalSpellTrait extends SpellTrait
     public void addDetail(List<Text> list)
     {
         list.add(
-                SDTexts.TEXT$SPELL_TRAIT$INTERVAL.get(
-                        mapLevel(lv -> Text.literal(interval.applyAsInt(lv) / 20d + "").formatted(Formatting.AQUA))
-                ).formatted(Formatting.GRAY)
+            SDTexts.TEXT$SPELL_TRAIT$INTERVAL.get(
+                mapLevel(lv -> Text.literal(interval.applyAsInt(lv) / 20d + "").formatted(Formatting.AQUA))
+            ).formatted(Formatting.GRAY)
         );
         super.addDetail(list);
     }

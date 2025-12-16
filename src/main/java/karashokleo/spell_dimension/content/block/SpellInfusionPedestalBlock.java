@@ -29,12 +29,12 @@ public class SpellInfusionPedestalBlock extends AbstractInfusionBlock
     public SpellInfusionPedestalBlock()
     {
         super(
-                FabricBlockSettings.create()
-                        .mapColor(MapColor.BLACK)
-                        .instrument(Instrument.BASEDRUM)
-                        .strength(5.0f, 1200.0f)
-                        .requiresTool()
-                        .nonOpaque()
+            FabricBlockSettings.create()
+                .mapColor(MapColor.BLACK)
+                .instrument(Instrument.BASEDRUM)
+                .strength(5.0f, 1200.0f)
+                .requiresTool()
+                .nonOpaque()
         );
     }
 
@@ -48,16 +48,16 @@ public class SpellInfusionPedestalBlock extends AbstractInfusionBlock
     public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type)
     {
         return world.isClient() ?
-                checkType(
-                        type,
-                        AllBlocks.SPELL_INFUSION_PEDESTAL_TILE,
-                        SpellInfusionPedestalTile::clientTick
-                ) :
-                checkType(
-                        type,
-                        AllBlocks.SPELL_INFUSION_PEDESTAL_TILE,
-                        SpellInfusionPedestalTile::serverTick
-                );
+            checkType(
+                type,
+                AllBlocks.SPELL_INFUSION_PEDESTAL_TILE,
+                SpellInfusionPedestalTile::clientTick
+            ) :
+            checkType(
+                type,
+                AllBlocks.SPELL_INFUSION_PEDESTAL_TILE,
+                SpellInfusionPedestalTile::serverTick
+            );
 //        return checkType(
 //                type,
 //                AllBlocks.SPELL_INFUSION_PEDESTAL_TILE,

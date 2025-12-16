@@ -35,49 +35,53 @@ public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
      * Cancels water submersion effects when clipping.
      */
     @Inject(
-            method = "updateWaterSubmersionState",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/client/network/AbstractClientPlayerEntity;updateWaterSubmersionState()Z",
-                    shift = At.Shift.AFTER
-            ),
-            cancellable = true
+        method = "updateWaterSubmersionState",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/network/AbstractClientPlayerEntity;updateWaterSubmersionState()Z",
+            shift = At.Shift.AFTER
+        ),
+        cancellable = true
     )
     private void onUpdateWaterSubmersionState(CallbackInfoReturnable<Boolean> cir)
     {
         if (NoClip.noClip(this))
+        {
             cir.setReturnValue(this.isSubmergedInWater);
+        }
     }
 
     /**
      * Prevents the player from having their sprinting stopped when clipping through water.
      */
     @Inject(
-            method = "tickMovement",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/client/network/ClientPlayerEntity;setSprinting(Z)V",
-                    ordinal = 3,
-                    shift = At.Shift.AFTER
-            )
+        method = "tickMovement",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/network/ClientPlayerEntity;setSprinting(Z)V",
+            ordinal = 3,
+            shift = At.Shift.AFTER
+        )
     )
     private void preventStopSprinting(CallbackInfo ci)
     {
         if (NoClip.noClip(this) && this.input.hasForwardMovement())
+        {
             this.setSprinting(true);
+        }
     }
 
     /**
      * Fixes underwater vision when clipping to be that of spectator's.
      */
     @ModifyArg(
-            method = "tickMovement",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/util/math/MathHelper;clamp(III)I",
-                    ordinal = 0
-            ),
-            index = 0
+        method = "tickMovement",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/util/math/MathHelper;clamp(III)I",
+            ordinal = 0
+        ),
+        index = 0
     )
     private int fixUnderwaterVision(int perTick)
     {

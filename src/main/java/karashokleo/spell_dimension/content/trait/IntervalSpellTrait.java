@@ -58,17 +58,20 @@ public class IntervalSpellTrait extends SpellTrait
         if (ReflectTrinket.canReflect(target, this))
         {
             List<LivingEntity> targets = target.getWorld().getEntitiesByClass(
-                    LivingEntity.class,
-                    target.getBoundingBox().expand(radius),
-                    e -> e != mob &&
-                         e.distanceTo(mob) < radius &&
-                         !ReflectTrinket.canReflect(e, this)
+                LivingEntity.class,
+                target.getBoundingBox().expand(radius),
+                e -> e != mob &&
+                    e.distanceTo(mob) < radius &&
+                    !ReflectTrinket.canReflect(e, this)
             );
             if (!targets.isEmpty())
             {
                 this.action(mob, level, data, targets.get(0));
             }
-        } else this.action(mob, level, data, target);
+        } else
+        {
+            this.action(mob, level, data, target);
+        }
     }
 
     public void action(MobEntity mob, int level, Data data, LivingEntity target)
@@ -81,9 +84,9 @@ public class IntervalSpellTrait extends SpellTrait
     public void addDetail(List<Text> list)
     {
         list.add(
-                SDTexts.TEXT$SPELL_TRAIT$INTERVAL.get(
-                        mapLevel(lv -> Text.literal(interval.applyAsInt(lv) / 20d + "").formatted(Formatting.AQUA))
-                ).formatted(Formatting.GRAY)
+            SDTexts.TEXT$SPELL_TRAIT$INTERVAL.get(
+                mapLevel(lv -> Text.literal(interval.applyAsInt(lv) / 20d + "").formatted(Formatting.AQUA))
+            ).formatted(Formatting.GRAY)
         );
         super.addDetail(list);
     }

@@ -31,7 +31,10 @@ public class EnlighteningComponent implements Component
             for (int i = 0; i < list.size(); i++)
             {
                 EnlighteningModifier modifier = EnlighteningModifier.fromNbt(list.getCompound(i));
-                if (modifier != null) this.modifiers.add(modifier);
+                if (modifier != null)
+                {
+                    this.modifiers.add(modifier);
+                }
             }
         }
     }
@@ -41,7 +44,9 @@ public class EnlighteningComponent implements Component
     {
         NbtList list = new NbtList();
         for (EnlighteningModifier modifier : this.modifiers)
+        {
             list.add(modifier.toNbt());
+        }
         tag.put(EnlighteningModifier.NBT_KEY, list);
     }
 

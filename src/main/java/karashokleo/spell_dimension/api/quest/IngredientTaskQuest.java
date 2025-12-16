@@ -22,10 +22,16 @@ public interface IngredientTaskQuest extends Quest
     {
         List<Ingredient> tasks = new ArrayList<>(this.getTasks());
         for (var list : ((PlayerInventoryAccessor) player.getInventory()).getCombinedInventory())
+        {
             for (ItemStack stack : list)
+            {
                 tasks.removeIf(goal -> goal.test(stack));
+            }
+        }
         for (EntitySlotAccess access : TrinketCompat.getItemAccess(player))
+        {
             tasks.removeIf(goal -> goal.test(access.get()));
+        }
         return tasks.isEmpty();
     }
 
@@ -38,7 +44,10 @@ public interface IngredientTaskQuest extends Quest
         {
             for (ItemStack stack : task.getMatchingStacks())
             {
-                if (capacity++ > 27) break;
+                if (capacity++ > 27)
+                {
+                    break;
+                }
                 stacks.add(stack);
             }
         }

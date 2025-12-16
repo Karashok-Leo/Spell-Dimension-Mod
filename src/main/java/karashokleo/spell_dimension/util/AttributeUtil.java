@@ -39,7 +39,10 @@ public class AttributeUtil
     public static void addTooltip(List<Text> tooltip, EntityAttribute attribute, double amount, EntityAttributeModifier.Operation operation)
     {
         MutableText text = getTooltip(attribute, amount, operation);
-        if (text != null) tooltip.add(text);
+        if (text != null)
+        {
+            tooltip.add(text);
+        }
     }
 
     @Nullable
@@ -51,8 +54,12 @@ public class AttributeUtil
         {
             return Text.translatable("attribute.modifier.plus." + operation.getId(), ItemStack.MODIFIER_FORMAT.format(e), Text.translatable(attribute.getTranslationKey())).formatted(Formatting.BLUE);
         } else if (amount < 0.0)
+        {
             return Text.translatable("attribute.modifier.take." + operation.getId(), ItemStack.MODIFIER_FORMAT.format(e * -1.0), Text.translatable(attribute.getTranslationKey())).formatted(Formatting.RED);
-        else return null;
+        } else
+        {
+            return null;
+        }
     }
 
     /**
@@ -69,7 +76,10 @@ public class AttributeUtil
     {
         EntityAttributeInstance instance = entity.getAttributeInstance(attribute);
         EntityAttributeModifier modifier = new EntityAttributeModifier(uuid, name, value, operation);
-        if (instance == null || instance.hasModifier(modifier)) return;
+        if (instance == null || instance.hasModifier(modifier))
+        {
+            return;
+        }
         instance.addPersistentModifier(modifier);
     }
 
@@ -84,6 +94,8 @@ public class AttributeUtil
     {
         EntityAttributeInstance instance = entity.getAttributeInstance(attribute);
         if (instance != null)
+        {
             instance.removeModifier(uuid);
+        }
     }
 }

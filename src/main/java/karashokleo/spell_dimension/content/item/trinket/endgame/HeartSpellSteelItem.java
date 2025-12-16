@@ -44,16 +44,26 @@ public class HeartSpellSteelItem extends SingleEpicTrinketItem implements Damage
     public void afterKilling(ItemStack stack, LivingEntity entity, LivingEntity killed, DamageSource source)
     {
         if (!source.isOf(SpellSchools.HEALING.damageType))
+        {
             return;
+        }
         if (entity.distanceTo(killed) >= MAX_DISTANCE)
+        {
             return;
+        }
         if (MobDifficulty.get(killed).map(MobDifficulty::getLevel).orElse(0) <= MIN_MOB_LEVEL)
+        {
             return;
+        }
         if (!(entity instanceof PlayerEntity player))
+        {
             return;
+        }
         ItemCooldownManager manager = player.getItemCooldownManager();
         if (manager.isCoolingDown(this))
+        {
             return;
+        }
         manager.set(this, COOLDOWN);
 
         NbtCompound nbt = stack.getOrCreateNbt();
@@ -68,13 +78,13 @@ public class HeartSpellSteelItem extends SingleEpicTrinketItem implements Damage
     {
         var modifiers = super.getModifiers(stack, slot, entity, uuid);
         modifiers.put(
-                EntityAttributes.GENERIC_MAX_HEALTH,
-                new EntityAttributeModifier(
-                        uuid,
-                        MODIFIER_NAME,
-                        stack.getOrCreateNbt().getDouble(KEY),
-                        EntityAttributeModifier.Operation.ADDITION
-                )
+            EntityAttributes.GENERIC_MAX_HEALTH,
+            new EntityAttributeModifier(
+                uuid,
+                MODIFIER_NAME,
+                stack.getOrCreateNbt().getDouble(KEY),
+                EntityAttributeModifier.Operation.ADDITION
+            )
         );
         return modifiers;
     }
@@ -83,17 +93,17 @@ public class HeartSpellSteelItem extends SingleEpicTrinketItem implements Damage
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
         tooltip.add(
-                SDTexts.TOOLTIP$HEART_SPELL_STEEL$USAGE.get(
-                        MAX_DISTANCE,
-                        MIN_MOB_LEVEL,
-                        "%.1f%%".formatted(ACCUMULATE_RATE * 100),
-                        COOLDOWN / 20
-                ).formatted(Formatting.DARK_PURPLE)
+            SDTexts.TOOLTIP$HEART_SPELL_STEEL$USAGE.get(
+                MAX_DISTANCE,
+                MIN_MOB_LEVEL,
+                "%.1f%%".formatted(ACCUMULATE_RATE * 100),
+                COOLDOWN / 20
+            ).formatted(Formatting.DARK_PURPLE)
         );
         tooltip.add(
-                SDTexts.TOOLTIP$HEART_SPELL_STEEL$ACCUMULATED.get(
-                        "%.1f".formatted(stack.getOrCreateNbt().getDouble(KEY))
-                ).formatted(Formatting.GOLD)
+            SDTexts.TOOLTIP$HEART_SPELL_STEEL$ACCUMULATED.get(
+                "%.1f".formatted(stack.getOrCreateNbt().getDouble(KEY))
+            ).formatted(Formatting.GOLD)
         );
     }
 }

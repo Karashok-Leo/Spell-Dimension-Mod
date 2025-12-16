@@ -21,13 +21,15 @@ public abstract class WraithEntityMixin extends HostileGraveyardEntity
     }
 
     @Inject(
-            method = "isInvulnerableTo",
-            at = @At("HEAD"),
-            cancellable = true
+        method = "isInvulnerableTo",
+        at = @At("HEAD"),
+        cancellable = true
     )
     private void inject_isInvulnerableTo(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir)
     {
         if (damageSource.isIn(LHTags.MAGIC))
+        {
             cir.setReturnValue(super.isInvulnerableTo(damageSource));
+        }
     }
 }

@@ -19,11 +19,11 @@ import java.util.List;
 public abstract class EnchantRandomlyLootFunctionMixin
 {
     @ModifyVariable(
-            method = "process",
-            at = @At(
-                    value = "STORE",
-                    ordinal = 0
-            )
+        method = "process",
+        at = @At(
+            value = "STORE",
+            ordinal = 0
+        )
     )
     private List<Enchantment> inject_process(List<Enchantment> original)
     {

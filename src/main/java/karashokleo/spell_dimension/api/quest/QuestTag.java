@@ -43,9 +43,9 @@ public class QuestTag
     public static MutableText getTagText(TagKey<Quest> tag)
     {
         return SDTexts.TOOLTIP$BRACKETS.get(
-                Text.translatable(getTagTranslationKey(tag))
+            Text.translatable(getTagTranslationKey(tag))
         ).formatted(
-                getTagFormatting(tag)
+            getTagFormatting(tag)
         );
     }
 }

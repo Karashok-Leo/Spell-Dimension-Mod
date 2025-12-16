@@ -16,59 +16,59 @@ public class SpellConfig
     public static final ElectrocutionConfig ELECTROCUTION_CONFIG = new ElectrocutionConfig(20, 3, 1.5F);
 
     public record BlazingMarkConfig(
-            int totalDuration,
-            int triggerDuration,
-            float maxDamageRatio,
-            float reDamageRatio
+        int totalDuration,
+        int triggerDuration,
+        float maxDamageRatio,
+        float reDamageRatio
     )
     {
     }
 
     public record ChainLightningConfig(
-            float damageFactor,
-            int lifespan,
-            int chainStep,
-            float range
+        float damageFactor,
+        int lifespan,
+        int chainStep,
+        float range
     )
     {
     }
 
     public record PowerPassiveConfig(
-            int surge,
-            int arclight
+        int surge,
+        int arclight
     )
     {
     }
 
     public record ChainLightningPassiveConfig(
-            int steadyCurrentLifespan,
-            int constantCurrentLifespan,
-            int fissionChainStep,
-            int resonanceRange
+        int steadyCurrentLifespan,
+        int constantCurrentLifespan,
+        int fissionChainStep,
+        int resonanceRange
     )
     {
     }
 
     public record BallLightningConfig(
-            float damageFactor,
-            int lifespan,
-            int lifespanIncrement
+        float damageFactor,
+        int lifespan,
+        int lifespanIncrement
     )
     {
     }
 
     public record RailgunConfig(
-            int length,
-            int radius,
-            float damageFactor
+        int length,
+        int radius,
+        float damageFactor
     )
     {
     }
 
     public record ElectrocutionConfig(
-            int maxDuration,
-            int maxStacks,
-            float damageFactor
+        int maxDuration,
+        int maxStacks,
+        float damageFactor
     )
     {
     }

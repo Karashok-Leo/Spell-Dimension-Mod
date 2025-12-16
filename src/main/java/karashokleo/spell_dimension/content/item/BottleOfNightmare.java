@@ -34,7 +34,7 @@ public class BottleOfNightmare extends DrinkableBottleItem
     {
         int difficulty = GameStageComponent.getDifficulty(player);
         MutableText text = SDTexts.TOOLTIP$DIFFICULTY_TIER$ENTER.get(
-                SDTexts.getDifficultyTierText(difficulty)
+            SDTexts.getDifficultyTierText(difficulty)
         );
         S2CTitle title = new S2CTitle(text);
         AllPackets.toClientPlayer(player, title);

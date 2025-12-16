@@ -49,39 +49,39 @@ public class CastEntry extends BaseEntryProvider
         context.page("cast");
         this.lang().add(context.pageTitle(), "Spell Casting");
         this.lang().add(context.pageText(),
+            """
+                Spell casting is the basic skill of a mage. Mage need to hold **spell casting items** in hand to cast spells. Common spell casting items are **staffs, swords and some other weapons**.
                 """
-                        Spell casting is the basic skill of a mage. Mage need to hold **spell casting items** in hand to cast spells. Common spell casting items are **staffs, swords and some other weapons**.
-                        """
         );
         this.lang("zh_cn").add(context.pageTitle(), "施法");
         this.lang("zh_cn").add(context.pageText(),
+            """
+                施法是魔法师的基本功。魔法师需要手持**施法物品**才能施法。常见的施法物品有**法杖、剑和一些其他武器**。魔法师能够施展哪些法术取决于他们的法术池。魔法师的法术池由他们手持的物品和装备的法术书决定。
                 """
-                        施法是魔法师的基本功。魔法师需要手持**施法物品**才能施法。常见的施法物品有**法杖、剑和一些其他武器**。魔法师能够施展哪些法术取决于他们的法术池。魔法师的法术池由他们手持的物品和装备的法术书决定。
-                        """
         );
 
         BookSpotlightPageModel cast = BookSpotlightPageModel
-                .builder()
-                .withTitle(context.pageTitle())
-                .withText(context.pageText())
-                .withItem(BookGenUtil.getIngredient(Weapons.entries.stream().map(entry -> entry.item().getDefaultStack())))
-                .build();
+            .builder()
+            .withTitle(context.pageTitle())
+            .withText(context.pageText())
+            .withItem(BookGenUtil.getIngredient(Weapons.entries.stream().map(entry -> entry.item().getDefaultStack())))
+            .build();
 
         context.page("pool");
         this.lang().add(context.pageText(),
+            """
+                Which spells a mage can cast depends on their spell pool. A mage's spell pool is determined by the item they are holding and the spell book they have equipped.
                 """
-                        Which spells a mage can cast depends on their spell pool. A mage's spell pool is determined by the item they are holding and the spell book they have equipped.
-                        """
         );
         this.lang("zh_cn").add(context.pageText(),
+            """
+                魔法师能够施展哪些法术取决于他们的法术池。魔法师的法术池由他们手持的物品和装备的法术书决定。
                 """
-                        魔法师能够施展哪些法术取决于他们的法术池。魔法师的法术池由他们手持的物品和装备的法术书决定。
-                        """
         );
         BookTextPageModel pool = BookTextPageModel
-                .builder()
-                .withText(context.pageText())
-                .build();
+            .builder()
+            .withText(context.pageText())
+            .build();
 
         return List.of(cast, pool);
     }

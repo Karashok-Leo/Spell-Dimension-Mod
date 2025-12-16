@@ -32,7 +32,10 @@ public class FutureTask<T>
         });
         GenericEvents.schedulePersistent(() ->
         {
-            if (this.done) consumer.accept(result);
+            if (this.done)
+            {
+                consumer.accept(result);
+            }
             return this.done;
         });
     }

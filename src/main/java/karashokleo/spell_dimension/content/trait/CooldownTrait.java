@@ -27,17 +27,26 @@ public abstract class CooldownTrait extends MobTrait
     public void serverTick(MobDifficulty difficulty, LivingEntity mob, int level)
     {
         var data = getData(difficulty);
-        if (data.cooldown <= 0) return;
+        if (data.cooldown <= 0)
+        {
+            return;
+        }
         data.cooldown--;
     }
 
     public void trigger(int level, LivingEntity entity, LivingEntity target)
     {
         var diff = MobDifficulty.get(entity);
-        if (diff.isEmpty()) return;
+        if (diff.isEmpty())
+        {
+            return;
+        }
         var cap = diff.get();
         var data = getData(cap);
-        if (data.cooldown > 0) return;
+        if (data.cooldown > 0)
+        {
+            return;
+        }
         action(level, data, cap.owner, target);
         data.cooldown = cooldown.applyAsInt(level);
     }
@@ -53,8 +62,8 @@ public abstract class CooldownTrait extends MobTrait
     public void addDetail(List<Text> list)
     {
         list.add(Text.translatable(getDescKey(),
-                        mapLevel(lv -> Text.literal(cooldown.applyAsInt(lv) / 20d + "").formatted(Formatting.AQUA)))
-                .formatted(Formatting.GRAY));
+                mapLevel(lv -> Text.literal(cooldown.applyAsInt(lv) / 20d + "").formatted(Formatting.AQUA)))
+            .formatted(Formatting.GRAY));
     }
 
     @SerialClass

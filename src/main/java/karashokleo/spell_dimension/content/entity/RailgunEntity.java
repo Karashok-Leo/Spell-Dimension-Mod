@@ -135,8 +135,8 @@ public class RailgunEntity extends ProjectileEntity
     {
         List<LivingEntity> hitEntities = new ArrayList<>();
         List<LivingEntity> entities = world.getNonSpectatingEntities(
-                LivingEntity.class,
-                new Box(from, to).expand(1, 1, 1)
+            LivingEntity.class,
+            new Box(from, to).expand(1, 1, 1)
         );
         for (LivingEntity entity : entities)
         {

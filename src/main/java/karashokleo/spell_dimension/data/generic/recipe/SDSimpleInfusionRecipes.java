@@ -39,11 +39,11 @@ public class SDSimpleInfusionRecipes
     public static void add(Consumer<RecipeJsonProvider> exporter, Item base, Item addition, ItemStack output)
     {
         new SimpleInfusionRecipeBuilder()
-                .withTableIngredient(Ingredient.ofItems(base))
-                .withPedestalItem(1, addition)
-                .withPedestalItem(1, Ingredient.fromTag(AllTags.ESSENCE.get(0)))
-                .copyNbt(false)
-                .offerTo(exporter, getRecipeId(output), output);
+            .withTableIngredient(Ingredient.ofItems(base))
+            .withPedestalItem(1, addition)
+            .withPedestalItem(1, Ingredient.fromTag(AllTags.ESSENCE.get(0)))
+            .copyNbt(false)
+            .offerTo(exporter, getRecipeId(output), output);
     }
 
     public static void add(Consumer<RecipeJsonProvider> exporter)
@@ -80,47 +80,47 @@ public class SDSimpleInfusionRecipes
 
         ItemStack stormyxShell = MythicItems.Mats.STORMYX_SHELL.getDefaultStack();
         new SimpleInfusionRecipeBuilder()
-                .withTableIngredient(Ingredient.ofItems(MythicBlocks.STORMYX.getStorageBlock().asItem()))
-                .withPedestalItem(2, AllItems.BASE_ESSENCES.get(SpellSchools.ARCANE).get(2))
-                .copyNbt(false)
-                .offerTo(exporter, getRecipeId(stormyxShell), stormyxShell);
+            .withTableIngredient(Ingredient.ofItems(MythicBlocks.STORMYX.getStorageBlock().asItem()))
+            .withPedestalItem(2, AllItems.BASE_ESSENCES.get(SpellSchools.ARCANE).get(2))
+            .copyNbt(false)
+            .offerTo(exporter, getRecipeId(stormyxShell), stormyxShell);
 
         ItemStack carmotStone = MythicItems.Mats.CARMOT_STONE.getDefaultStack();
         new SimpleInfusionRecipeBuilder()
-                .withTableIngredient(Ingredient.ofItems(MythicBlocks.CARMOT.getStorageBlock().asItem()))
-                .withPedestalItem(2, AllItems.BASE_ESSENCES.get(SpellSchools.FIRE).get(2))
-                .copyNbt(false)
-                .offerTo(exporter, getRecipeId(carmotStone), carmotStone);
+            .withTableIngredient(Ingredient.ofItems(MythicBlocks.CARMOT.getStorageBlock().asItem()))
+            .withPedestalItem(2, AllItems.BASE_ESSENCES.get(SpellSchools.FIRE).get(2))
+            .copyNbt(false)
+            .offerTo(exporter, getRecipeId(carmotStone), carmotStone);
 
         ItemStack aquariumPearl = MythicItems.Mats.AQUARIUM_PEARL.getDefaultStack();
         new SimpleInfusionRecipeBuilder()
-                .withTableIngredient(Ingredient.ofItems(MythicBlocks.AQUARIUM.getStorageBlock().asItem()))
-                .withPedestalItem(2, AllItems.BASE_ESSENCES.get(SpellSchools.FROST).get(2))
-                .copyNbt(false)
-                .offerTo(exporter, getRecipeId(aquariumPearl), aquariumPearl);
+            .withTableIngredient(Ingredient.ofItems(MythicBlocks.AQUARIUM.getStorageBlock().asItem()))
+            .withPedestalItem(2, AllItems.BASE_ESSENCES.get(SpellSchools.FROST).get(2))
+            .copyNbt(false)
+            .offerTo(exporter, getRecipeId(aquariumPearl), aquariumPearl);
 
         // Cursed Apple
         new SimpleInfusionRecipeBuilder()
-                .withTableIngredient(Ingredient.ofItems(Items.ENCHANTED_GOLDEN_APPLE))
-                .withPedestalItem(1, TrinketItems.CURSE_ENVY)
-                .withPedestalItem(1, TrinketItems.CURSE_GLUTTONY)
-                .withPedestalItem(1, TrinketItems.CURSE_GREED)
-                .withPedestalItem(1, TrinketItems.CURSE_LUST)
-                .withPedestalItem(1, TrinketItems.CURSE_PRIDE)
-                .withPedestalItem(1, TrinketItems.CURSE_SLOTH)
-                .withPedestalItem(1, TrinketItems.CURSE_WRATH)
-                .withPedestalItem(1, Ingredient.ofItems(ThingsItems.AGGLOMERATION, ThingsItems.EMPTY_AGGLOMERATION))
-                .copyNbt(false)
-                .offerTo(exporter, SpellDimension.modLoc("cursed_apple"), AllItems.CURED_APPLE.getDefaultStack());
+            .withTableIngredient(Ingredient.ofItems(Items.ENCHANTED_GOLDEN_APPLE))
+            .withPedestalItem(1, TrinketItems.CURSE_ENVY)
+            .withPedestalItem(1, TrinketItems.CURSE_GLUTTONY)
+            .withPedestalItem(1, TrinketItems.CURSE_GREED)
+            .withPedestalItem(1, TrinketItems.CURSE_LUST)
+            .withPedestalItem(1, TrinketItems.CURSE_PRIDE)
+            .withPedestalItem(1, TrinketItems.CURSE_SLOTH)
+            .withPedestalItem(1, TrinketItems.CURSE_WRATH)
+            .withPedestalItem(1, Ingredient.ofItems(ThingsItems.AGGLOMERATION, ThingsItems.EMPTY_AGGLOMERATION))
+            .copyNbt(false)
+            .offerTo(exporter, SpellDimension.modLoc("cursed_apple"), AllItems.CURED_APPLE.getDefaultStack());
 
         // Mirage Reflector
         new SimpleInfusionRecipeBuilder()
-                .withTableIngredient(Ingredient.ofItems(TrinketItems.ABRAHADABRA))
-                .withPedestalItem(1, ComplementItems.FORCE_FIELD)
-                .withPedestalItem(1, ComplementItems.ETERNIUM.ingot())
-                .withPedestalItem(1, MiscItems.HOSTILITY_ESSENCE)
-                .withPedestalItem(1, ItemInit.SOURCE_STONE)
-                .copyNbt(false)
-                .offerTo(exporter, SpellDimension.modLoc("mirage_reflector"), AllItems.MIRAGE_REFLECTOR.getDefaultStack());
+            .withTableIngredient(Ingredient.ofItems(TrinketItems.ABRAHADABRA))
+            .withPedestalItem(1, ComplementItems.FORCE_FIELD)
+            .withPedestalItem(1, ComplementItems.ETERNIUM.ingot())
+            .withPedestalItem(1, MiscItems.HOSTILITY_ESSENCE)
+            .withPedestalItem(1, ItemInit.SOURCE_STONE)
+            .copyNbt(false)
+            .offerTo(exporter, SpellDimension.modLoc("mirage_reflector"), AllItems.MIRAGE_REFLECTOR.getDefaultStack());
     }
 }

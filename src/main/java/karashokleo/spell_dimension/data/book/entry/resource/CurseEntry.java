@@ -49,39 +49,39 @@ public class CurseEntry extends BaseEntryProvider
         context.page("curse");
         this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
+            """
+                Wearing a curse can get you some special resources, but it will bring some negative effects.
+                \\
+                \\
+                For example, the **Curse of Envy** will give you a chance to drop mob traits when you kill an enemy, but it will raise your hostility level.
                 """
-                        Wearing a curse can get you some special resources, but it will bring some negative effects.
-                        \\
-                        \\
-                        For example, the **Curse of Envy** will give you a chance to drop mob traits when you kill an enemy, but it will raise your hostility level.
-                        """
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
+            """
+                佩戴诅咒可以获取一些特殊的资源，但会带来一些负面影响。
+                \\
+                \\
+                比如，**嫉妒诅咒**会让你在击杀敌人时有概率掉落词条，但会提高你的恶意等级。
                 """
-                        佩戴诅咒可以获取一些特殊的资源，但会带来一些负面影响。
-                        \\
-                        \\
-                        比如，**嫉妒诅咒**会让你在击杀敌人时有概率掉落词条，但会提高你的恶意等级。
-                        """
         );
 
         List<Item> curses = List.of(
-                TrinketItems.CURSE_ENVY,
-                TrinketItems.CURSE_PRIDE,
-                TrinketItems.CURSE_GLUTTONY,
-                TrinketItems.CURSE_GREED,
-                TrinketItems.CURSE_LUST,
-                TrinketItems.CURSE_SLOTH,
-                TrinketItems.CURSE_WRATH
+            TrinketItems.CURSE_ENVY,
+            TrinketItems.CURSE_PRIDE,
+            TrinketItems.CURSE_GLUTTONY,
+            TrinketItems.CURSE_GREED,
+            TrinketItems.CURSE_LUST,
+            TrinketItems.CURSE_SLOTH,
+            TrinketItems.CURSE_WRATH
         );
 
         BookSpotlightPageModel curse = BookSpotlightPageModel
-                .builder()
-                .withTitle(context.pageTitle())
-                .withText(context.pageText())
-                .withItem(BookGenUtil.getIngredient(curses.stream().map(Item::getDefaultStack)))
-                .build();
+            .builder()
+            .withTitle(context.pageTitle())
+            .withText(context.pageText())
+            .withItem(BookGenUtil.getIngredient(curses.stream().map(Item::getDefaultStack)))
+            .build();
 
         return List.of(curse);
     }

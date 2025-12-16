@@ -50,7 +50,9 @@ public class AtomicBreastplateItem extends SingleEpicTrinketItem implements Dama
     {
         // Blacklist
         if (EssenceLootConfig.BASE_CONFIG.blacklist().contains(event.getEntity().getType()))
+        {
             return;
+        }
         Upgrade.ENCHANTED.addProgress(stack, event.getAmount());
     }
 
@@ -64,7 +66,9 @@ public class AtomicBreastplateItem extends SingleEpicTrinketItem implements Dama
     public boolean onClicked(ItemStack stack, ItemStack otherStack, Slot slot, ClickType clickType, PlayerEntity player, StackReference cursorStackReference)
     {
         if (clickType == ClickType.RIGHT && slot.canTakePartial(player))
+        {
             for (Upgrade upgrade : Upgrade.values())
+            {
                 if (upgrade.getProgressRate(stack) >= 1 &&
                     otherStack.isOf(upgrade.ingredientSupplier.get()))
                 {
@@ -73,6 +77,8 @@ public class AtomicBreastplateItem extends SingleEpicTrinketItem implements Dama
                     SoundUtil.playSound(player, SoundUtil.ANVIL);
                     return true;
                 }
+            }
+        }
         return false;
     }
 
@@ -81,12 +87,12 @@ public class AtomicBreastplateItem extends SingleEpicTrinketItem implements Dama
     {
         Multimap<EntityAttribute, EntityAttributeModifier> modifiers = super.getModifiers(stack, slot, entity, uuid);
         modifiers.put(
-                EntityAttributes.GENERIC_ARMOR,
-                new EntityAttributeModifier(uuid, "Atomic Breastplate Armor", ARMOR_ADDITION, EntityAttributeModifier.Operation.ADDITION)
+            EntityAttributes.GENERIC_ARMOR,
+            new EntityAttributeModifier(uuid, "Atomic Breastplate Armor", ARMOR_ADDITION, EntityAttributeModifier.Operation.ADDITION)
         );
         modifiers.put(
-                EntityAttributes.GENERIC_ARMOR_TOUGHNESS,
-                new EntityAttributeModifier(uuid, "Atomic Breastplate Armor Toughness", ARMOR_TOUGHNESS_ADDITION, EntityAttributeModifier.Operation.ADDITION)
+            EntityAttributes.GENERIC_ARMOR_TOUGHNESS,
+            new EntityAttributeModifier(uuid, "Atomic Breastplate Armor Toughness", ARMOR_TOUGHNESS_ADDITION, EntityAttributeModifier.Operation.ADDITION)
         );
         return modifiers;
     }
@@ -95,43 +101,45 @@ public class AtomicBreastplateItem extends SingleEpicTrinketItem implements Dama
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
         for (Upgrade upgrade : Upgrade.values())
+        {
             upgrade.appendTooltip(tooltip, stack);
+        }
         super.appendTooltip(stack, world, tooltip, context);
     }
 
     public enum Upgrade
     {
         ENCHANTED(
-                AllItems.ENCHANTED_BREASTPLATE::getDefaultStack,
-                () -> Items.NETHERITE_BLOCK,
-                "EnchantedProgress",
-                100000,
-                Formatting.DARK_PURPLE,
-                SDTexts.TOOLTIP$ATOMIC_TO_ENCHANTED
+            AllItems.ENCHANTED_BREASTPLATE::getDefaultStack,
+            () -> Items.NETHERITE_BLOCK,
+            "EnchantedProgress",
+            100000,
+            Formatting.DARK_PURPLE,
+            SDTexts.TOOLTIP$ATOMIC_TO_ENCHANTED
         ),
         FLEX(
-                AllItems.FLEX_BREASTPLATE::getDefaultStack,
-                () -> ModItems.HEART_OF_THE_END,
-                "FlexProgress",
-                1000,
-                Formatting.DARK_RED,
-                SDTexts.TOOLTIP$ATOMIC_TO_FLEX
+            AllItems.FLEX_BREASTPLATE::getDefaultStack,
+            () -> ModItems.HEART_OF_THE_END,
+            "FlexProgress",
+            1000,
+            Formatting.DARK_RED,
+            SDTexts.TOOLTIP$ATOMIC_TO_FLEX
         ),
         FLICKER(
-                AllItems.FLICKER_BREASTPLATE::getDefaultStack,
-                () -> ComplementItems.CAPTURED_BULLET,
-                "FlickerProgress",
-                100,
-                Formatting.GOLD,
-                SDTexts.TOOLTIP$ATOMIC_TO_FLICKER
+            AllItems.FLICKER_BREASTPLATE::getDefaultStack,
+            () -> ComplementItems.CAPTURED_BULLET,
+            "FlickerProgress",
+            100,
+            Formatting.GOLD,
+            SDTexts.TOOLTIP$ATOMIC_TO_FLICKER
         ),
         OBLIVION(
-                AllItems.OBLIVION_BREASTPLATE::getDefaultStack,
-                () -> Registries.ITEM.get(new Identifier("bosses_of_mass_destruction:brimstone_nectar")),
-                "OblivionProgress",
-                1000,
-                Formatting.AQUA,
-                SDTexts.TOOLTIP$ATOMIC_TO_OBLIVION
+            AllItems.OBLIVION_BREASTPLATE::getDefaultStack,
+            () -> Registries.ITEM.get(new Identifier("bosses_of_mass_destruction:brimstone_nectar")),
+            "OblivionProgress",
+            1000,
+            Formatting.AQUA,
+            SDTexts.TOOLTIP$ATOMIC_TO_OBLIVION
         );
 
         public final Supplier<ItemStack> itemSupplier;
@@ -142,12 +150,12 @@ public class AtomicBreastplateItem extends SingleEpicTrinketItem implements Dama
         public final SDTexts tooltipText;
 
         Upgrade(
-                Supplier<ItemStack> itemSupplier,
-                Supplier<Item> ingredientSupplier,
-                String progressKey,
-                double maxProgress,
-                Formatting formatting,
-                SDTexts tooltipText
+            Supplier<ItemStack> itemSupplier,
+            Supplier<Item> ingredientSupplier,
+            String progressKey,
+            double maxProgress,
+            Formatting formatting,
+            SDTexts tooltipText
         )
         {
             this.itemSupplier = itemSupplier;
@@ -176,22 +184,24 @@ public class AtomicBreastplateItem extends SingleEpicTrinketItem implements Dama
         public void appendTooltip(List<Text> tooltip, ItemStack stack)
         {
             tooltip.add(
-                    this.tooltipText.get(
-                            this.maxProgress
-                    ).formatted(this.formatting)
+                this.tooltipText.get(
+                    this.maxProgress
+                ).formatted(this.formatting)
             );
             double progressRate = getProgressRate(stack);
             tooltip.add(
-                    SDTexts.TOOLTIP$ATOMIC_BREASTPLATE_PROGRESS.get(
-                            "%.1f%%".formatted(progressRate * 100)
-                    ).formatted(this.formatting)
+                SDTexts.TOOLTIP$ATOMIC_BREASTPLATE_PROGRESS.get(
+                    "%.1f%%".formatted(progressRate * 100)
+                ).formatted(this.formatting)
             );
             if (progressRate >= 1)
+            {
                 tooltip.add(
-                        SDTexts.TOOLTIP$ATOMIC_BREASTPLATE_UPGRADEABLE.get(
-                                this.ingredientSupplier.get().getName()
-                        ).formatted(Formatting.GREEN)
+                    SDTexts.TOOLTIP$ATOMIC_BREASTPLATE_UPGRADEABLE.get(
+                        this.ingredientSupplier.get().getName()
+                    ).formatted(Formatting.GREEN)
                 );
+            }
         }
     }
 }

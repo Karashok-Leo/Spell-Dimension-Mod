@@ -16,20 +16,20 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public record SpellPowerQuest(
-        double min,
-        Supplier<ItemStack> reward
+    double min,
+    Supplier<ItemStack> reward
 ) implements ItemRewardQuest
 {
     @Override
     public boolean completeTasks(ServerPlayerEntity player)
     {
         return SchoolUtil.SCHOOLS
-                .stream()
-                .anyMatch(school ->
-                        SpellPower
-                                .getSpellPower(school, player)
-                                .baseValue() >= min
-                );
+            .stream()
+            .anyMatch(school ->
+                SpellPower
+                    .getSpellPower(school, player)
+                    .baseValue() >= min
+            );
     }
 
     @Override
@@ -48,7 +48,7 @@ public record SpellPowerQuest(
     public @Nullable ItemStack getIcon()
     {
         return isIn(AllTags.CHALLENGE) ?
-                Armors.netherite_arcaneRobeSet.head.getDefaultStack() :
-                Armors.arcaneRobeSet.head.getDefaultStack();
+            Armors.netherite_arcaneRobeSet.head.getDefaultStack() :
+            Armors.arcaneRobeSet.head.getDefaultStack();
     }
 }

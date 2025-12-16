@@ -28,13 +28,16 @@ public abstract class StackClickEssenceItem extends SpellEssenceItem
     public boolean onStackClicked(ItemStack stack, Slot slot, ClickType clickType, PlayerEntity player)
     {
         if (clickType == ClickType.RIGHT &&
-                !player.getItemCooldownManager().isCoolingDown(stack.getItem()) &&
-                !slot.getStack().isEmpty() &&
-                applyEffect(stack, slot.getStack(), player))
+            !player.getItemCooldownManager().isCoolingDown(stack.getItem()) &&
+            !slot.getStack().isEmpty() &&
+            applyEffect(stack, slot.getStack(), player))
         {
             success(stack, player);
             return true;
-        } else return false;
+        } else
+        {
+            return false;
+        }
     }
 
     @Override

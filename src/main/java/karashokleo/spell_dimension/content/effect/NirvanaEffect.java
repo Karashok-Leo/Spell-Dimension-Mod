@@ -16,25 +16,25 @@ public class NirvanaEffect extends StatusEffect
     public static String getDesc(boolean en)
     {
         return (en ?
-                "Fire spell power and max health reduced to %s%% of original and stays on fire." :
-                "火焰法术强度和最大生命值降低至原来的%s%%，并持续着火")
-                .formatted(Math.round(NIRVANA_FACTOR * 100));
+            "Fire spell power and max health reduced to %s%% of original and stays on fire." :
+            "火焰法术强度和最大生命值降低至原来的%s%%，并持续着火")
+            .formatted(Math.round(NIRVANA_FACTOR * 100));
     }
 
     public NirvanaEffect()
     {
         super(StatusEffectCategory.NEUTRAL, 0xFF0000);
         addAttributeModifier(
-                EntityAttributes.GENERIC_MAX_HEALTH,
-                UUID,
-                NIRVANA_FACTOR - 1,
-                EntityAttributeModifier.Operation.MULTIPLY_TOTAL
+            EntityAttributes.GENERIC_MAX_HEALTH,
+            UUID,
+            NIRVANA_FACTOR - 1,
+            EntityAttributeModifier.Operation.MULTIPLY_TOTAL
         );
         addAttributeModifier(
-                SpellSchools.FIRE.attribute,
-                UUID,
-                NIRVANA_FACTOR - 1,
-                EntityAttributeModifier.Operation.MULTIPLY_TOTAL
+            SpellSchools.FIRE.attribute,
+            UUID,
+            NIRVANA_FACTOR - 1,
+            EntityAttributeModifier.Operation.MULTIPLY_TOTAL
         );
     }
 
@@ -55,6 +55,8 @@ public class NirvanaEffect extends StatusEffect
     {
         entity.setFrozenTicks(0);
         if (entity.getFireTicks() < FIRE_TICKS)
+        {
             entity.setFireTicks(FIRE_TICKS);
+        }
     }
 }

@@ -35,7 +35,7 @@ public abstract class SpellBladeAmplifyEnchantment extends Enchantment
     protected boolean canAccept(Enchantment other)
     {
         return !(other instanceof SpellBladeAmplifyEnchantment)
-               && super.canAccept(other);
+            && super.canAccept(other);
     }
 
     public abstract void operateModifiers(ItemStack stack, Multimap<EntityAttribute, EntityAttributeModifier> modifiers);

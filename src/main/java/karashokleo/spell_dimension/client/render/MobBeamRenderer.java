@@ -30,12 +30,21 @@ public class MobBeamRenderer<T extends MobEntity, M extends EntityModel<T>> exte
     public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, T entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch)
     {
         if (entity.isDead() ||
-            !(entity instanceof BeamProvider caster)) return;
+            !(entity instanceof BeamProvider caster))
+        {
+            return;
+        }
         var beamAppearance = caster.getBeam();
-        if (beamAppearance == null) return;
+        if (beamAppearance == null)
+        {
+            return;
+        }
 
         LivingEntity target = caster.getBeamTarget();
-        if (target == null) return;
+        if (target == null)
+        {
+            return;
+        }
 
         matrices.push();
 
@@ -59,15 +68,15 @@ public class MobBeamRenderer<T extends MobEntity, M extends EntityModel<T>> exte
         float yaw = MathHelper.lerp(tickDelta, entity.prevBodyYaw, entity.getBodyYaw());
 
         renderBeamFromMob(
-                matrices,
-                vertexConsumers,
-                beamAppearance,
-                180 - pitchOffset,
-                90 + yawOffset - yaw,
-                beamPosition.length(),
-                offset,
-                entity.getWorld().getTime(),
-                tickDelta
+            matrices,
+            vertexConsumers,
+            beamAppearance,
+            180 - pitchOffset,
+            90 + yawOffset - yaw,
+            beamPosition.length(),
+            offset,
+            entity.getWorld().getTime(),
+            tickDelta
         );
         ((BeamEmitterEntity) entity).setLastRenderedBeam(new Beam.Rendered(beamPosition, beamAppearance));
 
@@ -76,15 +85,15 @@ public class MobBeamRenderer<T extends MobEntity, M extends EntityModel<T>> exte
 
 
     private static void renderBeamFromMob(
-            MatrixStack matrixStack,
-            VertexConsumerProvider vertexConsumerProvider,
-            Spell.Release.Target.Beam beam,
-            float pitchOffset,
-            float yawOffset,
-            float length,
-            Vec3d offset,
-            long time,
-            float tickDelta
+        MatrixStack matrixStack,
+        VertexConsumerProvider vertexConsumerProvider,
+        Spell.Release.Target.Beam beam,
+        float pitchOffset,
+        float yawOffset,
+        float length,
+        Vec3d offset,
+        long time,
+        float tickDelta
     )
     {
         var absoluteTime = (float) Math.floorMod(time, 40) + tickDelta;
@@ -110,9 +119,9 @@ public class MobBeamRenderer<T extends MobEntity, M extends EntityModel<T>> exte
         var alpha = color & 255;
 
         BeamRenderer.renderBeam(matrixStack, vertexConsumerProvider,
-                texture, time, tickDelta, beam.flow, true,
-                (int) red, (int) green, (int) blue, (int) alpha,
-                0, length, beam.width);
+            texture, time, tickDelta, beam.flow, true,
+            (int) red, (int) green, (int) blue, (int) alpha,
+            0, length, beam.width);
 
         matrixStack.pop();
     }

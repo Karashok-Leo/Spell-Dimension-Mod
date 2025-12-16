@@ -15,10 +15,10 @@ public enum LocationType
         return switch (this)
         {
             case STRUCTURE -> Text.translatable(
-                    id.toTranslationKey("structure").replace('/', '.')
+                id.toTranslationKey("structure").replace('/', '.')
             );
             case BIOME -> Text.translatable(
-                    id.toTranslationKey("biome").replace('/', '.')
+                id.toTranslationKey("biome").replace('/', '.')
             );
         };
     }

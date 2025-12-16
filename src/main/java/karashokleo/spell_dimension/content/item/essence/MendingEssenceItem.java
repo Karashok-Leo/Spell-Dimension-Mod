@@ -27,12 +27,16 @@ public class MendingEssenceItem extends StackClickEssenceItem
         NbtCompound nbt = target.getNbt();
         if (nbt != null &&
             (target.isDamageable() ||
-             target.getRepairCost() > 0))
+                target.getRepairCost() > 0))
         {
             if (nbt.contains("Damage"))
+            {
                 target.setDamage(0);
+            }
             if (nbt.contains("RepairCost"))
+            {
                 target.setRepairCost(0);
+            }
             return true;
         }
         return false;

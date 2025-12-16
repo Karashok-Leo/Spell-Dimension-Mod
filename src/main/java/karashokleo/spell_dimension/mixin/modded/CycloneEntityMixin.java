@@ -30,11 +30,11 @@ public abstract class CycloneEntityMixin extends Entity implements Ownable
 {
     @Unique
     private static final Set<Identifier> FOLLOW_SPELLS = Sets.newHashSet(
-            AllSpells.INFERNO,
-            AllSpells.MAELSTROM,
-            AllSpells.TEMPEST,
-            new Identifier("spellbladenext:whirlwind"),
-            new Identifier("spellbladenext:reckoning")
+        AllSpells.INFERNO,
+        AllSpells.MAELSTROM,
+        AllSpells.TEMPEST,
+        new Identifier("spellbladenext:whirlwind"),
+        new Identifier("spellbladenext:reckoning")
     );
 
     @Shadow(remap = false)
@@ -93,14 +93,14 @@ public abstract class CycloneEntityMixin extends Entity implements Ownable
                 }
 
                 this.setVelocity(
-                        this.getVelocity()
-                                .multiply(0.95)
-                                .add(
-                                        this.target.getPos()
-                                                .subtract(this.getPos())
-                                                .normalize()
-                                                .multiply(0.05)
-                                )
+                    this.getVelocity()
+                        .multiply(0.95)
+                        .add(
+                            this.target.getPos()
+                                .subtract(this.getPos())
+                                .normalize()
+                                .multiply(0.05)
+                        )
                 );
             }
         } else
@@ -128,13 +128,13 @@ public abstract class CycloneEntityMixin extends Entity implements Ownable
             this.context != null)
         {
             List<LivingEntity> targets = this.getWorld()
-                    .getEntitiesByClass(
-                            LivingEntity.class,
-                            this.getBoundingBox(),
-                            e -> this.target == e ||
-                                 TargetHelper.actionAllowed(TargetHelper.TargetingMode.AREA, TargetHelper.Intent.HARMFUL, livingOwner, e)
+                .getEntitiesByClass(
+                    LivingEntity.class,
+                    this.getBoundingBox(),
+                    e -> this.target == e ||
+                        TargetHelper.actionAllowed(TargetHelper.TargetingMode.AREA, TargetHelper.Intent.HARMFUL, livingOwner, e)
 
-                    );
+                );
             Identifier spellId = new Identifier(Spellblades.MOD_ID, "bladestorm");
             SpellInfo spell = new SpellInfo(SpellRegistry.getSpell(spellId), spellId);
             for (var livingTarget : targets)

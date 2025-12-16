@@ -18,21 +18,23 @@ import java.util.stream.Collectors;
 public class SchoolUtil
 {
     public static final List<SpellSchool> SCHOOLS = List.of(
-            SpellSchools.ARCANE,
-            SpellSchools.FIRE,
-            SpellSchools.FROST,
-            SpellSchools.HEALING,
-            SpellSchools.LIGHTNING,
-            SpellSchools.SOUL
+        SpellSchools.ARCANE,
+        SpellSchools.FIRE,
+        SpellSchools.FROST,
+        SpellSchools.HEALING,
+        SpellSchools.LIGHTNING,
+        SpellSchools.SOUL
     );
 
     public static List<SpellSchool> getLivingSchools(@Nullable LivingEntity entity)
     {
         if (entity == null)
+        {
             return SCHOOLS;
+        }
         Map<SpellSchool, Double> map = SCHOOLS.stream().collect(Collectors.toMap(
-                school -> school,
-                school -> SpellPower.getSpellPower(school, entity).baseValue()
+            school -> school,
+            school -> SpellPower.getSpellPower(school, entity).baseValue()
         ));
         Double max = Collections.max(map.values());
         return SCHOOLS.stream().filter(school -> map.get(school).equals(max)).toList();
@@ -41,18 +43,22 @@ public class SchoolUtil
     public static List<SpellSchool> getLivingSecondarySchools(@Nullable LivingEntity entity)
     {
         if (entity == null)
+        {
             return List.of();
+        }
         return TrinketCompat.getTrinketItems(entity, e -> e.getItem() instanceof SecondarySchoolItem)
-                .stream()
-                .map(e -> ((SecondarySchoolItem) e.getItem()).school)
-                .toList();
+            .stream()
+            .map(e -> ((SecondarySchoolItem) e.getItem()).school)
+            .toList();
     }
 
     public static double getEntitySpellPower(LivingEntity entity)
     {
         List<SpellSchool> schools = SchoolUtil.getLivingSchools(entity);
         if (!schools.isEmpty())
+        {
             return SpellPower.getSpellPower(schools.get(0), entity).baseValue();
+        }
         return 0;
     }
 
@@ -60,8 +66,12 @@ public class SchoolUtil
     public static SpellSchool getDamageSchool(DamageSource source)
     {
         for (SpellSchool school : SCHOOLS)
+        {
             if (source.isOf(school.damageType))
+            {
                 return school;
+            }
+        }
         return null;
     }
 
@@ -69,8 +79,12 @@ public class SchoolUtil
     public static SpellSchool getAttributeSchool(EntityAttribute attribute)
     {
         for (SpellSchool school : SCHOOLS)
+        {
             if (attribute == school.attribute)
+            {
                 return school;
+            }
+        }
         return null;
     }
 }

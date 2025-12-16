@@ -37,15 +37,19 @@ public class EnchantedBreastplateItem extends SingleEpicTrinketItem
         double armor = spellPower * ARMOR_RATIO;
         double armorToughness = spellPower * ARMOR_TOUGHNESS_RATIO;
         if (armor != 0)
+        {
             modifiers.put(
-                    EntityAttributes.GENERIC_ARMOR,
-                    new EntityAttributeModifier(uuid, "Enchanted Breastplate Armor", armor, EntityAttributeModifier.Operation.ADDITION)
+                EntityAttributes.GENERIC_ARMOR,
+                new EntityAttributeModifier(uuid, "Enchanted Breastplate Armor", armor, EntityAttributeModifier.Operation.ADDITION)
             );
+        }
         if (armorToughness != 0)
+        {
             modifiers.put(
-                    EntityAttributes.GENERIC_ARMOR_TOUGHNESS,
-                    new EntityAttributeModifier(uuid, "Enchanted Breastplate Armor Toughness", armorToughness, EntityAttributeModifier.Operation.ADDITION)
+                EntityAttributes.GENERIC_ARMOR_TOUGHNESS,
+                new EntityAttributeModifier(uuid, "Enchanted Breastplate Armor Toughness", armorToughness, EntityAttributeModifier.Operation.ADDITION)
             );
+        }
         return modifiers;
     }
 

@@ -8,19 +8,19 @@ import net.spell_engine.particle.ParticleHelper;
 public class PhaseParticleSpawner implements CustomParticleStatusEffect.Spawner
 {
     private static final ParticleBatch PARTICLE = new ParticleBatch(
-            "minecraft:enchant",
-            ParticleBatch.Shape.PIPE,
-            ParticleBatch.Origin.CENTER,
-            null,
-            0,
-            0,
-            4,
-            0.1F,
-            0.2F,
-            0,
-            0,
-            0,
-            false
+        "minecraft:enchant",
+        ParticleBatch.Shape.PIPE,
+        ParticleBatch.Origin.CENTER,
+        null,
+        0,
+        0,
+        4,
+        0.1F,
+        0.2F,
+        0,
+        0,
+        0,
+        false
     );
 
     @Override

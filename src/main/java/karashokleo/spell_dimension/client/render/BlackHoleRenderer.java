@@ -33,15 +33,15 @@ public class BlackHoleRenderer extends EntityRenderer<BlackHoleEntity>
     public static RenderLayer createRenderLayer()
     {
         return RenderLayer.of(
-                "black_hole",
-                VertexFormats.POSITION_COLOR_TEXTURE_OVERLAY_LIGHT_NORMAL,
-                VertexFormat.DrawMode.TRIANGLE_FAN, 256, true, true,
-                RenderLayer.MultiPhaseParameters.builder()
-                        .program(RenderPhase.ENTITY_TRANSLUCENT_PROGRAM)
-                        .texture(new RenderPhase.Texture(CORE, false, false))
-                        .transparency(RenderPhase.TRANSLUCENT_TRANSPARENCY)
-                        .depthTest(RenderPhase.ALWAYS_DEPTH_TEST)
-                        .build(false)
+            "black_hole",
+            VertexFormats.POSITION_COLOR_TEXTURE_OVERLAY_LIGHT_NORMAL,
+            VertexFormat.DrawMode.TRIANGLE_FAN, 256, true, true,
+            RenderLayer.MultiPhaseParameters.builder()
+                .program(RenderPhase.ENTITY_TRANSLUCENT_PROGRAM)
+                .texture(new RenderPhase.Texture(CORE, false, false))
+                .transparency(RenderPhase.TRANSLUCENT_TRANSPARENCY)
+                .depthTest(RenderPhase.ALWAYS_DEPTH_TEST)
+                .build(false)
         );
     }
 
@@ -99,24 +99,24 @@ public class BlackHoleRenderer extends EntityRenderer<BlackHoleEntity>
         Matrix3f normalMatrix = peek.getNormalMatrix();
 
         centerBuffer.vertex(positionMatrix, 0, 0, 0)
-                .color(255, 255, 255, alpha)
-                .texture(0.5f, 0.5f)
-                .overlay(OverlayTexture.DEFAULT_UV)
-                .light(LightmapTextureManager.MAX_LIGHT_COORDINATE)
-                .normal(normalMatrix, 0, 1, 0)
-                .next();
+            .color(255, 255, 255, alpha)
+            .texture(0.5f, 0.5f)
+            .overlay(OverlayTexture.DEFAULT_UV)
+            .light(LightmapTextureManager.MAX_LIGHT_COORDINATE)
+            .normal(normalMatrix, 0, 1, 0)
+            .next();
         for (int i = 0; i <= segments; i++)
         {
             float theta = 2.0f * MathHelper.PI * i / segments;
             float cos = MathHelper.cos(theta);
             float sin = MathHelper.sin(theta);
             centerBuffer.vertex(positionMatrix, 0, radius * cos, radius * sin)
-                    .color(255, 255, 255, alpha)
-                    .texture(0.5f + 0.5f * cos, 0.5f + 0.5f * sin)
-                    .overlay(OverlayTexture.DEFAULT_UV)
-                    .light(LightmapTextureManager.MAX_LIGHT_COORDINATE)
-                    .normal(normalMatrix, 0, 1, 0)
-                    .next();
+                .color(255, 255, 255, alpha)
+                .texture(0.5f + 0.5f * cos, 0.5f + 0.5f * sin)
+                .overlay(OverlayTexture.DEFAULT_UV)
+                .light(LightmapTextureManager.MAX_LIGHT_COORDINATE)
+                .normal(normalMatrix, 0, 1, 0)
+                .next();
         }
     }
 

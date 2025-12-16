@@ -10,14 +10,14 @@ public class SpellResistanceEnchantment extends UnobtainableEnchantment
     public SpellResistanceEnchantment()
     {
         super(
-                Rarity.RARE,
-                EnchantmentTarget.ARMOR,
-                new EquipmentSlot[]{
-                        EquipmentSlot.CHEST,
-                        EquipmentSlot.HEAD,
-                        EquipmentSlot.LEGS,
-                        EquipmentSlot.FEET
-                }
+            Rarity.RARE,
+            EnchantmentTarget.ARMOR,
+            new EquipmentSlot[]{
+                EquipmentSlot.CHEST,
+                EquipmentSlot.HEAD,
+                EquipmentSlot.LEGS,
+                EquipmentSlot.FEET
+            }
         );
     }
 

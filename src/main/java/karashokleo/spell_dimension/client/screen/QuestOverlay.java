@@ -27,7 +27,10 @@ public class QuestOverlay extends InfoSideBar<SideBar.IntSignature>
     protected List<Text> getText()
     {
         ClientPlayerEntity player = L2HostilityClient.getClientPlayer();
-        if (player == null) return List.of();
+        if (player == null)
+        {
+            return List.of();
+        }
         ItemStack stack = player.getMainHandStack();
         if (stack.getItem() instanceof QuestScrollItem scroll)
         {
@@ -58,9 +61,15 @@ public class QuestOverlay extends InfoSideBar<SideBar.IntSignature>
     @Override
     public boolean isScreenOn()
     {
-        if (L2HostilityClient.getClient().currentScreen != null) return false;
+        if (L2HostilityClient.getClient().currentScreen != null)
+        {
+            return false;
+        }
         ClientPlayerEntity player = L2HostilityClient.getClientPlayer();
-        if (player == null) return false;
+        if (player == null)
+        {
+            return false;
+        }
         return player.getMainHandStack().isOf(AllItems.QUEST_SCROLL);
     }
 }

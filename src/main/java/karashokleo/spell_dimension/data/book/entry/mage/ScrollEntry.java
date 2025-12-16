@@ -54,46 +54,46 @@ public class ScrollEntry extends BaseEntryProvider
         context.page("prev");
         this.lang().add(context.pageTitle(), "Spell Scroll");
         this.lang().add(context.pageText(),
+            """
+                There are a limited number of spells that you can learn through the Spell Binding Table. To learn to use more spells, you need to have Spell Scrolls.
+                \\
+                \\
+                Search for spell scrolls to see how to get them.
                 """
-                        There are a limited number of spells that you can learn through the Spell Binding Table. To learn to use more spells, you need to have Spell Scrolls.
-                        \\
-                        \\
-                        Search for spell scrolls to see how to get them.
-                        """
         );
         this.lang("zh_cn").add(context.pageTitle(), "法术卷轴");
         this.lang("zh_cn").add(context.pageText(),
+            """
+                通过法术绑定台能够学习到的法术有限。要想学习使用更多魔法，你需要拥有法术卷轴。
+                \\
+                \\
+                搜索法术卷轴以查阅其获取方式。
                 """
-                        通过法术绑定台能够学习到的法术有限。要想学习使用更多魔法，你需要拥有法术卷轴。
-                        \\
-                        \\
-                        搜索法术卷轴以查阅其获取方式。
-                        """
         );
 
         BookSpotlightPageModel prev = BookSpotlightPageModel
-                .builder()
-                .withTitle(context.pageTitle())
-                .withText(context.pageText())
-                .withItem(BookGenUtil.getNbtIngredient(STACK))
-                .build();
+            .builder()
+            .withTitle(context.pageTitle())
+            .withText(context.pageText())
+            .withItem(BookGenUtil.getNbtIngredient(STACK))
+            .build();
 
         context.page("next");
         this.lang().add(context.pageText(),
+            """
+                Spell Scrolls can be used directly to cast spells, or they can be freely bound or unbound to Spell Books. Spell Scrolls are usually obtained by infusing specific materials with magic.
                 """
-                        Spell Scrolls can be used directly to cast spells, or they can be freely bound or unbound to Spell Books. Spell Scrolls are usually obtained by infusing specific materials with magic.
-                        """
         );
         this.lang("zh_cn").add(context.pageText(),
+            """
+                法术卷轴可以直接用于施法，也可以自由地与法术书绑定或解绑。法术卷轴通常需要使用特定的材料进行魔力灌注获得。
                 """
-                        法术卷轴可以直接用于施法，也可以自由地与法术书绑定或解绑。法术卷轴通常需要使用特定的材料进行魔力灌注获得。
-                        """
         );
 
         BookTextPageModel next = BookTextPageModel
-                .builder()
-                .withText(context.pageText())
-                .build();
+            .builder()
+            .withText(context.pageText())
+            .build();
 
         return List.of(prev, next);
     }

@@ -23,9 +23,9 @@ public class DivineAuraEffect extends StatusEffect
     public static String getDesc(boolean en)
     {
         return (en ?
-                "Every %s second, applies Absorption effect to surrounding allies and deals %.1fx spell power damage to surrounding enemies. Range >=%d and <=%d, increases by 1 for every 100 spell power." :
-                "每隔%s秒，对周围友方施加伤害吸收效果，并对周围敌人造成%.1f倍法术强度的治愈法术伤害，范围>=%d且<=%d，每100法强增加1格。")
-                .formatted(INTERVAL / 20, SpellConfig.DIVINE_AURA_FACTOR, MIN_RADIUS, MAX_RADIUS);
+            "Every %s second, applies Absorption effect to surrounding allies and deals %.1fx spell power damage to surrounding enemies. Range >=%d and <=%d, increases by 1 for every 100 spell power." :
+            "每隔%s秒，对周围友方施加伤害吸收效果，并对周围敌人造成%.1f倍法术强度的治愈法术伤害，范围>=%d且<=%d，每100法强增加1格。")
+            .formatted(INTERVAL / 20, SpellConfig.DIVINE_AURA_FACTOR, MIN_RADIUS, MAX_RADIUS);
     }
 
     public static final int INTERVAL = 20;
@@ -44,12 +44,18 @@ public class DivineAuraEffect extends StatusEffect
     public void applyUpdateEffect(LivingEntity entity, int amplifier)
     {
         World world = entity.getWorld();
-        if (world.isClient()) return;
+        if (world.isClient())
+        {
+            return;
+        }
         int radius = getRadius(amplifier);
         List<LivingEntity> entities = world.getEntitiesByClass(LivingEntity.class, entity.getBoundingBox().expand(radius), EntityPredicates.VALID_LIVING_ENTITY);
         for (LivingEntity target : entities)
         {
-            if (target.distanceTo(entity) > radius) continue;
+            if (target.distanceTo(entity) > radius)
+            {
+                continue;
+            }
             if (RelationUtil.isAlly(entity, target))
             {
                 target.addStatusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 20, amplifier, false, false));

@@ -24,7 +24,9 @@ public class RandomUtil
     public static <T> T randomFromList(Random random, List<T> list)
     {
         if (list.isEmpty())
+        {
             throw new IllegalArgumentException("The list must not be empty.");
+        }
         int randomIndex = random.nextInt(list.size());
         return list.get(randomIndex);
     }
@@ -32,14 +34,18 @@ public class RandomUtil
     public static <T> T randomFromSet(Random random, Set<T> set)
     {
         if (set.isEmpty())
+        {
             throw new IllegalArgumentException("The set must not be empty.");
+        }
         return randomFromList(random, new ArrayList<>(set));
     }
 
     public static <T extends Enum<T>> T randomEnum(Random random, Class<T> enumClass)
     {
         if (!enumClass.isEnum())
+        {
             throw new IllegalArgumentException("The class must be an enum.");
+        }
         T[] enumValues = enumClass.getEnumConstants();
         int randomIndex = random.nextInt(enumValues.length);
         return enumValues[randomIndex];

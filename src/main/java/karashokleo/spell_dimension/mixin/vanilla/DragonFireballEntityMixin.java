@@ -24,21 +24,33 @@ public abstract class DragonFireballEntityMixin extends ExplosiveProjectileEntit
     }
 
     @Inject(
-            method = "onCollision",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/entity/projectile/DragonFireballEntity;discard()V"
-            )
+        method = "onCollision",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/entity/projectile/DragonFireballEntity;discard()V"
+        )
     )
     private void inject_onCollision(HitResult hitResult, CallbackInfo ci)
     {
         Entity owner = this.getOwner();
-        if (!(owner instanceof LivingEntity living)) return;
-        if (!living.isAlive()) return;
+        if (!(owner instanceof LivingEntity living))
+        {
+            return;
+        }
+        if (!living.isAlive())
+        {
+            return;
+        }
         var diff = MobDifficulty.get(living);
-        if (diff.isEmpty()) return;
+        if (diff.isEmpty())
+        {
+            return;
+        }
         int traitLevel = diff.get().getTraitLevel(AllTraits.BLACK_HOLE);
-        if (traitLevel <= 0) return;
+        if (traitLevel <= 0)
+        {
+            return;
+        }
         BlackHoleSpell.onEnderDragonCast(this, hitResult);
     }
 }

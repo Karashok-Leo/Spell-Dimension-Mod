@@ -30,8 +30,8 @@ public abstract class ParticleManagerMixin
     private static void addTypes(CallbackInfo ci)
     {
         PARTICLE_TEXTURE_SHEETS = ImmutableList.<ParticleTextureSheet>builder()
-                .addAll(PARTICLE_TEXTURE_SHEETS)
-                .add(ZapParticle.PARTICLE_EMISSIVE)
-                .build();
+            .addAll(PARTICLE_TEXTURE_SHEETS)
+            .add(ZapParticle.PARTICLE_EMISSIVE)
+            .build();
     }
 }

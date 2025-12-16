@@ -28,18 +28,18 @@ public class ConsciousnessBaseBlock extends Block
     public ConsciousnessBaseBlock()
     {
         super(
-                FabricBlockSettings.create()
-                        .mapColor(MapColor.BLUE)
-                        .instrument(Instrument.BASS)
-                        .sounds(BlockSoundGroup.WOOD)
-                        .strength(-1.0F, 3600000.0F)
-                        .dropsNothing()
-                        .allowsSpawning(Blocks::never)
+            FabricBlockSettings.create()
+                .mapColor(MapColor.BLUE)
+                .instrument(Instrument.BASS)
+                .sounds(BlockSoundGroup.WOOD)
+                .strength(-1.0F, 3600000.0F)
+                .dropsNothing()
+                .allowsSpawning(Blocks::never)
         );
         this.setDefaultState(
-                this.stateManager.getDefaultState()
-                        .with(TURNING, false)
-                        .with(TURNED, false)
+            this.stateManager.getDefaultState()
+                .with(TURNING, false)
+                .with(TURNED, false)
         );
     }
 
@@ -63,7 +63,9 @@ public class ConsciousnessBaseBlock extends Block
         {
             world.setBlockState(pos, state.with(TURNING, false));
             if (!state.get(TURNED))
+            {
                 world.setBlockState(pos, world.getBlockState(pos).with(TURNED, true));
+            }
 
             // TODO: play sound
             // TODO: spawn particles
@@ -75,7 +77,9 @@ public class ConsciousnessBaseBlock extends Block
     public void tryTurnSelf(BlockState state, World world, BlockPos pos)
     {
         if (!state.get(TURNING) && !state.get(TURNED))
+        {
             world.setBlockState(pos, state.with(TURNING, true));
+        }
         world.scheduleBlockTick(pos, state.getBlock(), 5);
     }
 
@@ -87,7 +91,9 @@ public class ConsciousnessBaseBlock extends Block
             BlockState otherState = world.getBlockState(otherPos);
             if (otherState.isOf(this) &&
                 state.get(TURNED))
+            {
                 this.tryTurnSelf(otherState, world, otherPos);
+            }
         }
 //        for (BlockPos otherPos : getSurroundingPoses(pos))
 //        {
@@ -103,13 +109,19 @@ public class ConsciousnessBaseBlock extends Block
         Set<BlockPos> poses = new HashSet<>();
         int radius = 1;
         for (int x = -radius; x <= radius; x++)
+        {
             for (int y = -radius; y <= radius; y++)
+            {
                 for (int z = -radius; z <= radius; z++)
                 {
                     if (x == 0 && y == 0 && z == 0)
+                    {
                         continue;
+                    }
                     poses.add(pos.add(x, y, z));
                 }
+            }
+        }
         return poses;
     }
 }

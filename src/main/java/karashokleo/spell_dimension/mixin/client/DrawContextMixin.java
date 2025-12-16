@@ -65,8 +65,8 @@ public abstract class DrawContextMixin
             } else if (stack.getItem() instanceof QuestScrollItem scroll)
             {
                 scroll.getQuest(stack)
-                        .map(Quest::getIcon)
-                        .ifPresent(itemStack -> drawItem(itemStack, x, y, seed, z + (itemStack.getItem() instanceof BlockItem ? 5 : 200)));
+                    .map(Quest::getIcon)
+                    .ifPresent(itemStack -> drawItem(itemStack, x, y, seed, z + (itemStack.getItem() instanceof BlockItem ? 5 : 200)));
             }
         }
     }

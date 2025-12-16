@@ -20,8 +20,14 @@ public class ClientAirHopHandler
     private static void onClientTick(MinecraftClient instance)
     {
         ClientPlayerEntity player = instance.player;
-        if (player == null || player.input == null) return;
-        if (jumpTicks > 0) jumpTicks--;
+        if (player == null || player.input == null)
+        {
+            return;
+        }
+        if (jumpTicks > 0)
+        {
+            jumpTicks--;
+        }
         handleCloudInABottleInput(player);
     }
 

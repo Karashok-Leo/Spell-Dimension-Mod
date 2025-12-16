@@ -53,69 +53,69 @@ public class SmithEntry extends BaseEntryProvider
         context.page("modifier");
         this.lang().add(context.pageTitle(), "Modifier");
         this.lang().add(context.pageText(),
+            """
+                Every tool and armor piece you obtain will have special modifiers, which provide additional stat bonuses and abilities.
                 """
-                        Every tool and armor piece you obtain will have special modifiers, which provide additional stat bonuses and abilities.
-                        """
         );
         this.lang("zh_cn").add(context.pageTitle(), "装备词条");
         this.lang("zh_cn").add(context.pageText(),
+            """
+                你获得的每件工具和盔甲都有特殊的词条，可以提供额外的属性加成。
                 """
-                        你获得的每件工具和盔甲都有特殊的词条，可以提供额外的属性加成。
-                        """
         );
 
         BookSpotlightPageModel modifier = BookSpotlightPageModel
-                .builder()
-                .withTitle(context.pageTitle())
-                .withText(context.pageText())
-                .withItem(Ingredient.ofItems(TABLE))
-                .build();
+            .builder()
+            .withTitle(context.pageTitle())
+            .withText(context.pageText())
+            .withItem(Ingredient.ofItems(TABLE))
+            .build();
 
         context.page("reforge");
         this.lang().add(context.pageTitle(), "Reforge");
         this.lang().add(context.pageText(),
+            """
+                You can use reforge scrolls to reforge your equipment on the reforge table, and the higher the level of reforge scrolls the higher the probability of getting better modifiers.
                 """
-                        You can use reforge scrolls to reforge your equipment on the reforge table, and the higher the level of reforge scrolls the higher the probability of getting better modifiers.
-                        """
         );
         this.lang("zh_cn").add(context.pageTitle(), "重铸");
         this.lang("zh_cn").add(context.pageText(),
+            """
+                你可以使用重铸卷轴在重铸台上重铸你的装备，越高级的重铸卷轴能获得较好词条的概率越高。
                 """
-                        你可以使用重铸卷轴在重铸台上重铸你的装备，越高级的重铸卷轴能获得较好词条的概率越高。
-                        """
         );
 
         BookSpotlightPageModel reforge = BookSpotlightPageModel
-                .builder()
-                .withTitle(context.pageTitle())
-                .withText(context.pageText())
-                .withItem(BookGenUtil.getIngredient(
-                        Identifier.of("equipment_standard", "reforge_scroll_lv1"),
-                        Identifier.of("equipment_standard", "reforge_scroll_lv2"),
-                        Identifier.of("equipment_standard", "reforge_scroll_lv3")
-                ))
-                .build();
+            .builder()
+            .withTitle(context.pageTitle())
+            .withText(context.pageText())
+            .withItem(BookGenUtil.getIngredient(
+                Identifier.of("equipment_standard", "reforge_scroll_lv1"),
+                Identifier.of("equipment_standard", "reforge_scroll_lv2"),
+                Identifier.of("equipment_standard", "reforge_scroll_lv3")
+            ))
+            .build();
 
         context.page("fusion");
         this.lang().add(context.pageTitle(), "Fusion Smithing");
         this.lang().add(context.pageText(),
+            """
+                Fusion Smithing Template allows you to transfer Enchantments, Enchanted Modifiers, etc. from one piece of equipment to another.
                 """
-                        Fusion Smithing Template allows you to transfer Enchantments, Enchanted Modifiers, etc. from one piece of equipment to another.
-                        """
         );
         this.lang("zh_cn").add(context.pageTitle(), "融锻");
         this.lang("zh_cn").add(context.pageText(),
+            """
+                融锻模板允许你将一件装备的附魔、束魔强化等转移到另一件装备上。
                 """
-                        融锻模板允许你将一件装备的附魔、束魔强化等转移到另一件装备上。
-                        """
         );
 
         BookSpotlightPageModel fusion = BookSpotlightPageModel
-                .builder()
-                .withTitle(context.pageTitle())
-                .withText(context.pageText())
-                .withItem(BookGenUtil.getIngredient(new Identifier("fusion-smithing:fusion_smithing_template")))
-                .build();
+            .builder()
+            .withTitle(context.pageTitle())
+            .withText(context.pageText())
+            .withItem(BookGenUtil.getIngredient(new Identifier("fusion-smithing:fusion_smithing_template")))
+            .build();
 
         return List.of(modifier, reforge, fusion);
     }

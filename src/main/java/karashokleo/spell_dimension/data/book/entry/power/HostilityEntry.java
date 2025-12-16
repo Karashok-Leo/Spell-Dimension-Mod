@@ -50,44 +50,44 @@ public class HostilityEntry extends BaseEntryProvider
         context.page("prev");
         this.lang().add(context.pageTitle(), "Lightland Hostility");
         this.lang().add(context.pageText(),
+            """
+                The game uses **L2 Hostility** to control the difficulty. Difficulty increases only when you kill strong enemies, and decreases when you die. Monsters are generated with special abilities called **'Trait'**.
                 """
-                        The game uses **L2 Hostility** to control the difficulty. Difficulty increases only when you kill strong enemies, and decreases when you die. Monsters are generated with special abilities called **'Trait'**.
-                        """
         );
         this.lang("zh_cn").add(context.pageTitle(), "莱特兰·恶意");
         this.lang("zh_cn").add(context.pageText(),
+            """
+                游戏采用**莱特兰·恶意**控制难度。只有在杀死强大怪物时才增加难度，死亡时降低难度。怪物生成时会带有特殊能力，称为 **"词条"**。
                 """
-                        游戏采用**莱特兰·恶意**控制难度。只有在杀死强大怪物时才增加难度，死亡时降低难度。怪物生成时会带有特殊能力，称为 **"词条"**。
-                        """
         );
 
         BookSpotlightPageModel prev = BookSpotlightPageModel
-                .builder()
-                .withTitle(context.pageTitle())
-                .withText(context.pageText())
-                .withItem(Ingredient.fromTag(LHTags.TRAIT_ITEM))
-                .build();
+            .builder()
+            .withTitle(context.pageTitle())
+            .withText(context.pageText())
+            .withItem(Ingredient.fromTag(LHTags.TRAIT_ITEM))
+            .build();
 
         context.page("next");
         this.lang().add(context.pageText(),
-                """
-                        The higher the level of the monster, the higher their attributes such as damage and health, and the more powerful the traits they possess. Each trait has a unique way of dealing with it.
-                        \\
-                        \\
-                        See the *L2Hostility Guide* for more details."""
+            """
+                The higher the level of the monster, the higher their attributes such as damage and health, and the more powerful the traits they possess. Each trait has a unique way of dealing with it.
+                \\
+                \\
+                See the *L2Hostility Guide* for more details."""
         );
         this.lang("zh_cn").add(context.pageText(),
-                """
-                        怪物的等级越高，它们的伤害与血量等属性也就越高，拥有的词条越强大。每一种词条都有独特的应对方法。
-                        \\
-                        \\
-                        更多详细信息见《莱特兰恶意教程》。"""
+            """
+                怪物的等级越高，它们的伤害与血量等属性也就越高，拥有的词条越强大。每一种词条都有独特的应对方法。
+                \\
+                \\
+                更多详细信息见《莱特兰恶意教程》。"""
         );
 
         BookTextPageModel next = BookTextPageModel
-                .builder()
-                .withText(context.pageText())
-                .build();
+            .builder()
+            .withText(context.pageText())
+            .build();
 
         return List.of(prev, next);
     }

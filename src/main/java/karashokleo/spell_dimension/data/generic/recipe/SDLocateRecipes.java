@@ -295,24 +295,24 @@ public class SDLocateRecipes
     public static void addStructureWithSuffix(Consumer<RecipeJsonProvider> exporter, Identifier structure, RegistryKey<World> world, Item item, String suffix)
     {
         exporter.accept(
-                new LocateStructureRecipeJsonProvider(
-                        SpellDimension.modLoc("locate/structure/%s/%s%s".formatted(structure.getNamespace(), structure.getPath(), suffix)),
-                        world.getValue(),
-                        Ingredient.ofItems(item),
-                        structure
-                )
+            new LocateStructureRecipeJsonProvider(
+                SpellDimension.modLoc("locate/structure/%s/%s%s".formatted(structure.getNamespace(), structure.getPath(), suffix)),
+                world.getValue(),
+                Ingredient.ofItems(item),
+                structure
+            )
         );
     }
 
     public static void addStructure(Consumer<RecipeJsonProvider> exporter, Identifier structure, Identifier world, Item item)
     {
         exporter.accept(
-                new LocateStructureRecipeJsonProvider(
-                        SpellDimension.modLoc("locate/structure/%s/%s".formatted(structure.getNamespace(), structure.getPath())),
-                        world,
-                        Ingredient.ofItems(item),
-                        structure
-                )
+            new LocateStructureRecipeJsonProvider(
+                SpellDimension.modLoc("locate/structure/%s/%s".formatted(structure.getNamespace(), structure.getPath())),
+                world,
+                Ingredient.ofItems(item),
+                structure
+            )
         );
     }
 
@@ -329,12 +329,12 @@ public class SDLocateRecipes
     public static void addBiome(Consumer<RecipeJsonProvider> exporter, Identifier biomeTag, Identifier world, Item item)
     {
         exporter.accept(
-                new LocateBiomeRecipeJsonProvider(
-                        SpellDimension.modLoc("locate/biome/%s/%s".formatted(biomeTag.getNamespace(), biomeTag.getPath())),
-                        world,
-                        Ingredient.ofItems(item),
-                        biomeTag
-                )
+            new LocateBiomeRecipeJsonProvider(
+                SpellDimension.modLoc("locate/biome/%s/%s".formatted(biomeTag.getNamespace(), biomeTag.getPath())),
+                world,
+                Ingredient.ofItems(item),
+                biomeTag
+            )
         );
     }
 

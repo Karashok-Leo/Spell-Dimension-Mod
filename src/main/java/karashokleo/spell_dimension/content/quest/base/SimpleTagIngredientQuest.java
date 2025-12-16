@@ -16,8 +16,8 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public record SimpleTagIngredientQuest(
-        List<TagKey<Item>> tags,
-        Supplier<ItemStack> reward
+    List<TagKey<Item>> tags,
+    Supplier<ItemStack> reward
 ) implements IngredientTaskQuest, ItemRewardQuest
 {
     public SimpleTagIngredientQuest(TagKey<Item> tag, Supplier<ItemStack> reward)
@@ -41,7 +41,10 @@ public record SimpleTagIngredientQuest(
     public void appendTaskDescription(World world, List<Text> desc)
     {
         IngredientTaskQuest.super.appendTaskDescription(world, desc);
-        if (tags.isEmpty()) return;
+        if (tags.isEmpty())
+        {
+            return;
+        }
         MutableText tagText = Text.literal("#" + tags.get(0).id().toString()).formatted(Formatting.AQUA);
         for (int i = 1; i < tags.size(); i++)
         {

@@ -22,12 +22,12 @@ public class SoundUtil
     public static final Sound LEVEL_UP = new Sound("entity.player.levelup");
 
     private static final Map<SpellSchool, Sound> map = Map.of(
-            SpellSchools.ARCANE, new Sound("spell_engine:generic_arcane_release"),
-            SpellSchools.FIRE, new Sound("spell_engine:generic_fire_release"),
-            SpellSchools.FROST, new Sound("spell_engine:generic_frost_release"),
-            SpellSchools.HEALING, new Sound("spell_engine:generic_healing_release"),
-            SpellSchools.LIGHTNING, new Sound("spell_engine:generic_lightning_release"),
-            SpellSchools.SOUL, new Sound("spell_engine:generic_soul_release")
+        SpellSchools.ARCANE, new Sound("spell_engine:generic_arcane_release"),
+        SpellSchools.FIRE, new Sound("spell_engine:generic_fire_release"),
+        SpellSchools.FROST, new Sound("spell_engine:generic_frost_release"),
+        SpellSchools.HEALING, new Sound("spell_engine:generic_healing_release"),
+        SpellSchools.LIGHTNING, new Sound("spell_engine:generic_lightning_release"),
+        SpellSchools.SOUL, new Sound("spell_engine:generic_soul_release")
     );
 
     public static Sound getSound(@Nullable SpellSchool school)
@@ -49,6 +49,9 @@ public class SoundUtil
                 System.err.println("Failed to play sound: " + sound.id());
                 e.printStackTrace();
             }
-        } else SoundHelper.playSound(entity.getWorld(), entity, sound);
+        } else
+        {
+            SoundHelper.playSound(entity.getWorld(), entity, sound);
+        }
     }
 }

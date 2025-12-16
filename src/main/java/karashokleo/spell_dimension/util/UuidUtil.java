@@ -25,7 +25,9 @@ public class UuidUtil
         {
             HashMap<Operation, UUID> map = new HashMap<>();
             for (Operation operation : Operation.values())
+            {
                 map.put(operation, getUUIDFromString("Equipment-" + slot.name() + "-" + operation.name()));
+            }
             forEquipment.put(slot, map);
         }
     }

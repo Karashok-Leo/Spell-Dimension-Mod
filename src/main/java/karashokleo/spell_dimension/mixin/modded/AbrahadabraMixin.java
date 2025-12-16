@@ -22,10 +22,10 @@ import java.util.List;
 public abstract class AbrahadabraMixin
 {
     @Inject(
-            method = "canReflect",
-            at = @At("HEAD"),
-            cancellable = true,
-            remap = false
+        method = "canReflect",
+        at = @At("HEAD"),
+        cancellable = true,
+        remap = false
     )
     private void inject_canReflect(MobTrait trait, CallbackInfoReturnable<Boolean> cir)
     {
@@ -36,11 +36,11 @@ public abstract class AbrahadabraMixin
     }
 
     @Inject(
-            method = "appendTooltip",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lkarashokleo/l2hostility/content/item/trinket/core/CurseTrinketItem;appendTooltip(Lnet/minecraft/item/ItemStack;Lnet/minecraft/world/World;Ljava/util/List;Lnet/minecraft/client/item/TooltipContext;)V"
-            )
+        method = "appendTooltip",
+        at = @At(
+            value = "INVOKE",
+            target = "Lkarashokleo/l2hostility/content/item/trinket/core/CurseTrinketItem;appendTooltip(Lnet/minecraft/item/ItemStack;Lnet/minecraft/world/World;Ljava/util/List;Lnet/minecraft/client/item/TooltipContext;)V"
+        )
     )
     private void inject_appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, CallbackInfo ci)
     {

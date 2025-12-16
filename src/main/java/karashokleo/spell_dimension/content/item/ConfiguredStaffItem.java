@@ -19,20 +19,20 @@ public class ConfiguredStaffItem extends StaffItem
     private static final UUID MISC_UUID = UUID.fromString("c102cb57-a7b8-4a98-8c6e-2cd7b70b74c1");
 
     public ConfiguredStaffItem(
-            ToolMaterials material,
-            Item repairItem,
-            float attackDamage,
-            float attackSpeed,
-            SpellSchool school,
-            float spellPower
+        ToolMaterials material,
+        Item repairItem,
+        float attackDamage,
+        float attackSpeed,
+        SpellSchool school,
+        float spellPower
     )
     {
         super(
-                Weapon.CustomMaterial.matching(
-                        material,
-                        () -> Ingredient.ofItems(repairItem)
-                ),
-                new FabricItemSettings()
+            Weapon.CustomMaterial.matching(
+                material,
+                () -> Ingredient.ofItems(repairItem)
+            ),
+            new FabricItemSettings()
         );
 
         ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();

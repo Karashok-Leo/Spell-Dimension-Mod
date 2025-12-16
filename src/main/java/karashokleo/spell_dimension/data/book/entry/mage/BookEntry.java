@@ -51,55 +51,55 @@ public class BookEntry extends BaseEntryProvider
         context.page("prev");
         this.lang().add(context.pageTitle(), "Spell Book");
         this.lang().add(context.pageText(),
+            """
+                A spell book is a vehicle for recording spells. You can use the Spell Binding Table to transform a normal book into the most basic apprentices spell book. But this is just the beginning, you can then infuse it into primary, intermediate, and advanced spell books.
                 """
-                        A spell book is a vehicle for recording spells. You can use the Spell Binding Table to transform a normal book into the most basic apprentices spell book. But this is just the beginning, you can then infuse it into primary, intermediate, and advanced spell books.
-                        """
         );
         this.lang("zh_cn").add(context.pageTitle(), "法术书");
         this.lang("zh_cn").add(context.pageText(),
+            """
+                法术书是记录法术的载体。你可以使用法术绑定台将普通的书转化为最基本的学徒法术书。但这只是一个开始，之后你可以使用魔咒灌注将其合成至初级、中级、高级法术书。
                 """
-                        法术书是记录法术的载体。你可以使用法术绑定台将普通的书转化为最基本的学徒法术书。但这只是一个开始，之后你可以使用魔咒灌注将其合成至初级、中级、高级法术书。
-                        """
         );
 
         BookSpotlightPageModel prev = BookSpotlightPageModel
-                .builder()
-                .withTitle(context.pageTitle())
-                .withText(context.pageText())
-                .withItem(BookGenUtil.getIngredient(
-                        Identifier.of(WizardsMod.ID, "arcane_spell_book"),
-                        Identifier.of(WizardsMod.ID, "fire_spell_book"),
-                        Identifier.of(WizardsMod.ID, "frost_spell_book"),
-                        Identifier.of(PaladinsMod.ID, "priest_spell_book")
-                ))
-                .build();
+            .builder()
+            .withTitle(context.pageTitle())
+            .withText(context.pageText())
+            .withItem(BookGenUtil.getIngredient(
+                Identifier.of(WizardsMod.ID, "arcane_spell_book"),
+                Identifier.of(WizardsMod.ID, "fire_spell_book"),
+                Identifier.of(WizardsMod.ID, "frost_spell_book"),
+                Identifier.of(PaladinsMod.ID, "priest_spell_book")
+            ))
+            .build();
 
         context.page("next");
         this.lang().add(context.pageTitle(), "Advanced Spell Book");
         this.lang().add(context.pageText(),
+            """
+                The more advanced the spell book, the more spell slots it provides.
+                \\
+                \\
+                You can put spell scrolls into primary, intermediate, and advanced spell books (just as you would into a Bundle). Apprentice spell books do not have this feature.
                 """
-                        The more advanced the spell book, the more spell slots it provides.
-                        \\
-                        \\
-                        You can put spell scrolls into primary, intermediate, and advanced spell books (just as you would into a Bundle). Apprentice spell books do not have this feature.
-                        """
         );
         this.lang("zh_cn").add(context.pageTitle(), "高级法术书");
         this.lang("zh_cn").add(context.pageText(),
+            """
+                越高级的法术书提供越多的法术槽位。
+                \\
+                \\
+                你可以将法术卷轴放入初级、中级、高级法术书中（就像放入收纳袋那样），学徒法术书则没有这个功能。
                 """
-                        越高级的法术书提供越多的法术槽位。
-                        \\
-                        \\
-                        你可以将法术卷轴放入初级、中级、高级法术书中（就像放入收纳袋那样），学徒法术书则没有这个功能。
-                        """
         );
 
         BookSpotlightPageModel next = BookSpotlightPageModel
-                .builder()
-                .withTitle(context.pageTitle())
-                .withText(context.pageText())
-                .withItem(BookGenUtil.getIngredient(AllStacks.getSpellBooks()))
-                .build();
+            .builder()
+            .withTitle(context.pageTitle())
+            .withText(context.pageText())
+            .withItem(BookGenUtil.getIngredient(AllStacks.getSpellBooks()))
+            .build();
 
         return List.of(prev, next);
     }

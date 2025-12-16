@@ -30,10 +30,10 @@ public class SpellPrismItem extends Item
     public SpellPrismItem()
     {
         super(
-                new FabricItemSettings()
-                        .rarity(Rarity.UNCOMMON)
-                        .maxCount(1)
-                        .maxDamage(4)
+            new FabricItemSettings()
+                .rarity(Rarity.UNCOMMON)
+                .maxCount(1)
+                .maxDamage(4)
         );
         ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
         EntityAttributeModifier modifier = new EntityAttributeModifier(HASTE_DECAY, "Spell Prism", -0.9, EntityAttributeModifier.Operation.MULTIPLY_TOTAL);
@@ -51,8 +51,8 @@ public class SpellPrismItem extends Item
     public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(ItemStack stack, EquipmentSlot slot)
     {
         return slot == EquipmentSlot.OFFHAND ?
-                this.modifiers :
-                super.getAttributeModifiers(slot);
+            this.modifiers :
+            super.getAttributeModifiers(slot);
     }
 
     @Override

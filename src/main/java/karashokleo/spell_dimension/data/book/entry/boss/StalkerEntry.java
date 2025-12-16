@@ -51,63 +51,63 @@ public class StalkerEntry extends BaseEntryProvider
         context.page("boss");
         this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
-                """
-                        Level: %d+
-                        \\
-                        \\
-                        May spawn when the player breaks an **Ancient Vase** in the **Otherside** (Deeper Darker Dimension).
-                        \\
-                        \\
-                        *Ancient Vase: Generated in the Ancient Temple in the Otherside.*
-                        """.formatted(TextConstants.BOSS_LEVELS[1])
+            """
+                Level: %d+
+                \\
+                \\
+                May spawn when the player breaks an **Ancient Vase** in the **Otherside** (Deeper Darker Dimension).
+                \\
+                \\
+                *Ancient Vase: Generated in the Ancient Temple in the Otherside.*
+                """.formatted(TextConstants.BOSS_LEVELS[1])
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
-                """
-                        等级: %d+
-                        \\
-                        \\
-                        玩家在**幽冥异界**（深暗维度）打破**远古花瓶**时有概率生成。
-                        \\
-                        \\
-                        *远古花瓶: 生成于幽冥异界的远古神庙。*
-                        """.formatted(TextConstants.BOSS_LEVELS[1])
+            """
+                等级: %d+
+                \\
+                \\
+                玩家在**幽冥异界**（深暗维度）打破**远古花瓶**时有概率生成。
+                \\
+                \\
+                *远古花瓶: 生成于幽冥异界的远古神庙。*
+                """.formatted(TextConstants.BOSS_LEVELS[1])
         );
 
         BookSpotlightPageModel boss = BookSpotlightPageModel
-                .builder()
-                .withTitle(context.pageTitle())
-                .withText(context.pageText())
-                .withItem(BookGenUtil.getIngredient(new Identifier("deeperdarker", "ancient_vase")))
-                .build();
+            .builder()
+            .withTitle(context.pageTitle())
+            .withText(context.pageText())
+            .withItem(BookGenUtil.getIngredient(new Identifier("deeperdarker", "ancient_vase")))
+            .build();
 
         context.page("next");
         this.lang().add(context.pageText(),
+            """
+                *Ancient Temple: Structure ID deeperdarker:ancient_temple*
+                \\
+                \\
+                *Deeper Darker: Use the Heart of the Deep to open the portal within the ancient city to enter.*
                 """
-                        *Ancient Temple: Structure ID deeperdarker:ancient_temple*
-                        \\
-                        \\
-                        *Deeper Darker: Use the Heart of the Deep to open the portal within the ancient city to enter.*
-                        """
         );
         this.lang("zh_cn").add(context.pageText(),
+            """
+                *远古神庙: 结构ID为 deeperdarker:ancient_temple*
+                \\
+                \\
+                *深暗维度: 使用深渊之心开启古代城市内的传送门进入。*
                 """
-                        *远古神庙: 结构ID为 deeperdarker:ancient_temple*
-                        \\
-                        \\
-                        *深暗维度: 使用深渊之心开启古代城市内的传送门进入。*
-                        """
         );
 
         BookTextPageModel next = BookTextPageModel
-                .builder()
-                .withText(context.pageText())
-                .build();
+            .builder()
+            .withText(context.pageText())
+            .build();
 
         BookEntityPageModel entity = BookEntityPageModel
-                .builder()
-                .withEntityId("deeperdarker:stalker")
-                .build();
+            .builder()
+            .withEntityId("deeperdarker:stalker")
+            .build();
 
         return List.of(boss, next, entity);
     }

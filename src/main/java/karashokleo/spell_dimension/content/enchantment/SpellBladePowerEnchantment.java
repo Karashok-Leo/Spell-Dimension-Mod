@@ -25,12 +25,15 @@ public class SpellBladePowerEnchantment extends SpellBladeAmplifyEnchantment
     public void operateModifiers(ItemStack stack, Multimap<EntityAttribute, EntityAttributeModifier> modifiers)
     {
         double sum = modifiers.get(EntityAttributes.GENERIC_ATTACK_DAMAGE)
-                .stream()
-                .filter(m -> m.getOperation() == EntityAttributeModifier.Operation.ADDITION)
-                .mapToDouble(EntityAttributeModifier::getValue)
-                .sum();
+            .stream()
+            .filter(m -> m.getOperation() == EntityAttributeModifier.Operation.ADDITION)
+            .mapToDouble(EntityAttributeModifier::getValue)
+            .sum();
         sum += EnchantmentHelper.getAttackDamage(stack, EntityGroup.DEFAULT);
-        if (sum <= 0) return;
+        if (sum <= 0)
+        {
+            return;
+        }
         for (SpellSchool school : this.schools)
         {
             EntityAttributeModifier modifier = new EntityAttributeModifier(SpellBladePowerEnchantment.MODIFIER_ID, "Spell Blade Enchantment", sum, EntityAttributeModifier.Operation.ADDITION);

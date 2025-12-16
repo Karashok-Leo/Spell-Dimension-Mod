@@ -280,18 +280,18 @@ public class AllSpells
     public static Set<Identifier> getSpells(Predicate<ScrollType> predicate)
     {
         return SPELL_TO_SCROLL_TYPE.entrySet()
-                .stream()
-                .filter(entry -> predicate.test(entry.getValue()))
-                .map(Map.Entry::getKey)
-                .collect(Collectors.toSet());
+            .stream()
+            .filter(entry -> predicate.test(entry.getValue()))
+            .map(Map.Entry::getKey)
+            .collect(Collectors.toSet());
     }
 
     public static MutableText getSpellObtainText(Identifier spellId)
     {
         ScrollType scrollType = SPELL_TO_SCROLL_TYPE.get(spellId);
         return scrollType == null ?
-                SDTexts.SCROLL$UNAVAILABLE.get() :
-                scrollType.getTooltip();
+            SDTexts.SCROLL$UNAVAILABLE.get() :
+            scrollType.getTooltip();
     }
 
     public static int getSpellTier(Identifier spellId)
@@ -379,9 +379,13 @@ public class AllSpells
         {
             ALL.add(id);
             if (tier != null)
+            {
                 SPELL_TO_TIER.put(id, tier);
+            }
             if (scrollType != null)
+            {
                 SPELL_TO_SCROLL_TYPE.put(id, scrollType);
+            }
             return id;
         }
     }

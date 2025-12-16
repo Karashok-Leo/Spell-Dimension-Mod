@@ -36,7 +36,10 @@ public class NucleusRenderer<T extends LivingEntity, M extends EntityModel<T>> e
     public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, T entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch)
     {
         Optional<Nucleus> optional = Buff.get(entity, Nucleus.TYPE);
-        if (optional.isEmpty() || optional.get().getDuration() <= 0) return;
+        if (optional.isEmpty() || optional.get().getDuration() <= 0)
+        {
+            return;
+        }
         this.random.setSeed(entity.getId() * entity.getId() * 3121L + entity.getId() * 45238971L);
 
         float width = entity.getWidth();

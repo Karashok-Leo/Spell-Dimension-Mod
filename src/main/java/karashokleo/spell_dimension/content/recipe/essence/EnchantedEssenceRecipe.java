@@ -22,34 +22,34 @@ import java.util.Map;
 public class EnchantedEssenceRecipe extends ShapedRecipe
 {
     public static final Map<EquipmentSlot, String[]> PATTERNS = Map.of(
-            EquipmentSlot.MAINHAND, new String[]{
-                    " ##",
-                    "###",
-                    "## "
-            },
-            EquipmentSlot.OFFHAND, new String[]{
-                    "###",
-                    "###",
-                    " # "
-            },
-            EquipmentSlot.HEAD, new String[]{
-                    "###",
-                    "# #"
-            },
-            EquipmentSlot.CHEST, new String[]{
-                    "# #",
-                    "###",
-                    "###"
-            },
-            EquipmentSlot.LEGS, new String[]{
-                    "###",
-                    "# #",
-                    "# #"
-            },
-            EquipmentSlot.FEET, new String[]{
-                    "# #",
-                    "# #"
-            }
+        EquipmentSlot.MAINHAND, new String[]{
+            " ##",
+            "###",
+            "## "
+        },
+        EquipmentSlot.OFFHAND, new String[]{
+            "###",
+            "###",
+            " # "
+        },
+        EquipmentSlot.HEAD, new String[]{
+            "###",
+            "# #"
+        },
+        EquipmentSlot.CHEST, new String[]{
+            "# #",
+            "###",
+            "###"
+        },
+        EquipmentSlot.LEGS, new String[]{
+            "###",
+            "# #",
+            "# #"
+        },
+        EquipmentSlot.FEET, new String[]{
+            "# #",
+            "# #"
+        }
     );
 
     protected final int grade;
@@ -60,16 +60,16 @@ public class EnchantedEssenceRecipe extends ShapedRecipe
     public EnchantedEssenceRecipe(Identifier id, int grade, int threshold, EquipmentSlot slot, SpellSchool school)
     {
         super(id, "", CraftingRecipeCategory.MISC, getWidth(slot), getHeight(slot), getIngredients(slot, school, grade), AllItems.ENCHANTED_ESSENCE.getStack(
-                new EnchantedModifier(
-                        threshold,
-                        slot,
-                        new EnlighteningModifier(
-                                school.attribute,
-                                UuidUtil.getEquipmentUuid(slot, EntityAttributeModifier.Operation.ADDITION),
-                                1.0,
-                                EntityAttributeModifier.Operation.ADDITION
-                        )
+            new EnchantedModifier(
+                threshold,
+                slot,
+                new EnlighteningModifier(
+                    school.attribute,
+                    UuidUtil.getEquipmentUuid(slot, EntityAttributeModifier.Operation.ADDITION),
+                    1.0,
+                    EntityAttributeModifier.Operation.ADDITION
                 )
+            )
         ));
         this.grade = grade;
         this.threshold = threshold;
@@ -96,11 +96,18 @@ public class EnchantedEssenceRecipe extends ShapedRecipe
         int width = getWidth(slot);
         DefaultedList<Ingredient> defaultedList = DefaultedList.ofSize(height * width, Ingredient.EMPTY);
         for (int i = 0; i < height; i++)
+        {
             for (int j = 0; j < width; j++)
+            {
                 if (pattern[i].charAt(j) == ' ')
+                {
                     defaultedList.set(i * width + j, Ingredient.EMPTY);
-                else
+                } else
+                {
                     defaultedList.set(i * width + j, Ingredient.ofItems(AllItems.BASE_ESSENCES.get(school).get(tier)));
+                }
+            }
+        }
         return defaultedList;
     }
 
@@ -114,16 +121,16 @@ public class EnchantedEssenceRecipe extends ShapedRecipe
     public ItemStack getOutput(DynamicRegistryManager registryManager)
     {
         return AllItems.ENCHANTED_ESSENCE.getStack(
-                new EnchantedModifier(
-                        threshold,
-                        slot,
-                        new EnlighteningModifier(
-                                school.attribute,
-                                UuidUtil.getEquipmentUuid(slot, EntityAttributeModifier.Operation.ADDITION),
-                                1.0,
-                                EntityAttributeModifier.Operation.ADDITION
-                        )
+            new EnchantedModifier(
+                threshold,
+                slot,
+                new EnlighteningModifier(
+                    school.attribute,
+                    UuidUtil.getEquipmentUuid(slot, EntityAttributeModifier.Operation.ADDITION),
+                    1.0,
+                    EntityAttributeModifier.Operation.ADDITION
                 )
+            )
         );
     }
 

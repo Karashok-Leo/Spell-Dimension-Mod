@@ -22,20 +22,20 @@ public class ProtectiveCoverBlock extends AbstractGlassBlock implements BlockEnt
     public ProtectiveCoverBlock()
     {
         super(
-                FabricBlockSettings.create()
-                        .mapColor(DyeColor.PURPLE)
-                        .instrument(Instrument.HAT)
-                        .strength(0.3F)
-                        .sounds(BlockSoundGroup.GLASS)
-                        .nonOpaque()
-                        .allowsSpawning(Blocks::never)
-                        .solidBlock(Blocks::never)
-                        .suffocates(Blocks::never)
-                        .blockVision(Blocks::never)
+            FabricBlockSettings.create()
+                .mapColor(DyeColor.PURPLE)
+                .instrument(Instrument.HAT)
+                .strength(0.3F)
+                .sounds(BlockSoundGroup.GLASS)
+                .nonOpaque()
+                .allowsSpawning(Blocks::never)
+                .solidBlock(Blocks::never)
+                .suffocates(Blocks::never)
+                .blockVision(Blocks::never)
         );
         this.setDefaultState(
-                this.stateManager.getDefaultState()
-                        .with(Properties.PERSISTENT, false)
+            this.stateManager.getDefaultState()
+                .with(Properties.PERSISTENT, false)
         );
     }
 
@@ -43,7 +43,9 @@ public class ProtectiveCoverBlock extends AbstractGlassBlock implements BlockEnt
     {
         world.setBlockState(pos, AllBlocks.PROTECTIVE_COVER.block().getDefaultState());
         if (world.getBlockEntity(pos) instanceof ProtectiveCoverBlockTile tile)
+        {
             tile.setLife(life);
+        }
     }
 
     public static void placePersistent(World world, BlockPos pos)
@@ -54,28 +56,40 @@ public class ProtectiveCoverBlock extends AbstractGlassBlock implements BlockEnt
     public static void placeAsCube(World world, BlockPos pos, int radius, int height, int life)
     {
         for (int x = -radius; x <= radius; x++)
+        {
             for (int y = 0; y <= height; y++)
+            {
                 for (int z = -radius; z <= radius; z++)
+                {
                     if (x == -radius || x == radius ||
                         y == 0 || y == height ||
                         z == -radius || z == radius)
                     {
                         placeWithOffset(world, pos, life, x, y, z);
                     }
+                }
+            }
+        }
 
     }
 
     public static void placeAsCube(World world, BlockPos pos, int radius, int life)
     {
         for (int x = -radius; x <= radius; x++)
+        {
             for (int y = -radius; y <= radius; y++)
+            {
                 for (int z = -radius; z <= radius; z++)
+                {
                     if (x == -radius || x == radius ||
                         y == -radius || y == radius ||
                         z == -radius || z == radius)
                     {
                         placeWithOffset(world, pos, life, x, y, z);
                     }
+                }
+            }
+        }
     }
 
     private static void placeWithOffset(World world, BlockPos pos, int life, int x, int y, int z)
@@ -86,35 +100,49 @@ public class ProtectiveCoverBlock extends AbstractGlassBlock implements BlockEnt
         {
             world.setBlockState(placePos, AllBlocks.PROTECTIVE_COVER.block().getDefaultState());
             if (world.getBlockEntity(placePos) instanceof ProtectiveCoverBlockTile tile)
+            {
                 tile.setLife(life);
+            }
         }
     }
 
     public static void breakAsCube(World world, BlockPos pos, int radius, int height)
     {
         for (int x = -radius; x <= radius; x++)
+        {
             for (int y = 0; y <= height; y++)
+            {
                 for (int z = -radius; z <= radius; z++)
+                {
                     if (x == -radius || x == radius ||
                         y == 0 || y == height ||
                         z == -radius || z == radius)
                     {
                         breakWithOffset(world, pos, x, y, z);
                     }
+                }
+            }
+        }
 
     }
 
     public static void breakAsCube(World world, BlockPos pos, int radius)
     {
         for (int x = -radius; x <= radius; x++)
+        {
             for (int y = -radius; y <= radius; y++)
+            {
                 for (int z = -radius; z <= radius; z++)
+                {
                     if (x == -radius || x == radius ||
                         y == -radius || y == radius ||
                         z == -radius || z == radius)
                     {
                         breakWithOffset(world, pos, x, y, z);
                     }
+                }
+            }
+        }
     }
 
     private static void breakWithOffset(World world, BlockPos pos, int x, int y, int z)
@@ -154,7 +182,7 @@ public class ProtectiveCoverBlock extends AbstractGlassBlock implements BlockEnt
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type)
     {
         return (!state.get(Properties.PERSISTENT) &&
-                type == AllBlocks.PROTECTIVE_COVER_TILE) ?
-                (w, pos, s, tile) -> ProtectiveCoverBlockTile.tick(w, pos, s, (ProtectiveCoverBlockTile) tile) : null;
+            type == AllBlocks.PROTECTIVE_COVER_TILE) ?
+            (w, pos, s, tile) -> ProtectiveCoverBlockTile.tick(w, pos, s, (ProtectiveCoverBlockTile) tile) : null;
     }
 }

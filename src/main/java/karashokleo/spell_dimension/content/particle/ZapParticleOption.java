@@ -17,9 +17,9 @@ import net.minecraft.util.math.Vec3d;
  * Learned from <a href="https://github.com/iron431/irons-spells-n-spellbooks/blob/1.20.1/src/main/java/io/redspace/ironsspellbooks/particle/ZapParticleOption.java">...</a>
  */
 public record ZapParticleOption(
-        Either<Integer, Vec3d> from,
-        Either<Integer, Vec3d> to,
-        int strands
+    Either<Integer, Vec3d> from,
+    Either<Integer, Vec3d> to,
+    int strands
 ) implements ParticleEffect
 {
     public ZapParticleOption(int fromEntity, int toEntity, int strands)
@@ -47,11 +47,11 @@ public record ZapParticleOption(
     }
 
     public static final Codec<ZapParticleOption> CODEC = RecordCodecBuilder.create(
-            ins -> ins.group(
-                    PositionProvider.CODEC.fieldOf("from").forGetter(ZapParticleOption::from),
-                    PositionProvider.CODEC.fieldOf("to").forGetter(ZapParticleOption::to),
-                    Codecs.POSITIVE_INT.fieldOf("strands").forGetter(ZapParticleOption::strands)
-            ).apply(ins, ZapParticleOption::new)
+        ins -> ins.group(
+            PositionProvider.CODEC.fieldOf("from").forGetter(ZapParticleOption::from),
+            PositionProvider.CODEC.fieldOf("to").forGetter(ZapParticleOption::to),
+            Codecs.POSITIVE_INT.fieldOf("strands").forGetter(ZapParticleOption::strands)
+        ).apply(ins, ZapParticleOption::new)
     );
 
     @SuppressWarnings("deprecation")

@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public record EnderDragonAdvancementQuest(
-        Supplier<ItemStack> reward
+    Supplier<ItemStack> reward
 ) implements AdvancementQuest, ItemRewardQuest
 {
     private static final Identifier ADVANCEMENT_ID = new Identifier("minecraft:end/kill_dragon");

@@ -23,7 +23,10 @@ public record FirstDayQuest(Supplier<ItemStack> reward) implements ItemRewardQue
     @Override
     public boolean completeTasks(ServerPlayerEntity player)
     {
-        if (player.getAbilities().creativeMode) return true;
+        if (player.getAbilities().creativeMode)
+        {
+            return true;
+        }
         int sinceDeath = player.getStatHandler().getStat(Stats.CUSTOM.getOrCreateStat(Stats.TIME_SINCE_DEATH));
         return sinceDeath >= ONE_DAY;
     }

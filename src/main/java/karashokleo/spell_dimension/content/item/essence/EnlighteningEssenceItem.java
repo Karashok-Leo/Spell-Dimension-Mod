@@ -76,15 +76,25 @@ public class EnlighteningEssenceItem extends RightPressEssenceItem
     {
         boolean bl = applyEffect(stack, user);
         if (user instanceof PlayerEntity player)
-            if (bl) success(stack, player);
-            else fail(stack, player);
+        {
+            if (bl)
+            {
+                success(stack, player);
+            } else
+            {
+                fail(stack, player);
+            }
+        }
         return stack;
     }
 
     protected boolean applyEffect(ItemStack essence, LivingEntity entity)
     {
         EnlighteningModifier enlighteningModifier = getModifier(essence);
-        if (enlighteningModifier == null) return false;
+        if (enlighteningModifier == null)
+        {
+            return false;
+        }
         return enlighteningModifier.applyToEntityOrPlayer(entity);
     }
 

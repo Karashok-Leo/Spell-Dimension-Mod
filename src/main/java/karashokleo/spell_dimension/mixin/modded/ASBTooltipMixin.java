@@ -20,12 +20,12 @@ import uk.co.dotcode.asb.event.TooltipEvent;
 public abstract class ASBTooltipMixin
 {
     @Redirect(
-            method = "modifyTooltip",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Luk/co/dotcode/asb/ComponentManager;mergeComponents([Lnet/minecraft/text/Text;)Lnet/minecraft/text/MutableText;",
-                    ordinal = 5
-            )
+        method = "modifyTooltip",
+        at = @At(
+            value = "INVOKE",
+            target = "Luk/co/dotcode/asb/ComponentManager;mergeComponents([Lnet/minecraft/text/Text;)Lnet/minecraft/text/MutableText;",
+            ordinal = 5
+        )
     )
     private static MutableText inject_modifyTooltip_1(Text[] c, @Local Bonus bonus)
     {
@@ -33,12 +33,12 @@ public abstract class ASBTooltipMixin
     }
 
     @Redirect(
-            method = "modifyTooltip",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Luk/co/dotcode/asb/ComponentManager;mergeComponents([Lnet/minecraft/text/Text;)Lnet/minecraft/text/MutableText;",
-                    ordinal = 10
-            )
+        method = "modifyTooltip",
+        at = @At(
+            value = "INVOKE",
+            target = "Luk/co/dotcode/asb/ComponentManager;mergeComponents([Lnet/minecraft/text/Text;)Lnet/minecraft/text/MutableText;",
+            ordinal = 10
+        )
     )
     private static MutableText inject_modifyTooltip_2(Text[] c, @Local Bonus bonus)
     {
@@ -49,11 +49,19 @@ public abstract class ASBTooltipMixin
     private static MutableText getAttributeModifierText(Bonus bonus)
     {
         EntityAttribute attribute = Registries.ATTRIBUTE.get(new Identifier(bonus.name));
-        if (attribute == null) return Text.empty();
+        if (attribute == null)
+        {
+            return Text.empty();
+        }
         EntityAttributeModifier.Operation op = EntityAttributeModifier.Operation.fromId(bonus.attributeOperation);
         double amount = bonus.value;
         MutableText text = AttributeUtil.getTooltip(attribute, amount, op);
-        if (text == null) return Text.empty();
-        else return text.setStyle(Style.EMPTY);
+        if (text == null)
+        {
+            return Text.empty();
+        } else
+        {
+            return text.setStyle(Style.EMPTY);
+        }
     }
 }

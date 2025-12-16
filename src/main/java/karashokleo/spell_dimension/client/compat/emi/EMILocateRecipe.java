@@ -22,8 +22,8 @@ public record EMILocateRecipe(EmiIngredient input, LocationEmiStack location) im
     public EMILocateRecipe(LocateRecipe recipe)
     {
         this(
-                EmiIngredient.of(recipe.getIngredient()),
-                new LocationEmiStack(LocationStack.fromRecipe(recipe))
+            EmiIngredient.of(recipe.getIngredient()),
+            new LocationEmiStack(LocationStack.fromRecipe(recipe))
         );
     }
 
@@ -78,12 +78,12 @@ public record EMILocateRecipe(EmiIngredient input, LocationEmiStack location) im
         widgets.addSlot(input, centerX - 20 * 2, centerY);
 
         widgets.addSlot(SPELL_SCROLL, centerX - 20, centerY)
-                .catalyst(true)
-                .drawBack(false);
+            .catalyst(true)
+            .drawBack(false);
 
         widgets.addSlot(WORKSTATION, centerX, centerY)
-                .catalyst(true)
-                .drawBack(false);
+            .catalyst(true)
+            .drawBack(false);
 
         widgets.addSlot(location, centerX + 20, centerY);
     }

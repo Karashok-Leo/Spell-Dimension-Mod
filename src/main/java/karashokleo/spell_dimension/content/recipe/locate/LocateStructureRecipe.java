@@ -47,10 +47,10 @@ public class LocateStructureRecipe extends LocateRecipe
         player.sendMessage(SDTexts.TEXT$LOCATING.get(targetName), false);
 
         Optional<RegistryEntryList<Structure>> optional = world
-                .getRegistryManager()
-                .get(RegistryKeys.STRUCTURE)
-                .getEntry(RegistryKey.of(RegistryKeys.STRUCTURE, structure))
-                .map(RegistryEntryList::of);
+            .getRegistryManager()
+            .get(RegistryKeys.STRUCTURE)
+            .getEntry(RegistryKey.of(RegistryKeys.STRUCTURE, structure))
+            .map(RegistryEntryList::of);
 
         if (optional.isEmpty())
         {
@@ -59,9 +59,9 @@ public class LocateStructureRecipe extends LocateRecipe
         }
 
         Pair<BlockPos, RegistryEntry<Structure>> pair = world
-                .getChunkManager()
-                .getChunkGenerator()
-                .locateStructure(world, optional.get(), pos, 100, false);
+            .getChunkManager()
+            .getChunkGenerator()
+            .locateStructure(world, optional.get(), pos, 100, false);
 
         if (pair == null)
         {

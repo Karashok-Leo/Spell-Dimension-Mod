@@ -36,11 +36,20 @@ public class EnchantmentEvents
         // Spell blade amplify enchantment
         ModifyItemAttributeModifiersCallback.EVENT.register((stack, slot, attributeModifiers) ->
         {
-            if (slot != EquipmentSlot.MAINHAND) return;
-            if (!(stack.getItem() instanceof SwordItem)) return;
+            if (slot != EquipmentSlot.MAINHAND)
+            {
+                return;
+            }
+            if (!(stack.getItem() instanceof SwordItem))
+            {
+                return;
+            }
             for (Enchantment enchantment : EnchantmentHelper.get(stack).keySet())
             {
-                if (!(enchantment instanceof SpellBladeAmplifyEnchantment ench)) continue;
+                if (!(enchantment instanceof SpellBladeAmplifyEnchantment ench))
+                {
+                    continue;
+                }
                 ench.operateModifiers(stack, attributeModifiers);
             }
         });
@@ -49,11 +58,13 @@ public class EnchantmentEvents
         MobEffectEvent.APPLICABLE.register(event ->
         {
             if (TrinketCompat.getTrinketItems(event.getEntity(),
-                    e -> e.isIn(AllTags.BREASTPLATE_SLOT)).stream().anyMatch(
-                    e -> EnchantmentHelper.get(e).keySet().stream().anyMatch(
-                            enchantment -> enchantment instanceof EffectImmunityEnchantment immunity &&
-                                           immunity.test(event.getEffectInstance()))))
+                e -> e.isIn(AllTags.BREASTPLATE_SLOT)).stream().anyMatch(
+                e -> EnchantmentHelper.get(e).keySet().stream().anyMatch(
+                    enchantment -> enchantment instanceof EffectImmunityEnchantment immunity &&
+                        immunity.test(event.getEffectInstance()))))
+            {
                 event.setResult(BaseEvent.Result.DENY);
+            }
         });
 
         // Spell impact enchantment
@@ -79,18 +90,26 @@ public class EnchantmentEvents
         DamagePhase.ARMOR.addListener(0, damageAccess ->
         {
             if (!(damageAccess.getEntity() instanceof PlayerEntity player))
+            {
                 return;
+            }
 
             if (damageAccess.getSource().isIn(DamageTypeTags.BYPASSES_INVULNERABILITY))
+            {
                 return;
+            }
 
             int totalLevel = 0;
             for (ItemStack stack : player.getArmorItems())
+            {
                 totalLevel += EnchantmentHelper.getLevel(AllEnchantments.SPELL_RESISTANCE, stack);
+            }
 
             double totalSpellPower = 0;
             for (SpellSchool school : SchoolUtil.getLivingSchools(player))
+            {
                 totalSpellPower += SpellPower.getSpellPower(school, player).baseValue();
+            }
 
             float damageReduction = (float) (totalLevel * 0.01 * totalSpellPower);
             damageAccess.addModifier(originalDamage -> Math.max(0, originalDamage - damageReduction));
@@ -100,15 +119,21 @@ public class EnchantmentEvents
         DamagePhase.APPLY.addListener(0, damageAccess ->
         {
             if (!damageAccess.getSource().isIn(LHTags.MAGIC))
+            {
                 return;
+            }
             if (!(damageAccess.getAttacker() instanceof PlayerEntity player))
+            {
                 return;
+            }
 
             int totalLevel = EnchantmentHelper.getLevel(AllEnchantments.SPELL_LEECH, player.getMainHandStack());
 
             double totalSpellPower = 0;
             for (SpellSchool school : SchoolUtil.getLivingSchools(player))
+            {
                 totalSpellPower += SpellPower.getSpellPower(school, player).baseValue();
+            }
 
             float damageLeech = (float) (totalLevel * 0.01 * totalSpellPower);
             player.heal(damageLeech);

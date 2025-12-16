@@ -65,7 +65,10 @@ public abstract class TFTreeFeature<T extends TFTreeFeatureConfig> extends Featu
                 StructureTemplate.updateCorner(structureWorldAccess, 3, discreteVoxelShape, boundingBox.getMinX(), boundingBox.getMinY(), boundingBox.getMinZ());
                 return true;
             }).orElse(false);
-        } else return false;
+        } else
+        {
+            return false;
+        }
     }
 
     private static BiConsumer<BlockPos, BlockState> createPlacer(Set<BlockPos> set, StructureWorldAccess structureWorldAccess)
@@ -89,8 +92,12 @@ public abstract class TFTreeFeature<T extends TFTreeFeatureConfig> extends Featu
         }
 
         for (BlockPos blockPos : Lists.newArrayList(Sets.union(decorationPositions, rootPositions)))
+        {
             if (box.contains(blockPos))
+            {
                 voxelSet.set(blockPos.getX() - box.getMinX(), blockPos.getY() - box.getMinY(), blockPos.getZ() - box.getMinZ());
+            }
+        }
 
         BlockPos.Mutable mutable = new BlockPos.Mutable();
         int k = 0;
@@ -100,7 +107,10 @@ public abstract class TFTreeFeature<T extends TFTreeFeatureConfig> extends Featu
         {
             while (k >= 7 || !list.get(k).isEmpty())
             {
-                if (k >= 7) return voxelSet;
+                if (k >= 7)
+                {
+                    return voxelSet;
+                }
 
                 Iterator<BlockPos> iterator = list.get(k).iterator();
                 BlockPos blockPos2 = iterator.next();
@@ -152,12 +162,12 @@ public abstract class TFTreeFeature<T extends TFTreeFeatureConfig> extends Featu
      * This works akin to the AbstractTreeFeature.generate, but put our branches and roots here
      */
     protected abstract boolean generate(
-            StructureWorldAccess world,
-            Random random,
-            BlockPos pos,
-            BiConsumer<BlockPos, BlockState> trunkPlacer,
-            BiConsumer<BlockPos, BlockState> leavesPlacer,
-            BiConsumer<BlockPos, BlockState> decorationPlacer,
-            T config
+        StructureWorldAccess world,
+        Random random,
+        BlockPos pos,
+        BiConsumer<BlockPos, BlockState> trunkPlacer,
+        BiConsumer<BlockPos, BlockState> leavesPlacer,
+        BiConsumer<BlockPos, BlockState> decorationPlacer,
+        T config
     );
 }

@@ -26,12 +26,12 @@ public class ConsciousnessTreeFeature extends TFTreeFeature<TFTreeFeatureConfig>
 
     @Override
     public boolean generate(
-            StructureWorldAccess world,
-            Random random, BlockPos pos,
-            BiConsumer<BlockPos, BlockState> trunkPlacer,
-            BiConsumer<BlockPos, BlockState> leavesPlacer,
-            BiConsumer<BlockPos, BlockState> decorationPlacer,
-            TFTreeFeatureConfig config
+        StructureWorldAccess world,
+        Random random, BlockPos pos,
+        BiConsumer<BlockPos, BlockState> trunkPlacer,
+        BiConsumer<BlockPos, BlockState> leavesPlacer,
+        BiConsumer<BlockPos, BlockState> decorationPlacer,
+        TFTreeFeatureConfig config
     )
     {
         float v = random.nextFloat() - 0.5f;
@@ -44,7 +44,9 @@ public class ConsciousnessTreeFeature extends TFTreeFeature<TFTreeFeatureConfig>
         // do we have enough height?
         if (world.isOutOfHeightLimit(pos.getY()) ||
             world.isOutOfHeightLimit(pos.getY() + height + radius))
+        {
             return false;
+        }
 
         // check the top too
         int crownRadius = radius * 4 + 8;
@@ -57,7 +59,9 @@ public class ConsciousnessTreeFeature extends TFTreeFeature<TFTreeFeatureConfig>
                     Block whatsThere = world.getBlockState(pos.add(dx, dy, dz)).getBlock();
                     if (whatsThere == Blocks.AIR ||
                         whatsThere instanceof LeavesBlock)
+                    {
                         continue;
+                    }
                     return false;
                 }
             }
@@ -95,21 +99,21 @@ public class ConsciousnessTreeFeature extends TFTreeFeature<TFTreeFeatureConfig>
      * size 0 = small, 1 = med, 2 = large, 3 = root
      */
     protected void buildBranchRing(
-            StructureWorldAccess world,
-            BiConsumer<BlockPos, BlockState> trunkPlacer,
-            BiConsumer<BlockPos, BlockState> leavesPlacer,
-            Random random,
-            BlockPos pos,
-            int radius,
-            int branchHeight,
-            int heightVar,
-            int length,
-            double tilt,
-            int minBranches,
-            int maxBranches,
-            int size,
-            boolean leafy,
-            TFTreeFeatureConfig config
+        StructureWorldAccess world,
+        BiConsumer<BlockPos, BlockState> trunkPlacer,
+        BiConsumer<BlockPos, BlockState> leavesPlacer,
+        Random random,
+        BlockPos pos,
+        int radius,
+        int branchHeight,
+        int heightVar,
+        int length,
+        double tilt,
+        int minBranches,
+        int maxBranches,
+        int size,
+        boolean leafy,
+        TFTreeFeatureConfig config
     )
     {
         //let's do this!
@@ -121,16 +125,23 @@ public class ConsciousnessTreeFeature extends TFTreeFeature<TFTreeFeatureConfig>
         {
             int dHeight = branchHeight;
             if (heightVar > 0)
+            {
                 dHeight += random.nextInt(2 * heightVar) - heightVar;
+            }
 
             if (size == 0)
+            {
                 makeSmallBranch(world, trunkPlacer, leavesPlacer, random, pos, radius, dHeight, length, i * branchRotation + branchOffset, tilt, leafy, config);
-            else if (size == 1)
+            } else if (size == 1)
+            {
                 makeMedBranch(world, trunkPlacer, leavesPlacer, random, pos, radius, dHeight, length - 1, i * branchRotation + branchOffset, tilt, leafy, config);
-            else if (size == 2)
+            } else if (size == 2)
+            {
                 makeLargeBranch(world, trunkPlacer, leavesPlacer, random, pos, radius, dHeight, length - 3, i * branchRotation + branchOffset, tilt, leafy, config);
-            else
+            } else
+            {
                 makeRoot(world, random, pos, radius, dHeight, length, i * branchRotation + branchOffset, tilt, config);
+            }
         }
     }
 
@@ -138,14 +149,14 @@ public class ConsciousnessTreeFeature extends TFTreeFeature<TFTreeFeatureConfig>
      * This function builds the hollow trunk of the tree
      */
     protected void buildTrunk(
-            WorldAccess world,
-            BiConsumer<BlockPos, BlockState> trunkPlacer,
-            BiConsumer<BlockPos, BlockState> decoPlacer,
-            Random random,
-            BlockPos pos,
-            int radius,
-            int height,
-            TFTreeFeatureConfig config
+        WorldAccess world,
+        BiConsumer<BlockPos, BlockState> trunkPlacer,
+        BiConsumer<BlockPos, BlockState> decoPlacer,
+        Random random,
+        BlockPos pos,
+        int radius,
+        int height,
+        TFTreeFeatureConfig config
     )
     {
         final int hollow = radius >> 1;
@@ -222,13 +233,13 @@ public class ConsciousnessTreeFeature extends TFTreeFeature<TFTreeFeatureConfig>
      * Build the crown of the tree
      */
     protected void buildFullCrown(
-            StructureWorldAccess world,
-            BiConsumer<BlockPos, BlockState> trunkPlacer,
-            BiConsumer<BlockPos, BlockState> leavesPlacer,
-            Random random, BlockPos pos,
-            int radius,
-            int height,
-            TFTreeFeatureConfig config
+        StructureWorldAccess world,
+        BiConsumer<BlockPos, BlockState> trunkPlacer,
+        BiConsumer<BlockPos, BlockState> leavesPlacer,
+        Random random, BlockPos pos,
+        int radius,
+        int height,
+        TFTreeFeatureConfig config
     )
     {
         int crownRadius = radius * 4 + 2;
@@ -254,18 +265,18 @@ public class ConsciousnessTreeFeature extends TFTreeFeature<TFTreeFeatureConfig>
      * Make a small branch at a certain height
      */
     protected void makeSmallBranch(
-            WorldAccess world,
-            BiConsumer<BlockPos, BlockState> trunkPlacer,
-            BiConsumer<BlockPos, BlockState> leavesPlacer,
-            Random random,
-            BlockPos pos,
-            int radius,
-            int branchHeight,
-            double length,
-            double angle,
-            double tilt,
-            boolean leafy,
-            TFTreeFeatureConfig config
+        WorldAccess world,
+        BiConsumer<BlockPos, BlockState> trunkPlacer,
+        BiConsumer<BlockPos, BlockState> leavesPlacer,
+        Random random,
+        BlockPos pos,
+        int radius,
+        int branchHeight,
+        double length,
+        double angle,
+        double tilt,
+        boolean leafy,
+        TFTreeFeatureConfig config
     )
     {
         BlockPos src = FeatureLogic.translate(pos.up(branchHeight), radius, angle, 0.5);
@@ -276,16 +287,16 @@ public class ConsciousnessTreeFeature extends TFTreeFeature<TFTreeFeatureConfig>
      * Make a small branch with a leaf blob at the end
      */
     protected void makeSmallBranch(
-            WorldAccess world,
-            BiConsumer<BlockPos, BlockState> trunkPlacer,
-            BiConsumer<BlockPos, BlockState> leavesPlacer,
-            Random random,
-            BlockPos src,
-            double length,
-            double angle,
-            double tilt,
-            boolean leafy,
-            TFTreeFeatureConfig config
+        WorldAccess world,
+        BiConsumer<BlockPos, BlockState> trunkPlacer,
+        BiConsumer<BlockPos, BlockState> leavesPlacer,
+        Random random,
+        BlockPos src,
+        double length,
+        double angle,
+        double tilt,
+        boolean leafy,
+        TFTreeFeatureConfig config
     )
     {
         BlockPos dest = FeatureLogic.translate(src, length, angle, tilt);
@@ -303,17 +314,17 @@ public class ConsciousnessTreeFeature extends TFTreeFeature<TFTreeFeatureConfig>
      * Make a branch!
      */
     protected void makeMedBranch(
-            WorldAccess world,
-            BiConsumer<BlockPos, BlockState> trunkPlacer,
-            BiConsumer<BlockPos, BlockState> leavesPlacer,
-            Random random, BlockPos pos,
-            int radius,
-            int branchHeight,
-            double length,
-            double angle,
-            double tilt,
-            boolean leafy,
-            TFTreeFeatureConfig config
+        WorldAccess world,
+        BiConsumer<BlockPos, BlockState> trunkPlacer,
+        BiConsumer<BlockPos, BlockState> leavesPlacer,
+        Random random, BlockPos pos,
+        int radius,
+        int branchHeight,
+        double length,
+        double angle,
+        double tilt,
+        boolean leafy,
+        TFTreeFeatureConfig config
     )
     {
         BlockPos src = FeatureLogic.translate(pos.up(branchHeight), radius, angle, 0.5);
@@ -324,16 +335,16 @@ public class ConsciousnessTreeFeature extends TFTreeFeature<TFTreeFeatureConfig>
      * Make a branch!
      */
     protected void makeMedBranch(
-            WorldAccess world,
-            BiConsumer<BlockPos, BlockState> trunkPlacer,
-            BiConsumer<BlockPos, BlockState> leavesPlacer,
-            Random random,
-            BlockPos src,
-            double length,
-            double angle,
-            double tilt,
-            boolean leafy,
-            TFTreeFeatureConfig config
+        WorldAccess world,
+        BiConsumer<BlockPos, BlockState> trunkPlacer,
+        BiConsumer<BlockPos, BlockState> leavesPlacer,
+        Random random,
+        BlockPos src,
+        double length,
+        double angle,
+        double tilt,
+        boolean leafy,
+        TFTreeFeatureConfig config
     )
     {
         BlockPos dest = FeatureLogic.translate(src, length, angle, tilt);
@@ -343,8 +354,10 @@ public class ConsciousnessTreeFeature extends TFTreeFeature<TFTreeFeatureConfig>
         // with leaves!
 
         if (leafy)
-            // and a blob at the end
+        // and a blob at the end
+        {
             FeaturePlacers.placeSpheroid(world, leavesPlacer, FeaturePlacers.VALID_TREE_POS, random, dest, 2.5f, 2.5f, config.leavesProvider());
+        }
 
         // and several small branches
 
@@ -371,18 +384,18 @@ public class ConsciousnessTreeFeature extends TFTreeFeature<TFTreeFeatureConfig>
      * Make a large, branching "base" branch off of the tree
      */
     protected void makeLargeBranch(
-            StructureWorldAccess world,
-            BiConsumer<BlockPos, BlockState> trunkPlacer,
-            BiConsumer<BlockPos, BlockState> leavesPlacer,
-            Random random,
-            BlockPos pos,
-            int radius,
-            int branchHeight,
-            double length,
-            double angle,
-            double tilt,
-            boolean leafy,
-            TFTreeFeatureConfig config
+        StructureWorldAccess world,
+        BiConsumer<BlockPos, BlockState> trunkPlacer,
+        BiConsumer<BlockPos, BlockState> leavesPlacer,
+        Random random,
+        BlockPos pos,
+        int radius,
+        int branchHeight,
+        double length,
+        double angle,
+        double tilt,
+        boolean leafy,
+        TFTreeFeatureConfig config
     )
     {
         BlockPos src = FeatureLogic.translate(pos.up(branchHeight), radius, angle, 0.5);
@@ -395,16 +408,16 @@ public class ConsciousnessTreeFeature extends TFTreeFeature<TFTreeFeatureConfig>
      * The large branch will have 1-4 medium branches and several small branches too
      */
     protected void makeLargeBranch(
-            StructureWorldAccess world,
-            BiConsumer<BlockPos, BlockState> trunkPlacer,
-            BiConsumer<BlockPos, BlockState> leavesPlacer,
-            Random random,
-            BlockPos src,
-            double length,
-            double angle,
-            double tilt,
-            boolean leafy,
-            TFTreeFeatureConfig config
+        StructureWorldAccess world,
+        BiConsumer<BlockPos, BlockState> trunkPlacer,
+        BiConsumer<BlockPos, BlockState> leavesPlacer,
+        Random random,
+        BlockPos src,
+        double length,
+        double angle,
+        double tilt,
+        boolean leafy,
+        TFTreeFeatureConfig config
     )
     {
         BlockPos dest = FeatureLogic.translate(src, length, angle, tilt);
@@ -465,15 +478,15 @@ public class ConsciousnessTreeFeature extends TFTreeFeature<TFTreeFeatureConfig>
      * Make a root
      */
     protected void makeRoot(
-            WorldAccess worldReader,
-            Random random,
-            BlockPos pos,
-            int radius,
-            int branchHeight,
-            double length,
-            double angle,
-            double tilt,
-            TFTreeFeatureConfig config
+        WorldAccess worldReader,
+        Random random,
+        BlockPos pos,
+        int radius,
+        int branchHeight,
+        double length,
+        double angle,
+        double tilt,
+        TFTreeFeatureConfig config
     )
     {
         BlockPos src = FeatureLogic.translate(pos.up(branchHeight), radius, angle, 0.5);
@@ -483,11 +496,11 @@ public class ConsciousnessTreeFeature extends TFTreeFeature<TFTreeFeatureConfig>
     }
 
     private void makeLeafDungeon(
-            StructureWorldAccess world,
-            BiConsumer<BlockPos, BlockState> leavesPlacer,
-            Random random,
-            BlockPos pos,
-            TFTreeFeatureConfig config
+        StructureWorldAccess world,
+        BiConsumer<BlockPos, BlockState> leavesPlacer,
+        Random random,
+        BlockPos pos,
+        TFTreeFeatureConfig config
     )
     {
         // make leaves
@@ -505,7 +518,9 @@ public class ConsciousnessTreeFeature extends TFTreeFeature<TFTreeFeatureConfig>
         pos = pos.offset(chestDir, 2);
         world.setBlockState(pos, Blocks.CHEST.getDefaultState().with(ChestBlock.FACING, chestDir.getOpposite()), 2);
         if (world.getBlockEntity(pos) instanceof LootableContainerBlockEntity lootChest)
+        {
             lootChest.setLootTable(SpellDimension.modLoc("pool/start"), world.getSeed() * pos.getX() * pos.getY() * pos.getZ());
+        }
     }
 
     /**

@@ -12,10 +12,10 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 
 public record SpellInfusionRecipe(
-        Identifier id,
-        Ingredient input,
-        DefaultedList<Ingredient> ingredients,
-        Identifier spellId
+    Identifier id,
+    Ingredient input,
+    DefaultedList<Ingredient> ingredients,
+    Identifier spellId
 ) implements InfusionRecipe
 {
     @Override

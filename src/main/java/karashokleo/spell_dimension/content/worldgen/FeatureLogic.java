@@ -19,9 +19,9 @@ public final class FeatureLogic
     public static boolean hasEmptyHorizontalNeighbor(TestableWorld worldReader, BlockPos pos)
     {
         return worldReader.testBlockState(pos.north(), IS_REPLACEABLE_AIR)
-               || worldReader.testBlockState(pos.south(), IS_REPLACEABLE_AIR)
-               || worldReader.testBlockState(pos.west(), IS_REPLACEABLE_AIR)
-               || worldReader.testBlockState(pos.east(), IS_REPLACEABLE_AIR);
+            || worldReader.testBlockState(pos.south(), IS_REPLACEABLE_AIR)
+            || worldReader.testBlockState(pos.west(), IS_REPLACEABLE_AIR)
+            || worldReader.testBlockState(pos.east(), IS_REPLACEABLE_AIR);
     }
 
     // Slight stretch of logic: We check if the block is completely surrounded by air.
@@ -29,11 +29,11 @@ public final class FeatureLogic
     public static boolean hasSolidNeighbor(TestableWorld worldReader, BlockPos pos)
     {
         return !(worldReader.testBlockState(pos.down(), IS_REPLACEABLE_AIR)
-                 && worldReader.testBlockState(pos.north(), IS_REPLACEABLE_AIR)
-                 && worldReader.testBlockState(pos.south(), IS_REPLACEABLE_AIR)
-                 && worldReader.testBlockState(pos.west(), IS_REPLACEABLE_AIR)
-                 && worldReader.testBlockState(pos.east(), IS_REPLACEABLE_AIR)
-                 && worldReader.testBlockState(pos.up(), IS_REPLACEABLE_AIR));
+            && worldReader.testBlockState(pos.north(), IS_REPLACEABLE_AIR)
+            && worldReader.testBlockState(pos.south(), IS_REPLACEABLE_AIR)
+            && worldReader.testBlockState(pos.west(), IS_REPLACEABLE_AIR)
+            && worldReader.testBlockState(pos.east(), IS_REPLACEABLE_AIR)
+            && worldReader.testBlockState(pos.up(), IS_REPLACEABLE_AIR));
     }
 
     public static boolean canRootGrowIn(TestableWorld worldReader, BlockPos pos)
@@ -51,9 +51,9 @@ public final class FeatureLogic
     public static boolean worldGenReplaceable(BlockState state)
     {
         return (state.isReplaceable() ||
-                state.isIn(BlockTags.LUSH_GROUND_REPLACEABLE) ||
-                state.isIn(BlockTags.REPLACEABLE_BY_TREES)) &&
-               !state.isIn(BlockTags.FEATURES_CANNOT_REPLACE);
+            state.isIn(BlockTags.LUSH_GROUND_REPLACEABLE) ||
+            state.isIn(BlockTags.REPLACEABLE_BY_TREES)) &&
+            !state.isIn(BlockTags.FEATURES_CANNOT_REPLACE);
     }
 
     /**
@@ -64,8 +64,12 @@ public final class FeatureLogic
     public static boolean hasAirAround(WorldAccess world, BlockPos pos)
     {
         for (Direction e : directionsExceptDown)
+        {
             if (world.isAir(pos.offset(e)))
+            {
                 return true;
+            }
+        }
         return false;
     }
 
@@ -81,9 +85,9 @@ public final class FeatureLogic
         double rTilt = tilt * Math.PI;
 
         return pos.add(
-                (int) Math.round(Math.sin(rAngle) * Math.sin(rTilt) * distance),
-                (int) Math.round(Math.cos(rTilt) * distance),
-                (int) Math.round(Math.cos(rAngle) * Math.sin(rTilt) * distance)
+            (int) Math.round(Math.sin(rAngle) * Math.sin(rTilt) * distance),
+            (int) Math.round(Math.cos(rTilt) * distance),
+            (int) Math.round(Math.cos(rAngle) * Math.sin(rTilt) * distance)
         );
     }
 }

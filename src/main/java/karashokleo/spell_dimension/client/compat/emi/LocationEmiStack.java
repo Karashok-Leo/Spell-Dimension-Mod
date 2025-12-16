@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 public class LocationEmiStack extends EmiStack
 {
-    protected LocationStack stack;
+    protected final LocationStack stack;
 
     public LocationEmiStack(LocationStack stack)
     {
@@ -25,9 +25,9 @@ public class LocationEmiStack extends EmiStack
     public EmiStack copy()
     {
         return new LocationEmiStack(stack)
-                .setChance(chance)
-                .setRemainder(getRemainder().copy())
-                .comparison(comparison);
+            .setChance(chance)
+            .setRemainder(getRemainder().copy())
+            .comparison(comparison);
     }
 
     @Override

@@ -15,11 +15,11 @@ public record REILocateDisplay(EntryIngredient input, EntryStack<LocationStack> 
     public REILocateDisplay(LocateRecipe recipe)
     {
         this(
-                EntryIngredients.ofIngredient(recipe.getIngredient()),
-                EntryStack.of(
-                        REICompat.LOCATION,
-                        LocationStack.fromRecipe(recipe)
-                )
+            EntryIngredients.ofIngredient(recipe.getIngredient()),
+            EntryStack.of(
+                REICompat.LOCATION,
+                LocationStack.fromRecipe(recipe)
+            )
         );
     }
 

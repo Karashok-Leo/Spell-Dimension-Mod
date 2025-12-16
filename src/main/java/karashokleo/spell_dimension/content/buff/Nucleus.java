@@ -31,9 +31,9 @@ import java.util.UUID;
 public class Nucleus implements Buff
 {
     public static final Codec<Nucleus> CODEC = RecordCodecBuilder.create(
-            ins -> ins.group(
-                    Codecs.NONNEGATIVE_INT.fieldOf("duration").forGetter(Nucleus::getDuration)
-            ).apply(ins, Nucleus::new)
+        ins -> ins.group(
+            Codecs.NONNEGATIVE_INT.fieldOf("duration").forGetter(Nucleus::getDuration)
+        ).apply(ins, Nucleus::new)
     );
     public static final BuffType<Nucleus> TYPE = new BuffType<>(CODEC, true);
 
@@ -99,7 +99,9 @@ public class Nucleus implements Buff
                 Buff.remove(entity, TYPE);
             }
             if (entity.isOnFire())
+            {
                 Buff.remove(entity, TYPE);
+            }
         }
     }
 
@@ -117,7 +119,10 @@ public class Nucleus implements Buff
 
     public static void nucleusBoom(LivingEntity source, LivingEntity caster)
     {
-        if (caster == null) return;
+        if (caster == null)
+        {
+            return;
+        }
         SpellPower.Result power = SpellPower.getSpellPower(SpellSchools.FROST, caster);
         int amplifier = Math.min((int) (power.baseValue()) / 24 + 1, 3);
         SpellInfo icicleInfo = getOrCreateSpellInfo(caster);
@@ -134,8 +139,12 @@ public class Nucleus implements Buff
 
         int step = 72 / (amplifier + 1);
         for (int i = 0; i < 360; i += step)
+        {
             for (int j = 0; j < 360; j += step)
+            {
                 ImpactUtil.shootProjectile(source.getWorld(), caster, source.getPos().add(0, height / 2, 0), ImpactUtil.fromEulerAngle(i, j, 0), range, icicleInfo, context);
+            }
+        }
 
         source.getWorld().playSound(null, source.getBlockPos(), SoundEvents.BLOCK_GLASS_BREAK, source.getSoundCategory(), 1.0F, 1.0F);
     }

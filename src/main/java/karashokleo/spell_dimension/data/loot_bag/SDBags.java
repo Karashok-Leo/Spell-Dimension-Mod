@@ -17,175 +17,175 @@ import java.util.function.Supplier;
 public enum SDBags
 {
     START(
-            SDContents.START,
-            Rarity.COMMON,
-            13467442,
-            16775920,
-            SDContents.START.nameEn + " Bag",
-            SDContents.START.nameZh + "袋"
+        SDContents.START,
+        Rarity.COMMON,
+        13467442,
+        16775920,
+        SDContents.START.nameEn + " Bag",
+        SDContents.START.nameZh + "袋"
     ),
     ARTIFACT(
-            SDContents.ARTIFACT,
-            Rarity.EPIC,
-            14972979,
-            4353858
+        SDContents.ARTIFACT,
+        Rarity.EPIC,
+        14972979,
+        4353858
     ),
     ARING(
-            SDContents.ARING,
-            Rarity.EPIC,
-            9408445,
-            9315179
+        SDContents.ARING,
+        Rarity.EPIC,
+        9408445,
+        9315179
     ),
     JEWELRY_RINGS(
-            SDContents.JEWELRY_RINGS,
-            Rarity.EPIC,
-            16711935,
-            16776960
+        SDContents.JEWELRY_RINGS,
+        Rarity.EPIC,
+        16711935,
+        16776960
     ),
     JEWELRY_NECKLACES(
-            SDContents.JEWELRY_NECKLACES,
-            Rarity.EPIC,
-            16711935,
-            16776960
+        SDContents.JEWELRY_NECKLACES,
+        Rarity.EPIC,
+        16711935,
+        16776960
     ),
     MIDAS(
-            SDContents.MIDAS,
-            Rarity.COMMON,
-            16776960,
-            14408560
+        SDContents.MIDAS,
+        Rarity.COMMON,
+        16776960,
+        14408560
     ),
     COMMON_BOOK(
-            SDContents.COMMON_BOOK,
-            Rarity.COMMON,
-            16316671,
-            16775920
+        SDContents.COMMON_BOOK,
+        Rarity.COMMON,
+        16316671,
+        16775920
     ),
     COMMON_GEAR(
-            SDContents.COMMON_GEAR,
-            Rarity.COMMON,
-            16316671,
-            16775920
+        SDContents.COMMON_GEAR,
+        Rarity.COMMON,
+        16316671,
+        16775920
     ),
     COMMON_MATERIAL(
-            SDContents.COMMON_MATERIAL,
-            Rarity.COMMON,
-            16316671,
-            16775920
+        SDContents.COMMON_MATERIAL,
+        Rarity.COMMON,
+        16316671,
+        16775920
     ),
     UNCOMMON_BOOK(
-            SDContents.UNCOMMON_BOOK,
-            Rarity.UNCOMMON,
-            16776960,
-            16775920
+        SDContents.UNCOMMON_BOOK,
+        Rarity.UNCOMMON,
+        16776960,
+        16775920
     ),
     UNCOMMON_GEAR(
-            SDContents.UNCOMMON_GEAR,
-            Rarity.UNCOMMON,
-            16776960,
-            16775920
+        SDContents.UNCOMMON_GEAR,
+        Rarity.UNCOMMON,
+        16776960,
+        16775920
     ),
     UNCOMMON_MATERIAL(
-            SDContents.UNCOMMON_MATERIAL,
-            Rarity.UNCOMMON,
-            16776960,
-            16775920
+        SDContents.UNCOMMON_MATERIAL,
+        Rarity.UNCOMMON,
+        16776960,
+        16775920
     ),
     RARE_BOOK(
-            SDContents.RARE_BOOK,
-            Rarity.RARE,
-            65535,
-            16775920
+        SDContents.RARE_BOOK,
+        Rarity.RARE,
+        65535,
+        16775920
     ),
     RARE_GEAR(
-            SDContents.RARE_GEAR,
-            Rarity.RARE,
-            65535,
-            16775920
+        SDContents.RARE_GEAR,
+        Rarity.RARE,
+        65535,
+        16775920
     ),
     RARE_MATERIAL(
-            SDContents.RARE_MATERIAL,
-            Rarity.RARE,
-            65535,
-            16775920
+        SDContents.RARE_MATERIAL,
+        Rarity.RARE,
+        65535,
+        16775920
     ),
     EPIC_BOOK(
-            SDContents.EPIC_BOOK,
-            Rarity.EPIC,
-            9055202,
-            16775920
+        SDContents.EPIC_BOOK,
+        Rarity.EPIC,
+        9055202,
+        16775920
     ),
     EPIC_GEAR(
-            SDContents.EPIC_GEAR,
-            Rarity.EPIC,
-            9055202,
-            16775920
+        SDContents.EPIC_GEAR,
+        Rarity.EPIC,
+        9055202,
+        16775920
     ),
     EPIC_MATERIAL(
-            SDContents.EPIC_MATERIAL,
-            Rarity.EPIC,
-            9055202,
-            16775920
+        SDContents.EPIC_MATERIAL,
+        Rarity.EPIC,
+        9055202,
+        16775920
     ),
     LEGENDARY_BOOK(
-            SDContents.LEGENDARY_BOOK,
-            Rarity.EPIC,
-            3100495,
-            16775920
+        SDContents.LEGENDARY_BOOK,
+        Rarity.EPIC,
+        3100495,
+        16775920
     ),
     LEGENDARY_GEAR(
-            SDContents.LEGENDARY_GEAR,
-            Rarity.EPIC,
-            3100495,
-            16775920
+        SDContents.LEGENDARY_GEAR,
+        Rarity.EPIC,
+        3100495,
+        16775920
     ),
     LEGENDARY_MATERIAL(
-            SDContents.LEGENDARY_MATERIAL,
-            Rarity.EPIC,
-            3100495,
-            16775920
+        SDContents.LEGENDARY_MATERIAL,
+        Rarity.EPIC,
+        3100495,
+        16775920
     ),
     ROBE(
-            List.of(
-                    SDContents.ROBE_GENERAL,
-                    SDContents.ROBE_ARCANE,
-                    SDContents.ROBE_FIRE,
-                    SDContents.ROBE_FROST,
-                    SDContents.ROBE_HEALING,
-                    SDContents.ROBE_LIGHTNING
-            ),
-            Rarity.COMMON,
-            10040013,
-            10444703,
-            "Apprentice Robe Bag",
-            "新手法袍袋"
+        List.of(
+            SDContents.ROBE_GENERAL,
+            SDContents.ROBE_ARCANE,
+            SDContents.ROBE_FIRE,
+            SDContents.ROBE_FROST,
+            SDContents.ROBE_HEALING,
+            SDContents.ROBE_LIGHTNING
+        ),
+        Rarity.COMMON,
+        10040013,
+        10444703,
+        "Apprentice Robe Bag",
+        "新手法袍袋"
     ),
     WAND(
-            List.of(
-                    SDContents.WAND_ARCANE,
-                    SDContents.WAND_FIRE,
-                    SDContents.WAND_FROST,
-                    SDContents.WAND_HEALING,
-                    SDContents.WAND_LIGHTNING
-            ),
-            Rarity.COMMON,
-            10040013,
-            10444703,
-            "Apprentice Wand Bag",
-            "新手法杖袋"
+        List.of(
+            SDContents.WAND_ARCANE,
+            SDContents.WAND_FIRE,
+            SDContents.WAND_FROST,
+            SDContents.WAND_HEALING,
+            SDContents.WAND_LIGHTNING
+        ),
+        Rarity.COMMON,
+        10040013,
+        10444703,
+        "Apprentice Wand Bag",
+        "新手法杖袋"
     ),
     RUNE(
-            List.of(
-                    SDContents.RUNE_ARCANE,
-                    SDContents.RUNE_FIRE,
-                    SDContents.RUNE_FROST,
-                    SDContents.RUNE_HEALING,
-                    SDContents.RUNE_LIGHTNING
-            ),
-            Rarity.COMMON,
-            10040013,
-            10444703,
-            "Magic Rune Bag",
-            "魔法符文袋"
+        List.of(
+            SDContents.RUNE_ARCANE,
+            SDContents.RUNE_FIRE,
+            SDContents.RUNE_FROST,
+            SDContents.RUNE_HEALING,
+            SDContents.RUNE_LIGHTNING
+        ),
+        Rarity.COMMON,
+        10040013,
+        10444703,
+        "Magic Rune Bag",
+        "魔法符文袋"
     ),
     ;
     public final Identifier id;
@@ -205,27 +205,27 @@ public enum SDBags
     SDBags(SDContents contents, Rarity rarity, int bodyColor, int stringColor, String nameEn, String nameZh)
     {
         this(
-                () -> new SingleBag(contents.factory.get(), rarity, new Bag.Color(bodyColor, stringColor)),
-                nameEn,
-                nameZh
+            () -> new SingleBag(contents.factory.get(), rarity, new Bag.Color(bodyColor, stringColor)),
+            nameEn,
+            nameZh
         );
     }
 
     SDBags(SDContents contents, Rarity rarity, int bodyColor, int stringColor)
     {
         this(
-                () -> new SingleBag(contents.factory.get(), rarity, new Bag.Color(bodyColor, stringColor)),
-                contents.nameEn + " Loot Bag",
-                contents.nameZh + "战利品袋"
+            () -> new SingleBag(contents.factory.get(), rarity, new Bag.Color(bodyColor, stringColor)),
+            contents.nameEn + " Loot Bag",
+            contents.nameZh + "战利品袋"
         );
     }
 
     SDBags(List<SDContents> contents, Rarity rarity, int bodyColor, int stringColor, String nameEn, String nameZh)
     {
         this(
-                () -> new OptionalBag(contents.stream().map(ins -> ins.factory.get()).toList(), rarity, new Bag.Color(bodyColor, stringColor)),
-                nameEn,
-                nameZh
+            () -> new OptionalBag(contents.stream().map(ins -> ins.factory.get()).toList(), rarity, new Bag.Color(bodyColor, stringColor)),
+            nameEn,
+            nameZh
         );
     }
 

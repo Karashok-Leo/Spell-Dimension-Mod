@@ -24,6 +24,8 @@ public abstract class InGameOverlayRendererMixin
     private static void onRenderOverlays(MinecraftClient client, MatrixStack matrices, CallbackInfo ci)
     {
         if (NoClip.noClip(client.player))
+        {
             ci.cancel();
+        }
     }
 }

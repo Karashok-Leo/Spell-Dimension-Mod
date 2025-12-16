@@ -8,19 +8,19 @@ import net.spell_engine.particle.ParticleHelper;
 public class FrostedParticleSpawner implements CustomParticleStatusEffect.Spawner
 {
     private static final ParticleBatch PARTICLE = new ParticleBatch(
-            "spell_engine:frost_hit",
-            ParticleBatch.Shape.SPHERE,
-            ParticleBatch.Origin.CENTER,
-            null,
-            0,
-            0,
-            1,
-            0.1F,
-            0.4F,
-            0,
-            0,
-            0,
-            false
+        "spell_engine:frost_hit",
+        ParticleBatch.Shape.SPHERE,
+        ParticleBatch.Origin.CENTER,
+        null,
+        0,
+        0,
+        1,
+        0.1F,
+        0.4F,
+        0,
+        0,
+        0,
+        false
     );
 
     @Override

@@ -22,7 +22,7 @@ public class FrostedEffectRenderer implements CustomModelStatusEffect.Renderer
         matrices.scale(entity.getWidth() * 0.8F, entity.getHeight(), entity.getWidth() * 0.8F);
         matrices.translate(0, 0.5, 0);
         CustomModels.render(RENDER_LAYER, MinecraftClient.getInstance().getItemRenderer(), SpellDimensionClient.FROSTED_MODEL,
-                matrices, vertexConsumers, light, entity.getId());
+            matrices, vertexConsumers, light, entity.getId());
         matrices.pop();
     }
 }

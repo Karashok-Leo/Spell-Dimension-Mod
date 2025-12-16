@@ -13,15 +13,15 @@ import org.spongepowered.asm.mixin.injection.At;
 public abstract class AnvilScreenHandlerMixin
 {
     @WrapOperation(
-            method = "updateResult",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/enchantment/Enchantment;isAcceptableItem(Lnet/minecraft/item/ItemStack;)Z"
-            )
+        method = "updateResult",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/enchantment/Enchantment;isAcceptableItem(Lnet/minecraft/item/ItemStack;)Z"
+        )
     )
     private boolean injected(Enchantment instance, ItemStack stack, Operation<Boolean> original)
     {
         return original.call(instance, stack) &&
-               !stack.isOf(AllItems.SPELL_PRISM);
+            !stack.isOf(AllItems.SPELL_PRISM);
     }
 }

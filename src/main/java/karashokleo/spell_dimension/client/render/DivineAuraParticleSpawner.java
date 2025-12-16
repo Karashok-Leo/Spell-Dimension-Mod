@@ -9,19 +9,19 @@ import net.spell_engine.particle.ParticleHelper;
 public class DivineAuraParticleSpawner implements CustomParticleStatusEffect.Spawner
 {
     private static final ParticleBatch PARTICLE = new ParticleBatch(
-            "spell_engine:holy_spark_mini",
-            ParticleBatch.Shape.CIRCLE,
-            ParticleBatch.Origin.CENTER,
-            null,
-            0,
-            0,
-            12,
-            0.01F,
-            0.05F,
-            0,
-            0,
-            0,
-            false
+        "spell_engine:holy_spark_mini",
+        ParticleBatch.Shape.CIRCLE,
+        ParticleBatch.Origin.CENTER,
+        null,
+        0,
+        0,
+        12,
+        0.01F,
+        0.05F,
+        0,
+        0,
+        0,
+        false
     );
 
     @Override

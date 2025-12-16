@@ -15,16 +15,18 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class AdaptingTraitMixin
 {
     @Inject(
-            method = "onHurt",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lkarashokleo/l2hostility/content/trait/common/AdaptingTrait$Data;adapt(Ljava/lang/String;I)Ljava/util/Optional;"
-            ),
-            cancellable = true
+        method = "onHurt",
+        at = @At(
+            value = "INVOKE",
+            target = "Lkarashokleo/l2hostility/content/trait/common/AdaptingTrait$Data;adapt(Ljava/lang/String;I)Ljava/util/Optional;"
+        ),
+        cancellable = true
     )
     private void inject_onHurt(MobDifficulty difficulty, LivingEntity entity, int level, LivingHurtEvent event, CallbackInfo ci, @Local AdaptingTrait.Data data)
     {
         if (AdaptiveCompat.adaptSpell(level, entity, event, data))
+        {
             ci.cancel();
+        }
     }
 }

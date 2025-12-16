@@ -29,7 +29,9 @@ public class AttributeColorConfig
 
         // Spell School
         for (SpellSchool school : SchoolUtil.SCHOOLS)
+        {
             map.put(AttributeUtil.getAttributeId(school.attribute), school.color);
+        }
     }
 
     public static int get(@Nullable EntityAttribute attribute)

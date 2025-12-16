@@ -18,14 +18,14 @@ public interface PositionProvider
     static PositionProvider get(Either<Integer, Vec3d> position, World world)
     {
         return position.map(
-                id ->
-                {
-                    var entity = world.getEntityById(id);
-                    return entity == null ?
-                            null :
-                            tickDelta -> getPos(entity, tickDelta);
-                },
-                vec -> tickDelta -> vec
+            id ->
+            {
+                var entity = world.getEntityById(id);
+                return entity == null ?
+                    null :
+                    tickDelta -> getPos(entity, tickDelta);
+            },
+            vec -> tickDelta -> vec
         );
     }
 
@@ -33,7 +33,7 @@ public interface PositionProvider
     {
         Vec3d prevPos = new Vec3d(entity.prevX, entity.prevY, entity.prevZ);
         return prevPos.lerp(entity.getPos(), tickDelta)
-                .add(0, entity.getHeight() / 2, 0);
+            .add(0, entity.getHeight() / 2, 0);
     }
 
     static Either<Integer, Vec3d> readFromString(StringReader reader) throws CommandSyntaxException
@@ -59,19 +59,19 @@ public interface PositionProvider
         if (position.left().isPresent())
         {
             sb.append(true)
-                    .append(' ')
-                    .append(position.left().get());
+                .append(' ')
+                .append(position.left().get());
         } else
         {
             //noinspection OptionalGetWithoutIsPresent
             Vec3d vec = position.right().get();
             sb.append(false)
-                    .append(' ')
-                    .append(vec.x)
-                    .append(' ')
-                    .append(vec.y)
-                    .append(' ')
-                    .append(vec.z);
+                .append(' ')
+                .append(vec.x)
+                .append(' ')
+                .append(vec.y)
+                .append(' ')
+                .append(vec.z);
         }
     }
 

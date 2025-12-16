@@ -60,15 +60,15 @@ public class SpellInfusionPedestalTile extends AbstractInfusionTile
             float radian = progress * MathHelper.PI * 4;
             float y = 2.5F * (1 - progress);
             Vec3d vec = pos.toCenterPos()
-                    .add(
-                            MathHelper.cos(radian) * progress * 1.5,
-                            y > 1.8 ? 1.8 - (y - 1.8) / 0.7 * 1.2 : y,
-                            MathHelper.sin(radian) * progress * 1.5
-                    );
+                .add(
+                    MathHelper.cos(radian) * progress * 1.5,
+                    y > 1.8 ? 1.8 - (y - 1.8) / 0.7 * 1.2 : y,
+                    MathHelper.sin(radian) * progress * 1.5
+                );
             world.addParticle(
-                    ParticleTypes.END_ROD,
-                    vec.getX(), vec.getY(), vec.getZ(),
-                    0, 0, 0
+                ParticleTypes.END_ROD,
+                vec.getX(), vec.getY(), vec.getZ(),
+                0, 0, 0
             );
         }
     }
@@ -84,7 +84,9 @@ public class SpellInfusionPedestalTile extends AbstractInfusionTile
             {
                 entity.setStack(entity.crafting);
                 if (world instanceof ServerWorld serverWorld)
+                {
                     ParticleUtil.sparkParticleEmit(serverWorld, pos.toCenterPos().add(0, 0.6, 0), 24);
+                }
                 entity.crafting = null;
                 entity.craftTimeMax = 0;
             }
@@ -105,7 +107,9 @@ public class SpellInfusionPedestalTile extends AbstractInfusionTile
     {
         super.writeNbt(nbt);
         if (this.crafting != null)
+        {
             nbt.put("Crafting", this.crafting.writeNbt(new NbtCompound()));
+        }
         nbt.putInt("CraftTime", this.craftTime);
         nbt.putInt("CraftTimeMax", this.craftTimeMax);
     }

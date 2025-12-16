@@ -19,13 +19,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class EndPortalBlockMixin
 {
     @Inject(
-            method = "onEntityCollision",
-            at = @At("HEAD"),
-            cancellable = true
+        method = "onEntityCollision",
+        at = @At("HEAD"),
+        cancellable = true
     )
     private void inject_onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity, CallbackInfo ci)
     {
-        if (world.isClient()) return;
+        if (world.isClient())
+        {
+            return;
+        }
         if (entity instanceof PlayerEntity player &&
             !GameStageComponent.canEnterEnd(player))
         {

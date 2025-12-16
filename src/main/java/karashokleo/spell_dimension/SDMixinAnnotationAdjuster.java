@@ -24,9 +24,9 @@ public class SDMixinAnnotationAdjuster implements MixinAnnotationAdjuster
         if (mixinClassName.equals("io.ix0rai.rainglow.mixin.SlimeEntityMixin") &&
             annotationNode.is(Inject.class) &&
             annotationNode.as(AdjustableInjectNode.class)
-                    .getMethod()
-                    .get(0)
-                    .equals("tick")
+                .getMethod()
+                .get(0)
+                .equals("tick")
         )
         {
             System.out.println("Mixin " + mixinClassName + " cancelled");

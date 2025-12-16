@@ -31,10 +31,10 @@ public class MagicMirrorItem extends Item
     public MagicMirrorItem(boolean broken)
     {
         super(
-                new FabricItemSettings()
-                        .fireproof()
-                        .maxCount(1)
-                        .rarity(broken ? Rarity.UNCOMMON : Rarity.EPIC)
+            new FabricItemSettings()
+                .fireproof()
+                .maxCount(1)
+                .rarity(broken ? Rarity.UNCOMMON : Rarity.EPIC)
         );
         this.broken = broken;
     }
@@ -50,7 +50,9 @@ public class MagicMirrorItem extends Item
     {
         ItemStack stack = user.getStackInHand(hand);
         if (world.getRegistryKey().equals(AllWorldGen.OC_WORLD))
+        {
             return TypedActionResult.fail(stack);
+        }
         user.setCurrentHand(hand);
         return TypedActionResult.consume(stack);
     }
@@ -75,7 +77,10 @@ public class MagicMirrorItem extends Item
                 AllPackets.toClientPlayer(player, floatingItem);
 
                 // Consume if broken
-                if (broken) stack.decrement(1);
+                if (broken)
+                {
+                    stack.decrement(1);
+                }
 
                 BlockPos destinationPos = null;
 
@@ -86,28 +91,30 @@ public class MagicMirrorItem extends Item
                     float spawnAngle = player.getSpawnAngle();
                     Optional<Vec3d> respawnPosition = PlayerEntity.findRespawnPosition(destinationWorld, blockPos, spawnAngle, true, true);
                     if (respawnPosition.isPresent())
+                    {
                         destinationPos = BlockPos.ofFloored(respawnPosition.get());
+                    }
                 }
 
                 // Teleport to the coordinate position if the spawn point is not set
                 if (destinationPos == null)
                 {
                     FutureTask.submit(
-                            TeleportUtil.getChangeWorldPosFuture(serverWorld, destinationWorld, player.getBlockPos()),
-                            optional -> optional.ifPresent(
-                                    pos -> TeleportUtil.teleportPlayerChangeDimension(
-                                            player,
-                                            destinationWorld,
-                                            pos
-                                    )
+                        TeleportUtil.getChangeWorldPosFuture(serverWorld, destinationWorld, player.getBlockPos()),
+                        optional -> optional.ifPresent(
+                            pos -> TeleportUtil.teleportPlayerChangeDimension(
+                                player,
+                                destinationWorld,
+                                pos
                             )
+                        )
                     );
                 } else
                 {
                     TeleportUtil.teleportPlayerChangeDimension(
-                            player,
-                            destinationWorld,
-                            destinationPos
+                        player,
+                        destinationWorld,
+                        destinationPos
                     );
                 }
             }

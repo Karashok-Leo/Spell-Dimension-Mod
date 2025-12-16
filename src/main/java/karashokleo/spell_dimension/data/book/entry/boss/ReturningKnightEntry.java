@@ -51,34 +51,34 @@ public class ReturningKnightEntry extends BaseEntryProvider
         context.page("boss");
         this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
-                """
-                        Level: %d+
-                        \\
-                        \\
-                        Use the Lost Soul on the Old Moon Altar to summon.
-                        """.formatted(TextConstants.BOSS_LEVELS[1])
+            """
+                Level: %d+
+                \\
+                \\
+                Use the Lost Soul on the Old Moon Altar to summon.
+                """.formatted(TextConstants.BOSS_LEVELS[1])
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
-                """
-                        等级: %d+
-                        \\
-                        \\
-                        对破旧的月光祭坛使用迷失的灵魂召唤。
-                        """.formatted(TextConstants.BOSS_LEVELS[1])
+            """
+                等级: %d+
+                \\
+                \\
+                对破旧的月光祭坛使用迷失的灵魂召唤。
+                """.formatted(TextConstants.BOSS_LEVELS[1])
         );
 
         BookSpotlightPageModel boss = BookSpotlightPageModel
-                .builder()
-                .withTitle(context.pageTitle())
-                .withText(context.pageText())
-                .withItem(Ingredient.ofItems(BookGenUtil.getItem(new Identifier("soulsweapons:nightfall"))))
-                .build();
+            .builder()
+            .withTitle(context.pageTitle())
+            .withText(context.pageText())
+            .withItem(Ingredient.ofItems(BookGenUtil.getItem(new Identifier("soulsweapons:nightfall"))))
+            .build();
         BookEntityPageModel entity = BookEntityPageModel
-                .builder()
-                .withEntityId("soulsweapons:returning_knight")
-                .withOffset(0.2f)
-                .build();
+            .builder()
+            .withEntityId("soulsweapons:returning_knight")
+            .withOffset(0.2f)
+            .build();
 
         return List.of(boss, entity);
     }

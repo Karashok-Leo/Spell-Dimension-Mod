@@ -45,57 +45,57 @@ public class AllBlocks
     public static void register()
     {
         SPELL_INFUSION_PEDESTAL = Entry.of("spell_infusion_pedestal", new SpellInfusionPedestalBlock())
-                .addEN()
-                .addZH("魔力灌注基座")
-                .addLoot()
-                .addSimpleItem()
-                .addTag(BlockTags.PICKAXE_MINEABLE)
-                .registerWithItem();
+            .addEN()
+            .addZH("魔力灌注基座")
+            .addLoot()
+            .addSimpleItem()
+            .addTag(BlockTags.PICKAXE_MINEABLE)
+            .registerWithItem();
         SPELL_INFUSION_PEDESTAL_TILE = Registry.register(
-                Registries.BLOCK_ENTITY_TYPE,
-                SpellDimension.modLoc("spell_infusion_pedestal"),
-                FabricBlockEntityTypeBuilder.create(SpellInfusionPedestalTile::new, SPELL_INFUSION_PEDESTAL.block()).build()
+            Registries.BLOCK_ENTITY_TYPE,
+            SpellDimension.modLoc("spell_infusion_pedestal"),
+            FabricBlockEntityTypeBuilder.create(SpellInfusionPedestalTile::new, SPELL_INFUSION_PEDESTAL.block()).build()
         );
         SPELL_LIGHT = Entry.of("spell_light", new SpellLightBlock())
-                .addEN()
-                .addZH("魔力之光")
-                .register();
+            .addEN()
+            .addZH("魔力之光")
+            .register();
         CONSCIOUSNESS_BASE = Entry.of("consciousness_base", new ConsciousnessBaseBlock())
-                .addEN()
-                .addZH("识之基座")
-                .addSimpleItem(new FabricItemSettings().rarity(Rarity.EPIC))
-                .registerWithItem();
+            .addEN()
+            .addZH("识之基座")
+            .addSimpleItem(new FabricItemSettings().rarity(Rarity.EPIC))
+            .registerWithItem();
         CONSCIOUSNESS_CORE = Entry.of("consciousness_core", new ConsciousnessCoreBlock())
-                .addEN()
-                .addZH("识之核心")
-                .addSimpleItem(new FabricItemSettings().rarity(Rarity.EPIC))
-                .addModel()
-                .registerWithItem();
+            .addEN()
+            .addZH("识之核心")
+            .addSimpleItem(new FabricItemSettings().rarity(Rarity.EPIC))
+            .addModel()
+            .registerWithItem();
         CONSCIOUSNESS_CORE_TILE = Registry.register(
-                Registries.BLOCK_ENTITY_TYPE,
-                SpellDimension.modLoc("consciousness_core"),
-                FabricBlockEntityTypeBuilder.create(ConsciousnessCoreTile::new, CONSCIOUSNESS_CORE.block()).build()
+            Registries.BLOCK_ENTITY_TYPE,
+            SpellDimension.modLoc("consciousness_core"),
+            FabricBlockEntityTypeBuilder.create(ConsciousnessCoreTile::new, CONSCIOUSNESS_CORE.block()).build()
         );
 
         PROTECTIVE_COVER = Entry.of("protective_cover", new ProtectiveCoverBlock())
-                .addEN()
-                .addZH("屏障")
-                .addSimpleItem()
-                .addModel()
-                .registerWithItem();
+            .addEN()
+            .addZH("屏障")
+            .addSimpleItem()
+            .addModel()
+            .registerWithItem();
         PROTECTIVE_COVER_TILE = Registry.register(
-                Registries.BLOCK_ENTITY_TYPE,
-                SpellDimension.modLoc("protective_cover"),
-                FabricBlockEntityTypeBuilder.create(ProtectiveCoverBlockTile::new, PROTECTIVE_COVER.block()).build()
+            Registries.BLOCK_ENTITY_TYPE,
+            SpellDimension.modLoc("protective_cover"),
+            FabricBlockEntityTypeBuilder.create(ProtectiveCoverBlockTile::new, PROTECTIVE_COVER.block()).build()
         );
 
         STILL_CONSCIOUSNESS = Registry.register(Registries.FLUID, SpellDimension.modLoc("still_consciousness"), new ConsciousnessFluid.Still());
         FLOWING_CONSCIOUSNESS = Registry.register(Registries.FLUID, SpellDimension.modLoc("flowing_consciousness"), new ConsciousnessFluid.Flowing());
 
         CONSCIOUSNESS = Entry.of("consciousness", new FluidBlock(STILL_CONSCIOUSNESS, Block.Settings.copy(Blocks.WATER)))
-                .addEN()
-                .addZH("识")
-                .register();
+            .addEN()
+            .addZH("识")
+            .register();
 
         SpellDimension.MODELS.addBlock(generator ->
         {

@@ -9,10 +9,10 @@ import java.util.List;
 public class EssenceLootConfig
 {
     public static final BaseConfig BASE_CONFIG = new BaseConfig(
-            List.of(Dummmmmmy.TARGET_DUMMY.get()),
-            0.2F,
-            200, 400,
-            0.80F, 0.96F
+        List.of(Dummmmmmy.TARGET_DUMMY.get()),
+        0.2F,
+        200, 400,
+        0.80F, 0.96F
     );
 
     public static final int EC_WEIGHT = 7;
@@ -23,24 +23,36 @@ public class EssenceLootConfig
     public static final LootPool ENTITY_POOL = new LootPool(0, 2, 210);
 
     public record BaseConfig(
-            List<EntityType<?>> blacklist,
-            float dropChance,
-            int intermediateLevel,
-            int advancedLevel,
-            float intermediateChance,
-            float advancedChance
+        List<EntityType<?>> blacklist,
+        float dropChance,
+        int intermediateLevel,
+        int advancedLevel,
+        float intermediateChance,
+        float advancedChance
     )
     {
         public int getRandomGrade(Random random, int mobLevel)
         {
             int maxGrade = 0;
-            if (mobLevel >= intermediateLevel) maxGrade++;
-            if (mobLevel >= advancedLevel) maxGrade++;
+            if (mobLevel >= intermediateLevel)
+            {
+                maxGrade++;
+            }
+            if (mobLevel >= advancedLevel)
+            {
+                maxGrade++;
+            }
 
             int randomGrade = 0;
             float f = random.nextFloat();
-            if (f >= intermediateChance) randomGrade++;
-            if (f >= advancedChance) randomGrade++;
+            if (f >= intermediateChance)
+            {
+                randomGrade++;
+            }
+            if (f >= advancedChance)
+            {
+                randomGrade++;
+            }
 
             return Math.min(maxGrade, randomGrade);
 

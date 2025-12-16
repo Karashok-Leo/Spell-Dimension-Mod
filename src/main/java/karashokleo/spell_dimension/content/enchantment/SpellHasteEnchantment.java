@@ -17,9 +17,9 @@ public class SpellHasteEnchantment extends SpellImpactEnchantment
     public SpellHasteEnchantment()
     {
         super(
-                Rarity.UNCOMMON,
-                EnchantmentTarget.WEARABLE,
-                EquipmentSlot.values()
+            Rarity.UNCOMMON,
+            EnchantmentTarget.WEARABLE,
+            EquipmentSlot.values()
         );
     }
 

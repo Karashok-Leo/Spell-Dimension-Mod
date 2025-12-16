@@ -10,10 +10,10 @@ import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
 public record SummonRecipeJsonProvider(
-        Identifier recipeId,
-        Ingredient ingredient,
-        EntityType<?> entityType,
-        int count
+    Identifier recipeId,
+    Ingredient ingredient,
+    EntityType<?> entityType,
+    int count
 ) implements RecipeJsonProvider
 {
     @Override

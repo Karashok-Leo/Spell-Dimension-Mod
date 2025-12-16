@@ -12,15 +12,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class SpellInfinityEnchantmentMixin
 {
     @Inject(
-            method = "isEligible",
-            at = @At("RETURN"),
-            cancellable = true
+        method = "isEligible",
+        at = @At("RETURN"),
+        cancellable = true
     )
     private static void inject_isEligible(ItemStack stack, CallbackInfoReturnable<Boolean> cir)
     {
         cir.setReturnValue(
-                cir.getReturnValue() ||
-                        stack.isIn(AllTags.MELEE_WEAPONS)
+            cir.getReturnValue() ||
+                stack.isIn(AllTags.MELEE_WEAPONS)
         );
     }
 }

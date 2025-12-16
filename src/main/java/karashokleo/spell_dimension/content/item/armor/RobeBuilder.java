@@ -17,10 +17,10 @@ import java.util.function.BiFunction;
 
 public class RobeBuilder
 {
-    protected EnumMap<ArmorItem.Type, String> suffixID = new EnumMap<>(ArmorItem.Type.class);
-    protected EnumMap<ArmorItem.Type, String> suffixEN = new EnumMap<>(ArmorItem.Type.class);
-    protected EnumMap<ArmorItem.Type, String> suffixZH = new EnumMap<>(ArmorItem.Type.class);
-    protected EnumMap<ArmorItem.Type, ArmorItem> items = new EnumMap<>(ArmorItem.Type.class);
+    protected final EnumMap<ArmorItem.Type, String> suffixID = new EnumMap<>(ArmorItem.Type.class);
+    protected final EnumMap<ArmorItem.Type, String> suffixEN = new EnumMap<>(ArmorItem.Type.class);
+    protected final EnumMap<ArmorItem.Type, String> suffixZH = new EnumMap<>(ArmorItem.Type.class);
+    protected final EnumMap<ArmorItem.Type, ArmorItem> items = new EnumMap<>(ArmorItem.Type.class);
 
     protected final String name;
 
@@ -32,7 +32,7 @@ public class RobeBuilder
     @Nullable
     protected ConfiguredArmorMaterial material;
 
-    protected ArrayList<TagKey<Item>> tags = new ArrayList<>();
+    protected final ArrayList<TagKey<Item>> tags = new ArrayList<>();
 
     public RobeBuilder(String name)
     {
@@ -94,28 +94,28 @@ public class RobeBuilder
         for (ArmorItem.Type type : ArmorItem.Type.values())
         {
             ItemBuilder<ArmorItem> builder = itemBuilder.apply(
-                            name + suffixID.get(type),
-                            new ConfiguredArmorItem(material, type)
-                    )
-                    .addEN(nameEN + suffixEN.get(type))
-                    .addZH(nameZH + suffixZH.get(type))
-                    .addTag(AllTags.WIZARD_ROBES);
+                    name + suffixID.get(type),
+                    new ConfiguredArmorItem(material, type)
+                )
+                .addEN(nameEN + suffixEN.get(type))
+                .addZH(nameZH + suffixZH.get(type))
+                .addTag(AllTags.WIZARD_ROBES);
             for (TagKey<Item> tag : tags)
             {
                 builder.addTag(tag);
             }
             ArmorItem item = builder
-                    .addModel()
-                    .setTab(AllGroups.EQUIPMENTS)
-                    .register();
+                .addModel()
+                .setTab(AllGroups.EQUIPMENTS)
+                .register();
             items.put(type, item);
         }
 
         return new ArmorSet(
-                items.get(ArmorItem.Type.HELMET),
-                items.get(ArmorItem.Type.CHESTPLATE),
-                items.get(ArmorItem.Type.LEGGINGS),
-                items.get(ArmorItem.Type.BOOTS)
+            items.get(ArmorItem.Type.HELMET),
+            items.get(ArmorItem.Type.CHESTPLATE),
+            items.get(ArmorItem.Type.LEGGINGS),
+            items.get(ArmorItem.Type.BOOTS)
         );
     }
 

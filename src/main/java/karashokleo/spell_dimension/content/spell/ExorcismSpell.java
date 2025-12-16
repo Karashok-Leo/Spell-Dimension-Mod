@@ -17,19 +17,34 @@ public class ExorcismSpell
     public static void handle(World world, LivingEntity caster, List<Entity> targets, SpellInfo spellInfo)
     {
         Optional<Entity> target = targets.stream().findFirst();
-        if (target.isEmpty()) return;
+        if (target.isEmpty())
+        {
+            return;
+        }
         LivingEntity living = ImpactUtil.castToLiving(target.get());
         if (living == null)
         {
             return;
         }
-        if (!living.isAttackable()) return;
-        if (living.getType().isIn(LHTags.SEMIBOSS)) return;
+        if (!living.isAttackable())
+        {
+            return;
+        }
+        if (living.getType().isIn(LHTags.SEMIBOSS))
+        {
+            return;
+        }
         Optional<MobDifficulty> optional = MobDifficulty.get(living);
-        if (optional.isEmpty()) return;
+        if (optional.isEmpty())
+        {
+            return;
+        }
         MobDifficulty difficulty = optional.get();
         int level = difficulty.getLevel();
-        if (level <= 0) return;
+        if (level <= 0)
+        {
+            return;
+        }
         caster.damage(living.getDamageSources().create(DamageTypes.INDIRECT_MAGIC, living), level);
         difficulty.reInit(level / 2, false);
     }

@@ -43,14 +43,14 @@ public class LightSpell
     }
 
     public record LightSpawner(
-            BlockPos center,
-            int lightThreshold,
-            int lightSpacing,
-            int total,
-            int step,
-            Queue<BlockPos> border,
-            Set<BlockPos> visited,
-            Set<BlockPos> spawned
+        BlockPos center,
+        int lightThreshold,
+        int lightSpacing,
+        int total,
+        int step,
+        Queue<BlockPos> border,
+        Set<BlockPos> visited,
+        Set<BlockPos> spawned
     )
     {
         public LightSpawner(BlockPos center, int lightThreshold, int total, int step)
@@ -61,30 +61,30 @@ public class LightSpell
         }
 
         private static final Vec3i[] EXPANDS = {
-                new Vec3i(1, 0, 0),
-                new Vec3i(-1, 0, 0),
-                new Vec3i(0, 1, 0),
-                new Vec3i(0, -1, 0),
-                new Vec3i(0, 0, 1),
-                new Vec3i(0, 0, -1),
+            new Vec3i(1, 0, 0),
+            new Vec3i(-1, 0, 0),
+            new Vec3i(0, 1, 0),
+            new Vec3i(0, -1, 0),
+            new Vec3i(0, 0, 1),
+            new Vec3i(0, 0, -1),
 
-                new Vec3i(1, 1, 0),
-                new Vec3i(-1, 1, 0),
-                new Vec3i(0, 1, 1),
-                new Vec3i(0, 1, -1),
-                new Vec3i(1, 1, 1),
-                new Vec3i(1, 1, -1),
-                new Vec3i(-1, 1, 1),
-                new Vec3i(-1, 1, -1),
+            new Vec3i(1, 1, 0),
+            new Vec3i(-1, 1, 0),
+            new Vec3i(0, 1, 1),
+            new Vec3i(0, 1, -1),
+            new Vec3i(1, 1, 1),
+            new Vec3i(1, 1, -1),
+            new Vec3i(-1, 1, 1),
+            new Vec3i(-1, 1, -1),
 
-                new Vec3i(1, -1, 0),
-                new Vec3i(-1, -1, 0),
-                new Vec3i(0, -1, 1),
-                new Vec3i(0, -1, -1),
-                new Vec3i(1, -1, 1),
-                new Vec3i(1, -1, -1),
-                new Vec3i(-1, -1, 1),
-                new Vec3i(-1, -1, -1),
+            new Vec3i(1, -1, 0),
+            new Vec3i(-1, -1, 0),
+            new Vec3i(0, -1, 1),
+            new Vec3i(0, -1, -1),
+            new Vec3i(1, -1, 1),
+            new Vec3i(1, -1, -1),
+            new Vec3i(-1, -1, 1),
+            new Vec3i(-1, -1, -1),
         };
 
         public void spawn(ServerWorld world)
@@ -97,8 +97,13 @@ public class LightSpell
                 {
                     BlockPos neighbor = pos.add(direction);
                     if (tryVisit(world, neighbor))
+                    {
                         expand++;
-                    if (expand > step) break;
+                    }
+                    if (expand > step)
+                    {
+                        break;
+                    }
                 }
             }
         }
@@ -114,11 +119,13 @@ public class LightSpell
                 {
                     boolean canSpawn = true;
                     for (BlockPos existed : spawned)
+                    {
                         if (existed.getManhattanDistance(pos) < 7)
                         {
                             canSpawn = false;
                             break;
                         }
+                    }
                     if (canSpawn)
                     {
                         spawned.add(pos);
@@ -131,11 +138,11 @@ public class LightSpell
                         {
                             Vec3d particlePos = centerPos.add(direction.multiply(i));
                             world.spawnParticles(
-                                    ParticleTypes.END_ROD,
-                                    particlePos.getX(),
-                                    particlePos.getY(),
-                                    particlePos.getZ(),
-                                    1, 0, 0, 0, 0
+                                ParticleTypes.END_ROD,
+                                particlePos.getX(),
+                                particlePos.getY(),
+                                particlePos.getZ(),
+                                1, 0, 0, 0, 0
                             );
                         }
                     }
@@ -153,10 +160,19 @@ public class LightSpell
 
     public static void handle(SpellProjectile projectile, Identifier spellId, BlockHitResult hitResult)
     {
-        if (!spellId.equals(AllSpells.LIGHT)) return;
-        if (!(projectile.getWorld() instanceof ServerWorld world)) return;
+        if (!spellId.equals(AllSpells.LIGHT))
+        {
+            return;
+        }
+        if (!(projectile.getWorld() instanceof ServerWorld world))
+        {
+            return;
+        }
         Entity owner = projectile.getOwner();
-        if (owner == null) return;
+        if (owner == null)
+        {
+            return;
+        }
         if (AllWorldGen.disableInWorld(world))
         {
             owner.sendMessage(SDTexts.TEXT$BANNED_SPELL.get().formatted(Formatting.RED));

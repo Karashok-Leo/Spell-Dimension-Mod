@@ -27,11 +27,11 @@ public abstract class LootModifierFixer
     @Nullable Identifier randomSequenceId;
 
     @WrapOperation(
-            method = "generateLoot(Lnet/minecraft/loot/context/LootContext;Ljava/util/function/Consumer;)V",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/loot/LootTable;generateUnprocessedLoot(Lnet/minecraft/loot/context/LootContext;Ljava/util/function/Consumer;)V"
-            )
+        method = "generateLoot(Lnet/minecraft/loot/context/LootContext;Ljava/util/function/Consumer;)V",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/loot/LootTable;generateUnprocessedLoot(Lnet/minecraft/loot/context/LootContext;Ljava/util/function/Consumer;)V"
+        )
     )
     private void finishCollectingLoot$0(LootTable instance, LootContext context, Consumer<ItemStack> lootConsumer, Operation<Void> original)
     {
@@ -41,11 +41,11 @@ public abstract class LootModifierFixer
     }
 
     @WrapOperation(
-            method = "generateLoot(Lnet/minecraft/loot/context/LootContextParameterSet;Ljava/util/function/Consumer;)V",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/loot/LootTable;generateUnprocessedLoot(Lnet/minecraft/loot/context/LootContextParameterSet;Ljava/util/function/Consumer;)V"
-            )
+        method = "generateLoot(Lnet/minecraft/loot/context/LootContextParameterSet;Ljava/util/function/Consumer;)V",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/loot/LootTable;generateUnprocessedLoot(Lnet/minecraft/loot/context/LootContextParameterSet;Ljava/util/function/Consumer;)V"
+        )
     )
     private void finishCollectingLoot$1(LootTable instance, LootContextParameterSet parameters, Consumer<ItemStack> lootConsumer, Operation<Void> original)
     {
@@ -53,11 +53,11 @@ public abstract class LootModifierFixer
     }
 
     @WrapOperation(
-            method = "generateLoot(Lnet/minecraft/loot/context/LootContextParameterSet;JLjava/util/function/Consumer;)V",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/loot/LootTable;generateUnprocessedLoot(Lnet/minecraft/loot/context/LootContext;Ljava/util/function/Consumer;)V"
-            )
+        method = "generateLoot(Lnet/minecraft/loot/context/LootContextParameterSet;JLjava/util/function/Consumer;)V",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/loot/LootTable;generateUnprocessedLoot(Lnet/minecraft/loot/context/LootContext;Ljava/util/function/Consumer;)V"
+        )
     )
     private void finishCollectingLoot$2(LootTable instance, LootContext context, Consumer<ItemStack> lootConsumer, Operation<Void> original)
     {

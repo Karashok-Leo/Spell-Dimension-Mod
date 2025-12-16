@@ -13,18 +13,18 @@ public class IllusionUpgradeTab extends UpgradeSettingsTab<IllusionUpgradeContai
     public static final String NAME_KEY = "gui.spell-dimension.reforge";
     public static final String TOOLTIP_KEY = NAME_KEY + ".tooltip";
 
-    protected FilterLogicControl<FilterLogic, FilterLogicContainer<FilterLogic>> filterLogicControl;
+    protected final FilterLogicControl<FilterLogic, FilterLogicContainer<FilterLogic>> filterLogicControl;
 
     public IllusionUpgradeTab(IllusionUpgradeContainer upgradeContainer, Position position, StorageScreenBase<?> screen)
     {
         super(upgradeContainer, position, screen, Text.translatable(NAME_KEY), Text.translatable(TOOLTIP_KEY));
         filterLogicControl = addHideableChild(
-                new FilterLogicControl.Advanced(
-                        screen,
-                        new Position(x + 3, y + 24),
-                        getContainer().getFilterLogicContainer(),
-                        4
-                )
+            new FilterLogicControl.Advanced(
+                screen,
+                new Position(x + 3, y + 24),
+                getContainer().getFilterLogicContainer(),
+                4
+            )
         );
     }
 

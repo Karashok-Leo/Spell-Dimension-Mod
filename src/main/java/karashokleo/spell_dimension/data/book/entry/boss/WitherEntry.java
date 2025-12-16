@@ -52,34 +52,34 @@ public class WitherEntry extends BaseEntryProvider
         context.page("boss");
         this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
-                """
-                        Level: %d+
-                        \\
-                        \\
-                        Drops **Shard of Uncertainty** upon defeating Wither.
-                        """.formatted(TextConstants.BOSS_LEVELS[0])
+            """
+                Level: %d+
+                \\
+                \\
+                Drops **Shard of Uncertainty** upon defeating Wither.
+                """.formatted(TextConstants.BOSS_LEVELS[0])
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
-                """
-                        等级: %d+
-                        \\
-                        \\
-                        击败凋灵后掉落**不确定性的残片**。
-                        """.formatted(TextConstants.BOSS_LEVELS[0])
+            """
+                等级: %d+
+                \\
+                \\
+                击败凋灵后掉落**不确定性的残片**。
+                """.formatted(TextConstants.BOSS_LEVELS[0])
         );
 
         BookSpotlightPageModel boss = BookSpotlightPageModel
-                .builder()
-                .withTitle(context.pageTitle())
-                .withText(context.pageText())
-                .withItem(Ingredient.ofItems(BookGenUtil.getItem(new Identifier("soulsweapons:shard_of_uncertainty"))))
-                .build();
+            .builder()
+            .withTitle(context.pageTitle())
+            .withText(context.pageText())
+            .withItem(Ingredient.ofItems(BookGenUtil.getItem(new Identifier("soulsweapons:shard_of_uncertainty"))))
+            .build();
 
         BookEntityPageModel entity = BookEntityPageModel
-                .builder()
-                .withEntityId("minecraft:wither")
-                .build();
+            .builder()
+            .withEntityId("minecraft:wither")
+            .build();
 
         return List.of(boss, entity);
     }

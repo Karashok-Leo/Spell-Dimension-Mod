@@ -91,211 +91,211 @@ public class AllTraits
     public static void register()
     {
         AIRBORNE = Entry.of(
-                        "airborne",
-                        new AirborneTrait(),
-                        120, 100, 4, 50)
-                .addEN()
-                .addZH("击飞")
-                .addENDesc("Every %s seconds, the next attack will knock the target into the air")
-                .addZHDesc("每隔%s秒，下一次攻击将击飞目标")
-                .register();
+                "airborne",
+                new AirborneTrait(),
+                120, 100, 4, 50)
+            .addEN()
+            .addZH("击飞")
+            .addENDesc("Every %s seconds, the next attack will knock the target into the air")
+            .addZHDesc("每隔%s秒，下一次攻击将击飞目标")
+            .register();
         LEECH = Entry.of(
-                        "leech",
-                        new LeechTrait(),
-                        30, 100, 5, 50)
-                .addEN()
-                .addZH("蛭吸")
-                .addENDesc("%s of damage dealt will heal itself")
-                .addZHDesc("造成的%s的伤害将治疗自身")
-                .register();
+                "leech",
+                new LeechTrait(),
+                30, 100, 5, 50)
+            .addEN()
+            .addZH("蛭吸")
+            .addENDesc("%s of damage dealt will heal itself")
+            .addZHDesc("造成的%s的伤害将治疗自身")
+            .register();
 
         SHIFT = Entry.of(
-                        "shift",
-                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.SHIFT, lv -> 20 + lv * 20),
-                        200, 30, 3, 300)
-                .addBlacklistOptional(LHTags.SEMIBOSS)
-                .register();
+                "shift",
+                new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.SHIFT, lv -> 20 + lv * 20),
+                200, 30, 3, 300)
+            .addBlacklistOptional(LHTags.SEMIBOSS)
+            .register();
         CONVERGE = Entry.of(
-                        "converge",
-                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.CONVERGE, lv -> 20 + lv * 20),
-                        200, 30, 3, 300)
-                .register();
+                "converge",
+                new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.CONVERGE, lv -> 20 + lv * 20),
+                200, 30, 3, 300)
+            .register();
         ARCANE_MISSILE = Entry.of(
-                        "arcane_missile",
-                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.ARCANE_MISSILE, lv -> 20 + lv * 20),
-                        200, 30, 3, 300)
-                .register();
+                "arcane_missile",
+                new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.ARCANE_MISSILE, lv -> 20 + lv * 20),
+                200, 30, 3, 300)
+            .register();
         ARCANE_BLAST = Entry.of(
-                        "arcane_blast",
-                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.ARCANE_BLAST, lv -> 10 + lv * 10),
-                        200, 30, 3, 300)
-                .register();
+                "arcane_blast",
+                new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.ARCANE_BLAST, lv -> 10 + lv * 10),
+                200, 30, 3, 300)
+            .register();
         ARCANE_BLINK = Entry.of(
-                        "arcane_blink",
-                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.ARCANE_BLINK, lv -> 20 + lv * 20),
-                        200, 30, 3, 300)
-                .register();
+                "arcane_blink",
+                new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.ARCANE_BLINK, lv -> 20 + lv * 20),
+                200, 30, 3, 300)
+            .register();
 
         AMETHYST_SLASH = Entry.of(
-                        "amethyst_slash",
-                        new ChanelIntervalSpellTrait(lv -> 300 - 40 * lv, lv -> 10, AllSpells.AMETHYST_SLASH, lv -> 20 + lv * 20),
-                        300, 20, 3, 600)
-                .register();
+                "amethyst_slash",
+                new ChanelIntervalSpellTrait(lv -> 300 - 40 * lv, lv -> 10, AllSpells.AMETHYST_SLASH, lv -> 20 + lv * 20),
+                300, 20, 3, 600)
+            .register();
         ARCANE_BEAM = Entry.of(
-                        "arcane_beam",
-                        new ChanelIntervalSpellTrait(lv -> 300 - 40 * lv, lv -> 10, AllSpells.ARCANE_BEAM, lv -> 20 + lv * 20),
-                        300, 20, 3, 600)
-                .register();
+                "arcane_beam",
+                new ChanelIntervalSpellTrait(lv -> 300 - 40 * lv, lv -> 10, AllSpells.ARCANE_BEAM, lv -> 20 + lv * 20),
+                300, 20, 3, 600)
+            .register();
 
         MAELSTROM = Entry.of(
-                        "maelstrom",
-                        new CycloneTrait(lv -> 300 - 40 * lv, AllSpells.MAELSTROM, lv -> 20 + lv * 20, 2),
-                        400, 10, 3, 900)
-                .register();
+                "maelstrom",
+                new CycloneTrait(lv -> 300 - 40 * lv, AllSpells.MAELSTROM, lv -> 20 + lv * 20, 2),
+                400, 10, 3, 900)
+            .register();
         ECHO_STORM = Entry.of(
-                        "echo_storm",
-                        new CycloneTrait(lv -> 300 - 40 * lv, AllSpells.ECHO_STORM, lv -> 20 + lv * 20, 5),
-                        400, 10, 3, 900)
-                .register();
+                "echo_storm",
+                new CycloneTrait(lv -> 300 - 40 * lv, AllSpells.ECHO_STORM, lv -> 20 + lv * 20, 5),
+                400, 10, 3, 900)
+            .register();
 
         FIREBALL = Entry.of(
-                        "fireball",
-                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.FIREBALL, lv -> 20 + lv * 20),
-                        200, 30, 3, 300)
-                .register();
+                "fireball",
+                new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.FIREBALL, lv -> 20 + lv * 20),
+                200, 30, 3, 300)
+            .register();
         FIRE_WALL = Entry.of(
-                        "fire_wall",
-                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.FIRE_WALL, lv -> 20 + lv * 20),
-                        200, 30, 3, 300)
-                .register();
+                "fire_wall",
+                new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.FIRE_WALL, lv -> 20 + lv * 20),
+                200, 30, 3, 300)
+            .register();
         FIRE_METEOR = Entry.of(
-                        "fire_meteor",
-                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.FIRE_METEOR, lv -> 20 + lv * 20),
-                        200, 30, 3, 300)
-                .register();
+                "fire_meteor",
+                new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.FIRE_METEOR, lv -> 20 + lv * 20),
+                200, 30, 3, 300)
+            .register();
 
         FLAME_SLASH = Entry.of(
-                        "flame_slash",
-                        new ChanelIntervalSpellTrait(lv -> 300 - 40 * lv, lv -> 10, AllSpells.FLAME_SLASH, lv -> 20 + lv * 20),
-                        300, 20, 3, 600)
-                .register();
+                "flame_slash",
+                new ChanelIntervalSpellTrait(lv -> 300 - 40 * lv, lv -> 10, AllSpells.FLAME_SLASH, lv -> 20 + lv * 20),
+                300, 20, 3, 600)
+            .register();
 
         INFERNO = Entry.of(
-                        "inferno",
-                        new CycloneTrait(lv -> 300 - 40 * lv, AllSpells.INFERNO, lv -> 20 + lv * 20, 4),
-                        400, 10, 3, 900)
-                .register();
+                "inferno",
+                new CycloneTrait(lv -> 300 - 40 * lv, AllSpells.INFERNO, lv -> 20 + lv * 20, 4),
+                400, 10, 3, 900)
+            .register();
 
         FROST_NOVA = Entry.of(
-                        "frost_nova",
-                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.FROST_NOVA, lv -> 20 + lv * 20),
-                        200, 30, 3, 300)
-                .register();
+                "frost_nova",
+                new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.FROST_NOVA, lv -> 20 + lv * 20),
+                200, 30, 3, 300)
+            .register();
         FROST_SHIELD = Entry.of(
-                        "frost_shield",
-                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.FROST_SHIELD, lv -> 20 + lv * 20),
-                        200, 30, 3, 300)
-                .register();
+                "frost_shield",
+                new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.FROST_SHIELD, lv -> 20 + lv * 20),
+                200, 30, 3, 300)
+            .register();
         ICICLE = Entry.of(
-                        "icicle",
-                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.ICICLE, lv -> 20 + lv * 20),
-                        200, 30, 3, 300)
-                .register();
+                "icicle",
+                new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.ICICLE, lv -> 20 + lv * 20),
+                200, 30, 3, 300)
+            .register();
         FROST_BLIZZARD = Entry.of(
-                        "frost_blizzard",
-                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.FROST_BLIZZARD, lv -> 20 + lv * 20),
-                        200, 30, 3, 300)
-                .register();
+                "frost_blizzard",
+                new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.FROST_BLIZZARD, lv -> 20 + lv * 20),
+                200, 30, 3, 300)
+            .register();
 
         NUCLEUS = Entry.of(
-                        "icy_nucleus",
-                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.ICY_NUCLEUS, lv -> 20 + lv * 20),
-                        300, 20, 3, 600)
-                .register();
+                "icy_nucleus",
+                new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.ICY_NUCLEUS, lv -> 20 + lv * 20),
+                300, 20, 3, 600)
+            .register();
         FROST_AURA = Entry.of(
-                        "frost_aura",
-                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.FROST_AURA, lv -> 20 + lv * 20),
-                        300, 20, 3, 600)
-                .register();
+                "frost_aura",
+                new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.FROST_AURA, lv -> 20 + lv * 20),
+                300, 20, 3, 600)
+            .register();
         FROST_BLINK = Entry.of(
-                        "frost_blink",
-                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.FROST_BLINK, lv -> 20 + lv * 20),
-                        300, 20, 3, 600)
-                .register();
+                "frost_blink",
+                new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.FROST_BLINK, lv -> 20 + lv * 20),
+                300, 20, 3, 600)
+            .register();
         FROST_SLASH = Entry.of(
-                        "frost_slash",
-                        new ChanelIntervalSpellTrait(lv -> 300 - 40 * lv, lv -> 10, AllSpells.FROST_SLASH, lv -> 20 + lv * 20),
-                        300, 20, 3, 600)
-                .register();
+                "frost_slash",
+                new ChanelIntervalSpellTrait(lv -> 300 - 40 * lv, lv -> 10, AllSpells.FROST_SLASH, lv -> 20 + lv * 20),
+                300, 20, 3, 600)
+            .register();
 
         TEMPEST = Entry.of(
-                        "tempest",
-                        new CycloneTrait(lv -> 300 - 40 * lv, AllSpells.TEMPEST, lv -> 20 + lv * 20, 3),
-                        400, 10, 3, 900)
-                .register();
+                "tempest",
+                new CycloneTrait(lv -> 300 - 40 * lv, AllSpells.TEMPEST, lv -> 20 + lv * 20, 3),
+                400, 10, 3, 900)
+            .register();
 
         DIVINE_PROTECTION = Entry.of(
-                        "divine_protection",
-                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.DIVINE_PROTECTION, lv -> 20 + lv * 20),
-                        200, 30, 3, 300)
-                .register();
+                "divine_protection",
+                new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.DIVINE_PROTECTION, lv -> 20 + lv * 20),
+                200, 30, 3, 300)
+            .register();
         HOLY_BEAM = Entry.of(
-                        "holy_beam",
-                        new ChanelIntervalSpellTrait(lv -> 300 - 40 * lv, lv -> 10, AllSpells.HOLY_BEAM, lv -> 20 + lv * 20),
-                        300, 20, 3, 600)
-                .register();
+                "holy_beam",
+                new ChanelIntervalSpellTrait(lv -> 300 - 40 * lv, lv -> 10, AllSpells.HOLY_BEAM, lv -> 20 + lv * 20),
+                300, 20, 3, 600)
+            .register();
 
         BLESSING = Entry.of(
-                        "blessing",
-                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.BLESSING, lv -> 20 + lv * 20),
-                        300, 20, 3, 600)
-                .register();
+                "blessing",
+                new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.BLESSING, lv -> 20 + lv * 20),
+                300, 20, 3, 600)
+            .register();
         MISFORTUNE = Entry.of(
-                        "misfortune",
-                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.MISFORTUNE, lv -> 20 + lv * 20),
-                        300, 20, 3, 600)
-                .register();
+                "misfortune",
+                new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.MISFORTUNE, lv -> 20 + lv * 20),
+                300, 20, 3, 600)
+            .register();
         HEAVENLY_JUSTICE = Entry.of(
-                        "heavenly_justice",
-                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.HEAVENLY_JUSTICE, lv -> 20 + lv * 20),
-                        300, 20, 3, 600)
-                .register();
+                "heavenly_justice",
+                new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.HEAVENLY_JUSTICE, lv -> 20 + lv * 20),
+                300, 20, 3, 600)
+            .register();
 
         CHAIN_LIGHTNING = Entry.of(
-                        "chain_lightning",
-                        new ChanelIntervalSpellTrait(lv -> 300 - 40 * lv, lv -> 10, AllSpells.CHAIN_LIGHTNING, lv -> 20 + lv * 20),
-                        200, 30, 3, 300)
-                .register();
+                "chain_lightning",
+                new ChanelIntervalSpellTrait(lv -> 300 - 40 * lv, lv -> 10, AllSpells.CHAIN_LIGHTNING, lv -> 20 + lv * 20),
+                200, 30, 3, 300)
+            .register();
         BALL_LIGHTNING = Entry.of(
-                        "ball_lightning",
-                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.BALL_LIGHTNING, lv -> 20 + lv * 20),
-                        200, 30, 3, 300)
-                .register();
+                "ball_lightning",
+                new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.BALL_LIGHTNING, lv -> 20 + lv * 20),
+                200, 30, 3, 300)
+            .register();
         THUNDERBOLT = Entry.of(
-                        "thunderbolt",
-                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.THUNDERBOLT, lv -> 20 + lv * 20),
-                        200, 30, 3, 300)
-                .register();
+                "thunderbolt",
+                new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.THUNDERBOLT, lv -> 20 + lv * 20),
+                200, 30, 3, 300)
+            .register();
         QUANTUM_FIELD = Entry.of(
-                        "quantum_field",
-                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.QUANTUM_FIELD, lv -> 20 + lv * 20),
-                        300, 20, 3, 600)
-                .register();
+                "quantum_field",
+                new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.QUANTUM_FIELD, lv -> 20 + lv * 20),
+                300, 20, 3, 600)
+            .register();
 
         BLACK_HOLE = Entry.of(
-                        "black_hole",
-                        new SpellTrait(AllSpells.BLACK_HOLE, lv -> 80),
-                        0, 1, 1, 0)
+                "black_hole",
+                new SpellTrait(AllSpells.BLACK_HOLE, lv -> 80),
+                0, 1, 1, 0)
 //                .addENDesc("Fireballs spawns a black hole in place when they explode.")
 //                .addZHDesc("发射的火球爆炸时在原地形成一个黑洞")
-                .addWhitelist(EntityType.ENDER_DRAGON)
-                .register();
+            .addWhitelist(EntityType.ENDER_DRAGON)
+            .register();
         INCARCERATE = Entry.of(
-                        "incarcerate",
-                        new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.INCARCERATE, lv -> 40),
-                        0, 1, 1, 0)
-                .addWhitelist(TGEntities.LICH.get())
-                .register();
+                "incarcerate",
+                new IntervalSpellTrait(lv -> 300 - 40 * lv, AllSpells.INCARCERATE, lv -> 40),
+                0, 1, 1, 0)
+            .addWhitelist(TGEntities.LICH.get())
+            .register();
     }
 
     static class Entry<T extends MobTrait> extends MobTraitBuilder<T>
@@ -333,9 +333,9 @@ public class AllTraits
         {
             Identifier id = getId();
             this.getItemBuilder()
-                    .apply(name, new TraitSymbol(new FabricItemSettings()))
-                    .addTag(LHTags.TRAIT_ITEM)
-                    .register();
+                .apply(name, new TraitSymbol(new FabricItemSettings()))
+                .addTag(LHTags.TRAIT_ITEM)
+                .register();
             this.addModel();
             this.generateConfig(content, config);
             return Registry.register(LHTraits.TRAIT, id, content);
@@ -353,11 +353,11 @@ public class AllTraits
             Identifier foreground = this.getId().withPrefixedPath("item/trait/");
             TextureMap textureMap = TextureMap.layered(SYMBOL_BG, foreground);
             this.getModelGenerator().addItem(generator ->
-                    Models.GENERATED_TWO_LAYERS.upload(
-                            modelId,
-                            textureMap,
-                            generator.writer
-                    ));
+                Models.GENERATED_TWO_LAYERS.upload(
+                    modelId,
+                    textureMap,
+                    generator.writer
+                ));
         }
     }
 }

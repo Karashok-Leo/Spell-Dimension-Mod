@@ -34,12 +34,12 @@ public class RandomEnlighteningEssenceEntry extends LeafEntry
         AttributeModifier modifier = LootContextUtil.getContextModifier(random, context);
 
         lootConsumer.accept(AllItems.ENLIGHTENING_ESSENCE.getStack(
-                new EnlighteningModifier(
-                        modifier.attribute(),
-                        UuidUtil.getSelfUuid(modifier.operation()),
-                        modifier.amount(),
-                        modifier.operation()
-                )
+            new EnlighteningModifier(
+                modifier.attribute(),
+                UuidUtil.getSelfUuid(modifier.operation()),
+                modifier.amount(),
+                modifier.operation()
+            )
         ));
     }
 

@@ -24,8 +24,13 @@ public abstract class ClientPlayerInteractionManagerMixin
     @Inject(method = "isFlyingLocked", at = @At("HEAD"), cancellable = true)
     private void lockedFlying(CallbackInfoReturnable<Boolean> cir)
     {
-        if (client.player == null) return;
+        if (client.player == null)
+        {
+            return;
+        }
         if (NoClip.noClip(client.player))
+        {
             cir.setReturnValue(true);
+        }
     }
 }

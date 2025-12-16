@@ -35,15 +35,20 @@ public class ConsciousCoreOverlay extends InfoSideBar<SideBar.IntSignature>
     {
         ArrayList<Text> texts = new ArrayList<>();
         if (this.state == ConsciousnessCoreTile.CoreState.TRIGGERING)
+        {
             texts.add(SDTexts.TEXT$CONSCIOUSNESS_CORE$TRIGGERING.get().formatted(Formatting.YELLOW));
-        else if (this.state == ConsciousnessCoreTile.CoreState.INACTIVE)
+        } else if (this.state == ConsciousnessCoreTile.CoreState.INACTIVE)
         {
             texts.add(SDTexts.TEXT$CONSCIOUSNESS_CORE$NOT_TRIGGERED.get().formatted(Formatting.RED));
             texts.add(SDTexts.TEXT$CONSCIOUSNESS_CORE$LEVEL_FACTOR.get("%.2f".formatted(this.levelFactor)).formatted(Formatting.GOLD));
             if (this.award != null)
+            {
                 texts.add(SDTexts.TEXT$CONSCIOUSNESS_CORE$AWARD.get(this.award.getText()).formatted(Formatting.AQUA));
+            }
             if (this.level != null)
+            {
                 texts.add(SDTexts.TEXT$CONSCIOUSNESS_CORE$LEVEL.get(this.level).formatted(Formatting.LIGHT_PURPLE));
+            }
         }
         return texts;
     }
@@ -63,9 +68,15 @@ public class ConsciousCoreOverlay extends InfoSideBar<SideBar.IntSignature>
     @Override
     public boolean isScreenOn()
     {
-        if (L2HostilityClient.getClient().currentScreen != null) return false;
+        if (L2HostilityClient.getClient().currentScreen != null)
+        {
+            return false;
+        }
         ClientPlayerEntity player = L2HostilityClient.getClientPlayer();
-        if (player == null) return false;
+        if (player == null)
+        {
+            return false;
+        }
         BlockPos pos = RayTraceUtil.rayTraceBlock(player.getWorld(), player, 5).getBlockPos();
         if (player.getWorld().getBlockEntity(pos) instanceof ConsciousnessCoreTile tile)
         {

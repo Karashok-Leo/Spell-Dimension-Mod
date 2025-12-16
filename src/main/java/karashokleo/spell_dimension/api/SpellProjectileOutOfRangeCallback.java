@@ -10,7 +10,9 @@ public interface SpellProjectileOutOfRangeCallback
     Event<SpellProjectileOutOfRangeCallback> EVENT = EventFactory.createArrayBacked(SpellProjectileOutOfRangeCallback.class, (listeners) -> ((projectile, spellId) ->
     {
         for (SpellProjectileOutOfRangeCallback listener : listeners)
+        {
             listener.onOutOfRange(projectile, spellId);
+        }
     }));
 
     void onOutOfRange(SpellProjectile projectile, Identifier spellId);

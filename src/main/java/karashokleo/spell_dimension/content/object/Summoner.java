@@ -36,8 +36,8 @@ public interface Summoner
     static Summoner fromNbt(NbtElement nbt)
     {
         return Codecs.TAG_ENTRY_ID
-                .decode(NbtOps.INSTANCE, nbt)
-                .result().map(pair -> new Impl(pair.getFirst())).orElse(null);
+            .decode(NbtOps.INSTANCE, nbt)
+            .result().map(pair -> new Impl(pair.getFirst())).orElse(null);
     }
 
     Optional<EntityType<?>> getEntityType(ServerWorld world);
@@ -51,8 +51,8 @@ public interface Summoner
         public Optional<EntityType<?>> getEntityType(ServerWorld world)
         {
             return this.entry.tag() ?
-                    this.getEntityTypeByTag(world.getRandom()) :
-                    Optional.of(this.getEntityTypeById());
+                this.getEntityTypeByTag(world.getRandom()) :
+                Optional.of(this.getEntityTypeById());
         }
 
         @Nullable
@@ -60,24 +60,26 @@ public interface Summoner
         public NbtElement toNbt()
         {
             return Codecs.TAG_ENTRY_ID
-                    .encodeStart(NbtOps.INSTANCE, this.entry)
-                    .result()
-                    .orElse(null);
+                .encodeStart(NbtOps.INSTANCE, this.entry)
+                .result()
+                .orElse(null);
         }
 
         private Optional<EntityType<?>> getEntityTypeByTag(Random random)
         {
             return Registries.ENTITY_TYPE
-                    .getEntryList(TagUtil.entityTypeTag(this.entry.id()))
-                    .flatMap(list ->
+                .getEntryList(TagUtil.entityTypeTag(this.entry.id()))
+                .flatMap(list ->
+                {
+                    var randomOne = list.getRandom(random);
+                    while (randomOne.isPresent() &&
+                        randomOne.get().value() == EntityType.ENDER_DRAGON)
                     {
-                        var randomOne = list.getRandom(random);
-                        while (randomOne.isPresent() &&
-                               randomOne.get().value() == EntityType.ENDER_DRAGON)
-                            randomOne = list.getRandom(random);
-                        return randomOne;
-                    })
-                    .map(RegistryEntry::value);
+                        randomOne = list.getRandom(random);
+                    }
+                    return randomOne;
+                })
+                .map(RegistryEntry::value);
         }
 
         private EntityType<?> getEntityTypeById()

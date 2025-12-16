@@ -23,7 +23,9 @@ public class ForceLandingEffect extends StatusEffect
     {
         Vec3d velocity = entity.getVelocity();
         if (!entity.getWorld().getBlockState(entity.getBlockPos().down()).isAir())
+        {
             return;
+        }
         entity.setVelocity(velocity.x, Math.min(velocity.y, -1), velocity.z);
     }
 }

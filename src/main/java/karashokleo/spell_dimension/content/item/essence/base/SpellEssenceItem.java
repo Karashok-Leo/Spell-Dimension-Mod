@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 
 public abstract class SpellEssenceItem extends Item implements ColorProvider, ParticleProvider
 {
-    protected static int COOLDOWN = 10;
+    protected static final int COOLDOWN = 10;
 
     protected SpellEssenceItem(Settings settings)
     {
@@ -20,7 +20,10 @@ public abstract class SpellEssenceItem extends Item implements ColorProvider, Pa
         ParticleUtil.ringParticleEmit(player, 4 * 30, 5, getParticle(essence));
         player.sendMessage(SDTexts.TEXT$ESSENCE$SUCCESS.get(), true);
         player.getItemCooldownManager().set(this, COOLDOWN);
-        if (!player.getAbilities().creativeMode) essence.decrement(1);
+        if (!player.getAbilities().creativeMode)
+        {
+            essence.decrement(1);
+        }
     }
 
     protected void fail(ItemStack essence, PlayerEntity player)

@@ -48,29 +48,29 @@ public class SpellContainerEntry extends BaseEntryProvider
         context.page("spell_container");
         this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
+            """
+                When your hostility level reaches a certain point, monsters have a chance to carry powerful spell traits.
+                \\
+                \\
+                At this point, wearing a **spell container** is the best choice to defend against spell damage from traits.
                 """
-                        When your hostility level reaches a certain point, monsters have a chance to carry powerful spell traits.
-                        \\
-                        \\
-                        At this point, wearing a **spell container** is the best choice to defend against spell damage from traits.
-                        """
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
+            """
+                当你的恶意难度等级提高到一定程度时，怪物有概率携带强力的法术词条。
+                \\
+                \\
+                此时，佩戴**法术容器**是抵御来自词条的法术伤害的最佳选择。
                 """
-                        当你的恶意难度等级提高到一定程度时，怪物有概率携带强力的法术词条。
-                        \\
-                        \\
-                        此时，佩戴**法术容器**是抵御来自词条的法术伤害的最佳选择。
-                        """
         );
 
         BookSpotlightPageModel spell_container = BookSpotlightPageModel
-                .builder()
-                .withTitle(context.pageTitle())
-                .withText(context.pageText())
-                .withItem(Ingredient.ofItems(AllItems.SPELL_CONTAINER))
-                .build();
+            .builder()
+            .withTitle(context.pageTitle())
+            .withText(context.pageText())
+            .withItem(Ingredient.ofItems(AllItems.SPELL_CONTAINER))
+            .build();
 
         return List.of(spell_container);
     }

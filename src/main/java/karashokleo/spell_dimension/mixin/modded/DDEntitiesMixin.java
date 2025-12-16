@@ -11,11 +11,11 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public abstract class DDEntitiesMixin
 {
     @Redirect(
-            method = "<clinit>",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/fabricmc/fabric/api/object/builder/v1/entity/FabricEntityTypeBuilder;trackRangeBlocks(I)Lnet/fabricmc/fabric/api/object/builder/v1/entity/FabricEntityTypeBuilder;"
-            )
+        method = "<clinit>",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/fabricmc/fabric/api/object/builder/v1/entity/FabricEntityTypeBuilder;trackRangeBlocks(I)Lnet/fabricmc/fabric/api/object/builder/v1/entity/FabricEntityTypeBuilder;"
+        )
     )
     private static <T extends Entity> FabricEntityTypeBuilder<T> redirect_trackRangeBlocks(FabricEntityTypeBuilder<T> instance, int range)
     {

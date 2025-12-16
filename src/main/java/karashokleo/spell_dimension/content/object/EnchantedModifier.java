@@ -21,9 +21,9 @@ import java.util.List;
 import java.util.Objects;
 
 public record EnchantedModifier(
-        int threshold,
-        EquipmentSlot slot,
-        EnlighteningModifier modifier
+    int threshold,
+    EquipmentSlot slot,
+    EnlighteningModifier modifier
 )
 {
     private static final String ENCHANTED_MODIFIER_KEY = "EnchantedModifier";
@@ -91,7 +91,10 @@ public record EnchantedModifier(
             NbtCompound entry = nbtList.getCompound(i);
             // check if slot is valid
             @Nullable EquipmentSlot modifierSlot = getSlotFromString(entry.getString(SLOT_KEY));
-            if (slot != modifierSlot) continue;
+            if (slot != modifierSlot)
+            {
+                continue;
+            }
             // try overwrite enlightening modifier
             NbtCompound enlighteningModifier = entry.getCompound(MODIFIER_KEY);
             if (this.modifier.tryOverWriteNbt(enlighteningModifier))
@@ -149,10 +152,16 @@ public record EnchantedModifier(
             NbtCompound entry = nbtList.getCompound(i);
             // check if slot is valid
             @Nullable EquipmentSlot modifierSlot = getSlotFromString(entry.getString(SLOT_KEY));
-            if (slot != modifierSlot) continue;
+            if (slot != modifierSlot)
+            {
+                continue;
+            }
             // get enlightening modifier
             EnlighteningModifier enlighteningModifier = EnlighteningModifier.fromNbt(entry.getCompound(MODIFIER_KEY));
-            if (enlighteningModifier == null) continue;
+            if (enlighteningModifier == null)
+            {
+                continue;
+            }
             enlighteningModifier.applyToStack(modifiers);
         }
     }
@@ -182,7 +191,10 @@ public record EnchantedModifier(
         {
             // get enlightening modifier
             EnlighteningModifier enlighteningModifier = EnlighteningModifier.fromNbt(nbtList.getCompound(i));
-            if (enlighteningModifier == null) continue;
+            if (enlighteningModifier == null)
+            {
+                continue;
+            }
             NbtCompound entry = new NbtCompound();
             entry.putString(SLOT_KEY, slot.getName());
             entry.put(MODIFIER_KEY, enlighteningModifier.toNbt());
@@ -206,9 +218,15 @@ public record EnchantedModifier(
     public static void levelTooltip(ItemStack stack, TooltipContext context, List<Text> lines)
     {
         NbtCompound nbt = stack.getNbt();
-        if (nbt == null || !nbt.contains(ENCHANTED_MODIFIER_KEY)) return;
+        if (nbt == null || !nbt.contains(ENCHANTED_MODIFIER_KEY))
+        {
+            return;
+        }
         NbtCompound extraModifiers = nbt.getCompound(ENCHANTED_MODIFIER_KEY);
-        if (!extraModifiers.contains(LEVEL_KEY)) return;
+        if (!extraModifiers.contains(LEVEL_KEY))
+        {
+            return;
+        }
         lines.add(ScreenTexts.EMPTY);
         lines.add(SDTexts.TOOLTIP$ENCHANTED_LEVEL.get(extraModifiers.getInt(LEVEL_KEY)).formatted(Formatting.BOLD));
         lines.add(ScreenTexts.EMPTY);
@@ -226,9 +244,9 @@ public record EnchantedModifier(
         try
         {
             return new EnchantedModifier(
-                    nbt.getInt(THRESHOLD_KEY),
-                    EquipmentSlot.byName(nbt.getString(SLOT_KEY)),
-                    EnlighteningModifier.fromNbt(nbt)
+                nbt.getInt(THRESHOLD_KEY),
+                EquipmentSlot.byName(nbt.getString(SLOT_KEY)),
+                EnlighteningModifier.fromNbt(nbt)
             );
         } catch (Exception e)
         {

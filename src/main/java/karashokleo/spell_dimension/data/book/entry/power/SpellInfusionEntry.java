@@ -49,28 +49,28 @@ public class SpellInfusionEntry extends BaseEntryProvider
         context.page("text");
         this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
+            """
+                Enchantment Infusion can be used for enchanting in addition to craft most Spell Scrolls and some special items.
+                \\
+                \\
+                Crafting items using the Infusion Table is the same as enchanting.
                 """
-                        Enchantment Infusion can be used for enchanting in addition to craft most Spell Scrolls and some special items.
-                        \\
-                        \\
-                        Crafting items using the Infusion Table is the same as enchanting.
-                        """
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
+            """
+                魔咒灌注除了可以用于附魔，还可以合成大部分法术卷轴和一部分特殊物品。
+                \\
+                \\
+                使用灌注台合成物品的操作方法与附魔相同。
                 """
-                        魔咒灌注除了可以用于附魔，还可以合成大部分法术卷轴和一部分特殊物品。
-                        \\
-                        \\
-                        使用灌注台合成物品的操作方法与附魔相同。
-                        """
         );
         BookSpotlightPageModel text = BookSpotlightPageModel
-                .builder()
-                .withTitle(context.pageTitle())
-                .withText(context.pageText())
-                .withItem(Ingredient.ofItems(EIItems.INFUSION_TABLE_ITEM, EIItems.INFUSION_PEDESTAL_ITEM))
-                .build();
+            .builder()
+            .withTitle(context.pageTitle())
+            .withText(context.pageText())
+            .withItem(Ingredient.ofItems(EIItems.INFUSION_TABLE_ITEM, EIItems.INFUSION_PEDESTAL_ITEM))
+            .build();
 
         return List.of(text);
     }

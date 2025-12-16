@@ -23,8 +23,8 @@ public class FrostAuraEffect extends StatusEffect
     public static String getDesc(boolean en)
     {
         return (en ?
-                "Targets within the Frost Aura continue to receive the Frosted effect" :
-                "霜环内目标持续受到霜冻效果");
+            "Targets within the Frost Aura continue to receive the Frosted effect" :
+            "霜环内目标持续受到霜冻效果");
     }
 
     public static final float RADIUS = 3;
@@ -69,23 +69,28 @@ public class FrostAuraEffect extends StatusEffect
 
     private static void auraParticles(LivingEntity entity, int amplifier)
     {
-        if (!(entity.getWorld() instanceof ServerWorld world)) return;
+        if (!(entity.getWorld() instanceof ServerWorld world))
+        {
+            return;
+        }
         double radian = Math.toRadians(world.getTime() * 4 % 360);
         int grade = Math.min(amplifier, 2);
         for (int i = 0; i <= amplifier; i++)
         {
             for (double offset : GRADES[grade])
+            {
                 world.spawnParticles(
-                        new BlockStateParticleEffect(ParticleTypes.FALLING_DUST, Blocks.SNOW.getDefaultState()),
-                        entity.getX() + RADIUS * Math.cos(radian),
-                        entity.getY() + 1 + offset,
-                        entity.getZ() + RADIUS * Math.sin(radian),
-                        1,
-                        VELOCITY * Math.sin(radian),
-                        0,
-                        -VELOCITY * Math.cos(radian),
-                        0.1
+                    new BlockStateParticleEffect(ParticleTypes.FALLING_DUST, Blocks.SNOW.getDefaultState()),
+                    entity.getX() + RADIUS * Math.cos(radian),
+                    entity.getY() + 1 + offset,
+                    entity.getZ() + RADIUS * Math.sin(radian),
+                    1,
+                    VELOCITY * Math.sin(radian),
+                    0,
+                    -VELOCITY * Math.cos(radian),
+                    0.1
                 );
+            }
             radian += Math.PI * 2 / (amplifier + 1);
         }
     }

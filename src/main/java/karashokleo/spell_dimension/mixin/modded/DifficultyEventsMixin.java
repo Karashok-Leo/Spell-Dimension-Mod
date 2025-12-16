@@ -13,18 +13,22 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 public abstract class DifficultyEventsMixin
 {
     @ModifyVariable(
-            method = "onDamageArmor",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lkarashokleo/leobrary/damage/api/modify/DamageAccess;addModifier(Lkarashokleo/leobrary/damage/api/modify/DamageModifier;)V"
-            )
+        method = "onDamageArmor",
+        at = @At(
+            value = "INVOKE",
+            target = "Lkarashokleo/leobrary/damage/api/modify/DamageAccess;addModifier(Lkarashokleo/leobrary/damage/api/modify/DamageModifier;)V"
+        )
     )
     private static double inject_onDamageArmor(double factor, @Local(argsOnly = true) DamageAccess access)
     {
         if (!(access.getEntity() instanceof PlayerEntity player))
+        {
             return factor;
+        }
         if (GameStageComponent.isNormalMode(player))
+        {
             return factor;
+        }
         return factor * 2;
     }
 }

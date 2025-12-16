@@ -51,34 +51,34 @@ public class MoonKnightEntry extends BaseEntryProvider
         context.page("boss");
         this.lang().add(context.pageTitle(), nameEN());
         this.lang().add(context.pageText(),
-                """
-                        Level: %d+
-                        \\
-                        \\
-                        Use the Essence of Eventide on the Old Moon Altar to summon.
-                        """.formatted(TextConstants.BOSS_LEVELS[1])
+            """
+                Level: %d+
+                \\
+                \\
+                Use the Essence of Eventide on the Old Moon Altar to summon.
+                """.formatted(TextConstants.BOSS_LEVELS[1])
         );
         this.lang("zh_cn").add(context.pageTitle(), nameZH());
         this.lang("zh_cn").add(context.pageText(),
-                """
-                        等级: %d+
-                        \\
-                        \\
-                        对破旧的月光祭坛使用日暮精粹召唤。
-                        """.formatted(TextConstants.BOSS_LEVELS[1])
+            """
+                等级: %d+
+                \\
+                \\
+                对破旧的月光祭坛使用日暮精粹召唤。
+                """.formatted(TextConstants.BOSS_LEVELS[1])
         );
 
         BookSpotlightPageModel boss = BookSpotlightPageModel
-                .builder()
-                .withTitle(context.pageTitle())
-                .withText(context.pageText())
-                .withItem(Ingredient.ofItems(BookGenUtil.getItem(new Identifier("soulsweapons:essence_of_luminescence"))))
-                .build();
+            .builder()
+            .withTitle(context.pageTitle())
+            .withText(context.pageText())
+            .withItem(Ingredient.ofItems(BookGenUtil.getItem(new Identifier("soulsweapons:essence_of_luminescence"))))
+            .build();
         BookEntityPageModel entity = BookEntityPageModel
-                .builder()
-                .withEntityId("soulsweapons:moonknight")
-                .withOffset(0.2f)
-                .build();
+            .builder()
+            .withEntityId("soulsweapons:moonknight")
+            .withOffset(0.2f)
+            .build();
 
         return List.of(boss, entity);
     }

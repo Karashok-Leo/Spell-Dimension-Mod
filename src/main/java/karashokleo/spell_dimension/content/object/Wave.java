@@ -13,11 +13,20 @@ public record Wave(Summoner summoner, int count)
     public static Wave fromNbt(NbtCompound nbt)
     {
         int count = nbt.getInt(COUNT_KEY);
-        if (count <= 0) return null;
+        if (count <= 0)
+        {
+            return null;
+        }
         NbtElement summonerNbt = nbt.get(SUMMONER_KEY);
-        if (summonerNbt == null) return null;
+        if (summonerNbt == null)
+        {
+            return null;
+        }
         Summoner summoner = Summoner.fromNbt(summonerNbt);
-        if (summoner == null) return null;
+        if (summoner == null)
+        {
+            return null;
+        }
         return new Wave(summoner, count);
     }
 
@@ -25,7 +34,10 @@ public record Wave(Summoner summoner, int count)
     public NbtCompound toNbt()
     {
         NbtElement summonerNbt = this.summoner().toNbt();
-        if (summonerNbt == null) return null;
+        if (summonerNbt == null)
+        {
+            return null;
+        }
         NbtCompound nbt = new NbtCompound();
         nbt.put(SUMMONER_KEY, summonerNbt);
         nbt.putInt(COUNT_KEY, this.count());

@@ -15,15 +15,18 @@ public abstract class PlayerDifficultyMixin
     public PlayerEntity owner;
 
     @ModifyVariable(
-            method = "addKillCredit",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lkarashokleo/l2hostility/content/logic/DifficultyLevel;grow(DLkarashokleo/l2hostility/content/component/mob/MobDifficulty;)V"
-            )
+        method = "addKillCredit",
+        at = @At(
+            value = "INVOKE",
+            target = "Lkarashokleo/l2hostility/content/logic/DifficultyLevel;grow(DLkarashokleo/l2hostility/content/component/mob/MobDifficulty;)V"
+        )
     )
     private double inject_addKillCredit(double factor)
     {
-        if (GameStageComponent.isNormalMode(owner)) return factor;
+        if (GameStageComponent.isNormalMode(owner))
+        {
+            return factor;
+        }
         return factor * 2;
     }
 }

@@ -17,11 +17,11 @@ public abstract class PlayerAdvancementTrackerMixin
     private ServerPlayerEntity owner;
 
     @Inject(
-            method = "grantCriterion",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/advancement/AdvancementRewards;apply(Lnet/minecraft/server/network/ServerPlayerEntity;)V"
-            )
+        method = "grantCriterion",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/advancement/AdvancementRewards;apply(Lnet/minecraft/server/network/ServerPlayerEntity;)V"
+        )
     )
     private void inject_grantCriterion(Advancement advancement, String criterionName, CallbackInfoReturnable<Boolean> cir)
     {

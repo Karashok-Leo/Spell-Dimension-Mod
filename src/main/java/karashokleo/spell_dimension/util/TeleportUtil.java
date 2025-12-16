@@ -26,7 +26,9 @@ public class TeleportUtil
     public static void teleportPlayer(Entity entity, BlockPos targetPos)
     {
         if (!(entity.getWorld() instanceof ServerWorld serverWorld))
+        {
             return;
+        }
 
         serverWorld.getChunkManager().addTicket(ChunkTicketType.POST_TELEPORT, new ChunkPos(targetPos), 1, entity.getId());
 
@@ -41,7 +43,9 @@ public class TeleportUtil
     public static void teleportPlayerChangeDimension(ServerPlayerEntity player, ServerWorld world, BlockPos targetPos)
     {
         if (player.getWorld().getRegistryKey().equals(world.getRegistryKey()))
+        {
             throw new IllegalArgumentException("Should not use this method to teleport player to the same dimension");
+        }
 
         world.getChunkManager().addTicket(ChunkTicketType.POST_TELEPORT, new ChunkPos(targetPos), 1, player.getId());
 
@@ -49,10 +53,10 @@ public class TeleportUtil
 
         player.detach();
         TeleportTarget target = new TeleportTarget(
-                targetPos.toCenterPos(),
-                Vec3d.ZERO,
-                player.getYaw(),
-                player.getPitch()
+            targetPos.toCenterPos(),
+            Vec3d.ZERO,
+            player.getYaw(),
+            player.getPitch()
         );
         FabricDimensions.teleport(player, world, target);
 
@@ -67,26 +71,26 @@ public class TeleportUtil
     public static CompletableFuture<Optional<BlockPos>> getChangeWorldPosFuture(ServerWorld source, ServerWorld destination, BlockPos pos)
     {
         return getTopYFuture(destination, pos.getX(), pos.getZ())
-                .thenApply(
-                        optionalY -> optionalY.map(
-                                resultY ->
-                                {
-                                    WorldBorder worldBorder = destination.getWorldBorder();
-                                    double factor = DimensionType.getCoordinateScaleFactor(source.getDimension(), destination.getDimension());
-                                    int resultX = (int) (pos.getX() * factor);
-                                    int resultZ = (int) (pos.getZ() * factor);
-                                    return worldBorder.clamp(resultX, resultY, resultZ);
-                                }
-                        )
-                );
+            .thenApply(
+                optionalY -> optionalY.map(
+                    resultY ->
+                    {
+                        WorldBorder worldBorder = destination.getWorldBorder();
+                        double factor = DimensionType.getCoordinateScaleFactor(source.getDimension(), destination.getDimension());
+                        int resultX = (int) (pos.getX() * factor);
+                        int resultZ = (int) (pos.getZ() * factor);
+                        return worldBorder.clamp(resultX, resultY, resultZ);
+                    }
+                )
+            );
     }
 
     public static CompletableFuture<Optional<BlockPos>> getTeleportPosFuture(ServerWorld world, BlockPos pos)
     {
         return world.getDimension().hasCeiling() ?
-                CompletableFuture.supplyAsync(() -> Optional.ofNullable(getLandingPos(world, pos))) :
-                getTopYFuture(world, pos.getX(), pos.getZ())
-                        .thenApply(optionalY -> optionalY.map(topY -> new BlockPos(pos.getX(), topY, pos.getZ())));
+            CompletableFuture.supplyAsync(() -> Optional.ofNullable(getLandingPos(world, pos))) :
+            getTopYFuture(world, pos.getX(), pos.getZ())
+                .thenApply(optionalY -> optionalY.map(topY -> new BlockPos(pos.getX(), topY, pos.getZ())));
     }
 
     public static BlockPos getLandingPos(ServerWorld world, BlockPos pos)
@@ -101,7 +105,9 @@ public class TeleportUtil
                 mutable.move(0, -1, 0);
                 state = world.getBlockState(mutable);
                 if (mutable.getY() < world.getBottomY())
+                {
                     break;
+                }
             }
             return mutable.up();
         } else
@@ -118,13 +124,13 @@ public class TeleportUtil
     public static CompletableFuture<Optional<Integer>> getTopYFuture(ServerWorld world, int x, int z)
     {
         return world.getChunkManager()
-                .getChunkFutureSyncOnMainThread(
-                        ChunkSectionPos.getSectionCoord(x),
-                        ChunkSectionPos.getSectionCoord(z),
-                        ChunkStatus.FULL,
-                        true
-                )
-                .thenApply(either -> either.left()
-                        .map(chunk -> chunk.sampleHeightmap(Heightmap.Type.MOTION_BLOCKING, x & 15, z & 15)));
+            .getChunkFutureSyncOnMainThread(
+                ChunkSectionPos.getSectionCoord(x),
+                ChunkSectionPos.getSectionCoord(z),
+                ChunkStatus.FULL,
+                true
+            )
+            .thenApply(either -> either.left()
+                .map(chunk -> chunk.sampleHeightmap(Heightmap.Type.MOTION_BLOCKING, x & 15, z & 15)));
     }
 }

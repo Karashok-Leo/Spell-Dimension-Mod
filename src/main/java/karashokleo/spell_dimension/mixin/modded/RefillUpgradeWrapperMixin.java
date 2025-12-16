@@ -17,9 +17,9 @@ public abstract class RefillUpgradeWrapperMixin
 {
     @SuppressWarnings("UnstableApiUsage")
     @Inject(
-            method = "tryRefillFilter",
-            at = @At("HEAD"),
-            cancellable = true
+        method = "tryRefillFilter",
+        at = @At("HEAD"),
+        cancellable = true
     )
     private void inject_tryRefillFilter(Entity entity, PlayerInventoryStorage playerInvHandler, ItemStack filter, RefillUpgradeWrapper.TargetSlot targetSlot, CallbackInfo ci)
     {

@@ -22,13 +22,15 @@ public interface ItemRewardQuest extends Quest
     default void appendRewardDescription(World world, List<Text> desc)
     {
         for (ItemStack reward : this.getRewards())
+        {
             desc.add(
-                    SDTexts.TOOLTIP$QUEST$MUL.get(
-                            Text.empty()
-                                    .append(reward.getName())
-                                    .formatted(reward.getRarity().formatting),
-                            reward.getCount()
-                    )
+                SDTexts.TOOLTIP$QUEST$MUL.get(
+                    Text.empty()
+                        .append(reward.getName())
+                        .formatted(reward.getRarity().formatting),
+                    reward.getCount()
+                )
             );
+        }
     }
 }

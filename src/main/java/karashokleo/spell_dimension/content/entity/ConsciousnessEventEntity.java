@@ -83,7 +83,7 @@ public class ConsciousnessEventEntity extends Entity
         super(AllEntities.CONSCIOUSNESS_EVENT, world);
         this.level = level;
         WaveFactory.getRandom(world.getRandom(), this.level)
-                .fillWaves(world.getRandom(), this.waves);
+            .fillWaves(world.getRandom(), this.waves);
     }
 
     @Override
@@ -100,11 +100,19 @@ public class ConsciousnessEventEntity extends Entity
         Set<ServerPlayerEntity> set = new HashSet<>(this.bossBar.getPlayers());
         List<ServerPlayerEntity> list = this.getPlayers(world);
         for (ServerPlayerEntity player : list)
+        {
             if (!set.contains(player))
+            {
                 this.bossBar.addPlayer(player);
+            }
+        }
         for (ServerPlayerEntity player : set)
+        {
             if (!list.contains(player))
+            {
                 this.bossBar.removePlayer(player);
+            }
+        }
     }
 
     protected void forceAddAntibuild(ServerWorld world)
@@ -120,7 +128,10 @@ public class ConsciousnessEventEntity extends Entity
     public void tick()
     {
         super.tick();
-        if (!(this.getWorld() instanceof ServerWorld world)) return;
+        if (!(this.getWorld() instanceof ServerWorld world))
+        {
+            return;
+        }
 
         updateSummonedEntities(world);
 
@@ -144,10 +155,15 @@ public class ConsciousnessEventEntity extends Entity
         while (!this.summonedUuids.isEmpty())
         {
             UUID uuid = this.summonedUuids.poll();
-            if (uuid == null) continue;
+            if (uuid == null)
+            {
+                continue;
+            }
             Entity entity = world.getEntity(uuid);
             if (entity instanceof LivingEntity living)
+            {
                 this.summoned.add(living);
+            }
         }
     }
 
@@ -160,8 +176,8 @@ public class ConsciousnessEventEntity extends Entity
     {
         Vec3d subtract = this.getPos().subtract(entity.getPos());
         return Math.abs(subtract.getX()) <= RADIUS &&
-               Math.abs(subtract.getY()) <= RADIUS &&
-               Math.abs(subtract.getZ()) <= RADIUS;
+            Math.abs(subtract.getY()) <= RADIUS &&
+            Math.abs(subtract.getZ()) <= RADIUS;
     }
 
     protected void tickPrepare(ServerWorld world)
@@ -185,7 +201,9 @@ public class ConsciousnessEventEntity extends Entity
 
         this.bossBar.setPercent((float) this.age / PREPARE_TIME);
         if (this.age % 10 == 0)
+        {
             this.bossBar.setName(SDTexts.TEXT$EVENT$PREPARE.get((PREPARE_TIME - this.age) / 20));
+        }
     }
 
     protected void tickRunning(ServerWorld world)
@@ -195,8 +213,12 @@ public class ConsciousnessEventEntity extends Entity
         {
             this.waveIndex++;
             if (this.waveIndex >= this.waves.size())
+            {
                 this.turnToFinish(world, true);
-            else this.turnToWaiting(world);
+            } else
+            {
+                this.turnToWaiting(world);
+            }
         }
 
         // if no player, pending
@@ -204,10 +226,15 @@ public class ConsciousnessEventEntity extends Entity
         {
             this.pendingTimer++;
             if (this.pendingTimer > PENDING_TIME)
+            {
                 this.turnToFinish(world, false);
+            }
         }
         // if players exist, reset pending timer
-        else this.pendingTimer = 0;
+        else
+        {
+            this.pendingTimer = 0;
+        }
 
         // if exceed time limit or players escape, fail
         if (this.pendingTimer > PENDING_TIME ||
@@ -220,13 +247,15 @@ public class ConsciousnessEventEntity extends Entity
         float current = (float) this.summoned.stream().mapToDouble(LivingEntity::getHealth).sum();
         this.bossBar.setPercent(current / this.totalMaxHealth);
         if (this.age % 10 == 0)
+        {
             this.bossBar.setName(
-                    SDTexts.TEXT$EVENT$RUNNING.get(
-                            this.waveIndex + 1,
-                            this.waves.size(),
-                            this.summoned.size()
-                    )
+                SDTexts.TEXT$EVENT$RUNNING.get(
+                    this.waveIndex + 1,
+                    this.waves.size(),
+                    this.summoned.size()
+                )
             );
+        }
     }
 
     protected void tickWaiting(ServerWorld world)
@@ -235,18 +264,22 @@ public class ConsciousnessEventEntity extends Entity
         {
             this.waitTimer++;
             if (this.waitTimer == WAIT_TIME)
+            {
                 this.turnToRunning(world);
+            }
         }
 
         this.bossBar.setPercent((float) this.waitTimer / WAIT_TIME);
         if (this.age % 10 == 0)
+        {
             this.bossBar.setName(
-                    SDTexts.TEXT$EVENT$WAITING.get(
-                            this.waveIndex + 1,
-                            this.waves.size(),
-                            (WAIT_TIME - this.waitTimer) / 20
-                    )
+                SDTexts.TEXT$EVENT$WAITING.get(
+                    this.waveIndex + 1,
+                    this.waves.size(),
+                    (WAIT_TIME - this.waitTimer) / 20
+                )
             );
+        }
     }
 
     protected void tickFinish(ServerWorld world)
@@ -280,9 +313,9 @@ public class ConsciousnessEventEntity extends Entity
         this.state = EventState.FINISH;
         this.finishTimer = 0;
         this.bossBar.setName(
-                success ?
-                        SDTexts.TEXT$EVENT$FINISH$SUCCESS.get() :
-                        SDTexts.TEXT$EVENT$FINISH$FAIL.get()
+            success ?
+                SDTexts.TEXT$EVENT$FINISH$SUCCESS.get() :
+                SDTexts.TEXT$EVENT$FINISH$FAIL.get()
         );
 
         if (world.getBlockEntity(this.getBlockPos()) instanceof ConsciousnessCoreTile core)
@@ -293,7 +326,10 @@ public class ConsciousnessEventEntity extends Entity
 
     protected void summon(ServerWorld world)
     {
-        if (waveIndex >= waves.size()) return;
+        if (waveIndex >= waves.size())
+        {
+            return;
+        }
         Wave wave = waves.get(waveIndex);
         this.summoned.clear();
         double playerLevel = this.calcPlayerLevel(world);
@@ -301,14 +337,23 @@ public class ConsciousnessEventEntity extends Entity
         int time = 0;
         while (this.summoned.size() < wave.count())
         {
-            if ((++time) > SPAWN_LIMIT) break;
+            if ((++time) > SPAWN_LIMIT)
+            {
+                break;
+            }
 
             Optional<EntityType<?>> entityTypeOptional = wave.summoner().getEntityType(world);
-            if (entityTypeOptional.isEmpty()) continue;
+            if (entityTypeOptional.isEmpty())
+            {
+                continue;
+            }
             EntityType<?> entityType = entityTypeOptional.get();
 
             Optional<BlockPos> posOptional = tryFindSummonPos(world, this.getBlockPos(), entityType);
-            if (posOptional.isEmpty()) continue;
+            if (posOptional.isEmpty())
+            {
+                continue;
+            }
 
             Entity spawn = entityType.spawn(world, posOptional.get(), SpawnReason.EVENT);
 
@@ -324,7 +369,9 @@ public class ConsciousnessEventEntity extends Entity
                 }));
             }
             if (spawn instanceof MobEntity mob)
+            {
                 mob.playSpawnEffects();
+            }
         }
 
         this.totalMaxHealth = (float) this.summoned.stream().mapToDouble(LivingEntity::getMaxHealth).sum();
@@ -342,7 +389,9 @@ public class ConsciousnessEventEntity extends Entity
             BlockPos checkPos = pos.add(x, y, z);
             if (world.getBlockState(checkPos).isAir() &&
                 world.isSpaceEmpty(entityType.createSimpleBoundingBox(checkPos.getX(), checkPos.getY(), checkPos.getZ())))
+            {
                 return Optional.of(checkPos);
+            }
             y++;
         }
         return Optional.empty();
@@ -351,10 +400,10 @@ public class ConsciousnessEventEntity extends Entity
     protected double calcPlayerLevel(ServerWorld world)
     {
         return this.getPlayers(world)
-                .stream()
-                .mapToDouble(player -> PlayerDifficulty.get(player).getLevel().getLevel())
-                .average()
-                .orElse(0);
+            .stream()
+            .mapToDouble(player -> PlayerDifficulty.get(player).getLevel().getLevel())
+            .average()
+            .orElse(0);
     }
 
     protected boolean checkSummonedClear(ServerWorld world)
@@ -455,17 +504,25 @@ public class ConsciousnessEventEntity extends Entity
         this.waves.clear();
         NbtList wavesNbt = nbt.getList(WAVES_KEY, NbtElement.COMPOUND_TYPE);
         for (NbtElement element : wavesNbt)
+        {
             if (element instanceof NbtCompound waveNbt)
             {
                 Wave wave = Wave.fromNbt(waveNbt);
                 if (wave != null)
+                {
                     this.waves.add(wave);
+                }
             }
+        }
         this.summonedUuids.clear();
         NbtList summonedNbt = nbt.getList(SUMMONED_KEY, NbtElement.INT_ARRAY_TYPE);
         for (NbtElement i : summonedNbt)
+        {
             if (i instanceof NbtIntArray uuidNbt)
+            {
                 this.summonedUuids.add(NbtHelper.toUuid(uuidNbt));
+            }
+        }
     }
 
     @Override
@@ -484,12 +541,16 @@ public class ConsciousnessEventEntity extends Entity
         {
             NbtCompound waveNbt = wave.toNbt();
             if (waveNbt != null)
+            {
                 wavesNbt.add(waveNbt);
+            }
         }
         nbt.put(WAVES_KEY, wavesNbt);
         NbtList summonedNbt = new NbtList();
         for (Entity entity : this.summoned)
+        {
             summonedNbt.add(NbtHelper.fromUuid(entity.getUuid()));
+        }
         nbt.put(SUMMONED_KEY, summonedNbt);
     }
 }

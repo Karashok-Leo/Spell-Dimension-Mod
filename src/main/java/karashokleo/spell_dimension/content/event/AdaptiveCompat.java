@@ -24,7 +24,10 @@ public class AdaptiveCompat
         for (Entity target : targets)
         {
             Optional<MobDifficulty> optional = MobDifficulty.get(target);
-            if (optional.isEmpty()) return;
+            if (optional.isEmpty())
+            {
+                return;
+            }
             MobDifficulty diff = optional.get();
             AdaptingTrait.Data data = diff.getOrCreateData(LHTraits.ADAPTIVE.getId(), AdaptingTrait.Data::new);
             int adaptLv = diff.getTraitLevel(LHTraits.ADAPTIVE);
@@ -50,13 +53,19 @@ public class AdaptiveCompat
         if (event.getSource().isIn(SpellPowerTags.DamageType.ALL))
         {
             var cap = MobDifficulty.get(entity);
-            if (cap.isEmpty()) return false;
+            if (cap.isEmpty())
+            {
+                return false;
+            }
 
             Optional<String> firstToken = data.memory.stream().filter(string -> string.startsWith(ADAPTIVE_CACHE)).findFirst();
-            if (firstToken.isEmpty()) return false;
+            if (firstToken.isEmpty())
+            {
+                return false;
+            }
 
             data.adapt(firstToken.get(), level)
-                    .ifPresent(factor -> event.setAmount(event.getAmount() * factor));
+                .ifPresent(factor -> event.setAmount(event.getAmount() * factor));
             return true;
         }
         return false;

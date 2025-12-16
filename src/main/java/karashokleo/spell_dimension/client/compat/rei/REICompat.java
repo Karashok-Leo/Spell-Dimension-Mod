@@ -60,7 +60,10 @@ public class REICompat implements REIClientPlugin
     public void registerEntries(EntryRegistry registry)
     {
         ClientPlayNetworkHandler connection = MinecraftClient.getInstance().getNetworkHandler();
-        if (connection == null) return;
+        if (connection == null)
+        {
+            return;
+        }
         RecipeManager recipeManager = connection.getRecipeManager();
         for (LocateRecipe recipe : recipeManager.listAllOfType(LocateRecipe.TYPE))
         {

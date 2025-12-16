@@ -63,13 +63,13 @@ public class MacroElectronRenderer implements BuiltinItemRendererRegistry.Dynami
 
         EntityRenderDispatcher dispatcher = client.getEntityRenderDispatcher();
         EntityRendererFactory.Context context = new EntityRendererFactory.Context(
-                dispatcher,
-                client.getItemRenderer(),
-                client.getBlockRenderManager(),
-                dispatcher.getHeldItemRenderer(),
-                client.getResourceManager(),
-                client.getEntityModelLoader(),
-                client.textRenderer
+            dispatcher,
+            client.getItemRenderer(),
+            client.getBlockRenderManager(),
+            dispatcher.getHeldItemRenderer(),
+            client.getResourceManager(),
+            client.getEntityModelLoader(),
+            client.textRenderer
         );
         renderer = new BallLightningRenderer(context);
     }

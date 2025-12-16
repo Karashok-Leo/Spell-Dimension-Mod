@@ -36,19 +36,27 @@ public class SoulfireMaskItem extends SingleEpicTrinketItem
     public void tick(ItemStack stack, SlotReference slot, LivingEntity entity)
     {
         if (!(entity instanceof PlayerEntity player))
+        {
             return;
+        }
         if (entity.getWorld().isClient())
         {
             RayTraceUtil.clientUpdateTarget(player, RANGE);
             return;
         }
         if (entity.age % INTERNAL == 0)
+        {
             return;
+        }
         LivingEntity target = RayTraceUtil.serverGetTarget(player);
         if (target == null)
+        {
             return;
+        }
         if (RelationUtil.isAlly(player, target))
+        {
             return;
+        }
         int amplifier = (int) (SpellPower.getSpellPower(SpellSchools.FIRE, player).baseValue() / SPELL_POWER_BONUS);
         EffectUtil.forceAddEffect(target, new StatusEffectInstance(LHEffects.FLAME, DURATION, amplifier, false, false), entity);
     }

@@ -20,7 +20,10 @@ public class IcicleSpell
 {
     public static void handle(SpellProjectile projectile, Identifier spellId, HitResult hitResult)
     {
-        if (!spellId.equals(AllSpells.ICICLE)) return;
+        if (!spellId.equals(AllSpells.ICICLE))
+        {
+            return;
+        }
 
         Entity owner = projectile.getOwner();
         if (owner == null ||
