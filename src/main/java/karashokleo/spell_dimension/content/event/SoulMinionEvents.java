@@ -12,6 +12,7 @@ import karashokleo.spell_dimension.content.misc.SoulControl;
 import karashokleo.spell_dimension.content.network.S2CBloodOverlay;
 import karashokleo.spell_dimension.content.object.SoulNetDamageState;
 import karashokleo.spell_dimension.data.SDTexts;
+import karashokleo.spell_dimension.init.AllDamageStates;
 import karashokleo.spell_dimension.init.AllPackets;
 import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.init.AllStatusEffects;
@@ -100,7 +101,7 @@ public class SoulMinionEvents
         });
 
         // fake player self damage feedback
-        DamagePhase.APPLY.registerModifier(9999, access ->
+        DamagePhase.APPLY.addListener(9999, access ->
         {
             if (!(access.getEntity() instanceof FakePlayerEntity fakePlayer))
             {
@@ -113,7 +114,7 @@ public class SoulMinionEvents
             }
 
             // this is safe because DamageAccess#getModifiedDamage is not called in DamageAccess#addModifier
-            float finalDamage = access.getModifiedDamage(access.getOriginalDamage());
+            float finalDamage = access.getModifiedDamage();
             if (finalDamage <= 0.0f)
             {
                 return;
@@ -198,11 +199,11 @@ public class SoulMinionEvents
             }
 
             DamageSource source = event.getSource();
-            if (((DamageStateProvider) source).hasState(SoulNetDamageState.PREDICATE))
+            if (source.hasState(AllDamageStates.SOUL_NET::equals))
             {
                 return;
             }
-            ((DamageStateProvider) source).addState(new SoulNetDamageState());
+            source.addState(AllDamageStates.SOUL_NET);
 
             SoulControllerComponent controllerComponent = SoulControl.getSoulController(owner);
             List<MobEntity> activeMinions = controllerComponent.getActiveMinions();

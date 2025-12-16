@@ -20,12 +20,12 @@ public abstract class ElectricSparkFactoryMixin extends SpellFlameParticle.Color
     }
 
     @ModifyArg(
-            method = "<init>",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/spell_engine/client/particle/SpellFlameParticle$ColoredAnimatedFactory;<init>(Lnet/spell_engine/client/util/Color;FLnet/minecraft/client/particle/SpriteProvider;)V"
-            ),
-            index = 1
+        method = "<init>",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/spell_engine/client/particle/SpellFlameParticle$ColoredAnimatedFactory;<init>(Lnet/spell_engine/client/util/Color;FLnet/minecraft/client/particle/SpriteProvider;)V"
+        ),
+        index = 1
     )
     private static float inject_init(float scale)
     {
@@ -40,6 +40,7 @@ public abstract class ElectricSparkFactoryMixin extends SpellFlameParticle.Color
         float red = (float) (rgb >> 16 & 255) / 255.0F;
         float green = (float) (rgb >> 8 & 255) / 255.0F;
         float blue = (float) (rgb & 255) / 255.0F;
+        assert particle != null;
         particle.setColor(red, green, blue);
         return particle;
     }

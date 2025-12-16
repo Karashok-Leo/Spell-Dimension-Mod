@@ -67,7 +67,7 @@ public class ImpactUtil
             switch (targeting.type)
             {
                 case AREA:
-                    Vec3d center = caster.getPos().add(0.0, (double) (caster.getHeight() / 2.0F), 0.0);
+                    Vec3d center = caster.getPos().add(0.0, caster.getHeight() / 2.0F, 0.0);
                     Spell.Release.Target.Area area = spell.release.target.area;
                     SpellHelperInvoker.applyAreaImpact(world, caster, targets, spell.range, area, spellInfo, context.position(center), true);
                     break;
@@ -81,7 +81,7 @@ public class ImpactUtil
                 case CURSOR:
                     if (optionalTarget.isPresent())
                     {
-                        SpellHelperInvoker.directImpact(world, caster, (Entity) optionalTarget.get(), spellInfo, context);
+                        SpellHelperInvoker.directImpact(world, caster, optionalTarget.get(), spellInfo, context);
                     } else
                     {
                         released = false;

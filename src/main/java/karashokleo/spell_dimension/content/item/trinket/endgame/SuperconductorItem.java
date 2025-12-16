@@ -4,10 +4,9 @@ import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHu
 import karashokleo.l2hostility.content.event.GenericEvents;
 import karashokleo.l2hostility.content.item.trinket.core.DamageListenerTrinket;
 import karashokleo.l2hostility.content.item.trinket.core.SingleEpicTrinketItem;
-import karashokleo.leobrary.damage.api.state.DamageStateProvider;
-import karashokleo.spell_dimension.content.object.ChainLightningDamageState;
 import karashokleo.spell_dimension.content.spell.ChainLightningSpell;
 import karashokleo.spell_dimension.data.SDTexts;
+import karashokleo.spell_dimension.init.AllDamageStates;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
@@ -43,7 +42,7 @@ public class SuperconductorItem extends SingleEpicTrinketItem implements DamageL
         {
             return;
         }
-        if (((DamageStateProvider) source).hasState(ChainLightningDamageState.PREDICATE))
+        if (source.hasState(AllDamageStates.CHAIN_LIGHTNING))
         {
             return;
         }

@@ -76,7 +76,7 @@ public class EnchantmentEvents
         });
 
         // Spell Resistance
-        DamagePhase.ARMOR.registerModifier(0, damageAccess ->
+        DamagePhase.ARMOR.addListener(0, damageAccess ->
         {
             if (!(damageAccess.getEntity() instanceof PlayerEntity player))
                 return;
@@ -97,7 +97,7 @@ public class EnchantmentEvents
         });
 
         // Spell Leech
-        DamagePhase.APPLY.registerModifier(0, damageAccess ->
+        DamagePhase.APPLY.addListener(0, damageAccess ->
         {
             if (!damageAccess.getSource().isIn(LHTags.MAGIC))
                 return;

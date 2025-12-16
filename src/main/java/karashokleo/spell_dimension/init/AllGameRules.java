@@ -2,7 +2,7 @@ package karashokleo.spell_dimension.init;
 
 import net.minecraft.world.GameRules;
 
-public class AllMiscInit
+public class AllGameRules
 {
     public static final GameRules.Key<GameRules.BooleanRule> NOTIFY_SPELL_TRAIT_CASTING = createRule("notifySpellTraitCasting", true);
 

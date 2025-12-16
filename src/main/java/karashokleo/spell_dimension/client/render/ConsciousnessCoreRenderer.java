@@ -83,7 +83,7 @@ public class ConsciousnessCoreRenderer implements BlockEntityRenderer<Consciousn
         float s = 0.0F;
         float t = -innerRadius;
         float w = -1.0F + h;
-        float x = (float) maxY * heightScale * (0.5F / innerRadius) + w;
+        float x = maxY * heightScale * (0.5F / innerRadius) + w;
         renderBeamLayer(matrices, vertexConsumers.getBuffer(RenderLayer.getBeaconBeam(textureId, false)), j, k, l, 1.0F, yOffset, i, 0.0F, n, o, 0.0F, q, 0.0F, 0.0F, t, 0.0F, 1.0F, x, w);
         matrices.pop();
         m = -outerRadius;

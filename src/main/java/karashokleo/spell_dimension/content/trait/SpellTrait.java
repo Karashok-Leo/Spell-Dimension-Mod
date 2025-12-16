@@ -3,7 +3,7 @@ package karashokleo.spell_dimension.content.trait;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
 import karashokleo.spell_dimension.data.SDTexts;
-import karashokleo.spell_dimension.init.AllMiscInit;
+import karashokleo.spell_dimension.init.AllGameRules;
 import karashokleo.spell_dimension.util.UuidUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
@@ -83,7 +83,7 @@ public class SpellTrait extends MobTrait
 
     public void tryNotifyTarget(MobEntity mob)
     {
-        if (!mob.getWorld().getGameRules().get(AllMiscInit.NOTIFY_SPELL_TRAIT_CASTING).get())
+        if (!mob.getWorld().getGameRules().get(AllGameRules.NOTIFY_SPELL_TRAIT_CASTING).get())
         {
             return;
         }

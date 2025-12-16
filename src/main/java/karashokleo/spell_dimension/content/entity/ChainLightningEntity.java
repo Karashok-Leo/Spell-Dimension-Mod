@@ -1,11 +1,10 @@
 package karashokleo.spell_dimension.content.entity;
 
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
-import karashokleo.leobrary.damage.api.state.DefaultDamageStateProvider;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
 import karashokleo.spell_dimension.config.SpellConfig;
-import karashokleo.spell_dimension.content.object.ChainLightningDamageState;
 import karashokleo.spell_dimension.content.particle.ZapParticleOption;
+import karashokleo.spell_dimension.init.AllDamageStates;
 import karashokleo.spell_dimension.init.AllEntities;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllSpells;
@@ -203,8 +202,8 @@ public class ChainLightningEntity extends ProjectileEntity
         DamageSource source = SpellDamageSource.create(SpellSchools.LIGHTNING, caster);
         if (TrinketCompat.hasItemInTrinket(caster, AllItems.SUPERCONDUCTOR))
         {
-            ((DefaultDamageStateProvider) source).addState(new ChainLightningDamageState());
-            ((DefaultDamageStateProvider) source).setBypassCooldown();
+            source.addState(AllDamageStates.CHAIN_LIGHTNING);
+            source.setBypassCooldown();
         }
         ((ConfigurableKnockback) target).pushKnockbackMultiplier_SpellEngine(0);
         target.damage(source, damage);

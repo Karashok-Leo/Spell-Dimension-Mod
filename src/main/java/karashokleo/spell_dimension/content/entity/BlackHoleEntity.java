@@ -245,10 +245,10 @@ public class BlackHoleEntity extends Entity implements Ownable
         if (this.age > LIFESPAN)
         {
             this.discard();
-            // remove sound
+            // TODO: remove sound
         } else if (this.age % IDLE_SOUND_INTERVAL == 0)
         {
-            // idle sound
+            // TODO: idle sound
         }
     }
 }

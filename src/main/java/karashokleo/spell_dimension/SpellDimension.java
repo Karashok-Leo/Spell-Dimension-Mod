@@ -77,7 +77,8 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
         AllParticles.register();
         AllCriterions.register();
         AllStats.register();
-        AllMiscInit.register();
+        AllGameRules.register();
+        AllDamageStates.register();
 
         AllPackets.init();
         EnchantedModifier.init();

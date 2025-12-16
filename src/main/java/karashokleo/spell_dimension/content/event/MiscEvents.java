@@ -8,7 +8,7 @@ import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.l2hostility.content.event.GenericEvents;
 import karashokleo.l2hostility.content.feature.EntityFeature;
 import karashokleo.l2hostility.content.item.TrinketItems;
-import karashokleo.l2hostility.content.logic.ReflectState;
+import karashokleo.l2hostility.content.trait.common.ReflectTrait;
 import karashokleo.l2hostility.init.LHTags;
 import karashokleo.leobrary.damage.api.modify.DamageAccess;
 import karashokleo.leobrary.damage.api.modify.DamagePhase;
@@ -69,20 +69,20 @@ public class MiscEvents
             }
             GameRules gameRules = player.getWorld().getGameRules();
 
-            boolean enable = gameRules.getBoolean(AllMiscInit.ENABLE_DAMAGE_TRACKER);
+            boolean enable = gameRules.getBoolean(AllGameRules.ENABLE_DAMAGE_TRACKER);
             if (!enable)
             {
                 return;
             }
 
-            boolean immune = gameRules.getBoolean(AllMiscInit.IMMUNE_TRACKED_DAMAGE);
+            boolean immune = gameRules.getBoolean(AllGameRules.IMMUNE_TRACKED_DAMAGE);
             if (immune && phase == DamagePhase.APPLY)
             {
                 // set to 0 or 0.1 ?
                 access.addModifier(originalDamage -> 0);
             }
 
-            int threshold = gameRules.getInt(AllMiscInit.DAMAGE_TRACKER_THRESHOLD);
+            int threshold = gameRules.getInt(AllGameRules.DAMAGE_TRACKER_THRESHOLD);
             float damage = access.getOriginalDamage();
             if (damage <= player.getMaxHealth() * threshold / 100)
             {
@@ -105,7 +105,7 @@ public class MiscEvents
             }
             SpellDimension.LOGGER.info("- {} phase: {}", phase.name(), damage);
             // send message
-            boolean notify = gameRules.getBoolean(AllMiscInit.NOTIFY_DAMAGE_TRACKER);
+            boolean notify = gameRules.getBoolean(AllGameRules.NOTIFY_DAMAGE_TRACKER);
             if (!notify)
             {
                 return;
@@ -127,7 +127,7 @@ public class MiscEvents
         // Damage Tracker
         for (DamagePhase phase : DamagePhase.values())
         {
-            phase.registerModifier(9999, new DamageTracker(phase));
+            phase.addListener(9999, new DamageTracker(phase));
         }
 
         // Fix dynamic spell book nbt copy
@@ -144,7 +144,7 @@ public class MiscEvents
         });
 
         // Spell Prism
-        DamagePhase.SHIELD.registerModifier(0, access ->
+        DamagePhase.SHIELD.addListener(0, access ->
         {
             if (!access.getSource().isIn(LHTags.MAGIC))
             {
@@ -214,7 +214,7 @@ public class MiscEvents
                 event.setCanceled(true);
             }
         });
-        DamagePhase.SHIELD.registerModifier(0, access ->
+        DamagePhase.SHIELD.addListener(0, access ->
         {
             if (!access.getSource().isOf(MythicUpgradesDamageTypes.DEFLECTING_DAMAGE_TYPE))
             {
@@ -292,14 +292,14 @@ public class MiscEvents
         });
 
         // Quantum Field
-        DamagePhase.SHIELD.registerModifier(0, access ->
+        DamagePhase.SHIELD.addListener(0, access ->
         {
             DamageSource source = access.getSource();
             if (source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY))
             {
                 return;
             }
-            if (((DamageStateProvider) source).hasState(ReflectState.PREDICATE))
+            if (source.hasState(ReflectTrait.REFLECT_STATE::equals))
             {
                 return;
             }
@@ -325,7 +325,7 @@ public class MiscEvents
             }
 
             DamageSource damageSource = SpellDamageSource.create(SpellSchools.LIGHTNING, attacker);
-            ((DamageStateProvider) damageSource).addState(new ReflectState());
+            damageSource.addState(ReflectTrait.REFLECT_STATE);
             GenericEvents.schedule(() -> attacker.damage(damageSource, reflect));
         });
 
