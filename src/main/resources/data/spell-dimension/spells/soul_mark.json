@@ -53,7 +53,7 @@
     }
   ],
   "cost": {
-    "exhaust": 5,
+    "exhaust": 4,
     "cooldown_duration": 32,
     "item_id": "runes:soul_stone"
   }
