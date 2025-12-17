@@ -1,6 +1,6 @@
 {
   "school": "SOUL",
-  "range": 16,
+  "range": 32,
   "cast": {
     "duration": 3.0,
     "animation": "spell_engine:one_handed_projectile_charge",
@@ -21,7 +21,10 @@
   },
   "release": {
     "target": {
-      "type": "CURSOR"
+      "type": "CURSOR",
+      "cursor": {
+        "use_caster_as_fallback": true
+      }
     },
     "animation": "spell_engine:one_handed_projectile_release",
     "sound": {
@@ -42,28 +45,15 @@
   "impact": [
     {
       "action": {
-        "type": "DAMAGE",
-        "damage": {
+        "type": "HEAL",
+        "heal": {
           "spell_power_coefficient": 0
         }
-      },
-      "particles": [
-        {
-          "particle_id": "minecraft:soul",
-          "shape": "SPHERE",
-          "origin": "CENTER",
-          "count": 40.0,
-          "min_speed": 0.2,
-          "max_speed": 0.7
-        }
-      ],
-      "sound": {
-        "id": "spell_engine:generic_healing_impact_1"
       }
     }
   ],
   "cost": {
-    "exhaust" : 5,
+    "exhaust": 0,
     "cooldown_duration": 32,
     "item_id": "runes:soul_stone"
   }

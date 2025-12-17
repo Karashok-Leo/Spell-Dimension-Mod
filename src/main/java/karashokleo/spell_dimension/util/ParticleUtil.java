@@ -6,6 +6,7 @@ import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Vec3d;
+import net.spell_engine.api.spell.ParticleBatch;
 import net.spell_engine.particle.Particles;
 import net.spell_power.api.SpellSchool;
 import net.spell_power.api.SpellSchools;
@@ -15,6 +16,22 @@ import java.util.Map;
 
 public class ParticleUtil
 {
+    public static final ParticleBatch[] EXPLOSION = {new ParticleBatch(
+        "minecraft:explosion_emitter",
+        ParticleBatch.Shape.SPHERE,
+        ParticleBatch.Origin.CENTER,
+        null,
+        0,
+        0,
+        1,
+        0.25F,
+        0.5F,
+        0,
+        0,
+        0,
+        false
+    )};
+
     public static final ParticleEffect CRIT = ParticleTypes.CRIT;
 
     private static final Map<SpellSchool, ParticleEffect> map = Map.of(

@@ -9,7 +9,6 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.world.World;
 import net.spell_engine.api.spell.SpellInfo;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -41,24 +40,5 @@ public class PossessSpell
                 SoulControl.setControllingMinion(player, null);
             }
         }
-    }
-
-    @Nullable
-    private static MobEntity findTarget(ServerPlayerEntity player, List<Entity> targets)
-    {
-        if (targets.isEmpty())
-        {
-            return null;
-        }
-        Entity target = targets.get(0);
-        if (!(target instanceof MobEntity mob))
-        {
-            return null;
-        }
-        if (!SoulControl.isSoulMinion(player, mob))
-        {
-            return null;
-        }
-        return mob;
     }
 }

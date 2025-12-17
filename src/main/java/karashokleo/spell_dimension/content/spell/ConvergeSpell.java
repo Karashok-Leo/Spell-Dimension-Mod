@@ -5,6 +5,7 @@ import karashokleo.spell_dimension.config.SpellConfig;
 import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.util.DamageUtil;
 import karashokleo.spell_dimension.util.ImpactUtil;
+import karashokleo.spell_dimension.util.ParticleUtil;
 import karashokleo.spell_dimension.util.RelationUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -12,7 +13,6 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Vec3d;
-import net.spell_engine.api.spell.ParticleBatch;
 import net.spell_engine.api.spell.SpellInfo;
 import net.spell_engine.entity.SpellProjectile;
 import net.spell_engine.internals.SpellRegistry;
@@ -26,22 +26,6 @@ import java.util.List;
 
 public class ConvergeSpell
 {
-    private static final ParticleBatch[] PARTICLE = {new ParticleBatch(
-        "minecraft:explosion_emitter",
-        ParticleBatch.Shape.SPHERE,
-        ParticleBatch.Origin.CENTER,
-        null,
-        0,
-        0,
-        1,
-        0.25F,
-        0.5F,
-        0,
-        0,
-        0,
-        false
-    )};
-
     public static void handle(SpellProjectile projectile, Identifier spellId, HitResult hitResult)
     {
         if (spellId.equals(AllSpells.CONVERGE))
@@ -66,7 +50,7 @@ public class ConvergeSpell
     {
         SpellPower.Result power = SpellPower.getSpellPower(SpellSchools.ARCANE, caster);
         int amplifier = Math.min((int) (power.baseValue()) / 24 + 1, 3);
-        ParticleHelper.sendBatches(tracked, PARTICLE);
+        ParticleHelper.sendBatches(tracked, ParticleUtil.EXPLOSION);
         SoundHelper.playSoundEvent(tracked.getWorld(), tracked, SoundEvents.ENTITY_GENERIC_EXPLODE);
         float damage = (float) DamageUtil.calculateDamage(caster, SpellSchools.ARCANE, SpellConfig.CONVERGE_FACTOR);
         List<LivingEntity> targets = ImpactUtil.getLivingsInRange(
