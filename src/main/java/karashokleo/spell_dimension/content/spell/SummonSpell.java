@@ -6,13 +6,13 @@ import karashokleo.spell_dimension.content.object.SummonEntry;
 import karashokleo.spell_dimension.content.recipe.summon.SummonRecipe;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllItems;
-import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.util.ParticleUtil;
 import karashokleo.spell_dimension.util.RandomUtil;
 import net.adventurez.init.EntityInit;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.MobSpawnerBlockEntity;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -21,11 +21,14 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
+import net.spell_engine.api.spell.SpellInfo;
 import net.spell_engine.entity.SpellProjectile;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Optional;
@@ -64,12 +67,8 @@ public class SummonSpell
         return Optional.of(new SummonEntry(summonRecipe.entityType(), summonRecipe.count()));
     }
 
-    public static void handle(SpellProjectile projectile, Identifier spellId, BlockHitResult hitResult)
+    public static void handle(SpellProjectile projectile, SpellInfo spellInfo, @Nullable Entity owner, HitResult hitResult)
     {
-        if (!spellId.equals(AllSpells.SUMMON))
-        {
-            return;
-        }
         if (!(projectile.getWorld() instanceof ServerWorld world))
         {
             return;
@@ -78,7 +77,11 @@ public class SummonSpell
         {
             return;
         }
-        BlockPos blockPos = hitResult.getBlockPos();
+        if (!(hitResult instanceof BlockHitResult blockHitResult))
+        {
+            return;
+        }
+        BlockPos blockPos = blockHitResult.getBlockPos();
         BlockState blockState = world.getBlockState(blockPos);
 
         if (!blockState.isOf(Blocks.SPAWNER) ||

@@ -4,21 +4,23 @@ import karashokleo.spell_dimension.content.entity.LocatePortalEntity;
 import karashokleo.spell_dimension.content.recipe.locate.LocateRecipe;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllItems;
-import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.init.AllTags;
 import karashokleo.spell_dimension.util.FutureTask;
 import karashokleo.spell_dimension.util.RandomUtil;
 import karashokleo.spell_dimension.util.TeleportUtil;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.spell_engine.api.spell.SpellInfo;
 import net.spell_engine.entity.SpellProjectile;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
@@ -26,12 +28,8 @@ public class LocateSpell
 {
     public static final double BREAK_CHANCE = 0.3;
 
-    public static void handle(SpellProjectile projectile, Identifier spellId, BlockHitResult hitResult)
+    public static void handle(SpellProjectile projectile, SpellInfo spellInfo, @Nullable Entity owner, HitResult hitResult)
     {
-        if (!spellId.equals(AllSpells.LOCATE))
-        {
-            return;
-        }
         if (!(projectile.getWorld() instanceof ServerWorld world))
         {
             return;
@@ -40,7 +38,11 @@ public class LocateSpell
         {
             return;
         }
-        BlockPos castPos = hitResult.getBlockPos();
+        if (!(hitResult instanceof BlockHitResult blockHitResult))
+        {
+            return;
+        }
+        BlockPos castPos = blockHitResult.getBlockPos();
         if (!isLocateTargetBlock(world, castPos))
         {
             return;

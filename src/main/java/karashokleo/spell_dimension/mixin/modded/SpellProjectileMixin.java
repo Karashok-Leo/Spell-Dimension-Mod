@@ -1,14 +1,13 @@
 package karashokleo.spell_dimension.mixin.modded;
 
-import karashokleo.spell_dimension.api.SpellProjectileHitBlockCallback;
-import karashokleo.spell_dimension.api.SpellProjectileHitEntityCallback;
-import karashokleo.spell_dimension.api.SpellProjectileOutOfRangeCallback;
+import karashokleo.spell_dimension.api.SpellProjectileHitCallback;
+import karashokleo.spell_dimension.content.object.EmptyHitResult;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.projectile.ProjectileEntity;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.world.World;
+import net.spell_engine.api.spell.SpellInfo;
 import net.spell_engine.entity.SpellProjectile;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -20,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class SpellProjectileMixin extends ProjectileEntity
 {
     @Shadow
-    private Identifier spellId;
+    public abstract SpellInfo getSpellInfo();
 
     private SpellProjectileMixin(EntityType<? extends ProjectileEntity> entityType, World world)
     {
@@ -30,13 +29,13 @@ public abstract class SpellProjectileMixin extends ProjectileEntity
     @Inject(method = "onEntityHit", at = @At(value = "INVOKE", target = "Lnet/spell_engine/entity/SpellProjectile;setFollowedTarget(Lnet/minecraft/entity/Entity;)V"))
     private void inject_onEntityHit(EntityHitResult entityHitResult, CallbackInfo ci)
     {
-        SpellProjectileHitEntityCallback.EVENT.invoker().onHitEntity((SpellProjectile) (Object) this, spellId, entityHitResult);
+        SpellProjectileHitCallback.EVENT.invoker().onHit((SpellProjectile) (Object) this, getSpellInfo(), getOwner(), entityHitResult);
     }
 
     @Inject(method = "onBlockHit", at = @At("HEAD"))
     private void inject_onBlockHit(BlockHitResult blockHitResult, CallbackInfo ci)
     {
-        SpellProjectileHitBlockCallback.EVENT.invoker().onHitBlock((SpellProjectile) (Object) this, spellId, blockHitResult);
+        SpellProjectileHitCallback.EVENT.invoker().onHit((SpellProjectile) (Object) this, getSpellInfo(), getOwner(), blockHitResult);
     }
 
     @Inject(
@@ -49,7 +48,7 @@ public abstract class SpellProjectileMixin extends ProjectileEntity
     )
     private void inject_tick_flyKilled(CallbackInfo ci)
     {
-        SpellProjectileOutOfRangeCallback.EVENT.invoker().onOutOfRange((SpellProjectile) (Object) this, spellId);
+        SpellProjectileHitCallback.EVENT.invoker().onHit((SpellProjectile) (Object) this, getSpellInfo(), getOwner(), new EmptyHitResult(getPos()));
     }
 
     @Inject(
@@ -81,7 +80,7 @@ public abstract class SpellProjectileMixin extends ProjectileEntity
     )
     private void inject_tick_fallKilled(CallbackInfo ci)
     {
-        SpellProjectileOutOfRangeCallback.EVENT.invoker().onOutOfRange((SpellProjectile) (Object) this, spellId);
+        SpellProjectileHitCallback.EVENT.invoker().onHit((SpellProjectile) (Object) this, getSpellInfo(), getOwner(), new EmptyHitResult(getPos()));
     }
 
     @Inject(
@@ -94,6 +93,6 @@ public abstract class SpellProjectileMixin extends ProjectileEntity
     )
     private void inject_tick_defaultKilled(CallbackInfo ci)
     {
-        SpellProjectileOutOfRangeCallback.EVENT.invoker().onOutOfRange((SpellProjectile) (Object) this, spellId);
+        SpellProjectileHitCallback.EVENT.invoker().onHit((SpellProjectile) (Object) this, getSpellInfo(), getOwner(), new EmptyHitResult(getPos()));
     }
 }

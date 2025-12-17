@@ -5,27 +5,21 @@ import karashokleo.spell_dimension.api.buff.Buff;
 import karashokleo.spell_dimension.content.buff.Nucleus;
 import karashokleo.spell_dimension.content.item.trinket.endgame.GlacialNuclearEraItem;
 import karashokleo.spell_dimension.init.AllItems;
-import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.util.ImpactUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
+import net.spell_engine.api.spell.SpellInfo;
 import net.spell_engine.entity.SpellProjectile;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
 public class IcicleSpell
 {
-    public static void handle(SpellProjectile projectile, Identifier spellId, HitResult hitResult)
+    public static void handle(SpellProjectile projectile, SpellInfo spellInfo, @Nullable Entity owner, HitResult hitResult)
     {
-        if (!spellId.equals(AllSpells.ICICLE))
-        {
-            return;
-        }
-
-        Entity owner = projectile.getOwner();
         if (owner == null ||
             owner.isRemoved() ||
             (!(owner instanceof LivingEntity caster)))

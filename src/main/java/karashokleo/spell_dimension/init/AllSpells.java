@@ -3,9 +3,7 @@ package karashokleo.spell_dimension.init;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDamageEvent;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
-import karashokleo.spell_dimension.api.SpellProjectileHitBlockCallback;
-import karashokleo.spell_dimension.api.SpellProjectileHitEntityCallback;
-import karashokleo.spell_dimension.api.SpellProjectileOutOfRangeCallback;
+import karashokleo.spell_dimension.api.SpellProjectileHitCallback;
 import karashokleo.spell_dimension.content.buff.BlazingMark;
 import karashokleo.spell_dimension.content.object.ScrollType;
 import karashokleo.spell_dimension.content.spell.*;
@@ -15,8 +13,10 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.text.MutableText;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.hit.HitResult;
 import net.minecraft.world.World;
 import net.spell_engine.api.spell.SpellInfo;
+import net.spell_engine.entity.SpellProjectile;
 import net.spell_power.api.SpellSchool;
 import net.spell_power.api.SpellSchools;
 import org.jetbrains.annotations.Nullable;
@@ -211,24 +211,8 @@ public class AllSpells
         LivingDamageEvent.DAMAGE.register(ElectricBondageSpell::onDamage);
         LivingDamageEvent.DAMAGE.register(ElectrocutionSpell::onDamage);
 
-        SpellProjectileHitEntityCallback.EVENT.register(ShiftSpell::handle);
-
-        SpellProjectileHitEntityCallback.EVENT.register(ConvergeSpell::handle);
-        SpellProjectileHitBlockCallback.EVENT.register(ConvergeSpell::handle);
-
-        SpellProjectileHitEntityCallback.EVENT.register(BlackHoleSpell::handle);
-        SpellProjectileHitBlockCallback.EVENT.register(BlackHoleSpell::handle);
-        SpellProjectileOutOfRangeCallback.EVENT.register(BlackHoleSpell::handle);
-
-        SpellProjectileHitEntityCallback.EVENT.register(IcicleSpell::handle);
-
-        SpellProjectileHitBlockCallback.EVENT.register(LightSpell::handle);
-        SpellProjectileHitBlockCallback.EVENT.register(LocateSpell::handle);
-        SpellProjectileHitBlockCallback.EVENT.register(SummonSpell::handle);
-        SpellProjectileHitBlockCallback.EVENT.register(PlaceSpell::handle);
-        SpellProjectileHitBlockCallback.EVENT.register(BreakSpell::handle);
-
         SpellImpactEvents.PRE.register(AllSpells::handleImpact);
+        SpellProjectileHitCallback.EVENT.register(AllSpells::handleImpact);
 
         registerImpactHandler(ARCANE_BARRIER, ArcaneBarrierSpell::handle);
         registerImpactHandler(ICY_NUCLEUS, NucleusSpell::handle);
@@ -249,9 +233,20 @@ public class AllSpells
         registerImpactHandler(SOUL_MARK, SoulMarkSpell::handle);
         registerImpactHandler(SOUL_ECHO, SoulEchoSpell::handle);
         registerImpactHandler(SOUL_BURST, SoulBurstSpell::handle);
+
+        registerImpactHandler(SHIFT, ShiftSpell::handle);
+        registerImpactHandler(CONVERGE, ConvergeSpell::handle);
+        registerImpactHandler(BLACK_HOLE, BlackHoleSpell::handle);
+        registerImpactHandler(ICICLE, IcicleSpell::handle);
+        registerImpactHandler(LIGHT, LightSpell::handle);
+        registerImpactHandler(LOCATE, LocateSpell::handle);
+        registerImpactHandler(SUMMON, SummonSpell::handle);
+        registerImpactHandler(PLACE, PlaceSpell::handle);
+        registerImpactHandler(BREAK, BreakSpell::handle);
     }
 
     private static final Map<Identifier, SpellImpactEvents.Callback> IMPACT_HANDLERS = new HashMap<>();
+    private static final Map<Identifier, SpellProjectileHitCallback> PROJECTILE_IMPACT_HANDLERS = new HashMap<>();
 
     private static void handleImpact(World world, LivingEntity caster, List<Entity> targets, SpellInfo spellInfo)
     {
@@ -263,9 +258,24 @@ public class AllSpells
         handler.invoke(world, caster, targets, spellInfo);
     }
 
+    private static void handleImpact(SpellProjectile projectile, SpellInfo spellInfo, @Nullable Entity owner, HitResult hitResult)
+    {
+        SpellProjectileHitCallback handler = PROJECTILE_IMPACT_HANDLERS.get(spellInfo.id());
+        if (handler == null)
+        {
+            return;
+        }
+        handler.onHit(projectile, spellInfo, owner, hitResult);
+    }
+
     public static void registerImpactHandler(Identifier spellId, SpellImpactEvents.Callback handler)
     {
         IMPACT_HANDLERS.put(spellId, handler);
+    }
+
+    public static void registerImpactHandler(Identifier spellId, SpellProjectileHitCallback handler)
+    {
+        PROJECTILE_IMPACT_HANDLERS.put(spellId, handler);
     }
 
     public static Set<Identifier> getAll()

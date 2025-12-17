@@ -6,7 +6,6 @@ import karashokleo.spell_dimension.content.block.SpellLightBlock;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllBlocks;
 import karashokleo.spell_dimension.init.AllItems;
-import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.init.AllWorldGen;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
@@ -17,13 +16,14 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.LightType;
+import net.spell_engine.api.spell.SpellInfo;
 import net.spell_engine.entity.SpellProjectile;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -158,17 +158,12 @@ public class LightSpell
         }
     }
 
-    public static void handle(SpellProjectile projectile, Identifier spellId, BlockHitResult hitResult)
+    public static void handle(SpellProjectile projectile, SpellInfo spellInfo, @Nullable Entity owner, HitResult hitResult)
     {
-        if (!spellId.equals(AllSpells.LIGHT))
-        {
-            return;
-        }
         if (!(projectile.getWorld() instanceof ServerWorld world))
         {
             return;
         }
-        Entity owner = projectile.getOwner();
         if (owner == null)
         {
             return;
@@ -190,6 +185,6 @@ public class LightSpell
                 total = 24000;
             }
         }
-        SPAWNERS.put(world, new LightSpawner(hitResult.getBlockPos(), 7, total, 20));
+        SPAWNERS.put(world, new LightSpawner(BlockPos.ofFloored(hitResult.getPos()), 7, total, 20));
     }
 }

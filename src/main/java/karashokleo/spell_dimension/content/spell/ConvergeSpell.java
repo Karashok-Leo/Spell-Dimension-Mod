@@ -10,7 +10,6 @@ import karashokleo.spell_dimension.util.RelationUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Vec3d;
 import net.spell_engine.api.spell.SpellInfo;
@@ -20,30 +19,22 @@ import net.spell_engine.particle.ParticleHelper;
 import net.spell_engine.utils.SoundHelper;
 import net.spell_power.api.SpellPower;
 import net.spell_power.api.SpellSchools;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ConvergeSpell
 {
-    public static void handle(SpellProjectile projectile, Identifier spellId, HitResult hitResult)
+    public static void handle(SpellProjectile projectile, SpellInfo spellInfo, @Nullable Entity owner, HitResult hitResult)
     {
-        if (spellId.equals(AllSpells.CONVERGE))
-        {
-            convergeImpact(projectile);
-        }
-    }
-
-    public static void convergeImpact(SpellProjectile projectile)
-    {
-        Entity owner = projectile.getOwner();
         if (owner == null ||
             owner.isRemoved() ||
             (!(owner instanceof LivingEntity caster)))
         {
             return;
         }
-        convergeImpact(caster, projectile, projectile.getPos());
+        convergeImpact(caster, projectile, hitResult.getPos());
     }
 
     public static void convergeImpact(LivingEntity caster, Entity tracked, Vec3d pos)

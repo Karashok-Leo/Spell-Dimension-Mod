@@ -1,29 +1,28 @@
 package karashokleo.spell_dimension.content.spell;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.EntityEvents;
-import karashokleo.spell_dimension.init.AllSpells;
 import net.minecraft.entity.Entity;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.EntityHitResult;
+import net.minecraft.util.hit.HitResult;
 import net.minecraft.world.event.GameEvent;
+import net.spell_engine.api.spell.SpellInfo;
 import net.spell_engine.entity.SpellProjectile;
+import org.jetbrains.annotations.Nullable;
 
 public class ShiftSpell
 {
-    public static void handle(SpellProjectile projectile, Identifier spellId, EntityHitResult hitResult)
+    public static void handle(SpellProjectile projectile, SpellInfo spellInfo, @Nullable Entity owner, HitResult hitResult)
     {
-        if (!spellId.equals(AllSpells.SHIFT))
-        {
-            return;
-        }
-        Entity owner = projectile.getOwner();
         if (owner == null || owner.isRemoved() || owner.getWorld().isClient())
         {
             return;
         }
-        Entity entity = hitResult.getEntity();
-        exchangePosition(owner, entity);
+        if (!(hitResult instanceof EntityHitResult entityHitResult))
+        {
+            return;
+        }
+        exchangePosition(owner, entityHitResult.getEntity());
     }
 
     public static void exchangePosition(Entity thisEntity, Entity thatEntity)

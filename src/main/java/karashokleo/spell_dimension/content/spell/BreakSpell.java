@@ -2,7 +2,6 @@ package karashokleo.spell_dimension.content.spell;
 
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllItems;
-import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.init.AllWorldGen;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -12,25 +11,26 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
+import net.spell_engine.api.spell.SpellInfo;
 import net.spell_engine.entity.SpellProjectile;
+import org.jetbrains.annotations.Nullable;
 
 public class BreakSpell
 {
-    public static void handle(SpellProjectile projectile, Identifier spellId, BlockHitResult hitResult)
+    public static void handle(SpellProjectile projectile, SpellInfo spellInfo, @Nullable Entity owner, HitResult hitResult)
     {
-        if (!spellId.equals(AllSpells.BREAK))
-        {
-            return;
-        }
         if (!(projectile.getWorld() instanceof ServerWorld world))
         {
             return;
         }
-        Entity owner = projectile.getOwner();
         if (owner == null)
+        {
+            return;
+        }
+        if (!(hitResult instanceof BlockHitResult blockHitResult))
         {
             return;
         }
@@ -40,7 +40,7 @@ public class BreakSpell
             return;
         }
 
-        BlockPos blockPos = hitResult.getBlockPos();
+        BlockPos blockPos = blockHitResult.getBlockPos();
         if (owner instanceof LivingEntity living)
         {
             ItemStack offHandStack = living.getOffHandStack();
