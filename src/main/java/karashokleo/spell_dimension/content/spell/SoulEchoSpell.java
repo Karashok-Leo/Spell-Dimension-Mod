@@ -1,5 +1,6 @@
 package karashokleo.spell_dimension.content.spell;
 
+import karashokleo.spell_dimension.api.SpellImpactEvents;
 import karashokleo.spell_dimension.content.component.SoulControllerComponent;
 import karashokleo.spell_dimension.content.misc.SoulControl;
 import karashokleo.spell_dimension.util.DamageUtil;
@@ -19,6 +20,7 @@ import net.spell_engine.api.spell.SpellInfo;
 import net.spell_power.api.SpellDamageSource;
 import net.spell_power.api.SpellSchools;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SoulEchoSpell
@@ -44,14 +46,14 @@ public class SoulEchoSpell
         SoulControllerComponent controllerComponent = SoulControl.getSoulController(player);
         List<MobEntity> activeMinions = controllerComponent.getActiveMinions();
 
-        launchEcho(caster, caster, target, range);
+        launchEcho(caster, caster, target, range, spellInfo);
         for (MobEntity minion : activeMinions)
         {
-            launchEcho(caster, minion, target, range);
+            launchEcho(caster, minion, target, range, spellInfo);
         }
     }
 
-    private static void launchEcho(LivingEntity caster, LivingEntity launcher, LivingEntity target, float range)
+    private static void launchEcho(LivingEntity caster, LivingEntity launcher, LivingEntity target, float range, SpellInfo spellInfo)
     {
         if (!(caster.getWorld() instanceof ServerWorld world))
         {
@@ -75,8 +77,10 @@ public class SoulEchoSpell
 
         // damage
         float amount = (float) DamageUtil.calculateDamage(caster, SpellSchools.SOUL, 0.5f);
-        List<LivingEntity> hit = ImpactUtil.getLivingsNearLineSegment(world, from, to, 2);
-        for (LivingEntity living : hit)
+        List<LivingEntity> targets = ImpactUtil.getLivingsNearLineSegment(world, from, to, 2);
+        SpellImpactEvents.POST.invoker().invoke(caster.getWorld(), caster, new ArrayList<>(targets), spellInfo);
+
+        for (LivingEntity living : targets)
         {
             if (RelationUtil.isAlly(caster, living))
             {

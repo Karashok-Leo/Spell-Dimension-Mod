@@ -2,7 +2,6 @@ package karashokleo.spell_dimension.content.spell;
 
 import karashokleo.spell_dimension.api.SpellImpactEvents;
 import karashokleo.spell_dimension.config.SpellConfig;
-import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.util.DamageUtil;
 import karashokleo.spell_dimension.util.ImpactUtil;
 import karashokleo.spell_dimension.util.ParticleUtil;
@@ -14,7 +13,6 @@ import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Vec3d;
 import net.spell_engine.api.spell.SpellInfo;
 import net.spell_engine.entity.SpellProjectile;
-import net.spell_engine.internals.SpellRegistry;
 import net.spell_engine.particle.ParticleHelper;
 import net.spell_engine.utils.SoundHelper;
 import net.spell_power.api.SpellPower;
@@ -34,10 +32,10 @@ public class ConvergeSpell
         {
             return;
         }
-        convergeImpact(caster, projectile, hitResult.getPos());
+        convergeImpact(caster, projectile, hitResult.getPos(), spellInfo);
     }
 
-    public static void convergeImpact(LivingEntity caster, Entity tracked, Vec3d pos)
+    public static void convergeImpact(LivingEntity caster, Entity tracked, Vec3d pos, SpellInfo spellInfo)
     {
         SpellPower.Result power = SpellPower.getSpellPower(SpellSchools.ARCANE, caster);
         int amplifier = Math.min((int) (power.baseValue()) / 24 + 1, 3);
@@ -54,7 +52,6 @@ public class ConvergeSpell
             return;
         }
 
-        SpellInfo spellInfo = new SpellInfo(SpellRegistry.getSpell(AllSpells.CONVERGE), AllSpells.CONVERGE);
         SpellImpactEvents.POST.invoker().invoke(caster.getWorld(), caster, new ArrayList<>(targets), spellInfo);
 
         for (LivingEntity target : targets)

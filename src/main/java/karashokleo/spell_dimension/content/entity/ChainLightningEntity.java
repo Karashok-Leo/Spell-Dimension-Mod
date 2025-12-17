@@ -28,6 +28,7 @@ import net.spell_engine.internals.SpellRegistry;
 import net.spell_engine.particle.ParticleHelper;
 import net.spell_power.api.SpellDamageSource;
 import net.spell_power.api.SpellSchools;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -79,6 +80,8 @@ public class ChainLightningEntity extends ProjectileEntity
     private LivingEntity initialTarget;
     private final ArrayList<LivingEntity> alreadyChained = new ArrayList<>();
     private final ArrayList<LivingEntity> lastChained = new ArrayList<>();
+    @Nullable
+    private SpellInfo spellInfo;
 
     public ChainLightningEntity(World world, Entity owner, LivingEntity initialTarget)
     {
@@ -99,6 +102,15 @@ public class ChainLightningEntity extends ProjectileEntity
         this.chainStep = SpellConfig.CHAIN_LIGHTNING_CONFIG.chainStep();
         this.range = SpellConfig.CHAIN_LIGHTNING_CONFIG.range();
         this.canPenetrate = false;
+    }
+
+    public SpellInfo getSpellInfo()
+    {
+        if (this.spellInfo == null)
+        {
+            this.spellInfo = new SpellInfo(SpellRegistry.getSpell(AllSpells.CHAIN_LIGHTNING), AllSpells.CHAIN_LIGHTNING);
+        }
+        return spellInfo;
     }
 
     @SuppressWarnings("ForLoopReplaceableByForEach")
@@ -190,8 +202,7 @@ public class ChainLightningEntity extends ProjectileEntity
 
         if (getOwner() instanceof LivingEntity caster)
         {
-            SpellInfo spellInfo = new SpellInfo(SpellRegistry.getSpell(AllSpells.CHAIN_LIGHTNING), AllSpells.CHAIN_LIGHTNING);
-            SpellImpactEvents.POST.invoker().invoke(world, caster, List.of(target), spellInfo);
+            SpellImpactEvents.POST.invoker().invoke(world, caster, List.of(target), getSpellInfo());
             applyDamage(caster, target);
         }
     }

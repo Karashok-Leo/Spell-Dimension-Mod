@@ -9,10 +9,13 @@ import karashokleo.leobrary.effect.api.event.LivingHealCallback;
 import karashokleo.spell_dimension.content.item.trinket.breastplate.AtomicBreastplateItem;
 import karashokleo.spell_dimension.content.spell.ConvergeSpell;
 import karashokleo.spell_dimension.init.AllItems;
+import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.util.SchoolUtil;
 import net.combatroll.api.event.ServerSideRollEvents;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.spell_engine.api.spell.SpellInfo;
+import net.spell_engine.internals.SpellRegistry;
 import net.spell_power.api.SpellSchool;
 
 public class TrinketEvents
@@ -39,7 +42,7 @@ public class TrinketEvents
         {
             if (TrinketCompat.hasItemInTrinket(player, AllItems.ARMOR_OF_CONVERGENCE))
             {
-                ConvergeSpell.convergeImpact(player, player, player.getPos().add(0, 1, 0));
+                ConvergeSpell.convergeImpact(player, player, player.getPos().add(0, 1, 0), new SpellInfo(SpellRegistry.getSpell(AllSpells.CONVERGE), AllSpells.CONVERGE));
             }
         });
 

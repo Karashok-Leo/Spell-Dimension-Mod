@@ -32,6 +32,7 @@ import net.spell_engine.internals.SpellContainerHelper;
 import net.spell_engine.internals.SpellRegistry;
 import net.spell_engine.particle.ParticleHelper;
 import net.spell_power.api.SpellSchools;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,6 +76,9 @@ public class BallLightningEntity extends ProjectileEntity
     public int power;
     private int lifespan;
 
+    @Nullable
+    private SpellInfo spellInfo;
+
     public BallLightningEntity(World world, Entity owner)
     {
         this(AllEntities.BALL_LIGHTNING, world);
@@ -88,6 +92,15 @@ public class BallLightningEntity extends ProjectileEntity
         this.macro = false;
         this.power = 1;
         this.lifespan = SpellConfig.BALL_LIGHTNING_CONFIG.lifespan();
+    }
+
+    public SpellInfo getSpellInfo()
+    {
+        if (this.spellInfo == null)
+        {
+            this.spellInfo = new SpellInfo(SpellRegistry.getSpell(AllSpells.BALL_LIGHTNING), AllSpells.BALL_LIGHTNING);
+        }
+        return spellInfo;
     }
 
     private void applyPassives(List<String> spells)
@@ -191,8 +204,7 @@ public class BallLightningEntity extends ProjectileEntity
         if (target != null &&
             getOwner() instanceof LivingEntity caster)
         {
-            SpellInfo spellInfo = new SpellInfo(SpellRegistry.getSpell(AllSpells.BALL_LIGHTNING), AllSpells.BALL_LIGHTNING);
-            SpellImpactEvents.POST.invoker().invoke(world, caster, List.of(target), spellInfo);
+            SpellImpactEvents.POST.invoker().invoke(world, caster, List.of(target), getSpellInfo());
 
             float damage = (float) DamageUtil.calculateDamage(caster, SpellSchools.LIGHTNING, this.power * SpellConfig.BALL_LIGHTNING_CONFIG.damageFactor());
             DamageUtil.spellDamage(target, SpellSchools.LIGHTNING, caster, damage, false);
