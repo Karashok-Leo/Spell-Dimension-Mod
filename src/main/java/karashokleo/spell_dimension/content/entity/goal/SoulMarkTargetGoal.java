@@ -18,7 +18,7 @@ public class SoulMarkTargetGoal extends TrackTargetGoal
     protected static final int RECIPROCAL_CHANCE = 5;
     @Nullable
     protected LivingEntity targetEntity;
-    protected TargetPredicate targetPredicate;
+    protected final TargetPredicate targetPredicate;
 
     public SoulMarkTargetGoal(MobEntity mob)
     {

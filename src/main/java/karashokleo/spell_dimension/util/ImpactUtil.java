@@ -9,6 +9,7 @@ import net.minecraft.entity.boss.dragon.EnderDragonPart;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -28,6 +29,7 @@ import net.spell_engine.utils.SoundHelper;
 import net.spell_power.api.SpellPower;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -204,5 +206,25 @@ public class ImpactUtil
     public static List<LivingEntity> getLivingsInRange(Entity origin, double range, Predicate<LivingEntity> predicate)
     {
         return origin.getWorld().getEntitiesByClass(LivingEntity.class, origin.getBoundingBox().expand(range), predicate);
+    }
+
+    public static List<LivingEntity> getLivingsNearLineSegment(World world, Vec3d from, Vec3d to, double padding)
+    {
+        List<LivingEntity> ans = new ArrayList<>();
+        List<LivingEntity> entities = world.getNonSpectatingEntities(
+            LivingEntity.class,
+            new Box(from, to).expand(1, 1, 1)
+        );
+        for (LivingEntity entity : entities)
+        {
+            double pad = entity.getTargetingMargin() + padding;
+            Box aabb = entity.getBoundingBox().expand(pad, pad, pad);
+            if (aabb.contains(from) ||
+                aabb.raycast(from, to).isPresent())
+            {
+                ans.add(entity);
+            }
+        }
+        return ans;
     }
 }
