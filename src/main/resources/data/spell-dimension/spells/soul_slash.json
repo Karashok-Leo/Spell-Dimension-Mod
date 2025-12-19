@@ -1,6 +1,6 @@
 {
   "school": "SOUL",
-  "range": 8,
+  "range": 32,
   "learn": {
     "tier": 1
   },
@@ -17,39 +17,28 @@
       "type": "PROJECTILE",
       "projectile": {
         "launch_properties": {
-          "velocity": 3.0
+          "velocity": 0.6
         },
         "projectile": {
-          "homing_angle": 0,
-          "divergence": 15,
           "perks": {
-            "pierce": 2
+            "pierce": 64
           },
           "client_data": {
             "travel_particles": [
               {
-                "particle_id": "minecraft:soul",
-                "shape": "CIRCLE",
-                "rotation": "LOOK",
-                "origin": "CENTER",
-                "count": 2.0,
-                "min_speed": 0.05,
-                "max_speed": 0.1
-              },
-              {
                 "particle_id": "minecraft:soul_fire_flame",
-                "shape": "CIRCLE",
+                "shape": "SPHERE",
                 "rotation": "LOOK",
                 "origin": "CENTER",
-                "count": 2.0,
-                "min_speed": 0.05,
-                "max_speed": 0.1
+                "count": 1.0,
+                "min_speed": 0.1,
+                "max_speed": 0.2
               }
             ],
             "model": {
-              "model_id": "spellbladenext:projectile/amethyst",
-              "render": "DEEP",
-              "scale": 3
+              "model_id": "spell-dimension:spell_projectile/soul_slash",
+              "rotate_degrees_per_tick": 0.3,
+              "scale": 1.5
             }
           }
         }
@@ -73,9 +62,9 @@
           "particle_id": "minecraft:soul",
           "shape": "SPHERE",
           "origin": "CENTER",
-          "count": 40.0,
-          "min_speed": 0.2,
-          "max_speed": 0.7
+          "count": 20.0,
+          "min_speed": 0.1,
+          "max_speed": 0.2
         }
       ],
       "sound": {
@@ -84,6 +73,7 @@
     }
   ],
   "cost": {
+    "exhaust" : 1,
     "cooldown_duration": 3,
     "item_id": "runes:soul_stone"
   }

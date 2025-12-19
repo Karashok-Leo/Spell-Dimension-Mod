@@ -41,25 +41,24 @@ public class SoulEchoSpell
             return;
         }
 
-        float range = spellInfo.spell().range;
-
         SoulControllerComponent controllerComponent = SoulControl.getSoulController(player);
         List<MobEntity> activeMinions = controllerComponent.getActiveMinions();
 
-        launchEcho(caster, caster, target, range, spellInfo);
+        launchEcho(caster, caster, target, spellInfo);
         for (MobEntity minion : activeMinions)
         {
-            launchEcho(caster, minion, target, range, spellInfo);
+            launchEcho(caster, minion, target, spellInfo);
         }
     }
 
-    private static void launchEcho(LivingEntity caster, LivingEntity launcher, LivingEntity target, float range, SpellInfo spellInfo)
+    private static void launchEcho(LivingEntity caster, LivingEntity launcher, LivingEntity target, SpellInfo spellInfo)
     {
         if (!(caster.getWorld() instanceof ServerWorld world))
         {
             return;
         }
 
+        float range = spellInfo.spell().range;
         Vec3d from = launcher.getEyePos();
         Vec3d to = target.getEyePos();
         Vec3d direction = to.subtract(from).normalize();
