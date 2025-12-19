@@ -2,6 +2,7 @@ package karashokleo.spell_dimension.content.event;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEvent;
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingEntityEvents;
+import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDamageEvent;
 import karashokleo.leobrary.damage.api.modify.DamagePhase;
 import karashokleo.leobrary.effect.api.event.LivingHealCallback;
 import karashokleo.spell_dimension.content.component.SoulControllerComponent;
@@ -16,6 +17,7 @@ import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.init.AllStatusEffects;
 import karashokleo.spell_dimension.util.DamageUtil;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.MobEntity;
@@ -23,7 +25,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Formatting;
 import net.spell_engine.api.spell.SpellContainer;
+import net.spell_engine.entity.ConfigurableKnockback;
 import net.spell_engine.internals.SpellContainerHelper;
+import net.spell_power.api.SpellDamageSource;
 import net.spell_power.api.SpellSchools;
 
 import java.util.List;
@@ -52,22 +56,40 @@ public class SoulMinionEvents
 
         // prevent minion attack owner
         // extra soul magic damage
-        LivingAttackEvent.ATTACK.register(event ->
+        LivingDamageEvent.DAMAGE.register(event ->
         {
-            if (!(event.getSource().getAttacker() instanceof MobEntity mob))
+            PlayerEntity owner = null;
+            DamageSource source = event.getSource();
+            Entity attacker = source.getAttacker();
+            LivingEntity living = event.getEntity();
+
+            if (living.getWorld().isClient())
             {
                 return;
             }
 
-            SoulMinionComponent minionComponent = SoulControl.getSoulMinion(mob);
-            PlayerEntity owner = minionComponent.getOwner();
-
-            LivingEntity living = event.getEntity();
-            // prevent attack owner
-            if (living == owner)
+            if (source.hasState(AllDamageStates.SOUL_MINION_EXTRA))
             {
-                event.setCanceled(true);
                 return;
+            }
+
+            if (attacker instanceof MobEntity mob)
+            {
+                SoulMinionComponent minionComponent = SoulControl.getSoulMinion(mob);
+                owner = minionComponent.getOwner();
+                // prevent attack owner
+                if (living == owner)
+                {
+                    event.setCanceled(true);
+                    return;
+                }
+            } else if (attacker instanceof PlayerEntity player)
+            {
+                SoulControllerComponent controllerComponent = SoulControl.getSoulController(player);
+                if (controllerComponent.isControlling())
+                {
+                    owner = player;
+                }
             }
 
             if (owner == null)
@@ -95,7 +117,13 @@ public class SoulMinionEvents
             float amount = (float) DamageUtil.calculateDamage(owner, SpellSchools.SOUL, factor);
             // at least 1 damage
             amount = Math.max(1.0f, amount);
-            DamageUtil.spellDamage(living, SpellSchools.SOUL, owner, amount, false);
+            DamageSource damageSource = SpellDamageSource.create(SpellSchools.SOUL, owner);
+            damageSource.setBypassCooldown();
+            damageSource.addState(AllDamageStates.SOUL_MINION_EXTRA);
+            // apply damage
+            ((ConfigurableKnockback) living).pushKnockbackMultiplier_SpellEngine(0);
+            living.damage(damageSource, amount);
+            ((ConfigurableKnockback) living).popKnockbackMultiplier_SpellEngine();
         });
 
         // fake player self damage feedback
