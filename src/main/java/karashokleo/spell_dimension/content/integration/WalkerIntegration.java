@@ -14,11 +14,11 @@ public class WalkerIntegration extends AbstractIntegration
     {
         Integrations.register(SpellDimension.MOD_ID, WalkerIntegration::new);
 
-        ApiLevel.setApiLevel(ApiLevel.DEFAULT);
+        ApiLevel.setApiLevel(ApiLevel.API_ONLY);
 
         unregisterTraits("minecraft:husk", "walkers:burn_in_daylight");
         unregisterTraits("mutantmonsters:mutant_zombie", "walkers:burn_in_daylight");
-        unregisterTraits("mutantmonsters:mutant_skeleton", "walkers:burn_in_daylight");
+        unregisterTraits("mutantmonsters:mutant_skeleton", "walkers:burn_in_daylight"); 
     }
 
     private static void unregisterTraits(String entityId, String traitId)
