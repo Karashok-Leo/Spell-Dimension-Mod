@@ -1,5 +1,6 @@
 package karashokleo.spell_dimension.content.entity;
 
+import karashokleo.l2hostility.util.raytrace.RayTraceUtil;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
 import karashokleo.spell_dimension.config.SpellConfig;
 import karashokleo.spell_dimension.init.AllEntities;
@@ -12,6 +13,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
@@ -31,6 +35,7 @@ import net.spell_engine.api.spell.SpellInfo;
 import net.spell_engine.internals.SpellContainerHelper;
 import net.spell_engine.internals.SpellRegistry;
 import net.spell_engine.particle.ParticleHelper;
+import net.spell_engine.utils.VectorHelper;
 import net.spell_power.api.SpellSchools;
 import org.jetbrains.annotations.Nullable;
 
@@ -71,8 +76,10 @@ public class BallLightningEntity extends ProjectileEntity
             false
         ),
     };
+    public static final float HOMING_ANGLE = 8f;
 
-    public boolean macro;
+    private static final TrackedData<Boolean> MACRO = DataTracker.registerData(BallLightningEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+
     public int power;
     private int lifespan;
 
@@ -89,7 +96,6 @@ public class BallLightningEntity extends ProjectileEntity
     {
         super(entityType, world);
         this.setNoGravity(true);
-        this.macro = false;
         this.power = 1;
         this.lifespan = SpellConfig.BALL_LIGHTNING_CONFIG.lifespan();
     }
@@ -116,7 +122,7 @@ public class BallLightningEntity extends ProjectileEntity
     {
         super.onBlockHit(blockHitResult);
 
-        if (macro)
+        if (isMacro())
         {
             World world = this.getWorld();
             BlockPos blockPos = blockHitResult.getBlockPos();
@@ -178,7 +184,7 @@ public class BallLightningEntity extends ProjectileEntity
 
         Entity entity = entityHitResult.getEntity();
 
-        if (macro && !(entity instanceof PlayerEntity))
+        if (isMacro() && !(entity instanceof PlayerEntity))
         {
             ArrayList<Runnable> possibles = new ArrayList<>();
             possibles.add(entity::discard);
@@ -222,7 +228,8 @@ public class BallLightningEntity extends ProjectileEntity
         lifespan--;
 
         setPosition(getPos().add(getVelocity()));
-        ProjectileUtil.setRotationFromVelocity(this, 1);
+        followTarget();
+        ProjectileUtil.setRotationFromVelocity(this, 0.5f);
 
         HitResult hitResult = ProjectileUtil.getCollision(this, this::canHit);
         if (hitResult.getType() != HitResult.Type.MISS)
@@ -243,6 +250,41 @@ public class BallLightningEntity extends ProjectileEntity
         }
     }
 
+    private void followTarget()
+    {
+        if (!isMacro())
+        {
+            return;
+        }
+        Entity owner = getOwner();
+        if (!(owner instanceof PlayerEntity player))
+        {
+            return;
+        }
+        if (this.getWorld().isClient())
+        {
+            RayTraceUtil.clientUpdateTarget(player, getSpellInfo().spell().range);
+            return;
+        }
+
+        LivingEntity target = RayTraceUtil.serverGetTarget(player);
+        if (target == null)
+        {
+            return;
+        }
+
+        Vec3d targetPos = target.getPos()
+            .add(0, target.getHeight() / 2, 0);
+        Vec3d selfPos = this.getPos().add(0, this.getHeight() / 2, 0);
+        Vec3d distanceVector = targetPos.subtract(selfPos);
+        Vec3d newVelocity = VectorHelper.rotateTowards(this.getVelocity(), distanceVector, HOMING_ANGLE);
+        if (newVelocity.lengthSquared() > 0)
+        {
+            this.setVelocity(newVelocity);
+            this.velocityDirty = true;
+        }
+    }
+
     @Override
     public void checkDespawn()
     {
@@ -260,9 +302,20 @@ public class BallLightningEntity extends ProjectileEntity
         return living != null && !RelationUtil.isAlly(this, living);
     }
 
+    public boolean isMacro()
+    {
+        return this.getDataTracker().get(MACRO);
+    }
+
+    public void setMacro(boolean macro)
+    {
+        this.getDataTracker().set(MACRO, macro);
+    }
+
     @Override
     protected void initDataTracker()
     {
+        this.getDataTracker().startTracking(MACRO, false);
     }
 
     @Override
@@ -275,7 +328,7 @@ public class BallLightningEntity extends ProjectileEntity
     protected void writeCustomDataToNbt(NbtCompound nbt)
     {
         super.writeCustomDataToNbt(nbt);
-        nbt.putBoolean("Macro", macro);
+        nbt.putBoolean("Macro", isMacro());
         nbt.putInt("Power", power);
         nbt.putInt("Lifespan", lifespan);
     }
@@ -284,7 +337,7 @@ public class BallLightningEntity extends ProjectileEntity
     protected void readCustomDataFromNbt(NbtCompound nbt)
     {
         super.readCustomDataFromNbt(nbt);
-        macro = nbt.getBoolean("Macro");
+        setMacro(nbt.getBoolean("Macro"));
         power = nbt.getInt("Power");
         lifespan = nbt.getInt("Lifespan");
     }

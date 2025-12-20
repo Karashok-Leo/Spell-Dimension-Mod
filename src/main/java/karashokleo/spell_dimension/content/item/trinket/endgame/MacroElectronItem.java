@@ -21,7 +21,8 @@ public class MacroElectronItem extends SingleEpicTrinketItem
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
-        tooltip.add(SDTexts.TOOLTIP$MACRO_ELECTRON.get().formatted(Formatting.AQUA));
+        tooltip.add(SDTexts.TOOLTIP$MACRO_ELECTRON$1.get().formatted(Formatting.AQUA));
+        tooltip.add(SDTexts.TOOLTIP$MACRO_ELECTRON$2.get().formatted(Formatting.YELLOW));
         super.appendTooltip(stack, world, tooltip, context);
     }
 }

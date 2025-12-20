@@ -247,7 +247,8 @@ public enum SDTexts
     TOOLTIP$REJUVENATING_BLOSSOM$2("- When injured, gain a regeneration effect that restores health equivalent to the amount of damage received.", "- 受伤时获得生命恢复效果，该效果将恢复的生命值等同于受到的伤害值"),
     TOOLTIP$SUPERCONDUCTOR$1("- When dealing lightning spell damage ([Chain Lightning] damage excluded), cast [Chain Lightning], increasing the duration by 0.05 seconds per %d spell power.", "- 非 [连锁闪电] 造成雷电法术伤害时，施放 [连锁闪电]，每%d点法术强度增加0.05秒持续时间"),
     TOOLTIP$SUPERCONDUCTOR$2("- Damage caused by [Chain Lightning] bypass damage cooldown.", "- [连锁闪电] 造成的伤害无视伤害冷却"),
-    TOOLTIP$MACRO_ELECTRON("The ball lightning you cast will randomly select and destroy the target, without dropping any loot.", "你施放的球状闪电将随机选取并摧毁目标，但不会掉落战利品。"),
+    TOOLTIP$MACRO_ELECTRON$1("- [Ball Lightning] will randomly select and destroy the target, without dropping any loot.", "- [球状闪电] 将随机选取并摧毁目标，但不会掉落战利品。"),
+    TOOLTIP$MACRO_ELECTRON$2("- [Ball Lightning] will track the entity you are looking at.", "- [球状闪电] 将追踪你目视的实体。"),
 
     /**
      * Breastplates

@@ -26,7 +26,7 @@ public class BallLightningSpell
         BallLightningEntity ballLightning = new BallLightningEntity(world, caster);
         if (TrinketCompat.hasItemInTrinket(caster, AllItems.MACRO_ELECTRON))
         {
-            ballLightning.macro = true;
+            ballLightning.setMacro(true);
         }
         if (caster instanceof PlayerEntity player)
         {
