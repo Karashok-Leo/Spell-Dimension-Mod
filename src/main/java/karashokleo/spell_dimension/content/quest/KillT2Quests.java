@@ -18,7 +18,7 @@ public class KillT2Quests
                 new SimpleLootItemQuest(
                     "graveyard:lich",
                     "endrem:undead_soul",
-                    SDBags.EPIC_GEAR::getStack
+                    SDBags.EPIC$GEAR::getStack
                 )
             )
             .addEnFeedback("Undead lich possessed the secret art of rising from the dead with only the help of a specific medium and at a minimal cost. The bone staff that broke into three pieces was one of them, and you used your blood as a guide to bring him back to the present and give him an eternal end yourself.")
@@ -32,7 +32,7 @@ public class KillT2Quests
                 new SimpleLootItemQuest(
                     "bosses_of_mass_destruction:lich",
                     "bosses_of_mass_destruction:ancient_anima",
-                    SDBags.EPIC_BOOK::getStack
+                    SDBags.EPIC$BOOK::getStack
                 )
             )
             .addEnFeedback("The skeleton of Night Lich collapsed with a hiss as the canopy of eternal night cracked its first slit. The popping sound of roots awakening comes from beneath the ice. As light pierces the remnants of the tower, you are inconsolable for a long time.")
@@ -46,7 +46,7 @@ public class KillT2Quests
                 new SimpleLootItemQuest(
                     "bosses_of_mass_destruction:void_blossom",
                     "bosses_of_mass_destruction:void_thorn",
-                    SDBags.EPIC_MATERIAL::getStack
+                    SDBags.EPIC$MATERIAL::getStack
                 )
             )
             .addEnFeedback("A giant flower of thorns planted deep in the earth, it draws its power from the void below the bedrock and grows. Do these thorns from the void symbolize life, or destruction?")
@@ -60,7 +60,7 @@ public class KillT2Quests
                 new SimpleLootItemQuest(
                     "bosses_of_mass_destruction:gauntlet",
                     "bosses_of_mass_destruction:blazing_eye",
-                    SDBags.EPIC_MATERIAL::getStack
+                    SDBags.EPIC$MATERIAL::getStack
                 )
             )
             .addEnFeedback("In the ruins of the Blackstone Arena, the dust settled, and the gauntlet that had once been sealed in the black stone was transformed into a cluster of netherracks. It was once so powerful that the death rays from the palm's eyeballs deterred countless heroes. Now it has been completely extinguished, leaving only an eye that still burns brightly.")

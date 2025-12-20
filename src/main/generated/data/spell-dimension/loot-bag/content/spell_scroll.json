@@ -1,0 +1,19 @@
+{
+  "type": "spell-dimension:spell_scroll",
+  "icon": {
+    "type": "loot-bag:item",
+    "item": {
+      "Count": 1,
+      "id": "spell-dimension:spell_scroll",
+      "tag": {
+        "spell_container": {
+          "is_proxy": 1,
+          "max_spell_count": 1,
+          "spell_ids": [
+            "wizards:arcane_beam"
+          ]
+        }
+      }
+    }
+  }
+}

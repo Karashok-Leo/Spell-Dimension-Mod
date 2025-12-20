@@ -19,7 +19,7 @@ public class KillMutantQuests
                 new SimpleLootItemQuest(
                     ModRegistry.MUTANT_ZOMBIE_ENTITY_TYPE::get,
                     ModRegistry.HULK_HAMMER_ITEM::get,
-                    SDBags.UNCOMMON_MATERIAL::getStack
+                    SDBags.UNCOMMON$MATERIAL::getStack
                 )
             )
             .addEnFeedback("The otherworldly conflict caused the Zombie to mutate, and it gained the power to return from the dead. However, the flames still work wonders on it.")
@@ -32,7 +32,7 @@ public class KillMutantQuests
                 new SimpleLootItemQuest(
                     ModRegistry.MUTANT_SKELETON_ENTITY_TYPE::get,
                     ModRegistry.MUTANT_SKELETON_SKULL_ITEM::get,
-                    SDBags.UNCOMMON_MATERIAL::getStack
+                    SDBags.UNCOMMON$MATERIAL::getStack
                 )
             )
             .addEnFeedback("The otherworldly conflict caused the Skeleton to mutate, and its massive bony body is a wonder to behold. You pick up the bones that burst to the ground when it died, they give off an ominous aura that might come in handy later.")
@@ -45,7 +45,7 @@ public class KillMutantQuests
                 new SimpleLootItemQuest(
                     ModRegistry.MUTANT_CREEPER_ENTITY_TYPE::get,
                     ModRegistry.CREEPER_SHARD_ITEM::get,
-                    SDBags.UNCOMMON_GEAR::getStack
+                    SDBags.UNCOMMON$GEAR::getStack
                 )
             )
             .addEnFeedback("The otherworldly conflict caused the Creeper to mutate, and it no longer needs to ignite itself to cause an explosion. The egg it left behind after its death was broken by you, and transformed into a highly unstable shard. You realize that perhaps this is the way to break the Arena suppression.")
@@ -58,7 +58,7 @@ public class KillMutantQuests
                 new SimpleLootItemQuest(
                     ModRegistry.MUTANT_ENDERMAN_ENTITY_TYPE::get,
                     ModRegistry.ENDERSOUL_HAND_ITEM::get,
-                    SDBags.UNCOMMON_BOOK::getStack
+                    SDBags.UNCOMMON$BOOK::getStack
                 )
             )
             .addEnFeedback("The otherworldly conflict caused the Enderman to mutate, with new arms growing from its torso and the ender power no longer confined to its body.")

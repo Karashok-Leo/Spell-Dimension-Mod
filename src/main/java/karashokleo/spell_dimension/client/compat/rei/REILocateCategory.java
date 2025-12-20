@@ -1,9 +1,9 @@
 package karashokleo.spell_dimension.client.compat.rei;
 
 import com.google.common.collect.Lists;
-import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.data.SpellTexts;
 import karashokleo.spell_dimension.init.AllItems;
+import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.init.AllTags;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
@@ -23,7 +23,7 @@ import java.util.List;
 public class REILocateCategory implements DisplayCategory<REILocateDisplay>
 {
     public static final EntryIngredient WORKSTATION = EntryIngredients.ofItemTag(AllTags.LOCATE_TARGET);
-    public static final EntryIngredient SPELL_SCROLL = EntryIngredients.of(AllItems.SPELL_SCROLL.getStack(SpellDimension.modLoc("locate")));
+    public static final EntryIngredient SPELL_SCROLL = EntryIngredients.of(AllItems.SPELL_SCROLL.getStack(AllSpells.LOCATE));
 
     @Override
     public List<Widget> setupDisplay(REILocateDisplay display, Rectangle bounds)

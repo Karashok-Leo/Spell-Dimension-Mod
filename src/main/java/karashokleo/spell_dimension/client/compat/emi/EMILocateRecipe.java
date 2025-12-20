@@ -5,10 +5,10 @@ import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
-import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.client.compat.LocationStack;
 import karashokleo.spell_dimension.content.recipe.locate.LocateRecipe;
 import karashokleo.spell_dimension.init.AllItems;
+import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.init.AllTags;
 import net.minecraft.util.Identifier;
 
@@ -17,7 +17,7 @@ import java.util.List;
 public record EMILocateRecipe(EmiIngredient input, LocationEmiStack location) implements EmiRecipe
 {
     public static final EmiIngredient WORKSTATION = EmiIngredient.of(AllTags.LOCATE_TARGET);
-    public static final EmiStack SPELL_SCROLL = EmiStack.of(AllItems.SPELL_SCROLL.getStack(SpellDimension.modLoc("locate")));
+    public static final EmiStack SPELL_SCROLL = EmiStack.of(AllItems.SPELL_SCROLL.getStack(AllSpells.LOCATE));
 
     public EMILocateRecipe(LocateRecipe recipe)
     {

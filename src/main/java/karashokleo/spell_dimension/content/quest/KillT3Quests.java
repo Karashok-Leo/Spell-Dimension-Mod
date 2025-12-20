@@ -24,7 +24,7 @@ public class KillT3Quests
                 new SimpleLootItemQuest(
                     "soulsweapons:moonknight",
                     "soulsweapons:essence_of_luminescence",
-                    SDBags.RARE_BOOK::getStack
+                    SDBags.RARE$BOOK::getStack
                 )
             )
             .addEnFeedback("His entire body was covered in deep dark runes, his skin fused with his armor, his soul banished, leaving only a shell containing raw power. That armor, now a prison for the lingering power of moonlight, transforming him into a puppet. As night falls, he comes at you wielding a giant hammer, and you make your choice.")
@@ -38,7 +38,7 @@ public class KillT3Quests
                 new SimpleLootItemQuest(
                     () -> EntityInit.BLACKSTONE_GOLEM,
                     () -> ItemInit.BLACKSTONE_GOLEM_HEART,
-                    SDBags.RARE_BOOK::getStack
+                    SDBags.RARE$BOOK::getStack
                 )
             )
             .addEnFeedback("The ancient golem summoned through the ritual seems to have been revived from the world's deepest memories. From that core, you can feel a powerful force surging.")
@@ -52,7 +52,7 @@ public class KillT3Quests
                 new SimpleLootItemQuest(
                     () -> AquamiraeEntities.CAPTAIN_CORNELIA,
                     () -> AquamiraeItems.FROZEN_KEY,
-                    SDBags.RARE_GEAR::getStack
+                    SDBags.RARE$GEAR::getStack
                 )
             )
             .addEnFeedback("The departed soul was dragged into the boundless abyss, and cold magic penetrated every ounce of her soul. By using the power of the Abyssal Guardian to unseal her and blowing the horn, that departed king of the sea returned from the abyss on the sound of the horn. You ended her life, but for her it was a relief.")
@@ -66,7 +66,7 @@ public class KillT3Quests
                 new SimpleLootItemQuest(
                     "soulsweapons:chaos_monarch",
                     "soulsweapons:chaos_crown",
-                    SDBags.RARE_GEAR::getStack
+                    SDBags.RARE$GEAR::getStack
                 )
             )
             .addEnFeedback("Not everyone can harness the power of Chaos, and anyone who touches its edge will be consumed by it. You have no intention of fighting him, but the crown that contains the power of Chaos is yours for the taking.")
@@ -80,7 +80,7 @@ public class KillT3Quests
                 new SimpleLootItemQuest(
                     "soulsweapons:returning_knight",
                     "soulsweapons:arkenstone",
-                    SDBags.RARE_MATERIAL::getStack
+                    SDBags.RARE$MATERIAL::getStack
                 )
             )
             .addEnFeedback("While there are few warriors who will be remembered by the world, those who display fearless courage are as numerous as the stars. He wielded his sword and slashed his path toward you. He does not represent a particular warrior, but once symbolized courage itself.")
@@ -94,7 +94,7 @@ public class KillT3Quests
                 new SimpleLootItemQuest(
                     "deeperdarker:stalker",
                     "deeperdarker:soul_crystal",
-                    SDBags.RARE_MATERIAL::getStack
+                    SDBags.RARE$MATERIAL::getStack
                 )
             )
             .addEnFeedback("The vases that were once used for offerings in the ancient temple in the deeper dark contained a mysterious power. However, to this day, that power has been corrupted by the sculk and has become an extension of the dark will. It emerged from the broken vase and attempted to devour you. It is a pity that it did not succeed in its attempt.")

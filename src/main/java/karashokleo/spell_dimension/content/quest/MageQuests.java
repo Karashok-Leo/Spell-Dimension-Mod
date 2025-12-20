@@ -31,7 +31,7 @@ public class MageQuests
                 "base_essence",
                 new SimpleTagIngredientQuest(
                     AllTags.ESSENCE_ALL,
-                    SDBags.COMMON_MATERIAL::getStack
+                    SDBags.COMMON$MATERIAL::getStack
                 )
             )
             .addEnDesc("Obtain any basic magic essence")
@@ -46,7 +46,7 @@ public class MageQuests
                 "rune",
                 new SimpleTagIngredientQuest(
                     AllTags.RUNE,
-                    SDBags.UNCOMMON_MATERIAL::getStack
+                    SDBags.UNCOMMON$MATERIAL::getStack
                 )
             )
             .addEnDesc("Use basic magic essence to craft runes at the rune altar")
@@ -65,7 +65,7 @@ public class MageQuests
                         () -> AllItems.ENCHANTED_ESSENCE,
                         () -> AllItems.MENDING_ESSENCE
                     ),
-                    SDBags.RARE_MATERIAL::getStack
+                    SDBags.RARE$MATERIAL::getStack
                 )
             )
             .addEnFeedback("All three of the essences you gain in your adventures are undoubtedly very powerful. The Enlightening Essence directly enhances your spell power, the Enchanted Essence brings magic together in your equipment, and the Mending Essence repairs your equipment until it is as good as new.")
@@ -78,7 +78,7 @@ public class MageQuests
                 "spell_book_0",
                 new SimpleTagIngredientQuest(
                     AllTags.BOOK.get(0),
-                    SDBags.RARE_GEAR::getStack
+                    SDBags.RARE$GEAR::getStack
                 )
             )
             .addEnDesc("Craft your Apprentice Spell Book which was crafted through the Spellbinding Table into a Primary Spell Book")
@@ -93,7 +93,7 @@ public class MageQuests
                 "spell_book_1",
                 new SimpleTagIngredientQuest(
                     AllTags.BOOK.get(1),
-                    SDBags.EPIC_GEAR::getStack
+                    SDBags.EPIC$GEAR::getStack
                 )
             )
             .addEnDesc("Craft your Primary Spell Book into a Intermediate Spell Book")
@@ -108,7 +108,7 @@ public class MageQuests
                 "spell_book_2",
                 new SimpleTagIngredientQuest(
                     AllTags.BOOK.get(2),
-                    SDBags.LEGENDARY_GEAR::getStack
+                    SDBags.LEGENDARY$GEAR::getStack
                 )
             )
             .addEnDesc("Craft your Intermediate Spell Book into a Advanced Spell Book")
@@ -123,7 +123,7 @@ public class MageQuests
                 "endgame_trinkets",
                 new SimpleTagIngredientQuest(
                     AllTags.ENDGAME_TRINKETS,
-                    SDBags.JEWELRY_NECKLACES::getStack
+                    SDBags.JEWELRY$NECKLACES::getStack
                 )
             )
             .addEnDesc("Craft trinkets that carry special spell effects")
@@ -138,7 +138,7 @@ public class MageQuests
                 "spell_power_0",
                 new SpellPowerQuest(
                     DynamicSpellBookItem.REQUIREMENT_SPELL_POWER_PER_GRADE[0],
-                    SDBags.UNCOMMON_MATERIAL::getStack
+                    SDBags.UNCOMMON$MATERIAL::getStack
                 )
             )
             .addEnFeedback("You have enhanced the magic you can manipulate through various methods. At the same time, your understanding of the world has grown.")
@@ -151,7 +151,7 @@ public class MageQuests
                 "spell_power_1",
                 new SpellPowerQuest(
                     DynamicSpellBookItem.REQUIREMENT_SPELL_POWER_PER_GRADE[1],
-                    SDBags.RARE_MATERIAL::getStack
+                    SDBags.RARE$MATERIAL::getStack
                 )
             )
             .addEnFeedback("You've reached a new level of proficiency in magic, and you're going to start going your own way next. Be careful though, they are learning your magic.")
@@ -164,7 +164,7 @@ public class MageQuests
                 "spell_power_2",
                 new SpellPowerQuest(
                     DynamicSpellBookItem.REQUIREMENT_SPELL_POWER_PER_GRADE[2],
-                    SDBags.EPIC_MATERIAL::getStack
+                    SDBags.EPIC$MATERIAL::getStack
                 )
             )
             .addEnFeedback("You are already powerful enough to fight against the top powerhouses of this world. But you are not slacking off, because you know that stagnation is self-destruction.")
@@ -177,7 +177,7 @@ public class MageQuests
                 "spell_power_3",
                 new SpellPowerQuest(
                     2048,
-                    SDBags.LEGENDARY_MATERIAL::getStack
+                    SDBags.LEGENDARY$MATERIAL::getStack
                 )
             )
             .addEnTitle("Ancient Ones")
@@ -192,7 +192,7 @@ public class MageQuests
                 "spell_power_4",
                 new SpellPowerQuest(
                     65536,
-                    SDBags.LEGENDARY_MATERIAL::getStack
+                    SDBags.LEGENDARY$MATERIAL::getStack
                 )
             )
             .addEnTitle("Ultimate Limit")

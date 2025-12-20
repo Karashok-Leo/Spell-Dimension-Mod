@@ -36,7 +36,7 @@ public class HostilityQuests
                 "chaos_ingot",
                 new SimpleItemQuest(
                     () -> MiscItems.CHAOS.ingot(),
-                    SDBags.JEWELRY_RINGS::getStack
+                    SDBags.JEWELRY$RINGS::getStack
                 )
             )
             .addEnFeedback("Special materials filled with chaotic power seem to be substances created due to otherworldly conflicts.")
@@ -48,7 +48,7 @@ public class HostilityQuests
                 "oddeyes_glasses",
                 new SimpleItemQuest(
                     () -> TrinketItems.ODDEYES_GLASSES,
-                    SDBags.JEWELRY_NECKLACES::getStack
+                    SDBags.JEWELRY$NECKLACES::getStack
                 )
             )
             .addEnFeedback("Odd glasses made using Chaos Ingots. Doesn't seem to be able to wear two at once though.")
@@ -60,7 +60,7 @@ public class HostilityQuests
                 "triple_strip_cape",
                 new SimpleItemQuest(
                     () -> TrinketItems.TRIPLE_STRIP_CAPE,
-                    SDBags.JEWELRY_RINGS::getStack
+                    SDBags.JEWELRY$RINGS::getStack
                 )
             )
             .addEnFeedback("An tricolor cape made with Chaos Ingots. Doesn't seem to be able to wear two at once though.")
@@ -72,7 +72,7 @@ public class HostilityQuests
                 "curse_envy",
                 new SimpleItemQuest(
                     () -> TrinketItems.CURSE_ENVY,
-                    SDBags.JEWELRY_NECKLACES::getStack
+                    SDBags.JEWELRY$NECKLACES::getStack
                 )
             )
             .addEnFeedback("The otherworldly conflict has made the monsters stronger and stronger, and with the Chaos Ingot at its core you crafted this curse, which allows the powers the monsters possess to drop off in a special form. Are you envious of the power those monsters possess, or is the world envious of you?")
@@ -84,7 +84,7 @@ public class HostilityQuests
                 "trait_item",
                 new SimpleTagIngredientQuest(
                     LHTags.TRAIT_ITEM,
-                    SDBags.JEWELRY_RINGS::getStack
+                    SDBags.JEWELRY$RINGS::getStack
                 )
             )
             .addEnDesc("Obtain any Hostility Trait")
@@ -99,7 +99,7 @@ public class HostilityQuests
                 "hostility_curse",
                 new SimpleTagIngredientQuest(
                     AllTags.HOSTILITY_CURSE,
-                    SDBags.JEWELRY_NECKLACES::getStack
+                    SDBags.JEWELRY$NECKLACES::getStack
                 )
             )
             .addEnDesc("Obtain any Hostility Curse")
@@ -114,7 +114,7 @@ public class HostilityQuests
                 "hostility_ring",
                 new SimpleTagIngredientQuest(
                     AllTags.HOSTILITY_RING,
-                    SDBags.JEWELRY_RINGS::getStack
+                    SDBags.JEWELRY$RINGS::getStack
                 )
             )
             .addEnDesc("Obtain any Hostility Ring")
@@ -128,7 +128,7 @@ public class HostilityQuests
                 "infinity_glove",
                 new SimpleItemQuest(
                     () -> TrinketItems.INFINITY_GLOVE,
-                    SDBags.JEWELRY_NECKLACES::getStack
+                    SDBags.JEWELRY$NECKLACES::getStack
                 )
             )
             .addEnFeedback("A fanciful glove crafted using Chaos Ingots, which allows you to wear more rings on one hand at a time. Doesn't seem to be able to wear two at once though.")
@@ -140,7 +140,7 @@ public class HostilityQuests
                 "miracle_ingot",
                 new SimpleItemQuest(
                     () -> MiscItems.MIRACLE.ingot(),
-                    SDBags.JEWELRY_RINGS::getStack
+                    SDBags.JEWELRY$RINGS::getStack
                 )
             )
             .addEnFeedback("A powerful material crafted using Chaos Ingots, Hostility Essence, and Miracle Powder, it is the product of an otherworldly fusion stabilized with seemingly unparalleled potential.")
@@ -152,7 +152,7 @@ public class HostilityQuests
                 "divinity_cross",
                 new SimpleItemQuest(
                     () -> TrinketItems.DIVINITY_CROSS,
-                    SDBags.JEWELRY_NECKLACES::getStack
+                    SDBags.JEWELRY$NECKLACES::getStack
                 )
             )
             .addEnFeedback("A peculiar trinket crafted using a Miracle Ingot as its core, it attenuates the weakening of yourself by Cleanse effects, though it only works on lower level beneficial effects.")
@@ -164,7 +164,7 @@ public class HostilityQuests
                 "divinity_light",
                 new SimpleItemQuest(
                     () -> TrinketItems.DIVINITY_LIGHT,
-                    SDBags.JEWELRY_RINGS::getStack
+                    SDBags.JEWELRY$RINGS::getStack
                 )
             )
             .addEnFeedback("A peculiar trinket crafted using a large number of miracle ingots. It anchors you steadily to this world, the fusion of the otherworlds is suspended as a result, but the negative effects from the curse can never be counteracted.")
@@ -176,7 +176,7 @@ public class HostilityQuests
                 "eternium_ingot",
                 new SimpleItemQuest(
                     () -> ComplementItems.ETERNIUM.ingot(),
-                    SDBags.JEWELRY_NECKLACES::getStack
+                    SDBags.JEWELRY$NECKLACES::getStack
                 )
             )
             .addEnFeedback("A top-notch material born from the collision of extreme powers, you would definitely try to build a full set of armor with it if you weren't lacking in skill. It was created to make up for the lack of physical properties of Miracle Ingot, allowing you to craft some of the top items in the world.")
@@ -188,7 +188,7 @@ public class HostilityQuests
                 "restoration",
                 new SimpleItemQuest(
                     () -> TrinketItems.RESTORATION,
-                    SDBags.JEWELRY_RINGS::getStack
+                    SDBags.JEWELRY$RINGS::getStack
                 )
             )
             .addEnFeedback("The enemy's indefensible sealing ability gives you a headache, and sometimes you are so busy that you don't even notice if there are seals on you. So you crafted this pocket, which automatically absorbs those sealed items and automatically unseals them. But does a better method exist?")
@@ -200,7 +200,7 @@ public class HostilityQuests
                 "abyssal_throne",
                 new SimpleItemQuest(
                     () -> TrinketItems.ABYSSAL_THRONE,
-                    SDBags.JEWELRY_NECKLACES::getStack
+                    SDBags.JEWELRY$NECKLACES::getStack
                 )
             )
             .addEnFeedback("You think you must have been crazy to create it, that summoning monsters around you would become real monsters just by wearing it, which would be tantamount to suicide. But the desire for power compels you to do it.")
@@ -212,7 +212,7 @@ public class HostilityQuests
                 "abrahadabra",
                 new SimpleItemQuest(
                     () -> TrinketItems.ABRAHADABRA,
-                    SDBags.JEWELRY_RINGS::getStack
+                    SDBags.JEWELRY$RINGS::getStack
                 )
             )
             .addEnFeedback("The pinnacle of present-day craftsmanship, it is enough to reverse the laws of the world. The warp and woof of space and time are mirrored, and all the hostility will inflicted upon you will fall like a swirling starburst into the chamber of the gun that fired it... But remember, it is not invincible.")
@@ -224,7 +224,7 @@ public class HostilityQuests
                 "nidhoggur",
                 new SimpleItemQuest(
                     () -> TrinketItems.NIDHOGGUR,
-                    SDBags.JEWELRY_NECKLACES::getStack
+                    SDBags.JEWELRY$NECKLACES::getStack
                 )
             )
             .addEnFeedback("Named after the Black Dragon, the dark gold pupil hides a secret that has driven countless demon hunters mad. But beware, excessive greed will surely lead to disaster.")
@@ -236,7 +236,7 @@ public class HostilityQuests
                 "mirage_reflector",
                 new SimpleItemQuest(
                     () -> AllItems.MIRAGE_REFLECTOR,
-                    SDBags.JEWELRY_NECKLACES::getStack
+                    SDBags.JEWELRY$NECKLACES::getStack
                 )
             )
             .addEnFeedback("The past and the future mingle in the folds, and the border between reality and illusion blurs like melted wax. All the forces that seek to harm you will eventually become their own gravediggers in a reversal of karma. You are invincible.")

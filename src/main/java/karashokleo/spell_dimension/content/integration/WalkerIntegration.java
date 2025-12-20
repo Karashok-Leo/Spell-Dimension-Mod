@@ -18,7 +18,7 @@ public class WalkerIntegration extends AbstractIntegration
 
         unregisterTraits("minecraft:husk", "walkers:burn_in_daylight");
         unregisterTraits("mutantmonsters:mutant_zombie", "walkers:burn_in_daylight");
-        unregisterTraits("mutantmonsters:mutant_skeleton", "walkers:burn_in_daylight"); 
+        unregisterTraits("mutantmonsters:mutant_skeleton", "walkers:burn_in_daylight");
     }
 
     private static void unregisterTraits(String entityId, String traitId)

@@ -30,7 +30,7 @@ public class KillT4Quests
                         () -> Registries.ENTITY_TYPE.get(new Identifier("soulsweapons:night_shade"))
                     ),
                     List.of(() -> Registries.ITEM.get(new Identifier("soulsweapons:essence_of_eventide"))),
-                    SDBags.RARE_MATERIAL::getStack
+                    SDBags.RARE$MATERIAL::getStack
                 )
             )
             .addEnFeedback("The ancient champion lies dormant in the underground grave, and the power of the night takes over its body. When it returns to the earth, you see the power of the night overflowing. It is no longer alone. As the battle sweeps on, the champion's heart breastplate will give you shelter.")
@@ -44,7 +44,7 @@ public class KillT4Quests
                 new SimpleLootItemQuest(
                     () -> Registries.ENTITY_TYPE.get(new Identifier("soulsweapons:accursed_lord_boss")),
                     () -> AllItems.ACCURSED_BLACKSTONE,
-                    SDBags.RARE_MATERIAL::getStack
+                    SDBags.RARE$MATERIAL::getStack
                 )
             )
             .addEnFeedback("He watched in despair as his kingdom was engulfed in lava, the decaying crown shimmering weakly above him. He vaguely understands that perhaps this is the best end for him...")
@@ -58,7 +58,7 @@ public class KillT4Quests
                 new SimpleLootItemQuest(
                     () -> EntityType.ELDER_GUARDIAN,
                     () -> AllItems.ABYSS_GUARD,
-                    SDBags.RARE_BOOK::getStack
+                    SDBags.RARE$BOOK::getStack
                 )
             )
             .addEnFeedback("You sensed the gaze that originated from the abyss. So you dove to the bottom of the sea, and in the monument you defeated it. But you never understood whether its gaze was watching you or looking into the infinite depths.")
@@ -72,7 +72,7 @@ public class KillT4Quests
                 new SimpleLootItemQuest(
                     () -> EntityType.WITHER,
                     () -> Items.NETHER_STAR,
-                    SDBags.RARE_BOOK::getStack
+                    SDBags.RARE$BOOK::getStack
                 )
             )
             .addEnFeedback("The ultimate undead from hell, trying to destroy everything living within sight. Killing it takes a lot out of you, but it's worth it.")
@@ -86,7 +86,7 @@ public class KillT4Quests
                 new SimpleLootItemQuest(
                     "illagerinvasion:invoker",
                     "illagerinvasion:primal_essence",
-                    SDBags.RARE_GEAR::getStack
+                    SDBags.RARE$GEAR::getStack
                 )
             )
             .addEnFeedback("The leader of pillagers, a powerful mage who wields the primal magic. You thought he had faded into the dust of history, yet now he has reappeared. But his power is not what it once was, and he is doomed to perish under your spells.")
@@ -100,7 +100,7 @@ public class KillT4Quests
                 new SimpleLootItemQuest(
                     () -> EntityType.WARDEN,
                     () -> Registries.ITEM.get(new Identifier("deeperdarker:heart_of_the_deep")),
-                    SDBags.RARE_GEAR::getStack
+                    SDBags.RARE$GEAR::getStack
                 )
             )
             .addEnFeedback("Born in sculk veins, it symbolizes darkness and fear. You hold its still-beating heart in your hand, said to be the key to a certain portal.")

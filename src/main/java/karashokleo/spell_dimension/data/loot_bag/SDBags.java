@@ -36,14 +36,14 @@ public enum SDBags
         9408445,
         9315179
     ),
-    JEWELRY_RINGS(
-        SDContents.JEWELRY_RINGS,
+    JEWELRY$RINGS(
+        SDContents.JEWELRY$RINGS,
         Rarity.EPIC,
         16711935,
         16776960
     ),
-    JEWELRY_NECKLACES(
-        SDContents.JEWELRY_NECKLACES,
+    JEWELRY$NECKLACES(
+        SDContents.JEWELRY$NECKLACES,
         Rarity.EPIC,
         16711935,
         16776960
@@ -54,104 +54,104 @@ public enum SDBags
         16776960,
         14408560
     ),
-    COMMON_BOOK(
-        SDContents.COMMON_BOOK,
+    COMMON$BOOK(
+        SDContents.COMMON$BOOK,
         Rarity.COMMON,
         16316671,
         16775920
     ),
-    COMMON_GEAR(
-        SDContents.COMMON_GEAR,
+    COMMON$GEAR(
+        SDContents.COMMON$GEAR,
         Rarity.COMMON,
         16316671,
         16775920
     ),
-    COMMON_MATERIAL(
-        SDContents.COMMON_MATERIAL,
+    COMMON$MATERIAL(
+        SDContents.COMMON$MATERIAL,
         Rarity.COMMON,
         16316671,
         16775920
     ),
-    UNCOMMON_BOOK(
-        SDContents.UNCOMMON_BOOK,
+    UNCOMMON$BOOK(
+        SDContents.UNCOMMON$BOOK,
         Rarity.UNCOMMON,
         16776960,
         16775920
     ),
-    UNCOMMON_GEAR(
-        SDContents.UNCOMMON_GEAR,
+    UNCOMMON$GEAR(
+        SDContents.UNCOMMON$GEAR,
         Rarity.UNCOMMON,
         16776960,
         16775920
     ),
-    UNCOMMON_MATERIAL(
-        SDContents.UNCOMMON_MATERIAL,
+    UNCOMMON$MATERIAL(
+        SDContents.UNCOMMON$MATERIAL,
         Rarity.UNCOMMON,
         16776960,
         16775920
     ),
-    RARE_BOOK(
-        SDContents.RARE_BOOK,
+    RARE$BOOK(
+        SDContents.RARE$BOOK,
         Rarity.RARE,
         65535,
         16775920
     ),
-    RARE_GEAR(
-        SDContents.RARE_GEAR,
+    RARE$GEAR(
+        SDContents.RARE$GEAR,
         Rarity.RARE,
         65535,
         16775920
     ),
-    RARE_MATERIAL(
-        SDContents.RARE_MATERIAL,
+    RARE$MATERIAL(
+        SDContents.RARE$MATERIAL,
         Rarity.RARE,
         65535,
         16775920
     ),
-    EPIC_BOOK(
-        SDContents.EPIC_BOOK,
+    EPIC$BOOK(
+        SDContents.EPIC$BOOK,
         Rarity.EPIC,
         9055202,
         16775920
     ),
-    EPIC_GEAR(
-        SDContents.EPIC_GEAR,
+    EPIC$GEAR(
+        SDContents.EPIC$GEAR,
         Rarity.EPIC,
         9055202,
         16775920
     ),
-    EPIC_MATERIAL(
-        SDContents.EPIC_MATERIAL,
+    EPIC$MATERIAL(
+        SDContents.EPIC$MATERIAL,
         Rarity.EPIC,
         9055202,
         16775920
     ),
-    LEGENDARY_BOOK(
-        SDContents.LEGENDARY_BOOK,
+    LEGENDARY$BOOK(
+        SDContents.LEGENDARY$BOOK,
         Rarity.EPIC,
         3100495,
         16775920
     ),
-    LEGENDARY_GEAR(
-        SDContents.LEGENDARY_GEAR,
+    LEGENDARY$GEAR(
+        SDContents.LEGENDARY$GEAR,
         Rarity.EPIC,
         3100495,
         16775920
     ),
-    LEGENDARY_MATERIAL(
-        SDContents.LEGENDARY_MATERIAL,
+    LEGENDARY$MATERIAL(
+        SDContents.LEGENDARY$MATERIAL,
         Rarity.EPIC,
         3100495,
         16775920
     ),
     ROBE(
         List.of(
-            SDContents.ROBE_GENERAL,
-            SDContents.ROBE_ARCANE,
-            SDContents.ROBE_FIRE,
-            SDContents.ROBE_FROST,
-            SDContents.ROBE_HEALING,
-            SDContents.ROBE_LIGHTNING
+            SDContents.ROBE$GENERAL,
+            SDContents.ROBE$ARCANE,
+            SDContents.ROBE$FIRE,
+            SDContents.ROBE$FROST,
+            SDContents.ROBE$HEALING,
+            SDContents.ROBE$LIGHTNING
         ),
         Rarity.COMMON,
         10040013,
@@ -161,11 +161,11 @@ public enum SDBags
     ),
     WAND(
         List.of(
-            SDContents.WAND_ARCANE,
-            SDContents.WAND_FIRE,
-            SDContents.WAND_FROST,
-            SDContents.WAND_HEALING,
-            SDContents.WAND_LIGHTNING
+            SDContents.WAND$ARCANE,
+            SDContents.WAND$FIRE,
+            SDContents.WAND$FROST,
+            SDContents.WAND$HEALING,
+            SDContents.WAND$LIGHTNING
         ),
         Rarity.COMMON,
         10040013,
@@ -175,17 +175,25 @@ public enum SDBags
     ),
     RUNE(
         List.of(
-            SDContents.RUNE_ARCANE,
-            SDContents.RUNE_FIRE,
-            SDContents.RUNE_FROST,
-            SDContents.RUNE_HEALING,
-            SDContents.RUNE_LIGHTNING
+            SDContents.RUNE$ARCANE,
+            SDContents.RUNE$FIRE,
+            SDContents.RUNE$FROST,
+            SDContents.RUNE$HEALING,
+            SDContents.RUNE$LIGHTNING
         ),
         Rarity.COMMON,
         10040013,
         10444703,
         "Magic Rune Bag",
         "魔法符文袋"
+    ),
+    SPELL_SCROLL(
+        SDContents.SPELL_SCROLL,
+        Rarity.EPIC,
+        9055202,
+        16775920,
+        "Spell Scroll Bag",
+        "法术卷轴袋"
     ),
     ;
     public final Identifier id;
@@ -195,7 +203,7 @@ public enum SDBags
 
     SDBags(Supplier<Bag> bag, String nameEn, String nameZh)
     {
-        String path = this.name().toLowerCase(Locale.ROOT).replace('_', '/');
+        String path = this.name().toLowerCase(Locale.ROOT).replace('$', '/');
         this.id = SpellDimension.modLoc(path);
         this.factory = () -> new BagEntry(this.id, bag.get());
         this.nameEn = nameEn;

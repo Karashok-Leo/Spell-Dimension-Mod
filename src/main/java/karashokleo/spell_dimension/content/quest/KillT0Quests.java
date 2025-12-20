@@ -20,7 +20,7 @@ public class KillT0Quests
                 new SimpleLootItemQuest(
                     "bosses_of_mass_destruction:obsidilith",
                     "bosses_of_mass_destruction:obsidian_heart",
-                    SDBags.LEGENDARY_MATERIAL::getStack
+                    SDBags.LEGENDARY$MATERIAL::getStack
                 )
             )
             .addEnFeedback("The dark purple runes were gradually extinguished from the base upwards, and the Obsidilith had condensed into a pitch-black mirror of absolute stillness, reflecting the gasping figure of the Conqueror like a gigantic tombstone.")

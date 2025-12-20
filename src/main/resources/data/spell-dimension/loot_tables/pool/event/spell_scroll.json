@@ -1,4 +1,15 @@
 {
   "type": "minecraft:generic",
-  "pools": []
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "loot-bag:loot_bag",
+          "bag": "spell-dimension:spell/scroll"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
 }

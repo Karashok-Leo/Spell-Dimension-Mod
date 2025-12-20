@@ -28,7 +28,7 @@ public class KillT1Quests
                         () -> Registries.ENTITY_TYPE.get(new Identifier("soulsweapons:night_prowler"))
                     ),
                     List.of(() -> AllItems.CELESTIAL_DEBRIS),
-                    SDBags.LEGENDARY_GEAR::getStack
+                    SDBags.LEGENDARY$GEAR::getStack
                 )
             )
             .addEnFeedback("Day and night shift, and the Gatekeepers are reduced to dust and ash. The invisible barrier blasts open and the embers scatter into the void, while the end is still far away.")
@@ -49,7 +49,7 @@ public class KillT1Quests
         KILL_ENDER_DRAGON = QuestBuilder.of(
                 "kill_ender_dragon",
                 new EnderDragonAdvancementQuest(
-                    SDBags.LEGENDARY_MATERIAL::getStack
+                    SDBags.LEGENDARY$MATERIAL::getStack
                 )
             )
             .addEnDesc("Defeat Ender Dragon")
@@ -65,7 +65,7 @@ public class KillT1Quests
                 new SimpleLootItemQuest(
                     () -> EntityInit.THE_EYE,
                     () -> ItemInit.PRIME_EYE,
-                    SDBags.LEGENDARY_BOOK::getStack
+                    SDBags.LEGENDARY$BOOK::getStack
                 )
             )
             .addEnFeedback("When the giant crystalline lens shatters, the entrance to the deep void opens. You drift through this boundless void as if immersed in a never-ending dream.")

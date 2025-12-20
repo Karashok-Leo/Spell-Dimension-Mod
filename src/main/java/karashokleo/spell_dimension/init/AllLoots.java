@@ -5,14 +5,14 @@ import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.item.trinket.misc.LootingCharm;
 import karashokleo.l2hostility.content.logic.DifficultyLevel;
 import karashokleo.l2hostility.init.LHTraits;
+import karashokleo.loot_bag.api.common.LootBagRegistry;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
 import karashokleo.spell_dimension.config.EssenceLootConfig;
 import karashokleo.spell_dimension.content.loot.entry.RandomEnchantedEssenceEntry;
 import karashokleo.spell_dimension.content.loot.entry.RandomEnlighteningEssenceEntry;
 import karashokleo.spell_dimension.content.loot.entry.SpellScrollEntry;
-import karashokleo.spell_dimension.content.object.EventAward;
-import karashokleo.spell_dimension.content.object.ScrollType;
+import karashokleo.spell_dimension.content.object.SpellScrollContent;
 import karashokleo.spell_dimension.util.ImpactUtil;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.minecraft.entity.Entity;
@@ -27,10 +27,7 @@ import net.minecraft.loot.entry.LootPoolEntryType;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.util.Identifier;
 import net.spell_power.api.SpellSchool;
-
-import java.util.Set;
 
 public class AllLoots
 {
@@ -43,6 +40,8 @@ public class AllLoots
         RANDOM_ENCHANTED_ESSENCE_ENTRY = Registry.register(Registries.LOOT_POOL_ENTRY_TYPE, SpellDimension.modLoc("random_enchanted_essence"), new LootPoolEntryType(new RandomEnchantedEssenceEntry.Serializer()));
         RANDOM_ENLIGHTENING_ESSENCE_ENTRY = Registry.register(Registries.LOOT_POOL_ENTRY_TYPE, SpellDimension.modLoc("random_enlightening_essence"), new LootPoolEntryType(new RandomEnlighteningEssenceEntry.Serializer()));
         SPELL_SCROLL_ENTRY = Registry.register(Registries.LOOT_POOL_ENTRY_TYPE, SpellDimension.modLoc("spell_scroll"), new LootPoolEntryType(new SpellScrollEntry.Serializer()));
+
+        LootBagRegistry.registerContentType(SpellDimension.modLoc("spell_scroll"), SpellScrollContent.TYPE);
 
         LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) ->
         {
@@ -57,12 +56,6 @@ public class AllLoots
                 LootPool.Builder builder = LootPool.builder();
                 addEssenceLootPool(builder, EssenceLootConfig.ENTITY_POOL, true);
                 builder.conditionally(KilledByPlayerLootCondition.builder());
-                tableBuilder.pool(builder.build());
-            }
-            if (id.equals(EventAward.SPELL_SCROLL.lootTable))
-            {
-                LootPool.Builder builder = LootPool.builder();
-                addSpellScrollLootPool(builder, AllSpells.getSpells(type -> type == ScrollType.CRAFTING || type == ScrollType.EVENT_AWARD));
                 tableBuilder.pool(builder.build());
             }
         });
@@ -143,14 +136,5 @@ public class AllLoots
 
         // MendingEssence
         builder.with(ItemEntry.builder(AllItems.MENDING_ESSENCE).weight(EssenceLootConfig.MD_WEIGHT));
-    }
-
-    private static void addSpellScrollLootPool(LootPool.Builder builder, Set<Identifier> pool)
-    {
-        builder.rolls(UniformLootNumberProvider.create(1, 2));
-        for (Identifier spellId : pool)
-        {
-            builder.with(SpellScrollEntry.builder(spellId));
-        }
     }
 }

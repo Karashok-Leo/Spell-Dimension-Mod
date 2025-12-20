@@ -8,16 +8,15 @@ import com.klikli_dev.modonomicon.api.datagen.book.page.BookSpotlightPageModel;
 import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
 import karashokleo.spell_dimension.data.book.entry.BaseEntryProvider;
 import karashokleo.spell_dimension.init.AllItems;
+import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.util.BookGenUtil;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Identifier;
-import net.wizards.WizardsMod;
 
 import java.util.List;
 
 public class ScrollEntry extends BaseEntryProvider
 {
-    public static final ItemStack STACK = AllItems.SPELL_SCROLL.getStack(new Identifier(WizardsMod.ID, "fire_breath"));
+    public static final ItemStack STACK = AllItems.SPELL_SCROLL.getStack(AllSpells.FIRE_BREATH);
 
     public ScrollEntry(CategoryProvider parent)
     {

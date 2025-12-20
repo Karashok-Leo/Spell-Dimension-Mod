@@ -8,7 +8,10 @@ import karashokleo.loot_bag.api.common.content.ItemContent;
 import karashokleo.loot_bag.api.common.content.LootTableContent;
 import karashokleo.loot_bag.api.common.icon.ItemIcon;
 import karashokleo.spell_dimension.SpellDimension;
+import karashokleo.spell_dimension.content.object.SpellScrollContent;
 import karashokleo.spell_dimension.init.AllArmors;
+import karashokleo.spell_dimension.init.AllItems;
+import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.init.AllWeapons;
 import net.jewelry.items.JewelryItems;
 import net.minecraft.item.ArmorItem;
@@ -41,213 +44,220 @@ public enum SDContents
         () -> ModItems.CRYSTAL_HEART.get(),
         "Artifact",
         "奇异饰品",
-        "Random 1 piece of artifact",
+        "Random 1 artifact",
         "随机1件奇异饰品"
     ),
     ARING(
         () -> com.focamacho.ringsofascension.init.ModItems.ringFlight,
         "Rings of Ascension",
         "提升戒指",
-        "Random 1 piece of ascension ring",
+        "Random 1 ascension ring",
         "随机1件提升戒指"
     ),
-    JEWELRY_RINGS(
+    JEWELRY$RINGS(
         () -> JewelryItems.ruby_ring.item(),
         "Jewelry Ring",
         "珠宝戒指",
-        "Random 1 piece of jewelry ring",
+        "Random 1 jewelry ring",
         "随机1件珠宝戒指"
     ),
-    JEWELRY_NECKLACES(
+    JEWELRY$NECKLACES(
         () -> JewelryItems.jade_necklace.item(),
         "Jewelry Necklace",
         "珠宝项链",
-        "Random 1 piece of jewelry necklace",
+        "Random 1 jewelry necklace",
         "随机1件珠宝项链"
     ),
     MIDAS(
         () -> MidasItems.COOKED_GOLDEN_BEEF,
         "Golden Food",
         "金色美食",
-        "Random 5-piece Golden Food",
+        "Random 5 Golden Food",
         "随机5件金色美食"
     ),
-    COMMON_BOOK(
+    COMMON$BOOK(
         () -> Items.ENCHANTED_BOOK,
         0,
         0
     ),
-    COMMON_GEAR(
+    COMMON$GEAR(
         () -> Items.IRON_SWORD,
         0,
         1
     ),
-    COMMON_MATERIAL(
+    COMMON$MATERIAL(
         () -> Items.IRON_INGOT,
         0,
         2
     ),
-    UNCOMMON_BOOK(
+    UNCOMMON$BOOK(
         () -> Items.ENCHANTED_BOOK,
         1,
         0
     ),
-    UNCOMMON_GEAR(
+    UNCOMMON$GEAR(
         () -> Items.DIAMOND_SWORD,
         1,
         1
     ),
-    UNCOMMON_MATERIAL(
+    UNCOMMON$MATERIAL(
         () -> Items.DIAMOND,
         1,
         2
     ),
-    RARE_BOOK(
+    RARE$BOOK(
         () -> Items.ENCHANTED_BOOK,
         2,
         0
     ),
-    RARE_GEAR(
+    RARE$GEAR(
         () -> MUItems.SAPPHIRE_SWORD,
         2,
         1
     ),
-    RARE_MATERIAL(
+    RARE$MATERIAL(
         () -> MUItems.SAPPHIRE_INGOT,
         2,
         2
     ),
-    EPIC_BOOK(
+    EPIC$BOOK(
         () -> Items.ENCHANTED_BOOK,
         3,
         0
     ),
-    EPIC_GEAR(
+    EPIC$GEAR(
         MythicTools.ADAMANTITE::getSword,
         3,
         1
     ),
-    EPIC_MATERIAL(
+    EPIC$MATERIAL(
         MythicItems.ADAMANTITE::getIngot,
         3,
         2
     ),
-    LEGENDARY_BOOK(
+    LEGENDARY$BOOK(
         () -> Items.ENCHANTED_BOOK,
         4,
         0
     ),
-    LEGENDARY_GEAR(
+    LEGENDARY$GEAR(
         MythicTools.METALLURGIUM::getSword,
         4,
         1
     ),
-    LEGENDARY_MATERIAL(
+    LEGENDARY$MATERIAL(
         MythicItems.METALLURGIUM::getIngot,
         4,
         2
     ),
-    ROBE_GENERAL(
+    ROBE$GENERAL(
         () -> Armors.wizardRobeSet.head,
         "General Robe",
         "通用法袍",
         "Includes full set of general robe",
         "包含全套通用法袍"
     ),
-    ROBE_ARCANE(
+    ROBE$ARCANE(
         () -> Armors.arcaneRobeSet.head,
         "Arcane Robe",
         "奥秘法袍",
         "Includes full set of arcane robe",
         "包含全套奥秘法袍"
     ),
-    ROBE_FIRE(
+    ROBE$FIRE(
         () -> Armors.fireRobeSet.head,
         "Fire Robe",
         "火焰法袍",
         "Includes full set of fire robe",
         "包含全套火焰法袍"
     ),
-    ROBE_FROST(
+    ROBE$FROST(
         () -> Armors.frostRobeSet.head,
         "Frost Robe",
         "寒冰法袍",
         "Includes full set of frost robe",
         "包含全套寒冰法袍"
     ),
-    ROBE_HEALING(
+    ROBE$HEALING(
         () -> net.paladins.item.armor.Armors.priestArmorSet_t1.head,
         "Healing Robe",
         "治愈法袍",
         "Includes full set of healing robe",
         "包含全套治愈法袍"
     ),
-    ROBE_LIGHTNING(
+    ROBE$LIGHTNING(
         () -> AllArmors.LIGHTNING_ROBE.get(ArmorItem.Type.HELMET),
         "Lightning Robe",
         "雷电法袍",
         "Includes full set of lightning robe",
         "包含全套雷电法袍"
     ),
-    WAND_ARCANE(
+    WAND$ARCANE(
         () -> Weapons.arcaneWand.item().getDefaultStack(),
         "Arcane Wand",
         "奥秘魔杖"
     ),
-    WAND_FIRE(
+    WAND$FIRE(
         () -> Weapons.fireWand.item().getDefaultStack(),
         "Fire Wand",
         "火焰魔杖"
     ),
-    WAND_FROST(
+    WAND$FROST(
         () -> Weapons.frostWand.item().getDefaultStack(),
         "Frost Wand",
         "寒冰魔杖"
     ),
-    WAND_HEALING(
+    WAND$HEALING(
         () -> net.paladins.item.Weapons.holy_wand.item().getDefaultStack(),
         "Holy Wand",
         "神圣魔杖"
     ),
-    WAND_LIGHTNING(
+    WAND$LIGHTNING(
         () -> AllWeapons.LIGHTNING_WAND.getDefaultStack(),
         "Lightning Wand",
         "雷电魔杖"
     ),
-    WAND_SOUL(
+    WAND$SOUL(
         () -> Weapons.arcaneWand.item().getDefaultStack(),
         "Soul Wand",
         "灵魂魔杖"
     ),
-    RUNE_ARCANE(
+    RUNE$ARCANE(
         () -> runeStack(RuneItems.RuneType.ARCANE),
         "Arcane Rune",
         "奥秘符文"
     ),
-    RUNE_FIRE(
+    RUNE$FIRE(
         () -> runeStack(RuneItems.RuneType.FIRE),
         "Fire Rune",
         "火焰符文"
     ),
-    RUNE_FROST(
+    RUNE$FROST(
         () -> runeStack(RuneItems.RuneType.FROST),
         "Frost Rune",
         "寒冰符文"
     ),
-    RUNE_HEALING(
+    RUNE$HEALING(
         () -> runeStack(RuneItems.RuneType.HEALING),
         "Healing Rune",
         "治愈符文"
     ),
-    RUNE_LIGHTNING(
+    RUNE$LIGHTNING(
         () -> runeStack(RuneItems.RuneType.LIGHTNING),
         "Lightning Rune",
         "雷电符文"
     ),
-    RUNE_SOUL(
+    RUNE$SOUL(
         () -> runeStack(RuneItems.RuneType.SOUL),
         "Soul Rune",
         "灵魂符文"
+    ),
+    SPELL_SCROLL(
+        path -> new SpellScrollContent(new ItemIcon(AllItems.SPELL_SCROLL.getStack(AllSpells.ARCANE_BEAM))),
+        "Spell Scroll",
+        "法术卷轴",
+        "Random 1 spell scroll, covering your primary and secondary spell schools, excluding spells you already have equipped",
+        "随机1件法术卷轴，涵盖你的主副学派，但不包含你已装备的法术"
     ),
     ;
     public final Identifier id;
@@ -265,7 +275,7 @@ public enum SDContents
         String descZh
     )
     {
-        String path = this.name().toLowerCase(Locale.ROOT).replace('_', '/');
+        String path = this.name().toLowerCase(Locale.ROOT).replace('$', '/');
         this.id = SpellDimension.modLoc(path);
         this.factory = () -> new ContentEntry(this.id, content.apply(path));
         this.nameEn = nameEn;

@@ -129,7 +129,7 @@ public class CraftQuests
                 "loot_charm_1",
                 new SimpleItemQuest(
                     () -> TrinketItems.LOOT_2,
-                    SDBags.JEWELRY_RINGS::getStack
+                    SDBags.JEWELRY$RINGS::getStack
                 )
             )
             .addEnFeedback("A fair quality Charm of Looting with a faint magical sheen glistening on its surface.")
@@ -142,7 +142,7 @@ public class CraftQuests
                 "loot_charm_2",
                 new SimpleItemQuest(
                     () -> TrinketItems.LOOT_3,
-                    SDBags.JEWELRY_NECKLACES::getStack
+                    SDBags.JEWELRY$NECKLACES::getStack
                 )
             )
             .addEnFeedback("The high quality Charm of Looting, the swirl of energy swirled more than once, emitting chaotic and intense fluctuations.")

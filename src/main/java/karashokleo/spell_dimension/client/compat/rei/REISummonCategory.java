@@ -1,9 +1,9 @@
 package karashokleo.spell_dimension.client.compat.rei;
 
 import com.google.common.collect.Lists;
-import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.data.SpellTexts;
 import karashokleo.spell_dimension.init.AllItems;
+import karashokleo.spell_dimension.init.AllSpells;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.gui.Renderer;
@@ -23,7 +23,7 @@ import java.util.List;
 public class REISummonCategory implements DisplayCategory<REISummonDisplay>
 {
     public static final EntryStack<ItemStack> WORKSTATION = EntryStacks.of(Items.SPAWNER);
-    public static final EntryStack<ItemStack> SPELL_SCROLL = EntryStacks.of(AllItems.SPELL_SCROLL.getStack(SpellDimension.modLoc("summon")));
+    public static final EntryStack<ItemStack> SPELL_SCROLL = EntryStacks.of(AllItems.SPELL_SCROLL.getStack(AllSpells.SUMMON));
 
     @Override
     public List<Widget> setupDisplay(REISummonDisplay display, Rectangle bounds)
