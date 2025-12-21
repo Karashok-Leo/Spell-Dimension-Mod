@@ -28,6 +28,7 @@ import net.minecraft.loot.provider.number.UniformLootNumberProvider;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.spell_power.api.SpellSchool;
+import net.spell_power.api.SpellSchools;
 
 public class AllLoots
 {
@@ -74,43 +75,51 @@ public class AllLoots
             SpellSchool school = spellInfo.spell().school;
             for (Entity target : targets)
             {
+                // living entity check
                 LivingEntity living = ImpactUtil.castToLiving(target);
                 if (living == null)
                 {
                     continue;
                 }
-                if (EssenceLootConfig.BASE_CONFIG.blacklist().contains(target.getType()))
+
+                // entity blacklist check
+                if (EssenceLootConfig.BASE_CONFIG.blacklist().contains(living.getType()))
                 {
                     continue;
                 }
 
-                boolean doDrop = (living instanceof PlayerEntity);
-
+                // no drop conditions check
                 var op = MobDifficulty.get(target);
                 if (op.isPresent())
                 {
                     MobDifficulty difficulty = op.get();
-                    doDrop = !difficulty.noDrop &&
-                        !difficulty.hasTrait(LHTraits.UNDYING) &&
-                        !difficulty.hasTrait(LHTraits.DISPELL) &&
-                        !difficulty.hasTrait(LHTraits.ADAPTIVE);
-                }
-
-                if (doDrop)
-                {
-                    // Determine the loot charm level
-                    int lootCharmLevel = TrinketCompat.getTrinketItems(caster, e -> e.getItem() instanceof LootingCharm).size();
-
-                    float dropChance = EssenceLootConfig.BASE_CONFIG.dropChance() + lootCharmLevel * 0.1F;
-                    if (caster.getRandom().nextFloat() > dropChance)
+                    if (difficulty.noDrop ||
+                        difficulty.hasTrait(LHTraits.UNDYING) ||
+                        difficulty.hasTrait(LHTraits.DISPELL) ||
+                        difficulty.hasTrait(LHTraits.ADAPTIVE))
                     {
                         continue;
                     }
-
-                    int grade = EssenceLootConfig.BASE_CONFIG.getRandomGrade(caster.getRandom(), DifficultyLevel.ofAny(living));
-
-                    target.dropItem(AllItems.BASE_ESSENCES.get(school).get(grade));
                 }
+
+                float baseChance = EssenceLootConfig.BASE_CONFIG.dropChance();
+                // lightning school penalty
+                if (school == SpellSchools.LIGHTNING)
+                {
+                    baseChance *= 0.6f;
+                }
+                // looting charm bonus
+                int lootCharmLevel = TrinketCompat.getTrinketItems(caster, e -> e.getItem() instanceof LootingCharm).size();
+                float dropChance = baseChance + lootCharmLevel * 0.1F;
+
+                // drop chance check
+                if (caster.getRandom().nextFloat() > dropChance)
+                {
+                    continue;
+                }
+
+                int grade = EssenceLootConfig.BASE_CONFIG.getRandomGrade(caster.getRandom(), DifficultyLevel.ofAny(living));
+                target.dropItem(AllItems.BASE_ESSENCES.get(school).get(grade));
             }
         });
     }
