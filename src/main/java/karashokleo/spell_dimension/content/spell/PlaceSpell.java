@@ -32,7 +32,7 @@ public class PlaceSpell
         }
         if (AllWorldGen.disableInWorld(world))
         {
-            player.sendMessage(SDTexts.TEXT$BANNED_SPELL.get().formatted(Formatting.RED));
+            player.sendMessage(SDTexts.TEXT$DIMENSION_BANNED_SPELL.get().formatted(Formatting.RED));
             return;
         }
         player.getOffHandStack().useOnBlock(

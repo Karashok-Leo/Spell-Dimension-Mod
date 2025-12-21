@@ -170,7 +170,7 @@ public class LightSpell
         }
         if (AllWorldGen.disableInWorld(world))
         {
-            owner.sendMessage(SDTexts.TEXT$BANNED_SPELL.get().formatted(Formatting.RED));
+            owner.sendMessage(SDTexts.TEXT$DIMENSION_BANNED_SPELL.get().formatted(Formatting.RED));
             return;
         }
 

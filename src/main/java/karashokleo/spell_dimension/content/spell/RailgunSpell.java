@@ -17,7 +17,7 @@ public class RailgunSpell
     {
         if (AllWorldGen.disableInWorld(world))
         {
-            caster.sendMessage(SDTexts.TEXT$BANNED_SPELL.get().formatted(Formatting.RED));
+            caster.sendMessage(SDTexts.TEXT$DIMENSION_BANNED_SPELL.get().formatted(Formatting.RED));
             return;
         }
         RailgunEntity railgun = new RailgunEntity(world, caster);

@@ -91,6 +91,7 @@ public class AllTags
     public static final TagKey<Item> MAGIC_WEAPON = TagUtil.itemTag(new Identifier("equipment_standard:magic/weapons"));
     public static final TagKey<Item> MAGIC_ARMOR = TagUtil.itemTag(new Identifier("equipment_standard:magic/armor"));
 
+    public static final TagKey<Item> BANNED = TagUtil.itemTag("banned");
     public static final TagKey<Item> DUNGEON_BANNED = TagUtil.itemTag("dungeon_banned");
     public static final TagKey<Item> REFILL_BANNED = TagUtil.itemTag("refill_banned");
 
@@ -249,6 +250,11 @@ public class AllTags
                 TrinketItems.CURSE_PRIDE,
                 TrinketItems.CURSE_WRATH
             );
+
+        SpellDimension.ITEM_TAGS.getOrCreateContainer(BANNED)
+            .add(Spellblades.OFFERING)
+            .add(Spellblades.HEXBLADEITEM)
+            .add(Spellblades.PRISMATIC);
 
         SpellDimension.ITEM_TAGS.getOrCreateContainer(DUNGEON_BANNED)
             .add(MythicTools.LEGENDARY_BANGLUM.getPickaxe())

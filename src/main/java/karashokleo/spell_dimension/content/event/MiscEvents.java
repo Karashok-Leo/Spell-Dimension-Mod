@@ -42,7 +42,6 @@ import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.spell_engine.api.spell.SpellContainer;
@@ -178,17 +177,10 @@ public class MiscEvents
             System.out.printf("Fixed NaN health for %s, why is this happening?", entity);
         });
 
-        // dungeon item blacklist
-        UseItemCallback.EVENT.register((player, world, hand) ->
-        {
-            ItemStack stack = player.getStackInHand(hand);
-            if (stack.isIn(AllTags.DUNGEON_BANNED) &&
-                AllWorldGen.disableInWorld(world))
-            {
-                return TypedActionResult.fail(stack);
-            }
-            return TypedActionResult.pass(stack);
-        });
+        // banned items
+        ItemBannedHandler handler = new ItemBannedHandler();
+        UseItemCallback.EVENT.register(handler);
+        UseBlockCallback.EVENT.register(handler);
 
         // quest scroll
         PlayerInteractionEvents.LEFT_CLICK_EMPTY.register(event ->

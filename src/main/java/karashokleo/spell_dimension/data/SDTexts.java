@@ -61,7 +61,9 @@ public enum SDTexts
     TEXT$QUEST$SPELL_POWER("Increase any Spell Power to %s", "将任意法术强度提升至%s"),
 
     TEXT$REFILL_BANNED("You cannot use the Refill Upgrade to automatically refill this item!", "你不能使用补货升级自动补货该物品！"),
-    TEXT$BANNED_SPELL("You cannot cast this spell in your current dimension!", "你不能在当前维度施放该法术！"),
+    TEXT$DIMENSION_BANNED_SPELL("You cannot cast this spell in your current dimension!", "你不能在当前维度施放该法术！"),
+    TEXT$DIMENSION_BANNED_ITEM("You cannot use this item in your current dimension!", "你不能在当前维度使用该物品！"),
+    TEXT$BANNED_ITEM("This item has been banned!", "该物品已被禁用！"),
     TEXT$INVALID_KEY_ITEM("Invalid Key Item!", "无效的索引物品！"),
     TEXT$SPELL_INFUSION("Spell Infusion", "魔力灌注"),
 
