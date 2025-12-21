@@ -14,7 +14,11 @@ import net.minecraft.util.Identifier;
 
 import java.util.List;
 
-public record EMILocateRecipe(EmiIngredient input, LocationEmiStack location) implements EmiRecipe
+public record EMILocateRecipe(
+    Identifier id,
+    EmiIngredient input,
+    LocationEmiStack location
+) implements EmiRecipe
 {
     public static final EmiIngredient WORKSTATION = EmiIngredient.of(AllTags.LOCATE_TARGET);
     public static final EmiStack SPELL_SCROLL = EmiStack.of(AllItems.SPELL_SCROLL.getStack(AllSpells.LOCATE));
@@ -22,6 +26,7 @@ public record EMILocateRecipe(EmiIngredient input, LocationEmiStack location) im
     public EMILocateRecipe(LocateRecipe recipe)
     {
         this(
+            recipe.getId(),
             EmiIngredient.of(recipe.getIngredient()),
             new LocationEmiStack(LocationStack.fromRecipe(recipe))
         );
@@ -42,7 +47,7 @@ public record EMILocateRecipe(EmiIngredient input, LocationEmiStack location) im
     @Override
     public Identifier getId()
     {
-        return location.getId();
+        return id;
     }
 
     @Override
@@ -85,6 +90,7 @@ public record EMILocateRecipe(EmiIngredient input, LocationEmiStack location) im
             .catalyst(true)
             .drawBack(false);
 
-        widgets.addSlot(location, centerX + 20, centerY);
+        widgets.addSlot(location, centerX + 20, centerY)
+            .recipeContext(this);
     }
 }

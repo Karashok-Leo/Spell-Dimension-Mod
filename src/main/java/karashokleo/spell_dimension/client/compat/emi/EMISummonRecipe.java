@@ -16,14 +16,22 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public record EMISummonRecipe(EmiIngredient input, LivingEntityWrapper wrapper) implements EmiRecipe
+public record EMISummonRecipe(
+    Identifier id,
+    EmiIngredient input,
+    LivingEntityWrapper wrapper
+) implements EmiRecipe
 {
     public static final EmiStack WORKSTATION = EmiStack.of(Items.SPAWNER);
     public static final EmiStack SPELL_SCROLL = EmiStack.of(AllItems.SPELL_SCROLL.getStack(AllSpells.SUMMON));
 
     public EMISummonRecipe(SummonRecipe recipe)
     {
-        this(EmiIngredient.of(recipe.ingredient()), SummonedEntityWrapperFactory.of(recipe.entityType(), recipe.count()));
+        this(
+            recipe.getId(),
+            EmiIngredient.of(recipe.ingredient()),
+            SummonedEntityWrapperFactory.of(recipe.entityType(), recipe.count())
+        );
     }
 
     @Override
@@ -41,7 +49,7 @@ public record EMISummonRecipe(EmiIngredient input, LivingEntityWrapper wrapper) 
     @Override
     public @Nullable Identifier getId()
     {
-        return null;
+        return id;
     }
 
     @Override
