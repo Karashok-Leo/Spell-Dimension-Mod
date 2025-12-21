@@ -68,7 +68,7 @@ public class PlayerHealthEvents
         {
             return;
         }
-        createHeartModifier(FROM_KILL).applyToEntityOrPlayer(player);
+        createHealthModifier(FROM_KILL, 2).applyToEntityOrPlayer(player);
     }
 
     private static void onEatHeartFood(LivingEntity entity, World world, ItemStack stack)
@@ -77,7 +77,7 @@ public class PlayerHealthEvents
         {
             return;
         }
-        createHeartModifier(FROM_EAT).applyToEntityOrPlayer(entity);
+        createHealthModifier(FROM_EAT, 2).applyToEntityOrPlayer(entity);
     }
 
     private static final Identifier ROOT_ADVANCEMENT_ID = SpellDimension.modLoc("spell_dimension/root");
@@ -97,11 +97,11 @@ public class PlayerHealthEvents
         {
             return;
         }
-        createHeartModifier(FROM_ADVANCEMENT).applyToEntityOrPlayer(player);
+        createHealthModifier(FROM_ADVANCEMENT, 1).applyToEntityOrPlayer(player);
     }
 
-    public static EnlighteningModifier createHeartModifier(UUID uuid)
+    public static EnlighteningModifier createHealthModifier(UUID uuid, double amount)
     {
-        return new EnlighteningModifier(EntityAttributes.GENERIC_MAX_HEALTH, uuid, 2, EntityAttributeModifier.Operation.ADDITION);
+        return new EnlighteningModifier(EntityAttributes.GENERIC_MAX_HEALTH, uuid, amount, EntityAttributeModifier.Operation.ADDITION);
     }
 }
