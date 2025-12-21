@@ -4,7 +4,6 @@ import dev.emi.trinkets.api.TrinketEnums;
 import dev.emi.trinkets.api.event.TrinketDropCallback;
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.l2hostility.content.item.TrinketItems;
-import karashokleo.l2hostility.content.logic.DifficultyLevel;
 import karashokleo.leobrary.effect.api.event.LivingHealCallback;
 import karashokleo.spell_dimension.content.item.trinket.breastplate.AtomicBreastplateItem;
 import karashokleo.spell_dimension.content.spell.ConvergeSpell;
@@ -72,14 +71,13 @@ public class TrinketEvents
                 SpellSchool.Apply.MULTIPLY,
                 args ->
                 {
-                    if (TrinketCompat.hasItemInTrinket(args.entity(), TrinketItems.CURSE_PRIDE))
+                    if (args.entity() instanceof PlayerEntity player &&
+                        TrinketCompat.hasItemInTrinket(player, TrinketItems.CURSE_PRIDE))
                     {
-                        int level = DifficultyLevel.ofAny(args.entity());
-                        return level * PRIDE_BONUS;
+                        return player.experienceLevel * PRIDE_BONUS;
                     }
                     return 0D;
                 }
-
             );
         }
     }

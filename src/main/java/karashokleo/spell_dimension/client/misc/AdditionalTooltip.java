@@ -4,7 +4,6 @@ import com.klikli_dev.modonomicon.book.Book;
 import com.klikli_dev.modonomicon.item.ModonomiconItem;
 import karashokleo.l2hostility.client.L2HostilityClient;
 import karashokleo.l2hostility.content.item.TrinketItems;
-import karashokleo.l2hostility.content.logic.DifficultyLevel;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.api.quest.Quest;
 import karashokleo.spell_dimension.api.quest.QuestUsage;
@@ -128,9 +127,8 @@ public class AdditionalTooltip
         {
             return;
         }
-        int level = DifficultyLevel.ofAny(player);
         lines.add(SDTexts.TOOLTIP$CURSE_PRIDE_2.get(
-            "%.1f%%".formatted((level * TrinketEvents.PRIDE_BONUS) * 100)
+            "%.1f%%".formatted((player.experienceLevel * TrinketEvents.PRIDE_BONUS) * 100)
         ).formatted(Formatting.AQUA));
     }
 

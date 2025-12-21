@@ -766,7 +766,7 @@
   "tooltip.spell-dimension.container.spell": "Attempt to void spell traits, converting them to damage reduction amount for the corresponding spell school.",
   "tooltip.spell-dimension.container_empty": "[Empty]",
   "tooltip.spell-dimension.contributor_item": "        ——Special item for contributor @%s",
-  "tooltip.spell-dimension.curse_pride_1": "All school spell power are increased by %s%% per difficulty level",
+  "tooltip.spell-dimension.curse_pride_1": "All school spell power are increased by %s%% per experience level",
   "tooltip.spell-dimension.curse_pride_2": "Current spell power increment: +%s",
   "tooltip.spell-dimension.curse_wrath": "Increase damage dealt and damage received by %s%% per difficulty level difference when facing mobs with higher level than you.",
   "tooltip.spell-dimension.cursed_apple.1": "- +7 Curse slots",

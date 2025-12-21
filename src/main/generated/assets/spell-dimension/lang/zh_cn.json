@@ -764,7 +764,7 @@
   "tooltip.spell-dimension.container.spell": "尝试销毁法术词条，转化为对应法术学派的减伤数额",
   "tooltip.spell-dimension.container_empty": "[空]",
   "tooltip.spell-dimension.contributor_item": "        ——贡献者物品 @%s",
-  "tooltip.spell-dimension.curse_pride_1": "根据玩家难度，所有学派法术强度每级提升%s%%",
+  "tooltip.spell-dimension.curse_pride_1": "根据玩家经验等级，所有学派法术强度每级提升%s%%",
   "tooltip.spell-dimension.curse_pride_2": "当前增幅：+%s",
   "tooltip.spell-dimension.curse_wrath": "面对等级比自己高的怪物时每级等级差造成伤害与受到伤害均提升%s%%",
   "tooltip.spell-dimension.cursed_apple.1": "- +7 恶意-诅咒饰品槽位",
