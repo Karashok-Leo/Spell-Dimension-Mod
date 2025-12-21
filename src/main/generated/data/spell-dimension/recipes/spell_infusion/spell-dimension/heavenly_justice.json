@@ -2,7 +2,7 @@
   "type": "spell-dimension:spell_infusion",
   "ingredients": [
     {
-      "item": "spell-dimension:essence_healing_1"
+      "item": "spell-dimension:essence_healing_2"
     },
     {
       "item": "l2hostility:resonant_feather"

@@ -5,20 +5,25 @@ import dev.emi.trinkets.api.event.TrinketDropCallback;
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.l2hostility.content.item.TrinketItems;
 import karashokleo.leobrary.effect.api.event.LivingHealCallback;
+import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.item.trinket.breastplate.AtomicBreastplateItem;
 import karashokleo.spell_dimension.content.spell.ConvergeSpell;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.util.SchoolUtil;
 import net.combatroll.api.event.ServerSideRollEvents;
+import net.fabricmc.fabric.api.event.Event;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Identifier;
 import net.spell_engine.api.spell.SpellInfo;
 import net.spell_engine.internals.SpellRegistry;
 import net.spell_power.api.SpellSchool;
 
 public class TrinketEvents
 {
+    public static final Identifier HEAL_FINAL = SpellDimension.modLoc("heal_final");
     public static final double PRIDE_BONUS = 0.02F;
 
     public static void init()
@@ -64,6 +69,7 @@ public class TrinketEvents
             return true;
         });
 
+        // Curse of Pride
         for (SpellSchool school : SchoolUtil.SCHOOLS)
         {
             school.addSource(
@@ -80,5 +86,19 @@ public class TrinketEvents
                 }
             );
         }
+
+        // Rejuvenating Blossom
+        LivingHealCallback.EVENT.addPhaseOrdering(Event.DEFAULT_PHASE, HEAL_FINAL);
+        LivingHealCallback.EVENT.register(event ->
+        {
+            LivingEntity entity = event.getEntity();
+            if (!TrinketCompat.hasItemInTrinket(entity, AllItems.REJUVENATING_BLOSSOM))
+            {
+                return true;
+            }
+            float scale = AllItems.REJUVENATING_BLOSSOM.getHealingAmountScale(entity);
+            event.setAmount(event.getAmount() * (1 + scale));
+            return true;
+        });
     }
 }

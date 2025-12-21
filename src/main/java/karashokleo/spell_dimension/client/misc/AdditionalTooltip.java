@@ -47,6 +47,7 @@ public class AdditionalTooltip
         ItemTooltipCallback.EVENT.register(AdditionalTooltip::appendFlexBreastplate);
         ItemTooltipCallback.EVENT.register(AdditionalTooltip::appendFlickerBreastplate);
         ItemTooltipCallback.EVENT.register(AdditionalTooltip::modifyCursePride);
+        ItemTooltipCallback.EVENT.register(AdditionalTooltip::modifyRejuvenatingBlossom);
         ItemTooltipCallback.EVENT.register(AdditionalTooltip::appendModonomicon);
         ItemTooltipCallback.EVENT.register(AdditionalTooltip::appendSpellScroll);
         ItemTooltipCallback.EVENT.register(AdditionalTooltip::appendBottleNightmare);
@@ -127,9 +128,25 @@ public class AdditionalTooltip
         {
             return;
         }
-        lines.add(SDTexts.TOOLTIP$CURSE_PRIDE_2.get(
+        lines.add(SDTexts.TOOLTIP$CURSE_PRIDE$2.get(
             "%.1f%%".formatted((player.experienceLevel * TrinketEvents.PRIDE_BONUS) * 100)
         ).formatted(Formatting.AQUA));
+    }
+
+    private static void modifyRejuvenatingBlossom(ItemStack stack, TooltipContext context, List<Text> lines)
+    {
+        if (!stack.isOf(AllItems.REJUVENATING_BLOSSOM))
+        {
+            return;
+        }
+        var player = MinecraftClient.getInstance().player;
+        if (player == null)
+        {
+            return;
+        }
+        lines.add(SDTexts.TOOLTIP$REJUVENATING_BLOSSOM$2.get(
+            "%.1f%%".formatted(AllItems.REJUVENATING_BLOSSOM.getHealingAmountScale(player) * 100)
+        ).formatted(Formatting.GREEN));
     }
 
     private static void appendModonomicon(ItemStack stack, TooltipContext context, List<Text> lines)
