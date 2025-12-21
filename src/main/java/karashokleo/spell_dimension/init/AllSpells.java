@@ -162,8 +162,8 @@ public class AllSpells
     public static final Identifier BATTLE_BANNER = fromCraftingWithId("paladins:battle_banner").withTier(1).build();
     public static final Identifier BLESSING = fromCrafting("blessing").withTier(1).build();
     public static final Identifier MISFORTUNE = fromCrafting("misfortune").withTier(1).build();
-    public static final Identifier HEAVENLY_JUSTICE = fromCrafting("heavenly_justice").withTier(1).build();
     // Tier 3
+    public static final Identifier HEAVENLY_JUSTICE = fromCrafting("heavenly_justice").withTier(2).build();
     public static final Identifier DIVINE_AURA = fromCrafting("divine_aura").withTier(2).build();
     public static final Identifier EXORCISM = fromCrafting("exorcism").withTier(2).build();
     public static final Identifier SPELL_POWER_ADVANCED = builderWithName("spell_power_advanced").withScrollType(ScrollType.EVENT_AWARD).withTier(2).build();
