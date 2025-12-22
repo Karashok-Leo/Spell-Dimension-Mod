@@ -66,6 +66,7 @@
   "client": [
     "client.DrawContextMixin",
     "client.ElectricSparkFactoryMixin",
+    "client.HandledScreenMixin",
     "client.phase.ClientPlayerEntityMixin",
     "client.phase.ClientPlayerInteractionManagerMixin",
     "client.phase.EntityRenderDispatcherMixin",

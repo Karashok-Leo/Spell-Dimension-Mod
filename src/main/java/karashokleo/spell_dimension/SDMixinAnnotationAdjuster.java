@@ -32,6 +32,11 @@ public class SDMixinAnnotationAdjuster implements MixinAnnotationAdjuster
             System.out.println("Mixin " + mixinClassName + " cancelled");
             return null;
         }
+        if (mixinClassName.equals("vazkii.patchouli.mixin.client.MixinGuiGraphics"))
+        {
+            System.out.println("Mixin " + mixinClassName + " cancelled");
+            return null;
+        }
         return annotationNode;
     }
 }

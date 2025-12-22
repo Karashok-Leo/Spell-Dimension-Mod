@@ -76,6 +76,8 @@ public class AllItems
     public static SpellPrismItem SPELL_PRISM;
     public static MirageReflectorItem MIRAGE_REFLECTOR;
 
+    public static final Identifier MAGIC_GUIDE = SpellDimension.modLoc("magic_guide");
+
     // Breastplates
     public static AtomicBreastplateItem ATOMIC_BREASTPLATE;
     public static EnchantedBreastplateItem ENCHANTED_BREASTPLATE;
