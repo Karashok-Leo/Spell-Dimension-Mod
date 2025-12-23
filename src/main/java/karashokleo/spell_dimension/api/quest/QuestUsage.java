@@ -1,6 +1,5 @@
 package karashokleo.spell_dimension.api.quest;
 
-import karashokleo.spell_dimension.config.QuestToEntryConfig;
 import karashokleo.spell_dimension.content.component.QuestComponent;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllTags;
@@ -103,17 +102,11 @@ public interface QuestUsage
     static void appendQuestOperationTooltip(List<Text> tooltip, World world, Quest quest)
     {
         quest.appendTooltip(world, tooltip);
+        tooltip.add(SDTexts.TOOLTIP$QUEST$SUBMIT.get().formatted(Formatting.GOLD));
         if (quest.isIn(AllTags.SKIPPABLE))
         {
-            tooltip.add(SDTexts.TOOLTIP$QUEST$SUBMIT_OR_SKIP.get().formatted(Formatting.GOLD));
-        } else
-        {
-            tooltip.add(SDTexts.TOOLTIP$QUEST$SUBMIT.get().formatted(Formatting.GOLD));
+            tooltip.add(SDTexts.TOOLTIP$QUEST$SKIP.get().formatted(Formatting.DARK_GREEN));
         }
-        tooltip.add(SDTexts.TOOLTIP$QUEST$RESELECT.get().formatted(Formatting.DARK_GREEN));
-        if (QuestToEntryConfig.hasEntry(quest))
-        {
-            tooltip.add(SDTexts.TOOLTIP$QUEST$OPEN_ENTRY.get().formatted(Formatting.DARK_AQUA));
-        }
+        tooltip.add(SDTexts.TOOLTIP$QUEST$RESELECT.get().formatted(Formatting.DARK_AQUA));
     }
 }

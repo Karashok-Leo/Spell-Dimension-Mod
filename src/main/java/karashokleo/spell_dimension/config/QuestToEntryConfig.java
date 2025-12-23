@@ -1,10 +1,11 @@
 package karashokleo.spell_dimension.config;
 
 import com.klikli_dev.modonomicon.client.gui.BookGuiManager;
+import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.api.quest.Quest;
 import karashokleo.spell_dimension.data.book.MagicGuidanceProvider;
-import karashokleo.spell_dimension.util.BookGenUtil;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,6 +19,13 @@ public class QuestToEntryConfig
         return QUEST_TO_ENTRY.containsKey(quest);
     }
 
+    @Nullable
+    public static Identifier getEntryId(Quest quest)
+    {
+        return QUEST_TO_ENTRY.get(quest);
+    }
+
+    @Deprecated
     public static void openEntry(Quest quest)
     {
         Identifier entryId = QUEST_TO_ENTRY.get(quest);
@@ -30,7 +38,7 @@ public class QuestToEntryConfig
 
     public static void register(Quest quest, String entryId)
     {
-        register(quest, BookGenUtil.id(entryId));
+        register(quest, SpellDimension.modLoc(entryId));
     }
 
     public static void register(Quest quest, Identifier entryId)

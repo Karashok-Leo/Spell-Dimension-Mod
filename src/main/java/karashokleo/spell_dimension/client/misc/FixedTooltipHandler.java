@@ -2,8 +2,7 @@ package karashokleo.spell_dimension.client.misc;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.datafixers.util.Pair;
-import karashokleo.spell_dimension.SpellDimension;
-import karashokleo.spell_dimension.init.AllItems;
+import karashokleo.spell_dimension.api.PatchouliLookupCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
@@ -22,8 +21,6 @@ import vazkii.patchouli.client.book.gui.GuiBook;
 import vazkii.patchouli.common.base.PatchouliConfig;
 import vazkii.patchouli.common.book.Book;
 import vazkii.patchouli.common.util.ItemStackUtil;
-
-import java.util.Optional;
 
 public class FixedTooltipHandler
 {
@@ -49,21 +46,16 @@ public class FixedTooltipHandler
                     Book book = ItemStackUtil.getBookFromStack(stackAt);
                     if (book != null)
                     {
-                        if (stack.isOf(AllItems.QUEST_SCROLL))
+                        Pair<Identifier, Integer> pair = PatchouliLookupCallback.EVENT.invoker().lookupEntry(stack);
+                        if (pair != null)
                         {
-                            Optional<Identifier> questId = AllItems.QUEST_SCROLL.getQuestId(stack);
-                            if (questId.isPresent() &&
-                                questId.get().getPath().equals("first_day"))
+                            BookEntry bookEntry = book.getContents().entries.get(pair.getFirst());
+                            if (bookEntry != null && !bookEntry.isLocked())
                             {
-                                var entryId = SpellDimension.modLoc("boss/blackstone_golem");
-                                BookEntry bookEntry = book.getContents().entries.get(entryId);
-                                if (bookEntry != null && !bookEntry.isLocked())
-                                {
-                                    lexiconStack = stackAt;
-                                    lexSlot = i;
-                                    lexiconEntry = Pair.of(bookEntry, 0);
-                                    break;
-                                }
+                                lexiconStack = stackAt;
+                                lexSlot = i;
+                                lexiconEntry = Pair.of(bookEntry, pair.getSecond());
+                                break;
                             }
                         }
 

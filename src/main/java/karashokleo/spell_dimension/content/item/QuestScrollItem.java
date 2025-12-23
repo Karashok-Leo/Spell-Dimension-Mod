@@ -5,7 +5,6 @@ import karashokleo.l2hostility.init.LHNetworking;
 import karashokleo.spell_dimension.api.quest.Quest;
 import karashokleo.spell_dimension.api.quest.QuestRegistry;
 import karashokleo.spell_dimension.api.quest.QuestUsage;
-import karashokleo.spell_dimension.config.QuestToEntryConfig;
 import karashokleo.spell_dimension.content.component.QuestComponent;
 import karashokleo.spell_dimension.content.network.S2COpenQuestScreen;
 import karashokleo.spell_dimension.content.network.S2CTitle;
@@ -95,94 +94,91 @@ public class QuestScrollItem extends Item
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand)
     {
         ItemStack stack = user.getStackInHand(hand);
-        if (world.isClient() && user.isSneaking())
+        if (!(user instanceof ServerPlayerEntity player))
         {
-            Optional<Quest> optional = this.getQuest(stack);
-            optional.ifPresent(QuestToEntryConfig::openEntry);
-        } else if (user instanceof ServerPlayerEntity player &&
-            !player.isSneaking())
+            return TypedActionResult.success(stack, world.isClient());
+        }
+        Optional<Quest> optional = this.getQuest(stack);
+        // Valid quest
+        if (optional.isPresent())
         {
-            Optional<Quest> optional = this.getQuest(stack);
-            // Valid quest
-            if (optional.isPresent())
+            Quest quest = optional.get();
+            boolean creativeMode = player.getAbilities().creativeMode;
+            // Already completed
+            if (QuestUsage.isQuestCompleted(player, quest))
             {
-                Quest quest = optional.get();
-                boolean creativeMode = player.getAbilities().creativeMode;
-                // Already completed
-                if (QuestUsage.isQuestCompleted(player, quest))
+                if (creativeMode)
                 {
-                    if (creativeMode)
-                    {
-                        player.sendMessage(SDTexts.TEXT$PROGRESS_ROLLBACK.get(), true);
-                        QuestUsage.removeQuestsCompleted(player, quest);
-                    } else
-                    {
-                        player.sendMessage(SDTexts.TEXT$QUEST$COMPLETED.get(), true);
-                    }
-                }
-                // Do reward
-                else if (QuestUsage.allDependenciesCompleted(player, quest))
-                {
-                    // Requirements met or creative mode
-                    if (quest.completeTasks(player) ||
-                        creativeMode)
-                    {
-                        quest.reward(player);
-                        QuestUsage.addQuestsCompleted(player, quest);
-//                        giveDependentQuests(player, quest);
-                        Text feedback = quest.getFeedback(world);
-                        if (feedback != null)
-                        {
-                            player.sendMessage(SPACING_LINE);
-                            player.sendMessage(feedback);
-                            player.sendMessage(SPACING_LINE);
-                        }
-                        S2CTitle title = new S2CTitle(SDTexts.TEXT$QUEST$COMPLETE.get());
-                        AllPackets.toClientPlayer(player, title);
-                        S2CUndying packet = new S2CUndying(player);
-                        LHNetworking.toClientPlayer(player, packet);
-                        LHNetworking.toTracking(player, packet);
-                        world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENTITY_PLAYER_LEVELUP, player.getSoundCategory(), 1.0F, 1.0F);
-//                        if (!creativeMode) stack.decrement(1);
-                        AllItems.QUEST_SCROLL.setQuest(stack, null);
-                    }
-                    // Skippable quest
-                    else if (quest.isIn(AllTags.SKIPPABLE))
-                    {
-                        QuestUsage.addQuestsCompleted(player, quest);
-                        player.sendMessage(SDTexts.TEXT$QUEST$SKIP.get(), true);
-                        world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENTITY_PLAYER_LEVELUP, player.getSoundCategory(), 1.0F, 1.0F);
-                        AllItems.QUEST_SCROLL.setQuest(stack, null);
-                    }
-                    // Requirements not met
-                    else
-                    {
-                        player.sendMessage(SDTexts.TEXT$QUEST$REQUIREMENT.get(), true);
-                    }
-                }
-                // Dependencies not completed
-                else
-                {
-                    player.sendMessage(SDTexts.TEXT$QUEST$DEPENDENCIES.get(), true);
-                }
-            }
-            // Empty quest
-            else
-            {
-                Set<RegistryEntry<Quest>> currentQuests = QuestUsage.getCurrentQuests(player);
-                // All completed
-                if (currentQuests.isEmpty())
-                {
-                    player.sendMessage(SDTexts.TEXT$QUEST$ALL_COMPLETED.get(), true);
+                    player.sendMessage(SDTexts.TEXT$PROGRESS_ROLLBACK.get(), true);
+                    QuestUsage.removeQuestsCompleted(player, quest);
                 } else
                 {
-                    AllPackets.toClientPlayer(player, new S2COpenQuestScreen(hand));
+                    player.sendMessage(SDTexts.TEXT$QUEST$COMPLETED.get(), true);
+                }
+            }
+            // Do reward
+            else if (QuestUsage.allDependenciesCompleted(player, quest))
+            {
+                // Requirements met or creative mode
+                if (quest.completeTasks(player) ||
+                    creativeMode)
+                {
+                    quest.reward(player);
+                    QuestUsage.addQuestsCompleted(player, quest);
+//                        giveDependentQuests(player, quest);
+                    Text feedback = quest.getFeedback(world);
+                    if (feedback != null)
+                    {
+                        player.sendMessage(SPACING_LINE);
+                        player.sendMessage(feedback);
+                        player.sendMessage(SPACING_LINE);
+                    }
+                    S2CTitle title = new S2CTitle(SDTexts.TEXT$QUEST$COMPLETE.get());
+                    AllPackets.toClientPlayer(player, title);
+                    S2CUndying packet = new S2CUndying(player);
+                    LHNetworking.toClientPlayer(player, packet);
+                    LHNetworking.toTracking(player, packet);
+                    world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENTITY_PLAYER_LEVELUP, player.getSoundCategory(), 1.0F, 1.0F);
+//                        if (!creativeMode) stack.decrement(1);
+                    AllItems.QUEST_SCROLL.setQuest(stack, null);
+                }
+                // Skippable quest
+                else if (user.isSneaking() &&
+                    quest.isIn(AllTags.SKIPPABLE))
+                {
+                    QuestUsage.addQuestsCompleted(player, quest);
+                    player.sendMessage(SDTexts.TEXT$QUEST$SKIP.get(), true);
+                    world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENTITY_PLAYER_LEVELUP, player.getSoundCategory(), 1.0F, 1.0F);
+                    AllItems.QUEST_SCROLL.setQuest(stack, null);
+                }
+                // Requirements not met
+                else
+                {
+                    player.sendMessage(SDTexts.TEXT$QUEST$REQUIREMENT.get(), true);
+                }
+            }
+            // Dependencies not completed
+            else
+            {
+                player.sendMessage(SDTexts.TEXT$QUEST$DEPENDENCIES.get(), true);
+            }
+        }
+        // Empty quest
+        else
+        {
+            Set<RegistryEntry<Quest>> currentQuests = QuestUsage.getCurrentQuests(player);
+            // All completed
+            if (currentQuests.isEmpty())
+            {
+                player.sendMessage(SDTexts.TEXT$QUEST$ALL_COMPLETED.get(), true);
+            } else
+            {
+                AllPackets.toClientPlayer(player, new S2COpenQuestScreen(hand));
 //                    currentQuests.stream()
 //                            .map(AllItems.QUEST_SCROLL::getStack)
 //                            .forEach(itemStack -> player.getInventory().offerOrDrop(itemStack));
 //                    if (!player.getAbilities().creativeMode)
 //                        stack.decrement(1);
-                }
             }
         }
         return TypedActionResult.success(stack, world.isClient());

@@ -182,7 +182,7 @@ public enum SDTexts
     TOOLTIP$QUEST$TASK("Task:", "任务目标："),
     TOOLTIP$QUEST$REWARD("Reward:", "任务奖励："),
     TOOLTIP$QUEST$SUBMIT("Right-click to submit", "右键提交任务"),
-    TOOLTIP$QUEST$SUBMIT_OR_SKIP("Right-click to submit or skip", "右键提交或跳过任务"),
+    TOOLTIP$QUEST$SKIP("Shift + Right-click to skip", "Shift + 右键跳过任务"),
     TOOLTIP$QUEST$OPEN_ENTRY("Shift + Right-click to open the related guide page", "Shift + 右键打开相关指引页面"),
     TOOLTIP$QUEST$OBTAIN_CURRENT("Right-click to obtain all current quests", "右键获取当前所有任务"),
     TOOLTIP$QUEST$VIEW_CURRENT("Right-click to view all current quests", "右键浏览当前所有任务"),
