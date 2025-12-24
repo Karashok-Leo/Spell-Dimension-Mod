@@ -11,6 +11,7 @@ import karashokleo.l2hostility.content.item.TrinketItems;
 import karashokleo.l2hostility.content.trait.common.ReflectTrait;
 import karashokleo.l2hostility.init.LHTags;
 import karashokleo.leobrary.damage.api.modify.DamageAccess;
+import karashokleo.leobrary.damage.api.modify.DamageModifier;
 import karashokleo.leobrary.damage.api.modify.DamagePhase;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.item.DynamicSpellBookItem;
@@ -77,7 +78,7 @@ public class MiscEvents
             if (immune && phase == DamagePhase.APPLY)
             {
                 // set to 0 or 0.1 ?
-                access.addModifier(originalDamage -> 0);
+                access.addModifier(DamageModifier.zero());
             }
 
             int threshold = gameRules.getInt(AllGameRules.DAMAGE_TRACKER_THRESHOLD);
@@ -212,7 +213,7 @@ public class MiscEvents
                 return;
             }
             float maxDamage = access.getEntity().getMaxHealth();
-            access.addModifier(originalDamage -> Math.min(originalDamage, maxDamage));
+            access.addModifier(DamageModifier.max(maxDamage));
         });
 
         // cancel offhand block placement interaction while holding spell scroll
@@ -308,7 +309,7 @@ public class MiscEvents
             float distance = entity.distanceTo(attacker);
             float ratio = AllStatusEffects.QUANTUM_FIELD.getReflectRatio(distance);
 
-            access.addModifier(originalDamage -> originalDamage * ratio);
+            access.addModifier(DamageModifier.multiply(ratio));
             float reflect = access.getOriginalDamage() * (1 - ratio);
             if (reflect <= 0)
             {

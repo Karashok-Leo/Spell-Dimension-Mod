@@ -5,6 +5,7 @@ import io.github.fabricators_of_create.porting_lib.entity.events.living.MobEffec
 import karashokleo.l2hostility.api.event.ModifyDispellImmuneFactorCallback;
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.l2hostility.init.LHTags;
+import karashokleo.leobrary.damage.api.modify.DamageModifier;
 import karashokleo.leobrary.damage.api.modify.DamagePhase;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
 import karashokleo.spell_dimension.content.enchantment.*;
@@ -110,7 +111,7 @@ public class EnchantmentEvents
             }
 
             float damageReduction = (float) (totalLevel * SpellResistanceEnchantment.MULTIPLIER * totalSpellPower);
-            damageAccess.addModifier(originalDamage -> Math.max(0, originalDamage - damageReduction));
+            damageAccess.addModifier(DamageModifier.reduce(damageReduction));
         });
 
         // Spell Leech
@@ -134,10 +135,10 @@ public class EnchantmentEvents
             }
 
             float amount = (float) (totalLevel * totalSpellPower);
-            float leechAmount = amount * SpellLeechEnchantment.HEAL_MULTIPLIER;
-            player.heal(leechAmount);
-            float damageLeech = amount * SpellLeechEnchantment.REDUCTION_MULTIPLIER;
-            damageAccess.addModifier(originalDamage -> Math.max(0, originalDamage - damageLeech));
+            float healAmount = amount * SpellLeechEnchantment.HEAL_MULTIPLIER;
+            player.heal(healAmount);
+            float reduceAmount = amount * SpellLeechEnchantment.REDUCTION_MULTIPLIER;
+            damageAccess.addModifier(DamageModifier.reduce(reduceAmount));
         });
 
         ServerSideRollEvents.PLAYER_START_ROLLING.register(AllEnchantments.DASH_RESISTANCE::onDash);
