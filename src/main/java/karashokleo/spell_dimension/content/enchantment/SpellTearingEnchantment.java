@@ -7,6 +7,8 @@ import net.minecraft.util.Formatting;
 
 public class SpellTearingEnchantment extends UnobtainableEnchantment
 {
+    public static final float MULTIPLIER = 0.2F;
+
     public SpellTearingEnchantment()
     {
         super(Rarity.UNCOMMON, EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND});

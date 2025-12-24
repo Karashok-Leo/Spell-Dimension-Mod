@@ -7,6 +7,8 @@ import net.minecraft.util.Formatting;
 
 public class SpellResistanceEnchantment extends UnobtainableEnchantment
 {
+    public static final float MULTIPLIER = 0.01F;
+
     public SpellResistanceEnchantment()
     {
         super(

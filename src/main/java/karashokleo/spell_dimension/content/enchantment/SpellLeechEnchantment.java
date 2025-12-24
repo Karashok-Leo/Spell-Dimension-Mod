@@ -7,6 +7,9 @@ import net.minecraft.util.Formatting;
 
 public class SpellLeechEnchantment extends UnobtainableEnchantment
 {
+    public static final float HEAL_MULTIPLIER = 0.01F;
+    public static final float REDUCTION_MULTIPLIER = 0.05F;
+
     public SpellLeechEnchantment()
     {
         super(Rarity.VERY_RARE, EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND});

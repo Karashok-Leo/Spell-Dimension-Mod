@@ -7,9 +7,7 @@ import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.l2hostility.init.LHTags;
 import karashokleo.leobrary.damage.api.modify.DamagePhase;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
-import karashokleo.spell_dimension.content.enchantment.EffectImmunityEnchantment;
-import karashokleo.spell_dimension.content.enchantment.SpellBladeAmplifyEnchantment;
-import karashokleo.spell_dimension.content.enchantment.SpellImpactEnchantment;
+import karashokleo.spell_dimension.content.enchantment.*;
 import karashokleo.spell_dimension.init.AllEnchantments;
 import karashokleo.spell_dimension.init.AllTags;
 import karashokleo.spell_dimension.util.SchoolUtil;
@@ -80,7 +78,7 @@ public class EnchantmentEvents
             if (source.getAttacker() instanceof LivingEntity living)
             {
                 int tearingLv = EnchantmentHelper.getEquipmentLevel(AllEnchantments.SPELL_TEARING, living);
-                float f = MathHelper.clamp(tearingLv * 0.2f, 0f, 1f);
+                float f = MathHelper.clamp(tearingLv * SpellTearingEnchantment.MULTIPLIER, 0f, 1f);
                 return factor * (1 - f);
             }
             return factor;
@@ -111,7 +109,7 @@ public class EnchantmentEvents
                 totalSpellPower += SpellPower.getSpellPower(school, player).baseValue();
             }
 
-            float damageReduction = (float) (totalLevel * 0.01 * totalSpellPower);
+            float damageReduction = (float) (totalLevel * SpellResistanceEnchantment.MULTIPLIER * totalSpellPower);
             damageAccess.addModifier(originalDamage -> Math.max(0, originalDamage - damageReduction));
         });
 
@@ -135,9 +133,11 @@ public class EnchantmentEvents
                 totalSpellPower += SpellPower.getSpellPower(school, player).baseValue();
             }
 
-            float damageLeech = (float) (totalLevel * 0.01 * totalSpellPower);
-            player.heal(damageLeech);
-            damageAccess.addModifier(originalDamage -> Math.max(0, originalDamage - damageLeech * 5));
+            float amount = (float) (totalLevel * totalSpellPower);
+            float leechAmount = amount * SpellLeechEnchantment.HEAL_MULTIPLIER;
+            player.heal(leechAmount);
+            float damageLeech = amount * SpellLeechEnchantment.REDUCTION_MULTIPLIER;
+            damageAccess.addModifier(originalDamage -> Math.max(0, originalDamage - damageLeech));
         });
 
         ServerSideRollEvents.PLAYER_START_ROLLING.register(AllEnchantments.DASH_RESISTANCE::onDash);

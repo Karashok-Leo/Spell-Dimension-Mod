@@ -76,16 +76,16 @@ public class AllEnchantments
             .register();
         SPELL_LEECH = new Entry<>("spell_leech", new SpellLeechEnchantment())
             .addEN()
-            .addENDesc("The spell damage you deal will be reduced by a certain percentage (0.01x spell power per level) and converted into health you recover.")
+            .addENDesc("The spell damage you deal will be reduced (%.2f × spell power per level) and converted into health you recover (%.2f × spell power per level).".formatted(SpellLeechEnchantment.REDUCTION_MULTIPLIER, SpellLeechEnchantment.HEAL_MULTIPLIER))
             .addZH("法术吸血")
-            .addZHDesc("你造成的法术伤害将按一定比例（每级0.01×法术强度）减少，转化为你回复的生命值。")
+            .addZHDesc("你造成的法术伤害减少一定数额（魔咒等级 × %.2f × 法术强度），部分转化为回复的生命值（魔咒等级 × %.2f × 法术强度）。".formatted(SpellLeechEnchantment.REDUCTION_MULTIPLIER, SpellLeechEnchantment.HEAL_MULTIPLIER))
             .addTag(AllTags.LOOTABLE)
             .register();
         SPELL_RESISTANCE = new Entry<>("spell_resistance", new SpellResistanceEnchantment())
             .addEN()
-            .addENDesc("Your spell power will help you resist some damage (0.01x spell power per level).")
+            .addENDesc("Your spell power will help you resist some damage (%.2f × spell power per level).".formatted(SpellResistanceEnchantment.MULTIPLIER))
             .addZH("魔力御体")
-            .addZHDesc("你的法术强度将会为你抵御部分伤害（每级0.01×法术强度）。")
+            .addZHDesc("你的法术强度将会为你抵御部分伤害（魔咒等级 × %.2f × 法术强度）。".formatted(SpellResistanceEnchantment.MULTIPLIER))
             .addTag(AllTags.LOOTABLE)
             .register();
         SPELL_MENDING = new Entry<>("spell_mending", new SpellMendingEnchantment())
@@ -97,9 +97,9 @@ public class AllEnchantments
             .register();
         SPELL_TEARING = new Entry<>("spell_tearing", new SpellTearingEnchantment())
             .addEN()
-            .addENDesc("Your spells can penetrate the target's Dispell trait. Restores 20% of the original damage per level.")
+            .addENDesc("Your spells can penetrate the target's Dispell trait. Restores %d%% of the original damage per level.".formatted((int) (SpellTearingEnchantment.MULTIPLIER * 100)))
             .addZH("法术穿透")
-            .addZHDesc("你的法术可以穿透目标的破魔词条。每级恢复原有伤害的20%。")
+            .addZHDesc("你的法术可以穿透目标的破魔词条。每级恢复原有伤害的%d%%。".formatted((int) (SpellTearingEnchantment.MULTIPLIER * 100)))
             .addTag(AllTags.LOOTABLE)
             .register();
         ANTI_ADAPTION = new Entry<>("anti_adaption", new AntiAdaptionEnchantment())
