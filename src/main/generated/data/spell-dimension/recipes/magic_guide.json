@@ -1,0 +1,12 @@
+{
+  "type": "patchouli:shapeless_book_recipe",
+  "book": "spell-dimension:magic_guide",
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "tag": "spell-dimension:essence/all"
+    }
+  ]
+}

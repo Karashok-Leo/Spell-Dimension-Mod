@@ -5,6 +5,7 @@ import karashokleo.fusion_smithing.item.FusionSmithingTemplateItem;
 import karashokleo.l2hostility.content.item.ComplementItems;
 import karashokleo.l2hostility.content.item.ConsumableItems;
 import karashokleo.l2hostility.content.item.MiscItems;
+import karashokleo.leobrary.compat.patchouli.PatchouliHelper;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.item.armor.ArmorSet;
 import karashokleo.spell_dimension.content.item.essence.EnchantedEssenceItem;
@@ -93,6 +94,12 @@ public class SDRecipeProvider extends FabricRecipeProvider
                 FabricRecipeProvider.conditionsFromItem(AllItems.ENCHANTED_ESSENCE)
             )
             .offerTo(exporter);
+
+        // Magic Guide
+        PatchouliHelper.shapeless(AllItems.MAGIC_GUIDE, Items.BOOK)
+            .input(Items.BOOK)
+            .input(Ingredient.fromTag(AllTags.ESSENCE_ALL))
+            .offerTo(exporter, AllItems.MAGIC_GUIDE);
 
         // Empty Quest Scroll
         ShapelessRecipeJsonBuilder
