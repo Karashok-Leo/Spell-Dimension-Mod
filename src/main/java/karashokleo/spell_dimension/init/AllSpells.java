@@ -75,6 +75,7 @@ public class AllSpells
     // Soul
     public static final Identifier POSSESS = fromBinding(SpellDimension.modLoc("possess"));
     public static final Identifier RECALL = fromBinding(SpellDimension.modLoc("recall"));
+    public static final Identifier REQUIEM = fromBinding(SpellDimension.modLoc("requiem"));
 
     /**
      * Infusion spells
@@ -197,9 +198,10 @@ public class AllSpells
     public static final Identifier SOUL_MARK = fromCrafting("soul_mark").withTier(0).build();
     // Tier 2
     public static final Identifier SOUL_DUET = fromCrafting("soul_duet").withTier(1).setPassive().build();
-    public static final Identifier SOUL_NET = fromCrafting("soul_net").withTier(1).setPassive().build();
+    public static final Identifier PHANTOM_SYNDICATE = fromCrafting("phantom_syndicate").withTier(1).setPassive().build();
     public static final Identifier SOUL_ECHO = fromCrafting("soul_echo").withTier(1).build();
     public static final Identifier SOUL_BURST = fromCrafting("soul_burst").withTier(1).build();
+    public static final Identifier SOUL_SACRIFICE = fromCrafting("soul_sacrifice").withTier(1).build();
     public static final Identifier ETHEREAL_EVASION = fromCrafting("ethereal_evasion").withTier(1).build();
     // Tier 3
 
@@ -233,6 +235,7 @@ public class AllSpells
         registerImpactHandler(SOUL_MARK, SoulMarkSpell::handle);
         registerImpactHandler(SOUL_ECHO, SoulEchoSpell::handle);
         registerImpactHandler(SOUL_BURST, SoulBurstSpell::handle);
+        registerImpactHandler(SOUL_SACRIFICE, SoulSacrificeSpell::handle);
 
         registerImpactHandler(SHIFT, ShiftSpell::handle);
         registerImpactHandler(CONVERGE, ConvergeSpell::handle);

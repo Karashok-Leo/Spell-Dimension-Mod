@@ -246,7 +246,7 @@ public class MiscEvents
                 player.getStackInHand(hand).isOf(AllItems.DEBUG_STAFF))
             {
                 SchoolUtil.getLivingSchools(player).stream().findFirst().ifPresent(school ->
-                    entity.damage(SpellDamageSource.player(school, player), 999999));
+                    entity.damage(SpellDamageSource.create(school, player), 999999));
             }
             return ActionResult.PASS;
         });

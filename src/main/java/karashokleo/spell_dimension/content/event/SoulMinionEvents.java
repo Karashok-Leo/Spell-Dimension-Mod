@@ -34,6 +34,9 @@ import java.util.List;
 
 public class SoulMinionEvents
 {
+
+    public static final float REQUIEM_FACTOR = 0.15f;
+
     public static void init()
     {
         // player death stops soul control
@@ -97,13 +100,22 @@ public class SoulMinionEvents
                 return;
             }
 
-            // extra soul magic damage
-            float factor = 0.15f;
-
             // passive
             SpellContainer spellContainer = SpellContainerHelper.getEquipped(owner.getMainHandStack(), owner);
-            if (spellContainer != null &&
-                spellContainer.spell_ids.contains(AllSpells.SOUL_DUET.toString()))
+
+            if (spellContainer == null)
+            {
+                return;
+            }
+
+            if (!spellContainer.spell_ids.contains(AllSpells.REQUIEM.toString()))
+            {
+                return;
+            }
+
+            // extra soul magic damage
+            float factor = REQUIEM_FACTOR;
+            if (spellContainer.spell_ids.contains(AllSpells.SOUL_DUET.toString()))
             {
                 factor *= 2;
             }
@@ -219,7 +231,7 @@ public class SoulMinionEvents
             // passive
             SpellContainer spellContainer = SpellContainerHelper.getEquipped(owner.getMainHandStack(), owner);
             if (spellContainer == null ||
-                !spellContainer.spell_ids.contains(AllSpells.SOUL_NET.toString()))
+                !spellContainer.spell_ids.contains(AllSpells.PHANTOM_SYNDICATE.toString()))
             {
                 return;
             }
@@ -262,7 +274,7 @@ public class SoulMinionEvents
             // passive
             SpellContainer spellContainer = SpellContainerHelper.getEquipped(owner.getMainHandStack(), owner);
             if (spellContainer == null ||
-                !spellContainer.spell_ids.contains(AllSpells.SOUL_NET.toString()))
+                !spellContainer.spell_ids.contains(AllSpells.PHANTOM_SYNDICATE.toString()))
             {
                 return true;
             }

@@ -7,6 +7,7 @@ import karashokleo.spell_dimension.content.buff.Nucleus;
 import karashokleo.spell_dimension.content.effect.*;
 import karashokleo.spell_dimension.content.entity.BlackHoleEntity;
 import karashokleo.spell_dimension.content.spell.RandomEffectSpell;
+import karashokleo.spell_dimension.content.spell.SoulSacrificeSpell;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 
@@ -392,6 +393,12 @@ public enum SpellTexts
         "[Can only be cast while possessing a soul minion] Teleport the possessed soul minion near your body and release the possession.",
         "[仅限附体灵仆时施放] 附体灵仆传送至本体附近，并解除附体状态。"
     ),
+    REQUIEM(
+        "Requiem",
+        "安魂曲",
+        "[Passive] When a soul minion deals damage, it adds an instance of soul spell damage from its owner.",
+        "[被动] 灵仆造成伤害时会附加一次来自于其主人的灵魂法术伤害。"
+    ),
     SOUL_SWAP(
         "Soul Swap",
         "元魂易位",
@@ -413,12 +420,12 @@ public enum SpellTexts
     SOUL_DUET(
         "Soul Duet",
         "灵魂二重奏",
-        "[Passive] Doubles the additional soul damage dealt by your soul minions.",
-        "[被动] 灵仆造成伤害时附加的灵魂法术伤害翻倍。"
+        "[Passive] Doubles the soul spell damage dealt by Requiem.",
+        "[被动] 安魂曲造成的灵魂法术伤害翻倍。"
     ),
-    SOUL_NET(
-        "Soul Net",
-        "魂脉网络",
+    PHANTOM_SYNDICATE(
+        "Phantom Syndicate",
+        "魅影辛迪加",
         "[Passive] Damage or healing effects received by soul minions are shared among all soul minions.",
         "[被动] 灵仆受到的伤害或治愈系效果将被分摊到所有灵仆身上。"
     ),
@@ -433,6 +440,12 @@ public enum SpellTexts
         "魂爆",
         "When cast on your soul minion, sacrifice and detonate it, dealing ranged soul damage based on the soul minion's health.",
         "对灵仆施放时，献祭并引爆选定的灵仆，根据灵仆生命值造成范围灵魂伤害。"
+    ),
+    SOUL_SACRIFICE(
+        "Soul Sacrifice",
+        "灵献",
+        "When cast on your soul minion, sacrifice %d%% of its max health to gain a set of loot.".formatted((int) Math.floor(SoulSacrificeSpell.HEALTH_RATIO * 100)),
+        "对灵仆施放时，献祭选定灵仆的%d%%最大生命值，获得一份战利品。".formatted((int) Math.floor(SoulSacrificeSpell.HEALTH_RATIO * 100))
     ),
     ETHEREAL_EVASION(
         "Ethereal Evasion",
