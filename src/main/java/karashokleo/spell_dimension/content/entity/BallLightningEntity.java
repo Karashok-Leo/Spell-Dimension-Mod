@@ -2,7 +2,6 @@ package karashokleo.spell_dimension.content.entity;
 
 import karashokleo.l2hostility.util.raytrace.RayTraceUtil;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
-import karashokleo.spell_dimension.config.SpellConfig;
 import karashokleo.spell_dimension.init.AllEntities;
 import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.util.DamageUtil;
@@ -44,6 +43,10 @@ import java.util.List;
 
 public class BallLightningEntity extends ProjectileEntity
 {
+    public static final float DAMAGE_FACTOR = 0.8F;
+    public static final int LIFESPAN = 200;
+    public static final int LIFESPAN_INCREMENT = 100;
+
     public static final ParticleBatch[] AMBIENT = {
         new ParticleBatch(
             "spell_engine:electric_arc_a",
@@ -97,7 +100,7 @@ public class BallLightningEntity extends ProjectileEntity
         super(entityType, world);
         this.setNoGravity(true);
         this.power = 1;
-        this.lifespan = SpellConfig.BALL_LIGHTNING_CONFIG.lifespan();
+        this.lifespan = LIFESPAN;
     }
 
     public SpellInfo getSpellInfo()
@@ -113,7 +116,7 @@ public class BallLightningEntity extends ProjectileEntity
     {
         if (spells.contains(AllSpells.CLOSED_LOOP.toString()))
         {
-            this.lifespan += SpellConfig.BALL_LIGHTNING_CONFIG.lifespanIncrement();
+            this.lifespan += LIFESPAN_INCREMENT;
         }
     }
 
@@ -212,7 +215,7 @@ public class BallLightningEntity extends ProjectileEntity
         {
             SpellImpactEvents.POST.invoker().invoke(world, caster, List.of(target), getSpellInfo());
 
-            float damage = (float) DamageUtil.calculateDamage(caster, SpellSchools.LIGHTNING, this.power * SpellConfig.BALL_LIGHTNING_CONFIG.damageFactor());
+            float damage = (float) DamageUtil.calculateDamage(caster, SpellSchools.LIGHTNING, this.power * DAMAGE_FACTOR);
             DamageUtil.spellDamage(target, SpellSchools.LIGHTNING, caster, damage, false);
 
             ParticleHelper.sendBatches(target, ChainLightningEntity.HIT_PARTICLES);

@@ -1,7 +1,6 @@
 package karashokleo.spell_dimension.content.spell;
 
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
-import karashokleo.spell_dimension.config.SpellConfig;
 import karashokleo.spell_dimension.content.entity.BallLightningEntity;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllSpells;
@@ -45,11 +44,11 @@ public class BallLightningSpell
     {
         if (spells.contains(AllSpells.SURGE.toString()))
         {
-            ballLightning.power *= SpellConfig.POWER_PASSIVE_CONFIG.surge();
+            ballLightning.power *= ChainLightningSpell.SURGE_POWER_MULTIPLIER;
         }
         if (spells.contains(AllSpells.ARCLIGHT.toString()))
         {
-            ballLightning.power *= SpellConfig.POWER_PASSIVE_CONFIG.arclight();
+            ballLightning.power *= ChainLightningSpell.ARCLIGHT_POWER_MULTIPLIER;
         }
     }
 }

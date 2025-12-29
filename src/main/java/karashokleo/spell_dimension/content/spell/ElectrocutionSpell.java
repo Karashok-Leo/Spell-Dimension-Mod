@@ -2,7 +2,6 @@ package karashokleo.spell_dimension.content.spell;
 
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDamageEvent;
 import karashokleo.spell_dimension.api.buff.Buff;
-import karashokleo.spell_dimension.config.SpellConfig;
 import karashokleo.spell_dimension.content.buff.Electrocution;
 import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.util.ImpactUtil;
@@ -47,7 +46,7 @@ public class ElectrocutionSpell
             if (electrocution.get().shouldExecute())
             {
                 Buff.remove(entity, Electrocution.TYPE);
-                event.setAmount(event.getAmount() * SpellConfig.ELECTROCUTION_CONFIG.damageFactor());
+                event.setAmount(event.getAmount() * Electrocution.DAMAGE_FACTOR);
             }
         } else
         {

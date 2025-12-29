@@ -2,7 +2,6 @@ package karashokleo.spell_dimension.content.entity;
 
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
-import karashokleo.spell_dimension.config.SpellConfig;
 import karashokleo.spell_dimension.content.particle.ZapParticleOption;
 import karashokleo.spell_dimension.init.AllDamageStates;
 import karashokleo.spell_dimension.init.AllEntities;
@@ -39,6 +38,11 @@ import java.util.List;
  */
 public class ChainLightningEntity extends ProjectileEntity
 {
+    public static final float DAMAGE_FACTOR = 0.2F;
+    public static final int LIFESPAN = 20;
+    public static final int CHAIN_STEP = 1;
+    public static final float RANGE = 3F;
+
     public static final ParticleBatch[] HIT_PARTICLES = {
         new ParticleBatch(
             "spell_engine:electric_arc_a",
@@ -98,9 +102,9 @@ public class ChainLightningEntity extends ProjectileEntity
         this.noClip = true;
         // default settings
         this.power = 1;
-        this.lifespan = SpellConfig.CHAIN_LIGHTNING_CONFIG.lifespan();
-        this.chainStep = SpellConfig.CHAIN_LIGHTNING_CONFIG.chainStep();
-        this.range = SpellConfig.CHAIN_LIGHTNING_CONFIG.range();
+        this.lifespan = LIFESPAN;
+        this.chainStep = CHAIN_STEP;
+        this.range = RANGE;
         this.canPenetrate = false;
     }
 
@@ -209,7 +213,7 @@ public class ChainLightningEntity extends ProjectileEntity
 
     protected void applyDamage(LivingEntity caster, LivingEntity target)
     {
-        float damage = (float) DamageUtil.calculateDamage(caster, SpellSchools.LIGHTNING, power * SpellConfig.CHAIN_LIGHTNING_CONFIG.damageFactor());
+        float damage = (float) DamageUtil.calculateDamage(caster, SpellSchools.LIGHTNING, power * DAMAGE_FACTOR);
         DamageSource source = SpellDamageSource.create(SpellSchools.LIGHTNING, caster);
         if (TrinketCompat.hasItemInTrinket(caster, AllItems.SUPERCONDUCTOR))
         {

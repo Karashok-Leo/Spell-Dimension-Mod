@@ -1,7 +1,6 @@
 package karashokleo.spell_dimension.content.spell;
 
 import com.mojang.datafixers.util.Either;
-import karashokleo.spell_dimension.config.SpellConfig;
 import karashokleo.spell_dimension.content.entity.ChainLightningEntity;
 import karashokleo.spell_dimension.content.particle.ZapParticleOption;
 import karashokleo.spell_dimension.init.AllSpells;
@@ -21,6 +20,13 @@ import java.util.Optional;
 
 public class ChainLightningSpell
 {
+    public static final int SURGE_POWER_MULTIPLIER = 2;
+    public static final int ARCLIGHT_POWER_MULTIPLIER = 2;
+    public static final int STEADY_CURRENT_LIFESPAN_MULTIPLIER = 2;
+    public static final int CONSTANT_CURRENT_LIFESPAN_MULTIPLIER = 4;
+    public static final int FISSION_CHAIN_STEP_BONUS = 2;
+    public static final int RESONANCE_RANGE_BONUS = 3;
+
     public static void spawn(World world, LivingEntity caster, LivingEntity living)
     {
         ChainLightningEntity chainLightning = new ChainLightningEntity(world, caster, living);
@@ -76,11 +82,11 @@ public class ChainLightningSpell
 
         if (spells.contains(AllSpells.SURGE.toString()))
         {
-            power *= SpellConfig.POWER_PASSIVE_CONFIG.surge();
+            power *= SURGE_POWER_MULTIPLIER;
         }
         if (spells.contains(AllSpells.ARCLIGHT.toString()))
         {
-            power *= SpellConfig.POWER_PASSIVE_CONFIG.arclight();
+            power *= ARCLIGHT_POWER_MULTIPLIER;
         }
 
         Vec3d vector = caster.getRotationVector();
@@ -104,27 +110,27 @@ public class ChainLightningSpell
     {
         if (spells.contains(AllSpells.SURGE.toString()))
         {
-            chainLightning.power *= SpellConfig.POWER_PASSIVE_CONFIG.surge();
+            chainLightning.power *= SURGE_POWER_MULTIPLIER;
         }
         if (spells.contains(AllSpells.ARCLIGHT.toString()))
         {
-            chainLightning.power *= SpellConfig.POWER_PASSIVE_CONFIG.arclight();
+            chainLightning.power *= ARCLIGHT_POWER_MULTIPLIER;
         }
         if (spells.contains(AllSpells.STEADY_CURRENT.toString()))
         {
-            chainLightning.lifespan *= SpellConfig.CHAIN_LIGHTNING_PASSIVE_CONFIG.steadyCurrentLifespan();
+            chainLightning.lifespan *= STEADY_CURRENT_LIFESPAN_MULTIPLIER;
         }
         if (spells.contains(AllSpells.CONSTANT_CURRENT.toString()))
         {
-            chainLightning.lifespan *= SpellConfig.CHAIN_LIGHTNING_PASSIVE_CONFIG.constantCurrentLifespan();
+            chainLightning.lifespan *= CONSTANT_CURRENT_LIFESPAN_MULTIPLIER;
         }
         if (spells.contains(AllSpells.FISSION.toString()))
         {
-            chainLightning.chainStep += SpellConfig.CHAIN_LIGHTNING_PASSIVE_CONFIG.fissionChainStep();
+            chainLightning.chainStep += FISSION_CHAIN_STEP_BONUS;
         }
         if (spells.contains(AllSpells.RESONANCE.toString()))
         {
-            chainLightning.range += SpellConfig.CHAIN_LIGHTNING_PASSIVE_CONFIG.resonanceRange();
+            chainLightning.range += RESONANCE_RANGE_BONUS;
         }
         if (spells.contains(AllSpells.BREAKDOWN.toString()))
         {

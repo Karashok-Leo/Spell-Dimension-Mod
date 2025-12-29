@@ -6,7 +6,6 @@ import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.api.buff.Buff;
 import karashokleo.spell_dimension.api.buff.BuffType;
-import karashokleo.spell_dimension.config.SpellConfig;
 import karashokleo.spell_dimension.content.item.trinket.endgame.GlacialNuclearEraItem;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.util.AttributeUtil;
@@ -30,6 +29,8 @@ import java.util.UUID;
 
 public class Nucleus implements Buff
 {
+    public static final float DAMAGE_FACTOR = 1.5F;
+
     public static final Codec<Nucleus> CODEC = RecordCodecBuilder.create(
         ins -> ins.group(
             Codecs.NONNEGATIVE_INT.fieldOf("duration").forGetter(Nucleus::getDuration)
@@ -128,7 +129,7 @@ public class Nucleus implements Buff
         SpellInfo icicleInfo = getOrCreateSpellInfo(caster);
 
         //Damage
-        float damage = (float) DamageUtil.calculateDamage(caster, SpellSchools.FROST, SpellConfig.NUCLEUS_FACTOR);
+        float damage = (float) DamageUtil.calculateDamage(caster, SpellSchools.FROST, DAMAGE_FACTOR);
         DamageUtil.spellDamage(source, SpellSchools.FROST, caster, damage, false);
 
         //Adjust amplifier

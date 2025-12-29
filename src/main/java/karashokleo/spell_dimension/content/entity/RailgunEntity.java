@@ -1,6 +1,5 @@
 package karashokleo.spell_dimension.content.entity;
 
-import karashokleo.spell_dimension.config.SpellConfig;
 import karashokleo.spell_dimension.init.AllEntities;
 import karashokleo.spell_dimension.util.DamageUtil;
 import karashokleo.spell_dimension.util.ImpactUtil;
@@ -29,6 +28,9 @@ import java.util.List;
 
 public class RailgunEntity extends ProjectileEntity
 {
+    private static final int LENGTH = 32;
+    private static final int RADIUS = 2;
+
     public boolean fired = false;
     public int firedAge = 0;
     public Vec3d endPos;
@@ -87,7 +89,7 @@ public class RailgunEntity extends ProjectileEntity
         this.fired = true;
         this.firedAge = this.age;
 
-        this.endPos = this.getPos().add(this.getVelocity().normalize().multiply(SpellConfig.RAILGUN_CONFIG.length()));
+        this.endPos = this.getPos().add(this.getVelocity().normalize().multiply(LENGTH));
 
         World world = getWorld();
         if (world.isClient())
@@ -103,7 +105,7 @@ public class RailgunEntity extends ProjectileEntity
         {
             BlockPos minPos = BlockPos.ofFloored(this.getPos());
             BlockPos maxPos = BlockPos.ofFloored(this.endPos);
-            BlockBox blockBox = BlockBox.create(minPos, maxPos).expand(SpellConfig.RAILGUN_CONFIG.radius());
+            BlockBox blockBox = BlockBox.create(minPos, maxPos).expand(RADIUS);
             BlockPos.stream(blockBox).forEach(pos ->
             {
                 Vec3d line = this.endPos.subtract(this.getPos());
@@ -122,7 +124,7 @@ public class RailgunEntity extends ProjectileEntity
         // apply damage
         if (this.getOwner() instanceof LivingEntity caster)
         {
-            List<LivingEntity> hit = ImpactUtil.getLivingsNearLineSegment(world, this.getPos(), this.endPos, SpellConfig.RAILGUN_CONFIG.radius() / 2F);
+            List<LivingEntity> hit = ImpactUtil.getLivingsNearLineSegment(world, this.getPos(), this.endPos, RADIUS / 2F);
             for (LivingEntity target : hit)
             {
                 if (RelationUtil.isAlly(caster, target))

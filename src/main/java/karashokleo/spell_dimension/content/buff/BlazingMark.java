@@ -6,7 +6,6 @@ import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDa
 import karashokleo.l2hostility.util.EffectHelper;
 import karashokleo.spell_dimension.api.buff.Buff;
 import karashokleo.spell_dimension.api.buff.BuffType;
-import karashokleo.spell_dimension.config.SpellConfig;
 import karashokleo.spell_dimension.init.AllStatusEffects;
 import karashokleo.spell_dimension.util.DamageUtil;
 import karashokleo.spell_dimension.util.ImpactUtil;
@@ -26,6 +25,11 @@ import org.jetbrains.annotations.Nullable;
 
 public class BlazingMark implements Buff
 {
+    private static final int TOTAL_DURATION = 200;
+    private static final int TRIGGER_DURATION = 100;
+    private static final float MAX_DAMAGE_RATIO = 0.5F;
+    private static final float RE_DAMAGE_RATIO = 0.5F;
+
     public static String getDesc(boolean en)
     {
         return (en ?
@@ -87,7 +91,7 @@ public class BlazingMark implements Buff
     public BlazingMark()
     {
         this(
-            SpellConfig.BLAZING_MARK_CONFIG.totalDuration(),
+            TOTAL_DURATION,
             0
         );
     }
@@ -101,7 +105,7 @@ public class BlazingMark implements Buff
             return;
         }
         --duration;
-        if (duration == SpellConfig.BLAZING_MARK_CONFIG.triggerDuration())
+        if (duration == TRIGGER_DURATION)
         {
             trigger(entity, source, damage);
         }
@@ -131,7 +135,7 @@ public class BlazingMark implements Buff
         }
         Buff.get(entity, TYPE).ifPresentOrElse(blazingMark ->
         {
-            if (blazingMark.getDuration() > SpellConfig.BLAZING_MARK_CONFIG.triggerDuration())
+            if (blazingMark.getDuration() > TRIGGER_DURATION)
             {
                 blazingMark.accumulateDamage(attacker, event.getAmount());
             }
@@ -141,21 +145,21 @@ public class BlazingMark implements Buff
     public void accumulateDamage(LivingEntity caster, float amount)
     {
         double baseValue = SpellPower.getSpellPower(SpellSchools.FIRE, caster).baseValue();
-        this.damage = Math.min(this.damage + amount, (float) baseValue * SpellConfig.BLAZING_MARK_CONFIG.maxDamageRatio());
+        this.damage = Math.min(this.damage + amount, (float) baseValue * MAX_DAMAGE_RATIO);
     }
 
     public static void trigger(LivingEntity source, LivingEntity caster, float damage)
     {
         ParticleHelper.sendBatches(source, PARTICLES);
-        DamageUtil.spellDamage(source, SpellSchools.FIRE, caster, damage * SpellConfig.BLAZING_MARK_CONFIG.reDamageRatio(), false);
+        DamageUtil.spellDamage(source, SpellSchools.FIRE, caster, damage * RE_DAMAGE_RATIO, false);
         EffectHelper.forceAddEffectWithEvent(source, new StatusEffectInstance(StatusEffects.WEAKNESS, 100, 2, false, false), caster);
     }
 
     private void particle(LivingEntity owner)
     {
         float f = Math.min(owner.getWidth(), owner.getHeight()) * 0.5F;
-        int color = duration >= SpellConfig.BLAZING_MARK_CONFIG.triggerDuration() ?
-            0xffff00 - 0x100 * (int) (0xff * damage / SpellConfig.BLAZING_MARK_CONFIG.maxDamageRatio()) :
+        int color = duration >= TRIGGER_DURATION ?
+            0xffff00 - 0x100 * (int) (0xff * damage / MAX_DAMAGE_RATIO) :
             0x888888;
         Vec3d pos = owner.getPos()
             .add(0, owner.getHeight() + f, 0).addRandom(owner.getRandom(), 0.5F)
@@ -179,7 +183,7 @@ public class BlazingMark implements Buff
 
     public static float getTriggerTime()
     {
-        return (SpellConfig.BLAZING_MARK_CONFIG.totalDuration() - SpellConfig.BLAZING_MARK_CONFIG.triggerDuration()) / 20.0F;
+        return (TOTAL_DURATION - TRIGGER_DURATION) / 20.0F;
     }
 
     public int getDuration()

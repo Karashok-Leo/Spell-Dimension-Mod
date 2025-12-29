@@ -1,7 +1,6 @@
 package karashokleo.spell_dimension.content.entity;
 
 import karashokleo.spell_dimension.api.SpellImpactEvents;
-import karashokleo.spell_dimension.config.SpellConfig;
 import karashokleo.spell_dimension.init.AllEntities;
 import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.util.DamageUtil;
@@ -36,6 +35,7 @@ public class BlackHoleEntity extends Entity implements Ownable
     public static final float MIN_RADIUS = 2f;
     public static final int LIFESPAN = 20 * 16;
     public static final int IDLE_SOUND_INTERVAL = 60;
+    public static final float DAMAGE_FACTOR = 0.2F;
 
     private static final TrackedData<Float> RADIUS = DataTracker.registerData(BlackHoleEntity.class, TrackedDataHandlerRegistry.FLOAT);
 
@@ -216,7 +216,7 @@ public class BlackHoleEntity extends Entity implements Ownable
         Vec3d center = this.getPos();
         LivingEntity caster = this.getOwner() instanceof LivingEntity living ? living : null;
 
-        float damage = caster == null ? 0 : (float) DamageUtil.calculateDamage(caster, SpellSchools.ARCANE, SpellConfig.BLACK_HOLE_FACTOR);
+        float damage = caster == null ? 0 : (float) DamageUtil.calculateDamage(caster, SpellSchools.ARCANE, DAMAGE_FACTOR);
 
         this.calculateCandidateTargetsMap(caster);
         List<Entity> targets = candidateTargets.keySet().stream().toList();

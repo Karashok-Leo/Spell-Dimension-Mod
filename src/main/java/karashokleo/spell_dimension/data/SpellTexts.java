@@ -1,11 +1,15 @@
 package karashokleo.spell_dimension.data;
 
 import karashokleo.spell_dimension.SpellDimension;
-import karashokleo.spell_dimension.config.SpellConfig;
 import karashokleo.spell_dimension.content.buff.BlazingMark;
+import karashokleo.spell_dimension.content.buff.Electrocution;
 import karashokleo.spell_dimension.content.buff.Nucleus;
 import karashokleo.spell_dimension.content.effect.*;
+import karashokleo.spell_dimension.content.entity.BallLightningEntity;
 import karashokleo.spell_dimension.content.entity.BlackHoleEntity;
+import karashokleo.spell_dimension.content.entity.ChainLightningEntity;
+import karashokleo.spell_dimension.content.spell.ChainLightningSpell;
+import karashokleo.spell_dimension.content.spell.ConvergeSpell;
 import karashokleo.spell_dimension.content.spell.RandomEffectSpell;
 import karashokleo.spell_dimension.content.spell.SoulSacrificeSpell;
 import net.minecraft.text.MutableText;
@@ -66,14 +70,14 @@ public enum SpellTexts
     CONVERGE(
         "Converge",
         "汇聚",
-        "Launch a spell to explode at the landing point and make enemies converged. Deal %.1fx spell power damage.".formatted(SpellConfig.CONVERGE_FACTOR),
-        "发射一道咒语，在落点处爆炸并汇聚敌人。造成%.1f倍法术强度的伤害。".formatted(SpellConfig.CONVERGE_FACTOR)
+        "Launch a spell to explode at the landing point and make enemies converged. Deal %.1fx spell power damage.".formatted(ConvergeSpell.DAMAGE_FACTOR),
+        "发射一道咒语，在落点处爆炸并汇聚敌人。造成%.1f倍法术强度的伤害。".formatted(ConvergeSpell.DAMAGE_FACTOR)
     ),
     BLACK_HOLE(
         "Black Hole",
         "黑洞",
-        "Create a Black Hole that continuously attracts surrounding creatures and deals damage, disappearing after %d seconds. The higher your spell power, the larger the radius of the black hole. Each attraction deals %.1fx spell power damage.".formatted(BlackHoleEntity.LIFESPAN / 20, SpellConfig.BLACK_HOLE_FACTOR),
-        "制造一个黑洞，持续吸引周围的生物并造成伤害，%d秒后消失。法术强度越高，黑洞半径越大。每次吸引造成%.1f倍法术强度的伤害。".formatted(BlackHoleEntity.LIFESPAN / 20, SpellConfig.BLACK_HOLE_FACTOR)
+        "Create a Black Hole that continuously attracts surrounding creatures and deals damage, disappearing after %d seconds. The higher your spell power, the larger the radius of the black hole. Each attraction deals %.1fx spell power damage.".formatted(BlackHoleEntity.LIFESPAN / 20, BlackHoleEntity.DAMAGE_FACTOR),
+        "制造一个黑洞，持续吸引周围的生物并造成伤害，%d秒后消失。法术强度越高，黑洞半径越大。每次吸引造成%.1f倍法术强度的伤害。".formatted(BlackHoleEntity.LIFESPAN / 20, BlackHoleEntity.DAMAGE_FACTOR)
     ),
     PHASE(
         "Phase",
@@ -132,8 +136,8 @@ public enum SpellTexts
     ICY_NUCLEUS(
         "Icy Nucleus",
         "冰核",
-        "Freeze the target's heart into a ice nucleus that explodes in %s seconds, deals %.1fx spell power damage and shoots icicles into the surrounding area. ".formatted(Nucleus.TOTAL_DURATION / 20F, SpellConfig.NUCLEUS_FACTOR),
-        "将敌人的心脏化作一个冰核，%s秒后爆炸，造成%.1f倍法术强度的伤害并向周围射出冰刺。".formatted(Nucleus.TOTAL_DURATION / 20F, SpellConfig.NUCLEUS_FACTOR)
+        "Freeze the target's heart into a ice nucleus that explodes in %s seconds, deals %.1fx spell power damage and shoots icicles into the surrounding area. ".formatted(Nucleus.TOTAL_DURATION / 20F, Nucleus.DAMAGE_FACTOR),
+        "将敌人的心脏化作一个冰核，%s秒后爆炸，造成%.1f倍法术强度的伤害并向周围射出冰刺。".formatted(Nucleus.TOTAL_DURATION / 20F, Nucleus.DAMAGE_FACTOR)
     ),
     ICICLE(
         "Icicle",
@@ -265,35 +269,35 @@ public enum SpellTexts
         "Chain Lightning",
         "连锁闪电",
         "Discharges a chain of lightning with a default damage multiplier of %d%%%%, a duration of %d seconds, a number of %d per chain, and a chain range of %.1f blocks.".formatted(
-            Math.round(SpellConfig.CHAIN_LIGHTNING_CONFIG.damageFactor() * 100),
-            SpellConfig.CHAIN_LIGHTNING_CONFIG.lifespan() / 20,
-            SpellConfig.CHAIN_LIGHTNING_CONFIG.chainStep(),
-            SpellConfig.CHAIN_LIGHTNING_CONFIG.range()
+            Math.round(ChainLightningEntity.DAMAGE_FACTOR * 100),
+            ChainLightningEntity.LIFESPAN / 20,
+            ChainLightningEntity.CHAIN_STEP,
+            ChainLightningEntity.RANGE
         ),
         "释放连锁闪电，默认伤害倍率%d%%%%，存续时长%d秒，每次连锁数量为%d，连锁范围%.1f格。".formatted(
-            Math.round(SpellConfig.CHAIN_LIGHTNING_CONFIG.damageFactor() * 100),
-            SpellConfig.CHAIN_LIGHTNING_CONFIG.lifespan() / 20,
-            SpellConfig.CHAIN_LIGHTNING_CONFIG.chainStep(),
-            SpellConfig.CHAIN_LIGHTNING_CONFIG.range()
+            Math.round(ChainLightningEntity.DAMAGE_FACTOR * 100),
+            ChainLightningEntity.LIFESPAN / 20,
+            ChainLightningEntity.CHAIN_STEP,
+            ChainLightningEntity.RANGE
         )
     ),
     STEADY_CURRENT(
         "Steady Current",
         "稳流",
-        "[Passive] Chain Lightning duration ×%d".formatted(SpellConfig.CHAIN_LIGHTNING_PASSIVE_CONFIG.steadyCurrentLifespan()),
-        "[被动] 连锁闪电存续时间 ×%d".formatted(SpellConfig.CHAIN_LIGHTNING_PASSIVE_CONFIG.steadyCurrentLifespan())
+        "[Passive] Chain Lightning duration ×%d".formatted(ChainLightningSpell.STEADY_CURRENT_LIFESPAN_MULTIPLIER),
+        "[被动] 连锁闪电存续时间 ×%d".formatted(ChainLightningSpell.STEADY_CURRENT_LIFESPAN_MULTIPLIER)
     ),
     FISSION(
         "Fission",
         "裂变",
-        "[Passive] Chain Lightning number per chain +%d".formatted(SpellConfig.CHAIN_LIGHTNING_PASSIVE_CONFIG.fissionChainStep()),
-        "[被动] 连锁闪电每次连锁数量 +%d".formatted(SpellConfig.CHAIN_LIGHTNING_PASSIVE_CONFIG.fissionChainStep())
+        "[Passive] Chain Lightning number per chain +%d".formatted(ChainLightningSpell.FISSION_CHAIN_STEP_BONUS),
+        "[被动] 连锁闪电每次连锁数量 +%d".formatted(ChainLightningSpell.FISSION_CHAIN_STEP_BONUS)
     ),
     RESONANCE(
         "Resonance",
         "谐振",
-        "[Passive] Chain Lightning range per chain +%d".formatted(SpellConfig.CHAIN_LIGHTNING_PASSIVE_CONFIG.resonanceRange()),
-        "[被动] 连锁闪电每次连锁范围 +%d".formatted(SpellConfig.CHAIN_LIGHTNING_PASSIVE_CONFIG.resonanceRange())
+        "[Passive] Chain Lightning range per chain +%d".formatted(ChainLightningSpell.RESONANCE_RANGE_BONUS),
+        "[被动] 连锁闪电每次连锁范围 +%d".formatted(ChainLightningSpell.RESONANCE_RANGE_BONUS)
     ),
     BREAKDOWN(
         "Breakdown",
@@ -304,45 +308,50 @@ public enum SpellTexts
     SURGE(
         "Surge",
         "涌动",
-        "[Passive] Chain Lightning/Ball Lightning damage multiplier ×%d".formatted(SpellConfig.POWER_PASSIVE_CONFIG.surge()),
-        "[被动] 连锁闪电/球状闪电伤害倍率 ×%d".formatted(SpellConfig.POWER_PASSIVE_CONFIG.surge())
+        "[Passive] Chain Lightning/Ball Lightning damage multiplier ×%d".formatted(ChainLightningSpell.SURGE_POWER_MULTIPLIER),
+        "[被动] 连锁闪电/球状闪电伤害倍率 ×%d".formatted(ChainLightningSpell.SURGE_POWER_MULTIPLIER)
     ),
     ARCLIGHT(
         "Arclight",
         "弧光",
-        "[Passive] Chain Lightning/Ball Lightning damage multiplier ×%d".formatted(SpellConfig.POWER_PASSIVE_CONFIG.arclight()),
-        "[被动] 连锁闪电/球状闪电伤害倍率 ×%d".formatted(SpellConfig.POWER_PASSIVE_CONFIG.arclight())
+        "[Passive] Chain Lightning/Ball Lightning damage multiplier ×%d".formatted(ChainLightningSpell.ARCLIGHT_POWER_MULTIPLIER),
+        "[被动] 连锁闪电/球状闪电伤害倍率 ×%d".formatted(ChainLightningSpell.ARCLIGHT_POWER_MULTIPLIER)
     ),
     CONSTANT_CURRENT(
         "Constant Current",
         "恒流",
-        "[Passive] Chain Lightning duration ×%d".formatted(SpellConfig.CHAIN_LIGHTNING_PASSIVE_CONFIG.constantCurrentLifespan()),
-        "[被动] 连锁闪电存续时间 ×%d".formatted(SpellConfig.CHAIN_LIGHTNING_PASSIVE_CONFIG.constantCurrentLifespan())
+        "[Passive] Chain Lightning duration ×%d".formatted(ChainLightningSpell.CONSTANT_CURRENT_LIFESPAN_MULTIPLIER),
+        "[被动] 连锁闪电存续时间 ×%d".formatted(ChainLightningSpell.CONSTANT_CURRENT_LIFESPAN_MULTIPLIER)
     ),
     BALL_LIGHTNING(
         "Ball Lightning",
         "球状闪电",
-        "Fire a ball lightning that lasts for %d seconds, touching enemies for damage and bouncing off of touching blocks.".formatted(SpellConfig.BALL_LIGHTNING_CONFIG.lifespan() / 20),
-        "发射一个球状闪电，触碰敌人造成伤害，触碰方块反弹，存续时间%d秒。".formatted(SpellConfig.BALL_LIGHTNING_CONFIG.lifespan() / 20)
+        "Fire a ball lightning that lasts for %d seconds, touching enemies for damage (with a default damage multiplier of %d%%%%) and bouncing off of touching blocks.".formatted(
+            BallLightningEntity.LIFESPAN / 20,
+            Math.round(BallLightningEntity.DAMAGE_FACTOR * 100)
+        ),
+        "发射一个球状闪电，触碰敌人造成伤害，伤害倍率%d%%%%，触碰方块反弹，存续时间%d秒。".formatted(
+            Math.round(BallLightningEntity.DAMAGE_FACTOR * 100), BallLightningEntity.LIFESPAN / 20
+        )
     ),
     CLOSED_LOOP(
         "Closed Loop",
         "闭环",
-        "[Passive] When ball lightning bounces, its lifespan increases by %d seconds".formatted(SpellConfig.BALL_LIGHTNING_CONFIG.lifespanIncrement() / 20),
-        "[被动] 球状闪电反弹时，存续时间增加%d秒".formatted(SpellConfig.BALL_LIGHTNING_CONFIG.lifespanIncrement() / 20)
+        "[Passive] When ball lightning bounces, its lifespan increases by %d seconds".formatted(BallLightningEntity.LIFESPAN_INCREMENT / 20),
+        "[被动] 球状闪电反弹时，存续时间增加%d秒".formatted(BallLightningEntity.LIFESPAN_INCREMENT / 20)
     ),
     ELECTROCUTION(
         "Electrocution",
         "电刑",
         "[Passive] The %drd lightning spell damage dealt to the same enemy within %.1f seconds is increased by an additional %d%%%%".formatted(
-            SpellConfig.ELECTROCUTION_CONFIG.maxStacks(),
-            SpellConfig.ELECTROCUTION_CONFIG.maxDuration() / 20F,
-            (int) ((SpellConfig.ELECTROCUTION_CONFIG.damageFactor() - 1) * 100)
+            Electrocution.MAX_STACKS,
+            Electrocution.MAX_DURATION / 20F,
+            (int) ((Electrocution.DAMAGE_FACTOR - 1) * 100)
         ),
         "[被动] 在%.1f秒内对同一个敌人造成的第%d次雷电法术伤害额外增加%d%%%%".formatted(
-            SpellConfig.ELECTROCUTION_CONFIG.maxDuration() / 20F,
-            SpellConfig.ELECTROCUTION_CONFIG.maxStacks(),
-            (int) ((SpellConfig.ELECTROCUTION_CONFIG.damageFactor() - 1) * 100)
+            Electrocution.MAX_DURATION / 20F,
+            Electrocution.MAX_STACKS,
+            (int) ((Electrocution.DAMAGE_FACTOR - 1) * 100)
         )
     ),
     STORMFLASH(
@@ -444,8 +453,8 @@ public enum SpellTexts
     SOUL_SACRIFICE(
         "Soul Sacrifice",
         "灵献",
-        "When cast on your soul minion, sacrifice %d%% of its max health to gain a set of loot.".formatted((int) Math.floor(SoulSacrificeSpell.HEALTH_RATIO * 100)),
-        "对灵仆施放时，献祭选定灵仆的%d%%最大生命值，获得一份战利品。".formatted((int) Math.floor(SoulSacrificeSpell.HEALTH_RATIO * 100))
+        "When cast on your soul minion, sacrifice %d%%%% of its max health to gain a set of loot.".formatted(Math.round(SoulSacrificeSpell.HEALTH_RATIO * 100)),
+        "对灵仆施放时，献祭选定灵仆的%d%%%%最大生命值，获得一份战利品。".formatted(Math.round(SoulSacrificeSpell.HEALTH_RATIO * 100))
     ),
     ETHEREAL_EVASION(
         "Ethereal Evasion",

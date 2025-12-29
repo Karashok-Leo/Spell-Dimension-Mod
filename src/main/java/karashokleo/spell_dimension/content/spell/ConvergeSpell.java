@@ -1,7 +1,6 @@
 package karashokleo.spell_dimension.content.spell;
 
 import karashokleo.spell_dimension.api.SpellImpactEvents;
-import karashokleo.spell_dimension.config.SpellConfig;
 import karashokleo.spell_dimension.util.DamageUtil;
 import karashokleo.spell_dimension.util.ImpactUtil;
 import karashokleo.spell_dimension.util.ParticleUtil;
@@ -24,6 +23,8 @@ import java.util.List;
 
 public class ConvergeSpell
 {
+    public static final float DAMAGE_FACTOR = 0.6F;
+
     public static void handle(SpellProjectile projectile, SpellInfo spellInfo, @Nullable Entity owner, HitResult hitResult)
     {
         if (owner == null ||
@@ -41,7 +42,7 @@ public class ConvergeSpell
         int amplifier = Math.min((int) (power.baseValue()) / 24 + 1, 3);
         ParticleHelper.sendBatches(tracked, ParticleUtil.EXPLOSION);
         SoundHelper.playSoundEvent(tracked.getWorld(), tracked, SoundEvents.ENTITY_GENERIC_EXPLODE);
-        float damage = (float) DamageUtil.calculateDamage(caster, SpellSchools.ARCANE, SpellConfig.CONVERGE_FACTOR);
+        float damage = (float) DamageUtil.calculateDamage(caster, SpellSchools.ARCANE, DAMAGE_FACTOR);
         List<LivingEntity> targets = ImpactUtil.getLivingsInRange(
             tracked,
             3 + amplifier * 0.8F,

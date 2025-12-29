@@ -4,13 +4,16 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import karashokleo.spell_dimension.api.buff.Buff;
 import karashokleo.spell_dimension.api.buff.BuffType;
-import karashokleo.spell_dimension.config.SpellConfig;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.dynamic.Codecs;
 import org.jetbrains.annotations.Nullable;
 
 public class Electrocution implements Buff
 {
+    public static final int MAX_DURATION = 20;
+    public static final int MAX_STACKS = 3;
+    public static final float DAMAGE_FACTOR = 1.5F;
+
     public static final Codec<Electrocution> CODEC = RecordCodecBuilder.create(
         ins -> ins.group(
             Codecs.NONNEGATIVE_INT.fieldOf("duration").forGetter(Electrocution::getDuration),
@@ -30,7 +33,7 @@ public class Electrocution implements Buff
 
     public Electrocution()
     {
-        this(SpellConfig.ELECTROCUTION_CONFIG.maxDuration(), 1);
+        this(MAX_DURATION, 1);
     }
 
     @Override
@@ -51,7 +54,7 @@ public class Electrocution implements Buff
 
     public boolean shouldExecute()
     {
-        return stacks >= SpellConfig.ELECTROCUTION_CONFIG.maxStacks();
+        return stacks >= MAX_STACKS;
     }
 
     public int getDuration()

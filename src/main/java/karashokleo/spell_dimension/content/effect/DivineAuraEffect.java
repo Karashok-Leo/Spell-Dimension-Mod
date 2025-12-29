@@ -1,6 +1,5 @@
 package karashokleo.spell_dimension.content.effect;
 
-import karashokleo.spell_dimension.config.SpellConfig;
 import karashokleo.spell_dimension.util.DamageUtil;
 import karashokleo.spell_dimension.util.RelationUtil;
 import net.minecraft.entity.LivingEntity;
@@ -17,6 +16,7 @@ import java.util.List;
 
 public class DivineAuraEffect extends StatusEffect
 {
+    private static final float DAMAGE_FACTOR = 0.4F;
     private static final int MIN_RADIUS = 3;
     private static final int MAX_RADIUS = 10;
 
@@ -25,7 +25,7 @@ public class DivineAuraEffect extends StatusEffect
         return (en ?
             "Every %s second, applies Absorption effect to surrounding allies and deals %.1fx spell power damage to surrounding enemies. Range >=%d and <=%d, increases by 1 for every 100 spell power." :
             "每隔%s秒，对周围友方施加伤害吸收效果，并对周围敌人造成%.1f倍法术强度的治愈法术伤害，范围>=%d且<=%d，每100法强增加1格。")
-            .formatted(INTERVAL / 20, SpellConfig.DIVINE_AURA_FACTOR, MIN_RADIUS, MAX_RADIUS);
+            .formatted(INTERVAL / 20, DAMAGE_FACTOR, MIN_RADIUS, MAX_RADIUS);
     }
 
     public static final int INTERVAL = 20;
@@ -61,7 +61,7 @@ public class DivineAuraEffect extends StatusEffect
                 target.addStatusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 20, amplifier, false, false));
             } else
             {
-                float damage = (float) DamageUtil.calculateDamage(entity, SpellSchools.HEALING, SpellConfig.DIVINE_AURA_FACTOR);
+                float damage = (float) DamageUtil.calculateDamage(entity, SpellSchools.HEALING, DAMAGE_FACTOR);
                 DamageUtil.spellDamage(target, SpellSchools.HEALING, entity, damage, false);
             }
         }
