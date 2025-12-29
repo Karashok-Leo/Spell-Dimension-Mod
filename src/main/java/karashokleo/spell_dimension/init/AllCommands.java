@@ -9,6 +9,7 @@ import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
@@ -18,6 +19,7 @@ import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.TypeFilter;
 import net.spell_engine.SpellEngineMod;
 import net.spell_engine.internals.SpellRegistry;
 import net.spell_engine.network.Packets;
@@ -35,6 +37,7 @@ public class AllCommands
                 CommandManager
                     .literal("spell_dimension")
                     .then(printHandStack())
+                    .then(clearItemEntities())
                     .then(fixFakeDeath())
                     .then(reloadSpells())
                     .then(convertModifiers())
@@ -47,6 +50,13 @@ public class AllCommands
         return CommandManager
             .literal("hand")
             .executes(AllCommands::executePrintHandStack);
+    }
+
+    private static LiteralArgumentBuilder<ServerCommandSource> clearItemEntities()
+    {
+        return CommandManager
+            .literal("clear_item_entities")
+            .executes(AllCommands::executeClearItemEntities);
     }
 
     private static LiteralArgumentBuilder<ServerCommandSource> fixFakeDeath()
@@ -108,6 +118,16 @@ public class AllCommands
             context.getSource().sendMessage(line);
         }
         return Command.SINGLE_SUCCESS;
+    }
+
+    private static int executeClearItemEntities(CommandContext<ServerCommandSource> context)
+    {
+        var list = context.getSource().getWorld().getEntitiesByType(TypeFilter.instanceOf(ItemEntity.class), entity -> true);
+        for (ItemEntity itemEntity : list)
+        {
+            itemEntity.kill();
+        }
+        return list.size();
     }
 
     private static int executeFixFakeDeath(CommandContext<ServerCommandSource> context)
