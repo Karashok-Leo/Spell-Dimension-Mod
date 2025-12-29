@@ -9,6 +9,7 @@ import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
@@ -16,10 +17,13 @@ import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.spell_engine.SpellEngineMod;
 import net.spell_engine.internals.SpellRegistry;
 import net.spell_engine.network.Packets;
 import net.spell_engine.utils.WeaponCompatibility;
+
+import java.util.ArrayList;
 
 public class AllCommands
 {
@@ -67,16 +71,41 @@ public class AllCommands
             .executes(AllCommands::executeConvertModifiers);
     }
 
+    @SuppressWarnings("all")
     private static int executePrintHandStack(CommandContext<ServerCommandSource> context)
     {
         ServerPlayerEntity player = context.getSource().getPlayer();
-        if (player != null)
+        if (player == null)
         {
-            var nbt = player.getMainHandStack().getNbt();
-            if (nbt != null)
-            {
-                context.getSource().sendMessage(Text.literal(nbt.toString()));
-            }
+            return Command.SINGLE_SUCCESS;
+        }
+
+        ItemStack stack = player.getMainHandStack();
+        if (stack.isEmpty())
+        {
+            return Command.SINGLE_SUCCESS;
+        }
+        Item item = stack.getItem();
+        var registryEntry = item.getRegistryEntry();
+
+        ArrayList<Text> lines = new ArrayList<>();
+
+        lines.add(Text.literal("Item:").formatted(Formatting.AQUA));
+        lines.add(Text.literal(registryEntry.registryKey().getValue().toString()));
+
+        lines.add(Text.literal("Tags:").formatted(Formatting.AQUA));
+        registryEntry.streamTags().map(tag -> Text.literal("#" + tag.id())).forEach(lines::add);
+
+        var nbt = stack.getNbt();
+        if (nbt != null)
+        {
+            lines.add(Text.literal("Nbt:").formatted(Formatting.AQUA));
+            lines.add(Text.literal(nbt.toString()));
+        }
+
+        for (Text line : lines)
+        {
+            context.getSource().sendMessage(line);
         }
         return Command.SINGLE_SUCCESS;
     }
