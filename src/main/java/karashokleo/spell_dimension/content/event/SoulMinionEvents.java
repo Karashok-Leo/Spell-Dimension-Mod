@@ -3,18 +3,17 @@ package karashokleo.spell_dimension.content.event;
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEvent;
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingEntityEvents;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDamageEvent;
+import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.leobrary.damage.api.modify.DamagePhase;
 import karashokleo.leobrary.effect.api.event.LivingHealCallback;
+import karashokleo.spell_dimension.api.SpellImpactEvents;
 import karashokleo.spell_dimension.content.component.SoulControllerComponent;
 import karashokleo.spell_dimension.content.component.SoulMinionComponent;
 import karashokleo.spell_dimension.content.entity.FakePlayerEntity;
 import karashokleo.spell_dimension.content.misc.SoulControl;
 import karashokleo.spell_dimension.content.network.S2CBloodOverlay;
 import karashokleo.spell_dimension.data.SDTexts;
-import karashokleo.spell_dimension.init.AllDamageStates;
-import karashokleo.spell_dimension.init.AllPackets;
-import karashokleo.spell_dimension.init.AllSpells;
-import karashokleo.spell_dimension.init.AllStatusEffects;
+import karashokleo.spell_dimension.init.*;
 import karashokleo.spell_dimension.util.DamageUtil;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.minecraft.entity.Entity;
@@ -24,9 +23,12 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Formatting;
+import net.minecraft.world.World;
 import net.spell_engine.api.spell.SpellContainer;
+import net.spell_engine.api.spell.SpellInfo;
 import net.spell_engine.entity.ConfigurableKnockback;
 import net.spell_engine.internals.SpellContainerHelper;
+import net.spell_engine.internals.SpellRegistry;
 import net.spell_power.api.SpellDamageSource;
 import net.spell_power.api.SpellSchools;
 
@@ -34,7 +36,6 @@ import java.util.List;
 
 public class SoulMinionEvents
 {
-
     public static final float REQUIEM_FACTOR = 0.15f;
 
     public static void init()
@@ -42,19 +43,37 @@ public class SoulMinionEvents
         // player death stops soul control
         ServerLivingEntityEvents.ALLOW_DEATH.register((entity, damageSource, damageAmount) ->
         {
-            if (!(entity instanceof ServerPlayerEntity player))
+            if (entity instanceof ServerPlayerEntity player)
             {
-                return true;
-            }
+                SoulControllerComponent controllerComponent = SoulControl.getSoulController(player);
+                if (!controllerComponent.isControlling())
+                {
+                    return true;
+                }
 
-            SoulControllerComponent controllerComponent = SoulControl.getSoulController(player);
-            if (!controllerComponent.isControlling())
+                // controlling
+                // rebirth
+                if (TrinketCompat.hasItemInTrinket(player, AllItems.REBIRTH_SIGIL))
+                {
+                    AllItems.REBIRTH_SIGIL.rebirth(player, player);
+                    return false;
+                }
+
+                // release control
+                SoulControl.setControllingMinion(player, null);
+                return false;
+            } else if (entity instanceof MobEntity mob)
             {
-                return true;
+                SoulMinionComponent minionComponent = SoulControl.getSoulMinion(mob);
+                PlayerEntity owner = minionComponent.getOwner();
+                if (owner != null &&
+                    TrinketCompat.hasItemInTrinket(owner, AllItems.REBIRTH_SIGIL))
+                {
+                    AllItems.REBIRTH_SIGIL.rebirth(mob, owner);
+                    return false;
+                }
             }
-
-            SoulControl.setControllingMinion(player, null);
-            return false;
+            return true;
         });
 
         // prevent minion attack owner
@@ -66,7 +85,8 @@ public class SoulMinionEvents
             Entity attacker = source.getAttacker();
             LivingEntity living = event.getEntity();
 
-            if (living.getWorld().isClient())
+            World world = living.getWorld();
+            if (world.isClient())
             {
                 return;
             }
@@ -136,6 +156,8 @@ public class SoulMinionEvents
             ((ConfigurableKnockback) living).pushKnockbackMultiplier_SpellEngine(0);
             living.damage(damageSource, amount);
             ((ConfigurableKnockback) living).popKnockbackMultiplier_SpellEngine();
+
+            SpellImpactEvents.POST.invoker().invoke(world, owner, List.of(living), new SpellInfo(SpellRegistry.getSpell(AllSpells.REQUIEM), AllSpells.REQUIEM));
         });
 
         // fake player self damage feedback
@@ -213,11 +235,19 @@ public class SoulMinionEvents
             controllerComponent.onMinionRemoved(mob);
         });
 
+        // Rebirth Sigil
         // Soul Net - damage
         LivingAttackEvent.ATTACK.register(event ->
         {
             if (!(event.getEntity() instanceof MobEntity mob))
             {
+                return;
+            }
+
+            // Rebirth
+            if (mob.hasStatusEffect(AllStatusEffects.REBIRTH))
+            {
+                event.setCanceled(true);
                 return;
             }
 

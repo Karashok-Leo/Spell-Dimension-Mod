@@ -4,6 +4,7 @@ import karashokleo.spell_dimension.content.component.SoulControllerComponent;
 import karashokleo.spell_dimension.content.component.SoulMinionComponent;
 import karashokleo.spell_dimension.content.entity.FakePlayerEntity;
 import karashokleo.spell_dimension.init.AllComponents;
+import karashokleo.spell_dimension.init.AllStatusEffects;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
@@ -13,6 +14,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -80,12 +82,13 @@ public interface SoulControl
                 NbtCompound minionData = controllerComponent.getControllingMinionData();
                 MobEntity loadedMinion = loadMinionFromData(minionData, world);
                 updatePosRotHealth(loadedMinion, player);
+                transferMinionData(player, loadedMinion);
                 world.spawnEntity(loadedMinion);
             } else
             {
                 // spawn fake player
                 FakePlayerEntity fakePlayer = new FakePlayerEntity(player);
-                copyPlayerProperties(player, fakePlayer);
+                transferPlayerData(player, fakePlayer);
                 updatePosRotHealth(fakePlayer, player);
                 world.spawnEntity(fakePlayer);
 
@@ -95,6 +98,7 @@ public interface SoulControl
             // update player shape & position
             PlayerShape.updateShapes(player, minion);
             updatePosRotHealth(player, minion);
+            transferMinionData(minion, player);
 
             // save minion nbt data
             NbtCompound savedMinionData = saveMinionData(minion);
@@ -111,6 +115,7 @@ public interface SoulControl
             MobEntity loadedMinion = loadMinionFromData(minionData, world);
 
             updatePosRotHealth(loadedMinion, player);
+            transferMinionData(player, loadedMinion);
             world.spawnEntity(loadedMinion);
 
             FakePlayerEntity self = controllerComponent.getFakePlayerSelf();
@@ -186,7 +191,18 @@ public interface SoulControl
         target.setHealth(target.getMaxHealth() * proportion);
     }
 
-    static void copyPlayerProperties(PlayerEntity player, FakePlayerEntity fakePlayer)
+    private static void transferMinionData(LivingEntity source, LivingEntity target)
+    {
+        StatusEffectInstance effect = source.getStatusEffect(AllStatusEffects.REBIRTH);
+        if (effect == null)
+        {
+            return;
+        }
+        target.addStatusEffect(effect);
+        source.removeStatusEffect(AllStatusEffects.REBIRTH);
+    }
+
+    private static void transferPlayerData(PlayerEntity player, FakePlayerEntity fakePlayer)
     {
         var attributes = new EntityAttribute[]{
             EntityAttributes.GENERIC_MAX_HEALTH,

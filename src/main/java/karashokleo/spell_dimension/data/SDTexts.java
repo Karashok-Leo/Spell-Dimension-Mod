@@ -251,6 +251,7 @@ public enum SDTexts
     TOOLTIP$SUPERCONDUCTOR$2("- Damage caused by [Chain Lightning] bypass damage cooldown.", "- [连锁闪电] 造成的伤害无视伤害冷却"),
     TOOLTIP$MACRO_ELECTRON$1("- [Ball Lightning] will randomly select and destroy the target, without dropping any loot.", "- [球状闪电] 将随机选取并摧毁目标，但不会掉落战利品。"),
     TOOLTIP$MACRO_ELECTRON$2("- [Ball Lightning] will track the entity you are looking at.", "- [球状闪电] 将追踪你目视的实体。"),
+    TOOLTIP$REBIRTH_SIGIL("- Your soul minions refuse to die.", "- 你的灵仆拒绝死亡。"),
 
     /**
      * Breastplates

@@ -3,8 +3,8 @@ package karashokleo.spell_dimension.content.item.trinket.endgame;
 import dev.emi.trinkets.api.SlotReference;
 import karashokleo.l2hostility.content.item.trinket.core.SingleEpicTrinketItem;
 import karashokleo.l2hostility.init.LHEffects;
+import karashokleo.l2hostility.util.EffectHelper;
 import karashokleo.l2hostility.util.raytrace.RayTraceUtil;
-import karashokleo.leobrary.effect.api.util.EffectUtil;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.util.RelationUtil;
 import net.minecraft.client.item.TooltipContext;
@@ -58,7 +58,7 @@ public class SoulfireMaskItem extends SingleEpicTrinketItem
             return;
         }
         int amplifier = (int) (SpellPower.getSpellPower(SpellSchools.FIRE, player).baseValue() / SPELL_POWER_BONUS);
-        EffectUtil.forceAddEffect(target, new StatusEffectInstance(LHEffects.FLAME, DURATION, amplifier, false, false), entity);
+        EffectHelper.forceAddEffectWithEvent(target, new StatusEffectInstance(LHEffects.FLAME, DURATION, amplifier, false, false), entity);
     }
 
     @Override

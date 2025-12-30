@@ -160,11 +160,6 @@ public class Nucleus implements Buff
         return 2 - (float) this.duration / TOTAL_DURATION;
     }
 
-    public boolean isActive()
-    {
-        return this.duration > 0;
-    }
-
     @Override
     public BuffType<?> getType()
     {

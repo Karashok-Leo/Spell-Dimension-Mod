@@ -25,6 +25,7 @@ public class AllStatusEffects
     public static CustomStatusEffect STUN;
     public static QuantumFieldEffect QUANTUM_FIELD;
     public static CustomStatusEffect SOUL_MARK;
+    public static RebirthEffect REBIRTH;
     //    public static final PhaseEffect ASTRAL_TRIP = new PhaseEffect();
 
     public static void register()
@@ -107,14 +108,23 @@ public class AllStatusEffects
             .addZHDesc("被灵仆攻击时受到额外灵魂法术伤害")
             .addTag(LHTags.CLEANSE_BLACKLIST)
             .register();
+        REBIRTH = new Entry<>("rebirth", new RebirthEffect())
+            .addEN()
+            .addZH("复生")
+            .addENDesc("Unable to do anything, health gradually recovers to maximum")
+            .addZHDesc("无法行动，生命值逐渐恢复至最大值")
+            .addTag(LHTags.CLEANSE_BLACKLIST)
+            .register();
 
         Synchronized.configure(PHASE, true);
         Synchronized.configure(FROSTED, true);
         Synchronized.configure(DIVINE_AURA, true);
         Synchronized.configure(STUN, true);
         Synchronized.configure(QUANTUM_FIELD, true);
+        Synchronized.configure(REBIRTH, true);
 
         ActionImpairing.configure(STUN, EntityActionsAllowed.STUN);
+        ActionImpairing.configure(REBIRTH, EntityActionsAllowed.STUN);
     }
 
     public static class Entry<T extends StatusEffect> extends StatusEffectBuilder<T>
