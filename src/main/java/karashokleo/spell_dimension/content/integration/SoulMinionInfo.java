@@ -2,9 +2,9 @@ package karashokleo.spell_dimension.content.integration;
 
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.component.SoulMinionComponent;
+import karashokleo.spell_dimension.content.item.SoulContainer;
 import karashokleo.spell_dimension.content.misc.SoulControl;
 import karashokleo.spell_dimension.data.SDTexts;
-import karashokleo.spell_dimension.init.AllItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -31,10 +31,9 @@ public class SoulMinionInfo implements IEntityComponentProvider
         if (owner == null)
         {
             PlayerEntity player = entityAccessor.getPlayer();
-            if (player.getMainHandStack().isOf(AllItems.SOUL_CONTAINER) ||
-                player.getOffHandStack().isOf(AllItems.SOUL_CONTAINER))
+            if (player.getMainHandStack().getItem() instanceof SoulContainer soulContainer)
             {
-                float probability = SoulControl.getCaptureProbability(mob);
+                float probability = soulContainer.getCaptureProbability(mob);
                 iTooltip.add(SDTexts.TOOLTIP$SOUL_MINION$CAPTURE_PROBABILITY.get("%.1f%%".formatted(probability * 100)));
             }
         } else

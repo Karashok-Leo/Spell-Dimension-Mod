@@ -1,6 +1,7 @@
 package karashokleo.spell_dimension.content.item;
 
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
+import karashokleo.l2hostility.util.raytrace.RayTraceUtil;
 import karashokleo.spell_dimension.content.component.SoulMinionComponent;
 import karashokleo.spell_dimension.content.misc.SoulControl;
 import karashokleo.spell_dimension.data.SDTexts;
@@ -15,14 +16,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.Hand;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -34,6 +34,7 @@ import java.util.UUID;
 
 public class SoulContainer extends Item
 {
+    public static final int RANGE = 8;
     public static final String ENTITY_KEY = "Entity";
     public static final String TOOLTIP_DATA_KEY = "TooltipData";
     public static final String CUSTOM_NAME_KEY = "CustomName";
@@ -42,44 +43,114 @@ public class SoulContainer extends Item
     public static final String HEALTH_KEY = "Health";
     public static final String MAX_HEALTH_KEY = "MaxHealth";
 
-    public SoulContainer()
+    private final float healthThresholdRatio;
+    private final boolean destroyOnFail;
+
+    public SoulContainer(float healthThresholdRatio, boolean destroyOnFail)
     {
         super(
             new FabricItemSettings()
                 .fireproof()
                 .maxCount(1)
         );
+        this.healthThresholdRatio = healthThresholdRatio;
+        this.destroyOnFail = destroyOnFail;
     }
 
     @Override
-    public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand)
+    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand)
     {
-        if (user.getWorld().isClient())
+        ItemStack stack = user.getStackInHand(hand);
+        // already stored
+        if (hand != Hand.MAIN_HAND ||
+            stack.getOrCreateNbt().contains(ENTITY_KEY, NbtElement.COMPOUND_TYPE))
         {
-            return ActionResult.CONSUME;
+            return TypedActionResult.fail(stack);
         }
+        user.setCurrentHand(hand);
+        return TypedActionResult.consume(stack);
+    }
 
-        stack = user.getStackInHand(hand);
+    @Override
+    public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks)
+    {
+        if (world.isClient() && user instanceof PlayerEntity player)
+        {
+            RayTraceUtil.clientUpdateTarget(player, RANGE);
+        }
+    }
+
+    @Override
+    public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user)
+    {
+        if (user instanceof ServerPlayerEntity player)
+        {
+            LivingEntity target = RayTraceUtil.serverGetTarget(player);
+            if (target != null)
+            {
+                tryCapture(stack, player, target);
+            }
+        }
+        return stack;
+    }
+
+    @Override
+    public int getMaxUseTime(ItemStack stack)
+    {
+        return destroyOnFail ? 16 : 32;
+    }
+
+    @Override
+    public UseAction getUseAction(ItemStack stack)
+    {
+        return UseAction.BOW;
+    }
+
+    public float getCaptureProbability(LivingEntity entity)
+    {
+        float health = entity.getHealth();
+        float maxHealth = entity.getMaxHealth();
+        float threshold = maxHealth * healthThresholdRatio;
+        threshold = Math.max(threshold, 4f);
+        if (health <= 0 || health >= threshold)
+        {
+            return 0;
+        } else
+        {
+            return 1 - health / threshold;
+        }
+    }
+
+    protected void fail(ItemStack stack, PlayerEntity user, LivingEntity entity)
+    {
+        if (destroyOnFail)
+        {
+            stack.decrement(1);
+        }
+    }
+
+    protected void tryCapture(ItemStack stack, PlayerEntity user, LivingEntity entity)
+    {
         NbtCompound nbt = stack.getOrCreateNbt();
         // already stored
         if (nbt.contains(ENTITY_KEY, NbtElement.COMPOUND_TYPE))
         {
-            return ActionResult.PASS;
+            return;
         }
 
         if (!(entity instanceof MobEntity mob))
         {
-            return ActionResult.PASS;
+            return;
         }
 
         SoulMinionComponent component = SoulControl.getSoulMinion(mob);
         boolean notOwned = component.getOwner() != user;
         // user is not the owner, and failed to capture
         if (notOwned &&
-            user.getRandom().nextFloat() > SoulControl.getCaptureProbability(mob))
+            user.getRandom().nextFloat() > getCaptureProbability(mob))
         {
-            stack.decrement(1);
-            return ActionResult.FAIL;
+            fail(stack, user, entity);
+            return;
         }
 
         // first capture
@@ -95,8 +166,6 @@ public class SoulContainer extends Item
         NbtCompound tooltipData = saveSoulMinionTooltipData(mob);
         nbt.put(TOOLTIP_DATA_KEY, tooltipData);
         mob.discard();
-
-        return ActionResult.SUCCESS;
     }
 
     @Override
@@ -210,7 +279,15 @@ public class SoulContainer extends Item
                 tooltip.add(SDTexts.TOOLTIP$SOUL_CONTAINER$USAGE_3.get().formatted(Formatting.GRAY));
                 tooltip.add(Text.empty());
             }
-            tooltip.add(SDTexts.TOOLTIP$SOUL_CONTAINER$USAGE_1.get().formatted(Formatting.GRAY));
+            tooltip.add(
+                SDTexts.TOOLTIP$SOUL_CONTAINER$USAGE_1.get(
+                    "%d%%".formatted(Math.round(healthThresholdRatio * 100))
+                ).formatted(Formatting.GRAY)
+            );
+            if (destroyOnFail)
+            {
+                tooltip.add(SDTexts.TOOLTIP$SOUL_CONTAINER$USAGE_DESTROY.get().formatted(Formatting.RED));
+            }
         }
     }
 

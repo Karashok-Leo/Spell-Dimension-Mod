@@ -69,6 +69,7 @@ public class AllItems
     public static MeritRegisterItem MERIT_REGISTER;
 
     public static SoulContainer SOUL_CONTAINER;
+    public static SoulContainer ADVANCED_SOUL_CONTAINER;
     public static ProtectiveSpellContainerItem SPELL_CONTAINER;
     public static IllusionContainerItem ILLUSION_CONTAINER;
     public static IllusionUpgradeItem ILLUSION_UPGRADE;
@@ -235,9 +236,15 @@ public class AllItems
             .addModel()
             .register();
 
-        SOUL_CONTAINER = Entry.of("soul_container", new SoulContainer())
+        SOUL_CONTAINER = Entry.of("soul_container", new SoulContainer(0.1f, true))
             .addEN()
             .addZH("灵魂容器")
+            .setTab(AllGroups.EQUIPMENTS)
+            .addModel()
+            .register();
+        ADVANCED_SOUL_CONTAINER = Entry.of("advanced_soul_container", new SoulContainer(1f, false))
+            .addEN()
+            .addZH("高级灵魂容器")
             .setTab(AllGroups.EQUIPMENTS)
             .addModel()
             .register();

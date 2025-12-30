@@ -204,9 +204,10 @@ public enum SDTexts
     TOOLTIP$SOUL_MINION$CAPTURE_PROBABILITY("Capture probability: %s", "捕捉概率：%s"),
     TOOLTIP$SOUL_CONTAINER$STORED("Stored:", "已存储："),
     TOOLTIP$SOUL_CONTAINER$LAST_STORED("Last stored:", "上次存储："),
-    TOOLTIP$SOUL_CONTAINER$USAGE_1("Right-click on mobs with health below 10% to attempt capturing their souls, converting them into soul minions and storing them in containers. The lower the target's health, the higher the success rate.", "右键点击生命值低于10%的生物时可尝试捕捉其灵魂，转化为灵仆并存储在容器中，目标生命值越低成功率越高。"),
+    TOOLTIP$SOUL_CONTAINER$USAGE_1("Right-click on mobs with health below %s to attempt capturing their souls, converting them into soul minions and storing them in containers. The lower the target's health, the higher the success rate.", "右键点击生命值低于%s的生物时可尝试捕捉其灵魂，转化为灵仆并存储在容器中，目标生命值越低成功率越高。"),
     TOOLTIP$SOUL_CONTAINER$USAGE_2("Right-click the block to release the stored soul minion.", "右键点击方块可释放存储的灵仆。"),
     TOOLTIP$SOUL_CONTAINER$USAGE_3("Right-click the block to attempt recalling the last summoned soul minion.", "右键点击方块可尝试将上次释放的灵仆召回。"),
+    TOOLTIP$SOUL_CONTAINER$USAGE_DESTROY("When soul capture fails, the item is destroyed.", "捕捉灵魂失败时，该物品销毁。"),
     TOOLTIP$SOUL_CONTAINER$WARNING("The target is dead, lost, or not present in this dimension.", "目标已死亡，遗失，或不在此维度中。"),
 
     /**
