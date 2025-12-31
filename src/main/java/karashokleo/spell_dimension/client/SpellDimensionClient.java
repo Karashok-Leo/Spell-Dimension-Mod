@@ -16,6 +16,7 @@ import karashokleo.spell_dimension.client.screen.ConsciousCoreOverlay;
 import karashokleo.spell_dimension.client.screen.GameOverOverlay;
 import karashokleo.spell_dimension.client.screen.QuestOverlay;
 import karashokleo.spell_dimension.client.screen.SpellPowerTab;
+import karashokleo.spell_dimension.content.integration.PatchouliIntegration;
 import karashokleo.spell_dimension.content.item.essence.base.ColorProvider;
 import karashokleo.spell_dimension.content.item.upgrade.IllusionUpgradeTab;
 import karashokleo.spell_dimension.content.misc.NoClip;
@@ -145,6 +146,7 @@ public class SpellDimensionClient implements ClientModInitializer
 
         AllParticles.registerClient();
 
+        PatchouliIntegration.init();
 //        SoulControlHandler.register();
     }
 }
