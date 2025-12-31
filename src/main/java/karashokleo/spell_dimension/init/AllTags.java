@@ -84,6 +84,8 @@ public class AllTags
     public static final TagKey<Item> HEART_FOOD = TagUtil.itemTag("heart_food");
     public static final TagKey<Item> ENDGAME_TRINKETS = TagUtil.itemTag("endgame_trinkets");
 
+    public static final TagKey<Item> SPELL_TRAIT_ITEM = TagUtil.itemTag("spell_trait_item");
+
     // Equipment Standard
     public static final TagKey<Item> ARMOR = TagUtil.itemTag(new Identifier("equipment_standard:armor"));
     public static final TagKey<Item> MELEE_WEAPONS = TagUtil.itemTag(new Identifier("equipment_standard:melee_weapons"));

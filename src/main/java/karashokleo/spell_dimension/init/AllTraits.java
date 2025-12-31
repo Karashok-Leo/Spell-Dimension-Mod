@@ -332,10 +332,14 @@ public class AllTraits
         public T register()
         {
             Identifier id = getId();
-            this.getItemBuilder()
+            ItemBuilder<Item> itemBuilder = this.getItemBuilder()
                 .apply(name, new TraitSymbol(new FabricItemSettings()))
-                .addTag(LHTags.TRAIT_ITEM)
-                .register();
+                .addTag(LHTags.TRAIT_ITEM);
+            if (content instanceof SpellTrait)
+            {
+                itemBuilder.addTag(AllTags.SPELL_TRAIT_ITEM);
+            }
+            itemBuilder.register();
             this.addModel();
             this.generateConfig(content, config);
             return Registry.register(LHTraits.TRAIT, id, content);
