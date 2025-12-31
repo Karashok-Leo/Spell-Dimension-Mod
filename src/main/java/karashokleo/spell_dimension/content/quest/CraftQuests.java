@@ -42,7 +42,7 @@ public class CraftQuests
             .addZhDesc("合成任意1级冶炼控制器，并建造1级合金冶炼炉")
             .addEnFeedback("Even in the age of magic, the simple alloy forge has not been completely forgotten, and you should be thankful that you still remember some of the physics and can build it using simple machinations.")
             .addZhFeedback("即使身处魔法时代，简单的冶炼炉也没有完全被忘记，你应该庆幸自己仍记得部分物理知识，使用简单的机巧就能把它打造出来。")
-            .toEntry("resource/alloy")
+            .toEntry("mechanic/alloy")
             .addTag(AllTags.MAIN, AllTags.SKIPPABLE)
             .addDependencies(BaseQuests.HOSTILITY_ORB)
             .register();
@@ -57,7 +57,7 @@ public class CraftQuests
             .addZhDesc("合成任意2级冶炼控制器，并建造2级合金冶炼炉")
             .addEnFeedback("A forge controller made with stronger and more magically compatible materials, with which you can start crafting some truly magic-related items.")
             .addZhFeedback("使用更加坚固和魔法兼容性更好的材料制作的冶炼炉控制器，使用它你可以开始制作一些真正与魔法相关的物品了。")
-            .toEntry("resource/alloy")
+            .toEntry("mechanic/alloy")
             .addTag(AllTags.MAIN)
             .addDependencies(FORGE_0)
             .register();
@@ -72,7 +72,7 @@ public class CraftQuests
             .addZhDesc("合成任意3级冶炼控制器，并建造3级合金冶炼炉")
             .addEnFeedback("An alloy forge built using advanced materials is the limit of your ability. But it's enough to smelt the strongest materials that you can use.")
             .addZhFeedback("使用高级材料打造的冶炼炉，这已经是你能力的极限。不过这足够了，使用它足以冶炼你所能使用的最强材料。")
-            .toEntry("resource/alloy")
+            .toEntry("mechanic/alloy")
             .addTag(AllTags.MAIN)
             .addDependencies(FORGE_1)
             .register();
@@ -121,7 +121,7 @@ public class CraftQuests
             )
             .addEnFeedback("A mundane Charm of Looting looks to be of rough quality.")
             .addZhFeedback("较为平凡的抢夺宝珠，看上去品质粗糙。")
-            .toEntry("resource/loot_charm")
+            .toEntry("mechanic/loot_charm")
             .addTag(AllTags.MAIN)
             .addDependencies(BaseQuests.HOSTILITY_ORB)
             .register();
@@ -134,7 +134,7 @@ public class CraftQuests
             )
             .addEnFeedback("A fair quality Charm of Looting with a faint magical sheen glistening on its surface.")
             .addZhFeedback("品质尚可的抢夺宝珠，表面闪烁着微弱的魔法光泽。")
-            .toEntry("resource/loot_charm")
+            .toEntry("mechanic/loot_charm")
             .addTag(AllTags.MAIN)
             .addDependencies(LOOT_CHARM_1)
             .register();
@@ -147,7 +147,7 @@ public class CraftQuests
             )
             .addEnFeedback("The high quality Charm of Looting, the swirl of energy swirled more than once, emitting chaotic and intense fluctuations.")
             .addZhFeedback("高等品质的抢夺宝珠，能量漩涡旋转不止，散发着混乱而强烈的波动。")
-            .toEntry("resource/loot_charm")
+            .toEntry("mechanic/loot_charm")
             .addTag(AllTags.MAIN)
             .addDependencies(LOOT_CHARM_2)
             .register();
@@ -160,7 +160,7 @@ public class CraftQuests
             )
             .addEnFeedback("The top-notch Charm of Looting exuded a brilliant and mysterious light, containing incredible miraculous power.")
             .addZhFeedback("顶级的抢夺宝珠，散发出璀璨而神秘的光芒，蕴含着不可思议的奇迹之力。")
-            .toEntry("resource/loot_charm")
+            .toEntry("mechanic/loot_charm")
             .addTag(AllTags.MAIN)
             .addDependencies(LOOT_CHARM_3)
             .register();
@@ -208,7 +208,7 @@ public class CraftQuests
             )
             .addEnFeedback("You can't infuse magic directly into an item, but by channeling the magic that is free from nature through the Infusion Pedestals, you have managed to do so. In this magic-rich environment, the process only takes a few seconds enough to complete.")
             .addZhFeedback("你无法直接将魔力灌注到物品上，但通过灌注基座引导游离于自然中的魔力，你成功做到了这一点。在这个魔力充足的环境，这个过程只需要几秒足以完成。")
-            .toEntry("power/enchant")
+            .toEntry("mage/infusion")
             .addTag(AllTags.MAIN)
             .addDependencies(BaseQuests.HOSTILITY_ORB)
             .register();

@@ -91,7 +91,7 @@ public class HostilityQuests
             .addZhDesc("获得任意恶意词条")
             .addEnFeedback("The good news is that you made it, the bad news is that you can't use them directly. It looks like you'll need to do something with them.")
             .addZhFeedback("好消息是，你成功了，坏消息是你无法直接使用它们。看来你需要对它们进行一些处理。")
-            .toEntry("power/trait")
+            .toEntry("mechanic/trait")
             .addTag(AllTags.MAIN)
             .addDependencies(CURSE_ENVY)
             .register();
@@ -106,7 +106,7 @@ public class HostilityQuests
             .addZhDesc("获得任意恶意诅咒")
             .addEnFeedback("You summoned the courage to craft more curses, and they granted you greater power, but at what cost?")
             .addZhFeedback("你鼓起勇气制作了更多的诅咒，它们赋予了你更强大的力量，但代价是什么呢？")
-            .toEntry("resource/curse")
+            .toEntry("mechanic/curse")
             .addTag(AllTags.BRANCH)
             .addDependencies(TRAIT_ITEM)
             .register();

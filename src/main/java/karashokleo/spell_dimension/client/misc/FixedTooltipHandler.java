@@ -50,10 +50,13 @@ public class FixedTooltipHandler
                 }
             }
 
-            Pair<BookEntry, Integer> entry = book.getContents().getEntryForStack(stack);
-            if (entry != null && !entry.getFirst().isLocked())
+            if (lexiconEntry == null)
             {
-                lexiconEntry = entry;
+                Pair<BookEntry, Integer> entry = book.getContents().getEntryForStack(stack);
+                if (entry != null && !entry.getFirst().isLocked())
+                {
+                    lexiconEntry = entry;
+                }
             }
 
             if (lexiconEntry == null)

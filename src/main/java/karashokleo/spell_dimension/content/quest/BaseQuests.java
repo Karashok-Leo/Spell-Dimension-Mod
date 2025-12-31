@@ -57,7 +57,7 @@ public class BaseQuests
             ))
             .addEnFeedback("It seems that with your arrival, the balance of the world has been upset, and the monsters will gradually become stronger, just like you.")
             .addZhFeedback("似乎，随着你的到来，这个世界的平衡被打破了，怪物将会和你一样逐渐变强。")
-            .toEntry("power/hostility")
+            .toEntry("mechanic/hostility")
             .addTag(AllTags.MAIN)
             .addDependencies(FIRST_DAY)
             .register();
@@ -72,7 +72,7 @@ public class BaseQuests
             )
             .addEnFeedback("Perhaps because of some kind of balance, when you kill a powerful enough monster, the magic of chaos condenses into this precious orb, which can purify a large area. Is this a choice the world has given you, or is it a salvation?")
             .addZhFeedback("或许因为某种平衡，当你击杀了足够强大的怪物后，混沌的魔力凝结成了这颗宝珠，它可以净化一大片区域。这是世界给你的一种选择，还是一种救赎？")
-            .toEntry("power/hostility")
+            .toEntry("mechanic/hostility")
             .addTag(AllTags.MAIN)
             .addDependencies(FIRST_DAY)
             .register();
