@@ -22,6 +22,7 @@ import net.spell_engine.api.spell.SpellInfo;
 import net.spell_engine.entity.SpellProjectile;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Optional;
 
 public class LocateSpell
@@ -54,9 +55,19 @@ public class LocateSpell
         // if spell prism, locate a random spot
         if (offHandStack.isOf(AllItems.SPELL_PRISM))
         {
+            List<LocateRecipe> list = world.getRecipeManager()
+                .listAllOfType(LocateRecipe.TYPE)
+                .stream()
+                .filter(recipe -> world.getRegistryKey().getValue().equals(recipe.getWorldId()))
+                .toList();
+            if (list.isEmpty())
+            {
+                // no locate recipes for this dimension
+                return;
+            }
             locateRecipe = RandomUtil.randomFromList(
                 player.getRandom(),
-                world.getRecipeManager().listAllOfType(LocateRecipe.TYPE)
+                list
             );
         } else
         {
