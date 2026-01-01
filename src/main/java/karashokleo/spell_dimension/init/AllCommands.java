@@ -18,6 +18,7 @@ import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
+import net.minecraft.text.Texts;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.TypeFilter;
 import net.spell_engine.SpellEngineMod;
@@ -101,16 +102,16 @@ public class AllCommands
         ArrayList<Text> lines = new ArrayList<>();
 
         lines.add(Text.literal("Item:").formatted(Formatting.AQUA));
-        lines.add(Text.literal(registryEntry.registryKey().getValue().toString()));
+        lines.add(Texts.bracketedCopyable(registryEntry.registryKey().getValue().toString()));
 
         lines.add(Text.literal("Tags:").formatted(Formatting.AQUA));
-        registryEntry.streamTags().map(tag -> Text.literal("#" + tag.id())).forEach(lines::add);
+        registryEntry.streamTags().map(tag -> Texts.bracketedCopyable("#" + tag.id())).forEach(lines::add);
 
         var nbt = stack.getNbt();
         if (nbt != null)
         {
             lines.add(Text.literal("Nbt:").formatted(Formatting.AQUA));
-            lines.add(Text.literal(nbt.toString()));
+            lines.add(Texts.bracketedCopyable(nbt.toString()));
         }
 
         for (Text line : lines)

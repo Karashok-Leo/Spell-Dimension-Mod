@@ -11,8 +11,8 @@ public class EssenceLootConfig
     public static final BaseConfig BASE_CONFIG = new BaseConfig(
         List.of(Dummmmmmy.TARGET_DUMMY.get()),
         0.2F,
-        200, 400,
-        0.80F, 0.96F
+        160, 560,
+        0.30F, 0.08F
     );
 
     public static final int EC_WEIGHT = 7;
@@ -45,11 +45,11 @@ public class EssenceLootConfig
 
             int randomGrade = 0;
             float f = random.nextFloat();
-            if (f >= intermediateChance)
+            if (f <= intermediateChance)
             {
                 randomGrade++;
             }
-            if (f >= advancedChance)
+            if (f <= advancedChance)
             {
                 randomGrade++;
             }
