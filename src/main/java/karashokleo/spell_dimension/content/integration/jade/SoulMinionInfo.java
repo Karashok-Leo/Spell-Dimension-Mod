@@ -1,4 +1,4 @@
-package karashokleo.spell_dimension.content.integration;
+package karashokleo.spell_dimension.content.integration.jade;
 
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.component.SoulMinionComponent;
@@ -14,8 +14,10 @@ import snownee.jade.api.IEntityComponentProvider;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
 
-public class SoulMinionInfo implements IEntityComponentProvider
+public enum SoulMinionInfo implements IEntityComponentProvider
 {
+    INSTANCE;
+
     public static final Identifier ID = SpellDimension.modLoc("soul_minion");
 
     @Override
