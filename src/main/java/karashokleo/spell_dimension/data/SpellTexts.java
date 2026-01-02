@@ -28,14 +28,14 @@ public enum SpellTexts
     LOCATE(
         "Spell Locate",
         "魔力定位",
-        "Launch a spell, if it touches a lodestone, it will consume the item in your off-hand as a key item to find the corresponding structure or biome. If found, it will shatter the lodestone with a probability of 30%% to summon a portal to the corresponding structure or biome. Press U on Lodestone to view all recipes. Or search for the structure name in EMI/REI to find it.",
-        "发射一道咒语，若其触碰到磁石，则会以消耗你副手的物品作为索引物品，寻找相应的结构或群系。若找到，则有30%%的概率击碎磁石，召唤出一个通往对应结构或群系的传送门。对磁石按U可以查看所有配方。或者在EMI/REI中搜索结构名称进行查找。"
+        "Launch a spell, if it touches a Lodestone, it will consume the item in your off-hand as a key item to find the corresponding structure or biome. If found, there is a 30%% chance to break the Lodestone and summon a portal to that structure or biome. You can look up all recipes by querying the Lodestone's uses in EMI/REI. Alternatively, search for the structure/biome name in EMI/REI to find it.",
+        "发射一道咒语，若其触碰到磁石，则会以消耗你副手的物品作为索引物品，寻找相应的结构或群系。若找到，则有30%%的概率击碎磁石，召唤出一个通往对应结构或群系的传送门。你可以在EMI/REI中对磁石查询用途以查看所有配方。或者在EMI/REI中搜索结构/群系名称进行查找。"
     ),
     SUMMON(
         "Spell Summon",
         "魔力召唤",
-        "Launch a spell, if it touches a spawner, it will use the item in your off-hand as a key item to replace the mob in the spawner. Press U on Spawner to view all recipes.",
-        "发射一道咒语，若其触碰到刷怪笼，则会以你副手的物品为索引物，替换刷怪笼中的生物。对刷怪笼按U可以查看所有配方。"
+        "Launch a spell, if it touches a Spawner, it will consume the item in your off-hand as a key item to replace the mob in the Spawner. You can look up all recipes by querying the Spawner's uses in EMI/REI.",
+        "发射一道咒语，若其触碰到刷怪笼，则会以消耗你副手的物品作为索引物品，替换刷怪笼中的生物。你可以在EMI/REI中对刷怪笼查询用途以查看所有配方。"
     ),
     PLACE(
         "Remote Manipulation",

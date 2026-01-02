@@ -86,6 +86,8 @@ public enum SDTexts
     TEXT$LOCATING("Locating: %s", "正在定位：%s"),
     TEXT$SUMMON$DISALLOW("%s can only be summoned with spell at its spawn location!", "只有在%s的生成地点才能使用魔力召唤它！"),
 
+    TEXT$SPAWNER$REMAIN("Remaining: %s", "剩余生成数量：%s"),
+
     TEXT$SOUL_MINION_INFO("%s's Soul Minion", "%s 的灵仆"),
     TEXT$SOUL_CONTROL$DAMAGE("Your body is taking %s damage!", "你的本体正受到%s点伤害！"),
 

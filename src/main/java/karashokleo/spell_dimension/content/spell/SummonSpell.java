@@ -7,8 +7,8 @@ import karashokleo.spell_dimension.content.recipe.summon.SummonRecipe;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.util.ParticleUtil;
-import karashokleo.spell_dimension.util.RandomUtil;
 import net.adventurez.init.EntityInit;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.MobSpawnerBlockEntity;
@@ -23,7 +23,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import net.spell_engine.api.spell.SpellInfo;
@@ -45,24 +44,12 @@ public class SummonSpell
             return AllItems.SPAWNER_SOUL.getSummonEntry(stack);
         }
 
-        SummonRecipe summonRecipe;
-        // if spell prism, summon a random entity
-        if (stack.isOf(AllItems.SPELL_PRISM))
+        Optional<SummonRecipe> optional = world.getRecipeManager().getFirstMatch(SummonRecipe.TYPE, player.getInventory(), world);
+        if (optional.isEmpty())
         {
-            summonRecipe = RandomUtil.randomFromList(
-                player.getRandom(),
-                world.getRecipeManager().listAllOfType(SummonRecipe.TYPE)
-            );
-        } else
-        {
-            Optional<SummonRecipe> optional = world.getRecipeManager().getFirstMatch(SummonRecipe.TYPE, player.getInventory(), world);
-            if (optional.isEmpty())
-            {
-                return Optional.empty();
-            }
-
-            summonRecipe = optional.get();
+            return Optional.empty();
         }
+        SummonRecipe summonRecipe = optional.get();
 
         return Optional.of(new SummonEntry(summonRecipe.entityType(), summonRecipe.count()));
     }
@@ -85,47 +72,54 @@ public class SummonSpell
         BlockState blockState = world.getBlockState(blockPos);
 
         if (!blockState.isOf(Blocks.SPAWNER) ||
-            !(world.getBlockEntity(blockPos) instanceof MobSpawnerBlockEntity mobSpawnerBlockEntity))
+            !(world.getBlockEntity(blockPos) instanceof MobSpawnerBlockEntity spawner))
         {
             return;
         }
 
-        Optional<SummonEntry> optional = getSummonEntry(world, player);
-        if (optional.isEmpty())
-        {
-            return;
-        }
-        if (!allowSummon(mobSpawnerBlockEntity, optional.get(), player))
-        {
-            return;
-        }
-        setSummonData(mobSpawnerBlockEntity, optional.get(), world.getRandom());
+        SpawnerExtension spawnerLogic = (SpawnerExtension) spawner.getLogic();
 
-        mobSpawnerBlockEntity.markDirty();
-        world.updateListeners(blockPos, blockState, blockState, 3);
+        ItemStack offHandStack = player.getOffHandStack();
+        if (offHandStack.isOf(AllItems.SPELL_PRISM))
+        {
+            spawnerLogic.setNoRemainAction(SpawnerExtension.NoRemainAction.NONE);
+        } else
+        {
+            Optional<SummonEntry> optional = getSummonEntry(world, player);
+            if (optional.isEmpty())
+            {
+                return;
+            }
+
+            SummonEntry summonEntry = optional.get();
+            if (!allowSummon(spawner, summonEntry, player))
+            {
+                return;
+            }
+
+            // set summon data
+            spawner.setEntityType(summonEntry.entityType(), world.getRandom());
+            spawnerLogic.setRemain(summonEntry.count());
+        }
+
+        spawner.markDirty();
+        world.updateListeners(blockPos, blockState, blockState, Block.NOTIFY_ALL);
         world.emitGameEvent(player, GameEvent.BLOCK_CHANGE, blockPos);
 
-        ParticleUtil.sparkParticleEmit(world, mobSpawnerBlockEntity.getPos().toCenterPos(), 24);
+        ParticleUtil.sparkParticleEmit(world, spawner.getPos().toCenterPos(), 24);
 
         if (player.getAbilities().creativeMode)
         {
             return;
         }
 
-        ItemStack offHandStack = player.getOffHandStack();
-        if (offHandStack.isOf(AllItems.SPAWNER_SOUL))
+        if (offHandStack.isOf(AllItems.SPELL_PRISM))
         {
             offHandStack.damage(1, player, e -> e.sendToolBreakStatus(Hand.OFF_HAND));
         } else
         {
             offHandStack.decrement(1);
         }
-    }
-
-    private static void setSummonData(MobSpawnerBlockEntity spawnerBlockEntity, SummonEntry summonEntry, Random random)
-    {
-        spawnerBlockEntity.setEntityType(summonEntry.entityType(), random);
-        ((SpawnerExtension) spawnerBlockEntity.getLogic()).setRemain(summonEntry.count());
     }
 
     private static final HashMap<EntityType<?>, Identifier> WORLD_RESTRICTIONS = new HashMap<>();

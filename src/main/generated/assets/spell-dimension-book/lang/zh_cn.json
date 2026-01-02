@@ -130,7 +130,7 @@
   "book.spell-dimension-book.magic_guidance.mage.essence.base.text": "也许你已经注意到，法术命中时有概率掉落一些魔法精华。它们是魔法师成长路上的重要材料，可以用来合成一些魔法物品，比如法术书、符文和束魔精华。",
   "book.spell-dimension-book.magic_guidance.mage.essence.base.title": "基础精华",
   "book.spell-dimension-book.magic_guidance.mage.essence.description": "魔法凝结而成的微妙结晶",
-  "book.spell-dimension-book.magic_guidance.mage.essence.loot.text": "基础精华的掉落概率是20.0%%，你佩戴的高级掠夺宝珠可以放大此概率。当法术目标的等级大于200时，有80.0%%的概率掉落中级精华，当法术目标的等级大于400时，有96.0%%的概率掉落高级精华。",
+  "book.spell-dimension-book.magic_guidance.mage.essence.loot.text": "基础精华的掉落概率是20.0%%，你佩戴的高级掠夺宝珠可以放大此概率。当法术目标的等级大于160时，有30.0%%的概率掉落中级精华，当法术目标的等级大于560时，有8.0%%的概率掉落高级精华。",
   "book.spell-dimension-book.magic_guidance.mage.essence.name": "魔法精华",
   "book.spell-dimension-book.magic_guidance.mage.mending.description": "完好如初",
   "book.spell-dimension-book.magic_guidance.mage.mending.mending.text": "修复精华可以完全修复一件物品, 并且清除其累积的修复惩罚。修复精华不能合成，只能从战利品中获取。\n",

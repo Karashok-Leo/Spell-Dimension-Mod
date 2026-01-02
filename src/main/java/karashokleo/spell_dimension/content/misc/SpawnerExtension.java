@@ -3,44 +3,63 @@ package karashokleo.spell_dimension.content.misc;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
-
-import java.util.function.BiConsumer;
+import net.minecraft.world.MobSpawnerLogic;
 
 public interface SpawnerExtension
 {
     String KEY_REMAIN = "Remain";
+    String KEY_NO_REMAIN_ACTION = "NoRemainAction";
 
     int DEFAULT_REMAIN = 20;
 
-    NbtCompound getEntityNbt();
+    default NbtCompound getEntityNbt()
+    {
+        throw new UnsupportedOperationException();
+    }
 
-    int getRemain();
+    default int getRemain()
+    {
+        throw new UnsupportedOperationException();
+    }
 
-    void setRemain(int remain);
+    default void setRemain(int remain)
+    {
+        throw new UnsupportedOperationException();
+    }
 
     default boolean noRemain()
     {
         return this.getRemain() <= 0;
     }
 
-    NoRemainAction getNoRemainAction();
+    default NoRemainAction getNoRemainAction()
+    {
+        throw new UnsupportedOperationException();
+    }
 
-    void setNoRemainAction(NoRemainAction action);
+    default void setNoRemainAction(NoRemainAction action)
+    {
+        throw new UnsupportedOperationException();
+    }
 
     enum NoRemainAction
     {
-        BREAK((world, pos) -> world.breakBlock(pos, false));
+        NONE((world, pos, spawnerLogic) ->
+        {
+        }),
+        BREAK((world, pos, spawnerLogic) -> world.breakBlock(pos, false));
 
-        final BiConsumer<ServerWorld, BlockPos> action;
+        public final SpawnerLogicConsumer action;
 
-        NoRemainAction(BiConsumer<ServerWorld, BlockPos> action)
+        NoRemainAction(SpawnerLogicConsumer action)
         {
             this.action = action;
         }
+    }
 
-        public void action(ServerWorld world, BlockPos pos)
-        {
-            action.accept(world, pos);
-        }
+    @FunctionalInterface
+    interface SpawnerLogicConsumer
+    {
+        void accept(ServerWorld world, BlockPos pos, MobSpawnerLogic spawnerLogic);
     }
 }

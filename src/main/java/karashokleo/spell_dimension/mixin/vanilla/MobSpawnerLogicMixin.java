@@ -2,6 +2,8 @@ package karashokleo.spell_dimension.mixin.vanilla;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import karashokleo.spell_dimension.content.misc.SpawnerExtension;
+import net.minecraft.block.Block;
+import net.minecraft.block.entity.MobSpawnerBlockEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
@@ -24,11 +26,27 @@ public abstract class MobSpawnerLogicMixin implements SpawnerExtension
     @Nullable
     private MobSpawnerEntry spawnEntry;
 
+    @Shadow
+    protected abstract void setSpawnEntry(@Nullable World world, BlockPos pos, MobSpawnerEntry spawnEntry);
+
     @Unique
     private int remain = DEFAULT_REMAIN;
 
     @Unique
     private NoRemainAction noRemainAction = NoRemainAction.BREAK;
+
+    @ModifyExpressionValue(
+        method = "serverTick",
+        at = @At(
+            value = "INVOKE",
+            target = "Ljava/util/Optional;isEmpty()Z",
+            ordinal = 0
+        )
+    )
+    private boolean cancelSpawn_inject_serverTick(boolean original)
+    {
+        return this.noRemain() || original;
+    }
 
     @Inject(
         method = "serverTick",
@@ -40,27 +58,19 @@ public abstract class MobSpawnerLogicMixin implements SpawnerExtension
     private void updateRemain_inject_serverTick(ServerWorld world, BlockPos pos, CallbackInfo ci)
     {
         this.remain--;
-    }
-
-    @ModifyExpressionValue(
-        method = "serverTick",
-        at = @At(value = "INVOKE", target = "Ljava/util/Optional;isEmpty()Z")
-    )
-    private boolean cancelSpawn_inject_serverTick(boolean original)
-    {
-        return this.noRemain() || original;
-    }
-
-    @Inject(
-        method = "serverTick",
-        at = @At("HEAD")
-    )
-    private void noRemainAction_inject_serverTick(ServerWorld world, BlockPos pos, CallbackInfo ci)
-    {
         if (this.noRemain())
         {
-            this.getNoRemainAction().action(world, pos);
+            this.setSpawnEntry(world, pos, new MobSpawnerEntry());
+            this.getNoRemainAction().action.accept(world, pos, (MobSpawnerLogic) (Object) this);
         }
+
+        if (!(world.getBlockEntity(pos) instanceof MobSpawnerBlockEntity spawner))
+        {
+            return;
+        }
+
+        spawner.markDirty();
+        world.updateListeners(pos, spawner.getCachedState(), spawner.getCachedState(), Block.NOTIFY_ALL);
     }
 
     @Inject(
@@ -69,7 +79,8 @@ public abstract class MobSpawnerLogicMixin implements SpawnerExtension
     )
     private void inject_readNbt(World world, BlockPos pos, NbtCompound nbt, CallbackInfo ci)
     {
-        this.remain = nbt.contains(KEY_REMAIN) ? nbt.getShort(KEY_REMAIN) : DEFAULT_REMAIN;
+        this.remain = nbt.contains(KEY_REMAIN) ? nbt.getInt(KEY_REMAIN) : DEFAULT_REMAIN;
+        this.noRemainAction = nbt.contains(KEY_NO_REMAIN_ACTION) ? NoRemainAction.values()[nbt.getInt(KEY_NO_REMAIN_ACTION)] : NoRemainAction.BREAK;
     }
 
     @Inject(
@@ -78,7 +89,8 @@ public abstract class MobSpawnerLogicMixin implements SpawnerExtension
     )
     private void inject_writeNbt(NbtCompound nbt, CallbackInfoReturnable<NbtCompound> cir)
     {
-        nbt.putShort(KEY_REMAIN, (short) this.remain);
+        nbt.putInt(KEY_REMAIN, this.remain);
+        nbt.putInt(KEY_NO_REMAIN_ACTION, this.noRemainAction.ordinal());
     }
 
     @Override
