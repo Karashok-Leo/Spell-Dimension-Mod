@@ -3,6 +3,7 @@ package karashokleo.spell_dimension.init;
 import artifacts.registry.ModItems;
 import com.kyanite.deeperdarker.content.DDEntities;
 import com.spellbladenext.Spellblades;
+import com.teamremastered.endrem.registry.ERItems;
 import karashokleo.l2hostility.L2Hostility;
 import karashokleo.l2hostility.content.item.ConsumableItems;
 import karashokleo.l2hostility.content.item.TrinketItems;
@@ -136,6 +137,8 @@ public class AllTags
     public static final TagKey<Item> TIER_2_ARMORS = TagUtil.itemTag(new Identifier("rpg_series:tier_2_armors"));
     public static final TagKey<Item> TIER_3_WEAPONS = TagUtil.itemTag(new Identifier("rpg_series:tier_3_weapons"));
     public static final TagKey<Item> TIER_3_ARMORS = TagUtil.itemTag(new Identifier("rpg_series:tier_3_armors"));
+    // End Remastered
+    public static final TagKey<Item> ENDREM_EYES = TagUtil.itemTag("endrem_eyes");
 
     public static final TagKey<EntityType<?>> ZOMBIES = TagUtil.entityTypeTag(new Identifier("zombies"));
     public static final TagKey<EntityType<?>> SKELETONS = EntityTypeTags.SKELETONS;
@@ -271,6 +274,24 @@ public class AllTags
             .add(MythicItems.Copper.COPPER.getNugget());
         SpellDimension.ITEM_TAGS.getOrCreateContainer(getRuneTag(SpellSchools.LIGHTNING, "_medium"))
             .add(Items.COPPER_INGOT);
+
+        SpellDimension.ITEM_TAGS.getOrCreateContainer(ENDREM_EYES)
+            .add(ERItems.BLACK_EYE)
+            .add(ERItems.COLD_EYE)
+            .add(ERItems.CORRUPTED_EYE)
+            .add(ERItems.LOST_EYE)
+            .add(ERItems.NETHER_EYE)
+            .add(ERItems.OLD_EYE)
+            .add(ERItems.ROGUE_EYE)
+            .add(ERItems.CURSED_EYE)
+            .add(ERItems.EVIL_EYE)
+            .add(ERItems.GUARDIAN_EYE)
+            .add(ERItems.MAGICAL_EYE)
+            .add(ERItems.WITHER_EYE)
+            .add(ERItems.WITCH_EYE)
+            .add(ERItems.UNDEAD_EYE)
+            .add(ERItems.EXOTIC_EYE)
+            .add(ERItems.CRYPTIC_EYE);
 
         SpellDimension.BLOCK_TAGS.getOrCreateContainer(LOCATE_TARGET)
             .add(

@@ -69,7 +69,7 @@ public class OldChampionEntry extends BaseEntryProvider
                 等级: %d+
                 \\
                 \\
-                生成于**古英雄的坟墓**(soulsweapons:champions_grave)内。
+                生成于**古英雄的陵墓**(soulsweapons:champions_grave)内。
                 \\
                 \\
                 可用月石罗盘在主世界寻找该结构。
