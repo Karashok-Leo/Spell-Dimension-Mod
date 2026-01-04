@@ -1,0 +1,21 @@
+{
+  "name": "末影人突变体",
+  "icon": "mutantmonsters:endersoul_hand",
+  "category": "spell-dimension:boss/t5",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "mutantmonsters:endersoul_hand",
+      "title": "末影人突变体",
+      "text": "$(br)$(key)末影人$()自然生成时有小概率突变转化为$(key)末影人突变体$()。$(br)也可用$(mage/spell#summon)魔力召唤$()或$(key)喷溅型突变药水$()人为生成。$(br2)击败$(key)末影人突变体$()后掉落$(key)末影之手$()，可用于合成$(mage/spell#break)远端操控$()。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "mutantmonsters:mutant_enderman",
+      "scale": 1.0,
+      "offset": 0.0
+    }
+  ]
+}

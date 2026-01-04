@@ -1,0 +1,21 @@
+{
+  "name": "锻造",
+  "icon": "fusion-smithing:fusion_smithing_template",
+  "category": "spell-dimension:mechanic",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "equipment_standard:reforge_table,equipment_standard:reforge_scroll_lv1,equipment_standard:reforge_scroll_lv2,equipment_standard:reforge_scroll_lv3",
+      "title": "重铸",
+      "text": "$(br)你获得的每件工具和盔甲都有特殊的$(bold)词条$()，可以提供额外的属性加成。$(br2)你可以使用$(key)重铸卷轴$()在$(key)重铸台$()上重铸你的装备，越高级的$(key)重铸卷轴$()能获得较好$(bold)词条$()的概率越高。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "fusion-smithing:fusion_smithing_template",
+      "title": "融锻",
+      "text": "$(br)$(key)融锻模板$()允许你将一件装备的$(bold)附魔$()、$(bold)束魔强化$()等转移到另一件装备上。$(br2)在$(key)锻造台$()上使用它。",
+      "link_recipe": true
+    }
+  ]
+}

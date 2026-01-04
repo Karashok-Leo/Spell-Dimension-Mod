@@ -1,0 +1,18 @@
+{
+  "name": "法术棱镜",
+  "icon": "spell-dimension:spell_prism",
+  "category": "spell-dimension:mage",
+  "sortnum": 22,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "spell-dimension:spell_prism",
+      "text": "$(br)$(key)法术棱镜$()可以使你的法术伤害能够$(bold)穿透$()魔法防御。$(br2)一个$(key)法术棱镜$()只能使用$(bold)4$()次，你无法为它附魔$(bold)经验修补$()或$(bold)魔力修补$()。但它造价低廉，是前期破除敌人防御的有效手段之一。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br)除此之外，$(key)法术棱镜$()还能$(bold)增强$()一些$(key)通用学派$()法术的效果：$(br)$(list)$(mage/spell#locate)魔力定位$()：随机定位一处地点。$(br)$(list)$(mage/spell#summon)魔力召唤$()：刷怪笼剩余数量归零后不再自毁。$(br)$(list)$(mage/spell#break)远端瓦解$()：破坏时附带精准采集效果。$(br)$(list)魔力之光：覆盖更大范围。"
+    }
+  ]
+}

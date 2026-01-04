@@ -1,0 +1,34 @@
+{
+  "name": "昼从者 & 夜伏者",
+  "icon": "soulsweapons:chaos_orb",
+  "category": "spell-dimension:boss/t1",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "soulsweapons:chaos_orb",
+      "title": "昼从者 & 夜伏者",
+      "text": "等级：<level_t1>$(br2)使用$(key)混沌宝珠$()召唤。$(br2)$(key)昼从者$()和$(key)夜伏者$()均携带强大的$(mechanic/hostility#spell_trait)法术词条$()，建议使用$(mage/spell_container)法术容器$()应对。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "spell-dimension:celestial_debris",
+      "title": "昼从者 & 夜伏者",
+      "text": "$(br)击败$(key)昼从者$()和$(key)夜伏者$()后掉落$(key)日月星碎$()，可用于合成$(boss/t1/dragon)无尽星辉$()。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "soulsweapons:day_stalker",
+      "scale": 1.0,
+      "offset": 0.0
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "soulsweapons:night_prowler",
+      "scale": 1.0,
+      "offset": 0.0
+    }
+  ]
+}

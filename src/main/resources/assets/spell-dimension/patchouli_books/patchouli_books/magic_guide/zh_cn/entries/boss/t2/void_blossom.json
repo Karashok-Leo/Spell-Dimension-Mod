@@ -1,0 +1,27 @@
+{
+  "name": "虚空之花",
+  "icon": "bosses_of_mass_destruction:void_thorn",
+  "category": "spell-dimension:boss/t2",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "bosses_of_mass_destruction:void_lily",
+      "title": "虚空之花",
+      "text": "等级：<level_t2>$(br2)生成于$(bold)主世界地底的洞穴$()[$(copy:bosses_of_mass_destruction:void_blossom)bosses_of_mass_destruction:void_blossom$()]内。$(br)可用$(key)虚空百合$()在$(bold)主世界$()寻找该结构。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "bosses_of_mass_destruction:void_thorn,bosses_of_mass_destruction:crystal_fruit",
+      "text": "$(br)$(key)虚空之花$()生命力极强，建议在开战前准备好$(key)法术诅咒$()魔咒以减少其治疗量。$(br2)击败$(key)虚空之花$()后掉落$(key)虚空荆棘$()，可用于合成$(boss/t1/day_night)混沌宝珠$()，同时还会掉落$(key)水晶果实$()，可用于合成$(mechanic/loot_charm)混沌抢夺宝珠$()。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "bosses_of_mass_destruction:void_blossom",
+      "scale": 1.0,
+      "offset": -4.5
+    }
+  ]
+}

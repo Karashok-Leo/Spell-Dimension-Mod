@@ -1,0 +1,65 @@
+{
+  "name": "莱特兰·恶意",
+  "icon": "l2hostility:teleport",
+  "category": "spell-dimension:mechanic",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "tag:l2hostility:trait_item",
+      "title": "莱特兰·恶意",
+      "text": "$(br)游戏采用$(bold)莱特兰·恶意$()控制$(key)难度$()。玩家杀死强大怪物时增加$(key)难度$()，死亡时降低$(key)难度$()。怪物生成时会带有特殊能力，称为$(key)“词条”$()。$(br2)怪物的$(key)等级$()越高，它们的$(bold)伤害$()与$(bold)血量$()等属性也就越高，拥有的$(key)词条$()越强大。每一种$(key)词条$()都有独特的应对方法。"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "l2hostility:invisible,l2hostility:repelling,l2hostility:pulling",
+      "title": "隐身/排斥/吸引",
+      "text": "$(br)带有$(key)词条$()的怪物虽然强大，但并非不可反制。接下来将介绍一些$(key)词条$()的克制方法。$(br)$(list)$(bold)隐身$()：佩戴$(key)侦测眼镜$()可以看到隐身的怪物。$(br)$(list)$(bold)排斥/吸引$()：$(key)绝缘$()魔咒可以缓解目标对你的排斥/吸引效果。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "l2hostility:weakness,l2hostility:slowness,l2hostility:poison,l2hostility:wither,l2hostility:blindness,l2hostility:nausea,l2hostility:levitation,l2hostility:soul_burner,l2hostility:freezing,l2hostility:cursed",
+      "title": "负面效果词条",
+      "text": "$(list)$(bold)虚弱/流沙/剧毒/凋零/致盲/扭曲/升空/业火/寒流/诅咒$()：$(br)$(key)圣光守护之戒$()或$(key)诅咒扭曲之戒$()可以让你免疫几乎所有的负面效果。但作为替代，你也可以使用$(boss/t4/old_champion)护心镜$()的$(bold)专属附魔$()来免疫特定的负面效果。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "l2hostility:regenerate,l2hostility:undying,l2hostility:dispell",
+      "title": "再生/不死/破魔",
+      "text": "$(list)$(bold)再生/不死$()：对怪物施加诅咒效果可以阻止它们回血。这可以通过$(key)法术诅咒$()魔咒来实现。$(br)$(list)$(bold)破魔$()：$(key)法术穿透$()魔咒、$(key)法术棱镜$()、$(key)破咒遗骨$()都可以使法术伤害穿透破魔的保护。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "l2hostility:adaptive",
+      "title": "适应",
+      "text": "$(list)$(bold)适应$()：除了使用各种负面效果，你还可以通过$(bold)切换$()法术来刷新怪物的适应性。每种法术都相当于一种伤害类型。$(key)反适应$()魔咒可以使法术更难以被适应，或者使用$(key)法术棱镜$()或$(key)破咒遗骨$()来穿透适应的保护。",
+      "anchor": "adaptive",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "l2hostility:corrosion,l2hostility:erosion,l2hostility:split,l2hostility:teleport",
+      "title": "腐蚀/风蚀/分裂/传送",
+      "text": "$(list)$(bold)腐蚀/风蚀$()：$(mechanic/durability#hardened)硬化$()魔咒可以大幅减少怪物对你装备造成的耐久损耗。$(br)$(list)$(bold)分裂$()：$(key)分裂抑制$()魔咒可以防止怪物分裂。$(br)$(list)$(bold)传送$()：你可以使用$(key)禁锢诅咒之戒$()或者$(key)黑炎弹$()对怪物施加$(key)禁锢$()效果，防止它们传送。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "tag:spell-dimension:spell_trait_item",
+      "title": "法术词条",
+      "text": "$(list)$(bold)法术词条$()：你可以使用$(key)圣光守护之戒$()或者$(mage/spell_container)法术容器$()来降低敌人对你的法术伤害，在游戏后期，你可以通过$(key)魔法免疫$()来完全免疫敌人的法术伤害。",
+      "anchor": "spell_trait",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "l2hostility:arena,l2hostility:ragnarok",
+      "title": "领域压制/诸神黄昏",
+      "text": "$(list)$(bold)领域压制$()：你可以使用$(mage/spell#place)远端操控$()法术或者$(mage/spell#break)远端瓦解$()法术在领域内破坏或放置方块。$(br)$(list)$(bold)诸神黄昏$()：$(key)解咒口袋$()可以自动帮你解除装备上的封印。",
+      "anchor": "arena",
+      "link_recipe": true
+    }
+  ]
+}

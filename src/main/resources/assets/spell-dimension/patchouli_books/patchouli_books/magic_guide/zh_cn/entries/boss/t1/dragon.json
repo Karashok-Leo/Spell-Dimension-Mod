@@ -1,0 +1,28 @@
+{
+  "name": "末影龙",
+  "icon": "minecraft:dragon_head",
+  "category": "spell-dimension:boss/t1",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "spell-dimension:celestial_luminary,tag:spell-dimension:endrem_eyes",
+      "title": "末影龙",
+      "text": "等级：<level_t1>$(br2)欲进入末地，你需要先集齐$(bold)12$()个$(key)特殊的眼睛$()。这些$(key)特殊的眼睛$()来自于各个Boss的战利品。$(br2)击败$(boss/t1/day_night)昼从者和夜伏者$()后，合成并使用$(key)无尽星辉$()解锁$(key)终末阶段$()，赋予自己进入末地的$(bold)权柄$()。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:dragon_egg,dragonloot:dragon_scale",
+      "title": "龙蛋 & 龙鳞",
+      "text": "$(br)$(key)末影龙$()必定带有$(key)黑洞$()词条，它的火球爆炸时会施放$(key)黑洞$()法术，请小心躲避。$(br2)击败$(key)末影龙$()后掉落$(key)龙蛋$()，可用于召唤$(boss/t1/the_eye)眼球$()，同时还会掉落$(key)龙鳞$()，可用于合成$(mechanic/loot_charm)奇迹抢夺宝珠$()。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "minecraft:ender_dragon",
+      "scale": 1.5,
+      "offset": -5.0
+    }
+  ]
+}

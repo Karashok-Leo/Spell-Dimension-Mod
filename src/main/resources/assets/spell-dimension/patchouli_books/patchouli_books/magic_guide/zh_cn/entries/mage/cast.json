@@ -1,0 +1,14 @@
+{
+  "name": "施法",
+  "icon": "wizards:wand_novice",
+  "category": "spell-dimension:mage",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "tag:wizards:wands,tag:wizards:staves",
+      "title": "施法",
+      "text": "$(br)施法是魔法师的基本功。魔法师需要手持$(key)施法物品$()才能施法。常见的$(key)施法物品$()有$(bold)法杖、剑和一些其他武器$()。$(br2)魔法师能够施展哪些法术取决于他们的$(key)法术池$()。魔法师的$(key)法术池$()由他们手持的物品和装备的$(mage/book)法术书$()决定。"
+    }
+  ]
+}

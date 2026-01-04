@@ -1,0 +1,21 @@
+{
+  "name": "骷髅突变体",
+  "icon": "mutantmonsters:mutant_skeleton_skull",
+  "category": "spell-dimension:boss/t5",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "mutantmonsters:mutant_skeleton_skull,mutantmonsters:mutant_skeleton_rib_cage,mutantmonsters:mutant_skeleton_pelvis",
+      "title": "骷髅突变体",
+      "text": "$(br)$(key)骷髅$()自然生成时有小概率突变转化为$(key)骷髅突变体$()。$(br)也可用$(mage/spell#summon)魔力召唤$()或$(key)喷溅型突变药水$()人为生成。$(br2)击败$(key)骷髅突变体$()后掉落$(key)骷髅突变体头颅/肋架骨/盆骨$()，可用于合成$(boss/t2/graveyard_lich#staff)不祥的骨杖残片$()。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "mutantmonsters:mutant_skeleton",
+      "scale": 1.0,
+      "offset": 0.0
+    }
+  ]
+}

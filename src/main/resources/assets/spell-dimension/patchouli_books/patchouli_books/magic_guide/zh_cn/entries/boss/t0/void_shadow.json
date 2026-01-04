@@ -1,0 +1,37 @@
+{
+  "name": "虚空之影",
+  "icon": "adventurez:source_stone",
+  "category": "spell-dimension:boss/t0",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "voidz:void_portal",
+      "title": "虚空之影",
+      "text": "等级：<level_t0>$(br2)击败$(boss/t1/the_eye)眼球$()后将生成一个$(bold)浮岛$()，通过其上的$(key)传送门$()可进入$(key)虚空之影$()的$(bold)领域$()。$(br2)在$(key)虚空之影$()的$(bold)领域$()里你无法手动放置或破坏方块。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br)当$(key)虚空之影$()至少有一半生命值时，你可以通过击杀它召唤的$(key)侍从$()对其本体造成伤害。每次击杀造成的伤害不会超过$(key)虚空之影$()的最大生命值的$(bold)5%$()。$(br2)当$(key)虚空之影$()只剩下不到一半生命值时，它将进入$(bold)狂暴$()状态。此时如果你摧毁了平台上的所有$(key)虚空碎片$()，它将停止围绕平台旋转，并来到平台中心与你决战。"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "adventurez:void_shadow",
+      "scale": 1.0,
+      "offset": 0.4
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "adventurez:void_shade",
+      "scale": 1.0,
+      "offset": 0.3
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "adventurez:void_fragment",
+      "scale": 1.0,
+      "offset": 0.4
+    }
+  ]
+}

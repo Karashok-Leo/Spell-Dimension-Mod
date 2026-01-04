@@ -1,0 +1,19 @@
+{
+  "name": "诅咒",
+  "icon": "l2hostility:curse_of_envy",
+  "category": "spell-dimension:mechanic",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "tag:spell-dimension:hostility_curse",
+      "title": "诅咒",
+      "text": "佩戴$(key)诅咒$()可以获取一些特殊的资源或是带来一些战斗力增幅，但会带来一些负面影响。$(br2)$(key)嫉妒诅咒$()是最重要的、也是玩家应该最先制作的$(key)诅咒$()，它会让你在击杀敌人时有概率掉落$(bold)词条物品$()。$(bold)词条物品$()是制作各种高级饰品或附魔书的$(bold)重要材料$()。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br)$(key)傲慢诅咒$()和$(key)暴怒诅咒$()是游戏后期的$(key)诅咒$()，可以成倍提升玩家的战斗力，但需要玩家处于$(mechanic/difficulty_tier#nightmare)梦魇难度层级$()时才能佩戴。",
+      "anchor": "nightmare"
+    }
+  ]
+}

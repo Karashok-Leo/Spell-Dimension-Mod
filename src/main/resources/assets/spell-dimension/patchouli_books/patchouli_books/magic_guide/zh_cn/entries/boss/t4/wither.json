@@ -1,0 +1,21 @@
+{
+  "name": "凋灵",
+  "icon": "minecraft:nether_star",
+  "category": "spell-dimension:boss/t4",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "soulsweapons:shard_of_uncertainty",
+      "title": "凋灵",
+      "text": "等级：<level_t4>$(br2)击败$(key)凋灵$()后掉落$(key)不确定性的残片$()，可用于召唤$(boss/t3/chaos_monarch)混沌君主$()。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "minecraft:wither",
+      "scale": 1.0,
+      "offset": 0.0
+    }
+  ]
+}

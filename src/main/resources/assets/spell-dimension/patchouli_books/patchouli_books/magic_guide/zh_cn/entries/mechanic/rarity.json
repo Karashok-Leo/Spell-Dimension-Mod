@@ -1,0 +1,27 @@
+{
+  "name": "物品稀有度",
+  "icon": "spell-dimension:random_rare_material",
+  "category": "spell-dimension:mechanic",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "spell-dimension:random_common_material,spell-dimension:random_uncommon_material,spell-dimension:random_rare_material,spell-dimension:random_epic_material,spell-dimension:random_legendary_material,spell-dimension:random_common_gear,spell-dimension:random_uncommon_gear,spell-dimension:random_rare_gear,spell-dimension:random_epic_gear,spell-dimension:random_legendary_gear",
+      "title": "物品稀有度",
+      "text": "所有材料和装备被分为不同的$(key)稀有度$()，从低到高分别是$(bold)普通$()(common)、$(bold)不凡$()(uncommon)、$(bold)稀有$()(rare)、$(bold)史诗$()(epic)和$(bold)传奇$()(legendary)。$(br2)$(welcome/emi#search)搜索$()特定的标签（以$(bold)#$()起始）可查看对应的物品。$(br2)接下来将展示各稀有度物品对应的搜索关键词：",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(list)普通材料：$(copy:#spell-dimension:common/material)#spell-dimension:common/material$()$(br)$(list)不凡材料：$(copy:#spell-dimension:uncommon/material)#spell-dimension:uncommon/material$()$(br)$(list)罕见材料：$(copy:#spell-dimension:rare/material)#spell-dimension:rare/material$()$(br)$(list)史诗材料：$(copy:#spell-dimension:epic/material)#spell-dimension:epic/material$()$(br)$(list)传奇材料：$(copy:#spell-dimension:legendary/material)#spell-dimension:legendary/material$()"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br2)如果你想搜索$(bold)武器$()、$(bold)盔甲$()或$(t:包括武器和装备)$(bold)装备$()，只需将上述关键词作如下替换：$(br)$(list)武器：material -> $(copy:weapon)weapon$()$(br)$(list)盔甲：material -> $(copy:armor)armor$()$(br)$(list)装备：material -> $(copy:gear)gear$()",
+      "anchor": "gear"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br2)如果你觉得关键词太长，可以只输入一部分。$(br2)例如：$(br2)$(copy:#spell-dimension:epic/armor)#spell-dimension:epic/armor$()简化为$(copy:#epic/armor)#epic/armor$()也能得到相同的结果。$(br2)但记住，$(bold)不要省略前面的#符号$()。"
+    }
+  ]
+}

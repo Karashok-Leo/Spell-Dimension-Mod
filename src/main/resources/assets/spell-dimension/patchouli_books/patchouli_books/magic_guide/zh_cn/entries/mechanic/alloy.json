@@ -1,0 +1,40 @@
+{
+  "name": "合金冶炼",
+  "icon": "alloy_forgery:adamantite_block_forge_controller",
+  "category": "spell-dimension:mechanic",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "tag:spell-dimension:forge_controller/1,tag:spell-dimension:forge_controller/2,tag:spell-dimension:forge_controller/3",
+      "title": "合金冶炼",
+      "text": "$(br)$(key)合金冶炼$()是$(bold)提高矿石产量$()的简单方法。但更重要的是，它可以让你合成一些$(bold)特殊的物品$()。$(br2)要建造一个冶炼炉，只需按照图中所示的指南，使用$(key)冶炼控制器方块$()及其支持的任意$(key)炉壁方块$()组合即可。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "spell-dimension-book:textures/alloy_forge/1.png",
+        "spell-dimension-book:textures/alloy_forge/2.png",
+        "spell-dimension-book:textures/alloy_forge/3.png"
+      ],
+      "text":"$(key)炉壁方块$()是指多方块结构中除控制器以外的其他方块。",
+      "border": true
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br)高级的冶炼炉有着$(bold)更快的速度$()和$(bold)更大的燃料容量$()，并且支持处理$(bold)更多配方$()。$(br2)以下是各等级冶炼炉所需的$(key)冶炼控制器方块$()和可用的$(key)炉壁方块$()：$(br)$(list)$(bold)1级$()：$(br)$(list2)$(key)石砖冶炼炉$()$(list3)石砖冶炼控制器$(list3)石砖炉壁：$(list4)石砖$(list4)雕纹石砖"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br)$(list2)$(key)红砖冶炼炉$()$(list3)红砖冶炼控制器$(list3)红砖炉壁：$(list4)红砖块$(br)$(list2)$(key)深板岩砖冶炼炉$()$(list3)深板岩砖冶炼控制器$(list3)深板岩砖炉壁：$(list4)深板岩瓦$(list4)磨制深板岩$(list4)雕纹深板岩"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br)$(list)$(bold)2级$()：$(br)$(list2)$(key)海晶石砖冶炼炉$()$(list3)海晶石砖冶炼控制器$(list3)海晶石砖炉壁：$(list4)海晶石砖$(br)$(list2)$(key)磨制黑石冶炼炉$()$(list3)磨制黑石冶炼控制器$(list3)磨制黑石炉壁：$(list4)磨制黑石$(list4)磨制黑石砖$(list4)雕纹磨制黑石"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br)$(list)$(bold)3级$()：$(br)$(list2)$(key)末地石砖冶炼炉$()$(list3)末地石砖冶炼控制器$(list3)末地石砖炉壁：$(list4)末地石砖$(br)$(list2)$(key)精金锻造炉$()$(list3)精金锻造控制器$(list3)精金炉壁：$(list4)精金块"
+    }
+  ]
+}

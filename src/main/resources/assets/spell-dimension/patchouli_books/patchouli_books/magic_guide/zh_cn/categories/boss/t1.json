@@ -1,0 +1,7 @@
+{
+  "name": "T1级别",
+  "description": "此处列举了所有T1级别的Boss信息。",
+  "icon": "soulsweapons:chaos_orb",
+  "parent": "spell-dimension:boss",
+  "sortnum": 4
+}

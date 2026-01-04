@@ -1,0 +1,23 @@
+{
+  "name": "book.spell-dimension-book.magic_guidance.name",
+  "landing_text": "text.spell-dimension.mage_book.1",
+  "version": "X",
+  "model": "spell-dimension:magic_guide",
+  "creative_tab": "spell-dimension:sd_misc",
+  "use_resource_pack": true,
+  "show_toasts": false,
+  "use_blocky_font ": true,
+  "macros": {
+    "<level_t4>": "$(bold)80+$()",
+    "<level_t3>": "$(bold)160+$()",
+    "<level_t2>": "$(bold)320+$()",
+    "<level_t1>": "$(bold)560+$()",
+    "<level_t0>": "$(bold)880+$()",
+    "$(key)": "$(#b0b)$(bold)",
+    "$(welcome": "$(l:spell-dimension:welcome",
+    "$(mage": "$(l:spell-dimension:mage",
+    "$(boss": "$(l:spell-dimension:boss",
+    "$(mechanic": "$(l:spell-dimension:mechanic",
+    "$(util": "$(l:spell-dimension:util"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "name": "T3级别",
+  "description": "此处列举了所有T3级别的Boss信息。",
+  "icon": "deeperdarker:soul_crystal",
+  "parent": "spell-dimension:boss",
+  "sortnum": 2
+}

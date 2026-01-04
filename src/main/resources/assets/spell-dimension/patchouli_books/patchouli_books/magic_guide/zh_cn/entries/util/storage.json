@@ -1,0 +1,48 @@
+{
+  "name": "存储",
+  "icon": "toms_storage:ts.inventory_connector",
+  "category": "spell-dimension:util",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "sophisticatedbackpacks:backpack,sophisticatedbackpacks:copper_backpack,sophisticatedbackpacks:iron_backpack,sophisticatedbackpacks:gold_backpack,sophisticatedbackpacks:diamond_backpack,sophisticatedbackpacks:netherite_backpack",
+      "title": "背包",
+      "text": "$(br)$(key)背包$()提供了额外的存储空间，你可以将其装备至$(key)饰品栏$()，按 $(bold)B$() 打开。$(br2)你可以使用$(key)铁锭$()、$(key)金锭$()、$(key)钻石$()等材料升级背包（在$(bold)工作台$()上合成，详情请$(welcome/emi#ru)查看配方$()），高级背包提供了更大的存储容量和更多的升级插槽。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:smelting",
+      "title": "提示",
+      "recipe": "spell-dimension:misc/rotten_flesh2leather",
+      "text": "$(br)如果你觉得皮革难以获取，可以试试这个配方。"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "toms_storage:ts.inventory_connector,toms_storage:ts.storage_terminal,toms_storage:ts.crafting_terminal",
+      "title": "汤姆的简易存储",
+      "text": "$(br)在你的箱子（或者桶等其他容器）旁放置$(key)存储连接器$()与$(key)存储终端$()或者$(key)合成终端$()，之后你便可以通过$(key)终端$()统一管理所有箱子里的物品。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "spell-dimension-book:textures/storage_system.png"
+      ],
+      "text": "箱子必须与$(key)存储连接器$()相连，才能被$(key)终端$()访问。",
+      "border": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:beacon,toms_storage:ts.adv_wireless_terminal,kibe:chunk_loader",
+      "title": "无线存储",
+      "text": "$(br)建造一个$(bold)4$()级以上的$(key)信标$()，或将你的存储系统安置在足够高的$(mechanic/ocean#pivot)识之枢纽$()（$(key)识之基座$()层数大于$(bold)4$()层）旁边，使用$(key)高级无线终端$()绑定到终端上，并使用$(key)区块加载器$()加载区块，即可实现跨维度远距离访问你的存储系统。",
+      "link_recipe": true,
+      "anchor": "wireless"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br)需要特别说明的是：携带NBT标签的物品是指带有额外数据的物品，包括$(bold)已附魔物品$()、$(bold)有耐久度的物品$()等，它们通常无法堆叠。$(br2)如果将大量此类物品接入存储系统，容易造成$(bold)严重卡顿$()，对服务器产生性能影响。因此，推荐将这些物品存入$(bold)独立的箱子$()中，或是对其进行$(util/illusion)幻化$()处理。",
+      "title": "NBT物品"
+    }
+  ]
+}

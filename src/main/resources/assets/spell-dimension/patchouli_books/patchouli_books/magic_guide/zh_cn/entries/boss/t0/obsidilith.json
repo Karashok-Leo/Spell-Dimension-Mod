@@ -1,0 +1,27 @@
+{
+  "name": "黑曜巨石柱",
+  "icon": "bosses_of_mass_destruction:obsidian_heart",
+  "category": "spell-dimension:boss/t0",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "bosses_of_mass_destruction:obsidilith_end_frame",
+      "title": "黑曜巨石柱",
+      "text": "等级：<level_t0>$(br2)生成于$(copy:黑曜巨石柱竞技场)黑曜巨石柱竞技场$()[$(copy:bosses_of_mass_destruction:obsidilith_arena)bosses_of_mass_destruction:obsidilith_arena$()]内。$(br)可用$(mage/spell#locate)魔力定位$()在$(bold)主世界$()寻找该结构。$(br2)对竞技场中央的$(key)黑曜石祭坛$()使用$(key)末影之眼$()召唤。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "bosses_of_mass_destruction:obsidilith_rune",
+      "text": "$(br)$(key)黑曜巨石柱$()在战斗时可能会召唤$(key)黑曜石符文$()，这些符文未被破坏时$(key)黑曜巨石柱$()将处于$(bold)无敌$()状态。$(br2)你可以施放$(mage/spell#break)远端瓦解$()法术摧毁这些$(key)黑曜石符文$()，也可以搭配$(mage/prism)法术棱镜$()来采集它们。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "bosses_of_mass_destruction:obsidilith",
+      "scale": 1.0,
+      "offset": -4.5
+    }
+  ]
+}

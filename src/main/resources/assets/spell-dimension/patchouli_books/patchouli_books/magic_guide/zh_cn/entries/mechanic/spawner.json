@@ -1,0 +1,19 @@
+{
+  "name": "刷怪笼",
+  "icon": "minecraft:spawner",
+  "category": "spell-dimension:mechanic",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:spawner",
+      "text": "$(br)现在，刷怪笼不再无限生成怪物，而是设有$(key)“剩余生成数量”$()属性，生成数量耗尽时刷怪笼将停止刷怪并$(bold)自毁$()。$(br2)自然生成的刷怪笼生成数量默认为$(bold)20$()。$(br2)你可以使用$(mage/spell#summon)魔力召唤$()法术为刷怪笼$(bold)重置$()剩余生成数量。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "spell-dimension:spawner_soul",
+      "text": "$(br)刷怪笼被$(bold)人为$()破坏后会掉落$(key)笼中魄$()，这是某些物品的重要合成材料。$(br2)你也可以将$(key)笼中魄$()作为$(mage/spell#summon)魔力召唤$()法术的$(bold)索引物品$()重新放入刷怪笼中。",
+      "link_recipe": true
+    }
+  ]
+}

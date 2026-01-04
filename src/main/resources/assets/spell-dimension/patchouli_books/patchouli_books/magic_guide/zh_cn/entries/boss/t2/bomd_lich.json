@@ -1,0 +1,27 @@
+{
+  "name": "暗夜巫妖",
+  "icon": "bosses_of_mass_destruction:ancient_anima",
+  "category": "spell-dimension:boss/t2",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "bosses_of_mass_destruction:soul_star,bosses_of_mass_destruction:chiseled_stone_altar",
+      "title": "暗夜巫妖",
+      "text": "等级：<level_t2>$(br2)生成于$(bold)巫妖塔$()[$(copy:bosses_of_mass_destruction:lich_tower)bosses_of_mass_destruction:lich_tower$()]内。$(br)可用$(key)灵魂之星$()在$(bold)主世界$()寻找该结构。$(br2)在塔上的四个$(key)錾制石头祭坛$()嵌入$(key)灵魂之星$()即可召唤$(key)暗夜巫妖$()。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "bosses_of_mass_destruction:ancient_anima",
+      "text": "$(br)$(key)暗夜巫妖$()擅长$(bold)飞行$()，建议在开战前准备好$(bold)远距离攻击$()或者$(bold)快速近身$()的手段。$(br2)击败$(key)暗夜巫妖$()后掉落$(key)古代灵魄$()，可用于合成$(boss/t1/day_night)混沌宝珠$()。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "bosses_of_mass_destruction:lich",
+      "scale": 1.0,
+      "offset": 0.0
+    }
+  ]
+}

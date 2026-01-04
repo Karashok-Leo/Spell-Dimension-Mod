@@ -1,0 +1,46 @@
+{
+  "name": "魔咒灌注",
+  "icon": "enchantment_infusion:enchantment_infusion_table",
+  "category": "spell-dimension:mage",
+  "sortnum": 23,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "enchantment_infusion:enchantment_infusion_table,enchantment_infusion:enchantment_infusion_pedestal",
+      "title": "魔咒灌注",
+      "text": "$(br)$(key)魔咒灌注$()是一种$(bold)定向附魔$()和$(bold)物品合成$()的方式。$(br2)$(key)魔咒灌注$()的核心方块是$(key)魔咒灌注台$()和$(key)魔咒灌注基座$()。$(br2)手持物品$(bold)右键单击$()方块将其放入，$(bold)空手右键$()取出其中物品。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:multiblock",
+      "multiblock": {
+        "pattern": [
+          [
+            "   P   ",
+            " P   P ",
+            "       ",
+            "P  0  P",
+            "       ",
+            " P   P ",
+            "   P   "
+          ]
+        ],
+        "mapping": {
+          "0": "enchantment_infusion:enchantment_infusion_table",
+          "P": "enchantment_infusion:enchantment_infusion_pedestal"
+        },
+        "symmetrical": true
+      }
+    },
+    {
+      "type": "patchouli:text",
+      "title": "定向附魔",
+      "text": "$(br)你可以对$(key)魔咒灌注台$()或$(key)魔咒灌注基座$()$(welcome/emi#ru)查询用途$()以查看所有配方。$(br2)按照配方在$(key)魔咒灌注基座$()上摆放对应的物品（次序不重要），最后在中心的$(key)魔咒灌注台$()上摆放你想要附魔的物品（已有魔咒等级$(bold)不小于$()配方需求即可），等待若干秒即可完成灌注。"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "合成物品",
+      "text": "$(br)$(key)魔咒灌注$()除了可以用于$(bold)定向附魔$()，还可以合成大部分$(mage/scroll)法术卷轴$()和一部分特殊物品。$(br2)通过$(key)魔咒灌注$()合成物品的操作方法与$(bold)定向附魔$()相同。"
+    }
+  ]
+}

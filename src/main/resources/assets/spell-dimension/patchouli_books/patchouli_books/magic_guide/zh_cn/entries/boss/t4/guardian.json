@@ -1,0 +1,21 @@
+{
+  "name": "远古守卫者",
+  "icon": "l2hostility:guardian_eye",
+  "category": "spell-dimension:boss/t4",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "spell-dimension:abyss_guard",
+      "title": "远古守卫者",
+      "text": "等级：<level_t4>$(br2)生成于$(copy:海底神殿)海底神殿$()[$(copy:betteroceanmonuments:ocean_monument)betteroceanmonuments:ocean_monument$()]内。$(br)可用$(mage/spell#locate)魔力定位$()在$(bold)主世界$()寻找该结构。$(br2)击败$(key)远古守卫者$()后掉落$(key)深渊守护$()，可用于召唤$(boss/t3/captain)船长科妮莉亚亡灵$()。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "minecraft:elder_guardian",
+      "scale": 0.3,
+      "offset": 0.0
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "name": "快速查询",
+  "icon": "minecraft:spyglass",
+  "category": "spell-dimension:welcome",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "快速查询",
+      "text": "$(br)为了改善指引，我们为《魔力接引》添加了$(key)快速查询$()功能！$(br2)$(key)快速查询$()的操作方法有如下两种：$(br)$(list)$(bold)在物品栏界面，将鼠标悬停在某个物品上，长按Ctrl$()$(br)$(list)$(bold)在世界中，将准星对准某个方块，手持《魔力接引》并潜行右键$()$(br2)"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "spell-dimension-book:textures/lookup/item.png",
+        "spell-dimension-book:textures/lookup/block.png"
+      ],
+      "text": "$(t:怎么样？听起来是不是有点像植物魔法的手册，向魔法界的老资历致敬:>)——然后你就可以跳转到这个物品/方块在本书中对应的条目（如果有的话）！$()",
+      "border": true
+    }
+  ]
+}

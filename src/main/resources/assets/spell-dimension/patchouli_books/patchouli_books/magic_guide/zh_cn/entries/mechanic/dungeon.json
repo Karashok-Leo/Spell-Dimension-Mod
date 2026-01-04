@@ -1,0 +1,20 @@
+{
+  "name": "地牢试炼",
+  "icon": "minecraft:mossy_stone_bricks",
+  "category": "spell-dimension:mechanic",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(br)通过地表上的特殊入口，你可以进入一个特殊的$(key)地牢维度$()，其中有着大量的特殊战利品，但也有着强大的怪物，你需要击败Boss才能安全返回。$(br2)你可以通过$(mage/spell#locate)定位法术$()寻找$(bold)地牢入口$()。",
+      "title": "地牢试炼"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br)进入地牢需要$(bold)入场费$()，右键$(key)地牢传送门$()以了解详情。$(br2)击败最后一个房间中的Boss或者输入命令$(copy:/dungeon leave)$(bold)/dungeon leave$()即可离开地牢。$(br2)下面将列出各种地牢包含的特殊战利品类型:$(br2)$(copy:暗黑地牢)暗黑地牢$(): 大量束魔精华和源启精华。$(br2)$(copy:沙漠地牢)沙漠地牢$(): 大量装备。"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "dungeonz:dungeon_gate": 0,
+    "dungeonz:dungeon_portal": 0
+  }
+}

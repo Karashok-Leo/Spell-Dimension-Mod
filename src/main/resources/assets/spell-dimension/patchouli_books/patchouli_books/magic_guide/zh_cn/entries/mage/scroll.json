@@ -1,0 +1,18 @@
+{
+  "name": "法术卷轴",
+  "icon": "spell-dimension:spell_scroll",
+  "category": "spell-dimension:mage",
+  "sortnum": 21,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "spell-dimension:spell_scroll{spell_container:{is_proxy:1b,max_spell_count:1b,spell_ids:['wizards:fire_breath']}}",
+      "title": "法术卷轴",
+      "text": "$(br)通过$(mage/bind)法术绑定台$()能够学习到的法术有限。要想学习使用更多魔法，你需要拥有$(key)法术卷轴$()。$(br2)$(welcome/emi#search)搜索$()关键词$(copy:法术卷轴)法术卷轴$()以$(welcome/emi#ru)查阅$()其获取方式。"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br)$(key)法术卷轴$()可以直接用于$(mage/cast)施法$()，也可以自由地与$(mage/book)法术书$()$(bold)绑定$()或$(bold)解绑$()。$(key)法术卷轴$()通常需要使用特定的材料进行$(mage/infusion)魔咒灌注$()获得。"
+    }
+  ]
+}

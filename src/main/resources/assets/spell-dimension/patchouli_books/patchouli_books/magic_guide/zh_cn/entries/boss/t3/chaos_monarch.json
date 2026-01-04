@@ -1,0 +1,21 @@
+{
+  "name": "混沌君主",
+  "icon": "soulsweapons:chaos_crown",
+  "category": "spell-dimension:boss/t3",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "soulsweapons:chaos_crown",
+      "title": "混沌君主",
+      "text": "等级：<level_t3>$(br2)对$(key)黑石基座$()使用$(boss/t4/wither)不确定性的残片$()召唤。$(br2)击败$(key)混沌君主$()后掉落$(key)混沌之冠$()，可用于合成$(boss/t1/day_night)混沌宝珠$()。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "soulsweapons:chaos_monarch",
+      "scale": 1.0,
+      "offset": 0.0
+    }
+  ]
+}

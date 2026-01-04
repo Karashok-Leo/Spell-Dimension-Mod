@@ -1,0 +1,36 @@
+{
+  "name": "实用法术",
+  "icon": "spell-dimension:textures/spell/place.png",
+  "category": "spell-dimension:mage",
+  "sortnum": 22,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "spell-dimension:spell_scroll{spell_container:{is_proxy:1b,max_spell_count:1b,spell_ids:['spell-dimension:locate']}}",
+      "title": "魔力定位",
+      "text": "$(br)$(bold)副手$()持有特定$(bold)索引物品$()时对$(key)磁石$()施放$(key)魔力定位$()法术可以定位到一些特殊的$(bold)结构/群系$()。$(br2)你可以对$(key)磁石$()$(welcome/emi#ru)查询用途$()以查看所有配方。或者直接$(welcome/emi#search)搜索$()$(bold)结构/群系$()名称进行查找。$(br2)被命中的$(key)磁石$()有$(bold)30%$()的概率被破坏。",
+      "anchor": "locate"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "spell-dimension:spell_scroll{spell_container:{is_proxy:1b,max_spell_count:1b,spell_ids:['spell-dimension:summon']}}",
+      "title": "魔力召唤",
+      "text": "$(br)$(bold)副手$()持有特定$(bold)索引物品$()时对$(mechanic/spawner)刷怪笼$()施放$(key)魔力召唤$()法术可以召唤一些特殊的生物。$(br2)你可以对$(mechanic/spawner)刷怪笼$()$(welcome/emi#ru)查询用途$()以查看所有配方。$(br2)有些Boss也可以使用$(key)魔力召唤$()法术进行召唤，但必须位于他们$(bold)$(t:例如：追猎者必须在幽冥异界才能召唤)本来所在的场所$()。",
+      "anchor": "summon"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "spell-dimension:spell_scroll{spell_container:{is_proxy:1b,max_spell_count:1b,spell_ids:['spell-dimension:place']}}",
+      "title": "远端操控",
+      "text": "$(br)施放$(key)远端操控$()法术将释放一道咒语，这道咒语触碰方块时将对其$(bold)使用$()你$(bold)副手$()持有的物品。$(br2)你可以使用$(key)远端操控$()法术在远处放置方块。$(br2)这个法术可以绕过某些限制，比如$(mechanic/hostility#arena)领域压制$()。",
+      "anchor": "place"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "spell-dimension:spell_scroll{spell_container:{is_proxy:1b,max_spell_count:1b,spell_ids:['spell-dimension:break']}}",
+      "title": "远端瓦解",
+      "text": "$(br)施放$(key)远端瓦解$()法术将释放一道咒语，这道咒语触碰方块时会将其$(bold)破坏$()并掉落其本应掉落的物品。$(br2)你可以使用$(key)远端瓦解$()法术破坏一些无法挖掘的方块。$(br2)这个法术可以绕过某些限制，比如$(mechanic/hostility#arena)领域压制$()。",
+      "anchor": "break"
+    }
+  ]
+}

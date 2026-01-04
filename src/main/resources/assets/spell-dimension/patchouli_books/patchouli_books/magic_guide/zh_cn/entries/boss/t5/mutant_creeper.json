@@ -1,0 +1,21 @@
+{
+  "name": "苦力怕突变体",
+  "icon": "mutantmonsters:creeper_shard",
+  "category": "spell-dimension:boss/t5",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "mutantmonsters:creeper_shard",
+      "title": "苦力怕突变体",
+      "text": "$(br)$(key)苦力怕$()自然生成时有小概率突变转化为$(key)苦力怕突变体$()。$(br)也可用$(mage/spell#summon)魔力召唤$()或$(key)喷溅型突变药水$()人为生成。$(br2)击败$(key)苦力怕突变体$()后掉落$(key)苦力怕残片$()，可用于合成$(mage/spell#break)远端瓦解$()。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "mutantmonsters:mutant_creeper",
+      "scale": 1.0,
+      "offset": 0.0
+    }
+  ]
+}

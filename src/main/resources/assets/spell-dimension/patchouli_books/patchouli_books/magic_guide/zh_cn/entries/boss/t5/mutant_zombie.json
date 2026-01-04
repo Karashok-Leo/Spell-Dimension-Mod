@@ -1,0 +1,21 @@
+{
+  "name": "僵尸突变体",
+  "icon": "mutantmonsters:hulk_hammer",
+  "category": "spell-dimension:boss/t5",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "mutantmonsters:hulk_hammer",
+      "title": "僵尸突变体",
+      "text": "$(br)$(key)僵尸$()自然生成时有小概率突变转化为$(key)僵尸突变体$()。$(br)也可用$(mage/spell#summon)魔力召唤$()或$(key)喷溅型突变药水$()人为生成。$(br2)击败$(key)僵尸突变体$()后掉落$(key)巨人之锤$()。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "mutantmonsters:mutant_zombie",
+      "scale": 1.0,
+      "offset": 0.0
+    }
+  ]
+}

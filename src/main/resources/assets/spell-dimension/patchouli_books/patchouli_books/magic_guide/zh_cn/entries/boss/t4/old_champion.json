@@ -1,0 +1,39 @@
+{
+  "name": "古英雄的遗骸",
+  "icon": "soulsweapons:essence_of_eventide",
+  "category": "spell-dimension:boss/t4",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "soulsweapons:draugr",
+      "title": "古英雄的遗骸",
+      "text": "等级：<level_t4>$(br2)生成于$(copy:古英雄的陵墓)古英雄的陵墓$()[$(copy:soulsweapons:champions_grave)soulsweapons:champions_grave$()]内。$(br2)可用$(key)月石罗盘$()或$(mage/spell#locate)魔力定位$()在$(bold)主世界$()寻找该结构。$(br2)或者对$(key)破旧的月光祭坛$()使用$(key)德拉古尔$()召唤。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br)$(key)古英雄的遗骸$()对同一武器（$(bold)主手物品$()）的伤害有$(bold)适应性$()。$(bold)不同$()于词条$(mechanic/hostility#adaptive)适应$()，你只需切换不同的主手物品造成伤害即可破坏这种适应。$(br2)$(key)古英雄的遗骸$()死后生成$(key)暗夜之影$()。$(br2)$(key)暗夜之影$()可以$(bold)穿墙$()，攻击时会使目标获得$(bold)失明$()、$(bold)凋零$()等多种负面效果。"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "spell-dimension:atomic_breastplate,soulsweapons:essence_of_eventide",
+      "title": "原子护心镜 & 日暮精粹",
+      "text": "$(br)击败$(key)古英雄的遗骸$()后掉落$(key)原子护心镜$()，这是魔法师前期防御力的重要来源。$(br2)击败$(key)暗夜之影$()后掉落$(key)日暮精粹$()，可用于召唤$(boss/t3/moon_knight)陨落王者$()。",
+      "anchor": "loot",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "soulsweapons:draugr_boss",
+      "scale": 0.8,
+      "offset": 0.2
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "soulsweapons:night_shade",
+      "scale": 1.0,
+      "offset": 0.0
+    }
+  ]
+}

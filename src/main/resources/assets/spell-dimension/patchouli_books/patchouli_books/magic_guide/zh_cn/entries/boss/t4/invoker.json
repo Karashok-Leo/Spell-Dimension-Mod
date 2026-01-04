@@ -1,0 +1,21 @@
+{
+  "name": "祈灵师",
+  "icon": "illagerinvasion:primal_essence",
+  "category": "spell-dimension:boss/t4",
+  "sortnum": 4,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "illagerinvasion:primal_essence,soulsweapons:lost_soul",
+      "title": "祈灵师",
+      "text": "等级：<level_t4>$(br2)生成于$(copy:林地府邸)林地府邸$()[$(copy:minecraft:mansion)minecraft:mansion$()]内。$(br)可用$(mage/spell#locate)魔力定位$()在$(bold)主世界$()寻找该结构。$(br2)击败$(key)祈灵师$()后掉落$(key)始源精华$()，可用于合成$(boss/t3/returning_knight)迷失的灵魂$()。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "illagerinvasion:invoker",
+      "scale": 1.0,
+      "offset": 0.35
+    }
+  ]
+}

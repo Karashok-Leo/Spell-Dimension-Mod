@@ -1,0 +1,7 @@
+{
+  "name": "T0级别",
+  "description": "此处列举了所有T0级别的Boss信息。",
+  "icon": "adventurez:source_stone",
+  "parent": "spell-dimension:boss",
+  "sortnum": 5
+}

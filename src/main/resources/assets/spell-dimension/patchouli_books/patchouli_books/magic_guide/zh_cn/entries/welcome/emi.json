@@ -1,0 +1,26 @@
+{
+  "name": "EMI/JEI/REI",
+  "icon": "minecraft:writable_book",
+  "category": "spell-dimension:welcome",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "EMI/JEI/REI",
+      "text": "$(br)当你打开物品栏时，注意到右侧陈列着许多物品吗？这就是$(t:也可能是JEI或者REI，但在本模组包中默认安装的是EMI)$(key)EMI$()。$(br2)这是一类强大的$(key)物品信息查询工具$()，能够帮助你了解如何制作和使用各种物品。$(br2)如果你不知道如何使用它，看看接下来的指南吧！"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br)在$(bold)屏幕底部$()有一个$(key)搜索框$()，你可以输入名称查找对应物品（支持拼音）。$(br2)除此之外：$(br)$(list)$(bold)鼠标右键搜索框$()：清除搜索框里的关键词$(list)$(bold)在关键词前加入@$()：按模组名称搜索$(list)$(bold)在关键词前加入#$()：按物品详情说明或者物品标签搜索",
+      "anchor": "search"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br)当你搜索到目标物品时，把$(bold)鼠标悬停在物品上$()：$(br)$(list)$(bold)按R或者鼠标左键$()：查询物品的$(key)配方$()，也就是如何获得这个物品$(list)$(bold)按U或者鼠标右键$()：查询物品的$(key)用途$()，也就是可以用它制作什么$(list)$(bold)按A或者拖拽至屏幕左侧$()：将该物品加入你的$(key)收藏夹$()，方便以后快速查找",
+      "anchor": "ru"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br)好啦恭喜你！你已经学会了如何使用$(key)EMI/JEI/REI$()来查询物品配方和用途啦！$(br2)当然以上介绍的只是一些基础用法，如果你想了解更多高级功能，可以查阅$(key)EMI/JEI/REI$()的相关教程。祝你游戏愉快！"
+    }
+  ]
+}

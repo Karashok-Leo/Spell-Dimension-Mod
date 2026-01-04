@@ -1,0 +1,23 @@
+{
+  "name": "生命机制",
+  "icon": "artifacts:crystal_heart",
+  "category": "spell-dimension:mechanic",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "tag:spell-dimension:heart_food",
+      "text": "$(br)如你所见，开局你只有$(bold)10$()点生命值。在游戏初期，当你击杀$(key)恶意等级$()比你高的怪物时，你会获得$(t:即2点最大生命值)$(bold)一颗心$()。你最多只能通过这种方式获取$(bold)66$()点生命上限。",
+      "title": "生命机制",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br2)但你始终可以通过以下两种方法来获得额外的最大生命值：$(br)$(list)$(bold)食用特定食物$()(比如附魔金苹果)。你可以搜索$(copy:#spell-dimension:heart_food)#spell-dimension:heart_food$()查看所有可用的食物。$(br)$(list)$(bold)获得成就$()。仅限获得时会在聊天栏通知的成就。"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br)被敌人击中后，如果你迅速$(key)反击$()对手，可以重获失去的生命值。",
+      "title": "反击"
+    }
+  ]
+}

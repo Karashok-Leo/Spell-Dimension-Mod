@@ -1,0 +1,16 @@
+{
+  "name": "键位绑定",
+  "icon": "minecraft:birch_hanging_sign",
+  "category": "spell-dimension:welcome",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "键位绑定",
+      "text": "$(list)$(util/mining)连锁采集$()：$(bold)`(~)$()$(br)$(list)翻滚：$(bold)R$()$(br)$(list)打开$(util/storage)背包$()：$(bold)B$()$(br)$(list)打开末影袋：$(bold)G$()$(br)$(list)放大镜头：$(bold)C$()$(br)$(list)开启/关闭$(util/step)自动上坡$()：$(bold)J$()"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(list)整理物品栏：$(list2)$(bold)鼠标中键$()$(list2)$(bold)鼠标左键双击$()$(br)$(list)攀墙跳：$(bold)左Shift + W$()$(br)$(list)施放法术：$(list2)$(bold)鼠标右键$()$(list2)$(bold)数字键1/2/3/...$()"
+    }
+  ]
+}

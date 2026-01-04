@@ -1,0 +1,21 @@
+{
+  "name": "陨落王者",
+  "icon": "soulsweapons:essence_of_luminescence",
+  "category": "spell-dimension:boss/t3",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "soulsweapons:essence_of_luminescence",
+      "title": "陨落王者",
+      "text": "等级：<level_t3>$(br2)对$(key)破旧的月光祭坛$()使用$(boss/t4/old_champion#loot)日暮精粹$()召唤。$(br2)击败$(key)陨落王者$()后掉落$(key)昏光精粹$()，可用于合成$(boss/t1/day_night)混沌宝珠$()。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "soulsweapons:moonknight",
+      "scale": 1.0,
+      "offset": 0.2
+    }
+  ]
+}

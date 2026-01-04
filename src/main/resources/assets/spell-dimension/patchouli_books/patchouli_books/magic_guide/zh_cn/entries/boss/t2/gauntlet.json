@@ -1,0 +1,21 @@
+{
+  "name": "下界铁掌",
+  "icon": "bosses_of_mass_destruction:blazing_eye",
+  "category": "spell-dimension:boss/t2",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "bosses_of_mass_destruction:gauntlet_blackstone",
+      "title": "下界铁掌",
+      "text": "等级：<level_t2>$(br2)生成于$(copy:下界铁掌竞技场)下界铁掌竞技场$()[$(copy:bosses_of_mass_destruction:gauntlet_arena)bosses_of_mass_destruction:gauntlet_arena$()]内。$(br)可用$(mage/spell#locate)魔力定位$()在$(bold)下界$()寻找该结构。$(br2)破坏竞技场中心的$(key)远古雕纹黑石$()即可召唤$(key)下界铁掌$()。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "bosses_of_mass_destruction:gauntlet",
+      "scale": 1.0,
+      "offset": 0.0
+    }
+  ]
+}

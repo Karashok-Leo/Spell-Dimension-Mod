@@ -1,0 +1,34 @@
+{
+  "name": "附魔与祛魔",
+  "icon": "enchantment_infusion:enchantment_infusion_table",
+  "category": "spell-dimension:mechanic",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:enchanting_table",
+      "title": "附魔",
+      "text": "$(br)除了使用$(key)附魔台$()进行附魔以外，你还可以通过$(mage/infusion)魔咒灌注$()的方式合成附魔书或是为物品附魔。$(br2)$(italic)前者需要一些运气，而后者需要一些经济。$()",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:grindstone",
+      "title": "祛魔",
+      "text": "$(br)把带有魔咒的$(key)装备$()和空白的$(key)书$()放在$(key)砂轮$()上，可以将魔咒$(bold)转移$()至$(key)书$()上。$(br2)或者把带有多种魔咒的$(key)附魔书$()和空白的$(key)书$()放在$(key)砂轮$()上，可以将其中一条魔咒$(bold)转移$()至$(key)书$()上。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:enchanted_book{StoredEnchantments:[{id:'spell_power:sunfire',lvl:5s}]},minecraft:enchanted_book{StoredEnchantments:[{id:'spell_power:soulfrost',lvl:5s}]},minecraft:enchanted_book{StoredEnchantments:[{id:'spell_power:energize',lvl:5s}]}",
+      "title": "附魔限制",
+      "text": "$(br)你可以对$(key)附魔书$()$(welcome/emi#ru)查询用途$()以查看魔咒的$(bold)可应用物品$()和$(bold)冲突魔咒$()。$(br2)除此之外，$(bold)$(t:例如：阳炎、灵冻、蓄能)增加法术强度的魔咒$()还要求物品携带对应学派的法术强度$(bold)加成$()，否则无法附魔。"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "l2hostility:book_of_omniscience",
+      "text": "$(br)$(key)全知之书$()几乎可以转化为你想要的任何魔咒。你需要解锁$(boss/t1/dragon)终末阶段$()以后才能使用$(key)全知之书$()。$(br2)获取$(key)全知之书$()的唯一方式是将大量$(bold)$(t:附魔书或带有附魔的物品)魔咒$()通过$(util/illusion)幻化$()转化而来。",
+      "anchor": "omni",
+      "link_recipe": true
+    }
+  ]
+}

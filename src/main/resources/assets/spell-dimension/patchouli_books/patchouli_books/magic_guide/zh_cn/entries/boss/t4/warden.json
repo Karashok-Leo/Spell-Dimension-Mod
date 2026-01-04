@@ -1,0 +1,29 @@
+{
+  "name": "监守者",
+  "icon": "deeperdarker:heart_of_the_deep",
+  "category": "spell-dimension:boss/t4",
+  "sortnum": 5,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:sculk_shrieker",
+      "title": "监守者",
+      "text": "等级：<level_t4>$(br2)当$(key)幽匿尖啸体$()被$(bold)振动$()激活至少$(bold)4$()次时，$(key)监守者$()会从地面钻出。$(br2)击败$(key)监守者$()后掉落$(key)深渊之心$()，可用于开启$(key)幽冥异界$()。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "deeperdarker:heart_of_the_deep",
+      "title": "幽冥异界",
+      "text": "$(copy:古代城市)古代城市$()[$(copy:minecraft:ancient_city)minecraft:ancient_city$()]位于$(bold)主世界$()的地下深处。$(br)可用$(mage/spell#locate)魔力定位$()在$(bold)主世界$()寻找该结构。$(br2)$(key)古代城市$()中心有一个由$(key)强化深板岩$()组成的$(key)传送门$()，$(bold)清除$()其上附着的$(key)幽匿脉络$()后，使用$(key)深渊之心$()$(bold)右键单机$()传送门$(bold)边框$()即可激活$(key)传送门$()。穿过$(key)传送门$()后，你将到达$(key)$(t:又称：深暗维度)幽冥异界$()。",
+      "anchor": "otherside",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "minecraft:warden",
+      "scale": 1.0,
+      "offset": 0.0
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "name": "腐化巫妖",
+  "icon": "graveyard:white_bone_staff",
+  "category": "spell-dimension:boss/t2",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "graveyard:white_bone_staff",
+      "title": "腐化巫妖",
+      "text": "等级：<level_t2>$(br2)生成于$(copy:巫妖之狱)巫妖之狱$()[$(copy:graveyard:lich_prison)graveyard:lich_prison$()]内。$(br)可用$(mage/spell#locate)魔力定位$()在$(bold)主世界$()寻找该结构。$(br2)要召唤$(key)腐化巫妖$()，你需要准备$(key)血瓶$()以及$(key)不祥的骨杖残片$()。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "graveyard:vial_of_blood,graveyard:bone_dagger",
+      "text": "$(br)主手持$(key)骨头匕首$()，副手持空$(key)玻璃瓶$()或未满的$(key)血瓶$()时杀死$(key)僵尸$()或$(key)村民$()可以使瓶中的血增加$(bold)1/8$()，$(key)血瓶$()装满后才能用于召唤$(key)腐化巫妖$()。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "graveyard:upper_bone_staff,graveyard:middle_bone_staff,graveyard:lower_bone_staff",
+      "text": "$(br)可以使用$(key)突变骷髅$()的掉落物合成，或在$(copy:遗迹)遗迹$()[$(copy:graveyard:ruins)graveyard:ruins$()]内找到。$(br)可用$(mage/spell#locate)魔力定位$()在$(bold)主世界$()寻找该结构。",
+      "anchor": "staff",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "graveyard:altar_center,graveyard:altar",
+      "title": "召唤腐化巫妖",
+      "text": "$(br)在$(bold)夜晚$()依次将上、中、下共$(bold)3$()块$(key)不祥的骨杖残片$()依次从左至右放置于祭坛前的$(key)碎裂的深石中心$()上，然后将$(key)血瓶$()中的血倒在浮岛中央的$(key)祭坛$()方块上，即可召唤$(key)腐化巫妖$()。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "graveyard:lich",
+      "scale": 1.0,
+      "offset": 0.0
+    }
+  ]
+}

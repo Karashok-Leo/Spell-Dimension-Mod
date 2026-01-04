@@ -1,0 +1,18 @@
+{
+  "name": "自动上坡",
+  "icon": "artifacts:running_shoes",
+  "category": "spell-dimension:util",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "artifacts:running_shoes",
+      "title": "自动上坡",
+      "text": "$(br)你可以按下 $(bold)J$() 键来启用或是禁用$(key)自动上坡$()功能。这项功能允许你在行走时自动跨越$(bold)1$()格高的方块，而不需要跳跃。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br)如果你已经禁用了这个功能，却仍然会$(key)自动上坡$()，可能是因为身上穿着了提供$(key)自动上坡$()效果的装备或饰品，请检查你的$(bold)靴子$()或者$(bold)足部饰品栏$()。"
+    }
+  ]
+}

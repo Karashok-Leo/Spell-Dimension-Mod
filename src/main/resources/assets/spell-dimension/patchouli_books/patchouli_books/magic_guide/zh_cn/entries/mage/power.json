@@ -1,0 +1,17 @@
+{
+  "name": "法术强度",
+  "icon": "wizards:wizard_robe_head",
+  "category": "spell-dimension:mage",
+  "sortnum": 21,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(br)$(key)法术强度$()是法师的核心属性，它直接决定了法术的$(bold)威力$()和$(bold)效果$()。$(br2)默认情况下，从战利品中获取到的$(mage/essence#ec)束魔精华$()和$(mage/essence#el)源启精华$()都属于法师$(key)法术强度$()最高的$(mage/school)魔法学派$()，即$(bold)“擅长”$()的$(mage/school)法术学派$()。",
+      "title": "法术强度"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br)以下列举了$(key)法术强度$()的几种提升方式：$(br)$(list)精华：$(mage/essence#ec)束魔精华$()和$(mage/essence#el)源启精华$()$(br)$(list)魔咒：术式魔能、阳炎、灵冻、蓄能、咒剑$(br)$(list)装备：$(mechanic/armor_set)盔甲套装效果$()以及特殊饰品"
+    }
+  ]
+}

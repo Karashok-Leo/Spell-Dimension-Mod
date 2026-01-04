@@ -1,0 +1,27 @@
+{
+  "name": "腐朽之王",
+  "icon": "soulsweapons:darkin_blade",
+  "category": "spell-dimension:boss/t4",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "soulsweapons:withered_demon_heart",
+      "title": "腐朽之王",
+      "text": "等级：<level_t4>$(br2)生成于$(copy:腐朽王国)腐朽王国$()[$(copy:soulsweapons:decaying_kingdom)soulsweapons:decaying_kingdom$()]内。$(br)可用$(key)月石罗盘$()或$(mage/spell#locate)魔力定位$()在$(bold)下界$()寻找该结构。$(br2)或者对$(key)黑石基座$()使用$(key)凋零恶魔之心$()召唤。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "spell-dimension:accursed_blackstone",
+      "text": "$(br)击败$(key)腐朽之王$()后掉落$(key)朽咒黑石$()，可用于合成$(boss/t3/blackstone_golem)錾制黑石基座$()或$(mechanic/loot_charm)粗糙抢夺宝珠$()。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "soulsweapons:accursed_lord_boss",
+      "scale": 0.8,
+      "offset": 0.15
+    }
+  ]
+}

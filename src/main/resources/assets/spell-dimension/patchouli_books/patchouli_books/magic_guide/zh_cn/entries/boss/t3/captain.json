@@ -1,0 +1,21 @@
+{
+  "name": "船长科妮莉亚亡灵",
+  "icon": "aquamirae:three_bolt_helmet",
+  "category": "spell-dimension:boss/t3",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "aquamirae:shell_horn",
+      "title": "船长科妮莉亚亡灵",
+      "text": "等级：<level_t3>$(br2)身上携带$(boss/t4/guardian)深渊守护$()时在$(bold)冰冻深海$()的$(bold)海边$()使用$(key)贝壳号角$()即可召唤$(key)船长科妮莉亚亡灵$()。$(br2)$(key)贝壳号角$(): 击杀$(copy:搁浅舰船)搁浅舰船$()[$(copy:aquamirae:ship)aquamirae:ship$()]中位于$(bold)船长室$()的$(bold)掠夺者$()可获得。$(br)可用$(mage/spell#locate)魔力定位$()在$(bold)主世界$()寻找该结构。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "aquamirae:captain_cornelia",
+      "scale": 1.0,
+      "offset": 0.3
+    }
+  ]
+}

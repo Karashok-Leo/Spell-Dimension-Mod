@@ -1,0 +1,14 @@
+{
+  "name": "法术容器",
+  "icon": "spell-dimension:spell_container",
+  "category": "spell-dimension:mage",
+  "sortnum": 30,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "spell-dimension:spell_container",
+      "text": "$(br)使用$(key)法术容器$()销毁$(mechanic/hostility#spell_trait)法术词条$()$(bold)物品$()可以将其转化为对应法术学派的$(key)减伤数额$()，佩戴$(key)法术容器$()时会自动消耗这些$(key)减伤数额$()为你抵御法术伤害。$(br2)每个$(mechanic/hostility#spell_trait)法术词条$()$(bold)物品$()可以转化的$(key)减伤数额$()相当于对应$(bold)满级$()词条能给怪物提供的$(mage/power)法术强度$()加成。",
+      "link_recipe": true
+    }
+  ]
+}

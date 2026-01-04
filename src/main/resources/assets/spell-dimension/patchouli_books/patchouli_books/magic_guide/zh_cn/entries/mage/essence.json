@@ -1,0 +1,55 @@
+{
+  "name": "魔法精华",
+  "icon": "spell-dimension:essence_arcane_1",
+  "category": "spell-dimension:mage",
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "tag:spell-dimension:essence/all",
+      "title": "基础精华",
+      "text": "$(br)也许你已经注意到，法术$(bold)命中$()时有概率掉落一些$(key)基础魔法精华$()。$(br2)$(key)基础精华$()是魔法师成长路上的重要材料，可以用来合成一些魔法物品，比如$(mage/book)法术书$()、$(mage/rune)符文$()和$(mage/essence#ec)束魔精华$()。",
+      "anchor": "base",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br2)$(key)基础精华$()的掉落概率是$(bold)20%$()，你每佩戴一个$(mechanic/loot_charm)掠夺宝珠$()，此概率提升$(bold)10%$()。$(br2)当法术目标的$(mechanic/hostility)等级$()大于$(bold)160$()时，有概率掉落$(bold)中级$()精华。$(br2)当法术目标的$(mechanic/hostility)等级$()大于$(bold)560$()时，有概率掉落$(bold)高级$()精华。"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "spell-dimension:enchanted_essence{EnchantedModifiers:{Amount:1.0d,Attribute:'spell_power:arcane',Operation:0,Slot:'mainhand',Threshold:10,Uuid:[I;700308044,-1542469417,-1493494063,-1478207010]}}",
+      "title": "束魔精华",
+      "text": "$(br)$(key)束魔精华$()可以为物品注入魔力，使其增加部分属性。$(br2)每次对物品使用$(key)束魔精华$()时，物品的$(bold)束魔等级$()会提高一级。$(br2)只有当$(key)束魔精华$()的$(bold)阈值$()高于或等于物品的$(bold)束魔等级$()时，才能作用于该物品。",
+      "anchor": "ec",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br)获取途径：$(br)$(list)$(bold)初级/中级/高级$()的$(mage/essence#base)基础精华$()分别可以合成$(bold)阈值$()为$(bold)10/20/30$()的$(key)束魔精华$()。$(br)$(list)战利品中能获取到的$(key)束魔精华$()的$(bold)阈值$()上限取决于你的$(mechanic/hostility)恶意难度等级$()。$(br)$(list)在$(mechanic/difficulty_tier#nightmare)梦魇难度层级$()下，你可以手动$(bold)合并$()$(key)束魔精华$()以获得更高$(bold)阈值$()的$(key)束魔精华$()。"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "spell-dimension:enlightening_essence{EnlighteningModifiers:{Amount:1.0d,Attribute:'spell_power:frost',Operation:0,Uuid:[I;-1607061764,-43820874,-1108786045,-1539459220]}}",
+      "title": "源启精华",
+      "text": "$(br)$(key)源启精华$()与$(mage/essence#ec)束魔精华$()类似，不同的是$(mage/essence#ec)束魔精华$()作用于$(bold)物品$()，而$(key)源启精华$()作用于魔法师$(bold)自身$()，且不受限于$(bold)阈值$()。$(br2)$(key)源启精华$()不能合成，只能从战利品中获取。",
+      "anchor": "el",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "spell-dimension:mending_essence",
+      "title": "修复精华",
+      "text": "$(br)$(key)修复精华$()可以完全修复一件物品, 并且清除其累积的$(bold)修复惩罚$()。$(br2)$(key)修复精华$()不能合成，只能从战利品中获取。",
+      "anchor": "mend",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "spell-dimension:disenchanted_essence",
+      "title": "祛魔精华",
+      "text": "$(br)$(key)祛魔精华$()能够将$(mage/essence#ec)束魔精华$()注入在一件物品上的所有魔力$(bold)转移$()至另一件物品上。$(br2)获取$(key)祛魔精华$()的途径是合成或从哥布林商人手中购买。",
+      "link_recipe": true
+    }
+  ]
+}

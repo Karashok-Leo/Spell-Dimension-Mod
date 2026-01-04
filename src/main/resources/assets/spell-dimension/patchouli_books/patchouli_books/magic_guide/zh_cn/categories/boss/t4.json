@@ -1,0 +1,7 @@
+{
+  "name": "T4级别",
+  "description": "此处列举了所有T4级别的Boss信息。",
+  "icon": "illagerinvasion:primal_essence",
+  "parent": "spell-dimension:boss",
+  "sortnum": 1
+}

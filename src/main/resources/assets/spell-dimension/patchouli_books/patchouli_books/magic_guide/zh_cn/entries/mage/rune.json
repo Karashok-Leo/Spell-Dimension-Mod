@@ -1,0 +1,22 @@
+{
+  "name": "符文",
+  "icon": "runes:fire_stone",
+  "category": "spell-dimension:mage",
+  "sortnum": 11,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "tag:spell-dimension:rune",
+      "title": "符文",
+      "text": "$(br)施放某些法术需要消耗$(key)符文$()。$(br2)你可以直接在手中合成$(key)符文$()，或是制作一个$(key)符文祭坛$()以相同的原料制作更多的$(key)符文$()。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:enchanted_book{StoredEnchantments:[{id:'spell_engine:spell_infinity',lvl:1s}]}",
+      "title": "符文",
+      "text": "$(br)$(key)法术无限$()魔咒可以让你在施放法术时不消耗任何$(key)符文$()。",
+      "link_recipe": true
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "终局饰品",
+  "icon": "spell-dimension:arcane_throne",
+  "category": "spell-dimension:mage",
+  "sortnum": 31,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "tag:spell-dimension:endgame_trinkets",
+      "title": "终局饰品",
+      "text": "$(br)在击败了更为强大的Boss之后，你可以制作一些特殊饰品，它们具有一些独特的$(bold)法术特效$()。$(br2)$(welcome/emi#search)搜索$()关键词$(copy:#spell-dimension:endgame_trinkets)#spell-dimension:endgame_trinkets$()以查看所有相关物品。",
+      "link_recipe": true
+    }
+  ]
+}

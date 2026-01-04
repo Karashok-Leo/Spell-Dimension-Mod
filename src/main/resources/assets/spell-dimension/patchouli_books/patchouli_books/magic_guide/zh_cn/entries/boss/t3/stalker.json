@@ -1,0 +1,27 @@
+{
+  "name": "追猎者",
+  "icon": "deeperdarker:soul_crystal",
+  "category": "spell-dimension:boss/t3",
+  "sortnum": 5,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "deeperdarker:ancient_vase",
+      "title": "追猎者",
+      "text": "等级：<level_t3>$(br2)玩家在$(boss/t4/warden#otherside)幽冥异界$()打破$(key)远古花瓶$()时有概率生成。$(br2)$(key)远古花瓶$()生成于$(copy:远古神庙)远古神庙$()[$(copy:deeperdarker:ancient_temple)deeperdarker:ancient_temple$()]。$(br)可用$(mage/spell#locate)魔力定位$()在$(boss/t4/warden#otherside)幽冥异界$()寻找该结构。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "deeperdarker:soul_crystal",
+      "text": "$(br)击败$(key)追猎者$()后掉落$(key)灵魂水晶$()，可用于合成$(mechanic/loot_charm)魔能抢夺宝珠$()。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "deeperdarker:stalker",
+      "scale": 1.0,
+      "offset": 0.0
+    }
+  ]
+}

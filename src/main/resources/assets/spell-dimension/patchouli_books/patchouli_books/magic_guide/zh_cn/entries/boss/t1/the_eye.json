@@ -1,0 +1,57 @@
+{
+  "name": "眼球",
+  "icon": "adventurez:prime_eye",
+  "category": "spell-dimension:boss/t1",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "adventurez:prime_eye",
+      "title": "眼球",
+      "text": "等级：<level_t1>$(br2)使用$(bold)25$()块$(key)黑曜石$()，$(bold)9$()块$(key)哭泣的黑曜石$()、$(bold)8$()根$(key)末地烛$()和$(bold)1$()个$(key)龙蛋$()在$(bold)末地$()搭建祭坛，$(bold)$(t:可能要等很久...)等待片刻$()后即可召唤。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:multiblock",
+      "multiblock": {
+        "pattern": [
+          [
+            "     ",
+            " L L ",
+            "  D  ",
+            " L L ",
+            "     "
+          ],
+          [
+            "L   L",
+            " CCC ",
+            " CCC ",
+            " CCC ",
+            "L   L"
+          ],
+          [
+            "OOOOO",
+            "OOOOO",
+            "OO0OO",
+            "OOOOO",
+            "OOOOO"
+          ]
+        ],
+        "mapping": {
+          "0": "minecraft:obsidian",
+          "C": "minecraft:crying_obsidian",
+          "D": "minecraft:dragon_egg",
+          "L": "minecraft:end_rod",
+          "O": "minecraft:obsidian"
+        },
+        "symmetrical": true
+      }
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "adventurez:the_eye",
+      "scale": 1.0,
+      "offset": 0.0
+    }
+  ]
+}

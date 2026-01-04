@@ -1,0 +1,24 @@
+{
+  "name": "难度层级",
+  "icon": "spell-dimension:bottle_of_nightmare",
+  "category": "spell-dimension:mechanic",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "spell-dimension:bottle_of_nightmare",
+      "title": "难度层级",
+      "text": "$(br)$(key)难度层级$()是玩家可以自主选择的额外难度设定。$(br2)初始$(key)难度层级$()为$(key)普通$()。玩家每次饮用$(key)梦魇之瓶$()，都可以提升一个$(key)难度层级$()。$(br2)每个$(key)难度层级$()都会为玩家带来不同的挑战：",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(list)$(key)硬核$()$(list2)玩家初始$(mechanic/hostility)额外难度$()增加$(bold)30$()$(list2)玩家造成击杀提升的$(mechanic/hostility)难度$()翻倍$(list2)$(mechanic/hostility)恶意伤害加成$()翻倍$(list2)高级$(mage/scroll)法术卷轴$()不能放入低级$(mage/book)法术书$()$(list2)从战利品中获取的$(mage/essence#ec)束魔精华$()阈值降低$(list2)无法使用$(key)恶意净化药水$()和$(key)恶意吸收宝珠$()",
+      "anchor": "hardcore"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(list)$(key)梦魇$()$(list2)每拥有$(bold)1$()点$(mage/power)法术强度$()，增加$(bold)0.5$()$(mechanic/hostility)额外难度$(list2)$(mage/essence#ec)束魔精华$()可以合并$(list2)可以使用$(mechanic/curse#nightmare)梦魇层级限定物品$()$(list2)同时应用$(mechanic/difficulty_tier#hardcore)硬核难度层级$()的所有效果",
+      "anchor": "nightmare"
+    }
+  ]
+}

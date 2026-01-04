@@ -1,0 +1,19 @@
+{
+  "name": "魔法学派",
+  "icon": "wizards:wand_frost",
+  "category": "spell-dimension:mage",
+  "sortnum": 12,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(br)魔法体系中共有六大$(bold)学派$()，分别为：$(br)$(list)$(bold)$(#ff66ff)奥秘$()：高机动性$(list)$(bold)$(#ff3300)火焰$()：高额范围伤害$(list)$(bold)$(#00cccc)寒冰$()：减速控场$(list)$(bold)$(#00bb00)治愈$()：高额治疗$(list)$(bold)$(#cccc00)雷电$()：少量多段伤害$(list)$(bold)$(#3ea29f)灵魂$()：操纵生命",
+      "title": "魔法学派"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "tag:trinkets:chest/secondary_school",
+      "title": "副法术学派",
+      "text": "$(br)当你精通了单一法术学派后，可以选择研习一个$(key)副学派$()。为此你需要制作一些特定的魔法物品，以此作为学派的研习基础。$(br2)$(welcome/emi#search)搜索$()关键词$(copy:#trinkets:chest/secondary_school)#trinkets:chest/secondary_school$()可查看对应的物品。"
+    }
+  ]
+}

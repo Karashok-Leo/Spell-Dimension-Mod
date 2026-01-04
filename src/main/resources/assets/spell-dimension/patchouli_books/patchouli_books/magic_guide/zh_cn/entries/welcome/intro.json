@@ -1,0 +1,33 @@
+{
+  "name": "引言",
+  "icon": "patchouli:guide_book{'patchouli:book':'spell-dimension:magic_guide'}",
+  "category": "spell-dimension:welcome",
+  "priority": true,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "patchouli:guide_book{'patchouli:book':'spell-dimension:magic_guide'}",
+      "title": "引言",
+      "text": "$(br)欢迎来到咒次元！$(br2)这本$(key)《魔力接引》$()将帮助你了解本模组包的基本机制和玩法，你对本模组包的大部分疑问都能在这里找到答案。"
+    },
+    {
+      "type": "patchouli:relations",
+      "entries": [
+        "spell-dimension:welcome/emi",
+        "spell-dimension:welcome/quest",
+        "spell-dimension:welcome/lookup",
+        "spell-dimension:welcome/key",
+        "spell-dimension:welcome/opac"
+      ],
+      "text": "$(br)如果你是第一次游玩，建议读一读本章的$(bold)上述条目$()，随后你可以借助$(welcome/lookup)快速查询$()功能，在游玩过程中随时查阅你需要的信息，而无需通读整本书。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "spell-dimension:magic_guide",
+      "text": "$(br)如果你不幸丢失了这本书，没关系，你可以以极低的成本重新制作一个新的。"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "patchouli:guide_book{'patchouli:book':'spell-dimension:magic_guide'}": 0
+  }
+}

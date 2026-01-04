@@ -1,0 +1,14 @@
+{
+  "name": "抢夺宝珠",
+  "icon": "l2hostility:charm_of_looting_4",
+  "category": "spell-dimension:mechanic",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "l2hostility:charm_of_looting_1,l2hostility:charm_of_looting_2,l2hostility:charm_of_looting_3,l2hostility:charm_of_looting_4",
+      "title": "抢夺宝珠",
+      "text": "佩戴$(key)抢夺宝珠$()可以获取一些特殊的资源。$(br2)你可以对$(key)抢夺宝珠$()$(welcome/emi#ru)查询用途$()以查看它们的额外抢夺效果。$(br2)相较于$(bold)焚烧转化$()和完成$(bold)特定挑战$()，佩戴$(key)抢夺宝珠$()通常是获取某些资源最简单的方法。",
+      "link_recipe": true
+    }
+  ]
+}

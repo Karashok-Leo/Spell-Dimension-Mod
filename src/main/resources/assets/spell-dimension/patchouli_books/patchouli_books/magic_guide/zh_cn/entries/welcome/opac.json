@@ -1,0 +1,16 @@
+{
+  "name": "组建队伍",
+  "icon": "artifacts:fire_gauntlet",
+  "category": "spell-dimension:welcome",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "组建队伍",
+      "text": "多人游玩时，你可以和好友组建或加入同一队伍。在同一队伍中时，你的法术将不会对队友造成伤害。$(br2)以下是用于组建队伍的指令：$(br)$(list)创建队伍：$(br)  $(copy:/openpac-parties create)/openpac-parties create$()$(br)$(list)解散队伍：$(br)  $(copy:/openpac-parties destroy confirm)/openpac-parties destroy $(br)   confirm$()"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(list)离开队伍：$(br)  $(copy:/openpac-parties leave)/openpac-parties leave$()$(br)$(list)邀请玩家加入队伍：$(br)  $(copy:/openpac-parties member invite )/openpac-parties member $(br)   invite <玩家ID>$()$(br)$(list)将玩家移出队伍：$(br)  $(copy:/openpac-parties member kick )/openpac-parties member $(br)   kick <玩家ID>$()$(br)$(list)加入队伍：$(br)  $(copy:/openpac-parties join )/openpac-parties join <id>$()"
+    }
+  ]
+}

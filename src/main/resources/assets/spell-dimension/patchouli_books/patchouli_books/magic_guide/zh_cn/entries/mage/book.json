@@ -1,0 +1,22 @@
+{
+  "name": "法术书",
+  "icon": "paladins:priest_spell_book",
+  "category": "spell-dimension:mage",
+  "sortnum": 20,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "wizards:arcane_spell_book,wizards:fire_spell_book,wizards:frost_spell_book,paladins:priest_spell_book",
+      "title": "法术书",
+      "text": "$(key)法术书$()是记录法术的载体。你可以使用$(mage/bind)法术绑定台$()将普通的书转化为最基本的$(key)学徒法术书$()。但这只是一个开始，之后你可以使用$(mage/infusion)魔咒灌注$()将其合成至$(bold)初级/中级/高级$()$(key)法术书$()。$(br2)$(bold)$(#cccc00)雷电$()和$(bold)$(#3ea29f)灵魂$()学派没有$(key)学徒法术书$()，你需要直接合成$(key)初级法术书$()。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "tag:spell-dimension:book/0,tag:spell-dimension:book/1,tag:spell-dimension:book/2",
+      "title": "高级法术书",
+      "text": "越高级的$(key)法术书$()提供越多的$(key)法术槽位$()。$(br2)你可以将$(mage/scroll)法术卷轴$()放入$(bold)初级/中级/高级$()$(key)法术书$()中（就像放入收纳袋那样），$(key)学徒法术书$()则没有这个功能。",
+      "link_recipe": true
+    }
+  ]
+}

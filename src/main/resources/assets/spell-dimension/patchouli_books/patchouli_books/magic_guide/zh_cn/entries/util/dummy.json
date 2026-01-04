@@ -1,0 +1,19 @@
+{
+  "name": "训练假人",
+  "icon": "dummmmmmy:target_dummy",
+  "category": "spell-dimension:util",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "dummmmmmy:target_dummy",
+      "text": "$(br)$(key)训练假人$()可以用于测试你的战斗力。$(bold)右键单击方块$()放置它，$(bold)空手左键$()移除。$(br2)你可以给这家伙穿上各种盔甲和装备。只需用物品$(bold)右键单击$()它即可。要取消装备某个盔甲，只需$(bold)空手右键单击$()其相应的身体部位即可。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dummmmmmy:target_dummy",
+      "scale": 1.0,
+      "offset": 0.0
+    }
+  ]
+}

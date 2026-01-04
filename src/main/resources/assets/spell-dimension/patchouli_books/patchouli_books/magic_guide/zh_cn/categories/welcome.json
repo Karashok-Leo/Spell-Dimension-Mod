@@ -1,0 +1,6 @@
+{
+  "name": "欢迎",
+  "description": "这里是本模组包的入门引导篇，强烈建议新手玩家优先阅读。",
+  "icon": "patchouli:guide_book{'patchouli:book':'spell-dimension:magic_guide'}",
+  "sortnum": 0
+}

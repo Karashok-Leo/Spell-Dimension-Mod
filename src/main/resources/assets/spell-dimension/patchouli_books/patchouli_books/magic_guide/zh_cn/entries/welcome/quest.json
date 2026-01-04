@@ -1,0 +1,25 @@
+{
+  "name": "任务系统",
+  "icon": "spell-dimension:quest_scroll",
+  "category": "spell-dimension:welcome",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "spell-dimension:quest_scroll",
+      "title": "任务系统",
+      "text": "$(br)本模组包内置了一个任务系统，通过完成任务你可以体验到游戏中的大部分内容，并获得一些奖励。$(br2)手持$(key)任务卷轴$()右键浏览当前所有正在进行的任务，选择其中一个再次右键即可尝试提交，提交成功后解锁更多任务。"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br)提交任务时，系统会检测玩家的状态，常见的有：$(br)$(list)$(bold)属性$()$(list)$(bold)成就进度$()$(list)$(bold)是否持有某物品$()$(br)（需要手动将对应物品放置在$(bold)物品栏、装备栏或饰品栏$()）$(br2)每个玩家的任务进度是$(bold)独立$()的，如果你想与好友共享进度，可以将任务所需物品分享给他们。"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "spell-dimension:empty_quest_scroll",
+      "text": "$(br)如果你不幸丢失了$(key)任务卷轴$()，没关系，你可以以极低的成本重新制作一个新的。"
+    }
+  ],
+  "extra_recipe_mappings": {
+    "spell-dimension:quest_scroll": 0
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "name": "T2级别",
+  "description": "此处列举了所有T2级别的Boss信息。",
+  "icon": "bosses_of_mass_destruction:ancient_anima",
+  "parent": "spell-dimension:boss",
+  "sortnum": 3
+}

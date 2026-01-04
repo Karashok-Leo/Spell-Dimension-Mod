@@ -1,0 +1,18 @@
+{
+  "name": "幻化",
+  "icon": "spell-dimension:illusion_container",
+  "category": "spell-dimension:util",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "spell-dimension:illusion_container,spell-dimension:illusion_upgrade",
+      "title": "幻化",
+      "text": "$(br)$(key)幻化容器$()可以吞噬大量$(mechanic/rarity#gear)装备$()以及一切带有附魔的物品，并将它们转化为相同$(mechanic/rarity)稀有度$()的$(bold)随机材料$()或者$(mechanic/enchant#omni)全知之书$()。这也是$(mechanic/enchant#omni)全知之书$()的唯一获取途径。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br)$(key)幻化升级$()类似于背包的拾取升级，但是可以自动转化拾取的物品。为了安全起见，$(key)幻化升级$()$(bold)不会转化被束魔精华强化过的物品$()。"
+    }
+  ]
+}
