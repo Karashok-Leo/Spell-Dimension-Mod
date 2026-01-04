@@ -7,16 +7,15 @@
       "type": "patchouli:spotlight",
       "item": "equipment_standard:reforge_table,equipment_standard:reforge_scroll_lv1,equipment_standard:reforge_scroll_lv2,equipment_standard:reforge_scroll_lv3",
       "title": "Reforging",
-      "text": "$(br)Every tool and piece of armor you obtain can have special $(bold)affixes$() that provide extra stats.$(br2)You can use $(key)Reforge Scrolls$() at a $(key)Reforge Table$() to reforge your gear. Higher-tier $(key)Reforge Scrolls$() have a higher chance to roll better $(bold)affixes$().",
+      "text": "$(br)Tools and armor can roll special $(bold)affixes$() that grant extra stats.$(br2)Use $(key)Reforge Scrolls$() at a $(key)Reforge Table$() to reroll your gear. Higher-tier scrolls are more likely to roll better $(bold)affixes$().",
       "link_recipe": true
     },
     {
       "type": "patchouli:spotlight",
       "item": "fusion-smithing:fusion_smithing_template",
       "title": "Fusion Smithing",
-      "text": "$(br)A $(key)Fusion Smithing Template$() allows you to transfer $(bold)enchantments$(), $(bold)Enchanted Essence upgrades$(), and more from one piece of gear to another.$(br2)Use it in a $(key)Smithing Table$().",
+      "text": "$(br)A $(key)Fusion Smithing Template$() allows you to transfer $(bold)enchantments$(), $(mage/essence#ec)Enchanted Essence upgrades$(), and more from one piece of gear to another.$(br2)Use it in a $(key)Smithing Table$().",
       "link_recipe": true
     }
   ]
 }
-

@@ -14,7 +14,7 @@
       "type": "patchouli:spotlight",
       "item": "fusion-smithing:fusion_smithing_template",
       "title": "融锻",
-      "text": "$(br)$(key)融锻模板$()允许你将一件装备的$(bold)附魔$()、$(bold)束魔强化$()等转移到另一件装备上。$(br2)在$(key)锻造台$()上使用它。",
+      "text": "$(br)$(key)融锻模板$()允许你将一件装备的$(bold)附魔$()、$(mage/essence#ec)束魔强化$()等转移到另一件装备上。$(br2)在$(key)锻造台$()上使用它。",
       "link_recipe": true
     }
   ]

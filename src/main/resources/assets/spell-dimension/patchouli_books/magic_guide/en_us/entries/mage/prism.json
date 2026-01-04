@@ -12,8 +12,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(br)In addition, $(key)Spell Prism$() can $(bold)enhance$() the effects of some $(key)universal school$() spells:$(br)$(list)$(mage/spell#locate)Mana Locate$(): locates a random destination.$(br)$(list)$(mage/spell#summon)Mana Summon$(): spawners will no longer self-destruct after their remaining count reaches zero.$(br)$(list)$(mage/spell#break)Remote Disintegration$(): applies Silk Touch when breaking blocks.$(br)$(list)Mana Light: covers a larger area."
+      "text": "$(br)In addition, $(key)Spell Prism$() can $(bold)enhance$() the effects of some $(key)universal school$() spells:$(br)$(list)$(mage/spell#locate)Spell Locate$(): locates a random destination.$(br)$(list)$(mage/spell#summon)Spell Summon$(): spawners will no longer self-destruct after their remaining count reaches zero.$(br)$(list)$(mage/spell#break)Remote Destruction$(): applies Silk Touch when breaking blocks.$(br)$(list)Mana Light: covers a larger area."
     }
   ]
 }
-

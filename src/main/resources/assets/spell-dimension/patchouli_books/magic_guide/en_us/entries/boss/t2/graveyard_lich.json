@@ -8,7 +8,7 @@
       "type": "patchouli:spotlight",
       "item": "graveyard:white_bone_staff",
       "title": "Corrupted Lich",
-      "text": "Level: <level_t2>$(br2)Spawns in $(copy:Lich Prison)Lich Prison$()[$(copy:graveyard:lich_prison)graveyard:lich_prison$()].$(br)You can locate this structure in the $(bold)Overworld$() using $(mage/spell#locate)Mana Locate$().$(br2)To summon the $(key)Corrupted Lich$(), you need a $(key)Vial of Blood$() and $(key)Ominous Bone Staff Fragments$().",
+      "text": "Level: <level_t2>$(br2)Spawns in $(copy:Lich Prison)Lich Prison$()[$(copy:graveyard:lich_prison)graveyard:lich_prison$()].$(br)You can locate this structure in the $(bold)Overworld$() using $(mage/spell#locate)Spell Locate$().$(br2)To summon the $(key)Corrupted Lich$(), you need a $(key)Vial of Blood$() and $(key)Ominous Bone Staff Fragments$().",
       "link_recipe": true
     },
     {
@@ -20,7 +20,7 @@
     {
       "type": "patchouli:spotlight",
       "item": "graveyard:upper_bone_staff,graveyard:middle_bone_staff,graveyard:lower_bone_staff",
-      "text": "$(br)These can be crafted from $(key)Mutant Skeleton$() drops, or found in $(copy:Ruins)Ruins$()[$(copy:graveyard:ruins)graveyard:ruins$()].$(br)You can locate this structure in the $(bold)Overworld$() using $(mage/spell#locate)Mana Locate$().",
+      "text": "$(br)These can be crafted from $(key)Mutant Skeleton$() drops, or found in $(copy:Ruins)Ruins$()[$(copy:graveyard:ruins)graveyard:ruins$()].$(br)You can locate this structure in the $(bold)Overworld$() using $(mage/spell#locate)Spell Locate$().",
       "anchor": "staff",
       "link_recipe": true
     },
@@ -39,4 +39,3 @@
     }
   ]
 }
-

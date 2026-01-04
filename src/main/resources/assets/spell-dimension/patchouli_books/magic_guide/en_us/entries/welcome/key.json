@@ -6,7 +6,7 @@
     {
       "type": "patchouli:text",
       "title": "Keybinds",
-      "text": "$(list)$(util/mining)Chain Mining$(): $(bold)`(~)$()$(br)$(list)Dodge Roll: $(bold)R$()$(br)$(list)Open $(util/storage)Backpack$(): $(bold)B$()$(br)$(list)Open Ender Bag: $(bold)G$()$(br)$(list)Zoom: $(bold)C$()$(br)$(list)Toggle $(util/step)Auto Step-up$(): $(bold)J$()"
+      "text": "$(list)$(util/mining)Vein Mining$(): $(bold)`(~)$()$(br)$(list)Combat Roll: $(bold)R$()$(br)$(list)Open $(util/storage)Backpack$(): $(bold)B$()$(br)$(list)Open Ender Bag: $(bold)G$()$(br)$(list)Zoom: $(bold)C$()$(br)$(list)Toggle $(util/step)Auto Step-up$(): $(bold)J$()"
     },
     {
       "type": "patchouli:text",

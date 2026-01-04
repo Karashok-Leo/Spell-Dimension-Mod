@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "$(br)$(bold)全套穿戴$()一些装备可以获得特殊套装效果。$(br2)$(welcome/emi#search)搜索$()关键词$(copy:套装)套装$()（或拼音）以查看所有可用的套装效果。",
+      "text": "$(br)$(bold)全套穿戴$()一些装备可以获得特殊$(key)套装效果$()。$(br2)$(welcome/emi#search)搜索$()关键词$(copy:套装)套装$()（或拼音）以查看所有可用的$(key)套装效果$()。",
       "title": "套装效果"
     }
   ]

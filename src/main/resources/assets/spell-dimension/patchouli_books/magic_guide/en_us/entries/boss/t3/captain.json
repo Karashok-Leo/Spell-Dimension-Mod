@@ -8,7 +8,7 @@
       "type": "patchouli:spotlight",
       "item": "aquamirae:shell_horn",
       "title": "Captain Cornelia",
-      "text": "Level: <level_t3>$(br2)While carrying $(boss/t4/guardian)Abyss Guard$(), use a $(key)Shell Horn$() on the $(bold)coast$() of a $(bold)Frozen Deep Ocean$() to summon $(key)Captain Cornelia$().$(br2)$(key)Shell Horn$(): obtained by killing the $(bold)Pillager$() in the $(bold)captain's cabin$() of a $(copy:Stranded Ship)Stranded Ship$()[$(copy:aquamirae:ship)aquamirae:ship$()].$(br)You can locate this structure in the $(bold)Overworld$() using $(mage/spell#locate)Mana Locate$().",
+      "text": "Level: <level_t3>$(br2)While carrying $(boss/t4/guardian)Abyss Guard$(), use a $(key)Shell Horn$() on the $(bold)coast$() of a $(bold)Frozen Deep Ocean$() to summon $(key)Captain Cornelia$().$(br2)$(key)Shell Horn$(): obtained by killing the $(bold)Pillager$() in the $(bold)captain's cabin$() of a $(copy:Stranded Ship)Stranded Ship$()[$(copy:aquamirae:ship)aquamirae:ship$()].$(br)You can locate this structure in the $(bold)Overworld$() using $(mage/spell#locate)Spell Locate$().",
       "link_recipe": true
     },
     {
@@ -19,4 +19,3 @@
     }
   ]
 }
-

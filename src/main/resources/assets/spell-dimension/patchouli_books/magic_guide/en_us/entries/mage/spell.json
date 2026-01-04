@@ -7,15 +7,15 @@
     {
       "type": "patchouli:spotlight",
       "item": "spell-dimension:spell_scroll{spell_container:{is_proxy:1b,max_spell_count:1b,spell_ids:['spell-dimension:locate']}}",
-      "title": "Mana Locate",
-      "text": "$(br)When holding a specific $(bold)index item$() in your $(bold)offhand$(), casting $(key)Mana Locate$() on a $(key)Lodestone$() can locate special $(bold)structures/biomes$().$(br2)$(welcome/emi#ru)Check uses$() on a $(key)Lodestone$() to see all recipes, or $(welcome/emi#search)search$() for the $(bold)structure/biome$() name directly.$(br2)A $(key)Lodestone$() that gets hit has a $(bold)30%$() chance to break.",
+      "title": "Spell Locate",
+      "text": "$(br)When holding a specific $(bold)key item$() in your $(bold)offhand$(), casting $(key)Spell Locate$() on a $(key)Lodestone$() can locate special $(bold)structures/biomes$().$(br2)$(welcome/emi#ru)Check uses$() on a $(key)Lodestone$() to see all recipes, or $(welcome/emi#search)search$() for the $(bold)structure/biome$() name directly.$(br2)A $(key)Lodestone$() that gets hit has a $(bold)30%$() chance to break.",
       "anchor": "locate"
     },
     {
       "type": "patchouli:spotlight",
       "item": "spell-dimension:spell_scroll{spell_container:{is_proxy:1b,max_spell_count:1b,spell_ids:['spell-dimension:summon']}}",
-      "title": "Mana Summon",
-      "text": "$(br)When holding a specific $(bold)index item$() in your $(bold)offhand$(), casting $(key)Mana Summon$() on a $(mechanic/spawner)spawner$() can summon special mobs.$(br2)$(welcome/emi#ru)Check uses$() on a $(mechanic/spawner)spawner$() to see all recipes.$(br2)Some bosses can also be summoned with $(key)Mana Summon$(), but you must be in the place where they $(bold)normally appear$() $(t:e.g. Stalker must be summoned in the Otherworld).",
+      "title": "Spell Summon",
+      "text": "$(br)When holding a specific $(bold)key item$() in your $(bold)offhand$(), casting $(key)Spell Summon$() on a $(mechanic/spawner)spawner$() can summon special mobs.$(br2)$(welcome/emi#ru)Check uses$() on a $(mechanic/spawner)spawner$() to see all recipes.$(br2)Some bosses can also be summoned with $(key)Spell Summon$(), but you must be in the place where they $(bold)normally appear$() $(t:e.g. Stalker must be summoned in the Otherworld).",
       "anchor": "summon"
     },
     {
@@ -28,10 +28,9 @@
     {
       "type": "patchouli:spotlight",
       "item": "spell-dimension:spell_scroll{spell_container:{is_proxy:1b,max_spell_count:1b,spell_ids:['spell-dimension:break']}}",
-      "title": "Remote Disintegration",
-      "text": "$(br)Casting $(key)Remote Disintegration$() releases a spell that $(bold)breaks$() a block when it touches it, and drops what it would normally drop.$(br2)You can use $(key)Remote Disintegration$() to break some blocks that cannot be mined normally.$(br2)This spell can bypass some restrictions, such as $(mechanic/hostility#arena)Domain Suppression$().",
+      "title": "Remote Destruction",
+      "text": "$(br)Casting $(key)Remote Destruction$() releases a spell that $(bold)breaks$() a block when it touches it, and drops what it would normally drop.$(br2)You can use $(key)Remote Destruction$() to break some blocks that cannot be mined normally.$(br2)This spell can bypass some restrictions, such as $(mechanic/hostility#arena)Domain Suppression$().",
       "anchor": "break"
     }
   ]
 }
-

@@ -15,22 +15,19 @@
       "item": "minecraft:enchanted_book{StoredEnchantments:[{id:'l2hostility:hardened',lvl:1s}]}",
       "title": "硬化",
       "text": "$(br)通常，怪物对你造成的伤害越多，对你的盔甲造成的损伤也就越多。$(key)硬化$()魔咒可以使物品的单次耐久损耗最多为$(bold)1$()。",
-      "anchor": "hardened",
-      "link_recipe": true
+      "anchor": "hardened"
     },
     {
       "type": "patchouli:spotlight",
       "item": "minecraft:enchanted_book{StoredEnchantments:[{id:'l2hostility:durable_armor',lvl:3s}]}",
       "title": "盔甲耐久",
-      "text": "$(br)$(key)盔甲耐久$()魔咒可以使你的盔甲获得更高的耐久。它和$(key)耐久$()附魔不兼容。$(br2)$(bold)$(#f00)注意：由于某些原因，该魔咒暂时无法生效！$()",
-      "link_recipe": true
+      "text": "$(br)$(key)盔甲耐久$()魔咒可以使你的盔甲获得更高的耐久。它和$(key)耐久$()附魔不兼容。$(br2)$(bold)$(#f00)注意：由于某些原因，该魔咒暂时无法生效！$()"
     },
     {
       "type": "patchouli:spotlight",
       "item": "minecraft:enchanted_book{StoredEnchantments:[{id:'l2hostility:safeguard',lvl:1s}]}",
       "title": "保险",
-      "text": "$(br)$(key)保险$()魔咒可以使耐久大于$(bold)1$()的此物品受到耐久损耗时，最多削减耐久到$(bold)1$()。一段时间后如果没有恢复原来的耐久，则$(bold)移除$()该附魔。",
-      "link_recipe": true
+      "text": "$(br)$(key)保险$()魔咒可以使耐久大于$(bold)1$()的此物品受到耐久损耗时，最多削减耐久到$(bold)1$()。一段时间后如果没有恢复原来的耐久，则$(bold)移除$()该附魔。"
     }
   ]
 }

@@ -6,7 +6,7 @@
     {
       "type": "patchouli:spotlight",
       "item": "tag:spell-dimension:heart_food",
-      "text": "$(br)如你所见，开局你只有$(bold)10$()点生命值。在游戏初期，当你击杀$(key)恶意等级$()比你高的怪物时，你会获得$(t:即2点最大生命值)$(bold)一颗心$()。你最多只能通过这种方式获取$(bold)66$()点生命上限。",
+      "text": "$(br)如你所见，开局你只有$(bold)10$()点生命值。在游戏初期，当你击杀$(mechanic/hostility)恶意等级$()比你高的怪物时，你会获得$(t:即2点最大生命值)$(bold)一颗心$()。你最多只能通过这种方式获取$(bold)66$()点生命上限。",
       "title": "生命机制",
       "link_recipe": true
     },

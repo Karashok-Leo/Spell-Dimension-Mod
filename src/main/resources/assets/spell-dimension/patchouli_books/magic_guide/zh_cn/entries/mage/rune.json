@@ -15,8 +15,7 @@
       "type": "patchouli:spotlight",
       "item": "minecraft:enchanted_book{StoredEnchantments:[{id:'spell_engine:spell_infinity',lvl:1s}]}",
       "title": "符文",
-      "text": "$(br)$(key)法术无限$()魔咒可以让你在施放法术时不消耗任何$(key)符文$()。",
-      "link_recipe": true
+      "text": "$(br)$(key)法术无限$()魔咒可以让你在施放法术时不消耗任何$(key)符文$()。"
     }
   ]
 }

@@ -8,7 +8,7 @@
       "type": "patchouli:spotlight",
       "item": "illagerinvasion:primal_essence,soulsweapons:lost_soul",
       "title": "Invoker",
-      "text": "Level: <level_t4>$(br2)Spawns in $(copy:Woodland Mansion)Woodland Mansion$()[$(copy:minecraft:mansion)minecraft:mansion$()].$(br)You can locate this structure in the $(bold)Overworld$() using $(mage/spell#locate)Mana Locate$().$(br2)Defeating $(key)Invoker$() drops $(key)Primal Essence$(), which can be used to craft $(boss/t3/returning_knight)Lost Soul$().",
+      "text": "Level: <level_t4>$(br2)Spawns in $(copy:Woodland Mansion)Woodland Mansion$()[$(copy:minecraft:mansion)minecraft:mansion$()].$(br)You can locate this structure in the $(bold)Overworld$() using $(mage/spell#locate)Spell Locate$().$(br2)Defeating $(key)Invoker$() drops $(key)Primal Essence$(), which can be used to craft $(boss/t3/returning_knight)Lost Soul$().",
       "link_recipe": true
     },
     {
@@ -19,4 +19,3 @@
     }
   ]
 }
-

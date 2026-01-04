@@ -15,7 +15,7 @@
       "type": "patchouli:spotlight",
       "item": "deeperdarker:heart_of_the_deep",
       "title": "Otherside",
-      "text": "$(copy:Ancient City)Ancient City$()[$(copy:minecraft:ancient_city)minecraft:ancient_city$()] lies deep underground in the $(bold)Overworld$().$(br)You can locate this structure in the $(bold)Overworld$() using $(mage/spell#locate)Mana Locate$().$(br2)In the center of an $(key)Ancient City$() there is a $(key)portal$() made of $(key)Reinforced Deepslate$(). After $(bold)clearing$() the $(key)Sculk Veins$() attached to it, $(bold)right-click$() the $(bold)portal frame$() with a $(key)Heart of the Deep$() to activate the $(key)portal$(). Going through it will take you to the $(key)$(t:also known as the Deep Dark dimension)Otherside$().",
+      "text": "$(copy:Ancient City)Ancient City$()[$(copy:minecraft:ancient_city)minecraft:ancient_city$()] lies deep underground in the $(bold)Overworld$().$(br)You can locate this structure in the $(bold)Overworld$() using $(mage/spell#locate)Spell Locate$().$(br2)In the center of an $(key)Ancient City$() there is a $(key)portal$() made of $(key)Reinforced Deepslate$(). After $(bold)clearing$() the $(key)Sculk Veins$() attached to it, $(bold)right-click$() the $(bold)portal frame$() with a $(key)Heart of the Deep$() to activate the $(key)portal$(). Going through it will take you to the $(key)$(t:also known as the Deep Dark dimension)Otherside$().",
       "anchor": "otherside",
       "link_recipe": true
     },
@@ -27,4 +27,3 @@
     }
   ]
 }
-

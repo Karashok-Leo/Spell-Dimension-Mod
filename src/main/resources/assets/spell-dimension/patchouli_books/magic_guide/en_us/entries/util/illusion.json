@@ -7,7 +7,7 @@
       "type": "patchouli:spotlight",
       "item": "spell-dimension:illusion_container,spell-dimension:illusion_upgrade",
       "title": "Illusion",
-      "text": "$(br)The $(key)Illusion Container$() can devour large amounts of $(mechanic/rarity#gear)gear$() and any enchanted items, converting them into $(bold)random materials$() of the same $(mechanic/rarity)rarity$() or a $(mechanic/enchant#omni)Book of Omniscience$(). This is also the only way to obtain the $(mechanic/enchant#omni)Book of Omniscience$().",
+      "text": "$(br)The $(key)Illusion Container$() can devour large amounts of $(mechanic/rarity#gear)gear$() and any enchanted items, converting them into $(bold)random materials$() of the same $(mechanic/rarity)rarity$() or a $(mechanic/enchant#omni)Book Of Omniscience$(). This is also the only way to obtain the $(mechanic/enchant#omni)Book Of Omniscience$().",
       "link_recipe": true
     },
     {

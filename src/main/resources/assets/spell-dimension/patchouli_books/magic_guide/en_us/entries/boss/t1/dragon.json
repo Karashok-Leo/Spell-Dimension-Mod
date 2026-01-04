@@ -8,7 +8,7 @@
       "type": "patchouli:spotlight",
       "item": "spell-dimension:celestial_luminary,tag:spell-dimension:endrem_eyes",
       "title": "Ender Dragon",
-      "text": "Level: <level_t1>$(br2)To enter the End, you must first collect $(bold)12$() $(key)special eyes$(). These $(key)special eyes$() come from various boss loot.$(br2)After defeating $(boss/t1/day_night)Day Stalker & Night Prowler$(), craft and use $(key)Endless Starlight$() to unlock the $(key)Endgame Phase$() and grant yourself the $(bold)authority$() to enter the End.",
+      "text": "Level: <level_t1>$(br2)To enter the End, you must first collect $(bold)12$() $(key)special eyes$(). These $(key)special eyes$() come from various boss loot.$(br2)After defeating $(boss/t1/day_night)Day Stalker & Night Prowler$(), craft and use $(key)Endless Starlight$() to unlock the $(key)End Stage$() and grant yourself the $(bold)authority$() to enter the End.",
       "link_recipe": true
     },
     {

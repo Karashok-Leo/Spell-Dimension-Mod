@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "$(br)Wearing a $(bold)full set$() of certain equipment grants special set bonuses.$(br2)$(welcome/emi#search)Search$() for $(copy:set)set$() (or pinyin) to see all available set bonuses.",
+      "text": "$(br)Wearing a $(bold)full set$() of certain equipment grants special $(key)set bonuses$().$(br2)$(welcome/emi#search)Search$() for $(copy:set)set$() to see all available $(key)set bonuses$().",
       "title": "Set Bonuses"
     }
   ]

@@ -8,7 +8,7 @@
       "type": "patchouli:spotlight",
       "item": "soulsweapons:withered_demon_heart",
       "title": "Decaying King",
-      "text": "Level: <level_t4>$(br2)Spawns in $(copy:Decaying Kingdom)Decaying Kingdom$()[$(copy:soulsweapons:decaying_kingdom)soulsweapons:decaying_kingdom$()].$(br)You can locate this structure in the $(bold)Nether$() using a $(key)Moonstone Compass$() or $(mage/spell#locate)Mana Locate$().$(br2)Alternatively, use a $(key)Withered Demon Heart$() on a $(key)Blackstone Pedestal$() to summon.",
+      "text": "Level: <level_t4>$(br2)Spawns in $(copy:Decaying Kingdom)Decaying Kingdom$()[$(copy:soulsweapons:decaying_kingdom)soulsweapons:decaying_kingdom$()].$(br)You can locate this structure in the $(bold)Nether$() using a $(key)Moonstone Compass$() or $(mage/spell#locate)Spell Locate$().$(br2)Alternatively, use a $(key)Withered Demon Heart$() on a $(key)Blackstone Pedestal$() to summon.",
       "link_recipe": true
     },
     {
@@ -25,4 +25,3 @@
     }
   ]
 }
-

@@ -13,8 +13,8 @@
     {
       "type": "patchouli:spotlight",
       "item": "fwaystones:abyss_watcher,fwaystones:pocket_wormhole",
-      "title": "Abyss Watcher & Pocket Wormhole",
-      "text": "$(br)$(key)Abyss Watcher$() and $(key)Pocket Wormhole$() let you $(bold)open the teleport screen from anywhere$(). The difference is that Abyss Watcher is $(bold)single-use$(), while Pocket Wormhole is $(bold)reusable$().",
+      "title": "Teleport Anytime",
+      "text": "$(br)$(key)Abyss Watcher$() and $(key)Pocket Wormhole$() let you $(bold)open the teleport screen from anywhere$(). The difference is that $(key)Abyss Watcher$() is $(bold)single-use$(), while $(key)Pocket Wormhole$() is $(bold)reusable$().",
       "link_recipe": true
     }
   ]

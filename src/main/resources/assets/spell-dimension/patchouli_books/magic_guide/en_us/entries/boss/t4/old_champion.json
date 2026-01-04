@@ -8,7 +8,7 @@
       "type": "patchouli:spotlight",
       "item": "soulsweapons:draugr",
       "title": "Old Champion's Remains",
-      "text": "Level: <level_t4>$(br2)Spawns in $(copy:Champion's Grave)Champion's Grave$()[$(copy:soulsweapons:champions_grave)soulsweapons:champions_grave$()].$(br2)You can locate this structure in the $(bold)Overworld$() using a $(key)Moonstone Compass$() or $(mage/spell#locate)Mana Locate$().$(br2)Alternatively, use $(key)Draugr$() on the $(key)Old Moon Altar$() to summon.",
+      "text": "Level: <level_t4>$(br2)Spawns in $(copy:Champion's Grave)Champion's Grave$()[$(copy:soulsweapons:champions_grave)soulsweapons:champions_grave$()].$(br2)You can locate this structure in the $(bold)Overworld$() using a $(key)Moonstone Compass$() or $(mage/spell#locate)Spell Locate$().$(br2)Alternatively, use $(key)Draugr$() on the $(key)Old Moon Altar$() to summon.",
       "link_recipe": true
     },
     {
@@ -37,4 +37,3 @@
     }
   ]
 }
-

@@ -8,7 +8,7 @@
       "type": "patchouli:spotlight",
       "item": "bosses_of_mass_destruction:gauntlet_blackstone",
       "title": "Gauntlet",
-      "text": "Level: <level_t2>$(br2)Spawns in the $(copy:Gauntlet Arena)Gauntlet Arena$()[$(copy:bosses_of_mass_destruction:gauntlet_arena)bosses_of_mass_destruction:gauntlet_arena$()].$(br)You can locate this structure in the $(bold)Nether$() using $(mage/spell#locate)Mana Locate$().$(br2)Break the $(key)Ancient Chiseled Blackstone$() in the center of the arena to summon the $(key)Gauntlet$().",
+      "text": "Level: <level_t2>$(br2)Spawns in the $(copy:Gauntlet Arena)Gauntlet Arena$()[$(copy:bosses_of_mass_destruction:gauntlet_arena)bosses_of_mass_destruction:gauntlet_arena$()].$(br)You can locate this structure in the $(bold)Nether$() using $(mage/spell#locate)Spell Locate$().$(br2)Break the $(key)Ancient Chiseled Blackstone$() in the center of the arena to summon the $(key)Gauntlet$().",
       "link_recipe": true
     },
     {
@@ -19,4 +19,3 @@
     }
   ]
 }
-

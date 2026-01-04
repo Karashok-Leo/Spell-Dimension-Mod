@@ -15,8 +15,7 @@
       "type": "patchouli:spotlight",
       "item": "minecraft:enchanted_book{StoredEnchantments:[{id:'spell_engine:spell_infinity',lvl:1s}]}",
       "title": "Runes",
-      "text": "$(br)The $(key)Spell Infinity$() enchantment makes casting spells consume no $(key)runes$().",
-      "link_recipe": true
+      "text": "$(br)The $(key)Spell Infinity$() enchantment makes casting spells consume no $(key)runes$()."
     }
   ]
 }

@@ -1,13 +1,13 @@
 {
-  "name": "Alloy Smelting",
+  "name": "Alloy Forgery",
   "icon": "alloy_forgery:adamantite_block_forge_controller",
   "category": "spell-dimension:mechanic",
   "pages": [
     {
       "type": "patchouli:spotlight",
       "item": "tag:spell-dimension:forge_controller/1,tag:spell-dimension:forge_controller/2,tag:spell-dimension:forge_controller/3",
-      "title": "Alloy Smelting",
-      "text": "$(br)$(key)Alloy Smelting$() is an easy way to $(bold)increase ore yield$(). More importantly, it also lets you craft some $(bold)special items$().$(br2)To build a forge, follow the guide shown in the images and combine a $(key)Forge Controller$() with any supported $(key)Forge Casing blocks$().",
+      "title": "Alloy Forgery",
+      "text": "$(br)$(key)Alloy Forgery$() is an easy way to $(bold)increase ore yield$(). More importantly, it also lets you craft some $(bold)special items$().$(br2)To build a forge, follow the guide shown in the images and combine a $(key)Forge Controller$() with any supported $(key)Forge Body blocks$().",
       "link_recipe": true
     },
     {
@@ -17,25 +17,24 @@
         "spell-dimension-book:textures/alloy_forge/2.png",
         "spell-dimension-book:textures/alloy_forge/3.png"
       ],
-      "text": "$(key)Forge Casing blocks$() are all blocks in the multiblock structure except the controller.",
+      "text": "$(key)Forge Body blocks$() are blocks in the multiblock except the controller.",
       "border": true
     },
     {
       "type": "patchouli:text",
-      "text": "$(br)Higher-tier forges have $(bold)faster speed$(), $(bold)larger fuel capacity$(), and support $(bold)more recipes$().$(br2)Below are the required $(key)Forge Controller$() blocks and available $(key)Forge Casing blocks$() for each tier:$(br)$(list)$(bold)Tier 1$():$(br)$(list2)$(key)Stone Brick Forge$()$(list3)Stone Brick Forge Controller$(list3)Stone Brick Casing:$(list4)Stone Bricks$(list4)Chiseled Stone Bricks"
+      "text": "Higher-tier forges are $(bold)faster$(), hold $(bold)more fuel$(), and support $(bold)more recipes$().$(br2)Below lists the required $(key)Forge Controller$() blocks and available $(key)Forge Body blocks$() for each tier:$(br)$(list)$(bold)Tier 1$():$(br)$(list2)$(key)Stone Brick Forge$()$(list3)Stone Brick Forge Controller$(list3)Stone Brick Forge Body:$(list4)Stone Bricks$(list4)Chiseled Stone Bricks"
     },
     {
       "type": "patchouli:text",
-      "text": "$(br)$(list2)$(key)Brick Forge$()$(list3)Brick Forge Controller$(list3)Brick Casing:$(list4)Bricks$(br)$(list2)$(key)Deepslate Brick Forge$()$(list3)Deepslate Brick Forge Controller$(list3)Deepslate Brick Casing:$(list4)Deepslate Tiles$(list4)Polished Deepslate$(list4)Chiseled Deepslate"
+      "text": "$(list2)$(key)Brick Forge$()$(list3)Brick Forge Controller$(list3)Brick Forge Body:$(list4)Bricks$(br)$(list2)$(key)Deepslate Brick Forge$()$(list3)Deepslate Brick Forge Controller$(list3)Deepslate Brick Forge Body:$(list4)Deepslate Tiles$(list4)Polished Deepslate$(list4)Chiseled Deepslate"
     },
     {
       "type": "patchouli:text",
-      "text": "$(br)$(list)$(bold)Tier 2$():$(br)$(list2)$(key)Prismarine Brick Forge$()$(list3)Prismarine Brick Forge Controller$(list3)Prismarine Brick Casing:$(list4)Prismarine Bricks$(br)$(list2)$(key)Polished Blackstone Forge$()$(list3)Polished Blackstone Forge Controller$(list3)Polished Blackstone Casing:$(list4)Polished Blackstone$(list4)Polished Blackstone Bricks$(list4)Chiseled Polished Blackstone"
+      "text": "$(list)$(bold)Tier 2$():$(br)$(list2)$(key)Prismarine Brick Forge$()$(list3)Prismarine Brick Forge Controller$(list3)Prismarine Brick Forge Body:$(list4)Prismarine Bricks$(br)$(list2)$(key)Polished Blackstone Forge$()$(list3)Polished Blackstone Forge Controller$(list3)Polished Blackstone Forge Body:$(list4)Polished Blackstone$(list4)Polished Blackstone Bricks$(list4)Chiseled Polished Blackstone"
     },
     {
       "type": "patchouli:text",
-      "text": "$(br)$(list)$(bold)Tier 3$():$(br)$(list2)$(key)End Stone Brick Forge$()$(list3)End Stone Brick Forge Controller$(list3)End Stone Brick Casing:$(list4)End Stone Bricks$(br)$(list2)$(key)Adamantite Forge$()$(list3)Adamantite Forge Controller$(list3)Adamantite Casing:$(list4)Adamantite Block"
+      "text": "$(list)$(bold)Tier 3$():$(br)$(list2)$(key)End Stone Brick Forge$()$(list3)End Stone Brick Forge Controller$(list3)End Stone Brick Forge Body:$(list4)End Stone Bricks$(br)$(list2)$(key)Adamantite Forge$()$(list3)Adamantite Block Forge Controller$(list3)Adamantite Forge Body:$(list4)Block of Adamantite"
     }
   ]
 }
-

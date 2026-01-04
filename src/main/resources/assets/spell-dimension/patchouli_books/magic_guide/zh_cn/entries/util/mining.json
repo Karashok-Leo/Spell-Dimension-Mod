@@ -7,8 +7,7 @@
       "type": "patchouli:spotlight",
       "item": "minecraft:enchanted_book{StoredEnchantments:[{id:'veinmining:vein_mining',lvl:1s}]}",
       "title": "连锁采集",
-      "text": "你可以按住 $(bold)`(~)$() 键来启用$(key)连锁采集$()功能，该键位通常位于键盘左上角，Tab键上方、Esc键的下方以及数字1键的左边。$(br2)默认情况下，一次$(key)连锁采集$()只能破坏掉寥寥几个方块，你可以通过为你的工具$(bold)附魔连锁采集$()来提升破坏范围。",
-      "link_recipe": true
+      "text": "你可以按住 $(bold)`(~)$() 键来启用$(key)连锁采集$()功能，该键位通常位于键盘左上角，$(bold)Tab$()键上方、$(bold)Esc$()键的下方以及数字$(bold)1$()键的左边。$(br2)默认情况下，一次$(key)连锁采集$()只能破坏掉寥寥几个方块，你可以通过为你的工具$(key)附魔连锁采集$()来提升破坏范围。"
     }
   ]
 }

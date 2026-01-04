@@ -14,7 +14,7 @@
       "type": "patchouli:spotlight",
       "item": "fwaystones:abyss_watcher,fwaystones:pocket_wormhole",
       "title": "深渊观察者 & 便携虫洞",
-      "text": "$(br)$(key)深渊观察者$()和$(key)便携虫洞$()可以允许玩家$(bold)从任何地方打开传送界面$()。两者不同的是，深渊观察者是$(bold)一次性$()的，而便携虫洞可以$(bold)重复使用$()。",
+      "text": "$(br)$(key)深渊观察者$()和$(key)便携虫洞$()可以允许玩家$(bold)从任何地方打开传送界面$()。两者不同的是，$(key)深渊观察者$()是$(bold)一次性$()的，而$(key)便携虫洞$()可以$(bold)重复使用$()。",
       "link_recipe": true
     }
   ]

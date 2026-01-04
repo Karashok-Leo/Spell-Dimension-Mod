@@ -7,7 +7,7 @@
       "type": "patchouli:spotlight",
       "item": "spell-dimension:random_common_material,spell-dimension:random_uncommon_material,spell-dimension:random_rare_material,spell-dimension:random_epic_material,spell-dimension:random_legendary_material,spell-dimension:random_common_gear,spell-dimension:random_uncommon_gear,spell-dimension:random_rare_gear,spell-dimension:random_epic_gear,spell-dimension:random_legendary_gear",
       "title": "Item Rarity",
-      "text": "All materials and gear are divided into different $(key)rarities$(). From low to high: $(bold)Common$()(common), $(bold)Uncommon$()(uncommon), $(bold)Rare$()(rare), $(bold)Epic$()(epic), and $(bold)Legendary$()(legendary).$(br2)$(welcome/emi#search)Search$() for specific tags (starting with $(bold)#$()) to view matching items.$(br2)Here are the search keywords for each rarity:",
+      "text": "All materials and gear have $(key)rarities$(). From low to high: $(bold)Common$(), $(bold)Uncommon$(), $(bold)Rare$(), $(bold)Epic$(), and $(bold)Legendary$().$(br2)$(welcome/emi#search)Search$() tags (starting with $(bold)#$()) to view related items.$(br2)Search keywords for each rarity:",
       "link_recipe": true
     },
     {
@@ -25,4 +25,3 @@
     }
   ]
 }
-

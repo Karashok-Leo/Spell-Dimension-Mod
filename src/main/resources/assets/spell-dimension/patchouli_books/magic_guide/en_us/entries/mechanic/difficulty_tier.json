@@ -7,12 +7,12 @@
       "type": "patchouli:spotlight",
       "item": "spell-dimension:bottle_of_nightmare",
       "title": "Difficulty Tiers",
-      "text": "$(br)$(key)Difficulty Tiers$() are optional difficulty settings that players can choose for additional challenges.$(br2)Your starting $(key)Difficulty Tier$() is $(key)Normal$(). Each time you drink a $(key)Bottle of Nightmare$(), you increase your $(key)Difficulty Tier$() by one.$(br2)Each tier brings different challenges:",
+      "text": "$(key)Difficulty Tiers$() are optional settings for extra challenge.$(br2)You start at $(key)Normal$(). Each $(key)Bottle of Nightmare$() increases your $(key)Difficulty Tier$() by one.$(br2)Each tier brings different challenges:",
       "link_recipe": true
     },
     {
       "type": "patchouli:text",
-      "text": "$(list)$(key)Hardcore$()$(list2)Base $(mechanic/hostility)Hostility extra difficulty$() increased by $(bold)30$()$(list2)$(mechanic/hostility)Difficulty$() gained from kills is doubled$(list2)$(mechanic/hostility)Hostility damage bonus$() is doubled$(list2)Advanced $(mage/scroll)spell scrolls$() cannot be inserted into lower-tier $(mage/book)spell books$()$(list2)Loot $(mage/essence#ec)Enchanted Essence$() has reduced thresholds$(list2)Cannot use $(key)Hostility Cleansing Potion$() or $(key)Hostility Absorption Orb$()",
+      "text": "$(list)$(key)Hardcore$()$(list2)Base $(mechanic/hostility)Hostility extra difficulty$() increased by $(bold)30$()$(list2)$(mechanic/hostility)Difficulty$() gained from kills is doubled$(list2)$(mechanic/hostility)Hostility damage bonus$() is doubled$(list2)Advanced $(mage/scroll)spell scrolls$() cannot be put into lower-tier $(mage/book)spell books$()$(list2)$(mage/essence#ec)Enchanted Essence$() from loot has lower thresholds$(list2)Cannot use $(key)Bottle Of Sanity$() or $(key)Hostility Orb$()",
       "anchor": "hardcore"
     },
     {
@@ -22,4 +22,3 @@
     }
   ]
 }
-

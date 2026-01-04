@@ -7,7 +7,7 @@
       "type": "patchouli:spotlight",
       "item": "tag:spell-dimension:hostility_curse",
       "title": "Curses",
-      "text": "Wearing $(key)curses$() can grant special resources or combat power, but also comes with drawbacks.$(br2)The $(key)Curse of Envy$() is the most important curse and is usually the first one you should craft. It gives you a chance to obtain $(bold)trait items$() when killing enemies. $(bold)Trait items$() are $(bold)important materials$() for crafting many advanced trinkets and enchanted books.",
+      "text": "Wearing $(key)curses$() can grant special resources or combat power, but has drawbacks.$(br2)The $(key)Curse of Envy$() is the most important, and is usually the first you should craft. It can drop $(key)Trait Items$() from kills. $(key)Trait Items$() are $(bold)key materials$() for many advanced trinkets and enchanted books.",
       "link_recipe": true
     },
     {
@@ -17,4 +17,3 @@
     }
   ]
 }
-

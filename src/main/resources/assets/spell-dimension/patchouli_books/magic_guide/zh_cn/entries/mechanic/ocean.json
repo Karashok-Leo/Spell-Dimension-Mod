@@ -7,14 +7,14 @@
       "type": "patchouli:spotlight",
       "item": "spell-dimension:magic_mirror,spell-dimension:broken_magic_mirror",
       "title": "识之海",
-      "text": "$(key)识之海$()是一个一无所有的世界。$(br2)一旦你进入这个世界，你的$(mechanic/hostility)恶意额外难度$()将永久提升100级。$(br2)你不能使用传送石碑出入识之海，唯一的进入方法是使用$(key)魔镜$()，唯一的出口是$(key)识之枢纽$()。",
+      "text": "$(key)识之海$()是一个一无所有的世界。$(br2)一旦你进入这个世界，你的$(mechanic/hostility)恶意额外难度$()将永久提升$(bold)100$()级。$(br2)你不能使用$(util/waystone)传送石碑$()出入识之海，唯一的进入方法是使用$(key)魔镜$()，唯一的出口是$(key)识之枢纽$()。",
       "link_recipe": true
     },
     {
       "type": "patchouli:spotlight",
       "item": "spell-dimension:consciousness_core",
       "title": "识之枢纽",
-      "text": "$(key)识之枢纽$()分布在在识之海维度表面，右击其上的$(key)识之核心$()即可$(bold)激活$()枢纽，同时触发$(key)入侵事件$()，怪物将会分波次出现并攻击玩家，击败所有怪物即可获得特殊奖励。$(br2)$(key)识之枢纽$()的难度系数越大，$(key)识之基座$()的层数越多，入侵事件的难度也会越大。",
+      "text": "$(key)识之枢纽$()分布在在识之海维度表面，右击其上的$(key)识之核心$()即可$(bold)激活$()枢纽，同时触发$(key)入侵事件$()，怪物将会分波次出现并攻击玩家，击败所有怪物即可获得特殊奖励。$(br2)$(key)识之枢纽$()的$(bold)难度系数$()越大，$(key)识之基座$()的层数越多，入侵事件的难度也会越大。",
       "anchor": "pivot",
       "link_recipe": true
     },

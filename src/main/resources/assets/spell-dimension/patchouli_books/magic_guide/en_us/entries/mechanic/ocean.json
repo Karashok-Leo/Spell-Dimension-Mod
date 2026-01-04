@@ -7,14 +7,14 @@
       "type": "patchouli:spotlight",
       "item": "spell-dimension:magic_mirror,spell-dimension:broken_magic_mirror",
       "title": "Ocean of Consciousness",
-      "text": "$(key)Ocean of Consciousness$() is a world of nothingness.$(br2)Once you enter, your $(mechanic/hostility)Hostility extra difficulty$() will permanently increase by 100 levels.$(br2)You cannot use Waystones to travel in or out of the Ocean of Consciousness. The only way in is the $(key)Magic Mirror$(), and the only way out is the $(key)Consciousness Pivot$().",
+      "text": "$(key)Ocean of Consciousness$() is a world of nothingness.$(br2)Entering permanently increases your $(mechanic/hostility)Hostility extra difficulty$() by $(bold)100$() levels.$(br2)You cannot use $(util/waystone)Waystones$() to enter or leave. The only way in is the $(key)Magic Mirror$(), and the only way out is the $(key)Consciousness Pivot$().",
       "link_recipe": true
     },
     {
       "type": "patchouli:spotlight",
       "item": "spell-dimension:consciousness_core",
       "title": "Consciousness Pivot",
-      "text": "$(key)Consciousness Pivots$() are scattered across the surface of the Ocean of Consciousness. Right-click the $(key)Consciousness Core$() on top to $(bold)activate$() the pivot and trigger an $(key)Invasion Event$(). Mobs will spawn in waves and attack the player; defeat them all to gain special rewards.$(br2)The higher the pivot's difficulty coefficient and the more $(key)Consciousness Pedestals$() it has, the harder the Invasion Event will be.",
+      "text": "$(key)Consciousness Pivots$() are scattered across the ocean's surface. Right-click the $(key)Consciousness Core$() to $(bold)activate$() it and start an $(key)Invasion Event$(). Mobs attack in waves; clear them for special rewards.$(br2)Higher $(bold)Difficulty Factor$() makes invasions harder.",
       "anchor": "pivot",
       "link_recipe": true
     },
