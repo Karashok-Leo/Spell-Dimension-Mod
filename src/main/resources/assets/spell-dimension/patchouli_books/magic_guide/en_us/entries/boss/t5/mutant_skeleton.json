@@ -1,0 +1,22 @@
+{
+  "name": "Mutant Skeleton",
+  "icon": "mutantmonsters:mutant_skeleton_skull",
+  "category": "spell-dimension:boss/t5",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "mutantmonsters:mutant_skeleton_skull,mutantmonsters:mutant_skeleton_rib_cage,mutantmonsters:mutant_skeleton_pelvis",
+      "title": "Mutant Skeleton",
+      "text": "$(br)Naturally spawned $(key)Skeletons$() have a small chance to mutate into a $(key)Mutant Skeleton$().$(br)They can also be spawned manually via $(mage/spell#summon)Mana Summon$() or a $(key)Splash Mutant Potion$().$(br2)Defeating a $(key)Mutant Skeleton$() drops $(key)Mutant Skeleton Skull/Rib Cage/Pelvis$(), which can be used to craft $(boss/t2/graveyard_lich#staff)Ominous Bone Staff Fragments$().",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "mutantmonsters:mutant_skeleton",
+      "scale": 1.0,
+      "offset": 0.0
+    }
+  ]
+}
+

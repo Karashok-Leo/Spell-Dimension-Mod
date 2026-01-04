@@ -1,0 +1,37 @@
+{
+  "name": "Equipment Durability",
+  "icon": "minecraft:diamond_chestplate",
+  "category": "spell-dimension:mechanic",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "spell-dimension:broken_item",
+      "title": "Broken",
+      "text": "$(br)Thanks to your magical blessing, when your equipment breaks, it won't shatter — it turns into a $(key)Broken Item$() instead. You can fully repair it with a certain amount of $(mage/essence#mend)Mending Essence$().",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:enchanted_book{StoredEnchantments:[{id:'l2hostility:hardened',lvl:1s}]}",
+      "title": "Hardened",
+      "text": "$(br)Usually, the more damage a mob deals to you, the more durability damage it deals to your armor. The $(key)Hardened$() enchantment caps durability loss per hit to at most $(bold)1$().",
+      "anchor": "hardened",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:enchanted_book{StoredEnchantments:[{id:'l2hostility:durable_armor',lvl:3s}]}",
+      "title": "Durable Armor",
+      "text": "$(br)The $(key)Durable Armor$() enchantment increases your armor's durability. It is incompatible with $(key)Unbreaking$().$(br2)$(bold)$(#f00)Note: for some reason, this enchantment is currently not working!$()",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:enchanted_book{StoredEnchantments:[{id:'l2hostility:safeguard',lvl:1s}]}",
+      "title": "Safeguard",
+      "text": "$(br)The $(key)Safeguard$() enchantment ensures that when an item with durability greater than $(bold)1$() takes durability damage, its durability will not drop below $(bold)1$(). If the durability is not restored after some time, the enchantment will be $(bold)removed$().",
+      "link_recipe": true
+    }
+  ]
+}
+

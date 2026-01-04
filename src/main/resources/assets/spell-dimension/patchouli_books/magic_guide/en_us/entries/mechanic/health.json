@@ -1,0 +1,24 @@
+{
+  "name": "Health System",
+  "icon": "artifacts:crystal_heart",
+  "category": "spell-dimension:mechanic",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "tag:spell-dimension:heart_food",
+      "text": "$(br)As you can see, you start with only $(bold)10$() health. Early on, when you kill a mob whose $(key)Hostility level$() is higher than yours, you gain $(t:2 max health)$(bold)one heart$(). You can gain up to $(bold)66$() max health this way.",
+      "title": "Health System",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br2)You can always gain additional max health in these two ways:$(br)$(list)$(bold)Eat certain foods$() (e.g. Enchanted Golden Apples). Search $(copy:#spell-dimension:heart_food)#spell-dimension:heart_food$() to see all available foods.$(br)$(list)$(bold)Earn advancements$(). Only advancements that announce in chat when obtained count."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br)After being hit, if you quickly $(key)counterattack$() your opponent, you can regain the health you lost.",
+      "title": "Counterattack"
+    }
+  ]
+}
+

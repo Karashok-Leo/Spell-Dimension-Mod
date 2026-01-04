@@ -1,0 +1,13 @@
+{
+  "name": "Set Bonuses",
+  "icon": "plentyofarmors:stardusite_chestplate",
+  "category": "spell-dimension:mechanic",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(br)Wearing a $(bold)full set$() of certain equipment grants special set bonuses.$(br2)$(welcome/emi#search)Search$() for $(copy:set)set$() (or pinyin) to see all available set bonuses.",
+      "title": "Set Bonuses"
+    }
+  ]
+}
+

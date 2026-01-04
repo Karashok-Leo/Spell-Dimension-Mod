@@ -1,0 +1,21 @@
+{
+  "name": "Quick Lookup",
+  "icon": "minecraft:spyglass",
+  "category": "spell-dimension:welcome",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Quick Lookup",
+      "text": "$(br)To improve the guide, we added a $(key)Quick Lookup$() feature to $(key)$(italic)Magic Guide$()!$(br2)There are two ways to use it:$(br)$(list)$(bold)In the inventory screen, hover an item and hold Ctrl$()$(br)$(list)$(bold)In the world, aim at a block, hold $(key)$(italic)Magic Guide$() and sneak-right-click$()$(br2)"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "spell-dimension-book:textures/lookup/item.png",
+        "spell-dimension-book:textures/lookup/block.png"
+      ],
+      "text": "$(t:How's that? Sounds a bit like Botania's Lexica Botania — a salute to the veterans of magic :>)—Then you'll jump to the entry for that item/block in this book (if any)!$()",
+      "border": true
+    }
+  ]
+}

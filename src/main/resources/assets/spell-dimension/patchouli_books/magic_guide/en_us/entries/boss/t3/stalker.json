@@ -1,0 +1,28 @@
+{
+  "name": "Stalker",
+  "icon": "deeperdarker:soul_crystal",
+  "category": "spell-dimension:boss/t3",
+  "sortnum": 5,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "deeperdarker:ancient_vase",
+      "title": "Stalker",
+      "text": "Level: <level_t3>$(br2)While in the $(boss/t4/warden#otherside)Otherside$(), breaking an $(key)Ancient Vase$() has a chance to spawn a $(key)Stalker$().$(br2)$(key)Ancient Vases$() generate in $(copy:Ancient Temples)Ancient Temples$()[$(copy:deeperdarker:ancient_temple)deeperdarker:ancient_temple$()].$(br)You can locate this structure in the $(boss/t4/warden#otherside)Otherside$() using $(mage/spell#locate)Mana Locate$().",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "deeperdarker:soul_crystal",
+      "text": "$(br)Defeating $(key)Stalker$() drops a $(key)Soul Crystal$(), which can be used to craft the $(mechanic/loot_charm)Arcane Loot Charm$().",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "deeperdarker:stalker",
+      "scale": 1.0,
+      "offset": 0.0
+    }
+  ]
+}
+

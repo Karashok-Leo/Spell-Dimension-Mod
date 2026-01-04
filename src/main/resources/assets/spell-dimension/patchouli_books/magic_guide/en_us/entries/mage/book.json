@@ -1,0 +1,23 @@
+{
+  "name": "Spell Books",
+  "icon": "paladins:priest_spell_book",
+  "category": "spell-dimension:mage",
+  "sortnum": 20,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "wizards:arcane_spell_book,wizards:fire_spell_book,wizards:frost_spell_book,paladins:priest_spell_book",
+      "title": "Spell Books",
+      "text": "$(key)Spell books$() are containers for spells. With the $(mage/bind)Spell Binding Table$(), you can turn a regular book into the most basic $(key)Apprentice Spell Book$(). But that's only the beginning — later, you can use $(mage/infusion)Enchantment Infusion$() to upgrade it into $(bold)Novice/Intermediate/Advanced$() $(key)Spell Books$().$(br2)$(bold)$(#cccc00)Lightning$() and $(bold)$(#3ea29f)Soul$() schools do not have an $(key)Apprentice Spell Book$(); you must craft a $(key)Novice Spell Book$() directly.",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "tag:spell-dimension:book/0,tag:spell-dimension:book/1,tag:spell-dimension:book/2",
+      "title": "Advanced Spell Books",
+      "text": "Higher-tier $(key)spell books$() provide more $(key)spell slots$().$(br2)You can put $(mage/scroll)spell scrolls$() into $(bold)Novice/Intermediate/Advanced$() $(key)Spell Books$() (similar to putting items into a storage bag). The $(key)Apprentice Spell Book$() does not support this.",
+      "link_recipe": true
+    }
+  ]
+}
+

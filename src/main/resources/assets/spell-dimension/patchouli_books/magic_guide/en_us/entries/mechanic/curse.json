@@ -1,0 +1,20 @@
+{
+  "name": "Curses",
+  "icon": "l2hostility:curse_of_envy",
+  "category": "spell-dimension:mechanic",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "tag:spell-dimension:hostility_curse",
+      "title": "Curses",
+      "text": "Wearing $(key)curses$() can grant special resources or combat power, but also comes with drawbacks.$(br2)The $(key)Curse of Envy$() is the most important curse and is usually the first one you should craft. It gives you a chance to obtain $(bold)trait items$() when killing enemies. $(bold)Trait items$() are $(bold)important materials$() for crafting many advanced trinkets and enchanted books.",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br)The $(key)Curse of Pride$() and $(key)Curse of Wrath$() are late-game $(key)curses$() that can multiply your combat power, but they can only be worn in the $(mechanic/difficulty_tier#nightmare)Nightmare difficulty tier$().",
+      "anchor": "nightmare"
+    }
+  ]
+}
+

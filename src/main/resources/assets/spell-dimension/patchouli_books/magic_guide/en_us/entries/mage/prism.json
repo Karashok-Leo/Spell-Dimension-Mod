@@ -1,0 +1,19 @@
+{
+  "name": "Spell Prism",
+  "icon": "spell-dimension:spell_prism",
+  "category": "spell-dimension:mage",
+  "sortnum": 22,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "spell-dimension:spell_prism",
+      "text": "$(br)$(key)Spell Prism$() allows your spell damage to $(bold)pierce$() magic defense.$(br2)A $(key)Spell Prism$() can only be used $(bold)4$() times. You cannot enchant it with $(bold)Mending$() or $(bold)Mana Mending$(). However, it is cheap to craft and is an effective early-game way to break through enemy defenses.",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br)In addition, $(key)Spell Prism$() can $(bold)enhance$() the effects of some $(key)universal school$() spells:$(br)$(list)$(mage/spell#locate)Mana Locate$(): locates a random destination.$(br)$(list)$(mage/spell#summon)Mana Summon$(): spawners will no longer self-destruct after their remaining count reaches zero.$(br)$(list)$(mage/spell#break)Remote Disintegration$(): applies Silk Touch when breaking blocks.$(br)$(list)Mana Light: covers a larger area."
+    }
+  ]
+}
+

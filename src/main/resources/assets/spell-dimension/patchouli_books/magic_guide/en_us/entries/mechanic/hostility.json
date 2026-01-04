@@ -1,0 +1,66 @@
+{
+  "name": "L2Hostility",
+  "icon": "l2hostility:teleport",
+  "category": "spell-dimension:mechanic",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "tag:l2hostility:trait_item",
+      "title": "L2Hostility",
+      "text": "$(br)The game uses $(bold)L2Hostility$() to control $(key)difficulty$(). Killing powerful mobs increases your $(key)difficulty$(), while dying decreases it. Mobs can spawn with special abilities called $(key)\"traits\"$().$(br2)The higher a mob's $(key)level$(), the higher its $(bold)damage$() and $(bold)health$(), and the stronger its $(key)traits$(). Every $(key)trait$() has its own counterplay."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "l2hostility:invisible,l2hostility:repelling,l2hostility:pulling",
+      "title": "Invisibility/Repelling/Pulling",
+      "text": "$(br)Mobs with $(key)traits$() are powerful, but not unbeatable. Here are some ways to counter traits:$(br)$(list)$(bold)Invisibility$(): wearing $(key)Detector Glasses$() lets you see invisible mobs.$(br)$(list)$(bold)Repelling/Pulling$(): the $(key)Insulator$() enchantment can mitigate the repelling/pulling effect.",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "l2hostility:weakness,l2hostility:slowness,l2hostility:poison,l2hostility:wither,l2hostility:blindness,l2hostility:nausea,l2hostility:levitation,l2hostility:soul_burner,l2hostility:freezing,l2hostility:cursed",
+      "title": "Debuff Traits",
+      "text": "$(list)$(bold)Weakness/Quicksand/Poison/Wither/Blindness/Distortion/Levitation/Soul Burner/Freezing/Cursed$():$(br)$(key)Ring of Divinity$() or $(key)Ring of Reflection$() can make you immune to almost all negative effects. Alternatively, you can use the $(bold)exclusive enchantments$() of the $(boss/t4/old_champion)Breastplate$() to become immune to specific debuffs.",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "l2hostility:regenerate,l2hostility:undying,l2hostility:dispell",
+      "title": "Regenerate/Undying/Dispell",
+      "text": "$(list)$(bold)Regenerate/Undying$(): applying a curse effect to mobs can prevent them from regenerating health. This can be achieved with the $(key)Spell Curse$() enchantment.$(br)$(list)$(bold)Dispell$(): the $(key)Spell Tearing$() enchantment, $(key)Spell Prism$(), and $(key)Imagine Breaker$() all allow spell damage to pierce Dispell's protection.",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "l2hostility:adaptive",
+      "title": "Adaptive",
+      "text": "$(list)$(bold)Adaptive$(): besides using debuffs, you can also refresh a mob's adaptation by $(bold)switching$() spells — each spell counts as a different damage type. The $(key)Anti-Adaptation$() enchantment makes spells harder to adapt to, or you can use $(key)Spell Prism$() / $(key)Imagine Breaker$() to pierce Adaptive's protection.",
+      "anchor": "adaptive",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "l2hostility:corrosion,l2hostility:erosion,l2hostility:split,l2hostility:teleport",
+      "title": "Corrosion/Erosion/Split/Teleport",
+      "text": "$(list)$(bold)Corrosion/Erosion$(): the $(mechanic/durability#hardened)Hardened$() enchantment greatly reduces durability damage to your gear.$(br)$(list)$(bold)Split$(): the $(key)Split Suppression$() enchantment prevents mobs from splitting.$(br)$(list)$(bold)Teleport$(): you can apply $(key)Imprisonment$() to mobs with the $(key)Ring of Imprisonment$() or a $(key)Blackflame Bomb$() to prevent them from teleporting.",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "tag:spell-dimension:spell_trait_item",
+      "title": "Spell Traits",
+      "text": "$(list)$(bold)Spell Traits$(): you can use $(key)Ring of Divinity$() or a $(mage/spell_container)Spell Container$() to reduce enemy spell damage against you. Later in the game, you can become completely immune to enemy spell damage with $(key)Magic Immune$().",
+      "anchor": "spell_trait",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "l2hostility:arena,l2hostility:ragnarok",
+      "title": "Arena/Ragnarok",
+      "text": "$(list)$(bold)Arena$(): you can place or break blocks inside the arena with $(mage/spell#place)Remote Manipulation$() or $(mage/spell#break)Remote Disintegration$().$(br)$(list)$(bold)Ragnarok$(): a $(key)Dispel Pouch$() can automatically remove seals from your equipment.",
+      "anchor": "arena",
+      "link_recipe": true
+    }
+  ]
+}
+

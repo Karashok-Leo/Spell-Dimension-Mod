@@ -1,0 +1,22 @@
+{
+  "name": "Elder Guardian",
+  "icon": "l2hostility:guardian_eye",
+  "category": "spell-dimension:boss/t4",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "spell-dimension:abyss_guard",
+      "title": "Elder Guardian",
+      "text": "Level: <level_t4>$(br2)Spawns in $(copy:Ocean Monument)Ocean Monument$()[$(copy:betteroceanmonuments:ocean_monument)betteroceanmonuments:ocean_monument$()].$(br)You can locate this structure in the $(bold)Overworld$() using $(mage/spell#locate)Mana Locate$().$(br2)Defeating $(key)Elder Guardian$() drops $(key)Abyss Guard$(), which can be used to summon $(boss/t3/captain)Captain Cornelia$().",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "minecraft:elder_guardian",
+      "scale": 0.3,
+      "offset": 0.0
+    }
+  ]
+}
+

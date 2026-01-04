@@ -1,0 +1,20 @@
+{
+  "name": "Spawners",
+  "icon": "minecraft:spawner",
+  "category": "spell-dimension:mechanic",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:spawner",
+      "text": "$(br)Spawners no longer spawn mobs infinitely. They now have a $(key)\"Remaining Spawn Count\"$() — when it reaches zero, the spawner stops spawning and $(bold)self-destructs$().$(br2)Naturally generated spawners have a default count of $(bold)20$().$(br2)You can use $(mage/spell#summon)Mana Summon$() to $(bold)reset$() a spawner's remaining spawn count.",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "spell-dimension:spawner_soul",
+      "text": "$(br)When a spawner is $(bold)manually$() broken, it drops a $(key)Spawner Soul$(), which is an important crafting material for some items.$(br2)You can also use a $(key)Spawner Soul$() as an $(bold)index item$() for $(mage/spell#summon)Mana Summon$() to put it back into a spawner.",
+      "link_recipe": true
+    }
+  ]
+}
+

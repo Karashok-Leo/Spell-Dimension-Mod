@@ -1,0 +1,21 @@
+{
+  "name": "Waystones",
+  "icon": "fwaystones:waystone",
+  "category": "spell-dimension:util",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "tag:fwaystones:waystones",
+      "title": "Waystones",
+      "text": "$(br)$(key)Waystones$() allow you to quickly teleport between different locations. You can find them in $(bold)villages$(), or craft them yourself.$(br2)You cannot use $(key)Waystones$() to enter or leave the $(mechanic/dungeon)dungeon dimension$() or the $(mechanic/ocean)Ocean of Consciousness$().",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "fwaystones:abyss_watcher,fwaystones:pocket_wormhole",
+      "title": "Abyss Watcher & Pocket Wormhole",
+      "text": "$(br)$(key)Abyss Watcher$() and $(key)Pocket Wormhole$() let you $(bold)open the teleport screen from anywhere$(). The difference is that Abyss Watcher is $(bold)single-use$(), while Pocket Wormhole is $(bold)reusable$().",
+      "link_recipe": true
+    }
+  ]
+}

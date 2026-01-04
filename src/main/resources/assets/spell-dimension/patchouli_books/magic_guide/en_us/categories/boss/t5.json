@@ -1,0 +1,7 @@
+{
+  "name": "Tier 5",
+  "description": "All Tier 5 bosses are listed here.",
+  "icon": "mutantmonsters:endersoul_hand",
+  "parent": "spell-dimension:boss",
+  "sortnum": 0
+}

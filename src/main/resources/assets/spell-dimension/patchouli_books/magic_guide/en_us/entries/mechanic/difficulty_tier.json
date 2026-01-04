@@ -1,0 +1,25 @@
+{
+  "name": "Difficulty Tiers",
+  "icon": "spell-dimension:bottle_of_nightmare",
+  "category": "spell-dimension:mechanic",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "spell-dimension:bottle_of_nightmare",
+      "title": "Difficulty Tiers",
+      "text": "$(br)$(key)Difficulty Tiers$() are optional difficulty settings that players can choose for additional challenges.$(br2)Your starting $(key)Difficulty Tier$() is $(key)Normal$(). Each time you drink a $(key)Bottle of Nightmare$(), you increase your $(key)Difficulty Tier$() by one.$(br2)Each tier brings different challenges:",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(list)$(key)Hardcore$()$(list2)Base $(mechanic/hostility)Hostility extra difficulty$() increased by $(bold)30$()$(list2)$(mechanic/hostility)Difficulty$() gained from kills is doubled$(list2)$(mechanic/hostility)Hostility damage bonus$() is doubled$(list2)Advanced $(mage/scroll)spell scrolls$() cannot be inserted into lower-tier $(mage/book)spell books$()$(list2)Loot $(mage/essence#ec)Enchanted Essence$() has reduced thresholds$(list2)Cannot use $(key)Hostility Cleansing Potion$() or $(key)Hostility Absorption Orb$()",
+      "anchor": "hardcore"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(list)$(key)Nightmare$()$(list2)For every $(bold)1$() $(mage/power)Spell Power$(), gain $(bold)0.5$() $(mechanic/hostility)Hostility extra difficulty$()$(list2)$(mage/essence#ec)Enchanted Essence$() can be merged$(list2)Can use $(mechanic/curse#nightmare)Nightmare-tier-only items$()$(list2)Also applies all effects from $(mechanic/difficulty_tier#hardcore)Hardcore$()",
+      "anchor": "nightmare"
+    }
+  ]
+}
+

@@ -1,0 +1,7 @@
+{
+  "name": "Tier 3",
+  "description": "All Tier 3 bosses are listed here.",
+  "icon": "minecraft:netherite_sword",
+  "parent": "spell-dimension:boss",
+  "sortnum": 2
+}

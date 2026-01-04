@@ -1,0 +1,20 @@
+{
+  "name": "Target Dummy",
+  "icon": "dummmmmmy:target_dummy",
+  "category": "spell-dimension:util",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "dummmmmmy:target_dummy",
+      "text": "$(br)$(key)Target Dummies$() are used to test your combat performance. $(bold)Right-click a block$() to place it, and $(bold)left-click with an empty hand$() to remove it.$(br2)You can equip it with different armor and gear by $(bold)right-clicking it$() with the item. To remove a piece, $(bold)right-click the corresponding body part with an empty hand$().",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "dummmmmmy:target_dummy",
+      "scale": 1.0,
+      "offset": 0.0
+    }
+  ]
+}
+

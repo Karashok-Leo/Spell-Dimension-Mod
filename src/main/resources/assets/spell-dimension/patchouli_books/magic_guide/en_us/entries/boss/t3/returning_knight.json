@@ -1,0 +1,22 @@
+{
+  "name": "Returning Knight",
+  "icon": "soulsweapons:nightfall",
+  "category": "spell-dimension:boss/t3",
+  "sortnum": 4,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "soulsweapons:arkenstone",
+      "title": "Returning Knight",
+      "text": "Level: <level_t3>$(br2)Use $(key)Lost Soul$() on the $(key)Old Moon Altar$() to summon.$(br2)Defeating $(key)Returning Knight$() drops the $(key)Arkenstone$(), which can be used to craft $(boss/t1/day_night)Chaos Orbs$().",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "soulsweapons:returning_knight",
+      "scale": 1.0,
+      "offset": 0.2
+    }
+  ]
+}
+

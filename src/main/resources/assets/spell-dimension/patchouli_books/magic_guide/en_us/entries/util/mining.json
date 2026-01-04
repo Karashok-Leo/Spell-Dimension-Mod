@@ -1,0 +1,15 @@
+{
+  "name": "Vein Mining",
+  "icon": "minecraft:diamond_pickaxe",
+  "category": "spell-dimension:util",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:enchanted_book{StoredEnchantments:[{id:'veinmining:vein_mining',lvl:1s}]}",
+      "title": "Vein Mining",
+      "text": "Hold $(bold)`(~)$() to enable $(key)Vein Mining$(). This key is usually located in the top-left of the keyboard, above Tab, below Esc, and to the left of 1.$(br2)By default, each $(key)Vein Mining$() action only breaks a few blocks. You can increase the range by enchanting your tools with $(bold)Vein Mining$().",
+      "link_recipe": true
+    }
+  ]
+}
+

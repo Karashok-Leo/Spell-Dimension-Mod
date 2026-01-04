@@ -1,0 +1,27 @@
+{
+  "name": "EMI/JEI/REI",
+  "icon": "minecraft:writable_book",
+  "category": "spell-dimension:welcome",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "EMI/JEI/REI",
+      "text": "When you open your inventory, do you notice a lot of items displayed on the right? That's $(t:It may also be JEI or REI, but this modpack ships with EMI by default)$(key)EMI$().$(br2)It's a powerful $(key)item information and recipe lookup tool$() that helps you learn how to craft and use all kinds of items.$(br2)If you don't know how to use it, read on!"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br)At the $(bold)bottom of the screen$() there is a $(key)search bar$(). You can type a name to find items.$(br2)Also:$(br)$(list)$(bold)Right-click the search bar$(): clears the current query$(list)$(bold)Prefix the query with @$(): search by mod name$(list)$(bold)Prefix the query with #$(): search by tooltip text or item tags",
+      "anchor": "search"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br)After you find the target item, $(bold)hover it with your mouse$():$(br)$(list)$(bold)Press R or left-click$(): view the item's $(key)recipe$() (how to obtain it)$(list)$(bold)Press U or right-click$(): view the item's $(key)uses$() (what it can be used to craft)$(list)$(bold)Press A or drag it to the left side of the screen$(): add it to your $(key)bookmarks$() for quick access later",
+      "anchor": "ru"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br)Nice! Now you know how to use $(key)EMI/JEI/REI$() to look up recipes and usages.$(br2)Of course, this is only the basics — for more advanced features, check out tutorials for $(key)EMI/JEI/REI$(). Have fun!"
+    }
+  ]
+}
+

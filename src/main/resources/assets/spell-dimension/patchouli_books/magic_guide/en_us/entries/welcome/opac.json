@@ -1,0 +1,17 @@
+{
+  "name": "Parties",
+  "icon": "artifacts:fire_gauntlet",
+  "category": "spell-dimension:welcome",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Parties",
+      "text": "When playing multiplayer, you can create or join a party with friends. While in the same party, your spells will not damage your teammates.$(br2)Commands for party management:$(br)$(list)Create party:$(br)  $(copy:/openpac-parties create)/openpac-parties create$()$(br)$(list)Disband party:$(br)  $(copy:/openpac-parties destroy confirm)/openpac-parties destroy $(br)   confirm$()"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(list)Leave party:$(br)  $(copy:/openpac-parties leave)/openpac-parties leave$()$(br)$(list)Invite player:$(br)  $(copy:/openpac-parties member invite )/openpac-parties member $(br)   invite <player id>$()$(br)$(list)Kick player:$(br)  $(copy:/openpac-parties member kick )/openpac-parties member $(br)   kick <player id>$()$(br)$(list)Join party:$(br)  $(copy:/openpac-parties join )/openpac-parties join <id>$()"
+    }
+  ]
+}
+

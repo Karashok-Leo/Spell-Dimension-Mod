@@ -1,0 +1,28 @@
+{
+  "name": "Obsidilith",
+  "icon": "bosses_of_mass_destruction:obsidian_heart",
+  "category": "spell-dimension:boss/t0",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "bosses_of_mass_destruction:obsidilith_end_frame",
+      "title": "Obsidilith",
+      "text": "Level: <level_t0>$(br2)Spawns in the $(copy:Obsidilith Arena)Obsidilith Arena$()[$(copy:bosses_of_mass_destruction:obsidilith_arena)bosses_of_mass_destruction:obsidilith_arena$()].$(br)You can locate this structure in the $(bold)Overworld$() using $(mage/spell#locate)Mana Locate$().$(br2)Use an $(key)Eye of Ender$() on the $(key)Obsidian Altar$() in the center of the arena to summon it.",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "bosses_of_mass_destruction:obsidilith_rune",
+      "text": "$(br)During the fight, $(key)Obsidilith$() may summon $(key)Obsidian Runes$(). While any rune remains unbroken, $(key)Obsidilith$() becomes $(bold)invulnerable$().$(br2)You can destroy these $(key)Obsidian Runes$() with $(mage/spell#break)Remote Disintegration$(), or harvest them with a $(mage/prism)Spell Prism$().",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "bosses_of_mass_destruction:obsidilith",
+      "scale": 1.0,
+      "offset": -4.5
+    }
+  ]
+}
+

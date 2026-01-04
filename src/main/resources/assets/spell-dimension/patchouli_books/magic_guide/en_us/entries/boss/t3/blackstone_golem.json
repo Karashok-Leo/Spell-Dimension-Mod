@@ -1,0 +1,48 @@
+{
+  "name": "Blackstone Golem",
+  "icon": "adventurez:blackstone_golem_heart",
+  "category": "spell-dimension:boss/t3",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "adventurez:gilded_netherite_fragment",
+      "title": "Blackstone Golem",
+      "text": "Level: <level_t3>$(br2)In the $(bold)Nether$(), build an altar with $(bold)4$() $(key)Chiseled Blackstone Holders$() and $(bold)81$() $(key)Polished Blackstone$(). Place a $(key)Gilded Blackstone Fragment$() on each holder to summon it.$(br2)Defeating $(key)Blackstone Golem$() drops $(key)Gilded Netherite Fragments$(), which can be used to craft $(boss/t1/day_night)Chaos Orbs$().",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:multiblock",
+      "multiblock": {
+        "pattern": [
+          [
+            "     A     ",
+            " BBBBBBBBB ",
+            " BBBBBBBBB ",
+            " BBBBBBBBB ",
+            " BBBBBBBBB ",
+            "ABBBB0BBBBA",
+            " BBBBBBBBB ",
+            " BBBBBBBBB ",
+            " BBBBBBBBB ",
+            " BBBBBBBBB ",
+            "     A     "
+          ]
+        ],
+        "mapping": {
+          "0": "minecraft:polished_blackstone",
+          "A": "adventurez:chiseled_polished_blackstone_holder",
+          "B": "minecraft:polished_blackstone"
+        },
+        "symmetrical": true
+      }
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "adventurez:blackstone_golem",
+      "scale": 1.0,
+      "offset": 0.0
+    }
+  ]
+}
+

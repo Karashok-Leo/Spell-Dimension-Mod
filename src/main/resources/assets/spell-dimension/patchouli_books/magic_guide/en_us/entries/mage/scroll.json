@@ -1,0 +1,19 @@
+{
+  "name": "Spell Scrolls",
+  "icon": "spell-dimension:spell_scroll",
+  "category": "spell-dimension:mage",
+  "sortnum": 21,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "spell-dimension:spell_scroll{spell_container:{is_proxy:1b,max_spell_count:1b,spell_ids:['wizards:fire_breath']}}",
+      "title": "Spell Scrolls",
+      "text": "$(br)The spells you can learn from the $(mage/bind)Spell Binding Table$() are limited. To learn and use more magic, you need $(key)spell scrolls$().$(br2)$(welcome/emi#search)Search$() for $(copy:spell scroll)spell scroll$() and $(welcome/emi#ru)check uses$() to see how to obtain them."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br)$(key)Spell scrolls$() can be used directly for $(mage/cast)casting$(), and can also be freely $(bold)bound$() to or $(bold)unbound$() from $(mage/book)spell books$(). $(key)Spell scrolls$() are usually obtained via $(mage/infusion)Enchantment Infusion$() with specific materials."
+    }
+  ]
+}
+

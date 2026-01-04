@@ -1,0 +1,26 @@
+{
+  "name": "Quest System",
+  "icon": "spell-dimension:quest_scroll",
+  "category": "spell-dimension:welcome",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "spell-dimension:quest_scroll",
+      "title": "Quest System",
+      "text": "$(br)This modpack includes a built-in quest system. By completing quests, you can experience most of the game's content and earn rewards.$(br2)Hold the $(key)Quest Scroll$() and right-click to browse all currently active quests. Select one and right-click again to try submitting it. Submitting successfully unlocks more quests."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br)When you submit a quest, the system checks your current status. Common checks include:$(br)$(list)$(bold)Attributes$()$(list)$(bold)Advancement progress$()$(list)$(bold)Whether you have certain items$()$(br)(You must manually place the required items in your $(bold)inventory, equipment slots, or trinket slots$().)$(br2)Quest progress is $(bold)per-player$(). If you want to share progress with friends, you can share the required items with them."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "spell-dimension:empty_quest_scroll",
+      "text": "$(br)If you accidentally lose the $(key)Quest Scroll$(), don't worry — you can craft a new one at a very low cost."
+    }
+  ],
+  "extra_recipe_mappings": {
+    "spell-dimension:quest_scroll": 0
+  }
+}
+

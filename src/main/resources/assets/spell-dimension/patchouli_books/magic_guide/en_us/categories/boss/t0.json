@@ -1,0 +1,7 @@
+{
+  "name": "Tier 0",
+  "description": "All Tier 0 bosses are listed here.",
+  "icon": "adventurez:source_stone",
+  "parent": "spell-dimension:boss",
+  "sortnum": 5
+}

@@ -1,0 +1,35 @@
+{
+  "name": "Enchanting & Disenchanting",
+  "icon": "enchantment_infusion:enchantment_infusion_table",
+  "category": "spell-dimension:mechanic",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:enchanting_table",
+      "title": "Enchanting",
+      "text": "$(br)Besides using an $(key)Enchanting Table$(), you can also craft enchanted books or enchant items through $(mage/infusion)Enchantment Infusion$().$(br2)$(italic)The former requires some luck, while the latter requires some money.$()",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:grindstone",
+      "title": "Disenchanting",
+      "text": "$(br)Place enchanted $(key)equipment$() and a blank $(key)book$() in a $(key)Grindstone$() to $(bold)transfer$() the enchantments onto the $(key)book$().$(br2)Or, place an $(key)enchanted book$() with multiple enchantments and a blank $(key)book$() in a $(key)Grindstone$() to $(bold)transfer$() one of its enchantments onto the blank $(key)book$().",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:enchanted_book{StoredEnchantments:[{id:'spell_power:sunfire',lvl:5s}]},minecraft:enchanted_book{StoredEnchantments:[{id:'spell_power:soulfrost',lvl:5s}]},minecraft:enchanted_book{StoredEnchantments:[{id:'spell_power:energize',lvl:5s}]}",
+      "title": "Enchanting Restrictions",
+      "text": "$(br)$(welcome/emi#ru)Check uses$() on an $(key)enchanted book$() to see its $(bold)applicable items$() and $(bold)conflicting enchantments$().$(br2)In addition, $(bold)spell-power enchantments$() $(t:e.g. Sunfire, Soulfrost, Energize) require the item to have a corresponding $(bold)Spell Power bonus$() for that school, otherwise it cannot be enchanted."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "l2hostility:book_of_omniscience",
+      "text": "$(br)The $(key)Book of Omniscience$() can be converted into almost any enchantment. You can only use it after unlocking the $(boss/t1/dragon)Endgame Phase$().$(br2)The only way to obtain the $(key)Book of Omniscience$() is to convert a large amount of $(bold)enchantments$() $(t:enchanted books or enchanted items) through $(util/illusion)Illusion$().",
+      "anchor": "omni",
+      "link_recipe": true
+    }
+  ]
+}
+

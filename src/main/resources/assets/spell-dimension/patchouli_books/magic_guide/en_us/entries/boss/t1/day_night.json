@@ -1,0 +1,35 @@
+{
+  "name": "Day Stalker & Night Prowler",
+  "icon": "soulsweapons:chaos_orb",
+  "category": "spell-dimension:boss/t1",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "soulsweapons:chaos_orb",
+      "title": "Day Stalker & Night Prowler",
+      "text": "Level: <level_t1>$(br2)Summoned with a $(key)Chaos Orb$().$(br2)Both $(key)Day Stalker$() and $(key)Night Prowler$() carry powerful $(mechanic/hostility#spell_trait)spell traits$(). Using a $(mage/spell_container)Spell Container$() is recommended.",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "spell-dimension:celestial_debris",
+      "title": "Day Stalker & Night Prowler",
+      "text": "$(br)Defeating $(key)Day Stalker$() and $(key)Night Prowler$() drops $(key)Celestial Debris$(), which can be used to craft $(boss/t1/dragon)Endless Starlight$().",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "soulsweapons:day_stalker",
+      "scale": 1.0,
+      "offset": 0.0
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "soulsweapons:night_prowler",
+      "scale": 1.0,
+      "offset": 0.0
+    }
+  ]
+}
+

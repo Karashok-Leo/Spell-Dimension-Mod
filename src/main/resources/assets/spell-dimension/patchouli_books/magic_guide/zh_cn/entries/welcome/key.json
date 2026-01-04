@@ -10,7 +10,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(list)整理物品栏：$(list2)$(bold)鼠标中键$()$(list2)$(bold)鼠标左键双击$()$(br)$(list)攀墙跳：$(bold)左Shift + W$()$(br)$(list)施放法术：$(list2)$(bold)鼠标右键$()$(list2)$(bold)数字键1/2/3/...$()"
+      "text": "$(list)整理物品栏：$(list2)$(bold)鼠标中键$()$(list2)$(bold)鼠标左键双击$()$(br)$(list)攀墙跳：$(bold)左Shift + W$()$(br)$(list)$(mage/cast)施放法术$()：$(list2)$(bold)鼠标右键$()$(list2)$(bold)数字键1/2/3/...$()"
     }
   ]
 }

@@ -1,0 +1,22 @@
+{
+  "name": "Fallen Icon",
+  "icon": "soulsweapons:essence_of_luminescence",
+  "category": "spell-dimension:boss/t3",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "soulsweapons:essence_of_luminescence",
+      "title": "Fallen Icon",
+      "text": "Level: <level_t3>$(br2)Use $(boss/t4/old_champion#loot)Essence of Eventide$() on the $(key)Old Moon Altar$() to summon.$(br2)Defeating $(key)Fallen Icon$() drops $(key)Essence of Dusk$(), which can be used to craft $(boss/t1/day_night)Chaos Orbs$().",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "soulsweapons:moonknight",
+      "scale": 1.0,
+      "offset": 0.2
+    }
+  ]
+}
+

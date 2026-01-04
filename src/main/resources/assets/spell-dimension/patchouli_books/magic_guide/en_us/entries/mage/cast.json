@@ -1,0 +1,15 @@
+{
+  "name": "Casting",
+  "icon": "wizards:wand_novice",
+  "category": "spell-dimension:mage",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "tag:wizards:wands,tag:wizards:staves",
+      "title": "Casting",
+      "text": "$(br)Casting is a mage's bread and butter. You must hold a $(key)casting item$() to cast spells. Common $(key)casting items$() include $(bold)wands, staves, swords, and some other weapons$().$(br2)Which spells you can cast depends on your $(key)spell pool$(). Your $(key)spell pool$() is determined by the item in your hand and the $(mage/book)spell book$() you have equipped."
+    }
+  ]
+}
+

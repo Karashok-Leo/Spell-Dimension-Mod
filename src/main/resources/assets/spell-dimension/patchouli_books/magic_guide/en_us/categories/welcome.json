@@ -1,0 +1,7 @@
+{
+  "name": "Welcome",
+  "description": "This is the introductory section of the modpack. New players are strongly encouraged to read it first.",
+  "icon": "patchouli:guide_book{'patchouli:book':'spell-dimension:magic_guide'}",
+  "sortnum": 0
+}
+

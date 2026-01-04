@@ -1,0 +1,19 @@
+{
+  "name": "Illusion",
+  "icon": "spell-dimension:illusion_container",
+  "category": "spell-dimension:util",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "spell-dimension:illusion_container,spell-dimension:illusion_upgrade",
+      "title": "Illusion",
+      "text": "$(br)The $(key)Illusion Container$() can devour large amounts of $(mechanic/rarity#gear)gear$() and any enchanted items, converting them into $(bold)random materials$() of the same $(mechanic/rarity)rarity$() or a $(mechanic/enchant#omni)Book of Omniscience$(). This is also the only way to obtain the $(mechanic/enchant#omni)Book of Omniscience$().",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br)$(key)Illusion Upgrade$() works like a backpack pickup upgrade, but automatically converts items as you pick them up. For safety, $(key)Illusion Upgrade$() will not convert items that have been enhanced by $(mage/essence#ec)Enchanted Essence$()."
+    }
+  ]
+}
+

@@ -1,0 +1,21 @@
+{
+  "name": "Dungeon Trials",
+  "icon": "minecraft:mossy_stone_bricks",
+  "category": "spell-dimension:mechanic",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(br)Through special entrances on the surface, you can enter a unique $(key)dungeon dimension$(). It contains valuable loot, but also powerful mobs — you must defeat the boss to return safely.$(br2)You can use the $(mage/spell#locate)locate spell$() to find $(bold)dungeon entrances$().",
+      "title": "Dungeon Trials"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br)Entering a dungeon requires an $(bold)entry fee$(). Right-click the $(key)dungeon portal$() to learn more.$(br2)Defeat the boss in the last room, or run $(copy:/dungeon leave)$(bold)/dungeon leave$() to leave the dungeon.$(br2)Special loot types in each dungeon:$(br2)$(copy:Dark Dungeon)Dark Dungeon$(): lots of Enchanted Essence and Enlightening Essence.$(br2)$(copy:Desert Dungeon)Desert Dungeon$(): lots of gear."
+    }
+  ],
+  "extra_recipe_mappings": {
+    "dungeonz:dungeon_gate": 0,
+    "dungeonz:dungeon_portal": 0
+  }
+}
+

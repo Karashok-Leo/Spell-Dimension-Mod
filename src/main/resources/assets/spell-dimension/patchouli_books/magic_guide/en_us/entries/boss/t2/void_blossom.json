@@ -1,0 +1,28 @@
+{
+  "name": "Void Blossom",
+  "icon": "bosses_of_mass_destruction:void_thorn",
+  "category": "spell-dimension:boss/t2",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "bosses_of_mass_destruction:void_lily",
+      "title": "Void Blossom",
+      "text": "Level: <level_t2>$(br2)Spawns in underground caves in the $(bold)Overworld$()[$(copy:bosses_of_mass_destruction:void_blossom)bosses_of_mass_destruction:void_blossom$()].$(br)You can locate this structure in the $(bold)Overworld$() using a $(key)Void Lily$().",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "bosses_of_mass_destruction:void_thorn,bosses_of_mass_destruction:crystal_fruit",
+      "text": "$(br)$(key)Void Blossom$() has extremely strong regeneration. Prepare the $(key)Spell Curse$() enchantment before the fight to reduce its healing.$(br2)Defeating $(key)Void Blossom$() drops a $(key)Void Thorn$() (used to craft $(boss/t1/day_night)Chaos Orbs$()), and also drops $(key)Crystal Fruit$() which can be used to craft the $(mechanic/loot_charm)Chaos Loot Charm$().",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "bosses_of_mass_destruction:void_blossom",
+      "scale": 1.0,
+      "offset": -4.5
+    }
+  ]
+}
+

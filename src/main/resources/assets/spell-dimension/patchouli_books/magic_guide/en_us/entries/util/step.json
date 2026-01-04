@@ -1,0 +1,18 @@
+{
+  "name": "Auto Step-up",
+  "icon": "artifacts:running_shoes",
+  "category": "spell-dimension:util",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "artifacts:running_shoes",
+      "title": "Auto Step-up",
+      "text": "$(br)Press $(bold)J$() to enable or disable $(key)Auto Step-up$(). This allows you to automatically step up blocks that are $(bold)1$() block high while walking, without jumping.",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br)If you've disabled this feature but you still $(key)auto step-up$(), it may be because you are wearing equipment or trinkets that grant $(key)Auto Step-up$(). Check your $(bold)boots$() or your $(bold)feet trinket slot$()."
+    }
+  ]
+}

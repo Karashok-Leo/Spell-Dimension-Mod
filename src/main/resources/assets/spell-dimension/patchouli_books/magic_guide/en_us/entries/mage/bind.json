@@ -1,0 +1,16 @@
+{
+  "name": "Spell Binding",
+  "icon": "spell_engine:spell_binding",
+  "category": "spell-dimension:mage",
+  "sortnum": 13,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "spell_engine:spell_binding",
+      "title": "Spell Binding",
+      "text": "Use the $(key)Spell Binding Table$() to get your first $(mage/book)spell book$() and bind some spells!$(br2)You can find a $(key)Spell Binding Table$() in $(bold)villages$(), or craft one yourself.$(br2)Place some $(key)bookshelves$() around the $(key)Spell Binding Table$() to bind more spells.",
+      "link_recipe": true
+    }
+  ]
+}
+

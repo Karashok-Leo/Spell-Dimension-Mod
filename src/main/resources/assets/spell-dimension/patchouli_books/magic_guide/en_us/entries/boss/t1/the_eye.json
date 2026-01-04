@@ -1,0 +1,58 @@
+{
+  "name": "The Eye",
+  "icon": "adventurez:prime_eye",
+  "category": "spell-dimension:boss/t1",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "adventurez:prime_eye",
+      "title": "The Eye",
+      "text": "Level: <level_t1>$(br2)In the $(bold)End$(), build an altar using $(bold)25$() $(key)Obsidian$(), $(bold)9$() $(key)Crying Obsidian$(), $(bold)8$() $(key)End Rods$(), and $(bold)1$() $(key)Dragon Egg$().$(br2)After $(bold)$(t:It may take a while...)waiting for a moment$(), it will be summoned.",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:multiblock",
+      "multiblock": {
+        "pattern": [
+          [
+            "     ",
+            " L L ",
+            "  D  ",
+            " L L ",
+            "     "
+          ],
+          [
+            "L   L",
+            " CCC ",
+            " CCC ",
+            " CCC ",
+            "L   L"
+          ],
+          [
+            "OOOOO",
+            "OOOOO",
+            "OO0OO",
+            "OOOOO",
+            "OOOOO"
+          ]
+        ],
+        "mapping": {
+          "0": "minecraft:obsidian",
+          "C": "minecraft:crying_obsidian",
+          "D": "minecraft:dragon_egg",
+          "L": "minecraft:end_rod",
+          "O": "minecraft:obsidian"
+        },
+        "symmetrical": true
+      }
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "adventurez:the_eye",
+      "scale": 1.0,
+      "offset": 0.0
+    }
+  ]
+}
+

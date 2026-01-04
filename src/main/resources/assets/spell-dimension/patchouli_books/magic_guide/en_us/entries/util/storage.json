@@ -1,0 +1,48 @@
+{
+  "name": "Storage",
+  "icon": "toms_storage:ts.inventory_connector",
+  "category": "spell-dimension:util",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "sophisticatedbackpacks:backpack,sophisticatedbackpacks:copper_backpack,sophisticatedbackpacks:iron_backpack,sophisticatedbackpacks:gold_backpack,sophisticatedbackpacks:diamond_backpack,sophisticatedbackpacks:netherite_backpack",
+      "title": "Backpacks",
+      "text": "$(br)$(key)Backpacks$() provide extra storage space. You can equip one in your $(key)trinket slot$() and press $(bold)B$() to open it.$(br2)You can upgrade backpacks using materials like $(key)iron ingots$(), $(key)gold ingots$(), $(key)diamonds$(), etc. (crafting in a $(bold)crafting table$(); $(welcome/emi#ru)check recipes$() for details). Higher-tier backpacks provide more storage and more upgrade slots.",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:smelting",
+      "title": "Tip",
+      "recipe": "spell-dimension:misc/rotten_flesh2leather",
+      "text": "$(br)If leather feels hard to get, try this recipe."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "toms_storage:ts.inventory_connector,toms_storage:ts.storage_terminal,toms_storage:ts.crafting_terminal",
+      "title": "Tom's Simple Storage",
+      "text": "$(br)Place a $(key)Storage Connector$() next to your chests (or other containers such as barrels), along with a $(key)Storage Terminal$() or $(key)Crafting Terminal$(). After that, you can manage all items across your containers through the $(key)terminal$().",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "spell-dimension-book:textures/storage_system.png"
+      ],
+      "text": "A chest must be connected to a $(key)Storage Connector$() to be accessible from the $(key)terminal$().",
+      "border": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:beacon,toms_storage:ts.adv_wireless_terminal,kibe:chunk_loader",
+      "title": "Wireless Storage",
+      "text": "$(br)Build a $(key)Beacon$() of level $(bold)4$() or higher, or place your storage system next to a high-enough $(mechanic/ocean#pivot)Consciousness Pivot$() ($(key)Consciousness Pedestal$() stack higher than $(bold)4$()). Then bind an $(key)Advanced Wireless Terminal$() to your terminal, and keep the chunks loaded with a $(key)Chunk Loader$() to access your storage remotely across dimensions.",
+      "link_recipe": true,
+      "anchor": "wireless"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br)Note: items with NBT are items that contain extra data, including $(bold)enchanted items$(), $(bold)durability items$(), etc. They usually do not stack.$(br2)Connecting large amounts of such items to a storage system can cause $(bold)severe lag$() and impact server performance. It is recommended to store them in $(bold)separate chests$(), or process them with $(util/illusion)Illusion$().",
+      "title": "NBT Items"
+    }
+  ]
+}

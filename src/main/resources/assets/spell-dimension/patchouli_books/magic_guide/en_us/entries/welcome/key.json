@@ -1,0 +1,16 @@
+{
+  "name": "Keybinds",
+  "icon": "minecraft:birch_hanging_sign",
+  "category": "spell-dimension:welcome",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Keybinds",
+      "text": "$(list)$(util/mining)Chain Mining$(): $(bold)`(~)$()$(br)$(list)Dodge Roll: $(bold)R$()$(br)$(list)Open $(util/storage)Backpack$(): $(bold)B$()$(br)$(list)Open Ender Bag: $(bold)G$()$(br)$(list)Zoom: $(bold)C$()$(br)$(list)Toggle $(util/step)Auto Step-up$(): $(bold)J$()"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(list)Sort Inventory: $(list2)$(bold)Middle Mouse Button$()$(list2)$(bold)Double Left-click$()$(br)$(list)Wall Jump: $(bold)Left Shift + W$()$(br)$(list)$(mage/cast)Cast Spells$(): $(list2)$(bold)Right-click$()$(list2)$(bold)Number keys 1/2/3/...$()"
+    }
+  ]
+}

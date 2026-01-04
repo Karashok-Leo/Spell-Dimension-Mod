@@ -1,0 +1,16 @@
+{
+  "name": "Endgame Trinkets",
+  "icon": "spell-dimension:arcane_throne",
+  "category": "spell-dimension:mage",
+  "sortnum": 31,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "tag:spell-dimension:endgame_trinkets",
+      "title": "Endgame Trinkets",
+      "text": "$(br)After defeating more powerful bosses, you can craft special trinkets with unique $(bold)spell effects$().$(br2)$(welcome/emi#search)Search$() for $(copy:#spell-dimension:endgame_trinkets)#spell-dimension:endgame_trinkets$() to see all related items.",
+      "link_recipe": true
+    }
+  ]
+}
+

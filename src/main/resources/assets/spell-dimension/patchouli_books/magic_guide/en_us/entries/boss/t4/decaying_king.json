@@ -1,0 +1,28 @@
+{
+  "name": "Decaying King",
+  "icon": "soulsweapons:darkin_blade",
+  "category": "spell-dimension:boss/t4",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "soulsweapons:withered_demon_heart",
+      "title": "Decaying King",
+      "text": "Level: <level_t4>$(br2)Spawns in $(copy:Decaying Kingdom)Decaying Kingdom$()[$(copy:soulsweapons:decaying_kingdom)soulsweapons:decaying_kingdom$()].$(br)You can locate this structure in the $(bold)Nether$() using a $(key)Moonstone Compass$() or $(mage/spell#locate)Mana Locate$().$(br2)Alternatively, use a $(key)Withered Demon Heart$() on a $(key)Blackstone Pedestal$() to summon.",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "spell-dimension:accursed_blackstone",
+      "text": "$(br)Defeating $(key)Decaying King$() drops $(key)Accursed Blackstone$(), which can be used to craft $(boss/t3/blackstone_golem)Chiseled Blackstone Holders$() or the $(mechanic/loot_charm)Crude Loot Charm$().",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "soulsweapons:accursed_lord_boss",
+      "scale": 0.8,
+      "offset": 0.15
+    }
+  ]
+}
+

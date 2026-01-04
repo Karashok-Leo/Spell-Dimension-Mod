@@ -1,0 +1,28 @@
+{
+  "name": "Item Rarity",
+  "icon": "spell-dimension:random_rare_material",
+  "category": "spell-dimension:mechanic",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "spell-dimension:random_common_material,spell-dimension:random_uncommon_material,spell-dimension:random_rare_material,spell-dimension:random_epic_material,spell-dimension:random_legendary_material,spell-dimension:random_common_gear,spell-dimension:random_uncommon_gear,spell-dimension:random_rare_gear,spell-dimension:random_epic_gear,spell-dimension:random_legendary_gear",
+      "title": "Item Rarity",
+      "text": "All materials and gear are divided into different $(key)rarities$(). From low to high: $(bold)Common$()(common), $(bold)Uncommon$()(uncommon), $(bold)Rare$()(rare), $(bold)Epic$()(epic), and $(bold)Legendary$()(legendary).$(br2)$(welcome/emi#search)Search$() for specific tags (starting with $(bold)#$()) to view matching items.$(br2)Here are the search keywords for each rarity:",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(list)Common materials: $(copy:#spell-dimension:common/material)#spell-dimension:common/material$()$(br)$(list)Uncommon materials: $(copy:#spell-dimension:uncommon/material)#spell-dimension:uncommon/material$()$(br)$(list)Rare materials: $(copy:#spell-dimension:rare/material)#spell-dimension:rare/material$()$(br)$(list)Epic materials: $(copy:#spell-dimension:epic/material)#spell-dimension:epic/material$()$(br)$(list)Legendary materials: $(copy:#spell-dimension:legendary/material)#spell-dimension:legendary/material$()"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br2)If you want to search for $(bold)weapons$(), $(bold)armor$(), or $(t:includes both weapons and gear)$(bold)gear$(), replace the keyword above as follows:$(br)$(list)Weapons: material -> $(copy:weapon)weapon$()$(br)$(list)Armor: material -> $(copy:armor)armor$()$(br)$(list)Gear: material -> $(copy:gear)gear$()",
+      "anchor": "gear"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br2)If the keywords feel too long, you can type only part of them.$(br2)For example:$(br2)$(copy:#spell-dimension:epic/armor)#spell-dimension:epic/armor$() can be shortened to $(copy:#epic/armor)#epic/armor$() with the same result.$(br2)Just remember: $(bold)don't omit the leading #$()."
+    }
+  ]
+}
+

@@ -1,0 +1,22 @@
+{
+  "name": "Wither",
+  "icon": "minecraft:nether_star",
+  "category": "spell-dimension:boss/t4",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "soulsweapons:shard_of_uncertainty",
+      "title": "Wither",
+      "text": "Level: <level_t4>$(br2)Defeating the $(key)Wither$() drops a $(key)Shard of Uncertainty$(), which can be used to summon the $(boss/t3/chaos_monarch)Monarch of Chaos$().",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "minecraft:wither",
+      "scale": 1.0,
+      "offset": 0.0
+    }
+  ]
+}
+

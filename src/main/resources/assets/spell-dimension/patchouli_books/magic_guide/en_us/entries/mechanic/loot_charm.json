@@ -1,0 +1,15 @@
+{
+  "name": "Loot Charms",
+  "icon": "l2hostility:charm_of_looting_4",
+  "category": "spell-dimension:mechanic",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "l2hostility:charm_of_looting_1,l2hostility:charm_of_looting_2,l2hostility:charm_of_looting_3,l2hostility:charm_of_looting_4",
+      "title": "Loot Charms",
+      "text": "Wearing $(key)Loot Charms$() grants access to special resources.$(br2)$(welcome/emi#ru)Check uses$() on $(key)Loot Charms$() to see their extra loot effects.$(br2)Compared to $(bold)burning conversion$() and completing $(bold)specific challenges$(), wearing $(key)Loot Charms$() is often the easiest way to obtain certain resources.",
+      "link_recipe": true
+    }
+  ]
+}
+

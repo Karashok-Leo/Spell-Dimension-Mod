@@ -1,0 +1,33 @@
+{
+  "name": "Introduction",
+  "icon": "patchouli:guide_book{'patchouli:book':'spell-dimension:magic_guide'}",
+  "category": "spell-dimension:welcome",
+  "priority": true,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "patchouli:guide_book{'patchouli:book':'spell-dimension:magic_guide'}",
+      "title": "Introduction",
+      "text": "$(br)Welcome to Spell Dimension!$(br2)This $(key)$(italic)Magic Guide$() will help you understand the core mechanics and gameplay of the modpack. Most of your questions can be answered right here."
+    },
+    {
+      "type": "patchouli:relations",
+      "entries": [
+        "spell-dimension:welcome/emi",
+        "spell-dimension:welcome/quest",
+        "spell-dimension:welcome/lookup",
+        "spell-dimension:welcome/key",
+        "spell-dimension:welcome/opac"
+      ],
+      "text": "$(br)New players should read the $(bold)entries above$() first. After that, you can use $(welcome/lookup)Quick Lookup$() to check details anytime, without having to read the entire book."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "spell-dimension:magic_guide",
+      "text": "$(br)If you accidentally lose this book, don't worry — you can craft a new one at a very low cost."
+    }
+  ],
+  "extra_recipe_mappings": {
+    "patchouli:guide_book{'patchouli:book':'spell-dimension:magic_guide'}": 0
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "name": "Tier 4",
+  "description": "All Tier 4 bosses are listed here.",
+  "icon": "soulsweapons:essence_of_eventide",
+  "parent": "spell-dimension:boss",
+  "sortnum": 1
+}

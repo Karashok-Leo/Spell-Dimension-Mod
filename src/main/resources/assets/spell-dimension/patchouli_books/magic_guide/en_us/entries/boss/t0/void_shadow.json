@@ -1,0 +1,38 @@
+{
+  "name": "Void Shadow",
+  "icon": "adventurez:source_stone",
+  "category": "spell-dimension:boss/t0",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "voidz:void_portal",
+      "title": "Void Shadow",
+      "text": "Level: <level_t0>$(br2)After defeating $(boss/t1/the_eye)The Eye$(), a $(bold)floating island$() will appear. Enter the $(key)portal$() on it to reach the $(bold)domain$() of the $(key)Void Shadow$().$(br2)Inside the $(key)Void Shadow$() domain, you cannot manually place or break blocks.",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br)While $(key)Void Shadow$() has at least half of its health, you can damage it by killing the $(key)minions$() it summons. Each kill deals up to $(bold)5%$() of $(key)Void Shadow$()'s max health.$(br2)When $(key)Void Shadow$() drops below half health, it enters an $(bold)enraged$() state. If you destroy all $(key)Void Fragments$() on the platform, it will stop circling and move to the center to finish the fight."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "adventurez:void_shadow",
+      "scale": 1.0,
+      "offset": 0.4
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "adventurez:void_shade",
+      "scale": 1.0,
+      "offset": 0.3
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "adventurez:void_fragment",
+      "scale": 1.0,
+      "offset": 0.4
+    }
+  ]
+}
+
