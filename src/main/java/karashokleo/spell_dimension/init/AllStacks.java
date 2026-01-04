@@ -5,7 +5,7 @@ import com.klikli_dev.modonomicon.registry.ItemRegistry;
 import karashokleo.spell_dimension.api.quest.QuestRegistry;
 import karashokleo.spell_dimension.config.AttributeModifier;
 import karashokleo.spell_dimension.content.object.EnchantedModifier;
-import karashokleo.spell_dimension.data.book.MagicGuidanceProvider;
+import karashokleo.spell_dimension.data.book.MagicGuideProvider;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -94,6 +94,6 @@ public class AllStacks
     static
     {
         GUIDE_BOOK = ItemRegistry.MODONOMICON.get().getDefaultStack();
-        GUIDE_BOOK.getOrCreateNbt().putString(ModonomiconConstants.Nbt.ITEM_BOOK_ID_TAG, MagicGuidanceProvider.BOOK_ID.toString());
+        GUIDE_BOOK.getOrCreateNbt().putString(ModonomiconConstants.Nbt.ITEM_BOOK_ID_TAG, MagicGuideProvider.BOOK_ID.toString());
     }
 }

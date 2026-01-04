@@ -14,12 +14,12 @@ import karashokleo.spell_dimension.util.BookGenUtil;
 import net.minecraft.data.DataOutput;
 import net.minecraft.util.Identifier;
 
-public class MagicGuidanceProvider extends BookProvider
+public class MagicGuideProvider extends BookProvider
 {
-    public static final String BOOK_NAME = "magic_guidance";
+    public static final String BOOK_NAME = "magic_guide";
     public static final Identifier BOOK_ID = BookGenUtil.id(BOOK_NAME);
 
-    public MagicGuidanceProvider(DataOutput packOutput, ModonomiconLanguageProvider defaultLang, ModonomiconLanguageProvider... translations)
+    public MagicGuideProvider(DataOutput packOutput, ModonomiconLanguageProvider defaultLang, ModonomiconLanguageProvider... translations)
     {
         super(BOOK_NAME, packOutput, BookGenUtil.NAMESPACE, defaultLang, translations);
     }
@@ -28,7 +28,7 @@ public class MagicGuidanceProvider extends BookProvider
     protected BookModel generateBook()
     {
         BookContextHelper context = this.context();
-        this.lang().add(context.bookName(), "Magic Guidance");
+        this.lang().add(context.bookName(), "Magic Guide");
         this.lang("zh_cn").add(context.bookName(), "魔力接引");
         return BookModel
             .create(BOOK_ID, context.bookName())

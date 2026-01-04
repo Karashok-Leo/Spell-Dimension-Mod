@@ -3,7 +3,7 @@ package karashokleo.spell_dimension.config;
 import com.klikli_dev.modonomicon.client.gui.BookGuiManager;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.api.quest.Quest;
-import karashokleo.spell_dimension.data.book.MagicGuidanceProvider;
+import karashokleo.spell_dimension.data.book.MagicGuideProvider;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
@@ -33,7 +33,7 @@ public class QuestToEntryConfig
         {
             return;
         }
-        BookGuiManager.get().openEntry(MagicGuidanceProvider.BOOK_ID, entryId, 0);
+        BookGuiManager.get().openEntry(MagicGuideProvider.BOOK_ID, entryId, 0);
     }
 
     public static void register(Quest quest, String entryId)

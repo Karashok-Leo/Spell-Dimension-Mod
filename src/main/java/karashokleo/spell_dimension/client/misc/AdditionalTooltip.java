@@ -12,7 +12,7 @@ import karashokleo.spell_dimension.content.event.TrinketEvents;
 import karashokleo.spell_dimension.content.item.DynamicSpellBookItem;
 import karashokleo.spell_dimension.content.object.EnchantedModifier;
 import karashokleo.spell_dimension.data.SDTexts;
-import karashokleo.spell_dimension.data.book.MagicGuidanceProvider;
+import karashokleo.spell_dimension.data.book.MagicGuideProvider;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.init.AllTags;
@@ -156,7 +156,7 @@ public class AdditionalTooltip
             return;
         }
         Book book = ModonomiconItem.getBook(stack);
-        if (!book.getId().equals(MagicGuidanceProvider.BOOK_ID))
+        if (!book.getId().equals(MagicGuideProvider.BOOK_ID))
         {
             return;
         }
