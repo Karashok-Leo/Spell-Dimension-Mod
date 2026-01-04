@@ -3,6 +3,7 @@
   "package": "karashokleo.spell_dimension.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "client.PatchouliXplatMixin",
     "client.RollManagerInvoker",
     "modded.AbrahadabraMixin",
     "modded.AdaptingTraitMixin",
@@ -15,6 +16,7 @@
     "modded.DDEntitiesMixin",
     "modded.DifficultyEventsMixin",
     "modded.FinCutterItemMixin",
+    "modded.FirstPersonModelCompatibilityMixin",
     "modded.HealthDecreaseEffectMixin",
     "modded.LootingCharmMixin",
     "modded.LootModifierFixer",
