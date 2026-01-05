@@ -8,7 +8,7 @@
       "type": "patchouli:spotlight",
       "item": "bosses_of_mass_destruction:obsidilith_end_frame",
       "title": "黑曜巨石柱",
-      "text": "等级：<level_t0>$(br2)生成于$(copy:黑曜巨石柱竞技场)黑曜巨石柱竞技场$()[$(copy:bosses_of_mass_destruction:obsidilith_arena)bosses_of_mass_destruction:obsidilith_arena$()]内。$(br)可用$(mage/spell#locate)魔力定位$()在$(bold)主世界$()寻找该结构。$(br2)对竞技场中央的$(key)黑曜石祭坛$()使用$(key)末影之眼$()召唤。",
+      "text": "等级：<level_t0>$(br2)生成于$(copy:黑曜巨石柱竞技场)黑曜巨石柱竞技场$()[$(copy:bosses_of_mass_destruction:obsidilith_arena)bosses_of_mass_destruction:obsidilith_arena$()]内。$(br)可用$(mage/spell#locate)魔力定位$()在$(bold)末地$()寻找该结构。$(br2)对竞技场中央的$(key)黑曜石祭坛$()使用$(key)末影之眼$()召唤。",
       "link_recipe": true
     },
     {

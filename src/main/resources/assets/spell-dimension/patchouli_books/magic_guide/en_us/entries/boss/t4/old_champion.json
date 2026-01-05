@@ -8,17 +8,16 @@
       "type": "patchouli:spotlight",
       "item": "soulsweapons:draugr",
       "title": "Old Champion's Remains",
-      "text": "Level: <level_t4>$(br2)Spawns in $(copy:Champion's Grave)Champion's Grave$()[$(copy:soulsweapons:champions_grave)soulsweapons:champions_grave$()].$(br2)You can locate this structure in the $(bold)Overworld$() using a $(key)Moonstone Compass$() or $(mage/spell#locate)Spell Locate$().$(br2)Alternatively, use $(key)Draugr$() on the $(key)Old Moon Altar$() to summon.",
+      "text": "Level: <level_t4>$(br2)Spawns in $(copy:Champions Graves)Champions Graves$()[$(copy:soulsweapons:champions_graves)soulsweapons:champions_graves$()].$(br)Locate this structure in the $(bold)Overworld$() with $(key)Moonstone Compass$() or $(mage/spell#locate)Spell Locate$().$(br2)Alternatively, use $(key)Draugr$() on the $(key)Old Moon Altar$() to summon.",
       "link_recipe": true
     },
     {
       "type": "patchouli:text",
-      "text": "$(br)$(key)Old Champion's Remains$() adapts to damage from the same weapon ($(bold)mainhand item$()). Unlike the $(mechanic/hostility#adaptive)Adaptive$() trait, you can break this adaptation simply by switching to a different mainhand item to deal damage.$(br2)Upon death, $(key)Old Champion's Remains$() spawns a $(key)Frenzied Shade$().$(br2)$(key)Frenzied Shade$() can $(bold)phase through walls$() and inflicts multiple debuffs such as $(bold)Blindness$() and $(bold)Wither$() on attack."
+      "text": "$(key)Old Champion's Remains$() adapts to damage from the same weapon ($(bold)mainhand item$()). Unlike the $(mechanic/hostility#adaptive)Adaptive$() trait, you can break this adaptation simply by switching to a different mainhand item to deal damage.$(br2)Upon death, $(key)Old Champion's Remains$() spawns a $(key)Frenzied Shade$().$(br2)$(key)Frenzied Shade$() can $(bold)phase through walls$() and inflicts multiple debuffs such as $(bold)Blindness$() and $(bold)Wither$() on attack."
     },
     {
       "type": "patchouli:spotlight",
       "item": "spell-dimension:atomic_breastplate,soulsweapons:essence_of_eventide",
-      "title": "Atomic Breastplate & Essence of Eventide",
       "text": "$(br)Defeating $(key)Old Champion's Remains$() drops an $(key)Atomic Breastplate$(), an important early defensive item for mages.$(br2)Defeating $(key)Frenzied Shade$() drops $(key)Essence of Eventide$(), which can be used to summon $(boss/t3/moon_knight)Fallen Icon$().",
       "anchor": "loot",
       "link_recipe": true

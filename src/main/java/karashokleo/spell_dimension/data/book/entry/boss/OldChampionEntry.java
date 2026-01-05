@@ -57,7 +57,7 @@ public class OldChampionEntry extends BaseEntryProvider
                 Level: %d+
                 \\
                 \\
-                Spawns inside the **Champion's Grave**(soulsweapons:champions_grave).
+                Spawns inside the **Champions Graves**(soulsweapons:champions_graves).
                 \\
                 \\
                 This structure can be located in the Overworld using the Moonstone Compass.
@@ -69,7 +69,7 @@ public class OldChampionEntry extends BaseEntryProvider
                 等级: %d+
                 \\
                 \\
-                生成于**古英雄的陵墓**(soulsweapons:champions_grave)内。
+                生成于**古英雄的陵墓**(soulsweapons:champions_graves)内。
                 \\
                 \\
                 可用月石罗盘在主世界寻找该结构。

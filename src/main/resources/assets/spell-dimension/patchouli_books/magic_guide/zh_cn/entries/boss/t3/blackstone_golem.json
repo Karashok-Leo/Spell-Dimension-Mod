@@ -6,9 +6,9 @@
   "pages": [
     {
       "type": "patchouli:spotlight",
-      "item": "adventurez:gilded_netherite_fragment",
+      "item": "adventurez:gilded_blackstone_shard,adventurez:chiseled_polished_blackstone_holder,adventurez:gilded_netherite_fragment",
       "title": "黑石傀儡",
-      "text": "等级：<level_t3>$(br2)使用$(bold)4$()块$(key)錾制黑石基座$()，$(bold)81$()块$(key)磨制黑石$()在$(bold)下界$()搭建祭坛，在所有$(key)錾制黑石基座$()上放置$(key)镶金黑石碎片$()即可召唤。$(br2)击败$(key)黑石傀儡$()后掉落$(key)镶金下界合金碎片$()，可用于合成$(boss/t1/day_night)混沌宝珠$()。",
+      "text": "等级：<level_t3>$(br2)使用$(bold)4$()块$(key)錾制磨制黑石基座$()，$(bold)81$()块$(key)磨制黑石$()在$(bold)下界$()搭建祭坛，在所有$(key)錾制黑石基座$()上放置$(key)镶金黑石碎片$()即可召唤。$(br2)击败$(key)黑石傀儡$()后掉落$(key)镶金下界合金碎片$()，可用于合成$(boss/t1/day_night)混沌宝珠$()。",
       "link_recipe": true
     },
     {

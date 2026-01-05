@@ -8,7 +8,7 @@
       "type": "patchouli:spotlight",
       "item": "adventurez:prime_eye",
       "title": "The Eye",
-      "text": "Level: <level_t1>$(br2)In the $(bold)End$(), build an altar using $(bold)25$() $(key)Obsidian$(), $(bold)9$() $(key)Crying Obsidian$(), $(bold)8$() $(key)End Rods$(), and $(bold)1$() $(key)Dragon Egg$().$(br2)After $(bold)$(t:It may take a while...)waiting for a moment$(), it will be summoned.",
+      "text": "Level: <level_t1>$(br2)In the $(bold)End$(), build an altar using $(bold)25$() $(key)Obsidian$(), $(bold)9$() $(key)Crying Obsidian$(), $(bold)8$() $(key)End Rods$(), and $(bold)1$() $(key)Dragon Egg$().$(br2)After $(bold)$(t:It may take a while...)waiting for a moment$(), $(key)The Eye$() will be summoned.",
       "link_recipe": true
     },
     {

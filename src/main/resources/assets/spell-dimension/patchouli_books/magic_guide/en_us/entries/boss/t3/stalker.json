@@ -8,7 +8,7 @@
       "type": "patchouli:spotlight",
       "item": "deeperdarker:ancient_vase",
       "title": "Stalker",
-      "text": "Level: <level_t3>$(br2)While in the $(boss/t4/warden#otherside)Otherside$(), breaking an $(key)Ancient Vase$() has a chance to spawn a $(key)Stalker$().$(br2)$(key)Ancient Vases$() generate in $(copy:Ancient Temples)Ancient Temples$()[$(copy:deeperdarker:ancient_temple)deeperdarker:ancient_temple$()].$(br)You can locate this structure in the $(boss/t4/warden#otherside)Otherside$() using $(mage/spell#locate)Spell Locate$().",
+      "text": "Level: <level_t3>$(br2)While in the $(boss/t4/warden#otherside)Otherside$(), breaking an $(key)Ancient Vase$() has a chance to spawn a $(key)Stalker$().$(br2)$(key)Ancient Vases$() generate in $(copy:Ancient Temples)Ancient Temples$()[$(copy:deeperdarker:ancient_temple)deeperdarker:ancient_temple$()].$(br)Locate this structure in the $(boss/t4/warden#otherside)Otherside$() with $(mage/spell#locate)Spell Locate$().",
       "link_recipe": true
     },
     {

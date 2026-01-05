@@ -8,7 +8,7 @@
       "type": "patchouli:spotlight",
       "item": "spell-dimension:abyss_guard",
       "title": "Elder Guardian",
-      "text": "Level: <level_t4>$(br2)Spawns in $(copy:Ocean Monument)Ocean Monument$()[$(copy:betteroceanmonuments:ocean_monument)betteroceanmonuments:ocean_monument$()].$(br)You can locate this structure in the $(bold)Overworld$() using $(mage/spell#locate)Spell Locate$().$(br2)Defeating $(key)Elder Guardian$() drops $(key)Abyss Guard$(), which can be used to summon $(boss/t3/captain)Captain Cornelia$().",
+      "text": "Level: <level_t4>$(br2)Spawns in $(copy:Ocean Monument)Ocean Monument$()[$(copy:betteroceanmonuments:ocean_monument)betteroceanmonuments:ocean_monument$()].$(br)Locate this structure in the $(bold)Overworld$() with $(mage/spell#locate)Spell Locate$().$(br2)Defeating $(key)Elder Guardian$() drops $(key)Abyss Guard$(), which can be used to summon $(boss/t3/captain)Captain Cornelia$().",
       "link_recipe": true
     },
     {

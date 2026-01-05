@@ -8,7 +8,7 @@
       "type": "patchouli:spotlight",
       "item": "soulsweapons:chaos_crown",
       "title": "Monarch of Chaos",
-      "text": "Level: <level_t3>$(br2)Use $(boss/t4/wither)Shard of Uncertainty$() on a $(key)Blackstone Pedestal$() to summon.$(br2)Defeating $(key)Monarch of Chaos$() drops the $(key)Crown of Chaos$(), which can be used to craft $(boss/t1/day_night)Chaos Orbs$().",
+      "text": "Level: <level_t3>$(br2)Use $(boss/t4/wither)Shard of Uncertainty$() on a $(key)Blackstone Pedestal$() to summon.$(br2)Defeating $(key)Monarch of Chaos$() drops the $(key)Crown of Chaos$(), which can be used to craft the $(boss/t1/day_night)Chaos Orb$().",
       "link_recipe": true
     },
     {

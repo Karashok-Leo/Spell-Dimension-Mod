@@ -8,7 +8,7 @@
       "type": "patchouli:spotlight",
       "item": "soulsweapons:draugr",
       "title": "古英雄的遗骸",
-      "text": "等级：<level_t4>$(br2)生成于$(copy:古英雄的陵墓)古英雄的陵墓$()[$(copy:soulsweapons:champions_grave)soulsweapons:champions_grave$()]内。$(br2)可用$(key)月石罗盘$()或$(mage/spell#locate)魔力定位$()在$(bold)主世界$()寻找该结构。$(br2)或者对$(key)破旧的月光祭坛$()使用$(key)德拉古尔$()召唤。",
+      "text": "等级：<level_t4>$(br2)生成于$(copy:古英雄的陵墓)古英雄的陵墓$()[$(copy:soulsweapons:champions_graves)soulsweapons:champions_graves$()]内。$(br2)可用$(key)月石罗盘$()或$(mage/spell#locate)魔力定位$()在$(bold)主世界$()寻找该结构。$(br2)或者对$(key)破旧的月光祭坛$()使用$(key)德拉古尔$()召唤。",
       "link_recipe": true
     },
     {

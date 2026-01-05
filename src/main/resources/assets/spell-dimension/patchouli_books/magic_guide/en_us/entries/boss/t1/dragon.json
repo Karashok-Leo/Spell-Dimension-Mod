@@ -8,14 +8,14 @@
       "type": "patchouli:spotlight",
       "item": "spell-dimension:celestial_luminary,tag:spell-dimension:endrem_eyes",
       "title": "Ender Dragon",
-      "text": "Level: <level_t1>$(br2)To enter the End, you must first collect $(bold)12$() $(key)special eyes$(). These $(key)special eyes$() come from various boss loot.$(br2)After defeating $(boss/t1/day_night)Day Stalker & Night Prowler$(), craft and use $(key)Endless Starlight$() to unlock the $(key)End Stage$() and grant yourself the $(bold)authority$() to enter the End.",
+      "text": "Level: <level_t1>$(br2)To enter the End, you need to collect $(bold)12$() $(key)special eyes$(), which come from boss loot.$(br2)After defeating $(boss/t1/day_night)Day Stalker & Night Prowler$(), craft and use $(key)Celestial Luminary$() to unlock the $(key)End Stage$() and grant yourself the $(bold)authority$() to enter the End.",
       "link_recipe": true
     },
     {
       "type": "patchouli:spotlight",
       "item": "minecraft:dragon_egg,dragonloot:dragon_scale",
-      "title": "Dragon Egg & Dragon Scales",
-      "text": "$(br)$(key)Ender Dragon$() always has the $(key)Black Hole$() trait. When its fireballs explode, they cast $(key)Black Hole$() — be careful and dodge.$(br2)Defeating $(key)Ender Dragon$() drops a $(key)Dragon Egg$() (used to summon $(boss/t1/the_eye)The Eye$()), and also drops $(key)Dragon Scales$() which can be used to craft the $(mechanic/loot_charm)Miraculous Looting Charm$().",
+      "title": "Dragon Egg & Scales",
+      "text": "$(key)Ender Dragon$() always has the $(key)Black Hole$() trait. When its fireballs explode, $(key)Black Hole$() appears — be careful and dodge.$(br2)Defeating $(key)Ender Dragon$() drops a $(key)Dragon Egg$() (used to summon $(boss/t1/the_eye)The Eye$()), and also drops $(key)Dragon Scales$() which can be used to craft the $(mechanic/loot_charm)Miraculous Looting Charm$().",
       "link_recipe": true
     },
     {

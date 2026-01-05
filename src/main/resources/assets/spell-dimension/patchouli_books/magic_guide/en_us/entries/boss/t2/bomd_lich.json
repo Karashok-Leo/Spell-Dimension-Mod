@@ -8,13 +8,13 @@
       "type": "patchouli:spotlight",
       "item": "bosses_of_mass_destruction:soul_star,bosses_of_mass_destruction:chiseled_stone_altar",
       "title": "Night Lich",
-      "text": "Level: <level_t2>$(br2)Spawns in the $(bold)Lich Tower$()[$(copy:bosses_of_mass_destruction:lich_tower)bosses_of_mass_destruction:lich_tower$()].$(br)You can locate this structure in the $(bold)Overworld$() using a $(key)Soul Star$().$(br2)Insert a $(key)Soul Star$() into each of the four $(key)Chiseled Stone Altars$() on the tower to summon the $(key)Night Lich$().",
+      "text": "Level: <level_t2>$(br2)Spawns in the $(bold)Lich Tower$()[$(copy:bosses_of_mass_destruction:lich_tower)bosses_of_mass_destruction:lich_tower$()].$(br)Locate this structure in the $(bold)Overworld$() with a $(key)Soul Star$().$(br2)Insert a $(key)Soul Star$() into each of the four $(key)Chiseled Stone Altars$() on the tower to summon the $(key)Night Lich$().",
       "link_recipe": true
     },
     {
       "type": "patchouli:spotlight",
       "item": "bosses_of_mass_destruction:ancient_anima",
-      "text": "$(br)$(key)Night Lich$() excels at $(bold)flying$(). Prepare either $(bold)long-range attacks$() or a way to $(bold)close the gap quickly$().$(br2)Defeating $(key)Night Lich$() drops $(key)Ancient Anima$(), which can be used to craft $(boss/t1/day_night)Chaos Orbs$().",
+      "text": "$(br)$(key)Night Lich$() excels at $(bold)flying$(). Prepare either $(bold)long-range attacks$() or a way to $(bold)close the gap quickly$().$(br2)Defeating $(key)Night Lich$() drops $(key)Ancient Anima$(), which can be used to craft the $(boss/t1/day_night)Chaos Orb$().",
       "link_recipe": true
     },
     {

@@ -8,7 +8,7 @@
       "type": "patchouli:spotlight",
       "item": "mutantmonsters:hulk_hammer",
       "title": "Mutant Zombie",
-      "text": "Naturally spawned $(key)Zombies$() have a small chance to mutate into a $(key)Mutant Zombie$().$(br)They can also be spawned manually via $(mage/spell#summon)Spell Summon$() or a $(key)Splash Potion of Chemical X$().$(br2)Defeating a $(key)Mutant Zombie$() drops the $(key)Hulk Hammer$().",
+      "text": "Naturally spawned $(key)Zombies$() have a small chance to mutate into a $(key)Mutant Zombie$().$(br)They can also be spawned manually via $(mage/spell#summon)Spell Summon$() or $(key)Splash Potion of Chemical X$().$(br2)Defeating a $(key)Mutant Zombie$() drops the $(key)Hulk Hammer$().",
       "link_recipe": true
     },
     {

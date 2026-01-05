@@ -1,7 +1,7 @@
 {
   "name": "Tier 1",
   "description": "All Tier 1 bosses are listed here.",
-  "icon": "minecraft:dragon_head",
+  "icon": "soulsweapons:chaos_orb",
   "parent": "spell-dimension:boss",
   "sortnum": 4
 }

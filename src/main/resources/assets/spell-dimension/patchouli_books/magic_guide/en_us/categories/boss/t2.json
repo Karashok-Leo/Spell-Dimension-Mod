@@ -1,7 +1,7 @@
 {
   "name": "Tier 2",
   "description": "All Tier 2 bosses are listed here.",
-  "icon": "minecraft:end_crystal",
+  "icon": "bosses_of_mass_destruction:ancient_anima",
   "parent": "spell-dimension:boss",
   "sortnum": 3
 }

@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:spotlight",
-      "item": "soulsweapons:arkenstone",
+      "item": "soulsweapons:arkenstone,soulsweapons:lost_soul",
       "title": "复仇骑士",
       "text": "等级：<level_t3>$(br2)对$(key)破旧的月光祭坛$()使用$(key)迷失的灵魂$()召唤。$(br2)击败$(key)复仇骑士$()后掉落$(key)阿肯宝钻$()，可用于合成$(boss/t1/day_night)混沌宝珠$()。",
       "link_recipe": true

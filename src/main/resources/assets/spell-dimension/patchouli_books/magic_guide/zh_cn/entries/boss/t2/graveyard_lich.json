@@ -20,7 +20,7 @@
     {
       "type": "patchouli:spotlight",
       "item": "graveyard:upper_bone_staff,graveyard:middle_bone_staff,graveyard:lower_bone_staff",
-      "text": "$(br)可以使用$(key)突变骷髅$()的掉落物合成，或在$(copy:遗迹)遗迹$()[$(copy:graveyard:ruins)graveyard:ruins$()]内找到。$(br)可用$(mage/spell#locate)魔力定位$()在$(bold)主世界$()寻找该结构。",
+      "text": "$(br)可以使用$(boss/t5/mutant_skeleton)突变骷髅$()的掉落物合成，或在$(copy:遗迹)遗迹$()[$(copy:graveyard:ruins)graveyard:ruins$()]内找到。$(br)可用$(mage/spell#locate)魔力定位$()在$(bold)主世界$()寻找该结构。",
       "anchor": "staff",
       "link_recipe": true
     },
