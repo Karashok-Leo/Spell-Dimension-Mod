@@ -16,7 +16,6 @@
     "modded.DDEntitiesMixin",
     "modded.DifficultyEventsMixin",
     "modded.FinCutterItemMixin",
-    "modded.FirstPersonModelCompatibilityMixin",
     "modded.HealthDecreaseEffectMixin",
     "modded.LootingCharmMixin",
     "modded.LootModifierFixer",
