@@ -1,0 +1,65 @@
+{
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "category": "spell-dimension-book:boss",
+  "condition": {
+    "type": "modonomicon:entry_read",
+    "entry_id": "spell-dimension-book:boss/day_night"
+  },
+  "description": "book.spell-dimension-book.magic_guide.boss.obsidilith.description",
+  "hide_while_locked": false,
+  "icon": {
+    "item": "bosses_of_mass_destruction:obsidian_heart"
+  },
+  "name": "book.spell-dimension-book.magic_guide.boss.obsidilith.name",
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "item": {
+        "item": "bosses_of_mass_destruction:obsidian_heart"
+      },
+      "text": "book.spell-dimension-book.magic_guide.boss.obsidilith.boss.text",
+      "title": "book.spell-dimension-book.magic_guide.boss.obsidilith.boss.title"
+    },
+    {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "show_title_separator": true,
+      "text": "book.spell-dimension-book.magic_guide.boss.obsidilith.next.text",
+      "title": "",
+      "use_markdown_in_title": false
+    },
+    {
+      "type": "modonomicon:entity",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "default_rotation": -45.0,
+      "entity_id": "bosses_of_mass_destruction:obsidilith",
+      "name": "",
+      "offset": -4.5,
+      "rotate": true,
+      "scale": 1.0,
+      "text": ""
+    }
+  ],
+  "parents": [
+    {
+      "draw_arrow": true,
+      "entry": "spell-dimension-book:boss/day_night",
+      "line_enabled": true,
+      "line_reversed": false
+    }
+  ],
+  "show_when_any_parent_unlocked": false,
+  "x": -1,
+  "y": 4
+}

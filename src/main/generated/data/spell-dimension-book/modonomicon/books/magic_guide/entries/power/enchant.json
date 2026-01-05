@@ -1,0 +1,107 @@
+{
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "category": "spell-dimension-book:power",
+  "description": "book.spell-dimension-book.magic_guide.power.enchant.description",
+  "hide_while_locked": false,
+  "icon": {
+    "item": "enchantment_infusion:enchantment_infusion_table"
+  },
+  "name": "book.spell-dimension-book.magic_guide.power.enchant.name",
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "item": [
+        {
+          "item": "enchantment_infusion:enchantment_infusion_table"
+        },
+        {
+          "item": "enchantment_infusion:enchantment_infusion_pedestal"
+        }
+      ],
+      "text": "book.spell-dimension-book.magic_guide.power.enchant.infuse.text",
+      "title": "book.spell-dimension-book.magic_guide.power.enchant.infuse.title"
+    },
+    {
+      "type": "modonomicon:multiblock",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "multiblock_id": "spell-dimension-book:enchantment_infusion",
+      "multiblock_name": "",
+      "show_visualize_button": true,
+      "text": ""
+    },
+    {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "show_title_separator": true,
+      "text": "book.spell-dimension-book.magic_guide.power.enchant.pos.text",
+      "title": "",
+      "use_markdown_in_title": false
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "item": {
+        "item": "minecraft:grindstone"
+      },
+      "text": "book.spell-dimension-book.magic_guide.power.enchant.disenchant.text",
+      "title": "book.spell-dimension-book.magic_guide.power.enchant.disenchant.title"
+    },
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "item": {
+        "fabric:type": "fabric:any",
+        "ingredients": [
+          {
+            "fabric:type": "enchantment_infusion:enchantment",
+            "enchantment": "spell_power:sunfire",
+            "min_level": 5
+          },
+          {
+            "fabric:type": "enchantment_infusion:enchantment",
+            "enchantment": "spell_power:soulfrost",
+            "min_level": 5
+          },
+          {
+            "fabric:type": "enchantment_infusion:enchantment",
+            "enchantment": "spell_power:energize",
+            "min_level": 5
+          }
+        ]
+      },
+      "text": "book.spell-dimension-book.magic_guide.power.enchant.restriction.text",
+      "title": "book.spell-dimension-book.magic_guide.power.enchant.restriction.title"
+    },
+    {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "show_title_separator": true,
+      "text": "book.spell-dimension-book.magic_guide.power.enchant.amplify.text",
+      "title": "",
+      "use_markdown_in_title": false
+    }
+  ],
+  "show_when_any_parent_unlocked": false,
+  "x": -1,
+  "y": 0
+}

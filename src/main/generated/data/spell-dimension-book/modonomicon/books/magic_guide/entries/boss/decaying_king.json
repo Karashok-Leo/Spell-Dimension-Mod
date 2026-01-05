@@ -1,0 +1,53 @@
+{
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "category": "spell-dimension-book:boss",
+  "description": "book.spell-dimension-book.magic_guide.boss.decaying_king.description",
+  "hide_while_locked": false,
+  "icon": {
+    "item": "soulsweapons:darkin_blade"
+  },
+  "name": "book.spell-dimension-book.magic_guide.boss.decaying_king.name",
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "item": {
+        "item": "spell-dimension:accursed_blackstone"
+      },
+      "text": "book.spell-dimension-book.magic_guide.boss.decaying_king.boss.text",
+      "title": "book.spell-dimension-book.magic_guide.boss.decaying_king.boss.title"
+    },
+    {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "show_title_separator": true,
+      "text": "book.spell-dimension-book.magic_guide.boss.decaying_king.next.text",
+      "title": "",
+      "use_markdown_in_title": false
+    },
+    {
+      "type": "modonomicon:entity",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "default_rotation": -45.0,
+      "entity_id": "soulsweapons:accursed_lord_boss",
+      "name": "",
+      "offset": 0.15,
+      "rotate": true,
+      "scale": 0.8,
+      "text": ""
+    }
+  ],
+  "show_when_any_parent_unlocked": false,
+  "x": -3,
+  "y": -4
+}

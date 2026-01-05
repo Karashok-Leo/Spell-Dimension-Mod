@@ -1,0 +1,14 @@
+{
+  "background": "spell-dimension-book:textures/background/1.png",
+  "background_height": 512,
+  "background_parallax_layers": [],
+  "background_texture_zoom_multiplier": 1.0,
+  "background_width": 512,
+  "entry_textures": "modonomicon:textures/gui/entry_textures.png",
+  "icon": {
+    "item": "wizards:arcane_robe_head"
+  },
+  "name": "book.spell-dimension-book.magic_guide.mage.name",
+  "show_category_button": true,
+  "sort_number": -1
+}

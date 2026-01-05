@@ -1,0 +1,53 @@
+{
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "category": "spell-dimension-book:boss",
+  "description": "book.spell-dimension-book.magic_guide.boss.gauntlet.description",
+  "hide_while_locked": false,
+  "icon": {
+    "item": "bosses_of_mass_destruction:blazing_eye"
+  },
+  "name": "book.spell-dimension-book.magic_guide.boss.gauntlet.name",
+  "pages": [
+    {
+      "type": "modonomicon:spotlight",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "item": {
+        "item": "bosses_of_mass_destruction:blazing_eye"
+      },
+      "text": "book.spell-dimension-book.magic_guide.boss.gauntlet.boss.text",
+      "title": "book.spell-dimension-book.magic_guide.boss.gauntlet.boss.title"
+    },
+    {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "show_title_separator": true,
+      "text": "book.spell-dimension-book.magic_guide.boss.gauntlet.next.text",
+      "title": "",
+      "use_markdown_in_title": false
+    },
+    {
+      "type": "modonomicon:entity",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "default_rotation": -45.0,
+      "entity_id": "bosses_of_mass_destruction:gauntlet",
+      "name": "",
+      "offset": 0.0,
+      "rotate": true,
+      "scale": 1.0,
+      "text": ""
+    }
+  ],
+  "show_when_any_parent_unlocked": false,
+  "x": 3,
+  "y": 0
+}
