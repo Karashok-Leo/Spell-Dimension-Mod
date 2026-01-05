@@ -10,8 +10,10 @@
       "title": "Spell Power"
     },
     {
-      "type": "patchouli:text",
-      "text": "$(br)Ways to increase $(key)Spell Power$():$(br)$(list)Essences: $(mage/essence#ec)Enchanted Essence$() and $(mage/essence#el)Enlightening Essence$()$(br)$(list)Enchantments: Spell Power, Sunfire, Soulfrost, Energize, Spellblade$(br)$(list)Equipment: $(mechanic/armor_set)armor set bonuses$() and special trinkets"
+      "type": "patchouli:spotlight",
+      "item": "minecraft:enchanted_book{StoredEnchantments:[{id:'spell_power:spell_power',lvl:5s}]},minecraft:enchanted_book{StoredEnchantments:[{id:'spell_power:sunfire',lvl:5s}]},minecraft:enchanted_book{StoredEnchantments:[{id:'spell_power:soulfrost',lvl:5s}]},minecraft:enchanted_book{StoredEnchantments:[{id:'spell_power:energize',lvl:5s}]}",
+      "title": "Increase Spell Power",
+      "text": "Ways to increase $(key)Spell Power$():$(br)$(list)Essences: $(mage/essence#ec)Enchanted Essence$() and $(mage/essence#el)Enlightening Essence$()$(br)$(list)Enchantments: Spell Power, Sunfire, Soulfrost, Energize, Spellblade$(br)$(list)Equipment: $(mechanic/armor_set)armor set bonuses$() and special trinkets"
     }
   ]
 }

@@ -8,6 +8,8 @@ import karashokleo.leobrary.datagen.generator.*;
 import karashokleo.leobrary.datagen.generator.init.GeneratorStorage;
 import karashokleo.spell_dimension.api.quest.Quest;
 import karashokleo.spell_dimension.api.quest.QuestRegistry;
+import karashokleo.spell_dimension.config.EnchantmentToEntryConfig;
+import karashokleo.spell_dimension.config.QuestToEntryConfig;
 import karashokleo.spell_dimension.content.component.*;
 import karashokleo.spell_dimension.content.integration.WalkerIntegration;
 import karashokleo.spell_dimension.content.object.EnchantedModifier;
@@ -86,6 +88,8 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
         AllEvents.init();
         AllCommands.init();
         WalkerIntegration.init();
+        QuestToEntryConfig.init();
+        EnchantmentToEntryConfig.init();
     }
 
     @Override

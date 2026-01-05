@@ -50,7 +50,8 @@ public class FixedTooltipHandler
                 }
             }
 
-            if (lexiconEntry == null)
+            // quest scroll -> recipe page? no!!!
+            if (lexiconEntry == null && !stack.isOf(AllItems.QUEST_SCROLL))
             {
                 Pair<BookEntry, Integer> entry = book.getContents().getEntryForStack(stack);
                 if (entry != null && !entry.getFirst().isLocked())

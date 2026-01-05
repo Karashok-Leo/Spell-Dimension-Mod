@@ -91,7 +91,7 @@ public class HostilityQuests
             .addZhDesc("获得任意恶意词条")
             .addEnFeedback("The good news is that you made it, the bad news is that you can't use them directly. It looks like you'll need to do something with them.")
             .addZhFeedback("好消息是，你成功了，坏消息是你无法直接使用它们。看来你需要对它们进行一些处理。")
-            .toEntry("mechanic/trait")
+            .toEntry("mechanic/hostility")
             .addTag(AllTags.MAIN)
             .addDependencies(CURSE_ENVY)
             .register();
@@ -193,6 +193,7 @@ public class HostilityQuests
             )
             .addEnFeedback("The enemy's indefensible sealing ability gives you a headache, and sometimes you are so busy that you don't even notice if there are seals on you. So you crafted this pocket, which automatically absorbs those sealed items and automatically unseals them. But does a better method exist?")
             .addZhFeedback("敌人防不胜防的封印能力让你感到头疼，有时忙碌的你甚至没有注意到自己身上是否存在封印。于是你制作了这个口袋，它可以自动吸纳那些被封印的物品，并自动解除封印。但是否存在更好的方法呢？")
+            .toEntry("mechanic/hostility", 3)
             .addTag(AllTags.BRANCH)
             .addDependencies(ETERNIUM_INGOT, TRAIT_ITEM)
             .register();

@@ -18,10 +18,9 @@
       "link_recipe": true
     },
     {
-      "type": "patchouli:spotlight",
-      "item": "minecraft:enchanted_book{StoredEnchantments:[{id:'spell_power:sunfire',lvl:5s}]},minecraft:enchanted_book{StoredEnchantments:[{id:'spell_power:soulfrost',lvl:5s}]},minecraft:enchanted_book{StoredEnchantments:[{id:'spell_power:energize',lvl:5s}]}",
+      "type": "patchouli:text",
       "title": "Enchanting Restrictions",
-      "text": "$(welcome/emi#ru)Check uses$() on an $(key)enchanted book$() to see its $(bold)applicable items$() and $(bold)conflicting enchantments$().$(br2)In addition, $(bold)spell-power enchantments$() $(t:e.g. Sunfire, Soulfrost, Energize) require the item to have a corresponding $(bold)Spell Power bonus$() for that school, otherwise it cannot be enchanted."
+      "text": "$(br)$(welcome/emi#ru)Check uses$() on an $(key)enchanted book$() to see its $(bold)applicable items$() and $(bold)conflicting enchantments$().$(br2)In addition, $(bold)spell-power enchantments$() $(t:e.g. Sunfire, Soulfrost, Energize) require the item to have a corresponding $(bold)Spell Power bonus$() for that school, otherwise it cannot be enchanted."
     },
     {
       "type": "patchouli:spotlight",

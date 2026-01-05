@@ -18,8 +18,7 @@
       "link_recipe": true
     },
     {
-      "type": "patchouli:spotlight",
-      "item": "minecraft:enchanted_book{StoredEnchantments:[{id:'spell_power:sunfire',lvl:5s}]},minecraft:enchanted_book{StoredEnchantments:[{id:'spell_power:soulfrost',lvl:5s}]},minecraft:enchanted_book{StoredEnchantments:[{id:'spell_power:energize',lvl:5s}]}",
+      "type": "patchouli:text",
       "title": "附魔限制",
       "text": "$(br)你可以对$(key)附魔书$()$(welcome/emi#ru)查询用途$()以查看魔咒的$(bold)可应用物品$()和$(bold)冲突魔咒$()。$(br2)除此之外，$(bold)$(t:例如：阳炎、灵冻、蓄能)增加法术强度的魔咒$()还要求物品携带对应学派的法术强度$(bold)加成$()，否则无法附魔。"
     },

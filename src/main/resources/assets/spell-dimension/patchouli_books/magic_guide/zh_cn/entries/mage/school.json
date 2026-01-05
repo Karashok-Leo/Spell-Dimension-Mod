@@ -13,7 +13,8 @@
       "type": "patchouli:spotlight",
       "item": "tag:trinkets:chest/secondary_school",
       "title": "副法术学派",
-      "text": "$(br)当你精通了单一法术学派后，可以选择研习一个$(key)副学派$()。为此你需要制作一些特定的魔法物品，以此作为学派的研习基础。$(br2)$(welcome/emi#search)搜索$()关键词$(copy:#trinkets:chest/secondary_school)#trinkets:chest/secondary_school$()可查看对应的物品。"
+      "text": "$(br)当你精通了单一法术学派后，可以选择研习一个$(key)副学派$()。为此你需要制作一些特定的魔法物品，以此作为学派的研习基础。$(br2)$(welcome/emi#search)搜索$()关键词$(copy:#trinkets:chest/secondary_school)#trinkets:chest/secondary_school$()可查看对应的物品。",
+      "link_recipe": true
     }
   ]
 }

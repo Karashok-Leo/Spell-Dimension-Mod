@@ -70,7 +70,7 @@ public class MageQuests
             )
             .addEnFeedback("All three of the essences you gain in your adventures are undoubtedly very powerful. The Enlightening Essence directly enhances your spell power, the Enchanted Essence brings magic together in your equipment, and the Mending Essence repairs your equipment until it is as good as new.")
             .addZhFeedback("你在冒险中获得的这三种精华无疑都十分强大。源启精华可以直接增强魔力，束魔精华可以将魔力汇聚在装备上，而修复精华则可以将装备修复至完好如初。")
-            .toEntry("mage/essence")
+            .toEntry("mage/essence", 1)
             .addTag(AllTags.MAIN)
             .addDependencies(BASE_ESSENCE)
             .register();

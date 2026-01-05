@@ -13,7 +13,8 @@
       "type": "patchouli:spotlight",
       "item": "tag:trinkets:chest/secondary_school",
       "title": "Secondary School",
-      "text": "After you master a single school of magic, you can choose to study a $(key)secondary school$(). To do so, you need to craft certain magical items as the foundation for that school.$(br2)$(welcome/emi#search)Search$() for $(copy:#trinkets:chest/secondary_school)#trinkets:chest/secondary_school$() to view the related items."
+      "text": "After you master a single school of magic, you can choose to study a $(key)secondary school$(). To do so, you need to craft certain magical items as the foundation for that school.$(br2)$(welcome/emi#search)Search$() for $(copy:#trinkets:chest/secondary_school)#trinkets:chest/secondary_school$() to view the related items.",
+      "link_recipe": true
     }
   ]
 }

@@ -76,6 +76,12 @@ public class QuestBuilder<Q extends Quest> extends NamedEntryBuilder<Q> implemen
         return this;
     }
 
+    public QuestBuilder<Q> toEntry(String path, int page)
+    {
+        QuestToEntryConfig.register(content, path, page);
+        return this;
+    }
+
     public QuestBuilder<Q> addEnTitle(String text)
     {
         getEnglishGenerator().addText(getTitleKey(), text);

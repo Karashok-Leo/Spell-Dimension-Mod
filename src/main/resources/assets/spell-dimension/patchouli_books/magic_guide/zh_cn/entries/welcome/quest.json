@@ -18,8 +18,5 @@
       "recipe": "spell-dimension:empty_quest_scroll",
       "text": "$(br)如果你不幸丢失了$(key)任务卷轴$()，没关系，你可以以极低的成本重新制作一个新的。"
     }
-  ],
-  "extra_recipe_mappings": {
-    "spell-dimension:quest_scroll": 0
-  }
+  ]
 }

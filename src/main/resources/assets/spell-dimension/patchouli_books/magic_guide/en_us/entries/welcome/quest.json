@@ -18,8 +18,5 @@
       "recipe": "spell-dimension:empty_quest_scroll",
       "text": "$(br)If you accidentally lose the $(key)Quest Scroll$(), don't worry — you can craft a new one at a very low cost."
     }
-  ],
-  "extra_recipe_mappings": {
-    "spell-dimension:quest_scroll": 0
-  }
+  ]
 }
