@@ -2,13 +2,13 @@
   "name": "Runes",
   "icon": "runes:fire_stone",
   "category": "spell-dimension:mage",
-  "sortnum": 11,
+  "sortnum": 10,
   "pages": [
     {
       "type": "patchouli:spotlight",
       "item": "tag:spell-dimension:rune",
       "title": "Runes",
-      "text": "$(br)Casting some spells consumes $(key)runes$().$(br2)You can craft $(key)runes$() directly in your hand, or build a $(key)Rune Altar$() to craft more $(key)runes$() with the same ingredients.",
+      "text": "$(br)Casting some spells consumes $(key)runes$().$(br2)You can craft $(key)runes$() directly in your hand, or build a $(key)Rune Crafting Altar$() to craft more $(key)runes$() with the same ingredients.",
       "link_recipe": true
     },
     {
@@ -17,6 +17,9 @@
       "title": "Runes",
       "text": "$(br)The $(key)Spell Infinity$() enchantment makes casting spells consume no $(key)runes$()."
     }
-  ]
+  ],
+  "extra_recipe_mappings": {
+    "runes:crafting_altar": 0
+  }
 }
 

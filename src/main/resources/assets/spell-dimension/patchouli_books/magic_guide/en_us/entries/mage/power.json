@@ -6,12 +6,12 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "$(br)$(key)Spell Power$() is a mage's core attribute — it directly determines a spell's $(bold)damage$() and $(bold)effects$().$(br2)By default, $(mage/essence#ec)Enchanted Essence$() and $(mage/essence#el)Enlightening Essence$() obtained from loot will belong to the $(mage/school)magic school$() in which you have the highest $(key)Spell Power$() — your $(bold)\"specialty\"$() school.",
+      "text": "$(key)Spell Power$() is a mage's core attribute — it directly determines a spell's $(bold)damage$() and $(bold)effects$().$(br2)By default, $(mage/essence#ec)Enchanted Essence$() and $(mage/essence#el)Enlightening Essence$() obtained from loot will belong to the $(mage/school)spell school$() in which you have the highest $(key)Spell Power$() — your $(bold)\"specialized\"$() school.",
       "title": "Spell Power"
     },
     {
       "type": "patchouli:text",
-      "text": "$(br)Ways to increase $(key)Spell Power$():$(br)$(list)Essences: $(mage/essence#ec)Enchanted Essence$() and $(mage/essence#el)Enlightening Essence$()$(br)$(list)Enchantments: Arcane Formula, Sunfire, Soulfrost, Energize, Spellblade$(br)$(list)Equipment: $(mechanic/armor_set)armor set bonuses$() and special trinkets"
+      "text": "$(br)Ways to increase $(key)Spell Power$():$(br)$(list)Essences: $(mage/essence#ec)Enchanted Essence$() and $(mage/essence#el)Enlightening Essence$()$(br)$(list)Enchantments: Spell Power, Sunfire, Soulfrost, Energize, Spellblade$(br)$(list)Equipment: $(mechanic/armor_set)armor set bonuses$() and special trinkets"
     }
   ]
 }

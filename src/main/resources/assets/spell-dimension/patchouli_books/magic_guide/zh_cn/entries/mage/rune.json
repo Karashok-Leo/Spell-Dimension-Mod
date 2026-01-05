@@ -2,7 +2,7 @@
   "name": "符文",
   "icon": "runes:fire_stone",
   "category": "spell-dimension:mage",
-  "sortnum": 11,
+  "sortnum": 10,
   "pages": [
     {
       "type": "patchouli:spotlight",
@@ -17,5 +17,8 @@
       "title": "符文",
       "text": "$(br)$(key)法术无限$()魔咒可以让你在施放法术时不消耗任何$(key)符文$()。"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {
+    "runes:crafting_altar": 0
+  }
 }

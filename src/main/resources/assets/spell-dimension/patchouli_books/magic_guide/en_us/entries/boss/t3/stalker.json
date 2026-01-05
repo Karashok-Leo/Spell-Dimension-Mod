@@ -14,7 +14,7 @@
     {
       "type": "patchouli:spotlight",
       "item": "deeperdarker:soul_crystal",
-      "text": "$(br)Defeating $(key)Stalker$() drops a $(key)Soul Crystal$(), which can be used to craft the $(mechanic/loot_charm)Arcane Loot Charm$().",
+      "text": "$(br)Defeating $(key)Stalker$() drops a $(key)Soul Crystal$(), which can be used to craft the $(mechanic/loot_charm)Magical Looting Charm$().",
       "link_recipe": true
     },
     {

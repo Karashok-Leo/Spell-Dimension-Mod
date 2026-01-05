@@ -8,7 +8,7 @@
       "type": "patchouli:spotlight",
       "item": "mutantmonsters:creeper_shard",
       "title": "Mutant Creeper",
-      "text": "$(br)Naturally spawned $(key)Creepers$() have a small chance to mutate into a $(key)Mutant Creeper$().$(br)They can also be spawned manually via $(mage/spell#summon)Spell Summon$() or a $(key)Splash Mutant Potion$().$(br2)Defeating a $(key)Mutant Creeper$() drops a $(key)Creeper Shard$(), which can be used to craft $(mage/spell#break)Remote Destruction$().",
+      "text": "Naturally spawned $(key)Creepers$() have a small chance to mutate into a $(key)Mutant Creeper$().$(br)They can also be spawned manually via $(mage/spell#summon)Spell Summon$() or a $(key)Splash Potion of Chemical X$().$(br2)Defeating a $(key)Mutant Creeper$() drops a $(key)Creeper Shard$(), which can be used to craft $(mage/spell#break)Remote Destruction$().",
       "link_recipe": true
     },
     {

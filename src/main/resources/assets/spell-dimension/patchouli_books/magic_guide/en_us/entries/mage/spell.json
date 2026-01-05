@@ -8,28 +8,28 @@
       "type": "patchouli:spotlight",
       "item": "spell-dimension:spell_scroll{spell_container:{is_proxy:1b,max_spell_count:1b,spell_ids:['spell-dimension:locate']}}",
       "title": "Spell Locate",
-      "text": "$(br)When holding a specific $(bold)key item$() in your $(bold)offhand$(), casting $(key)Spell Locate$() on a $(key)Lodestone$() can locate special $(bold)structures/biomes$().$(br2)$(welcome/emi#ru)Check uses$() on a $(key)Lodestone$() to see all recipes, or $(welcome/emi#search)search$() for the $(bold)structure/biome$() name directly.$(br2)A $(key)Lodestone$() that gets hit has a $(bold)30%$() chance to break.",
+      "text": "Hold a $(bold)key item$() in your $(bold)offhand$(), then cast $(key)Spell Locate$() at a $(key)Lodestone$() to locate $(bold)structures/biomes$().$(br2)$(welcome/emi#ru)Check uses$() on a $(key)Lodestone$() for recipes, or $(welcome/emi#search)search$() by location name.$(br2)A hit $(key)Lodestone$() has a $(bold)30%$() chance to break.",
       "anchor": "locate"
     },
     {
       "type": "patchouli:spotlight",
       "item": "spell-dimension:spell_scroll{spell_container:{is_proxy:1b,max_spell_count:1b,spell_ids:['spell-dimension:summon']}}",
       "title": "Spell Summon",
-      "text": "$(br)When holding a specific $(bold)key item$() in your $(bold)offhand$(), casting $(key)Spell Summon$() on a $(mechanic/spawner)spawner$() can summon special mobs.$(br2)$(welcome/emi#ru)Check uses$() on a $(mechanic/spawner)spawner$() to see all recipes.$(br2)Some bosses can also be summoned with $(key)Spell Summon$(), but you must be in the place where they $(bold)normally appear$() $(t:e.g. Stalker must be summoned in the Otherworld).",
+      "text": "Hold a $(bold)key item$() in your $(bold)offhand$(), then cast $(key)Spell Summon$() at a $(mechanic/spawner)spawner$() to summon special mobs.$(br2)$(welcome/emi#ru)Check uses$() on a $(mechanic/spawner)spawner$() for recipes.$(br2)Some bosses can also be summoned this way, but only where they $(t:e.g. Stalker in the Otherside)$(bold)normally appear$().",
       "anchor": "summon"
     },
     {
       "type": "patchouli:spotlight",
       "item": "spell-dimension:spell_scroll{spell_container:{is_proxy:1b,max_spell_count:1b,spell_ids:['spell-dimension:place']}}",
       "title": "Remote Manipulation",
-      "text": "$(br)Casting $(key)Remote Manipulation$() releases a spell that $(bold)uses$() the item you are holding in your $(bold)offhand$() when it touches a block.$(br2)You can use $(key)Remote Manipulation$() to place blocks from a distance.$(br2)This spell can bypass some restrictions, such as $(mechanic/hostility#arena)Domain Suppression$().",
+      "text": "Casting $(key)Remote Manipulation$() releases a spell that $(bold)uses$() your $(bold)offhand$() item on contact.$(br2)Use it to place blocks from a distance.$(br2)It can bypass some restrictions, such as $(mechanic/hostility#arena)Arena$().",
       "anchor": "place"
     },
     {
       "type": "patchouli:spotlight",
       "item": "spell-dimension:spell_scroll{spell_container:{is_proxy:1b,max_spell_count:1b,spell_ids:['spell-dimension:break']}}",
       "title": "Remote Destruction",
-      "text": "$(br)Casting $(key)Remote Destruction$() releases a spell that $(bold)breaks$() a block when it touches it, and drops what it would normally drop.$(br2)You can use $(key)Remote Destruction$() to break some blocks that cannot be mined normally.$(br2)This spell can bypass some restrictions, such as $(mechanic/hostility#arena)Domain Suppression$().",
+      "text": "Casting $(key)Remote Destruction$() releases a spell that $(bold)breaks$() a block on contact and drops normal loot.$(br2)Use it to break blocks that cannot be mined normally.$(br2)It can bypass some restrictions, such as $(mechanic/hostility#arena)Arena$().",
       "anchor": "break"
     }
   ]

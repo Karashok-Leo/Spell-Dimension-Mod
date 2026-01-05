@@ -8,7 +8,7 @@
       "type": "patchouli:spotlight",
       "item": "spell-dimension:spell_scroll{spell_container:{is_proxy:1b,max_spell_count:1b,spell_ids:['wizards:fire_breath']}}",
       "title": "Spell Scrolls",
-      "text": "$(br)The spells you can learn from the $(mage/bind)Spell Binding Table$() are limited. To learn and use more magic, you need $(key)spell scrolls$().$(br2)$(welcome/emi#search)Search$() for $(copy:spell scroll)spell scroll$() and $(welcome/emi#ru)check uses$() to see how to obtain them."
+      "text": "$(br)The spells you can learn from the $(mage/bind)Spell Binding Table$() are limited. To learn and cast more spells, you need $(key)spell scrolls$().$(br2)$(welcome/emi#search)Search$() for $(copy:spell scroll)spell scroll$() and $(welcome/emi#ru)check recipes$() to see how to obtain them."
     },
     {
       "type": "patchouli:text",

@@ -8,7 +8,7 @@
       "type": "patchouli:spotlight",
       "item": "mutantmonsters:endersoul_hand",
       "title": "Mutant Enderman",
-      "text": "$(br)Naturally spawned $(key)Endermen$() have a small chance to mutate into a $(key)Mutant Enderman$().$(br)They can also be spawned manually via $(mage/spell#summon)Spell Summon$() or a $(key)Splash Mutant Potion$().$(br2)Defeating a $(key)Mutant Enderman$() drops an $(key)Endersoul Hand$(), which can be used to craft $(mage/spell#break)Remote Manipulation$().",
+      "text": "Naturally spawned $(key)Endermen$() have a small chance to mutate into a $(key)Mutant Enderman$().$(br)They can also be spawned manually via $(mage/spell#summon)Spell Summon$() or a $(key)Splash Potion of Chemical X$().$(br2)Defeating a $(key)Mutant Enderman$() drops an $(key)Endersoul Hand$(), which can be used to craft $(mage/spell#break)Remote Manipulation$().",
       "link_recipe": true
     },
     {

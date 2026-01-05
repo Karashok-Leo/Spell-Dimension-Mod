@@ -7,9 +7,12 @@
     {
       "type": "patchouli:spotlight",
       "item": "spell-dimension:spell_container",
-      "text": "$(br)Using a $(key)Spell Container$() to destroy $(mechanic/hostility#spell_trait)spell-trait$() $(bold)items$() converts them into a school-specific $(key)damage reduction$() value. While wearing a $(key)Spell Container$(), it will automatically consume these $(key)damage reduction$() values to protect you from spell damage.$(br2)The $(key)damage reduction$() value converted from each $(mechanic/hostility#spell_trait)spell-trait$() $(bold)item$() is equivalent to the $(mage/power)Spell Power$() bonus that a corresponding $(bold)max-level$() trait would provide to mobs.",
+      "text": "$(br)Using a $(key)Spell Container$() on $(mechanic/hostility#spell_trait)spell-trait$() $(bold)items$() converts them into school-specific $(key)damage reduction$(). While wearing it, the container consumes stored $(key)damage reduction$() to protect you from spell damage.",
       "link_recipe": true
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br)Each converted value matches the $(mage/power)Spell Power$() bonus a corresponding $(bold)max-level$() trait would give mobs."
     }
   ]
 }
-

@@ -2,7 +2,7 @@
   "name": "魔法精华",
   "icon": "spell-dimension:essence_arcane_1",
   "category": "spell-dimension:mage",
-  "sortnum": 10,
+  "sortnum": 11,
   "pages": [
     {
       "type": "patchouli:spotlight",
@@ -40,7 +40,7 @@
       "type": "patchouli:spotlight",
       "item": "spell-dimension:mending_essence",
       "title": "修复精华",
-      "text": "$(br)$(key)修复精华$()可以完全修复一件物品, 并且清除其累积的$(bold)修复惩罚$()。$(br2)$(key)修复精华$()不能合成，只能从战利品中获取。",
+      "text": "$(br)$(key)修复精华$()可以完全修复一件物品, 并且清除其累积的$(bold)修复惩罚$()。$(br2)$(key)修复精华$()可以合成，也可以从战利品中获取。",
       "anchor": "mend",
       "link_recipe": true
     },

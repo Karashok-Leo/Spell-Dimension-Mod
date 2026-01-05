@@ -14,7 +14,7 @@
     {
       "type": "patchouli:spotlight",
       "item": "bosses_of_mass_destruction:void_thorn,bosses_of_mass_destruction:crystal_fruit",
-      "text": "$(br)$(key)Void Blossom$() has extremely strong regeneration. Prepare the $(key)Spell Curse$() enchantment before the fight to reduce its healing.$(br2)Defeating $(key)Void Blossom$() drops a $(key)Void Thorn$() (used to craft $(boss/t1/day_night)Chaos Orbs$()), and also drops $(key)Crystal Fruit$() which can be used to craft the $(mechanic/loot_charm)Chaos Loot Charm$().",
+      "text": "$(br)$(key)Void Blossom$() has extremely strong regeneration. Prepare the $(key)Spell Curse$() enchantment before the fight to reduce its healing.$(br2)Defeating $(key)Void Blossom$() drops a $(key)Void Thorn$() (used to craft $(boss/t1/day_night)Chaos Orbs$()), and also drops $(key)Crystal Fruit$() which can be used to craft the $(mechanic/loot_charm)Chaotic Looting Charm$().",
       "link_recipe": true
     },
     {
@@ -25,4 +25,3 @@
     }
   ]
 }
-

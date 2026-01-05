@@ -8,7 +8,7 @@
       "type": "patchouli:spotlight",
       "item": "enchantment_infusion:enchantment_infusion_table,enchantment_infusion:enchantment_infusion_pedestal",
       "title": "Enchantment Infusion",
-      "text": "$(br)$(key)Enchantment Infusion$() is a way to perform $(bold)directed enchanting$() and $(bold)item crafting$().$(br2)Its core blocks are the $(key)Enchantment Infusion Table$() and $(key)Enchantment Infusion Pedestal$().$(br2)$(bold)Right-click$() with an item to place it, and $(bold)right-click with an empty hand$() to take it out.",
+      "text": "$(key)Enchantment Infusion$() performs $(bold)directed enchanting$() and $(bold)item crafting$().$(br2)Core blocks: $(key)Enchantment Infusion Table$() and $(key)Enchantment Infusion Pedestal$().$(br2)$(bold)Right-click$() with an item to place it, and $(bold)empty-hand right-click$() to remove it.",
       "link_recipe": true
     },
     {
@@ -35,7 +35,7 @@
     {
       "type": "patchouli:text",
       "title": "Directed Enchanting",
-      "text": "$(br)$(welcome/emi#ru)Check uses$() on the $(key)Enchantment Infusion Table$() or $(key)Enchantment Infusion Pedestal$() to see all recipes.$(br2)Place the required ingredients on the $(key)Enchantment Infusion Pedestals$() (order doesn't matter). Finally, place the item you want to enchant on the center $(key)Enchantment Infusion Table$() (its existing enchantment level must be $(bold)at least$() the recipe requirement). Wait a few seconds and the infusion will complete."
+      "text": "$(br)$(welcome/emi#ru)Check uses$() on the $(key)Enchantment Infusion Table$() or $(key)Enchantment Infusion Pedestal$() for recipes.$(br2)Place ingredients on the $(key)Pedestals$() (order doesn't matter). Then place the item to enchant on the center $(key)Table$() (its enchantment level must meet the recipe). Wait a few seconds to finish."
     },
     {
       "type": "patchouli:text",
@@ -44,4 +44,3 @@
     }
   ]
 }
-

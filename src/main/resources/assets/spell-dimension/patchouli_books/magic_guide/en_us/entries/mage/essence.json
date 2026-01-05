@@ -1,38 +1,38 @@
 {
-  "name": "Magical Essences",
+  "name": "Spell Essences",
   "icon": "spell-dimension:essence_arcane_1",
   "category": "spell-dimension:mage",
-  "sortnum": 10,
+  "sortnum": 11,
   "pages": [
     {
       "type": "patchouli:spotlight",
       "item": "tag:spell-dimension:essence/all",
-      "title": "Basic Essences",
-      "text": "$(br)You may have noticed that spells have a chance to drop some $(key)basic magical essences$() when they $(bold)hit$().$(br2)$(key)Basic essences$() are important materials on a mage's journey. They are used to craft magical items such as $(mage/book)spell books$(), $(mage/rune)runes$(), and $(mage/essence#ec)Enchanted Essence$().",
+      "title": "Base Essences",
+      "text": "You may have noticed that spells have a chance to drop some $(key)base essences$() when they $(bold)hit$().$(br2)$(key)Base essences$() are important materials on a mage's journey. They are used to craft magical items such as $(mage/book)spell books$(), $(mage/rune)runes$(), and $(mage/essence#ec)Enchanted Essence$().",
       "anchor": "base",
       "link_recipe": true
     },
     {
       "type": "patchouli:text",
-      "text": "$(br2)The drop chance for $(key)basic essences$() is $(bold)20%$(). Each $(mechanic/loot_charm)Loot Charm$() you wear increases it by $(bold)10%$().$(br2)When the target's $(mechanic/hostility)Hostility level$() is above $(bold)160$(), it has a chance to drop $(bold)Intermediate$() essences.$(br2)When the target's $(mechanic/hostility)Hostility level$() is above $(bold)560$(), it has a chance to drop $(bold)Advanced$() essences."
+      "text": "$(br)The drop chance for $(key)base essences$() is $(bold)20%$(). Each $(mechanic/loot_charm)Looting Charm$() you wear increases it by $(bold)10%$().$(br2)When the target's $(mechanic/hostility)Hostility level$() is above $(bold)160$(), it has a chance to drop $(bold)Intermediate$() essences.$(br2)When the target's $(mechanic/hostility)Hostility level$() is above $(bold)560$(), it has a chance to drop $(bold)Advanced$() essences."
     },
     {
       "type": "patchouli:spotlight",
       "item": "spell-dimension:enchanted_essence{EnchantedModifiers:{Amount:1.0d,Attribute:'spell_power:arcane',Operation:0,Slot:'mainhand',Threshold:10,Uuid:[I;700308044,-1542469417,-1493494063,-1478207010]}}",
       "title": "Enchanted Essence",
-      "text": "$(br)$(key)Enchanted Essence$() can infuse an item with magic, increasing some of its attributes.$(br2)Each time you use $(key)Enchanted Essence$() on an item, the item's $(bold)enchant level$() increases by one.$(br2)$(key)Enchanted Essence$() can only affect an item when its $(bold)threshold$() is greater than or equal to the item's $(bold)enchant level$().",
+      "text": "$(key)Enchanted Essence$() infuses an item with magic, boosting some attributes.$(br2)Each use increases the item's $(bold)enchant level$() by one.$(br2)It only works when its $(bold)threshold$() is at least the item's $(bold)enchant level$().",
       "anchor": "ec",
       "link_recipe": true
     },
     {
       "type": "patchouli:text",
-      "text": "$(br)How to obtain:$(br)$(list)$(bold)Basic essences$() (Novice/Intermediate/Advanced) can be crafted into $(key)Enchanted Essence$() with $(bold)thresholds$() of $(bold)10/20/30$() respectively.$(br)$(list)The maximum $(bold)threshold$() of $(key)Enchanted Essence$() found in loot depends on your $(mechanic/hostility)Hostility difficulty level$().$(br)$(list)In the $(mechanic/difficulty_tier#nightmare)Nightmare difficulty tier$(), you can manually $(bold)merge$() $(key)Enchanted Essence$() to obtain a higher-$(bold)threshold$() $(key)Enchanted Essence$()."
+      "text": "$(br)How to obtain:$(br)$(list)$(bold)Base essences$() (Primary/Intermediate/Advanced) craft $(key)Enchanted Essence$() with $(bold)thresholds$() of $(bold)10/20/30$() respectively.$(br)$(list)Looted $(key)Enchanted Essence$() max $(bold)threshold$() depends on your $(mechanic/hostility)Hostility difficulty level$().$(br)$(list)In $(mechanic/difficulty_tier#nightmare)Nightmare$(), you can $(bold)merge$() $(key)Enchanted Essence$() to obtain higher-$(bold)threshold$() essences."
     },
     {
       "type": "patchouli:spotlight",
       "item": "spell-dimension:enlightening_essence{EnlighteningModifiers:{Amount:1.0d,Attribute:'spell_power:frost',Operation:0,Uuid:[I;-1607061764,-43820874,-1108786045,-1539459220]}}",
       "title": "Enlightening Essence",
-      "text": "$(br)$(key)Enlightening Essence$() is similar to $(mage/essence#ec)Enchanted Essence$(). The difference is that $(mage/essence#ec)Enchanted Essence$() affects $(bold)items$(), while $(key)Enlightening Essence$() affects the mage $(bold)directly$() and is not limited by a $(bold)threshold$().$(br2)$(key)Enlightening Essence$() cannot be crafted; it can only be obtained from loot.",
+      "text": "$(key)Enlightening Essence$() is similar to $(mage/essence#ec)Enchanted Essence$(). The difference is that $(mage/essence#ec)Enchanted Essence$() affects $(bold)items$(), while $(key)Enlightening Essence$() affects the mage $(bold)directly$() and is not limited by a $(bold)threshold$().$(br2)$(key)Enlightening Essence$() cannot be crafted; it can only be obtained from loot.",
       "anchor": "el",
       "link_recipe": true
     },
@@ -40,17 +40,16 @@
       "type": "patchouli:spotlight",
       "item": "spell-dimension:mending_essence",
       "title": "Mending Essence",
-      "text": "$(br)$(key)Mending Essence$() fully repairs an item and removes its accumulated $(bold)repair penalties$().$(br2)$(key)Mending Essence$() cannot be crafted; it can only be obtained from loot.",
+      "text": "$(key)Mending Essence$() fully repairs an item and removes its accumulated $(bold)repair cost$().$(br2)$(key)Mending Essence$() can be crafted or obtained from loot.",
       "anchor": "mend",
       "link_recipe": true
     },
     {
       "type": "patchouli:spotlight",
       "item": "spell-dimension:disenchanted_essence",
-      "title": "Disenchanting Essence",
-      "text": "$(br)$(key)Disenchanting Essence$() can $(bold)transfer$() all the magic infused into an item by $(mage/essence#ec)Enchanted Essence$() to another item.$(br2)$(key)Disenchanting Essence$() can be crafted, or purchased from Goblin Traders.",
+      "title": "Disenchanted Essence",
+      "text": "$(key)Disenchanted Essence$() can $(bold)transfer$() all the magic infused into an item by $(mage/essence#ec)Enchanted Essence$() to another item.$(br2)$(key)Disenchanted Essence$() can be crafted, or purchased from Goblin Traders.",
       "link_recipe": true
     }
   ]
 }
-
