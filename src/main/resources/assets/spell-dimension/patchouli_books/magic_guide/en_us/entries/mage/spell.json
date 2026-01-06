@@ -32,5 +32,8 @@
       "text": "Casting $(key)Remote Destruction$() releases a spell that $(bold)breaks$() a block on contact and drops normal loot.$(br2)Use it to break blocks that cannot be mined normally.$(br2)It can bypass some restrictions, such as $(mechanic/hostility#arena)Arena$().",
       "anchor": "break"
     }
-  ]
+  ],
+  "extra_recipe_mappings": {
+    "minecraft:lodestone": 0
+  }
 }

@@ -1,5 +1,5 @@
 {
-  "name": "book.spell-dimension-book.magic_guidance.name",
+  "name": "book.spell-dimension-book.magic_guide.name",
   "landing_text": "text.spell-dimension.mage_book.1",
   "version": "X",
   "model": "spell-dimension:magic_guide",

@@ -1,0 +1,30 @@
+{
+  "name": "灵仆",
+  "icon": "spell-dimension:soul_container",
+  "category": "spell-dimension:mage",
+  "sortnum": 24,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(br)$(key)操纵灵魂$()是$(#3ea29f)灵魂$()学派的核心机制。对濒死的生物使用$(key)灵魂容器$()，可以将其转化为$(key)灵仆$()并收容进容器中。再次使用即可放出$(key)灵仆$()。$(br2)被转化的$(key)灵仆$()不会攻击你，且会协助你战斗，除此之外的行为逻辑与原来无异。"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "spell-dimension:soul_container,spell-dimension:advanced_soul_container",
+      "title": "灵魂容器",
+      "text": "$(br)普通的$(key)灵魂容器$()尝试转化$(key)灵仆$()失败将会$(bold)销毁$()。$(br2)$(key)高级灵魂容器$()转化$(key)灵仆$()的成功率更高，且失败时不会$(bold)销毁$()。",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:text",
+      "title": "附体",
+      "text": "$(br)对$(bold)灵仆$()施放$(key)附体$()，可将自身灵魂附体至$(bold)灵仆$()身上，$(bold)本体$()留在原地。附体后可以控制$(bold)灵仆$()行动，获得部分$(bold)灵仆$()特性，但保留自身物品栏。$(br2)$(bold)灵仆$()死亡时，$(key)附体状态$()自动解除，灵魂回归$(bold)本体$()；$(bold)本体$()濒临死亡时，$(key)附体状态$()自动解除，灵魂回归$(bold)本体$()，$(bold)灵仆$()留在原地，同时$(bold)本体$()保留$(t:至少一颗心)$(bold)1%$()血量。"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "spell-dimension:spell_scroll{spell_container:{is_proxy:1b,max_spell_count:1b,spell_ids:['spell-dimension:possess']}},spell-dimension:spell_scroll{spell_container:{is_proxy:1b,max_spell_count:1b,spell_ids:['spell-dimension:recall']}}",
+      "title": "解除附体",
+      "text": "$(br)可施放$(key)归魂$()或对$(bold)本体$()施放$(key)附体$()以主动解除$(key)附体状态$()。"
+    }
+  ]
+}

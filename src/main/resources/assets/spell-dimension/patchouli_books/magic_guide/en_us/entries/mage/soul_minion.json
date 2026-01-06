@@ -1,0 +1,30 @@
+{
+  "name": "Soul Minion",
+  "icon": "spell-dimension:soul_container",
+  "category": "spell-dimension:mage",
+  "sortnum": 24,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(key)Manipulating souls$() is the core mechanism of the $(#3ea29f)Soul$() School. Using a $(key)Soul Container$() on a low-health mob transforms it into a $(key)Soul Minion$() and seals it within the container. Reusing the container releases the $(key)Soul Minion$(). $(br2)$(key)Soul Minion$() will not attack you and will assist you in combat; otherwise unchanged."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "spell-dimension:soul_container,spell-dimension:advanced_soul_container",
+      "title": "Soul Container",
+      "text": "$(br)Normal $(key)Soul Container$() that fail to convert $(key)Soul Minions$() will be $(bold)destroyed$(). $(br2)$(key)Advanced Soul Container$() has a higher success rate when converting $(key)Soul Minions$() and will not be $(bold)destroyed$().",
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Possession",
+      "text": "Cast $(key)Possess$() on a $(bold)soul minion$() to bind your soul to its body while your $(bold)body$() remains behind. After possession, you can control the $(bold)soul minion$()'s actions and gain some of its abilities, while retaining your own inventory. $(br2)$(key)Possession$() ends and your soul returns if the $(bold)soul minion$() dies or your $(bold)body$() is near death (retaining $(t:At least 1 heart)$(bold)1%$() health)."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "spell-dimension:spell_scroll{spell_container:{is_proxy:1b,max_spell_count:1b,spell_ids:['spell-dimension:possess']}},spell-dimension:spell_scroll{spell_container:{is_proxy:1b,max_spell_count:1b,spell_ids:['spell-dimension:recall']}}",
+      "title": "Release from Possession",
+      "text": "$(br)You may cast $(key)Recall$() or cast $(key)Possess$() on your $(bold)body$() to manually end the $(key)Possession state$()."
+    }
+  ]
+}

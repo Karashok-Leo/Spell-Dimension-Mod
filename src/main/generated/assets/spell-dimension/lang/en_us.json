@@ -850,7 +850,7 @@
   "tooltip.spell-dimension.shift_reset": "Shift + Right-click to reset the progress",
   "tooltip.spell-dimension.soul_container.last_stored": "Last stored:",
   "tooltip.spell-dimension.soul_container.stored": "Stored:",
-  "tooltip.spell-dimension.soul_container.usage_1": "Right-click on mobs with health below %s to attempt capturing their souls, converting them into soul minions and storing them in containers. The lower the target's health, the higher the success rate.",
+  "tooltip.spell-dimension.soul_container.usage_1": "Right-click and hold on mobs with health below %s to attempt capturing their souls, converting them into soul minions and storing them in containers. The lower the target's health, the higher the success rate.",
   "tooltip.spell-dimension.soul_container.usage_2": "Right-click the block to release the stored soul minion.",
   "tooltip.spell-dimension.soul_container.usage_3": "Right-click the block to attempt recalling the last summoned soul minion.",
   "tooltip.spell-dimension.soul_container.usage_destroy": "When soul capture fails, the item is destroyed.",

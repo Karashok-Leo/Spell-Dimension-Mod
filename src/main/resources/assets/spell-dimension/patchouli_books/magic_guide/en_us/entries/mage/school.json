@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "$(br)There are six major $(bold)schools$() of magic:$(br)$(list)$(bold)$(#ff66ff)Arcane$(): high mobility$(list)$(bold)$(#ff3300)Fire$(): high AoE damage$(list)$(bold)$(#00cccc)Frost$(): slows and crowd control$(list)$(bold)$(#00bb00)Healing$(): strong healing$(list)$(bold)$(#cccc00)Lightning$(): small, multi-hit damage$(list)$(bold)$(#3ea29f)Soul$(): manipulation of souls",
+      "text": "$(br)There are six major $(bold)schools$() of magic:$(br)$(list)$(bold)$(#ff66ff)Arcane$(): high mobility$(list)$(bold)$(#ff3300)Fire$(): high AoE damage$(list)$(bold)$(#00cccc)Frost$(): slows and crowd control$(list)$(bold)$(#00bb00)Healing$(): strong healing$(list)$(bold)$(#cccc00)Lightning$(): small, multi-hit damage$(list)$(bold)$(#3ea29f)Soul$(): $(mage/soul_minion)manipulation of souls$()",
       "title": "Magic Schools"
     },
     {
