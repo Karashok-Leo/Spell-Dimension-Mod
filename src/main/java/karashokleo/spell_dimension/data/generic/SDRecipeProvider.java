@@ -31,6 +31,7 @@ import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.tag.ItemTags;
 import net.p3pp3rf1y.sophisticatedbackpacks.init.ModItems;
 import net.spell_power.api.SpellSchool;
+import net.spell_power.api.SpellSchools;
 import nourl.mythicmetals.item.MythicItems;
 
 import java.util.function.Consumer;
@@ -50,6 +51,7 @@ public class SDRecipeProvider extends FabricRecipeProvider
         addEnchantedEssenceRecipe(exporter);
         addWeaponRecipes(exporter);
         addArmorRecipes(exporter, AllArmors.LIGHTNING_ROBE, AllArmors.NETHERITE_LIGHTNING_ROBE, Items.LIGHTNING_ROD);
+        addArmorRecipes(exporter, AllArmors.SOUL_ROBE, AllArmors.NETHERITE_SOUL_ROBE, Items.SOUL_SAND);
         SDEnchantmentRecipes.add(exporter);
         SDLocateRecipes.add(exporter);
         SDSummonRecipes.add(exporter);
@@ -241,6 +243,29 @@ public class SDRecipeProvider extends FabricRecipeProvider
                 FabricRecipeProvider.conditionsFromItem(MiscItems.MIRACLE_POWDER)
             )
             .offerTo(exporter);
+        // Soul Container
+        ShapedRecipeJsonBuilder
+            .create(RecipeCategory.MISC, AllItems.SOUL_CONTAINER)
+            .pattern("EBE")
+            .pattern("B B")
+            .pattern("EBE")
+            .input('E', AllItems.BASE_ESSENCES.get(SpellSchools.SOUL).get(0))
+            .input('B', Items.IRON_BARS)
+            .criterion(
+                FabricRecipeProvider.hasItem(Items.IRON_BARS),
+                FabricRecipeProvider.conditionsFromItem(Items.IRON_BARS)
+            )
+            .offerTo(exporter);
+        SmithingTransformRecipeJsonBuilder
+            .create(
+                Ingredient.ofItems(FusionSmithingTemplateItem.FUSION_SMITHING_TEMPLATE),
+                Ingredient.ofItems(AllItems.SOUL_CONTAINER),
+                Ingredient.ofItems(DDItems.HEART_OF_THE_DEEP),
+                RecipeCategory.MISC,
+                AllItems.ADVANCED_SOUL_CONTAINER
+            )
+            .criterion(FabricRecipeProvider.hasItem(DDItems.HEART_OF_THE_DEEP), FabricRecipeProvider.conditionsFromItem(DDItems.HEART_OF_THE_DEEP))
+            .offerTo(exporter, SpellDimension.modLoc("advanced_soul_container"));
 
         // Spell Prism
         ShapedRecipeJsonBuilder
@@ -344,6 +369,39 @@ public class SDRecipeProvider extends FabricRecipeProvider
             AllWeapons.LIGHTNING_STAFF,
             RecipeCategory.MISC,
             AllWeapons.NETHERITE_LIGHTNING_STAFF
+        );
+        ShapedRecipeJsonBuilder
+            .create(RecipeCategory.MISC, AllWeapons.SOUL_WAND)
+            .pattern(" A")
+            .pattern("G ")
+            .input('A', MythicItems.QUADRILLUM.getIngot())
+            .input('G', MythicItems.SILVER.getIngot())
+            .criterion(FabricRecipeProvider.hasItem(MythicItems.SILVER.getIngot()), FabricRecipeProvider.conditionsFromItem(MythicItems.SILVER.getIngot()))
+            .criterion(FabricRecipeProvider.hasItem(AllWeapons.SOUL_WAND), FabricRecipeProvider.conditionsFromItem(AllWeapons.SOUL_WAND))
+            .offerTo(exporter);
+        RecipeProvider.offerNetheriteUpgradeRecipe(
+            exporter,
+            AllWeapons.SOUL_WAND,
+            RecipeCategory.MISC,
+            AllWeapons.NETHERITE_SOUL_WAND
+        );
+        ShapedRecipeJsonBuilder
+            .create(RecipeCategory.MISC, AllWeapons.SOUL_STAFF)
+            .pattern(" AL")
+            .pattern(" SA")
+            .pattern("G  ")
+            .input('L', AllItems.SPAWNER_SOUL)
+            .input('A', MythicItems.QUADRILLUM.getIngot())
+            .input('S', Items.STICK)
+            .input('G', MythicItems.SILVER.getIngot())
+            .criterion(FabricRecipeProvider.hasItem(MythicItems.SILVER.getIngot()), FabricRecipeProvider.conditionsFromItem(MythicItems.SILVER.getIngot()))
+            .criterion(FabricRecipeProvider.hasItem(AllWeapons.SOUL_STAFF), FabricRecipeProvider.conditionsFromItem(AllWeapons.SOUL_STAFF))
+            .offerTo(exporter);
+        RecipeProvider.offerNetheriteUpgradeRecipe(
+            exporter,
+            AllWeapons.SOUL_STAFF,
+            RecipeCategory.MISC,
+            AllWeapons.NETHERITE_SOUL_STAFF
         );
     }
 

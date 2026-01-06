@@ -1,0 +1,15 @@
+{
+  "type": "spell-dimension:spell_infusion",
+  "ingredients": [
+    {
+      "item": "spell-dimension:essence_soul_1"
+    },
+    {
+      "item": "l2hostility:soul_flame"
+    }
+  ],
+  "input": {
+    "item": "minecraft:paper"
+  },
+  "spell_id": "spell-dimension:soul_duet"
+}

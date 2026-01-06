@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "deeperdarker:heart_of_the_deep"
+  },
+  "base": {
+    "item": "spell-dimension:soul_container"
+  },
+  "result": {
+    "item": "spell-dimension:advanced_soul_container"
+  },
+  "template": {
+    "item": "fusion-smithing:fusion_smithing_template"
+  }
+}

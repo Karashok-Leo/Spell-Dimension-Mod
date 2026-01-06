@@ -1,0 +1,18 @@
+{
+  "type": "spell-dimension:spell_infusion",
+  "ingredients": [
+    {
+      "item": "spell-dimension:essence_soul_1"
+    },
+    {
+      "item": "l2hostility:hostility_essence"
+    },
+    {
+      "item": "l2hostility:life_essence"
+    }
+  ],
+  "input": {
+    "item": "minecraft:paper"
+  },
+  "spell_id": "spell-dimension:soul_sacrifice"
+}

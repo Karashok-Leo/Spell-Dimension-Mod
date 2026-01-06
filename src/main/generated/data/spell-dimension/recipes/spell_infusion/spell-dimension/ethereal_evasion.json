@@ -1,0 +1,15 @@
+{
+  "type": "spell-dimension:spell_infusion",
+  "ingredients": [
+    {
+      "item": "spell-dimension:essence_soul_1"
+    },
+    {
+      "item": "soulsweapons:skofnung_stone"
+    }
+  ],
+  "input": {
+    "item": "minecraft:paper"
+  },
+  "spell_id": "spell-dimension:ethereal_evasion"
+}

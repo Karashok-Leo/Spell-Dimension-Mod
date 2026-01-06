@@ -15,6 +15,7 @@ import karashokleo.spell_dimension.content.recipe.spell.SpellInfusionRecipeBuild
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.init.AllTags;
+import karashokleo.spell_dimension.util.TagUtil;
 import net.adventurez.init.BlockInit;
 import net.adventurez.init.ItemInit;
 import net.aleganza.plentyofarmors.item.ModItems;
@@ -56,6 +57,28 @@ public class SDSpellInfusionRecipes
             .withTableIngredient(Ingredient.ofItems(Items.PAPER))
             .withPedestalItem(1, ingredient);
         for (Item item : addition)
+        {
+            builder.withPedestalItem(1, item);
+        }
+        builder.offerTo(exporter, recipeId, spellId);
+    }
+
+    public static void add(Consumer<RecipeJsonProvider> exporter, Identifier spellId, SpellSchool school, Ingredient... addition)
+    {
+        Ingredient ingredient;
+        if (school == AllSpells.GENERIC)
+        {
+            ingredient = Ingredient.fromTag(AllTags.ESSENCE_ALL);
+        } else
+        {
+            Item essence = AllItems.BASE_ESSENCES.get(school).get(AllSpells.getSpellTier(spellId));
+            ingredient = Ingredient.ofItems(essence);
+        }
+        Identifier recipeId = SpellDimension.modLoc("spell_infusion/%s/%s".formatted(spellId.getNamespace(), spellId.getPath()));
+        SpellInfusionRecipeBuilder builder = new SpellInfusionRecipeBuilder()
+            .withTableIngredient(Ingredient.ofItems(Items.PAPER))
+            .withPedestalItem(1, ingredient);
+        for (Ingredient item : addition)
         {
             builder.withPedestalItem(1, item);
         }
@@ -150,5 +173,15 @@ public class SDSpellInfusionRecipes
         add(exporter, AllSpells.STORMFLASH, SpellSchools.LIGHTNING, ComplementItems.STORM_CORE, MythicBlocks.STORMYX.getStorageBlock().asItem());
         add(exporter, AllSpells.RAILGUN, SpellSchools.LIGHTNING, "bosses_of_mass_destruction:obsidilith_rune");
         add(exporter, AllSpells.ELECTRIC_BONDAGE, SpellSchools.LIGHTNING, ConsumableItems.ETERNAL_WITCH_CHARGE, ComplementItems.BLACKSTONE_CORE, ComplementItems.SCULKIUM.blockSet().item());
+
+        add(exporter, AllSpells.SOUL_SWAP, SpellSchools.SOUL, TGItems.DARK_IRON_INGOT.get());
+        add(exporter, AllSpells.SOUL_STEP, SpellSchools.SOUL, Registries.ITEM.get(new Identifier("soulsweapons:lost_soul")));
+        add(exporter, AllSpells.SOUL_MARK, SpellSchools.SOUL, Ingredient.fromTag(TagUtil.itemTag(new Identifier("soulsweapons:lord_soul"))));
+        add(exporter, AllSpells.SOUL_DUET, SpellSchools.SOUL, ComplementItems.SOUL_FLAME);
+        add(exporter, AllSpells.PHANTOM_SYNDICATE, SpellSchools.SOUL, DDItems.SOUL_DUST);
+        add(exporter, AllSpells.SOUL_ECHO, SpellSchools.SOUL, DDItems.SOUL_CRYSTAL);
+        add(exporter, AllSpells.SOUL_BURST, SpellSchools.SOUL, ComplementItems.EXPLOSION_SHARD, Registries.ITEM.get(new Identifier("soulsweapons:lost_ingot")));
+        add(exporter, AllSpells.SOUL_SACRIFICE, SpellSchools.SOUL, MiscItems.HOSTILITY_ESSENCE, ComplementItems.LIFE_ESSENCE);
+        add(exporter, AllSpells.ETHEREAL_EVASION, SpellSchools.SOUL, Registries.ITEM.get(new Identifier("soulsweapons:skofnung_stone")));
     }
 }

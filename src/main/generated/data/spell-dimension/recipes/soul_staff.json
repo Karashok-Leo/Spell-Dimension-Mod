@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "mythicmetals:quadrillum_ingot"
+    },
+    "G": {
+      "item": "mythicmetals:silver_ingot"
+    },
+    "L": {
+      "item": "spell-dimension:spawner_soul"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    " AL",
+    " SA",
+    "G  "
+  ],
+  "result": {
+    "item": "spell-dimension:soul_staff"
+  },
+  "show_notification": true
+}

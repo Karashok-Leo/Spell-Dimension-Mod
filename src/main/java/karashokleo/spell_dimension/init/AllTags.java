@@ -275,6 +275,13 @@ public class AllTags
         SpellDimension.ITEM_TAGS.getOrCreateContainer(getRuneTag(SpellSchools.LIGHTNING, "_medium"))
             .add(Items.COPPER_INGOT);
 
+        SpellDimension.ITEM_TAGS.getOrCreateContainer(getRuneTag(SpellSchools.SOUL, "_small"))
+            .add(MythicItems.QUADRILLUM.getNugget())
+            .add(Items.SOUL_SOIL)
+            .add(Items.SOUL_SAND);
+        SpellDimension.ITEM_TAGS.getOrCreateContainer(getRuneTag(SpellSchools.SOUL, "_medium"))
+            .add(MythicItems.QUADRILLUM.getIngot());
+
         SpellDimension.ITEM_TAGS.getOrCreateContainer(ENDREM_EYES)
             .add(ERItems.BLACK_EYE)
             .add(ERItems.COLD_EYE)

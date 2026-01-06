@@ -3,6 +3,9 @@
   "values": [
     "spell-dimension:essence_soul_0",
     "spell-dimension:essence_soul_1",
-    "spell-dimension:essence_soul_2"
+    "spell-dimension:essence_soul_2",
+    "mythicmetals:quadrillum_nugget",
+    "minecraft:soul_soil",
+    "minecraft:soul_sand"
   ]
 }

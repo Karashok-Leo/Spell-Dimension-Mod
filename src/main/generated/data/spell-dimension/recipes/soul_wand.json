@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "mythicmetals:quadrillum_ingot"
+    },
+    "G": {
+      "item": "mythicmetals:silver_ingot"
+    }
+  },
+  "pattern": [
+    " A",
+    "G "
+  ],
+  "result": {
+    "item": "spell-dimension:soul_wand"
+  },
+  "show_notification": true
+}

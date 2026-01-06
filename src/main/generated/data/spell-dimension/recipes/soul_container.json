@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:iron_bars"
+    },
+    "E": {
+      "item": "spell-dimension:essence_soul_0"
+    }
+  },
+  "pattern": [
+    "EBE",
+    "B B",
+    "EBE"
+  ],
+  "result": {
+    "item": "spell-dimension:soul_container"
+  },
+  "show_notification": true
+}
