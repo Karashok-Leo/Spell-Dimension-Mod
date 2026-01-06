@@ -7,7 +7,9 @@
     {
       "item": "l2hostility:explosion_shard"
     },
-    []
+    {
+      "item": "soulsweapons:soul_ingot"
+    }
   ],
   "input": {
     "item": "minecraft:paper"

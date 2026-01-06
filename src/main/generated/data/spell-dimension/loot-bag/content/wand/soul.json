@@ -4,7 +4,7 @@
     "type": "loot-bag:item",
     "item": {
       "Count": 1,
-      "id": "wizards:wand_arcane",
+      "id": "spell-dimension:soul_wand",
       "tag": {
         "Damage": 0
       }
@@ -12,7 +12,7 @@
   },
   "item": {
     "Count": 1,
-    "id": "wizards:wand_arcane",
+    "id": "spell-dimension:soul_wand",
     "tag": {
       "Damage": 0
     }

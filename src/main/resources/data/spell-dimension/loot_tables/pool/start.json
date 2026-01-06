@@ -77,11 +77,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "modonomicon:modonomicon",
+          "name": "patchouli:guide_book",
           "functions": [
             {
               "function": "minecraft:set_nbt",
-              "tag": "{\"modonomicon:book_id\":\"spell-dimension-book:magic_guidance\"}"
+              "tag": "{\"patchouli:book\":\"spell-dimension:magic_guide\"}"
             }
           ]
         }

@@ -180,7 +180,7 @@ public class SDSpellInfusionRecipes
         add(exporter, AllSpells.SOUL_DUET, SpellSchools.SOUL, ComplementItems.SOUL_FLAME);
         add(exporter, AllSpells.PHANTOM_SYNDICATE, SpellSchools.SOUL, DDItems.SOUL_DUST);
         add(exporter, AllSpells.SOUL_ECHO, SpellSchools.SOUL, DDItems.SOUL_CRYSTAL);
-        add(exporter, AllSpells.SOUL_BURST, SpellSchools.SOUL, ComplementItems.EXPLOSION_SHARD, Registries.ITEM.get(new Identifier("soulsweapons:lost_ingot")));
+        add(exporter, AllSpells.SOUL_BURST, SpellSchools.SOUL, ComplementItems.EXPLOSION_SHARD, Registries.ITEM.get(new Identifier("soulsweapons:soul_ingot")));
         add(exporter, AllSpells.SOUL_SACRIFICE, SpellSchools.SOUL, MiscItems.HOSTILITY_ESSENCE, ComplementItems.LIFE_ESSENCE);
         add(exporter, AllSpells.ETHEREAL_EVASION, SpellSchools.SOUL, Registries.ITEM.get(new Identifier("soulsweapons:skofnung_stone")));
     }

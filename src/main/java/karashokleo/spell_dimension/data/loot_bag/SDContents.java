@@ -192,6 +192,13 @@ public enum SDContents
         "Includes full set of lightning robe",
         "包含全套雷电法袍"
     ),
+    ROBE$SOUL(
+        () -> AllArmors.SOUL_ROBE.get(ArmorItem.Type.HELMET),
+        "Soul Robe",
+        "灵魂法袍",
+        "Includes full set of soul robe",
+        "包含全套灵魂法袍"
+    ),
     WAND$ARCANE(
         () -> Weapons.arcaneWand.item().getDefaultStack(),
         "Arcane Wand",
@@ -218,7 +225,7 @@ public enum SDContents
         "雷电魔杖"
     ),
     WAND$SOUL(
-        () -> Weapons.arcaneWand.item().getDefaultStack(),
+        () -> AllWeapons.SOUL_WAND.getDefaultStack(),
         "Soul Wand",
         "灵魂魔杖"
     ),
