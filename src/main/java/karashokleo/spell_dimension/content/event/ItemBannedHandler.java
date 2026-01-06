@@ -1,6 +1,7 @@
 package karashokleo.spell_dimension.content.event;
 
 import karashokleo.spell_dimension.data.SDTexts;
+import karashokleo.spell_dimension.init.AllBlocks;
 import karashokleo.spell_dimension.init.AllTags;
 import karashokleo.spell_dimension.init.AllWorldGen;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
@@ -35,6 +36,9 @@ public class ItemBannedHandler implements UseItemCallback, UseBlockCallback
                 player.sendMessage(SDTexts.TEXT$DIMENSION_BANNED_ITEM.get().formatted(Formatting.RED));
             }
             return false;
+        } else if (stack.isOf(AllBlocks.CONSCIOUSNESS_CORE.item()))
+        {
+            return player.isCreative();
         }
         return true;
     }

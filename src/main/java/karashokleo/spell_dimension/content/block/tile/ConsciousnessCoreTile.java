@@ -6,6 +6,7 @@ import karashokleo.spell_dimension.content.block.ConsciousnessBaseBlock;
 import karashokleo.spell_dimension.content.entity.ConsciousnessEventEntity;
 import karashokleo.spell_dimension.content.object.EventAward;
 import karashokleo.spell_dimension.init.AllBlocks;
+import karashokleo.spell_dimension.init.AllWorldGen;
 import karashokleo.spell_dimension.util.FutureTask;
 import karashokleo.spell_dimension.util.RandomUtil;
 import karashokleo.spell_dimension.util.TeleportUtil;
@@ -350,9 +351,19 @@ public class ConsciousnessCoreTile extends BlockEntity
         {
             return;
         }
-        if (this.world instanceof ServerWorld serverWorld &&
-            player instanceof ServerPlayerEntity serverPlayer &&
-            state == CoreState.INACTIVE)
+        if (!(this.world instanceof ServerWorld serverWorld))
+        {
+            return;
+        }
+        if (!serverWorld.getRegistryKey().equals(AllWorldGen.OC_WORLD))
+        {
+            return;
+        }
+        if (!(player instanceof ServerPlayerEntity serverPlayer))
+        {
+            return;
+        }
+        if (state == CoreState.INACTIVE)
         {
             tryTrigger(serverWorld, serverPlayer);
         }
