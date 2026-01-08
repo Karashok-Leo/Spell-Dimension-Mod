@@ -9,9 +9,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class MeritRegisterItem extends SingleEpicTrinketItem
+public class SpiritTomeItem extends SingleEpicTrinketItem
 {
-    public MeritRegisterItem()
+    public SpiritTomeItem()
     {
         super();
     }

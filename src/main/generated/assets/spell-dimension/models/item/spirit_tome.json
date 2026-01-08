@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "spell-dimension:item/merit_register"
+    "layer0": "spell-dimension:item/spirit_tome"
   }
 }

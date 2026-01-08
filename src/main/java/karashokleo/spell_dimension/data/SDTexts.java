@@ -255,6 +255,7 @@ public enum SDTexts
     TOOLTIP$MACRO_ELECTRON$1("- [Ball Lightning] will randomly select and destroy the target, without dropping any loot.", "- [球状闪电] 将随机选取并摧毁目标，但不会掉落战利品。"),
     TOOLTIP$MACRO_ELECTRON$2("- [Ball Lightning] will track the entity you are looking at.", "- [球状闪电] 将追踪你目视的实体。"),
     TOOLTIP$REBIRTH_SIGIL("- Your soul minions refuse to die.", "- 你的灵仆拒绝死亡。"),
+    TOOLTIP$SPIRIT_TOME("- Press [%s] to open the Spirit Tome.", "- 按[%s]打开通灵簿。"),
 
     /**
      * Breastplates
@@ -329,8 +330,9 @@ public enum SDTexts
     SCROLL$KILLING("Dropped by killing certain mobs, see recipes for details", "击杀特定生物掉落，详情查看配方"),
     SCROLL$CRAFTING("Obtained through crafting using specific materials, see recipes for details", "使用特定材料合成获得，详情查看配方"),
     SCROLL$EVENT_AWARD("Can only be obtained through invasion event loot in the Ocean of Consciousness.", "只能通过识之海入侵事件战利品获得"),
-    ;
 
+    KEY$CATEGORY("Spell Dimension", "咒次元"),
+    KEY$OPEN_SPIRIT_TOME("Open Spirit Tome", "打开通灵簿");
 
     private final String key;
     private final String en;

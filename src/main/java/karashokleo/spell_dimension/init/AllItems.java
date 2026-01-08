@@ -66,7 +66,7 @@ public class AllItems
     public static SuperconductorItem SUPERCONDUCTOR;
     public static MacroElectronItem MACRO_ELECTRON;
     public static RebirthSigilItem REBIRTH_SIGIL;
-    public static MeritRegisterItem MERIT_REGISTER;
+    public static SpiritTomeItem SPIRIT_TOME;
 
     public static SoulContainer SOUL_CONTAINER;
     public static SoulContainer ADVANCED_SOUL_CONTAINER;
@@ -228,9 +228,9 @@ public class AllItems
             .setTab(AllGroups.EQUIPMENTS)
             .addModel()
             .register();
-        MERIT_REGISTER = Entry.of("merit_register", new MeritRegisterItem())
+        SPIRIT_TOME = Entry.of("spirit_tome", new SpiritTomeItem())
             .addEN()
-            .addZH("功德簿")
+            .addZH("通灵簿")
             .addTag(LHTags.CURSE_SLOT, AllTags.ENDGAME_TRINKETS)
             .setTab(AllGroups.EQUIPMENTS)
             .addModel()

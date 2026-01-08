@@ -18,6 +18,7 @@ import karashokleo.spell_dimension.init.AllSpells;
 import karashokleo.spell_dimension.init.AllTags;
 import karashokleo.spell_dimension.util.SchoolUtil;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.event.Event;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
@@ -48,6 +49,7 @@ public class AdditionalTooltip
         ItemTooltipCallback.EVENT.register(AdditionalTooltip::appendFlickerBreastplate);
         ItemTooltipCallback.EVENT.register(AdditionalTooltip::modifyCursePride);
         ItemTooltipCallback.EVENT.register(AdditionalTooltip::modifyRejuvenatingBlossom);
+        ItemTooltipCallback.EVENT.register(AdditionalTooltip::modifySpiritTome);
         ItemTooltipCallback.EVENT.register(AdditionalTooltip::appendModonomicon);
         ItemTooltipCallback.EVENT.register(AdditionalTooltip::appendSpellScroll);
         ItemTooltipCallback.EVENT.register(AdditionalTooltip::appendBottleNightmare);
@@ -147,6 +149,11 @@ public class AdditionalTooltip
         lines.add(SDTexts.TOOLTIP$REJUVENATING_BLOSSOM$2.get(
             "%.1f%%".formatted(AllItems.REJUVENATING_BLOSSOM.getHealingAmountScale(player) * 100)
         ).formatted(Formatting.GREEN));
+    }
+
+    private static void modifySpiritTome(ItemStack stack, TooltipContext tooltipContext, List<Text> lines)
+    {
+        lines.add(SDTexts.TOOLTIP$SPIRIT_TOME.get(KeyBindingHelper.getBoundKeyOf(SpiritTomeKeyHandler.OPEN_TOME_KEY).getLocalizedText()));
     }
 
     private static void appendModonomicon(ItemStack stack, TooltipContext context, List<Text> lines)
