@@ -18,7 +18,8 @@
     {
       "type": "patchouli:text",
       "title": "Possession",
-      "text": "Cast $(key)Possess$() on a $(bold)soul minion$() to bind your soul to its body while your $(bold)body$() remains behind. After possession, you can control the $(bold)soul minion$()'s actions and gain some of its abilities, while retaining your own inventory. $(br2)$(key)Possession$() ends and your soul returns if the $(bold)soul minion$() dies or your $(bold)body$() is near death (retaining $(t:At least 1 heart)$(bold)1%$() health)."
+      "text": "Cast $(key)Possess$() on a $(bold)soul minion$() to bind your soul to its body while your $(bold)body$() remains behind. After possession, you can control the $(bold)soul minion$()'s actions and gain some of its $(welcome/key)abilities$(), while retaining your own inventory. $(br2)$(key)Possession$() ends and your soul returns if the $(bold)soul minion$() dies or your $(bold)body$() is near death (retaining $(t:At least 1 heart)$(bold)1%$() health).",
+      "anchor": "possess"
     },
     {
       "type": "patchouli:spotlight",
