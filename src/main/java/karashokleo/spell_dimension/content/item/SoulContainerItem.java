@@ -32,7 +32,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.UUID;
 
-public class SoulContainer extends Item
+public class SoulContainerItem extends Item
 {
     public static final int RANGE = 8;
     public static final String ENTITY_KEY = "Entity";
@@ -46,7 +46,7 @@ public class SoulContainer extends Item
     private final float healthThresholdRatio;
     private final boolean destroyOnFail;
 
-    public SoulContainer(float healthThresholdRatio, boolean destroyOnFail)
+    public SoulContainerItem(float healthThresholdRatio, boolean destroyOnFail)
     {
         super(
             new FabricItemSettings()
@@ -61,6 +61,10 @@ public class SoulContainer extends Item
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand)
     {
         ItemStack stack = user.getStackInHand(hand);
+        if (user.getItemCooldownManager().isCoolingDown(this))
+        {
+            return TypedActionResult.fail(stack);
+        }
         // already stored
         if (hand != Hand.MAIN_HAND ||
             stack.getOrCreateNbt().contains(ENTITY_KEY, NbtElement.COMPOUND_TYPE))
@@ -89,6 +93,7 @@ public class SoulContainer extends Item
             if (target != null)
             {
                 tryCapture(stack, player, target);
+                player.getItemCooldownManager().set(this, 10);
             }
         }
         return stack;
@@ -97,7 +102,7 @@ public class SoulContainer extends Item
     @Override
     public int getMaxUseTime(ItemStack stack)
     {
-        return destroyOnFail ? 16 : 32;
+        return destroyOnFail ? 30 : 10;
     }
 
     @Override

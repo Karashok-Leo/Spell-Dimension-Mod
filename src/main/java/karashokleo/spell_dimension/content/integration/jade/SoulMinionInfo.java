@@ -2,7 +2,7 @@ package karashokleo.spell_dimension.content.integration.jade;
 
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.component.SoulMinionComponent;
-import karashokleo.spell_dimension.content.item.SoulContainer;
+import karashokleo.spell_dimension.content.item.SoulContainerItem;
 import karashokleo.spell_dimension.content.misc.SoulControl;
 import karashokleo.spell_dimension.data.SDTexts;
 import net.minecraft.entity.Entity;
@@ -33,7 +33,7 @@ public enum SoulMinionInfo implements IEntityComponentProvider
         if (owner == null)
         {
             PlayerEntity player = entityAccessor.getPlayer();
-            if (player.getMainHandStack().getItem() instanceof SoulContainer soulContainer)
+            if (player.getMainHandStack().getItem() instanceof SoulContainerItem soulContainer)
             {
                 float probability = soulContainer.getCaptureProbability(mob);
                 iTooltip.add(SDTexts.TOOLTIP$SOUL_MINION$CAPTURE_PROBABILITY.get("%.1f%%".formatted(probability * 100)));

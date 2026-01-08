@@ -153,7 +153,11 @@ public class AdditionalTooltip
 
     private static void modifySpiritTome(ItemStack stack, TooltipContext tooltipContext, List<Text> lines)
     {
-        lines.add(SDTexts.TOOLTIP$SPIRIT_TOME.get(KeyBindingHelper.getBoundKeyOf(SpiritTomeKeyHandler.OPEN_TOME_KEY).getLocalizedText()));
+        if (!stack.isOf(AllItems.SPIRIT_TOME))
+        {
+            return;
+        }
+        lines.add(SDTexts.TOOLTIP$SPIRIT_TOME.get(KeyBindingHelper.getBoundKeyOf(SpiritTomeKeyHandler.OPEN_TOME_KEY).getLocalizedText()).formatted(Formatting.GRAY));
     }
 
     private static void appendModonomicon(ItemStack stack, TooltipContext context, List<Text> lines)

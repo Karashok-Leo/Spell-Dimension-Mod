@@ -68,8 +68,8 @@ public class AllItems
     public static RebirthSigilItem REBIRTH_SIGIL;
     public static SpiritTomeItem SPIRIT_TOME;
 
-    public static SoulContainer SOUL_CONTAINER;
-    public static SoulContainer ADVANCED_SOUL_CONTAINER;
+    public static SoulContainerItem SOUL_CONTAINER;
+    public static SoulContainerItem ADVANCED_SOUL_CONTAINER;
     public static ProtectiveSpellContainerItem SPELL_CONTAINER;
     public static IllusionContainerItem ILLUSION_CONTAINER;
     public static IllusionUpgradeItem ILLUSION_UPGRADE;
@@ -236,13 +236,13 @@ public class AllItems
             .addModel()
             .register();
 
-        SOUL_CONTAINER = Entry.of("soul_container", new SoulContainer(0.1f, true))
+        SOUL_CONTAINER = Entry.of("soul_container", new SoulContainerItem(0.1f, true))
             .addEN()
             .addZH("灵魂容器")
             .setTab(AllGroups.EQUIPMENTS)
             .addModel()
             .register();
-        ADVANCED_SOUL_CONTAINER = Entry.of("advanced_soul_container", new SoulContainer(1f, false))
+        ADVANCED_SOUL_CONTAINER = Entry.of("advanced_soul_container", new SoulContainerItem(1f, false))
             .addEN()
             .addZH("高级灵魂容器")
             .setTab(AllGroups.EQUIPMENTS)
