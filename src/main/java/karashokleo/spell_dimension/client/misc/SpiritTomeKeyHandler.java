@@ -1,7 +1,9 @@
 package karashokleo.spell_dimension.client.misc;
 
+import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.spell_dimension.client.screen.SpiritTomeScreen;
 import karashokleo.spell_dimension.data.SDTexts;
+import karashokleo.spell_dimension.init.AllItems;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.option.KeyBinding;
@@ -36,6 +38,10 @@ public class SpiritTomeKeyHandler
                 return;
             }
             if (client.currentScreen != null)
+            {
+                return;
+            }
+            if (!TrinketCompat.hasItemInTrinket(client.player, AllItems.SPIRIT_TOME))
             {
                 return;
             }

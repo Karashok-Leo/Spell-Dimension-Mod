@@ -65,38 +65,35 @@ public class SpellPowerScreen extends BaseTextScreen
     private static Text getSpellPowerInfo(SpellSchool school, PlayerEntity player)
     {
         SpellPower.Result result = SpellPower.getSpellPower(school, player);
-        return new SpellPowerEntry(
+        return getAttributeText(
             school.attribute,
             "%.1f".formatted(result.baseValue())
-        ).getText().setStyle(Style.EMPTY.withColor(school.color));
+        ).setStyle(Style.EMPTY.withColor(school.color));
     }
 
     private static List<Text> getMechanicInfo(SpellSchool school, PlayerEntity player)
     {
         SpellPower.Result result = SpellPower.getSpellPower(school, player);
         return List.of(
-            new SpellPowerEntry(
+            getAttributeText(
                 SpellPowerMechanics.CRITICAL_CHANCE.attribute,
                 "%.1f%%".formatted(result.criticalChance() * 100)
-            ).getText(),
-            new SpellPowerEntry(
+            ),
+            getAttributeText(
                 SpellPowerMechanics.CRITICAL_DAMAGE.attribute,
                 "× %.1f%%".formatted(result.criticalDamage() * 100)
-            ).getText(),
-            new SpellPowerEntry(
+            ),
+            getAttributeText(
                 SpellPowerMechanics.HASTE.attribute,
                 "+ %.1f%%".formatted((SpellPower.getHaste(player, school) - 1) * 100)
-            ).getText()
+            )
         );
     }
 
-    record SpellPowerEntry(EntityAttribute attribute, String value)
+    private static MutableText getAttributeText(EntityAttribute attribute, String value)
     {
-        MutableText getText()
-        {
-            return Text.translatable(attribute.getTranslationKey())
-                .append(" : ")
-                .append(value);
-        }
+        return Text.translatable(attribute.getTranslationKey())
+            .append(" : ")
+            .append(value);
     }
 }
