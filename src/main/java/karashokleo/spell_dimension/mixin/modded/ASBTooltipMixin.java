@@ -24,7 +24,7 @@ public abstract class ASBTooltipMixin
         at = @At(
             value = "INVOKE",
             target = "Luk/co/dotcode/asb/ComponentManager;mergeComponents([Lnet/minecraft/text/Text;)Lnet/minecraft/text/MutableText;",
-            ordinal = 5
+            ordinal = 6
         )
     )
     private static MutableText inject_modifyTooltip_1(Text[] c, @Local Bonus bonus)
@@ -37,7 +37,7 @@ public abstract class ASBTooltipMixin
         at = @At(
             value = "INVOKE",
             target = "Luk/co/dotcode/asb/ComponentManager;mergeComponents([Lnet/minecraft/text/Text;)Lnet/minecraft/text/MutableText;",
-            ordinal = 10
+            ordinal = 12
         )
     )
     private static MutableText inject_modifyTooltip_2(Text[] c, @Local Bonus bonus)
