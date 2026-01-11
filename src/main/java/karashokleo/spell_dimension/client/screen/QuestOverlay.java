@@ -1,6 +1,5 @@
 package karashokleo.spell_dimension.client.screen;
 
-import karashokleo.l2hostility.client.L2HostilityClient;
 import karashokleo.leobrary.gui.api.overlay.InfoSideBar;
 import karashokleo.leobrary.gui.api.overlay.SideBar;
 import karashokleo.spell_dimension.api.quest.Quest;
@@ -8,6 +7,7 @@ import karashokleo.spell_dimension.api.quest.QuestUsage;
 import karashokleo.spell_dimension.content.item.QuestScrollItem;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllItems;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
@@ -26,7 +26,7 @@ public class QuestOverlay extends InfoSideBar<SideBar.IntSignature>
     @Override
     protected List<Text> getText()
     {
-        ClientPlayerEntity player = L2HostilityClient.getClientPlayer();
+        ClientPlayerEntity player = MinecraftClient.getInstance().player;
         if (player == null)
         {
             return List.of();
@@ -61,11 +61,12 @@ public class QuestOverlay extends InfoSideBar<SideBar.IntSignature>
     @Override
     public boolean isScreenOn()
     {
-        if (L2HostilityClient.getClient().currentScreen != null)
+        var client = MinecraftClient.getInstance();
+        if (client.currentScreen != null)
         {
             return false;
         }
-        ClientPlayerEntity player = L2HostilityClient.getClientPlayer();
+        ClientPlayerEntity player = client.player;
         if (player == null)
         {
             return false;

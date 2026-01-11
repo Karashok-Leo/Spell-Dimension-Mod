@@ -13,10 +13,7 @@ import karashokleo.spell_dimension.client.misc.SpiritTomeKeyHandler;
 import karashokleo.spell_dimension.client.quest.QuestItemTooltipComponent;
 import karashokleo.spell_dimension.client.quest.QuestItemTooltipData;
 import karashokleo.spell_dimension.client.render.*;
-import karashokleo.spell_dimension.client.screen.ConsciousCoreOverlay;
-import karashokleo.spell_dimension.client.screen.GameOverOverlay;
-import karashokleo.spell_dimension.client.screen.QuestOverlay;
-import karashokleo.spell_dimension.client.screen.SpellPowerTab;
+import karashokleo.spell_dimension.client.screen.*;
 import karashokleo.spell_dimension.content.integration.PatchouliIntegration;
 import karashokleo.spell_dimension.content.item.essence.base.ColorProvider;
 import karashokleo.spell_dimension.content.item.upgrade.IllusionUpgradeTab;
@@ -102,6 +99,7 @@ public class SpellDimensionClient implements ClientModInitializer
 
         GuiOverlayRegistry.registerLayer(6, new QuestOverlay());
         GuiOverlayRegistry.registerLayer(7, new ConsciousCoreOverlay());
+        GuiOverlayRegistry.registerLayer(8, new SoulContainerOverlay());
         GuiOverlayRegistry.registerLayer(3, new GameOverOverlay());
 
         TextureOverlayRegistry.register(PHASE_LAYER, (client, player, context, tickDelta) -> NoClip.noClip(player) ? 0.5f : -1);

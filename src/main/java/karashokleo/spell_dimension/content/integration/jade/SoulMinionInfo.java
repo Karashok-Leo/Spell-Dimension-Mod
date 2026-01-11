@@ -30,17 +30,18 @@ public enum SoulMinionInfo implements IEntityComponentProvider
         }
         SoulMinionComponent minionComponent = SoulControl.getSoulMinion(mob);
         PlayerEntity owner = minionComponent.getOwner();
-        if (owner == null)
+        if (owner != null)
         {
-            PlayerEntity player = entityAccessor.getPlayer();
+            iTooltip.add(SDTexts.TEXT$SOUL_MINION_INFO.get(owner.getName()));
+        }
+        PlayerEntity player = entityAccessor.getPlayer();
+        if (owner != player)
+        {
             if (player.getMainHandStack().getItem() instanceof SoulContainerItem soulContainer)
             {
                 float probability = soulContainer.getCaptureProbability(mob);
                 iTooltip.add(SDTexts.TOOLTIP$SOUL_MINION$CAPTURE_PROBABILITY.get("%.1f%%".formatted(probability * 100)));
             }
-        } else
-        {
-            iTooltip.add(SDTexts.TEXT$SOUL_MINION_INFO.get(owner.getName()));
         }
     }
 

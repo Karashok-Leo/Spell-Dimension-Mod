@@ -1,6 +1,5 @@
 package karashokleo.spell_dimension.client.screen;
 
-import karashokleo.l2hostility.client.L2HostilityClient;
 import karashokleo.leobrary.gui.api.IGuiOverlay;
 import karashokleo.leobrary.gui.api.overlay.SideBar;
 import karashokleo.leobrary.gui.api.overlay.TextBox;
@@ -46,11 +45,12 @@ public class GameOverOverlay extends SideBar<SideBar.IntSignature> implements IG
     @Override
     public boolean isScreenOn()
     {
-        if (L2HostilityClient.getClient().currentScreen != null)
+        var client = MinecraftClient.getInstance();
+        if (client.currentScreen != null)
         {
             return false;
         }
-        ClientPlayerEntity player = L2HostilityClient.getClientPlayer();
+        ClientPlayerEntity player = client.player;
         if (player == null)
         {
             return false;

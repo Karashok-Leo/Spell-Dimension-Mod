@@ -1,12 +1,12 @@
 package karashokleo.spell_dimension.client.screen;
 
-import karashokleo.l2hostility.client.L2HostilityClient;
 import karashokleo.l2hostility.util.raytrace.RayTraceUtil;
 import karashokleo.leobrary.gui.api.overlay.InfoSideBar;
 import karashokleo.leobrary.gui.api.overlay.SideBar;
 import karashokleo.spell_dimension.content.block.tile.ConsciousnessCoreTile;
 import karashokleo.spell_dimension.content.object.EventAward;
 import karashokleo.spell_dimension.data.SDTexts;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -68,11 +68,12 @@ public class ConsciousCoreOverlay extends InfoSideBar<SideBar.IntSignature>
     @Override
     public boolean isScreenOn()
     {
-        if (L2HostilityClient.getClient().currentScreen != null)
+        var client = MinecraftClient.getInstance();
+        if (client.currentScreen != null)
         {
             return false;
         }
-        ClientPlayerEntity player = L2HostilityClient.getClientPlayer();
+        ClientPlayerEntity player = client.player;
         if (player == null)
         {
             return false;
