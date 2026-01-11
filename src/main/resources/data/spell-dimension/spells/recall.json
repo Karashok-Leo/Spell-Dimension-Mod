@@ -1,6 +1,9 @@
 {
   "school": "SOUL",
   "range": 0,
+  "learn": {
+    "tier": 3
+  },
   "cast": {
     "duration": 1.5,
     "animation": "spell_engine:one_handed_healing_charge",

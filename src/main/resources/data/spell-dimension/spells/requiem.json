@@ -1,3 +1,6 @@
 {
-  "school": "SOUL"
+  "school": "SOUL",
+  "learn": {
+    "tier": 4
+  }
 }
