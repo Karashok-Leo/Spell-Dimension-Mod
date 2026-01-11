@@ -69,7 +69,15 @@ public abstract class SpellHelperMixin
     private static void inject_performSpell_before(World world, PlayerEntity player, Identifier spellId, List<Entity> targets, SpellCast.Action action, float progress, CallbackInfo ci, @Local SpellInfo spellInfo)
     {
         SpellImpactEvents.PRE.invoker().invoke(world, player, targets, spellInfo);
-        SpellImpactEvents.POST.invoker().invoke(world, player, targets, spellInfo);
+    }
+
+    @Inject(
+        method = "performImpacts(Lnet/minecraft/world/World;Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/entity/Entity;Lnet/minecraft/entity/Entity;Lnet/spell_engine/api/spell/SpellInfo;Lnet/spell_engine/internals/SpellHelper$ImpactContext;Z)Z",
+        at = @At("RETURN")
+    )
+    private static void inject_performImpacts(World world, LivingEntity caster, Entity target, Entity aoeSource, SpellInfo spellInfo, SpellHelper.ImpactContext context, boolean additionalTargetLookup, CallbackInfoReturnable<Boolean> cir)
+    {
+        SpellImpactEvents.POST.invoker().invoke(world, caster, List.of(target), spellInfo);
     }
 
     @Inject(
