@@ -154,50 +154,50 @@ public enum SDContents
         () -> Armors.wizardRobeSet.head,
         "General Robe",
         "通用法袍",
-        "Includes full set of general robe",
+        "Includes full set of general robes",
         "包含全套通用法袍"
     ),
     ROBE$ARCANE(
         () -> Armors.arcaneRobeSet.head,
         "Arcane Robe",
         "奥秘法袍",
-        "Includes full set of arcane robe",
+        "Includes full set of arcane robes",
         "包含全套奥秘法袍"
     ),
     ROBE$FIRE(
         () -> Armors.fireRobeSet.head,
         "Fire Robe",
         "火焰法袍",
-        "Includes full set of fire robe",
+        "Includes full set of fire robes",
         "包含全套火焰法袍"
     ),
     ROBE$FROST(
         () -> Armors.frostRobeSet.head,
         "Frost Robe",
         "寒冰法袍",
-        "Includes full set of frost robe",
+        "Includes full set of frost robes",
         "包含全套寒冰法袍"
     ),
     ROBE$HEALING(
         () -> net.paladins.item.armor.Armors.priestArmorSet_t1.head,
         "Healing Robe",
         "治愈法袍",
-        "Includes full set of healing robe",
+        "Includes full set of healing robes",
         "包含全套治愈法袍"
     ),
     ROBE$LIGHTNING(
         () -> AllArmors.LIGHTNING_ROBE.get(ArmorItem.Type.HELMET),
         "Lightning Robe",
         "雷电法袍",
-        "Includes full set of lightning robe",
+        "Includes full set of lightning robes",
         "包含全套雷电法袍"
     ),
     ROBE$SOUL(
         () -> AllArmors.SOUL_ROBE.get(ArmorItem.Type.HELMET),
         "Soul Robe",
         "灵魂法袍",
-        "Includes full set of soul robe",
-        "包含全套灵魂法袍"
+        "Includes full set of soul robes and a Soul Container",
+        "包含全套灵魂法袍，以及一个灵魂容器"
     ),
     WAND$ARCANE(
         () -> Weapons.arcaneWand.item().getDefaultStack(),

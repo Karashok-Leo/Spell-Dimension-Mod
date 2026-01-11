@@ -506,6 +506,7 @@ public class AllItems
             )
             .addModel("spell_book/" + school.id.getPath() + "/" + grade)
             .addTag(AllTags.BOOK.get(grade))
+            .addTag(LHTags.NO_SEAL)
             .register();
         SpellBooks.all.add(item);
         SpellRegistry.book_containers.put(SpellDimension.modLoc(name), item.getSpellContainer());

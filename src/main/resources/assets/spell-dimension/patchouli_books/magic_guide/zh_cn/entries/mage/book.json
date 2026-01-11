@@ -15,7 +15,7 @@
       "type": "patchouli:spotlight",
       "item": "tag:spell-dimension:book/0,tag:spell-dimension:book/1,tag:spell-dimension:book/2",
       "title": "高级法术书",
-      "text": "越高级的$(key)法术书$()提供越多的$(key)法术槽位$()。$(br2)你可以将$(mage/scroll)法术卷轴$()放入$(bold)初级/中级/高级$()$(key)法术书$()中（就像放入收纳袋那样），$(key)学徒法术书$()则没有这个功能。",
+      "text": "越高级的$(key)法术书$()提供越多的$(key)法术槽位$()，但也$(t:灵魂学派除外)$(bold)需要$()你拥有足够高的$(mage/power)法术强度$()才能够佩戴。$(br2)你可以将$(mage/scroll)法术卷轴$()放入$(bold)初级/中级/高级$()$(key)法术书$()中（就像放入收纳袋那样），$(key)学徒法术书$()则没有这个功能。",
       "link_recipe": true
     }
   ]

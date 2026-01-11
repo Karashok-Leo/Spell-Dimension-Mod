@@ -15,7 +15,7 @@
       "type": "patchouli:spotlight",
       "item": "tag:spell-dimension:book/0,tag:spell-dimension:book/1,tag:spell-dimension:book/2",
       "title": "Advanced Spell Books",
-      "text": "Higher-tier $(key)spell books$() provide more $(key)spell slots$().$(br2)You can put $(mage/scroll)spell scrolls$() into $(bold)Primary/Intermediate/Advanced$() $(key)Spell Books$() (similar to putting items into a bundle). The $(key)Apprentice Spell Book$() does not support this.",
+      "text": "Higher-tier $(key)spell books$() provide more $(key)spell slots$(), but $(t:Except for the Soul school)$(bold)require$() high $(mage/power)spell power$() to equip. $(br2)You can put $(mage/scroll)spell scrolls$() into $(bold)Primary/Intermediate/Advanced$() $(key)Spell Books$() (similar to putting items into a bundle). The $(key)Apprentice Spell Book$() does not support this.",
       "link_recipe": true
     }
   ]

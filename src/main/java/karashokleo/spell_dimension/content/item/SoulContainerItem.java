@@ -35,6 +35,7 @@ import java.util.UUID;
 public class SoulContainerItem extends Item
 {
     public static final int RANGE = 8;
+    public static final int COOLDOWN = 10;
     public static final String ENTITY_KEY = "Entity";
     public static final String TOOLTIP_DATA_KEY = "TooltipData";
     public static final String CUSTOM_NAME_KEY = "CustomName";
@@ -93,7 +94,7 @@ public class SoulContainerItem extends Item
             if (target != null)
             {
                 tryCapture(stack, player, target);
-                player.getItemCooldownManager().set(this, 10);
+                player.getItemCooldownManager().set(this, COOLDOWN);
             }
         }
         return stack;
@@ -102,7 +103,7 @@ public class SoulContainerItem extends Item
     @Override
     public int getMaxUseTime(ItemStack stack)
     {
-        return destroyOnFail ? 30 : 10;
+        return 10;
     }
 
     @Override
@@ -353,5 +354,21 @@ public class SoulContainerItem extends Item
                 nbt.getFloat(MAX_HEALTH_KEY)
             )
         ).formatted(Formatting.DARK_AQUA));
+    }
+
+    public static int getContainMobLevel(ItemStack stack)
+    {
+        if (stack.getItem() instanceof SoulContainerItem)
+        {
+            var nbt = stack.getNbt();
+            if (nbt != null &&
+                nbt.contains(ENTITY_KEY, NbtElement.COMPOUND_TYPE) &&
+                nbt.contains(TOOLTIP_DATA_KEY, NbtElement.COMPOUND_TYPE))
+            {
+                NbtCompound tempData = nbt.getCompound(TOOLTIP_DATA_KEY);
+                return tempData.getInt(LEVEL_KEY);
+            }
+        }
+        return 0;
     }
 }

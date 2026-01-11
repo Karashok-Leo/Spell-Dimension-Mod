@@ -1,6 +1,24 @@
 {
   "replace": false,
   "values": [
+    "spell-dimension:spell_book_arcane_0",
+    "spell-dimension:spell_book_arcane_1",
+    "spell-dimension:spell_book_arcane_2",
+    "spell-dimension:spell_book_fire_0",
+    "spell-dimension:spell_book_fire_1",
+    "spell-dimension:spell_book_fire_2",
+    "spell-dimension:spell_book_frost_0",
+    "spell-dimension:spell_book_frost_1",
+    "spell-dimension:spell_book_frost_2",
+    "spell-dimension:spell_book_healing_0",
+    "spell-dimension:spell_book_healing_1",
+    "spell-dimension:spell_book_healing_2",
+    "spell-dimension:spell_book_lightning_0",
+    "spell-dimension:spell_book_lightning_1",
+    "spell-dimension:spell_book_lightning_2",
+    "spell-dimension:spell_book_soul_0",
+    "spell-dimension:spell_book_soul_1",
+    "spell-dimension:spell_book_soul_2",
     "spell-dimension:mirage_reflector",
     "spell-dimension:broken_item"
   ]

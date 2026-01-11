@@ -7,6 +7,7 @@ import karashokleo.spell_dimension.content.component.GameStageComponent;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllSpells;
+import karashokleo.spell_dimension.mixin.vanilla.PlayerInventoryAccessor;
 import karashokleo.spell_dimension.util.SpellContainerUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
@@ -46,6 +47,8 @@ import java.util.stream.Stream;
 public class DynamicSpellBookItem extends SpellBookTrinketItem
 {
     public static final int[] REQUIREMENT_SPELL_POWER_PER_GRADE = {80, 160, 320};
+    public static final int[] REQUIREMENT_SOUL_MINION_LEVEL_PER_GRADE = {40, 120, 360};
+    public static final int[] MAX_SPELL_COUNT = {4, 6, 8};
     public static final double MODIFIER_PER_GRADE = 0.1;
     public static final Identifier DYNAMIC_POOL = SpellDimension.modLoc("dynamic");
     public static final Map<SpellSchool, Identifier> POOLS = Map.of(
@@ -54,7 +57,7 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
         SpellSchools.FROST, SpellDimension.modLoc("frost"),
         SpellSchools.HEALING, SpellDimension.modLoc("healing"),
         SpellSchools.LIGHTNING, SpellDimension.modLoc("lightning"),
-        SpellSchools.SOUL, DYNAMIC_POOL
+        SpellSchools.SOUL, SpellDimension.modLoc("soul")
     );
 
     private final SpellSchool school;
@@ -75,7 +78,7 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
 
     public int getMaxSpellCount()
     {
-        return this.grade + 4;
+        return MAX_SPELL_COUNT[this.grade];
     }
 
     public SpellContainer getSpellContainer()
@@ -102,12 +105,22 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
         super.appendTooltip(stack, world, tooltip, context);
-        tooltip.add(
-            SDTexts.TOOLTIP$BOOK_REQUIREMENT.get(
-                this.getRequirementSpellPower(),
-                Text.translatable("attribute.name.spell_power." + school.id.getPath())
-            ).setStyle(Style.EMPTY.withColor(this.school.color))
-        );
+        if (this.school == SpellSchools.SOUL)
+        {
+            tooltip.add(
+                SDTexts.TOOLTIP$BOOK_REQUIREMENT$SOUL.get(
+                    REQUIREMENT_SOUL_MINION_LEVEL_PER_GRADE[this.grade]
+                ).setStyle(Style.EMPTY.withColor(this.school.color))
+            );
+        } else
+        {
+            tooltip.add(
+                SDTexts.TOOLTIP$BOOK_REQUIREMENT.get(
+                    REQUIREMENT_SPELL_POWER_PER_GRADE[this.grade],
+                    Text.translatable("attribute.name.spell_power." + school.id.getPath())
+                ).setStyle(Style.EMPTY.withColor(this.school.color))
+            );
+        }
         tooltip.add(SDTexts.TOOLTIP$DYNAMIC_BOOK$USAGE_1.get().formatted(Formatting.BOLD));
         tooltip.add(SDTexts.TOOLTIP$DYNAMIC_BOOK$USAGE_2.get());
     }
@@ -115,13 +128,22 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
     @Override
     public boolean canEquip(ItemStack stack, SlotReference slot, LivingEntity entity)
     {
-        return SpellPower.getSpellPower(this.school, entity).baseValue() >=
-            this.getRequirementSpellPower();
-    }
+        if (this.school == SpellSchools.SOUL &&
+            entity instanceof PlayerEntity player)
+        {
+            int level = 0;
+            for (var list : ((PlayerInventoryAccessor) player.getInventory()).getCombinedInventory())
+            {
+                for (ItemStack invStack : list)
+                {
+                    level = Math.max(level, SoulContainerItem.getContainMobLevel(invStack));
+                }
+            }
+            return level >= REQUIREMENT_SOUL_MINION_LEVEL_PER_GRADE[this.grade];
+        }
 
-    public int getRequirementSpellPower()
-    {
-        return REQUIREMENT_SPELL_POWER_PER_GRADE[this.grade];
+        return SpellPower.getSpellPower(this.school, entity).baseValue() >=
+            REQUIREMENT_SPELL_POWER_PER_GRADE[this.grade];
     }
 
     public void tryAddScroll(ItemStack stack, ItemStack scroll, PlayerEntity player)

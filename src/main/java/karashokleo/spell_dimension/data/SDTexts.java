@@ -172,6 +172,7 @@ public enum SDTexts
     TOOLTIP$USE$CLICK("Usage: Right-click on other item with this item in the inventory.", "用法：物品栏中用该物品右键其他物品。"),
     TOOLTIP$USE$PRESS("Usage: Main hand holding, press the right button.", "用法：主手持有时，长按右键。"),
     TOOLTIP$BOOK_REQUIREMENT("Must have at least %s %s to equip", "需要拥有至少%s的%s才能装备"),
+    TOOLTIP$BOOK_REQUIREMENT$SOUL("Must have a soul minion of at least level %s in the soul container to equip.", "需要在灵魂容器中拥有至少%s级的灵仆才能装备"),
     TOOLTIP$EFFECT("Effect:", "效果："),
     TOOLTIP$ENCHANTED_LEVEL("Enchanted Level: %s", "束魔等级：%s"),
     TOOLTIP$STORED_ENCHANTED_LEVEL("Stored Enchanted Level: %s", "已存储束魔等级：%s"),
