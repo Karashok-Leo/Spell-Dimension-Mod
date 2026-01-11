@@ -2,6 +2,7 @@ package karashokleo.spell_dimension.client.misc;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.datafixers.util.Pair;
+import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.api.PatchouliLookupCallback;
 import karashokleo.spell_dimension.init.AllItems;
 import net.minecraft.client.MinecraftClient;
@@ -50,8 +51,19 @@ public class FixedTooltipHandler
                 }
             }
 
+            if (stack.getItem() instanceof ItemModBook)
+            {
+                if (ItemModBook.getBook(stack) == book)
+                {
+                    BookEntry bookEntry = book.getContents().entries.get(SpellDimension.modLoc("welcome/intro"));
+                    if (bookEntry != null && !bookEntry.isLocked())
+                    {
+                        lexiconEntry = Pair.of(bookEntry, 0);
+                    }
+                }
+            }
             // quest scroll -> recipe page? no!!!
-            if (lexiconEntry == null && !stack.isOf(AllItems.QUEST_SCROLL))
+            else if (lexiconEntry == null && !stack.isOf(AllItems.QUEST_SCROLL))
             {
                 Pair<BookEntry, Integer> entry = book.getContents().getEntryForStack(stack);
                 if (entry != null && !entry.getFirst().isLocked())

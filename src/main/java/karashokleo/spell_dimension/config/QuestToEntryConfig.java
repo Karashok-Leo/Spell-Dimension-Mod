@@ -16,6 +16,7 @@ import java.util.Optional;
 public class QuestToEntryConfig
 {
     private static final Map<Quest, Pair<Identifier, Integer>> QUEST_TO_ENTRY = new HashMap<>();
+    public static final Pair<Identifier, Integer> QUEST_SYSTEM_ENTRY = new Pair<>(SpellDimension.modLoc("welcome/quest"), 0);
 
     public static void init()
     {
@@ -28,7 +29,7 @@ public class QuestToEntryConfig
             Optional<Quest> optional = AllItems.QUEST_SCROLL.getQuest(stack);
             if (optional.isEmpty())
             {
-                return new Pair<>(SpellDimension.modLoc("welcome/quest"), 0);
+                return QUEST_SYSTEM_ENTRY;
             }
             return QUEST_TO_ENTRY.get(optional.get());
         });
