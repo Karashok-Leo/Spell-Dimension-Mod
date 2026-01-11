@@ -81,8 +81,8 @@ public class MageQuests
                     SDBags.RARE$GEAR::getStack
                 )
             )
-            .addEnDesc("Craft your Apprentice Spell Book which was crafted through the Spellbinding Table into a Primary Spell Book")
-            .addZhDesc("将通过法术绑定台制作的学徒法术书合成为初级法术书")
+            .addEnDesc("Craft your Apprentice Spell Book which was crafted through the Spellbinding Table (or any enchanted book) into a Primary Spell Book")
+            .addZhDesc("将通过法术绑定台制作的学徒法术书（或任意附魔书）合成为初级法术书")
             .addEnFeedback("Spell Book obtained by simple upgrades using primary materials have the ability to hold spell scrolls and provide you with basic enhancements.")
             .addZhFeedback("使用初级材料简单升级得到的法术书，具备容纳法术卷轴的功能，并能为你提供基本的增强效果。")
             .toEntry("mage/book")

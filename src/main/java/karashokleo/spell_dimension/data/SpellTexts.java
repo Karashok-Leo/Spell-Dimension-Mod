@@ -387,8 +387,8 @@ public enum SpellTexts
     SOUL_SLASH(
         "Soul Slash",
         "灵斩",
-        "Shoots a soul slash, causing {damage} soul spell damage.",
-        "发射一道灵斩，造成{damage}点灵魂法术伤害。"
+        "Fire a soul slash that pierces through enemies and deals {damage} area damage, plus additional damage based on the average level of you and all your soul minions present.",
+        "发射一道灵斩，穿透敌人并造成{damage}点范围伤害，同时根据你与你在场的所有灵仆的平均等级造成额外伤害。"
     ),
     POSSESS(
         "Possess",

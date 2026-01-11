@@ -228,6 +228,7 @@ public class AllSpells
         registerImpactHandler(BALL_LIGHTNING, BallLightningSpell::handle);
         registerImpactHandler(THUNDERBOLT, ThunderboltSpell::handle);
         registerImpactHandler(RAILGUN, RailgunSpell::handle);
+        registerImpactHandler(SOUL_SLASH, SoulSlashSpell::handle);
         registerImpactHandler(POSSESS, PossessSpell::handle);
         registerImpactHandler(RECALL, RecallSpell::handle);
         registerImpactHandler(SOUL_SWAP, SoulSwapSpell::handle);

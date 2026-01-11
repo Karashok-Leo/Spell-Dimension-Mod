@@ -2,8 +2,11 @@ package karashokleo.spell_dimension.content.item;
 
 import com.google.common.collect.Multimap;
 import dev.emi.trinkets.api.SlotReference;
+import karashokleo.l2hostility.content.logic.DifficultyLevel;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.component.GameStageComponent;
+import karashokleo.spell_dimension.content.component.SoulControllerComponent;
+import karashokleo.spell_dimension.content.misc.SoulControl;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllSpells;
@@ -16,6 +19,7 @@ import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.StackReference;
 import net.minecraft.item.ItemStack;
@@ -132,6 +136,13 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
             entity instanceof PlayerEntity player)
         {
             int level = 0;
+            // active minions
+            SoulControllerComponent controllerComponent = SoulControl.getSoulController(player);
+            for (MobEntity minion : controllerComponent.getActiveMinions())
+            {
+                level = Math.max(level, DifficultyLevel.ofAny(minion));
+            }
+            // inventory minions
             for (var list : ((PlayerInventoryAccessor) player.getInventory()).getCombinedInventory())
             {
                 for (ItemStack invStack : list)
