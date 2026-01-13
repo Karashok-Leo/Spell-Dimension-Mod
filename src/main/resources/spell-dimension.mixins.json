@@ -56,6 +56,7 @@
     "vanilla.PlayerInventoryAccessor",
     "vanilla.PlayerKeepInventoryMixin",
     "vanilla.ServerPlayerEntityMixin",
+    "vanilla.ServerWorldMixin",
     "vanilla.SlimeEntityMixin",
     "vanilla.StrafePlayerPhaseMixin",
     "vanilla.TrackTargetGoalMixin"

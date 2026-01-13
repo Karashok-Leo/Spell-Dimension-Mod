@@ -2,14 +2,22 @@ package karashokleo.spell_dimension.content.component;
 
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import dev.onyxstudios.cca.api.v3.component.tick.ServerTickingComponent;
+import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.entity.FakePlayerEntity;
 import karashokleo.spell_dimension.content.misc.SoulControl;
+import karashokleo.spell_dimension.util.OptionalEntityRef;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.ClickEvent;
+import net.minecraft.text.Style;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -26,10 +34,7 @@ public class SoulControllerComponent implements AutoSyncedComponent, ServerTicki
     @Nullable
     private NbtCompound controllingMinionData;
 
-    @Nullable
-    private FakePlayerEntity fakePlayerSelf;
-    @Nullable
-    private UUID fakePlayerSelfUuid;
+    private final OptionalEntityRef<FakePlayerEntity> fakePlayerSelf;
 
     /**
      * used in client-side only
@@ -40,6 +45,7 @@ public class SoulControllerComponent implements AutoSyncedComponent, ServerTicki
     {
         this.player = player;
         this.activeMinions = new HashSet<>();
+        this.fakePlayerSelf = new OptionalEntityRef<>(FakePlayerEntity.class, LivingEntity::isAlive);
     }
 
     public void onMinionAdded(MobEntity minion)
@@ -75,7 +81,8 @@ public class SoulControllerComponent implements AutoSyncedComponent, ServerTicki
     {
         if (!player.getWorld().isClient())
         {
-            controlling = getControllingMinionData() != null && fakePlayerSelfUuid != null;
+            controlling = getControllingMinionData() != null &&
+                fakePlayerSelf.isPresent();
         }
 
         return controlling;
@@ -95,35 +102,17 @@ public class SoulControllerComponent implements AutoSyncedComponent, ServerTicki
     @Nullable
     public FakePlayerEntity getFakePlayerSelf()
     {
-        if (fakePlayerSelfUuid == null)
+        MinecraftServer server = player.getServer();
+        if (server == null)
         {
             return null;
         }
-        if (!(player.getWorld() instanceof ServerWorld world))
-        {
-            return null;
-        }
-        if (fakePlayerSelf == null &&
-            world.getEntity(fakePlayerSelfUuid) instanceof FakePlayerEntity fakePlayer)
-        {
-            fakePlayerSelf = fakePlayer;
-        }
-        return fakePlayerSelf;
+        return fakePlayerSelf.get(server);
     }
 
     public void setFakePlayerSelf(@Nullable FakePlayerEntity fakePlayerSelf)
     {
-        if (fakePlayerSelf == null ||
-            fakePlayerSelf.isDead() ||
-            fakePlayerSelf.isRemoved())
-        {
-            this.fakePlayerSelf = null;
-            this.fakePlayerSelfUuid = null;
-        } else
-        {
-            this.fakePlayerSelf = fakePlayerSelf;
-            this.fakePlayerSelfUuid = fakePlayerSelf.getUuid();
-        }
+        this.fakePlayerSelf.set(fakePlayerSelf);
     }
 
     @Override
@@ -139,19 +128,29 @@ public class SoulControllerComponent implements AutoSyncedComponent, ServerTicki
             return;
         }
 
+        fakePlayerSelf.keepLoaded(player.getServer());
+
         FakePlayerEntity self = getFakePlayerSelf();
         if (self == null)
         {
-            player.damage(player.getDamageSources().outOfWorld(), Float.MAX_VALUE);
-            // ensure death
-            player.setHealth(0);
+            SpellDimension.sendErrorMsg(player, "Your body was accidentally lost while possessing a soul minion! This may be caused by a program error. Please report it to the GitHub issue tracker. Click this message to jump to the issue page.");
+            SpellDimension.sendErrorMsg(player, "你的本体意外丢失了！这可能是程序错误导致的，请将此问题报告至 GitHub Issue（点击此消息跳转）。或进入QQ群反馈给作者。");
+            SpellDimension.LOGGER.warn("FakePlayerEntity is null!!!");
+//            player.damage(player.getDamageSources().outOfWorld(), Float.MAX_VALUE);
+//            // ensure death
+//            player.setHealth(0);
             return;
         }
 
-        if (self.isDead() || self.isRemoved())
+        if (self.isAlive())
         {
-            SoulControl.onSelfBodyDeath((ServerPlayerEntity) player);
+            return;
         }
+
+        SpellDimension.sendErrorMsg(player, "Your body accidentally died while possessing a soul minion! This may be caused by a program error. Please report it to the GitHub issue tracker. Click this message to jump to the issue page.");
+        SpellDimension.sendErrorMsg(player, "你的本体意外死亡了！这可能是程序错误导致的，请将此问题报告至 GitHub Issue（点击此消息跳转）。或进入QQ群反馈给作者。");
+        SpellDimension.LOGGER.warn("FakePlayerEntity is dead or removed!!!");
+        SoulControl.onSelfBodyDeath((ServerPlayerEntity) player);
     }
 
     @Override
@@ -161,9 +160,9 @@ public class SoulControllerComponent implements AutoSyncedComponent, ServerTicki
         {
             controllingMinionData = tag.getCompound(CONTROLLING_MINION_KEY);
         }
-        if (tag.containsUuid(FAKE_PLAYER_SELF_KEY))
+        if (tag.contains(FAKE_PLAYER_SELF_KEY, NbtCompound.COMPOUND_TYPE))
         {
-            fakePlayerSelfUuid = tag.getUuid(FAKE_PLAYER_SELF_KEY);
+            fakePlayerSelf.readFromNbt(tag.getCompound(FAKE_PLAYER_SELF_KEY));
         }
     }
 
@@ -174,9 +173,11 @@ public class SoulControllerComponent implements AutoSyncedComponent, ServerTicki
         {
             tag.put(CONTROLLING_MINION_KEY, controllingMinionData);
         }
-        if (fakePlayerSelfUuid != null)
+        if (fakePlayerSelf.isPresent())
         {
-            tag.putUuid(FAKE_PLAYER_SELF_KEY, fakePlayerSelfUuid);
+            NbtCompound fakePlayerTag = new NbtCompound();
+            fakePlayerSelf.writeToNbt(fakePlayerTag);
+            tag.put(FAKE_PLAYER_SELF_KEY, fakePlayerTag);
         }
     }
 

@@ -1,5 +1,6 @@
 package karashokleo.spell_dimension.content.entity;
 
+import karashokleo.spell_dimension.content.component.SoulControllerComponent;
 import karashokleo.spell_dimension.content.misc.SoulControl;
 import karashokleo.spell_dimension.init.AllEntities;
 import net.minecraft.entity.EntityType;
@@ -12,6 +13,7 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Arm;
 import net.minecraft.util.collection.DefaultedList;
@@ -27,12 +29,14 @@ public class FakePlayerEntity extends LivingEntity
 
     private final DefaultedList<ItemStack> heldItems;
     private final DefaultedList<ItemStack> armorItems;
+    private long prevChunkPos;
 
     public FakePlayerEntity(EntityType<? extends LivingEntity> entityType, World world)
     {
         super(entityType, world);
         this.heldItems = DefaultedList.ofSize(2, ItemStack.EMPTY);
         this.armorItems = DefaultedList.ofSize(4, ItemStack.EMPTY);
+        this.prevChunkPos = this.getChunkPos().toLong();
     }
 
     public FakePlayerEntity(World world, PlayerEntity player)
@@ -69,14 +73,50 @@ public class FakePlayerEntity extends LivingEntity
     public PlayerEntity getPlayer()
     {
         UUID playerUUID = getPlayerUUID();
-        return playerUUID == null ? null : getWorld().getPlayerByUuid(playerUUID);
+        MinecraftServer server = getServer();
+        return playerUUID == null || server == null ?
+            null :
+            server.getPlayerManager().getPlayer(playerUUID);
+    }
+
+    /**
+     * @return true if the FakePlayerEntity is still valid and should persist, false to discard it
+     */
+    public boolean refreshRefData()
+    {
+        PlayerEntity player = getPlayer();
+        // player offline or accidentally removed
+        if (player == null)
+        {
+            return true;
+        }
+        SoulControllerComponent controllerComponent = SoulControl.getSoulController(player);
+        if (controllerComponent.isControlling())
+        {
+            controllerComponent.setFakePlayerSelf(this);
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public boolean isInvulnerableTo(DamageSource damageSource)
+    public void tick()
     {
-        return super.isInvulnerableTo(damageSource) &&
-            damageSource.getAttacker() == getPlayer();
+        super.tick();
+
+        if (this.age % 20 != 0 &&
+            this.getChunkPos().toLong() == this.prevChunkPos)
+        {
+            return;
+        }
+
+        this.prevChunkPos = this.getChunkPos().toLong();
+        if (refreshRefData())
+        {
+            return;
+        }
+        // just in case the FakePlayerEntity is not properly discarded
+        this.discard();
     }
 
     @Override
