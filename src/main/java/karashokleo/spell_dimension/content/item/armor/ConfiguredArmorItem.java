@@ -1,16 +1,24 @@
 package karashokleo.spell_dimension.content.item.armor;
 
 import com.google.common.collect.ImmutableMultimap;
+import karashokleo.spell_dimension.client.render.CustomRobeRenderer;
+import mod.azure.azurelibarmor.animatable.client.RenderProvider;
+import mod.azure.azurelibarmor.renderer.GeoArmorRenderer;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.client.render.entity.model.BipedEntityModel;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Util;
 import net.spell_power.api.SpellPowerMechanics;
 import net.wizards.item.WizardArmor;
 
 import java.util.EnumMap;
 import java.util.UUID;
+import java.util.function.Consumer;
 
 public class ConfiguredArmorItem extends WizardArmor
 {
@@ -39,5 +47,26 @@ public class ConfiguredArmorItem extends WizardArmor
         builder.put(SpellPowerMechanics.HASTE.attribute, new EntityAttributeModifier(uuid, "Armor modifier", material.haste, EntityAttributeModifier.Operation.MULTIPLY_BASE));
 
         setAttributes(builder.build());
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public void createRenderer(Consumer<Object> consumer)
+    {
+        consumer.accept(new RenderProvider()
+        {
+            private GeoArmorRenderer<?> renderer;
+
+            @Override
+            public BipedEntityModel<LivingEntity> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, BipedEntityModel<LivingEntity> original)
+            {
+                if (this.renderer == null)
+                {
+                    this.renderer = new CustomRobeRenderer();
+                }
+                this.renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original);
+                return this.renderer;
+            }
+        });
     }
 }
