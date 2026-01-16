@@ -3,6 +3,7 @@ package karashokleo.spell_dimension.init;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDamageEvent;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
+import karashokleo.spell_dimension.api.SpellProjectileHitBox;
 import karashokleo.spell_dimension.api.SpellProjectileHitCallback;
 import karashokleo.spell_dimension.content.buff.BlazingMark;
 import karashokleo.spell_dimension.content.object.ScrollType;
@@ -14,6 +15,7 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.text.MutableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.HitResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.spell_engine.api.spell.SpellInfo;
 import net.spell_engine.entity.SpellProjectile;
@@ -73,9 +75,9 @@ public class AllSpells
     public static final Identifier FISSION = fromBindingPassive(SpellDimension.modLoc("fission"));
 
     // Soul
+    public static final Identifier REQUIEM = fromBinding(SpellDimension.modLoc("requiem"));
     public static final Identifier POSSESS = fromBinding(SpellDimension.modLoc("possess"));
     public static final Identifier RECALL = fromBinding(SpellDimension.modLoc("recall"));
-    public static final Identifier REQUIEM = fromBinding(SpellDimension.modLoc("requiem"));
 
     /**
      * Infusion spells
@@ -248,6 +250,8 @@ public class AllSpells
         registerImpactHandler(SUMMON, SummonSpell::handle);
         registerImpactHandler(PLACE, PlaceSpell::handle);
         registerImpactHandler(BREAK, BreakSpell::handle);
+
+        SpellProjectileHitBox.registerExtension(SOUL_SLASH, new Vec3d(1.5f, 0.2f, 1.5f));
     }
 
     private static final Map<Identifier, SpellImpactEvents.Callback> IMPACT_HANDLERS = new HashMap<>();
