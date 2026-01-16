@@ -390,6 +390,12 @@ public enum SpellTexts
         "Fire a soul slash that pierces through enemies and deals {damage} area damage, plus additional damage based on the average level of you and all your soul minions present.",
         "发射一道灵斩，穿透敌人并造成{damage}点范围伤害，同时根据你与你在场的所有灵仆的平均等级造成额外伤害。"
     ),
+    REQUIEM(
+        "Requiem",
+        "安魂曲",
+        "[Passive] When a soul minion deals damage, it adds an instance of soul spell damage from its owner.",
+        "[被动] 灵仆造成伤害时会附加一次来自于其主人的灵魂法术伤害。"
+    ),
     POSSESS(
         "Possess",
         "附体",
@@ -401,12 +407,6 @@ public enum SpellTexts
         "归魂",
         "[Can only be cast while possessing a soul minion] Teleport the possessed soul minion near your body and release the possession.",
         "[仅限附体灵仆时施放] 附体灵仆传送至本体附近，并解除附体状态。"
-    ),
-    REQUIEM(
-        "Requiem",
-        "安魂曲",
-        "[Passive] When a soul minion deals damage, it adds an instance of soul spell damage from its owner.",
-        "[被动] 灵仆造成伤害时会附加一次来自于其主人的灵魂法术伤害。"
     ),
     SOUL_SWAP(
         "Soul Swap",
@@ -423,8 +423,8 @@ public enum SpellTexts
     SOUL_MARK(
         "Soul Mark",
         "魂印",
-        "Mark the enemy, causing all soul minions to prioritize attacking that target. The marked target takes additional soul damage.",
-        "标记敌人，使所有灵仆优先攻击该目标。被标记目标受到额外灵魂伤害。"
+        "Mark the enemy, causing all soul minions to teleport near the target and attack it. The marked target takes additional soul spell damage for {effect_duration} seconds.",
+        "标记敌人，使所有灵仆传送到目标附近发起攻击。被标记目标受到额外灵魂伤害，持续{effect_duration}秒。"
     ),
     SOUL_DUET(
         "Soul Duet",

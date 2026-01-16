@@ -104,8 +104,8 @@ public class AllStatusEffects
         SOUL_MARK = new Entry<>("soul_mark", new CustomStatusEffect(StatusEffectCategory.HARMFUL, 0x800080))
             .addEN()
             .addZH("魂印")
-            .addENDesc("Takes additional soul spell damage when attacked by soul minions")
-            .addZHDesc("被灵仆攻击时受到额外灵魂法术伤害")
+            .addENDesc("Increases soul spell damage taken")
+            .addZHDesc("受到的灵魂法术伤害增加")
             .addTag(LHTags.CLEANSE_BLACKLIST)
             .register();
         REBIRTH = new Entry<>("rebirth", new RebirthEffect())
