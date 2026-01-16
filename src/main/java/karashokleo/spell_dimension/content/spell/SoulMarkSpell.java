@@ -33,12 +33,12 @@ public class SoulMarkSpell
         List<MobEntity> activeMinions = controllerComponent.getActiveMinions();
         for (MobEntity minion : activeMinions)
         {
-            SoulControl.teleportNearSomeone(minion, target);
-//            if (minion.distanceTo(target) > minion.getAttributeValue(EntityAttributes.GENERIC_FOLLOW_RANGE))
-//            {
-//                continue;
-//            }
             minion.setTarget(target);
+            if (minion.distanceTo(target) < 6)
+            {
+                continue;
+            }
+            SoulControl.teleportNearSomeone(minion, target);
         }
     }
 }

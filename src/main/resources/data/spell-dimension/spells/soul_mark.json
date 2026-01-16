@@ -2,7 +2,7 @@
   "school": "SOUL",
   "range": 16,
   "cast": {
-    "duration": 3,
+    "duration": 0.3,
     "animation": "spell_engine:one_handed_healing_charge",
     "sound": {
       "id": "spell_engine:generic_soul_casting",
@@ -46,7 +46,7 @@
         "status_effect": {
           "effect_id": "spell-dimension:soul_mark",
           "amplifier": 0,
-          "duration": 24,
+          "duration": 8,
           "show_particles": false
         }
       }
@@ -54,7 +54,7 @@
   ],
   "cost": {
     "exhaust": 4,
-    "cooldown_duration": 32,
+    "cooldown_duration": 4,
     "item_id": "runes:soul_stone"
   }
 }
