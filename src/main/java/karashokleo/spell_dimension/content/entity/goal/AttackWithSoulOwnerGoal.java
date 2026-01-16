@@ -12,12 +12,12 @@ import net.minecraft.entity.player.PlayerEntity;
 
 import java.util.EnumSet;
 
-public class AttackWithSoulControllerGoal extends TrackTargetGoal
+public class AttackWithSoulOwnerGoal extends TrackTargetGoal
 {
     private LivingEntity attacking;
     private int lastAttackTime;
 
-    public AttackWithSoulControllerGoal(MobEntity mob)
+    public AttackWithSoulOwnerGoal(MobEntity mob)
     {
         super(mob, false);
         this.setControls(EnumSet.of(Goal.Control.TARGET));

@@ -4,7 +4,6 @@ import karashokleo.spell_dimension.content.component.SoulControllerComponent;
 import karashokleo.spell_dimension.content.misc.SoulControl;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.world.World;
@@ -34,10 +33,11 @@ public class SoulMarkSpell
         List<MobEntity> activeMinions = controllerComponent.getActiveMinions();
         for (MobEntity minion : activeMinions)
         {
-            if (minion.distanceTo(target) > minion.getAttributeValue(EntityAttributes.GENERIC_FOLLOW_RANGE))
-            {
-                continue;
-            }
+            SoulControl.teleportNearSomeone(minion, target);
+//            if (minion.distanceTo(target) > minion.getAttributeValue(EntityAttributes.GENERIC_FOLLOW_RANGE))
+//            {
+//                continue;
+//            }
             minion.setTarget(target);
         }
     }

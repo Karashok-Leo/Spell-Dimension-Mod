@@ -11,6 +11,8 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.pathing.LandPathNodeMaker;
+import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -21,7 +23,9 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.packet.s2c.play.PositionFlag;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import tocraft.walkers.api.PlayerShape;
@@ -237,5 +241,61 @@ public interface SoulControl
         return minionComponent.getOwner() == MinecraftClient.getInstance().player ?
             0x2dd4da :
             0x078b8f;
+    }
+
+    static void teleportNearSomeone(LivingEntity source, Entity destination)
+    {
+        if (!(destination.getWorld() instanceof ServerWorld world))
+        {
+            return;
+        }
+
+        BlockPos destPos = destination.getBlockPos();
+        Vec3d targetPos = null;
+        Random random = source.getRandom();
+        for (int i = 0; i < 10; i++)
+        {
+            // HORIZONTAL_VARIATION = 3
+            // VERTICAL_VARIATION = 1
+            int j = random.nextInt(7) - 3;
+            int k = random.nextInt(3) - 1;
+            int l = random.nextInt(7) - 3;
+
+            BlockPos pos = destPos.add(j, k, l);
+            PathNodeType pathNodeType = LandPathNodeMaker.getLandNodeType(world, pos.mutableCopy());
+            if (pathNodeType != PathNodeType.WALKABLE)
+            {
+                continue;
+            }
+
+            BlockPos vec = pos.subtract(source.getBlockPos());
+            if (!world.isSpaceEmpty(source, source.getBoundingBox().offset(vec)))
+            {
+                continue;
+            }
+
+            targetPos = new Vec3d(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
+            break;
+        }
+
+        if (targetPos == null)
+        {
+            targetPos = destination.getPos()
+                .add(
+                    destination.getRotationVector()
+                        .multiply(1, 0, 1)
+                        .normalize().multiply(2)
+                );
+        }
+
+        source.teleport(
+            world,
+            targetPos.getX(),
+            targetPos.getY(),
+            targetPos.getZ(),
+            PositionFlag.VALUES,
+            source.getYaw(),
+            source.getPitch()
+        );
     }
 }

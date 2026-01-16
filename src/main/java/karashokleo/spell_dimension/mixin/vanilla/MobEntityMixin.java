@@ -3,8 +3,9 @@ package karashokleo.spell_dimension.mixin.vanilla;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import karashokleo.spell_dimension.content.entity.goal.AttackWithSoulControllerGoal;
-import karashokleo.spell_dimension.content.entity.goal.TrackSoulControllerAttackerGoal;
+import karashokleo.spell_dimension.content.entity.goal.AttackWithSoulOwnerGoal;
+import karashokleo.spell_dimension.content.entity.goal.FollowSoulOwnerGoal;
+import karashokleo.spell_dimension.content.entity.goal.TrackSoulOwnerAttackerGoal;
 import karashokleo.spell_dimension.content.misc.SoulControl;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.GoalSelector;
@@ -21,6 +22,10 @@ public abstract class MobEntityMixin
     @Final
     public GoalSelector targetSelector;
 
+    @Shadow
+    @Final
+    public GoalSelector goalSelector;
+
     @WrapOperation(
         method = "<init>",
         at = @At(
@@ -33,8 +38,9 @@ public abstract class MobEntityMixin
         original.call(instance);
         var mob = (MobEntity) (Object) this;
 //        this.targetSelector.add(0, new SoulMarkTargetGoal(mob));
-        this.targetSelector.add(1, new TrackSoulControllerAttackerGoal(mob));
-        this.targetSelector.add(2, new AttackWithSoulControllerGoal(mob));
+        this.targetSelector.add(1, new TrackSoulOwnerAttackerGoal(mob));
+        this.targetSelector.add(2, new AttackWithSoulOwnerGoal(mob));
+        this.goalSelector.add(6, new FollowSoulOwnerGoal(mob));
     }
 
     @WrapMethod(method = "setTarget")

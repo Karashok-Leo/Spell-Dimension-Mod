@@ -77,7 +77,7 @@ public class SoulMinionEvents
         });
 
         // prevent minion attack owner
-        // extra soul magic damage
+        // requiem: extra soul magic damage
         LivingDamageEvent.DAMAGE.register(event ->
         {
             PlayerEntity owner = null;
@@ -87,11 +87,6 @@ public class SoulMinionEvents
 
             World world = living.getWorld();
             if (world.isClient())
-            {
-                return;
-            }
-
-            if (source.hasState(AllDamageStates.SOUL_MINION_EXTRA))
             {
                 return;
             }
@@ -116,6 +111,11 @@ public class SoulMinionEvents
             }
 
             if (owner == null)
+            {
+                return;
+            }
+
+            if (source.hasState(AllDamageStates.REQUIEM))
             {
                 return;
             }
@@ -151,7 +151,7 @@ public class SoulMinionEvents
             amount = Math.max(1.0f, amount);
             DamageSource damageSource = SpellDamageSource.create(SpellSchools.SOUL, owner);
             damageSource.setBypassCooldown();
-            damageSource.addState(AllDamageStates.SOUL_MINION_EXTRA);
+            damageSource.addState(AllDamageStates.REQUIEM);
             // apply damage
             ((ConfigurableKnockback) living).pushKnockbackMultiplier_SpellEngine(0);
             living.damage(damageSource, amount);
