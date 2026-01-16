@@ -37,6 +37,7 @@ import java.util.List;
 public class SoulMinionEvents
 {
     public static final float REQUIEM_FACTOR = 0.15f;
+    public static final float SOUL_MARK_FACTOR = 1.5f;
 
     public static void init()
     {
@@ -140,12 +141,6 @@ public class SoulMinionEvents
                 factor *= 2;
             }
 
-            // soul mark
-            if (living.hasStatusEffect(AllStatusEffects.SOUL_MARK))
-            {
-                factor *= 2f;
-            }
-
             float amount = (float) DamageUtil.calculateDamage(owner, SpellSchools.SOUL, factor);
             // at least 1 damage
             amount = Math.max(1.0f, amount);
@@ -233,6 +228,19 @@ public class SoulMinionEvents
 
             SoulControllerComponent controllerComponent = SoulControl.getSoulController(owner);
             controllerComponent.onMinionRemoved(mob);
+        });
+
+        LivingDamageEvent.DAMAGE.register(event ->
+        {
+            if (!event.getEntity().hasStatusEffect(AllStatusEffects.SOUL_MARK))
+            {
+                return;
+            }
+            if (!event.getSource().isOf(SpellSchools.SOUL.damageType))
+            {
+                return;
+            }
+            event.setAmount(event.getAmount() * SOUL_MARK_FACTOR);
         });
 
         // Rebirth Sigil
