@@ -1,3 +1,15 @@
 {
-  "school": "SOUL"
+  "school": "SOUL",
+  "range": 0,
+  "cast": {
+  },
+  "release": {
+    "target": {
+      "type": "SELF"
+    }
+  },
+  "impact": [
+  ],
+  "cost": {
+  }
 }

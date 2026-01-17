@@ -2,5 +2,17 @@
   "school": "SOUL",
   "learn": {
     "tier": 1
+  },
+  "range": 0,
+  "cast": {
+  },
+  "release": {
+    "target": {
+      "type": "SELF"
+    }
+  },
+  "impact": [
+  ],
+  "cost": {
   }
 }
