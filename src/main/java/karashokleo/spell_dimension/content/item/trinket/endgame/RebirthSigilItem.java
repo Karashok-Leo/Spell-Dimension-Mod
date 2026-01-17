@@ -26,7 +26,7 @@ public class RebirthSigilItem extends SingleEpicTrinketItem
     public void rebirth(LivingEntity entity, LivingEntity owner)
     {
         entity.setHealth(0.001f);
-        EffectHelper.forceAddEffectWithEvent(entity, new StatusEffectInstance(AllStatusEffects.REBIRTH, RebirthEffect.TOTAL_DURATION, 0, false, false), owner);
+        EffectHelper.forceAddEffectWithEvent(entity, new StatusEffectInstance(AllStatusEffects.REBIRTH, RebirthEffect.TOTAL_DURATION, 0, false, false, true), owner);
     }
 
     @Override

@@ -42,7 +42,7 @@ public class SpellCurseEnchantment extends SpellImpactEnchantment
             {
                 continue;
             }
-            EffectHelper.forceAddEffectWithEvent(living, new StatusEffectInstance(LHEffects.CURSE, 20 * (context.totalLevel() + 1), context.totalLevel() - 1, false, false), caster);
+            EffectHelper.forceAddEffectWithEvent(living, new StatusEffectInstance(LHEffects.CURSE, 20 * (context.totalLevel() + 1), context.totalLevel() - 1, false, false, true), caster);
         }
     }
 

@@ -58,7 +58,7 @@ public class DivineAuraEffect extends StatusEffect
             }
             if (RelationUtil.isAlly(entity, target))
             {
-                target.addStatusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 20, amplifier, false, false));
+                target.addStatusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 20, amplifier, false, false, true));
             } else
             {
                 float damage = (float) DamageUtil.calculateDamage(entity, SpellSchools.HEALING, DAMAGE_FACTOR);

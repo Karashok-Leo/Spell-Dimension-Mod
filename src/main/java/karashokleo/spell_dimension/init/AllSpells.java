@@ -75,7 +75,7 @@ public class AllSpells
     public static final Identifier FISSION = fromBindingPassive(SpellDimension.modLoc("fission"));
 
     // Soul
-    public static final Identifier REQUIEM = fromBinding(SpellDimension.modLoc("requiem"));
+    public static final Identifier REQUIEM = fromBindingPassive(SpellDimension.modLoc("requiem"));
     public static final Identifier POSSESS = fromBinding(SpellDimension.modLoc("possess"));
     public static final Identifier RECALL = fromBinding(SpellDimension.modLoc("recall"));
 

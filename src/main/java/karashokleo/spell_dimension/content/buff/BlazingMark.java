@@ -152,7 +152,7 @@ public class BlazingMark implements Buff
     {
         ParticleHelper.sendBatches(source, PARTICLES);
         DamageUtil.spellDamage(source, SpellSchools.FIRE, caster, damage * RE_DAMAGE_RATIO, false);
-        EffectHelper.forceAddEffectWithEvent(source, new StatusEffectInstance(StatusEffects.WEAKNESS, 100, 2, false, false), caster);
+        EffectHelper.forceAddEffectWithEvent(source, new StatusEffectInstance(StatusEffects.WEAKNESS, 100, 2, false, false, true), caster);
     }
 
     private void particle(LivingEntity owner)

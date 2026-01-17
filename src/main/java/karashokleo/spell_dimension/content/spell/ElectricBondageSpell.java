@@ -44,7 +44,7 @@ public class ElectricBondageSpell
         int ticks = 2 * level;
         EffectHelper.forceAddEffectWithEvent(
             event.getEntity(),
-            new StatusEffectInstance(AllStatusEffects.STUN, ticks, 0, false, false),
+            new StatusEffectInstance(AllStatusEffects.STUN, ticks, 0, false, false, true),
             player
         );
     }

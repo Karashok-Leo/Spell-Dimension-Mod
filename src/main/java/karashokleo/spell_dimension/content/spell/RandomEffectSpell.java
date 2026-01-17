@@ -48,7 +48,8 @@ public class RandomEffectSpell
                     DURATION * 20,
                     random.nextInt(MAX_AMPLIFIER),
                     false,
-                    false
+                    false,
+                    true
                 ),
                 caster
             );

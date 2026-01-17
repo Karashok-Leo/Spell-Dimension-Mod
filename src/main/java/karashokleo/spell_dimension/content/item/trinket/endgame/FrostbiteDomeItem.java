@@ -41,7 +41,7 @@ public class FrostbiteDomeItem extends SingleEpicTrinketItem implements DamageLi
         {
             EffectHelper.forceAddEffectWithEvent(
                 target,
-                new StatusEffectInstance(LHEffects.STONE_CAGE, STONE_CAGE_DURATION, 0, false, false),
+                new StatusEffectInstance(LHEffects.STONE_CAGE, STONE_CAGE_DURATION, 0, false, false, true),
                 entity
             );
         } else

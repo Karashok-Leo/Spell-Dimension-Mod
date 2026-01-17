@@ -32,7 +32,7 @@ public class SpellHasteEnchantment extends SpellImpactEnchantment
     @Override
     public void onSpellImpact(World world, LivingEntity caster, Context context, List<Entity> targets, SpellInfo spellInfo)
     {
-        caster.addStatusEffect(new StatusEffectInstance(SpellPowerMechanics.HASTE.boostEffect, 40, context.totalLevel(), false, false));
+        caster.addStatusEffect(new StatusEffectInstance(SpellPowerMechanics.HASTE.boostEffect, 40, context.totalLevel(), false, false, true));
     }
 
     @Override

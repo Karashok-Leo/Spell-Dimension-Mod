@@ -25,7 +25,7 @@ public class DashResistanceEnchantment extends UnobtainableEnchantment
             return;
         }
         level = Math.min(level, getMaxLevel());
-        player.addStatusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 20, level - 1));
+        player.addStatusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 20, level - 1, false, false, true));
     }
 
     @Override

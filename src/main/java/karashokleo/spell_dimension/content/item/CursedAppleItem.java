@@ -89,7 +89,7 @@ public class CursedAppleItem extends Item
 
         world.playSound(null, user.getX(), user.getY(), user.getZ(), user.getEatSound(stack), SoundCategory.NEUTRAL, 1.0F, 1.0F + (world.random.nextFloat() - world.random.nextFloat()) * 0.4F);
         user.damage(user.getDamageSources().magic(), user.getHealth() + user.getAbsorptionAmount() - 2);
-        user.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 20 * 30, 9, false, false));
+        user.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, 20 * 30, 9, false, false, true));
         user.emitGameEvent(GameEvent.EAT);
         if (user instanceof ServerPlayerEntity player)
         {

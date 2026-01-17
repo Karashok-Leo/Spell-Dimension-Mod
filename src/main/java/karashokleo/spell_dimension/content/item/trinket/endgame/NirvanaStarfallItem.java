@@ -54,7 +54,7 @@ public class NirvanaStarfallItem extends SingleEpicTrinketItem implements Damage
         StatusEffectInstance effect = entity.getStatusEffect(AllStatusEffects.NIRVANA);
         int level = effect == null ? 0 : effect.getAmplifier() + 1;
 
-        EffectHelper.forceAddEffectWithEvent(entity, new StatusEffectInstance(AllStatusEffects.NIRVANA, DURATION, level, false, false), entity);
+        EffectHelper.forceAddEffectWithEvent(entity, new StatusEffectInstance(AllStatusEffects.NIRVANA, DURATION, level, false, false, true), entity);
 
         S2CUndying packet = new S2CUndying(entity);
         LHNetworking.toTracking(entity, packet);

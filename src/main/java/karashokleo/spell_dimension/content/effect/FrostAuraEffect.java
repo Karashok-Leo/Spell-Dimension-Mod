@@ -57,7 +57,7 @@ public class FrostAuraEffect extends StatusEffect
             {
                 continue;
             }
-            EffectHelper.forceAddEffectWithEvent(target, new StatusEffectInstance(AllStatusEffects.FROSTED, 100, amplifier, false, false), entity);
+            EffectHelper.forceAddEffectWithEvent(target, new StatusEffectInstance(AllStatusEffects.FROSTED, 100, amplifier, false, false, true), entity);
         }
     }
 
