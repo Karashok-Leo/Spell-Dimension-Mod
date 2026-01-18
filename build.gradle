@@ -223,6 +223,19 @@ jar {
     }
 }
 
+def jarCopyDir = providers.gradleProperty("jarCopyDir")
+
+tasks.register("copyReleaseJar", Copy) {
+    dependsOn tasks.named("remapJar")
+    from tasks.named("remapJar").flatMap { it.archiveFile }
+    into jarCopyDir.map { file(it) }
+    onlyIf { jarCopyDir.present }
+}
+
+tasks.register("buildAndCopyReleaseJar") {
+    dependsOn tasks.named("build"), tasks.named("copyReleaseJar")
+}
+
 publishing {
     publications {
         mavenJava(MavenPublication) {
