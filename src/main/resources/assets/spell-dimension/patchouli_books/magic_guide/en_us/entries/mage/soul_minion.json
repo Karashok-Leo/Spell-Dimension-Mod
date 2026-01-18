@@ -12,7 +12,7 @@
       "type": "patchouli:spotlight",
       "item": "spell-dimension:soul_container,spell-dimension:advanced_soul_container",
       "title": "Soul Container",
-      "text": "$(br)Normal $(key)Soul Container$() that fail to convert $(key)Soul Minions$() will be $(bold)destroyed$(). $(br2)$(key)Advanced Soul Container$() has a higher success rate when converting $(key)Soul Minions$() and will not be $(bold)destroyed$().",
+      "text": "$(br)Normal $(key)Soul Container$() that fail to convert $(key)Soul Minions$() will enter a $(bold)cooldown$(). $(br2)$(key)Advanced Soul Container$() has a higher success rate when converting $(key)Soul Minions$() and has almost no $(bold)cooldown$() upon failure.",
       "link_recipe": true
     },
     {

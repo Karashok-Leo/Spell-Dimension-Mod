@@ -12,7 +12,7 @@
       "type": "patchouli:spotlight",
       "item": "spell-dimension:soul_container,spell-dimension:advanced_soul_container",
       "title": "灵魂容器",
-      "text": "$(br)普通的$(key)灵魂容器$()尝试转化$(key)灵仆$()失败将会$(bold)销毁$()。$(br2)$(key)高级灵魂容器$()转化$(key)灵仆$()的成功率更高，且失败时不会$(bold)销毁$()。",
+      "text": "$(br)普通的$(key)灵魂容器$()尝试转化$(key)灵仆$()失败后会进入$(bold)冷却$()。$(br2)$(key)高级灵魂容器$()转化$(key)灵仆$()的成功率更高，且失败时几乎没有$(bold)冷却$()。",
       "link_recipe": true
     },
     {

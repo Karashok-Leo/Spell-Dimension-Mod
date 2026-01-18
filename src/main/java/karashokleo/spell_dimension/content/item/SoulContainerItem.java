@@ -45,9 +45,9 @@ public class SoulContainerItem extends Item
     public static final String MAX_HEALTH_KEY = "MaxHealth";
 
     private final float healthThresholdRatio;
-    private final boolean destroyOnFail;
+    private final int cooldownOnFail;
 
-    public SoulContainerItem(float healthThresholdRatio, boolean destroyOnFail)
+    public SoulContainerItem(float healthThresholdRatio, int cooldownOnFail)
     {
         super(
             new FabricItemSettings()
@@ -55,7 +55,7 @@ public class SoulContainerItem extends Item
                 .maxCount(1)
         );
         this.healthThresholdRatio = healthThresholdRatio;
-        this.destroyOnFail = destroyOnFail;
+        this.cooldownOnFail = cooldownOnFail;
     }
 
     @Override
@@ -94,7 +94,6 @@ public class SoulContainerItem extends Item
             if (target != null)
             {
                 tryCapture(stack, player, target);
-                player.getItemCooldownManager().set(this, COOLDOWN);
             }
         }
         return stack;
@@ -127,14 +126,6 @@ public class SoulContainerItem extends Item
         }
     }
 
-    protected void fail(ItemStack stack, PlayerEntity user, LivingEntity entity)
-    {
-        if (destroyOnFail)
-        {
-            stack.decrement(1);
-        }
-    }
-
     protected void tryCapture(ItemStack stack, PlayerEntity user, LivingEntity entity)
     {
         NbtCompound nbt = stack.getOrCreateNbt();
@@ -155,7 +146,7 @@ public class SoulContainerItem extends Item
         if (notOwned &&
             user.getRandom().nextFloat() > getCaptureProbability(mob))
         {
-            fail(stack, user, entity);
+            user.getItemCooldownManager().set(this, cooldownOnFail);
             return;
         }
 
@@ -172,6 +163,8 @@ public class SoulContainerItem extends Item
         NbtCompound tooltipData = saveSoulMinionTooltipData(mob);
         nbt.put(TOOLTIP_DATA_KEY, tooltipData);
         mob.discard();
+
+        user.getItemCooldownManager().set(this, COOLDOWN);
     }
 
     @Override
@@ -290,10 +283,6 @@ public class SoulContainerItem extends Item
                     "%d%%".formatted(Math.round(healthThresholdRatio * 100))
                 ).formatted(Formatting.GRAY)
             );
-            if (destroyOnFail)
-            {
-                tooltip.add(SDTexts.TOOLTIP$SOUL_CONTAINER$USAGE_DESTROY.get().formatted(Formatting.RED));
-            }
         }
     }
 

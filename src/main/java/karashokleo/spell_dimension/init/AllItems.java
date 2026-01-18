@@ -236,13 +236,13 @@ public class AllItems
             .addModel()
             .register();
 
-        SOUL_CONTAINER = Entry.of("soul_container", new SoulContainerItem(0.1f, true))
+        SOUL_CONTAINER = Entry.of("soul_container", new SoulContainerItem(0.1f, 200))
             .addEN()
             .addZH("灵魂容器")
             .setTab(AllGroups.EQUIPMENTS)
             .addModel()
             .register();
-        ADVANCED_SOUL_CONTAINER = Entry.of("advanced_soul_container", new SoulContainerItem(1f, false))
+        ADVANCED_SOUL_CONTAINER = Entry.of("advanced_soul_container", new SoulContainerItem(1f, 10))
             .addEN()
             .addZH("高级灵魂容器")
             .setTab(AllGroups.EQUIPMENTS)
