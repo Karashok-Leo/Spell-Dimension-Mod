@@ -51,10 +51,17 @@ fabricApi {
     configureDataGeneration()
 }
 
-// Specify the modid to avoid generating dependencies' data
-runDatagen.jvmArgs("-Dfabric-api.datagen.modid=spell-dimension")
-
-//runClient.jvmArgs("-Dmixin.debug.export=true")
+loom {
+    runs {
+        client {
+            property("mixin.debug.export", "true")
+        }
+        datagen {
+            // Specify the modid to avoid generating dependencies' data
+            property("fabric-api.datagen.modid", "spell-dimension")
+        }
+    }
+}
 
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"

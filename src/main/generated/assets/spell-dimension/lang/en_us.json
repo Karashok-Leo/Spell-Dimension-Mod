@@ -858,7 +858,6 @@
   "tooltip.spell-dimension.soul_container.usage_1": "Right-click and hold on mobs with health below %s to attempt capturing their souls, converting them into soul minions and storing them in containers. The lower the target's health, the higher the success rate.",
   "tooltip.spell-dimension.soul_container.usage_2": "Right-click the block to release the stored soul minion.",
   "tooltip.spell-dimension.soul_container.usage_3": "Right-click the block to attempt recalling the last summoned soul minion.",
-  "tooltip.spell-dimension.soul_container.usage_destroy": "When soul capture fails, the item is destroyed.",
   "tooltip.spell-dimension.soul_container.warning": "The target is dead, lost, or not present in this dimension.",
   "tooltip.spell-dimension.soul_minion.capture_probability": "Capture probability: %s",
   "tooltip.spell-dimension.soul_minion.health": "Health: %s",

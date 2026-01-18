@@ -856,7 +856,6 @@
   "tooltip.spell-dimension.soul_container.usage_1": "对生命值低于%s的生物长按右键可尝试捕捉其灵魂，转化为灵仆并存储在容器中，目标生命值越低成功率越高。",
   "tooltip.spell-dimension.soul_container.usage_2": "右键点击方块可释放存储的灵仆。",
   "tooltip.spell-dimension.soul_container.usage_3": "右键点击方块可尝试将上次释放的灵仆召回。",
-  "tooltip.spell-dimension.soul_container.usage_destroy": "捕捉灵魂失败时，该物品销毁。",
   "tooltip.spell-dimension.soul_container.warning": "目标已死亡，遗失，或不在此维度中。",
   "tooltip.spell-dimension.soul_minion.capture_probability": "捕捉概率：%s",
   "tooltip.spell-dimension.soul_minion.health": "生命值：%s",

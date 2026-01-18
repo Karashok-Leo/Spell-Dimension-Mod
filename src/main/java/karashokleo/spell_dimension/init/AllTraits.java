@@ -351,11 +351,13 @@ public class AllTraits
         {
             Identifier modelId = this.getId().withPrefixedPath("item/");
             // spell texture is not contained in block atlas
-//            Identifier foreground = content instanceof SpellTrait spellTrait ?
+//            Identifier trait = content instanceof SpellTrait spellTrait ?
 //                    spellTrait.getSpellId().withPrefixedPath("spell/") :
 //                    this.getId().withPrefixedPath("item/trait/");
-            Identifier foreground = this.getId().withPrefixedPath("item/trait/");
-            TextureMap textureMap = TextureMap.layered(SYMBOL_BG, foreground);
+            Identifier trait = this.getId().withPrefixedPath("item/trait/");
+            TextureMap textureMap = content instanceof SpellTrait ?
+                TextureMap.layered(trait, SYMBOL_BG) :
+                TextureMap.layered(SYMBOL_BG, trait);
             this.getModelGenerator().addItem(generator ->
                 Models.GENERATED_TWO_LAYERS.upload(
                     modelId,
