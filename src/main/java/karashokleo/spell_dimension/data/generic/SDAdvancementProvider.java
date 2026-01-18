@@ -95,7 +95,7 @@ public class SDAdvancementProvider extends FabricAdvancementProvider
         Advancement drop_guide_1 = Advancement.Builder.create()
             .parent(root)
             .display(
-                AllStacks.GUIDE_BOOK,
+                AllStacks.NEW_GUIDE_BOOK,
                 SDTexts.ADVANCEMENT$DROP_GUIDE_1$TITLE.get(),
                 SDTexts.ADVANCEMENT$DROP_GUIDE_1$DESCRIPTION.get(),
                 null,
@@ -104,13 +104,13 @@ public class SDAdvancementProvider extends FabricAdvancementProvider
                 true,
                 true
             )
-            .criterion("0", DroppedItemsCriterion.condition(AllStacks.GUIDE_BOOK.getItem(), 1))
+            .criterion("0", DroppedItemsCriterion.condition(AllStacks.NEW_GUIDE_BOOK, 1))
             .build(SpellDimension.modLoc("spell_dimension/drop_guide_1"));
 
         Advancement drop_guide_2 = Advancement.Builder.create()
             .parent(drop_guide_1)
             .display(
-                AllStacks.GUIDE_BOOK,
+                AllStacks.NEW_GUIDE_BOOK,
                 SDTexts.ADVANCEMENT$DROP_GUIDE_2$TITLE.get(),
                 SDTexts.ADVANCEMENT$DROP_GUIDE_2$DESCRIPTION.get(),
                 null,
@@ -119,7 +119,7 @@ public class SDAdvancementProvider extends FabricAdvancementProvider
                 true,
                 true
             )
-            .criterion("0", DroppedItemsCriterion.condition(AllStacks.GUIDE_BOOK.getItem(), 2))
+            .criterion("0", DroppedItemsCriterion.condition(AllStacks.NEW_GUIDE_BOOK, 2))
             .build(SpellDimension.modLoc("spell_dimension/drop_guide_2"));
 
         consumer.accept(root);

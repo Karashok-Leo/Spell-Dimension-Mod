@@ -4,7 +4,6 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import karashokleo.spell_dimension.content.component.GameStageComponent;
 import karashokleo.spell_dimension.init.AllCriterions;
-import karashokleo.spell_dimension.init.AllStacks;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -35,6 +34,6 @@ public abstract class ServerPlayerEntityMixin
     )
     private void inject_dropItem(ItemStack stack, boolean throwRandomly, boolean retainOwnership, CallbackInfoReturnable<ItemEntity> cir)
     {
-        AllCriterions.DROPPED_ITEMS.trigger((ServerPlayerEntity) (Object) this, AllStacks.GUIDE_BOOK.getItem());
+        AllCriterions.DROPPED_ITEMS.trigger((ServerPlayerEntity) (Object) this, stack);
     }
 }

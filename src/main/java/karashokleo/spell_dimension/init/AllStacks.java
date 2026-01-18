@@ -11,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.spell_engine.api.spell.SpellInfo;
+import vazkii.patchouli.common.item.ItemModBook;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -18,6 +19,7 @@ import java.util.List;
 
 public class AllStacks
 {
+    public static final ItemStack NEW_GUIDE_BOOK = ItemModBook.forBook(AllItems.MAGIC_GUIDE);
     public static final ItemStack GUIDE_BOOK;
 
     public static List<ItemStack> getBaseEssences()

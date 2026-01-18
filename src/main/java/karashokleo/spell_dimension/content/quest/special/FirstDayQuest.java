@@ -34,6 +34,6 @@ public record FirstDayQuest(Supplier<ItemStack> reward) implements ItemRewardQue
     @Override
     public ItemStack getIcon()
     {
-        return AllStacks.GUIDE_BOOK;
+        return AllStacks.NEW_GUIDE_BOOK;
     }
 }

@@ -60,6 +60,7 @@ public class SoulMinionEvents
                     return false;
                 }
 
+                player.sendMessage(SDTexts.TEXT$SOUL_CONTROL$MINION_DIED.get().formatted(Formatting.RED), false);
                 // release control
                 SoulControl.setControllingMinion(player, null);
                 return false;

@@ -4,7 +4,13 @@
     "0": {
       "conditions": {
         "count": 2,
-        "item": "modonomicon:modonomicon"
+        "item": {
+          "Count": 1,
+          "id": "patchouli:guide_book",
+          "tag": {
+            "patchouli:book": "spell-dimension:magic_guide"
+          }
+        }
       },
       "trigger": "spell-dimension:dropped_items"
     }
@@ -17,8 +23,8 @@
     "frame": "task",
     "hidden": true,
     "icon": {
-      "item": "modonomicon:modonomicon",
-      "nbt": "{\"modonomicon:book_id\":\"spell-dimension-book:magic_guide\"}"
+      "item": "patchouli:guide_book",
+      "nbt": "{\"patchouli:book\":\"spell-dimension:magic_guide\"}"
     },
     "show_toast": true,
     "title": {

@@ -90,6 +90,8 @@ public enum SDTexts
 
     TEXT$SOUL_MINION_INFO("%s's Soul Minion", "%s 的灵仆"),
     TEXT$SOUL_CONTROL$DAMAGE("Your body is taking %s damage!", "你的本体正受到%s点伤害！"),
+    TEXT$SOUL_CONTROL$BODY_DIED("Your body is nearing death!", "你的本体正濒临死亡！"),
+    TEXT$SOUL_CONTROL$MINION_DIED("The soul minion you possessed is dead!", "你附体的灵仆已死亡！"),
 
     /**
      * Game Over
