@@ -49,7 +49,7 @@ public class ArcaneThroneItem extends CurseTrinketItem
 
         EffectHelper.forceAddEffectWithEvent(
             entity,
-            new StatusEffectInstance(AllStatusEffects.PHASE, 40, 0, false, false, true),
+            new StatusEffectInstance(AllStatusEffects.PHASE, 40, 0, true, false, true),
             entity
         );
     }

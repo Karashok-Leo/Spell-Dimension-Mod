@@ -120,7 +120,7 @@ public class ConsciousnessEventEntity extends Entity
         List<ServerPlayerEntity> list = this.getPlayers(world);
         for (ServerPlayerEntity player : list)
         {
-            EffectHelper.forceAddEffectWithEvent(player, new StatusEffectInstance(LHEffects.ANTI_BUILD, 40, 0, false, false, true), this);
+            EffectHelper.forceAddEffectWithEvent(player, new StatusEffectInstance(LHEffects.ANTI_BUILD, 40, 0, true, false, true), this);
         }
     }
 
