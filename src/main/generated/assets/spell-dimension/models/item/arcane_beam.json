@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "spell-dimension:item/trait/arcane_beam",
-    "layer1": "l2hostility:item/bg"
+    "layer0": "l2hostility:item/bg",
+    "layer1": "spell-dimension:item/trait/arcane_beam"
   }
 }

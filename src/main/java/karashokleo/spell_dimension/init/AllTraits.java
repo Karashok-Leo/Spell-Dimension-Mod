@@ -355,9 +355,7 @@ public class AllTraits
 //                    spellTrait.getSpellId().withPrefixedPath("spell/") :
 //                    this.getId().withPrefixedPath("item/trait/");
             Identifier trait = this.getId().withPrefixedPath("item/trait/");
-            TextureMap textureMap = content instanceof SpellTrait ?
-                TextureMap.layered(trait, SYMBOL_BG) :
-                TextureMap.layered(SYMBOL_BG, trait);
+            TextureMap textureMap = TextureMap.layered(SYMBOL_BG, trait);
             this.getModelGenerator().addItem(generator ->
                 Models.GENERATED_TWO_LAYERS.upload(
                     modelId,
