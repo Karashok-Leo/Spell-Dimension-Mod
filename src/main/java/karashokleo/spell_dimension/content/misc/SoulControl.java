@@ -3,6 +3,7 @@ package karashokleo.spell_dimension.content.misc;
 import karashokleo.spell_dimension.content.component.SoulControllerComponent;
 import karashokleo.spell_dimension.content.component.SoulMinionComponent;
 import karashokleo.spell_dimension.content.entity.FakePlayerEntity;
+import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllComponents;
 import karashokleo.spell_dimension.init.AllStatusEffects;
 import net.fabricmc.api.EnvType;
@@ -23,6 +24,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.packet.s2c.play.PositionFlag;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
@@ -62,6 +64,7 @@ public interface SoulControl
 
     static void onSelfBodyDeath(ServerPlayerEntity player)
     {
+        player.sendMessage(SDTexts.TEXT$SOUL_CONTROL$BODY_DIED.get().formatted(Formatting.RED), false);
         SoulControl.setControllingMinion(player, null);
         // keep max(2, 1% max_health) health
         player.setHealth(Math.max(2.0f, player.getMaxHealth() * 0.01f));
@@ -243,7 +246,7 @@ public interface SoulControl
             0x078b8f;
     }
 
-    static void teleportNearSomeone(LivingEntity source, Entity destination)
+    static void teleportNearSomeone(LivingEntity source, Entity destination, boolean forced)
     {
         if (!(destination.getWorld() instanceof ServerWorld world))
         {
@@ -280,6 +283,11 @@ public interface SoulControl
 
         if (targetPos == null)
         {
+            if (!forced)
+            {
+                return;
+            }
+
             targetPos = destination.getPos()
                 .add(
                     destination.getRotationVector()

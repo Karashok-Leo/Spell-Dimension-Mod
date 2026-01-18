@@ -29,7 +29,7 @@ public class RecallSpell
         FakePlayerEntity self = controllerComponent.getFakePlayerSelf();
         assert self != null;
 
-        SoulControl.teleportNearSomeone(player, self);
+        SoulControl.teleportNearSomeone(player, self, true);
 
         SoulControl.setControllingMinion(player, null);
     }

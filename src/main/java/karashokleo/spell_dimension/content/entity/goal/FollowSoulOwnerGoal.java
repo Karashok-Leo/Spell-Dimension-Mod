@@ -100,7 +100,7 @@ public class FollowSoulOwnerGoal extends Goal
             this.updateCountdownTicks = this.getTickCount(10);
             if (this.mob.squaredDistanceTo(this.owner) >= TELEPORT_DISTANCE_SQR)
             {
-                SoulControl.teleportNearSomeone(this.mob, this.owner);
+                SoulControl.teleportNearSomeone(this.mob, this.owner, false);
                 this.navigation.stop();
             } else
             {

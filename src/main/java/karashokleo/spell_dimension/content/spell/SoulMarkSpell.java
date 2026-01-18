@@ -38,7 +38,7 @@ public class SoulMarkSpell
             {
                 continue;
             }
-            SoulControl.teleportNearSomeone(minion, target);
+            SoulControl.teleportNearSomeone(minion, target, true);
         }
     }
 }
