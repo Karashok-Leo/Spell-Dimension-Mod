@@ -6,7 +6,6 @@ import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.entity.FakePlayerEntity;
 import karashokleo.spell_dimension.content.misc.SoulControl;
 import karashokleo.spell_dimension.util.OptionalEntityRef;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -14,10 +13,6 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.text.ClickEvent;
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -45,7 +40,7 @@ public class SoulControllerComponent implements AutoSyncedComponent, ServerTicki
     {
         this.player = player;
         this.activeMinions = new HashSet<>();
-        this.fakePlayerSelf = new OptionalEntityRef<>(FakePlayerEntity.class, LivingEntity::isAlive);
+        this.fakePlayerSelf = new OptionalEntityRef<>(FakePlayerEntity.class, e -> !e.isRemoved());
     }
 
     public void onMinionAdded(MobEntity minion)
