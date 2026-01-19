@@ -3,6 +3,7 @@ package karashokleo.spell_dimension.content.event;
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEvent;
 import io.github.fabricators_of_create.porting_lib.entity.events.LivingEntityEvents;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDamageEvent;
+import karashokleo.l2hostility.api.event.AllowTraitEffectCallback;
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.leobrary.damage.api.modify.DamagePhase;
 import karashokleo.leobrary.effect.api.event.LivingHealCallback;
@@ -340,6 +341,18 @@ public class SoulMinionEvents
 
             event.setAmount(0);
             return true;
+        });
+
+        AllowTraitEffectCallback.EVENT.register((difficulty, entity, target, trait, level) ->
+        {
+            if (!(entity instanceof MobEntity mob))
+            {
+                // impossible case
+                return true;
+            }
+            SoulMinionComponent minionComponent = SoulControl.getSoulMinion(mob);
+            PlayerEntity owner = minionComponent.getOwner();
+            return owner != target;
         });
     }
 }

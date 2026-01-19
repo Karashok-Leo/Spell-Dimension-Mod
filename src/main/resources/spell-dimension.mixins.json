@@ -8,6 +8,7 @@
     "modded.AbrahadabraMixin",
     "modded.AdaptingTraitMixin",
     "modded.AmplifierEnchantmentMixin",
+    "modded.ArenaTraitMixin",
     "modded.ASBTooltipMixin",
     "modded.BookEverythingMixin",
     "modded.CurseOfPrideMixin",
