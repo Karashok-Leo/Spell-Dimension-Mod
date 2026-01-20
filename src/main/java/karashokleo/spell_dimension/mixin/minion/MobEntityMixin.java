@@ -1,4 +1,4 @@
-package karashokleo.spell_dimension.mixin.vanilla;
+package karashokleo.spell_dimension.mixin.minion;
 
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;

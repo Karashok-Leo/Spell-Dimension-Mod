@@ -34,9 +34,6 @@ import tocraft.walkers.api.PlayerShape;
 
 import java.util.Optional;
 
-/**
- * server-side only
- */
 public interface SoulControl
 {
     static SoulMinionComponent getSoulMinion(MobEntity entity)

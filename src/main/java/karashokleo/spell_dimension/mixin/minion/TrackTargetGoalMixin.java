@@ -1,4 +1,4 @@
-package karashokleo.spell_dimension.mixin.vanilla;
+package karashokleo.spell_dimension.mixin.minion;
 
 import karashokleo.spell_dimension.content.misc.SoulControl;
 import net.minecraft.entity.ai.goal.TrackTargetGoal;

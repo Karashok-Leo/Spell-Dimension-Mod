@@ -1,4 +1,4 @@
-package karashokleo.spell_dimension.mixin.modded;
+package karashokleo.spell_dimension.mixin.minion;
 
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.trait.highlevel.ArenaTrait;

@@ -50,8 +50,10 @@ public class SoulSacrificeSpell
 
     private static void sacrifice(PlayerEntity caster, LivingEntity minionToDamage, LivingEntity minionToDrop)
     {
+        // TODO: reduce max health permanently?
         // damage
         DamageSource damageSource = minionToDamage.getDamageSources().magic();
+        damageSource.setBypassInvulnerability();
         float amount = minionToDamage.getMaxHealth() * HEALTH_RATIO;
         minionToDamage.damage(damageSource, amount);
 
