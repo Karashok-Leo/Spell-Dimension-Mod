@@ -3,6 +3,7 @@ package karashokleo.spell_dimension.content.spell;
 import karashokleo.spell_dimension.content.component.SoulControllerComponent;
 import karashokleo.spell_dimension.content.entity.FakePlayerEntity;
 import karashokleo.spell_dimension.content.misc.SoulControl;
+import karashokleo.spell_dimension.util.ImpactUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
@@ -25,7 +26,9 @@ public class PossessSpell
         {
             return;
         }
-        Entity target = targets.get(0);
+
+        var target = ImpactUtil.castToLiving(targets.get(0));
+
         if (target instanceof MobEntity mob)
         {
             if (SoulControl.isSoulMinion(player, mob))

@@ -5,6 +5,7 @@ import karashokleo.spell_dimension.content.misc.SoulControl;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.Ownable;
 import net.minecraft.entity.Tameable;
+import net.minecraft.entity.boss.dragon.EnderDragonPart;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -97,6 +98,11 @@ public class RelationUtil
         if (owner == null && entity instanceof FakePlayerEntity fakePlayer)
         {
             owner = fakePlayer.getPlayer();
+        }
+
+        if (owner == null && entity instanceof EnderDragonPart part)
+        {
+            owner = part.owner;
         }
 
         return owner;

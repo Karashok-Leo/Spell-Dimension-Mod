@@ -191,7 +191,8 @@ public class BallLightningEntity extends ProjectileEntity
         {
             ArrayList<Runnable> possibles = new ArrayList<>();
             possibles.add(entity::discard);
-            if (entity instanceof LivingEntity living)
+            var living = ImpactUtil.castToLiving(entity);
+            if (living != null)
             {
                 for (EquipmentSlot slot : EquipmentSlot.values())
                 {

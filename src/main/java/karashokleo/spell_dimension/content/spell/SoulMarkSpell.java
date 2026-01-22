@@ -2,6 +2,7 @@ package karashokleo.spell_dimension.content.spell;
 
 import karashokleo.spell_dimension.content.component.SoulControllerComponent;
 import karashokleo.spell_dimension.content.misc.SoulControl;
+import karashokleo.spell_dimension.util.ImpactUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
@@ -24,7 +25,9 @@ public class SoulMarkSpell
         {
             return;
         }
-        if (!(targets.get(0) instanceof LivingEntity target))
+
+        var target = ImpactUtil.castToLiving(targets.get(0));
+        if (target == null)
         {
             return;
         }
