@@ -47,12 +47,7 @@ public class SDMixinAnnotationAdjuster implements MixinAnnotationAdjuster
             annotationNode.as(AdjustableInjectNode.class)
                 .getMethod()
                 .get(0)
-                .equals("hurt") &&
-            annotationNode.as(AdjustableInjectNode.class)
-                .getAt()
-                .get(0)
-                .getValue()
-                .equals("RETURN"))
+                .equals("hurt"))
         {
             System.out.println("Mixin " + mixinClassName + " cancelled");
             return null;

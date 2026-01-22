@@ -2,9 +2,12 @@ package karashokleo.spell_dimension.mixin.minion;
 
 import karashokleo.spell_dimension.content.misc.LivingEntityExtensions;
 import karashokleo.spell_dimension.content.misc.SoulControl;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.World;
 import net.spell_power.api.SpellDamageSource;
 import net.spell_power.api.SpellSchools;
 import org.jetbrains.annotations.Nullable;
@@ -12,14 +15,21 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import tocraft.walkers.impl.ShapeDataProvider;
 
-@Mixin(LivingEntity.class)
-public abstract class LivingEntityMixin implements LivingEntityExtensions
+@Mixin(value = LivingEntity.class, priority = 1500)
+public abstract class LivingEntityMixin extends Entity implements LivingEntityExtensions
 {
     @Shadow
     @Nullable
     protected PlayerEntity attackingPlayer;
+
+    private LivingEntityMixin(EntityType<?> type, World world)
+    {
+        super(type, world);
+    }
 
     @Shadow
     protected abstract void dropLoot(DamageSource damageSource, boolean causedByPlayer);
@@ -47,5 +57,32 @@ public abstract class LivingEntityMixin implements LivingEntityExtensions
         }
 
         cir.setReturnValue(false);
+    }
+
+    @SuppressWarnings("UnstableApiUsage")
+    @ModifyVariable(
+        method = "damage",
+        at = @At("HEAD"),
+        ordinal = 0,
+        argsOnly = true
+    )
+    private DamageSource setPlayerDamageSource(DamageSource source)
+    {
+        Entity attacker = source.getAttacker();
+        if (!(attacker instanceof ShapeDataProvider pvd))
+        {
+            return source;
+        }
+        int playerId = pvd.walkers$shapedPlayer();
+        if (playerId == -1)
+        {
+            return source;
+        }
+        Entity player = getWorld().getEntityById(playerId);
+        if (!(player instanceof PlayerEntity))
+        {
+            return source;
+        }
+        return new DamageSource(source.getTypeRegistryEntry(), source.getSource(), player);
     }
 }
