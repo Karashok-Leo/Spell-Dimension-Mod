@@ -42,6 +42,21 @@ public class SDMixinAnnotationAdjuster implements MixinAnnotationAdjuster
             System.out.println("Mixin " + mixinClassName + " cancelled");
             return null;
         }
+        if (mixinClassName.equals("tocraft.walkers.mixin.LivingEntityMixin") &&
+            annotationNode.is(Inject.class) &&
+            annotationNode.as(AdjustableInjectNode.class)
+                .getMethod()
+                .get(0)
+                .equals("hurt") &&
+            annotationNode.as(AdjustableInjectNode.class)
+                .getAt()
+                .get(0)
+                .getValue()
+                .equals("RETURN"))
+        {
+            System.out.println("Mixin " + mixinClassName + " cancelled");
+            return null;
+        }
         return annotationNode;
     }
 }

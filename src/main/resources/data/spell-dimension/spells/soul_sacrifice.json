@@ -1,6 +1,6 @@
 {
   "school": "SOUL",
-  "range": 8,
+  "range": 12,
   "cast": {
     "duration": 3.0,
     "animation": "spell_engine:one_handed_projectile_charge",
@@ -23,7 +23,7 @@
     "target": {
       "type": "CURSOR",
       "cursor": {
-        "use_caster_as_fallback": true
+        "use_caster_as_fallback": false
       }
     },
     "animation": "spell_engine:one_handed_projectile_release",

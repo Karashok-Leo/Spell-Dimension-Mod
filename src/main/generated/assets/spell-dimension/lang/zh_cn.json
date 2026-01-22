@@ -587,7 +587,7 @@
   "spell.spell-dimension.soul_echo.name": "灵魂回响",
   "spell.spell-dimension.soul_mark.description": "标记敌人，使所有灵仆传送到目标附近发起攻击。被标记目标受到额外灵魂伤害，持续{effect_duration}秒。",
   "spell.spell-dimension.soul_mark.name": "魂印",
-  "spell.spell-dimension.soul_sacrifice.description": "对灵仆施放时，献祭选定灵仆的50%%最大生命值，获得一份战利品。",
+  "spell.spell-dimension.soul_sacrifice.description": "对最大生命值高于100灵仆施放时，献祭选定灵仆的90%%最大生命值，获得一份战利品。",
   "spell.spell-dimension.soul_sacrifice.name": "灵献",
   "spell.spell-dimension.soul_slash.description": "发射一道灵斩，穿透敌人并造成{damage}点范围伤害，同时根据你与你在场的所有灵仆的平均等级造成额外伤害。",
   "spell.spell-dimension.soul_slash.name": "灵斩",

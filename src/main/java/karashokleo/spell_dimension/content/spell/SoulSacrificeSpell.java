@@ -1,23 +1,26 @@
 package karashokleo.spell_dimension.content.spell;
 
-import karashokleo.spell_dimension.content.component.SoulControllerComponent;
 import karashokleo.spell_dimension.content.misc.LivingEntityExtensions;
 import karashokleo.spell_dimension.content.misc.SoulControl;
+import karashokleo.spell_dimension.init.AllSpells;
+import karashokleo.spell_dimension.util.ImpactUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.attribute.EntityAttributeInstance;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.world.World;
 import net.spell_engine.api.spell.SpellInfo;
-import tocraft.walkers.api.PlayerShape;
 
 import java.util.List;
 
 public class SoulSacrificeSpell
 {
-    public static final float HEALTH_RATIO = 0.5F;
+    public static final int THRESHOLD = 100;
+    public static final float HEALTH_RATIO = 0.9F;
 
     public static void handle(World world, LivingEntity caster, List<Entity> targets, SpellInfo spellInfo)
     {
@@ -26,37 +29,38 @@ public class SoulSacrificeSpell
             return;
         }
 
-        Entity target = targets.isEmpty() ? player : targets.get(0);
-
-        if (target instanceof MobEntity mob)
+        if (targets.isEmpty())
         {
-            if (SoulControl.isSoulMinion(player, mob))
-            {
-                sacrifice(player, mob, mob);
-            }
-        } else if (target == player)
-        {
-            SoulControllerComponent controllerComponent = SoulControl.getSoulController(player);
-            if (controllerComponent.isControlling())
-            {
-                LivingEntity shape = PlayerShape.getCurrentShape(player);
-                if (shape != null)
-                {
-                    sacrifice(player, player, shape);
-                }
-            }
+            return;
         }
+
+        var target = ImpactUtil.castToLiving(targets.get(0));
+
+        if (!(target instanceof MobEntity mob))
+        {
+            return;
+        }
+
+        if (!SoulControl.isSoulMinion(player, mob))
+        {
+            return;
+        }
+
+        sacrifice(player, mob, mob);
     }
 
-    private static void sacrifice(PlayerEntity caster, LivingEntity minionToDamage, LivingEntity minionToDrop)
+    private static void sacrifice(PlayerEntity caster, LivingEntity minionToSacrifice, LivingEntity minionToDrop)
     {
-        // TODO: reduce max health permanently?
-        // damage
-        DamageSource damageSource = minionToDamage.getDamageSources().magic();
-        damageSource.setBypassInvulnerability();
-        float amount = minionToDamage.getMaxHealth() * HEALTH_RATIO;
-        minionToDamage.damage(damageSource, amount);
-
+        if (minionToSacrifice.getMaxHealth() < THRESHOLD)
+        {
+            return;
+        }
+        EntityAttributeInstance maxHealth = minionToSacrifice.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
+        if (maxHealth == null)
+        {
+            return;
+        }
+        maxHealth.addPersistentModifier(new EntityAttributeModifier(AllSpells.SOUL_SACRIFICE.toString(), -HEALTH_RATIO, EntityAttributeModifier.Operation.MULTIPLY_TOTAL));
         // drop
         ((LivingEntityExtensions) minionToDrop).dropSacrificeLoot(caster);
     }

@@ -453,8 +453,8 @@ public enum SpellTexts
     SOUL_SACRIFICE(
         "Soul Sacrifice",
         "灵献",
-        "When cast on your soul minion, sacrifice %d%%%% of its max health to gain a set of loot.".formatted(Math.round(SoulSacrificeSpell.HEALTH_RATIO * 100)),
-        "对灵仆施放时，献祭选定灵仆的%d%%%%最大生命值，获得一份战利品。".formatted(Math.round(SoulSacrificeSpell.HEALTH_RATIO * 100))
+        "When cast on your soul minion with max health exceeding %d, sacrifice %d%%%% of its max health to gain a set of loot.".formatted(SoulSacrificeSpell.THRESHOLD, Math.round(SoulSacrificeSpell.HEALTH_RATIO * 100)),
+        "对最大生命值高于%d灵仆施放时，献祭选定灵仆的%d%%%%最大生命值，获得一份战利品。".formatted(SoulSacrificeSpell.THRESHOLD, Math.round(SoulSacrificeSpell.HEALTH_RATIO * 100))
     ),
     ETHEREAL_EVASION(
         "Ethereal Evasion",
