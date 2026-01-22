@@ -76,7 +76,9 @@ public class ChanelIntervalSpellTrait extends SpellTrait
         }
 
         LivingEntity target = mob.getTarget();
-        if (target != null && target.isAlive())
+        if (target != null &&
+            target.isAlive() &&
+            mob.getVisibilityCache().canSee(target))
         {
             World world = mob.getWorld();
 
@@ -102,6 +104,10 @@ public class ChanelIntervalSpellTrait extends SpellTrait
     {
         LivingEntity target = mob.getTarget();
         if (target == null || target.isDead())
+        {
+            return;
+        }
+        if (!mob.getVisibilityCache().canSee(target))
         {
             return;
         }

@@ -95,6 +95,10 @@ public class SpellTrait extends MobTrait
         {
             return;
         }
+        if (!mob.getVisibilityCache().canSee(target))
+        {
+            return;
+        }
         target.sendMessage(SDTexts.TEXT$SPELL_TRAIT$ACTION.get(
             mob.getName(),
             this.getName().setStyle(Style.EMPTY.withColor(getColor()))

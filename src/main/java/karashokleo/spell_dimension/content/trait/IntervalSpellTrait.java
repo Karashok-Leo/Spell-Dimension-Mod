@@ -54,6 +54,10 @@ public class IntervalSpellTrait extends SpellTrait
         {
             return;
         }
+        if (!mob.getVisibilityCache().canSee(target))
+        {
+            return;
+        }
         int radius = LHConfig.common().items.reflectTrinketRadius;
         if (ReflectTrinket.canReflect(target, this))
         {
