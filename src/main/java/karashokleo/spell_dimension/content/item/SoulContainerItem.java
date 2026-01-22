@@ -1,5 +1,6 @@
 package karashokleo.spell_dimension.content.item;
 
+import it.unimi.dsi.fastutil.floats.FloatUnaryOperator;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.util.raytrace.RayTraceUtil;
 import karashokleo.spell_dimension.content.component.SoulMinionComponent;
@@ -24,6 +25,7 @@ import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
@@ -44,16 +46,18 @@ public class SoulContainerItem extends Item
     public static final String HEALTH_KEY = "Health";
     public static final String MAX_HEALTH_KEY = "MaxHealth";
 
+    private final FloatUnaryOperator probabilityFunction;
     private final float healthThresholdRatio;
     private final int cooldownOnFail;
 
-    public SoulContainerItem(float healthThresholdRatio, int cooldownOnFail)
+    public SoulContainerItem(FloatUnaryOperator probabilityFunction, float healthThresholdRatio, int cooldownOnFail)
     {
         super(
             new FabricItemSettings()
                 .fireproof()
                 .maxCount(1)
         );
+        this.probabilityFunction = probabilityFunction;
         this.healthThresholdRatio = healthThresholdRatio;
         this.cooldownOnFail = cooldownOnFail;
     }
@@ -115,15 +119,8 @@ public class SoulContainerItem extends Item
     {
         float health = entity.getHealth();
         float maxHealth = entity.getMaxHealth();
-        float threshold = maxHealth * healthThresholdRatio;
-        threshold = Math.max(threshold, 4f);
-        if (health <= 0 || health >= threshold)
-        {
-            return 0;
-        } else
-        {
-            return 1 - health / threshold;
-        }
+        float probability = probabilityFunction.apply(health / maxHealth);
+        return MathHelper.clamp(probability, 0f, 1f);
     }
 
     protected void tryCapture(ItemStack stack, PlayerEntity user, LivingEntity entity)
