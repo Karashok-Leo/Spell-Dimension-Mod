@@ -1,5 +1,7 @@
 package karashokleo.spell_dimension.mixin.minion;
 
+import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import karashokleo.spell_dimension.content.component.SoulMinionComponent;
 import karashokleo.spell_dimension.content.misc.SoulControl;
 import net.minecraft.entity.Entity;
@@ -12,6 +14,18 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(value = Entity.class, priority = 1200)
 public abstract class EntityMixin
 {
+    @WrapMethod(
+        method = "isTeammate"
+    )
+    private boolean is(Entity other, Operation<Boolean> original)
+    {
+        if (SoulControl.isSoulMinion(other, (Entity) (Object) this))
+        {
+            return true;
+        }
+        return original.call(other);
+    }
+
     @Inject(
         method = "getTeamColorValue",
         at = @At("HEAD"),

@@ -37,7 +37,7 @@ import java.util.List;
 
 public class SoulMinionEvents
 {
-    public static final float REQUIEM_FACTOR = 0.15f;
+    public static final float REQUIEM_FACTOR = 0.3f;
     public static final float SOUL_MARK_FACTOR = 1.5f;
 
     public static void init()
