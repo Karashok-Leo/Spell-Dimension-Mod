@@ -1,6 +1,7 @@
 package karashokleo.spell_dimension.content.component;
 
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
+import karashokleo.spell_dimension.content.object.SoulMinionMode;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -19,11 +20,13 @@ public class SoulMinionComponent implements AutoSyncedComponent
     @Nullable
     private UUID ownerUuid;
 
+    public SoulMinionMode mode;
     public byte soulNetFlag;
 
     public SoulMinionComponent(MobEntity mob)
     {
         this.mob = mob;
+        this.mode = SoulMinionMode.FOLLOW;
         this.soulNetFlag = 0;
     }
 

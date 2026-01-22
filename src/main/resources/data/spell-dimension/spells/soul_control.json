@@ -1,0 +1,26 @@
+{
+  "school": "SOUL",
+  "range": 12,
+  "release": {
+    "target": {
+      "type": "CURSOR"
+    },
+    "animation": "spell_engine:one_handed_area_release",
+    "sound": {
+      "id": "spell_engine:generic_soul_release",
+      "randomness": 0
+    }
+  },
+  "impact": [
+    {
+      "action": {
+        "type": "HEAL",
+        "heal": {
+          "spell_power_coefficient": 0
+        }
+      }
+    }
+  ],
+  "cost": {
+  }
+}

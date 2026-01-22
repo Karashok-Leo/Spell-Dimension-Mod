@@ -5,6 +5,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import karashokleo.spell_dimension.content.entity.goal.AttackWithSoulOwnerGoal;
 import karashokleo.spell_dimension.content.entity.goal.FollowSoulOwnerGoal;
+import karashokleo.spell_dimension.content.entity.goal.StandbySoulMinionGoal;
 import karashokleo.spell_dimension.content.entity.goal.TrackSoulOwnerAttackerGoal;
 import karashokleo.spell_dimension.content.misc.SoulControl;
 import net.minecraft.entity.LivingEntity;
@@ -40,6 +41,7 @@ public abstract class MobEntityMixin
 //        this.targetSelector.add(0, new SoulMarkTargetGoal(mob));
         this.targetSelector.add(1, new TrackSoulOwnerAttackerGoal(mob));
         this.targetSelector.add(2, new AttackWithSoulOwnerGoal(mob));
+        this.goalSelector.add(0, new StandbySoulMinionGoal(mob));
         this.goalSelector.add(6, new FollowSoulOwnerGoal(mob));
     }
 

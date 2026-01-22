@@ -2,6 +2,7 @@ package karashokleo.spell_dimension.content.entity.goal;
 
 import karashokleo.spell_dimension.content.component.SoulMinionComponent;
 import karashokleo.spell_dimension.content.misc.SoulControl;
+import karashokleo.spell_dimension.content.object.SoulMinionMode;
 import karashokleo.spell_dimension.util.RelationUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.TargetPredicate;
@@ -27,6 +28,10 @@ public class AttackWithSoulOwnerGoal extends TrackTargetGoal
     public boolean canStart()
     {
         SoulMinionComponent minionComponent = SoulControl.getSoulMinion(this.mob);
+        if (minionComponent.mode == SoulMinionMode.STANDBY)
+        {
+            return false;
+        }
         PlayerEntity owner = minionComponent.getOwner();
         if (owner == null)
         {

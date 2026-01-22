@@ -2,6 +2,7 @@ package karashokleo.spell_dimension.content.entity.goal;
 
 import karashokleo.spell_dimension.content.component.SoulMinionComponent;
 import karashokleo.spell_dimension.content.misc.SoulControl;
+import karashokleo.spell_dimension.content.object.SoulMinionMode;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.pathing.EntityNavigation;
@@ -34,6 +35,10 @@ public class FollowSoulOwnerGoal extends Goal
     public boolean canStart()
     {
         SoulMinionComponent minionComponent = SoulControl.getSoulMinion(this.mob);
+        if (minionComponent.mode == SoulMinionMode.STANDBY)
+        {
+            return false;
+        }
         var soulOwner = minionComponent.getOwner();
         if (soulOwner == null)
         {
@@ -57,6 +62,11 @@ public class FollowSoulOwnerGoal extends Goal
     @Override
     public boolean shouldContinue()
     {
+        SoulMinionComponent minionComponent = SoulControl.getSoulMinion(this.mob);
+        if (minionComponent.mode == SoulMinionMode.STANDBY)
+        {
+            return false;
+        }
         return !this.navigation.isIdle() &&
             !this.cannotFollow() &&
             !(this.mob.squaredDistanceTo(this.owner) <= MAX_DISTANCE_SQR);
@@ -100,7 +110,8 @@ public class FollowSoulOwnerGoal extends Goal
             this.updateCountdownTicks = this.getTickCount(10);
             if (this.mob.squaredDistanceTo(this.owner) >= TELEPORT_DISTANCE_SQR)
             {
-                SoulControl.teleportNearSomeone(this.mob, this.owner, false);
+                SoulMinionMode mode = SoulControl.getSoulMinion(this.mob).mode;
+                SoulControl.teleportNearSomeone(this.mob, this.owner, mode == SoulMinionMode.FORCED_FOLLOW);
                 this.navigation.stop();
             } else
             {
