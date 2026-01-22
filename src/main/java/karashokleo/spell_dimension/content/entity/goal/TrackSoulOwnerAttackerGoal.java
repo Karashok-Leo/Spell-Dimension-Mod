@@ -43,7 +43,7 @@ public class TrackSoulOwnerAttackerGoal extends TrackTargetGoal
     @Override
     public void start()
     {
-        this.mob.setTarget(this.attacker);
+        SoulControl.setAttackTarget(this.mob, this.attacker);
         SoulMinionComponent minionComponent = SoulControl.getSoulMinion(this.mob);
         PlayerEntity owner = minionComponent.getOwner();
         if (owner != null)

@@ -37,6 +37,7 @@ import net.trique.mythicupgrades.MythicUpgradesDamageTypes;
 import net.wizards.WizardsMod;
 import nourl.mythicmetals.item.MythicItems;
 import nourl.mythicmetals.item.tools.MythicTools;
+import tocraft.walkers.Walkers;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -148,6 +149,8 @@ public class AllTags
     public static final TagKey<EntityType<?>> SCULK = TagUtil.entityTypeTag("sculk");
     public static final TagKey<EntityType<?>> ADVZ_MONSTER = TagUtil.entityTypeTag("advz_monster");
     public static final TagKey<EntityType<?>> SW_MONSTER = TagUtil.entityTypeTag("sw_monster");
+    public static final TagKey<EntityType<?>> FLYING = TagUtil.entityTypeTag(Walkers.id("flying"));
+    public static final TagKey<EntityType<?>> NO_CLIPS = TagUtil.entityTypeTag(Walkers.id("fall_through_blocks"));
 
     public static final TagKey<Enchantment> LOOTABLE = TagUtil.enchantmentTag("lootable");
     public static final TagKey<Enchantment> TRADABLE = TagUtil.enchantmentTag("tradable");
@@ -429,6 +432,23 @@ public class AllTags
                 new Identifier("soulsweapons:soulmass"),
                 new Identifier("soulsweapons:frost_giant"),
                 new Identifier("soulsweapons:rime_spectre")
+            );
+
+        SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(FLYING)
+            .addOptional(
+                new Identifier("soulsweapons:night_shade"),
+                new Identifier("soulsweapons:day_stalker"),
+                new Identifier("soulsweapons:night_prowler"),
+                new Identifier("aquamirae:captain_cornelia"),
+                new Identifier("bosses_of_mass_destruction:lich"),
+                new Identifier("bosses_of_mass_destruction:gauntlet"),
+                new Identifier("adventurez:the_eye"),
+                new Identifier("adventurez:void_shadow"),
+                new Identifier("adventurez:void_shade")
+            );
+        SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(NO_CLIPS)
+            .addOptional(
+                new Identifier("soulsweapons:night_shade")
             );
 
         SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(LHTags.WHITELIST)

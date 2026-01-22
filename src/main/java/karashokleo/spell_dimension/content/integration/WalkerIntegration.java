@@ -16,12 +16,12 @@ public class WalkerIntegration extends AbstractIntegration
 
         ApiLevel.setApiLevel(ApiLevel.API_ONLY);
 
-        unregisterTraits("minecraft:husk", "walkers:burn_in_daylight");
-        unregisterTraits("mutantmonsters:mutant_zombie", "walkers:burn_in_daylight");
-        unregisterTraits("mutantmonsters:mutant_skeleton", "walkers:burn_in_daylight");
+        unregisterTrait("minecraft:husk", "walkers:burn_in_daylight");
+        unregisterTrait("mutantmonsters:mutant_zombie", "walkers:burn_in_daylight");
+        unregisterTrait("mutantmonsters:mutant_skeleton", "walkers:burn_in_daylight");
     }
 
-    private static void unregisterTraits(String entityId, String traitId)
+    private static void unregisterTrait(String entityId, String traitId)
     {
         Walkers.CONFIG.traitBlacklist
             .computeIfAbsent(entityId, k -> new ArrayList<>())

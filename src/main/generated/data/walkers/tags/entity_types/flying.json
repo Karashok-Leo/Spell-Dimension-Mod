@@ -1,0 +1,41 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "soulsweapons:night_shade",
+      "required": false
+    },
+    {
+      "id": "soulsweapons:day_stalker",
+      "required": false
+    },
+    {
+      "id": "soulsweapons:night_prowler",
+      "required": false
+    },
+    {
+      "id": "aquamirae:captain_cornelia",
+      "required": false
+    },
+    {
+      "id": "bosses_of_mass_destruction:lich",
+      "required": false
+    },
+    {
+      "id": "bosses_of_mass_destruction:gauntlet",
+      "required": false
+    },
+    {
+      "id": "adventurez:the_eye",
+      "required": false
+    },
+    {
+      "id": "adventurez:void_shadow",
+      "required": false
+    },
+    {
+      "id": "adventurez:void_shade",
+      "required": false
+    }
+  ]
+}

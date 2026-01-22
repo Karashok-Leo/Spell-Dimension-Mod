@@ -5,7 +5,6 @@ import karashokleo.spell_dimension.content.misc.SoulControl;
 import karashokleo.spell_dimension.util.RelationUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.TargetPredicate;
-import net.minecraft.entity.ai.brain.MemoryModuleType;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.goal.TrackTargetGoal;
 import net.minecraft.entity.mob.MobEntity;
@@ -44,8 +43,7 @@ public class AttackWithSoulOwnerGoal extends TrackTargetGoal
     @Override
     public void start()
     {
-        this.mob.setTarget(this.attacking);
-        this.mob.getBrain().remember(MemoryModuleType.ATTACK_TARGET, this.attacking);
+        SoulControl.setAttackTarget(this.mob, this.attacking);
         SoulMinionComponent minionComponent = SoulControl.getSoulMinion(this.mob);
         PlayerEntity owner = minionComponent.getOwner();
         if (owner != null)

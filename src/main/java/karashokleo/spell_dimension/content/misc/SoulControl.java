@@ -12,13 +12,15 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.brain.Brain;
+import net.minecraft.entity.ai.brain.MemoryModuleType;
 import net.minecraft.entity.ai.pathing.LandPathNodeMaker;
 import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.mob.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.packet.s2c.play.PositionFlag;
@@ -302,5 +304,35 @@ public interface SoulControl
             source.getYaw(),
             source.getPitch()
         );
+    }
+
+    static void setAttackTarget(MobEntity mob, LivingEntity target)
+    {
+        mob.setTarget(target);
+        if (mob instanceof WardenEntity warden)
+        {
+            warden.increaseAngerAt(target, Angriness.ANGRY.getThreshold() + 20, false);
+            warden.updateAttackTarget(target);
+            return;
+        }
+
+        Brain<?> brain = mob.getBrain();
+        if (mob instanceof PiglinBruteEntity || mob instanceof PiglinEntity)
+        {
+            brain.forget(MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE);
+            brain.remember(MemoryModuleType.ANGRY_AT, target.getUuid(), 600L);
+            brain.remember(MemoryModuleType.ATTACK_TARGET, target);
+            return;
+        }
+
+        if (mob instanceof HoglinEntity)
+        {
+            brain.forget(MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE);
+            brain.forget(MemoryModuleType.BREED_TARGET);
+            brain.remember(MemoryModuleType.ATTACK_TARGET, target, 200L);
+            return;
+        }
+
+        brain.remember(MemoryModuleType.ATTACK_TARGET, target);
     }
 }
