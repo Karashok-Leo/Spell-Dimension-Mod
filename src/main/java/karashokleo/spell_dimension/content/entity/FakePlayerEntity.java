@@ -73,10 +73,16 @@ public class FakePlayerEntity extends LivingEntity
     public PlayerEntity getPlayer()
     {
         UUID playerUUID = getPlayerUUID();
+        if (playerUUID == null)
+        {
+            return null;
+        }
         MinecraftServer server = getServer();
-        return playerUUID == null || server == null ?
-            null :
-            server.getPlayerManager().getPlayer(playerUUID);
+        if (server != null)
+        {
+            return server.getPlayerManager().getPlayer(playerUUID);
+        }
+        return getWorld().getPlayerByUuid(playerUUID);
     }
 
     /**
