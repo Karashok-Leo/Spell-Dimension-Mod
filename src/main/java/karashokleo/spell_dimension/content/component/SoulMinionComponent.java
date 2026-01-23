@@ -13,6 +13,7 @@ import java.util.UUID;
 public class SoulMinionComponent implements AutoSyncedComponent
 {
     private static final String OWNER_KEY = "Owner";
+    private static final String MODE_KEY = "Mode";
 
     private final MobEntity mob;
     @Nullable
@@ -26,7 +27,6 @@ public class SoulMinionComponent implements AutoSyncedComponent
     public SoulMinionComponent(MobEntity mob)
     {
         this.mob = mob;
-        this.mode = SoulMinionMode.FOLLOW;
         this.soulNetFlag = 0;
     }
 
@@ -88,6 +88,7 @@ public class SoulMinionComponent implements AutoSyncedComponent
         {
             ownerUuid = tag.getUuid(OWNER_KEY);
         }
+        this.mode = SoulMinionMode.values()[tag.getInt(MODE_KEY)];
     }
 
     @Override
@@ -97,5 +98,6 @@ public class SoulMinionComponent implements AutoSyncedComponent
         {
             tag.putUuid(OWNER_KEY, ownerUuid);
         }
+        tag.putInt(MODE_KEY, mode.ordinal());
     }
 }

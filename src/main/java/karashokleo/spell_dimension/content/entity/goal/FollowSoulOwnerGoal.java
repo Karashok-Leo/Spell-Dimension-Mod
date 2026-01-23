@@ -111,7 +111,7 @@ public class FollowSoulOwnerGoal extends Goal
             if (this.mob.squaredDistanceTo(this.owner) >= TELEPORT_DISTANCE_SQR)
             {
                 SoulMinionMode mode = SoulControl.getSoulMinion(this.mob).mode;
-                SoulControl.teleportNearSomeone(this.mob, this.owner, mode == SoulMinionMode.FORCED_FOLLOW);
+                SoulControl.teleportNearSomeone(this.mob, this.owner, mode == SoulMinionMode.FORCE_FOLLOW);
                 this.navigation.stop();
             } else
             {

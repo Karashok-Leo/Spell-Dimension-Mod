@@ -195,7 +195,7 @@ public class AllSpells
 
     // Soul
     // Tier 1
-    public static final Identifier SOUL_CONTROL = fromCrafting("soul_control").withTier(0).build();
+    public static final Identifier SOUL_COMMAND = fromCrafting("soul_command").withTier(0).build();
     public static final Identifier SOUL_SWAP = fromCrafting("soul_swap").withTier(0).build();
     public static final Identifier SOUL_STEP = fromCrafting("soul_step").withTier(0).build();
     public static final Identifier SOUL_MARK = fromCrafting("soul_mark").withTier(0).build();
@@ -233,9 +233,9 @@ public class AllSpells
         registerImpactHandler(RAILGUN, RailgunSpell::handle);
 
         SpellImpactEvents.POST.register(SOUL_SLASH, SoulSlashSpell::handle);
-        registerImpactHandler(SOUL_CONTROL, SoulControlSpell::handle);
         registerImpactHandler(POSSESS, PossessSpell::handle);
         registerImpactHandler(RECALL, RecallSpell::handle);
+        registerImpactHandler(SOUL_COMMAND, SoulCommandSpell::handle);
         registerImpactHandler(SOUL_SWAP, SoulSwapSpell::handle);
         registerImpactHandler(SOUL_STEP, SoulStepSpell::handle);
         registerImpactHandler(SOUL_MARK, SoulMarkSpell::handle);

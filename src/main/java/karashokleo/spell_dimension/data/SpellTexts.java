@@ -408,6 +408,12 @@ public enum SpellTexts
         "[Can only be cast while possessing a soul minion] Teleport the possessed soul minion near your body and release the possession.",
         "[仅限附体灵仆时施放] 附体灵仆传送至本体附近，并解除附体状态。"
     ),
+    SOUL_COMMAND(
+        "Soul Command",
+        "魂令",
+        "Switch target soul minion behavior mode: Follow / Force Follow / Standby",
+        "切换目标灵仆的行为模式：跟随/强制跟随/待命"
+    ),
     SOUL_SWAP(
         "Soul Swap",
         "元魂易位",

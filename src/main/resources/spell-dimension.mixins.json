@@ -7,6 +7,7 @@
     "client.RollManagerInvoker",
     "minion.ActiveTargetGoalMixin",
     "minion.ArenaTraitMixin",
+    "minion.BrainMixin",
     "minion.EntityMixin",
     "minion.LivingEntityMixin",
     "minion.MobEntityMixin",

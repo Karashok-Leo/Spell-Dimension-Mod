@@ -5,6 +5,7 @@ import karashokleo.spell_dimension.api.quest.QuestTag;
 import karashokleo.spell_dimension.content.effect.NirvanaEffect;
 import karashokleo.spell_dimension.content.item.upgrade.IllusionUpgradeTab;
 import karashokleo.spell_dimension.content.object.EventAward;
+import karashokleo.spell_dimension.content.object.SoulMinionMode;
 import karashokleo.spell_dimension.data.generic.recipe.SDLocateRecipes;
 import karashokleo.spell_dimension.data.loot_bag.SDBags;
 import karashokleo.spell_dimension.data.loot_bag.SDContents;
@@ -164,6 +165,13 @@ public enum SDTexts
     DIFFICULTY_TIER$0("Normal", "普通"),
     DIFFICULTY_TIER$1("Hardcore", "硬核"),
     DIFFICULTY_TIER$2("Nightmare", "梦魇"),
+
+    /**
+     * Soul Minion Mode
+     */
+    SOUL_MINION_MODE$0("Follow", "跟随"),
+    SOUL_MINION_MODE$1("Force Follow", "强制跟随"),
+    SOUL_MINION_MODE$2("Standby", "待命"),
 
     /**
      * Tooltip
@@ -393,6 +401,11 @@ public enum SDTexts
     public static MutableText getDifficultyTierText(int tier)
     {
         return Text.translatable(Util.createTranslationKey("difficulty_tier", SpellDimension.modLoc(tier + "")));
+    }
+
+    public static MutableText getSoulMinionModeText(SoulMinionMode mode)
+    {
+        return Text.translatable(Util.createTranslationKey("soul_minion_mode", SpellDimension.modLoc(mode.ordinal() + "")));
     }
 
     public static void register()

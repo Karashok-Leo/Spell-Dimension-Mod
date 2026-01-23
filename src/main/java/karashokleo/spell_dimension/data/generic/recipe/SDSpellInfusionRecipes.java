@@ -174,6 +174,7 @@ public class SDSpellInfusionRecipes
         add(exporter, AllSpells.RAILGUN, SpellSchools.LIGHTNING, "bosses_of_mass_destruction:obsidilith_rune");
         add(exporter, AllSpells.ELECTRIC_BONDAGE, SpellSchools.LIGHTNING, ConsumableItems.ETERNAL_WITCH_CHARGE, ComplementItems.BLACKSTONE_CORE, ComplementItems.SCULKIUM.blockSet().item());
 
+        add(exporter, AllSpells.SOUL_COMMAND, SpellSchools.SOUL, Items.APPLE);
         add(exporter, AllSpells.SOUL_SWAP, SpellSchools.SOUL, TGItems.DARK_IRON_INGOT.get());
         add(exporter, AllSpells.SOUL_STEP, SpellSchools.SOUL, Registries.ITEM.get(new Identifier("soulsweapons:lost_soul")));
         add(exporter, AllSpells.SOUL_MARK, SpellSchools.SOUL, Ingredient.fromTag(TagUtil.itemTag(new Identifier("soulsweapons:lord_soul"))));

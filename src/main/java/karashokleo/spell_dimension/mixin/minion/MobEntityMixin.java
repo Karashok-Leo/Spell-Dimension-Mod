@@ -3,6 +3,7 @@ package karashokleo.spell_dimension.mixin.minion;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import karashokleo.spell_dimension.content.entity.brain.SoulMinionBrain;
 import karashokleo.spell_dimension.content.entity.goal.AttackWithSoulOwnerGoal;
 import karashokleo.spell_dimension.content.entity.goal.FollowSoulOwnerGoal;
 import karashokleo.spell_dimension.content.entity.goal.StandbySoulMinionGoal;
@@ -15,6 +16,8 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(MobEntity.class)
 public abstract class MobEntityMixin
@@ -38,7 +41,6 @@ public abstract class MobEntityMixin
     {
         original.call(instance);
         var mob = (MobEntity) (Object) this;
-//        this.targetSelector.add(0, new SoulMarkTargetGoal(mob));
         this.targetSelector.add(1, new TrackSoulOwnerAttackerGoal(mob));
         this.targetSelector.add(2, new AttackWithSoulOwnerGoal(mob));
         this.goalSelector.add(0, new StandbySoulMinionGoal(mob));
@@ -53,5 +55,17 @@ public abstract class MobEntityMixin
             return;
         }
         original.call(target);
+    }
+
+    @Inject(method = "tick", at = @At("HEAD"))
+    private void inject_tick(CallbackInfo ci)
+    {
+        MobEntity mob = (MobEntity) (Object) this;
+        if (mob.getWorld().isClient())
+        {
+            return;
+        }
+
+        SoulMinionBrain.tickSoulMinionStandbyMode(mob);
     }
 }

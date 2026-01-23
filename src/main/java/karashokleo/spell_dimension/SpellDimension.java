@@ -11,6 +11,7 @@ import karashokleo.spell_dimension.api.quest.QuestRegistry;
 import karashokleo.spell_dimension.config.EnchantmentToEntryConfig;
 import karashokleo.spell_dimension.config.QuestToEntryConfig;
 import karashokleo.spell_dimension.content.component.*;
+import karashokleo.spell_dimension.content.entity.brain.SoulMinionBrain;
 import karashokleo.spell_dimension.content.integration.WalkerIntegration;
 import karashokleo.spell_dimension.content.object.EnchantedModifier;
 import karashokleo.spell_dimension.content.object.EnlighteningModifier;
@@ -74,6 +75,7 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
         AllWeapons.register();
         AllArmors.register();
         AllBlocks.register();
+        SoulMinionBrain.register();
         AllEntities.register();
         AllWorldGen.register();
         AllQuests.register();
@@ -91,7 +93,6 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
         AllStats.register();
         AllGameRules.register();
         AllDamageStates.register();
-
         AllPackets.init();
         EnchantedModifier.init();
         EnlighteningModifier.init();
