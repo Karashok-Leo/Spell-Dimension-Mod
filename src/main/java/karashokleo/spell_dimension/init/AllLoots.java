@@ -72,6 +72,10 @@ public class AllLoots
             {
                 return;
             }
+            if (EssenceLootConfig.BASE_CONFIG.spellBlacklist().contains(spellInfo.id()))
+            {
+                return;
+            }
             SpellSchool school = spellInfo.spell().school;
             for (Entity target : targets)
             {
@@ -83,7 +87,7 @@ public class AllLoots
                 }
 
                 // entity blacklist check
-                if (EssenceLootConfig.BASE_CONFIG.blacklist().contains(living.getType()))
+                if (EssenceLootConfig.BASE_CONFIG.entityBlacklist().contains(living.getType()))
                 {
                     continue;
                 }
