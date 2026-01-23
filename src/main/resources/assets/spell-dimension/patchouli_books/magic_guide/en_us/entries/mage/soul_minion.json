@@ -23,9 +23,18 @@
     },
     {
       "type": "patchouli:spotlight",
-      "item": "spell-dimension:spell_scroll{spell_container:{is_proxy:1b,max_spell_count:1b,spell_ids:['spell-dimension:possess']}},spell-dimension:spell_scroll{spell_container:{is_proxy:1b,max_spell_count:1b,spell_ids:['spell-dimension:recall']}}",
+      "item": "spell-dimension:spell_scroll{spell_container:{is_proxy:1b,max_spell_count:1b,spell_ids:['spell-dimension:possess']}},spell-dimension:spell_scroll{spell_container:{is_proxy:1b,max_spell_count:1b,spell_ids:['spell-dimension:recall']}},spell-dimension:spell_scroll{spell_container:{is_proxy:1b,max_spell_count:1b,spell_ids:['spell-dimension:soul_command']}}",
       "title": "Release from Possession",
-      "text": "$(br)You may cast $(key)Recall$() or cast $(key)Possess$() on your $(bold)body$() to manually end the $(key)Possession state$()."
+      "text": "$(br)You may cast $(key)Possess$() on your $(bold)body$() or cast $(key)Recall$() directly to manually end the $(key)Possession state$().$(br2)Additionally, cast $(key)Soul Command$() on your $(bold)soul minion$() to switch its specific $(bold)behavior mode$()."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Behavior Modes",
+      "text": "$(list)$(bold)Move Mode$():$(br)$(list2)$(bold)Follow$(): proactively follow the owner and attempt to teleport when out of range$(br)$(list2)$(bold)Force Follow$(): force follow owner, ignore pathfinding$(br)$(list2)$(bold)Standby$(): stand down. Cease movement and attacks"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br2)$(list)$(bold)Attack Mode$():$(br)$(list2)$(bold)Default$(): will not attack the owner or allies$(br)$(list2)$(bold)Aggressive$(): will not attack the owner, but may attack allies (such as other soul minions)"
     }
   ]
 }

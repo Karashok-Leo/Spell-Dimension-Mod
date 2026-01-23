@@ -23,9 +23,18 @@
     },
     {
       "type": "patchouli:spotlight",
-      "item": "spell-dimension:spell_scroll{spell_container:{is_proxy:1b,max_spell_count:1b,spell_ids:['spell-dimension:possess']}},spell-dimension:spell_scroll{spell_container:{is_proxy:1b,max_spell_count:1b,spell_ids:['spell-dimension:recall']}}",
+      "item": "spell-dimension:spell_scroll{spell_container:{is_proxy:1b,max_spell_count:1b,spell_ids:['spell-dimension:possess']}},spell-dimension:spell_scroll{spell_container:{is_proxy:1b,max_spell_count:1b,spell_ids:['spell-dimension:recall']}},spell-dimension:spell_scroll{spell_container:{is_proxy:1b,max_spell_count:1b,spell_ids:['spell-dimension:soul_command']}}",
       "title": "解除附体",
-      "text": "$(br)可施放$(key)归魂$()或对$(bold)本体$()施放$(key)附体$()以主动解除$(key)附体状态$()。"
+      "text": "$(br)可对$(bold)本体$()施放$(key)附体$()或直接施放$(key)归魂$()以主动解除$(key)附体状态$()。$(br2)除此之外，对灵仆施放$(key)魂令$()可以切换$(bold)灵仆$()的具体$(bold)行为模式$()。"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "行为模式",
+      "text": "$(list)$(bold)移动模式$():$(br)$(list2)$(bold)跟随$()：主动跟随主人，超出范围时尝试传送$(br)$(list2)$(bold)强制跟随$()：强制跟随主人，忽略寻路$(br)$(list2)$(bold)待命$()：原地待命，停止移动和攻击"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br2)$(list)$(bold)攻击模式$():$(br)$(list2)$(bold)默认$()：不会攻击主人及其所有友方$(br)$(list2)$(bold)主动$()：不会攻击主人，但可以攻击主人的友方（如其他灵仆）。"
     }
   ]
 }

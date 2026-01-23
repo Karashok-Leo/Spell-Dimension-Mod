@@ -14,6 +14,9 @@ import karashokleo.spell_dimension.client.quest.QuestItemTooltipComponent;
 import karashokleo.spell_dimension.client.quest.QuestItemTooltipData;
 import karashokleo.spell_dimension.client.render.*;
 import karashokleo.spell_dimension.client.screen.*;
+import karashokleo.spell_dimension.config.EnchantmentToEntryConfig;
+import karashokleo.spell_dimension.config.QuestToEntryConfig;
+import karashokleo.spell_dimension.config.SpellToEntryConfig;
 import karashokleo.spell_dimension.content.integration.PatchouliIntegration;
 import karashokleo.spell_dimension.content.item.essence.base.ColorProvider;
 import karashokleo.spell_dimension.content.item.upgrade.IllusionUpgradeTab;
@@ -147,5 +150,9 @@ public class SpellDimensionClient implements ClientModInitializer
 
         PatchouliIntegration.init();
         SpiritTomeKeyHandler.register();
+
+        QuestToEntryConfig.init();
+        SpellToEntryConfig.init();
+        EnchantmentToEntryConfig.init();
     }
 }
