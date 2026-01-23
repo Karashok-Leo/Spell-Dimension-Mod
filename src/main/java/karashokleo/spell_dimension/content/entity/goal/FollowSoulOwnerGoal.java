@@ -35,7 +35,7 @@ public class FollowSoulOwnerGoal extends Goal
     public boolean canStart()
     {
         SoulMinionComponent minionComponent = SoulControl.getSoulMinion(this.mob);
-        if (minionComponent.mode == SoulMinionMode.STANDBY)
+        if (minionComponent.moveMode == SoulMinionMode.Move.STANDBY)
         {
             return false;
         }
@@ -63,7 +63,7 @@ public class FollowSoulOwnerGoal extends Goal
     public boolean shouldContinue()
     {
         SoulMinionComponent minionComponent = SoulControl.getSoulMinion(this.mob);
-        if (minionComponent.mode == SoulMinionMode.STANDBY)
+        if (minionComponent.moveMode == SoulMinionMode.Move.STANDBY)
         {
             return false;
         }
@@ -110,8 +110,8 @@ public class FollowSoulOwnerGoal extends Goal
             this.updateCountdownTicks = this.getTickCount(10);
             if (this.mob.squaredDistanceTo(this.owner) >= TELEPORT_DISTANCE_SQR)
             {
-                SoulMinionMode mode = SoulControl.getSoulMinion(this.mob).mode;
-                SoulControl.teleportNearSomeone(this.mob, this.owner, mode == SoulMinionMode.FORCE_FOLLOW);
+                SoulMinionMode.Move mode = SoulControl.getSoulMinion(this.mob).moveMode;
+                SoulControl.teleportNearSomeone(this.mob, this.owner, mode == SoulMinionMode.Move.FORCE_FOLLOW);
                 this.navigation.stop();
             } else
             {

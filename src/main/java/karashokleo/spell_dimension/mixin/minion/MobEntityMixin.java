@@ -50,7 +50,7 @@ public abstract class MobEntityMixin
     @WrapMethod(method = "setTarget")
     private void wrap_setTarget(LivingEntity target, Operation<Void> original)
     {
-        if (SoulControl.isSoulMinion(target, (MobEntity) (Object) this))
+        if (SoulControl.mobCannotAttack((MobEntity) (Object) this, target))
         {
             return;
         }

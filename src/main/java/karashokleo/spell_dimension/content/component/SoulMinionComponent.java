@@ -13,7 +13,8 @@ import java.util.UUID;
 public class SoulMinionComponent implements AutoSyncedComponent
 {
     private static final String OWNER_KEY = "Owner";
-    private static final String MODE_KEY = "Mode";
+    private static final String MOVE_MODE_KEY = "MoveMode";
+    private static final String ATTACK_MODE_KEY = "AttackMode";
 
     private final MobEntity mob;
     @Nullable
@@ -21,13 +22,15 @@ public class SoulMinionComponent implements AutoSyncedComponent
     @Nullable
     private UUID ownerUuid;
 
-    public SoulMinionMode mode;
+    public SoulMinionMode.Move moveMode;
+    public SoulMinionMode.Attack attackMode;
     public byte soulNetFlag;
 
     public SoulMinionComponent(MobEntity mob)
     {
         this.mob = mob;
-        this.mode = SoulMinionMode.FOLLOW;
+        this.moveMode = SoulMinionMode.Move.FOLLOW;
+        this.attackMode = SoulMinionMode.Attack.DEFAULT;
         this.soulNetFlag = 0;
     }
 
@@ -89,7 +92,8 @@ public class SoulMinionComponent implements AutoSyncedComponent
         {
             ownerUuid = tag.getUuid(OWNER_KEY);
         }
-        this.mode = SoulMinionMode.values()[tag.getInt(MODE_KEY)];
+        this.moveMode = SoulMinionMode.Move.values()[tag.getInt(MOVE_MODE_KEY)];
+        this.attackMode = SoulMinionMode.Attack.values()[tag.getInt(ATTACK_MODE_KEY)];
     }
 
     @Override
@@ -99,6 +103,7 @@ public class SoulMinionComponent implements AutoSyncedComponent
         {
             tag.putUuid(OWNER_KEY, ownerUuid);
         }
-        tag.putInt(MODE_KEY, mode.ordinal());
+        tag.putInt(MOVE_MODE_KEY, moveMode.ordinal());
+        tag.putInt(ATTACK_MODE_KEY, attackMode.ordinal());
     }
 }

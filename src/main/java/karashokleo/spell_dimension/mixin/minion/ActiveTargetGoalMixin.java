@@ -55,13 +55,11 @@ public abstract class ActiveTargetGoalMixin<T extends LivingEntity> extends Trac
     @Inject(method = "start", at = @At("HEAD"), cancellable = true)
     private void inject_start(CallbackInfo ci)
     {
-        if (!SoulControl.isSoulMinion(targetEntity, mob))
+        if (SoulControl.mobCannotAttack(mob, targetEntity))
         {
-            return;
+            stop();
+            ci.cancel();
         }
-
-        stop();
-        ci.cancel();
     }
 
     @Inject(method = "findClosestTarget", at = @At("TAIL"))
@@ -115,7 +113,7 @@ public abstract class ActiveTargetGoalMixin<T extends LivingEntity> extends Trac
 
         if (targetEntity != null)
         {
-            if (SoulControl.isSoulMinion(targetEntity, mob))
+            if (SoulControl.mobCannotAttack(mob, targetEntity))
             {
                 targetEntity = null;
             }

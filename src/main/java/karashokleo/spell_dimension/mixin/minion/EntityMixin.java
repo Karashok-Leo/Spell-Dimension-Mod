@@ -17,11 +17,14 @@ public abstract class EntityMixin
     @WrapMethod(
         method = "isTeammate"
     )
-    private boolean is(Entity other, Operation<Boolean> original)
+    private boolean wrap_isTeammate(Entity other, Operation<Boolean> original)
     {
-        if (SoulControl.isSoulMinion(other, (Entity) (Object) this))
+        if ((Entity) (Object) this instanceof MobEntity mob)
         {
-            return true;
+            if (SoulControl.mobCannotAttack(mob, other))
+            {
+                return true;
+            }
         }
         return original.call(other);
     }

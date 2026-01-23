@@ -93,6 +93,8 @@ public enum SDTexts
     TEXT$SOUL_CONTROL$DAMAGE("Your body is taking %s damage!", "你的本体正受到%s点伤害！"),
     TEXT$SOUL_CONTROL$BODY_DIED("Your body is nearing death!", "你的本体正濒临死亡！"),
     TEXT$SOUL_CONTROL$MINION_DIED("The soul minion you possessed is dead!", "你附体的灵仆已死亡！"),
+    TEXT$SOUL_COMMAND$MOVE_MODE("Current Move Mode: %s", "当前移动模式：%s"),
+    TEXT$SOUL_COMMAND$ATTACK_MODE("Current Attack Mode: %s", "当前攻击模式：%s"),
 
     /**
      * Game Over
@@ -169,9 +171,11 @@ public enum SDTexts
     /**
      * Soul Minion Mode
      */
-    SOUL_MINION_MODE$0("Follow", "跟随"),
-    SOUL_MINION_MODE$1("Force Follow", "强制跟随"),
-    SOUL_MINION_MODE$2("Standby", "待命"),
+    SOUL_MINION_MOVE_MODE$0("Follow", "跟随"),
+    SOUL_MINION_MOVE_MODE$1("Force Follow", "强制跟随"),
+    SOUL_MINION_MOVE_MODE$2("Standby", "待命"),
+    SOUL_MINION_ATTACK_MODE$0("Default", "默认"),
+    SOUL_MINION_ATTACK_MODE$1("Aggressive", "主动"),
 
     /**
      * Tooltip
@@ -403,9 +407,14 @@ public enum SDTexts
         return Text.translatable(Util.createTranslationKey("difficulty_tier", SpellDimension.modLoc(tier + "")));
     }
 
-    public static MutableText getSoulMinionModeText(SoulMinionMode mode)
+    public static MutableText getSoulMinionMoveModeText(SoulMinionMode.Move mode)
     {
-        return Text.translatable(Util.createTranslationKey("soul_minion_mode", SpellDimension.modLoc(mode.ordinal() + "")));
+        return Text.translatable(Util.createTranslationKey("soul_minion_move_mode", SpellDimension.modLoc(mode.ordinal() + "")));
+    }
+
+    public static MutableText getSoulMinionAttackModeText(SoulMinionMode.Attack mode)
+    {
+        return Text.translatable(Util.createTranslationKey("soul_minion_attack_mode", SpellDimension.modLoc(mode.ordinal() + "")));
     }
 
     public static void register()

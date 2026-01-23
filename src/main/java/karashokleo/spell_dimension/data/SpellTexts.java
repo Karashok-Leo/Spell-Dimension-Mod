@@ -411,8 +411,8 @@ public enum SpellTexts
     SOUL_COMMAND(
         "Soul Command",
         "魂令",
-        "Switch target soul minion behavior mode: Follow / Force Follow / Standby",
-        "切换目标灵仆的行为模式：跟随/强制跟随/待命"
+        "Normal Cast: switch the target soul minion's move mode; Cast While Sneaking: switch the target soul minion's attack mode.",
+        "正常施放：切换目标灵仆的移动模式；潜行时施放：切换目标灵仆的攻击模式。"
     ),
     SOUL_SWAP(
         "Soul Swap",

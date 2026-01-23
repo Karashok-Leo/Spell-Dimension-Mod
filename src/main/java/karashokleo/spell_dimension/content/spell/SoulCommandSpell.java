@@ -8,6 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 import net.spell_engine.api.spell.SpellInfo;
 
@@ -35,7 +36,15 @@ public class SoulCommandSpell
         }
 
         SoulMinionComponent minionComponent = SoulControl.getSoulMinion(mob);
-        minionComponent.mode = minionComponent.mode.next();
-        player.sendMessage(SDTexts.getSoulMinionModeText(minionComponent.mode), true);
+
+        if (player.isSneaking())
+        {
+            minionComponent.attackMode = minionComponent.attackMode.next();
+            player.sendMessage(SDTexts.TEXT$SOUL_COMMAND$ATTACK_MODE.get(SDTexts.getSoulMinionAttackModeText(minionComponent.attackMode).formatted(Formatting.BOLD)), true);
+        } else
+        {
+            minionComponent.moveMode = minionComponent.moveMode.next();
+            player.sendMessage(SDTexts.TEXT$SOUL_COMMAND$MOVE_MODE.get(SDTexts.getSoulMinionMoveModeText(minionComponent.moveMode).formatted(Formatting.BOLD)), true);
+        }
     }
 }

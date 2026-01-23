@@ -3,9 +3,11 @@ package karashokleo.spell_dimension.content.misc;
 import karashokleo.spell_dimension.content.component.SoulControllerComponent;
 import karashokleo.spell_dimension.content.component.SoulMinionComponent;
 import karashokleo.spell_dimension.content.entity.FakePlayerEntity;
+import karashokleo.spell_dimension.content.object.SoulMinionMode;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllComponents;
 import karashokleo.spell_dimension.init.AllStatusEffects;
+import karashokleo.spell_dimension.util.RelationUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
@@ -49,16 +51,52 @@ public interface SoulControl
     }
 
     /**
-     * soul minion cannot and will not attack its owner,
-     * but owner can attack its soul minion
-     *
      * @return true if entity2 is a soul minion owned by entity1
      */
-    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     static boolean isSoulMinion(@Nullable Entity entity1, @Nullable Entity entity2)
     {
-        return entity2 instanceof MobEntity mob &&
-            SoulControl.getSoulMinion(mob).getOwner() == entity1;
+        if (!(entity2 instanceof MobEntity mob))
+        {
+            return false;
+        }
+        PlayerEntity owner = SoulControl.getSoulMinion(mob).getOwner();
+        return owner != null && owner == entity1;
+    }
+
+    /**
+     * soul minion cannot and will not attack its owner,
+     * but owner can attack its soul minion
+     * <p>in default mode, soul minion will not attack allies (other minions) of its owner;
+     * <p>in aggressive mode, soul minion can attack anyone except its owner;
+     *
+     * @return true if the mob is a soul minion and cannot attack the target, otherwise false
+     */
+    static boolean mobCannotAttack(MobEntity mob, @Nullable Entity target)
+    {
+        if (target == null)
+        {
+            return false;
+        }
+        SoulMinionComponent minionComponent = getSoulMinion(mob);
+        if (!minionComponent.hasOwner())
+        {
+            return false;
+        }
+        PlayerEntity owner = minionComponent.getOwner();
+        // has owner but owner offline, cannot attack anyone
+        if (owner == null)
+        {
+            return true;
+        }
+        if (owner == target)
+        {
+            return true;
+        }
+        if (RelationUtil.isAlly(mob, target))
+        {
+            return minionComponent.attackMode == SoulMinionMode.Attack.DEFAULT;
+        }
+        return false;
     }
 
     static void onSelfBodyDeath(ServerPlayerEntity player)

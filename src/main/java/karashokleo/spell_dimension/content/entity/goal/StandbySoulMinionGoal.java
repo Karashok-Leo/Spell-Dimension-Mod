@@ -23,7 +23,7 @@ public class StandbySoulMinionGoal extends Goal
     {
         SoulMinionComponent minionComponent = SoulControl.getSoulMinion(this.mob);
         return minionComponent.hasOwner() &&
-            minionComponent.mode == SoulMinionMode.STANDBY;
+            minionComponent.moveMode == SoulMinionMode.Move.STANDBY;
     }
 
     @Override

@@ -28,7 +28,7 @@ public class AttackWithSoulOwnerGoal extends TrackTargetGoal
     public boolean canStart()
     {
         SoulMinionComponent minionComponent = SoulControl.getSoulMinion(this.mob);
-        if (minionComponent.mode == SoulMinionMode.STANDBY)
+        if (minionComponent.moveMode == SoulMinionMode.Move.STANDBY)
         {
             return false;
         }

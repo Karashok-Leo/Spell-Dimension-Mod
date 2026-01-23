@@ -1,18 +1,36 @@
 package karashokleo.spell_dimension.content.object;
 
-public enum SoulMinionMode
+public class SoulMinionMode
 {
-    FOLLOW,
-    FORCE_FOLLOW,
-    STANDBY;
-
-    public SoulMinionMode next()
+    public enum Move
     {
-        return switch (this)
+        FOLLOW,
+        FORCE_FOLLOW,
+        STANDBY;
+
+        public Move next()
         {
-            case FOLLOW -> FORCE_FOLLOW;
-            case FORCE_FOLLOW -> STANDBY;
-            case STANDBY -> FOLLOW;
-        };
+            return switch (this)
+            {
+                case FOLLOW -> FORCE_FOLLOW;
+                case FORCE_FOLLOW -> STANDBY;
+                case STANDBY -> FOLLOW;
+            };
+        }
+    }
+
+    public enum Attack
+    {
+        DEFAULT,
+        AGGRESSIVE;
+
+        public Attack next()
+        {
+            return switch (this)
+            {
+                case DEFAULT -> AGGRESSIVE;
+                case AGGRESSIVE -> DEFAULT;
+            };
+        }
     }
 }

@@ -57,7 +57,7 @@ public final class SoulMinionBrain
             return;
         }
 
-        if (minionComponent.mode == SoulMinionMode.STANDBY)
+        if (minionComponent.moveMode == SoulMinionMode.Move.STANDBY)
         {
             mob.getBrain().remember(SOUL_STANDBY_MEMORY, Unit.INSTANCE);
             mob.getBrain().doExclusively(SOUL_STANDBY_ACTIVITY);

@@ -23,12 +23,10 @@ public abstract class TrackTargetGoalMixin
     @Inject(method = "start", at = @At("HEAD"), cancellable = true)
     private void inject_start(CallbackInfo ci)
     {
-        if (!SoulControl.isSoulMinion(mob.getTarget(), mob))
+        if (SoulControl.mobCannotAttack(mob, mob.getTarget()))
         {
-            return;
+            stop();
+            ci.cancel();
         }
-
-        stop();
-        ci.cancel();
     }
 }

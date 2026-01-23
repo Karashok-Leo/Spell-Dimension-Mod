@@ -6,6 +6,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 import net.spell_power.api.SpellDamageSource;
@@ -51,12 +52,14 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityEx
     )
     private void inject_canTarget(LivingEntity target, CallbackInfoReturnable<Boolean> cir)
     {
-        if (!SoulControl.isSoulMinion(target, (LivingEntity) (Object) this))
+        if (!((LivingEntity) (Object) this instanceof MobEntity mob))
         {
             return;
         }
-
-        cir.setReturnValue(false);
+        if (SoulControl.mobCannotAttack(mob, target))
+        {
+            cir.setReturnValue(false);
+        }
     }
 
     @SuppressWarnings("UnstableApiUsage")
