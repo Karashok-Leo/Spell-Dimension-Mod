@@ -3,7 +3,6 @@ package karashokleo.spell_dimension.content.entity.goal;
 import karashokleo.spell_dimension.content.component.SoulMinionComponent;
 import karashokleo.spell_dimension.content.misc.SoulControl;
 import karashokleo.spell_dimension.content.object.SoulMinionMode;
-import karashokleo.spell_dimension.util.RelationUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.ai.goal.Goal;
@@ -41,8 +40,7 @@ public class TrackSoulOwnerAttackerGoal extends TrackTargetGoal
         this.attacker = owner.getAttacker();
         int i = owner.getLastAttackedTime();
         return i != this.lastAttackedTime &&
-            this.canTrack(this.attacker, TargetPredicate.DEFAULT) &&
-            !RelationUtil.isAlly(this.mob, this.attacker);
+            this.canTrack(this.attacker, TargetPredicate.DEFAULT);
     }
 
     @Override
