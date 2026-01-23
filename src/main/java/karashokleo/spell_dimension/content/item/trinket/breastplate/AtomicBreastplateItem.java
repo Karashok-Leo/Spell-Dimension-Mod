@@ -49,7 +49,7 @@ public class AtomicBreastplateItem extends SingleEpicTrinketItem implements Dama
     public void onHurting(ItemStack stack, LivingEntity entity, LivingHurtEvent event)
     {
         // Blacklist
-        if (EssenceLootConfig.BASE_CONFIG.blacklist().contains(event.getEntity().getType()))
+        if (EssenceLootConfig.BASE_CONFIG.entityBlacklist().contains(event.getEntity().getType()))
         {
             return;
         }

@@ -387,8 +387,8 @@ public enum SpellTexts
     SOUL_SLASH(
         "Soul Slash",
         "灵斩",
-        "Fire a soul slash that pierces through enemies and deals {damage} area damage, plus additional damage based on the average level of you and all your soul minions present.",
-        "发射一道灵斩，穿透敌人并造成{damage}点范围伤害，同时根据你与你在场的所有灵仆的平均等级造成额外伤害。"
+        "Fire a soul slash that pierces through enemies and deals {damage} area damage, plus additional damage based on the average level of all your soul minions present.",
+        "发射一道灵斩，穿透敌人并造成{damage}点范围伤害，同时根据你在场的所有灵仆的平均等级造成额外伤害。"
     ),
     REQUIEM(
         "Requiem",
@@ -443,6 +443,12 @@ public enum SpellTexts
         "魅影辛迪加",
         "[Passive] Damage or healing effects received by soul minions are shared among all soul minions.",
         "[被动] 灵仆受到的伤害或治愈系效果将被分摊到所有灵仆身上。"
+    ),
+    SOUL_BEAM(
+        "Soul Beam",
+        "灵能射线",
+        "Channels a beam of light, healing soul minions by {heal}, and dealing {damage} spell damage to enemies every second.",
+        "引导一束射线，治疗灵仆{heal}点生命值，并对敌人造成每秒{damage}点法术伤害。"
     ),
     SOUL_ECHO(
         "Soul Echo",

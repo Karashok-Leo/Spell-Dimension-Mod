@@ -34,15 +34,16 @@ public class SoulSlashSpell
             return;
         }
 
-        int totalLevel = DifficultyLevel.ofAny(player);
-        int count = 1;
+        int totalLevel = 0;
+        int count = 0;
         SoulControllerComponent controllerComponent = SoulControl.getSoulController(player);
         for (MobEntity minion : controllerComponent.getActiveMinions())
         {
             totalLevel += DifficultyLevel.ofAny(minion);
             count++;
         }
-        float extraDamage = Math.max(0, (float) totalLevel / (float) count);
+        float extraDamage = count == 0 ? 0 : (float) totalLevel / (float) count;
+        extraDamage = Math.max(0, extraDamage);
 
         for (Entity target : targets)
         {

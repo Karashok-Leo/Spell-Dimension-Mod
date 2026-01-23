@@ -112,6 +112,7 @@ public class AllSpells
     public static final Identifier ECHO_STORM = fromCraftingWithId("spellbladenext:bladestorm").withTier(2).build();
 
     // Fire
+    // Tier 1
     public static final Identifier FIRE_BREATH = fromCraftingWithId("wizards:fire_breath").build();
     public static final Identifier OVER_BLAZE = fromCraftingWithId("spellbladenext:overblaze").build();
     public static final Identifier WILDFIRE = fromCraftingWithId("spellbladenext:snuffout").build();
@@ -130,6 +131,7 @@ public class AllSpells
     public static final Identifier FLICKER_STRIKE = fromCraftingWithId("spellbladenext:flicker_strike").withTier(2).build();
 
     // Frost
+    // Tier 1
     public static final Identifier ICICLE = fromCrafting("icicle").build();
     public static final Identifier FROZEN = fromCrafting("frozen").build();
     public static final Identifier FROST_LOTUS = fromCraftingWithId("spellbladenext:frostbloom0").build();
@@ -149,8 +151,8 @@ public class AllSpells
     public static final Identifier TEMPEST = fromCraftingWithId("spellbladenext:tempest").withTier(2).build();
 
     // Healing
+    // Tier 1
     public static final Identifier DIVINE_CURSE_BLAST = fromCrafting("divine_curse_blast").build();
-    public static final Identifier HOLY_BEAM = fromCraftingWithId("paladins:holy_beam").build();
     public static final Identifier CIRCLE_OF_HEALING = fromCraftingWithId("paladins:circle_of_healing").build();
     public static final Identifier JUDGEMENT = fromCraftingWithId("paladins:judgement").build();
     public static final Identifier CRITICAL_HIT = fromCrafting("critical_hit").build();
@@ -161,6 +163,7 @@ public class AllSpells
     public static final Identifier SPEED = fromCrafting("speed").build();
     // Tier 2
     public static final Identifier CLEANSE = fromCrafting("cleanse").withTier(1).build();
+    public static final Identifier HOLY_BEAM = fromCraftingWithId("paladins:holy_beam").withTier(1).build();
     public static final Identifier BARRIER = fromCraftingWithId("paladins:barrier").withTier(1).build();
     public static final Identifier BATTLE_BANNER = fromCraftingWithId("paladins:battle_banner").withTier(1).build();
     public static final Identifier BLESSING = fromCrafting("blessing").withTier(1).build();
@@ -195,13 +198,14 @@ public class AllSpells
 
     // Soul
     // Tier 1
-    public static final Identifier SOUL_COMMAND = fromCrafting("soul_command").withTier(0).build();
-    public static final Identifier SOUL_SWAP = fromCrafting("soul_swap").withTier(0).build();
-    public static final Identifier SOUL_STEP = fromCrafting("soul_step").withTier(0).build();
-    public static final Identifier SOUL_MARK = fromCrafting("soul_mark").withTier(0).build();
+    public static final Identifier SOUL_COMMAND = fromCrafting("soul_command").build();
+    public static final Identifier SOUL_SWAP = fromCrafting("soul_swap").build();
+    public static final Identifier SOUL_STEP = fromCrafting("soul_step").build();
+    public static final Identifier SOUL_MARK = fromCrafting("soul_mark").build();
     // Tier 2
     public static final Identifier SOUL_DUET = fromCrafting("soul_duet").withTier(1).setPassive().build();
     public static final Identifier PHANTOM_SYNDICATE = fromCrafting("phantom_syndicate").withTier(1).setPassive().build();
+    public static final Identifier SOUL_BEAM = fromCrafting("soul_beam").withTier(1).build();
     public static final Identifier SOUL_ECHO = fromCrafting("soul_echo").withTier(1).build();
     public static final Identifier SOUL_BURST = fromCrafting("soul_burst").withTier(1).build();
     public static final Identifier SOUL_SACRIFICE = fromCrafting("soul_sacrifice").withTier(1).build();
@@ -239,6 +243,7 @@ public class AllSpells
         registerImpactHandler(SOUL_SWAP, SoulSwapSpell::handle);
         registerImpactHandler(SOUL_STEP, SoulStepSpell::handle);
         registerImpactHandler(SOUL_MARK, SoulMarkSpell::handle);
+        registerImpactHandler(SOUL_BEAM, SoulBeamSpell::handle);
         registerImpactHandler(SOUL_ECHO, SoulEchoSpell::handle);
         registerImpactHandler(SOUL_BURST, SoulBurstSpell::handle);
         registerImpactHandler(SOUL_SACRIFICE, SoulSacrificeSpell::handle);

@@ -27,6 +27,7 @@ public class SoulMinionComponent implements AutoSyncedComponent
     public SoulMinionComponent(MobEntity mob)
     {
         this.mob = mob;
+        this.mode = SoulMinionMode.FOLLOW;
         this.soulNetFlag = 0;
     }
 
