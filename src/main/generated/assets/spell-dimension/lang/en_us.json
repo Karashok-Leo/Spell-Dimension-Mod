@@ -230,6 +230,8 @@
   "enchantment.spell-dimension.spell_tearing.desc": "Your spells can penetrate the target's Dispell trait. Restores 20% of the original damage per level.",
   "enchantment.spell-dimension.stress_response": "Stress Response",
   "enchantment.spell-dimension.stress_response.desc": "If the cooldown progress (percentage) of a spell when injured is less than the enchantment level × 0.16, the spell will immediately cool down.",
+  "enchantment.spell-dimension.stun_immunity": "Stun Immunity",
+  "enchantment.spell-dimension.stun_immunity.desc": "You are immune to the Stun effect.",
   "enchantment.spell-dimension.weakness_immunity": "Weakness Immunity",
   "enchantment.spell-dimension.weakness_immunity.desc": "You are immune to the Weakness effect.",
   "enchantment.spell-dimension.wither_immunity": "Wither Immunity",

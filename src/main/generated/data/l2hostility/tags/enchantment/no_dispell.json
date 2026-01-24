@@ -18,6 +18,7 @@
     "spell-dimension:levitation_immunity",
     "spell-dimension:soul_burner_immunity",
     "spell-dimension:freezing_immunity",
-    "spell-dimension:cursed_immunity"
+    "spell-dimension:cursed_immunity",
+    "spell-dimension:stun_immunity"
   ]
 }

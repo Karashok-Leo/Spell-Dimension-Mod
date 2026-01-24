@@ -5,14 +5,14 @@ import karashokleo.enchantment_infusion.api.util.EIRecipeUtil;
 import karashokleo.l2hostility.content.item.ComplementItems;
 import karashokleo.l2hostility.content.item.ConsumableItems;
 import karashokleo.l2hostility.content.item.MiscItems;
-import karashokleo.l2hostility.content.trait.base.TargetEffectTrait;
+import karashokleo.l2hostility.content.trait.base.MobTrait;
 import karashokleo.l2hostility.init.LHEnchantments;
 import karashokleo.l2hostility.init.LHTraits;
 import karashokleo.spell_dimension.SpellDimension;
-import karashokleo.spell_dimension.content.enchantment.TraitEffectImmunityEnchantment;
 import karashokleo.spell_dimension.init.AllEnchantments;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllTags;
+import karashokleo.spell_dimension.init.AllTraits;
 import karashokleo.spell_dimension.util.SchoolUtil;
 import karashokleo.spell_dimension.util.TagUtil;
 import net.aleganza.plentyofarmors.item.ModItems;
@@ -29,7 +29,7 @@ import net.spell_power.api.SpellSchools;
 import net.spell_power.api.enchantment.Enchantments_SpellPower;
 import net.spell_power.api.enchantment.Enchantments_SpellPowerMechanics;
 
-import java.util.Map;
+import java.util.List;
 import java.util.function.Consumer;
 
 public class SDEnchantmentRecipes
@@ -539,20 +539,23 @@ public class SDEnchantmentRecipes
 
         // Effect Immunity Enchantments
         {
-            Map<TraitEffectImmunityEnchantment, TargetEffectTrait> effect_immunity = Map.of(
-                AllEnchantments.WEAKNESS_IMMUNITY, LHTraits.WEAKNESS,
-                AllEnchantments.SLOWNESS_IMMUNITY, LHTraits.SLOWNESS,
-                AllEnchantments.POISON_IMMUNITY, LHTraits.POISON,
-                AllEnchantments.WITHER_IMMUNITY, LHTraits.WITHER,
-                AllEnchantments.BLINDNESS_IMMUNITY, LHTraits.BLIND,
-                AllEnchantments.CONFUSION_IMMUNITY, LHTraits.CONFUSION,
-                AllEnchantments.LEVITATION_IMMUNITY, LHTraits.LEVITATION,
-                AllEnchantments.SOUL_BURNER_IMMUNITY, LHTraits.SOUL_BURNER,
-                AllEnchantments.FREEZING_IMMUNITY, LHTraits.FREEZING,
-                AllEnchantments.CURSED_IMMUNITY, LHTraits.CURSED
+            List<MobTrait> traitList = List.of(
+                LHTraits.WEAKNESS,
+                LHTraits.SLOWNESS,
+                LHTraits.POISON,
+                LHTraits.WITHER,
+                LHTraits.BLIND,
+                LHTraits.CONFUSION,
+                LHTraits.LEVITATION,
+                LHTraits.SOUL_BURNER,
+                LHTraits.FREEZING,
+                LHTraits.CURSED,
+                AllTraits.THUNDERBOLT
             );
-            effect_immunity.forEach((enchantment, trait) ->
+            for (int i = 0; i < AllEnchantments.EFFECT_IMMUNITY.size(); i++)
             {
+                var enchantment = AllEnchantments.EFFECT_IMMUNITY.get(i);
+                var trait = traitList.get(i);
                 Identifier id = Registries.STATUS_EFFECT.getId(enchantment.getEffect());
                 assert id != null;
                 EIRecipeUtil.set(
@@ -564,7 +567,7 @@ public class SDEnchantmentRecipes
                     exporter,
                     SpellDimension.modLoc("enchantment/effect_immunity/" + id.getPath())
                 );
-            });
+            }
         }
 
         // Spell Blade Enchantments

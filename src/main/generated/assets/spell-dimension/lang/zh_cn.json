@@ -230,6 +230,8 @@
   "enchantment.spell-dimension.spell_tearing.desc": "你的法术可以穿透目标的破魔词条。每级恢复原有伤害的20%。",
   "enchantment.spell-dimension.stress_response": "应激急速",
   "enchantment.spell-dimension.stress_response.desc": "受伤时如果有法术冷却进度（百分比）小于 魔咒等级 × 0.16, 则该法术立即冷却完毕。",
+  "enchantment.spell-dimension.stun_immunity": "眩晕免疫",
+  "enchantment.spell-dimension.stun_immunity.desc": "你对眩晕效果免疫。",
   "enchantment.spell-dimension.weakness_immunity": "虚弱免疫",
   "enchantment.spell-dimension.weakness_immunity.desc": "你对虚弱效果免疫。",
   "enchantment.spell-dimension.wither_immunity": "凋零免疫",

@@ -41,6 +41,7 @@ public class AllEnchantments
     public static TraitEffectImmunityEnchantment SOUL_BURNER_IMMUNITY;
     public static TraitEffectImmunityEnchantment FREEZING_IMMUNITY;
     public static TraitEffectImmunityEnchantment CURSED_IMMUNITY;
+    public static TraitEffectImmunityEnchantment STUN_IMMUNITY;
 
     public static final List<TraitEffectImmunityEnchantment> EFFECT_IMMUNITY = new ArrayList<>();
 
@@ -217,6 +218,13 @@ public class AllEnchantments
             .addZHDesc("你对诅咒效果免疫。")
             .register();
 
+        STUN_IMMUNITY = new Entry<>("stun_immunity", new TraitEffectImmunityEnchantment(() -> AllStatusEffects.STUN))
+            .addEN()
+            .addENDesc("You are immune to the Stun effect.")
+            .addZH("眩晕免疫")
+            .addZHDesc("你对眩晕效果免疫。")
+            .register();
+
         EFFECT_IMMUNITY.add(WEAKNESS_IMMUNITY);
         EFFECT_IMMUNITY.add(SLOWNESS_IMMUNITY);
         EFFECT_IMMUNITY.add(POISON_IMMUNITY);
@@ -227,6 +235,7 @@ public class AllEnchantments
         EFFECT_IMMUNITY.add(SOUL_BURNER_IMMUNITY);
         EFFECT_IMMUNITY.add(FREEZING_IMMUNITY);
         EFFECT_IMMUNITY.add(CURSED_IMMUNITY);
+        EFFECT_IMMUNITY.add(STUN_IMMUNITY);
 
         EnchantmentRestriction.Condition condition = stack -> stack.isIn(AllTags.MAGIC_WEAPON);
 
