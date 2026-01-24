@@ -34,7 +34,7 @@ public class SoulMarkTargetGoal extends TrackTargetGoal
         {
             return false;
         }
-        if (SoulControl.getSoulMinion(this.mob).getOwner() != null)
+        if (!SoulControl.getSoulMinion(this.mob).hasOwner())
         {
             return false;
         }

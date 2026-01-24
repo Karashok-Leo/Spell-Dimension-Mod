@@ -868,6 +868,7 @@
   "tooltip.spell-dimension.secondary_school_item.3": "- 有%s%%的几率获得%s法术学派的束魔精华和源启精华",
   "tooltip.spell-dimension.shift_reset": "Shift + 右键重置进度",
   "tooltip.spell-dimension.soul_container.last_stored": "上次存储：",
+  "tooltip.spell-dimension.soul_container.owner": "拥有者：%s",
   "tooltip.spell-dimension.soul_container.stored": "已存储：",
   "tooltip.spell-dimension.soul_container.usage_1": "对生命值低于%s的生物长按右键可尝试捕捉其灵魂，转化为灵仆并存储在容器中，目标生命值越低成功率越高。",
   "tooltip.spell-dimension.soul_container.usage_2": "右键点击方块可释放存储的灵仆。",

@@ -221,6 +221,7 @@ public enum SDTexts
     TOOLTIP$SOUL_MINION$CAPTURE_PROBABILITY("Capture probability: %s", "捕捉概率：%s"),
     TOOLTIP$SOUL_CONTAINER$STORED("Stored:", "已存储："),
     TOOLTIP$SOUL_CONTAINER$LAST_STORED("Last stored:", "上次存储："),
+    TOOLTIP$SOUL_CONTAINER$OWNER("Owner: %s", "拥有者：%s"),
     TOOLTIP$SOUL_CONTAINER$USAGE_1("Right-click and hold on mobs with health below %s to attempt capturing their souls, converting them into soul minions and storing them in containers. The lower the target's health, the higher the success rate.", "对生命值低于%s的生物长按右键可尝试捕捉其灵魂，转化为灵仆并存储在容器中，目标生命值越低成功率越高。"),
     TOOLTIP$SOUL_CONTAINER$USAGE_2("Right-click the block to release the stored soul minion.", "右键点击方块可释放存储的灵仆。"),
     TOOLTIP$SOUL_CONTAINER$USAGE_3("Right-click the block to attempt recalling the last summoned soul minion.", "右键点击方块可尝试将上次释放的灵仆召回。"),

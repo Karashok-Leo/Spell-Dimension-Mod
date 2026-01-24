@@ -17,11 +17,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
+import net.minecraft.registry.Registries;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
@@ -38,6 +40,7 @@ public class SoulContainerItem extends Item
 {
     public static final int RANGE = 8;
     public static final int COOLDOWN = 10;
+    public static final String OWNER_KEY = "Owner";
     public static final String ENTITY_KEY = "Entity";
     public static final String TOOLTIP_DATA_KEY = "TooltipData";
     public static final String CUSTOM_NAME_KEY = "CustomName";
@@ -70,9 +73,14 @@ public class SoulContainerItem extends Item
         {
             return TypedActionResult.fail(stack);
         }
+        NbtCompound nbt = stack.getOrCreateNbt();
+        if (isBoundToOther(nbt, user))
+        {
+            return TypedActionResult.fail(stack);
+        }
         // already stored
         if (hand != Hand.MAIN_HAND ||
-            stack.getOrCreateNbt().contains(ENTITY_KEY, NbtElement.COMPOUND_TYPE))
+            nbt.contains(ENTITY_KEY, NbtElement.COMPOUND_TYPE))
         {
             return TypedActionResult.fail(stack);
         }
@@ -126,6 +134,10 @@ public class SoulContainerItem extends Item
     protected void tryCapture(ItemStack stack, PlayerEntity user, LivingEntity entity)
     {
         NbtCompound nbt = stack.getOrCreateNbt();
+        if (isBoundToOther(nbt, user))
+        {
+            return;
+        }
         // already stored
         if (nbt.contains(ENTITY_KEY, NbtElement.COMPOUND_TYPE))
         {
@@ -161,6 +173,7 @@ public class SoulContainerItem extends Item
         nbt.put(TOOLTIP_DATA_KEY, tooltipData);
         mob.discard();
 
+        bindOwner(nbt, user);
         user.getItemCooldownManager().set(this, COOLDOWN);
     }
 
@@ -179,6 +192,16 @@ public class SoulContainerItem extends Item
         }
 
         ItemStack itemStack = context.getStack();
+        NbtCompound nbt = itemStack.getOrCreateNbt();
+        if (isBoundToOther(nbt, player))
+        {
+            return ActionResult.FAIL;
+        }
+        if (nbt.contains(ENTITY_KEY, NbtElement.COMPOUND_TYPE) ||
+            nbt.containsUuid(ENTITY_KEY))
+        {
+            bindOwner(nbt, player);
+        }
         BlockPos blockPos = context.getBlockPos();
         BlockPos offsetPos = serverWorld.getBlockState(blockPos)
             .getCollisionShape(serverWorld, blockPos).isEmpty() ?
@@ -186,7 +209,6 @@ public class SoulContainerItem extends Item
             blockPos.offset(context.getSide());
         Vec3d pos = Vec3d.ofBottomCenter(offsetPos);
 
-        NbtCompound nbt = itemStack.getOrCreateNbt();
         // if stored, try to spawn it
         if (nbt.contains(ENTITY_KEY, NbtElement.COMPOUND_TYPE))
         {
@@ -235,9 +257,14 @@ public class SoulContainerItem extends Item
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
         NbtCompound nbt = stack.getNbt();
+        if (nbt == null)
+        {
+            tooltip.add(SDTexts.TOOLTIP$CONTAINER_EMPTY.get().formatted(Formatting.DARK_AQUA).formatted(Formatting.GRAY));
+            return;
+        }
 
-        boolean stored = nbt != null && nbt.contains(ENTITY_KEY, NbtElement.COMPOUND_TYPE);
-        boolean lastStored = nbt != null && nbt.containsUuid(ENTITY_KEY);
+        boolean stored = nbt.contains(ENTITY_KEY, NbtElement.COMPOUND_TYPE);
+        boolean lastStored = nbt.containsUuid(ENTITY_KEY);
 
         // stored
         if (stored)
@@ -255,7 +282,26 @@ public class SoulContainerItem extends Item
             }
         }
 
-        if (nbt != null && nbt.contains(TOOLTIP_DATA_KEY, NbtElement.COMPOUND_TYPE))
+        if (nbt.containsUuid(OWNER_KEY))
+        {
+            UUID ownerId = nbt.getUuid(OWNER_KEY);
+            Text ownerName = null;
+            if (world != null)
+            {
+                PlayerEntity owner = world.getPlayerByUuid(ownerId);
+                if (owner != null)
+                {
+                    ownerName = owner.getName();
+                }
+            }
+            if (ownerName == null)
+            {
+                ownerName = Text.literal(ownerId.toString());
+            }
+            tooltip.add(SDTexts.TOOLTIP$SOUL_CONTAINER$OWNER.get(ownerName).formatted(Formatting.GRAY));
+        }
+
+        if (nbt.contains(TOOLTIP_DATA_KEY, NbtElement.COMPOUND_TYPE))
         {
             appendSoulMinionDetailTooltip(tooltip, nbt.getCompound(TOOLTIP_DATA_KEY));
             tooltip.add(Text.empty());
@@ -290,10 +336,12 @@ public class SoulContainerItem extends Item
         Text customName = entity.getCustomName();
         if (customName != null)
         {
-            nbt.putString(CUSTOM_NAME_KEY, customName.getString());
+            String json = Text.Serializer.toJson(customName);
+            nbt.putString(CUSTOM_NAME_KEY, json);
         }
 
-        nbt.putString(ENTITY_TYPE_KEY, entity.getType().getName().getString());
+        Identifier typeId = Registries.ENTITY_TYPE.getId(entity.getType());
+        nbt.putString(ENTITY_TYPE_KEY, typeId.toString());
 
         MobDifficulty.get(entity).ifPresent(difficulty ->
             nbt.putInt(LEVEL_KEY, difficulty.getLevel())
@@ -312,16 +360,34 @@ public class SoulContainerItem extends Item
     {
         if (nbt.contains(CUSTOM_NAME_KEY, NbtElement.STRING_TYPE))
         {
+            String rawName = nbt.getString(CUSTOM_NAME_KEY);
+            MutableText text = null;
+            try
+            {
+                text = Text.Serializer.fromJson(rawName);
+            } catch (RuntimeException ignored)
+            {
+            }
+            if (text == null)
+            {
+                text = Text.literal(rawName);
+            }
             tooltip.add(
                 SDTexts.TOOLTIP$SOUL_MINION$NAME
-                    .get(nbt.getString(CUSTOM_NAME_KEY))
+                    .get(text)
                     .formatted(Formatting.DARK_AQUA)
             );
         }
 
+        String typeRaw = nbt.getString(ENTITY_TYPE_KEY);
+        Identifier typeId = Identifier.tryParse(typeRaw);
+        Text typeName = typeId != null &&
+            Registries.ENTITY_TYPE.containsId(typeId) ?
+            Registries.ENTITY_TYPE.get(typeId).getName() :
+            Text.literal(typeRaw);
         tooltip.add(
             SDTexts.TOOLTIP$SOUL_MINION$TYPE
-                .get(nbt.getString(ENTITY_TYPE_KEY))
+                .get(typeName)
                 .formatted(Formatting.DARK_AQUA)
         );
 
@@ -356,5 +422,20 @@ public class SoulContainerItem extends Item
             }
         }
         return 0;
+    }
+
+    private static boolean isBoundToOther(NbtCompound nbt, PlayerEntity user)
+    {
+        return nbt.containsUuid(OWNER_KEY) &&
+            !nbt.getUuid(OWNER_KEY).equals(user.getUuid());
+    }
+
+    private static void bindOwner(NbtCompound nbt, PlayerEntity user)
+    {
+        if (nbt.containsUuid(OWNER_KEY))
+        {
+            return;
+        }
+        nbt.putUuid(OWNER_KEY, user.getUuid());
     }
 }
