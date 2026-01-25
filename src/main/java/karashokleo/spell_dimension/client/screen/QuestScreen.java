@@ -35,6 +35,7 @@ public class QuestScreen extends Screen
 {
     private final Hand hand;
     private final List<Quest> quests;
+    private final List<Text> tooltip;
     @Nullable
     private Quest current;
 
@@ -43,6 +44,7 @@ public class QuestScreen extends Screen
         super(Text.empty());
         this.hand = hand;
         this.quests = quests.stream().map(RegistryEntry::value).toList();
+        this.tooltip = Lists.newArrayList();
     }
 
     @Override
@@ -64,15 +66,14 @@ public class QuestScreen extends Screen
         if (super.keyPressed(keyCode, scanCode, modifiers))
         {
             return true;
-        } else if (this.client != null &&
+        }
+        if (this.client != null &&
             this.client.options.inventoryKey.matchesKey(keyCode, scanCode))
         {
             this.close();
             return true;
-        } else
-        {
-            return false;
         }
+        return false;
     }
 
     @Override
@@ -126,7 +127,10 @@ public class QuestScreen extends Screen
 
             var scale = 1f;
 
-            if (mouseX > stackX && mouseY > stackY && mouseX <= (stackX + 16) && mouseY <= (stackY + 16))
+            if (mouseX > stackX &&
+                mouseY > stackY &&
+                mouseX <= (stackX + 16) &&
+                mouseY <= (stackY + 16))
             {
                 scale = 1.3f;
                 this.current = quest;
@@ -144,9 +148,9 @@ public class QuestScreen extends Screen
 
         if (this.current != null)
         {
-            List<Text> list = Lists.newArrayList();
-            this.current.appendTooltip(client.world, list);
-            context.drawTooltip(this.textRenderer, list, mouseX, mouseY);
+            this.tooltip.clear();
+            this.current.appendTooltip(client.world, this.tooltip);
+            context.drawTooltip(this.textRenderer, this.tooltip, mouseX, mouseY);
         }
     }
 
