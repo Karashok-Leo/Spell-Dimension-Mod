@@ -313,8 +313,14 @@ public class SoulAlbumItem extends Item
 
     public static void selectContainer(ItemStack stack, int index)
     {
-        List<ItemStack> containers = getStoredContainers(stack);
-        if (index < 0 || index >= containers.size())
+        NbtCompound nbt = stack.getNbt();
+        if (nbt == null || !nbt.contains(STORAGE_KEY, NbtElement.LIST_TYPE))
+        {
+            setSelectedIndex(stack, -1);
+            return;
+        }
+        NbtList list = nbt.getList(STORAGE_KEY, NbtElement.COMPOUND_TYPE);
+        if (index < 0 || index >= list.size())
         {
             setSelectedIndex(stack, -1);
             return;
@@ -334,17 +340,19 @@ public class SoulAlbumItem extends Item
 
     private static Optional<ItemStack> getSelectedContainer(ItemStack stack)
     {
-        List<ItemStack> containers = getStoredContainers(stack);
-        if (containers.isEmpty())
+        NbtCompound nbt = stack.getNbt();
+        if (nbt == null || !nbt.contains(STORAGE_KEY, NbtElement.LIST_TYPE))
         {
             return Optional.empty();
         }
+        NbtList list = nbt.getList(STORAGE_KEY, NbtElement.COMPOUND_TYPE);
         int selected = getSelectedIndex(stack);
-        if (selected < 0 || selected >= containers.size())
+        if (selected < 0 || selected >= list.size())
         {
             return Optional.empty();
         }
-        return Optional.of(containers.get(selected));
+        ItemStack container = ItemStack.fromNbt(list.getCompound(selected));
+        return container.isEmpty() ? Optional.empty() : Optional.of(container);
     }
 
     private static boolean cannotStore(ItemStack stack)
@@ -364,33 +372,45 @@ public class SoulAlbumItem extends Item
 
     private static void addContainer(ItemStack album, ItemStack container)
     {
-        List<ItemStack> containers = getStoredContainers(album);
-        containers.add(container);
-        setStoredContainers(album, containers);
+        NbtCompound nbt = album.getOrCreateNbt();
+        NbtList list = nbt.getList(STORAGE_KEY, NbtElement.COMPOUND_TYPE);
+        list.add(container.writeNbt(new NbtCompound()));
+        nbt.put(STORAGE_KEY, list);
     }
 
     private static void updateSelectedContainer(ItemStack album, ItemStack selected)
     {
-        List<ItemStack> containers = getStoredContainers(album);
-        int index = getSelectedIndex(album);
-        if (index < 0 || index >= containers.size())
+        NbtCompound nbt = album.getNbt();
+        if (nbt == null || !nbt.contains(STORAGE_KEY, NbtElement.LIST_TYPE))
         {
             return;
         }
-        containers.set(index, selected);
-        setStoredContainers(album, containers);
+        NbtList list = nbt.getList(STORAGE_KEY, NbtElement.COMPOUND_TYPE);
+        int index = getSelectedIndex(album);
+        if (index < 0 || index >= list.size())
+        {
+            return;
+        }
+        list.set(index, selected.writeNbt(new NbtCompound()));
+        nbt.put(STORAGE_KEY, list);
     }
 
     private static ItemStack removeSelectedOrLast(ItemStack album)
     {
-        List<ItemStack> containers = getStoredContainers(album);
-        if (containers.isEmpty())
+        NbtCompound nbt = album.getNbt();
+        if (nbt == null || !nbt.contains(STORAGE_KEY, NbtElement.LIST_TYPE))
+        {
+            return ItemStack.EMPTY;
+        }
+        NbtList list = nbt.getList(STORAGE_KEY, NbtElement.COMPOUND_TYPE);
+        if (list.isEmpty())
         {
             return ItemStack.EMPTY;
         }
         int selected = getSelectedIndex(album);
-        int index = selected >= 0 && selected < containers.size() ? selected : containers.size() - 1;
-        ItemStack removed = containers.remove(index);
+        int index = selected >= 0 && selected < list.size() ? selected : list.size() - 1;
+        NbtCompound removedNbt = list.getCompound(index);
+        list.remove(index);
         int nextSelected = selected;
         if (selected == index)
         {
@@ -399,37 +419,44 @@ public class SoulAlbumItem extends Item
         {
             nextSelected = selected - 1;
         }
-        setStoredContainers(album, containers);
-        setSelectedIndex(album, nextSelected);
-        return removed;
-    }
-
-    private static void setStoredContainers(ItemStack stack, List<ItemStack> containers)
-    {
-        NbtCompound nbt = stack.getOrCreateNbt();
-        NbtList list = new NbtList();
-        for (ItemStack stored : containers)
+        if (list.isEmpty())
         {
-            list.add(stored.writeNbt(new NbtCompound()));
+            nbt.remove(STORAGE_KEY);
+        } else
+        {
+            nbt.put(STORAGE_KEY, list);
         }
-        nbt.put(STORAGE_KEY, list);
+        setSelectedIndex(album, nextSelected);
+        return ItemStack.fromNbt(removedNbt);
     }
 
     private static void setSelectedIndex(ItemStack stack, int selected)
     {
-        NbtCompound nbt = stack.getOrCreateNbt();
         if (selected < 0)
         {
-            nbt.remove(SELECTED_KEY);
+            NbtCompound nbt = stack.getNbt();
+            if (nbt != null)
+            {
+                nbt.remove(SELECTED_KEY);
+            }
         } else
         {
-            nbt.putInt(SELECTED_KEY, selected);
+            stack.getOrCreateNbt().putInt(SELECTED_KEY, selected);
         }
     }
 
     private static Stream<ItemStack> getAllContainers(ItemStack stack)
     {
-        return getStoredContainers(stack).stream();
+        NbtCompound nbt = stack.getNbt();
+        if (nbt == null || !nbt.contains(STORAGE_KEY, NbtElement.LIST_TYPE))
+        {
+            return Stream.empty();
+        }
+        NbtList list = nbt.getList(STORAGE_KEY, NbtElement.COMPOUND_TYPE);
+        return list.stream()
+            .map(NbtCompound.class::cast)
+            .map(ItemStack::fromNbt)
+            .filter(itemStack -> !itemStack.isEmpty());
     }
 
     private static NbtCompound saveSoulMinionTooltipData(Entity entity)
