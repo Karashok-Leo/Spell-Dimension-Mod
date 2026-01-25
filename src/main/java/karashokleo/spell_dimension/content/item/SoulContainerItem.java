@@ -112,7 +112,7 @@ public class SoulContainerItem extends AbstractSoulContainerItem
     @Override
     protected boolean cannotCapture(ItemStack stack, PlayerEntity user, MobEntity mob)
     {
-        return super.cannotCapture(stack, user, mob) &&
+        return super.cannotCapture(stack, user, mob) ||
             user.getRandom().nextFloat() > getCaptureProbability(mob);
     }
 

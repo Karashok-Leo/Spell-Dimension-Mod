@@ -1,6 +1,7 @@
 package karashokleo.spell_dimension.content.item;
 
 import karashokleo.l2hostility.content.logic.DifficultyLevel;
+import karashokleo.l2hostility.util.raytrace.RayTraceUtil;
 import karashokleo.spell_dimension.content.misc.SoulControl;
 import karashokleo.spell_dimension.content.network.S2COpenSoulAlbumScreen;
 import karashokleo.spell_dimension.data.SDTexts;
@@ -21,6 +22,7 @@ import net.minecraft.util.ClickType;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -77,11 +79,20 @@ public class SoulAlbumItem extends AbstractSoulContainerItem
         {
             return null;
         }
+        NbtCompound data = list.getCompound(selected);
         if (removeData)
         {
             list.remove(selected);
+            if (list.isEmpty())
+            {
+                itemNbt.remove(STORAGE_KEY);
+            } else
+            {
+                itemNbt.put(STORAGE_KEY, list);
+            }
+            itemNbt.remove(SELECTED_KEY);
         }
-        return list.getCompound(selected);
+        return data;
     }
 
     @Override
@@ -90,11 +101,14 @@ public class SoulAlbumItem extends AbstractSoulContainerItem
         ItemStack stack = user.getStackInHand(hand);
         if (getSelectedIndex(stack) < 0)
         {
-            if (!world.isClient() && user instanceof ServerPlayerEntity player)
+            if (!shouldStartCapture(user, stack))
             {
-                AllPackets.toClientPlayer(player, new S2COpenSoulAlbumScreen(hand));
+                if (!world.isClient() && user instanceof ServerPlayerEntity player)
+                {
+                    AllPackets.toClientPlayer(player, new S2COpenSoulAlbumScreen(hand));
+                }
+                return TypedActionResult.success(stack, world.isClient());
             }
-            return TypedActionResult.success(stack, world.isClient());
         }
         return super.use(world, user, hand);
     }
@@ -145,22 +159,6 @@ public class SoulAlbumItem extends AbstractSoulContainerItem
     {
         tooltip.add(SDTexts.TOOLTIP$USE$CLICK.get().formatted(Formatting.GRAY));
         tooltip.add(SDTexts.TOOLTIP$USE$PRESS.get().formatted(Formatting.GRAY));
-    }
-
-    public static List<NbtCompound> getStoredEntries(ItemStack stack)
-    {
-        NbtCompound nbt = stack.getNbt();
-        if (nbt == null || !nbt.contains(STORAGE_KEY, NbtElement.LIST_TYPE))
-        {
-            return List.of();
-        }
-        NbtList list = nbt.getList(STORAGE_KEY, NbtElement.COMPOUND_TYPE);
-        List<NbtCompound> entries = new ArrayList<>(list.size());
-        for (int i = 0; i < list.size(); i++)
-        {
-            entries.add(list.getCompound(i));
-        }
-        return entries;
     }
 
     public static void select(ItemStack stack, int index)
@@ -215,7 +213,7 @@ public class SoulAlbumItem extends AbstractSoulContainerItem
     }
 
     @Nullable
-    private static NbtList getStorageList(NbtCompound itemNbt)
+    public static NbtList getStorageList(NbtCompound itemNbt)
     {
         if (!itemNbt.contains(STORAGE_KEY, NbtElement.LIST_TYPE))
         {
@@ -262,6 +260,20 @@ public class SoulAlbumItem extends AbstractSoulContainerItem
         putMobDataToNbt(albumNbt, mobData);
         bindOwner(albumNbt, player);
         return true;
+    }
+
+    private boolean shouldStartCapture(PlayerEntity user, ItemStack stack)
+    {
+        if (cannotCapture(stack, user))
+        {
+            return false;
+        }
+        EntityHitResult hit = RayTraceUtil.rayTraceEntity(
+            user,
+            RANGE,
+            entity -> entity instanceof MobEntity mob && SoulControl.isSoulMinion(user, mob)
+        );
+        return hit != null;
     }
 
     private static void playSound(Entity entity)
