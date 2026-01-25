@@ -43,10 +43,10 @@ public class SoulContainerItem extends AbstractSoulContainerItem
     }
 
     @Override
-    protected MobEntity tryAccessMob(ServerWorld serverWorld, Vec3d pos, NbtCompound itemNbt, PlayerEntity player)
+    protected MobEntity tryAccessMob(ServerWorld world, Vec3d pos, NbtCompound itemNbt, PlayerEntity player)
     {
         // if stored, try to spawn it
-        MobEntity mob = super.tryAccessMob(serverWorld, pos, itemNbt, player);
+        MobEntity mob = super.tryAccessMob(world, pos, itemNbt, player);
         if (mob != null)
         {
             // data changed
@@ -58,7 +58,7 @@ public class SoulContainerItem extends AbstractSoulContainerItem
         if (itemNbt.containsUuid(ENTITY_KEY))
         {
             UUID lastUuid = itemNbt.getUuid(ENTITY_KEY);
-            if (serverWorld.getEntity(lastUuid) instanceof MobEntity mob1)
+            if (world.getEntity(lastUuid) instanceof MobEntity mob1)
             {
                 mob1.setPosition(pos);
                 return mob1;
@@ -78,18 +78,27 @@ public class SoulContainerItem extends AbstractSoulContainerItem
     @Override
     protected void saveMobToNbt(NbtCompound itemNbt, MobEntity mob)
     {
-        NbtCompound entityNbt = SoulControl.saveMinionData(mob);
-        itemNbt.put(ENTITY_KEY, entityNbt);
+        super.saveMobToNbt(itemNbt, mob);
         saveSoulMinionTooltipData(itemNbt, mob);
     }
 
     @Override
-    protected MobEntity readMobFromNbt(NbtCompound itemNbt, World world)
+    protected void putMobDataToNbt(NbtCompound itemNbt, NbtCompound mobNbt)
+    {
+        itemNbt.put(ENTITY_KEY, mobNbt);
+    }
+
+    @Override
+    protected NbtCompound getMobDataFromNbt(NbtCompound itemNbt, boolean removeData)
     {
         if (itemNbt.contains(ENTITY_KEY, NbtElement.COMPOUND_TYPE))
         {
             NbtCompound data = itemNbt.getCompound(ENTITY_KEY);
-            return SoulControl.loadMinionFromData(data, world);
+            if (removeData)
+            {
+                itemNbt.remove(ENTITY_KEY);
+            }
+            return data;
         }
         return null;
     }
@@ -181,11 +190,12 @@ public class SoulContainerItem extends AbstractSoulContainerItem
         {
             return 0;
         }
-        MobEntity mob = readMobFromNbt(nbt, world);
-        if (mob == null)
+        NbtCompound data = getMobDataFromNbt(nbt, false);
+        if (data == null)
         {
             return 0;
         }
+        MobEntity mob = SoulControl.loadMinionFromData(data, world);
         return DifficultyLevel.ofAny(mob);
     }
 }

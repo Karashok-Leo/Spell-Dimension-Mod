@@ -53,10 +53,16 @@ public abstract class AbstractSoulContainerItem extends Item
 
     protected abstract boolean isFull(NbtCompound itemNbt);
 
-    protected abstract void saveMobToNbt(NbtCompound itemNbt, MobEntity mob);
+    protected void saveMobToNbt(NbtCompound itemNbt, MobEntity mob)
+    {
+        NbtCompound mobNbt = SoulControl.saveMinionData(mob);
+        putMobDataToNbt(itemNbt, mobNbt);
+    }
+
+    protected abstract void putMobDataToNbt(NbtCompound itemNbt, NbtCompound mobNbt);
 
     @Nullable
-    protected abstract MobEntity readMobFromNbt(NbtCompound itemNbt, World world);
+    protected abstract NbtCompound getMobDataFromNbt(NbtCompound itemNbt, boolean removeData);
 
     protected int getCooldown(boolean success)
     {
@@ -213,23 +219,24 @@ public abstract class AbstractSoulContainerItem extends Item
     }
 
     @Nullable
-    protected MobEntity tryAccessMob(ServerWorld serverWorld, Vec3d pos, NbtCompound itemNbt, PlayerEntity player)
+    protected MobEntity tryAccessMob(ServerWorld world, Vec3d pos, NbtCompound itemNbt, PlayerEntity player)
     {
         // spawn entity
-        MobEntity mob = readMobFromNbt(itemNbt, serverWorld);
-        if (mob == null)
+        NbtCompound data = getMobDataFromNbt(itemNbt, true);
+        if (data == null)
         {
             return null;
         }
 
+        MobEntity mob = SoulControl.loadMinionFromData(data, world);
         // TODO: spawn pos
         mob.setPosition(pos);
-        serverWorld.spawnEntity(mob);
+        world.spawnEntity(mob);
 
         // feedback
         player.incrementStat(Stats.USED.getOrCreateStat(this));
-        serverWorld.emitGameEvent(player, GameEvent.ENTITY_PLACE, pos);
-        serverWorld.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PARTICLE_SOUL_ESCAPE, SoundCategory.PLAYERS, 0.5F, 0.4F / (serverWorld.getRandom().nextFloat() * 0.4F + 0.8F));
+        world.emitGameEvent(player, GameEvent.ENTITY_PLACE, pos);
+        world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PARTICLE_SOUL_ESCAPE, SoundCategory.PLAYERS, 0.5F, 0.4F / (world.getRandom().nextFloat() * 0.4F + 0.8F));
         return mob;
     }
 

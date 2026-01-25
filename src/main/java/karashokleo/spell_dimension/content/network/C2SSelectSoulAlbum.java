@@ -22,6 +22,6 @@ public record C2SSelectSoulAlbum(int index, Hand hand) implements SerialPacketC2
         {
             return;
         }
-        SoulAlbumItem.selectContainer(stackInHand, index);
+        SoulAlbumItem.select(stackInHand, index);
     }
 }
