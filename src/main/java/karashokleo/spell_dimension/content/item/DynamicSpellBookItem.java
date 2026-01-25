@@ -134,6 +134,7 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
         if (this.school == SpellSchools.SOUL &&
             entity instanceof PlayerEntity player)
         {
+            World world = player.getWorld();
             int level = 0;
             // active minions
             SoulControllerComponent controllerComponent = SoulControl.getSoulController(player);
@@ -146,7 +147,10 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
             {
                 for (ItemStack invStack : list)
                 {
-                    level = Math.max(level, SoulContainerItem.getContainMobLevel(invStack));
+                    if (invStack.getItem() instanceof AbstractSoulContainerItem containerItem)
+                    {
+                        level = Math.max(level, containerItem.getContainMobMaxLevel(invStack, world));
+                    }
                 }
             }
             return level >= REQUIREMENT_SOUL_MINION_LEVEL_PER_GRADE[this.grade];

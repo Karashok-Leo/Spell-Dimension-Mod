@@ -1,57 +1,34 @@
 package karashokleo.spell_dimension.content.item;
 
 import it.unimi.dsi.fastutil.floats.FloatUnaryOperator;
-import karashokleo.l2hostility.content.component.mob.MobDifficulty;
-import karashokleo.l2hostility.util.raytrace.RayTraceUtil;
-import karashokleo.spell_dimension.content.component.SoulMinionComponent;
+import karashokleo.l2hostility.content.logic.DifficultyLevel;
 import karashokleo.spell_dimension.content.misc.SoulControl;
 import karashokleo.spell_dimension.data.SDTexts;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsageContext;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
-import net.minecraft.registry.Registries;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.stat.Stats;
-import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
-import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.UUID;
 
-public class SoulContainerItem extends Item
+public class SoulContainerItem extends AbstractSoulContainerItem
 {
-    public static final int RANGE = 12;
-    public static final int COOLDOWN = 10;
-    public static final String OWNER_KEY = "Owner";
-    public static final String ENTITY_KEY = "Entity";
-    public static final String TOOLTIP_DATA_KEY = "TooltipData";
-    public static final String CUSTOM_NAME_KEY = "CustomName";
-    public static final String ENTITY_TYPE_KEY = "EntityType";
-    public static final String LEVEL_KEY = "Level";
-    public static final String HEALTH_KEY = "Health";
-    public static final String MAX_HEALTH_KEY = "MaxHealth";
+    protected static final String ENTITY_KEY = "Entity";
 
-    private final FloatUnaryOperator probabilityFunction;
-    private final float healthThresholdRatio;
-    private final int cooldownOnFail;
+    protected final FloatUnaryOperator probabilityFunction;
+    protected final float healthThresholdRatio;
+    protected final int cooldownOnFail;
 
     public SoulContainerItem(FloatUnaryOperator probabilityFunction, float healthThresholdRatio, int cooldownOnFail)
     {
@@ -66,64 +43,71 @@ public class SoulContainerItem extends Item
     }
 
     @Override
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand)
+    protected MobEntity tryAccessMob(ServerWorld serverWorld, Vec3d pos, NbtCompound itemNbt, PlayerEntity player)
     {
-        ItemStack stack = user.getStackInHand(hand);
-        if (user.getItemCooldownManager().isCoolingDown(this))
+        // if stored, try to spawn it
+        MobEntity mob = super.tryAccessMob(serverWorld, pos, itemNbt, player);
+        if (mob != null)
         {
-            return TypedActionResult.fail(stack);
+            // data changed
+            itemNbt.putUuid(ENTITY_KEY, mob.getUuid());
+            saveSoulMinionTooltipData(itemNbt, mob);
+            return mob;
         }
-        NbtCompound nbt = stack.getOrCreateNbt();
-        if (isBoundToOther(nbt, user))
+        // else if last stored, try to teleport it back here
+        if (itemNbt.containsUuid(ENTITY_KEY))
         {
-            return TypedActionResult.fail(stack);
-        }
-        // already stored
-        if (hand != Hand.MAIN_HAND ||
-            nbt.contains(ENTITY_KEY, NbtElement.COMPOUND_TYPE))
-        {
-            return TypedActionResult.fail(stack);
-        }
-        user.setCurrentHand(hand);
-        return TypedActionResult.consume(stack);
-    }
-
-    @Override
-    public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks)
-    {
-        if (world.isClient() && user instanceof PlayerEntity player)
-        {
-            RayTraceUtil.clientUpdateTarget(player, RANGE);
-        }
-    }
-
-    @Override
-    public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user)
-    {
-        if (user instanceof ServerPlayerEntity player)
-        {
-            LivingEntity target = RayTraceUtil.serverGetTarget(player);
-            if (target != null)
+            UUID lastUuid = itemNbt.getUuid(ENTITY_KEY);
+            if (serverWorld.getEntity(lastUuid) instanceof MobEntity mob1)
             {
-                tryCapture(stack, player, target);
+                mob1.setPosition(pos);
+                return mob1;
             }
         }
-        return stack;
+        // not spawned && not found
+        player.sendMessage(SDTexts.TOOLTIP$SOUL_CONTAINER$WARNING.get().formatted(Formatting.RED), true);
+        return null;
     }
 
     @Override
-    public int getMaxUseTime(ItemStack stack)
+    protected boolean isFull(NbtCompound itemNbt)
     {
-        return 10;
+        return itemNbt.contains(ENTITY_KEY, NbtElement.COMPOUND_TYPE);
     }
 
     @Override
-    public UseAction getUseAction(ItemStack stack)
+    protected void saveMobToNbt(NbtCompound itemNbt, MobEntity mob)
     {
-        return UseAction.BOW;
+        NbtCompound entityNbt = SoulControl.saveMinionData(mob);
+        itemNbt.put(ENTITY_KEY, entityNbt);
+        saveSoulMinionTooltipData(itemNbt, mob);
     }
 
-    public float getCaptureProbability(LivingEntity entity)
+    @Override
+    protected MobEntity readMobFromNbt(NbtCompound itemNbt, World world)
+    {
+        if (itemNbt.contains(ENTITY_KEY, NbtElement.COMPOUND_TYPE))
+        {
+            NbtCompound data = itemNbt.getCompound(ENTITY_KEY);
+            return SoulControl.loadMinionFromData(data, world);
+        }
+        return null;
+    }
+
+    @Override
+    protected int getCooldown(boolean success)
+    {
+        return success ? COOLDOWN : cooldownOnFail;
+    }
+
+    @Override
+    protected boolean cannotCapture(ItemStack stack, PlayerEntity user, MobEntity mob)
+    {
+        return super.cannotCapture(stack, user, mob) &&
+            user.getRandom().nextFloat() > getCaptureProbability(mob);
+    }
+
+    public float getCaptureProbability(MobEntity entity)
     {
         float health = entity.getHealth();
         float maxHealth = entity.getMaxHealth();
@@ -131,131 +115,11 @@ public class SoulContainerItem extends Item
         return MathHelper.clamp(probability, 0f, 1f);
     }
 
-    protected void tryCapture(ItemStack stack, PlayerEntity user, LivingEntity entity)
-    {
-        NbtCompound nbt = stack.getOrCreateNbt();
-        if (isBoundToOther(nbt, user))
-        {
-            return;
-        }
-        // already stored
-        if (nbt.contains(ENTITY_KEY, NbtElement.COMPOUND_TYPE))
-        {
-            return;
-        }
-
-        if (!(entity instanceof MobEntity mob))
-        {
-            return;
-        }
-
-        SoulMinionComponent component = SoulControl.getSoulMinion(mob);
-        boolean notOwned = component.getOwner() != user;
-        // user is not the owner, and failed to capture
-        if (notOwned &&
-            user.getRandom().nextFloat() > getCaptureProbability(mob))
-        {
-            user.getItemCooldownManager().set(this, cooldownOnFail);
-            return;
-        }
-
-        // first capture
-        if (notOwned)
-        {
-            mob.setHealth(mob.getMaxHealth());
-            component.setOwner(user);
-        }
-
-        // do saving
-        NbtCompound entityNbt = SoulControl.saveMinionData(mob);
-        nbt.put(ENTITY_KEY, entityNbt);
-        NbtCompound tooltipData = saveSoulMinionTooltipData(mob);
-        nbt.put(TOOLTIP_DATA_KEY, tooltipData);
-        mob.discard();
-
-        bindOwner(nbt, user);
-        user.getItemCooldownManager().set(this, COOLDOWN);
-    }
-
-    @Override
-    public ActionResult useOnBlock(ItemUsageContext context)
-    {
-        if (!(context.getWorld() instanceof ServerWorld serverWorld))
-        {
-            return ActionResult.CONSUME;
-        }
-
-        PlayerEntity player = context.getPlayer();
-        if (player == null)
-        {
-            return ActionResult.FAIL;
-        }
-
-        ItemStack itemStack = context.getStack();
-        NbtCompound nbt = itemStack.getOrCreateNbt();
-        if (isBoundToOther(nbt, player))
-        {
-            return ActionResult.FAIL;
-        }
-        if (nbt.contains(ENTITY_KEY, NbtElement.COMPOUND_TYPE) ||
-            nbt.containsUuid(ENTITY_KEY))
-        {
-            bindOwner(nbt, player);
-        }
-        BlockPos blockPos = context.getBlockPos();
-        BlockPos offsetPos = serverWorld.getBlockState(blockPos)
-            .getCollisionShape(serverWorld, blockPos).isEmpty() ?
-            blockPos :
-            blockPos.offset(context.getSide());
-        Vec3d pos = Vec3d.ofBottomCenter(offsetPos);
-
-        // if stored, try to spawn it
-        if (nbt.contains(ENTITY_KEY, NbtElement.COMPOUND_TYPE))
-        {
-            // spawn entity
-            NbtCompound data = nbt.getCompound(ENTITY_KEY);
-            MobEntity mob = SoulControl.loadMinionFromData(data, serverWorld);
-            // TODO: pos
-            mob.setPosition(pos);
-            serverWorld.spawnEntity(mob);
-
-            // data changed
-            nbt.putUuid(ENTITY_KEY, mob.getUuid());
-            NbtCompound tooltipData = saveSoulMinionTooltipData(mob);
-            nbt.put(TOOLTIP_DATA_KEY, tooltipData);
-
-            // feedback
-            player.incrementStat(Stats.USED.getOrCreateStat(this));
-            serverWorld.emitGameEvent(player, GameEvent.ENTITY_PLACE, pos);
-            serverWorld.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PARTICLE_SOUL_ESCAPE, SoundCategory.PLAYERS, 0.5F, 0.4F / (serverWorld.getRandom().nextFloat() * 0.4F + 0.8F));
-
-            return ActionResult.SUCCESS;
-        }
-
-        // else if last stored, try to teleport it back here
-        else if (nbt.containsUuid(ENTITY_KEY))
-        {
-            UUID lastUuid = nbt.getUuid(ENTITY_KEY);
-            Entity entity = serverWorld.getEntity(lastUuid);
-
-            // not found
-            if (entity == null)
-            {
-                player.sendMessage(SDTexts.TOOLTIP$SOUL_CONTAINER$WARNING.get().formatted(Formatting.RED), true);
-            } else
-            {
-                entity.setPosition(pos);
-                return ActionResult.SUCCESS;
-            }
-        }
-
-        // else do nothing
-        return ActionResult.FAIL;
-    }
-
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
+        super.appendTooltip(stack, world, tooltip, context);
+
         NbtCompound nbt = stack.getNbt();
         if (nbt == null)
         {
@@ -282,35 +146,15 @@ public class SoulContainerItem extends Item
             }
         }
 
-        if (nbt.containsUuid(OWNER_KEY))
-        {
-            UUID ownerId = nbt.getUuid(OWNER_KEY);
-            Text ownerName = null;
-            if (world != null)
-            {
-                PlayerEntity owner = world.getPlayerByUuid(ownerId);
-                if (owner != null)
-                {
-                    ownerName = owner.getName();
-                }
-            }
-            if (ownerName == null)
-            {
-                ownerName = Text.literal(ownerId.toString());
-            }
-            tooltip.add(SDTexts.TOOLTIP$SOUL_CONTAINER$OWNER.get(ownerName).formatted(Formatting.GRAY));
-        }
-
-        if (nbt.contains(TOOLTIP_DATA_KEY, NbtElement.COMPOUND_TYPE))
-        {
-            appendSoulMinionDetailTooltip(tooltip, nbt.getCompound(TOOLTIP_DATA_KEY));
-            tooltip.add(Text.empty());
-        } else if (stored || lastStored)
+        // content tooltips
+        if (!appendSoulMinionDetailTooltip(nbt, tooltip) &&
+            (stored || lastStored))
         {
             tooltip.add(SDTexts.TOOLTIP$INVALID.get().formatted(Formatting.RED));
-            tooltip.add(Text.empty());
         }
+        tooltip.add(Text.empty());
 
+        // usage tooltips
         if (stored)
         {
             tooltip.add(SDTexts.TOOLTIP$SOUL_CONTAINER$USAGE_2.get().formatted(Formatting.GRAY));
@@ -329,113 +173,19 @@ public class SoulContainerItem extends Item
         }
     }
 
-    private static NbtCompound saveSoulMinionTooltipData(Entity entity)
+    @Override
+    public int getContainMobMaxLevel(ItemStack stack, World world)
     {
-        NbtCompound nbt = new NbtCompound();
-
-        Text customName = entity.getCustomName();
-        if (customName != null)
+        var nbt = stack.getNbt();
+        if (nbt == null)
         {
-            String json = Text.Serializer.toJson(customName);
-            nbt.putString(CUSTOM_NAME_KEY, json);
+            return 0;
         }
-
-        Identifier typeId = Registries.ENTITY_TYPE.getId(entity.getType());
-        nbt.putString(ENTITY_TYPE_KEY, typeId.toString());
-
-        MobDifficulty.get(entity).ifPresent(difficulty ->
-            nbt.putInt(LEVEL_KEY, difficulty.getLevel())
-        );
-
-        if (entity instanceof LivingEntity living)
+        MobEntity mob = readMobFromNbt(nbt, world);
+        if (mob == null)
         {
-            nbt.putFloat(HEALTH_KEY, living.getHealth());
-            nbt.putFloat(MAX_HEALTH_KEY, living.getMaxHealth());
+            return 0;
         }
-
-        return nbt;
-    }
-
-    private static void appendSoulMinionDetailTooltip(List<Text> tooltip, NbtCompound nbt)
-    {
-        if (nbt.contains(CUSTOM_NAME_KEY, NbtElement.STRING_TYPE))
-        {
-            String rawName = nbt.getString(CUSTOM_NAME_KEY);
-            MutableText text = null;
-            try
-            {
-                text = Text.Serializer.fromJson(rawName);
-            } catch (RuntimeException ignored)
-            {
-            }
-            if (text == null)
-            {
-                text = Text.literal(rawName);
-            }
-            tooltip.add(
-                SDTexts.TOOLTIP$SOUL_MINION$NAME
-                    .get(text)
-                    .formatted(Formatting.DARK_AQUA)
-            );
-        }
-
-        String typeRaw = nbt.getString(ENTITY_TYPE_KEY);
-        Identifier typeId = Identifier.tryParse(typeRaw);
-        Text typeName = typeId != null &&
-            Registries.ENTITY_TYPE.containsId(typeId) ?
-            Registries.ENTITY_TYPE.get(typeId).getName() :
-            Text.literal(typeRaw);
-        tooltip.add(
-            SDTexts.TOOLTIP$SOUL_MINION$TYPE
-                .get(typeName)
-                .formatted(Formatting.DARK_AQUA)
-        );
-
-        if (nbt.contains(LEVEL_KEY, NbtElement.INT_TYPE))
-        {
-            tooltip.add(
-                SDTexts.TOOLTIP$SOUL_MINION$LEVEL
-                    .get(nbt.getInt(LEVEL_KEY))
-                    .formatted(Formatting.DARK_AQUA)
-            );
-        }
-
-        tooltip.add(SDTexts.TOOLTIP$SOUL_MINION$HEALTH.get(
-            "%.1f / %.1f".formatted(
-                nbt.getFloat(HEALTH_KEY),
-                nbt.getFloat(MAX_HEALTH_KEY)
-            )
-        ).formatted(Formatting.DARK_AQUA));
-    }
-
-    public static int getContainMobLevel(ItemStack stack)
-    {
-        if (stack.getItem() instanceof SoulContainerItem)
-        {
-            var nbt = stack.getNbt();
-            if (nbt != null &&
-                nbt.contains(ENTITY_KEY, NbtElement.COMPOUND_TYPE) &&
-                nbt.contains(TOOLTIP_DATA_KEY, NbtElement.COMPOUND_TYPE))
-            {
-                NbtCompound tempData = nbt.getCompound(TOOLTIP_DATA_KEY);
-                return tempData.getInt(LEVEL_KEY);
-            }
-        }
-        return 0;
-    }
-
-    private static boolean isBoundToOther(NbtCompound nbt, PlayerEntity user)
-    {
-        return nbt.containsUuid(OWNER_KEY) &&
-            !nbt.getUuid(OWNER_KEY).equals(user.getUuid());
-    }
-
-    private static void bindOwner(NbtCompound nbt, PlayerEntity user)
-    {
-        if (nbt.containsUuid(OWNER_KEY))
-        {
-            return;
-        }
-        nbt.putUuid(OWNER_KEY, user.getUuid());
+        return DifficultyLevel.ofAny(mob);
     }
 }
