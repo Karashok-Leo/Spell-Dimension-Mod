@@ -18,6 +18,7 @@ import karashokleo.spell_dimension.content.item.DynamicSpellBookItem;
 import karashokleo.spell_dimension.content.item.SpellScrollItem;
 import karashokleo.spell_dimension.content.misc.SpawnerExtension;
 import karashokleo.spell_dimension.content.network.C2SSelectQuest;
+import karashokleo.spell_dimension.content.network.C2SSelectSoulAlbum;
 import karashokleo.spell_dimension.init.*;
 import karashokleo.spell_dimension.util.SchoolUtil;
 import net.adventurez.entity.VoidShadeEntity;
@@ -186,9 +187,13 @@ public class MiscEvents
         // quest scroll
         PlayerInteractionEvents.LEFT_CLICK_EMPTY.register(event ->
         {
-            if (event.getItemStack().isOf(AllItems.QUEST_SCROLL))
+            ItemStack stack = event.getItemStack();
+            if (stack.isOf(AllItems.QUEST_SCROLL))
             {
                 AllPackets.toServer(new C2SSelectQuest(null, event.getHand()));
+            } else if (stack.isOf(AllItems.SOUL_ALBUM))
+            {
+                AllPackets.toServer(new C2SSelectSoulAlbum(-1, event.getHand()));
             }
         });
 

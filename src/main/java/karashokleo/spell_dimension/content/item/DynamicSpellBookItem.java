@@ -190,7 +190,7 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
                     SpellContainer container = SpellContainerHelper.containerFromItemStack(stack).copy();
                     SpellContainer modifiedContainer = SpellContainerUtil.addSpell(container, spellInfo.id());
                     SpellContainerHelper.addContainerToItemStack(modifiedContainer, stack);
-                    scroll.decrement(1);
+                    scroll.setCount(0);
                     this.playSound(player);
                 }
             }
@@ -274,10 +274,8 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
                 tryAddScroll(clicking, holding, player);
             }
             return true;
-        } else
-        {
-            return false;
         }
+        return false;
     }
 
     @Override

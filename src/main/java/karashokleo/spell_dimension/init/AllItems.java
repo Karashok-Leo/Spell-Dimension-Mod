@@ -71,6 +71,7 @@ public class AllItems
     public static SoulContainerItem SOUL_CONTAINER;
     public static SoulContainerItem ADVANCED_SOUL_CONTAINER;
     public static SoulContainerItem CREATIVE_SOUL_CONTAINER;
+    public static SoulAlbumItem SOUL_ALBUM;
     public static ProtectiveSpellContainerItem SPELL_CONTAINER;
     public static IllusionContainerItem ILLUSION_CONTAINER;
     public static IllusionUpgradeItem ILLUSION_UPGRADE;
@@ -252,6 +253,12 @@ public class AllItems
         CREATIVE_SOUL_CONTAINER = Entry.of("creative_soul_container", new SoulContainerItem(ratio -> 1, 1f, 10))
             .addEN()
             .addZH("创造灵魂容器")
+            .setTab(AllGroups.EQUIPMENTS)
+            .addModel()
+            .register();
+        SOUL_ALBUM = Entry.of("soul_album", new SoulAlbumItem())
+            .addEN()
+            .addZH("灵魂相册")
             .setTab(AllGroups.EQUIPMENTS)
             .addModel()
             .register();

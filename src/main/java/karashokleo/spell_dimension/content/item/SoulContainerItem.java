@@ -38,7 +38,7 @@ import java.util.UUID;
 
 public class SoulContainerItem extends Item
 {
-    public static final int RANGE = 8;
+    public static final int RANGE = 12;
     public static final int COOLDOWN = 10;
     public static final String OWNER_KEY = "Owner";
     public static final String ENTITY_KEY = "Entity";
