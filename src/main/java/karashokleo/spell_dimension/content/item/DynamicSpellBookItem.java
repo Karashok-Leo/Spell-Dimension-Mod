@@ -44,7 +44,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Stream;
 
@@ -197,7 +196,7 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
         }
     }
 
-    public Optional<ItemStack> removeSpell(ItemStack stack, PlayerEntity player)
+    public ItemStack removeSpell(ItemStack stack, PlayerEntity player)
     {
         SpellContainer container = SpellContainerHelper.containerFromItemStack(stack);
         if (container == null || !container.isValid())
@@ -206,7 +205,7 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
             {
                 player.sendMessage(SDTexts.TOOLTIP$INVALID.get().formatted(Formatting.RED));
             }
-            return Optional.empty();
+            return ItemStack.EMPTY;
         }
         int size = container.spell_ids.size();
         if (size < 1)
@@ -215,14 +214,14 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
             {
                 player.sendMessage(SDTexts.TEXT$BLANK_BOOK.get());
             }
-            return Optional.empty();
+            return ItemStack.EMPTY;
         }
         String spellId = container.spell_ids.get(size - 1);
         ItemStack scroll = AllItems.SPELL_SCROLL.getStack(new Identifier(spellId));
         SpellContainer modifiedContainer = SpellContainerUtil.removeLastSpell(container);
         SpellContainerHelper.addContainerToItemStack(modifiedContainer, stack);
         this.playSound(player);
-        return Optional.of(scroll);
+        return scroll;
     }
 
     private void playSound(Entity entity)
@@ -241,11 +240,12 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
         ItemStack clicking = slot.getStack();
         if (clicking.isEmpty())
         {
-            this.removeSpell(holding, player).ifPresent(stack ->
+            ItemStack removed = this.removeSpell(holding, player);
+            if (!removed.isEmpty())
             {
-                ItemStack remain = slot.insertStack(stack);
+                ItemStack remain = slot.insertStack(removed);
                 player.getInventory().offerOrDrop(remain);
-            });
+            }
         } else
         {
             tryAddScroll(holding, clicking, player);
@@ -261,14 +261,14 @@ public class DynamicSpellBookItem extends SpellBookTrinketItem
         {
             if (holding.isEmpty())
             {
-                removeSpell(clicking, player).ifPresent(stack ->
+                ItemStack removed = removeSpell(clicking, player);
+                if (!removed.isEmpty())
                 {
-                    // if failed to insert, drop the scroll
-                    if (!cursorStackReference.set(stack))
+                    if (!cursorStackReference.set(removed))
                     {
-                        player.getInventory().offerOrDrop(stack);
+                        player.getInventory().offerOrDrop(removed);
                     }
-                });
+                }
             } else
             {
                 tryAddScroll(clicking, holding, player);

@@ -35,7 +35,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Stream;
 
@@ -120,7 +119,7 @@ public class SoulAlbumItem extends Item
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand)
     {
         ItemStack stack = user.getStackInHand(hand);
-        Optional<ItemStack> selected = getSelectedContainer(stack);
+        ItemStack selected = getSelectedContainer(stack);
         if (selected.isEmpty())
         {
             if (!world.isClient() && user instanceof ServerPlayerEntity player)
@@ -130,8 +129,7 @@ public class SoulAlbumItem extends Item
             return TypedActionResult.success(stack, world.isClient());
         }
 
-        ItemStack selectedStack = selected.get();
-        if (!(selectedStack.getItem() instanceof SoulContainerItem soulContainer))
+        if (!(selected.getItem() instanceof SoulContainerItem soulContainer))
         {
             return TypedActionResult.fail(stack);
         }
@@ -139,7 +137,7 @@ public class SoulAlbumItem extends Item
         {
             return TypedActionResult.fail(stack);
         }
-        NbtCompound nbt = selectedStack.getOrCreateNbt();
+        NbtCompound nbt = selected.getOrCreateNbt();
         if (isBoundToOther(nbt, user))
         {
             return TypedActionResult.fail(stack);
@@ -169,21 +167,20 @@ public class SoulAlbumItem extends Item
         {
             return stack;
         }
-        Optional<ItemStack> selected = getSelectedContainer(stack);
+        ItemStack selected = getSelectedContainer(stack);
         if (selected.isEmpty())
         {
             return stack;
         }
-        ItemStack selectedStack = selected.get();
-        if (!(selectedStack.getItem() instanceof SoulContainerItem soulContainer))
+        if (!(selected.getItem() instanceof SoulContainerItem soulContainer))
         {
             return stack;
         }
         LivingEntity target = RayTraceUtil.serverGetTarget(player);
         if (target != null)
         {
-            soulContainer.tryCapture(selectedStack, player, target);
-            updateSelectedContainer(stack, selectedStack);
+            soulContainer.tryCapture(selected, player, target);
+            updateSelectedContainer(stack, selected);
         }
         return stack;
     }
@@ -192,13 +189,12 @@ public class SoulAlbumItem extends Item
     public ActionResult useOnBlock(ItemUsageContext context)
     {
         ItemStack stack = context.getStack();
-        Optional<ItemStack> selected = getSelectedContainer(stack);
+        ItemStack selected = getSelectedContainer(stack);
         if (selected.isEmpty())
         {
             return ActionResult.FAIL;
         }
-        ItemStack selectedStack = selected.get();
-        if (!(selectedStack.getItem() instanceof SoulContainerItem))
+        if (!(selected.getItem() instanceof SoulContainerItem))
         {
             return ActionResult.FAIL;
         }
@@ -213,7 +209,7 @@ public class SoulAlbumItem extends Item
             return ActionResult.FAIL;
         }
 
-        NbtCompound nbt = selectedStack.getOrCreateNbt();
+        NbtCompound nbt = selected.getOrCreateNbt();
         if (isBoundToOther(nbt, player))
         {
             return ActionResult.FAIL;
@@ -245,7 +241,7 @@ public class SoulAlbumItem extends Item
             serverWorld.emitGameEvent(player, GameEvent.ENTITY_PLACE, pos);
             serverWorld.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PARTICLE_SOUL_ESCAPE, SoundCategory.PLAYERS, 0.5F, 0.4F / (serverWorld.getRandom().nextFloat() * 0.4F + 0.8F));
 
-            updateSelectedContainer(stack, selectedStack);
+            updateSelectedContainer(stack, selected);
             return ActionResult.SUCCESS;
         } else if (nbt.containsUuid(SoulContainerItem.ENTITY_KEY))
         {
@@ -258,7 +254,7 @@ public class SoulAlbumItem extends Item
             } else
             {
                 entity.setPosition(pos);
-                updateSelectedContainer(stack, selectedStack);
+                updateSelectedContainer(stack, selected);
                 return ActionResult.SUCCESS;
             }
         }
@@ -338,21 +334,21 @@ public class SoulAlbumItem extends Item
         return nbt.getInt(SELECTED_KEY);
     }
 
-    private static Optional<ItemStack> getSelectedContainer(ItemStack stack)
+    private static ItemStack getSelectedContainer(ItemStack stack)
     {
         NbtCompound nbt = stack.getNbt();
         if (nbt == null || !nbt.contains(STORAGE_KEY, NbtElement.LIST_TYPE))
         {
-            return Optional.empty();
+            return ItemStack.EMPTY;
         }
         NbtList list = nbt.getList(STORAGE_KEY, NbtElement.COMPOUND_TYPE);
         int selected = getSelectedIndex(stack);
         if (selected < 0 || selected >= list.size())
         {
-            return Optional.empty();
+            return ItemStack.EMPTY;
         }
         ItemStack container = ItemStack.fromNbt(list.getCompound(selected));
-        return container.isEmpty() ? Optional.empty() : Optional.of(container);
+        return container;
     }
 
     private static boolean cannotStore(ItemStack stack)
