@@ -15,6 +15,7 @@ import net.minecraft.item.ItemUsageContext;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.registry.Registries;
+import net.minecraft.screen.ScreenTexts;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -84,7 +85,13 @@ public abstract class AbstractSoulContainerItem extends Item
             return true;
         }
         // content check
-        return isFull(nbt);
+        boolean full = isFull(nbt);
+        if (full)
+        {
+            notifyFull(user);
+            return true;
+        }
+        return false;
     }
 
     protected boolean cannotCapture(ItemStack stack, PlayerEntity user, MobEntity mob)
@@ -126,10 +133,9 @@ public abstract class AbstractSoulContainerItem extends Item
     {
         if (user instanceof ServerPlayerEntity player)
         {
-            LivingEntity target = RayTraceUtil.serverGetTarget(player);
-            if (target != null)
+            if (RayTraceUtil.serverGetTarget(player) instanceof MobEntity mob)
             {
-                tryCapture(stack, player, target);
+                tryCapture(stack, player, mob);
             }
         }
         return stack;
@@ -147,13 +153,8 @@ public abstract class AbstractSoulContainerItem extends Item
         return UseAction.BOW;
     }
 
-    protected void tryCapture(ItemStack stack, PlayerEntity user, LivingEntity entity)
+    protected void tryCapture(ItemStack stack, PlayerEntity user, MobEntity mob)
     {
-        // ignore non-mob cases
-        if (!(entity instanceof MobEntity mob))
-        {
-            return;
-        }
         if (cannotCapture(stack, user, mob))
         {
             // fail
@@ -194,6 +195,7 @@ public abstract class AbstractSoulContainerItem extends Item
         }
 
         ItemStack itemStack = context.getStack();
+        // TODO: do not create nbt?
         NbtCompound nbt = itemStack.getOrCreateNbt();
 
         // container owner check
@@ -227,6 +229,7 @@ public abstract class AbstractSoulContainerItem extends Item
         NbtCompound data = getMobDataFromNbt(itemNbt, true);
         if (data == null)
         {
+            notifyEmpty(player);
             return null;
         }
 
@@ -269,11 +272,17 @@ public abstract class AbstractSoulContainerItem extends Item
                 ownerName = Text.literal(ownerId.toString());
             }
             tooltip.add(SDTexts.TOOLTIP$SOUL_CONTAINER$OWNER.get(ownerName).formatted(Formatting.GRAY));
+            tooltip.add(ScreenTexts.SPACE);
         }
     }
 
-    protected static void saveSoulMinionTooltipData(NbtCompound itemNbt, MobEntity mob)
+    protected static void saveSoulMinionTooltipData(NbtCompound itemNbt, @Nullable MobEntity mob)
     {
+        if (mob == null)
+        {
+            itemNbt.remove(TOOLTIP_DATA_KEY);
+            return;
+        }
         NbtCompound nbt = new NbtCompound();
         {
             Text customName = mob.getCustomName();
@@ -296,6 +305,7 @@ public abstract class AbstractSoulContainerItem extends Item
         itemNbt.put(TOOLTIP_DATA_KEY, nbt);
     }
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     protected static boolean appendSoulMinionDetailTooltip(NbtCompound itemNbt, List<Text> tooltip)
     {
         if (!itemNbt.contains(TOOLTIP_DATA_KEY, NbtElement.COMPOUND_TYPE))
@@ -376,5 +386,23 @@ public abstract class AbstractSoulContainerItem extends Item
             return;
         }
         player.sendMessage(SDTexts.TEXT$SOUL_CONTAINER_NOT_OWNER.get().formatted(Formatting.RED), true);
+    }
+
+    protected static void notifyEmpty(PlayerEntity player)
+    {
+        if (player.getWorld().isClient())
+        {
+            return;
+        }
+        player.sendMessage(SDTexts.TEXT$SOUL_CONTAINER_EMPTY.get().formatted(Formatting.RED), true);
+    }
+
+    protected static void notifyFull(PlayerEntity player)
+    {
+        if (player.getWorld().isClient())
+        {
+            return;
+        }
+        player.sendMessage(SDTexts.TEXT$SOUL_CONTAINER_FULL.get().formatted(Formatting.RED), true);
     }
 }

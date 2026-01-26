@@ -12,6 +12,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
+import net.minecraft.screen.ScreenTexts;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -64,9 +65,9 @@ public class SoulContainerItem extends AbstractSoulContainerItem
                 mob1.setPosition(pos);
                 return mob1;
             }
+            // no found
+            player.sendMessage(SDTexts.TOOLTIP$SOUL_CONTAINER$WARNING.get().formatted(Formatting.RED), true);
         }
-        // not spawned && not found
-        player.sendMessage(SDTexts.TOOLTIP$SOUL_CONTAINER$WARNING.get().formatted(Formatting.RED), true);
         return null;
     }
 
@@ -119,9 +120,9 @@ public class SoulContainerItem extends AbstractSoulContainerItem
         }
         SoulMinionComponent component = SoulControl.getSoulMinion(mob);
         PlayerEntity owner = component.getOwner();
-        if (owner != null && owner == user)
+        if (owner != null)
         {
-            return false;
+            return owner != user;
         }
         // not owned
         return user.getRandom().nextFloat() > getCaptureProbability(mob);
@@ -144,6 +145,12 @@ public class SoulContainerItem extends AbstractSoulContainerItem
         if (nbt == null)
         {
             tooltip.add(SDTexts.TOOLTIP$CONTAINER_EMPTY.get().formatted(Formatting.DARK_AQUA).formatted(Formatting.GRAY));
+            tooltip.add(ScreenTexts.SPACE);
+            tooltip.add(
+                SDTexts.TOOLTIP$SOUL_CONTAINER$USAGE_1.get(
+                    "%d%%".formatted(Math.round(healthThresholdRatio * 100))
+                ).formatted(Formatting.GRAY)
+            );
             return;
         }
 
@@ -172,7 +179,7 @@ public class SoulContainerItem extends AbstractSoulContainerItem
         {
             tooltip.add(SDTexts.TOOLTIP$INVALID.get().formatted(Formatting.RED));
         }
-        tooltip.add(Text.empty());
+        tooltip.add(ScreenTexts.SPACE);
 
         // usage tooltips
         if (stored)
@@ -183,7 +190,7 @@ public class SoulContainerItem extends AbstractSoulContainerItem
             if (lastStored)
             {
                 tooltip.add(SDTexts.TOOLTIP$SOUL_CONTAINER$USAGE_3.get().formatted(Formatting.GRAY));
-                tooltip.add(Text.empty());
+                tooltip.add(ScreenTexts.SPACE);
             }
             tooltip.add(
                 SDTexts.TOOLTIP$SOUL_CONTAINER$USAGE_1.get(

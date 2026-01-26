@@ -17,11 +17,11 @@ public record C2SSelectSoulAlbum(int index, Hand hand) implements SerialPacketC2
     @Override
     public void handle(ServerPlayerEntity player)
     {
-        ItemStack stackInHand = player.getStackInHand(hand);
-        if (!(stackInHand.getItem() instanceof SoulAlbumItem))
+        ItemStack stack = player.getStackInHand(hand);
+        if (!(stack.getItem() instanceof SoulAlbumItem album))
         {
             return;
         }
-        SoulAlbumItem.select(stackInHand, index);
+        album.select(stack, index, player.getWorld());
     }
 }

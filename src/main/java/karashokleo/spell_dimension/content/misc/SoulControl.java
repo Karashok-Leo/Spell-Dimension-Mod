@@ -7,6 +7,7 @@ import karashokleo.spell_dimension.content.object.SoulMinionMode;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllComponents;
 import karashokleo.spell_dimension.init.AllStatusEffects;
+import karashokleo.spell_dimension.util.ImpactUtil;
 import karashokleo.spell_dimension.util.RelationUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -55,7 +56,7 @@ public interface SoulControl
      */
     static boolean isSoulMinion(@Nullable Entity entity1, @Nullable Entity entity2)
     {
-        if (!(entity2 instanceof MobEntity mob))
+        if (!(ImpactUtil.castToLiving(entity2) instanceof MobEntity mob))
         {
             return false;
         }

@@ -3,24 +3,23 @@ package karashokleo.spell_dimension.client.screen;
 import karashokleo.l2hostility.util.raytrace.RayTraceUtil;
 import karashokleo.leobrary.gui.api.overlay.InfoSideBar;
 import karashokleo.leobrary.gui.api.overlay.SideBar;
-import karashokleo.spell_dimension.content.component.SoulMinionComponent;
+import karashokleo.spell_dimension.content.item.AbstractSoulContainerItem;
 import karashokleo.spell_dimension.content.item.SoulContainerItem;
 import karashokleo.spell_dimension.content.misc.SoulControl;
 import karashokleo.spell_dimension.data.SDTexts;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
-import net.minecraft.util.hit.EntityHitResult;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SoulContainerOverlay extends InfoSideBar<SideBar.IntSignature>
 {
-    private EntityHitResult hitResult;
+    private final List<Text> texts = new ArrayList<>();
 
     public SoulContainerOverlay()
     {
@@ -30,34 +29,30 @@ public class SoulContainerOverlay extends InfoSideBar<SideBar.IntSignature>
     @Override
     protected List<Text> getText()
     {
+        this.texts.clear();
         ClientPlayerEntity player = MinecraftClient.getInstance().player;
         if (player == null)
         {
-            return List.of();
+            return this.texts;
         }
-        if (this.hitResult == null)
+        ItemStack stack = player.getMainHandStack();
+        if (!(stack.getItem() instanceof AbstractSoulContainerItem container))
         {
-            return List.of();
+            return this.texts;
         }
-        Entity entity = this.hitResult.getEntity();
-        if (!(entity instanceof MobEntity mob))
+        if (container instanceof SoulContainerItem soulContainer)
         {
-            return List.of();
+            var hitResult = RayTraceUtil.rayTraceEntity(player, AbstractSoulContainerItem.RANGE, e -> !SoulControl.isSoulMinion(player, e));
+            if (hitResult != null &&
+                hitResult.getEntity() instanceof MobEntity mob)
+            {
+                float probability = soulContainer.getCaptureProbability(mob);
+                this.texts.add(SDTexts.TOOLTIP$SOUL_MINION$CAPTURE_PROBABILITY.get("%.1f%%".formatted(probability * 100)));
+                return this.texts;
+            }
         }
-        SoulMinionComponent minionComponent = SoulControl.getSoulMinion(mob);
-        PlayerEntity owner = minionComponent.getOwner();
-        if (owner == player)
-        {
-            return List.of();
-        }
-        if (!(player.getMainHandStack().getItem() instanceof SoulContainerItem soulContainer))
-        {
-            return List.of();
-        }
-        ArrayList<Text> texts = new ArrayList<>();
-        float probability = soulContainer.getCaptureProbability(mob);
-        texts.add(SDTexts.TOOLTIP$SOUL_MINION$CAPTURE_PROBABILITY.get("%.1f%%".formatted(probability * 100)));
-        return texts;
+        container.appendTooltip(stack, player.getWorld(), this.texts, TooltipContext.BASIC);
+        return this.texts;
     }
 
     @Override
@@ -85,11 +80,6 @@ public class SoulContainerOverlay extends InfoSideBar<SideBar.IntSignature>
         {
             return false;
         }
-        if (!(player.getMainHandStack().getItem() instanceof SoulContainerItem))
-        {
-            return false;
-        }
-        this.hitResult = RayTraceUtil.rayTraceEntity(player, SoulContainerItem.RANGE, entity -> entity instanceof MobEntity);
-        return this.hitResult != null && this.hitResult.getEntity() != null;
+        return (player.getMainHandStack().getItem() instanceof AbstractSoulContainerItem);
     }
 }

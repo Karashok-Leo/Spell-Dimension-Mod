@@ -95,8 +95,8 @@ public enum SDTexts
     TEXT$SOUL_CONTROL$MINION_DIED("The soul minion you possessed is dead!", "你附体的灵仆已死亡！"),
     TEXT$SOUL_COMMAND$MOVE_MODE("Current Move Mode: %s", "当前移动模式：%s"),
     TEXT$SOUL_COMMAND$ATTACK_MODE("Current Attack Mode: %s", "当前攻击模式：%s"),
-    TEXT$SOUL_ALBUM_EMPTY("The soul album is empty.", "灵魂相册为空。"),
-    TEXT$SOUL_ALBUM_FULL("The soul album is full.", "灵魂相册已满。"),
+    TEXT$SOUL_CONTAINER_EMPTY("The container is empty", "容器为空"),
+    TEXT$SOUL_CONTAINER_FULL("The container is full", "容器已满"),
     TEXT$SOUL_CONTAINER_NOT_OWNER("You are not the owner of this item.", "你不是该物品的拥有者。"),
 
     /**
@@ -229,6 +229,11 @@ public enum SDTexts
     TOOLTIP$SOUL_CONTAINER$USAGE_2("Right-click the block to release the stored soul minion.", "右键点击方块可释放存储的灵仆。"),
     TOOLTIP$SOUL_CONTAINER$USAGE_3("Right-click the block to attempt recalling the last summoned soul minion.", "右键点击方块可尝试将上次释放的灵仆召回。"),
     TOOLTIP$SOUL_CONTAINER$WARNING("The target is dead, lost, or not present in this dimension.", "目标已死亡，遗失，或不在此维度中。"),
+    TOOLTIP$SOUL_ALBUM$CAPACITY("Capacity: %s / %s", "容量：%s / %s"),
+    TOOLTIP$SOUL_ALBUM$SELECTED("Selected:", "已选择："),
+    TOOLTIP$SOUL_ALBUM$USAGE_1("Left-click empty space to deselect", "左键空白处取消选择"),
+    TOOLTIP$SOUL_ALBUM$USAGE_2("Right-click to view all stored soul minions", "右键浏览所有已存储的灵仆"),
+    TOOLTIP$SOUL_ALBUM$USAGE_3("Usage: In the inventory, right-click on the book with a spell scroll to put it in, or right-click on an empty slot with the book to take the scroll out. Can also be used as a soul container, but only to store soul minions you already owned.", "用法：物品栏中用灵魂容器右键该物品将灵仆放入，或使用该物品右键灵魂容器将灵仆取出。也可以像灵魂容器一样使用，但只能收纳已拥有的灵仆。"),
 
     /**
      * Magic Mirror
