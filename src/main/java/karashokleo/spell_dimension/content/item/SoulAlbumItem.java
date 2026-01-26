@@ -10,7 +10,9 @@ import karashokleo.spell_dimension.util.ImpactUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.player.ItemCooldownManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
@@ -69,12 +71,10 @@ public class SoulAlbumItem extends AbstractSoulContainerItem
             return null;
         }
         NbtList list = getStorageList(itemNbt);
-        if (list == null)
+        // invalid selected, clear
+        if (list == null || selected >= list.size())
         {
-            return null;
-        }
-        if (selected >= list.size())
-        {
+            itemNbt.remove(SELECTED_KEY);
             return null;
         }
         NbtCompound data = list.getCompound(selected);
@@ -101,6 +101,17 @@ public class SoulAlbumItem extends AbstractSoulContainerItem
         {
             if (!shouldStartCapture(user, stack))
             {
+                NbtCompound nbt = stack.getNbt();
+                if (nbt != null && isBoundToOther(nbt, user))
+                {
+                    notifyOwnerBound(user);
+                    return TypedActionResult.fail(stack);
+                }
+                if (isStorageEmpty(nbt))
+                {
+                    notifyAlbumEmpty(user);
+                    return TypedActionResult.fail(stack);
+                }
                 if (!world.isClient() && user instanceof ServerPlayerEntity player)
                 {
                     AllPackets.toClientPlayer(player, new S2COpenSoulAlbumScreen(hand));
@@ -115,12 +126,28 @@ public class SoulAlbumItem extends AbstractSoulContainerItem
     public ActionResult useOnBlock(ItemUsageContext context)
     {
         ItemStack stack = context.getStack();
+        PlayerEntity player = context.getPlayer();
+        NbtCompound nbt = stack.getNbt();
+        if (player == null)
+        {
+            return ActionResult.FAIL;
+        }
+        if (nbt != null && isBoundToOther(nbt, player))
+        {
+            notifyOwnerBound(player);
+            return ActionResult.FAIL;
+        }
         if (getSelectedIndex(stack) < 0)
         {
-            if (!context.getWorld().isClient() &&
-                context.getPlayer() instanceof ServerPlayerEntity player)
+            if (isStorageEmpty(nbt))
             {
-                AllPackets.toClientPlayer(player, new S2COpenSoulAlbumScreen(context.getHand()));
+                notifyAlbumEmpty(player);
+                return ActionResult.FAIL;
+            }
+            if (!context.getWorld().isClient() &&
+                player instanceof ServerPlayerEntity serverPlayer)
+            {
+                AllPackets.toClientPlayer(serverPlayer, new S2COpenSoulAlbumScreen(context.getHand()));
             }
             return ActionResult.CONSUME;
         }
@@ -250,9 +277,14 @@ public class SoulAlbumItem extends AbstractSoulContainerItem
     {
         NbtCompound albumNbt = album.getOrCreateNbt();
         NbtCompound containerNbt = containerStack.getOrCreateNbt();
-        if (isBoundToOther(albumNbt, player) ||
-            isBoundToOther(containerNbt, player))
+        if (isBoundToOther(albumNbt, player))
         {
+            notifyOwnerBound(player);
+            return false;
+        }
+        if (isBoundToOther(containerNbt, player))
+        {
+            notifyOwnerBound(player);
             return false;
         }
 
@@ -268,11 +300,15 @@ public class SoulAlbumItem extends AbstractSoulContainerItem
             containerItem.putMobDataToNbt(containerNbt, mobData);
             bindOwner(albumNbt, player);
             bindOwner(containerNbt, player);
+            ItemCooldownManager cooldownManager = player.getItemCooldownManager();
+            cooldownManager.set(this, COOLDOWN);
+            cooldownManager.set(containerItem, COOLDOWN);
             return true;
         }
 
         if (isFull(albumNbt))
         {
+            notifyAlbumFull(player);
             return false;
         }
         // move from container to album
@@ -280,21 +316,58 @@ public class SoulAlbumItem extends AbstractSoulContainerItem
         putMobDataToNbt(albumNbt, mobData);
         bindOwner(albumNbt, player);
         bindOwner(containerNbt, player);
+        ItemCooldownManager cooldownManager = player.getItemCooldownManager();
+        cooldownManager.set(this, COOLDOWN);
+        cooldownManager.set(containerItem, COOLDOWN);
         return true;
     }
 
     private boolean shouldStartCapture(PlayerEntity user, ItemStack stack)
     {
-        if (cannotCapture(stack, user))
-        {
-            return false;
-        }
         EntityHitResult hit = RayTraceUtil.rayTraceEntity(
             user,
             RANGE,
             entity -> ImpactUtil.castToLiving(entity) instanceof MobEntity mob && SoulControl.isSoulMinion(user, mob)
         );
         return hit != null;
+    }
+
+    @Override
+    protected boolean cannotCapture(ItemStack stack, PlayerEntity user)
+    {
+        boolean blocked = super.cannotCapture(stack, user);
+        if (!blocked)
+        {
+            return false;
+        }
+        NbtCompound nbt = stack.getNbt();
+        if (nbt != null && isFull(nbt))
+        {
+            notifyAlbumFull(user);
+        }
+        return true;
+    }
+
+    @Override
+    protected void tryCapture(ItemStack stack, PlayerEntity user, LivingEntity entity)
+    {
+        int before = 0;
+        NbtCompound nbt = stack.getNbt();
+        if (nbt != null)
+        {
+            before = getStorageSize(nbt);
+        }
+        super.tryCapture(stack, user, entity);
+        nbt = stack.getNbt();
+        if (nbt == null)
+        {
+            return;
+        }
+        int after = getStorageSize(nbt);
+        if (after > before)
+        {
+            setSelectedIndex(stack, after - 1);
+        }
     }
 
     private static void playSound(Entity entity)
@@ -323,5 +396,28 @@ public class SoulAlbumItem extends AbstractSoulContainerItem
             max = Math.max(max, DifficultyLevel.ofAny(mob));
         }
         return max;
+    }
+
+    private static boolean isStorageEmpty(@Nullable NbtCompound itemNbt)
+    {
+        return itemNbt == null || getStorageSize(itemNbt) == 0;
+    }
+
+    private static void notifyAlbumEmpty(PlayerEntity player)
+    {
+        if (player.getWorld().isClient())
+        {
+            return;
+        }
+        player.sendMessage(SDTexts.TEXT$SOUL_ALBUM_EMPTY.get().formatted(Formatting.RED), true);
+    }
+
+    private static void notifyAlbumFull(PlayerEntity player)
+    {
+        if (player.getWorld().isClient())
+        {
+            return;
+        }
+        player.sendMessage(SDTexts.TEXT$SOUL_ALBUM_FULL.get().formatted(Formatting.RED), true);
     }
 }

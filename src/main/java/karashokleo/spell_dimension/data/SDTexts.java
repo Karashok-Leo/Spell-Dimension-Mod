@@ -95,6 +95,9 @@ public enum SDTexts
     TEXT$SOUL_CONTROL$MINION_DIED("The soul minion you possessed is dead!", "你附体的灵仆已死亡！"),
     TEXT$SOUL_COMMAND$MOVE_MODE("Current Move Mode: %s", "当前移动模式：%s"),
     TEXT$SOUL_COMMAND$ATTACK_MODE("Current Attack Mode: %s", "当前攻击模式：%s"),
+    TEXT$SOUL_ALBUM_EMPTY("The soul album is empty.", "灵魂相册为空。"),
+    TEXT$SOUL_ALBUM_FULL("The soul album is full.", "灵魂相册已满。"),
+    TEXT$SOUL_CONTAINER_NOT_OWNER("You are not the owner of this item.", "你不是该物品的拥有者。"),
 
     /**
      * Game Over

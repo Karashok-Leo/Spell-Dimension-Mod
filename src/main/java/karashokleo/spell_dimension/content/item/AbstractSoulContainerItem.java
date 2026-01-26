@@ -80,6 +80,7 @@ public abstract class AbstractSoulContainerItem extends Item
         NbtCompound nbt = stack.getOrCreateNbt();
         if (isBoundToOther(nbt, user))
         {
+            notifyOwnerBound(user);
             return true;
         }
         // content check
@@ -198,6 +199,7 @@ public abstract class AbstractSoulContainerItem extends Item
         // container owner check
         if (isBoundToOther(nbt, player))
         {
+            notifyOwnerBound(player);
             return ActionResult.FAIL;
         }
 
@@ -365,5 +367,14 @@ public abstract class AbstractSoulContainerItem extends Item
             return;
         }
         itemNbt.putUuid(OWNER_KEY, user.getUuid());
+    }
+
+    protected static void notifyOwnerBound(PlayerEntity player)
+    {
+        if (player.getWorld().isClient())
+        {
+            return;
+        }
+        player.sendMessage(SDTexts.TEXT$SOUL_CONTAINER_NOT_OWNER.get().formatted(Formatting.RED), true);
     }
 }
