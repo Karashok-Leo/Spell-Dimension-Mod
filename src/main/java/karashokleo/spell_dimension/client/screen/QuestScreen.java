@@ -102,35 +102,37 @@ public class QuestScreen extends Screen
         int n = quests.size();
         int w = (int) Math.ceil(Math.sqrt(n));
         int h = (int) Math.ceil(n * 1d / w);
-        var iconSize = 18;
-        var startX = window.getScaledWidth() / 2 - w * iconSize / 2;
-        var startY = window.getScaledHeight() / 2 - h * iconSize / 2;
-        var padding = 4;
+        int margin = 4;
+        int padding = 2;
+        int stackSize = 16;
+        int slotSize = stackSize + 2 * padding;
+        int startX = window.getScaledWidth() / 2 - w * slotSize / 2;
+        int startY = window.getScaledHeight() / 2 - h * slotSize / 2;
 
         context.fill(
-            startX - padding,
-            startY - padding,
-            startX + iconSize * w + padding,
-            startY + iconSize * h + padding,
+            startX - margin,
+            startY - margin,
+            startX + slotSize * w + margin,
+            startY + slotSize * h + margin,
             0x66000000
         );
 
         this.current = null;
-        var index = 0;
+        int index = 0;
 
         for (var quest : this.quests)
         {
             int iy = index / w;
             int ix = index - iy * w;
-            var stackX = startX + ix * iconSize;
-            var stackY = startY + iy * iconSize;
+            int stackX = startX + ix * slotSize + padding;
+            int stackY = startY + iy * slotSize + padding;
 
-            var scale = 1f;
+            float scale = 1f;
 
             if (mouseX > stackX &&
                 mouseY > stackY &&
-                mouseX <= (stackX + 16) &&
-                mouseY <= (stackY + 16))
+                mouseX <= (stackX + stackSize) &&
+                mouseY <= (stackY + stackSize))
             {
                 scale = 1.3f;
                 this.current = quest;
