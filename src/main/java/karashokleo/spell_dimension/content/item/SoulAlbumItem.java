@@ -6,27 +6,25 @@ import karashokleo.spell_dimension.content.misc.SoulControl;
 import karashokleo.spell_dimension.content.network.S2COpenSoulAlbumScreen;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllPackets;
+import karashokleo.spell_dimension.util.ImpactUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUsageContext;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
-import net.minecraft.util.ClickType;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.*;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SoulAlbumItem extends AbstractSoulContainerItem
@@ -111,6 +109,22 @@ public class SoulAlbumItem extends AbstractSoulContainerItem
             }
         }
         return super.use(world, user, hand);
+    }
+
+    @Override
+    public ActionResult useOnBlock(ItemUsageContext context)
+    {
+        ItemStack stack = context.getStack();
+        if (getSelectedIndex(stack) < 0)
+        {
+            if (!context.getWorld().isClient() &&
+                context.getPlayer() instanceof ServerPlayerEntity player)
+            {
+                AllPackets.toClientPlayer(player, new S2COpenSoulAlbumScreen(context.getHand()));
+            }
+            return ActionResult.CONSUME;
+        }
+        return super.useOnBlock(context);
     }
 
     // use album to click container
@@ -236,6 +250,11 @@ public class SoulAlbumItem extends AbstractSoulContainerItem
     {
         NbtCompound albumNbt = album.getOrCreateNbt();
         NbtCompound containerNbt = containerStack.getOrCreateNbt();
+        if (isBoundToOther(albumNbt, player) ||
+            isBoundToOther(containerNbt, player))
+        {
+            return false;
+        }
 
         NbtCompound containerData = containerItem.getMobDataFromNbt(containerNbt, false);
         // move from album to container
@@ -248,6 +267,7 @@ public class SoulAlbumItem extends AbstractSoulContainerItem
             }
             containerItem.putMobDataToNbt(containerNbt, mobData);
             bindOwner(albumNbt, player);
+            bindOwner(containerNbt, player);
             return true;
         }
 
@@ -259,6 +279,7 @@ public class SoulAlbumItem extends AbstractSoulContainerItem
         NbtCompound mobData = containerItem.getMobDataFromNbt(containerNbt, true);
         putMobDataToNbt(albumNbt, mobData);
         bindOwner(albumNbt, player);
+        bindOwner(containerNbt, player);
         return true;
     }
 
@@ -271,7 +292,7 @@ public class SoulAlbumItem extends AbstractSoulContainerItem
         EntityHitResult hit = RayTraceUtil.rayTraceEntity(
             user,
             RANGE,
-            entity -> entity instanceof MobEntity mob && SoulControl.isSoulMinion(user, mob)
+            entity -> ImpactUtil.castToLiving(entity) instanceof MobEntity mob && SoulControl.isSoulMinion(user, mob)
         );
         return hit != null;
     }

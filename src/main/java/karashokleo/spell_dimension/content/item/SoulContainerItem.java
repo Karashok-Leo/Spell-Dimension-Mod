@@ -2,6 +2,7 @@ package karashokleo.spell_dimension.content.item;
 
 import it.unimi.dsi.fastutil.floats.FloatUnaryOperator;
 import karashokleo.l2hostility.content.logic.DifficultyLevel;
+import karashokleo.spell_dimension.content.component.SoulMinionComponent;
 import karashokleo.spell_dimension.content.misc.SoulControl;
 import karashokleo.spell_dimension.data.SDTexts;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -112,8 +113,18 @@ public class SoulContainerItem extends AbstractSoulContainerItem
     @Override
     protected boolean cannotCapture(ItemStack stack, PlayerEntity user, MobEntity mob)
     {
-        return super.cannotCapture(stack, user, mob) ||
-            user.getRandom().nextFloat() > getCaptureProbability(mob);
+        if (cannotCapture(stack, user))
+        {
+            return true;
+        }
+        SoulMinionComponent component = SoulControl.getSoulMinion(mob);
+        PlayerEntity owner = component.getOwner();
+        if (owner != null && owner == user)
+        {
+            return false;
+        }
+        // not owned
+        return user.getRandom().nextFloat() > getCaptureProbability(mob);
     }
 
     public float getCaptureProbability(MobEntity entity)
