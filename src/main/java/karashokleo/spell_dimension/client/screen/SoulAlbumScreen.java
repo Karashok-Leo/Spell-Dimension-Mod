@@ -1,10 +1,14 @@
 package karashokleo.spell_dimension.client.screen;
 
 import com.google.common.collect.Lists;
+import karashokleo.l2hostility.client.MobTraitRenderer;
+import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.spell_dimension.content.item.SoulAlbumItem;
 import karashokleo.spell_dimension.content.misc.SoulControl;
 import karashokleo.spell_dimension.content.network.C2SSelectSoulAlbum;
+import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllPackets;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
@@ -13,6 +17,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import org.lwjgl.glfw.GLFW;
@@ -21,9 +26,6 @@ import java.util.List;
 
 public class SoulAlbumScreen extends Screen
 {
-    private static final int BASE_ENTITY_SIZE = 20;
-    private static final int CELL_SIZE = 48;
-
     private final Hand hand;
     private final List<MobEntity> mobs;
     private final List<Text> tooltip;
@@ -40,10 +42,7 @@ public class SoulAlbumScreen extends Screen
 
     private List<MobEntity> collectMobsInAlbum()
     {
-        if (client == null)
-        {
-            return List.of();
-        }
+        var client = MinecraftClient.getInstance();
         if (client.player == null)
         {
             return List.of();
@@ -65,7 +64,12 @@ public class SoulAlbumScreen extends Screen
         }
         World world = client.world;
         return list.stream()
-            .map(e -> SoulControl.loadMinionFromData((NbtCompound) e, world))
+            .map(e ->
+            {
+                MobEntity mob = SoulControl.loadMinionFromData((NbtCompound) e, world);
+                mob.getCommandTags().add(MobTraitRenderer.FLAG);
+                return mob;
+            })
             .toList();
     }
 
@@ -116,43 +120,67 @@ public class SoulAlbumScreen extends Screen
         int n = mobs.size();
         int w = (int) Math.ceil(Math.sqrt(n));
         int h = (int) Math.ceil(n * 1d / w);
-        var iconSize = 18;
-        var startX = window.getScaledWidth() / 2 - w * iconSize / 2;
-        var startY = window.getScaledHeight() / 2 - h * iconSize / 2;
-        var padding = 4;
+        int margin = 4;
+        int padding = 12;
+        int mobSize = 36;
+        int cellSize = 48;
+        int slotSize = cellSize + 2 * padding;
+        int startX = window.getScaledWidth() / 2 - w * slotSize / 2;
+        int startY = window.getScaledHeight() / 2 - h * slotSize / 2;
 
         context.fill(
-            startX - padding,
-            startY - padding,
-            startX + iconSize * w + padding,
-            startY + iconSize * h + padding,
+            startX - margin,
+            startY - margin,
+            startX + slotSize * w + margin,
+            startY + slotSize * h + margin,
             0x66000000
         );
 
+        this.currentIndex = -1;
         int index = 0;
 
         for (MobEntity mob : this.mobs)
         {
             int iy = index / w;
             int ix = index - iy * w;
-            int mobX = startX + ix * iconSize;
-            int mobY = startY + iy * iconSize;
-            int centerX = mobX + CELL_SIZE / 2;
-            int centerY = mobY + CELL_SIZE / 2;
+            int slotX = startX + ix * slotSize;
+            int slotY = startY + iy * slotSize;
+            int cellX = slotX + padding;
+            int cellY = slotY + padding;
 
-            float scale = 1f;
+            float maxDim = Math.max(mob.getWidth(), mob.getHeight());
+            int size = Math.round(mobSize / maxDim);
 
-            if (mouseX > mobX &&
-                mouseY > mobY &&
-                mouseX <= (mobX + 16) &&
-                mouseY <= (mobY + 16))
+            if (mouseX > slotX &&
+                mouseY > slotY &&
+                mouseX <= (slotX + slotSize) &&
+                mouseY <= (slotY + slotSize))
             {
-                scale = 1.3f;
+                size = Math.round(cellSize / maxDim);
                 this.currentIndex = index;
+                context.fill(
+                    slotX,
+                    slotY,
+                    slotX + slotSize,
+                    slotY + slotSize,
+                    0x88000000
+                );
             }
 
-            int size = Math.round(BASE_ENTITY_SIZE * scale);
-            InventoryScreen.drawEntity(context, centerX, centerY, size, centerX - mouseX, centerY - mouseY, mob);
+            int centerX = cellX + cellSize / 2;
+            int centerY = cellY + cellSize / 2;
+            int bottomY = (int) (centerY + mob.getHeight() * size / 2f);
+            int eyeY = (int) (bottomY - mob.getStandingEyeHeight() * size);
+            InventoryScreen.drawEntity(
+                context,
+                centerX,
+                bottomY,
+                size,
+                centerX - mouseX,
+                eyeY - mouseY,
+                mob
+            );
+
             index++;
         }
 
@@ -167,5 +195,14 @@ public class SoulAlbumScreen extends Screen
     private void appendMobTooltip(MobEntity mob)
     {
         tooltip.add(mob.getName());
+        MobDifficulty.get(mob).ifPresent(difficulty ->
+            tooltip.addAll(difficulty.getTitleWrap(true, true))
+        );
+        tooltip.add(SDTexts.TOOLTIP$SOUL_MINION$HEALTH.get(
+            "%.1f / %.1f".formatted(
+                mob.getHealth(),
+                mob.getMaxHealth()
+            )
+        ).formatted(Formatting.RED));
     }
 }
