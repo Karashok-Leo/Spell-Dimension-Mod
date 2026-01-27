@@ -220,7 +220,7 @@
   "enchantment.spell-dimension.spell_dash.desc": "Get one combat roll opportunity when casting spells",
   "enchantment.spell-dimension.spell_haste": "Spell Haste",
   "enchantment.spell-dimension.spell_haste.desc": "Obtain Spell Haste effect when casting spells",
-  "enchantment.spell-dimension.spell_leech": "Spell Leech",
+  "enchantment.spell-dimension.spell_leech": "Blood Magic",
   "enchantment.spell-dimension.spell_leech.desc": "The spell damage you deal will be reduced (0.05 × spell power per level) and converted into health you recover (0.01 × spell power per level).",
   "enchantment.spell-dimension.spell_mending": "Spell Mending",
   "enchantment.spell-dimension.spell_mending.desc": "Each cast will repair your damaged equipment.",

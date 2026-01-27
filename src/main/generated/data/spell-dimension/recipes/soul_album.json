@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "l2hostility:book_of_reprint"
+    },
+    "C": {
+      "item": "spell-dimension:advanced_soul_container"
+    },
+    "E": {
+      "item": "spell-dimension:essence_soul_2"
+    }
+  },
+  "pattern": [
+    "EBE",
+    "BCB",
+    "EBE"
+  ],
+  "result": {
+    "item": "spell-dimension:soul_album"
+  },
+  "show_notification": true
+}

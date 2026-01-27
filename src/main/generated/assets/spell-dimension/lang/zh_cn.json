@@ -220,7 +220,7 @@
   "enchantment.spell-dimension.spell_dash.desc": "施放法术时获得一次战术翻滚机会",
   "enchantment.spell-dimension.spell_haste": "施法急速",
   "enchantment.spell-dimension.spell_haste.desc": "施放法术时获得施法加速效果",
-  "enchantment.spell-dimension.spell_leech": "法术吸血",
+  "enchantment.spell-dimension.spell_leech": "血魔法",
   "enchantment.spell-dimension.spell_leech.desc": "你造成的法术伤害减少一定数额（魔咒等级 × 0.05 × 法术强度），部分转化为回复的生命值（魔咒等级 × 0.01 × 法术强度）。",
   "enchantment.spell-dimension.spell_mending": "魔力修补",
   "enchantment.spell-dimension.spell_mending.desc": "每次施法将修复你的受损装备。",

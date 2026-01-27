@@ -266,6 +266,19 @@ public class SDRecipeProvider extends FabricRecipeProvider
             )
             .criterion(FabricRecipeProvider.hasItem(DDItems.HEART_OF_THE_DEEP), FabricRecipeProvider.conditionsFromItem(DDItems.HEART_OF_THE_DEEP))
             .offerTo(exporter, SpellDimension.modLoc("advanced_soul_container"));
+        ShapedRecipeJsonBuilder
+            .create(RecipeCategory.MISC, AllItems.SOUL_ALBUM)
+            .pattern("EBE")
+            .pattern("BCB")
+            .pattern("EBE")
+            .input('C', AllItems.ADVANCED_SOUL_CONTAINER)
+            .input('E', AllItems.BASE_ESSENCES.get(SpellSchools.SOUL).get(2))
+            .input('B', ConsumableItems.BOOK_COPY)
+            .criterion(
+                FabricRecipeProvider.hasItem(ConsumableItems.BOOK_COPY),
+                FabricRecipeProvider.conditionsFromItem(ConsumableItems.BOOK_COPY)
+            )
+            .offerTo(exporter);
 
         // Spell Prism
         ShapedRecipeJsonBuilder

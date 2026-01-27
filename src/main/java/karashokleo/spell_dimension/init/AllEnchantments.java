@@ -76,9 +76,9 @@ public class AllEnchantments
             .addTag(AllTags.LOOTABLE)
             .register();
         SPELL_LEECH = new Entry<>("spell_leech", new SpellLeechEnchantment())
-            .addEN()
+            .addEN("Blood Magic")
             .addENDesc("The spell damage you deal will be reduced (%.2f × spell power per level) and converted into health you recover (%.2f × spell power per level).".formatted(SpellLeechEnchantment.REDUCTION_MULTIPLIER, SpellLeechEnchantment.HEAL_MULTIPLIER))
-            .addZH("法术吸血")
+            .addZH("血魔法")
             .addZHDesc("你造成的法术伤害减少一定数额（魔咒等级 × %.2f × 法术强度），部分转化为回复的生命值（魔咒等级 × %.2f × 法术强度）。".formatted(SpellLeechEnchantment.REDUCTION_MULTIPLIER, SpellLeechEnchantment.HEAL_MULTIPLIER))
             .addTag(AllTags.LOOTABLE)
             .register();
