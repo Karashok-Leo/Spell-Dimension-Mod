@@ -30,7 +30,7 @@ import java.util.List;
 
 public class SoulAlbumItem extends AbstractSoulContainerItem
 {
-    public static final int CAPACITY = 16;
+    public static final int CAPACITY = 20;
     private static final String STORAGE_KEY = "Storage";
     private static final String SELECTED_KEY = "Selected";
 
