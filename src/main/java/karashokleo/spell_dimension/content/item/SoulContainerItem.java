@@ -99,8 +99,9 @@ public class SoulContainerItem extends AbstractSoulContainerItem
             if (removeData)
             {
                 itemNbt.remove(ENTITY_KEY);
+                return data;
             }
-            return data;
+            return data.copy();
         }
         return null;
     }

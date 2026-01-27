@@ -88,8 +88,9 @@ public class SoulAlbumItem extends AbstractSoulContainerItem
                 itemNbt.put(STORAGE_KEY, list);
             }
             itemNbt.remove(SELECTED_KEY);
+            return data;
         }
-        return data;
+        return data.copy();
     }
 
     @Override
@@ -428,7 +429,8 @@ public class SoulAlbumItem extends AbstractSoulContainerItem
         for (int i = 0; i < list.size(); i++)
         {
             NbtCompound data = list.getCompound(i);
-            MobEntity mob = SoulControl.loadMinionFromData(data, world);
+            // we have to copy here to avoid modifying the original NBT data
+            MobEntity mob = SoulControl.loadMinionFromData(data.copy(), world);
             max = Math.max(max, DifficultyLevel.ofAny(mob));
         }
         return max;
