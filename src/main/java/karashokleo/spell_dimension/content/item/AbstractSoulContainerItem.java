@@ -29,6 +29,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
+import snownee.jade.util.CommonProxy;
 
 import java.util.List;
 import java.util.UUID;
@@ -255,21 +256,13 @@ public abstract class AbstractSoulContainerItem extends Item
         // container owner tooltips
         if (nbt.containsUuid(OWNER_KEY))
         {
-            UUID ownerId = nbt.getUuid(OWNER_KEY);
-            Text ownerName = null;
-            if (world != null)
+            UUID ownerUuid = nbt.getUuid(OWNER_KEY);
+            String name = CommonProxy.getLastKnownUsername(ownerUuid);
+            if (name == null)
             {
-                PlayerEntity owner = world.getPlayerByUuid(ownerId);
-                if (owner != null)
-                {
-                    ownerName = owner.getName();
-                }
+                name = "???";
             }
-            if (ownerName == null)
-            {
-                ownerName = Text.literal(ownerId.toString());
-            }
-            tooltip.add(SDTexts.TOOLTIP$SOUL_CONTAINER$OWNER.get(ownerName).formatted(Formatting.GRAY));
+            tooltip.add(SDTexts.TOOLTIP$SOUL_CONTAINER$OWNER.get(name).formatted(Formatting.GRAY));
             tooltip.add(ScreenTexts.SPACE);
         }
     }

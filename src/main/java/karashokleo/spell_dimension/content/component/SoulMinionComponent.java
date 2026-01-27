@@ -34,6 +34,12 @@ public class SoulMinionComponent implements AutoSyncedComponent
         this.soulNetFlag = 0;
     }
 
+    @Nullable
+    public UUID getOwnerUuid()
+    {
+        return ownerUuid;
+    }
+
     public boolean hasOwner()
     {
         return ownerUuid != null;

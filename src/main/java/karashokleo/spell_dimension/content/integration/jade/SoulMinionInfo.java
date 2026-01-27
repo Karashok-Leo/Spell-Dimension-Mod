@@ -8,22 +8,28 @@ import karashokleo.spell_dimension.data.SDTexts;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Identifier;
 import snownee.jade.api.EntityAccessor;
 import snownee.jade.api.IEntityComponentProvider;
+import snownee.jade.api.IServerDataProvider;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
+import snownee.jade.util.CommonProxy;
 
-public enum SoulMinionInfo implements IEntityComponentProvider
+import java.util.UUID;
+
+public enum SoulMinionInfo implements IEntityComponentProvider, IServerDataProvider<EntityAccessor>
 {
     INSTANCE;
 
     public static final Identifier ID = SpellDimension.modLoc("soul_minion");
 
     @Override
-    public void appendTooltip(ITooltip iTooltip, EntityAccessor entityAccessor, IPluginConfig iPluginConfig)
+    public void appendTooltip(ITooltip tooltip, EntityAccessor accessor, IPluginConfig config)
     {
-        Entity entity = entityAccessor.getEntity();
+        Entity entity = accessor.getEntity();
         if (!(entity instanceof MobEntity mob))
         {
             return;
@@ -31,23 +37,63 @@ public enum SoulMinionInfo implements IEntityComponentProvider
         SoulMinionComponent minionComponent = SoulControl.getSoulMinion(mob);
         if (minionComponent.hasOwner())
         {
-            PlayerEntity owner = minionComponent.getOwner();
-            iTooltip.add(SDTexts.TEXT$SOUL_MINION_INFO.get(
-                owner == null ?
-                    "Unknown" :
-                    owner.getName()
-            ));
+            String name = null;
+            NbtCompound data = accessor.getServerData();
+            if (data.contains("SoulOwnerName"))
+            {
+                name = data.getString("SoulOwnerName");
+            } else
+            {
+                UUID ownerUuid = minionComponent.getOwnerUuid();
+                if (ownerUuid != null)
+                {
+                    name = CommonProxy.getLastKnownUsername(ownerUuid);
+                }
+            }
+            if (name == null)
+            {
+                name = "???";
+            }
+            tooltip.add(SDTexts.TEXT$SOUL_MINION_INFO.get(name));
             return;
         }
-        PlayerEntity player = entityAccessor.getPlayer();
+        PlayerEntity player = accessor.getPlayer();
         if (!minionComponent.isOwner(player))
         {
             if (player.getMainHandStack().getItem() instanceof SoulContainerItem soulContainer)
             {
                 float probability = soulContainer.getCaptureProbability(mob);
-                iTooltip.add(SDTexts.TOOLTIP$SOUL_MINION$CAPTURE_PROBABILITY.get("%.1f%%".formatted(probability * 100)));
+                tooltip.add(SDTexts.TOOLTIP$SOUL_MINION$CAPTURE_PROBABILITY.get("%.1f%%".formatted(probability * 100)));
             }
         }
+    }
+
+    @Override
+    public void appendServerData(NbtCompound data, EntityAccessor accessor)
+    {
+        MinecraftServer server = accessor.getLevel().getServer();
+        if (server != null &&
+            server.isHost(accessor.getPlayer().getGameProfile()))
+        {
+            return;
+        }
+        Entity entity = accessor.getEntity();
+        if (!(entity instanceof MobEntity mob))
+        {
+            return;
+        }
+        SoulMinionComponent minionComponent = SoulControl.getSoulMinion(mob);
+        UUID ownerUuid = minionComponent.getOwnerUuid();
+        if (ownerUuid == null)
+        {
+            return;
+        }
+        String name = CommonProxy.getLastKnownUsername(ownerUuid);
+        if (name == null)
+        {
+            return;
+        }
+        data.putString("SoulOwnerName", name);
     }
 
     @Override
