@@ -7,6 +7,7 @@ import karashokleo.spell_dimension.content.item.AbstractSoulContainerItem;
 import karashokleo.spell_dimension.content.item.SoulContainerItem;
 import karashokleo.spell_dimension.content.misc.SoulControl;
 import karashokleo.spell_dimension.data.SDTexts;
+import karashokleo.spell_dimension.util.ImpactUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -42,7 +43,13 @@ public class SoulContainerOverlay extends InfoSideBar<SideBar.IntSignature>
         }
         if (container instanceof SoulContainerItem soulContainer)
         {
-            var hitResult = RayTraceUtil.rayTraceEntity(player, AbstractSoulContainerItem.RANGE, e -> !SoulControl.isSoulMinion(player, e));
+            var hitResult = RayTraceUtil.rayTraceEntity(
+                player,
+                AbstractSoulContainerItem.RANGE,
+                e ->
+                    (ImpactUtil.castToLiving(e) instanceof MobEntity mob) &&
+                        !SoulControl.getSoulMinion(mob).hasOwner()
+            );
             if (hitResult != null &&
                 hitResult.getEntity() instanceof MobEntity mob)
             {
