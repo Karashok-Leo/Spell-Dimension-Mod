@@ -30,7 +30,7 @@ import java.util.List;
 
 public class SoulAlbumItem extends AbstractSoulContainerItem
 {
-    public static final int CAPACITY = 10;
+    public static final int CAPACITY = 16;
     private static final String STORAGE_KEY = "Storage";
     private static final String SELECTED_KEY = "Selected";
 
@@ -43,10 +43,15 @@ public class SoulAlbumItem extends AbstractSoulContainerItem
         );
     }
 
+    protected int getCapacity()
+    {
+        return CAPACITY;
+    }
+
     @Override
     protected boolean isFull(NbtCompound itemNbt)
     {
-        return getStorageSize(itemNbt) >= CAPACITY;
+        return getStorageSize(itemNbt) >= getCapacity();
     }
 
     @Override
@@ -204,7 +209,7 @@ public class SoulAlbumItem extends AbstractSoulContainerItem
 
         // capacity tooltip
         int size = nbt == null ? 0 : getStorageSize(nbt);
-        tooltip.add(SDTexts.TOOLTIP$SOUL_ALBUM$CAPACITY.get(size, CAPACITY).formatted(Formatting.DARK_AQUA));
+        tooltip.add(SDTexts.TOOLTIP$SOUL_ALBUM$CAPACITY.get(size, getCapacity()).formatted(Formatting.DARK_AQUA));
         tooltip.add(ScreenTexts.SPACE);
 
         int selected = getSelectedIndex(stack);

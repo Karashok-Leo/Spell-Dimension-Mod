@@ -120,10 +120,9 @@ public class SoulContainerItem extends AbstractSoulContainerItem
             return true;
         }
         SoulMinionComponent component = SoulControl.getSoulMinion(mob);
-        PlayerEntity owner = component.getOwner();
-        if (owner != null)
+        if (component.hasOwner())
         {
-            return owner != user;
+            return !component.isOwner(user);
         }
         // not owned
         return user.getRandom().nextFloat() > getCaptureProbability(mob);

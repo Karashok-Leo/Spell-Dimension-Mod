@@ -26,11 +26,15 @@ public abstract class TargetPredicateMixin
     {
         if (instance instanceof MobEntity mob)
         {
+            // Only treat the owner as teammate, otherwise targeting is blocked by vanilla team checks.
             SoulMinionComponent minionComponent = SoulControl.getSoulMinion(mob);
-            PlayerEntity owner = minionComponent.getOwner();
-            if (owner != null && owner != entity)
+            if (minionComponent.hasOwner())
             {
-                return false;
+                if (!(entity instanceof PlayerEntity player) ||
+                    !minionComponent.isOwner(player))
+                {
+                    return false;
+                }
             }
         }
         return original.call(instance, entity);

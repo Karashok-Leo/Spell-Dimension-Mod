@@ -39,6 +39,13 @@ public class SoulMinionComponent implements AutoSyncedComponent
         return ownerUuid != null;
     }
 
+    public boolean isOwner(@Nullable PlayerEntity player)
+    {
+        return player != null &&
+            ownerUuid != null &&
+            ownerUuid.equals(player.getUuid());
+    }
+
     @Nullable
     public PlayerEntity getOwner()
     {

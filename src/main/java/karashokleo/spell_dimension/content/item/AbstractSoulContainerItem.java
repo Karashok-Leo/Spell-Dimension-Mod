@@ -100,10 +100,8 @@ public abstract class AbstractSoulContainerItem extends Item
         {
             return true;
         }
-        SoulMinionComponent component = SoulControl.getSoulMinion(mob);
-        PlayerEntity owner = component.getOwner();
         // not owned
-        return owner != user;
+        return !SoulControl.isSoulMinion(user, mob);
     }
 
     @Override
@@ -165,7 +163,7 @@ public abstract class AbstractSoulContainerItem extends Item
         SoulMinionComponent component = SoulControl.getSoulMinion(mob);
 
         // first capture
-        if (component.getOwner() != user)
+        if (!component.isOwner(user))
         {
             mob.setHealth(mob.getMaxHealth());
             component.setOwner(user);

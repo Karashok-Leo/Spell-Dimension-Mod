@@ -56,12 +56,15 @@ public interface SoulControl
      */
     static boolean isSoulMinion(@Nullable Entity entity1, @Nullable Entity entity2)
     {
+        if (!(entity1 instanceof PlayerEntity player))
+        {
+            return false;
+        }
         if (!(ImpactUtil.castToLiving(entity2) instanceof MobEntity mob))
         {
             return false;
         }
-        PlayerEntity owner = SoulControl.getSoulMinion(mob).getOwner();
-        return owner != null && owner == entity1;
+        return SoulControl.getSoulMinion(mob).isOwner(player);
     }
 
     /**
