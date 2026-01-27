@@ -78,6 +78,7 @@
     "client.phase.EntityRenderDispatcherMixin",
     "client.phase.InGameOverlayRendererMixin",
     "client.phase.WorldRendererMixin",
+    "modded.BetterCombatFix",
     "vanilla.ParticleManagerMixin"
   ],
   "mixinextras": {
