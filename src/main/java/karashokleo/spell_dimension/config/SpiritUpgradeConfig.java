@@ -2,21 +2,16 @@ package karashokleo.spell_dimension.config;
 
 import karashokleo.spell_dimension.content.object.EnlighteningModifier;
 import karashokleo.spell_dimension.util.UuidUtil;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
-import net.spell_power.api.SpellPower;
 import net.spell_power.api.SpellPowerMechanics;
 import net.spell_power.api.SpellSchools;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class SpiritUpgradeConfig
@@ -77,47 +72,6 @@ public class SpiritUpgradeConfig
                 amount,
                 operation
             );
-        }
-    }
-
-    @Environment(EnvType.CLIENT)
-    public static final List<AttributeLine> ATTRIBUTE_LINES = List.of(
-        new AttributeLine(EntityAttributes.GENERIC_MAX_HEALTH, SpiritUpgradeConfig::formatAttribute),
-        new AttributeLine(EntityAttributes.GENERIC_ARMOR, SpiritUpgradeConfig::formatAttribute),
-        new AttributeLine(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, SpiritUpgradeConfig::formatAttribute),
-        new AttributeLine(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, SpiritUpgradeConfig::formatAttribute),
-        new AttributeLine(EntityAttributes.GENERIC_MOVEMENT_SPEED, SpiritUpgradeConfig::formatAttributeDot2),
-        new AttributeLine(EntityAttributes.GENERIC_ATTACK_DAMAGE, SpiritUpgradeConfig::formatAttribute),
-        new AttributeLine(EntityAttributes.GENERIC_ATTACK_SPEED, SpiritUpgradeConfig::formatAttribute),
-        new AttributeLine(EntityAttributes.GENERIC_LUCK, SpiritUpgradeConfig::formatAttribute),
-        new AttributeLine(SpellSchools.SOUL.attribute, (player, attribute, result) -> "%.1f".formatted(result.nonCriticalValue())),
-        new AttributeLine(SpellPowerMechanics.CRITICAL_CHANCE.attribute, (player, attribute, result) -> "%.1f%%".formatted(result.criticalChance() * 100)),
-        new AttributeLine(SpellPowerMechanics.CRITICAL_DAMAGE.attribute, (player, attribute, result) -> "× %.1f%%".formatted(result.criticalDamage() * 100)),
-        new AttributeLine(SpellPowerMechanics.HASTE.attribute, (player, attribute, result) -> "+ %.1f%%".formatted((SpellPower.getHaste(player, SpellSchools.SOUL) - 1) * 100))
-    );
-
-    @Environment(EnvType.CLIENT)
-    private static String formatAttribute(PlayerEntity player, EntityAttribute attribute, SpellPower.Result result)
-    {
-        return "%.1f".formatted(player.getAttributeValue(attribute));
-    }
-
-    @Environment(EnvType.CLIENT)
-    private static String formatAttributeDot2(PlayerEntity player, EntityAttribute attribute, SpellPower.Result result)
-    {
-        return "%.2f".formatted(player.getAttributeValue(attribute));
-    }
-
-    @Environment(EnvType.CLIENT)
-    public record AttributeLine(
-        EntityAttribute attribute,
-        ValueProvider valueProvider
-    )
-    {
-        @FunctionalInterface
-        public interface ValueProvider
-        {
-            String get(PlayerEntity player, EntityAttribute attribute, SpellPower.Result result);
         }
     }
 }

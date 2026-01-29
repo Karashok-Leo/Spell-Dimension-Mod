@@ -5,78 +5,41 @@ import karashokleo.spell_dimension.content.component.SpiritHolderComponent;
 import karashokleo.spell_dimension.content.network.C2SSpiritAttributeUpgrade;
 import karashokleo.spell_dimension.init.AllPackets;
 import karashokleo.spell_dimension.util.AttributeUtil;
+import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.Registries;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.spell_power.api.SpellPower;
+import net.spell_power.api.SpellPowerMechanics;
 import net.spell_power.api.SpellSchools;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class SpiritTomeScreen extends Screen
 {
     private static final Identifier BACKGROUND_TEXTURE = new Identifier("spell-dimension-book", "textures/background/1.png");
     private static final Identifier BORDER_TEXTURE = new Identifier("spell-dimension", "textures/gui/spirit_tome.png");
     private static final int BACKGROUND_SIZE = 512;
-    private static final int TEXT_START_X = 300;
-    private static final int TEXT_START_Y = 100;
-    private static final int LINE_HEIGHT = 15;
-    private static final int VALUE_WIDTH = 120;
-    private static final int BUTTON_SIZE = 12;
-    private static final int BUTTON_OFFSET_X = 130;
-    private static final int BUTTON_OFFSET_Y = -2;
 
-    private final Map<EntityAttribute, UpgradeButton> upgradeButtons = new HashMap<>();
+    private final List<AttributeLine> attributeLines;
 
     public SpiritTomeScreen()
     {
         super(Text.empty());
-    }
-
-    @Override
-    public boolean keyPressed(int keyCode, int scanCode, int modifiers)
-    {
-        if (super.keyPressed(keyCode, scanCode, modifiers))
-        {
-            return true;
-        } else if (this.client != null &&
-            this.client.options.inventoryKey.matchesKey(keyCode, scanCode))
-        {
-            this.close();
-            return true;
-        } else
-        {
-            return false;
-        }
+        this.attributeLines = buildAttributeLines();
     }
 
     @Override
     public boolean shouldPause()
     {
         return false;
-    }
-
-    @Override
-    protected void init()
-    {
-        super.init();
-        this.upgradeButtons.clear();
-        int x = TEXT_START_X + 130;
-        int y = TEXT_START_Y - 2;
-        for (SpiritUpgradeConfig.AttributeLine line : SpiritUpgradeConfig.ATTRIBUTE_LINES)
-        {
-            UpgradeButton button = new UpgradeButton(line.attribute(), x, y, 11, 11);
-            this.upgradeButtons.put(line.attribute(), button);
-            y += LINE_HEIGHT;
-        }
     }
 
     @Override
@@ -94,53 +57,29 @@ public class SpiritTomeScreen extends Screen
 
         int marginX = this.width / 5;
         int marginY = this.height / 8;
+
+        // background
         renderBackground(context, mouseX, mouseY, marginX, marginY);
+        // player model
         InventoryScreen.drawEntity(context, 200, 150, 30, 200 - mouseX, 150 - 50 - mouseY, this.client.player);
+        // attribute panel
         context.fillGradient(280, 80, 480, 300, 0x33ffffff, 0x33ffffff);
-        updateUpgradeButtons(this.client.player);
-        renderTexts(context, this.client.player);
-        renderUpgradeButtons(context, mouseX, mouseY);
+
+        // attribute lines
+        int spirit = SpiritHolderComponent.getSpirit(this.client.player);
+        for (AttributeLine line : this.attributeLines)
+        {
+            line.update(spirit);
+        }
+
+        context.drawText(this.textRenderer, Text.literal("Spirit: " + SpiritHolderComponent.getSpirit(this.client.player)), 300, 120 - 15, 0xFFFFFF, true);
+        SpellPower.Result result = SpellPower.getSpellPower(SpellSchools.SOUL, this.client.player);
+        for (AttributeLine line : this.attributeLines)
+        {
+            line.render(context, mouseX, mouseY, this.textRenderer, this.client.player, result);
+        }
+
         super.render(context, mouseX, mouseY, delta);
-    }
-
-    @Override
-    public boolean mouseClicked(double mouseX, double mouseY, int button)
-    {
-        if (button == 0)
-        {
-            for (UpgradeButton upgradeButton : this.upgradeButtons.values())
-            {
-                if (upgradeButton.isHovered(mouseX, mouseY))
-                {
-                    if (upgradeButton.isActive())
-                    {
-                        requestUpgrade(upgradeButton.getAttribute());
-                        return true;
-                    }
-                    return false;
-                }
-            }
-        }
-        return super.mouseClicked(mouseX, mouseY, button);
-    }
-
-    private void renderTexts(DrawContext context, PlayerEntity player)
-    {
-        int x = TEXT_START_X;
-        int y = TEXT_START_Y;
-        context.drawText(this.textRenderer, Text.literal("Spirit: " + SpiritHolderComponent.getSpirit(player)), x, y - LINE_HEIGHT, 0xFFFFFF, true);
-        SpellPower.Result result = SpellPower.getSpellPower(SpellSchools.SOUL, player);
-        for (SpiritUpgradeConfig.AttributeLine line : SpiritUpgradeConfig.ATTRIBUTE_LINES)
-        {
-            EntityAttribute attribute = line.attribute();
-            String valueText = line.valueProvider().get(player, attribute, result);
-            // attribute name
-            context.drawText(this.textRenderer, Text.translatable(attribute.getTranslationKey()), x, y, 0xFFFFFF, true);
-            // attribute value
-            int width = this.textRenderer.getWidth(valueText);
-            context.drawText(this.textRenderer, valueText, x + VALUE_WIDTH - width, y, 0xFFFFFF, true);
-            y += LINE_HEIGHT;
-        }
     }
 
     private void renderBackground(DrawContext context, int mouseX, int mouseY, int marginX, int marginY)
@@ -192,114 +131,196 @@ public class SpiritTomeScreen extends Screen
         );
     }
 
-    private void renderUpgradeButtons(DrawContext context, int mouseX, int mouseY)
+    @Override
+    public boolean keyPressed(int keyCode, int scanCode, int modifiers)
     {
-        UpgradeButton hovered = null;
-        for (UpgradeButton button : this.upgradeButtons.values())
+        if (super.keyPressed(keyCode, scanCode, modifiers))
         {
-            button.render(context, mouseX, mouseY, this.textRenderer);
-            if (hovered == null && button.isHovered(mouseX, mouseY))
+            return true;
+        } else if (this.client != null &&
+            this.client.options.inventoryKey.matchesKey(keyCode, scanCode))
+        {
+            this.close();
+            return true;
+        } else
+        {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int button)
+    {
+        if (button == 0)
+        {
+            for (AttributeLine line : this.attributeLines)
             {
-                hovered = button;
+                if (line.mouseClicked(mouseX, mouseY))
+                {
+                    return true;
+                }
             }
         }
-
-        if (hovered != null)
-        {
-            List<Text> tooltip = buildUpgradeTooltip(hovered.getAttribute());
-            if (!tooltip.isEmpty())
-            {
-                context.drawTooltip(this.textRenderer, tooltip, mouseX, mouseY);
-            }
-        }
+        return super.mouseClicked(mouseX, mouseY, button);
     }
 
-    private List<Text> buildUpgradeTooltip(EntityAttribute attribute)
+    private static List<AttributeLine> buildAttributeLines()
     {
-        SpiritUpgradeConfig.SpiritUpgrade upgrade = SpiritUpgradeConfig.get(attribute);
-        if (upgrade == null)
-        {
-            return List.of();
-        }
-        Text cost = Text.literal("Spirit Cost: " + upgrade.cost());
-        var bonus = AttributeUtil.getTooltip(attribute, upgrade.amount(), upgrade.operation());
-        return bonus == null ? List.of(cost) : List.of(cost, bonus);
+        int x = 300;
+        int y = 100;
+        int lineHeight = 15;
+        return List.of(
+            new AttributeLine(EntityAttributes.GENERIC_MAX_HEALTH, SpiritTomeScreen::formatAttribute, x, y += lineHeight),
+            new AttributeLine(EntityAttributes.GENERIC_ARMOR, SpiritTomeScreen::formatAttribute, x, y += lineHeight),
+            new AttributeLine(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, SpiritTomeScreen::formatAttribute, x, y += lineHeight),
+            new AttributeLine(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, SpiritTomeScreen::formatAttribute, x, y += lineHeight),
+            new AttributeLine(EntityAttributes.GENERIC_MOVEMENT_SPEED, SpiritTomeScreen::formatAttributeDot2, x, y += lineHeight),
+            new AttributeLine(EntityAttributes.GENERIC_ATTACK_DAMAGE, SpiritTomeScreen::formatAttribute, x, y += lineHeight),
+            new AttributeLine(EntityAttributes.GENERIC_ATTACK_SPEED, SpiritTomeScreen::formatAttribute, x, y += lineHeight),
+            new AttributeLine(EntityAttributes.GENERIC_LUCK, SpiritTomeScreen::formatAttribute, x, y += lineHeight),
+            new AttributeLine(SpellSchools.SOUL.attribute, (player, attribute, result) -> "%.1f".formatted(result.nonCriticalValue()), x, y += lineHeight),
+            new AttributeLine(SpellPowerMechanics.CRITICAL_CHANCE.attribute, (player, attribute, result) -> "%.1f%%".formatted(result.criticalChance() * 100), x, y += lineHeight),
+            new AttributeLine(SpellPowerMechanics.CRITICAL_DAMAGE.attribute, (player, attribute, result) -> "× %.1f%%".formatted(result.criticalDamage() * 100), x, y += lineHeight),
+            new AttributeLine(SpellPowerMechanics.HASTE.attribute, (player, attribute, result) -> "+ %.1f%%".formatted((SpellPower.getHaste(player, SpellSchools.SOUL) - 1) * 100), x, y + lineHeight)
+        );
     }
 
-    private void requestUpgrade(EntityAttribute attribute)
+    private static String formatAttribute(PlayerEntity player, EntityAttribute attribute, SpellPower.Result result)
     {
-        if (this.client == null || this.client.player == null)
-        {
-            return;
-        }
-        Identifier id = Registries.ATTRIBUTE.getId(attribute);
-        if (id == null)
-        {
-            return;
-        }
-        AllPackets.toServer(new C2SSpiritAttributeUpgrade(id));
+        return "%.1f".formatted(player.getAttributeValue(attribute));
     }
 
-    private void updateUpgradeButtons(PlayerEntity player)
+    private static String formatAttributeDot2(PlayerEntity player, EntityAttribute attribute, SpellPower.Result result)
     {
-        int spirit = SpiritHolderComponent.getSpirit(player);
-        for (Map.Entry<EntityAttribute, UpgradeButton> entry : this.upgradeButtons.entrySet())
-        {
-            SpiritUpgradeConfig.SpiritUpgrade upgrade = SpiritUpgradeConfig.get(entry.getKey());
-            entry.getValue().setActive(upgrade != null && spirit >= upgrade.cost());
-        }
+        return "%.2f".formatted(player.getAttributeValue(attribute));
     }
 
-    private static final class UpgradeButton
+    public static class AttributeLine
     {
-        private final EntityAttribute attribute;
+        public final EntityAttribute attribute;
+        public final ValueProvider valueProvider;
         private final int x;
         private final int y;
-        private final int width;
-        private final int height;
-        private boolean active = true;
+        private final UpgradeButton upgradeButton;
+        private final List<Text> tooltip;
 
-        private UpgradeButton(EntityAttribute attribute, int x, int y, int width, int height)
+        public AttributeLine(EntityAttribute attribute, ValueProvider valueProvider, int x, int y)
         {
             this.attribute = attribute;
+            this.valueProvider = valueProvider;
+            this.upgradeButton = new UpgradeButton(attribute, x + 130, y - 2, 11, 11);
+            this.tooltip = buildUpgradeTooltip(attribute);
             this.x = x;
             this.y = y;
-            this.width = width;
-            this.height = height;
         }
 
-        public EntityAttribute getAttribute()
+        public void render(DrawContext context, int mouseX, int mouseY, TextRenderer textRenderer, PlayerEntity player, SpellPower.Result result)
         {
-            return attribute;
+            String valueText = valueProvider.get(player, attribute, result);
+            // attribute name
+            context.drawText(textRenderer, Text.translatable(attribute.getTranslationKey()), x, y, 0xFFFFFF, true);
+            // attribute value
+            int gap = 120 - textRenderer.getWidth(valueText);
+            context.drawText(textRenderer, valueText, x + gap, y, 0xFFFFFF, true);
+            // upgrade button
+            upgradeButton.render(context, mouseX, mouseY, textRenderer);
+            // tooltip
+            if (!tooltip.isEmpty() && upgradeButton.isHovered(mouseX, mouseY))
+            {
+                context.drawTooltip(textRenderer, tooltip, mouseX, mouseY);
+            }
         }
 
-        public boolean isActive()
+        public void update(int spirit)
         {
-            return active;
+            SpiritUpgradeConfig.SpiritUpgrade upgrade = SpiritUpgradeConfig.get(attribute);
+            upgradeButton.setActive(upgrade != null && spirit >= upgrade.cost());
         }
 
-        public void setActive(boolean active)
+        public boolean mouseClicked(double mouseX, double mouseY)
         {
-            this.active = active;
+            return upgradeButton.mouseClicked(mouseX, mouseY);
         }
 
-        public boolean isHovered(double mouseX, double mouseY)
+        private static List<Text> buildUpgradeTooltip(EntityAttribute attribute)
         {
-            return mouseX >= x &&
-                mouseY >= y &&
-                mouseX < x + width &&
-                mouseY < y + height;
+            SpiritUpgradeConfig.SpiritUpgrade upgrade = SpiritUpgradeConfig.get(attribute);
+            if (upgrade == null)
+            {
+                return List.of();
+            }
+            Text cost = Text.literal("Spirit Cost: " + upgrade.cost());
+            var bonus = AttributeUtil.getTooltip(attribute, upgrade.amount(), upgrade.operation());
+            return bonus == null ? List.of(cost) : List.of(cost, bonus);
         }
 
-        public void render(DrawContext context, int mouseX, int mouseY, net.minecraft.client.font.TextRenderer textRenderer)
+        @FunctionalInterface
+        public interface ValueProvider
         {
-            // button
-            int background = active ? (isHovered(mouseX, mouseY) ? 0xaaaaaaaa : 0xaa666666) : 0xaa111111;
-            context.fill(x, y, x + width, y + height, background);
-            // text
-            int textX = x + 1 + (width - textRenderer.getWidth("+")) / 2;
-            int textY = y + 1 + (height - textRenderer.fontHeight) / 2;
-            context.drawText(textRenderer, "+", textX, textY, 0xFFFFFF, false);
+            String get(PlayerEntity player, EntityAttribute attribute, SpellPower.Result result);
+        }
+
+        public static class UpgradeButton
+        {
+            private final EntityAttribute attribute;
+            private final int x;
+            private final int y;
+            private final int width;
+            private final int height;
+            private boolean active = true;
+
+            private UpgradeButton(EntityAttribute attribute, int x, int y, int width, int height)
+            {
+                this.attribute = attribute;
+                this.x = x;
+                this.y = y;
+                this.width = width;
+                this.height = height;
+            }
+
+            public void setActive(boolean active)
+            {
+                this.active = active;
+            }
+
+            public boolean isHovered(double mouseX, double mouseY)
+            {
+                return mouseX >= x &&
+                    mouseY >= y &&
+                    mouseX < x + width &&
+                    mouseY < y + height;
+            }
+
+            public boolean mouseClicked(double mouseX, double mouseY)
+            {
+                if (!isHovered(mouseX, mouseY))
+                {
+                    return false;
+                }
+                if (!active)
+                {
+                    return false;
+                }
+                // request upgrade
+                Identifier id = Registries.ATTRIBUTE.getId(attribute);
+                if (id == null)
+                {
+                    return false;
+                }
+                AllPackets.toServer(new C2SSpiritAttributeUpgrade(id));
+                return true;
+            }
+
+            public void render(DrawContext context, int mouseX, int mouseY, TextRenderer textRenderer)
+            {
+                // button
+                int background = active ? (isHovered(mouseX, mouseY) ? 0xaaaaaaaa : 0xaa666666) : 0xaa111111;
+                context.fill(x, y, x + width, y + height, background);
+                // text
+                int textX = x + 1 + (width - textRenderer.getWidth("+")) / 2;
+                int textY = y + 1 + (height - textRenderer.fontHeight) / 2;
+                context.drawText(textRenderer, "+", textX, textY, 0xFFFFFF, false);
+            }
         }
     }
 }
