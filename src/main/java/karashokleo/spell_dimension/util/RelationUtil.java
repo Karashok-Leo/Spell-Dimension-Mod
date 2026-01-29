@@ -57,6 +57,14 @@ public class RelationUtil
         {
             return false;
         }
+        if (party1 == party2)
+        {
+            return true;
+        }
+        if (party1.getId().equals(party2.getId()))
+        {
+            return true;
+        }
         return party1.isAlly(party2.getId());
     }
 
