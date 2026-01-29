@@ -13,7 +13,10 @@ import net.minecraft.advancement.AdvancementFrame;
 import net.minecraft.advancement.AdvancementRewards;
 import net.minecraft.advancement.criterion.ConsumeItemCriterion;
 import net.minecraft.advancement.criterion.InventoryChangedCriterion;
+import net.minecraft.advancement.criterion.StartedRidingCriterion;
 import net.minecraft.advancement.criterion.TickCriterion;
+import net.minecraft.entity.EntityType;
+import net.minecraft.predicate.entity.EntityPredicate;
 
 import java.util.function.Consumer;
 
@@ -122,11 +125,37 @@ public class SDAdvancementProvider extends FabricAdvancementProvider
             .criterion("0", DroppedItemsCriterion.condition(AllStacks.NEW_GUIDE_BOOK, 2))
             .build(SpellDimension.modLoc("spell_dimension/drop_guide_2"));
 
+        Advancement ride_player = Advancement.Builder.create()
+            .parent(root)
+            .display(
+                AllStacks.NEW_GUIDE_BOOK,
+                SDTexts.ADVANCEMENT$RIDE_PLAYER$TITLE.get(),
+                SDTexts.ADVANCEMENT$RIDE_PLAYER$DESCRIPTION.get(),
+                null,
+                AdvancementFrame.TASK,
+                true,
+                true,
+                true
+            )
+            .criterion(
+                "0",
+                StartedRidingCriterion.Conditions.create(
+                    EntityPredicate.Builder.create()
+                        .vehicle(
+                            EntityPredicate.Builder.create()
+                                .type(EntityType.PLAYER)
+                                .build()
+                        )
+                )
+            )
+            .build(SpellDimension.modLoc("spell_dimension/ride_player"));
+
         consumer.accept(root);
         consumer.accept(medal_1);
         consumer.accept(medal_2);
         consumer.accept(miner);
         consumer.accept(drop_guide_1);
         consumer.accept(drop_guide_2);
+        consumer.accept(ride_player);
     }
 }
