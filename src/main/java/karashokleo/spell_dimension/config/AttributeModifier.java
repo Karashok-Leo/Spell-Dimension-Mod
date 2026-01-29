@@ -24,7 +24,7 @@ public record AttributeModifier(EntityAttribute attribute, double amount, Entity
         new AttributeModifier(EntityAttributes.GENERIC_ARMOR, 1, EntityAttributeModifier.Operation.ADDITION),
         new AttributeModifier(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, 1, EntityAttributeModifier.Operation.ADDITION),
         new AttributeModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1, EntityAttributeModifier.Operation.ADDITION),
-        new AttributeModifier(EntityAttributes.GENERIC_ATTACK_SPEED, 0.05, EntityAttributeModifier.Operation.ADDITION),
+        new AttributeModifier(EntityAttributes.GENERIC_ATTACK_SPEED, 0.1, EntityAttributeModifier.Operation.ADDITION),
         new AttributeModifier(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 0.1, EntityAttributeModifier.Operation.ADDITION),
         new AttributeModifier(EntityAttributes.GENERIC_LUCK, 1, EntityAttributeModifier.Operation.ADDITION),
         new AttributeModifier(EntityAttributes.GENERIC_MAX_HEALTH, 1, EntityAttributeModifier.Operation.ADDITION),

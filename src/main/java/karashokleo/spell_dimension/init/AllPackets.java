@@ -30,13 +30,15 @@ public class AllPackets
             S2CBloodOverlay.class,
             C2SSelectQuest.class,
             C2SSelectSoulAlbum.class,
-            C2SReleaseControl.class
+            C2SReleaseControl.class,
+            C2SSpiritAttributeUpgrade.class
         );
 
         HANDLER.configureC2S(
             C2SSelectQuest.class,
             C2SSelectSoulAlbum.class,
-            C2SReleaseControl.class
+            C2SReleaseControl.class,
+            C2SSpiritAttributeUpgrade.class
         );
     }
 

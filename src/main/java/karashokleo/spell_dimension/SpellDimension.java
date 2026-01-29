@@ -8,6 +8,7 @@ import karashokleo.leobrary.datagen.generator.*;
 import karashokleo.leobrary.datagen.generator.init.GeneratorStorage;
 import karashokleo.spell_dimension.api.quest.Quest;
 import karashokleo.spell_dimension.api.quest.QuestRegistry;
+import karashokleo.spell_dimension.config.SpiritUpgradeConfig;
 import karashokleo.spell_dimension.content.component.*;
 import karashokleo.spell_dimension.content.entity.brain.SoulMinionBrain;
 import karashokleo.spell_dimension.content.integration.WalkerIntegration;
@@ -97,6 +98,7 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
         AllEvents.init();
         AllCommands.init();
         WalkerIntegration.init();
+        SpiritUpgradeConfig.init();
     }
 
     @Override
@@ -140,6 +142,7 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
         registry.registerFor(LivingEntity.class, AllComponents.BUFF, BuffComponentImpl::new);
         registry.registerFor(MobEntity.class, AllComponents.SOUL_MINION, SoulMinionComponent::new);
         registry.registerForPlayers(AllComponents.SOUL_CONTROLLER, SoulControllerComponent::new, RespawnCopyStrategy.LOSSLESS_ONLY);
+        registry.registerForPlayers(AllComponents.SPIRIT_HOLDER, player -> new SpiritHolderComponent(), RespawnCopyStrategy.ALWAYS_COPY);
     }
 
     public static final LanguageGenerator EN_TEXTS = new LanguageGenerator("en_us");

@@ -1,8 +1,10 @@
 package karashokleo.spell_dimension.init;
 
 import com.mojang.brigadier.Command;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
+import karashokleo.spell_dimension.content.component.SpiritHolderComponent;
 import karashokleo.spell_dimension.content.object.EnchantedModifier;
 import karashokleo.spell_dimension.mixin.modded.SpellRegistryAccessor;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
@@ -42,6 +44,7 @@ public class AllCommands
                     .then(fixFakeDeath())
                     .then(reloadSpells())
                     .then(convertModifiers())
+                    .then(spirit())
             );
         });
     }
@@ -80,6 +83,20 @@ public class AllCommands
         return CommandManager
             .literal("convert_modifiers")
             .executes(AllCommands::executeConvertModifiers);
+    }
+
+    private static LiteralArgumentBuilder<ServerCommandSource> spirit()
+    {
+        return CommandManager
+            .literal("spirit")
+            .requires(source -> source.hasPermissionLevel(2))
+            .then(CommandManager.literal("get").executes(AllCommands::executeGetSpirit))
+            .then(CommandManager.literal("add")
+                .then(CommandManager.argument("amount", IntegerArgumentType.integer(1))
+                    .executes(AllCommands::executeAddSpirit)))
+            .then(CommandManager.literal("set")
+                .then(CommandManager.argument("amount", IntegerArgumentType.integer(0))
+                    .executes(AllCommands::executeSetSpirit)));
     }
 
     @SuppressWarnings("all")
@@ -170,5 +187,43 @@ public class AllCommands
             EnchantedModifier.tryConvert(stack);
         }
         return Command.SINGLE_SUCCESS;
+    }
+
+    private static int executeGetSpirit(CommandContext<ServerCommandSource> context)
+    {
+        ServerPlayerEntity player = context.getSource().getPlayer();
+        if (player == null)
+        {
+            return Command.SINGLE_SUCCESS;
+        }
+        int spirit = SpiritHolderComponent.getSpirit(player);
+        context.getSource().sendMessage(Text.literal("Spirit: " + spirit));
+        return spirit;
+    }
+
+    private static int executeAddSpirit(CommandContext<ServerCommandSource> context)
+    {
+        ServerPlayerEntity player = context.getSource().getPlayer();
+        if (player == null)
+        {
+            return Command.SINGLE_SUCCESS;
+        }
+        int amount = IntegerArgumentType.getInteger(context, "amount");
+        SpiritHolderComponent.addSpirit(player, amount);
+        context.getSource().sendMessage(Text.literal("Spirit: " + SpiritHolderComponent.getSpirit(player)));
+        return amount;
+    }
+
+    private static int executeSetSpirit(CommandContext<ServerCommandSource> context)
+    {
+        ServerPlayerEntity player = context.getSource().getPlayer();
+        if (player == null)
+        {
+            return Command.SINGLE_SUCCESS;
+        }
+        int amount = IntegerArgumentType.getInteger(context, "amount");
+        SpiritHolderComponent.setSpirit(player, amount);
+        context.getSource().sendMessage(Text.literal("Spirit: " + SpiritHolderComponent.getSpirit(player)));
+        return amount;
     }
 }

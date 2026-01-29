@@ -13,4 +13,5 @@ public class AllComponents
     public static final ComponentKey<BuffComponent> BUFF = ComponentRegistry.getOrCreate(SpellDimension.modLoc("buff"), BuffComponent.class);
     public static final ComponentKey<SoulMinionComponent> SOUL_MINION = ComponentRegistry.getOrCreate(SpellDimension.modLoc("soul_minion"), SoulMinionComponent.class);
     public static final ComponentKey<SoulControllerComponent> SOUL_CONTROLLER = ComponentRegistry.getOrCreate(SpellDimension.modLoc("soul_controller"), SoulControllerComponent.class);
+    public static final ComponentKey<SpiritHolderComponent> SPIRIT_HOLDER = ComponentRegistry.getOrCreate(SpellDimension.modLoc("spirit_holder"), SpiritHolderComponent.class);
 }
