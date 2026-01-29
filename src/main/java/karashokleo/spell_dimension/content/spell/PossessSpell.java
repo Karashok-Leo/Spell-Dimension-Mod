@@ -3,11 +3,15 @@ package karashokleo.spell_dimension.content.spell;
 import karashokleo.spell_dimension.content.component.SoulControllerComponent;
 import karashokleo.spell_dimension.content.entity.FakePlayerEntity;
 import karashokleo.spell_dimension.content.misc.SoulControl;
+import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.util.ImpactUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import net.spell_engine.api.spell.SpellInfo;
 
@@ -41,6 +45,14 @@ public class PossessSpell
             if (controllerComponent.getFakePlayerSelf() == target)
             {
                 SoulControl.setControllingMinion(player, null);
+            }
+        } else if (target instanceof PlayerEntity)
+        {
+            ItemStack offHandStack = caster.getOffHandStack();
+            if (offHandStack.isOf(AllItems.SPELL_PRISM))
+            {
+                offHandStack.damage(1, player, e -> e.sendToolBreakStatus(Hand.OFF_HAND));
+                caster.startRiding(target, true);
             }
         }
     }

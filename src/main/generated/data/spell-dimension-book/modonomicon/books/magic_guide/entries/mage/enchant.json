@@ -3593,7 +3593,7 @@
             },
             "nbt": {
               "EnchantedModifiers": {
-                "Amount": 0.05,
+                "Amount": 0.1,
                 "Attribute": "minecraft:generic.attack_speed",
                 "Operation": 0,
                 "Slot": "mainhand",
@@ -3615,7 +3615,7 @@
             },
             "nbt": {
               "EnchantedModifiers": {
-                "Amount": 0.05,
+                "Amount": 0.1,
                 "Attribute": "minecraft:generic.attack_speed",
                 "Operation": 0,
                 "Slot": "mainhand",
@@ -3637,7 +3637,7 @@
             },
             "nbt": {
               "EnchantedModifiers": {
-                "Amount": 0.05,
+                "Amount": 0.1,
                 "Attribute": "minecraft:generic.attack_speed",
                 "Operation": 0,
                 "Slot": "mainhand",
@@ -3659,7 +3659,7 @@
             },
             "nbt": {
               "EnchantedModifiers": {
-                "Amount": 0.05,
+                "Amount": 0.1,
                 "Attribute": "minecraft:generic.attack_speed",
                 "Operation": 0,
                 "Slot": "offhand",
@@ -3681,7 +3681,7 @@
             },
             "nbt": {
               "EnchantedModifiers": {
-                "Amount": 0.05,
+                "Amount": 0.1,
                 "Attribute": "minecraft:generic.attack_speed",
                 "Operation": 0,
                 "Slot": "offhand",
@@ -3703,7 +3703,7 @@
             },
             "nbt": {
               "EnchantedModifiers": {
-                "Amount": 0.05,
+                "Amount": 0.1,
                 "Attribute": "minecraft:generic.attack_speed",
                 "Operation": 0,
                 "Slot": "offhand",
@@ -3725,7 +3725,7 @@
             },
             "nbt": {
               "EnchantedModifiers": {
-                "Amount": 0.05,
+                "Amount": 0.1,
                 "Attribute": "minecraft:generic.attack_speed",
                 "Operation": 0,
                 "Slot": "feet",
@@ -3747,7 +3747,7 @@
             },
             "nbt": {
               "EnchantedModifiers": {
-                "Amount": 0.05,
+                "Amount": 0.1,
                 "Attribute": "minecraft:generic.attack_speed",
                 "Operation": 0,
                 "Slot": "feet",
@@ -3769,7 +3769,7 @@
             },
             "nbt": {
               "EnchantedModifiers": {
-                "Amount": 0.05,
+                "Amount": 0.1,
                 "Attribute": "minecraft:generic.attack_speed",
                 "Operation": 0,
                 "Slot": "feet",
@@ -3791,7 +3791,7 @@
             },
             "nbt": {
               "EnchantedModifiers": {
-                "Amount": 0.05,
+                "Amount": 0.1,
                 "Attribute": "minecraft:generic.attack_speed",
                 "Operation": 0,
                 "Slot": "legs",
@@ -3813,7 +3813,7 @@
             },
             "nbt": {
               "EnchantedModifiers": {
-                "Amount": 0.05,
+                "Amount": 0.1,
                 "Attribute": "minecraft:generic.attack_speed",
                 "Operation": 0,
                 "Slot": "legs",
@@ -3835,7 +3835,7 @@
             },
             "nbt": {
               "EnchantedModifiers": {
-                "Amount": 0.05,
+                "Amount": 0.1,
                 "Attribute": "minecraft:generic.attack_speed",
                 "Operation": 0,
                 "Slot": "legs",
@@ -3857,7 +3857,7 @@
             },
             "nbt": {
               "EnchantedModifiers": {
-                "Amount": 0.05,
+                "Amount": 0.1,
                 "Attribute": "minecraft:generic.attack_speed",
                 "Operation": 0,
                 "Slot": "chest",
@@ -3879,7 +3879,7 @@
             },
             "nbt": {
               "EnchantedModifiers": {
-                "Amount": 0.05,
+                "Amount": 0.1,
                 "Attribute": "minecraft:generic.attack_speed",
                 "Operation": 0,
                 "Slot": "chest",
@@ -3901,7 +3901,7 @@
             },
             "nbt": {
               "EnchantedModifiers": {
-                "Amount": 0.05,
+                "Amount": 0.1,
                 "Attribute": "minecraft:generic.attack_speed",
                 "Operation": 0,
                 "Slot": "chest",
@@ -3923,7 +3923,7 @@
             },
             "nbt": {
               "EnchantedModifiers": {
-                "Amount": 0.05,
+                "Amount": 0.1,
                 "Attribute": "minecraft:generic.attack_speed",
                 "Operation": 0,
                 "Slot": "head",
@@ -3945,7 +3945,7 @@
             },
             "nbt": {
               "EnchantedModifiers": {
-                "Amount": 0.05,
+                "Amount": 0.1,
                 "Attribute": "minecraft:generic.attack_speed",
                 "Operation": 0,
                 "Slot": "head",
@@ -3967,7 +3967,7 @@
             },
             "nbt": {
               "EnchantedModifiers": {
-                "Amount": 0.05,
+                "Amount": 0.1,
                 "Attribute": "minecraft:generic.attack_speed",
                 "Operation": 0,
                 "Slot": "head",

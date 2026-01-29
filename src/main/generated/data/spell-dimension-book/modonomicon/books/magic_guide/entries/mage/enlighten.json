@@ -209,7 +209,7 @@
             },
             "nbt": {
               "EnlighteningModifiers": {
-                "Amount": 0.05,
+                "Amount": 0.1,
                 "Attribute": "minecraft:generic.attack_speed",
                 "Operation": 0,
                 "Uuid": [

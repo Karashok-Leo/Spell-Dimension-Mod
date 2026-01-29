@@ -136,6 +136,8 @@ public enum SDTexts
     ADVANCEMENT$DROP_GUIDE_1$DESCRIPTION("Discard Magic Guidance", "丢弃《魔力接引》"),
     ADVANCEMENT$DROP_GUIDE_2$TITLE("You'll regret this", "你会后悔的"),
     ADVANCEMENT$DROP_GUIDE_2$DESCRIPTION("Discard Magic Guidance AGAIN", "再一次丢弃《魔力接引》"),
+    ADVANCEMENT$RIDE_PLAYER$TITLE("I'm a Baby Kitty Where is Mama", "小猫咪找妈妈"),
+    ADVANCEMENT$RIDE_PLAYER$DESCRIPTION("Mount another player", "骑在另一名玩家身上"),
 
     /**
      * Spell School

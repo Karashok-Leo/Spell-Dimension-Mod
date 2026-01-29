@@ -1,0 +1,43 @@
+{
+  "parent": "spell-dimension:spell_dimension/root",
+  "criteria": {
+    "0": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "vehicle": {
+                "type": "minecraft:player"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:started_riding"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.spell-dimension.ride_player.description"
+    },
+    "frame": "task",
+    "hidden": true,
+    "icon": {
+      "item": "patchouli:guide_book",
+      "nbt": "{\"patchouli:book\":\"spell-dimension:magic_guide\"}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.spell-dimension.ride_player.title"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
