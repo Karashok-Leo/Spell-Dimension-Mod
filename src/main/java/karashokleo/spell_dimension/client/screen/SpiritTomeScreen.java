@@ -1,18 +1,21 @@
 package karashokleo.spell_dimension.client.screen;
 
 import karashokleo.spell_dimension.config.SpiritUpgradeConfig;
-import karashokleo.spell_dimension.content.component.SpiritHolderComponent;
+import karashokleo.spell_dimension.content.component.SpiritTomeComponent;
 import karashokleo.spell_dimension.content.network.C2SSpiritAttributeUpgrade;
+import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllPackets;
 import karashokleo.spell_dimension.util.AttributeUtil;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.Registries;
+import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
@@ -27,12 +30,28 @@ public class SpiritTomeScreen extends Screen
     private static final Identifier BACKGROUND_TEXTURE = new Identifier("spell-dimension-book", "textures/background/1.png");
     private static final Identifier BORDER_TEXTURE = new Identifier("spell-dimension", "textures/gui/spirit_tome.png");
     private static final int BACKGROUND_SIZE = 512;
+    public static final int LINE_HEIGHT = 15;
+    public static final int ATTRIBUTE_COUNT = 12;
 
-    private final List<AttributeLine> attributeLines;
+    private int marginX;
+    private int marginY;
+    private int viewportWidth;
+    private int viewportHeight;
+    private List<AttributeLine> attributeLines;
 
     public SpiritTomeScreen()
     {
         super(Text.empty());
+    }
+
+    @Override
+    protected void init()
+    {
+        super.init();
+        this.viewportWidth = 384;
+        this.viewportHeight = 226;
+        this.marginX = (this.width - this.viewportWidth) / 2;
+        this.marginY = (this.height - this.viewportHeight) / 2;
         this.attributeLines = buildAttributeLines();
     }
 
@@ -50,43 +69,64 @@ public class SpiritTomeScreen extends Screen
             return;
         }
 
-        if (this.client.player == null)
+        ClientPlayerEntity player = this.client.player;
+        if (player == null)
         {
             return;
         }
 
-        int marginX = this.width / 5;
-        int marginY = this.height / 8;
-
         // background
         renderBackground(context, mouseX, mouseY, marginX, marginY);
         // player model
-        InventoryScreen.drawEntity(context, 200, 150, 30, 200 - mouseX, 150 - 50 - mouseY, this.client.player);
-        // attribute panel
-        context.fillGradient(280, 80, 480, 300, 0x33ffffff, 0x33ffffff);
+        int playerX = this.marginX + this.viewportWidth / 4;
+        int playerY = this.height / 2 - 15;
+        InventoryScreen.drawEntity(context, playerX, playerY, 30, playerX - mouseX, playerY - 50 - mouseY, player);
+
+        // basic info
+        renderBasicInfo(context, player);
 
         // attribute lines
-        int spirit = SpiritHolderComponent.getSpirit(this.client.player);
+        context.fill(
+            this.width / 2 + 15,
+            marginY + 15,
+            this.width - marginX - 15,
+            this.height - marginY - 15,
+            0x33ffffff
+        );
+        int spirit = SpiritTomeComponent.getSpirit(player);
         for (AttributeLine line : this.attributeLines)
         {
             line.update(spirit);
         }
 
-        context.drawText(this.textRenderer, Text.literal("Spirit: " + SpiritHolderComponent.getSpirit(this.client.player)), 300, 120 - 15, 0xFFFFFF, true);
-        SpellPower.Result result = SpellPower.getSpellPower(SpellSchools.SOUL, this.client.player);
+        SpellPower.Result result = SpellPower.getSpellPower(SpellSchools.SOUL, player);
         for (AttributeLine line : this.attributeLines)
         {
-            line.render(context, mouseX, mouseY, this.textRenderer, this.client.player, result);
+            line.render(context, mouseX, mouseY, this.textRenderer, player, result);
         }
 
         super.render(context, mouseX, mouseY, delta);
     }
 
+    private void renderBasicInfo(DrawContext context, ClientPlayerEntity player)
+    {
+        int x1 = marginX + 30;
+        int x2 = x1 + 80;
+        int y = this.height / 2 + 15;
+        context.drawText(this.textRenderer, SDTexts.TEXT$SPIRIT_TOME$NAME.get(player.getName()), x1, y, 0xFFFFFF, true);
+        context.drawText(this.textRenderer, SDTexts.TEXT$SPIRIT_TOME$GENDER.get(getGender(player)), x1, y += LINE_HEIGHT, 0xFFFFFF, true);
+        context.drawText(this.textRenderer, SDTexts.TEXT$SPIRIT_TOME$AGE.get("%.1f".formatted(getAge(player))), x2, y, 0xFFFFFF, true);
+        context.drawText(this.textRenderer, SDTexts.TEXT$SPIRIT_TOME$HEIGHT.get("%.2f".formatted(player.getHeight())), x1, y += LINE_HEIGHT, 0xFFFFFF, true);
+        context.drawText(this.textRenderer, SDTexts.TEXT$SPIRIT_TOME$WEIGHT.get("%.1f".formatted(SpiritTomeComponent.getWeight(player))), x2, y, 0xFFFFFF, true);
+        context.drawText(this.textRenderer, SDTexts.TEXT$SPIRIT_TOME$HEALTH.get("%.1f".formatted(player.getHealth())), x1, y += LINE_HEIGHT, 0xFFFFFF, true);
+        int spirit = SpiritTomeComponent.getSpirit(player);
+        context.drawText(this.textRenderer, SDTexts.TEXT$SPIRIT_TOME$SPIRIT.get(spirit), x2, y, 0xFFFFFF, true);
+    }
+
     private void renderBackground(DrawContext context, int mouseX, int mouseY, int marginX, int marginY)
     {
-        int viewportWidth = this.width - 2 * marginX;
-        int viewportHeight = this.height - 2 * marginY;
-        if (viewportWidth <= 0 || viewportHeight <= 0)
+        if (this.viewportWidth <= 0 ||
+            this.viewportHeight <= 0)
         {
             return;
         }
@@ -122,12 +162,118 @@ public class SpiritTomeScreen extends Screen
 
         context.disableScissor();
 
-        context.drawNineSlicedTexture(
-            BORDER_TEXTURE,
-            marginX - 7, marginY - 7,
-            viewportWidth + 14, viewportHeight + 14,
-            7, 21, 21,
+        drawBorder(
+            context,
+            marginX - 12, marginY - 12,
+            this.viewportWidth + 24, this.viewportHeight + 24,
+            32, 27,
+            76, 64,
             0, 0
+        );
+    }
+
+    @SuppressWarnings("SameParameterValue")
+    private static void drawBorder(
+        DrawContext context,
+        int x, int y,
+        int width, int height,
+        int cornerWidth, int cornerHeight,
+        int borderWidth, int borderHeight,
+        int u, int v
+    )
+    {
+        // left top
+        context.drawTexture(
+            BORDER_TEXTURE,
+            x, y,
+            u, v,
+            cornerWidth, cornerHeight
+        );
+        // right top
+        context.drawTexture(
+            BORDER_TEXTURE,
+            x + width - cornerWidth, y,
+            u + borderWidth - cornerWidth, v,
+            cornerWidth, cornerHeight
+        );
+        // left bottom
+        context.drawTexture(
+            BORDER_TEXTURE,
+            x, y + height - cornerHeight,
+            u, v + borderHeight - cornerHeight,
+            cornerWidth, cornerHeight
+        );
+        // right bottom
+        context.drawTexture(
+            BORDER_TEXTURE,
+            x + width - cornerWidth, y + height - cornerHeight,
+            u + borderWidth - cornerWidth, v + borderHeight - cornerHeight,
+            cornerWidth, cornerHeight
+        );
+        // repeating edges
+        int halfEdgeWidth = (borderWidth - cornerWidth * 2) / 2;
+        int halfEdgeHeight = (borderHeight - cornerHeight * 2) / 2;
+        int halfRenderWidth = (width - cornerWidth * 2) / 2;
+        int halfRenderHeight = (height - cornerHeight * 2) / 2;
+        // top center
+        context.drawRepeatingTexture(
+            BORDER_TEXTURE,
+            x + cornerWidth, y,
+            halfRenderWidth, cornerHeight,
+            u + cornerWidth, v,
+            halfEdgeWidth, cornerHeight
+        );
+        context.drawRepeatingTexture(
+            BORDER_TEXTURE,
+            x + cornerWidth + halfRenderWidth, y,
+            halfRenderWidth, cornerHeight,
+            u + cornerWidth + halfEdgeWidth, v,
+            halfEdgeWidth, cornerHeight
+        );
+        // bottom center
+        context.drawRepeatingTexture(
+            BORDER_TEXTURE,
+            x + cornerWidth, y + height - cornerHeight,
+            halfRenderWidth, cornerHeight,
+            u + cornerWidth, v + borderHeight - cornerHeight,
+            halfEdgeWidth, cornerHeight
+        );
+        context.drawRepeatingTexture(
+            BORDER_TEXTURE,
+            x + cornerWidth + halfRenderWidth, y + height - cornerHeight,
+            halfRenderWidth, cornerHeight,
+            u + cornerWidth + halfEdgeWidth, v + borderHeight - cornerHeight,
+            halfEdgeWidth, cornerHeight
+        );
+        // left center
+        context.drawRepeatingTexture(
+            BORDER_TEXTURE,
+            x, y + cornerHeight,
+            cornerWidth, halfRenderHeight,
+            u, v + cornerHeight,
+            cornerWidth, halfEdgeHeight
+        );
+        context.drawRepeatingTexture(
+            BORDER_TEXTURE,
+            x, y + cornerHeight + halfRenderHeight,
+            cornerWidth, halfRenderHeight,
+            u, v + cornerHeight + halfEdgeHeight,
+            cornerWidth, halfEdgeHeight
+        );
+        // right center
+        context.drawRepeatingTexture(
+            BORDER_TEXTURE,
+            x + width - cornerWidth, y + cornerHeight,
+            cornerWidth, halfRenderHeight,
+            u + borderWidth - cornerWidth, v + cornerHeight,
+            cornerWidth, halfEdgeHeight
+        );
+        context.drawRepeatingTexture(
+            BORDER_TEXTURE,
+            x + width - cornerWidth, y + cornerHeight + halfRenderHeight,
+            cornerWidth, halfRenderHeight,
+            u + borderWidth - cornerWidth, v + cornerHeight + halfEdgeHeight,
+            cornerWidth, halfEdgeHeight
         );
     }
 
@@ -164,24 +310,41 @@ public class SpiritTomeScreen extends Screen
         return super.mouseClicked(mouseX, mouseY, button);
     }
 
-    private static List<AttributeLine> buildAttributeLines()
+    private static Text getGender(ClientPlayerEntity player)
     {
-        int x = 300;
-        int y = 100;
-        int lineHeight = 15;
+        return switch (player.getModel())
+        {
+            case "default" -> SDTexts.TEXT$SPIRIT_TOME$MALE.get();
+            case "slim" -> SDTexts.TEXT$SPIRIT_TOME$FEMALE.get();
+            default -> SDTexts.TEXT$SPIRIT_TOME$UNKNOWN.get();
+        };
+    }
+
+    private static float getAge(ClientPlayerEntity player)
+    {
+        int playTimeTicks = player.getStatHandler().getStat(Stats.CUSTOM.getOrCreateStat(Stats.PLAY_TIME));
+        // define 1 year as 30 days
+        float yearsFromPlayTime = playTimeTicks / (24_000f * 30f);
+        return 16 + Math.max(0, yearsFromPlayTime);
+    }
+
+    private List<AttributeLine> buildAttributeLines()
+    {
+        int x = this.width / 2 + 25;
+        int y = (this.height - ATTRIBUTE_COUNT * LINE_HEIGHT) / 2 + 4;
         return List.of(
-            new AttributeLine(EntityAttributes.GENERIC_MAX_HEALTH, SpiritTomeScreen::formatAttribute, x, y += lineHeight),
-            new AttributeLine(EntityAttributes.GENERIC_ARMOR, SpiritTomeScreen::formatAttribute, x, y += lineHeight),
-            new AttributeLine(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, SpiritTomeScreen::formatAttribute, x, y += lineHeight),
-            new AttributeLine(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, SpiritTomeScreen::formatAttribute, x, y += lineHeight),
-            new AttributeLine(EntityAttributes.GENERIC_MOVEMENT_SPEED, SpiritTomeScreen::formatAttributeDot2, x, y += lineHeight),
-            new AttributeLine(EntityAttributes.GENERIC_ATTACK_DAMAGE, SpiritTomeScreen::formatAttribute, x, y += lineHeight),
-            new AttributeLine(EntityAttributes.GENERIC_ATTACK_SPEED, SpiritTomeScreen::formatAttribute, x, y += lineHeight),
-            new AttributeLine(EntityAttributes.GENERIC_LUCK, SpiritTomeScreen::formatAttribute, x, y += lineHeight),
-            new AttributeLine(SpellSchools.SOUL.attribute, (player, attribute, result) -> "%.1f".formatted(result.nonCriticalValue()), x, y += lineHeight),
-            new AttributeLine(SpellPowerMechanics.CRITICAL_CHANCE.attribute, (player, attribute, result) -> "%.1f%%".formatted(result.criticalChance() * 100), x, y += lineHeight),
-            new AttributeLine(SpellPowerMechanics.CRITICAL_DAMAGE.attribute, (player, attribute, result) -> "× %.1f%%".formatted(result.criticalDamage() * 100), x, y += lineHeight),
-            new AttributeLine(SpellPowerMechanics.HASTE.attribute, (player, attribute, result) -> "+ %.1f%%".formatted((SpellPower.getHaste(player, SpellSchools.SOUL) - 1) * 100), x, y + lineHeight)
+            new AttributeLine(EntityAttributes.GENERIC_MAX_HEALTH, SpiritTomeScreen::formatAttribute, x, y),
+            new AttributeLine(EntityAttributes.GENERIC_ARMOR, SpiritTomeScreen::formatAttribute, x, y += LINE_HEIGHT),
+            new AttributeLine(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, SpiritTomeScreen::formatAttribute, x, y += LINE_HEIGHT),
+            new AttributeLine(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, SpiritTomeScreen::formatAttribute, x, y += LINE_HEIGHT),
+            new AttributeLine(EntityAttributes.GENERIC_MOVEMENT_SPEED, SpiritTomeScreen::formatAttributeDot2, x, y += LINE_HEIGHT),
+            new AttributeLine(EntityAttributes.GENERIC_ATTACK_DAMAGE, SpiritTomeScreen::formatAttribute, x, y += LINE_HEIGHT),
+            new AttributeLine(EntityAttributes.GENERIC_ATTACK_SPEED, SpiritTomeScreen::formatAttribute, x, y += LINE_HEIGHT),
+            new AttributeLine(EntityAttributes.GENERIC_LUCK, SpiritTomeScreen::formatAttribute, x, y += LINE_HEIGHT),
+            new AttributeLine(SpellSchools.SOUL.attribute, (player, attribute, result) -> "%.1f".formatted(result.nonCriticalValue()), x, y += LINE_HEIGHT),
+            new AttributeLine(SpellPowerMechanics.CRITICAL_CHANCE.attribute, (player, attribute, result) -> "%.1f%%".formatted(result.criticalChance() * 100), x, y += LINE_HEIGHT),
+            new AttributeLine(SpellPowerMechanics.CRITICAL_DAMAGE.attribute, (player, attribute, result) -> "× %.1f%%".formatted(result.criticalDamage() * 100), x, y += LINE_HEIGHT),
+            new AttributeLine(SpellPowerMechanics.HASTE.attribute, (player, attribute, result) -> "+ %.1f%%".formatted((SpellPower.getHaste(player, SpellSchools.SOUL) - 1) * 100), x, y + LINE_HEIGHT)
         );
     }
 
@@ -249,7 +412,7 @@ public class SpiritTomeScreen extends Screen
             {
                 return List.of();
             }
-            Text cost = Text.literal("Spirit Cost: " + upgrade.cost());
+            Text cost = SDTexts.TEXT$SPIRIT_TOME$COST.get(upgrade.cost());
             var bonus = AttributeUtil.getTooltip(attribute, upgrade.amount(), upgrade.operation());
             return bonus == null ? List.of(cost) : List.of(cost, bonus);
         }

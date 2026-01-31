@@ -4,7 +4,7 @@ import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
-import karashokleo.spell_dimension.content.component.SpiritHolderComponent;
+import karashokleo.spell_dimension.content.component.SpiritTomeComponent;
 import karashokleo.spell_dimension.content.object.EnchantedModifier;
 import karashokleo.spell_dimension.mixin.modded.SpellRegistryAccessor;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
@@ -196,7 +196,7 @@ public class AllCommands
         {
             return Command.SINGLE_SUCCESS;
         }
-        int spirit = SpiritHolderComponent.getSpirit(player);
+        int spirit = SpiritTomeComponent.getSpirit(player);
         context.getSource().sendMessage(Text.literal("Spirit: " + spirit));
         return spirit;
     }
@@ -209,8 +209,8 @@ public class AllCommands
             return Command.SINGLE_SUCCESS;
         }
         int amount = IntegerArgumentType.getInteger(context, "amount");
-        SpiritHolderComponent.addSpirit(player, amount);
-        context.getSource().sendMessage(Text.literal("Spirit: " + SpiritHolderComponent.getSpirit(player)));
+        SpiritTomeComponent.addSpirit(player, amount);
+        context.getSource().sendMessage(Text.literal("Spirit: " + SpiritTomeComponent.getSpirit(player)));
         return amount;
     }
 
@@ -222,8 +222,8 @@ public class AllCommands
             return Command.SINGLE_SUCCESS;
         }
         int amount = IntegerArgumentType.getInteger(context, "amount");
-        SpiritHolderComponent.setSpirit(player, amount);
-        context.getSource().sendMessage(Text.literal("Spirit: " + SpiritHolderComponent.getSpirit(player)));
+        SpiritTomeComponent.setSpirit(player, amount);
+        context.getSource().sendMessage(Text.literal("Spirit: " + SpiritTomeComponent.getSpirit(player)));
         return amount;
     }
 }

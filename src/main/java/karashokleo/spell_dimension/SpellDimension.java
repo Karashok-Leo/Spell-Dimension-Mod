@@ -142,7 +142,7 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
         registry.registerFor(LivingEntity.class, AllComponents.BUFF, BuffComponentImpl::new);
         registry.registerFor(MobEntity.class, AllComponents.SOUL_MINION, SoulMinionComponent::new);
         registry.registerForPlayers(AllComponents.SOUL_CONTROLLER, SoulControllerComponent::new, RespawnCopyStrategy.LOSSLESS_ONLY);
-        registry.registerForPlayers(AllComponents.SPIRIT_HOLDER, player -> new SpiritHolderComponent(), RespawnCopyStrategy.ALWAYS_COPY);
+        registry.registerForPlayers(AllComponents.SPIRIT_TOME, SpiritTomeComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
     }
 
     public static final LanguageGenerator EN_TEXTS = new LanguageGenerator("en_us");

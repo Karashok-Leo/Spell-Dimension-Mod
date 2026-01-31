@@ -89,6 +89,9 @@ public enum SDTexts
 
     TEXT$SPAWNER$REMAIN("Remaining: %s", "剩余生成数量：%s"),
 
+    /**
+     * Soul Minion
+     */
     TEXT$SOUL_MINION_INFO("%s's Soul Minion", "%s 的灵仆"),
     TEXT$SOUL_CONTROL$DAMAGE("Your body is taking %s damage!", "你的本体正受到%s点伤害！"),
     TEXT$SOUL_CONTROL$BODY_DIED("Your body is nearing death!", "你的本体正濒临死亡！"),
@@ -98,6 +101,21 @@ public enum SDTexts
     TEXT$SOUL_CONTAINER_EMPTY("The container is empty", "容器为空"),
     TEXT$SOUL_CONTAINER_FULL("The container is full", "容器已满"),
     TEXT$SOUL_CONTAINER_NOT_OWNER("You are not the owner of this item.", "你不是该物品的拥有者。"),
+
+    /**
+     * Spirit Tome
+     */
+    TEXT$SPIRIT_TOME$NAME("Name: %s", "姓名：%s"),
+    TEXT$SPIRIT_TOME$GENDER("Gender: %s", "性别：%s"),
+    TEXT$SPIRIT_TOME$AGE("Age: %s", "年龄：%s"),
+    TEXT$SPIRIT_TOME$HEIGHT("Height: %s m", "身高：%s m"),
+    TEXT$SPIRIT_TOME$WEIGHT("Weight: %s kg", "体重：%s kg"),
+    TEXT$SPIRIT_TOME$HEALTH("Health: %s", "生命值：%s"),
+    TEXT$SPIRIT_TOME$SPIRIT("Spirit: %s", "通灵：%s"),
+    TEXT$SPIRIT_TOME$COST("Spirit Cost: %s", "消耗通灵：%s"),
+    TEXT$SPIRIT_TOME$MALE("Male", "男"),
+    TEXT$SPIRIT_TOME$FEMALE("Female", "女"),
+    TEXT$SPIRIT_TOME$UNKNOWN("Unknown", "???"),
 
     /**
      * Game Over
