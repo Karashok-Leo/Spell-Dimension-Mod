@@ -11,6 +11,7 @@ import karashokleo.spell_dimension.util.ImpactUtil;
 import karashokleo.spell_dimension.util.RelationUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -22,6 +23,7 @@ import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.mob.*;
 import net.minecraft.entity.player.PlayerEntity;
@@ -236,7 +238,17 @@ public interface SoulControl
 
         // update health proportionally
         float proportion = entity.getHealth() / entity.getMaxHealth();
-        target.setHealth(target.getMaxHealth() * proportion);
+        float health = target.getMaxHealth() * proportion;
+        float amount = Math.max(0, target.getHealth() - health);
+        target.setHealth(health);
+
+        // handle death if needed
+        DamageSource source = target.getDamageSources().generic();
+        if (target.isDead() &&
+            ServerLivingEntityEvents.ALLOW_DEATH.invoker().allowDeath(target, source, amount))
+        {
+            target.onDeath(source);
+        }
     }
 
     private static void transferMinionData(LivingEntity source, LivingEntity target)
