@@ -2,6 +2,7 @@ package karashokleo.spell_dimension.client.screen;
 
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.widget.ToggleButtonWidget;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.util.math.Rect2i;
 import net.minecraft.text.Text;
@@ -16,6 +17,8 @@ public class SpiritTomeScreen extends Screen
     private Rect2i viewport;
     private SpiritTomePage[] pages;
     private int currentPage;
+    private ToggleButtonWidget prevArrow;
+    private ToggleButtonWidget nextArrow;
 
     public SpiritTomeScreen()
     {
@@ -32,14 +35,62 @@ public class SpiritTomeScreen extends Screen
         int height = this.height - 2 * marginY;
         this.viewport = new Rect2i(marginX, marginY, width, height);
         this.pages = new SpiritTomePage[]{
+            new SpiritTomeInfoPage(this.viewport),
+            new SpiritTomeInfoPage(this.viewport),
             new SpiritTomeRulePage(this.viewport)
         };
         this.currentPage = 0;
+        this.initArrows();
+    }
+
+    protected void initArrows()
+    {
+        int arrowWidth = 11;
+        int arrowHeight = 16;
+        int offsetX = 10;
+        int arrowY = this.viewport.getY() + this.viewport.getHeight() / 2 - arrowHeight / 2;
+        prevArrow = new ToggleButtonWidget(
+            this.viewport.getX() - offsetX - arrowWidth,
+            arrowY,
+            arrowWidth,
+            arrowHeight,
+            false
+        );
+        prevArrow.setTextureUV(
+            80,
+            0,
+            arrowWidth,
+            arrowHeight,
+            BORDER_TEXTURE
+        );
+        nextArrow = new ToggleButtonWidget(
+            this.viewport.getX() + this.viewport.getWidth() + offsetX,
+            arrowY,
+            arrowWidth,
+            arrowHeight,
+            true
+        );
+        nextArrow.setTextureUV(
+            80,
+            0,
+            arrowWidth,
+            arrowHeight,
+            BORDER_TEXTURE
+        );
+        addDrawableChild(prevArrow);
+        addDrawableChild(nextArrow);
+        updateArrowVisibility();
     }
 
     protected SpiritTomePage getCurrentPage()
     {
         return this.pages[this.currentPage];
+    }
+
+    private void updateArrowVisibility()
+    {
+        prevArrow.visible = this.currentPage > 0;
+        nextArrow.visible = this.currentPage < this.pages.length - 1;
     }
 
     @Override
@@ -246,6 +297,18 @@ public class SpiritTomeScreen extends Screen
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button)
     {
+        if (prevArrow.visible && prevArrow.mouseClicked(mouseX, mouseY, button))
+        {
+            this.currentPage = Math.max(0, this.currentPage - 1);
+            updateArrowVisibility();
+            return true;
+        }
+        if (nextArrow.visible && nextArrow.mouseClicked(mouseX, mouseY, button))
+        {
+            this.currentPage = Math.min(this.pages.length - 1, this.currentPage + 1);
+            updateArrowVisibility();
+            return true;
+        }
         if (button == 0 &&
             this.getCurrentPage()
                 .mouseClicked(mouseX, mouseY))
