@@ -90,13 +90,22 @@ public class AllCommands
         return CommandManager
             .literal("spirit")
             .requires(source -> source.hasPermissionLevel(2))
-            .then(CommandManager.literal("get").executes(AllCommands::executeGetSpirit))
-            .then(CommandManager.literal("add")
-                .then(CommandManager.argument("amount", IntegerArgumentType.integer(1))
-                    .executes(AllCommands::executeAddSpirit)))
-            .then(CommandManager.literal("set")
-                .then(CommandManager.argument("amount", IntegerArgumentType.integer(0))
-                    .executes(AllCommands::executeSetSpirit)));
+            .then(
+                CommandManager.literal("positive")
+                    .then(
+                        CommandManager
+                            .argument("amount", IntegerArgumentType.integer())
+                            .executes(ctx -> executeSpirit(ctx, SpiritTomeComponent.SpiritType.POSITIVE))
+                    )
+            )
+            .then(
+                CommandManager.literal("negative")
+                    .then(
+                        CommandManager
+                            .argument("amount", IntegerArgumentType.integer())
+                            .executes(ctx -> executeSpirit(ctx, SpiritTomeComponent.SpiritType.NEGATIVE))
+                    )
+            );
     }
 
     @SuppressWarnings("all")
@@ -189,41 +198,20 @@ public class AllCommands
         return Command.SINGLE_SUCCESS;
     }
 
-    private static int executeGetSpirit(CommandContext<ServerCommandSource> context)
+    private static int executeSpirit(CommandContext<ServerCommandSource> context, SpiritTomeComponent.SpiritType type)
     {
-        ServerPlayerEntity player = context.getSource().getPlayer();
-        if (player == null)
-        {
-            return Command.SINGLE_SUCCESS;
-        }
-        int spirit = SpiritTomeComponent.getSpirit(player);
-        context.getSource().sendMessage(Text.literal("Spirit: " + spirit));
-        return spirit;
-    }
-
-    private static int executeAddSpirit(CommandContext<ServerCommandSource> context)
-    {
-        ServerPlayerEntity player = context.getSource().getPlayer();
+        ServerCommandSource source = context.getSource();
+        ServerPlayerEntity player = source.getPlayer();
         if (player == null)
         {
             return Command.SINGLE_SUCCESS;
         }
         int amount = IntegerArgumentType.getInteger(context, "amount");
-        SpiritTomeComponent.addSpirit(player, amount);
-        context.getSource().sendMessage(Text.literal("Spirit: " + SpiritTomeComponent.getSpirit(player)));
-        return amount;
-    }
-
-    private static int executeSetSpirit(CommandContext<ServerCommandSource> context)
-    {
-        ServerPlayerEntity player = context.getSource().getPlayer();
-        if (player == null)
-        {
-            return Command.SINGLE_SUCCESS;
-        }
-        int amount = IntegerArgumentType.getInteger(context, "amount");
-        SpiritTomeComponent.setSpirit(player, amount);
-        context.getSource().sendMessage(Text.literal("Spirit: " + SpiritTomeComponent.getSpirit(player)));
+        SpiritTomeComponent component = SpiritTomeComponent.get(player);
+        component.changeSpirit(type, amount);
+        source.sendMessage(Text.literal("Positive: " + component.getSpirit(SpiritTomeComponent.SpiritType.POSITIVE)));
+        source.sendMessage(Text.literal("Negative: " + component.getSpirit(SpiritTomeComponent.SpiritType.NEGATIVE)));
+        source.sendMessage(Text.literal("Total: " + component.getSpirit(SpiritTomeComponent.SpiritType.TOTAL)));
         return amount;
     }
 }
