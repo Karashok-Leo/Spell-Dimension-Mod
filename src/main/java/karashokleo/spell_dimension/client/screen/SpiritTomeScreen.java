@@ -32,7 +32,7 @@ public class SpiritTomeScreen extends Screen
         int height = this.height - 2 * marginY;
         this.viewport = new Rect2i(marginX, marginY, width, height);
         this.pages = new SpiritTomePage[]{
-            new SpiritTomeInfoPage(this.viewport)
+            new SpiritTomeRulePage(this.viewport)
         };
         this.currentPage = 0;
     }
@@ -67,7 +67,7 @@ public class SpiritTomeScreen extends Screen
 
         // page
         SpiritTomePage page = this.getCurrentPage();
-        page.render(this.viewport, context, mouseX, mouseY, this.textRenderer, player);
+        page.render(context, mouseX, mouseY, this.textRenderer, player);
 
         super.render(context, mouseX, mouseY, delta);
     }
@@ -248,7 +248,7 @@ public class SpiritTomeScreen extends Screen
     {
         if (button == 0 &&
             this.getCurrentPage()
-                .mouseClicked(this.viewport, mouseX, mouseY))
+                .mouseClicked(mouseX, mouseY))
         {
             return true;
         }

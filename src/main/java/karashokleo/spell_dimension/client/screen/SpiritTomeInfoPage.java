@@ -47,7 +47,7 @@ public class SpiritTomeInfoPage implements SpiritTomePage
     }
 
     @Override
-    public void render(Rect2i viewport, DrawContext context, int mouseX, int mouseY, TextRenderer textRenderer, ClientPlayerEntity player)
+    public void render(DrawContext context, int mouseX, int mouseY, TextRenderer textRenderer, ClientPlayerEntity player)
     {
         // player model
         int playerX = this.viewport.getX() + this.viewport.getWidth() / 4;
@@ -114,7 +114,7 @@ public class SpiritTomeInfoPage implements SpiritTomePage
     }
 
     @Override
-    public boolean mouseClicked(Rect2i viewport, double mouseX, double mouseY)
+    public boolean mouseClicked(double mouseX, double mouseY)
     {
         for (AttributeLine line : this.attributeLines)
         {
