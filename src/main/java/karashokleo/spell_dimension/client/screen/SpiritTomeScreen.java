@@ -26,10 +26,10 @@ public class SpiritTomeScreen extends Screen
     protected void init()
     {
         super.init();
-        int width = 384;
-        int height = 226;
-        int marginX = (this.width - width) / 2;
-        int marginY = (this.height - height) / 2;
+        int marginX = Math.max(0, (this.width - 384) / 2);
+        int marginY = Math.max(0, (this.height - 226) / 2);
+        int width = this.width - 2 * marginX;
+        int height = this.height - 2 * marginY;
         this.viewport = new Rect2i(marginX, marginY, width, height);
         this.pages = new SpiritTomePage[]{
             new SpiritTomeInfoPage(this.viewport)
@@ -63,7 +63,7 @@ public class SpiritTomeScreen extends Screen
         }
 
         // background
-        renderBackground(context, mouseX, mouseY, this.viewport.getX(), this.viewport.getY());
+        renderBackground(context, mouseX, mouseY);
 
         // page
         SpiritTomePage page = this.getCurrentPage();
@@ -72,14 +72,14 @@ public class SpiritTomeScreen extends Screen
         super.render(context, mouseX, mouseY, delta);
     }
 
-    private void renderBackground(DrawContext context, int mouseX, int mouseY, int marginX, int marginY)
+    private void renderBackground(DrawContext context, int mouseX, int mouseY)
     {
-        if (marginX <= 0 || marginY <= 0)
-        {
-            return;
-        }
-
-        context.enableScissor(marginX, this.viewport.getY(), this.width - marginX, this.height - this.viewport.getY());
+        context.enableScissor(
+            this.viewport.getX(),
+            this.viewport.getY(),
+            this.width - this.viewport.getX(),
+            this.height - this.viewport.getY()
+        );
 
         // -1 ~ 1
         int length = Math.max(this.width, this.height) / 2;
@@ -113,7 +113,7 @@ public class SpiritTomeScreen extends Screen
 
         drawBorder(
             context,
-            marginX - 12, this.viewport.getY() - 12,
+            this.viewport.getX() - 12, this.viewport.getY() - 12,
             this.viewport.getWidth() + 24, this.viewport.getHeight() + 24,
             32, 27,
             76, 64,

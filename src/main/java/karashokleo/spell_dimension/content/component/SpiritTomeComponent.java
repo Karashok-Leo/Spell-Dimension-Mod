@@ -4,6 +4,7 @@ import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.logic.DifficultyLevel;
+import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllComponents;
 import karashokleo.spell_dimension.init.AllItems;
 import net.minecraft.entity.mob.MobEntity;
@@ -11,6 +12,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.NotNull;
 
@@ -30,6 +32,10 @@ public class SpiritTomeComponent implements AutoSyncedComponent
 
     public static void onSpiritTomeRule(ServerPlayerEntity player, MobEntity mob, boolean captured)
     {
+        if (!TrinketCompat.hasItemInTrinket(player, AllItems.SPIRIT_TOME))
+        {
+            return;
+        }
         boolean hostile = MobDifficulty.get(mob).isPresent();
         int amount = hostile ?
             DifficultyLevel.ofAny(mob) :
@@ -42,10 +48,12 @@ public class SpiritTomeComponent implements AutoSyncedComponent
             if (captured)
             {
                 // rule 1
+                player.sendMessage(SDTexts.TEXT$SPIRIT_TOME$RULE$1$EFFECT.get(amount).formatted(Formatting.DARK_AQUA));
                 component.changeSpirit(SpiritType.POSITIVE, amount);
             } else
             {
                 // rule 2
+                player.sendMessage(SDTexts.TEXT$SPIRIT_TOME$RULE$2$EFFECT.get(amount).formatted(Formatting.DARK_AQUA));
                 component.changeSpirit(SpiritType.NEGATIVE, amount);
             }
         } else
@@ -53,10 +61,12 @@ public class SpiritTomeComponent implements AutoSyncedComponent
             if (captured)
             {
                 // rule 3
+                player.sendMessage(SDTexts.TEXT$SPIRIT_TOME$RULE$3$EFFECT.get(amount).formatted(Formatting.DARK_AQUA));
                 component.changeSpirit(SpiritType.NEGATIVE, -amount);
             } else
             {
                 // rule 4
+                player.sendMessage(SDTexts.TEXT$SPIRIT_TOME$RULE$4$EFFECT.get(amount).formatted(Formatting.DARK_AQUA));
                 component.changeSpirit(SpiritType.POSITIVE, -amount);
             }
         }
@@ -138,9 +148,13 @@ public class SpiritTomeComponent implements AutoSyncedComponent
     {
         if (amount <= 0)
         {
-            return true;
+            throw new UnsupportedOperationException();
         }
         if (this.getSpirit() < amount)
+        {
+            return false;
+        }
+        if (!TrinketCompat.hasItemInTrinket(this.player, AllItems.SPIRIT_TOME))
         {
             return false;
         }
@@ -199,14 +213,21 @@ public class SpiritTomeComponent implements AutoSyncedComponent
         {
             return;
         }
+        boolean hasTome = false;
         for (var access : TrinketCompat.getItemAccess(serverPlayer))
         {
             if (access.get().isOf(AllItems.SPIRIT_TOME))
             {
+                hasTome = true;
                 access.set(ItemStack.EMPTY);
+                break;
             }
         }
-        // TODO: broadcast death message?
+        if (!hasTome)
+        {
+            return;
+        }
+        serverPlayer.sendMessage(SDTexts.TEXT$SPIRIT_TOME$RULE$0$EFFECT.get().formatted(Formatting.DARK_AQUA));
         serverPlayer.damage(serverPlayer.getDamageSources().outOfWorld(), Float.MAX_VALUE);
         // ensure death
         serverPlayer.setHealth(0);
