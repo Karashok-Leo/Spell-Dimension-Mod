@@ -11,7 +11,6 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Language;
 import net.minecraft.util.Util;
-import net.minecraft.util.math.MathHelper;
 
 import java.util.List;
 
@@ -19,6 +18,7 @@ public class SpiritTomeRulePage implements SpiritTomePage
 {
     private static final Identifier BACKGROUND_TEXTURE = new Identifier("spell-dimension-book", "textures/background/2.png");
     private static final int LINE_HEIGHT = 15;
+    private static final int LINE_GAP = 10;
     private static final int HORIZONTAL_PADDING = 20;
 
     private static final List<Text> RULES = List.of(
@@ -33,10 +33,12 @@ public class SpiritTomeRulePage implements SpiritTomePage
     );
 
     private final Rect2i viewport;
+    private long hoverTime;
 
     public SpiritTomeRulePage(Rect2i viewport)
     {
         this.viewport = viewport;
+        this.hoverTime = -1L;
     }
 
     @Override
@@ -48,12 +50,12 @@ public class SpiritTomeRulePage implements SpiritTomePage
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, TextRenderer textRenderer, ClientPlayerEntity player)
     {
-        int RULE_GAP = 6;
         int left = this.viewport.getX() + HORIZONTAL_PADDING;
         int right = this.viewport.getX() + this.viewport.getWidth() - HORIZONTAL_PADDING;
-        int totalHeight = RULES.size() * LINE_HEIGHT + (RULES.size() - 1) * RULE_GAP;
+        int totalHeight = RULES.size() * LINE_HEIGHT + (RULES.size() - 1) * LINE_GAP;
         int y = this.viewport.getY() + (this.viewport.getHeight() - totalHeight) / 2;
 
+        boolean flag = false;
         for (int i = 0; i < RULES.size(); i++)
         {
             Text rule = RULES.get(i);
@@ -63,13 +65,19 @@ public class SpiritTomeRulePage implements SpiritTomePage
                 mouseX < right &&
                 mouseY >= top &&
                 mouseY < bottom;
+            flag |= hovered;
             drawText(context, textRenderer, rule, left, top, right, bottom, hovered);
             y += LINE_HEIGHT;
             if (i < RULES.size() - 1)
             {
-                y += RULE_GAP;
+                y += LINE_GAP;
             }
         }
+        if (flag)
+        {
+            return;
+        }
+        this.hoverTime = -1L;
     }
 
     @Override
@@ -78,7 +86,7 @@ public class SpiritTomeRulePage implements SpiritTomePage
         return false;
     }
 
-    protected static void drawText(DrawContext context, TextRenderer textRenderer, Text text, int left, int top, int right, int bottom, boolean hovered)
+    protected void drawText(DrawContext context, TextRenderer textRenderer, Text text, int left, int top, int right, int bottom, boolean hovered)
     {
         int maxWidth = Math.max(0, right - left);
         int width = textRenderer.getWidth(text);
@@ -86,31 +94,33 @@ public class SpiritTomeRulePage implements SpiritTomePage
         if (width < maxWidth)
         {
             context.drawTextWithShadow(textRenderer, text, left, y, 0xffffff);
-        } else
-        {
-            if (hovered)
-            {
-                // hovered, scroll
-                int overflow = width - maxWidth;
-                double time = Util.getMeasuringTimeMs() / 1000.0;
-                double period = Math.max(overflow * 0.5, 3.0);
-                double factor = Math.sin((Math.PI / 2) * Math.cos((Math.PI * 2) * time / period)) / 2.0 + 0.5;
-                double offset = MathHelper.lerp(factor, 0.0, overflow);
-                context.enableScissor(left, top, right, bottom);
-                context.drawTextWithShadow(textRenderer, text, left - (int) offset, y, 0xffffff);
-                context.disableScissor();
-            } else
-            {
-                // not hovered, ends with ellipsis
-                int ellipsisWidth = textRenderer.getWidth(ScreenTexts.ELLIPSIS);
-                int available = Math.max(0, maxWidth - ellipsisWidth);
-                StringVisitable trimmed = textRenderer.trimToWidth(text, available);
-                if (text != trimmed)
-                {
-                    trimmed = StringVisitable.concat(trimmed, ScreenTexts.ELLIPSIS);
-                }
-                context.drawTextWithShadow(textRenderer, Language.getInstance().reorder(trimmed), left, y, 0xffffff);
-            }
+            return;
         }
+        if (hovered)
+        {
+            // hovered, scroll
+            int overflow = width - maxWidth;
+            long now = Util.getMeasuringTimeMs();
+            if (this.hoverTime < 0L)
+            {
+                this.hoverTime = now;
+            }
+            double time = (now - this.hoverTime) / 20.0;
+            int offset = (int) Math.min(overflow, Math.round(time));
+            context.enableScissor(left, top, right, bottom);
+            context.drawTextWithShadow(textRenderer, text, left - offset, y, 0xffffff);
+            context.disableScissor();
+            return;
+        }
+
+        // not hovered, ends with ellipsis
+        int ellipsisWidth = textRenderer.getWidth(ScreenTexts.ELLIPSIS);
+        int available = Math.max(0, maxWidth - ellipsisWidth);
+        StringVisitable trimmed = textRenderer.trimToWidth(text, available);
+        if (text != trimmed)
+        {
+            trimmed = StringVisitable.concat(trimmed, ScreenTexts.ELLIPSIS);
+        }
+        context.drawTextWithShadow(textRenderer, Language.getInstance().reorder(trimmed), left, y, 0xffffff);
     }
 }
