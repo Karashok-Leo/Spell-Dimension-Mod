@@ -5,6 +5,7 @@ import karashokleo.spell_dimension.content.object.SoulMinionMode;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.network.ServerPlayerEntity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -94,6 +95,10 @@ public class SoulMinionComponent implements AutoSyncedComponent
         {
             this.owner = owner;
             this.ownerUuid = owner.getUuid();
+            if (this.owner instanceof ServerPlayerEntity player)
+            {
+                SpiritTomeComponent.onSpiritTomeRule(player, mob, true);
+            }
         }
         mob.setGlowing(hasOwner());
     }

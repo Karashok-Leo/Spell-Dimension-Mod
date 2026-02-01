@@ -10,12 +10,14 @@ import karashokleo.leobrary.effect.api.event.LivingHealCallback;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
 import karashokleo.spell_dimension.content.component.SoulControllerComponent;
 import karashokleo.spell_dimension.content.component.SoulMinionComponent;
+import karashokleo.spell_dimension.content.component.SpiritTomeComponent;
 import karashokleo.spell_dimension.content.entity.FakePlayerEntity;
 import karashokleo.spell_dimension.content.misc.SoulControl;
 import karashokleo.spell_dimension.content.network.S2CBloodOverlay;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.*;
 import karashokleo.spell_dimension.util.DamageUtil;
+import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -353,6 +355,32 @@ public class SoulMinionEvents
             SoulMinionComponent minionComponent = SoulControl.getSoulMinion(mob);
             PlayerEntity owner = minionComponent.getOwner();
             return owner != target;
+        });
+
+        ServerEntityCombatEvents.AFTER_KILLED_OTHER_ENTITY.register((world, entity, killedEntity) ->
+        {
+            if (!(killedEntity instanceof MobEntity killedMob))
+            {
+                return;
+            }
+            ServerPlayerEntity player = null;
+            if (entity instanceof ServerPlayerEntity serverPlayer)
+            {
+                player = serverPlayer;
+            } else if (entity instanceof MobEntity mob)
+            {
+                SoulMinionComponent minionComponent = SoulControl.getSoulMinion(mob);
+                PlayerEntity owner = minionComponent.getOwner();
+                if (owner instanceof ServerPlayerEntity serverOwner)
+                {
+                    player = serverOwner;
+                }
+            }
+            if (player == null)
+            {
+                return;
+            }
+            SpiritTomeComponent.onSpiritTomeRule(player, killedMob, false);
         });
     }
 }

@@ -55,7 +55,8 @@ public class SpiritTomeInfoPage implements SpiritTomePage
         InventoryScreen.drawEntity(context, playerX, playerY, 30, playerX - mouseX, playerY - 50 - mouseY, player);
 
         // basic info
-        renderBasicInfo(context, player, textRenderer);
+        SpiritTomeComponent component = SpiritTomeComponent.get(player);
+        renderBasicInfo(context, player, textRenderer, component);
 
         // attributes
         context.fill(
@@ -65,7 +66,8 @@ public class SpiritTomeInfoPage implements SpiritTomePage
             this.viewport.getY() + this.viewport.getHeight() - 15,
             0x33ffffff
         );
-        int spirit = SpiritTomeComponent.getSpirit(player);
+
+        int spirit = component.getSpirit();
         for (AttributeLine line : this.attributeLines)
         {
             line.update(spirit);
@@ -78,7 +80,7 @@ public class SpiritTomeInfoPage implements SpiritTomePage
         }
     }
 
-    private void renderBasicInfo(DrawContext context, ClientPlayerEntity player, TextRenderer textRenderer)
+    private void renderBasicInfo(DrawContext context, ClientPlayerEntity player, TextRenderer textRenderer, SpiritTomeComponent component)
     {
         int x1 = this.viewport.getX() + 30;
         int x2 = x1 + 80;
@@ -87,9 +89,9 @@ public class SpiritTomeInfoPage implements SpiritTomePage
         context.drawText(textRenderer, SDTexts.TEXT$SPIRIT_TOME$GENDER.get(getGender(player)), x1, y += LINE_HEIGHT, 0xFFFFFF, true);
         context.drawText(textRenderer, SDTexts.TEXT$SPIRIT_TOME$AGE.get("%.1f".formatted(getAge(player))), x2, y, 0xFFFFFF, true);
         context.drawText(textRenderer, SDTexts.TEXT$SPIRIT_TOME$HEIGHT.get("%.2f".formatted(player.getHeight())), x1, y += LINE_HEIGHT, 0xFFFFFF, true);
-        context.drawText(textRenderer, SDTexts.TEXT$SPIRIT_TOME$WEIGHT.get("%.1f".formatted(SpiritTomeComponent.getWeight(player))), x2, y, 0xFFFFFF, true);
+        context.drawText(textRenderer, SDTexts.TEXT$SPIRIT_TOME$WEIGHT.get("%.1f".formatted(component.getWeight())), x2, y, 0xFFFFFF, true);
         context.drawText(textRenderer, SDTexts.TEXT$SPIRIT_TOME$HEALTH.get("%.1f".formatted(player.getHealth())), x1, y += LINE_HEIGHT, 0xFFFFFF, true);
-        int spirit = SpiritTomeComponent.getSpirit(player);
+        int spirit = component.getSpirit();
         context.drawText(textRenderer, SDTexts.TEXT$SPIRIT_TOME$SPIRIT.get(spirit), x2, y, 0xFFFFFF, true);
     }
 
