@@ -10,12 +10,14 @@ import org.jetbrains.annotations.NotNull;
 
 public class SpiritTomeComponent implements AutoSyncedComponent
 {
-    private static final String SPIRIT_KEY = "Spirit";
+    private static final String POSITIVE_SPIRIT_KEY = "PositiveSpirit";
+    private static final String NEGATIVE_SPIRIT_KEY = "NegativeSpirit";
     private static final String WEIGHT_KEY = "Weight";
 
     private final PlayerEntity player;
-    private int spirit;
     private float baseWeight;
+    private int positiveSpirit;
+    private int negativeSpirit;
 
     public SpiritTomeComponent(PlayerEntity player)
     {
@@ -29,7 +31,8 @@ public class SpiritTomeComponent implements AutoSyncedComponent
 
     public static int getSpirit(PlayerEntity player)
     {
-        return get(player).spirit;
+        SpiritTomeComponent component = get(player);
+        return component.positiveSpirit + component.negativeSpirit;
     }
 
     public static float getWeight(PlayerEntity player)
@@ -50,14 +53,14 @@ public class SpiritTomeComponent implements AutoSyncedComponent
             return;
         }
         SpiritTomeComponent component = get(player);
-        component.spirit += amount;
+        component.positiveSpirit += amount;
         sync(player);
     }
 
     public static void setSpirit(ServerPlayerEntity player, int amount)
     {
         SpiritTomeComponent component = get(player);
-        component.spirit = Math.max(0, amount);
+        component.positiveSpirit = Math.max(0, amount);
         sync(player);
     }
 
@@ -68,11 +71,11 @@ public class SpiritTomeComponent implements AutoSyncedComponent
             return true;
         }
         SpiritTomeComponent component = get(player);
-        if (component.spirit < amount)
+        if (component.positiveSpirit < amount)
         {
             return false;
         }
-        component.spirit -= amount;
+        component.positiveSpirit -= amount;
         sync(player);
         return true;
     }
@@ -85,7 +88,8 @@ public class SpiritTomeComponent implements AutoSyncedComponent
     @Override
     public void readFromNbt(@NotNull NbtCompound tag)
     {
-        this.spirit = tag.getInt(SPIRIT_KEY);
+        this.positiveSpirit = tag.getInt(POSITIVE_SPIRIT_KEY);
+        this.negativeSpirit = tag.getInt(NEGATIVE_SPIRIT_KEY);
         if (tag.contains(WEIGHT_KEY))
         {
             float weight = tag.getFloat(WEIGHT_KEY);
@@ -99,7 +103,8 @@ public class SpiritTomeComponent implements AutoSyncedComponent
     @Override
     public void writeToNbt(@NotNull NbtCompound tag)
     {
-        tag.putInt(SPIRIT_KEY, this.spirit);
+        tag.putInt(POSITIVE_SPIRIT_KEY, this.positiveSpirit);
+        tag.putInt(NEGATIVE_SPIRIT_KEY, this.negativeSpirit);
         tag.putFloat(WEIGHT_KEY, this.baseWeight);
     }
 
