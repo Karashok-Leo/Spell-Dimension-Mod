@@ -112,10 +112,20 @@ public enum SDTexts
     TEXT$SPIRIT_TOME$WEIGHT("Weight: %s kg", "体重：%s kg"),
     TEXT$SPIRIT_TOME$HEALTH("Health: %s", "生命值：%s"),
     TEXT$SPIRIT_TOME$SPIRIT("Spirit: %s", "通灵：%s"),
-    TEXT$SPIRIT_TOME$COST("Spirit Cost: %s", "消耗通灵：%s"),
+    TEXT$SPIRIT_TOME$COST("Spirit Cost: %s", "消耗「通灵」：%s"),
     TEXT$SPIRIT_TOME$MALE("Male", "男"),
     TEXT$SPIRIT_TOME$FEMALE("Female", "女"),
     TEXT$SPIRIT_TOME$UNKNOWN("Unknown", "???"),
+    TEXT$SPIRIT_TOME$INSUFFICIENT("Insufficient Spirit", "「通灵」不足"),
+    TEXT$SPIRIT_TOME$REJECT("Spirit Tome is rejecting you", "通灵簿正在排斥你"),
+    TEXT$SPIRIT_TOME$RULE$0("Rule 0: The sum of \"Positive Spirit\" and \"Negative Spirit\" is collectively termed \"Spirit\". Erased when \"Spirit\" becomes negative, and the Spirit Tome self-destructs", "规则〇：「正通灵」与「负通灵」之和总称为「通灵」，「通灵」为负值时抹杀，且通灵簿自毁"),
+    TEXT$SPIRIT_TOME$RULE$1("Rule 1: Obtain \"Positive Spirit\" upon capturing hostile mobs as soul minions", "规则一：收容恶意生物为灵仆时获得「正通灵」"),
+    TEXT$SPIRIT_TOME$RULE$2("Rule 2: Obtain \"Negative Spirit\" upon defeating hostile mobs", "规则二：击杀恶意生物时获得「负通灵」"),
+    TEXT$SPIRIT_TOME$RULE$3("Rule 3: Lose \"Negative Spirit\" upon capturing non-hostile mobs as soul minions", "规则三：收容非恶意生物为灵仆时失去「负通灵」"),
+    TEXT$SPIRIT_TOME$RULE$4("Rule 4: Lose \"Positive Spirit\" upon defeating non-hostile mobs", "规则四：击杀非恶意生物时失去「正通灵」"),
+    TEXT$SPIRIT_TOME$RULE$5("Rule 5: When consuming \"Spirit\" using the Spirit Tome, \"Positive Spirit\" and \"Negative Spirit\" are consumed proportionally", "规则五：使用通灵簿消耗「通灵」时，「正通灵」与「负通灵」按比例消耗"),
+    TEXT$SPIRIT_TOME$RULE$6("Rule 6: When \"Positive Spirit\" exceeds 1,000,000 and \"Negative Spirit\" is less than 10,000, acquire ability \"Disarm\": Enemies with health below 10% become soul minions", "规则六：「正通灵」大于百万且「负通灵」小于一万时，获得能力「止戈」：敌人生命值低于一成时转为灵仆"),
+    TEXT$SPIRIT_TOME$RULE$7("Rule 6: When \"Negative Spirit\" exceeds 1,000,000 and \"Positive Spirit\" is less than 10,000, acquire ability \"Judgment\": Enemies with health below 10% are executed", "规则七：「负通灵」大于百万且「正通灵」小于一万时，获得能力「裁决」：敌人生命值低于一成时即刻斩杀"),
 
     /**
      * Game Over
