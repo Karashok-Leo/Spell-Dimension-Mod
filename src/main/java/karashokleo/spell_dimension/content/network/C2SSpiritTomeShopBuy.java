@@ -14,15 +14,29 @@ import java.util.List;
 @SerialClass
 public record C2SSpiritTomeShopBuy(int index) implements SerialPacketC2S
 {
+    public static final int SHOP_LOTTERY_INDEX = -1;
+    public static final int SHOP_REFRESH_INDEX = -2;
+
     @Override
     public void handle(ServerPlayerEntity player)
     {
         SpiritTomeComponent component = SpiritTomeComponent.get(player);
-        component.refreshShop();
-        // lottery
-        if (index < 0)
+        component.refreshShop(false);
+        // refresh
+        if (index == SHOP_REFRESH_INDEX)
         {
-            int cost = component.getShopCost(-1);
+            int cost = component.getShopCost(index);
+            if (!component.tryConsumeSpirit(cost))
+            {
+                return;
+            }
+            component.refreshShop(true);
+            return;
+        }
+        // lottery
+        if (index == SHOP_LOTTERY_INDEX)
+        {
+            int cost = component.getShopCost(index);
             if (!component.tryConsumeSpirit(cost))
             {
                 return;
@@ -33,6 +47,10 @@ public record C2SSpiritTomeShopBuy(int index) implements SerialPacketC2S
                 return;
             }
             player.getInventory().offerOrDrop(stack.copy());
+            return;
+        }
+        if (index < 0)
+        {
             return;
         }
         // already purchased

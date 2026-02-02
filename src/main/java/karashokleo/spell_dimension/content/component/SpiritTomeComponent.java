@@ -1,9 +1,11 @@
 package karashokleo.spell_dimension.content.component;
 
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
+import dev.onyxstudios.cca.api.v3.component.tick.ServerTickingComponent;
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.logic.DifficultyLevel;
+import karashokleo.spell_dimension.content.network.C2SSpiritTomeShopBuy;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllComponents;
 import karashokleo.spell_dimension.init.AllItems;
@@ -23,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class SpiritTomeComponent implements AutoSyncedComponent
+public class SpiritTomeComponent implements AutoSyncedComponent, ServerTickingComponent
 {
     public enum SpiritType
     {
@@ -94,6 +96,7 @@ public class SpiritTomeComponent implements AutoSyncedComponent
     public static final int SHOP_SLOT_COUNT = 6;
     public static final int SHOP_ITEM_COST = 200;
     public static final int SHOP_LOTTERY_COST = 300;
+    public static final int SHOP_REFRESH_COST = 50;
 
     private final PlayerEntity player;
     private float baseWeight;
@@ -103,13 +106,23 @@ public class SpiritTomeComponent implements AutoSyncedComponent
     private int shopPurchasedMask;
     private long shopDay;
     private long shopSeed;
+    private List<Item> shopItems;
 
     public SpiritTomeComponent(PlayerEntity player)
     {
         this.player = player;
         this.ruleRevealedMask = 1;
-        this.shopDay = -1L;
-        this.shopSeed = 0L;
+        this.shopItems = List.of();
+    }
+
+    @Override
+    public void serverTick()
+    {
+        if (this.player.age % 20 != 0)
+        {
+            return;
+        }
+        refreshShop(false);
     }
 
     public void sync()
@@ -275,6 +288,7 @@ public class SpiritTomeComponent implements AutoSyncedComponent
         this.shopSeed = tag.contains(SHOP_SEED_KEY, NbtElement.LONG_TYPE) ?
             tag.getLong(SHOP_SEED_KEY) :
             this.player.getRandom().nextLong();
+        refreshShopItems();
     }
 
     @Override
@@ -322,39 +336,45 @@ public class SpiritTomeComponent implements AutoSyncedComponent
         this.player.setHealth(0);
     }
 
-    public void refreshShop()
+    public void refreshShop(boolean forced)
     {
         if (!(this.player instanceof ServerPlayerEntity serverPlayer))
         {
             throw new UnsupportedOperationException();
         }
         long day = serverPlayer.getServerWorld().getTimeOfDay() / 24000L;
-        if (day == this.shopDay)
+        if (!forced && day == this.shopDay)
         {
             return;
         }
         this.shopPurchasedMask = 0;
         this.shopDay = day;
         this.shopSeed = this.player.getRandom().nextLong();
+        refreshShopItems();
         sync();
     }
 
     public List<Item> getShopItems()
     {
-        if (this.shopDay < 0)
-        {
-            return List.of();
-        }
+        return this.shopItems;
+    }
+
+    private void refreshShopItems()
+    {
         long seed = this.shopSeed ^ (this.shopDay * 31L);
         Random random = Random.create(seed);
-        return RandomUtil.randomItemsFromRegistry(random, AllTags.SPIRIT_TOME_SHOP_BLACKLIST, SHOP_SLOT_COUNT);
+        this.shopItems = RandomUtil.randomItemsFromRegistry(random, AllTags.SPIRIT_TOME_SHOP_BLACKLIST, SHOP_SLOT_COUNT);
     }
 
     /**
-     * @return item cost if index >= 0, otherwise lottery cost
+     * @return item cost if index >= 0, refresh cost if index == SHOP_REFRESH_INDEX, otherwise lottery cost
      */
     public int getShopCost(int index)
     {
+        if (index == C2SSpiritTomeShopBuy.SHOP_REFRESH_INDEX)
+        {
+            return SHOP_REFRESH_COST;
+        }
         return index >= 0 ? SHOP_ITEM_COST : SHOP_LOTTERY_COST;
     }
 }
