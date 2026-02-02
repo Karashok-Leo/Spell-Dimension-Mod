@@ -1,5 +1,6 @@
 package karashokleo.spell_dimension.content.component;
 
+import dev.onyxstudios.cca.api.v3.component.CopyableComponent;
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import karashokleo.spell_dimension.content.object.SoulMinionMode;
 import net.minecraft.entity.mob.MobEntity;
@@ -11,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
-public class SoulMinionComponent implements AutoSyncedComponent
+public class SoulMinionComponent implements AutoSyncedComponent, CopyableComponent<SoulMinionComponent>
 {
     private static final String OWNER_KEY = "Owner";
     private static final String MOVE_MODE_KEY = "MoveMode";
@@ -123,5 +124,13 @@ public class SoulMinionComponent implements AutoSyncedComponent
         }
         tag.putInt(MOVE_MODE_KEY, moveMode.ordinal());
         tag.putInt(ATTACK_MODE_KEY, attackMode.ordinal());
+    }
+
+    @Override
+    public void copyFrom(@NotNull SoulMinionComponent other)
+    {
+        this.ownerUuid = other.ownerUuid;
+        this.moveMode = other.moveMode;
+        this.attackMode = other.attackMode;
     }
 }
