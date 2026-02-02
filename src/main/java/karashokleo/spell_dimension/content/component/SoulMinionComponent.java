@@ -132,5 +132,6 @@ public class SoulMinionComponent implements AutoSyncedComponent, CopyableCompone
         this.ownerUuid = other.ownerUuid;
         this.moveMode = other.moveMode;
         this.attackMode = other.attackMode;
+        mob.setGlowing(hasOwner());
     }
 }
