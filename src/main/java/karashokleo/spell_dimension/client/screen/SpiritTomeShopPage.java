@@ -160,7 +160,7 @@ public class SpiritTomeShopPage implements SpiritTomePage
 
         protected void update(SpiritTomeComponent component)
         {
-            this.cost = component.getShopCost(this.operationFlag);
+            this.cost = SpiritTomeComponent.getShopCost(this.operationFlag);
             this.affordable = component.getSpirit() >= cost;
             this.active = this.affordable;
         }
@@ -324,7 +324,8 @@ public class SpiritTomeShopPage implements SpiritTomePage
                 .get(this.operationFlag)
                 .getDefaultStack();
             this.purchased = component.isShopItemPurchased(this.operationFlag);
-            super.update(component);
+            this.cost = SpiritTomeComponent.getShopCost(this.icon);
+            this.affordable = component.getSpirit() >= cost;
             this.active = affordable && !purchased;
         }
 
@@ -358,7 +359,7 @@ public class SpiritTomeShopPage implements SpiritTomePage
 
         private LotteryCard(int x, int y, int width, int height)
         {
-            super(x, y, width, height, C2SSpiritTomeShopBuy.SHOP_LOTTERY_INDEX);
+            super(x, y, width, height, SpiritTomeComponent.LOTTERY_FLAG);
             this.icon = Items.COMMAND_BLOCK.getDefaultStack();
         }
 
@@ -388,7 +389,7 @@ public class SpiritTomeShopPage implements SpiritTomePage
 
         private RefreshCard(int x, int y, int width, int height)
         {
-            super(x, y, width, height, C2SSpiritTomeShopBuy.SHOP_REFRESH_INDEX);
+            super(x, y, width, height, SpiritTomeComponent.REFRESH_FLAG);
             this.icon = Items.CLOCK.getDefaultStack();
         }
 

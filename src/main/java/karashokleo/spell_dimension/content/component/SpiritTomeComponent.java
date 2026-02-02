@@ -5,7 +5,6 @@ import dev.onyxstudios.cca.api.v3.component.tick.ServerTickingComponent;
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.logic.DifficultyLevel;
-import karashokleo.spell_dimension.content.network.C2SSpiritTomeShopBuy;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllComponents;
 import karashokleo.spell_dimension.init.AllItems;
@@ -27,6 +26,9 @@ import java.util.List;
 
 public class SpiritTomeComponent implements AutoSyncedComponent, ServerTickingComponent
 {
+    public static final int LOTTERY_FLAG = -1;
+    public static final int REFRESH_FLAG = -2;
+
     public enum SpiritType
     {
         POSITIVE,
@@ -92,11 +94,7 @@ public class SpiritTomeComponent implements AutoSyncedComponent, ServerTickingCo
     private static final String SHOP_PURCHASED_KEY = "ShopPurchased";
     private static final String SHOP_DAY_KEY = "ShopDay";
     private static final String SHOP_SEED_KEY = "ShopSeed";
-
-    public static final int SHOP_SLOT_COUNT = 6;
-    public static final int SHOP_ITEM_COST = 200;
-    public static final int SHOP_LOTTERY_COST = 300;
-    public static final int SHOP_REFRESH_COST = 50;
+    private static final int SHOP_SLOT_COUNT = 6;
 
     private final PlayerEntity player;
     private float baseWeight;
@@ -366,15 +364,25 @@ public class SpiritTomeComponent implements AutoSyncedComponent, ServerTickingCo
         this.shopItems = RandomUtil.randomItemsFromRegistry(random, AllTags.SPIRIT_TOME_SHOP_BLACKLIST, SHOP_SLOT_COUNT);
     }
 
-    /**
-     * @return item cost if index >= 0, refresh cost if index == SHOP_REFRESH_INDEX, otherwise lottery cost
-     */
-    public int getShopCost(int index)
+    public static int getShopCost(int index)
     {
-        if (index == C2SSpiritTomeShopBuy.SHOP_REFRESH_INDEX)
+        return switch (index)
         {
-            return SHOP_REFRESH_COST;
-        }
-        return index >= 0 ? SHOP_ITEM_COST : SHOP_LOTTERY_COST;
+            case LOTTERY_FLAG -> 200;
+            case REFRESH_FLAG -> 100;
+            // impossible case
+            default -> 300;
+        };
+    }
+
+    public static int getShopCost(ItemStack stack)
+    {
+        return switch (stack.getRarity())
+        {
+            case COMMON -> 300;
+            case UNCOMMON -> 1000;
+            case RARE -> 3000;
+            case EPIC -> 9999;
+        };
     }
 }
