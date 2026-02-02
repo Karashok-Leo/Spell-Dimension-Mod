@@ -1,16 +1,25 @@
 package karashokleo.spell_dimension.util;
 
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.Item;
+import net.minecraft.item.Items;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.spell_power.api.SpellSchool;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class RandomUtil
 {
+    public static final int MAX_TRIES = 100;
+    public static final Item DEFAULT_ITEM = Items.ENCHANTED_GOLDEN_APPLE;
+
     public static SpellSchool randomSchool(Random random)
     {
         return randomFromList(random, SchoolUtil.SCHOOLS);
@@ -51,6 +60,51 @@ public class RandomUtil
         return enumValues[randomIndex];
     }
 
+    public static List<Item> randomItemsFromRegistry(Random random, TagKey<Item> blacklist, int count)
+    {
+        List<Item> results = new ArrayList<>(count);
+        HashSet<Item> chosen = new HashSet<>();
+        int tries = 0;
+        int maxTries = MAX_TRIES * count;
+        while (results.size() < count && tries++ < maxTries)
+        {
+            Item item = Registries.ITEM
+                .getRandom(random)
+                .filter(e -> !e.isIn(blacklist))
+                .map(RegistryEntry.Reference::value)
+                .orElse(Items.AIR);
+            if (item == Items.AIR || chosen.contains(item))
+            {
+                continue;
+            }
+            chosen.add(item);
+            results.add(item);
+        }
+        while (results.size() < count)
+        {
+            results.add(DEFAULT_ITEM);
+        }
+        return results;
+    }
+
+    public static Item randomItemFromRegistry(Random random, TagKey<Item> blacklist)
+    {
+        int tries = 0;
+        while (tries++ < MAX_TRIES)
+        {
+            Item item = Registries.ITEM
+                .getRandom(random)
+                .filter(e -> !e.isIn(blacklist))
+                .map(RegistryEntry.Reference::value)
+                .orElse(Items.AIR);
+            if (item == Items.AIR)
+            {
+                continue;
+            }
+            return item;
+        }
+        return DEFAULT_ITEM;
+    }
 
     public static Vec3d perturbDirection(Vec3d direction, double sigma, Random random)
     {

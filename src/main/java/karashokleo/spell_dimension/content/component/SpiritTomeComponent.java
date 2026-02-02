@@ -7,14 +7,21 @@ import karashokleo.l2hostility.content.logic.DifficultyLevel;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllComponents;
 import karashokleo.spell_dimension.init.AllItems;
+import karashokleo.spell_dimension.init.AllTags;
+import karashokleo.spell_dimension.util.RandomUtil;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.random.Random;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 public class SpiritTomeComponent implements AutoSyncedComponent
 {
@@ -76,29 +83,42 @@ public class SpiritTomeComponent implements AutoSyncedComponent
         }
     }
 
+    private static final String BASE_WEIGHT_KEY = "BaseWeight";
     private static final String POSITIVE_SPIRIT_KEY = "PositiveSpirit";
     private static final String NEGATIVE_SPIRIT_KEY = "NegativeSpirit";
-    private static final String RULE_FLAG_KEY = "RuleFlag";
-    private static final String WEIGHT_KEY = "Weight";
+    private static final String RULE_REVEALED_KEY = "RuleRevealed";
+    private static final String SHOP_PURCHASED_KEY = "ShopPurchased";
+    private static final String SHOP_DAY_KEY = "ShopDay";
+    private static final String SHOP_SEED_KEY = "ShopSeed";
+
+    public static final int SHOP_SLOT_COUNT = 6;
+    public static final int SHOP_ITEM_COST = 200;
+    public static final int SHOP_LOTTERY_COST = 300;
 
     private final PlayerEntity player;
     private float baseWeight;
     private int positiveSpirit;
     private int negativeSpirit;
-    private int flag;
+    private int ruleRevealedMask;
+    private int shopPurchasedMask;
+    private long shopDay;
+    private long shopSeed;
 
     public SpiritTomeComponent(PlayerEntity player)
     {
         this.player = player;
-        this.flag = 1;
+        this.ruleRevealedMask = 1;
+        this.shopDay = -1L;
+        this.shopSeed = 0L;
     }
 
     public void sync()
     {
-        if (this.player instanceof ServerPlayerEntity serverPlayer)
+        if (this.player.getWorld().isClient())
         {
-            AllComponents.SPIRIT_TOME.sync(serverPlayer);
+            throw new UnsupportedOperationException();
         }
+        AllComponents.SPIRIT_TOME.sync(this.player);
     }
 
     public float getWeight()
@@ -128,20 +148,42 @@ public class SpiritTomeComponent implements AutoSyncedComponent
 
     public boolean isRuleRevealed(int rule)
     {
-        return (this.flag & (1 << rule)) != 0;
+        return (this.ruleRevealedMask & (1 << rule)) != 0;
     }
 
     private void revealRule(int rule)
     {
+        if (this.player.getWorld().isClient())
+        {
+            throw new UnsupportedOperationException();
+        }
         int mask = 1 << rule;
-        if ((this.flag & mask) != 0)
+        if ((this.ruleRevealedMask & mask) != 0)
         {
             return;
         }
-        this.flag |= mask;
+        this.ruleRevealedMask |= mask;
         this.player.sendMessage(SDTexts.TEXT$SPIRIT_TOME$RULE$REVEAL.get());
-        // no need to sync because later other methods will sync
-//        sync();
+        sync();
+    }
+
+    public boolean isShopItemPurchased(int index)
+    {
+        if (index < 0 || index >= SHOP_SLOT_COUNT)
+        {
+            return true;
+        }
+        return (this.shopPurchasedMask & (1 << index)) != 0;
+    }
+
+    public void markShopItemPurchased(int index)
+    {
+        if (index < 0 || index >= SHOP_SLOT_COUNT)
+        {
+            return;
+        }
+        this.shopPurchasedMask |= (1 << index);
+        sync();
     }
 
     /**
@@ -156,6 +198,10 @@ public class SpiritTomeComponent implements AutoSyncedComponent
         {
             return;
         }
+        if (this.player.getWorld().isClient())
+        {
+            throw new UnsupportedOperationException();
+        }
         switch (type)
         {
             case POSITIVE -> this.positiveSpirit += amount;
@@ -169,9 +215,14 @@ public class SpiritTomeComponent implements AutoSyncedComponent
         sync();
     }
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public boolean tryConsumeSpirit(int amount)
     {
         if (amount <= 0)
+        {
+            throw new UnsupportedOperationException();
+        }
+        if (this.player.getWorld().isClient())
         {
             throw new UnsupportedOperationException();
         }
@@ -212,12 +263,18 @@ public class SpiritTomeComponent implements AutoSyncedComponent
     @Override
     public void readFromNbt(@NotNull NbtCompound tag)
     {
+        float weight = tag.getFloat(BASE_WEIGHT_KEY);
+        // generate weight if not present
+        this.baseWeight = weight > 0 ? weight : generateWeight();
         this.positiveSpirit = tag.getInt(POSITIVE_SPIRIT_KEY);
         this.negativeSpirit = tag.getInt(NEGATIVE_SPIRIT_KEY);
-        this.flag = tag.getInt(RULE_FLAG_KEY);
-        this.flag |= 1;
-        float weight = tag.getFloat(WEIGHT_KEY);
-        this.baseWeight = weight > 0 ? weight : generateWeight();
+        this.ruleRevealedMask = tag.getInt(RULE_REVEALED_KEY);
+        this.ruleRevealedMask |= 1;
+        this.shopDay = tag.getLong(SHOP_DAY_KEY);
+        this.shopPurchasedMask = tag.getInt(SHOP_PURCHASED_KEY);
+        this.shopSeed = tag.contains(SHOP_SEED_KEY, NbtElement.LONG_TYPE) ?
+            tag.getLong(SHOP_SEED_KEY) :
+            this.player.getRandom().nextLong();
     }
 
     @Override
@@ -225,8 +282,11 @@ public class SpiritTomeComponent implements AutoSyncedComponent
     {
         tag.putInt(POSITIVE_SPIRIT_KEY, this.positiveSpirit);
         tag.putInt(NEGATIVE_SPIRIT_KEY, this.negativeSpirit);
-        tag.putInt(RULE_FLAG_KEY, this.flag);
-        tag.putFloat(WEIGHT_KEY, this.baseWeight);
+        tag.putInt(RULE_REVEALED_KEY, this.ruleRevealedMask);
+        tag.putFloat(BASE_WEIGHT_KEY, this.baseWeight);
+        tag.putLong(SHOP_DAY_KEY, this.shopDay);
+        tag.putInt(SHOP_PURCHASED_KEY, this.shopPurchasedMask);
+        tag.putLong(SHOP_SEED_KEY, this.shopSeed);
     }
 
     private float generateWeight()
@@ -238,12 +298,12 @@ public class SpiritTomeComponent implements AutoSyncedComponent
 
     private void erase()
     {
-        if (!(this.player instanceof ServerPlayerEntity serverPlayer))
+        if (this.player.getWorld().isClient())
         {
-            return;
+            throw new UnsupportedOperationException();
         }
         boolean hasTome = false;
-        for (var access : TrinketCompat.getItemAccess(serverPlayer))
+        for (var access : TrinketCompat.getItemAccess(this.player))
         {
             if (access.get().isOf(AllItems.SPIRIT_TOME))
             {
@@ -256,9 +316,45 @@ public class SpiritTomeComponent implements AutoSyncedComponent
         {
             return;
         }
-        serverPlayer.sendMessage(SDTexts.TEXT$SPIRIT_TOME$RULE$0$EFFECT.get().formatted(Formatting.DARK_AQUA));
-        serverPlayer.damage(serverPlayer.getDamageSources().outOfWorld(), Float.MAX_VALUE);
+        this.player.sendMessage(SDTexts.TEXT$SPIRIT_TOME$RULE$0$EFFECT.get().formatted(Formatting.DARK_AQUA));
+        this.player.damage(this.player.getDamageSources().outOfWorld(), Float.MAX_VALUE);
         // ensure death
-        serverPlayer.setHealth(0);
+        this.player.setHealth(0);
+    }
+
+    public void refreshShop()
+    {
+        if (!(this.player instanceof ServerPlayerEntity serverPlayer))
+        {
+            throw new UnsupportedOperationException();
+        }
+        long day = serverPlayer.getServerWorld().getTimeOfDay() / 24000L;
+        if (day == this.shopDay)
+        {
+            return;
+        }
+        this.shopPurchasedMask = 0;
+        this.shopDay = day;
+        this.shopSeed = this.player.getRandom().nextLong();
+        sync();
+    }
+
+    public List<Item> getShopItems()
+    {
+        if (this.shopDay < 0)
+        {
+            return List.of();
+        }
+        long seed = this.shopSeed ^ (this.shopDay * 31L);
+        Random random = Random.create(seed);
+        return RandomUtil.randomItemsFromRegistry(random, AllTags.SPIRIT_TOME_SHOP_BLACKLIST, SHOP_SLOT_COUNT);
+    }
+
+    /**
+     * @return item cost if index >= 0, otherwise lottery cost
+     */
+    public int getShopCost(int index)
+    {
+        return index >= 0 ? SHOP_ITEM_COST : SHOP_LOTTERY_COST;
     }
 }

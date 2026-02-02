@@ -31,14 +31,18 @@ public class AllPackets
             C2SSelectQuest.class,
             C2SSelectSoulAlbum.class,
             C2SReleaseControl.class,
-            C2SSpiritAttributeUpgrade.class
+            C2SSpiritAttributeUpgrade.class,
+            C2SSpiritTomeShopSync.class,
+            C2SSpiritTomeShopBuy.class
         );
 
         HANDLER.configureC2S(
             C2SSelectQuest.class,
             C2SSelectSoulAlbum.class,
             C2SReleaseControl.class,
-            C2SSpiritAttributeUpgrade.class
+            C2SSpiritAttributeUpgrade.class,
+            C2SSpiritTomeShopSync.class,
+            C2SSpiritTomeShopBuy.class
         );
     }
 
