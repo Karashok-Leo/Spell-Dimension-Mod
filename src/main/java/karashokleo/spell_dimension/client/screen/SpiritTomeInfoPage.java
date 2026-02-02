@@ -19,6 +19,7 @@ import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Util;
 import net.spell_power.api.SpellPower;
 import net.spell_power.api.SpellPowerMechanics;
 import net.spell_power.api.SpellSchools;
@@ -30,7 +31,6 @@ public class SpiritTomeInfoPage implements SpiritTomePage
 {
     private static final Identifier BACKGROUND_TEXTURE = new Identifier("spell-dimension-book", "textures/background/1.png");
     private static final int LINE_HEIGHT = 15;
-    private static final int ATTRIBUTE_COUNT = 12;
     private final Rect2i viewport;
     private final List<AttributeLine> attributeLines;
 
@@ -77,6 +77,21 @@ public class SpiritTomeInfoPage implements SpiritTomePage
         for (AttributeLine line : this.attributeLines)
         {
             line.render(context, mouseX, mouseY, textRenderer, player, result);
+        }
+
+        for (AttributeLine line : this.attributeLines)
+        {
+            if (!line.upgradeButton.isHovered(mouseX, mouseY))
+            {
+                continue;
+            }
+            List<Text> tooltip = line.upgradeButton.getTooltip();
+            if (tooltip == null || tooltip.isEmpty())
+            {
+                continue;
+            }
+            context.drawTooltip(textRenderer, tooltip, mouseX, mouseY);
+            break;
         }
     }
 
@@ -163,6 +178,7 @@ public class SpiritTomeInfoPage implements SpiritTomePage
         private final int x;
         private final int y;
         private final UpgradeButton upgradeButton;
+        private long hoverTime = -1L;
 
         private AttributeLine(EntityAttribute attribute, ValueProvider valueProvider, int x, int y)
         {
@@ -176,13 +192,51 @@ public class SpiritTomeInfoPage implements SpiritTomePage
         private void render(DrawContext context, int mouseX, int mouseY, TextRenderer textRenderer, PlayerEntity player, SpellPower.Result result)
         {
             String valueText = valueProvider.get(player, attribute, result);
+            int valueLeft = x + 120 - textRenderer.getWidth(valueText);
             // attribute name
-            context.drawText(textRenderer, Text.translatable(attribute.getTranslationKey()), x, y, 0xFFFFFF, true);
+            int right = valueLeft - 6;
+            int bottom = y + textRenderer.fontHeight;
+            boolean hovered = mouseX >= x &&
+                mouseY >= y &&
+                mouseX < right &&
+                mouseY < bottom;
+            drawScrollableText(context, textRenderer, Text.translatable(attribute.getTranslationKey()), x, y, right, bottom, hovered);
             // attribute value
-            int gap = 120 - textRenderer.getWidth(valueText);
-            context.drawText(textRenderer, valueText, x + gap, y, 0xFFFFFF, true);
+            context.drawText(textRenderer, valueText, valueLeft, y, 0xFFFFFF, true);
             // upgrade button
             upgradeButton.render(context, mouseX, mouseY, textRenderer);
+        }
+
+        private void drawScrollableText(DrawContext context, TextRenderer textRenderer, Text text, int left, int top, int right, int bottom, boolean hovered)
+        {
+            int width = textRenderer.getWidth(text);
+            int maxWidth = right - left;
+            if (width > maxWidth)
+            {
+                if (hovered)
+                {
+                    int overflow = width - maxWidth;
+                    long now = Util.getMeasuringTimeMs();
+                    if (this.hoverTime < 0L)
+                    {
+                        this.hoverTime = now;
+                    }
+                    double time = (now - this.hoverTime) / 30.0;
+                    int offset = (int) Math.min(overflow, Math.round(time));
+                    context.enableScissor(left, top, right, bottom);
+                    context.drawTextWithShadow(textRenderer, text, left - offset, top, 0xFFFFFF);
+                    context.disableScissor();
+                    return;
+                }
+
+                this.hoverTime = -1L;
+                context.enableScissor(left, top, right, bottom);
+                context.drawTextWithShadow(textRenderer, text, left, top, 0xFFFFFF);
+                context.disableScissor();
+                return;
+            }
+            this.hoverTime = -1L;
+            context.drawTextWithShadow(textRenderer, text, left, top, 0xFFFFFF);
         }
 
         private void update(int spirit)
@@ -265,23 +319,18 @@ public class SpiritTomeInfoPage implements SpiritTomePage
                 int textX = x + 1 + (width - textRenderer.getWidth("+")) / 2;
                 int textY = y + 1 + (height - textRenderer.fontHeight) / 2;
                 context.drawText(textRenderer, "+", textX, textY, 0xFFFFFF, false);
+            }
 
-                // tooltip
-                if (!hovered)
-                {
-                    return;
-                }
-                List<Text> tooltip;
+            private List<Text> getTooltip()
+            {
                 if (active)
                 {
-                    tooltip = this.tooltip;
-                } else
-                {
-                    tooltip = new ArrayList<>();
-                    tooltip.add(SDTexts.TEXT$SPIRIT_TOME$INSUFFICIENT.get().formatted(Formatting.RED));
-                    tooltip.addAll(this.tooltip);
+                    return this.tooltip;
                 }
-                context.drawTooltip(textRenderer, tooltip, mouseX, mouseY);
+                List<Text> tooltip = new ArrayList<>();
+                tooltip.add(SDTexts.TEXT$SPIRIT_TOME$INSUFFICIENT.get().formatted(Formatting.RED));
+                tooltip.addAll(this.tooltip);
+                return tooltip;
             }
 
             private static List<Text> buildUpgradeTooltip(EntityAttribute attribute)

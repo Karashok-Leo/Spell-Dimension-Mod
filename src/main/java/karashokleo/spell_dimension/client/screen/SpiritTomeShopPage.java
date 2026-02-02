@@ -257,22 +257,22 @@ public class SpiritTomeShopPage implements SpiritTomePage
          */
         protected static void drawScrollableText(DrawContext context, TextRenderer textRenderer, Text text, int left, int top, int right, int bottom, int color)
         {
-            int i = textRenderer.getWidth(text);
-            int j = (top + bottom - 9) / 2 + 1;
-            int k = right - left;
-            if (i > k)
+            int width = textRenderer.getWidth(text);
+            int y = (top + bottom - 9) / 2 + 1;
+            int maxWidth = right - left;
+            if (width > maxWidth)
             {
-                int l = i - k;
-                double d = Util.getMeasuringTimeMs() / 1000.0;
-                double e = Math.max(l * 0.5, 3.0);
-                double f = Math.sin((Math.PI / 2) * Math.cos((Math.PI * 2) * d / e)) / 2.0 + 0.5;
-                double g = MathHelper.lerp(f, 0.0, l);
+                int overflow = width - maxWidth;
+                double time = Util.getMeasuringTimeMs() / 1000.0;
+                double period = Math.max(overflow * 0.5, 3.0);
+                double factor = Math.sin((Math.PI / 2) * Math.cos((Math.PI * 2) * time / period)) / 2.0 + 0.5;
+                double offset = MathHelper.lerp(factor, 0.0, overflow);
                 context.enableScissor(left, top, right, bottom);
-                context.drawTextWithShadow(textRenderer, text, left - (int) g, j, color);
+                context.drawTextWithShadow(textRenderer, text, left - (int) offset, y, color);
                 context.disableScissor();
             } else
             {
-                context.drawCenteredTextWithShadow(textRenderer, text, (left + right) / 2, j, color);
+                context.drawCenteredTextWithShadow(textRenderer, text, (left + right) / 2, y, color);
             }
         }
 
