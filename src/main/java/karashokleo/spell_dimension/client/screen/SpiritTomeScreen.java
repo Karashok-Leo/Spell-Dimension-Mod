@@ -36,8 +36,7 @@ public class SpiritTomeScreen extends Screen
         this.viewport = new Rect2i(marginX, marginY, width, height);
         this.pages = new SpiritTomePage[]{
             new SpiritTomeInfoPage(this.viewport),
-            new SpiritTomeInfoPage(this.viewport),
-            new SpiritTomeRulePage(this.viewport)
+            new SpiritTomeRulePage(this.viewport, this.textRenderer)
         };
         this.currentPage = 0;
         this.initArrows();

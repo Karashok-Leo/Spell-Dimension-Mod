@@ -48,11 +48,13 @@ public class SpiritTomeComponent implements AutoSyncedComponent
             if (captured)
             {
                 // rule 1
+                component.revealRule(1);
                 player.sendMessage(SDTexts.TEXT$SPIRIT_TOME$RULE$1$EFFECT.get(amount).formatted(Formatting.DARK_AQUA));
                 component.changeSpirit(SpiritType.POSITIVE, amount);
             } else
             {
                 // rule 2
+                component.revealRule(2);
                 player.sendMessage(SDTexts.TEXT$SPIRIT_TOME$RULE$2$EFFECT.get(amount).formatted(Formatting.DARK_AQUA));
                 component.changeSpirit(SpiritType.NEGATIVE, amount);
             }
@@ -61,11 +63,13 @@ public class SpiritTomeComponent implements AutoSyncedComponent
             if (captured)
             {
                 // rule 3
+                component.revealRule(3);
                 player.sendMessage(SDTexts.TEXT$SPIRIT_TOME$RULE$3$EFFECT.get(amount).formatted(Formatting.DARK_AQUA));
                 component.changeSpirit(SpiritType.NEGATIVE, -amount);
             } else
             {
                 // rule 4
+                component.revealRule(4);
                 player.sendMessage(SDTexts.TEXT$SPIRIT_TOME$RULE$4$EFFECT.get(amount).formatted(Formatting.DARK_AQUA));
                 component.changeSpirit(SpiritType.POSITIVE, -amount);
             }
@@ -74,16 +78,19 @@ public class SpiritTomeComponent implements AutoSyncedComponent
 
     private static final String POSITIVE_SPIRIT_KEY = "PositiveSpirit";
     private static final String NEGATIVE_SPIRIT_KEY = "NegativeSpirit";
+    private static final String RULE_FLAG_KEY = "RuleFlag";
     private static final String WEIGHT_KEY = "Weight";
 
     private final PlayerEntity player;
     private float baseWeight;
     private int positiveSpirit;
     private int negativeSpirit;
+    private int flag;
 
     public SpiritTomeComponent(PlayerEntity player)
     {
         this.player = player;
+        this.flag = 1;
     }
 
     public void sync()
@@ -117,6 +124,24 @@ public class SpiritTomeComponent implements AutoSyncedComponent
             case NEGATIVE -> this.negativeSpirit;
             case TOTAL -> this.positiveSpirit + this.negativeSpirit;
         };
+    }
+
+    public boolean isRuleRevealed(int rule)
+    {
+        return (this.flag & (1 << rule)) != 0;
+    }
+
+    private void revealRule(int rule)
+    {
+        int mask = 1 << rule;
+        if ((this.flag & mask) != 0)
+        {
+            return;
+        }
+        this.flag |= mask;
+        this.player.sendMessage(SDTexts.TEXT$SPIRIT_TOME$RULE$REVEAL.get());
+        // no need to sync because later other methods will sync
+//        sync();
     }
 
     /**
@@ -179,6 +204,7 @@ public class SpiritTomeComponent implements AutoSyncedComponent
             // impossible case
             return false;
         }
+        revealRule(5);
         sync();
         return true;
     }
@@ -188,6 +214,8 @@ public class SpiritTomeComponent implements AutoSyncedComponent
     {
         this.positiveSpirit = tag.getInt(POSITIVE_SPIRIT_KEY);
         this.negativeSpirit = tag.getInt(NEGATIVE_SPIRIT_KEY);
+        this.flag = tag.getInt(RULE_FLAG_KEY);
+        this.flag |= 1;
         float weight = tag.getFloat(WEIGHT_KEY);
         this.baseWeight = weight > 0 ? weight : generateWeight();
     }
@@ -197,6 +225,7 @@ public class SpiritTomeComponent implements AutoSyncedComponent
     {
         tag.putInt(POSITIVE_SPIRIT_KEY, this.positiveSpirit);
         tag.putInt(NEGATIVE_SPIRIT_KEY, this.negativeSpirit);
+        tag.putInt(RULE_FLAG_KEY, this.flag);
         tag.putFloat(WEIGHT_KEY, this.baseWeight);
     }
 
