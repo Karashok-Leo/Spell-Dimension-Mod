@@ -11,6 +11,7 @@
     "minion.EntityMixin",
     "minion.LivingEntityMixin",
     "minion.MobEntityMixin",
+    "minion.SplitTraitMixin",
     "minion.TargetPredicateMixin",
     "minion.TrackTargetGoalMixin",
     "modded.AbrahadabraMixin",
