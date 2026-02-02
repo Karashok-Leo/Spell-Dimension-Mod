@@ -37,7 +37,7 @@ public class SpiritTomeInfoPage implements SpiritTomePage
     public SpiritTomeInfoPage(Rect2i viewport)
     {
         this.viewport = viewport;
-        this.attributeLines = buildAttributeLines();
+        this.attributeLines = createAttributeLines(viewport);
     }
 
     @Override
@@ -126,10 +126,10 @@ public class SpiritTomeInfoPage implements SpiritTomePage
         return false;
     }
 
-    private List<AttributeLine> buildAttributeLines()
+    private static List<AttributeLine> createAttributeLines(Rect2i viewport)
     {
-        int x = this.viewport.getX() + this.viewport.getWidth() / 2 + 25;
-        int y = this.viewport.getY() + 27;
+        int x = viewport.getX() + viewport.getWidth() / 2 + 25;
+        int y = viewport.getY() + 27;
         return List.of(
             new AttributeLine(EntityAttributes.GENERIC_MAX_HEALTH, SpiritTomeInfoPage::formatAttribute, x, y),
             new AttributeLine(EntityAttributes.GENERIC_ARMOR, SpiritTomeInfoPage::formatAttribute, x, y += LINE_HEIGHT),
@@ -156,10 +156,10 @@ public class SpiritTomeInfoPage implements SpiritTomePage
         return "%.2f".formatted(player.getAttributeValue(attribute));
     }
 
-    public static class AttributeLine
+    private static class AttributeLine
     {
-        public final EntityAttribute attribute;
-        public final ValueProvider valueProvider;
+        private final EntityAttribute attribute;
+        private final ValueProvider valueProvider;
         private final int x;
         private final int y;
         private final UpgradeButton upgradeButton;
