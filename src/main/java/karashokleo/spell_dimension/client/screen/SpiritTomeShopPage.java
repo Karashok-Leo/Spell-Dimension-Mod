@@ -10,6 +10,7 @@ import net.minecraft.client.item.TooltipContext;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.util.math.Rect2i;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.screen.ScreenTexts;
@@ -320,12 +321,20 @@ public class SpiritTomeShopPage implements SpiritTomePage
         @Override
         protected void update(SpiritTomeComponent component)
         {
-            this.icon = component.getShopItems()
-                .get(this.operationFlag)
-                .getDefaultStack();
-            this.purchased = component.isShopItemPurchased(this.operationFlag);
+            List<Item> items = component.getShopItems();
+            if (this.operationFlag >= items.size())
+            {
+                this.icon = Items.BARRIER.getDefaultStack();
+                this.cost = 0;
+                this.affordable = false;
+                this.purchased = false;
+                this.active = false;
+                return;
+            }
+            this.icon = items.get(this.operationFlag).getDefaultStack();
             this.cost = SpiritTomeComponent.getShopCost(this.icon);
             this.affordable = component.getSpirit() >= cost;
+            this.purchased = component.isShopItemPurchased(this.operationFlag);
             this.active = affordable && !purchased;
         }
 
