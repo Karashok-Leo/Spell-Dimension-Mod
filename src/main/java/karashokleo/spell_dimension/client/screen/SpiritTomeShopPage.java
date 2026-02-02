@@ -2,21 +2,22 @@ package karashokleo.spell_dimension.client.screen;
 
 import karashokleo.spell_dimension.content.component.SpiritTomeComponent;
 import karashokleo.spell_dimension.content.network.C2SSpiritTomeShopBuy;
-import karashokleo.spell_dimension.content.network.C2SSpiritTomeShopSync;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllPackets;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.util.math.Rect2i;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.text.OrderedText;
+import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Language;
+import net.minecraft.util.Util;
+import net.minecraft.util.math.MathHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,28 +25,16 @@ import java.util.List;
 public class SpiritTomeShopPage implements SpiritTomePage
 {
     private static final Identifier BACKGROUND_TEXTURE = new Identifier("spell-dimension-book", "textures/background/3.png");
-    private static final ItemStack LOTTERY_ICON = new ItemStack(Items.COMMAND_BLOCK);
-    private static final int CARD_WIDTH = 100;
-    private static final int CARD_HEIGHT = 54;
-    private static final int CARD_GAP_X = 10;
-    private static final int CARD_GAP_Y = 8;
-    private static final int BUTTON_WIDTH = 44;
-    private static final int BUTTON_HEIGHT = 12;
-    private static final int ICON_SIZE = 16;
+    public static final Text TITLE = SDTexts.TEXT$SPIRIT_TOME$SHOP$TITLE.get();
+    public static final Text SUBTITLE = SDTexts.TEXT$SPIRIT_TOME$SHOP$SUBTITLE.get();
 
     private final Rect2i viewport;
-    private final List<ItemStack> shopItems;
+    private final List<ShopCard> cards;
 
-    public SpiritTomeShopPage(Rect2i viewport, ClientPlayerEntity player)
+    public SpiritTomeShopPage(Rect2i viewport)
     {
         this.viewport = viewport;
-        this.shopItems = SpiritTomeComponent.get(player)
-            .getShopItems()
-            .stream()
-            .map(Item::getDefaultStack)
-            .toList();
-        // request refresh
-        AllPackets.toServer(new C2SSpiritTomeShopSync());
+        this.cards = createCards(viewport, 16, 8);
     }
 
     @Override
@@ -57,206 +46,369 @@ public class SpiritTomeShopPage implements SpiritTomePage
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, TextRenderer textRenderer, ClientPlayerEntity player)
     {
-        SpiritTomeComponent component = SpiritTomeComponent.get(player);
-
         // title
-        int titleX = this.viewport.getX() + 16;
-        int titleY = this.viewport.getY() + 10;
-        context.drawText(textRenderer, SDTexts.TEXT$SPIRIT_TOME$SHOP$TITLE.get(), titleX, titleY, 0xFFFFFF, true);
-        context.drawText(textRenderer, SDTexts.TEXT$SPIRIT_TOME$SHOP$REFRESH.get(), titleX, titleY + 14, 0xDDDDDD, true);
+        MatrixStack matrices = context.getMatrices();
+        matrices.push();
+        matrices.translate(
+            viewport.getX() + viewport.getWidth() / 2f,
+            viewport.getY() + viewport.getHeight() / 2f,
+            0
+        );
+        matrices.scale(2, 2, 2);
+        context.drawCenteredTextWithShadow(
+            textRenderer,
+            TITLE,
+            0,
+            -textRenderer.fontHeight - 2,
+            0xFFFFFF
+        );
+        context.drawCenteredTextWithShadow(
+            textRenderer,
+            SUBTITLE,
+            0,
+            2,
+            0xDDDDDD
+        );
+        matrices.pop();
 
-        int gridX = this.viewport.getX() + (this.viewport.getWidth() - getGridWidth()) / 2;
-        int gridY = this.viewport.getY() + 32;
-
-        boolean hovering = false;
-        List<Text> tooltip = null;
-
-        for (int i = 0; i < SpiritTomeComponent.SHOP_SLOT_COUNT; i++)
+        // cards
+        SpiritTomeComponent component = SpiritTomeComponent.get(player);
+        for (ShopCard card : this.cards)
         {
-            int cardX = gridX + (i % 3) * (CARD_WIDTH + CARD_GAP_X);
-            int cardY = gridY + (i / 3) * (CARD_HEIGHT + CARD_GAP_Y);
-            ItemStack stack = shopItems.get(i);
-            boolean purchased = component.isShopItemPurchased(i);
-            int cost = component.getShopCost(i);
-            boolean affordable = component.getSpirit() >= cost;
-            boolean active = affordable && !purchased && !stack.isEmpty();
-            renderShopCard(context, textRenderer, mouseX, mouseY, cardX, cardY, stack, cost, purchased, active);
-            if (isHoveringCard(mouseX, mouseY, cardX, cardY, CARD_WIDTH, CARD_HEIGHT))
-            {
-                hovering = true;
-                tooltip = buildShopTooltip(stack, cost, purchased, affordable);
-            }
+            card.update(component);
         }
-
-        int lotteryX = this.viewport.getX() + (this.viewport.getWidth() - getLotteryWidth()) / 2;
-        int lotteryY = gridY + getGridHeight() + 10;
-        int lotteryCost = component.getShopCost(-1);
-        boolean lotteryAffordable = component.getSpirit() >= lotteryCost;
-        renderLotteryCard(context, textRenderer, mouseX, mouseY, lotteryX, lotteryY, lotteryCost, lotteryAffordable);
-        if (isHoveringCard(mouseX, mouseY, lotteryX, lotteryY, getLotteryWidth(), CARD_HEIGHT))
+        for (ShopCard card : this.cards)
         {
-            hovering = true;
-            tooltip = buildLotteryTooltip(lotteryCost, lotteryAffordable);
+            card.render(context, textRenderer, mouseX, mouseY, player);
         }
-
-        if (!hovering || tooltip == null || tooltip.isEmpty())
-        {
-            return;
-        }
-        context.drawTooltip(textRenderer, tooltip, mouseX, mouseY);
     }
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY)
     {
-        int gridX = this.viewport.getX() + (this.viewport.getWidth() - getGridWidth()) / 2;
-        int gridY = this.viewport.getY() + 32;
-
-        for (int i = 0; i < SpiritTomeComponent.SHOP_SLOT_COUNT; i++)
+        for (ShopCard card : this.cards)
         {
-            int cardX = gridX + (i % 3) * (CARD_WIDTH + CARD_GAP_X);
-            int cardY = gridY + (i / 3) * (CARD_HEIGHT + CARD_GAP_Y);
-            Rect2i button = getButtonRect(cardX, cardY, CARD_WIDTH);
-            if (isWithin(mouseX, mouseY, button))
+            if (card.mouseClicked(mouseX, mouseY))
             {
-                AllPackets.toServer(new C2SSpiritTomeShopBuy(i));
                 return true;
             }
         }
-
-        int lotteryX = this.viewport.getX() + (this.viewport.getWidth() - getLotteryWidth()) / 2;
-        int lotteryY = gridY + getGridHeight() + 10;
-        Rect2i lotteryButton = getButtonRect(lotteryX, lotteryY, getLotteryWidth());
-        if (isWithin(mouseX, mouseY, lotteryButton))
-        {
-            AllPackets.toServer(new C2SSpiritTomeShopBuy(-1));
-            return true;
-        }
-
         return false;
     }
 
-    private void renderShopCard(DrawContext context, TextRenderer textRenderer, int mouseX, int mouseY, int x, int y, ItemStack stack, int cost, boolean purchased, boolean active)
+    @SuppressWarnings("SameParameterValue")
+    private static List<ShopCard> createCards(Rect2i viewport, int gapX, int gapY)
     {
-        context.fill(x, y, x + CARD_WIDTH, y + CARD_HEIGHT, 0x33000000);
+        List<ShopCard> cards = new ArrayList<>(9);
+        int gridX = viewport.getX() + gapX;
+        int gridY = viewport.getY() + gapY;
+        int gridWidth = (viewport.getWidth() - 4 * gapX) / 3;
+        int gridHeight = (viewport.getHeight() - 4 * gapY) / 3;
+        cards.add(new ItemCard(gridX, gridY, gridWidth, gridHeight, 0));
+        gridX += (gridWidth + gapX);
+        cards.add(new ItemCard(gridX, gridY, gridWidth, gridHeight, 1));
+        gridX += (gridWidth + gapX);
+        cards.add(new ItemCard(gridX, gridY, gridWidth, gridHeight, 2));
+        gridY += (gridHeight + gapY);
+        gridX = viewport.getX() + gapX;
+        cards.add(new LotteryCard(gridX, gridY, gridWidth, gridHeight));
+        gridX += (gridWidth + gapX) * 2;
+        cards.add(new RefreshCard(gridX, gridY, gridWidth, gridHeight));
+        gridY += (gridHeight + gapY);
+        gridX = viewport.getX() + gapX;
+        cards.add(new ItemCard(gridX, gridY, gridWidth, gridHeight, 3));
+        gridX += (gridWidth + gapX);
+        cards.add(new ItemCard(gridX, gridY, gridWidth, gridHeight, 4));
+        gridX += (gridWidth + gapX);
+        cards.add(new ItemCard(gridX, gridY, gridWidth, gridHeight, 5));
+        return cards;
+    }
 
-        int iconX = x + (CARD_WIDTH - ICON_SIZE) / 2;
-        int iconY = y + 4;
-        if (!stack.isEmpty())
+    private static abstract class ShopCard
+    {
+        protected static final Text TEXT_BUY = SDTexts.TEXT$SPIRIT_TOME$SHOP$BUY.get();
+        protected static final int TEXT_MARGIN = 4;
+        protected final Rect2i cardRect;
+        protected final Rect2i iconRect;
+        protected final Rect2i buttonRect;
+        protected final int operationFlag;
+        protected ItemStack icon = ItemStack.EMPTY;
+        protected int cost;
+        protected boolean affordable;
+        protected boolean active;
+
+        protected ShopCard(int x, int y, int width, int height, int operationFlag)
         {
-            context.drawItem(stack, iconX, iconY);
+            this.cardRect = new Rect2i(x, y, width, height);
+            int iconSize = 16;
+            this.iconRect = new Rect2i(
+                x + (width - iconSize) / 2,
+                y + 4,
+                iconSize,
+                iconSize
+            );
+            int buttonWidth = 54;
+            int buttonHeight = 12;
+            this.buttonRect = new Rect2i(
+                x + (width - buttonWidth) / 2,
+                y + height - 4 - buttonHeight,
+                buttonWidth,
+                buttonHeight
+            );
+            this.operationFlag = operationFlag;
         }
 
-        Text name = stack.isEmpty() ? Text.literal("???") : stack.getName();
-        OrderedText nameText = trim(textRenderer, name, CARD_WIDTH - 6);
-        int nameX = x + (CARD_WIDTH - textRenderer.getWidth(nameText)) / 2;
-        context.drawText(textRenderer, nameText, nameX, y + 24, 0xFFFFFF, true);
-
-        OrderedText costText = trim(textRenderer, SDTexts.TEXT$SPIRIT_TOME$COST.get(cost), CARD_WIDTH - 6);
-        int costX = x + (CARD_WIDTH - textRenderer.getWidth(costText)) / 2;
-        context.drawText(textRenderer, costText, costX, y + 34, 0xDDDDDD, true);
-
-        Rect2i button = getButtonRect(x, y, CARD_WIDTH);
-        boolean hovered = isWithin(mouseX, mouseY, button);
-        boolean enabled = active;
-        renderButton(context, textRenderer, button, hovered, enabled, purchased ? SDTexts.TEXT$SPIRIT_TOME$SHOP$BOUGHT.get() : SDTexts.TEXT$SPIRIT_TOME$SHOP$BUY.get());
-    }
-
-    private void renderLotteryCard(DrawContext context, TextRenderer textRenderer, int mouseX, int mouseY, int x, int y, int cost, boolean affordable)
-    {
-        context.fill(x, y, x + getLotteryWidth(), y + CARD_HEIGHT, 0x33000000);
-
-        int iconX = x + (getLotteryWidth() - ICON_SIZE) / 2;
-        int iconY = y + 4;
-        context.drawItem(LOTTERY_ICON, iconX, iconY);
-
-        OrderedText title = trim(textRenderer, SDTexts.TEXT$SPIRIT_TOME$SHOP$LOTTERY.get(), getLotteryWidth() - 6);
-        int titleX = x + (getLotteryWidth() - textRenderer.getWidth(title)) / 2;
-        context.drawText(textRenderer, title, titleX, y + 24, 0xFFFFFF, true);
-
-        OrderedText costText = trim(textRenderer, SDTexts.TEXT$SPIRIT_TOME$COST.get(cost), getLotteryWidth() - 6);
-        int costX = x + (getLotteryWidth() - textRenderer.getWidth(costText)) / 2;
-        context.drawText(textRenderer, costText, costX, y + 34, 0xDDDDDD, true);
-
-        Rect2i button = getButtonRect(x, y, getLotteryWidth());
-        boolean hovered = isWithin(mouseX, mouseY, button);
-        renderButton(context, textRenderer, button, hovered, affordable, SDTexts.TEXT$SPIRIT_TOME$SHOP$LOTTERY.get());
-    }
-
-    private static void renderButton(DrawContext context, TextRenderer textRenderer, Rect2i button, boolean hovered, boolean enabled, Text text)
-    {
-        int background = enabled ? (hovered ? 0xAA888888 : 0xAA666666) : 0xAA222222;
-        context.fill(button.getX(), button.getY(), button.getX() + button.getWidth(), button.getY() + button.getHeight(), background);
-        int textX = button.getX() + (button.getWidth() - textRenderer.getWidth(text)) / 2;
-        int textY = button.getY() + (button.getHeight() - textRenderer.fontHeight) / 2;
-        int color = enabled ? 0xFFFFFF : 0x888888;
-        context.drawText(textRenderer, text, textX, textY, color, false);
-    }
-
-    private static OrderedText trim(TextRenderer textRenderer, Text text, int maxWidth)
-    {
-        return Language.getInstance().reorder(textRenderer.trimToWidth(text, maxWidth));
-    }
-
-    private static List<Text> buildShopTooltip(ItemStack stack, int cost, boolean purchased, boolean affordable)
-    {
-        List<Text> tooltip = new ArrayList<>();
-        if (!stack.isEmpty())
+        protected void update(SpiritTomeComponent component)
         {
-            tooltip.add(stack.getName());
+            this.cost = component.getShopCost(this.operationFlag);
+            this.affordable = component.getSpirit() >= cost;
+            this.active = this.affordable;
         }
-        tooltip.add(SDTexts.TEXT$SPIRIT_TOME$COST.get(cost));
-        if (purchased)
+
+        protected void render(DrawContext context, TextRenderer textRenderer, int mouseX, int mouseY, ClientPlayerEntity player)
         {
-            tooltip.add(SDTexts.TEXT$SPIRIT_TOME$SHOP$BOUGHT.get().formatted(Formatting.GRAY));
-        } else if (!affordable)
-        {
-            tooltip.add(SDTexts.TEXT$SPIRIT_TOME$INSUFFICIENT.get().formatted(Formatting.RED));
+            // background
+//            context.fill(
+//                this.cardRect.getX(),
+//                this.cardRect.getY(),
+//                this.cardRect.getX() + this.cardRect.getWidth(),
+//                this.cardRect.getY() + this.cardRect.getHeight(),
+//                0x33000000
+//            );
+            // slot
+            int padding = 1;
+            context.fill(
+                this.iconRect.getX() - padding,
+                this.iconRect.getY() - padding,
+                this.iconRect.getX() + this.iconRect.getWidth() + padding,
+                this.iconRect.getY() + this.iconRect.getHeight() + padding,
+                0xAA666666
+            );
+            // icon
+            context.drawItem(this.icon, this.iconRect.getX(), this.iconRect.getY());
+            // title
+            int textY = this.iconRect.getY() + this.iconRect.getHeight() + 4;
+            drawScrollableText(
+                context,
+                textRenderer,
+                this.getTitleText(),
+                this.cardRect.getX() + TEXT_MARGIN,
+                textY,
+                this.cardRect.getX() + this.cardRect.getWidth() - TEXT_MARGIN,
+                textY + textRenderer.fontHeight,
+                0xffffff
+            );
+            textY += 12;
+            // cost
+            drawScrollableText(
+                context,
+                textRenderer,
+                SDTexts.TEXT$SPIRIT_TOME$SHOP$COST.get(this.cost),
+                this.cardRect.getX() + TEXT_MARGIN,
+                textY,
+                this.cardRect.getX() + this.cardRect.getWidth() - TEXT_MARGIN,
+                textY + textRenderer.fontHeight,
+                0xdddddd
+            );
+            // button
+            boolean buttonHovered = this.buttonRect.contains(mouseX, mouseY);
+            renderButton(context, textRenderer, buttonHovered);
+            // tooltip
+            List<Text> tooltip = null;
+            if (supportsItemTooltip() &&
+                this.iconRect.contains(mouseX, mouseY))
+            {
+                tooltip = icon.getTooltip(player, TooltipContext.BASIC);
+            } else if (this.buttonRect.contains(mouseX, mouseY))
+            {
+                tooltip = getButtonTooltip();
+            }
+            if (tooltip == null || tooltip.isEmpty())
+            {
+                return;
+            }
+            context.drawTooltip(textRenderer, tooltip, mouseX, mouseY);
         }
-        return tooltip;
-    }
 
-    private static List<Text> buildLotteryTooltip(int cost, boolean affordable)
-    {
-        List<Text> tooltip = new ArrayList<>();
-        tooltip.add(SDTexts.TEXT$SPIRIT_TOME$SHOP$LOTTERY_DESC.get());
-        tooltip.add(SDTexts.TEXT$SPIRIT_TOME$COST.get(cost));
-        if (!affordable)
+        private void renderButton(DrawContext context, TextRenderer textRenderer, boolean hovered)
         {
-            tooltip.add(SDTexts.TEXT$SPIRIT_TOME$INSUFFICIENT.get().formatted(Formatting.RED));
+            int background = active ? (hovered ? 0xAA888888 : 0xAA666666) : 0xAA222222;
+            context.fill(
+                this.buttonRect.getX(),
+                this.buttonRect.getY(),
+                this.buttonRect.getX() + this.buttonRect.getWidth(),
+                this.buttonRect.getY() + this.buttonRect.getHeight(),
+                background
+            );
+            Text text = this.getButtonText();
+            int color = active ? 0xFFFFFF : 0x888888;
+            drawScrollableText(
+                context, textRenderer, text,
+                this.buttonRect.getX() + TEXT_MARGIN,
+                this.buttonRect.getY(),
+                this.buttonRect.getX() + this.buttonRect.getWidth() - TEXT_MARGIN,
+                this.buttonRect.getY() + this.buttonRect.getHeight(),
+                color
+            );
         }
-        return tooltip;
+
+        /**
+         * Vanilla copy
+         */
+        protected static void drawScrollableText(DrawContext context, TextRenderer textRenderer, Text text, int left, int top, int right, int bottom, int color)
+        {
+            int i = textRenderer.getWidth(text);
+            int j = (top + bottom - 9) / 2 + 1;
+            int k = right - left;
+            if (i > k)
+            {
+                int l = i - k;
+                double d = Util.getMeasuringTimeMs() / 1000.0;
+                double e = Math.max(l * 0.5, 3.0);
+                double f = Math.sin((Math.PI / 2) * Math.cos((Math.PI * 2) * d / e)) / 2.0 + 0.5;
+                double g = MathHelper.lerp(f, 0.0, l);
+                context.enableScissor(left, top, right, bottom);
+                context.drawTextWithShadow(textRenderer, text, left - (int) g, j, color);
+                context.disableScissor();
+            } else
+            {
+                context.drawCenteredTextWithShadow(textRenderer, text, (left + right) / 2, j, color);
+            }
+        }
+
+        protected Text getTitleText()
+        {
+            return icon.getName();
+        }
+
+        protected Text getButtonText()
+        {
+            return TEXT_BUY;
+        }
+
+        protected boolean supportsItemTooltip()
+        {
+            return true;
+        }
+
+        protected List<Text> getButtonTooltip()
+        {
+            return List.of();
+        }
+
+        protected boolean mouseClicked(double mouseX, double mouseY)
+        {
+            if (!this.buttonRect.contains((int) mouseX, (int) mouseY))
+            {
+                return false;
+            }
+            AllPackets.toServer(new C2SSpiritTomeShopBuy(this.operationFlag));
+            return true;
+        }
     }
 
-    private static boolean isHoveringCard(int mouseX, int mouseY, int x, int y, int width, int height)
+    private static final class ItemCard extends ShopCard
     {
-        return mouseX >= x && mouseY >= y && mouseX < x + width && mouseY < y + height;
+        private static final Text TEXT_PURCHASED = SDTexts.TEXT$SPIRIT_TOME$SHOP$PURCHASED.get();
+        private boolean purchased;
+
+        private ItemCard(int x, int y, int width, int height, int operationFlag)
+        {
+            super(x, y, width, height, operationFlag);
+        }
+
+        @Override
+        protected void update(SpiritTomeComponent component)
+        {
+            this.icon = component.getShopItems()
+                .get(this.operationFlag)
+                .getDefaultStack();
+            this.purchased = component.isShopItemPurchased(this.operationFlag);
+            super.update(component);
+            this.active = affordable && !purchased;
+        }
+
+        @Override
+        protected Text getButtonText()
+        {
+            return purchased ? TEXT_PURCHASED : TEXT_BUY;
+        }
+
+        @Override
+        protected List<Text> getButtonTooltip()
+        {
+            if (purchased)
+            {
+                return List.of();
+            }
+            List<Text> tooltip = new ArrayList<>();
+            if (!affordable)
+            {
+                tooltip.add(SDTexts.TEXT$SPIRIT_TOME$INSUFFICIENT.get().formatted(Formatting.RED));
+            }
+            tooltip.add(SDTexts.TEXT$SPIRIT_TOME$COST.get(cost));
+            tooltip.add(TEXT_BUY.copy().append(ScreenTexts.SPACE).append(icon.getName()));
+            return tooltip;
+        }
     }
 
-    private static boolean isWithin(double mouseX, double mouseY, Rect2i rect)
+    private static final class LotteryCard extends ShopCard
     {
-        return mouseX >= rect.getX() && mouseY >= rect.getY() && mouseX < rect.getX() + rect.getWidth() && mouseY < rect.getY() + rect.getHeight();
+        private static final Text TITLE = SDTexts.TEXT$SPIRIT_TOME$SHOP$LOTTERY.get();
+
+        private LotteryCard(int x, int y, int width, int height)
+        {
+            super(x, y, width, height, C2SSpiritTomeShopBuy.SHOP_LOTTERY_INDEX);
+            this.icon = Items.COMMAND_BLOCK.getDefaultStack();
+        }
+
+        @Override
+        protected Text getTitleText()
+        {
+            return TITLE;
+        }
+
+        @Override
+        protected List<Text> getButtonTooltip()
+        {
+            List<Text> tooltip = new ArrayList<>();
+            if (!affordable)
+            {
+                tooltip.add(SDTexts.TEXT$SPIRIT_TOME$INSUFFICIENT.get().formatted(Formatting.RED));
+            }
+            tooltip.add(SDTexts.TEXT$SPIRIT_TOME$COST.get(cost));
+            tooltip.add(TEXT_BUY.copy().append(ScreenTexts.SPACE).append(TITLE));
+            return tooltip;
+        }
     }
 
-    private static Rect2i getButtonRect(int x, int y, int width)
+    private static final class RefreshCard extends ShopCard
     {
-        int buttonX = x + (width - BUTTON_WIDTH) / 2;
-        int buttonY = y + CARD_HEIGHT - BUTTON_HEIGHT - 4;
-        return new Rect2i(buttonX, buttonY, BUTTON_WIDTH, BUTTON_HEIGHT);
-    }
+        private static final Text TITLE = SDTexts.TEXT$SPIRIT_TOME$SHOP$REFRESH.get();
 
-    private static int getGridWidth()
-    {
-        return 3 * CARD_WIDTH + 2 * CARD_GAP_X;
-    }
+        private RefreshCard(int x, int y, int width, int height)
+        {
+            super(x, y, width, height, C2SSpiritTomeShopBuy.SHOP_REFRESH_INDEX);
+            this.icon = Items.CLOCK.getDefaultStack();
+        }
 
-    private static int getGridHeight()
-    {
-        return 2 * CARD_HEIGHT + CARD_GAP_Y;
-    }
+        @Override
+        protected Text getTitleText()
+        {
+            return TITLE;
+        }
 
-    private static int getLotteryWidth()
-    {
-        return CARD_WIDTH + 40;
+        @Override
+        protected List<Text> getButtonTooltip()
+        {
+            List<Text> tooltip = new ArrayList<>();
+            if (!affordable)
+            {
+                tooltip.add(SDTexts.TEXT$SPIRIT_TOME$INSUFFICIENT.get().formatted(Formatting.RED));
+            }
+            tooltip.add(SDTexts.TEXT$SPIRIT_TOME$COST.get(cost));
+            tooltip.add(TITLE);
+            return tooltip;
+        }
     }
 }

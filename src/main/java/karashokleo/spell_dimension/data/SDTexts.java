@@ -105,6 +105,7 @@ public enum SDTexts
     /**
      * Spirit Tome
      */
+    // info page
     TEXT$SPIRIT_TOME$NAME("Name: %s", "姓名：%s"),
     TEXT$SPIRIT_TOME$GENDER("Gender: %s", "性别：%s"),
     TEXT$SPIRIT_TOME$AGE("Age: %s", "年龄：%s"),
@@ -118,12 +119,15 @@ public enum SDTexts
     TEXT$SPIRIT_TOME$UNKNOWN("Unknown", "???"),
     TEXT$SPIRIT_TOME$INSUFFICIENT("Insufficient Spirit", "「通灵」不足"),
     TEXT$SPIRIT_TOME$REJECT("Spirit Tome is rejecting you", "通灵簿正在排斥你"),
+    // shop page
     TEXT$SPIRIT_TOME$SHOP$TITLE("Spirit Shop", "通灵商店"),
-    TEXT$SPIRIT_TOME$SHOP$REFRESH("Refreshes daily", "每日刷新"),
+    TEXT$SPIRIT_TOME$SHOP$SUBTITLE("Refreshes daily", "每日刷新"),
+    TEXT$SPIRIT_TOME$SHOP$COST("%s Spirit", "%s「通灵」"),
     TEXT$SPIRIT_TOME$SHOP$BUY("Buy", "购买"),
-    TEXT$SPIRIT_TOME$SHOP$BOUGHT("Purchased", "已购买"),
-    TEXT$SPIRIT_TOME$SHOP$LOTTERY("Lottery", "抽奖"),
-    TEXT$SPIRIT_TOME$SHOP$LOTTERY_DESC("Random item", "随机物品"),
+    TEXT$SPIRIT_TOME$SHOP$PURCHASED("Purchased", "已购买"),
+    TEXT$SPIRIT_TOME$SHOP$LOTTERY("Random Item", "随机物品"),
+    TEXT$SPIRIT_TOME$SHOP$REFRESH("Refresh Shop Items", "刷新商店物品"),
+    // rule page
     // rule descriptions
     TEXT$SPIRIT_TOME$RULE$0("Rule 0: The sum of \"Positive Spirit\" and \"Negative Spirit\" is collectively termed \"Spirit\". Erased when \"Spirit\" becomes negative, and the Spirit Tome self-destructs", "规则〇：「正通灵」与「负通灵」之和总称为「通灵」，「通灵」为负值时抹杀，且通灵簿自毁"),
     TEXT$SPIRIT_TOME$RULE$1("Rule 1: Gain \"Positive Spirit\" upon capturing hostile mobs as soul minions", "规则一：收容恶意生物为灵仆时获得「正通灵」"),

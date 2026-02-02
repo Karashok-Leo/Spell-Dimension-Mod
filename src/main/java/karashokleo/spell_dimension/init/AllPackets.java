@@ -32,7 +32,6 @@ public class AllPackets
             C2SSelectSoulAlbum.class,
             C2SReleaseControl.class,
             C2SSpiritAttributeUpgrade.class,
-            C2SSpiritTomeShopSync.class,
             C2SSpiritTomeShopBuy.class
         );
 
@@ -41,7 +40,6 @@ public class AllPackets
             C2SSelectSoulAlbum.class,
             C2SReleaseControl.class,
             C2SSpiritAttributeUpgrade.class,
-            C2SSpiritTomeShopSync.class,
             C2SSpiritTomeShopBuy.class
         );
     }

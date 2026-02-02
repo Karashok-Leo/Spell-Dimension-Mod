@@ -164,7 +164,7 @@ public class SpiritTomeInfoPage implements SpiritTomePage
         private final int y;
         private final UpgradeButton upgradeButton;
 
-        public AttributeLine(EntityAttribute attribute, ValueProvider valueProvider, int x, int y)
+        private AttributeLine(EntityAttribute attribute, ValueProvider valueProvider, int x, int y)
         {
             this.attribute = attribute;
             this.valueProvider = valueProvider;
@@ -173,7 +173,7 @@ public class SpiritTomeInfoPage implements SpiritTomePage
             this.y = y;
         }
 
-        public void render(DrawContext context, int mouseX, int mouseY, TextRenderer textRenderer, PlayerEntity player, SpellPower.Result result)
+        private void render(DrawContext context, int mouseX, int mouseY, TextRenderer textRenderer, PlayerEntity player, SpellPower.Result result)
         {
             String valueText = valueProvider.get(player, attribute, result);
             // attribute name
@@ -185,24 +185,24 @@ public class SpiritTomeInfoPage implements SpiritTomePage
             upgradeButton.render(context, mouseX, mouseY, textRenderer);
         }
 
-        public void update(int spirit)
+        private void update(int spirit)
         {
             SpiritUpgradeConfig.SpiritUpgrade upgrade = SpiritUpgradeConfig.get(attribute);
             upgradeButton.setActive(upgrade != null && spirit >= upgrade.cost());
         }
 
-        public boolean mouseClicked(double mouseX, double mouseY)
+        private boolean mouseClicked(double mouseX, double mouseY)
         {
             return upgradeButton.mouseClicked(mouseX, mouseY);
         }
 
         @FunctionalInterface
-        public interface ValueProvider
+        private interface ValueProvider
         {
             String get(PlayerEntity player, EntityAttribute attribute, SpellPower.Result result);
         }
 
-        public static class UpgradeButton
+        private static class UpgradeButton
         {
             private final EntityAttribute attribute;
             private final int x;
@@ -222,12 +222,12 @@ public class SpiritTomeInfoPage implements SpiritTomePage
                 this.tooltip = buildUpgradeTooltip(attribute);
             }
 
-            public void setActive(boolean active)
+            private void setActive(boolean active)
             {
                 this.active = active;
             }
 
-            public boolean isHovered(double mouseX, double mouseY)
+            private boolean isHovered(double mouseX, double mouseY)
             {
                 return mouseX >= x &&
                     mouseY >= y &&
@@ -235,7 +235,7 @@ public class SpiritTomeInfoPage implements SpiritTomePage
                     mouseY < y + height;
             }
 
-            public boolean mouseClicked(double mouseX, double mouseY)
+            private boolean mouseClicked(double mouseX, double mouseY)
             {
                 if (!isHovered(mouseX, mouseY))
                 {
@@ -255,7 +255,7 @@ public class SpiritTomeInfoPage implements SpiritTomePage
                 return true;
             }
 
-            public void render(DrawContext context, int mouseX, int mouseY, TextRenderer textRenderer)
+            private void render(DrawContext context, int mouseX, int mouseY, TextRenderer textRenderer)
             {
                 // button
                 boolean hovered = isHovered(mouseX, mouseY);
