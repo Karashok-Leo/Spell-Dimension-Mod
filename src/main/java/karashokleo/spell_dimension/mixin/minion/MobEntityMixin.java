@@ -41,8 +41,8 @@ public abstract class MobEntityMixin
     {
         original.call(instance);
         var mob = (MobEntity) (Object) this;
-        this.targetSelector.add(1, new TrackSoulOwnerAttackerGoal(mob));
-        this.targetSelector.add(2, new AttackWithSoulOwnerGoal(mob));
+        this.targetSelector.add(0, new TrackSoulOwnerAttackerGoal(mob));
+        this.targetSelector.add(0, new AttackWithSoulOwnerGoal(mob));
         this.goalSelector.add(0, new StandbySoulMinionGoal(mob));
         this.goalSelector.add(6, new FollowSoulOwnerGoal(mob));
     }
