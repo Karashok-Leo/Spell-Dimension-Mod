@@ -133,7 +133,7 @@ public enum SDTexts
     TEXT$SPIRIT_TOME$RULE$1$EFFECT("Rule 1 activated. You have gained %s point of \"Positive Spirit\"!", "规则一执行，你已获得%s点「正通灵」！"),
     TEXT$SPIRIT_TOME$RULE$2$EFFECT("Rule 2 activated. You have gained %s point of \"Negative Spirit\"!", "规则二执行，你已获得%s点「负通灵」！"),
     TEXT$SPIRIT_TOME$RULE$3$EFFECT("Rule 3 activated. You have lost %s point of \"Negative Spirit\"!", "规则三执行，你已失去%s点「负通灵」！"),
-    TEXT$SPIRIT_TOME$RULE$4$EFFECT("Rule 4 activated. You have lost %s point of \"Positive Spirit\"!", "规则四执行，你已获得%s点「正通灵」！"),
+    TEXT$SPIRIT_TOME$RULE$4$EFFECT("Rule 4 activated. You have lost %s point of \"Positive Spirit\"!", "规则四执行，你已失去%s点「正通灵」！"),
     TEXT$SPIRIT_TOME$RULE$6$EFFECT("Rule 6 activated. You have acquired the ability \"Disarm\"!", "规则六执行，你已获得能力「止戈」！"),
     TEXT$SPIRIT_TOME$RULE$7$EFFECT("Rule 7 activated. You have acquired the ability \"Judgment\"!", "规则七执行，你已获得能力「裁决」！"),
 

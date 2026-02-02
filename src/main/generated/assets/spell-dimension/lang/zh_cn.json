@@ -788,7 +788,7 @@
   "text.spell-dimension.spirit_tome.rule.3": "规则三：收容非恶意生物为灵仆时失去「负通灵」",
   "text.spell-dimension.spirit_tome.rule.3.effect": "规则三执行，你已失去%s点「负通灵」！",
   "text.spell-dimension.spirit_tome.rule.4": "规则四：击杀非恶意生物时失去「正通灵」",
-  "text.spell-dimension.spirit_tome.rule.4.effect": "规则四执行，你已获得%s点「正通灵」！",
+  "text.spell-dimension.spirit_tome.rule.4.effect": "规则四执行，你已失去%s点「正通灵」！",
   "text.spell-dimension.spirit_tome.rule.5": "规则五：使用通灵簿消耗「通灵」时，「正通灵」与「负通灵」按比例消耗",
   "text.spell-dimension.spirit_tome.rule.6": "规则六：「正通灵」大于百万且「负通灵」小于一万时，获得能力「止戈」：敌人生命值低于一成时转为灵仆",
   "text.spell-dimension.spirit_tome.rule.6.effect": "规则六执行，你已获得能力「止戈」！",
