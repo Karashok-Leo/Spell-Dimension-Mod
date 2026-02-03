@@ -157,7 +157,7 @@ public class AdditionalTooltip
         {
             return;
         }
-        lines.add(SDTexts.TOOLTIP$SPIRIT_TOME$0.get(KeyBindingHelper.getBoundKeyOf(SpiritTomeKeyHandler.OPEN_TOME_KEY).getLocalizedText()).formatted(Formatting.GRAY));
+        lines.add(SDTexts.TOOLTIP$SPIRIT_TOME$0.get(KeyBindingHelper.getBoundKeyOf(SpiritTomeKeyHandler.OPEN_TOME_KEY).getLocalizedText()).formatted(Formatting.DARK_AQUA));
         lines.add(SDTexts.TOOLTIP$SPIRIT_TOME$1.get().formatted(Formatting.RED));
     }
 

@@ -320,4 +320,26 @@ public class SpiritTomeScreen extends Screen
         }
         return super.mouseClicked(mouseX, mouseY, button);
     }
+
+    @Override
+    public boolean mouseScrolled(double mouseX, double mouseY, double amount)
+    {
+        if (!this.viewport.contains((int) mouseX, (int) mouseY))
+        {
+            return super.mouseScrolled(mouseX, mouseY, amount);
+        }
+        if (amount > 0 && this.currentPage > 0)
+        {
+            this.currentPage--;
+            updateArrowVisibility();
+            return true;
+        }
+        if (amount < 0 && this.currentPage < this.pages.length - 1)
+        {
+            this.currentPage++;
+            updateArrowVisibility();
+            return true;
+        }
+        return super.mouseScrolled(mouseX, mouseY, amount);
+    }
 }
