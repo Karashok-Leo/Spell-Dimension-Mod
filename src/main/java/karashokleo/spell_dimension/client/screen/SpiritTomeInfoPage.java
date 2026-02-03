@@ -169,15 +169,6 @@ public class SpiritTomeInfoPage implements SpiritTomePage
         return 16 + Math.max(0, yearsFromPlayTime);
     }
 
-    private static String formatScientificIfTooWide(TextRenderer textRenderer, int maxWidth, java.util.function.Function<String, Text> textFactory, String normalValue, String scientificValue)
-    {
-        if (textRenderer.getWidth(textFactory.apply(normalValue)) <= maxWidth)
-        {
-            return normalValue;
-        }
-        return scientificValue;
-    }
-
     private static String formatScientific(double value)
     {
         return "%.2E".formatted(value);

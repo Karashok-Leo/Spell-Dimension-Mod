@@ -153,7 +153,7 @@ public class SpiritTomeComponent implements AutoSyncedComponent, ServerTickingCo
         {
             case POSITIVE -> this.positiveSpirit;
             case NEGATIVE -> this.negativeSpirit;
-            case TOTAL -> this.positiveSpirit + this.negativeSpirit;
+            case TOTAL -> plusClamp(this.positiveSpirit, this.negativeSpirit);
         };
     }
 
@@ -226,8 +226,8 @@ public class SpiritTomeComponent implements AutoSyncedComponent, ServerTickingCo
         }
         switch (type)
         {
-            case POSITIVE -> this.positiveSpirit += amount;
-            case NEGATIVE -> this.negativeSpirit += amount;
+            case POSITIVE -> this.positiveSpirit = plusClamp(this.positiveSpirit, amount);
+            case NEGATIVE -> this.negativeSpirit = plusClamp(this.negativeSpirit, amount);
             case TOTAL -> throw new UnsupportedOperationException();
         }
         tryUnlockAdvancedRules();
@@ -415,5 +415,19 @@ public class SpiritTomeComponent implements AutoSyncedComponent, ServerTickingCo
             case RARE -> 3000;
             case EPIC -> 9999;
         };
+    }
+
+    private static int plusClamp(int a, int b)
+    {
+        long result = (long) a + (long) b;
+        if (result > Integer.MAX_VALUE)
+        {
+            return Integer.MAX_VALUE;
+        }
+        if (result < Integer.MIN_VALUE)
+        {
+            return Integer.MIN_VALUE;
+        }
+        return (int) result;
     }
 }
