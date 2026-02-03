@@ -5,16 +5,20 @@ import com.kyanite.deeperdarker.content.DDEntities;
 import com.spellbladenext.Spellblades;
 import com.teamremastered.endrem.registry.ERItems;
 import karashokleo.l2hostility.L2Hostility;
+import karashokleo.l2hostility.content.item.ComplementItems;
 import karashokleo.l2hostility.content.item.ConsumableItems;
 import karashokleo.l2hostility.content.item.TrinketItems;
+import karashokleo.l2hostility.content.trait.base.MobTrait;
 import karashokleo.l2hostility.init.LHEnchantments;
 import karashokleo.l2hostility.init.LHTags;
+import karashokleo.l2hostility.init.LHTraits;
 import karashokleo.leobrary.datagen.generator.TagGenerator;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.api.quest.Quest;
 import karashokleo.spell_dimension.content.enchantment.TraitEffectImmunityEnchantment;
 import karashokleo.spell_dimension.util.TagUtil;
 import net.adventurez.init.EntityInit;
+import net.mehvahdjukaar.dummmmmmy.Dummmmmmy;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.enchantment.Enchantment;
@@ -152,6 +156,7 @@ public class AllTags
     public static final TagKey<EntityType<?>> SW_MONSTER = TagUtil.entityTypeTag("sw_monster");
     public static final TagKey<EntityType<?>> FLYING = TagUtil.entityTypeTag(Walkers.id("flying"));
     public static final TagKey<EntityType<?>> NO_CLIPS = TagUtil.entityTypeTag(Walkers.id("fall_through_blocks"));
+    public static final TagKey<EntityType<?>> ESSENCE_LOOT_ENTITY_BLACKLIST = TagUtil.entityTypeTag("essence_loot_blacklist");
 
     public static final TagKey<Enchantment> LOOTABLE = TagUtil.enchantmentTag("lootable");
     public static final TagKey<Enchantment> TRADABLE = TagUtil.enchantmentTag("tradable");
@@ -167,6 +172,8 @@ public class AllTags
     public static final TagKey<Quest> SKIPPABLE = TagUtil.questTag("skippable");
 
     public static final TagKey<Biome> PRISMACHASM = TagUtil.biomeTag("prismachasm");
+
+    public static final TagKey<MobTrait> ESSENCE_LOOT_TRAIT_BLACKLIST = TagUtil.traitTag("essence_loot_blacklist");
 
     public static TagKey<Item> getRuneTag(SpellSchool school, String suffix)
     {
@@ -303,6 +310,39 @@ public class AllTags
             .add(ERItems.UNDEAD_EYE)
             .add(ERItems.EXOTIC_EYE)
             .add(ERItems.CRYPTIC_EYE);
+
+        SpellDimension.ITEM_TAGS.getOrCreateContainer(SPIRIT_TOME_SHOP_BLACKLIST)
+            .add(
+                Items.AIR,
+                Items.BARRIER,
+                Items.DEBUG_STICK,
+                Items.STRUCTURE_BLOCK,
+                Items.STRUCTURE_VOID,
+                Items.JIGSAW,
+                Items.LIGHT,
+                Items.COMMAND_BLOCK,
+                Items.REPEATING_COMMAND_BLOCK,
+                Items.CHAIN_COMMAND_BLOCK,
+                Items.COMMAND_BLOCK_MINECART,
+                AllItems.DEBUG_STAFF,
+                AllItems.CREATIVE_SOUL_CONTAINER,
+                AllItems.CREATIVE_SOUL_CONTAINER,
+//                MiscItems.AI_CONFIG_WAND,
+//                MiscItems.EQUIPMENT_WAND,
+//                MiscItems.TARGET_SELECT_WAND,
+//                MiscItems.TRAIT_ADDER_WAND,
+//                LHBlocks.SPAWNER.item(),
+                ComplementItems.SPACE_SHARD
+            )
+            .addOptional(
+                new Identifier("moonlight:placeable_item"),
+                new Identifier("soulsweapons:test_item"),
+                new Identifier("fwaystones:waystone_debugger"),
+                new Identifier("spellbladenext:debug"),
+                new Identifier("dungeonz:dungeon_compass"),
+                new Identifier("sophisticatedbackpacks:infinity_upgrade"),
+                new Identifier("sophisticatedbackpacks:survival_infinity_upgrade")
+            );
 
         SpellDimension.BLOCK_TAGS.getOrCreateContainer(LOCATE_TARGET)
             .add(
@@ -488,6 +528,12 @@ public class AllTags
             noDispellContainer.add(enchantment);
         }
 
+        SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(ESSENCE_LOOT_ENTITY_BLACKLIST)
+            .add(
+                Dummmmmmy.TARGET_DUMMY.get(),
+                EntityType.ARMOR_STAND
+            );
+
         SpellDimension.ENCHANTMENT_TAGS.getOrCreateContainer(LOOTABLE)
             .add(
                 LHEnchantments.SHULKER_ARMOR,
@@ -512,5 +558,12 @@ public class AllTags
 
         SpellDimension.BIOME_TAGS.getOrCreateContainer(PRISMACHASM)
             .addOptional(new Identifier("regions_unexplored:prismachasm"));
+
+        SpellDimension.TRAIT_TAGS.getOrCreateContainer(ESSENCE_LOOT_TRAIT_BLACKLIST)
+            .add(
+                LHTraits.UNDYING,
+                LHTraits.DISPELL,
+                LHTraits.ADAPTIVE
+            );
     }
 }

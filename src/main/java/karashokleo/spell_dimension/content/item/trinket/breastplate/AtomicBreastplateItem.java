@@ -7,9 +7,9 @@ import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingHu
 import karashokleo.l2hostility.content.item.ComplementItems;
 import karashokleo.l2hostility.content.item.trinket.core.DamageListenerTrinket;
 import karashokleo.l2hostility.content.item.trinket.core.SingleEpicTrinketItem;
-import karashokleo.spell_dimension.config.EssenceLootConfig;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllItems;
+import karashokleo.spell_dimension.init.AllTags;
 import karashokleo.spell_dimension.util.SoundUtil;
 import net.aleganza.plentyofarmors.item.ModItems;
 import net.minecraft.client.item.TooltipContext;
@@ -49,7 +49,9 @@ public class AtomicBreastplateItem extends SingleEpicTrinketItem implements Dama
     public void onHurting(ItemStack stack, LivingEntity entity, LivingHurtEvent event)
     {
         // Blacklist
-        if (EssenceLootConfig.BASE_CONFIG.entityBlacklist().contains(event.getEntity().getType()))
+        if (event.getEntity()
+            .getType()
+            .isIn(AllTags.ESSENCE_LOOT_ENTITY_BLACKLIST))
         {
             return;
         }

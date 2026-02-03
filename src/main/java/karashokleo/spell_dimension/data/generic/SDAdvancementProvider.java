@@ -16,6 +16,7 @@ import net.minecraft.advancement.criterion.InventoryChangedCriterion;
 import net.minecraft.advancement.criterion.StartedRidingCriterion;
 import net.minecraft.advancement.criterion.TickCriterion;
 import net.minecraft.entity.EntityType;
+import net.minecraft.item.Items;
 import net.minecraft.predicate.entity.EntityPredicate;
 
 import java.util.function.Consumer;
@@ -128,7 +129,7 @@ public class SDAdvancementProvider extends FabricAdvancementProvider
         Advancement ride_player = Advancement.Builder.create()
             .parent(root)
             .display(
-                AllStacks.NEW_GUIDE_BOOK,
+                Items.SADDLE,
                 SDTexts.ADVANCEMENT$RIDE_PLAYER$TITLE.get(),
                 SDTexts.ADVANCEMENT$RIDE_PLAYER$DESCRIPTION.get(),
                 null,

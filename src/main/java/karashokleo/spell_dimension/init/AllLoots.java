@@ -4,7 +4,6 @@ import karashokleo.l2hostility.compat.trinket.TrinketCompat;
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
 import karashokleo.l2hostility.content.item.trinket.misc.LootingCharm;
 import karashokleo.l2hostility.content.logic.DifficultyLevel;
-import karashokleo.l2hostility.init.LHTraits;
 import karashokleo.loot_bag.api.common.LootBagRegistry;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
@@ -87,7 +86,7 @@ public class AllLoots
                 }
 
                 // entity blacklist check
-                if (EssenceLootConfig.BASE_CONFIG.entityBlacklist().contains(living.getType()))
+                if (living.getType().isIn(AllTags.ESSENCE_LOOT_ENTITY_BLACKLIST))
                 {
                     continue;
                 }
@@ -97,10 +96,16 @@ public class AllLoots
                 if (op.isPresent())
                 {
                     MobDifficulty difficulty = op.get();
-                    if (difficulty.noDrop ||
-                        difficulty.hasTrait(LHTraits.UNDYING) ||
-                        difficulty.hasTrait(LHTraits.DISPELL) ||
-                        difficulty.hasTrait(LHTraits.ADAPTIVE))
+                    if (difficulty.noDrop)
+                    {
+                        continue;
+                    }
+                    if (difficulty.traits
+                        .keySet()
+                        .stream()
+                        .anyMatch(
+                            trait -> trait.isIn(AllTags.ESSENCE_LOOT_TRAIT_BLACKLIST)
+                        ))
                     {
                         continue;
                     }

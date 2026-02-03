@@ -10,6 +10,7 @@ import karashokleo.spell_dimension.data.generic.recipe.SDLocateRecipes;
 import karashokleo.spell_dimension.data.loot_bag.SDBags;
 import karashokleo.spell_dimension.data.loot_bag.SDContents;
 import karashokleo.spell_dimension.init.AllEntities;
+import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.init.AllStats;
 import karashokleo.spell_dimension.init.AllTags;
 import net.minecraft.entity.EquipmentSlot;
@@ -474,6 +475,17 @@ public enum SDTexts
     public static MutableText getSoulMinionAttackModeText(SoulMinionMode.Attack mode)
     {
         return Text.translatable(Util.createTranslationKey("soul_minion_attack_mode", SpellDimension.modLoc(mode.ordinal() + "")));
+    }
+
+    public static MutableText getSpiritTomeRuleText(int index, Object... objects)
+    {
+        return Text.translatable(
+            "chat.type.text",
+            AllItems.SPIRIT_TOME.getName(),
+            index < 0 ?
+                SDTexts.TEXT$SPIRIT_TOME$RULE$REVEAL.get() :
+                Text.translatable("text.%s.spirit_tome.rule.%d.effect".formatted(SpellDimension.MOD_ID, index), objects)
+        );
     }
 
     public static void register()

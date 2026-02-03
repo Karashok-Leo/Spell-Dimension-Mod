@@ -60,13 +60,13 @@ public class SpiritTomeComponent implements AutoSyncedComponent, ServerTickingCo
             {
                 // rule 1
                 component.revealRule(1);
-                player.sendMessage(SDTexts.TEXT$SPIRIT_TOME$RULE$1$EFFECT.get(amount).formatted(Formatting.DARK_AQUA));
+                player.sendMessage(SDTexts.getSpiritTomeRuleText(1, amount).formatted(Formatting.DARK_AQUA));
                 component.changeSpirit(SpiritType.POSITIVE, amount);
             } else
             {
                 // rule 2
                 component.revealRule(2);
-                player.sendMessage(SDTexts.TEXT$SPIRIT_TOME$RULE$2$EFFECT.get(amount).formatted(Formatting.DARK_AQUA));
+                player.sendMessage(SDTexts.getSpiritTomeRuleText(2, amount).formatted(Formatting.DARK_AQUA));
                 component.changeSpirit(SpiritType.NEGATIVE, amount);
             }
         } else
@@ -75,13 +75,13 @@ public class SpiritTomeComponent implements AutoSyncedComponent, ServerTickingCo
             {
                 // rule 3
                 component.revealRule(3);
-                player.sendMessage(SDTexts.TEXT$SPIRIT_TOME$RULE$3$EFFECT.get(amount).formatted(Formatting.DARK_AQUA));
+                player.sendMessage(SDTexts.getSpiritTomeRuleText(3, amount).formatted(Formatting.DARK_AQUA));
                 component.changeSpirit(SpiritType.NEGATIVE, -amount);
             } else
             {
                 // rule 4
                 component.revealRule(4);
-                player.sendMessage(SDTexts.TEXT$SPIRIT_TOME$RULE$4$EFFECT.get(amount).formatted(Formatting.DARK_AQUA));
+                player.sendMessage(SDTexts.getSpiritTomeRuleText(4, amount).formatted(Formatting.DARK_AQUA));
                 component.changeSpirit(SpiritType.POSITIVE, -amount);
             }
         }
@@ -157,6 +157,7 @@ public class SpiritTomeComponent implements AutoSyncedComponent, ServerTickingCo
         };
     }
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public boolean isRuleRevealed(int rule)
     {
         return (this.ruleRevealedMask & (1 << rule)) != 0;
@@ -184,7 +185,7 @@ public class SpiritTomeComponent implements AutoSyncedComponent, ServerTickingCo
             return;
         }
         this.ruleRevealedMask |= mask;
-        this.player.sendMessage(SDTexts.TEXT$SPIRIT_TOME$RULE$REVEAL.get());
+        this.player.sendMessage(SDTexts.getSpiritTomeRuleText(-1).formatted(Formatting.DARK_AQUA));
         sync();
     }
 
@@ -340,7 +341,7 @@ public class SpiritTomeComponent implements AutoSyncedComponent, ServerTickingCo
         {
             return;
         }
-        this.player.sendMessage(SDTexts.TEXT$SPIRIT_TOME$RULE$0$EFFECT.get().formatted(Formatting.DARK_AQUA));
+        this.player.sendMessage(SDTexts.getSpiritTomeRuleText(0).formatted(Formatting.DARK_AQUA));
         this.player.damage(this.player.getDamageSources().outOfWorld(), Float.MAX_VALUE);
         // ensure death
         this.player.setHealth(0);
@@ -355,12 +356,12 @@ public class SpiritTomeComponent implements AutoSyncedComponent, ServerTickingCo
         if (isDisarmActive() && !isRuleRevealed(6))
         {
             revealRule(6);
-            this.player.sendMessage(SDTexts.TEXT$SPIRIT_TOME$RULE$6$EFFECT.get().formatted(Formatting.DARK_AQUA));
+            this.player.sendMessage(SDTexts.getSpiritTomeRuleText(6).formatted(Formatting.DARK_AQUA));
         }
         if (isJudgmentActive() && !isRuleRevealed(7))
         {
             revealRule(7);
-            this.player.sendMessage(SDTexts.TEXT$SPIRIT_TOME$RULE$7$EFFECT.get().formatted(Formatting.DARK_AQUA));
+            this.player.sendMessage(SDTexts.getSpiritTomeRuleText(7).formatted(Formatting.DARK_AQUA));
         }
     }
 

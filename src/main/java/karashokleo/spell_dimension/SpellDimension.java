@@ -4,6 +4,8 @@ import com.klikli_dev.modonomicon.api.datagen.LanguageProviderCache;
 import dev.onyxstudios.cca.api.v3.entity.EntityComponentFactoryRegistry;
 import dev.onyxstudios.cca.api.v3.entity.EntityComponentInitializer;
 import dev.onyxstudios.cca.api.v3.entity.RespawnCopyStrategy;
+import karashokleo.l2hostility.content.trait.base.MobTrait;
+import karashokleo.l2hostility.init.LHTraits;
 import karashokleo.leobrary.datagen.generator.*;
 import karashokleo.leobrary.datagen.generator.init.GeneratorStorage;
 import karashokleo.spell_dimension.api.quest.Quest;
@@ -158,6 +160,7 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
     public static final TagGenerator<StatusEffect> EFFECT_TAGS = new TagGenerator<>(RegistryKeys.STATUS_EFFECT);
     public static final TagGenerator<Quest> QUEST_TAGS = new TagGenerator<>(QuestRegistry.QUEST_REGISTRY_KEY);
     public static final TagGenerator<Biome> BIOME_TAGS = new TagGenerator<>(RegistryKeys.BIOME);
+    public static final TagGenerator<MobTrait> TRAIT_TAGS = new TagGenerator<>(LHTraits.TRAIT_KEY);
 
     public static final DynamicRegistryGenerator<DamageType> DYNAMICS = new DynamicRegistryGenerator<>("Spell Dimension Dynamic Registries", RegistryKeys.DAMAGE_TYPE);
 

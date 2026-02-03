@@ -26,8 +26,7 @@
     "frame": "task",
     "hidden": true,
     "icon": {
-      "item": "patchouli:guide_book",
-      "nbt": "{\"patchouli:book\":\"spell-dimension:magic_guide\"}"
+      "item": "minecraft:saddle"
     },
     "show_toast": true,
     "title": {

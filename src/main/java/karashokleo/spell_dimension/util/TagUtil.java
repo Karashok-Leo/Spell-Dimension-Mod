@@ -1,5 +1,7 @@
 package karashokleo.spell_dimension.util;
 
+import karashokleo.l2hostility.content.trait.base.MobTrait;
+import karashokleo.l2hostility.init.LHTraits;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.api.quest.Quest;
 import karashokleo.spell_dimension.api.quest.QuestTag;
@@ -78,5 +80,15 @@ public class TagUtil
     public static TagKey<Biome> biomeTag(String path)
     {
         return biomeTag(SpellDimension.modLoc(path));
+    }
+
+    public static TagKey<MobTrait> traitTag(Identifier id)
+    {
+        return TagKey.of(LHTraits.TRAIT_KEY, id);
+    }
+
+    public static TagKey<MobTrait> traitTag(String path)
+    {
+        return traitTag(SpellDimension.modLoc(path));
     }
 }

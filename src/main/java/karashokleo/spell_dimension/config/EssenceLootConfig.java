@@ -1,8 +1,6 @@
 package karashokleo.spell_dimension.config;
 
 import karashokleo.spell_dimension.init.AllSpells;
-import net.mehvahdjukaar.dummmmmmy.Dummmmmmy;
-import net.minecraft.entity.EntityType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.random.Random;
 
@@ -12,7 +10,6 @@ public class EssenceLootConfig
 {
     public static final BaseConfig BASE_CONFIG = new BaseConfig(
         Set.of(AllSpells.SOUL_COMMAND),
-        Set.of(Dummmmmmy.TARGET_DUMMY.get()),
         0.2F,
         160, 560,
         0.30F, 0.08F
@@ -27,7 +24,6 @@ public class EssenceLootConfig
 
     public record BaseConfig(
         Set<Identifier> spellBlacklist,
-        Set<EntityType<?>> entityBlacklist,
         float dropChance,
         int intermediateLevel,
         int advancedLevel,

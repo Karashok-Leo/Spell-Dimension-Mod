@@ -1,0 +1,48 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:air",
+    "minecraft:barrier",
+    "minecraft:debug_stick",
+    "minecraft:structure_block",
+    "minecraft:structure_void",
+    "minecraft:jigsaw",
+    "minecraft:light",
+    "minecraft:command_block",
+    "minecraft:repeating_command_block",
+    "minecraft:chain_command_block",
+    "minecraft:command_block_minecart",
+    "spell-dimension:debug_staff",
+    "spell-dimension:creative_soul_container",
+    "spell-dimension:creative_soul_container",
+    "l2hostility:space_shard",
+    {
+      "id": "moonlight:placeable_item",
+      "required": false
+    },
+    {
+      "id": "soulsweapons:test_item",
+      "required": false
+    },
+    {
+      "id": "fwaystones:waystone_debugger",
+      "required": false
+    },
+    {
+      "id": "spellbladenext:debug",
+      "required": false
+    },
+    {
+      "id": "dungeonz:dungeon_compass",
+      "required": false
+    },
+    {
+      "id": "sophisticatedbackpacks:infinity_upgrade",
+      "required": false
+    },
+    {
+      "id": "sophisticatedbackpacks:survival_infinity_upgrade",
+      "required": false
+    }
+  ]
+}
