@@ -53,6 +53,28 @@ public interface SoulControl
         return AllComponents.SOUL_CONTROLLER.get(player);
     }
 
+    static void changeSoulOwner(MobEntity mob, @Nullable PlayerEntity newOwner)
+    {
+        SoulMinionComponent minionComponent = getSoulMinion(mob);
+        if (minionComponent.isOwner(newOwner))
+        {
+            return;
+        }
+        PlayerEntity oldOwner = minionComponent.getOwner();
+        if (oldOwner != null)
+        {
+            SoulControllerComponent controllerComponent = getSoulController(oldOwner);
+            controllerComponent.onMinionRemoved(mob);
+        }
+        minionComponent.setOwner(newOwner);
+        // must check hasOwner here, because setOwner rejects dead owner
+        if (newOwner != null && minionComponent.hasOwner())
+        {
+            SoulControllerComponent controllerComponent = getSoulController(newOwner);
+            controllerComponent.onMinionAdded(mob);
+        }
+    }
+
     /**
      * @return true if entity2 is a soul minion owned by entity1
      */

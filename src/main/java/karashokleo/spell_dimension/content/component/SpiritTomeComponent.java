@@ -162,6 +162,16 @@ public class SpiritTomeComponent implements AutoSyncedComponent, ServerTickingCo
         return (this.ruleRevealedMask & (1 << rule)) != 0;
     }
 
+    public boolean isDisarmActive()
+    {
+        return this.positiveSpirit > 1_000_000 && this.negativeSpirit < 10_000;
+    }
+
+    public boolean isJudgmentActive()
+    {
+        return this.negativeSpirit > 1_000_000 && this.positiveSpirit < 10_000;
+    }
+
     private void revealRule(int rule)
     {
         if (this.player.getWorld().isClient())
@@ -219,6 +229,7 @@ public class SpiritTomeComponent implements AutoSyncedComponent, ServerTickingCo
             case NEGATIVE -> this.negativeSpirit += amount;
             case TOTAL -> throw new UnsupportedOperationException();
         }
+        tryUnlockAdvancedRules();
         if (this.getSpirit() < 0)
         {
             erase();
@@ -287,6 +298,7 @@ public class SpiritTomeComponent implements AutoSyncedComponent, ServerTickingCo
             tag.getLong(SHOP_SEED_KEY) :
             this.player.getRandom().nextLong();
         refreshShopItems();
+        tryUnlockAdvancedRules();
     }
 
     @Override
@@ -332,6 +344,24 @@ public class SpiritTomeComponent implements AutoSyncedComponent, ServerTickingCo
         this.player.damage(this.player.getDamageSources().outOfWorld(), Float.MAX_VALUE);
         // ensure death
         this.player.setHealth(0);
+    }
+
+    private void tryUnlockAdvancedRules()
+    {
+        if (this.player.getWorld().isClient())
+        {
+            return;
+        }
+        if (isDisarmActive() && !isRuleRevealed(6))
+        {
+            revealRule(6);
+            this.player.sendMessage(SDTexts.TEXT$SPIRIT_TOME$RULE$6$EFFECT.get().formatted(Formatting.DARK_AQUA));
+        }
+        if (isJudgmentActive() && !isRuleRevealed(7))
+        {
+            revealRule(7);
+            this.player.sendMessage(SDTexts.TEXT$SPIRIT_TOME$RULE$7$EFFECT.get().formatted(Formatting.DARK_AQUA));
+        }
     }
 
     public void refreshShop(boolean forced)

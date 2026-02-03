@@ -77,12 +77,13 @@ public class SoulMinionComponent implements AutoSyncedComponent, CopyableCompone
     }
 
     /**
-     * after the change in ownership, mob must be despawned and respawned to get controlled by owner player
+     * After the change in ownership, SoulControllerComponent#onMinionAdded must be called on the new owner's SoulControllerComponent. If mob is already spawned, call SoulControl#changeSoulOwner instead.
      *
      * @param owner owner player entity, or null to clear owner
      * @see SoulControllerComponent#onMinionAdded(MobEntity)
      * @see SoulControllerComponent#onMinionRemoved(MobEntity)
      * @see SoulControllerComponent#getActiveMinions()
+     * @see karashokleo.spell_dimension.content.misc.SoulControl#changeSoulOwner(MobEntity, PlayerEntity)
      */
     public void setOwner(@Nullable PlayerEntity owner)
     {

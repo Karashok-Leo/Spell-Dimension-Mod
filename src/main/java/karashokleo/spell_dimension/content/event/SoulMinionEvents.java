@@ -5,6 +5,7 @@ import io.github.fabricators_of_create.porting_lib.entity.events.LivingEntityEve
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDamageEvent;
 import karashokleo.l2hostility.api.event.AllowTraitEffectCallback;
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
+import karashokleo.leobrary.damage.api.modify.DamageModifier;
 import karashokleo.leobrary.damage.api.modify.DamagePhase;
 import karashokleo.leobrary.effect.api.event.LivingHealCallback;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
@@ -381,6 +382,56 @@ public class SoulMinionEvents
                 return;
             }
             SpiritTomeComponent.onSpiritTomeRule(player, killedMob, false);
+        });
+
+        // Spirit Tome Rule 6/7
+        DamagePhase.APPLY.addListener(1000, damageAccess ->
+        {
+            if (!(damageAccess.getEntity() instanceof MobEntity mob))
+            {
+                return;
+            }
+            if (!(damageAccess.getAttacker() instanceof ServerPlayerEntity player))
+            {
+                return;
+            }
+            float damage = damageAccess.getModifiedDamage();
+            if (damage <= 0)
+            {
+                return;
+            }
+            if (!TrinketCompat.hasItemInTrinket(player, AllItems.SPIRIT_TOME))
+            {
+                return;
+            }
+
+            float health = mob.getHealth();
+            float threshold = mob.getMaxHealth() * 0.1f;
+            float predictedHealth = health + mob.getAbsorptionAmount() - damage;
+            if (predictedHealth > threshold)
+            {
+                return;
+            }
+
+            SpiritTomeComponent component = SpiritTomeComponent.get(player);
+            if (component.isDisarmActive())
+            {
+                damageAccess.addModifier(DamageModifier.zero());
+                if (health > threshold)
+                {
+                    mob.setHealth(threshold);
+                }
+                SoulControl.changeSoulOwner(mob, player);
+                return;
+            }
+
+            if (component.isJudgmentActive())
+            {
+                damageAccess.addModifier(originalDamage -> Float.MAX_VALUE);
+                damageAccess.getSource().setBypassArmor();
+                damageAccess.getSource().setBypassMagic();
+                damageAccess.getSource().setBypassCooldown();
+            }
         });
     }
 }
