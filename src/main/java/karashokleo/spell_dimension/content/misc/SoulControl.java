@@ -190,6 +190,14 @@ public interface SoulControl
             transferMinionData(player, loadedMinion);
             world.spawnEntity(loadedMinion);
 
+            // handle death if needed
+            DamageSource source = loadedMinion.getDamageSources().generic();
+            if (loadedMinion.isDead() &&
+                ServerLivingEntityEvents.ALLOW_DEATH.invoker().allowDeath(loadedMinion, source, Float.MAX_VALUE))
+            {
+                loadedMinion.onDeath(source);
+            }
+
             FakePlayerEntity self = controllerComponent.getFakePlayerSelf();
             assert self != null;
             // update player shape & position
@@ -261,16 +269,7 @@ public interface SoulControl
         // update health proportionally
         float proportion = entity.getHealth() / entity.getMaxHealth();
         float health = target.getMaxHealth() * proportion;
-        float amount = Math.max(0, target.getHealth() - health);
         target.setHealth(health);
-
-        // handle death if needed
-        DamageSource source = target.getDamageSources().generic();
-        if (target.isDead() &&
-            ServerLivingEntityEvents.ALLOW_DEATH.invoker().allowDeath(target, source, amount))
-        {
-            target.onDeath(source);
-        }
     }
 
     private static void transferMinionData(LivingEntity source, LivingEntity target)
