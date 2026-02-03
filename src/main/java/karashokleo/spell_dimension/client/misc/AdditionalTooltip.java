@@ -168,7 +168,7 @@ public class AdditionalTooltip
             return;
         }
         Book book = ModonomiconItem.getBook(stack);
-        if (!book.getId().equals(MagicGuideProvider.BOOK_ID))
+        if (book == null || !book.getId().equals(MagicGuideProvider.BOOK_ID))
         {
             return;
         }
