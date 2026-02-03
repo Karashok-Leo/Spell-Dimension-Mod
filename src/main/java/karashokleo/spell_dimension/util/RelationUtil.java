@@ -92,6 +92,7 @@ public class RelationUtil
             owner = tameable.getOwner();
         }
 
+        // TODO: use OwnerGetter?
         if (owner == null && entity instanceof Ownable ownable)
         {
             owner = ownable.getOwner();

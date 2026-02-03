@@ -18,11 +18,11 @@ import karashokleo.spell_dimension.content.network.S2CBloodOverlay;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.*;
 import karashokleo.spell_dimension.util.DamageUtil;
+import karashokleo.spell_dimension.util.OwnerGetter;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.Ownable;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -204,8 +204,7 @@ public class SoulMinionEvents
 
             // summoned mobs (e.g. vex) should be soul minions too
             if (!minionComponent.hasOwner() &&
-                mob instanceof Ownable ownable &&
-                ownable.getOwner() instanceof MobEntity parent)
+                OwnerGetter.getOwner(mob) instanceof MobEntity parent)
             {
                 SoulMinionComponent parentMinionComponent = SoulControl.getSoulMinion(parent);
                 if (parentMinionComponent.hasOwner())
