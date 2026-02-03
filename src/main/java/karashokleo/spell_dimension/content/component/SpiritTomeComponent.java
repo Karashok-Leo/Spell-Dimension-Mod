@@ -135,11 +135,11 @@ public class SpiritTomeComponent implements AutoSyncedComponent, ServerTickingCo
     public float getWeight()
     {
         var hungerManager = this.player.getHungerManager();
-        float hungerNormalized = (hungerManager.getFoodLevel() - 10f) / 10f;
-        float saturationNormalized = (hungerManager.getSaturationLevel() - 5f) / 5f;
-        float adjustment = 1.5f * MathHelper.clamp(hungerNormalized, -1f, 1f)
+        float hungerNormalized = (hungerManager.getFoodLevel() - 20f) / 20f;
+        float saturationNormalized = (hungerManager.getSaturationLevel() - 5f) / 15f;
+        float adjustment = 3.0f * MathHelper.clamp(hungerNormalized, -1f, 0f)
             + 0.5f * MathHelper.clamp(saturationNormalized, -1f, 1f);
-        return MathHelper.clamp(this.baseWeight + adjustment, 35f, 120f);
+        return MathHelper.clamp(this.baseWeight + adjustment, 35f, 110f);
     }
 
     public int getSpirit()
@@ -317,8 +317,8 @@ public class SpiritTomeComponent implements AutoSyncedComponent, ServerTickingCo
     private float generateWeight()
     {
         double gaussian = player.getRandom().nextGaussian();
-        float weight = (float) (65 + gaussian * 10);
-        return MathHelper.clamp(weight, 45, 100);
+        float weight = (float) (60 + gaussian * 7.5);
+        return MathHelper.clamp(weight, 42, 90);
     }
 
     private void erase()
