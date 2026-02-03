@@ -56,7 +56,7 @@ public class SpiritTomeInfoPage implements SpiritTomePage
 
         // basic info
         SpiritTomeComponent component = SpiritTomeComponent.get(player);
-        renderBasicInfo(context, player, textRenderer, component);
+        renderBasicInfo(context, player, textRenderer, component, mouseX, mouseY);
 
         // attributes
         context.fill(
@@ -95,19 +95,60 @@ public class SpiritTomeInfoPage implements SpiritTomePage
         }
     }
 
-    private void renderBasicInfo(DrawContext context, ClientPlayerEntity player, TextRenderer textRenderer, SpiritTomeComponent component)
+    private void renderBasicInfo(DrawContext context, ClientPlayerEntity player, TextRenderer textRenderer, SpiritTomeComponent component, int mouseX, int mouseY)
     {
         int x1 = this.viewport.getX() + 30;
         int x2 = x1 + 80;
+        int infoRight = this.viewport.getX() + this.viewport.getWidth() / 2 - 10;
+        int infoWidth = infoRight - x1;
         int y = this.viewport.getY() + this.viewport.getHeight() / 2 + 15;
+
+        // name
         context.drawText(textRenderer, SDTexts.TEXT$SPIRIT_TOME$NAME.get(player.getName()), x1, y, 0xFFFFFF, true);
+
+        // gender
         context.drawText(textRenderer, SDTexts.TEXT$SPIRIT_TOME$GENDER.get(getGender(player)), x1, y += LINE_HEIGHT, 0xFFFFFF, true);
+
+        // age
         context.drawText(textRenderer, SDTexts.TEXT$SPIRIT_TOME$AGE.get("%.1f".formatted(getAge(player))), x2, y, 0xFFFFFF, true);
+
+        // height
         context.drawText(textRenderer, SDTexts.TEXT$SPIRIT_TOME$HEIGHT.get("%.2f".formatted(player.getHeight())), x1, y += LINE_HEIGHT, 0xFFFFFF, true);
+
+        // weight
         context.drawText(textRenderer, SDTexts.TEXT$SPIRIT_TOME$WEIGHT.get("%.1f".formatted(component.getWeight())), x2, y, 0xFFFFFF, true);
-        context.drawText(textRenderer, SDTexts.TEXT$SPIRIT_TOME$HEALTH.get("%.1f".formatted(player.getHealth())), x1, y += LINE_HEIGHT, 0xFFFFFF, true);
+
+        // health / max health
+        Text healthText = SDTexts.TEXT$SPIRIT_TOME$HEALTH.get("%.1f / %.1f".formatted(player.getHealth(), player.getMaxHealth()));
+        if (textRenderer.getWidth(healthText) > infoWidth)
+        {
+            healthText = SDTexts.TEXT$SPIRIT_TOME$HEALTH.get("%s / %s".formatted(formatScientific(player.getHealth()), formatScientific(player.getMaxHealth())));
+        }
+        context.drawText(textRenderer, healthText, x1, y += LINE_HEIGHT, 0xFFFFFF, true);
+
+        // spirit
         int spirit = component.getSpirit();
-        context.drawText(textRenderer, SDTexts.TEXT$SPIRIT_TOME$SPIRIT.get(spirit), x2, y, 0xFFFFFF, true);
+        Text spiritText = SDTexts.TEXT$SPIRIT_TOME$SPIRIT.get(spirit);
+        if (textRenderer.getWidth(spiritText) > infoWidth)
+        {
+            spiritText = SDTexts.TEXT$SPIRIT_TOME$SPIRIT.get(formatScientific(spirit));
+        }
+        int spiritY = y + LINE_HEIGHT;
+        context.drawText(textRenderer, spiritText, x1, spiritY, 0xFFFFFF, true);
+
+        // tooltip for spirit
+        if (mouseX >= x1 &&
+            mouseY >= spiritY &&
+            mouseX < x1 + textRenderer.getWidth(spiritText) &&
+            mouseY < spiritY + textRenderer.fontHeight)
+        {
+            List<Text> tooltip = List.of(
+                SDTexts.TEXT$SPIRIT_TOME$SPIRIT.get(spirit),
+                SDTexts.TEXT$SPIRIT_TOME$POSITIVE_SPIRIT.get(component.getSpirit(SpiritTomeComponent.SpiritType.POSITIVE)),
+                SDTexts.TEXT$SPIRIT_TOME$NEGATIVE_SPIRIT.get(component.getSpirit(SpiritTomeComponent.SpiritType.NEGATIVE))
+            );
+            context.drawTooltip(textRenderer, tooltip, mouseX, mouseY);
+        }
     }
 
     private static Text getGender(ClientPlayerEntity player)
@@ -126,6 +167,20 @@ public class SpiritTomeInfoPage implements SpiritTomePage
         // define 1 year as 30 days
         float yearsFromPlayTime = playTimeTicks / (24_000f * 30f);
         return 16 + Math.max(0, yearsFromPlayTime);
+    }
+
+    private static String formatScientificIfTooWide(TextRenderer textRenderer, int maxWidth, java.util.function.Function<String, Text> textFactory, String normalValue, String scientificValue)
+    {
+        if (textRenderer.getWidth(textFactory.apply(normalValue)) <= maxWidth)
+        {
+            return normalValue;
+        }
+        return scientificValue;
+    }
+
+    private static String formatScientific(double value)
+    {
+        return "%.2E".formatted(value);
     }
 
     @Override

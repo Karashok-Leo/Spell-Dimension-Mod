@@ -1,5 +1,6 @@
 package karashokleo.spell_dimension.client.screen;
 
+import karashokleo.spell_dimension.client.misc.SpiritTomeKeyHandler;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ToggleButtonWidget;
@@ -283,15 +284,17 @@ public class SpiritTomeScreen extends Screen
         if (super.keyPressed(keyCode, scanCode, modifiers))
         {
             return true;
-        } else if (this.client != null &&
-            this.client.options.inventoryKey.matchesKey(keyCode, scanCode))
-        {
-            this.close();
-            return true;
-        } else
-        {
-            return false;
         }
+        if (this.client != null)
+        {
+            if (this.client.options.inventoryKey.matchesKey(keyCode, scanCode) ||
+                SpiritTomeKeyHandler.OPEN_TOME_KEY.matchesKey(keyCode, scanCode))
+            {
+                this.close();
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

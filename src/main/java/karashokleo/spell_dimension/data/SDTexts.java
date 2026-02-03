@@ -114,6 +114,8 @@ public enum SDTexts
     TEXT$SPIRIT_TOME$WEIGHT("Weight: %s kg", "体重：%s kg"),
     TEXT$SPIRIT_TOME$HEALTH("Health: %s", "生命值：%s"),
     TEXT$SPIRIT_TOME$SPIRIT("Spirit: %s", "通灵：%s"),
+    TEXT$SPIRIT_TOME$POSITIVE_SPIRIT("Positive Spirit: %s", "正通灵：%s"),
+    TEXT$SPIRIT_TOME$NEGATIVE_SPIRIT("Negative Spirit: %s", "负通灵：%s"),
     TEXT$SPIRIT_TOME$COST("Spirit Cost: %s", "消耗「通灵」：%s"),
     TEXT$SPIRIT_TOME$MALE("Male", "男"),
     TEXT$SPIRIT_TOME$FEMALE("Female", "女"),
@@ -329,7 +331,8 @@ public enum SDTexts
     TOOLTIP$MACRO_ELECTRON$1("- [Ball Lightning] will randomly select and destroy the target, without dropping any loot.", "- [球状闪电] 将随机选取并摧毁目标，但不会掉落战利品。"),
     TOOLTIP$MACRO_ELECTRON$2("- [Ball Lightning] will track the entity you are looking at.", "- [球状闪电] 将追踪你目视的实体。"),
     TOOLTIP$REBIRTH_SIGIL("- Your soul minions refuse to die.", "- 你的灵仆拒绝死亡。"),
-    TOOLTIP$SPIRIT_TOME("- Press [%s] to open the Spirit Tome.", "- 按[%s]打开通灵簿。"),
+    TOOLTIP$SPIRIT_TOME$0("- Equip and press [%s] to open the Spirit Tome.", "- 佩戴后按[%s]打开通灵簿。"),
+    TOOLTIP$SPIRIT_TOME$1("- Use with caution! Follow the \"Rules\"!", "- 慎重使用！遵守“规则”！"),
 
     /**
      * Breastplates

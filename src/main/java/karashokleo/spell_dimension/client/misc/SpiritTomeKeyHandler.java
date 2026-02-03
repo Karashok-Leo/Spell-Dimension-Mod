@@ -25,7 +25,7 @@ public class SpiritTomeKeyHandler
 
         ClientTickEvents.END_CLIENT_TICK.register(client ->
         {
-            if (!OPEN_TOME_KEY.isPressed())
+            if (!OPEN_TOME_KEY.wasPressed())
             {
                 return;
             }
