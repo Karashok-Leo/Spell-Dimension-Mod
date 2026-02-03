@@ -101,6 +101,10 @@ public abstract class AbstractSoulContainerItem extends Item
         {
             return true;
         }
+        if (mob.isDead())
+        {
+            return true;
+        }
         // not owned
         return !SoulControl.isSoulMinion(user, mob);
     }

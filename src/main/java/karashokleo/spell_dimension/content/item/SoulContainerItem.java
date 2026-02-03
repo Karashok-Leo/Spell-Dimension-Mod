@@ -119,6 +119,10 @@ public class SoulContainerItem extends AbstractSoulContainerItem
         {
             return true;
         }
+        if (mob.isDead())
+        {
+            return true;
+        }
         SoulMinionComponent component = SoulControl.getSoulMinion(mob);
         if (component.hasOwner())
         {
