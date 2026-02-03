@@ -15,6 +15,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.MathHelper;
@@ -116,6 +118,7 @@ public class SpiritTomeComponent implements AutoSyncedComponent, ServerTickingCo
     {
         this.player = player;
         this.shopItems = List.of();
+        this.ruleRevealedMask = 1;
         if (!(this.player instanceof ServerPlayerEntity serverPlayer))
         {
             return;
@@ -123,9 +126,9 @@ public class SpiritTomeComponent implements AutoSyncedComponent, ServerTickingCo
         this.baseWeight = generateWeight();
         this.positiveSpirit = 0;
         this.negativeSpirit = 0;
-        this.ruleRevealedMask = 1;
         this.shopPurchasedMask = 0;
-        this.shopDay = serverPlayer.getServerWorld().getTimeOfDay() / 24000L;
+        MinecraftServer server = serverPlayer.getServer();
+        this.shopDay = server == null ? 0 : server.getOverworld().getTimeOfDay() / 24000L;
         this.shopSeed = this.player.getRandom().nextLong();
         refreshShopItems();
     }
@@ -328,13 +331,26 @@ public class SpiritTomeComponent implements AutoSyncedComponent, ServerTickingCo
     public void readFromNbt(@NotNull NbtCompound tag)
     {
         // generate weight if not present
-        this.baseWeight = tag.getFloat(BASE_WEIGHT_KEY);
+        if (tag.contains(BASE_WEIGHT_KEY, NbtElement.FLOAT_TYPE))
+        {
+            this.baseWeight = tag.getFloat(BASE_WEIGHT_KEY);
+        }
         this.positiveSpirit = tag.getInt(POSITIVE_SPIRIT_KEY);
         this.negativeSpirit = tag.getInt(NEGATIVE_SPIRIT_KEY);
-        this.ruleRevealedMask = tag.getInt(RULE_REVEALED_KEY);
-        this.shopDay = tag.getLong(SHOP_DAY_KEY);
+        if (tag.contains(RULE_REVEALED_KEY, NbtElement.INT_TYPE))
+        {
+            this.ruleRevealedMask = tag.getInt(RULE_REVEALED_KEY);
+        }
+        this.ruleRevealedMask |= 1;
+        if (tag.contains(SHOP_DAY_KEY, NbtElement.LONG_TYPE))
+        {
+            this.shopDay = tag.getLong(SHOP_DAY_KEY);
+        }
         this.shopPurchasedMask = tag.getInt(SHOP_PURCHASED_KEY);
-        this.shopSeed = tag.getLong(SHOP_SEED_KEY);
+        if (tag.contains(SHOP_SEED_KEY, NbtElement.LONG_TYPE))
+        {
+            this.shopSeed = tag.getLong(SHOP_SEED_KEY);
+        }
         refreshShopItems();
         tryUnlockAdvancedRules();
 
@@ -422,7 +438,12 @@ public class SpiritTomeComponent implements AutoSyncedComponent, ServerTickingCo
         {
             throw new UnsupportedOperationException();
         }
-        long day = serverPlayer.getServerWorld().getTimeOfDay() / 24000L;
+        MinecraftServer server = serverPlayer.getServer();
+        if (server == null)
+        {
+            return;
+        }
+        long day = server.getOverworld().getTimeOfDay() / 24000L;
         if (!forced && day == this.shopDay)
         {
             return;
