@@ -340,7 +340,8 @@ public class AllTags
                 new Identifier("spellbladenext:debug"),
                 new Identifier("dungeonz:dungeon_compass"),
                 new Identifier("sophisticatedbackpacks:infinity_upgrade"),
-                new Identifier("sophisticatedbackpacks:survival_infinity_upgrade")
+                new Identifier("sophisticatedbackpacks:survival_infinity_upgrade"),
+                new Identifier("sophisticatedstorage:debug_tool")
             );
 
         SpellDimension.BLOCK_TAGS.getOrCreateContainer(LOCATE_TARGET)

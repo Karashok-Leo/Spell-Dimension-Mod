@@ -400,7 +400,7 @@ public class SpiritTomeComponent implements AutoSyncedComponent, ServerTickingCo
         return switch (index)
         {
             case LOTTERY_FLAG -> 200;
-            case REFRESH_FLAG -> 100;
+            case REFRESH_FLAG -> 500;
             // impossible case
             default -> 300;
         };

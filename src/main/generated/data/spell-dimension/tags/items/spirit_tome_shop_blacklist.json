@@ -42,6 +42,10 @@
     {
       "id": "sophisticatedbackpacks:survival_infinity_upgrade",
       "required": false
+    },
+    {
+      "id": "sophisticatedstorage:debug_tool",
+      "required": false
     }
   ]
 }
