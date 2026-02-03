@@ -3,6 +3,7 @@ package karashokleo.spell_dimension.content.component;
 import dev.onyxstudios.cca.api.v3.component.CopyableComponent;
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import karashokleo.spell_dimension.content.object.SoulMinionMode;
+import karashokleo.spell_dimension.init.AllComponents;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -103,6 +104,11 @@ public class SoulMinionComponent implements AutoSyncedComponent, CopyableCompone
             }
         }
         mob.setGlowing(hasOwner());
+        if (mob.getWorld().isClient())
+        {
+            return;
+        }
+        AllComponents.SOUL_MINION.sync(mob);
     }
 
     @Override

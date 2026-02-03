@@ -165,12 +165,12 @@ public class SpiritTomeComponent implements AutoSyncedComponent, ServerTickingCo
 
     public boolean isDisarmActive()
     {
-        return this.positiveSpirit > 1_000_000 && this.negativeSpirit < 10_000;
+        return this.positiveSpirit >= 1_000_000 && this.negativeSpirit <= 10_000;
     }
 
     public boolean isJudgmentActive()
     {
-        return this.negativeSpirit > 1_000_000 && this.positiveSpirit < 10_000;
+        return this.negativeSpirit >= 1_000_000 && this.positiveSpirit <= 10_000;
     }
 
     private void revealRule(int rule)
