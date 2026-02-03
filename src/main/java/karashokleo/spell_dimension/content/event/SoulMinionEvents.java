@@ -22,6 +22,7 @@ import net.fabricmc.fabric.api.entity.event.v1.ServerEntityCombatEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.Ownable;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -200,6 +201,19 @@ public class SoulMinionEvents
             }
 
             SoulMinionComponent minionComponent = SoulControl.getSoulMinion(mob);
+
+            // summoned mobs (e.g. vex) should be soul minions too
+            if (!minionComponent.hasOwner() &&
+                mob instanceof Ownable ownable &&
+                ownable.getOwner() instanceof MobEntity parent)
+            {
+                SoulMinionComponent parentMinionComponent = SoulControl.getSoulMinion(parent);
+                if (parentMinionComponent.hasOwner())
+                {
+                    minionComponent.copyFrom(parentMinionComponent);
+                }
+            }
+
             PlayerEntity owner = minionComponent.getOwner();
             if (owner == null)
             {
