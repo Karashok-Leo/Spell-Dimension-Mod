@@ -51,7 +51,7 @@ public class AtomicBreastplateItem extends SingleEpicTrinketItem implements Dama
         // Blacklist
         if (event.getEntity()
             .getType()
-            .isIn(AllTags.ESSENCE_LOOT_ENTITY_BLACKLIST))
+            .isIn(AllTags.INVALID_MOBS))
         {
             return;
         }

@@ -86,7 +86,7 @@ public class AllLoots
                 }
 
                 // entity blacklist check
-                if (living.getType().isIn(AllTags.ESSENCE_LOOT_ENTITY_BLACKLIST))
+                if (living.getType().isIn(AllTags.INVALID_MOBS))
                 {
                     continue;
                 }

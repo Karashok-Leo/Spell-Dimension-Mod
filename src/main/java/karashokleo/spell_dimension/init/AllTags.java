@@ -156,7 +156,7 @@ public class AllTags
     public static final TagKey<EntityType<?>> SW_MONSTER = TagUtil.entityTypeTag("sw_monster");
     public static final TagKey<EntityType<?>> FLYING = TagUtil.entityTypeTag(Walkers.id("flying"));
     public static final TagKey<EntityType<?>> NO_CLIPS = TagUtil.entityTypeTag(Walkers.id("fall_through_blocks"));
-    public static final TagKey<EntityType<?>> ESSENCE_LOOT_ENTITY_BLACKLIST = TagUtil.entityTypeTag("essence_loot_blacklist");
+    public static final TagKey<EntityType<?>> INVALID_MOBS = TagUtil.entityTypeTag("invalid_mobs");
 
     public static final TagKey<Enchantment> LOOTABLE = TagUtil.enchantmentTag("lootable");
     public static final TagKey<Enchantment> TRADABLE = TagUtil.enchantmentTag("tradable");
@@ -325,7 +325,6 @@ public class AllTags
                 Items.CHAIN_COMMAND_BLOCK,
                 Items.COMMAND_BLOCK_MINECART,
                 AllItems.DEBUG_STAFF,
-                AllItems.CREATIVE_SOUL_CONTAINER,
                 AllItems.CREATIVE_SOUL_CONTAINER,
 //                MiscItems.AI_CONFIG_WAND,
 //                MiscItems.EQUIPMENT_WAND,
@@ -528,7 +527,7 @@ public class AllTags
             noDispellContainer.add(enchantment);
         }
 
-        SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(ESSENCE_LOOT_ENTITY_BLACKLIST)
+        SpellDimension.ENTITY_TYPE_TAGS.getOrCreateContainer(INVALID_MOBS)
             .add(
                 Dummmmmmy.TARGET_DUMMY.get(),
                 EntityType.ARMOR_STAND

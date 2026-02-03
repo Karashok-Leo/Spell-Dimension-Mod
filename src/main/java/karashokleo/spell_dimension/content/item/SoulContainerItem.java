@@ -5,6 +5,7 @@ import karashokleo.l2hostility.content.logic.DifficultyLevel;
 import karashokleo.spell_dimension.content.component.SoulMinionComponent;
 import karashokleo.spell_dimension.content.misc.SoulControl;
 import karashokleo.spell_dimension.data.SDTexts;
+import karashokleo.spell_dimension.init.AllTags;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.mob.MobEntity;
@@ -120,6 +121,10 @@ public class SoulContainerItem extends AbstractSoulContainerItem
             return true;
         }
         if (mob.isDead())
+        {
+            return true;
+        }
+        if (mob.getType().isIn(AllTags.INVALID_MOBS))
         {
             return true;
         }

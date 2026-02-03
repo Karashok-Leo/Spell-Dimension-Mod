@@ -5,6 +5,7 @@ import karashokleo.l2hostility.util.raytrace.RayTraceUtil;
 import karashokleo.spell_dimension.content.component.SoulMinionComponent;
 import karashokleo.spell_dimension.content.misc.SoulControl;
 import karashokleo.spell_dimension.data.SDTexts;
+import karashokleo.spell_dimension.init.AllTags;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
@@ -102,6 +103,10 @@ public abstract class AbstractSoulContainerItem extends Item
             return true;
         }
         if (mob.isDead())
+        {
+            return true;
+        }
+        if (mob.getType().isIn(AllTags.INVALID_MOBS))
         {
             return true;
         }
