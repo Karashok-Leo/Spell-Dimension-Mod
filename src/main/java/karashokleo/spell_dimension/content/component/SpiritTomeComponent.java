@@ -15,7 +15,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.MathHelper;
@@ -106,11 +105,29 @@ public class SpiritTomeComponent implements AutoSyncedComponent, ServerTickingCo
     private long shopSeed;
     private List<Item> shopItems;
 
+    // statistics
+    public long positiveSpiritIncrease;
+    public long positiveSpiritDecrease;
+    public long negativeSpiritIncrease;
+    public long negativeSpiritDecrease;
+    public long spiritConsumed;
+
     public SpiritTomeComponent(PlayerEntity player)
     {
         this.player = player;
-        this.ruleRevealedMask = 1;
         this.shopItems = List.of();
+        if (!(this.player instanceof ServerPlayerEntity serverPlayer))
+        {
+            return;
+        }
+        this.baseWeight = generateWeight();
+        this.positiveSpirit = 0;
+        this.negativeSpirit = 0;
+        this.ruleRevealedMask = 1;
+        this.shopPurchasedMask = 0;
+        this.shopDay = serverPlayer.getServerWorld().getTimeOfDay() / 24000L;
+        this.shopSeed = this.player.getRandom().nextLong();
+        refreshShopItems();
     }
 
     @Override
@@ -230,6 +247,29 @@ public class SpiritTomeComponent implements AutoSyncedComponent, ServerTickingCo
             case NEGATIVE -> this.negativeSpirit = plusClamp(this.negativeSpirit, amount);
             case TOTAL -> throw new UnsupportedOperationException();
         }
+        switch (type)
+        {
+            case POSITIVE ->
+            {
+                if (amount > 0)
+                {
+                    this.positiveSpiritIncrease += amount;
+                } else
+                {
+                    this.positiveSpiritDecrease -= amount;
+                }
+            }
+            case NEGATIVE ->
+            {
+                if (amount > 0)
+                {
+                    this.negativeSpiritIncrease += amount;
+                } else
+                {
+                    this.negativeSpiritDecrease -= amount;
+                }
+            }
+        }
         tryUnlockAdvancedRules();
         if (this.getSpirit() < 0)
         {
@@ -278,6 +318,7 @@ public class SpiritTomeComponent implements AutoSyncedComponent, ServerTickingCo
             // impossible case
             return false;
         }
+        this.spiritConsumed += amount;
         revealRule(5);
         sync();
         return true;
@@ -286,20 +327,23 @@ public class SpiritTomeComponent implements AutoSyncedComponent, ServerTickingCo
     @Override
     public void readFromNbt(@NotNull NbtCompound tag)
     {
-        float weight = tag.getFloat(BASE_WEIGHT_KEY);
         // generate weight if not present
-        this.baseWeight = weight > 0 ? weight : generateWeight();
+        this.baseWeight = tag.getFloat(BASE_WEIGHT_KEY);
         this.positiveSpirit = tag.getInt(POSITIVE_SPIRIT_KEY);
         this.negativeSpirit = tag.getInt(NEGATIVE_SPIRIT_KEY);
         this.ruleRevealedMask = tag.getInt(RULE_REVEALED_KEY);
-        this.ruleRevealedMask |= 1;
         this.shopDay = tag.getLong(SHOP_DAY_KEY);
         this.shopPurchasedMask = tag.getInt(SHOP_PURCHASED_KEY);
-        this.shopSeed = tag.contains(SHOP_SEED_KEY, NbtElement.LONG_TYPE) ?
-            tag.getLong(SHOP_SEED_KEY) :
-            this.player.getRandom().nextLong();
+        this.shopSeed = tag.getLong(SHOP_SEED_KEY);
         refreshShopItems();
         tryUnlockAdvancedRules();
+
+        // statistics
+        this.positiveSpiritIncrease = tag.getLong("PositiveSpiritIncrease");
+        this.positiveSpiritDecrease = tag.getLong("PositiveSpiritDecrease");
+        this.negativeSpiritIncrease = tag.getLong("NegativeSpiritIncrease");
+        this.negativeSpiritDecrease = tag.getLong("NegativeSpiritDecrease");
+        this.spiritConsumed = tag.getLong("SpiritConsumed");
     }
 
     @Override
@@ -312,6 +356,13 @@ public class SpiritTomeComponent implements AutoSyncedComponent, ServerTickingCo
         tag.putLong(SHOP_DAY_KEY, this.shopDay);
         tag.putInt(SHOP_PURCHASED_KEY, this.shopPurchasedMask);
         tag.putLong(SHOP_SEED_KEY, this.shopSeed);
+
+        // statistics
+        tag.putLong("PositiveSpiritIncrease", this.positiveSpiritIncrease);
+        tag.putLong("PositiveSpiritDecrease", this.positiveSpiritDecrease);
+        tag.putLong("NegativeSpiritIncrease", this.negativeSpiritIncrease);
+        tag.putLong("NegativeSpiritDecrease", this.negativeSpiritDecrease);
+        tag.putLong("SpiritConsumed", this.spiritConsumed);
     }
 
     private float generateWeight()

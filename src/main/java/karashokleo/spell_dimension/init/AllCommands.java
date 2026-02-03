@@ -91,6 +91,10 @@ public class AllCommands
             .literal("spirit")
             .requires(source -> source.hasPermissionLevel(2))
             .then(
+                CommandManager.literal("print_statistics")
+                    .executes(AllCommands::executePrintSpiritStatistics)
+            )
+            .then(
                 CommandManager.literal("positive")
                     .then(
                         CommandManager
@@ -213,5 +217,22 @@ public class AllCommands
         source.sendMessage(Text.literal("Negative: " + component.getSpirit(SpiritTomeComponent.SpiritType.NEGATIVE)));
         source.sendMessage(Text.literal("Total: " + component.getSpirit(SpiritTomeComponent.SpiritType.TOTAL)));
         return amount;
+    }
+
+    private static int executePrintSpiritStatistics(CommandContext<ServerCommandSource> context)
+    {
+        ServerCommandSource source = context.getSource();
+        ServerPlayerEntity player = source.getPlayer();
+        if (player == null)
+        {
+            return Command.SINGLE_SUCCESS;
+        }
+        SpiritTomeComponent component = SpiritTomeComponent.get(player);
+        source.sendMessage(Text.literal("Positive Spirit Increase: " + component.positiveSpiritIncrease));
+        source.sendMessage(Text.literal("Positive Spirit Decrease: " + component.positiveSpiritDecrease));
+        source.sendMessage(Text.literal("Negative Spirit Increase: " + component.negativeSpiritIncrease));
+        source.sendMessage(Text.literal("Negative Spirit Decrease: " + component.negativeSpiritDecrease));
+        source.sendMessage(Text.literal("Spirit Consumed: " + component.spiritConsumed));
+        return Command.SINGLE_SUCCESS;
     }
 }
