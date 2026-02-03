@@ -373,6 +373,12 @@ public class SpiritTomeShopPage implements SpiritTomePage
         }
 
         @Override
+        protected boolean supportsItemTooltip()
+        {
+            return false;
+        }
+
+        @Override
         protected Text getTitleText()
         {
             return TITLE;
@@ -400,6 +406,12 @@ public class SpiritTomeShopPage implements SpiritTomePage
         {
             super(x, y, width, height, SpiritTomeComponent.REFRESH_FLAG);
             this.icon = Items.CLOCK.getDefaultStack();
+        }
+
+        @Override
+        protected boolean supportsItemTooltip()
+        {
+            return false;
         }
 
         @Override
