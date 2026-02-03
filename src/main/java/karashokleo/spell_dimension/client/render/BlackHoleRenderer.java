@@ -17,6 +17,7 @@ public class BlackHoleRenderer extends EntityRenderer<BlackHoleEntity>
 {
     public static final Identifier CORE = SpellDimension.modLoc("textures/entity/black_hole.png");
     public static final RenderLayer RENDER_LAYER = createRenderLayer();
+    public static final RenderLayer BEAM_LAYER = createBeamLayer();
     private final Random random = Random.create();
 
     public BlackHoleRenderer(EntityRendererFactory.Context ctx)
@@ -30,17 +31,32 @@ public class BlackHoleRenderer extends EntityRenderer<BlackHoleEntity>
         return CORE;
     }
 
-    public static RenderLayer createRenderLayer()
+    private static RenderLayer createRenderLayer()
     {
         return RenderLayer.of(
             "black_hole",
             VertexFormats.POSITION_COLOR_TEXTURE_OVERLAY_LIGHT_NORMAL,
-            VertexFormat.DrawMode.TRIANGLE_FAN, 256, true, true,
+            VertexFormat.DrawMode.TRIANGLES, 256, true, true,
             RenderLayer.MultiPhaseParameters.builder()
                 .program(RenderPhase.ENTITY_TRANSLUCENT_PROGRAM)
                 .texture(new RenderPhase.Texture(CORE, false, false))
                 .transparency(RenderPhase.TRANSLUCENT_TRANSPARENCY)
                 .depthTest(RenderPhase.ALWAYS_DEPTH_TEST)
+                .build(false)
+        );
+    }
+
+    private static RenderLayer createBeamLayer()
+    {
+        return RenderLayer.of(
+            "black_hole_beam",
+            VertexFormats.POSITION_COLOR,
+            VertexFormat.DrawMode.TRIANGLES, 256, false, true,
+            RenderLayer.MultiPhaseParameters.builder()
+                .program(RenderPhase.LIGHTNING_PROGRAM)
+                .transparency(RenderPhase.LIGHTNING_TRANSPARENCY)
+                .writeMaskState(RenderPhase.COLOR_MASK)
+                .cull(RenderPhase.DISABLE_CULLING)
                 .build(false)
         );
     }
@@ -70,7 +86,7 @@ public class BlackHoleRenderer extends EntityRenderer<BlackHoleEntity>
         matrices.pop();
 
         random.setSeed(entity.getId() * 6666L + entity.getId() * entity.getId() * 77777L);
-        VertexConsumer beamBuffer = vertexConsumers.getBuffer(RenderLayer.getLightning());
+        VertexConsumer beamBuffer = vertexConsumers.getBuffer(BEAM_LAYER);
 
         matrices.push();
         {
@@ -98,21 +114,32 @@ public class BlackHoleRenderer extends EntityRenderer<BlackHoleEntity>
         Matrix4f positionMatrix = peek.getPositionMatrix();
         Matrix3f normalMatrix = peek.getNormalMatrix();
 
-        centerBuffer.vertex(positionMatrix, 0, 0, 0)
-            .color(255, 255, 255, alpha)
-            .texture(0.5f, 0.5f)
-            .overlay(OverlayTexture.DEFAULT_UV)
-            .light(LightmapTextureManager.MAX_LIGHT_COORDINATE)
-            .normal(normalMatrix, 0, 1, 0)
-            .next();
-        for (int i = 0; i <= segments; i++)
+        for (int i = 0; i < segments; i++)
         {
-            float theta = 2.0f * MathHelper.PI * i / segments;
-            float cos = MathHelper.cos(theta);
-            float sin = MathHelper.sin(theta);
-            centerBuffer.vertex(positionMatrix, 0, radius * cos, radius * sin)
+            float theta0 = 2.0f * MathHelper.PI * i / segments;
+            float theta1 = 2.0f * MathHelper.PI * (i + 1) / segments;
+            float cos0 = MathHelper.cos(theta0);
+            float sin0 = MathHelper.sin(theta0);
+            float cos1 = MathHelper.cos(theta1);
+            float sin1 = MathHelper.sin(theta1);
+
+            centerBuffer.vertex(positionMatrix, 0, 0, 0)
                 .color(255, 255, 255, alpha)
-                .texture(0.5f + 0.5f * cos, 0.5f + 0.5f * sin)
+                .texture(0.5f, 0.5f)
+                .overlay(OverlayTexture.DEFAULT_UV)
+                .light(LightmapTextureManager.MAX_LIGHT_COORDINATE)
+                .normal(normalMatrix, 0, 1, 0)
+                .next();
+            centerBuffer.vertex(positionMatrix, 0, radius * cos0, radius * sin0)
+                .color(255, 255, 255, alpha)
+                .texture(0.5f + 0.5f * cos0, 0.5f + 0.5f * sin0)
+                .overlay(OverlayTexture.DEFAULT_UV)
+                .light(LightmapTextureManager.MAX_LIGHT_COORDINATE)
+                .normal(normalMatrix, 0, 1, 0)
+                .next();
+            centerBuffer.vertex(positionMatrix, 0, radius * cos1, radius * sin1)
+                .color(255, 255, 255, alpha)
+                .texture(0.5f + 0.5f * cos1, 0.5f + 0.5f * sin1)
                 .overlay(OverlayTexture.DEFAULT_UV)
                 .light(LightmapTextureManager.MAX_LIGHT_COORDINATE)
                 .normal(normalMatrix, 0, 1, 0)
