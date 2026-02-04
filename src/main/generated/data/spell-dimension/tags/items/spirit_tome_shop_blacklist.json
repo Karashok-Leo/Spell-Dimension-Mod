@@ -16,6 +16,14 @@
     "spell-dimension:creative_soul_container",
     "l2hostility:space_shard",
     {
+      "id": "patchouli:guide_book",
+      "required": false
+    },
+    {
+      "id": "modonomicon:modonomicon",
+      "required": false
+    },
+    {
       "id": "moonlight:placeable_item",
       "required": false
     },

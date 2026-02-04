@@ -334,6 +334,8 @@ public class AllTags
                 ComplementItems.SPACE_SHARD
             )
             .addOptional(
+                new Identifier("patchouli:guide_book"),
+                new Identifier("modonomicon:modonomicon"),
                 new Identifier("moonlight:placeable_item"),
                 new Identifier("soulsweapons:test_item"),
                 new Identifier("fwaystones:waystone_debugger"),

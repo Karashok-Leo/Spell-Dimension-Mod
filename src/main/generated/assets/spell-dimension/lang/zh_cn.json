@@ -777,6 +777,7 @@
   "text.spell-dimension.spirit_tome.height": "身高：%s m",
   "text.spell-dimension.spirit_tome.insufficient": "「通灵」不足",
   "text.spell-dimension.spirit_tome.male": "男",
+  "text.spell-dimension.spirit_tome.maxed": "已达上限",
   "text.spell-dimension.spirit_tome.name": "姓名：%s",
   "text.spell-dimension.spirit_tome.negative_spirit": "负通灵：%s",
   "text.spell-dimension.spirit_tome.positive_spirit": "正通灵：%s",

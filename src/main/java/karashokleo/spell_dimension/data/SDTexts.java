@@ -122,6 +122,7 @@ public enum SDTexts
     TEXT$SPIRIT_TOME$UNKNOWN("Unknown", "???"),
     TEXT$SPIRIT_TOME$INSUFFICIENT("Insufficient Spirit", "「通灵」不足"),
     TEXT$SPIRIT_TOME$REJECT("Spirit Tome is rejecting you", "通灵簿正在排斥你"),
+    TEXT$SPIRIT_TOME$MAXED("Maxed", "已达上限"),
     // shop page
     TEXT$SPIRIT_TOME$SHOP$TITLE("Spirit Shop", "通灵商店"),
     TEXT$SPIRIT_TOME$SHOP$SUBTITLE("Refreshes daily", "每日刷新"),

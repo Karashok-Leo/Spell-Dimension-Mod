@@ -288,8 +288,13 @@ public class SpiritTomeInfoPage implements SpiritTomePage
         private void update(PlayerEntity player, int spirit)
         {
             SpiritUpgradeConfig.SpiritUpgrade upgrade = SpiritUpgradeConfig.get(attribute);
-            int cost = upgrade == null ? Integer.MAX_VALUE : upgrade.getCost(player);
-            upgradeButton.setActive(upgrade != null && spirit >= cost);
+            if (upgrade == null || !upgrade.canUpgrade(player))
+            {
+                upgradeButton.setActive(false);
+                return;
+            }
+            int cost = upgrade.getCost(player);
+            upgradeButton.setActive(spirit >= cost);
         }
 
         private boolean mouseClicked(double mouseX, double mouseY)
@@ -374,6 +379,10 @@ public class SpiritTomeInfoPage implements SpiritTomePage
                 if (upgrade == null)
                 {
                     return List.of();
+                }
+                if (!upgrade.canUpgrade(player))
+                {
+                    return List.of(SDTexts.TEXT$SPIRIT_TOME$MAXED.get().formatted(Formatting.RED));
                 }
                 Text cost = SDTexts.TEXT$SPIRIT_TOME$COST.get(upgrade.getCost(player));
                 if (active)

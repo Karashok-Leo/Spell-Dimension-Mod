@@ -779,6 +779,7 @@
   "text.spell-dimension.spirit_tome.height": "Height: %s m",
   "text.spell-dimension.spirit_tome.insufficient": "Insufficient Spirit",
   "text.spell-dimension.spirit_tome.male": "Male",
+  "text.spell-dimension.spirit_tome.maxed": "Maxed",
   "text.spell-dimension.spirit_tome.name": "Name: %s",
   "text.spell-dimension.spirit_tome.negative_spirit": "Negative Spirit: %s",
   "text.spell-dimension.spirit_tome.positive_spirit": "Positive Spirit: %s",

@@ -2,10 +2,7 @@ package karashokleo.spell_dimension.config;
 
 import karashokleo.spell_dimension.content.object.EnlighteningModifier;
 import karashokleo.spell_dimension.util.UuidUtil;
-import net.minecraft.entity.attribute.EntityAttribute;
-import net.minecraft.entity.attribute.EntityAttributeInstance;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.attribute.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
@@ -74,6 +71,23 @@ public class SpiritUpgradeConfig
         double costGrowthPerLevel
     )
     {
+        @SuppressWarnings("BooleanMethodIsAlwaysInverted")
+        public boolean canUpgrade(PlayerEntity player)
+        {
+            if (player == null)
+            {
+                return false;
+            }
+            EntityAttributeInstance instance = player.getAttributeInstance(attribute);
+            if (instance == null)
+            {
+                return false;
+            }
+            double maxValue = attribute instanceof ClampedEntityAttribute clamped ? clamped.getMaxValue() : Double.POSITIVE_INFINITY;
+            return !Double.isFinite(maxValue) ||
+                instance.getValue() + 1.0E-8 < maxValue;
+        }
+
         public int getCost(PlayerEntity player)
         {
             if (player == null)
