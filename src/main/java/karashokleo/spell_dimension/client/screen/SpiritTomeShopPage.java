@@ -161,7 +161,7 @@ public class SpiritTomeShopPage implements SpiritTomePage
 
         protected void update(SpiritTomeComponent component)
         {
-            this.cost = SpiritTomeComponent.getShopCost(this.operationFlag);
+            this.cost = component.getShopCost(this.operationFlag);
             this.affordable = component.getSpirit() >= cost;
             this.active = this.affordable;
         }
@@ -332,7 +332,7 @@ public class SpiritTomeShopPage implements SpiritTomePage
                 return;
             }
             this.icon = items.get(this.operationFlag).getDefaultStack();
-            this.cost = SpiritTomeComponent.getShopCost(this.icon);
+            this.cost = component.getShopCost(this.operationFlag);
             this.affordable = component.getSpirit() >= cost;
             this.purchased = component.isShopItemPurchased(this.operationFlag);
             this.active = affordable && !purchased;

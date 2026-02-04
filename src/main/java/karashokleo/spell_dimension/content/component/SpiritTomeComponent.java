@@ -467,20 +467,21 @@ public class SpiritTomeComponent implements AutoSyncedComponent, ServerTickingCo
         this.shopItems = RandomUtil.randomItemsFromRegistry(random, AllTags.SPIRIT_TOME_SHOP_BLACKLIST, SHOP_SLOT_COUNT);
     }
 
-    public static int getShopCost(int index)
+    public int getShopCost(int index)
     {
         return switch (index)
         {
             case LOTTERY_FLAG -> 200;
             case REFRESH_FLAG -> 500;
-            // impossible case
-            default -> 300;
+            default -> (index < 0 || index >= this.shopItems.size()) ?
+                Integer.MAX_VALUE :
+                getShopCost(this.shopItems.get(index));
         };
     }
 
-    public static int getShopCost(ItemStack stack)
+    private int getShopCost(Item item)
     {
-        return switch (stack.getRarity())
+        return switch (item.getRarity(item.getDefaultStack()))
         {
             case COMMON -> 300;
             case UNCOMMON -> 1000;

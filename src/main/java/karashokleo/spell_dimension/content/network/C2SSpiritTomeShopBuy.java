@@ -19,10 +19,10 @@ public record C2SSpiritTomeShopBuy(int index) implements SerialPacketC2S
     {
         SpiritTomeComponent component = SpiritTomeComponent.get(player);
         component.refreshShop(false);
+        int cost = component.getShopCost(index);
         // refresh
         if (index == SpiritTomeComponent.REFRESH_FLAG)
         {
-            int cost = SpiritTomeComponent.getShopCost(index);
             if (!component.tryConsumeSpirit(cost))
             {
                 return;
@@ -33,7 +33,6 @@ public record C2SSpiritTomeShopBuy(int index) implements SerialPacketC2S
         // lottery
         if (index == SpiritTomeComponent.LOTTERY_FLAG)
         {
-            int cost = SpiritTomeComponent.getShopCost(index);
             if (!component.tryConsumeSpirit(cost))
             {
                 return;
@@ -63,7 +62,6 @@ public record C2SSpiritTomeShopBuy(int index) implements SerialPacketC2S
         }
         ItemStack stack = new ItemStack(shopItems.get(index));
         // consume spirit
-        int cost = SpiritTomeComponent.getShopCost(stack);
         if (!component.tryConsumeSpirit(cost))
         {
             return;
