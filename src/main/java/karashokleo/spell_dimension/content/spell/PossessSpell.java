@@ -5,6 +5,7 @@ import karashokleo.spell_dimension.content.entity.FakePlayerEntity;
 import karashokleo.spell_dimension.content.misc.SoulControl;
 import karashokleo.spell_dimension.init.AllItems;
 import karashokleo.spell_dimension.util.ImpactUtil;
+import karashokleo.spell_dimension.util.RelationUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
@@ -46,7 +47,8 @@ public class PossessSpell
             {
                 SoulControl.setControllingMinion(player, null);
             }
-        } else if (target instanceof PlayerEntity)
+        } else if (target instanceof PlayerEntity &&
+            RelationUtil.isPartner(caster, target))
         {
             ItemStack offHandStack = caster.getOffHandStack();
             if (offHandStack.isOf(AllItems.SPELL_PRISM))

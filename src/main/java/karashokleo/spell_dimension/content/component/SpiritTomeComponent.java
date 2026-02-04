@@ -29,6 +29,9 @@ public class SpiritTomeComponent implements AutoSyncedComponent, ServerTickingCo
 {
     public static final int LOTTERY_FLAG = -1;
     public static final int REFRESH_FLAG = -2;
+    private static final int LOTTERY_BASE_COST = 200;
+    private static final int REFRESH_BASE_COST = 500;
+    private static final int SHOP_COST_STEP = 300;
 
     public enum SpiritType
     {
@@ -95,6 +98,8 @@ public class SpiritTomeComponent implements AutoSyncedComponent, ServerTickingCo
     private static final String SHOP_PURCHASED_KEY = "ShopPurchased";
     private static final String SHOP_DAY_KEY = "ShopDay";
     private static final String SHOP_SEED_KEY = "ShopSeed";
+    private static final String SHOP_REFRESH_COST_KEY = "ShopRefreshCost";
+    private static final String SHOP_LOTTERY_COST_KEY = "ShopLotteryCost";
     private static final int SHOP_SLOT_COUNT = 6;
 
     private final PlayerEntity player;
@@ -105,6 +110,8 @@ public class SpiritTomeComponent implements AutoSyncedComponent, ServerTickingCo
     private int shopPurchasedMask;
     private long shopDay;
     private long shopSeed;
+    private int shopRefreshCost;
+    private int shopLotteryCost;
     private List<Item> shopItems;
 
     // statistics
@@ -119,18 +126,15 @@ public class SpiritTomeComponent implements AutoSyncedComponent, ServerTickingCo
         this.player = player;
         this.shopItems = List.of();
         this.ruleRevealedMask = 1;
-        if (!(this.player instanceof ServerPlayerEntity serverPlayer))
+        if (this.player.getWorld().isClient())
         {
             return;
         }
         this.baseWeight = generateWeight();
         this.positiveSpirit = 0;
         this.negativeSpirit = 0;
-        this.shopPurchasedMask = 0;
-        MinecraftServer server = serverPlayer.getServer();
-        this.shopDay = server == null ? 0 : server.getOverworld().getTimeOfDay() / 24000L;
-        this.shopSeed = this.player.getRandom().nextLong();
-        refreshShopItems();
+        tryRefreshDay();
+        refresh(true);
     }
 
     @Override
@@ -140,7 +144,7 @@ public class SpiritTomeComponent implements AutoSyncedComponent, ServerTickingCo
         {
             return;
         }
-        refreshShop(false);
+        tickRefresh();
     }
 
     public void sync()
@@ -346,11 +350,13 @@ public class SpiritTomeComponent implements AutoSyncedComponent, ServerTickingCo
         {
             this.shopDay = tag.getLong(SHOP_DAY_KEY);
         }
-        this.shopPurchasedMask = tag.getInt(SHOP_PURCHASED_KEY);
         if (tag.contains(SHOP_SEED_KEY, NbtElement.LONG_TYPE))
         {
             this.shopSeed = tag.getLong(SHOP_SEED_KEY);
         }
+        this.shopPurchasedMask = tag.getInt(SHOP_PURCHASED_KEY);
+        this.shopRefreshCost = Math.max(REFRESH_BASE_COST, tag.getInt(SHOP_REFRESH_COST_KEY));
+        this.shopLotteryCost = Math.max(LOTTERY_BASE_COST, tag.getInt(SHOP_LOTTERY_COST_KEY));
         refreshShopItems();
         tryUnlockAdvancedRules();
 
@@ -370,8 +376,10 @@ public class SpiritTomeComponent implements AutoSyncedComponent, ServerTickingCo
         tag.putInt(RULE_REVEALED_KEY, this.ruleRevealedMask);
         tag.putFloat(BASE_WEIGHT_KEY, this.baseWeight);
         tag.putLong(SHOP_DAY_KEY, this.shopDay);
-        tag.putInt(SHOP_PURCHASED_KEY, this.shopPurchasedMask);
         tag.putLong(SHOP_SEED_KEY, this.shopSeed);
+        tag.putInt(SHOP_PURCHASED_KEY, this.shopPurchasedMask);
+        tag.putInt(SHOP_REFRESH_COST_KEY, this.shopRefreshCost);
+        tag.putInt(SHOP_LOTTERY_COST_KEY, this.shopLotteryCost);
 
         // statistics
         tag.putLong("PositiveSpiritIncrease", this.positiveSpiritIncrease);
@@ -432,27 +440,46 @@ public class SpiritTomeComponent implements AutoSyncedComponent, ServerTickingCo
         }
     }
 
-    public void refreshShop(boolean forced)
+    private boolean tryRefreshDay()
     {
         if (!(this.player instanceof ServerPlayerEntity serverPlayer))
         {
-            throw new UnsupportedOperationException();
+            return false;
         }
         MinecraftServer server = serverPlayer.getServer();
         if (server == null)
         {
-            return;
+            return false;
         }
         long day = server.getOverworld().getTimeOfDay() / 24000L;
-        if (!forced && day == this.shopDay)
+        if (day == this.shopDay)
+        {
+            return false;
+        }
+        this.shopDay = day;
+        return true;
+    }
+
+    public void tickRefresh()
+    {
+        if (!tryRefreshDay())
         {
             return;
         }
+        refresh(true);
+        sync();
+    }
+
+    public void refresh(boolean daily)
+    {
         this.shopPurchasedMask = 0;
-        this.shopDay = day;
         this.shopSeed = this.player.getRandom().nextLong();
         refreshShopItems();
-        sync();
+        if (daily)
+        {
+            this.shopRefreshCost = REFRESH_BASE_COST;
+            this.shopLotteryCost = LOTTERY_BASE_COST;
+        }
     }
 
     public List<Item> getShopItems()
@@ -471,8 +498,8 @@ public class SpiritTomeComponent implements AutoSyncedComponent, ServerTickingCo
     {
         return switch (index)
         {
-            case LOTTERY_FLAG -> 200;
-            case REFRESH_FLAG -> 500;
+            case LOTTERY_FLAG -> this.shopLotteryCost;
+            case REFRESH_FLAG -> this.shopRefreshCost;
             default -> (index < 0 || index >= this.shopItems.size()) ?
                 Integer.MAX_VALUE :
                 getShopCost(this.shopItems.get(index));
@@ -488,6 +515,19 @@ public class SpiritTomeComponent implements AutoSyncedComponent, ServerTickingCo
             case RARE -> 3000;
             case EPIC -> 9999;
         };
+    }
+
+    public void onShopping(int index)
+    {
+        if (this.player.getWorld().isClient())
+        {
+            throw new UnsupportedOperationException();
+        }
+        switch (index)
+        {
+            case LOTTERY_FLAG -> this.shopLotteryCost = plusClamp(this.shopLotteryCost, SHOP_COST_STEP);
+            case REFRESH_FLAG -> this.shopRefreshCost = plusClamp(this.shopRefreshCost, SHOP_COST_STEP);
+        }
     }
 
     private static int plusClamp(int a, int b)

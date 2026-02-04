@@ -18,7 +18,7 @@ public record C2SSpiritTomeShopBuy(int index) implements SerialPacketC2S
     public void handle(ServerPlayerEntity player)
     {
         SpiritTomeComponent component = SpiritTomeComponent.get(player);
-        component.refreshShop(false);
+        component.tickRefresh();
         int cost = component.getShopCost(index);
         // refresh
         if (index == SpiritTomeComponent.REFRESH_FLAG)
@@ -27,7 +27,9 @@ public record C2SSpiritTomeShopBuy(int index) implements SerialPacketC2S
             {
                 return;
             }
-            component.refreshShop(true);
+            component.onShopping(SpiritTomeComponent.REFRESH_FLAG);
+            component.refresh(false);
+            component.sync();
             return;
         }
         // lottery
@@ -38,11 +40,9 @@ public record C2SSpiritTomeShopBuy(int index) implements SerialPacketC2S
                 return;
             }
             ItemStack stack = RandomUtil.randomItemFromRegistry(player.getRandom(), AllTags.SPIRIT_TOME_SHOP_BLACKLIST).getDefaultStack();
-            if (stack.isEmpty())
-            {
-                return;
-            }
             player.getInventory().offerOrDrop(stack.copy());
+            component.onShopping(SpiritTomeComponent.LOTTERY_FLAG);
+            component.sync();
             return;
         }
         if (index < 0)
