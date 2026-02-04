@@ -19,7 +19,7 @@ public record C2SSpiritAttributeUpgrade(Identifier attributeId) implements Seria
             return;
         }
         SpiritTomeComponent component = SpiritTomeComponent.get(player);
-        if (!component.tryConsumeSpirit(upgrade.cost()))
+        if (!component.tryConsumeSpirit(upgrade.getCost(player)))
         {
             return;
         }

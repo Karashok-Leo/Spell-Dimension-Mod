@@ -70,7 +70,7 @@ public class SpiritTomeInfoPage implements SpiritTomePage
         int spirit = component.getSpirit();
         for (AttributeLine line : this.attributeLines)
         {
-            line.update(spirit);
+            line.update(player, spirit);
         }
 
         SpellPower.Result result = SpellPower.getSpellPower(SpellSchools.SOUL, player);
@@ -85,8 +85,8 @@ public class SpiritTomeInfoPage implements SpiritTomePage
             {
                 continue;
             }
-            List<Text> tooltip = line.upgradeButton.getTooltip();
-            if (tooltip == null || tooltip.isEmpty())
+            List<Text> tooltip = line.upgradeButton.getTooltip(player);
+            if (tooltip.isEmpty())
             {
                 continue;
             }
@@ -285,10 +285,11 @@ public class SpiritTomeInfoPage implements SpiritTomePage
             context.drawTextWithShadow(textRenderer, text, left, top, 0xFFFFFF);
         }
 
-        private void update(int spirit)
+        private void update(PlayerEntity player, int spirit)
         {
             SpiritUpgradeConfig.SpiritUpgrade upgrade = SpiritUpgradeConfig.get(attribute);
-            upgradeButton.setActive(upgrade != null && spirit >= upgrade.cost());
+            int cost = upgrade == null ? Integer.MAX_VALUE : upgrade.getCost(player);
+            upgradeButton.setActive(upgrade != null && spirit >= cost);
         }
 
         private boolean mouseClicked(double mouseX, double mouseY)
@@ -309,7 +310,7 @@ public class SpiritTomeInfoPage implements SpiritTomePage
             private final int y;
             private final int width;
             private final int height;
-            private final List<Text> tooltip;
+            private final Text bonus;
             private boolean active = true;
 
             private UpgradeButton(EntityAttribute attribute, int x, int y, int width, int height)
@@ -319,7 +320,7 @@ public class SpiritTomeInfoPage implements SpiritTomePage
                 this.y = y;
                 this.width = width;
                 this.height = height;
-                this.tooltip = buildUpgradeTooltip(attribute);
+                this.bonus = buildUpgradeBonus(attribute);
             }
 
             private void setActive(boolean active)
@@ -367,28 +368,36 @@ public class SpiritTomeInfoPage implements SpiritTomePage
                 context.drawText(textRenderer, "+", textX, textY, 0xFFFFFF, false);
             }
 
-            private List<Text> getTooltip()
-            {
-                if (active)
-                {
-                    return this.tooltip;
-                }
-                List<Text> tooltip = new ArrayList<>();
-                tooltip.add(SDTexts.TEXT$SPIRIT_TOME$INSUFFICIENT.get().formatted(Formatting.RED));
-                tooltip.addAll(this.tooltip);
-                return tooltip;
-            }
-
-            private static List<Text> buildUpgradeTooltip(EntityAttribute attribute)
+            private List<Text> getTooltip(PlayerEntity player)
             {
                 SpiritUpgradeConfig.SpiritUpgrade upgrade = SpiritUpgradeConfig.get(attribute);
                 if (upgrade == null)
                 {
                     return List.of();
                 }
-                Text cost = SDTexts.TEXT$SPIRIT_TOME$COST.get(upgrade.cost());
-                var bonus = AttributeUtil.getTooltip(attribute, upgrade.amount(), upgrade.operation());
-                return bonus == null ? List.of(cost) : List.of(cost, bonus);
+                Text cost = SDTexts.TEXT$SPIRIT_TOME$COST.get(upgrade.getCost(player));
+                if (active)
+                {
+                    return bonus == null ? List.of(cost) : List.of(cost, bonus);
+                }
+                List<Text> tooltip = new ArrayList<>();
+                tooltip.add(SDTexts.TEXT$SPIRIT_TOME$INSUFFICIENT.get().formatted(Formatting.RED));
+                tooltip.add(cost);
+                if (bonus != null)
+                {
+                    tooltip.add(bonus);
+                }
+                return tooltip;
+            }
+
+            private static Text buildUpgradeBonus(EntityAttribute attribute)
+            {
+                SpiritUpgradeConfig.SpiritUpgrade upgrade = SpiritUpgradeConfig.get(attribute);
+                if (upgrade == null)
+                {
+                    return null;
+                }
+                return AttributeUtil.getTooltip(attribute, upgrade.amount(), upgrade.operation());
             }
         }
     }
