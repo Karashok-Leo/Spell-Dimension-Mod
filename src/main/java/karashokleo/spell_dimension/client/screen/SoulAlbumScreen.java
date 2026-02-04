@@ -12,6 +12,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
+import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
@@ -66,7 +67,15 @@ public class SoulAlbumScreen extends Screen
         return list.stream()
             .map(e ->
             {
-                MobEntity mob = SoulControl.loadMinionFromData((NbtCompound) e, world);
+                NbtCompound data = ((NbtCompound) e).copy();
+                MobEntity mob = SoulControl.loadMinionFromData(data, world);
+                mob.hurtTime = 0;
+                mob.deathTime = 0;
+                mob.setSilent(true);
+                mob.setAttacking(false);
+                mob.setFireTicks(0);
+                mob.setPose(EntityPose.STANDING);
+                mob.refreshPositionAndAngles(0, 2048, 0, 0, 0);
                 mob.getCommandTags().add(MobTraitRenderer.FLAG);
                 return mob;
             })

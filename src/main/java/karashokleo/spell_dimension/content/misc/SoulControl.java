@@ -155,6 +155,7 @@ public interface SoulControl
                 MobEntity loadedMinion = loadMinionFromData(minionData, world);
                 updatePosRotHealth(loadedMinion, player);
                 transferMinionData(player, loadedMinion);
+                clearTransientState(loadedMinion);
                 world.spawnEntity(loadedMinion);
             } else
             {
@@ -171,6 +172,7 @@ public interface SoulControl
             PlayerShape.updateShapes(player, minion);
             updatePosRotHealth(player, minion);
             transferMinionData(minion, player);
+            clearTransientState(player);
 
             // save minion nbt data
             NbtCompound savedMinionData = saveMinionData(minion);
@@ -188,6 +190,7 @@ public interface SoulControl
 
             updatePosRotHealth(loadedMinion, player);
             transferMinionData(player, loadedMinion);
+            clearTransientState(loadedMinion);
             world.spawnEntity(loadedMinion);
 
             // handle death if needed
@@ -203,6 +206,7 @@ public interface SoulControl
             // update player shape & position
             PlayerShape.updateShapes(player, null);
             updatePosRotHealth(player, self);
+            clearTransientState(player);
 
             // discard fake player
             self.discard();
@@ -270,6 +274,14 @@ public interface SoulControl
         float proportion = entity.getHealth() / entity.getMaxHealth();
         float health = target.getMaxHealth() * proportion;
         target.setHealth(health);
+    }
+
+    private static void clearTransientState(LivingEntity entity)
+    {
+        entity.setFireTicks(0);
+        entity.setVelocity(Vec3d.ZERO);
+        entity.fallDistance = 0.0f;
+        entity.velocityDirty = true;
     }
 
     private static void transferMinionData(LivingEntity source, LivingEntity target)
