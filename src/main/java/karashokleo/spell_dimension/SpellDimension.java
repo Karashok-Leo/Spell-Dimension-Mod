@@ -40,15 +40,10 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageType;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.registry.RegistryBuilder;
 import net.minecraft.registry.RegistryKeys;
-import net.minecraft.text.ClickEvent;
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.Biome;
 import org.slf4j.Logger;
@@ -62,11 +57,6 @@ public class SpellDimension implements ModInitializer, DataGeneratorEntrypoint, 
     public static Identifier modLoc(String id)
     {
         return new Identifier(MOD_ID, id);
-    }
-
-    public static void sendErrorMsg(PlayerEntity player, String msg)
-    {
-        player.sendMessage(Text.literal(msg).formatted(Formatting.RED).setStyle(Style.EMPTY.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/Karashok-Leo/Spell-Dimension-Modpack/issues"))), false);
     }
 
     @Override

@@ -202,14 +202,21 @@ public interface SoulControl
             }
 
             FakePlayerEntity self = controllerComponent.getFakePlayerSelf();
-            assert self != null;
             // update player shape & position
             PlayerShape.updateShapes(player, null);
-            updatePosRotHealth(player, self);
+
+            // self may be null here because of accident
+            if (self != null)
+            {
+                updatePosRotHealth(player, self);
+            }
             clearTransientState(player);
 
             // discard fake player
-            self.discard();
+            if (self != null)
+            {
+                self.discard();
+            }
 
             // update controller component data
             controllerComponent.setControllingMinionData(null);

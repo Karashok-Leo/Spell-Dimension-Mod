@@ -22,6 +22,7 @@ public class SoulControllerComponent implements AutoSyncedComponent, ServerTicki
 {
     private static final String CONTROLLING_MINION_KEY = "ControllingMinionData";
     private static final String FAKE_PLAYER_SELF_KEY = "FakePlayerSelf";
+    private static final int MISSING_SELF_CHECKS_BEFORE_DEATH = 10;
 
     private final PlayerEntity player;
     private final HashSet<UUID> activeMinions;
@@ -35,6 +36,7 @@ public class SoulControllerComponent implements AutoSyncedComponent, ServerTicki
      * used in client-side only
      */
     private boolean controlling = false;
+    private int missingSelfChecks = 0;
 
     public SoulControllerComponent(PlayerEntity player)
     {
@@ -120,6 +122,7 @@ public class SoulControllerComponent implements AutoSyncedComponent, ServerTicki
 
         if (!isControlling())
         {
+            missingSelfChecks = 0;
             return;
         }
 
@@ -128,22 +131,25 @@ public class SoulControllerComponent implements AutoSyncedComponent, ServerTicki
         FakePlayerEntity self = getFakePlayerSelf();
         if (self == null)
         {
-            SpellDimension.sendErrorMsg(player, "Your body was accidentally lost while possessing a soul minion! This may be caused by a program error. Please report it to the GitHub issue tracker. Click this message to jump to the issue page.");
-            SpellDimension.sendErrorMsg(player, "你的本体意外丢失了！这可能是程序错误导致的，请将此问题报告至 GitHub Issue（点击此消息跳转）。或进入QQ群反馈给作者。");
-            SpellDimension.LOGGER.warn("FakePlayerEntity is null!!!");
-//            player.damage(player.getDamageSources().outOfWorld(), Float.MAX_VALUE);
-//            // ensure death
-//            player.setHealth(0);
+            missingSelfChecks++;
+            if (missingSelfChecks < MISSING_SELF_CHECKS_BEFORE_DEATH)
+            {
+                return;
+            }
+
+            missingSelfChecks = 0;
+            SpellDimension.LOGGER.warn("FakePlayerEntity is missing for too long, treating as dead.");
+            SoulControl.onSelfBodyDeath((ServerPlayerEntity) player);
             return;
         }
+
+        missingSelfChecks = 0;
 
         if (self.isAlive())
         {
             return;
         }
 
-        SpellDimension.sendErrorMsg(player, "Your body accidentally died while possessing a soul minion! This may be caused by a program error. Please report it to the GitHub issue tracker. Click this message to jump to the issue page.");
-        SpellDimension.sendErrorMsg(player, "你的本体意外死亡了！这可能是程序错误导致的，请将此问题报告至 GitHub Issue（点击此消息跳转）。或进入QQ群反馈给作者。");
         SpellDimension.LOGGER.warn("FakePlayerEntity is dead or removed!!!");
         SoulControl.onSelfBodyDeath((ServerPlayerEntity) player);
     }

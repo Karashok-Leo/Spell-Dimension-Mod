@@ -1,6 +1,7 @@
 package karashokleo.spell_dimension.content.item;
 
 import karashokleo.l2hostility.content.component.mob.MobDifficulty;
+import karashokleo.l2hostility.util.raytrace.IGlowingTarget;
 import karashokleo.l2hostility.util.raytrace.RayTraceUtil;
 import karashokleo.spell_dimension.content.component.SoulMinionComponent;
 import karashokleo.spell_dimension.content.misc.SoulControl;
@@ -35,7 +36,7 @@ import snownee.jade.util.CommonProxy;
 import java.util.List;
 import java.util.UUID;
 
-public abstract class AbstractSoulContainerItem extends Item
+public abstract class AbstractSoulContainerItem extends Item implements IGlowingTarget
 {
     public static final int RANGE = 12;
     public static final int COOLDOWN = 10;
@@ -404,5 +405,11 @@ public abstract class AbstractSoulContainerItem extends Item
             return;
         }
         player.sendMessage(SDTexts.TEXT$SOUL_CONTAINER_FULL.get().formatted(Formatting.RED), true);
+    }
+
+    @Override
+    public int getDistance(ItemStack stack)
+    {
+        return RANGE;
     }
 }
