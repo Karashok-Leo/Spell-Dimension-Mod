@@ -22,7 +22,7 @@ public class SoulControllerComponent implements AutoSyncedComponent, ServerTicki
 {
     private static final String CONTROLLING_MINION_KEY = "ControllingMinionData";
     private static final String FAKE_PLAYER_SELF_KEY = "FakePlayerSelf";
-    private static final int MISSING_SELF_CHECKS_BEFORE_DEATH = 10;
+    private static final int MISSING_SELF_CHECKS_BEFORE_DEATH = 20;
 
     private final PlayerEntity player;
     private final HashSet<UUID> activeMinions;

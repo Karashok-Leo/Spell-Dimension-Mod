@@ -110,6 +110,11 @@ public class FakePlayerEntity extends LivingEntity
     {
         super.tick();
 
+        if (this.getWorld().isClient())
+        {
+            return;
+        }
+
         if (this.age % 20 != 0 &&
             this.getChunkPos().toLong() == this.prevChunkPos)
         {
