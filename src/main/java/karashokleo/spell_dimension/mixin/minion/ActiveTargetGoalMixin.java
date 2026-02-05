@@ -80,8 +80,9 @@ public abstract class ActiveTargetGoalMixin<T extends LivingEntity> extends Trac
                         target ->
                         {
                             PlayerEntity player = target.getPlayer();
+                            // TODO: check relation using player uuid when player is offline?
                             return !RelationUtil.isAlly(this.mob, target) &&
-                                (player == null || this.entityPredicate == null || this.entityPredicate.test(target));
+                                (player == null || this.entityPredicate == null || this.entityPredicate.test(player));
                         });
             }
             // players shaped as targetClass will be targeted

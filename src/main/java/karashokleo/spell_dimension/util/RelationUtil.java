@@ -1,5 +1,6 @@
 package karashokleo.spell_dimension.util;
 
+import com.mojang.datafixers.util.Either;
 import karashokleo.spell_dimension.content.entity.FakePlayerEntity;
 import karashokleo.spell_dimension.content.misc.SoulControl;
 import net.minecraft.entity.Entity;
@@ -14,6 +15,8 @@ import xaero.pac.common.server.api.OpenPACServerAPI;
 import xaero.pac.common.server.parties.party.api.IPartyManagerAPI;
 import xaero.pac.common.server.parties.party.api.IServerPartyAPI;
 
+import java.util.UUID;
+
 public class RelationUtil
 {
     /**
@@ -21,11 +24,56 @@ public class RelationUtil
      */
     public static boolean isAlly(Entity entity1, Entity entity2)
     {
-        Entity superior1 = getUltimateSuperiorEntity(entity1);
-        Entity superior2 = getUltimateSuperiorEntity(entity2);
-        return superior1 == superior2 ||
-            superior1.isTeammate(superior2) ||
-            isPartner(superior1, superior2);
+        Either<Entity, UUID> superior1 = getUltimateSuperiorEntity(entity1);
+        Either<Entity, UUID> superior2 = getUltimateSuperiorEntity(entity2);
+
+        Entity superiorEntity1 = superior1.left().orElse(null);
+        Entity superiorEntity2 = superior2.left().orElse(null);
+
+        if (superiorEntity1 != null && superiorEntity2 != null)
+        {
+            return superiorEntity1 == superiorEntity2 ||
+                superiorEntity1.isTeammate(superiorEntity2) ||
+                isPartner(superiorEntity1, superiorEntity2);
+        }
+
+        UUID superiorUUID1 = superior1.map(Entity::getUuid, uuid -> uuid);
+        UUID superiorUUID2 = superior2.map(Entity::getUuid, uuid -> uuid);
+
+        if (superiorUUID1.equals(superiorUUID2))
+        {
+            return true;
+        }
+
+        MinecraftServer server = entity1.getServer();
+        return server != null && isPartner(server, superiorUUID1, superiorUUID2);
+    }
+
+    /**
+     * @return true if entity1 and entity2 are players in the same party or allied parties in OPAC
+     */
+    public static boolean isPartner(MinecraftServer server, UUID entity1, UUID entity2)
+    {
+        IPartyManagerAPI manager = OpenPACServerAPI.get(server).getPartyManager();
+        IServerPartyAPI party1 = manager.getPartyByMember(entity1);
+        if (party1 == null)
+        {
+            return false;
+        }
+        IServerPartyAPI party2 = manager.getPartyByMember(entity2);
+        if (party2 == null)
+        {
+            return false;
+        }
+        if (party1 == party2)
+        {
+            return true;
+        }
+        if (party1.getId().equals(party2.getId()))
+        {
+            return true;
+        }
+        return party1.isAlly(party2.getId());
     }
 
     /**
@@ -46,35 +94,27 @@ public class RelationUtil
         {
             return false;
         }
-        IPartyManagerAPI manager = OpenPACServerAPI.get(server).getPartyManager();
-        IServerPartyAPI party1 = manager.getPartyByMember(sp1.getUuid());
-        if (party1 == null)
-        {
-            return false;
-        }
-        IServerPartyAPI party2 = manager.getPartyByMember(sp2.getUuid());
-        if (party2 == null)
-        {
-            return false;
-        }
-        if (party1 == party2)
-        {
-            return true;
-        }
-        if (party1.getId().equals(party2.getId()))
-        {
-            return true;
-        }
-        return party1.isAlly(party2.getId());
+        return isPartner(server, sp1.getUuid(), sp2.getUuid());
     }
 
-    public static Entity getUltimateSuperiorEntity(Entity entity)
+    private static Either<Entity, UUID> getUltimateSuperiorEntity(Entity entity)
     {
-        Entity ans = entity;
-        while (ans != null)
+        Either<Entity, UUID> ans = Either.left(entity);
+        while (true)
         {
-            Entity superior = getSuperiorEntity(ans);
+            // TODO: prevent circular reference?
+            Entity cur = ans.left().orElse(null);
+            if (cur == null)
+            {
+                break;
+            }
+            var superior = getSuperiorEntity(cur);
             if (superior == null)
+            {
+                break;
+            }
+            // TODO: check using uuid?
+            if (cur == superior.left().orElse(null))
             {
                 break;
             }
@@ -84,36 +124,69 @@ public class RelationUtil
     }
 
     @Nullable
-    public static Entity getSuperiorEntity(Entity entity)
+    private static Either<Entity, UUID> getSuperiorEntity(Entity entity)
     {
-        Entity owner = null;
         if (entity instanceof Tameable tameable)
         {
-            owner = tameable.getOwner();
+            var owner = tameable.getOwner();
+            if (owner != null)
+            {
+                return Either.left(owner);
+            }
+            UUID ownerUUID = tameable.getOwnerUuid();
+            if (ownerUUID != null)
+            {
+                return Either.right(ownerUUID);
+            }
         }
 
         // TODO: use OwnerGetter?
-        if (owner == null && entity instanceof Ownable ownable)
+        if (entity instanceof Ownable ownable)
         {
-            owner = ownable.getOwner();
+            var owner = ownable.getOwner();
+            if (owner != null)
+            {
+                return Either.left(owner);
+            }
         }
 
-        if (owner == null && entity instanceof MobEntity mob)
+        if (entity instanceof MobEntity mob)
         {
             var minionComponent = SoulControl.getSoulMinion(mob);
-            owner = minionComponent.getOwner();
+            if (minionComponent.hasOwner())
+            {
+                var owner = minionComponent.getOwner();
+                if (owner != null)
+                {
+                    return Either.left(owner);
+                }
+                return Either.right(minionComponent.getOwnerUuid());
+            }
         }
 
-        if (owner == null && entity instanceof FakePlayerEntity fakePlayer)
+        if (entity instanceof FakePlayerEntity fakePlayer)
         {
-            owner = fakePlayer.getPlayer();
+            var owner = fakePlayer.getPlayer();
+            if (owner != null)
+            {
+                return Either.left(owner);
+            }
+            UUID ownerUUID = fakePlayer.getPlayerUUID();
+            if (ownerUUID != null)
+            {
+                return Either.right(ownerUUID);
+            }
         }
 
-        if (owner == null && entity instanceof EnderDragonPart part)
+        if (entity instanceof EnderDragonPart part)
         {
-            owner = part.owner;
+            var owner = part.owner;
+            if (owner != null)
+            {
+                return Either.left(owner);
+            }
         }
 
-        return owner;
+        return null;
     }
 }

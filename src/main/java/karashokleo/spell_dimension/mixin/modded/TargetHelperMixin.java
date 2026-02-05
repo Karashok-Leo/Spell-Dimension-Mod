@@ -20,6 +20,7 @@ public abstract class TargetHelperMixin
     )
     private static void inject_getRelation(LivingEntity attacker, Entity target, CallbackInfoReturnable<TargetHelper.Relation> cir)
     {
+        // TODO: check relation using player uuid when player is offline?
         if (RelationUtil.isAlly(attacker, target))
         {
             cir.setReturnValue(TargetHelper.Relation.FRIENDLY);
