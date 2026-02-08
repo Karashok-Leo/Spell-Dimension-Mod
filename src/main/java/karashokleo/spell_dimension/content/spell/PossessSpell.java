@@ -34,6 +34,11 @@ public class PossessSpell
 
         var target = ImpactUtil.castToLiving(targets.get(0));
 
+        if (target == null || !target.isAlive())
+        {
+            return;
+        }
+
         if (target instanceof MobEntity mob)
         {
             if (SoulControl.isSoulMinion(player, mob))
