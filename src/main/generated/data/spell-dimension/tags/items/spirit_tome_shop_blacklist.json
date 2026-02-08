@@ -12,6 +12,7 @@
     "minecraft:repeating_command_block",
     "minecraft:chain_command_block",
     "minecraft:command_block_minecart",
+    "spell-dimension:medal",
     "spell-dimension:debug_staff",
     "spell-dimension:creative_soul_container",
     "l2hostility:space_shard",
@@ -25,6 +26,10 @@
     },
     {
       "id": "moonlight:placeable_item",
+      "required": false
+    },
+    {
+      "id": "adventurez:shadow_chest",
       "required": false
     },
     {

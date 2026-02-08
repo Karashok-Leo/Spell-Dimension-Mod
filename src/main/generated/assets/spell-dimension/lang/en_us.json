@@ -825,7 +825,7 @@
   "tooltip.spell-dimension.atomic_to_flicker": "After rolling a total of %s times, can be upgraded to Flicker Breastplate",
   "tooltip.spell-dimension.atomic_to_oblivion": "After restoring with a total of %s health, can be upgraded to Oblivion Breastplate",
   "tooltip.spell-dimension.book_requirement": "Must have at least %s %s to equip",
-  "tooltip.spell-dimension.book_requirement.soul": "Must have a soul minion of at least level %s to equip.",
+  "tooltip.spell-dimension.book_requirement.soul": "Must have a soul minion of at least level %s in your soul container to equip.",
   "tooltip.spell-dimension.bottle_nightmare": "Enter [%s] mode after use, cannot be undone",
   "tooltip.spell-dimension.bottle_soul_binding": "After using it, you will no longer lose the item when you die",
   "tooltip.spell-dimension.bottle_soul_binding.warning": "By default, items other than trinkets dropped by a player upon death are retained in the Gravestone. However, for some unknown reason, it is still possible, albeit highly unlikely, for items in the gravestone to disappear. If you are completely intolerant of the possibility of losing everything you own, drink this potion.",
