@@ -18,6 +18,7 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import net.spell_engine.api.spell.Spell;
@@ -70,7 +71,7 @@ public abstract class SpellHelperMixin
             target = "Lnet/spell_engine/internals/SpellHelper$ImpactContext;<init>(FFLnet/minecraft/util/math/Vec3d;Lnet/spell_power/api/SpellPower$Result;Lnet/spell_engine/utils/TargetHelper$TargetingMode;)V"
         )
     )
-    private static void inject_performSpell(World world, PlayerEntity player, Identifier spellId, List<Entity> targets, SpellCast.Action action, float progress, CallbackInfo ci, @Local SpellInfo spellInfo)
+    private static void inject_performSpell(World world, PlayerEntity player, Identifier spellId, List<Entity> targets, SpellCast.Action action, float progress, CallbackInfo ci, @Local(name = "spellInfo") SpellInfo spellInfo)
     {
         SpellImpactEvents.PRE.invoker().invoke(world, player, targets, spellInfo);
     }
@@ -98,7 +99,7 @@ public abstract class SpellHelperMixin
         ),
         cancellable = true
     )
-    private static void inject_attemptCasting(PlayerEntity player, ItemStack itemStack, Identifier spellId, boolean checkAmmo, CallbackInfoReturnable<SpellCast.Attempt> cir, @Local Spell spell)
+    private static void inject_attemptCasting(PlayerEntity player, ItemStack itemStack, Identifier spellId, boolean checkAmmo, CallbackInfoReturnable<SpellCast.Attempt> cir, @Local(name = "spell") Spell spell)
     {
         if (player.getAbilities().creativeMode)
         {
@@ -120,7 +121,7 @@ public abstract class SpellHelperMixin
         {
             return;
         }
-        player.sendMessage(SDTexts.TEXT$SKILLED_SCHOOL.get(), true);
+        player.sendMessage(SDTexts.TEXT$SKILLED_SCHOOL.get().formatted(Formatting.RED), true);
         cir.setReturnValue(SpellCast.Attempt.none());
     }
 

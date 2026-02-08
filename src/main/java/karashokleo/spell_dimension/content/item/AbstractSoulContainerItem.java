@@ -7,6 +7,7 @@ import karashokleo.spell_dimension.content.component.SoulMinionComponent;
 import karashokleo.spell_dimension.content.misc.SoulControl;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.init.AllTags;
+import karashokleo.spell_dimension.util.SchoolUtil;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
@@ -30,6 +31,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
+import net.spell_power.api.SpellSchools;
 import org.jetbrains.annotations.Nullable;
 import snownee.jade.util.CommonProxy;
 
@@ -92,6 +94,14 @@ public abstract class AbstractSoulContainerItem extends Item implements IGlowing
         if (full)
         {
             notifyFull(user);
+            return true;
+        }
+        // school check
+        if (!user.getAbilities().creativeMode &&
+            !SchoolUtil.getLivingSchools(user).contains(SpellSchools.SOUL) &&
+            !SchoolUtil.getLivingSecondarySchools(user).contains(SpellSchools.SOUL))
+        {
+            notifyNonSoul(user);
             return true;
         }
         return false;
@@ -405,6 +415,15 @@ public abstract class AbstractSoulContainerItem extends Item implements IGlowing
             return;
         }
         player.sendMessage(SDTexts.TEXT$SOUL_CONTAINER_FULL.get().formatted(Formatting.RED), true);
+    }
+
+    protected static void notifyNonSoul(PlayerEntity player)
+    {
+        if (player.getWorld().isClient())
+        {
+            return;
+        }
+        player.sendMessage(SDTexts.TEXT$SKILLED_SCHOOL.get().formatted(Formatting.RED), true);
     }
 
     @Override

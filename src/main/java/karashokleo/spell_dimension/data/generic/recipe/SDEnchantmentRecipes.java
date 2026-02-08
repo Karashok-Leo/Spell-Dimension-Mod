@@ -623,6 +623,18 @@ public class SDEnchantmentRecipes
                 exporter,
                 SpellDimension.modLoc("enchantment/vanishing_curse")
             );
+
+            EIRecipeUtil.set(
+                builder -> builder
+                    .withPedestalItem(1, Items.NAME_TAG)
+                    .withPedestalItem(1, Items.COBWEB)
+                    .withPedestalItem(1, Items.NAUTILUS_SHELL)
+                    .withPedestalItem(1, Ingredient.fromTag(ItemTags.COMPASSES)),
+                Enchantments.BINDING_CURSE,
+                1,
+                exporter,
+                SpellDimension.modLoc("enchantment/binding_curse")
+            );
         }
     }
 }

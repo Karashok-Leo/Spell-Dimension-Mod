@@ -374,22 +374,6 @@ public class SoulAlbumItem extends AbstractSoulContainerItem
     }
 
     @Override
-    protected boolean cannotCapture(ItemStack stack, PlayerEntity user)
-    {
-        boolean blocked = super.cannotCapture(stack, user);
-        if (!blocked)
-        {
-            return false;
-        }
-        NbtCompound nbt = stack.getNbt();
-        if (nbt != null && isFull(nbt))
-        {
-            notifyFull(user);
-        }
-        return true;
-    }
-
-    @Override
     protected void tryCapture(ItemStack stack, PlayerEntity user, MobEntity mob)
     {
         int before = 0;
