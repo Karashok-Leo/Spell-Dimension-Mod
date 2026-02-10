@@ -10,9 +10,9 @@
     },
     {
       "type": "patchouli:spotlight",
-      "item": "spell-dimension:soul_container,spell-dimension:advanced_soul_container",
-      "title": "Soul Container",
-      "text": "$(br)Normal $(key)Soul Container$() that fail to convert $(key)Soul Minions$() will enter a $(bold)cooldown$(). $(br2)$(key)Advanced Soul Container$() has a higher success rate when converting $(key)Soul Minions$() and has almost no $(bold)cooldown$() upon failure.",
+      "item": "spell-dimension:soul_container,spell-dimension:advanced_soul_container,spell-dimension:soul_album",
+      "title": "Soul Storage",
+      "text": "$(br)Normal $(key)Soul Container$() that fail to convert $(key)Soul Minions$() will enter a $(bold)cooldown$(). $(br2)$(key)Advanced Soul Container$() has a higher success rate when converting $(key)Soul Minions$() and has almost no $(bold)cooldown$() upon failure.$(br2)$(key)Soul Album$() cannot convert $(key)Soul Minions$() but can store multiple $(key)Soul Minions$().",
       "link_recipe": true
     },
     {

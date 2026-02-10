@@ -334,6 +334,7 @@ public enum SDTexts
     TOOLTIP$REBIRTH_SIGIL("- Your soul minions refuse to die.", "- 你的灵仆拒绝死亡。"),
     TOOLTIP$SPIRIT_TOME$0("- Equip and press [%s] to open the Spirit Tome.", "- 佩戴后按[%s]打开通灵簿。"),
     TOOLTIP$SPIRIT_TOME$1("- Use with caution! Follow the \"Rules\"!", "- 慎重使用！遵守“规则”！"),
+    TOOLTIP$SPIRIT_TOME$2("- Once worn, it cannot be removed!", "- 一旦佩戴，无法取下！"),
 
     /**
      * Breastplates

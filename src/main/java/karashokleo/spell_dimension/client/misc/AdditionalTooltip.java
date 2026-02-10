@@ -2,12 +2,12 @@ package karashokleo.spell_dimension.client.misc;
 
 import com.klikli_dev.modonomicon.book.Book;
 import com.klikli_dev.modonomicon.item.ModonomiconItem;
-import karashokleo.l2hostility.client.L2HostilityClient;
 import karashokleo.l2hostility.content.item.TrinketItems;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.api.quest.Quest;
 import karashokleo.spell_dimension.api.quest.QuestUsage;
 import karashokleo.spell_dimension.content.component.GameStageComponent;
+import karashokleo.spell_dimension.content.component.SpiritTomeComponent;
 import karashokleo.spell_dimension.content.event.TrinketEvents;
 import karashokleo.spell_dimension.content.item.DynamicSpellBookItem;
 import karashokleo.spell_dimension.content.object.EnchantedModifier;
@@ -22,7 +22,6 @@ import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.event.Event;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
@@ -158,7 +157,16 @@ public class AdditionalTooltip
             return;
         }
         lines.add(SDTexts.TOOLTIP$SPIRIT_TOME$0.get(KeyBindingHelper.getBoundKeyOf(SpiritTomeKeyHandler.OPEN_TOME_KEY).getLocalizedText()).formatted(Formatting.DARK_AQUA));
-        lines.add(SDTexts.TOOLTIP$SPIRIT_TOME$1.get().formatted(Formatting.RED));
+        lines.add(SDTexts.TOOLTIP$SPIRIT_TOME$1.get().formatted(Formatting.YELLOW));
+        lines.add(SDTexts.TOOLTIP$SPIRIT_TOME$2.get().formatted(Formatting.RED));
+
+        var player = MinecraftClient.getInstance().player;
+        int spirit = SpiritTomeComponent.get(player).getSpirit();
+        if (spirit >= 0)
+        {
+            return;
+        }
+        lines.add(SDTexts.TEXT$SPIRIT_TOME$REJECT.get().formatted(Formatting.DARK_RED));
     }
 
     private static void appendModonomicon(ItemStack stack, TooltipContext context, List<Text> lines)
@@ -183,7 +191,7 @@ public class AdditionalTooltip
         {
             return;
         }
-        ClientPlayerEntity player = L2HostilityClient.getClientPlayer();
+        var player = MinecraftClient.getInstance().player;
         if (player == null)
         {
             return;
@@ -213,7 +221,7 @@ public class AdditionalTooltip
         {
             return;
         }
-        ClientPlayerEntity player = L2HostilityClient.getClientPlayer();
+        var player = MinecraftClient.getInstance().player;
         if (player == null)
         {
             return;

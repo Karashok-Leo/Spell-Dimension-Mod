@@ -442,7 +442,7 @@ public enum SpellTexts
         "Phantom Syndicate",
         "魅影辛迪加",
         "[Passive] Damage or healing effects received by soul minions are shared among all soul minions.",
-        "[被动] 灵仆受到的伤害或治愈系效果将被分摊到所有灵仆身上。"
+        "[被动] 灵仆受到的伤害或治愈效果将被分摊到所有灵仆身上。"
     ),
     SOUL_BEAM(
         "Soul Beam",
@@ -459,8 +459,8 @@ public enum SpellTexts
     SOUL_BURST(
         "Soul Burst",
         "魂爆",
-        "When cast on your soul minion, sacrifice and detonate it, dealing ranged soul damage based on the soul minion's health.",
-        "对灵仆施放时，献祭并引爆选定的灵仆，根据灵仆生命值造成范围灵魂伤害。"
+        "When cast on your soul minion, sacrifice and detonate it, dealing ranged soul damage based on the soul minion's health that bypasses magic protection.",
+        "对灵仆施放时，献祭并引爆选定的灵仆，根据灵仆生命值造成范围灵魂伤害，且该伤害穿透魔法保护。"
     ),
     SOUL_SACRIFICE(
         "Soul Sacrifice",

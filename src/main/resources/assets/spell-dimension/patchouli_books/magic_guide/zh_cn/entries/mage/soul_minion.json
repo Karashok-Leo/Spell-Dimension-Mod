@@ -10,15 +10,15 @@
     },
     {
       "type": "patchouli:spotlight",
-      "item": "spell-dimension:soul_container,spell-dimension:advanced_soul_container",
-      "title": "灵魂容器",
-      "text": "$(br)普通的$(key)灵魂容器$()尝试转化$(key)灵仆$()失败后会进入$(bold)冷却$()。$(br2)$(key)高级灵魂容器$()转化$(key)灵仆$()的成功率更高，且失败时几乎没有$(bold)冷却$()。",
+      "item": "spell-dimension:soul_container,spell-dimension:advanced_soul_container,spell-dimension:soul_album",
+      "title": "收纳灵魂",
+      "text": "$(br)普通的$(key)灵魂容器$()尝试转化$(key)灵仆$()失败后会进入$(bold)冷却$()。$(br2)$(key)高级灵魂容器$()转化$(key)灵仆$()的成功率更高，且失败时几乎没有$(bold)冷却$()。$(br2)$(key)灵魂相册$()不能转化$(key)灵仆$()，但可以收纳多个$(key)灵仆$()。",
       "link_recipe": true
     },
     {
       "type": "patchouli:text",
       "title": "附体",
-      "text": "$(br)对$(bold)灵仆$()施放$(key)附体$()，可将自身灵魂附体至$(bold)灵仆$()身上，$(bold)本体$()留在原地。附体后可以控制$(bold)灵仆$()行动，获得部分$(bold)灵仆$()的$(welcome/key)能力$()，但保留自身物品栏。$(br2)$(bold)灵仆$()死亡时，$(key)附体状态$()自动解除，灵魂回归$(bold)本体$()；$(bold)本体$()濒临死亡时，$(key)附体状态$()自动解除，灵魂回归$(bold)本体$()，$(bold)灵仆$()留在原地，同时$(bold)本体$()保留$(t:至少一颗心)$(bold)1%$()血量。",
+      "text": "$(br)对$(bold)灵仆$()施放$(key)附体$()，可将自身灵魂附体至$(bold)灵仆$()身上，$(bold)本体$()留在原地。附体后可以控制$(bold)灵仆$()行动，获得$(bold)灵仆$()的部分$(welcome/key)能力$()，但保留自身物品栏。$(br2)$(bold)灵仆$()死亡时，$(key)附体状态$()自动解除，灵魂回归$(bold)本体$()；$(bold)本体$()濒临死亡时，$(key)附体状态$()自动解除，灵魂回归$(bold)本体$()，$(bold)灵仆$()留在原地，同时$(bold)本体$()保留$(t:至少一颗心)$(bold)1%$()血量。",
       "anchor": "possess"
     },
     {

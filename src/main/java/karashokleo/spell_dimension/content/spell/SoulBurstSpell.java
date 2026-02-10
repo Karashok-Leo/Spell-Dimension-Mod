@@ -3,20 +3,22 @@ package karashokleo.spell_dimension.content.spell;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
 import karashokleo.spell_dimension.content.component.SoulControllerComponent;
 import karashokleo.spell_dimension.content.misc.SoulControl;
-import karashokleo.spell_dimension.util.DamageUtil;
 import karashokleo.spell_dimension.util.ImpactUtil;
 import karashokleo.spell_dimension.util.ParticleUtil;
 import karashokleo.spell_dimension.util.RelationUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.spell_engine.api.spell.SpellInfo;
+import net.spell_engine.entity.ConfigurableKnockback;
 import net.spell_engine.particle.ParticleHelper;
 import net.spell_engine.utils.SoundHelper;
+import net.spell_power.api.SpellDamageSource;
 import net.spell_power.api.SpellSchools;
 
 import java.util.ArrayList;
@@ -82,7 +84,13 @@ public class SoulBurstSpell
                 .multiply(knockback)
                 .add(0, 0.2, 0);
             target.setVelocity(movement);
-            DamageUtil.spellDamage(target, SpellSchools.SOUL, caster, amount, false);
+
+            DamageSource damageSource = SpellDamageSource.create(SpellSchools.SOUL, caster);
+            damageSource.setBypassMagic();
+            // apply damage
+            ((ConfigurableKnockback) target).pushKnockbackMultiplier_SpellEngine(0);
+            target.damage(damageSource, amount);
+            ((ConfigurableKnockback) target).popKnockbackMultiplier_SpellEngine();
         }
     }
 }
