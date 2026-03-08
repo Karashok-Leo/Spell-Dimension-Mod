@@ -233,7 +233,7 @@ public class AllItems
         SPIRIT_TOME = Entry.of("spirit_tome", new SpiritTomeItem())
             .addEN()
             .addZH("通灵簿")
-            .addTag(LHTags.CURSE_SLOT, AllTags.ENDGAME_TRINKETS)
+            .addTag(LHTags.CURSE_SLOT, AllTags.ENDGAME_TRINKETS, LHTags.NO_SEAL)
             .setTab(AllGroups.EQUIPMENTS)
             .addModel()
             .register();

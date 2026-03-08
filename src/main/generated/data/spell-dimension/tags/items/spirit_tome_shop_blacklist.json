@@ -14,8 +14,13 @@
     "minecraft:command_block_minecart",
     "spell-dimension:medal",
     "spell-dimension:debug_staff",
+    "spell-dimension:broken_item",
     "spell-dimension:creative_soul_container",
+    "spell-dimension:spirit_tome",
+    "spell-dimension:celestial_luminary",
+    "l2hostility:sealed_item",
     "l2hostility:space_shard",
+    "loot-bag:loot_bag",
     {
       "id": "patchouli:guide_book",
       "required": false
@@ -58,6 +63,10 @@
     },
     {
       "id": "sophisticatedstorage:debug_tool",
+      "required": false
+    },
+    {
+      "id": "sophisticatedstorage:inaccessible_slot",
       "required": false
     }
   ]

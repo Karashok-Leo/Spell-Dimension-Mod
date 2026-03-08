@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "loot-bag:loot_bag",
-          "bag": "spell-dimension:spell/scroll"
+          "bag": "spell-dimension:spell_scroll"
         }
       ],
       "rolls": 1.0

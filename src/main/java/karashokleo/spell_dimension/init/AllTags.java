@@ -7,12 +7,14 @@ import com.teamremastered.endrem.registry.ERItems;
 import karashokleo.l2hostility.L2Hostility;
 import karashokleo.l2hostility.content.item.ComplementItems;
 import karashokleo.l2hostility.content.item.ConsumableItems;
+import karashokleo.l2hostility.content.item.MiscItems;
 import karashokleo.l2hostility.content.item.TrinketItems;
 import karashokleo.l2hostility.content.trait.base.MobTrait;
 import karashokleo.l2hostility.init.LHEnchantments;
 import karashokleo.l2hostility.init.LHTags;
 import karashokleo.l2hostility.init.LHTraits;
 import karashokleo.leobrary.datagen.generator.TagGenerator;
+import karashokleo.loot_bag.internal.item.LootBagItemRegistry;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.api.quest.Quest;
 import karashokleo.spell_dimension.content.enchantment.TraitEffectImmunityEnchantment;
@@ -326,13 +328,18 @@ public class AllTags
                 Items.COMMAND_BLOCK_MINECART,
                 AllItems.MEDAL,
                 AllItems.DEBUG_STAFF,
+                AllItems.BROKEN_ITEM,
                 AllItems.CREATIVE_SOUL_CONTAINER,
+                AllItems.SPIRIT_TOME,
+                AllItems.CELESTIAL_LUMINARY,
+                MiscItems.SEAL,
 //                MiscItems.AI_CONFIG_WAND,
 //                MiscItems.EQUIPMENT_WAND,
 //                MiscItems.TARGET_SELECT_WAND,
 //                MiscItems.TRAIT_ADDER_WAND,
 //                LHBlocks.SPAWNER.item(),
-                ComplementItems.SPACE_SHARD
+                ComplementItems.SPACE_SHARD,
+                LootBagItemRegistry.LOOT_BAG
             )
             .addOptional(
                 new Identifier("patchouli:guide_book"),
@@ -345,7 +352,8 @@ public class AllTags
                 new Identifier("dungeonz:dungeon_compass"),
                 new Identifier("sophisticatedbackpacks:infinity_upgrade"),
                 new Identifier("sophisticatedbackpacks:survival_infinity_upgrade"),
-                new Identifier("sophisticatedstorage:debug_tool")
+                new Identifier("sophisticatedstorage:debug_tool"),
+                new Identifier("sophisticatedstorage:inaccessible_slot")
             );
 
         SpellDimension.BLOCK_TAGS.getOrCreateContainer(LOCATE_TARGET)

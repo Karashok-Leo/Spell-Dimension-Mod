@@ -72,10 +72,10 @@ public class RandomUtil
                 .getRandom(random)
                 .filter(e -> !e.isIn(blacklist))
                 .map(RegistryEntry.Reference::value)
-                .orElse(Items.AIR);
-            if (item == Items.AIR || chosen.contains(item))
+                .orElse(DEFAULT_ITEM);
+            if (chosen.contains(item))
             {
-                continue;
+                item = DEFAULT_ITEM;
             }
             chosen.add(item);
             results.add(item);
@@ -89,21 +89,11 @@ public class RandomUtil
 
     public static Item randomItemFromRegistry(Random random, TagKey<Item> blacklist)
     {
-        int tries = 0;
-        while (tries++ < MAX_TRIES)
-        {
-            Item item = Registries.ITEM
-                .getRandom(random)
-                .filter(e -> !e.isIn(blacklist))
-                .map(RegistryEntry.Reference::value)
-                .orElse(Items.AIR);
-            if (item == Items.AIR)
-            {
-                continue;
-            }
-            return item;
-        }
-        return DEFAULT_ITEM;
+        return Registries.ITEM
+            .getRandom(random)
+            .filter(e -> !e.isIn(blacklist))
+            .map(RegistryEntry.Reference::value)
+            .orElse(DEFAULT_ITEM);
     }
 
     public static Vec3d perturbDirection(Vec3d direction, double sigma, Random random)
