@@ -335,15 +335,16 @@ public class SoulMinionEvents
                 return true;
             }
 
-            if (minionComponent.soulNetFlag > 0)
+            SoulControllerComponent controllerComponent = SoulControl.getSoulController(owner);
+
+            if (controllerComponent.soulNetFlag > 0)
             {
                 return true;
             }
 
             // prevent recursion
-            minionComponent.soulNetFlag++;
+            controllerComponent.soulNetFlag++;
 
-            SoulControllerComponent controllerComponent = SoulControl.getSoulController(owner);
             List<MobEntity> activeMinions = controllerComponent.getActiveMinions();
 
             // split heal
@@ -353,7 +354,7 @@ public class SoulMinionEvents
                 minion.heal(amount);
             }
 
-            minionComponent.soulNetFlag--;
+            controllerComponent.soulNetFlag--;
 
             event.setAmount(0);
             return true;

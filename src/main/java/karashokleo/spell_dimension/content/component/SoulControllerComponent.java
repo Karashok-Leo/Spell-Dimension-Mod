@@ -32,6 +32,8 @@ public class SoulControllerComponent implements AutoSyncedComponent, ServerTicki
 
     private final OptionalEntityRef<FakePlayerEntity> fakePlayerSelf;
 
+    public byte soulNetFlag;
+
     /**
      * used in client-side only
      */
@@ -43,6 +45,7 @@ public class SoulControllerComponent implements AutoSyncedComponent, ServerTicki
         this.player = player;
         this.activeMinions = new HashSet<>();
         this.fakePlayerSelf = new OptionalEntityRef<>(FakePlayerEntity.class, e -> !e.isRemoved());
+        this.soulNetFlag = 0;
     }
 
     public void onMinionAdded(MobEntity minion)

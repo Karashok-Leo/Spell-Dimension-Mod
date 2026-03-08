@@ -27,14 +27,12 @@ public class SoulMinionComponent implements AutoSyncedComponent, CopyableCompone
 
     public SoulMinionMode.Move moveMode;
     public SoulMinionMode.Attack attackMode;
-    public byte soulNetFlag;
 
     public SoulMinionComponent(MobEntity mob)
     {
         this.mob = mob;
         this.moveMode = SoulMinionMode.Move.FOLLOW;
         this.attackMode = SoulMinionMode.Attack.DEFAULT;
-        this.soulNetFlag = 0;
     }
 
     @Nullable
