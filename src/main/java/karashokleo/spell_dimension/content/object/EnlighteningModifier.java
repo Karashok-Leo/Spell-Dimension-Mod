@@ -34,6 +34,8 @@ public record EnlighteningModifier(
             {
                 modifier.applyToEntity(newPlayer);
             }
+
+            newPlayer.setHealth(newPlayer.getMaxHealth());
         });
     }
 
