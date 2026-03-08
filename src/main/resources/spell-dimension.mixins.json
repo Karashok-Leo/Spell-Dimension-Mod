@@ -9,6 +9,7 @@
     "minion.ArenaTraitMixin",
     "minion.BrainMixin",
     "minion.EntityMixin",
+    "minion.FlightHelperMixin",
     "minion.LivingEntityMixin",
     "minion.MobEntityMixin",
     "minion.SplitTraitMixin",

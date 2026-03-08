@@ -1,5 +1,8 @@
 package karashokleo.spell_dimension.content.misc;
 
+import io.github.ladysnake.pal.AbilitySource;
+import io.github.ladysnake.pal.Pal;
+import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.component.SoulControllerComponent;
 import karashokleo.spell_dimension.content.component.SoulMinionComponent;
 import karashokleo.spell_dimension.content.entity.FakePlayerEntity;
@@ -43,6 +46,8 @@ import java.util.Optional;
 
 public interface SoulControl
 {
+    AbilitySource MINION_FLY = Pal.getAbilitySource(SpellDimension.modLoc("minion_fly"));
+
     static SoulMinionComponent getSoulMinion(MobEntity entity)
     {
         return AllComponents.SOUL_MINION.get(entity);
