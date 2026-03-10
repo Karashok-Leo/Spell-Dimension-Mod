@@ -238,19 +238,19 @@ public class AllItems
             .addModel()
             .register();
 
-        SOUL_CONTAINER = Entry.of("soul_container", new SoulContainerItem(ratio -> 1 - 10 * ratio, 0.1f, 200))
+        SOUL_CONTAINER = Entry.of("soul_container", new SoulContainerItem(ratio -> 1 - 10 * ratio, 0.1f, 0.5f, 200))
             .addEN()
             .addZH("灵魂容器")
             .setTab(AllGroups.EQUIPMENTS)
             .addModel()
             .register();
-        ADVANCED_SOUL_CONTAINER = Entry.of("advanced_soul_container", new SoulContainerItem(ratio -> 1 - ratio, 1f, 10))
+        ADVANCED_SOUL_CONTAINER = Entry.of("advanced_soul_container", new SoulContainerItem(ratio -> 1 - ratio, 1f, 0.5f, 10))
             .addEN()
             .addZH("高级灵魂容器")
             .setTab(AllGroups.EQUIPMENTS)
             .addModel()
             .register();
-        CREATIVE_SOUL_CONTAINER = Entry.of("creative_soul_container", new SoulContainerItem(ratio -> 1, 1f, 10))
+        CREATIVE_SOUL_CONTAINER = Entry.of("creative_soul_container", new SoulContainerItem(ratio -> 1, 1f, 1f, 10))
             .addEN()
             .addZH("创造灵魂容器")
             .setTab(AllGroups.EQUIPMENTS)

@@ -2,6 +2,7 @@ package karashokleo.spell_dimension.content.item;
 
 import it.unimi.dsi.fastutil.floats.FloatUnaryOperator;
 import karashokleo.l2hostility.content.logic.DifficultyLevel;
+import karashokleo.l2hostility.init.LHTags;
 import karashokleo.spell_dimension.content.component.SoulMinionComponent;
 import karashokleo.spell_dimension.content.misc.SoulControl;
 import karashokleo.spell_dimension.data.SDTexts;
@@ -31,9 +32,15 @@ public class SoulContainerItem extends AbstractSoulContainerItem
 
     protected final FloatUnaryOperator probabilityFunction;
     protected final float healthThresholdRatio;
+    protected final float bossHealthThresholdRatio;
     protected final int cooldownOnFail;
 
-    public SoulContainerItem(FloatUnaryOperator probabilityFunction, float healthThresholdRatio, int cooldownOnFail)
+    public SoulContainerItem(
+        FloatUnaryOperator probabilityFunction,
+        float healthThresholdRatio,
+        float bossHealthThresholdRatio,
+        int cooldownOnFail
+    )
     {
         super(
             new FabricItemSettings()
@@ -42,6 +49,7 @@ public class SoulContainerItem extends AbstractSoulContainerItem
         );
         this.probabilityFunction = probabilityFunction;
         this.healthThresholdRatio = healthThresholdRatio;
+        this.bossHealthThresholdRatio = Math.min(healthThresholdRatio, bossHealthThresholdRatio);
         this.cooldownOnFail = cooldownOnFail;
     }
 
@@ -141,6 +149,11 @@ public class SoulContainerItem extends AbstractSoulContainerItem
     {
         float health = entity.getHealth();
         float maxHealth = entity.getMaxHealth();
+        if (entity.getType().isIn(LHTags.SEMIBOSS) &&
+            health > maxHealth * bossHealthThresholdRatio)
+        {
+            return 0;
+        }
         float probability = probabilityFunction.apply(health / maxHealth);
         return MathHelper.clamp(probability, 0f, 1f);
     }
@@ -157,7 +170,8 @@ public class SoulContainerItem extends AbstractSoulContainerItem
             tooltip.add(ScreenTexts.SPACE);
             tooltip.add(
                 SDTexts.TOOLTIP$SOUL_CONTAINER$USAGE_1.get(
-                    "%d%%".formatted(Math.round(healthThresholdRatio * 100))
+                    "%d%%".formatted(Math.round(healthThresholdRatio * 100)),
+                    "%d%%".formatted(Math.round(bossHealthThresholdRatio * 100))
                 ).formatted(Formatting.GRAY)
             );
             return;
@@ -203,7 +217,8 @@ public class SoulContainerItem extends AbstractSoulContainerItem
             }
             tooltip.add(
                 SDTexts.TOOLTIP$SOUL_CONTAINER$USAGE_1.get(
-                    "%d%%".formatted(Math.round(healthThresholdRatio * 100))
+                    "%d%%".formatted(Math.round(healthThresholdRatio * 100)),
+                    "%d%%".formatted(Math.round(bossHealthThresholdRatio * 100))
                 ).formatted(Formatting.GRAY)
             );
         }

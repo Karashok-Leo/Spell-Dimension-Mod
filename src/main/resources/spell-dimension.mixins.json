@@ -24,7 +24,6 @@
     "modded.CurseOfPrideMixin",
     "modded.CurseOfWrathMixin",
     "modded.CycloneEntityMixin",
-    "modded.DDEntitiesMixin",
     "modded.DifficultyEventsMixin",
     "modded.FinCutterItemMixin",
     "modded.HealthDecreaseEffectMixin",
