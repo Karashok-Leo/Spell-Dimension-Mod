@@ -3,13 +3,16 @@ package karashokleo.spell_dimension.content.item.trinket;
 import com.google.common.collect.Multimap;
 import dev.emi.trinkets.api.SlotReference;
 import karashokleo.l2hostility.compat.trinket.TrinketCompat;
+import karashokleo.l2hostility.content.item.TrinketItems;
 import karashokleo.l2hostility.content.item.trinket.core.SingleEpicTrinketItem;
+import karashokleo.spell_dimension.content.event.TrinketEvents;
 import karashokleo.spell_dimension.data.SDTexts;
 import karashokleo.spell_dimension.util.SchoolUtil;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
@@ -42,9 +45,16 @@ public class SecondarySchoolItem extends SingleEpicTrinketItem
         {
             return modifiers;
         }
+        double bonus = spellPower * SECONDARY_SCHOOL_RATIO;
+        // NOTE: Temporary fix for Curse of Pride and Secondary School Item, which repeats the bonus of the secondary school power.
+        if (entity instanceof PlayerEntity player &&
+            TrinketCompat.hasItemInTrinket(entity, TrinketItems.CURSE_PRIDE))
+        {
+            bonus /= (1 + player.experienceLevel * TrinketEvents.PRIDE_BONUS);
+        }
         modifiers.put(
             school.attribute,
-            new EntityAttributeModifier(uuid, "Secondary School Bonus", spellPower * SECONDARY_SCHOOL_RATIO, EntityAttributeModifier.Operation.ADDITION)
+            new EntityAttributeModifier(uuid, "Secondary School Bonus", bonus, EntityAttributeModifier.Operation.ADDITION)
         );
         return modifiers;
     }
