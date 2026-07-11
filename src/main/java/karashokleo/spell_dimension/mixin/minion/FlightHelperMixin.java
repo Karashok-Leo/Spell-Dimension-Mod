@@ -27,10 +27,7 @@ public interface FlightHelperMixin
     @Overwrite
     static void grantFlightTo(ServerPlayerEntity player)
     {
-        if (!FlightHelper.GRANT.invoke().event(player).isAccepted())
-        {
-            SoulControl.MINION_FLY.grantTo(player, VanillaAbilities.ALLOW_FLYING);
-        }
+        SoulControl.MINION_FLY.grantTo(player, VanillaAbilities.ALLOW_FLYING);
     }
 
     /**
@@ -40,9 +37,6 @@ public interface FlightHelperMixin
     @Overwrite
     static void revokeFlight(ServerPlayerEntity player)
     {
-        if (!FlightHelper.REVOKE.invoke().event(player).isAccepted())
-        {
-            SoulControl.MINION_FLY.revokeFrom(player, VanillaAbilities.ALLOW_FLYING);
-        }
+        SoulControl.MINION_FLY.revokeFrom(player, VanillaAbilities.ALLOW_FLYING);
     }
 }
