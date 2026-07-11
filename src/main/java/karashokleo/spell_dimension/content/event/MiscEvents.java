@@ -50,7 +50,7 @@ import net.spell_engine.api.spell.SpellContainer;
 import net.spell_engine.internals.SpellContainerHelper;
 import net.spell_power.api.SpellDamageSource;
 import net.spell_power.api.SpellSchools;
-import net.trique.mythicupgrades.MythicUpgradesDamageTypes;
+import net.trique.mythicupgrades.util.MUDamageTypes;
 
 import java.util.List;
 import java.util.Optional;
@@ -200,7 +200,7 @@ public class MiscEvents
         // Deflection
         LivingAttackEvent.ATTACK.register(event ->
         {
-            if (!event.getSource().isOf(MythicUpgradesDamageTypes.DEFLECTING_DAMAGE_TYPE))
+            if (!event.getSource().isOf(MUDamageTypes.DEFLECTING))
             {
                 return;
             }
@@ -213,7 +213,7 @@ public class MiscEvents
         });
         DamagePhase.SHIELD.addListener(0, access ->
         {
-            if (!access.getSource().isOf(MythicUpgradesDamageTypes.DEFLECTING_DAMAGE_TYPE))
+            if (!access.getSource().isOf(MUDamageTypes.DEFLECTING))
             {
                 return;
             }

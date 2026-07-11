@@ -21,7 +21,6 @@ import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.runes.api.RuneItems;
-import net.trique.mythicupgrades.item.MUItems;
 import net.wizards.item.Armors;
 import net.wizards.item.Weapons;
 import nourl.mythicmetals.item.MythicItems;
@@ -111,12 +110,12 @@ public enum SDContents
         0
     ),
     RARE$GEAR(
-        () -> MUItems.SAPPHIRE_SWORD,
+        () -> net.trique.mythicupgrades.item.MythicItems.SAPPHIRE_SWORD,
         2,
         1
     ),
     RARE$MATERIAL(
-        () -> MUItems.SAPPHIRE_INGOT,
+        () -> net.trique.mythicupgrades.item.MythicItems.SAPPHIRE_INGOT,
         2,
         2
     ),

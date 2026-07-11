@@ -39,7 +39,7 @@ import net.runes.api.RuneItems;
 import net.spell_engine.internals.SpellInfinityEnchantment;
 import net.spell_power.api.SpellSchool;
 import net.spell_power.api.SpellSchools;
-import net.trique.mythicupgrades.MythicUpgradesDamageTypes;
+import net.trique.mythicupgrades.util.MUDamageTypes;
 import net.wizards.WizardsMod;
 import nourl.mythicmetals.item.MythicItems;
 import nourl.mythicmetals.item.tools.MythicTools;
@@ -570,7 +570,7 @@ public class AllTags
             );
 
         SpellDimension.DAMAGE_TYPE_TAGS.getOrCreateContainer(LHTags.MAGIC)
-            .addOptional(MythicUpgradesDamageTypes.DEFLECTING_DAMAGE_TYPE);
+            .addOptional(MUDamageTypes.DEFLECTING);
 
         SpellDimension.BIOME_TAGS.getOrCreateContainer(PRISMACHASM)
             .addOptional(new Identifier("regions_unexplored:prismachasm"));
