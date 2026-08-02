@@ -63,7 +63,7 @@ public class EtherealEvasionSpell
             player.getX(),
             player.getY() + player.getHeight() * 0.5,
             player.getZ(),
-            16,
+            4,
             0.35,
             0.5,
             0.35,
