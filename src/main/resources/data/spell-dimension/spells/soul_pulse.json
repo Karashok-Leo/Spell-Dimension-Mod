@@ -1,0 +1,86 @@
+{
+  "school": "SOUL",
+  "range": 10,
+  "cast": {
+    "duration": 0.3,
+    "animation": "spell_engine:one_handed_area_charge",
+    "sound": {
+      "id": "spell_engine:generic_soul_casting",
+      "randomness": 0
+    },
+    "particles": [
+      {
+        "particle_id": "minecraft:soul",
+        "shape": "PIPE",
+        "origin": "FEET",
+        "count": 4,
+        "min_speed": 0.05,
+        "max_speed": 0.1
+      }
+    ]
+  },
+  "release": {
+    "target": {
+      "type": "AREA",
+      "area": {
+        "horizontal_range_multiplier": 1.0,
+        "vertical_range_multiplier": 1.0,
+        "angle_degrees": 360
+      }
+    },
+    "animation": "spell_engine:one_handed_area_release",
+    "sound": {
+      "id": "spell_engine:generic_soul_release",
+      "randomness": 0
+    },
+    "particles": [
+      {
+        "particle_id": "minecraft:soul",
+        "shape": "SPHERE",
+        "origin": "CENTER",
+        "count": 100,
+        "min_speed": 0.4,
+        "max_speed": 0.8,
+        "extent": 10
+      }
+    ]
+  },
+  "impact": [
+    {
+      "action": {
+        "type": "DAMAGE",
+        "damage": {
+          "spell_power_coefficient": 0.3,
+          "knockback": 5
+        }
+      },
+      "particles": [
+        {
+          "particle_id": "minecraft:soul",
+          "shape": "SPHERE",
+          "origin": "CENTER",
+          "count": 12,
+          "min_speed": 0.1,
+          "max_speed": 0.3
+        }
+      ]
+    },
+    {
+      "action": {
+        "type": "STATUS_EFFECT",
+        "status_effect": {
+          "effect_id": "minecraft:slowness",
+          "duration": 5,
+          "apply_mode": "SET",
+          "amplifier": 4,
+          "show_particles": false
+        }
+      }
+    }
+  ],
+  "cost": {
+    "item_id": "runes:soul_stone",
+    "exhaust": 1.0,
+    "cooldown_duration": 20
+  }
+}

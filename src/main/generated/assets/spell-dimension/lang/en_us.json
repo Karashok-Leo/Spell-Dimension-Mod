@@ -602,6 +602,8 @@
   "spell.spell-dimension.soul_echo.name": "Soul Echo",
   "spell.spell-dimension.soul_mark.description": "Mark the enemy, causing all soul minions to teleport near the target and attack it. The marked target takes additional soul spell damage for {effect_duration} seconds.",
   "spell.spell-dimension.soul_mark.name": "Soul Mark",
+  "spell.spell-dimension.soul_pulse.description": "Release a soul pulse, dealing {damage} soul spell damage, knocking nearby enemies away and inflicting Slowness V for {effect_duration} seconds.",
+  "spell.spell-dimension.soul_pulse.name": "Soul Pulse",
   "spell.spell-dimension.soul_rally.description": "Call all your soul minions to your side and grant them Strength III, Speed III and Resistance III for 12 seconds.",
   "spell.spell-dimension.soul_rally.name": "Soul Rally",
   "spell.spell-dimension.soul_reweave.description": "Restore {heal} health to the targeted soul minion and grant it Regeneration III for {effect_duration} seconds.",

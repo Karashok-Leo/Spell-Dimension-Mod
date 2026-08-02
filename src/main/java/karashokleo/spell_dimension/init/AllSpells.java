@@ -205,6 +205,7 @@ public class AllSpells
     public static final Identifier SOUL_REWEAVE = fromCrafting("soul_reweave").build();
     public static final Identifier SOUL_RALLY = fromCrafting("soul_rally").build();
     // Tier 2
+    public static final Identifier SOUL_PULSE = fromCrafting("soul_pulse").withTier(1).build();
     public static final Identifier SOUL_DUET = fromCrafting("soul_duet").withTier(1).setPassive().build();
     public static final Identifier PHANTOM_SYNDICATE = fromCrafting("phantom_syndicate").withTier(1).setPassive().build();
     public static final Identifier SOUL_BEAM = fromCrafting("soul_beam").withTier(1).build();

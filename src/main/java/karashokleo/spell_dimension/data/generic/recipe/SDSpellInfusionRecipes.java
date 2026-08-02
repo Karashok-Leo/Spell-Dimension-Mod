@@ -179,6 +179,7 @@ public class SDSpellInfusionRecipes
         add(exporter, AllSpells.SOUL_MARK, SpellSchools.SOUL, Ingredient.fromTag(TagUtil.itemTag(new Identifier("soulsweapons:lord_soul"))));
         add(exporter, AllSpells.SOUL_REWEAVE, SpellSchools.SOUL, Items.GHAST_TEAR);
         add(exporter, AllSpells.SOUL_RALLY, SpellSchools.SOUL, Items.GOAT_HORN);
+        add(exporter, AllSpells.SOUL_PULSE, SpellSchools.SOUL, Items.ECHO_SHARD);
         add(exporter, AllSpells.SOUL_DUET, SpellSchools.SOUL, ComplementItems.SOUL_FLAME);
         add(exporter, AllSpells.PHANTOM_SYNDICATE, SpellSchools.SOUL, Items.CALIBRATED_SCULK_SENSOR);
         add(exporter, AllSpells.SOUL_BEAM, SpellSchools.SOUL, "bosses_of_mass_destruction:ancient_anima");

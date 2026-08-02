@@ -444,6 +444,12 @@ public enum SpellTexts
         "Call all your soul minions to your side and grant them Strength III, Speed III and Resistance III for 12 seconds.",
         "召集所有灵仆到你身边，并给予其12秒力量 III，速度 III 和 抗性提示 III。"
     ),
+    SOUL_PULSE(
+        "Soul Pulse",
+        "灵魂脉冲",
+        "Release a soul pulse, dealing {damage} soul spell damage, knocking nearby enemies away and inflicting Slowness V for {effect_duration} seconds.",
+        "释放灵魂脉冲，对附近敌人造成{damage}点灵魂法术伤害并将其击退，同时施加{effect_duration}秒缓慢 V。"
+    ),
     SOUL_DUET(
         "Soul Duet",
         "灵魂二重奏",
