@@ -34,6 +34,7 @@ public class SoulRallySpell
 
             minion.addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, DURATION, AMPLIFIER, false, false, true));
             minion.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, DURATION, AMPLIFIER, false, false, true));
+            minion.addStatusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, DURATION, AMPLIFIER, false, false, true));
         }
     }
 }

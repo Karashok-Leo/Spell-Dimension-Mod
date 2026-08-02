@@ -441,8 +441,8 @@ public enum SpellTexts
     SOUL_RALLY(
         "Soul Rally",
         "灵魂振奋",
-        "Call all your soul minions to your side and grant them Strength III and Speed III for 12 seconds.",
-        "召集所有灵仆到你身边，并给予其12秒力量 III 和速度 III。"
+        "Call all your soul minions to your side and grant them Strength III, Speed III and Resistance III for 12 seconds.",
+        "召集所有灵仆到你身边，并给予其12秒力量 III，速度 III 和 抗性提示 III。"
     ),
     SOUL_DUET(
         "Soul Duet",

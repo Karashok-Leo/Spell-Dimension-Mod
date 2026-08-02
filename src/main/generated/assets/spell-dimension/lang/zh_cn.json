@@ -601,7 +601,7 @@
   "spell.spell-dimension.soul_echo.name": "灵魂回响",
   "spell.spell-dimension.soul_mark.description": "标记敌人，使所有灵仆传送到目标附近发起攻击。被标记目标受到额外灵魂伤害，持续{effect_duration}秒。",
   "spell.spell-dimension.soul_mark.name": "魂印",
-  "spell.spell-dimension.soul_rally.description": "召集所有灵仆到你身边，并给予其12秒力量 III 和速度 III。",
+  "spell.spell-dimension.soul_rally.description": "召集所有灵仆到你身边，并给予其12秒力量 III，速度 III 和 抗性提示 III。",
   "spell.spell-dimension.soul_rally.name": "灵魂振奋",
   "spell.spell-dimension.soul_reweave.description": "恢复目标灵仆{heal}点生命值，并给予其{effect_duration}秒生命恢复 III。",
   "spell.spell-dimension.soul_reweave.name": "灵魂重织",
