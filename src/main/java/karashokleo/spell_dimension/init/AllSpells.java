@@ -203,6 +203,7 @@ public class AllSpells
     public static final Identifier SOUL_STEP = fromCrafting("soul_step").build();
     public static final Identifier SOUL_MARK = fromCrafting("soul_mark").build();
     public static final Identifier SOUL_REWEAVE = fromCrafting("soul_reweave").build();
+    public static final Identifier SOUL_RALLY = fromCrafting("soul_rally").build();
     // Tier 2
     public static final Identifier SOUL_DUET = fromCrafting("soul_duet").withTier(1).setPassive().build();
     public static final Identifier PHANTOM_SYNDICATE = fromCrafting("phantom_syndicate").withTier(1).setPassive().build();
@@ -245,6 +246,7 @@ public class AllSpells
         registerImpactHandler(SOUL_STEP, SoulStepSpell::handle);
         registerImpactHandler(SOUL_MARK, SoulMarkSpell::handle);
         registerImpactHandler(SOUL_REWEAVE, SoulReweaveSpell::handle);
+        registerImpactHandler(SOUL_RALLY, SoulRallySpell::handle);
         registerImpactHandler(SOUL_BEAM, SoulBeamSpell::handle);
         registerImpactHandler(SOUL_ECHO, SoulEchoSpell::handle);
         registerImpactHandler(SOUL_BURST, SoulBurstSpell::handle);
