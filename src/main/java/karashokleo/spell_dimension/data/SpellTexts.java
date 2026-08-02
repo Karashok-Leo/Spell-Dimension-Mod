@@ -432,6 +432,12 @@ public enum SpellTexts
         "Mark the enemy, causing all soul minions to teleport near the target and attack it. The marked target takes additional soul spell damage for {effect_duration} seconds.",
         "标记敌人，使所有灵仆传送到目标附近发起攻击。被标记目标受到额外灵魂伤害，持续{effect_duration}秒。"
     ),
+    SOUL_REWEAVE(
+        "Soul Reweave",
+        "灵魂重织",
+        "Restore {heal} health to the targeted soul minion and grant it Regeneration III for {effect_duration} seconds.",
+        "恢复目标灵仆{heal}点生命值，并给予其{effect_duration}秒生命恢复 III。"
+    ),
     SOUL_DUET(
         "Soul Duet",
         "灵魂二重奏",
