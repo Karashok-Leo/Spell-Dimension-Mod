@@ -1,0 +1,61 @@
+{
+  "school": "SOUL",
+  "range": 0,
+  "cast": {
+    "duration": 1.5,
+    "animation": "spell_engine:one_handed_healing_charge",
+    "sound": {
+      "id": "spell_engine:generic_soul_casting",
+      "randomness": 0
+    },
+    "particles": [
+      {
+        "particle_id": "minecraft:soul",
+        "shape": "PIPE",
+        "origin": "FEET",
+        "count": 4,
+        "min_speed": 0.05,
+        "max_speed": 0.1
+      }
+    ]
+  },
+  "release": {
+    "target": {
+      "type": "SELF"
+    },
+    "animation": "spell_engine:one_handed_healing_release",
+    "sound": {
+      "id": "spell_engine:generic_soul_release",
+      "randomness": 0
+    },
+    "particles": [
+      {
+        "particle_id": "minecraft:soul",
+        "shape": "SPHERE",
+        "origin": "CENTER",
+        "count": 40,
+        "min_speed": 0.1,
+        "max_speed": 0.3
+      }
+    ]
+  },
+  "impact": [
+    {
+      "action": {
+        "type": "STATUS_EFFECT",
+        "status_effect": {
+          "effect_id": "spell-dimension:ethereal_evasion",
+          "duration": 30,
+          "apply_mode": "SET",
+          "amplifier": 0,
+          "show_particles": false
+        }
+      }
+    }
+  ],
+  "cost": {
+    "item_id": "runes:soul_stone",
+    "exhaust": 2.0,
+    "cooldown_duration": 60
+  }
+}

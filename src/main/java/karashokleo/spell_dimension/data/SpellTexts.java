@@ -489,8 +489,8 @@ public enum SpellTexts
     ETHEREAL_EVASION(
         "Ethereal Evasion",
         "分神",
-        "Apply Ethereal Evasion effect to oneself for {effect_duration} seconds. Ethereal Evasion: %s".formatted(EtherealEvasionEffect.getDesc(true)),
-        "施法者获得分神{effect_amplifier}效果，持续{effect_duration}秒。分神：%s".formatted(EtherealEvasionEffect.getDesc(false))
+        "Gain Ethereal Evasion for {effect_duration} seconds. %s".formatted(EtherealEvasionEffect.getDesc(true)),
+        "获得分神效果，持续{effect_duration}秒。%s".formatted(EtherealEvasionEffect.getDesc(false))
     ),
     LIGHTMOON(
         "Light Moon",

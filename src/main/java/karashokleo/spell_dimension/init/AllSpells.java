@@ -1,5 +1,6 @@
 package karashokleo.spell_dimension.init;
 
+import io.github.fabricators_of_create.porting_lib.entity.events.LivingAttackEvent;
 import io.github.fabricators_of_create.porting_lib.entity.events.living.LivingDamageEvent;
 import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.api.SpellImpactEvents;
@@ -212,8 +213,8 @@ public class AllSpells
     public static final Identifier SOUL_ECHO = fromCrafting("soul_echo").withTier(1).build();
     public static final Identifier SOUL_BURST = fromCrafting("soul_burst").withTier(1).build();
     public static final Identifier SOUL_SACRIFICE = fromCrafting("soul_sacrifice").withTier(1).build();
-    public static final Identifier ETHEREAL_EVASION = fromCrafting("ethereal_evasion").withTier(1).build();
     // Tier 3
+    public static final Identifier ETHEREAL_EVASION = fromCrafting("ethereal_evasion").withTier(2).build();
 
     public static void register()
     {
@@ -222,6 +223,7 @@ public class AllSpells
         LivingDamageEvent.DAMAGE.register(BlazingMark::mark);
         LivingDamageEvent.DAMAGE.register(ElectricBondageSpell::onDamage);
         LivingDamageEvent.DAMAGE.register(ElectrocutionSpell::onDamage);
+        LivingAttackEvent.ATTACK.register(EtherealEvasionSpell::onAttack);
 
         SpellImpactEvents.PRE.register(AllSpells::handleImpact);
         SpellProjectileHitCallback.EVENT.register(AllSpells::handleImpact);

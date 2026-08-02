@@ -8,8 +8,8 @@ public class EtherealEvasionEffect extends StatusEffect
     public static String getDesc(boolean en)
     {
         return (en ?
-            "Disperses the caster's soul across all soul minions, placing the caster in a suspended state where it cannot be harmed but are unable to move" :
-            "将灵魂分散到所有灵仆中，使施法者进入凝滞状态，不会受到伤害但无法移动");
+            "When taking damage, has a 50% chance to negate it; otherwise, a random active soul minion takes the damage instead. If no eligible soul minion exists, the damage is not negated" :
+            "受到伤害时，有50%概率完全免疫此次伤害；否则由一个随机的活跃灵仆代为承受。没有可用灵仆时，代偿失败，施法者正常受到伤害");
     }
 
     public EtherealEvasionEffect()

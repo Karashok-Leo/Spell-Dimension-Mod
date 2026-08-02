@@ -26,6 +26,7 @@ public class AllStatusEffects
     public static QuantumFieldEffect QUANTUM_FIELD;
     public static CustomStatusEffect SOUL_MARK;
     public static RebirthEffect REBIRTH;
+    public static EtherealEvasionEffect ETHEREAL_EVASION;
     //    public static final PhaseEffect ASTRAL_TRIP = new PhaseEffect();
 
     public static void register()
@@ -113,6 +114,13 @@ public class AllStatusEffects
             .addZH("复生")
             .addENDesc("Unable to do anything, health gradually recovers to maximum")
             .addZHDesc("无法行动，生命值逐渐恢复至最大值")
+            .addTag(LHTags.CLEANSE_BLACKLIST)
+            .register();
+        ETHEREAL_EVASION = new Entry<>("ethereal_evasion", new EtherealEvasionEffect())
+            .addEN("Ethereal Evasion")
+            .addZH("分神")
+            .addENDesc(EtherealEvasionEffect.getDesc(true))
+            .addZHDesc(EtherealEvasionEffect.getDesc(false))
             .addTag(LHTags.CLEANSE_BLACKLIST)
             .register();
 
