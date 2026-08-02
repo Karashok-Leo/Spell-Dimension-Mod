@@ -6,13 +6,17 @@ import karashokleo.spell_dimension.SpellDimension;
 import karashokleo.spell_dimension.content.entity.FakePlayerEntity;
 import karashokleo.spell_dimension.content.misc.SoulControl;
 import karashokleo.spell_dimension.util.OptionalEntityRef;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -150,11 +154,41 @@ public class SoulControllerComponent implements AutoSyncedComponent, ServerTicki
 
         if (self.isAlive())
         {
+            spawnPossessionLinkParticles(player, self);
             return;
         }
 
         SpellDimension.LOGGER.warn("FakePlayerEntity is dead or removed!!!");
         SoulControl.onSelfBodyDeath((ServerPlayerEntity) player);
+    }
+
+    private void spawnPossessionLinkParticles(Entity from, Entity to)
+    {
+        if (!(from.getWorld() instanceof ServerWorld world) || to.getWorld() != world)
+        {
+            return;
+        }
+
+        Vec3d start = from.getPos().add(0, from.getHeight() * 0.5, 0);
+        Vec3d end = to.getPos().add(0, to.getHeight() * 0.5, 0);
+        int steps = MathHelper.clamp((int) Math.ceil(from.distanceTo(to) * 2), 8, 48);
+        Vec3d step = end.subtract(start).multiply(1.0 / steps);
+
+        for (int i = 0; i <= steps; i++)
+        {
+            Vec3d pos = start.add(step.multiply(i));
+            world.spawnParticles(
+                ParticleTypes.SOUL_FIRE_FLAME,
+                pos.x,
+                pos.y,
+                pos.z,
+                1,
+                0,
+                0,
+                0,
+                0
+            );
+        }
     }
 
     @Override
