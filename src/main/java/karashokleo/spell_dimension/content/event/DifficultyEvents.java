@@ -1,6 +1,6 @@
 package karashokleo.spell_dimension.content.event;
 
-import com.obscuria.aquamirae.registry.AquamiraeItems;
+import dev.obscuria.aquamirae.registry.AquamiraeItems;
 import io.github.fabricators_of_create.porting_lib.entity.events.EntityEvents;
 import io.github.fabricators_of_create.porting_lib.entity.events.PlayerTickEvents;
 import karashokleo.l2hostility.data.config.WeaponConfig;
@@ -171,7 +171,7 @@ public class DifficultyEvents
             ItemStack stack = player.getStackInHand(hand);
             PlayerInventory inventory = player.getInventory();
             if (!world.isClient() &&
-                stack.isOf(AquamiraeItems.SHELL_HORN) &&
+                stack.isOf(AquamiraeItems.SHELL_HORN.asItem()) &&
                 !inventory.containsAny(itemStack -> itemStack.isOf(AllItems.ABYSS_GUARD)))
             {
                 player.sendMessage(SDTexts.TEXT$ABYSS_GUARD.get(), true);

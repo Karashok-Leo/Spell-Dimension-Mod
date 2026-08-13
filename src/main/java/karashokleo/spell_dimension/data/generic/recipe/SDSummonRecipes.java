@@ -3,7 +3,7 @@ package karashokleo.spell_dimension.data.generic.recipe;
 import artifacts.registry.ModEntityTypes;
 import com.kyanite.deeperdarker.content.DDEntities;
 import com.kyanite.deeperdarker.content.DDItems;
-import com.obscuria.aquamirae.registry.AquamiraeEntities;
+import dev.obscuria.aquamirae.registry.AquamiraeEntityTypes;
 import fuzs.mutantmonsters.init.ModRegistry;
 import karashokleo.l2hostility.content.item.ComplementItems;
 import karashokleo.l2hostility.content.item.MiscItems;
@@ -68,7 +68,7 @@ public class SDSummonRecipes
         add(exporter, ComplementItems.PIGLIN_RUNE, EntityInit.PIGLIN_BEAST);
         add(exporter, ComplementItems.GUARDIAN_RUNE, EntityType.ELDER_GUARDIAN, 1);
         add(exporter, fuzs.illagerinvasion.init.ModRegistry.HALLOWED_GEM_ITEM.get(), fuzs.illagerinvasion.init.ModRegistry.INVOKER_ENTITY_TYPE.get(), 1);
-        add(exporter, Items.HEART_OF_THE_SEA, AquamiraeEntities.CAPTAIN_CORNELIA, 1);
+        add(exporter, Items.HEART_OF_THE_SEA, AquamiraeEntityTypes.CAPTAIN_CORNELIA.get(), 1);
         add(exporter, DDItems.REINFORCED_ECHO_SHARD, DDEntities.STALKER, 1);
         add(exporter, Registries.ITEM.get(new Identifier("bosses_of_mass_destruction:obsidian_heart")), EntityInit.VOID_SHADOW, 1);
     }

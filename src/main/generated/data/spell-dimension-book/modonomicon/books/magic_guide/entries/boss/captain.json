@@ -9,7 +9,7 @@
   "description": "book.spell-dimension-book.magic_guide.boss.captain.description",
   "hide_while_locked": false,
   "icon": {
-    "item": "aquamirae:three_bolt_helmet"
+    "item": "aquamirae:salvager_helmet"
   },
   "name": "book.spell-dimension-book.magic_guide.boss.captain.name",
   "pages": [

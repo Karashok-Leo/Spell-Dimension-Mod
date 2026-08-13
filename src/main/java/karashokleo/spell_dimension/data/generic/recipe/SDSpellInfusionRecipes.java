@@ -3,8 +3,8 @@ package karashokleo.spell_dimension.data.generic.recipe;
 import com.glisco.things.items.ThingsItems;
 import com.kyanite.deeperdarker.content.DDItems;
 import com.lion.graveyard.init.TGItems;
-import com.obscuria.aquamirae.registry.AquamiraeItems;
 import com.teamremastered.endrem.registry.ERItems;
+import dev.obscuria.aquamirae.registry.AquamiraeItems;
 import fuzs.mutantmonsters.init.ModRegistry;
 import karashokleo.l2hostility.content.item.ComplementItems;
 import karashokleo.l2hostility.content.item.ConsumableItems;
@@ -127,19 +127,19 @@ public class SDSpellInfusionRecipes
 
         add(exporter, AllSpells.FROST_BLIZZARD, SpellSchools.FROST, MythicBlocks.SILVER.getStorageBlock().asItem());
         add(exporter, AllSpells.ICY_NUCLEUS, SpellSchools.FROST, MythicBlocks.AQUARIUM.getStorageBlock().asItem());
-        add(exporter, AllSpells.FROST_AURA, SpellSchools.FROST, AquamiraeItems.MAZE_ROSE);
+        add(exporter, AllSpells.FROST_AURA, SpellSchools.FROST, AquamiraeItems.MAZE_ROSE.asItem());
         add(exporter, AllSpells.ICICLE, SpellSchools.FROST, AllItems.ABYSS_GUARD);
-        add(exporter, AllSpells.FROST_BLINK, SpellSchools.FROST, AquamiraeItems.DEAD_SEA_SCROLL);
-        add(exporter, AllSpells.FROZEN, SpellSchools.FROST, AquamiraeItems.SHIP_GRAVEYARD_ECHO);
+        add(exporter, AllSpells.FROST_BLINK, SpellSchools.FROST, AquamiraeItems.DEAD_SEA_SCROLL.asItem());
+        add(exporter, AllSpells.FROZEN, SpellSchools.FROST, AquamiraeItems.SHIP_GRAVEYARD_ECHO.asItem());
         add(exporter, AllSpells.FROST_FLOURISH, SpellSchools.FROST, net.trique.mythicupgrades.block.MythicBlocks.AQUAMARINE_BLOCK.asItem());
         add(exporter, AllSpells.FROST_OVERDRIVE, SpellSchools.FROST, com.spellbladenext.items.Items.frost_orb.item());
         add(exporter, AllSpells.FROST_LOTUS, SpellSchools.FROST, MythicBlocks.RUNITE.getStorageBlock().asItem());
         add(exporter, AllSpells.DEATH_CHILL, SpellSchools.FROST, LHTraits.FREEZING.asItem());
         add(exporter, AllSpells.FROST_SLASH, SpellSchools.FROST, com.spellbladenext.items.Items.glacial_gladius.item());
-        add(exporter, AllSpells.MASSACRE, SpellSchools.FROST, AquamiraeItems.POISONED_CHAKRA);
+        add(exporter, AllSpells.MASSACRE, SpellSchools.FROST, AquamiraeItems.TERRIBLE_CHAKRAM.asItem());
         add(exporter, AllSpells.RIPTIDE, SpellSchools.FROST, MythicItems.Mats.AQUARIUM_PEARL);
         add(exporter, AllSpells.COLD_BUFF, SpellSchools.FROST, ERItems.COLD_EYE);
-        add(exporter, AllSpells.TEMPEST, SpellSchools.FROST, AquamiraeItems.ABYSSAL_AMETHYST);
+        add(exporter, AllSpells.TEMPEST, SpellSchools.FROST, AquamiraeItems.ABYSSAL_AMETHYST.asItem());
 
         add(exporter, AllSpells.DIVINE_CURSE_BLAST, SpellSchools.HEALING, ComplementItems.TOTEMIC_GOLD.ingot());
         add(exporter, AllSpells.HOLY_BEAM, SpellSchools.HEALING, "bosses_of_mass_destruction:ancient_anima");

@@ -1,7 +1,7 @@
 package karashokleo.spell_dimension.content.quest;
 
-import com.obscuria.aquamirae.registry.AquamiraeEntities;
-import com.obscuria.aquamirae.registry.AquamiraeItems;
+import dev.obscuria.aquamirae.registry.AquamiraeEntityTypes;
+import dev.obscuria.aquamirae.registry.AquamiraeItems;
 import karashokleo.spell_dimension.content.quest.base.SimpleLootItemQuest;
 import karashokleo.spell_dimension.data.loot_bag.SDBags;
 import karashokleo.spell_dimension.init.AllTags;
@@ -50,8 +50,8 @@ public class KillT3Quests
         KILL_CAPTAIN_CORNELIA = QuestBuilder.of(
                 "kill_captain_cornelia",
                 new SimpleLootItemQuest(
-                    () -> AquamiraeEntities.CAPTAIN_CORNELIA,
-                    () -> AquamiraeItems.FROZEN_KEY,
+                    AquamiraeEntityTypes.CAPTAIN_CORNELIA::get,
+                    AquamiraeItems.FROZEN_KEY::asItem,
                     SDBags.RARE$GEAR::getStack
                 )
             )
