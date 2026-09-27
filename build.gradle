@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.14-SNAPSHOT'
+    id 'fabric-loom' version '1.18-SNAPSHOT'
     id 'maven-publish'
 }
 
@@ -12,6 +12,7 @@ base {
 
 repositories {
     mavenLocal()
+    maven { url 'https://jitpack.io' }
     maven { url "https://maven.kosmx.dev/" }
     maven { url "https://www.cursemaven.com" }
     maven { url "https://maven.shedaniel.me/" }
@@ -88,8 +89,8 @@ dependencies {
     modImplementation "vazkii.patchouli:Patchouli:${project.patchouli_version}"
 
 
-    modImplementation "dev.xkmc.l2serial:L2Serial:${project.l2serial_version}"
-    modImplementation "dev.xkmc.l2tabs:L2Tabs:${project.l2tabs_version}"
+    modImplementation "dev.xkmc.l2serial:L2Serial-Fabricated:${project.l2serial_version}"
+    modImplementation "dev.xkmc.l2tabs:L2Tabs-Fabricated:${project.l2tabs_version}"
     modImplementation "karashokleo.leobrary:data:${project.leobrary_version}"
     modImplementation "karashokleo.leobrary:datagen:${project.leobrary_version}"
     modImplementation "karashokleo.leobrary:damage:${project.leobrary_version}"
@@ -97,8 +98,8 @@ dependencies {
     modImplementation "karashokleo.leobrary:gui:${project.leobrary_version}"
     modImplementation("karashokleo.leobrary:compat-patchouli:${project.leobrary_version}")
     modImplementation "karashokleo.effect_overlay:effect-overlay:${project.effect_overlay_version}"
-    modImplementation "karashokleo.loot_bag:Loot-Bag:${project.loot_bag_version}"
-    modImplementation "karashokleo.l2hostility:L2Hostility:${project.l2hostility_version}"
+    modImplementation "karashokleo.loot_bag:loot-bag:${project.loot_bag_version}"
+    modImplementation "karashokleo.l2hostility:L2Hostility-Fabricated:${project.l2hostility_version}"
     modImplementation "karashokleo.enchantment_infusion:enchantment_infusion:${project.enchantment_infusion_version}"
     modImplementation "karashokleo.fusion_smithing:Fusion-Smithing:${project.fusion_smithing_version}"
     modImplementation "io.github.fabricators_of_create.Porting-Lib:chunk_loading:${project.port_lib_version}"
@@ -120,7 +121,6 @@ dependencies {
     // Spell Engine Mods
     modImplementation "maven.modrinth:spell-engine:${project.spell_engine_version}"
     modImplementation "maven.modrinth:spell-power:${project.spell_power_version}-fabric"
-    modImplementation "maven.modrinth:ranged-weapon-api:${project.ranged_weapon_api_version}"
     modImplementation "maven.modrinth:runes:${project.runes_version}-fabric"
 
     modImplementation "maven.modrinth:wizards:${project.wizards_version}"
@@ -198,6 +198,35 @@ dependencies {
 
     modRuntimeOnly "curse.maven:yeetusexperimentus-635427:4680831"
     modRuntimeOnly "curse.maven:better-combat-by-daedelus-639842:5625715"
+
+    // Kibe
+    modImplementation "maven.modrinth:OvlwmUdC:fhSgEP7Z"
+    // Bosses of Mass Destruction
+    modImplementation "maven.modrinth:du3UfiLL:yoCCX4Cc"
+    modImplementation "com.github.miyo6032:maelstrom-lib:e26888c"
+    modImplementation "com.github.miyo6032:MultipartEntities:1.20-SNAPSHOT"
+    // Marium's Soulslike Weaponry
+    modImplementation "maven.modrinth:oX6SohLj:LY1MhWN0"
+    // Ranged Weapon API
+    modImplementation "maven.modrinth:AqaIIO6D:7VQ4OHzQ"
+    // Attribute Fix
+    modImplementation "maven.modrinth:lOOpEntO:9PvB3nqH"
+    // Fabric Language Kotlin
+    modImplementation "maven.modrinth:Ha28R6CL:eRRZzGMc"
+    // Equipment Standard
+    modImplementation "maven.modrinth:jxktWeyE:UwbE2xFE"
+    // YetAnotherConfigLib
+    modImplementation "maven.modrinth:1eAoo2KR:dvS5DjUA"
+    // Goblin Traders
+    modImplementation "curse.maven:goblintraders-fabric-667389:4802504"
+    // Framework
+    modImplementation "curse.maven:framework-fabric-667391:4718252"
+    // Step Height Entity Attribute
+    modImplementation "com.github.emilyploszaj:step-height-entity-attribute:v1.2.0"
+    // Runtime libraries omitted from the remapped artifacts
+    implementation "org.reflections:reflections:0.10.2"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:2.4.20"
+    implementation "org.quiltmc.parsers:gson:0.2.1"
 }
 
 processResources {
