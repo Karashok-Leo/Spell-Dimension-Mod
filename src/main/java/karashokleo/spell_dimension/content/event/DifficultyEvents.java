@@ -171,7 +171,7 @@ public class DifficultyEvents
             ItemStack stack = player.getStackInHand(hand);
             PlayerInventory inventory = player.getInventory();
             if (!world.isClient() &&
-                stack.isOf(AquamiraeItems.SHELL_HORN.asItem()) &&
+                stack.isOf(AquamiraeItems.SHELL_HORN.get()) &&
                 !inventory.containsAny(itemStack -> itemStack.isOf(AllItems.ABYSS_GUARD)))
             {
                 player.sendMessage(SDTexts.TEXT$ABYSS_GUARD.get(), true);

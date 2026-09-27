@@ -51,7 +51,7 @@ public class KillT3Quests
                 "kill_captain_cornelia",
                 new SimpleLootItemQuest(
                     AquamiraeEntityTypes.CAPTAIN_CORNELIA::get,
-                    AquamiraeItems.FROZEN_KEY::asItem,
+                    AquamiraeItems.FROZEN_KEY::get,
                     SDBags.RARE$GEAR::getStack
                 )
             )
