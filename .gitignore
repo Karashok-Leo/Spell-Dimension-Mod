@@ -42,3 +42,6 @@ replay_*.log
 
 # misc
 TODO.md
+
+# Local CurseForge publishing token
+/curseforge-token
